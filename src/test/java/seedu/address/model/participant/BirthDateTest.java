@@ -33,17 +33,17 @@ public class BirthDateTest {
     }
 
     @Test
-    public void isValidBirthDateTest() {
-        assertFalse(BirthDate.isValidBirthDate(LocalDate.MAX));
+    public void isPresentOrPastTest() {
+        assertFalse(BirthDate.isPresentOrPast(LocalDate.MAX));
 
-        assertFalse(BirthDate.isValidBirthDate(LocalDate.now().plusYears(20)));
+        assertFalse(BirthDate.isPresentOrPast(LocalDate.now().plusYears(20)));
 
-        assertTrue(BirthDate.isValidBirthDate(LocalDate.now()));
+        assertTrue(BirthDate.isPresentOrPast(LocalDate.now()));
 
         // for other use cases not strictly to participants
         // BirthDate is strictly what can be born now and in the past and not in the future only
-        assertTrue(BirthDate.isValidBirthDate(LocalDate.now().minusYears(200)));
+        assertTrue(BirthDate.isPresentOrPast(LocalDate.now().minusYears(200)));
 
-        assertTrue(BirthDate.isValidBirthDate(LocalDate.now().minusYears(50)));
+        assertTrue(BirthDate.isPresentOrPast(LocalDate.now().minusYears(50)));
     }
 }

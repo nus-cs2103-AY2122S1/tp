@@ -7,7 +7,7 @@ import java.time.Period;
 
 
 /**
- * Represents a Participant's date of birth in the event
+ * Represents a Participant's date of birth in the event.
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthDate(LocalDate)}}
  */
 public class BirthDate {
@@ -24,37 +24,37 @@ public class BirthDate {
     /**
      * Factory method for birthdate starting from dayOfMonth, then month, then year.
      *
-     * @param dayOfMonth day of the month
-     * @param month      month from 1-12
-     * @param year       year to be this year or before, year in the future is invalid in this case
-     * @return Birthdate object with specified date
+     * @param dayOfMonth day of the month.
+     * @param month      month from 1-12.
+     * @param year       year to be this year or before, year in the future is invalid in this case.
+     * @return Birthdate object with specified date.
      */
     public static BirthDate of(int year, int month, int dayOfMonth) {
         LocalDate date = LocalDate.of(year, month, dayOfMonth);
-        checkArgument(isValidBirthDate(date), MESSAGE_DATE_CONSTRAINTS);
+        checkArgument(isPresentOrPast(date), MESSAGE_DATE_CONSTRAINTS);
         return new BirthDate(date);
     }
 
     /**
-     * Factory method for birthdate which might not have been initialised yet
+     * Factory method for birthdate which might not have been initialised yet.
      *
-     * @return Birthdate with "N/A" String representation
+     * @return Birthdate with "N/A" String representation.
      */
     public static BirthDate notSpecified() {
         return new BirthDate(null);
     }
 
     /**
-     * Getter for date of this BirthDate
+     * Getter for date of this BirthDate.
      *
-     * @return date of the BirthDate
+     * @return date of the BirthDate.
      */
     public LocalDate getDate() {
         return this.date;
     }
 
     /**
-     * Return the age from the BirthDate
+     * Return the age from the BirthDate.
      *
      * @return age
      */
@@ -63,9 +63,9 @@ public class BirthDate {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given BirthDate is a valid email.
      */
-    public static boolean isValidBirthDate(LocalDate date) {
+    public static boolean isPresentOrPast(LocalDate date) {
         return (LocalDate.now().isEqual(date) || LocalDate.now().isAfter(date));
     }
 

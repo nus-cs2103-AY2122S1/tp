@@ -16,7 +16,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Participant in an event
+ * Represents a Participant in an event.
  * Guarantees: name, phone, email, address, tags, birthDate, notes, nextOfKins are present and not null, field values
  * are validated, immutable.
  */
@@ -30,14 +30,14 @@ public class Participant extends Person {
     /**
      * Every field must be present and not null.
      *
-     * @param name       Name object of the person
-     * @param phone      Phone object of the person
-     * @param email      Email object of the person
-     * @param address    Address object of the person
-     * @param tags       tags of the person
-     * @param birthDate  birthdate of the person
-     * @param notes      notes attached by the manager
-     * @param nextOfKins nextOfKins of the person
+     * @param name       Name object of the person.
+     * @param phone      Phone object of the person.
+     * @param email      Email object of the person.
+     * @param address    Address object of the person.
+     * @param tags       tags of the person.
+     * @param birthDate  birthdate of the person.
+     * @param notes      notes attached by the manager.
+     * @param nextOfKins nextOfKins of the person.
      */
     public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
                        Set<Note> notes, ArrayList<Person> nextOfKins) {
@@ -50,14 +50,14 @@ public class Participant extends Person {
 
 
     /**
-     * @return this object's birthDate
+     * @return this object's birthDate.
      */
     public BirthDate getBirthDate() {
         return this.birthDate;
     }
 
     /**
-     * @return this object's nextOfKins
+     * @return this object's nextOfKins.
      */
     public ArrayList<Person> getNextOfKins() {
         return this.nextOfKins;
@@ -65,18 +65,18 @@ public class Participant extends Person {
 
 
     /**
-     * Add note to set of notes
+     * Add note to set of notes.
      *
-     * @param note note to be added
+     * @param note note to be added.
      */
     public void addNote(Note note) {
         this.notes.add(note);
     }
 
     /**
-     * Remove note from set
+     * Remove note from set.
      *
-     * @param note note to be removed
+     * @param note note to be removed.
      */
     public void removeNote(Note note) {
         this.notes.remove(note);
@@ -95,13 +95,14 @@ public class Participant extends Person {
      * This defines a weaker notion of equality between two persons.
      * This allow Participant to both pass in Person and Participant objects.
      */
-    public boolean isSamePerson(Participant otherParticipant) {
+    public boolean isSameParticipant(Participant otherParticipant) {
         if (otherParticipant == this) {
             return true;
         }
 
         return otherParticipant != null
-                && otherParticipant.getName().equals(getName());
+                && otherParticipant.getName().equals(getName())
+                && otherParticipant.getBirthDate().equals(getBirthDate());
     }
 
     /**

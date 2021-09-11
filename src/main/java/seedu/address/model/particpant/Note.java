@@ -20,10 +20,10 @@ public class Note {
     private final Importance importance;
 
     /**
-     * Constructor for note
+     * Constructor for note.
      *
-     * @param content    content of the note
-     * @param importance importance of the note
+     * @param content    content of the note.
+     * @param importance importance of the note.
      */
     public Note(String content, Importance importance) {
         requireNonNull(content);
@@ -32,18 +32,18 @@ public class Note {
     }
 
     /**
-     * Getter for content
+     * Getter for content.
      *
-     * @return content of this note
+     * @return content of this note.
      */
     public String getContent() {
         return this.content;
     }
 
     /**
-     * Getter for importance
+     * Getter for importance.
      *
-     * @return importance of this note
+     * @return importance of this note.
      */
     public Importance getImportance() {
         return this.importance;
@@ -75,7 +75,7 @@ public class Note {
     }
 
     /**
-     * Template: "[IMPORTANCE] 'content'"
+     * Template: "[IMPORTANCE] 'content'".
      *
      * @return string representation according to the template
      */
