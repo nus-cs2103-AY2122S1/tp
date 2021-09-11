@@ -1,8 +1,9 @@
 package seedu.address.model.particpant;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a note with different level of importance.
@@ -63,8 +64,8 @@ public class Note {
         }
 
         Note otherNote = (Note) other;
-        return otherNote.content.equals(content) &&
-                otherNote.importance.equals(importance);
+        return otherNote.content.equals(content)
+                && otherNote.importance.equals(importance);
     }
 
     @Override

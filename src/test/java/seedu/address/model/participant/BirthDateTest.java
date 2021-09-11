@@ -1,15 +1,15 @@
 package seedu.address.model.participant;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.particpant.BirthDate;
-
-import java.time.LocalDate;
-import java.time.Period;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.time.Period;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.particpant.BirthDate;
 
 public class BirthDateTest {
 

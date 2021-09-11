@@ -1,18 +1,21 @@
 package seedu.address.model.particpant;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDate;
 import java.time.Period;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Participant's date of birth in the event
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthDate(LocalDate)}}
  */
 public class BirthDate {
-    private final LocalDate date;
 
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date of birth cannot be in the future or invalid";
+
+    private final LocalDate date;
+
 
     private BirthDate(LocalDate date) {
         this.date = date;
