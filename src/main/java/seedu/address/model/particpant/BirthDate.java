@@ -1,0 +1,90 @@
+package seedu.address.model.particpant;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+/**
+ * Represents a Participant's date of birth in the event
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthDate(LocalDate)}}
+ */
+public class BirthDate {
+    private final LocalDate date;
+
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Date of birth cannot be in the future or invalid";
+
+    private BirthDate(LocalDate date) {
+        this.date = date;
+    }
+
+    /**
+     * Factory method for birthdate starting from dayOfMonth, then month, then year.
+     *
+     * @param dayOfMonth day of the month
+     * @param month      month from 1-12
+     * @param year       year to be this year or before, year in the future is invalid in this case
+     * @return Birthdate object with specified date
+     */
+    public static BirthDate of(int year, int month, int dayOfMonth) {
+        LocalDate date = LocalDate.of(year, month, dayOfMonth);
+        checkArgument(isValidBirthDate(date), MESSAGE_DATE_CONSTRAINTS);
+        return new BirthDate(date);
+    }
+
+    /**
+     * Factory method for birthdate which might not have been initialised yet
+     *
+     * @return Birthdate with "N/A" String representation
+     */
+    public static BirthDate notSpecified() {
+        return new BirthDate(null);
+    }
+
+    /**
+     * Getter for date of this BirthDate
+     *
+     * @return date of the BirthDate
+     */
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public int getAge() {
+        return Period.between(this.date, LocalDate.now()).getYears();
+    }
+
+    /**
+     * Returns if a given string is a valid email.
+     */
+    public static boolean isValidBirthDate(LocalDate date) {
+        return (LocalDate.now().isEqual(date) || LocalDate.now().isAfter(date));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof BirthDate)) {
+            return false;
+        }
+
+        BirthDate otherBirthDate = (BirthDate) other;
+        if (this.getDate() == null || otherBirthDate.getDate() == null) {
+            return this.getDate() == otherBirthDate.getDate();
+        } else {
+            return otherBirthDate.getDate().equals(getDate());
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        if (this.date == null) {
+            return "N/A";
+        }
+        return date.toString();
+    }
+}
