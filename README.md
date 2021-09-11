@@ -1,5 +1,7 @@
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
+**LeadsForce** is a new way to streamline the process for student financial advisors to find the right clients to contact. We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly. Finding your next lead has never been easier. 
+
 ![Ui](docs/images/Ui.png)
 
 * This is **a sample project for Software Engineering (SE) students**.<br>
