@@ -1,3 +1,6 @@
+# SeniorLove
+An application for social workers from volunteer centres to manage contacts and profiles of the elderly with no or limited family support, as well as to contact the elderly regularly to check in on their well-being. 
+
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 
 ![Ui](docs/images/Ui.png)
