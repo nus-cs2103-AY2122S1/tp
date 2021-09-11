@@ -12,3 +12,20 @@
 * It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
 * For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
 * This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+
+## Feature List (v1.2)
+1. Student
+    * Add a student's information
+    * Edit a student's information
+    * Delete a student's information
+2. Assessment
+    * Add an assessment
+    * Add the score/grade that the student achieved for a particular assessment
+3. Studio
+    * Add a student's attendance for studio sessions
+    * Add a student's studio participation marks
+4. Retrieve
+    * Find specific information tagged to a student
+5. Help
+    * List out available commands
+    * Display the input format for the individual commands
