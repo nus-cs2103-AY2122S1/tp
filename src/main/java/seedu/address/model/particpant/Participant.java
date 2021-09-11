@@ -1,5 +1,7 @@
 package seedu.address.model.particpant;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,91 +15,39 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-
-
 /**
  * Represents a Participant in an event
- * Guarantees: name, phone, email, address, tags are present and not null, field values are validated, immutable.
- * Non-guarantees: birthDate - to be added with builder chaining method
+ * Guarantees: name, phone, email, address, tags, birthDate, notes, nextOfKins are present and not null, field values
+ * are validated, immutable.
  */
 public class Participant extends Person {
 
-    private BirthDate birthDate = BirthDate.notSpecified();
-    private Set<Note> notes = new HashSet<>();
-    private ArrayList<Person> nextOfKins = new ArrayList<>();
+    private final BirthDate birthDate;
+    private final Set<Note> notes = new HashSet<>();
+    private final ArrayList<Person> nextOfKins = new ArrayList<>();
 
 
     /**
      * Every field must be present and not null.
      *
-     * @param name    Name object of the person
-     * @param phone   Phone object of the person
-     * @param email   Email object of the person
-     * @param address Address object of the person
-     * @param tags    tags of the person
+     * @param name       Name object of the person
+     * @param phone      Phone object of the person
+     * @param email      Email object of the person
+     * @param address    Address object of the person
+     * @param tags       tags of the person
+     * @param birthDate  birthdate of the person
+     * @param notes      notes attached by the manager
+     * @param nextOfKins nextOfKins of the person
      */
-    public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
+                       Set<Note> notes, ArrayList<Person> nextOfKins) {
         super(name, phone, email, address, tags);
+        requireAllNonNull(birthDate, notes, nextOfKins);
+        this.birthDate = birthDate;
+        this.notes.addAll(notes);
+        this.nextOfKins.addAll(nextOfKins);
     }
 
-    /**
-     * Builder chaining method for retuning participant object with certain birthdate.
-     * This is to allow the use of Person template along with Person but adding extension fields.
-     * i.e. new Participant(name, phone, email, address, tags).withBirthDate(year, month, dayOfMonth)
-     *
-     * @param year       this year or before
-     * @param month      month of the year specified
-     * @param dayOfMonth day of the month specified
-     * @return another Participant with same particulars object but with birth date
-     */
-    public Participant withBirthDate(int year, int month, int dayOfMonth) {
-        Participant participantToReturn = new Participant(getName(), getPhone(), getEmail(), getAddress(), getTags());
-        participantToReturn.nextOfKins = nextOfKins;
-        participantToReturn.notes = notes;
-        // set birth Date
-        participantToReturn.birthDate = BirthDate.of(year, month, dayOfMonth);
-
-        return participantToReturn;
-    }
-
-    /**
-     * Builder chaining method for retuning participant object with certain birthdate.
-     * i.e. new Participant(name, phone, email, address, tags).withBirthDate(year, month, dayOfMonth).withNotes(notes)
-     * This chaining method is not required unless the participants were to be set with certain notes set
-     *
-     * @param notes set of Note object
-     * @return this Participant but with new notes
-     */
-    public Participant withNotes(Set<Note> notes) {
-        Participant participantToReturn = new Participant(getName(), getPhone(), getEmail(), getAddress(), getTags());
-        participantToReturn.nextOfKins = nextOfKins;
-        participantToReturn.birthDate = birthDate;
-
-        // set notes
-        participantToReturn.notes = notes;
-
-        return participantToReturn;
-    }
-
-
-    /**
-     * Builder chaining method for retuning participant object with certain birthdate.
-     * i.e. new Participant(name, phone, email, address, tags).withBirthDate(year, month, dayOfMonth).withNotes(notes)
-     * This chaining method is not required unless the participants were to be set with certain next of kins arrayList
-     *
-     * @param nextOfKins array list of next of kins
-     * @return this Participant but with new nextOfKins
-     */
-    public Participant withNextOfKins(ArrayList<Person> nextOfKins) {
-        Participant participantToReturn = new Participant(getName(), getPhone(), getEmail(), getAddress(), getTags());
-        participantToReturn.notes = notes;
-        participantToReturn.birthDate = birthDate;
-
-        // set next of kins
-        participantToReturn.nextOfKins = nextOfKins;
-
-        return participantToReturn;
-    }
 
     /**
      * @return this object's birthDate
@@ -132,6 +82,10 @@ public class Participant extends Person {
         this.notes.remove(note);
     }
 
+    /**
+     * Returns an immutable note set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Note> getNotes() {
         return Collections.unmodifiableSet(notes);
     }
@@ -203,6 +157,8 @@ public class Participant extends Person {
             builder.append("; NOK: ");
             nextOfKins.forEach(builder::append);
         }
+
+        Set<Note> notes = getNotes();
         if (!notes.isEmpty()) {
             builder.append("; Notes: ");
             notes.forEach(builder::append);

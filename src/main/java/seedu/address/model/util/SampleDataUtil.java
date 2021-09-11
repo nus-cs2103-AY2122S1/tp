@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.particpant.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -57,4 +58,13 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Return a note set containing the list of notes
+     *
+     * @param notes notes
+     * @return Set of notes
+     */
+    public static Set<Note> getNoteSet(Note... notes) {
+        return Arrays.stream(notes).collect(Collectors.toSet());
+    }
 }

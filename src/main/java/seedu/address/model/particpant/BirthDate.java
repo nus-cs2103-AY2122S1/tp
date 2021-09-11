@@ -53,6 +53,11 @@ public class BirthDate {
         return this.date;
     }
 
+    /**
+     * Return the age from the BirthDate
+     *
+     * @return age
+     */
     public int getAge() {
         return Period.between(this.date, LocalDate.now()).getYears();
     }
