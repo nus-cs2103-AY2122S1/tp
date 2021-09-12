@@ -76,7 +76,7 @@ public class Participant extends Person {
     }
 
     /**
-     * Remove note from set.
+     * Removes a specific Note from the set.
      *
      * @param note note to be removed.
      */
