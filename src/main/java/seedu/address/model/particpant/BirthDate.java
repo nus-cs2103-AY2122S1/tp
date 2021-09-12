@@ -54,7 +54,7 @@ public class BirthDate {
     }
 
     /**
-     * Return the age from the BirthDate.
+     * Returns the age from the BirthDate.
      *
      * @return age
      */
