@@ -57,6 +57,8 @@ public class Participant extends Person {
     }
 
     /**
+     * Returns an Arraylist of Person that represents the participant's next of kins.
+     *
      * @return this object's nextOfKins.
      */
     public ArrayList<Person> getNextOfKins() {
