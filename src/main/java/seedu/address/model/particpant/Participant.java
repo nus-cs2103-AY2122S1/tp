@@ -67,7 +67,7 @@ public class Participant extends Person {
 
 
     /**
-     * Add note to set of notes.
+     * Adds a note to set of notes.
      *
      * @param note note to be added.
      */
