@@ -54,7 +54,7 @@ public class BirthDate {
     }
 
     /**
-     * Return the age from the BirthDate.
+     * Returns the age from the BirthDate.
      *
      * @return age
      */
@@ -63,7 +63,11 @@ public class BirthDate {
     }
 
     /**
-     * Returns if a given BirthDate is a valid email.
+     * Returns true if a given LocalDate instance is in the past or present.
+     * This is used to ensure no one's BirthDate is in the future.
+     *
+     * @param date     A LocalDate instance.
+     * @return         A boolean representing if a date is in the past or present.
      */
     public static boolean isPresentOrPast(LocalDate date) {
         return (LocalDate.now().isEqual(date) || LocalDate.now().isAfter(date));

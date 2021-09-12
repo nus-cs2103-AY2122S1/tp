@@ -61,8 +61,8 @@ public class SampleDataUtil {
     /**
      * Return a note set containing the list of notes
      *
-     * @param notes notes
-     * @return Set of notes
+     * @param notes      An array of notes.
+     * @return           Set of Notes.
      */
     public static Set<Note> getNoteSet(Note... notes) {
         return Arrays.stream(notes).collect(Collectors.toSet());

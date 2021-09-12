@@ -57,6 +57,8 @@ public class Participant extends Person {
     }
 
     /**
+     * Returns an Arraylist of Person that represents the participant's next of kins.
+     *
      * @return this object's nextOfKins.
      */
     public ArrayList<Person> getNextOfKins() {
@@ -65,7 +67,7 @@ public class Participant extends Person {
 
 
     /**
-     * Add note to set of notes.
+     * Adds a note to set of notes.
      *
      * @param note note to be added.
      */
@@ -74,9 +76,9 @@ public class Participant extends Person {
     }
 
     /**
-     * Remove note from set.
+     * Removes a specific Note from the set.
      *
-     * @param note note to be removed.
+     * @param note    A Note to be removed.
      */
     public void removeNote(Note note) {
         this.notes.remove(note);
