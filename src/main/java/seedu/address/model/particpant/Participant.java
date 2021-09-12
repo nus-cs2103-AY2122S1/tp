@@ -78,7 +78,7 @@ public class Participant extends Person {
     /**
      * Removes a specific Note from the set.
      *
-     * @param note note to be removed.
+     * @param note    A Note to be removed.
      */
     public void removeNote(Note note) {
         this.notes.remove(note);
