@@ -25,7 +25,7 @@ public class Insurance {
         this.type = type;
     }
 
-    public Insurance of(String insuranceName) {
+    public static Insurance of(String insuranceName) {
         for (InsuranceType type : InsuranceType.values()) {
             if (type.getTypeName().equals(insuranceName)) {
                 return new Insurance(type);
