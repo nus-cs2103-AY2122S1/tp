@@ -1,11 +1,20 @@
 package seedu.address.model.person;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Represents an insurance policy that a person can own.
  */
 public class Insurance {
     /** The suffix that is added to the end of each insurance type */
     public static final String INSURANCE_SUFFIX = " insurance";
+    public static final String INVALID_ARG_SUFFIX = " is not an insurance type";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Insurance type must be one of the following: "
+            + String.join(", ", Arrays.stream(InsuranceType.values())
+                    .map(InsuranceType::getTypeName)
+                    .collect(Collectors.toList()));
     private InsuranceType type;
 
     /**
@@ -14,6 +23,15 @@ public class Insurance {
      */
     public Insurance(InsuranceType type) {
         this.type = type;
+    }
+
+    public Insurance of(String insuranceName) {
+        for (InsuranceType type : InsuranceType.values()) {
+            if (type.getTypeName().equals(insuranceName)) {
+                return new Insurance(type);
+            }
+        }
+        throw new IllegalArgumentException(insuranceName + INVALID_ARG_SUFFIX);
     }
 
     public InsuranceType getType() {
