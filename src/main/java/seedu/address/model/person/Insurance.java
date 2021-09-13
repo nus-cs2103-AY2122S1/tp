@@ -16,6 +16,10 @@ public class Insurance {
         this.type = type;
     }
 
+    public InsuranceType getType() {
+        return type;
+    }
+
     @Override
     public String toString(){
         return type.getTypeName() + INSURANCE_SUFFIX;
