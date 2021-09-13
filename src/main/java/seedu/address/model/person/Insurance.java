@@ -4,13 +4,20 @@ package seedu.address.model.person;
  * Represents an insurance policy that a person can own.
  */
 public class Insurance {
-    private String name;
+    /** The suffix that is added to the end of each insurance type */
+    public static final String INSURANCE_SUFFIX = " insurance";
+    private InsuranceType type;
 
     /**
      * Class constructor
-     * @param name The name of this insurance
+     * @param type The type of this insurance
      */
-    public Insurance(String name) {
-        this.name = name;
+    public Insurance(InsuranceType type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString(){
+        return type.getTypeName() + INSURANCE_SUFFIX;
     }
 }
