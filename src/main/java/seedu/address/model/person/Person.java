@@ -23,17 +23,27 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Insurance> insurances = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+             Set<Insurance> insurances) {
+        requireAllNonNull(name, phone, email, address, tags, insurances);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.insurances.addAll(insurances);
+    }
+
+    /**
+     * Legacy constructor
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, phone, email, address, tags, new HashSet<>());
     }
 
     public Name getName() {
@@ -58,6 +68,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable insurance set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Insurance> getInsurances() {
+        return Collections.unmodifiableSet(insurances);
     }
 
     /**
@@ -92,13 +110,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getInsurances().equals(getInsurances());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, insurances);
     }
 
     @Override
@@ -116,6 +135,11 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+        Set<Insurance> insurances = getInsurances();
+        if (!insurances.isEmpty()){
+            builder.append("; Insurances: ");
+            insurances.forEach(builder::append);
         }
         return builder.toString();
     }
