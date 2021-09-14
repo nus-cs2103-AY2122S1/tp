@@ -200,17 +200,17 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code insurances} to this object's {@code insurances}.
+         * A defensive copy of {@code insurances} is used internally.
          */
         public void setInsurances(Set<Insurance> insurances) {
             this.insurances = (insurances != null) ? new HashSet<>(insurances) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable insurance set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code insurances} is null.
          */
         public Optional<Set<Insurance>> getInsurances() {
             return (insurances != null) ?
