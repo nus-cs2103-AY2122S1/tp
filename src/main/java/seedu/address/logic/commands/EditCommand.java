@@ -94,8 +94,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        Set<Insurance> updatedInsurances = editPersonDescriptor.getInsurances().orElse(personToEdit.getInsurances());
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedInsurances);
     }
 
     @Override
@@ -236,7 +236,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getInsurances().equals(e.getInsurances());
         }
     }
 }
