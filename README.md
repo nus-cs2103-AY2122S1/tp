@@ -1,8 +1,8 @@
-# AY2122S1-CS2103-W17-4 TP UniFy
+# AY2122S1-CS2103T-W17-4 TP UniFy
 
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp/branch/master/graph/badge.svg?token=PQVA8CSXQ8)](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp)
 
 ![Ui](docs/images/Ui.png)
 
