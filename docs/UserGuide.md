@@ -142,6 +142,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+
+### Mark a task as done
+Marks the specified task of the specified person as done.
+
+Format: `tdone /p PERSON_ID /t TASK_ID`
+
+* Marks the task specified by `TASK_ID` of the person specified by `PERSON_ID`.
+* The `PERSON_ID` refers to the index number shown in the displayed participant list.
+* The `TASK_ID` refers to the index number shown in the displayed task list of the specified participant.
+* The `PERSON_ID` and `TASK_ID` **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `tdone /p 2 /t 3` deletes the 3rd task of the 2nd participants.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -189,4 +203,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
-**Help** | `help`
+**tdone** | `tdone /p PERSON_ID /t TASK_ID`<br> e.g. `tdone /p 2 /t 3`
+**Help** | `help``
