@@ -87,11 +87,35 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all persons :
 
-Shows a list of all persons in the address book.
+Shows a list of all persons (of an event optionally).
 
-Format: `list`
+Format: `plist [/e EVENT_ID]`
+* List all persons (specified by `EVENT_ID`).
+* The `EVENT_ID` refers to the index number shown in the displayed event list.
+* The `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `plist` lists all persons.
+* `plist /e 3` lists all participants of the event with index number 3.
+
+### Listing all tasks of a person : 
+
+Shows a list of tasks of a person with the specified id.
+
+Format: `tlist /p PERSON_ID`
+* The `PERSON_ID` refers to the index number shown in the displayed participant list.
+* The `PERSON_ID` **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `tlist /p 2` lists all tasks of the person with index number 2
+
+### Listing all events :
+
+Shows a list of all events.
+
+Format: `elist`
 
 ### Editing a person : `edit`
 
