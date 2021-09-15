@@ -13,13 +13,14 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
-- [Add](#add)
-  - [Adding a person: `padd`](#adding-a-person-padd)
-  - [Adding a task: `tadd`](#adding-a-task-tadd)
-  - [Adding an event: `eadd`](#adding-an-event-eadd)
-  - [Listing all persons : `plist`](#listing-all-persons--plist)
-  - [Listing all tasks of a person : `tlist`](#listing-all-tasks-of-a-person--tlist)
-  - [Listing all events : `elist`](#listing-all-events--elist)
+  - [Add](#add)
+    - [Adding a person: `padd`](#adding-a-person-padd)
+    - [Adding a task: `tadd`](#adding-a-task-tadd)
+    - [Adding an event: `eadd`](#adding-an-event-eadd)
+  - [List](#list)
+    - [Listing all persons : `plist`](#listing-all-persons--plist)
+    - [Listing all tasks of a person : `tlist`](#listing-all-tasks-of-a-person--tlist)
+    - [Listing all events : `elist`](#listing-all-events--elist)
   - [Editing a person : `edit`](#editing-a-person--edit)
   - [Locating persons by name: `find`](#locating-persons-by-name-find)
   - [Deleting a person : `delete`](#deleting-a-person--delete)
@@ -96,9 +97,9 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-## Add
+### Add
 
-### Adding a person: `padd`
+#### Adding a person: `padd`
 
 Adds a person to the Ailurus.
 
@@ -113,7 +114,7 @@ Examples:
 * `padd /n John Doe /p 98765432 /e johnd@example.com`
 * `padd /n Betsy Crowe /t friend /e betsycrowe@example.com /a Newgate Prison /p 1234567 /t criminal`
 
-### Adding a task: `tadd`
+#### Adding a task: `tadd`
 
 Adds a task to the Ailurus.
 
@@ -126,7 +127,7 @@ A task must be assigned to a person.
 Examples:
 * `tadd /n Collect payment from participants /p 3`
 
-### Adding an event: `eadd`
+#### Adding an event: `eadd`
 
 Adds an event to the Ailurus.
 
@@ -139,8 +140,9 @@ You can add multiple people to an event e.g. /p 2 /p 3 /p 4...
 Examples:
 * `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
 
+### List
 
-### Listing all persons : `plist`
+#### Listing all persons : `plist`
 
 Shows a list of all persons (of an event optionally).
 
@@ -153,7 +155,7 @@ Example:
 * `plist` lists all persons.
 * `plist /e 3` lists all participants of the event with index number 3.
 
-### Listing all tasks of a person : `tlist`
+#### Listing all tasks of a person : `tlist`
 
 Shows a list of tasks of a person with the specified id.
 
@@ -164,7 +166,7 @@ Format: `tlist /p PERSON_ID`
 Example:
 * `tlist /p 2` lists all tasks of the person with index number 2
 
-### Listing all events : `elist`
+#### Listing all events : `elist`
 
 Shows a list of all events.
 
@@ -274,11 +276,15 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `padd /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS [/t TAG]…​` <br> e.g., `padd /n James Ho /p 22224444 /e jamesho@example.com /a 123, Clementi Rd, 1234665 /t friend /t colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**padd** | `padd /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS [/t TAG]…​` <br> e.g., `padd /n James Ho /p 22224444 /e jamesho@example.com /a 123, Clementi Rd, 1234665 /t friend /t colleague`
+**tadd** | `tadd /n TASKNAME /p PERSON_ID` <br> e.g., `tadd /n Collect payment from participants /p 3`
+**eadd** | `eadd /n EVENTNAME [/p PERSON_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
+**clear** | `clear`
+**delete** | `delete INDEX`<br> e.g., `delete 3`
+**edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**plist** | `plist [/e EVENT_ID]` <br> e.g., `plist /e 3`
+**tlist** | `tlist /p PERSON_ID` <br> e.g., `tlist /p 2`
+**elist** | `elist`
 **tdone** | `tdone /p PERSON_ID /t TASK_ID`<br> e.g. `tdone /p 2 /t 3`
-**Help** | `help``
+**help** | `help``
