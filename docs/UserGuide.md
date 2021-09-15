@@ -21,6 +21,9 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
     - [Listing all persons : `plist`](#listing-all-persons--plist)
     - [Listing all tasks of a person : `tlist`](#listing-all-tasks-of-a-person--tlist)
     - [Listing all events : `elist`](#listing-all-events--elist)
+  - [View](#view)
+    - [Viewing particulars of a person : `view`](#viewing-particulars-of-a-person-view)
+    - [Quit viewing : `qview`](#quit-viewing-qview)
   - [Editing a person : `edit`](#editing-a-person--edit)
   - [Locating persons by name: `find`](#locating-persons-by-name-find)
   - [Delete](#delete)
@@ -167,13 +170,33 @@ Format: `tlist /p PERSON_ID`
 * The `PERSON_ID` **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `tlist /p 2` lists all tasks of the person with index number 2
+* `tlist /p 2` lists all tasks of the person with index number 2.
 
 #### Listing all events : `elist`
 
 Shows a list of all events.
 
 Format: `elist`
+
+### View
+
+#### Viewing particulars of a person: `view`
+
+Opens and shows all particulars of a person.
+
+format: `view /p PERSON_ID`
+
+* The `PERSON_ID` refers to the index number shown in the displayed participant list.
+* The `PERSON_ID` **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `view /p 2` will enlarge the particulars of the person onto fullscreen with index number 2.
+
+#### Quit viewing: `qview`
+
+Exits the viewing stage, and returns to normal view mode.
+
+* format: `qview`
 
 ### Editing a person : `edit`
 
