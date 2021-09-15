@@ -23,7 +23,10 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
     - [Listing all events : `elist`](#listing-all-events--elist)
   - [Editing a person : `edit`](#editing-a-person--edit)
   - [Locating persons by name: `find`](#locating-persons-by-name-find)
-  - [Deleting a person : `delete`](#deleting-a-person--delete)
+  - [Delete](#delete)
+    - [Deleting a person : `pdel`](#deleting-a-person--pdel)
+    - [Deleting a task belonging to a person : `tdel`](#deleting-a-task-belonging-to-a-person--tdel)
+    - [Deleting an event : `edel`](#deleting-an-event--edel)
   - [Mark a task as done : `tdone`](#mark-a-task-as-done--tdone)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Exiting the program : `exit`](#exiting-the-program--exit)
@@ -53,7 +56,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 
    * **`padd`**`/n John Doe /p 98765432 /e johnd@example.com /a John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`pdel`**`3` : Deletes the 3rd contact shown in the current list of people.
 
    * **`clear`** : Deletes all contacts.
 
@@ -207,20 +210,48 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Delete
+
+#### Deleting a person : `pdel`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `pdel /p PERSON_ID`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person at the specified `PERSON_ID`.
+* The `PERSON_ID` refers to the index number shown in the displayed person list.
+* The `PERSON_ID` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `pdel /p 2` deletes the 2nd person in the address book.
 
+#### Deleting a task belonging to a person : `tdel`
+
+Deletes the specified task of a specified person from the address book.
+
+Format: `tdel /t TASK_ID /for PERSON_ID`
+
+* Deletes the task at the specified `TASK_ID` belonging to the person at the specified `PERSON_ID`.
+* The `PERSON_ID` refers to the index number shown in the displayed person list.
+* The `PERSON_ID` **must be a positive integer** 1, 2, 3, …​
+* The `TASK_ID` refers to the index number shown in the displayed task list of that specified person.
+* The `TASK_ID` **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `tdel /t 3 /for 5` deletes the 3rd task for the 5th person in the address book.
+
+#### Deleting an event : `edel`
+
+Deletes the specified event from the address book.
+
+Format: `edel /e EVENT_ID`
+
+* Deletes the event at the specified `EVENT_ID`.
+* The `EVENT_ID` refers to the index number shown in the displayed person list.
+* The `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `edel /e 10` deletes the 10th event in the address book.
 
 ### Mark a task as done : `tdone`
 Marks the specified task of the specified person as done.
@@ -280,7 +311,9 @@ Action | Format, Examples
 **tadd** | `tadd /n TASKNAME /p PERSON_ID` <br> e.g., `tadd /n Collect payment from participants /p 3`
 **eadd** | `eadd /n EVENTNAME [/p PERSON_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
 **clear** | `clear`
-**delete** | `delete INDEX`<br> e.g., `delete 3`
+**pdel** | `pdel /p PERSON_ID` <br> e.g., `pdel /p 6`
+**tdel** | `tdel /t TASK_ID /for PERSON_ID` <br> e.g., `tdel /t 4 for/ 3`
+**edel** | `edel /e EVENT_ID` <br> e.g., `edel /e 7`
 **edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **plist** | `plist [/e EVENT_ID]` <br> e.g., `plist /e 3`
