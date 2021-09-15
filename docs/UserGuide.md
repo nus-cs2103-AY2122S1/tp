@@ -8,8 +8,29 @@ provides users with convenient viewing and editing access to all information, th
 
 It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Viewing help : `help`](#viewing-help--help)
+- [Add](#add)
+  - [Adding a person: `padd`](#adding-a-person-padd)
+  - [Adding a task: `tadd`](#adding-a-task-tadd)
+  - [Adding an event: `eadd`](#adding-an-event-eadd)
+  - [Listing all persons : `plist`](#listing-all-persons--plist)
+  - [Listing all tasks of a person : `tlist`](#listing-all-tasks-of-a-person--tlist)
+  - [Listing all events : `elist`](#listing-all-events--elist)
+  - [Editing a person : `edit`](#editing-a-person--edit)
+  - [Locating persons by name: `find`](#locating-persons-by-name-find)
+  - [Deleting a person : `delete`](#deleting-a-person--delete)
+  - [Mark a task as done : `tdone`](#mark-a-task-as-done--tdone)
+  - [Clearing all entries : `clear`](#clearing-all-entries--clear)
+  - [Exiting the program : `exit`](#exiting-the-program--exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+  - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+- [FAQ](#faq)
+- [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -119,7 +140,7 @@ Examples:
 * `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
 
 
-### Listing all persons :
+### Listing all persons : `plist`
 
 Shows a list of all persons (of an event optionally).
 
@@ -132,7 +153,7 @@ Example:
 * `plist` lists all persons.
 * `plist /e 3` lists all participants of the event with index number 3.
 
-### Listing all tasks of a person : 
+### Listing all tasks of a person : `tlist`
 
 Shows a list of tasks of a person with the specified id.
 
@@ -143,7 +164,7 @@ Format: `tlist /p PERSON_ID`
 Example:
 * `tlist /p 2` lists all tasks of the person with index number 2
 
-### Listing all events :
+### Listing all events : `elist`
 
 Shows a list of all events.
 
@@ -199,7 +220,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 
-### Mark a task as done
+### Mark a task as done : `tdone`
 Marks the specified task of the specified person as done.
 
 Format: `tdone /p PERSON_ID /t TASK_ID`
