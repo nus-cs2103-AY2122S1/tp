@@ -343,4 +343,6 @@ Action | Format, Examples
 **tlist** | `tlist /p PERSON_ID` <br> e.g., `tlist /p 2`
 **elist** | `elist`
 **tdone** | `tdone /p PERSON_ID /t TASK_ID`<br> e.g. `tdone /p 2 /t 3`
+**view** | `view /p PERSON_ID` <br> e.g., `view /p 2`
+**qview** | `qview`
 **help** | `help``
