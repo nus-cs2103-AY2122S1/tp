@@ -9,51 +9,54 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+Hi, this is AvengerDirectory.
 
-<img src="images/johndoe.png" width="200px">
+**please note that roles are still a WIP**
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
+### Manh Duc
+
+<img src="images/hmanhduc2k.png" width="200px">
+
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Supreme leader
 
-### Jane Doe
+### Phuc Cuong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/phuccuongngo99.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Minion
+* Responsibilities: Everything
 
-### Johnny Doe
+### Ee Jia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cheweejia.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Minion
+* Responsibilities: Everything
 
-### Jean Doe
+### Amadeus
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
+<img src="images/amadeus-winarto.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Minion
+* Responsibilities: Everything
+
+### Jian Wei
+
+<img src="images/jianoway.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Minion
+* Responsibilities: Everything
