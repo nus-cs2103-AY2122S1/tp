@@ -13,7 +13,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/kanjitp.png" width="200px">
 
-[[LinkedIn](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/kanjitp)]
 [[portfolio](team/kanjitp.md)]
 
