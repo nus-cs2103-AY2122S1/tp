@@ -1,5 +1,9 @@
-# User Guide
-
+---
+layout: page
+title: User Guide
+---
+* Table of Contents
+  {:toc}
 ## Features
 
 <div markdown="block" class="alert alert-info">
