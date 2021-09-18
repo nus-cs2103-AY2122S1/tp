@@ -1,3 +1,5 @@
+# User Guide
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -149,6 +151,35 @@ Format: ```find DESCRIPTION```
 Deletes all tasks.
 
 Format: ```clear```
+
+## Command summary
+
+### General
+Action | Format
+--------|------------------
+**Contacts** | `contacts`
+**Tasks** | `tasks`
+**Exit** | `exit`
+**Help** | `help`
+
+### Contact Tab
+Action | Format
+--------|------------------
+**Add** | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]`
+**Delete** | `delete INDEX`
+**Find** | `find NAME`
+**Find** | `find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+
+### Tasks Tab
+Action | Format
+--------|------------------
+**Add** | `add d/DESCRIPTION [t/TAG]`
+**Edit** | `edit INDEX [d/DESCRIPTION] [t/TAG]`
+**Delete** | `delete INDEX`
+**Find** | `find DESCRIPTION`
+**Find** | `find [t/TAG]`
+**Clear** | `clear`
 
 ## UI Mockup
 ![Ui01](images/Mockup01.png)
