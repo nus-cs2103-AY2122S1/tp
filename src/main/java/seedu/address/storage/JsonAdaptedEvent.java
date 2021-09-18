@@ -73,24 +73,34 @@ public class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EventName.class.getSimpleName()));
         }
+        if (!EventName.isValidEventName(this.name)) {
+            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+        }
         final EventName eventName = new EventName(this.name);
 
         // Implementation might need improvements
-        if (!EventDate.isValidDate(this.date)) {
+        if (this.date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EventDate.class.getSimpleName()));
+        }
+        if (!EventDate.isValidDate(this.date)) {
+            throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
         }
         final EventDate eventDate = new EventDate(this.date);
 
         EventTime eventTime;
+        if (this.time == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventTime.class.getSimpleName()));
+        }
         if (EventTime.isValidTime(this.time)) {
             eventTime = new EventTime(this.time);
         } else if (this.time.equals("")) {
             eventTime = new EventTime(); //No time given
         } else {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EventTime.class.getSimpleName()));
+            throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);
         }
+
         Event event = new Event(eventName, eventDate, eventTime);
         if (this.isDone.equals("Completed")) {
             event.markAsDone();

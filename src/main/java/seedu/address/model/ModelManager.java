@@ -136,7 +136,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
-     * {@code }
+     * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Event> getEventList() {

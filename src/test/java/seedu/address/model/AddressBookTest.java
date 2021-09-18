@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -82,6 +84,47 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnFalse() {
+        assertFalse(addressBook.hasEvent(EVENT_STUB));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        addressBook.addEvent(EVENT_STUB);
+        assertTrue(addressBook.hasEvent(EVENT_STUB));
+    }
+
+    @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+    }
+
+    @Test
+    public void removeEvent_eventInAddressBook_returnFalse() {
+        addressBook.addEvent(EVENT_STUB);
+        assertTrue(addressBook.getEventList().contains(EVENT_STUB));
+        addressBook.removeEvent(EVENT_STUB);
+        assertFalse(addressBook.hasEvent(EVENT_STUB));
+    }
+
+    @Test
+    public void addEvent_eventNotInAddressBook_returnTrue() {
+        addressBook.addEvent(EVENT_STUB);
+        assertTrue(addressBook.hasEvent(EVENT_STUB));
+    }
+
+    @Test
+    public void addEvent_eventInAddressBook_throwsDuplicateEventException() {
+        addressBook.addEvent(EVENT_STUB);
+        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(EVENT_STUB));
     }
 
     /**
