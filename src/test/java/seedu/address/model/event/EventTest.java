@@ -3,8 +3,9 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
 import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT_STUB;
+import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
+import static seedu.address.testutil.TypicalEvents.EVENT_STUB_COPY;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ public class EventTest {
     @Test
     public void isSameEvent() {
         // same name
-        assertTrue(EVENT_STUB.isSameEvent(ANOTHER_EVENT_STUB));
+        assertTrue(EVENT_STUB.isSameEvent(EVENT_STUB_COPY));
     }
 
     @Test
@@ -42,5 +43,4 @@ public class EventTest {
 
         // TODO: If implementing edit Event, can add more testcases.
     }
-
 }

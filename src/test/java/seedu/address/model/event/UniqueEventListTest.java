@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
 import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT_STUB;
+import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -103,6 +103,6 @@ class UniqueEventListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueEventList.asUnmodifiableObservableList().remove(0));
+            -> uniqueEventList.asUnmodifiableObservableList().remove(0));
     }
 }

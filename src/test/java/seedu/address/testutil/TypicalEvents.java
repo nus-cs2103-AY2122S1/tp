@@ -18,6 +18,8 @@ public class TypicalEvents {
             new EventTime("1000"));
     public static final Event ANOTHER_EVENT_STUB = new Event(new EventName("Sleep2"), new EventDate("2021-09-18"),
             new EventTime("1001"));
+    public static final Event EVENT_STUB_COPY = new Event(new EventName("Sleep"), new EventDate("2021-09-18"),
+            new EventTime("1001"));
 
     private TypicalEvents() {}
 
