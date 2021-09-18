@@ -19,7 +19,7 @@ public class Event implements Comparable<Event> {
     private EventTime eventTime;
 
     /**
-     * This is the constructors of an Event.
+     * This is the constructor of an Event.
      *
      * @param name of the Event.
      * @param date at which the Event occurs.
@@ -60,6 +60,7 @@ public class Event implements Comparable<Event> {
     public List<Participant> getParticipants() {
         return Collections.unmodifiableList(this.participants);
     }
+
     /**
      * Marks the Event as done.
      */
@@ -70,6 +71,9 @@ public class Event implements Comparable<Event> {
     /**
      * Returns true if both events have the same name.
      * This defines a weaker notion of equality between two events.
+     *
+     * @param otherEvent to be compared to this event.
+     * @return A boolean to indicate if the events are the same or has the same name.
      */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {

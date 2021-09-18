@@ -7,6 +7,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This is an EventTime class that represents the Time of an Event.
+ */
 public class EventTime {
     public static final String MESSAGE_CONSTRAINTS = "Time should be in 2359 format.";
 
@@ -29,6 +32,9 @@ public class EventTime {
 
     /**
      * Returns true if a given string is a valid time.
+     *
+     * @param test A String to be tested if it is a valid time.
+     * @return A boolean indicating if the string is a valid time.
      */
     public static boolean isValidTime(String test) {
         // There must be a better way to do this.

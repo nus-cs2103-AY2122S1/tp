@@ -6,6 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This is an EventDate class representing the Date of an Event.
+ */
 public class EventDate {
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in YYYY-MM-DD format!";
 
@@ -14,7 +17,7 @@ public class EventDate {
     /**
      * Constructs an {@code EventDate}
      *
-     * @param date  A valid date.
+     * @param date of the Event.
      */
     public EventDate(String date) {
         requireNonNull(date);
@@ -24,6 +27,9 @@ public class EventDate {
 
     /**
      * Returns true if a given string is a valid date.
+     *
+     * @param test A String representing a date to be tested.
+     * @return A boolean to indicate if a string is a valid date.
      */
     public static boolean isValidDate(String test) {
         // There must be a better way to do this.

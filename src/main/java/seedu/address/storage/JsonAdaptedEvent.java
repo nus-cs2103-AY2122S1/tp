@@ -61,7 +61,7 @@ public class JsonAdaptedEvent {
      * Converts this Json-friendly adapted person object into the model's {@code Event} object.
      *
      * @return an Event instance representing the JsonAdaptedEvent.
-     * @throws IllegalValueException if there were aby data constraints violated in the adapted event.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
         final List<Participant> participants = new ArrayList<>();

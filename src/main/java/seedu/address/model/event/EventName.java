@@ -33,6 +33,9 @@ public class EventName {
 
     /**
      * Returns true if a given string is a valid name.
+     *
+     * @param test A String that represents a name to be tested.
+     * @return A boolean indicating if the String is a valid name.
      */
     public static boolean isValidEventName(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -46,9 +49,9 @@ public class EventName {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof EventName // instanceof handles nulls
-                && eventName.equals(((EventName) other).eventName)); // state check
+        return other == this
+                || (other instanceof EventName
+                && eventName.equals(((EventName) other).eventName));
     }
 
     @Override

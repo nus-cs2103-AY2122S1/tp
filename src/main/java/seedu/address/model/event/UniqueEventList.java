@@ -38,6 +38,8 @@ public class UniqueEventList implements Iterable<Event> {
     /**
      * Adds an event to the list.
      * The event must not already exist in the list.
+     *
+     * @param toAdd An Event instance to be added to the list.
      */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
@@ -52,6 +54,8 @@ public class UniqueEventList implements Iterable<Event> {
     /**
      * Removes the equivalent event from the list.
      * The event must exist in the list.
+     *
+     * @param toRemove An Event instance to be removed from the list.
      */
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
@@ -60,14 +64,21 @@ public class UniqueEventList implements Iterable<Event> {
         }
     }
 
+    /**
+     * Sets the list of Events.
+     *
+     * @param replacement A UniqueEventList that replaces the current list of events.
+     */
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code events}.
+     * {@code events} must not contain duplicate events.
+     *
+     * @param events A List of Events.
      */
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);
@@ -92,8 +103,8 @@ public class UniqueEventList implements Iterable<Event> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof UniqueEventList // instanceof handles nulls
+        return other == this
+                || (other instanceof UniqueEventList
                 && internalList.equals(((UniqueEventList) other).internalList));
     }
 
