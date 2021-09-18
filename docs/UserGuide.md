@@ -190,6 +190,34 @@ Examples:
 * `removeEvent n/CS2100 Finals d/2021-11-20  t/0900` removes the Event “CS2100 Finals” on 20th November 2021 9:00am.
 * `removeEvent n/240km Marathon d/2022-08-20` removes the Event “240km Marathon” on 20th August 2022.
 
+### Show Event details: `showDetails`
+
+Format:
+`showDetails EVENT_NAME` - Displays the details of the Event matching the given name.
+
+Example Usage:
+`showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
+
+Expected Outcome:
+[ ] CS2103T Finals (at: 23rd November 2021 5:00pm) Total Participants: 400
+
+### Show Event Participants: `showParticipants`
+
+Format:
+`showParticipants EVENT_NAME` - Displays the list of participants of the Event matching the given name.
+
+Example Usage:
+`showParticipants CS2103T Finals` - Displays the list of participants of the ‘CS2103T Finals’ Event.
+
+Expected Outcome:
+List of participants for CS2103T Finals:
+
+1. Adam Badamia
+2. Alex Balexius
+3. Arby Barbikoos
+4. Boxxy Mynameis
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
