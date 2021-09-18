@@ -9,51 +9,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Zen
 
 <img src="images/johndoe.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+[[github](https://github.com/johndoe)][[portfolio](team/johndoe.md)]
 
-### Jane Doe
+* Role: Team Lead, Integration
+* Responsibilities: tbd
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
+### Hanif
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)][[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation, Code Quality
+* Responsibilities: tbd
 
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
+### Joshua
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)][[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation, Code Quality
+* Responsibilities: tbd
+
+### Aaron
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)][[portfolio](team/johndoe.md)]
+
+* Role: Deliverables and deadlines, Scheduling and tracking
+* Responsibilities: tbd
+
+### Myat
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)][[portfolio](team/johndoe.md)]
+
+* Role: Testing
+* Responsibilities: tbd
