@@ -155,6 +155,7 @@ Format: ```clear```
 ## Command summary
 
 ### General
+
 Action | Format
 --------|------------------
 **Contacts** | `contacts`
@@ -163,6 +164,7 @@ Action | Format
 **Help** | `help`
 
 ### Contact Tab
+
 Action | Format
 --------|------------------
 **Add** | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
@@ -172,6 +174,7 @@ Action | Format
 **Find** | `find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
 ### Tasks Tab
+
 Action | Format
 --------|------------------
 **Add** | `add d/DESCRIPTION [t/TAG]`
