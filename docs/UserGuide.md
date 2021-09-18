@@ -239,3 +239,5 @@ Action | Format, Examples
 **Help** | `help`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
+**Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
+**Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
