@@ -308,7 +308,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Update Studio attendance of student**
+
+**MSS**
+
+1.  User requests to list students attending the relevant Studio session
+2.  AcademyDirectory shows a list of students attending the relevant Studio session
+3.  User requests to update the attendance of the student in the relevant Studio session
+4.  AcademyDirectory updates the student's attendance for the relevant Studio session
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index for the Studio group is invalid.
+
+  * 1a1. AcademyDirectory shows an error message.
+      
+      Use case resumes at step 1.
+
+* 1b. The given index for the Studio group's Studio session is invalid.
+
+  * 1b1. AcademyDirectory shows an error message.
+  
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given keyword to search for the student is gives no result.
+
+    * 3a1. AcademyDirectory shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Update Studio participation of student**
+
+**MSS**
+
+1. User requests to list students attending the relevant Studio session
+2. AcademyDirectory shows a list of students attending the relevant Studio session
+3. User requests to update the Studio participation of the student in the relevant Studio session with the appropriate Studio participation score
+4. AcademyDirectory updates the student's Studio participation for the relevant Studio session
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index for the Studio group is invalid.
+
+    * 1a1. AcademyDirectory shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The given index for the Studio group's Studio session is invalid.
+
+    * 1b1. AcademyDirectory shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given keyword to search for the student is gives no result.
+
+    * 3a1. AcademyDirectory shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given Studio participation score is invalid (non-integer).
+
+    * 3b1. AcademyDirectory shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 

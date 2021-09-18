@@ -170,6 +170,46 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 _Details coming soon ..._
 
+### Editing a student's Studio attendance: `attendance`
+Avengers will be able to edit the attendance status of their students.
+
+Format: `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`
+
+* Edits the attendance of a student or multiple students who have the matching `KEYWORD` in their names and in Studio group as defined by `STUDIO_GROUP`.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* If `INDEX` is not supplied, the command will edit the attendance of the student is in the last created Studio session. Otherwise, it will execute the edit in the specified Studio session if `INDEX` is valid.
+* The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student attended the session or not.
+* Existing values will be updated to the input values.
+
+Examples:
+
+* `attendance s/1 k/Aaron a/0`
+* `attendance s/33 k/Chan a/1 i/7`
+
+### Editing a student’s Studio participation: `studiopart`
+
+Avengers will be able to track the participation of their tutees during the relevant studios. We will be keeping track of Studio participation with a counter system which starts at 0 by default. If a student participates, their counter will increment by 1.
+
+Format: `studiopart s/STUDIO_GROUP k/KEYWORD [a/AMOUNT] [i/INDEX]`
+
+* Edits the Studio participation of a student or multiple students who have the matching KEYWORD in their names and in Studio group as defined by `STUDIO_GROUP`.
+Only full words will be matched e.g. `Han` will not match `Hans`.
+The search is case-insensitive. e.g `hans` will match `Hans`.
+If `AMOUNT` is not supplied, the command will add 1 to the Studio. Otherwise it will edit the tutee’s Studio participation counter by the specified `AMOUNT`.
+A tutee’s Studio participation counter cannot be reduced below 0.
+If `INDEX` is not supplied, the command will edit the Studio participation of the tutee in the last created Studio session. Otherwise, it will execute the edit in the specified Studio session if `INDEX` is valid.
+
+Examples:
+* `studiopart s/12 k/Benny a/3` 
+* `studiopart s/2 k/Keng i/7`
+* `studiopart s/32 k/Ting a/-1 i/8`
+
+
+
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
