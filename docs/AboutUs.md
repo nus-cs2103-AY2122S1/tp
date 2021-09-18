@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Project Advisor
 
-### Jane Doe
+### Low Kang Ngee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lowkangn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lowkangn)]
+[[portfolio](team/lowkangn.md)]
 
-- Role: Team Lead
-- Responsibilities: UI
+- Role: Developer
+- Responsibilities: Testing + Deliverables and deadlines
 
 ### Johnny Doe
 
