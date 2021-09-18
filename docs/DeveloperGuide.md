@@ -257,29 +257,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* A student, 
+  * Students generally have different types of tasks they need to organize and deadlines to keep track of.
+  * Students have many contacts from various places such as modules, CCAs, etc, that they would like to organize better.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+* On his laptop/computer very often,
+  * Typing is mainly an advantage with a physical keyboard
+  * Some students may choose to avoid using their mobile phone often to avoid distractions
 
+* A person who prefers/is more skilled at typing,
+  * Typing is only faster with experience
+  * Tasks and deadlines are easier to be specified with typing, instead of clicking through multiple options with a laptop trackpad
+  * Students may encounter situations where they need to type information/deadlines very quickly (e.g. during a lecture)
+
+**Value proposition**: 
+ * Manage contacts and tasks faster than a typical mouse/GUI driven app.
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a(n) ...                                | I want to ...                                 | So that I can ...                                               |
+|----------|--------------------------------------------|-----------------------------------------------|-----------------------------------------------------------------|
+| * * *    | user                                       | create tasks                                  | record the tasks I need to do                                   |
+| * * *    | user                                       | delete tasks                                  | clear my list of tasks if it gets too cluttered                 |
+| * * *    | user                                       | view all tasks                                | see all the tasks I have at the moment                          |
+| * * *    | user                                       | edit tasks                                    | keep track of changing requirements                             |
+| * * *    | user                                       | add contacts                                  | store them for later reference                                  |
+| * * *    | user                                       | delete contacts                               | remove contacts when I want to                                  |
+| * * *    | user                                       | view all contacts                             | keep track of all my contacts                                   |
+| * * *    | user                                       | edit contacts                                 | change them later when my contacts update their contact details |
+| * * *    | first-time user                            | view a list of available commands             | refer to them easily                                            |
+| * * *    | user who prefers typing                    | use a CLI over a GUI                          | be faster and efficient in using the app                        |
+| * *      | experienced user                           | write notes on the main page of the app       | see miscellaneous reminders at a glance                         |
+| * *      | forgetful student                          | add short notes to each task as a reminder    | Remember what the task is about                                 |
+| * *      | stressed student with many tasks to handle | set priorities of tasks                       | decide what to do next                                          |
+| * *      | lazy student                               | go back to previously used full command lines | be even faster without needing to type                          |
+| * *      | student with many contacts                 | group contacts according to tags              | organise my contacts better                                     |
+| * *      | student with many CCAs                     | tag tasks with CCA tags                       | easily identify what I need to do for a particular CCA          |
+| * *      | student taking many modules                | tag tasks with module tags                    | easily identify what I need to do for a particular module       |
 
 ### Use cases
 
