@@ -297,32 +297,168 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+#### Use case 01: Add a task
 
-**Use case: Delete a person**
+<u>MSS:</u>
 
-**MSS**
+1. User switches to the task tab
+2. Dash shows the list of tasks
+3. User requests to add a task, specifying task info
+4. Dash adds task to the list 
+   
+Use case ends.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+<u>Extensions:</u>
 
-    Use case ends.
+3. There is no task description specified
+    * a. Dash shows an error message
 
-**Extensions**
+Use case resumes at step 2.
 
-* 2a. The list is empty.
+#### Use case 02: Delete a task
 
-  Use case ends.
+<u>MSS:</u>
 
-* 3a. The given index is invalid.
+1. User switches to the task tab
+2. Dash shows the list of tasks 
+3. User requests to delete a task, specifying the index to be deleted
+4. Dash deletes the task
 
-    * 3a1. AddressBook shows an error message.
+Use case ends.
 
-      Use case resumes at step 2.
+<u>Extension:</u>
 
-*{More to be added}*
+3. The list is empty
+
+Use case ends.
+
+3. The given index is invalid
+    * a. Dash shows an error message
+
+Use case resumes at step 2.
+
+#### Use case 03: Edit a task
+
+<u>MSS:</u>
+
+1. User switches to the task tab
+2. Dash shows the list of tasks
+3. User inputs the task index to be edited, specifying updated info for the task
+4. Dash edits the task
+   
+Use case ends.
+
+<u>Extension:</u>
+
+3.  The task list is empty
+
+Use case ends
+
+3. The given index is invalid
+   * a. Dash shows an error message
+
+Use case resumes at step 3
+
+#### Use case 04: View all tasks
+
+<u>MSS:</u>
+
+1. User switches to the task tab
+2. Dash shows the list of tasks
+
+Use case ends.
+
+<u>Extension:</u>
+
+2. The task list is empty
+
+Use case ends.
+
+#### Use case 05: Add a contact
+
+<u>MSS:</u>
+
+1. User switches to the contacts tab
+2. Dash shows a list of contacts
+3. User requests to add a contact, specifying contact info
+4. Dash adds contact to the list
+   
+Use case ends.
+
+<u>Extension:</u>
+
+3. The contact info is invalid
+    * a. Dash shows an error message
+    
+Use case resumes at step 2.
+
+#### Use case 06: Delete a contact
+
+<u>MSS:</u>
+
+1. User switches to the contacts tab
+2. Dash shows the list of contacts
+3. User requests to delete a contact, specifying the index to be deleted
+4. Dash deletes the contact
+
+Use case ends.
+
+<u>Extension:</u>
+
+3. The contacts list is empty
+
+Use case ends.
+
+3. The given index is invalid
+    * a. Dash shows an error message
+    
+Use case resumes at step 2.
+
+#### Use case 07: Edit a contact
+
+<u>MSS:</u>
+
+1. User switches to contacts tab
+2. Dash shows the list of contacts
+3. User inputs the contact index to be edited, specifying the updated info for the contact
+4. Dash edits the contact
+
+Use case ends.
+
+<u>Extension:</u>
+
+3. The contact list is empty
+
+Use case ends.
+
+3. The given index is invalid
+   * Dash shows an error message
+
+Use case resumes at step 2.
+
+#### Use case 08: View all contact
+
+<u>MSS:</u>
+
+1. User switches to the contacts tab
+2. Dash shows the list of contacts
+
+Use case ends.
+
+<u>Extension:</u>
+
+2a. The task list is empty
+
+Use case ends.
+
+#### Use case 09: View a list of available commands
+
+<u>MSS:</u>
+
+1. User requests to view all available commands
+2. Dash shows a list of all available commands
+
+Use case ends.
 
 ### Non-Functional Requirements
 
@@ -363,7 +499,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases … }_
 
 ### Deleting a person
 
@@ -380,7 +516,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases … }_
 
 ### Saving data
 
@@ -388,4 +524,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+1. _{ more test cases … }_
