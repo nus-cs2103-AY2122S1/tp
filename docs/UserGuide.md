@@ -177,8 +177,8 @@ Creates an Event at the specified date and time.
 Format: `addEvent n/NAME d/DATE [t/TIME]` 
 
 Examples:
-* `addEvent n/CS2100 Finals d/2021-11-20 t/0900` creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
-* `addEvent n/240Km Marathon d/2022-08-20` creates a full day Event "240km Marathon" on 20th August 2022.
+* `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
+* `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240km Marathon" on 20th August 2022.
 
 ### Removing an event : `removeEvent`
 
@@ -187,8 +187,18 @@ Removes an Event. If there are multiple events with the same name, specify the D
 Format: `removeEvent n/NAME [d/DATE] [t/TIME]` 
 
 Examples:
-* `removeEvent n/CS2100 Finals d/2021-11-20  t/0900` removes the Event “CS2100 Finals” on 20th November 2021 9:00am.
-* `removeEvent n/240km Marathon d/2022-08-20` removes the Event “240km Marathon” on 20th August 2022.
+* `removeEvent n/CS2100 Finals d/2021-11-20  t/0900` - Removes the Event “CS2100 Finals” on 20th November 2021 9:00am.
+* `removeEvent n/240km Marathon d/2022-08-20` - Removes the Event “240km Marathon” on 20th August 2022.
+
+### Mark an Event as done: `doneEvent`
+
+Format:
+`doneEvent n/NAME [d/DATE] [t/TIME]` - Marks an Event as done, if there are multiple events with the same name, specify the DATE (in YYYY-MM-DD format) and TIME (24h format) to select that event.
+
+Example Usage:
+`doneEvent n/CS2100 Finals d/2021-11-20  t/0900` - Marks the Event “CS2100 Finals” on 20th November 2021 9:00am as done.
+`doneEvent n/240km Marathon d/2022-08-20` - Marks the Event “240km Marathon” on 20th August 2022 as done.
+
 
 ### Show Event details: `showDetails`
 
@@ -198,9 +208,6 @@ Format:
 Example Usage:
 `showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
 
-Expected Outcome:
-[ ] CS2103T Finals (at: 23rd November 2021 5:00pm) Total Participants: 400
-
 ### Show Event Participants: `showParticipants`
 
 Format:
@@ -209,13 +216,13 @@ Format:
 Example Usage:
 `showParticipants CS2103T Finals` - Displays the list of participants of the ‘CS2103T Finals’ Event.
 
-Expected Outcome:
-List of participants for CS2103T Finals:
+### Find Participant and access details: `findParticipant`
 
-1. Adam Badamia
-2. Alex Balexius
-3. Arby Barbikoos
-4. Boxxy Mynameis
+Format:
+`findParticipant KEYWORD` - Finds any participants whose name contains the given KEYWORD and returns the details about each participant.
+
+Example Usage:
+`findParticipant Mike` - Filters the list of Participants for Participants who have names containing “Mike”.
 
 --------------------------------------------------------------------------------------------------------------------
 
