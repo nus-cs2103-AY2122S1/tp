@@ -38,12 +38,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Role: Developer
 - Responsibilities: Data
 
-### Jean Doe
+### Ng Tze Wei Bruce Mitchell
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ntwbruce.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ntwbruce)]
+[[portfolio](team/ntwbruce.md)]
 
 - Role: Developer
 - Responsibilities: Dev Ops + Threading
