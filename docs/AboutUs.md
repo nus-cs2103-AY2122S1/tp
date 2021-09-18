@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kan Jitpakdi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kanjitp.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/kanjitp)]
+[[portfolio](team/kanjitp.md)]
 
-- Role: Project Advisor
+* Role: Project Advisor
+* Responsibilities: Full Stack
 
 ### Low Kang Ngee
 
