@@ -26,34 +26,36 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Team Lead
+- Responsibilities: UI
 
-### Johnny Doe
+### Ye Xinjian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xxjjxj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/XXJJXJ)] [[portfolio](team/xxjjxj.md)]
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation + Code Quality
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Ng Tze Wei Bruce Mitchell
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/ntwbruce.png" width="200px">
 
-* Role: Developer
-* Responsibilities: UI
+[[github](http://github.com/ntwbruce)]
+[[portfolio](team/ntwbruce.md)]
+
+- Role: Developer
+- Responsibilities: Dev Ops + Threading
+
+### Dave Low
+
+<img src="images/davelowqx.png" width="200px">
+
+[[github](http://github.com/davelowqx)]
+[[portfolio](team/davelowqx.md)]
+
+- Role: Businessman
+- Responsibilities: Playing Golf
