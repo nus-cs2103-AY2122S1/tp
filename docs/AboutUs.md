@@ -29,14 +29,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 - Role: Developer
 - Responsibilities: Testing + Deliverables and deadlines
 
-### Johnny Doe
+### Ye Xinjian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/xxjjxj.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/XXJJXJ)] [[portfolio](team/xxjjxj.md)]
 
-- Role: Developer
-- Responsibilities: Data
+
+* Role: Developer
+* Responsibilities: Documentation + Code Quality
+
 
 ### Ng Tze Wei Bruce Mitchell
 
