@@ -73,19 +73,26 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a contact: `add`
 
-Adds a person to the address book.
+Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add (Category code)/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​​`
+
+Category Code:
+* Attraction: `c/att`
+* F&B: `c/fnb`
+* Commerce: `c/com`
+* Accomodation: `c/acc`
+* Transport: `c/tpt`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add c/att/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803`
+* `add c/acc/Marina Bay Sands t/Hotel e/1234@example.com a/10 Bayfront Ave, Singapore 018956`
 
 ### Listing all persons : `list`
 
