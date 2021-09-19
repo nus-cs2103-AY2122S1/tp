@@ -270,29 +270,52 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                    | I can …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | add my clients information     | easily refer to it         |
+| `* * *`  | user                                       | delete contact information     | remove contacts who I no longer keep in touch with                                                                       |
+| `* * *`  | user                                       | lookup a client in the address book | retrieve relevant information | 
+| `* * *`  | user                                       | search for a client by their name |                         |
+| `* * *`  | user                                       | save my address book locally   | access the information again when I reopen the application |
+| `* * *`  | user                                       | see hints in error messages when I input a wrong command | know how to rectify my command |
+| `* * *`  | user                                       | be warned that I am about to add the same user again |                         |
+| `* * *`  | user                                       | have the addressbook to be functional 99.999 percent of the time | not get frustrated and find another app to use |
+| `* * *`  | user                                       | exit the app safely            | my data will not be corrupted |
+| `* *`    | user                                       | edit my client's information   | keep track of relevant client information |
+| `* *`    | user                                       | sort my address book           | quickly identify the clients based on the last time I've seen them or the number of financial plans they have |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LeadsForce` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. LeadsForce adds the person to the contact book
+
+    Use case ends.
+
+**Extensions**
+
+* 1a.  The user forgets to input the required info (name and email)
+  
+  * 1a1. LeadsForce shows an error message.
+  
+    Use case resumes at step 2.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  LeadsForce shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  LeadsForce deletes the person
 
     Use case ends.
 
@@ -304,25 +327,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. LeadsForce shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Search for a person**
+
+**MSS**
+
+1. User requests to list persons
+2. LeadsForce shows a list of persons
+3. User requests to search using specific keywords
+4. LeadsForce shows the list of all people which match the keyword
+
+   Use case ends.
+
+**Extensions**
+
+* 2a.  The list is empty.
+
+    Use case ends.
+
+* 3a. No person fits the inputted keyword
+    
+    Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should respond within two seconds.
+5. Should work without requiring an installer.
+6. The system should work on a 64-bit environment.
+7. The product should be usable by a student who has little to much experience in using computers.
+
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Command Line Interface (CLI)**: Text-based user interface that is used to view and manage device files
+* **Graphical User Interface (GUI)**: A visual way of interacting with a device using a variety of items
+* **Leads**: refers to contact with a potential customer, also known as a “prospect”
+* **Risk Appetite**: level of risk that a lead is prepared to accept in pursuit of his/her objectives, before action is deemed necessary to reduce the risk
+* **Disposable Income**: total personal income minus personal current taxes
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
