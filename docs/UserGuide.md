@@ -28,7 +28,7 @@ faster than traditional GUI apps.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `delete n/Doraemon`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [e/EPISODE]` can be used as `n/Doraemon` or as `n/Doraemon e/1.
+  e.g `n/NAME [e/EPISODE]` can be used as `n/Doraemon` or as `n/Doraemon e/1.`
 </div>
 
 ### Viewing help : `help`
@@ -55,7 +55,20 @@ Format: `delete INDEX`
 - The index must be a positive integer 1, 2, 3, ...
 
 Examples:
-- `delete 1` deletes the 1st anime in the anime list.
+*  `delete 1` deletes the 1st anime in the anime list.
+
+### Updating an anime episode: `update`
+
+Updates the episode that you are currently on for a specified anime.<br>
+Format: `update INDEX e/NEWEPISODE`
+
+- `NEWEPISODE` refers to the latest episode watched.
+- Updates the anime at the specified `INDEX`.
+- The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+*  `update 1 e/3`
+
 
 ### Listing all anime: `list`
 
