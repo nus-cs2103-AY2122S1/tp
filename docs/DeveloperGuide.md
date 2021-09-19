@@ -272,12 +272,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+|`*`|Tour Guide|Edit contact details|ensure that my contacts are up to date|
+|`***`|Tour Guide|Add contacts to my list|build a list of all my contacts|
+|`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|store the relevant information of a contact in one place.|
+|`***`|Tour Guide|Delete contacts from my list|remove irrelevant or unwanted details|
+|`***`|Tour Guide|View all the contacts in my list |find contacts whose names I have forgotten|
+|`*`|Tour Guide|Sort my contacts by date visited/added||
+|`*`|Seasoned tour guide|Merge contacts |prevent duplicates or inaccurate information.|
+|`*`|Forgetful|Retrieve recently viewed/most frequently used contacts|easily access certain contacts|
+|`*`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
+|`***`|Organized|Label contacts with category|Access information more efficiently|
+|`*`|Creative|Add customised tags to contacts|Describe contacts simply and make them easy to find|
+|`***`|Busy |Search for a specific contact|View information about the contact|
+|`*`|Objective|Rate contacts (1 to 5 stars?)|Refer to them during itinerary planning|
+|`*`|Experienced|Add reviews to contacts|Recommend services based on reviews|
+|`***`|Forgetful|Scroll through my list manually|Find contacts that I may have forgotten the names of|
+|`***`|Visual|View my contacts on a GUI|Have a more user-friendly experience|
+|`*`|New|Access a help page|Remind myself / learn how to use the app|
+|`*`|Non tech-savvy|Easy search button|Search for information easily|
+|`*`|Busy|See the overview of my current data upon start up|Quick summary of my data at a glance|
+|`*`|Confused|Have sample data shown to me|Have a rough idea of what the app has to offer|
+|`*`|Helpful|Share my data with other tour guides (through the .txt file?)|Hopefully receive more contacts from other guides|
+|`*`|Tech-savvy|Transfer my contact information conveniently||
+
 
 *{More to be added}*
 
