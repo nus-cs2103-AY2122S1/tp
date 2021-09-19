@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -305,16 +305,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `tour guide user`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+**UC01 - Add a Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+User decides to add a contact
+User inputs the add command to the interface
+AddressBook informs the user that the contact was added
+AddressBook displays updated list of contacts
+Use case ends.
+
+**Extensions**
+* 2a. The format is wrong
+
+    * 2a1. Address books show an error message
+
+  Use case resumes at step 2.
+
+* 2b.  User already exists in the AddressBook
+
+    * 2b1. Address books show an error message
+
+  Use case resumes at step 2
+
+
+**UC02 - List All Contacts**
+
+**MSS**
+
+1.  User requests to list all contacts
+2.  AddressBook shows a list of contacts
 
     Use case ends.
 
@@ -324,9 +347,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**UC03 - Delete a Contact**
+***Preconditions: User has <u>listed all contacts UC02</u>***
+
+**MSS**
+
+1.  User requests to delete a specific contact in the list
+2.  AddressBook deletes the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+
+**UC04 - Find a Contact**
+
+**MSS**
+
+1.  User requests to find a contact
+2.  AddressBook displays a list of all contacts with the given keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The keyword cannot be found
+
+  Use case ends.
+
+* 2b. No keywords are provided
+
+    * 2b1. AddressBook shows an error message
 
       Use case resumes at step 2.
 
