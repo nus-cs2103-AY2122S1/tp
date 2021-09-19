@@ -16,7 +16,7 @@ The app helps the tour guides easily collate and access contacts of a variety of
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `wheretourgo.jar` from [here](no link for now).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
