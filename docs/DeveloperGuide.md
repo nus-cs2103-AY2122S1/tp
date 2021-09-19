@@ -277,7 +277,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-|`*`|Tour Guide|Edit contact details|ensure that my contacts are up to date|
+|`**`|Tour Guide|Edit contact details|ensure that my contacts are up to date|
 |`***`|Tour Guide|Add contacts to my list|build a list of all my contacts|
 |`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|store the relevant information of a contact in one place.|
 |`***`|Tour Guide|Delete contacts from my list|remove irrelevant or unwanted details|
@@ -285,15 +285,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`*`|Tour Guide|Sort my contacts by date visited/added||
 |`*`|Seasoned tour guide|Merge contacts |prevent duplicates or inaccurate information.|
 |`*`|Forgetful|Retrieve recently viewed/most frequently used contacts|easily access certain contacts|
-|`*`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
+|`**`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
 |`***`|Organized|Label contacts with category|Access information more efficiently|
-|`*`|Creative|Add customised tags to contacts|Describe contacts simply and make them easy to find|
+|`**`|Creative|Add customised tags to contacts|Describe contacts simply and make them easy to find|
 |`***`|Busy |Search for a specific contact|View information about the contact|
-|`*`|Objective|Rate contacts (1 to 5 stars?)|Refer to them during itinerary planning|
+|`**`|Objective|Rate contacts (1 to 5 stars?)|Refer to them during itinerary planning|
 |`*`|Experienced|Add reviews to contacts|Recommend services based on reviews|
 |`***`|Forgetful|Scroll through my list manually|Find contacts that I may have forgotten the names of|
 |`***`|Visual|View my contacts on a GUI|Have a more user-friendly experience|
-|`*`|New|Access a help page|Remind myself / learn how to use the app|
+|`**`|New|Access a help page|Remind myself / learn how to use the app|
 |`*`|Non tech-savvy|Easy search button|Search for information easily|
 |`*`|Busy|See the overview of my current data upon start up|Quick summary of my data at a glance|
 |`*`|Confused|Have sample data shown to me|Have a rough idea of what the app has to offer|
