@@ -276,7 +276,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new anime                         | keep track of the anime                                                |
 | `* * *`  | user                                       | delete an anime                         | remove anime that I no longer need                                     |
 | `* * *`  | user                                       | list all anime                          | see all anime I have added                                             |
-| `* * *`  | user                                       | keep track of the anime episode         | continue watching the right episode of the anime                       |
 | `* * *`  | user                                       | update anime episode                    | ensure I am on the right episode of the anime                          |
 
 *{More to be added}*
