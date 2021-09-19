@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### John Doe
+### Liu Chen En
 
 <img src="images/johndoe.png" width="200px">
 
