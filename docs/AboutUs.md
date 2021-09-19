@@ -5,16 +5,44 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Ajjagottu Kaushik Kumar Reddy
+
+<img src="images/kaushikkrdy.png" width="200px">
+
+[[github](https://github.com/kaushikkrdy)]
+
+Email: kaushikumar99@gmail.com
+
+* Role: Developer
+
+### Bryann Yeap Kok Keong
+
+<img src="images/bryannyeap.png" width="200px">
+
+[[github](https://github.com/BryannYeap)]
+
+Email: bryannyeapkk@gmail.com
+
+* Role: Developer
+
+### Liu Chen En
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](https://github.com/twothicc)]
+
+Email: chenenliuu@gmail.com
+
+* Role: Developer
+
+### Toh Wei Jie
 
 <img src="images/tohweijie01.png" width="200px">
 
 [[github](https://github.com/TohWeiJie01)]
-Email: e0564630@u.nus.edu
+
+Email: tohweijie01@gmail.com
 
 * Role: Developer
-* Responsibilities: 
