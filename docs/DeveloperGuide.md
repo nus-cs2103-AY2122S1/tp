@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,13 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* tour guides in Singapore
 * has a need to manage a significant number of contacts
+* has a need to collate and access contacts
+* has a need to find contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app and is able to find the necessary contact details quickly
+
 
 
 ### User stories
@@ -272,27 +277,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+|`*`|Tour Guide|Edit contact details|ensure that my contacts are up to date|
+|`***`|Tour Guide|Add contacts to my list|build a list of all my contacts|
+|`***`|Tour Guide|Add contact details such as address, phone number, and contact description to my list|store the relevant information of a contact in one place.|
+|`***`|Tour Guide|Delete contacts from my list|remove irrelevant or unwanted details|
+|`***`|Tour Guide|View all the contacts in my list |find contacts whose names I have forgotten|
+|`*`|Tour Guide|Sort my contacts by date visited/added||
+|`*`|Seasoned tour guide|Merge contacts |prevent duplicates or inaccurate information.|
+|`*`|Forgetful|Retrieve recently viewed/most frequently used contacts|easily access certain contacts|
+|`*`|Busy|Filter contacts|Retrieve relevant information based on a criteria|
+|`***`|Organized|Label contacts with category|Access information more efficiently|
+|`*`|Creative|Add customised tags to contacts|Describe contacts simply and make them easy to find|
+|`***`|Busy |Search for a specific contact|View information about the contact|
+|`*`|Objective|Rate contacts (1 to 5 stars?)|Refer to them during itinerary planning|
+|`*`|Experienced|Add reviews to contacts|Recommend services based on reviews|
+|`***`|Forgetful|Scroll through my list manually|Find contacts that I may have forgotten the names of|
+|`***`|Visual|View my contacts on a GUI|Have a more user-friendly experience|
+|`*`|New|Access a help page|Remind myself / learn how to use the app|
+|`*`|Non tech-savvy|Easy search button|Search for information easily|
+|`*`|Busy|See the overview of my current data upon start up|Quick summary of my data at a glance|
+|`*`|Confused|Have sample data shown to me|Have a rough idea of what the app has to offer|
+|`*`|Helpful|Share my data with other tour guides (through the .txt file?)|Hopefully receive more contacts from other guides|
+|`*`|Tech-savvy|Transfer my contact information conveniently||
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `tour guide user`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+**UC01 - Add a Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+User decides to add a contact
+User inputs the add command to the interface
+AddressBook informs the user that the contact was added
+AddressBook displays updated list of contacts
+Use case ends.
+
+**Extensions**
+* 2a. The format is wrong
+
+    * 2a1. Address books show an error message
+
+  Use case resumes at step 2.
+
+* 2b.  User already exists in the AddressBook
+
+    * 2b1. Address books show an error message
+
+  Use case resumes at step 2
+
+
+**UC02 - List All Contacts**
+
+**MSS**
+
+1.  User requests to list all contacts
+2.  AddressBook shows a list of contacts
 
     Use case ends.
 
@@ -302,9 +347,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**UC03 - Delete a Contact**
+***Preconditions: User has <u>listed all contacts UC02</u>***
+
+**MSS**
+
+1.  User requests to delete a specific contact in the list
+2.  AddressBook deletes the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+
+    * 2a1. AddressBook shows an error message.
+
+      Use case ends.
+
+
+**UC04 - Find a Contact**
+
+**MSS**
+
+1.  User requests to find a contact
+2.  AddressBook displays a list of all contacts with the given keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The keyword cannot be found
+
+  Use case ends.
+
+* 2b. No keywords are provided
+
+    * 2b1. AddressBook shows an error message
 
       Use case resumes at step 2.
 
