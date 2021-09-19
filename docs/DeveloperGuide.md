@@ -283,16 +283,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AniList` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Anilist` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - List all anime**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list anime
+2.  AniList shows a list of anime
+
+    Use case ends.
+
+**Use case: UC02 - Add an anime**
+
+**MSS**
+
+1.  User requests to add an anime to the list
+2.  AniList adds the anime
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. The anime name is a duplicate.
+
+  - 1a1. AniList shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC03 - Delete an anime**
+
+**MSS**
+
+1.  User requests to list anime
+2.  AniList shows a list of anime
+3.  User requests to delete a specific anime in the list
+4.  AniList deletes the anime
 
     Use case ends.
 
@@ -304,7 +330,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. AniList shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC04 - Update the episode of an anime**
+
+**MSS**
+
+1.  User requests to list anime
+2.  AniList shows a list of anime
+3.  User requests to update the episode number of a specific anime
+4.  AniList updates the episode number of the anime
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. AniList shows an error message.
 
       Use case resumes at step 2.
 
