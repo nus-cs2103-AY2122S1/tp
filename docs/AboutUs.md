@@ -29,11 +29,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Hu Tianran
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hutianran.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/Nature711)] [[portfolio](team/hutianran.md)]
 
 * Role: Developer
 * Responsibilities: Data
