@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT_STUB;
-import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
+import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,13 +27,13 @@ class UniqueEventListTest {
 
     @Test
     public void contains_eventNotInList_returnsFalse() {
-        assertFalse(uniqueEventList.contains(EVENT_STUB));
+        assertFalse(uniqueEventList.contains(SAMPLE_EVENT));
     }
 
     @Test
     public void contains_eventInList_returnsTrue() {
-        uniqueEventList.add(EVENT_STUB);
-        assertTrue(uniqueEventList.contains(EVENT_STUB));
+        uniqueEventList.add(SAMPLE_EVENT);
+        assertTrue(uniqueEventList.contains(SAMPLE_EVENT));
     }
 
     @Test
@@ -43,8 +43,8 @@ class UniqueEventListTest {
 
     @Test
     public void add_duplicateEvent_throwsDuplicateEventException() {
-        uniqueEventList.add(EVENT_STUB);
-        assertThrows(DuplicateEventException.class, () -> uniqueEventList.add(EVENT_STUB));
+        uniqueEventList.add(SAMPLE_EVENT);
+        assertThrows(DuplicateEventException.class, () -> uniqueEventList.add(SAMPLE_EVENT));
     }
 
     @Test
@@ -54,13 +54,13 @@ class UniqueEventListTest {
 
     @Test
     public void remove_eventDoesNotExist_throwsEventNotFoundException() {
-        assertThrows(EventNotFoundException.class, () -> uniqueEventList.remove(ANOTHER_EVENT_STUB));
+        assertThrows(EventNotFoundException.class, () -> uniqueEventList.remove(ANOTHER_EVENT));
     }
 
     @Test
     public void remove_existingEvent_removesEvent() {
-        uniqueEventList.add(EVENT_STUB);
-        uniqueEventList.remove(EVENT_STUB);
+        uniqueEventList.add(SAMPLE_EVENT);
+        uniqueEventList.remove(SAMPLE_EVENT);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
@@ -72,9 +72,9 @@ class UniqueEventListTest {
 
     @Test
     public void setEvents_uniqueEventList_replacesOwnListWithProvidedUniqueEventList() {
-        uniqueEventList.add(EVENT_STUB);
+        uniqueEventList.add(SAMPLE_EVENT);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.add(ANOTHER_EVENT_STUB);
+        expectedUniqueEventList.add(ANOTHER_EVENT);
         uniqueEventList.setEvents(expectedUniqueEventList);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
@@ -86,17 +86,17 @@ class UniqueEventListTest {
 
     @Test
     public void setEvents_list_replacesOwnListWithProvidedList() {
-        uniqueEventList.add(EVENT_STUB);
-        List<Event> eventList = Collections.singletonList(ANOTHER_EVENT_STUB);
+        uniqueEventList.add(SAMPLE_EVENT);
+        List<Event> eventList = Collections.singletonList(ANOTHER_EVENT);
         uniqueEventList.setEvents(eventList);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
-        expectedUniqueEventList.add(ANOTHER_EVENT_STUB);
+        expectedUniqueEventList.add(ANOTHER_EVENT);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
     @Test
     public void setEvents_listWithDuplicateEvents_throwsDuplicateEventException() {
-        List<Event> listWithDuplicateEvents = Arrays.asList(EVENT_STUB, EVENT_STUB);
+        List<Event> listWithDuplicateEvents = Arrays.asList(SAMPLE_EVENT, SAMPLE_EVENT);
         assertThrows(DuplicateEventException.class, () -> uniqueEventList.setEvents(listWithDuplicateEvents));
     }
 

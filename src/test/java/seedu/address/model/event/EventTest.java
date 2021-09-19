@@ -3,9 +3,9 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT_STUB;
-import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
-import static seedu.address.testutil.TypicalEvents.EVENT_STUB_COPY;
+import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_COPY_DIFFERENT_TIME;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,32 +14,32 @@ public class EventTest {
     @Test
     public void getParticipants() {
         // TODO: Modify and update as we can add participants into events
-        assertEquals(EVENT_STUB.getParticipants().size(), 0);
+        assertEquals(SAMPLE_EVENT.getParticipants().size(), 0);
     }
 
     @Test
     public void markAsDone() {
-        assertFalse(EVENT_STUB.getIsDone());
-        EVENT_STUB.markAsDone();
-        assertTrue(EVENT_STUB.getIsDone());
+        assertFalse(SAMPLE_EVENT.getIsDone());
+        SAMPLE_EVENT.markAsDone();
+        assertTrue(SAMPLE_EVENT.getIsDone());
     }
 
     @Test
     public void isSameEvent() {
         // same name
-        assertTrue(EVENT_STUB.isSameEvent(EVENT_STUB_COPY));
+        assertTrue(SAMPLE_EVENT.isSameEvent(SAMPLE_EVENT_COPY_DIFFERENT_TIME));
     }
 
     @Test
     void testEquals() {
         // same name but different other fields
-        assertFalse(EVENT_STUB.equals(ANOTHER_EVENT_STUB));
+        assertFalse(SAMPLE_EVENT.equals(ANOTHER_EVENT));
 
         // same Event
-        assertTrue(EVENT_STUB.equals(EVENT_STUB));
+        assertTrue(SAMPLE_EVENT.equals(SAMPLE_EVENT));
 
         // null -> returns false
-        assertFalse(EVENT_STUB.equals(null));
+        assertFalse(SAMPLE_EVENT.equals(null));
 
         // TODO: If implementing edit Event, can add more testcases.
     }

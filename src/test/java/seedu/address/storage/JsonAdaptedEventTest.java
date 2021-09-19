@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.EVENT_STUB;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,14 +26,14 @@ public class JsonAdaptedEventTest {
     private static final String VALID_DATE = "2021-09-18";
     private static final String VALID_TIME = "2359";
     // TODO: To be updated once addParticipants are implemented
-    private static final List<JsonAdaptedParticipant> VALID_PARTICIPANTS = EVENT_STUB.getParticipants().stream()
+    private static final List<JsonAdaptedParticipant> VALID_PARTICIPANTS = SAMPLE_EVENT.getParticipants().stream()
             .map(JsonAdaptedParticipant::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
-        JsonAdaptedEvent event = new JsonAdaptedEvent(EVENT_STUB);
-        assertEquals(EVENT_STUB, event.toModelType());
+        JsonAdaptedEvent event = new JsonAdaptedEvent(SAMPLE_EVENT);
+        assertEquals(SAMPLE_EVENT, event.toModelType());
     }
 
     @Test

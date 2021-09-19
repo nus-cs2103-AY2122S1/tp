@@ -14,12 +14,12 @@ import seedu.address.model.event.EventTime;
  * An utility class containing a list of {@code Event} objects to be used in tests.
  */
 public class TypicalEvents {
-    public static final Event EVENT_STUB = new Event(new EventName("Sleep"), new EventDate("2021-09-18"),
+    public static final Event SAMPLE_EVENT = new Event(new EventName("Sleep"), new EventDate("2021-09-18"),
             new EventTime("1000"));
-    public static final Event ANOTHER_EVENT_STUB = new Event(new EventName("Sleep2"), new EventDate("2021-09-18"),
+    public static final Event ANOTHER_EVENT = new Event(new EventName("Sleep2"), new EventDate("2021-09-18"),
             new EventTime("1001"));
-    public static final Event EVENT_STUB_COPY = new Event(new EventName("Sleep"), new EventDate("2021-09-18"),
-            new EventTime("1001"));
+    public static final Event SAMPLE_EVENT_COPY_DIFFERENT_TIME = new Event(new EventName("Sleep"),
+            new EventDate("2021-09-18"), new EventTime("1001"));
 
     private TypicalEvents() {}
 
@@ -35,6 +35,6 @@ public class TypicalEvents {
     }
 
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(EVENT_STUB, ANOTHER_EVENT_STUB));
+        return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, ANOTHER_EVENT));
     }
 }
