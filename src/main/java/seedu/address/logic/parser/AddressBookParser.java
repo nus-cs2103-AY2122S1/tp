@@ -74,7 +74,7 @@ public class AddressBookParser {
 
         // TODO: removeEvent (Use Parser):
 
-        // TODO:  (Use Parser):
+        // TODO: doneEvent (Use Parser):
 
         // TODO: sortEvents:
 
