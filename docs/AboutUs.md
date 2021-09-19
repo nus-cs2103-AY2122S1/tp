@@ -7,6 +7,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
+### Ajjagottu Kaushik Kumar Reddy
+
+<img src="images/kaushikkrdy.png" width="200px">
+
+[[github](https://github.com/kaushikkrdy)]
+
+Email: kaushikumar99@gmail.com
+
+* Role: Developer
 
 ### Bryann Yeap Kok Keong
 
