@@ -257,13 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* tour guides in Singapore
 * has a need to manage a significant number of contacts
+* has a need to collate and access contacts
+* has a need to find contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app and is able to find the necessary contact details quickly
+
 
 
 ### User stories
