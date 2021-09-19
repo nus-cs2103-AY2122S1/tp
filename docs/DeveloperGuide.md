@@ -285,7 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Anilist` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: List all anime**
+**Use case: UC01 - List all anime**
 
 **MSS**
 
@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Add an anime**
+**Use case: UC02 - Add an anime**
 
 **MSS**
 
@@ -311,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
-**Use case: Delete an anime**
+**Use case: UC03 - Delete an anime**
 
 **MSS**
 
@@ -334,7 +334,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update the episode of an anime**
+**Use case: UC04 - Update the episode of an anime**
 
 **MSS**
 
