@@ -261,15 +261,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
+**Target user**: Student Financial Advisor
+
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of contacts
+* Short on time as they have to juggle both school and work at the same time
+* Trying to sell financial products effectively by finding the right clients
+* Job is competitive in nature
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value propositions**: 
+* LeadsForce is a new way to streamline the process for student financial advisors to find the right clients to contact. We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly. Finding your next lead has never been easier.
+
 
 
 ### User stories
