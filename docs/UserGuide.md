@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming events and the details of their participants and collaborators**. It does not handle communication between the event organiser and the participants or collaborators.
 
 * Table of Contents
 {:toc}
@@ -140,8 +140,8 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
+ 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -168,7 +168,61 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 ### Archiving data files `[coming in v2.0]`
 
-_Details coming soon ..._
+_Details coming soon ..._ 
+
+### Adding an event: `addEvent`
+
+Creates an Event at the specified date and time.
+
+Format: `addEvent n/NAME d/DATE [t/TIME]` 
+
+Examples:
+* `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
+* `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240km Marathon" on 20th August 2022.
+
+### Removing an event : `removeEvent`
+
+Removes an Event. If there are multiple events with the same name, specify the DATE (in YYYY-MM-DD format) and TIME (24h format) to remove that event.
+
+Format: `removeEvent n/NAME [d/DATE] [t/TIME]` 
+
+Examples:
+* `removeEvent n/CS2100 Finals d/2021-11-20  t/0900` - Removes the Event “CS2100 Finals” on 20th November 2021 9:00am.
+* `removeEvent n/240km Marathon d/2022-08-20` - Removes the Event “240km Marathon” on 20th August 2022.
+
+### Mark an Event as done: `doneEvent`
+
+Format:
+`doneEvent n/NAME [d/DATE] [t/TIME]` - Marks an Event as done, if there are multiple events with the same name, specify the DATE (in YYYY-MM-DD format) and TIME (24h format) to select that event.
+
+Example Usage:
+`doneEvent n/CS2100 Finals d/2021-11-20  t/0900` - Marks the Event “CS2100 Finals” on 20th November 2021 9:00am as done.
+`doneEvent n/240km Marathon d/2022-08-20` - Marks the Event “240km Marathon” on 20th August 2022 as done.
+
+
+### Show Event details: `showDetails`
+
+Format:
+`showDetails EVENT_NAME` - Displays the details of the Event matching the given name.
+
+Example Usage:
+`showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
+
+### Show Event Participants: `showParticipants`
+
+Format:
+`showParticipants EVENT_NAME` - Displays the list of participants of the Event matching the given name.
+
+Example Usage:
+`showParticipants CS2103T Finals` - Displays the list of participants of the ‘CS2103T Finals’ Event.
+
+### Find Participant and access details: `findParticipant`
+
+Format:
+`findParticipant KEYWORD` - Finds any participants whose name contains the given KEYWORD and returns the details about each participant.
+
+Example Usage:
+`findParticipant Mike` - Filters the list of Participants for Participants who have names containing “Mike”.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,3 +244,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
+**Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
+**Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
+**Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
