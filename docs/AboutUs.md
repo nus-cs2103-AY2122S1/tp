@@ -7,11 +7,23 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
+
 ### Bryann Yeap Kok Keong
 
 <img src="images/bryannyeap.png" width="200px">
 
 [[github](https://github.com/BryannYeap)]
-email: bryannyeapkk@gmail.com
+
+Email: bryannyeapkk@gmail.com
+
+* Role: Developer
+
+### Liu Chen En
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](https://github.com/twothicc)]
+
+Email: chenenliuu@gmail.com
 
 * Role: Developer
