@@ -9,6 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Homework;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -96,6 +100,51 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String Time} into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Time} is invalid.
+     */
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +169,33 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String hw} into a {@code Homework}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Homework} is invalid.
+     */
+    public static Homework parseHw(String hw) throws ParseException {
+        requireNonNull(hw);
+        String trimmedHw = hw.trim();
+        if (!Tag.isValidTagName(trimmedHw)) {
+            throw new ParseException(Homework.MESSAGE_CONSTRAINTS);
+        }
+        return new Homework(trimmedHw);
+    }
+
+    /**
+     * Parses {@code Collection<String> homework} into a {@code Set<Homework>}.
+     */
+    public static Set<Homework> parseHomework(Collection<String> homework)
+            throws ParseException {
+        requireNonNull(homework);
+        final Set<Homework> homeworkSet = new HashSet<>();
+        for (String description : homework) {
+            homeworkSet.add(parseHw(description));
+        }
+        return homeworkSet;
     }
 }
