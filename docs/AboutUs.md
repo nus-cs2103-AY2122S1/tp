@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Liu Chen En
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/twothicc.png" width="200px">
 
 [[github](https://github.com/twothicc)]
 
