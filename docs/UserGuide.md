@@ -170,6 +170,34 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 _Details coming soon ..._
 
+### Set payment made: `paid`
+
+Sets the payment status of the specified student to `paid` for the current month. 
+
+Format: `paid STUDENT_INDEX`
+
+- Sets the payment status for the student at the specified `STUDENT_INDEX` as "paid" for the current month.
+- The index refers to the index number shown in the displayed student list.
+- The index must be a **positive integer** 1, 2, 3, ...
+
+Example:
+
+- `paid 3` updates the 3rd student's payment status to "paid".
+
+### Unset payment made: `unpaid`
+
+Sets the payment status of the specified student to ‘unpaid’ for the current month.
+
+Format: `unpaid STUDENT_INDEX`
+
+- Sets the payment status for the student at the specified `STUDENT_INDEX` as "unpaid" for the current month.
+- The index refers to the index number shown in the displayed student list.
+- The index must be a **positive integer** 1, 2, 3, …
+
+Examples:
+
+- `unpaid 3` updates the 3rd student's payment status to "unpaid".
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -190,3 +218,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3` 
+**Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3` 
