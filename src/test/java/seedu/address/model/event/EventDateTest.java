@@ -26,12 +26,20 @@ public class EventDateTest {
 
         // invalid dates
         assertFalse(EventDate.isValidDate("")); // empty string
-        assertFalse(EventDate.isValidDate("2021-9-1")); // wrong format
         assertFalse(EventDate.isValidDate("123")); // wrong format
+        assertFalse(EventDate.isValidDate("123-10")); // wrong format
         assertFalse(EventDate.isValidDate("2021 August 20")); // wrong format
+        assertFalse(EventDate.isValidDate("123-1-32")); // invalid day
+        assertFalse(EventDate.isValidDate("0-13-1")); // invalid month
+        assertFalse(EventDate.isValidDate("0-1-1")); // invalid year
 
         // valid dates
-        assertTrue(EventDate.isValidDate("2021-08-01"));
+        assertTrue(EventDate.isValidDate("2021-08-31"));
+        assertTrue(EventDate.isValidDate("2021-9-1"));
+        assertTrue(EventDate.isValidDate("0001-9-1"));
+        assertTrue(EventDate.isValidDate("1-9-1"));
+        assertTrue(EventDate.isValidDate("21-9-1"));
+        assertTrue(EventDate.isValidDate("121-9-1"));
 
     }
 }
