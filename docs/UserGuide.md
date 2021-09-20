@@ -1,9 +1,6 @@
----
-layout: page
-title: User Guide
----
+# PlannerMd User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+PlannerMd is a command-line application that helps clinic recptionists seamlessly integrate the daily appointments and the unique requuirements of each patient into a single application. PlannerMd expedites the manual processes found in a clinic and saves clinice receptionists plenty of time while also reducing human error.
 
 * Table of Contents
 {:toc}
@@ -14,7 +11,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `plannerMd.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
