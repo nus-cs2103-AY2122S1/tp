@@ -2,7 +2,6 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,7 +9,7 @@ import java.util.Set;
 
 
 /**
- * Represents a Person in the address book.
+ * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Lesson {
@@ -60,6 +59,15 @@ public abstract class Lesson {
         return Collections.unmodifiableSet(homework);
     }
 
+    public boolean isRecurring() {
+        return false;
+    }
+
+    /**
+     * Update the lesson date to the same day on the following week.
+     *
+     * @return newDate The date of the same day on the following week.
+     */
     public Date updateDateWithWeek() {
         Date newDate = new Date(getDate().getLocalDate().plusDays(7).toString());
         return newDate;
@@ -99,16 +107,16 @@ public abstract class Lesson {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDate())
-                .append("; Start: ")
+                .append("\n Start: ")
                 .append(getStartTime())
-                .append("; End: ")
+                .append("    End: ")
                 .append(getEndTime())
-                .append("; Subject: ")
+                .append("\n Subject: ")
                 .append(getSubject());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
-            builder.append("; Homework: ");
+            builder.append("\n Homework: ");
             homework.forEach(builder::append);
         }
         return builder.toString();

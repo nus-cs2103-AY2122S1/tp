@@ -26,11 +26,16 @@ public class RecurringLesson extends Lesson {
     }
 
     @Override
+    public boolean isRecurring() {
+        return true;
+    }
+
+    @Override
     public Lesson updateDate(String newDateString) {
         return new RecurringLesson(new Date(newDateString), getStartTime(), getEndTime(),
                 getSubject(), getHomework());
     }
-    
+
     private RecurringLesson updateRecurringLessonCount() {
         // Compare lesson date to current date
         // Increment count if date has passed
