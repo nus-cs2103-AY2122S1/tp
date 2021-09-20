@@ -21,7 +21,13 @@ import javafx.application.Application;
 
 // pull request
 public class Main {
+    /**
+     * Starting point of this application.
+     *
+     * @param args args.
+     */
     public static void main(String[] args) {
+
         Application.launch(MainApp.class, args);
     }
 }
