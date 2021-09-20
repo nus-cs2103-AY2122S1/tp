@@ -1,11 +1,11 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Lesson's date in the address book.
@@ -20,7 +20,7 @@ public class Date {
 
 
     public static final String VALIDATION_REGEX = "^[0-9]{2}\\s[a-zA-Z]{3}\\s[0-9]{4}";
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     public final String value;
 
@@ -41,7 +41,7 @@ public class Date {
     public static boolean isValidDate(String test) {
         boolean isValid = true;
         try {
-            LocalDate.parse(test, formatter);
+            LocalDate.parse(test, FORMATTER);
         } catch (DateTimeParseException e) {
             isValid = false;
         } finally {
@@ -50,7 +50,7 @@ public class Date {
     }
 
     public LocalDate getLocalDate() {
-        return LocalDate.parse(this.value, formatter);
+        return LocalDate.parse(this.value, FORMATTER);
     }
 
     @Override
