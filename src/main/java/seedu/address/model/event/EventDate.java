@@ -22,7 +22,6 @@ public class EventDate {
     /**
      * Constructs an {@code EventDate}
      *
-
      * @param date of the Event.
      */
     public EventDate(String date) {
