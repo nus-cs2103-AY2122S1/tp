@@ -11,7 +11,9 @@ import java.time.format.DateTimeParseException;
  * This is an EventTime class that represents the Time of an Event.
  */
 public class EventTime {
+
     public static final String MESSAGE_CONSTRAINTS = "Time should be in 2359 format.";
+    public static final String TIME_FORMAT = "HHmm";
 
     public final LocalTime time;
 
@@ -23,7 +25,7 @@ public class EventTime {
     public EventTime(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
+        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern(TIME_FORMAT));
     }
 
     public EventTime() {
@@ -37,13 +39,14 @@ public class EventTime {
      * @return A boolean indicating if the string is a valid time.
      */
     public static boolean isValidTime(String test) {
-        // There must be a better way to do this.
+        boolean isValid;
         try {
-            LocalTime.parse(test, DateTimeFormatter.ofPattern("HHmm"));
-            return true;
+            LocalTime.parse(test, DateTimeFormatter.ofPattern(TIME_FORMAT));
+            isValid = true;
         } catch (DateTimeParseException e) {
-            return false;
+            isValid = false;
         }
+        return isValid;
     }
 
     @Override
