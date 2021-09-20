@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -115,6 +116,10 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    public void sortEvents() {
+        addressBook.sortEvents();
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -88,4 +88,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of list of Events */
     ObservableList<Event> getEventList();
+
+    /** Sorts the event lists chronologically */
+    void sortEvents();
 }

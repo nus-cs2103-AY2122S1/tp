@@ -21,4 +21,9 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Event> getEventList();
 
+    /**
+     * Sorts the event list chronologically.
+     */
+    void sortEvents();
+
 }
