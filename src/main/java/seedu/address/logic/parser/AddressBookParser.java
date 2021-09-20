@@ -68,6 +68,28 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        //Add new Commands and cases here:
+
+        // TODO: addEvent (Use Parser):
+
+        // TODO: removeEvent (Use Parser):
+
+        // TODO: doneEvent (Use Parser):
+
+        // TODO: sortEvents:
+
+        // TODO: filterEvents (Use Parser):
+
+        // TODO: addParticipant (Use Parser):
+
+        // TODO: removeParticipant (Use Parser):
+
+        // TODO: findParticipant (Use Parser):
+
+        // TODO: showDetails (Use Parser):
+
+        // TODO: showParticipants (Use Parser):
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

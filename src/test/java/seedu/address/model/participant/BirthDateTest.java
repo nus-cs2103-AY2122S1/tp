@@ -27,9 +27,15 @@ public class BirthDateTest {
     }
 
     @Test
-    public void ofFactoryMethodStringRepresentationTest() {
+    public void ofFactoryMethod_integerParam_stringRepresentationTest() {
         BirthDate birthDate = BirthDate.of(2020, 8, 4);
         assertEquals("2020-08-04", birthDate.toString());
+    }
+
+    @Test
+    public void ofFactoryMethod_localDateParam_stringRepresentationTest() {
+        BirthDate birthDate = BirthDate.of(LocalDate.parse("2021-09-18"));
+        assertEquals("2021-09-18", birthDate.toString());
     }
 
     @Test
