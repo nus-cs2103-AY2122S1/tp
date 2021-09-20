@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Yim Jaewon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yimjaewon.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/somekoreanboi)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
