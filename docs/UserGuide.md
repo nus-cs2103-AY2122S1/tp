@@ -128,19 +128,29 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting an applicant/employer : `delete`
 
-Deletes the specified person from the address book.
+Deletes a specific applicant and/or employer by index from the address book.
 
-Format: `delete INDEX`
+Format: `delete applicant/<INDEX> employer/<INDEX>`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Delete command can handle either of **or** both prefixes `applicant/` and `employer/`.
+* The index given for `<INDEX>` **must be a positive integer** 1, 2, 3, …​
+* The index given for `<INDEX>` uses **1-based indexing**.
+* Prefix `applicant/` and Value `<INDEX>`:
+  * Deletes an applicant at the specified `<INDEX>` in the list of all applicants.
+  * `<INDEX>` refers to the index number of the applicant to be deleted in the list of all applicants.
+  * `<INDEX>` should not exceed the total applicant count.
+* Prefix `employer/` and Value `<INDEX>`:
+  * Deletes an employer at the specified `<INDEX>` in the list of all employers.
+  * `<INDEX>` refers to the index number of the applicant to be deleted in the list of all applicants.
+  * `<INDEX>` should not exceed the total employer count.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete applicant/2` deletes the 2nd applicant in the list of all applicants.
+* `delete employer/3` deletes the 3rd applicant in the list of all employers.
+* `delete applicant/2 employer/3` deletes the 2nd applicant in the list of all applicants
+and the 3rd applicant in the list of all employers.
 
 ### Clearing all entries : `clear`
 
