@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
  * This is an EventDate class representing the Date of an Event.
  */
 public class EventDate {
+
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in YYYY-MM-DD format!";
 
     public final LocalDate date;
@@ -32,13 +33,14 @@ public class EventDate {
      * @return A boolean to indicate if a string is a valid date.
      */
     public static boolean isValidDate(String test) {
-        // There must be a better way to do this.
+        boolean isValid;
         try {
             LocalDate.parse(test);
-            return true;
+            isValid = true;
         } catch (DateTimeParseException e) {
-            return false;
+            isValid = false;
         }
+        return isValid;
     }
 
     @Override
