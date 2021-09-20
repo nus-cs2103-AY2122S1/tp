@@ -12,7 +12,7 @@ Given below are my contributions to the project:
 
 * **Integration**
   * In charge of versioning of the code, maintaining the code repository and integrating various parts of the software to create a viable product as a whole.
-  
+
 * **Documentation**:
   * User Guide:
     * Added documentation for the feature `list`
