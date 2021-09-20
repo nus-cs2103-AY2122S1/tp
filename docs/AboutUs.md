@@ -19,14 +19,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lim Wan Ning
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wanninglim.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/wanninglim)]
+[[portfolio](team/wanninglim.md)]
 
-* Role: Team Lead
+* Role: Documentation
 * Responsibilities: UI
 
 ### Johnny Doe
