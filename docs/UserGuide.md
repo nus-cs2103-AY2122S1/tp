@@ -6,6 +6,7 @@ title: User Guide
 **TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
+
 {:toc}
 
 [comment]: <> (--------------------------------------------------------------------------------------------------------------------)
@@ -66,11 +67,11 @@ title: User Guide
 
 </div>
 
-### Viewing help: `help`
+### Viewing help: `help` [coming soon]
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+[comment]: <> (![help message]&#40;images/helpMessage.png&#41;)
 
 Format: `help`
 
