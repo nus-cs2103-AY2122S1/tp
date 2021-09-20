@@ -48,6 +48,10 @@ public class Time {
         }
     }
 
+    public LocalTime getLocalTime() {
+        return LocalTime.parse(value);
+    }
+
     @Override
     public String toString() {
         return value;

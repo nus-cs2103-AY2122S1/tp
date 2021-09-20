@@ -57,6 +57,11 @@ public class LessonAddCommandParser {
         Set<Homework> homework = parseHomeworkForEdit(argMultimap.getAllValues(PREFIX_HOMEWORK))
                 .orElse(new HashSet<>());
 
+        // Check if end time is earlier than start time
+        if (startTime.getLocalTime().compareTo(endTime.getLocalTime()) > 0) {
+            throw new ParseException("End time cannot be earlier than start time.");
+        }
+
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
             RecurringLesson lesson = new RecurringLesson(date, startTime, endTime, subject, homework);
