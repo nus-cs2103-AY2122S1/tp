@@ -92,13 +92,14 @@ public class BirthDate {
      * @return            A boolean representing if the String form birthDate is valid.
      */
     public static boolean isValidBirthDate(String birthDate) {
+        boolean isValid;
         try {
             LocalDate date = LocalDate.parse(birthDate);
-            return isPresentOrPast(date);
+            isValid = isPresentOrPast(date);
         } catch (DateTimeParseException e) {
-            // invalid String form of birthDate
-            return false;
+            isValid = false;
         }
+        return isValid;
     }
 
     @Override
