@@ -18,7 +18,7 @@ import seedu.address.model.event.EventTime;
 public class JsonAdaptedEventTest {
 
     private static final String INVALID_NAME = "R@ce for Hum@nity";
-    private static final String INVALID_DATE = "201-9-1";
+    private static final String INVALID_DATE = "201-13-1";
     private static final String INVALID_TIME = "999";
 
     private static final String VALID_NAME = "Race for Humanity";
