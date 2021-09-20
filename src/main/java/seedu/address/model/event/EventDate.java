@@ -3,8 +3,11 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This is an EventDate class representing the Date of an Event.
@@ -12,6 +15,7 @@ import java.time.format.DateTimeParseException;
 public class EventDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in YYYY-MM-DD format!";
+    public static final String DATE_FORMAT = "y-M-d";
 
     public final LocalDate date;
 
@@ -23,7 +27,7 @@ public class EventDate {
     public EventDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date);
+        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     /**
@@ -33,14 +37,14 @@ public class EventDate {
      * @return A boolean to indicate if a string is a valid date.
      */
     public static boolean isValidDate(String test) {
-        boolean isValid;
+        DateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        sdf.setLenient(false);
         try {
-            LocalDate.parse(test);
-            isValid = true;
-        } catch (DateTimeParseException e) {
-            isValid = false;
+            sdf.parse(test);
+        } catch (ParseException e) {
+            return false;
         }
-        return isValid;
+        return true;
     }
 
     @Override
