@@ -3,9 +3,11 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * This is an EventTime class that represents the Time of an Event.
@@ -39,14 +41,14 @@ public class EventTime {
      * @return A boolean indicating if the string is a valid time.
      */
     public static boolean isValidTime(String test) {
-        boolean isValid;
+        DateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
+        sdf.setLenient(false);
         try {
-            LocalTime.parse(test, DateTimeFormatter.ofPattern(TIME_FORMAT));
-            isValid = true;
-        } catch (DateTimeParseException e) {
-            isValid = false;
+            sdf.parse(test);
+        } catch (ParseException e) {
+            return false;
         }
-        return isValid;
+        return true;
     }
 
     @Override
