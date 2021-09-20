@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: TuitiONE
 ---
 
 [![CI Status](https://github.com/AY2122S1-CS2103T-F13-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-F13-4/tp/actions)
