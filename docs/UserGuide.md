@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-**TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+**TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
