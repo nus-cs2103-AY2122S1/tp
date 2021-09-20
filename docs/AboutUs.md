@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yim Jaewon
 
-<img src="images/yimjaewon.png" width="200px">
+<img src="images/somekoreanboi.png" width="200px">
 
 [[github](http://github.com/somekoreanboi)]
 [[portfolio](team/johndoe.md)]
