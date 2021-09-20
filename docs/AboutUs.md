@@ -38,15 +38,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Raveen Prabhu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/itsraveen.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/itsraveen)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+
 
 ### James Doe
 
