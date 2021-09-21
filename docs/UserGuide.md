@@ -1,11 +1,29 @@
-# User Guide
-LeadsForce is a desktop app that is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+---
+layout: page
+title: User Guide
+---
+
+LeadsForce is a desktop app that is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 It provides a new way to streamline the process for student financial advisors to find the right clients to contact. 
 We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly. 
 Finding your next lead has never been easier.
+## Table of Contents
 
-* Table of Contents
-{:toc}
+* [Quick Start](#quick-start)
+* [Client Information](#client-information)
+* [Features](#features)
+  * [Create new contact: create](#adding-a-person-add)
+  * Retrieve particular contact: view
+  * [Update existing contact: update](#editing-a-person--edit)
+  * [Delete particular contact: delete](#deleting-a-person--delete)
+  * [Clear all contacts: clear](#clearing-all-entries--clear)
+  * [List all contacts: list](#listing-all-persons--list)
+  * Sort contacts: sort
+  * [Find contacts: find](#locating-clients-by-keywords-find) 
+  * [Exiting application: exit](#exiting-the-program--exit)
+  * Saving data
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -13,14 +31,14 @@ Finding your next lead has never been easier.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `leadsforce.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your LeadsForce.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
@@ -33,7 +51,24 @@ Finding your next lead has never been easier.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Client Information
+
+Client Attribute | Type of Attribute | Argument Tag
+-----------------|-----------------|-----------------
+Client ID (**unique**) | integer | None. Assigned on creation of new contact
+Name (**Compulsory**) | String | name/
+Email (**Compulsory**)| String (email address)| email/
+Contact number | Integer (8 digits long)| contact/
+Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| risk-appetite/
+Last met/contacted | Date | last-met/
+Current financial plans | List of Strings | current-plans-add/<br>current-plans-remove/
+Disposable Income | Integer | disposable-income/
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -81,6 +116,7 @@ Examples:
 * `delete /id 4,6,7`(deletes clients with client id 4, client id 6 and client 7)
 * `delete /email keithtan@gmail.com`(deletes a client whose email address is keithtan@gmail.com)
 
+
 ### Sort Contacts : `sort`
 
 Sorts clients in order based off the inputted attribute
@@ -91,6 +127,38 @@ Format: `sort /<attribute> {ASC/DESC}`
 
 Examples:
 * `sort /risk-appetite ASC`
+
+### Locating clients by keywords: `find`
+
+Finds clients whose contacts match with the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]... [attribute/ATTRIBUTE_KEYWORD]...`
+
+* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all key
+* `attribute/` refers to the argument tag for the client's attribute
+* `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute
+* The search is case-insensitive. e.g `keith` will match `Keith`
+* The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only clients whose attribute matches with the attribute keyword will be returned (i.e. `AND` search), if attribute keyword is provided.
+  e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ### Saving the data
 
