@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Dion
 
 <img src="images/dion.png" width="200px">
 
@@ -38,12 +38,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data Master
 
-### Jean Doe
+### Ang Yang Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/angyangcheng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/djiangel)]
+[[portfolio](team/angyangcheng.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
