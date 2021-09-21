@@ -14,7 +14,8 @@ public class AddTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the application. "
             + "Parameters: "
-            + PREFIX_LABEL + "Description\n"
+            + PREFIX_LABEL + "LABEL "
+            + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LABEL + "Sew buttons onto black blazer "
             + PREFIX_DATE + "20th August 2021";
@@ -36,5 +37,12 @@ public class AddTaskCommand extends Command {
         requireNonNull(model);
         model.addTask(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof AddTaskCommand
+                && toAdd.equals(((AddTaskCommand) other).toAdd));
     }
 }

@@ -79,9 +79,24 @@ public class Task {
     @Override
     public String toString() {
         if (isDone) {
-            return "[X] " + label;
+            return "[X] " + label + ", due: " + date;
         } else {
-            return "[ ] " + label;
+            return "[ ] " + label + ", due: " + date;
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        return otherTask.getLabel().equals(getLabel())
+                && otherTask.getDate().equals(getDate());
     }
 }

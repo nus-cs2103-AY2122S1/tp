@@ -121,4 +121,28 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Simple check that validates label is not empty string after trimming.
+     */
+    public static String parseLabel(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+        if (trimmedValue.equals("")) {
+            throw new ParseException("empty label");
+        }
+        return trimmedValue;
+    }
+
+    /**
+     * Simple check that validates date is not empty string after trimming.
+     */
+    public static String parseDate(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+        if (trimmedValue.equals("")) {
+            throw new ParseException("empty date");
+        }
+        return trimmedValue;
+    }
 }

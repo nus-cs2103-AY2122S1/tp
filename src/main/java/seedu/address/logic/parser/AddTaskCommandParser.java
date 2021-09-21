@@ -1,16 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Task;
@@ -28,13 +23,14 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         //checks that preamble has only spaces, and none of the prefix values are empty
         //important for the argmultimap.getvalue().get() calls below
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_LABEL, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
 
-        String label = argMultimap.getValue(PREFIX_LABEL).get();
-        String date = argMultimap.getValue(PREFIX_DATE).get();
+        //very basic validation; only prevents empty strings right now
+        String label = ParserUtil.parseLabel(argMultimap.getValue(PREFIX_LABEL).get());
+        String date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Task task = new Task(label, date);
 
         return new AddTaskCommand(task);
