@@ -95,13 +95,19 @@ Examples:
 
 ### Viewing: `view`
 
-1 line intro
+Views a current client/product from the application.
 
 Format:
+* View a client: `view -c ID`
+* View a product: `view -p ID`
 
 Notes:
+*If the product/client doesn't exist, then we inform the user
+that such a product/client doesn't exist.
 
 Examples:
+* `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc.
+* `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
 
 ### Deleting: `delete`
 
@@ -151,7 +157,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | ...
 **Edit** | Edit a client: `edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]`<br>`edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`.<br><br>Edit a product: `edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`<br>`edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity to `20`.
-**View** | ...
+**View** | View a client: `view -c ID` <br> `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc. <br><br> View a product: `view -p ID` <br> `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
 **List** | ...
 **Delete** | ...
 **Exit** | `exit`
