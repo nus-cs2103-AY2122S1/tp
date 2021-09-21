@@ -204,3 +204,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**View** | `view STUDENT_INDEX`<br> e.g., `view 2`
+**Exit** | `exit`
