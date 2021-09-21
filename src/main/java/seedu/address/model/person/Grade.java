@@ -1,21 +1,22 @@
 package seedu.address.model.person;
 
-
-import java.util.Objects;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 /**
  * Represents the grade of the student
  */
 public class Grade {
+    public static final String MESSAGE_CONSTRAINTS = "Prefix should either be S (to denote secondary) "
+            + "or P (to denote Primary)."
+            + "Level number should be from 1 to 6 for primary and 1 to 4 for secondary.";
+
     private String prefix;
     private int levelNumber;
 
-    public static final String MESSAGE_CONSTRAINTS = "Prefix should either be S (to denote secondary) " +
-            "or P (to denote Primary)." +
-            "Level number should be from 1 to 6 for primary and 1 to 4 for secondary.";
+
 
     public Grade(String prefix, int levelNumber) {
         requireAllNonNull(prefix, levelNumber);
