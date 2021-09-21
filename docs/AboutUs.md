@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Marcus Chua
 
-<img src="images/marcuschua.png" width="200px">
+<img src="images/marcuschj.png" width="200px">
 
 [[github](https://github.com/marcuschj)]
 [[portfolio](team/marcuschj.md)]
