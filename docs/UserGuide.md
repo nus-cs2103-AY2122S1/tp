@@ -54,7 +54,7 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
    * **`list`** : Lists all contacts.
 
-   * **`add`** `add n/Ben p/91234567 e/ben123@gmail.com m/CS2103T` : Adds a contact named `Ben`.
+   * **`add`** : `add n/Ben p/91234567 e/ben123@gmail.com m/CS2103T` : Adds a contact named `Ben`.
 
    * **`delete 3`** : Deletes the 3rd contact shown in the current list.
 
@@ -73,13 +73,13 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/{NAME}`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/{NAME} [t/{TAG}]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/{NAME} p/{PHONE_NUMBER}`, `p/{PHONE_NUMBER} n/{NAME}` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -103,7 +103,7 @@ Format: `help`
 
 Adds a person to the address book. Tags are optional.
 
-Format: `add n/{NAME} p/{PHONE NUMBER} e/{EMAIL} m/{MODULE_CODE} [t/{TAG}]`
+Format: `add n/{NAME} p/{PHONE_NUMBER} e/{EMAIL} m/{MODULE_CODE} [t/{TAG}]`
 
 Examples:
 * `add n/Ben p/91234567 e/ben123@gmail.com m/CS2103T t/Overseas`
@@ -140,7 +140,7 @@ Examples:
 
 Sorts the contacts by module code (arranged in alphabetical order) / alphabetical order (denoted by the `-a` flag).
 
-Format: `sort <MODULE_CODE>` / `sort -a`
+Format: `sort {MODULE_CODE}` / `sort -a`
 
 Examples:
 * `sort CS2103T`
@@ -160,7 +160,7 @@ Edits the person at the specified index.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
-Format: `update <INDEX> [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]` / <br> `edit <INDEX> [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]`
+Format: `update {INDEX} [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]` / <br> `edit {INDEX} [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]`
 
 Examples: 
 * `update 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively. 
@@ -175,8 +175,9 @@ Delete the specified contact(s) from the address book.
 * Deletes the person at the specified index (inclusive).
 * Index refers to the index number shown in the displayed person list.
 * The index must be a positive integer 1,2,3...
+* `INDEX_B` should be a positive integer strictly greater than `INDEX_A`.
 
-Format: `delete <INDEX>, delete <INDEX_A, INDEX_B>`
+Format: `delete {INDEX}`, `delete {INDEX_A, INDEX_B}`
    
 Examples:
 * `delete 2` deletes the 2nd contact.
@@ -186,7 +187,7 @@ Examples:
 
 ### Delete all contacts: `clear` <a name="clear"></a>
 
-Purges **all** existing contacts from the address book.
+Purges **all** existing contacts from the address book. Use with caution.
 
 Format: `clear`
 
@@ -196,18 +197,18 @@ Format: `clear`
 
 Adds a description that will be tagged to the contact.
 
-Format: `remark <INDEX> <DESCRIPTION>`
+Format: `remark {INDEX} {DESCRIPTION}`
 
 Examples: 
-* `remark 2 punctual`
-
+* `remark 1 punctual`
+* `remark 2 currently overseas`
 ***
 
 ### Tag a contact: `tag` <a name="tag"></a>
 
 Tags a contact with a category.
 
-Format: `tag <INDEX> <TAG_NAME>`
+Format: `tag {INDEX} {TAG_NAME}`
 
 Examples: 
 * `tag Ben CS2103T`
@@ -219,7 +220,7 @@ Examples:
 
 Adds a contact to the favourite list.
 
-Format: `fav <INDEX>`
+Format: `fav {INDEX}`
 
 Examples:
 * `fav 2`
@@ -256,10 +257,10 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 | list / ls     | `list`/`ls`                                                                     | `list`/`ls`                                   |
 | find          | `find {NAME}`/`find {TAG}`                                                      | `find Ben`/`find CS2103T`                     |
 | sort          | `sort {MODULE_CODE}`/`sort -a`                                                  | `sort CS2103T`/`sort -a`                      |
-| edit / update | `update <INDEX> [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]` | `update 1 p/91234567 e/ben321@gmail.com`      |
+| edit / update | `update {INDEX} [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]` | `update 1 p/91234567 e/ben321@gmail.com`      |
 | delete        | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`                                  | `delete 2`/`delete 2, 5`                      |
 | clear         | `clear`                                                                         | `clear`                                       |
 | remark        | `remark {INDEX} {DESCRIPTION}`                                                  | `remark 2 absent`                             |
 | tag           | `tag {INDEX} {TAG_NAME}`                                                        | `tag 2 overseas`                              |
 | fav           | `fav {INDEX}`                                                                   | `fav 2`                                       |
-| exit / quit   | `quit`/`exit`                                                                   | `exit`/`quit`                                 |
+| exit / quit   | `exit`/`quit`                                                                   | `exit`/`quit`                                 |
