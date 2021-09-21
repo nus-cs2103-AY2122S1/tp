@@ -42,5 +42,4 @@ class AddTaskCommandParserTest {
         //empty date after spaces are trimmed
         assertParseFailure(parser, " l/label d/ ", "empty date");
     }
-
 }
