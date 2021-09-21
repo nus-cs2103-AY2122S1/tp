@@ -1,6 +1,6 @@
 ---
 
-layout: page title: John Doe's Project Portfolio Page
+layout: page title: Shi Chen's Project Portfolio Page
 
 ---
 
