@@ -40,10 +40,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/angyangcheng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/djiangel)]
+[[portfolio](team/angyangcheng.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
