@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Xingchen's Project Portfolio Page
+title: Shi Chen's Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3
