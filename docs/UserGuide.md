@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 Sellah is a desktop application optimized for online sellers who prefer CLI over GUI. It is an address book that
@@ -148,10 +149,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-
 **Add** | ...
-**Edit** | `edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`.<br>
-`edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity to `20`.
+**Edit** | `edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`.<br>`edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity to `20`.
 **View** | ...
 **List** | ...
 **Delete** | ...
