@@ -39,9 +39,9 @@ class AddTaskCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         //empty label
-        assertParseFailure(parser, " l/ d/date", "empty label");
+        assertParseFailure(parser, " l/ d/date", Label.MESSAGE_CONSTRAINTS);
 
         //empty date after spaces are trimmed
-        assertParseFailure(parser, " l/label d/ ", "empty date");
+        assertParseFailure(parser, " l/label d/ ", Date.MESSAGE_CONSTRAINTS);
     }
 }

@@ -132,7 +132,7 @@ public class ParserUtil {
         requireNonNull(label);
         String trimmedLabel = label.trim();
         if (!Label.isValidLabel(trimmedLabel)) {
-            throw new ParseException("empty label");
+            throw new ParseException(Label.MESSAGE_CONSTRAINTS);
         }
         return new Label(trimmedLabel);
     }
@@ -144,7 +144,7 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException("empty date");
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
     }
