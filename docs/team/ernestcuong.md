@@ -12,4 +12,6 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `add -p` and `del -p` [\#72]()
+  * Developer Guide:
+    * Target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
 
