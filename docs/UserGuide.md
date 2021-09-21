@@ -1,12 +1,22 @@
 ---
-layout: page
-title: User Guide
+layout: page title: User Guide
 ---
 
 Sellah is a desktop application optimized for online sellers who prefer CLI over GUI. It is an address book that
 contains the contact information and order details related to clients and partners.
 
 * Table of Contents {:toc}
+    * [Quick Start](#quick-start)
+    * [Features](#features)
+        * [Add](#adding-add)
+        * [Edit](#editing-edit)
+        * [View](#viewing-view)
+        * [Delete](#deleting-delete)
+        * [List](#listing-list)
+        * [Exit](#exiting-exit)
+        * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
+    * [FAQ](#faq)
+    * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,7 +56,7 @@ contains the contact information and order details related to clients and partne
   e.g. if you specify `-pn 12341234 -pn 56785678`, only `-pn 56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `exit`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
 
@@ -131,9 +141,10 @@ _Details coming soon ..._
 
 **Q**: ...<br>
 **A**: ...<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action | Format, Examples
 --------|------------------
@@ -144,3 +155,4 @@ Action | Format, Examples
 **View** | ...
 **List** | ...
 **Delete** | ...
+**Exit** | `exit`
