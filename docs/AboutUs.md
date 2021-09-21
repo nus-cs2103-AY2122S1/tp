@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jason
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jason-ng-zq99.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/jason-ng-zq99)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: In charge of Common
 
-### Johnny Doe
+### Germaine
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/driip-ddrop.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/driip-ddrop)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation + In charge of Storage
 
-### James Doe
+### Zhi Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/czhi-bin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/czhi-bin)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and deadlines + In charge of Logic 
+
+### James
+
+<img src="images/james-kua.png" width="200px">
+
+[[github](https://github.com/James-Kua)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality + Testing + In charge of UI
+
+### Rui Quan
+
+<img src="images/tanruiquan.png" width="200px">
+
+[[github](https://github.com/tanruiquan)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Integration + In charge of Model
