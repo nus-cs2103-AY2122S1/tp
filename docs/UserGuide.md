@@ -142,6 +142,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Viewing a student : `view`
+
+Displays the specified student’s name, phone number, progress and payment status, along with their parent’s name and phone number.
+
+Format: `view INDEX`
+
+* Display details of the student at the specified INDEX.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `view 2`shows the details associated with the 2nd student
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
