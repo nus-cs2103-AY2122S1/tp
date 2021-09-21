@@ -2,8 +2,8 @@
 
 ![Ui](docs/images/Ui.png)
 
-**contHACKS** is a desktop app for managing your contacts.<br>
-<br/>
+## contHACKS is a desktop app for managing your contacts.<br>
+
   Example usages:
   * Add and Delete contacts
   * Update your existing contacts
