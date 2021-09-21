@@ -128,6 +128,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filter a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `filter f/FACULTY [t/TAG]`
+
+* filters a person according to a tag
+Examples:
+* `filter f/computing` returns all users who have been assigned the f/computing tag.
+* `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
