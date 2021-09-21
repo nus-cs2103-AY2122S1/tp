@@ -153,6 +153,16 @@ public class AddCommandTest {
         public void addTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

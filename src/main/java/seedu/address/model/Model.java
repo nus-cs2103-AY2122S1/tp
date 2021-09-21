@@ -90,4 +90,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns and unmodifiable view of the filtered task list */
+    //added prior to the ui functionality actually being implemented.
+    ObservableList<Task> getFilteredTaskList();
+
+    void deleteTask(Task toDelete);
 }

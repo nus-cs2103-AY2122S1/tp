@@ -118,8 +118,17 @@ public class ModelManager implements Model {
 
     //=========== Task Management ==================================================================================
 
-    public void addTask(Task task) {
-        tasks.addTask(task);
+    public void addTask(Task toAdd) {
+        tasks.add(toAdd);
+    }
+
+    public void deleteTask(Task toDelete) {
+        tasks.remove(toDelete);
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return tasks.asUnmodifiableObservableList();
     }
 
 
