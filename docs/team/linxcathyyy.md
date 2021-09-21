@@ -1,7 +1,6 @@
 ---
-
-layout: page title: Xingchen's Project Portfolio Page
-
+layout: page
+title: Xingchen's Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3

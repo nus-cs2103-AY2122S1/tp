@@ -1,7 +1,6 @@
 ---
-
-layout: page title: Benjamin Lui's Project Portfolio Page
-
+layout: page
+title: Benjamin Lui's Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3
