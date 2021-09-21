@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Homework in the address book.
  */
 public class Homework {
-    public static final String MESSAGE_CONSTRAINTS = "Homework description should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Homework description should be alphanumeric.";
+    public static final String VALIDATION_REGEX = "(.*|\\n|\\s)*?";
 
     public final String description;
 

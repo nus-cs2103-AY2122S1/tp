@@ -180,7 +180,7 @@ public class ParserUtil {
     public static Homework parseHw(String hw) throws ParseException {
         requireNonNull(hw);
         String trimmedHw = hw.trim();
-        if (!Tag.isValidTagName(trimmedHw)) {
+        if (!Homework.isValidDescription(trimmedHw)) {
             throw new ParseException(Homework.MESSAGE_CONSTRAINTS);
         }
         return new Homework(trimmedHw);
