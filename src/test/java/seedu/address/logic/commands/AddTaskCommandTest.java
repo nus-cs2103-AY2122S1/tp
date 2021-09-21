@@ -17,6 +17,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 class AddTaskCommandTest {
@@ -29,7 +31,7 @@ class AddTaskCommandTest {
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
-        Task validTask = new Task("test label", "test date");
+        Task validTask = new Task(new Label("test label"), new Date("test date"));
 
         CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
 

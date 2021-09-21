@@ -4,8 +4,8 @@ package seedu.address.model.task;
  * Basic Task class for v1.2 implementation
  */
 public class Task {
-    protected String label;
-    protected String date;
+    protected Label label;
+    protected Date date;
     private boolean isDone;
 
     /**
@@ -13,7 +13,7 @@ public class Task {
      *
      * @param label Label the task is created with. Not allowed to be empty.
      */
-    public Task(String label, String date) {
+    public Task(Label label, Date date) {
         this.label = label;
         this.date = date;
         this.isDone = false;
@@ -42,7 +42,7 @@ public class Task {
      *
      * @return the label of the task.
      */
-    public String getLabel() {
+    public Label getLabel() {
         return label;
     }
 
@@ -51,7 +51,7 @@ public class Task {
      *
      * @param label The new label of the task.
      */
-    public void setLabel(String label) {
+    public void setLabel(Label label) {
         this.label = label;
     }
 
@@ -60,14 +60,14 @@ public class Task {
      *
      * @return A String representing the date associated with the Task.
      */
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
     /**
      * Setter for date. Not applicable for Todo tasks.
      */
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

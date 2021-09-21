@@ -14,6 +14,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Label;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -124,25 +126,26 @@ public class ParserUtil {
 
     /**
      * Simple check that validates label is not empty string after trimming.
+     * @return
      */
-    public static String parseLabel(String value) throws ParseException {
-        requireNonNull(value);
-        String trimmedValue = value.trim();
-        if (trimmedValue.equals("")) {
+    public static Label parseLabel(String label) throws ParseException {
+        requireNonNull(label);
+        String trimmedLabel = label.trim();
+        if (!Label.isValidLabel(trimmedLabel)) {
             throw new ParseException("empty label");
         }
-        return trimmedValue;
+        return new Label(trimmedLabel);
     }
 
     /**
      * Simple check that validates date is not empty string after trimming.
      */
-    public static String parseDate(String value) throws ParseException {
-        requireNonNull(value);
-        String trimmedValue = value.trim();
-        if (trimmedValue.equals("")) {
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException("empty date");
         }
-        return trimmedValue;
+        return new Date(trimmedDate);
     }
 }

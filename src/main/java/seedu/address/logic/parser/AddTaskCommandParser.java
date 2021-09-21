@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
@@ -29,8 +31,8 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         }
 
         //very basic validation; only prevents empty strings right now
-        String label = ParserUtil.parseLabel(argMultimap.getValue(PREFIX_LABEL).get());
-        String date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Label label = ParserUtil.parseLabel(argMultimap.getValue(PREFIX_LABEL).get());
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Task task = new Task(label, date);
 
         return new AddTaskCommand(task);

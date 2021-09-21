@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 class AddTaskCommandParserTest {
@@ -14,7 +16,7 @@ class AddTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        Task expectedTask = new Task("test label", "test date");
+        Task expectedTask = new Task(new Label("test label"), new Date("test date"));
 
         //basic test command
         assertParseSuccess(parser, " l/test label d/test date", new AddTaskCommand(expectedTask));
