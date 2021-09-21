@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void getEventList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getEventList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
     }
 
     // TODO: Implement hasEvent tests after adding addEvent and removeEvent features.
