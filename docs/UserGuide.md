@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 Sellah is a desktop application optimized for online sellers who prefer CLI over GUI. It is an address book that
