@@ -16,8 +16,12 @@ public class Grade {
     private String prefix;
     private int levelNumber;
 
-
-
+    /**
+     * Constructs a student grade
+     *
+     * @param prefix A valid prefix.
+     * @param levelNumber A valid levelNumber.
+     */
     public Grade(String prefix, int levelNumber) {
         requireAllNonNull(prefix, levelNumber);
         checkArgument(isValidInput(prefix, levelNumber), MESSAGE_CONSTRAINTS);
