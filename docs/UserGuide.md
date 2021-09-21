@@ -80,7 +80,7 @@ Shows a list of all students inputted into tApp together with their attendance a
 Format: `students`
 
 Examples:
-* `students` returns a lost of all students with their information and attendance scores
+* `students` returns a list of all students with their information and attendance scores
 
 ### Add a student : `add`
 
