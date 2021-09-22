@@ -222,7 +222,8 @@ Format:
 `addParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Adds Participant with matching participantID to Event.
 
 Example Usage: 
-`addParticipant e/CS2103T Finals p/mikerowe1` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
+
+* `addParticipant e/CS2103T Finals p/mikerowe1` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
 
 ### Remove Participant to Event: `removeParticipant`
 
@@ -230,7 +231,8 @@ Format:
 `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Removes Participant with matching participantID from event.
 
 Example Usage:
-`removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participant ID is mikerowe1 from event CS2103T Finals.
+
+* `removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participant ID is mikerowe1 from event CS2103T Finals.
 
 ### Show Event details: `showDetails`
 
@@ -238,6 +240,7 @@ Format:
 `showDetails EVENT_NAME` - Displays the details of the Event matching the given name.
 
 Example Usage:
+
 * `showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
 
 ### Show Event Participants: `showParticipants`
