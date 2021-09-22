@@ -292,7 +292,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a client/product**
+**Use case: UC01 Add a client/product**
+
+**MSS**
+
+1.  User requests to add a new client/product.
+2.  Sellah adds the client/product.
+3.  Sellah displays success message and <ins>shows the updated list of clients/products (UC04)</ins>.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given phone number/email/unit price/quantity are invalid.
+
+    * 1a1. Sellah shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The command format is incorrect.
+
+    * 1b1. Sellah shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The client/product already exits.
+
+    * 2a1. Sellah shows an error message.
+
+      Use case resumes at step 1.
+
+  Use case ends.
+
+**Use case: UC05 Delete a client/product**
 
 **MSS**
 
