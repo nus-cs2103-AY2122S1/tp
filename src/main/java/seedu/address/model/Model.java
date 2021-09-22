@@ -71,12 +71,6 @@ public interface Model {
      */
     void addPerson(Person person);
 
-    //======================================== TASK FUNCTIONALITIES =================================================
-    /**
-     * Adds the given task.
-     */
-    void addTask(Task task);
-
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -92,6 +86,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //======================================== TASK FUNCTIONALITIES =================================================
+    /**
+     * Adds the given task.
+     */
+    void addTask(Task task);
 
     /** Returns and unmodifiable view of the filtered task list */
     //added prior to the ui functionality actually being implemented.
