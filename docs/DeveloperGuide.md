@@ -256,14 +256,16 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
+* student
+* tech savvy
+* is a Teaching Assistant (TA)
+* does not have much time and wants to get things done fast
+* lazy and do not want complicated steps
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:<br /> 
+manage contacts faster than a typical mouse/GUI driven app<br /> 
+with a categorization ability and streamlined creation/reading/updating/deleting processes.
 
 
 ### User stories
@@ -278,50 +280,133 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| `* * *` | potential user | be able to download the app | I can use it to keep track of my contacts |
+| `* * *` | potential user | be able to start the app | I can see how the app would look like |
+| `* * *` | user | be able to create a new contact in the address book | I can save a contact |
+| `* * *` | user | be able to retrieve an existing contact in the address book | I can retrieve more details about the contact |
+| `* * *` | user | be able to update an existing contact in the address book | I can change information about my student if I made a mistake when adding them |
+| `* * *` | user | be able to delete an old contact in the address book | I can delete contacts whom I am not in contact with anymore |
+| `* * *` | user | be able to see their contact details | I can copy the contact details to contact them |
+| `* * *` | new user | be able to find out what kind of commands are available | I can use the app as intended |
+| `* * *` | user | be able to close the app | I can stop using it |
+| `* *` | user | be able to see the group this contact belongs to | I recognise where I know this person from |
+| `* *` | user | be able to purge all current data | I can get rid of sample/experimental data i used for exploring the app |
+| `* *` | user | be able to search for contacts | I don’t have to scroll the entire contact list |
+| `* *` | organised user | be able to sort by modules | I can see the modules in order |
+| `* *` | user | be able to retrieve data fast | I can get the contact in the fastest time possible |
+| `* *` | user | be able to view by categories | I can ignore unrelated contact |
+| `* *` | user | be able to delete contacts by groups | I don’t have to delete one by one |
+| `* *` | user | be able to add a description about a contact | I can add more details about the contact |
+| `* *` | user | be able to sort my contacts | I can see the contact in a certain order |
+| `* *` | user | to have access to a help page | I can know how to navigate the app |
+| `*` | potential user exploring the app | be able to see the app populated with sample data | I can easily see how the app works |
+| `*` | user | be able to know which contact I retrieve frequently | I know the contact is frequently contacted |
+| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I know the contact might be obsolete |
+| `*` | user | be able to set up profile picture for the contact | I can recognise the person |
+| `*` | forgetful user | be able to have reminders about upcoming classes | I can conduct classes punctually |
+| `*` | Expert user | be able to set up shortcuts | I can do things faster |
+| `*` | user | be able to create favorite contact list | I can find my favourite student/prof/TA |
+| `*` | user | be able to set up profile picture for myself | I can add a personal touch to the application |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `contHACKS` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Creating a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to create a contact
+2. contHACKS shows a list of existing tags in contHACKS, and asks for input regarding details of the contact
+3. User inputs details of the contact
+4. contHACKS reflects that contact is successfully created
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
+* 2a. There are no tags in contHACKS<br />
+    * 2a1. contHACKS reflects that there are no tags in contHACKS<br />
+      Use case ends.
+      
 
-* 2a. The list is empty.
+* 3a. User does not give a tag to the contact.
+    * 3a1. Contact creation continues without an input tag<br />
+    Use case resumes at step 4.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+* 3b. User wants to give a tag to the contact being created, and no tags currently exist in contHACKS
+    * 3b1. User continues to create a contact with the tag name
+    * 3b2. contHACKS creates the new tag and the new contact<br />
+    Use case resumes at step 4.
 
-    * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+* 3c. User gives insufficient details for contact creation
+    * 3c1. contHACKS shows an error message<br />
+    Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Finding a contact**
+
+**MSS**
+
+1. User requests to find a contact based on input details
+2. contHACKS shows a list of contacts that match input details
+
+Use case ends.
+
+**Extensions**
+* 1a. There are no contacts
+    Use case ends.
+
+
+* 1b. User finds by name
+    * 1b1. contHACKS returns a list of contacts with names that match the input<br />
+    Use case ends.
+      
+
+* 1c. User finds by tag
+    * 1c1. contHACKS returns a list of contacts that contains the same tag<br />
+    Use case ends.
+
+
+**Use case: Updating a contact**
+
+**MSS**
+
+1. User requests to update a specific contact
+2. contHACKS returns the current details of the contact
+3. User inputs the new details of the contact
+4. contHACKS reflects that contact is successfully updated
+
+Use case ends.
+
+**Extensions**
+* 1a. Contact does not exist
+    * 1a1. contHACKS shows an error message.<br />
+    Use case ends.
+
+
+* 1b. User just wants to add a new tag to the contact and change nothing else
+    * 1b1. User inputs just the tag, and the index of the contact.<br />
+    Use case resumes at step 4.
+
+* 1c. User gives insufficient details for contact creation
+    * 1c1. contHACKS shows an error message<br />
+    Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+    
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tag**: A categorisation given to a contact
+
 
 --------------------------------------------------------------------------------------------------------------------
 
