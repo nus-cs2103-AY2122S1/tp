@@ -139,6 +139,9 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+    public void markDone(Task task) {
+        tasks.markDone(task);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
