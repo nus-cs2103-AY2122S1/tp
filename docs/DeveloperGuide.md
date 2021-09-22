@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* online seller on e-commerce platforms who have a large client base
+* has a need to keep track of the manufacturing and delivery of their products as well as the contact information of their customers and business partners
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Sellah is an address book containing the contact information and orders related to the clients and partners. The information and status of each order can also be easily monitored by the user. This product makes it easy and convenient to track orders and look for future cooperation.
 
 
 ### User stories
@@ -272,27 +273,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | new user                                   | download the app               | use it                                                                 |
+| `* * *`  | new user                                   | type ‘exit’                    | quit the app immediately                                               |
+| `* * *`  | 2nd-time user                              | add a client                   | keep track of the details of a specific client                         |
+| `* * *`  | 2nd-time user                              | add a product                  | keep track of the details of a specific product                        |
+| `* * * ` | 2nd-time user                              | edit a client                  | edit the details of a specific client                                  |
+| `* * * ` | 2nd-time user                              | edit a product                 | edit the details of a specific product                                 |
+| `* * * ` | 2nd-time user                              | view a client                  | view the details of a specific client                                  |
+| `* * * ` | 2nd-time user                              | view a product                 | view the details of a specific product                                 |
+| `* * * ` | 2nd-time user                              | delete a client                | remove client that I no longer need                                    |
+| `* * * ` | 2nd-time user                              | delete a product               | remove product that I no longer need                                   |
+| `* * `   | 10th-time user                             | list all my clients            | locate a client easily                                                 |
+| `* * `   | 10th-time user                             | list all my products           | locate a product easily                                                |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a client/product**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list clients/products
+2.  Sellah shows a list of clients/products
+3.  User requests to delete a specific client/products in the list
+4.  Sellah deletes the client/products
 
     Use case ends.
 
@@ -304,7 +311,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Sellah shows an error message.
 
       Use case resumes at step 2.
 
@@ -316,7 +323,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
 
 ### Glossary
 
