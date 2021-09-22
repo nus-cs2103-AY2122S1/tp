@@ -286,11 +286,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | clinic receptionist                        | add an appointment |                                                 |
 | `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
 | `* * *`  | clinic receptionist                        | update an appointment | reschedule the appointment when the patient or doctor asks for it |
-| `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments I have at any time|
+| `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
 | `* * *`  | clinic receptionist                        | change the appointments that have been scheduled | update the appointment schedules when patient's change their appointments |
+| `* * *`  | clinic receptionist                        | add a doctor |     |
+| `* * *`  | clinic receptionist                        | view a doctor's personal details| view a his/her personal details to contact them |
+| `* * *`  | clinic receptionist                        | edit a doctor's personal details| edit his/her details should it change |
+| `* * *`  | clinic receptionist                        | delete a doctor | remove entries that I no longer need |
 | `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
-| `* *`    | clinic receptionist with many patients to mange| sort patients by name      | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many patients to mange| sort patients by risk      | locate a patient easily                                                |
+| `* *`    | clinic receptionist with many patients to manage| sort patients by name      | locate a patient easily                                                |
+| `* *`    | clinic receptionist with many patients to manage| sort patients by risk      | locate a patient easily                                                |
 | `* *`    | clinic receptionist | add remarks for a patient     | add additional information about the patient |
 | `* *`    | clinic receptionist | edit patients by risk      | change any additional information about the patient                                             |
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
