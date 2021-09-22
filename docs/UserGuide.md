@@ -104,11 +104,43 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+### Adding a staff's schedule: `addSchedule`
+
+Adds a time period where the staff is working to the staff’s schedule.
+
+Format: 
+* `addSchedule [n/name] [day-startTime-endTime]`
+* `addSchedule [id/ID] [day-startTime-endTime]`
+* `addSchedule [n/name] [t/nonrecurr] [d/date] [startTime-endTime]`
+* `addSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
+
+Note:
+* There are two ways to identify the staff to add the time period to: by their name or by their staff ID.
+* Also, there are two types of time periods that can be added - recurring and non-recurring.
+* The default is a recurring schedule which will occur every week. For the addition of the non-recurring time periods, 
+  the date which the staff works has to be specified.
+
+Examples:
+* `addSchedule n/Candice Mon-0800-1200`
+* `addSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
+
+### View a staff schedule : `viewSchedule`
+
+Views a specific staff’s schedule.
+
+Format: 
+* `viewSchedlue [n/name]`
+* `viewSchedlue [id/ID]`
+
+Examples:
+* `viewSchedule n/Candice`
+* `viewSchedule id/12345678`
 
 ### Locating persons by name: `find`
 
