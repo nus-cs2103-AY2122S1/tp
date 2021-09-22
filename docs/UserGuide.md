@@ -69,27 +69,25 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 Displays a window containing documentation for command syntax and format.
 
 ![help window](images/helpWindow.png)
+
 _(Referenced from macOS Preview help window)_
 
 Format: `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--find/-f) (--clear/-c) (--list/-l)`
 
-- The command can accept up to 1 optional argument.
-- By supplying the optional argument, the program displays the relevant documentation for the command.
-- Supplying 0 optional arguments will display the table of contents of the documentation with hyperlinks to the documentation of the commands.
+* The command can accept up to 1 optional argument.
+* By supplying the optional argument, the program displays the relevant documentation for the command.
+* Supplying 0 optional arguments will display the table of contents of the documentation with hyperlinks to the documentation of the commands.
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`
+- At least the name field must be provided.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add -n “John Doe” -p “+6501234567” -e “johndoe@example.com” -a “NUS School of Computing” -t “undergraduate,computer science”` adds a contact with name of `John Doe`, phone number `+6501234567`, email `johndoe@example.com`, address `NUS School of Computing`, tags `undergraduate` and `computer science`.
+* `add -n “Jane Deer” -t “woman”` adds a contact with the name of `Jane Deer` and tag of `woman`.
+
 
 ### Listing all persons : `list`
 
