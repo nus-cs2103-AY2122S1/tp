@@ -4,6 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -32,6 +33,16 @@ public class BirthDate {
     public static BirthDate of(int year, int month, int dayOfMonth) {
         LocalDate date = LocalDate.of(year, month, dayOfMonth);
         checkArgument(isPresentOrPast(date), MESSAGE_DATE_CONSTRAINTS);
+        return new BirthDate(date);
+    }
+
+    /**
+     * Factory method for birthdate using LocalDate instance.
+     *
+     * @param date    A LocalDate instance.
+     * @return        A BirthDate instance.
+     */
+    public static BirthDate of(LocalDate date) {
         return new BirthDate(date);
     }
 
@@ -71,6 +82,24 @@ public class BirthDate {
      */
     public static boolean isPresentOrPast(LocalDate date) {
         return (LocalDate.now().isEqual(date) || LocalDate.now().isAfter(date));
+    }
+
+    //Add on for Json Conversion in JsonAdaptedParticipants
+    /**
+     * Returns true if a given String form of birthDate is valid.
+     *
+     * @param birthDate   A String representing a date.
+     * @return            A boolean representing if the String form birthDate is valid.
+     */
+    public static boolean isValidBirthDate(String birthDate) {
+        boolean isValid;
+        try {
+            LocalDate date = LocalDate.parse(birthDate);
+            isValid = isPresentOrPast(date);
+        } catch (DateTimeParseException e) {
+            isValid = false;
+        }
+        return isValid;
     }
 
     @Override

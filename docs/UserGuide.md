@@ -196,9 +196,25 @@ Format:
 `doneEvent n/NAME [d/DATE] [t/TIME]` - Marks an Event as done, if there are multiple events with the same name, specify the DATE (in YYYY-MM-DD format) and TIME (24h format) to select that event.
 
 Example Usage:
-`doneEvent n/CS2100 Finals d/2021-11-20  t/0900` - Marks the Event “CS2100 Finals” on 20th November 2021 9:00am as done.
-`doneEvent n/240km Marathon d/2022-08-20` - Marks the Event “240km Marathon” on 20th August 2022 as done.
+* `doneEvent n/CS2100 Finals d/2021-11-20  t/0900` - Marks the Event “CS2100 Finals” on 20th November 2021 9:00am as done.
+* `doneEvent n/240km Marathon d/2022-08-20` - Marks the Event “240km Marathon” on 20th August 2022 as done.
 
+
+### Sort Events: `sortEvents`
+Sorts the current list of Events in chronological order with the earlier events at the top and later events at the bottom.
+
+Format:
+`sortEvents`
+
+### Filter Events: `filterEvents`
+Filters the list of events for events occurring on a specific date.
+
+Format:
+`filterEvents DATE`
+
+Example Usage:
+
+* `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
 
 ### Show Event details: `showDetails`
 
@@ -206,7 +222,7 @@ Format:
 `showDetails EVENT_NAME` - Displays the details of the Event matching the given name.
 
 Example Usage:
-`showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
+* `showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
 
 ### Show Event Participants: `showParticipants`
 
@@ -214,7 +230,7 @@ Format:
 `showParticipants EVENT_NAME` - Displays the list of participants of the Event matching the given name.
 
 Example Usage:
-`showParticipants CS2103T Finals` - Displays the list of participants of the ‘CS2103T Finals’ Event.
+* `showParticipants CS2103T Finals` - Displays the list of participants of the ‘CS2103T Finals’ Event.
 
 ### Find Participant and access details: `findParticipant`
 
@@ -222,7 +238,7 @@ Format:
 `findParticipant KEYWORD` - Finds any participants whose name contains the given KEYWORD and returns the details about each participant.
 
 Example Usage:
-`findParticipant Mike` - Filters the list of Participants for Participants who have names containing “Mike”.
+* `findParticipant Mike` - Filters the list of Participants for Participants who have names containing “Mike”.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -246,5 +262,9 @@ Action | Format, Examples
 **Help** | `help`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
+**Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g. `doneEvent n/240km Marathon d/2022-08-20`
+**Sort Events** | `sortEvents`
+**Filter Events** | `filterEvents DATE` <br> e.g. `filterEvents 2021-09-18`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
+**Find Participants** | `findParticipant KEYWORD` <br> e.g. `findParticipant Mike`

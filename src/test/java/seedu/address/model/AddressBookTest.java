@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -18,6 +19,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -83,11 +86,53 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
 
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnFalse() {
+        assertFalse(addressBook.hasEvent(SAMPLE_EVENT));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        addressBook.addEvent(SAMPLE_EVENT);
+        assertTrue(addressBook.hasEvent(SAMPLE_EVENT));
+    }
+
+    @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getEventList().remove(0));
+    }
+
+    @Test
+    public void removeEvent_eventInAddressBook_returnFalse() {
+        addressBook.addEvent(SAMPLE_EVENT);
+        assertTrue(addressBook.getEventList().contains(SAMPLE_EVENT));
+        addressBook.removeEvent(SAMPLE_EVENT);
+        assertFalse(addressBook.hasEvent(SAMPLE_EVENT));
+    }
+
+    @Test
+    public void addEvent_eventNotInAddressBook_returnTrue() {
+        addressBook.addEvent(SAMPLE_EVENT);
+        assertTrue(addressBook.hasEvent(SAMPLE_EVENT));
+    }
+
+    @Test
+    public void addEvent_eventInAddressBook_throwsDuplicateEventException() {
+        addressBook.addEvent(SAMPLE_EVENT);
+        assertThrows(DuplicateEventException.class, () -> addressBook.addEvent(SAMPLE_EVENT));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Event> events = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -96,6 +141,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            return events;
         }
     }
 

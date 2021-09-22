@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.EventTime;
 import seedu.address.model.particpant.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -41,10 +45,26 @@ public class SampleDataUtil {
         };
     }
 
+    public static Event[] getSampleEvents() {
+        return new Event[] {
+            new Event(new EventName("240Km Marathon"), new EventDate("2022-08-20")),
+            new Event(new EventName("CS2100 Finals"), new EventDate("2021-11-20"), new EventTime("0900")),
+            new Event(new EventName("CS2103T Submission"), new EventDate("2021-09-30")),
+            new Event(new EventName("End of Recess Week"), new EventDate("2021-09-26"), new EventTime("2359")),
+            new Event(new EventName("Recess Week"), new EventDate("2021-09-20"), new EventTime("0000")),
+            new Event(new EventName("Dinner"), new EventDate("2021-09-21"), new EventTime("2100")),
+            new Event(new EventName("Lunch"), new EventDate("2021-09-21"), new EventTime("1300")),
+            new Event(new EventName("BreakFast"), new EventDate("2021-09-21"), new EventTime("0800"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleAb.addEvent(sampleEvent);
         }
         return sampleAb;
     }
