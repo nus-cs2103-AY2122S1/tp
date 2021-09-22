@@ -264,7 +264,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 **Value proposition**:<br /> 
-manage contacts faster than a typical mouse/GUI driven app<br /> 
+Manage contacts faster than a typical mouse/GUI driven app,<br /> 
 with a categorization ability and streamlined creation/reading/updating/deleting processes.
 
 
@@ -274,12 +274,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 | `* * *` | potential user | be able to download the app | I can use it to keep track of my contacts |
 | `* * *` | potential user | be able to start the app | I can see how the app would look like |
 | `* * *` | user | be able to create a new contact in the address book | I can save a contact |
@@ -319,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to create a contact
 2. contHACKS shows a list of existing tags in contHACKS, and asks for input regarding details of the contact
 3. User inputs details of the contact
-4. contHACKS reflects that contact is successfully created
+4. contHACKS reflects that contact has been created successfully
 
 Use case ends.
 
@@ -354,7 +348,7 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 1a. There are no contacts
+* 1a. There are no contacts<br />
     Use case ends.
 
 
@@ -388,6 +382,7 @@ Use case ends.
 * 1b. User just wants to add a new tag to the contact and change nothing else
     * 1b1. User inputs just the tag, and the index of the contact.<br />
     Use case resumes at step 4.
+      
 
 * 1c. User gives insufficient details for contact creation
     * 1c1. contHACKS shows an error message<br />
