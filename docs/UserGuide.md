@@ -75,12 +75,12 @@ Format: `help`
 ### Adding a resident’s information : `add`
 
 Make changes ->
-Adds a person to the address book.
+Adds a resident to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A resident can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -90,17 +90,26 @@ Examples:
 ### Viewing residents’ information : `view`
 
 Make changes ->
-Shows a list of all persons in the address book.
+Shows a list of all residents in the address book.
 
 Format: `list`
 
 ### Updating FET date : `fet`
 
-Make changes ->
+Updates the last done FET date for all residents.
+
+Format: `fet d/DATE`
+
+* The date inputted has to be in `dd-mm-yyyy` format
+* Date will be stored in a `MMM dd yyyy` format, e.g., (`Sep 21 2021`)
+* The last FET date of all residents will be updated by this command
+
+Examples:
+* `fet 15-8-2021` sets the FET date of all residents to `Aug 15 2021`
 
 ### Searching by resident information: `search`
 
-Finds persons whose names contain any of the given keywords.
+Finds residents whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -108,7 +117,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Residents matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -118,17 +127,17 @@ Examples:
 ### Deleting a resident : `delete`
 
 Make changes ->
-Deletes the specified person from the address book.
+Deletes the specified resident from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the resident at the specified `INDEX`.
+* The index refers to the index number shown in the displayed resident list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd resident in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st resident in the results of the `find` command.
 
 ### Exiting the program : `exit`
 

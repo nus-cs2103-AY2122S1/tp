@@ -9,31 +9,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Project advisor: [Prof. Damith Rajapakshe](http://www.comp.nus.edu.sg/~damithch)
 
-<img src="images/johndoe.png" width="200px">
+### Vimuth Mendis
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/vimuthm.png" width="200px">
+
+[[github](https://github.com/VimuthM)]
+[[portfolio](team/vimuthm.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lim Hern Fong, Jared
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jaredlhf.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jaredlhf)]
+[[portfolio](team/jaredlhf.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
 
-### Johnny Doe
+### Lim Zi Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gordonlzy.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/gordonlzy)] [[portfolio](team/gordonlzy.md)]
 
 * Role: Developer
 * Responsibilities: Data
