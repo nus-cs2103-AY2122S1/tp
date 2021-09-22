@@ -149,6 +149,24 @@ Examples:
 * `list` followed by delete 2 deletes the 2nd person in the address book.
 * `find` Mandarin Oriental followed by delete 1 deletes the 1st contact (accomodation, hotel) in the results of the find command.
 
+### Filter by category : `filter`
+
+Shows a list of all contacts in the specified category
+
+Category codes:
+* Attraction :`c/att`
+* F&B :`c/fnb`
+* Commerce :`c/com`
+* Accommodation :`c/acc`
+* Transport :`c/tpt`
+
+Format: `filter c/CATEGORY`
+
+Examples:
+* `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts).
+* `filter c/acc` returns Mandarin Oriental and Hotel81 (all accommodation contacts)
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
