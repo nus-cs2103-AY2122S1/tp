@@ -18,41 +18,41 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Jason Ang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jasonang.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/timothywong.md)]
+[[github](http://github.com/kdeasymoneysniper)]
+[[portfolio](team/jasonang.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Dion
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dion.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/timothywong.md)]
+[[github](http://github.com/noobmaster19)] [[portfolio](team/noobmaster.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Data Master
 
-### Jean Doe
+### Ang Yang Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/angyangcheng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/timothywong.md)]
+[[github](http://github.com/djiangel)]
+[[portfolio](team/angyangcheng.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Shivam Tiwari
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Shivam.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/timothywong.md)]
+[[github](https://github.com/Shivlock221b)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
