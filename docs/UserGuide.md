@@ -66,12 +66,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Displays a window containing documentation for command syntax and format.
 
-![help message](images/helpMessage.png)
+![help window](images/helpWindow.png)
+_(Referenced from macOS Preview help window)_
 
-Format: `help`
+Format: `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--find/-f) (--clear/-c) (--list/-l)`
 
+- The command can accept up to 1 optional argument.
+- By supplying the optional argument, the program displays the relevant documentation for the command.
+- Supplying 0 optional arguments will display the table of contents of the documentation with hyperlinks to the documentation of the commands.
 
 ### Adding a person: `add`
 
