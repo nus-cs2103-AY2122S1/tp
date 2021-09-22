@@ -216,6 +216,22 @@ Example Usage:
 
 * `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
 
+### Add Participant to Event: `addParticipant`
+
+Format: 
+`addParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Adds Participant with matching participantID to Event.
+
+Example Usage: 
+`addParticipant e/CS2103T Finals p/mikerowe1` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
+
+### Remove Participant to Event: `removeParticipant`
+
+Format:
+`removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Removes Participant with matching participantID from event.
+
+Example Usage:
+`removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participant ID is mikerowe1 from event CS2103T Finals.
+
 ### Show Event details: `showDetails`
 
 Format:
