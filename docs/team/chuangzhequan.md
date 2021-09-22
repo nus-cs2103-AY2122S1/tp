@@ -21,7 +21,9 @@ Given below are my contributions to the project.
   * User Guide:
     *
   * Developer Guide:
-    * Added target user profile, value proposition, and user stores
+    * Added target user profile
+    * Added value propositions
+    * Added user stories
     * Added use cases
 
 * **Community**:
