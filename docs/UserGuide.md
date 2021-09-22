@@ -14,7 +14,7 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
   * [Editing a person: `edit`](#editing-a-person-edit)
   * [Locating persons by name: `find`](#locating-persons-by-name-find)
   * [Deleting a person: `delete`](#deleting-a-person-delete)
-  * [Clearing all entries: `clear`](#batch-importing-contacts-import)
+  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
   * [Exiting the program: `exit`](#exiting-the-program-exit)
   * [Saving the data](#saving-the-data)
   * [Editing the data file](#editing-the-data-file)
