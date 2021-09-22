@@ -264,7 +264,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage residents' information faster than a typical mouse/GUI driven app and allow easy enforcement of Covid-19 restrictions 
+**Value proposition**: Manage residents' information faster than a typical mouse/GUI driven app and allow easy enforcement of Covid-19 restrictions 
 
 
 ### User stories
@@ -316,8 +316,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should be targeted towards a single user and not multi-users.
+5.  Data stored locally should be in a human editable text file.
+6.  Do not make use of a DBMS to manage data.
+7.  Final software should be platform-independent.
+8.  The software shouldn't depend on our own remote server.
+9.  Application is to be packaged into a single JAR file.
+10. JAR file size to be limited to 100MB and documents to 15MB/file.
+11. UG and DG are to be pdf-friendly.
 
 ### Glossary
 
