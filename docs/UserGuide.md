@@ -203,19 +203,23 @@ Example Usage:
 ### Sort Events: `sortEvents`
 Sorts the current list of Events in chronological order with the earlier events at the top and later events at the bottom.
 
-Format:
-`sortEvents`
+Format: `sortEvents`
 
 ### Filter Events: `filterEvents`
 Filters the list of events for events occurring on a specific date and optionally by time too.
 
-Format:
-`filterEvents DATE [TIME]`
+Format: `filterEvents DATE [TIME]`
 
 Example Usage:
 
 * `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
 * `filterEvents 2021-09-18 0900` - Filters the list of events to show only events occurring on 18th September 2021 9am.
+
+### List Events: `listEvent`
+
+Show a list of all events in Managera.
+
+Format: `listEvent`
 
 ### Show Event details: `showDetails`
 
@@ -266,6 +270,7 @@ Action | Format, Examples
 **Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g., `doneEvent n/240km Marathon d/2022-08-20`
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents DATE [TIME]` <br> e.g., `filterEvents 2021-09-18`
+**List Events** | `listEvent`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
 **Find Participants** | `findParticipant KEYWORD` <br> e.g., `findParticipant Mike`
