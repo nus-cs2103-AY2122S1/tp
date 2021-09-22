@@ -138,7 +138,6 @@ Examples:
 
 ### Deleting a resident : `delete`
 
-Make changes ->
 Deletes the specified resident from the address book.
 
 Format: `delete INDEX`
@@ -156,9 +155,6 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
-=======
-* `list` followed by `delete 2` deletes the 2nd resident in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st resident in the results of the `find` command.
 
 ### Exiting the program : `exit`
 
