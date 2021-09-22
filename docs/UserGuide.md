@@ -3,14 +3,16 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+SalesNote is a **desktop app for managing contacts and tasks, optimized for use via a Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). Fast typists can get more out of the application 
+than from traditional GUI apps. The application and guide are based on AB3 with new added features.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick start (kept for now, to be updated in the future)
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -75,7 +77,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the application.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -89,13 +91,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the application.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the application.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -130,7 +132,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the application.
 
 Format: `delete INDEX`
 
@@ -139,12 +141,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the application.
 
 Format: `clear`
 
@@ -166,9 +168,44 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Listing all tasks: `listtask`
 
-_Details coming soon ..._
+Shows a list of all tasks in the application.
+
+### Adding a task: `addtask`
+
+Adds a task to the application.
+
+Format: `addtask l/LABEL d/DATE`
+
+Examples:
+* `addtask l/sew buttons onto blazer d/20th August 2021`
+
+### Deleting a task : `deletetask`
+
+Deletes the specified task from the application.
+
+Format: `deletetask INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
+
+### Mark a task as done: `markdone`
+
+Marks a specified task from the application as complete.
+
+Format: `deletetask INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,3 +227,8 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**ListTask** | `listtask`
+**AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20th August 2021`
+**DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
+**MarkDone** | `markdone INDEX` e.g. `markdone 2`
+
