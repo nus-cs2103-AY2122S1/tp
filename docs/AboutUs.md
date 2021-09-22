@@ -24,5 +24,5 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](https://github.com/KishendranVendarKon)]
 
-* Role: In charge of `Storage` component
-* Responsibilities: Responsible for implementing batch import via csv files
+* Role: Testing
+* Responsibilities: In charge of `Storage` component
