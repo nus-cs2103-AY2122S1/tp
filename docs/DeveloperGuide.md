@@ -269,14 +269,45 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                 | I want to …​                              | So that I can…​                                                     |
+| -------- | ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | NUS student                                | add the compulsory core modules for my major | keep track of the required module courses                              |
+| `* * *`  | NUS student                                | view the modules I'm currently taking        |                                                                        |
+| `* * *`  | NUS student                                | delete modules                               | remove module entries that I no longer need                            |
+| `* * *`  | NUS student                                | edit the module details                      | modify information for any module entry                                |
+| `* *`    | NUS student                                | add GE modules                               | keep track of General Education(GE) Modules                            |
+| `* *`    | NUS student                                | add Focus Area / Specialisation modules      | keep track of modules in my focus area                                 |
+| `* *`    | NUS student                                | add UE modules                               | keep track of Unrestricted Elective(UE) Modules                        |
+| `* * *`  | NUS student                                | view the modules I have taken                               | keep track of the modules taken in the past             |
+| `* * *`  | NUS student                                | view the modules I'm planning to take in the future         | have ideas about my future module plan                  |
+| `* * *`  | NUS student                                | view the number of MCs I'm currently taking                 | keep track of my degree progress                        |
+| `* * *`  | NUS student                                | view the number of MCs I have taken                         | keep track of my degree progress                        |
+| `* * *`  | NUS student                                | view the number of MCs left to take before graduating       | keep track of my degree progress                        |
+| `* *`    | NUS student                                | add internship semester                      | take note of my internship period                                      |
+| `* * *`  | NUS student                                | keep track of my CAP                         | monitor my learning in NUS                                             |
+| `* *`    | NUS student                                | see on which module I can exercise S/U option| decide how to use my S/Us better                                       |
+| `* *`    | NUS student                                | see how many S/U credits I have left         | have a better understanding of S/U credit usage                        |
+| `* *`    | NUS student                                | view my grade for modules I have taken       | keep track of my grades                                                |
+| `* *`    | NUS student                                | see the marking scheme for each module       | have a full understanding of each module                               |
+| `* * *`  | NUS student                                | mark a module I have taken as done           | only choose the modules I haven’t taken                                |
+| `* *`    | NUS student                                | add ‘DIY’ courses                            | keep track of my DYOM mods                                             |
+| `* *`    | parent of a NUS student                    | understand what my child is doing            | call them only when they are free                                      |
+| `* *`    | NUS student who are preparing their resumes| view which modules to put on my resume       | prepare for job applications                                           |
+| `* *`    | NUS student who needs module help          | see the contact information of professors for the module    | easily reach professors when needed.                    |
+| `* * *`  | NUS student who want to find a specific mod| search for a module by keywords/codes        | search for specific module entries easily                              |
+| `* * *`  | NUS student who is looking for a specific kind of modules    | categorise my modules           | search for a specific type of modules easily                      |
+| `* * *`  | NUS student who is looking for a specific kind of modules    | view the modules according to year/semester           | find specific modules easily                |
+| `* * *`  | NUS student who is making a module plan     | specify modules to take in each semester     | make a plan in advance                                                |
+| `* *`    | NUS student who is making a module plan | change the colour scheme of each module      |  easily differentiate between different modules                           |
+| `* * *`  | NUS student who is making a module plan       | find free time slots in our schedule         | add other modules in my free time slots                             |
+| `* * *`  | NUS student who is looking for modules            | sort the modules according to the level (1k/2k/3k…)            |   know the workload difficulty of the modules |
+| `* *`    | NUS student who have difficulties seeing text in default font style/size    | change the font style/size | be more comfortable for me to use                       |
+| `* *`    | clueless NUS student                                | see the recommended schedule for my major                            | make a better plan according to the suggestion                      |
+| `* * *`  | first time user                            | see some sample module plans when I open the app                      | easily try out its features without needing to add my data first            |
+| `* * *`  | first time user                            | see user guide       | get familiar with the software |
+| `*`      | forgetful NUS student                                | get notified when it's time for class   | attend the classes in time         |
+| `*`      | forgetful NUS student                                | get notified when exam dates approaching    | keep track of them             |
 
 *{More to be added}*
 
