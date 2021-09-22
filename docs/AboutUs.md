@@ -41,10 +41,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Naoki Shum
 
-<img src="images/NaokiShum.png" width="200px">
+<img src="images/naokishum.png" width="200px">
 
 [[github](http://github.com/NaokiShum)]
-[[portfolio](team/NaokiShum.md)]
+[[portfolio](team/naokishum.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
