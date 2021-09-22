@@ -410,13 +410,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Managera shows an error message stating that the given ID does not correspond to an existing Participant.
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
 * 1b. Event Organiser provides invalid Event name.
 
     * 1b1. Managera shows an error message stating that the given name does not correspond to an existing Event.
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
 **Use case: UC07 - Remove Participant from Event**
 
@@ -435,13 +435,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Managera shows an error message stating that the given ID does not correspond to an existing Participant.
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
 * 1b. Event Organiser provides invalid Event name.
 
     * 1b1. Managera shows an error message stating that the given name does not correspond to an existing Event.
 
-      Use case resumes at step 3.
+      Use case resumes at step 1.
 
 **Use case: UC08 - Find Participant and access details**
 
