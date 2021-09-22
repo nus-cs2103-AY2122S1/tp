@@ -22,8 +22,8 @@ import seedu.address.model.Model;
 import seedu.address.model.staff.Address;
 import seedu.address.model.staff.Email;
 import seedu.address.model.staff.Name;
-import seedu.address.model.staff.Staff;
 import seedu.address.model.staff.Phone;
+import seedu.address.model.staff.Staff;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,7 +54,7 @@ public class EditCommand extends Command {
     private final EditStaffDescriptor editStaffDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditStaffDescriptor editPersonDescriptor) {
@@ -131,7 +131,8 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
 
-        public EditStaffDescriptor() {}
+        public EditStaffDescriptor() {
+        }
 
         /**
          * Copy constructor.
