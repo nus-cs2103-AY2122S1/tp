@@ -79,7 +79,7 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
   e.g `n/{NAME} [t/{TAG}]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/{NAME} p/{PHONE_NUMBER}`, `p/{PHONE_NUMBER} n/{NAME}` is also acceptable.
+  e.g. if the command specifies `n/{NAME} p/{PHONE}`, `p/{PHONE} n/{NAME}` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
@@ -91,22 +91,22 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
 ***
 
-### Viewing help : `help` <a name="help"></a>
+### Viewing help : `help` / `man` <a name="help"></a>
 
 Shows a message explaning how to access the help page.
 
-Format: `help`
+Format: `help`/`man`
 
 ***
 
 ### Adding a person: `add` <a name="add"></a>
 
-Adds a person to the address book. Tags are optional.
+Adds a person to the address book. Name, email and module code are **compulsory**. Phone number, telegram handle and tags are **optional**. Parameters can be in any order.
 
-Format: `add n/{NAME} p/{PHONE_NUMBER} e/{EMAIL} m/{MODULE_CODE} [t/{TAG}]`
+Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`
 
 Examples:
-* `add n/Ben p/91234567 e/ben123@gmail.com m/CS2103T t/Overseas`
+* `add n/Ben e/ben123@gmail.com m/CS2103T h/@BenIsHere t/Overseas`
 * `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100`
 
 ***
@@ -138,12 +138,12 @@ Examples:
 
 ### Sort contacts: `sort` <a name="sort"></a>
 
-Sorts the contacts by module code (arranged in alphabetical order) / alphabetical order (denoted by the `-a` flag).
+Sorts the contacts such that contacts are arranged alphabetically after being grouped into modules (denoted by the `-m` flag) / in general alphabetical order (denoted by the `-a` flag).
 
-Format: `sort {MODULE_CODE}` / `sort -a`
+Format: `sort -m` / `sort -a`
 
 Examples:
-* `sort CS2103T`
+* `sort -m`
 * `sort -a`
 
 ***
@@ -160,28 +160,30 @@ Edits the person at the specified index.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
-Format: `update {INDEX} [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]` / <br> `edit {INDEX} [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]`
+Format: `update {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]` / <br> `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]`
 
 Examples: 
 * `update 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively. 
 * `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe` and clears all existing tags.
+* `update 3 h/@BenWasHere t/Overseas` Edits the telegram handle of the 3rd person to be `@BenWasHere` and adds an `Overseas` tag.
 
 ***
 
 ### Delete contact individually / in batches: `delete` <a name="delete"></a>
 
-Delete the specified contact(s) from the address book.
+Delete the specified contact(s) from the address book. It can also be used to delete all contacts associated with a tag (using `b/{TAG}`).
 
 * Deletes the person at the specified index (inclusive).
 * Index refers to the index number shown in the displayed person list.
 * The index must be a positive integer 1,2,3...
 * `INDEX_B` should be a positive integer strictly greater than `INDEX_A`.
 
-Format: `delete {INDEX}`, `delete {INDEX_A, INDEX_B}`
+Format: `delete {INDEX}`/ `delete {INDEX_A, INDEX_B}` / `delete b/{TAG}`
    
 Examples:
 * `delete 2` deletes the 2nd contact.
 * `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
+* `delete b/CS2103T` deletes all the contacts from CS2103T.
 
 ***
 
@@ -208,7 +210,7 @@ Examples:
 
 Tags a contact with a category.
 
-Format: `tag {INDEX} {TAG_NAME}`
+Format: `tag {INDEX} {TAG}`
 
 Examples: 
 * `tag Ben CS2103T`
@@ -250,17 +252,17 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 
 ## Command Summary <a name="summary"></a>
 
-| Command       | Format                                                                          | Example                                       |
-|---------------|---------------------------------------------------------------------------------| ----------------------------------------------|
-| help / man    | `help`/`man`                                                                    | `help`/`man`                                  |
-| add           | `add n/{NAME} p/{PHONE NUMBER} e/{EMAIL} m/{MODULE_CODE} [t/{TAG}]`             | `add Ben 91234567 ben123@gmail.com CS2103T`   |
-| list / ls     | `list`/`ls`                                                                     | `list`/`ls`                                   |
-| find          | `find {NAME}`/`find {TAG}`                                                      | `find Ben`/`find CS2103T`                     |
-| sort          | `sort {MODULE_CODE}`/`sort -a`                                                  | `sort CS2103T`/`sort -a`                      |
-| edit / update | `update {INDEX} [n/{NAME}] [p/{PHONE}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}]` | `update 1 p/91234567 e/ben321@gmail.com`      |
-| delete        | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`                                  | `delete 2`/`delete 2, 5`                      |
-| clear         | `clear`                                                                         | `clear`                                       |
-| remark        | `remark {INDEX} {DESCRIPTION}`                                                  | `remark 2 absent`                             |
-| tag           | `tag {INDEX} {TAG_NAME}`                                                        | `tag 2 overseas`                              |
-| fav           | `fav {INDEX}`                                                                   | `fav 2`                                       |
-| exit / quit   | `exit`/`quit`                                                                   | `exit`/`quit`                                 |
+| Command       | Format                                                                                               | Example                                  |
+|---------------|------------------------------------------------------------------------------------------------------| -----------------------------------------|
+| help / man    | `help`/`man`                                                                                         | `help`/`man`                             |
+| add           | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                 | `add n/Ben Davies e/ben123@gmail.com                                                                                                                                 m/CS2103T`                              |
+| list / ls     | `list`/`ls`                                                                                          | `list`/`ls`                              |
+| find          | `find {NAME}`/`find {TAG}`                                                                           | `find Ben`/`find CS2103T`                | 
+| sort          | `sort -m`/`sort -a`                                                                                  | `sort -m`/`sort -a`                      |
+| edit / update | `update {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`| `update 1 p/91234567 e/ben321@gmail.com` |
+| delete        | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`/`delete b/{TAG}`                                      | `delete 2`/`delete 2, 5`/`delete                                                                                                                                     b/CS2103T`                              |
+| clear         | `clear`                                                                                              | `clear`                                  |
+| remark        | `remark {INDEX} {DESCRIPTION}`                                                                       | `remark 2 absent`                        |
+| tag           | `tag {INDEX} {TAG}`                                                                                  | `tag 2 overseas`                         |
+| fav           | `fav {INDEX}`                                                                                        | `fav 2`                                  |
+| exit / quit   | `exit`/`quit`                                                                                        | `exit`/`quit`                            |
