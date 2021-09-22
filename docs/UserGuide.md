@@ -5,21 +5,21 @@ title: User Guide
 
 NUSpam is a desktop app for managing contacts **targeted at marketers who require fast manipulation and precise handling of contact data.** It enables marketers to more easily manage and make use of email and phone leads, and **minimise tedious and repetitive tasks** such as data entry, email blasts, and mail merge.
 
-* [Quick start](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#quick-start)
-* [Features](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#features)
-  * [Viewing help: `help`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#viewing-help-help)
-  * [Adding a person: `add`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#adding-a-person-add)
-  * [Batch importing contacts: `import`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#batch-importing-contacts-import)
-  * [Listing all persons: `list`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#listing-all-persons-list)
-  * [Editing a person: `edit`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#editing-a-person-edit)
-  * [Locating persons by name: `find`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#locating-persons-by-name-find)
-  * [Deleting a person: `delete`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#deleting-a-person-delete)
-  * [Clearing all entries: `clear`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#batch-importing-contacts-import)
-  * [Exiting the program: `exit`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#exiting-the-program-exit)
-  * [Saving the data](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#saving-the-data)
-  * [Editing the data file](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#editing-the-data-file)
-* [FAQ](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#faq)
-* [Command Summary](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/docs/UserGuide.md#command-summary)
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Adding a person: `add`](#adding-a-person-add)
+  * [Batch importing contacts: `import`](#batch-importing-contacts-import)
+  * [Listing all persons: `list`](#listing-all-persons-list)
+  * [Editing a person: `edit`](#editing-a-person-edit)
+  * [Locating persons by name: `find`](#locating-persons-by-name-find)
+  * [Deleting a person: `delete`](#deleting-a-person-delete)
+  * [Clearing all entries: `clear`](#batch-importing-contacts-import)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Saving the data](#saving-the-data)
+  * [Editing the data file](#editing-the-data-file)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
