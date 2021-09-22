@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +85,8 @@ public class AddressBookParser {
         case FilterEventCommand.COMMAND_WORD:
             return new FilterEventCommandParser().parse(arguments);
 
+        case ListEventCommand.COMMAND_WORD:
+            return new ListEventCommand();
         // TODO: addParticipant (Use Parser):
 
         // TODO: removeParticipant (Use Parser):
