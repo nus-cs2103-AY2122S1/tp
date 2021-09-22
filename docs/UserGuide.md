@@ -5,8 +5,30 @@ title: User Guide
 
 Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming events and the details of their participants and collaborators**. It does not handle communication between the event organiser and the participants or collaborators.
 
-* Table of Contents
-{:toc}
+## Table of Contents
+- [**Quick start**](#quick-start)
+- [**Features**](#features)
+    * [Viewing help: `help`](#viewing-help--help)
+    * [Adding a person: `add`](#adding-a-person-add)
+    * [Listing all persons: `list`](#listing-all-persons--list)
+    * [Editing a person: `edit`](#editing-a-person--edit)
+    * [Locating persons by name: `find`](#locating-persons-by-name-find)
+    * [Deleting a person: `delete`](#deleting-a-person--delete)
+    * [Clearing all entries: `clear`](#clearing-all-entries--clear)
+    * [Exiting the program: `exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+    * [Adding an event: `addEvent`](#adding-an-event-addevent)
+    * [Removing an event: `removeEvent`](#removing-an-event--removeevent)
+    * [Mark an Event as done: `doneEvent`](#mark-an-event-as-done-doneevent)
+    * [Sort Events: `sortEvents`](#sort-events-sortevents)
+    * [Filter Events: `filterEvents`](#filter-events-filterevents)
+    * [Show Event details: `showDetails`](#show-event-details-showdetails)
+    * [Show Event Participants: `showParticipants`](#show-event-participants-showparticipants)
+    * [Find Participant and access details: `findParticipant`](#find-participant-and-access-details-findparticipant)
+- [**FAQ**](#faq)
+- [**Command summary**](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
