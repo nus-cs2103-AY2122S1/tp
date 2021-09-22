@@ -278,21 +278,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | clinic receptionist                        | add a new patient              |                                                                        |
 | `* * *`  | clinic receptionist                        | delete a patient               | remove entries that I no longer need                                   |
-| `* * *`  | clinic receptionist                        | view a patient's personal details| view a his/her personal details to better understand them and contact them |
-| `* * *`  | clinic receptionist                        | view a patient's risk profile| view a his/her risk |
+| `* * *`  | clinic receptionist                        | view a patient's personal details| view his/her personal details to better understand them and contact them |
+| `* * *`  | clinic receptionist                        | view a patient's risk profile| view his/her risk |
 | `* * *`  | clinic receptionist                        | edit a patient's personal details| change his/her personal details should it change|
 | `* * *`  | clinic receptionist                        | edit a patient's risk profile| change his/her risk profile should it change |
 | `* * *`  | clinic receptionist                        | find a patient by name         | locate details of patients without having to go through the entire list |
+| `* * *`  | clinic receptionist                        | add a doctor |     |
+| `* * *`  | clinic receptionist                        | view a doctor's personal details| view his/her personal details to contact him/her |
+| `* * *`  | clinic receptionist                        | edit a doctor's personal details| edit his/her details should it change |
+| `* * *`  | clinic receptionist                        | delete a doctor | remove entries that I no longer need |
+| `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
 | `* * *`  | clinic receptionist                        | add an appointment |                                                 |
 | `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
 | `* * *`  | clinic receptionist                        | update an appointment | reschedule the appointment when the patient or doctor asks for it |
 | `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
-| `* * *`  | clinic receptionist                        | change the appointments that have been scheduled | update the appointment schedules when patient change his/her appointment |
-| `* * *`  | clinic receptionist                        | add a doctor |     |
-| `* * *`  | clinic receptionist                        | view a doctor's personal details| view a his/her personal details to contact him/her |
-| `* * *`  | clinic receptionist                        | edit a doctor's personal details| edit his/her details should it change |
-| `* * *`  | clinic receptionist                        | delete a doctor | remove entries that I no longer need |
-| `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
 | `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
 | `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
 | `* *`    | clinic receptionist with many patients to manage| sort doctors by name      | locate a doctor easily                                                |
@@ -427,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a2. User requests to reschedule to a different time.
     * 4a3. PlannerMD updates the doctor's schedule which is reflected immediately.
 
-      Use case resumes at step 2.
+      Use case ends.
     
 
 *{More to be added}*
