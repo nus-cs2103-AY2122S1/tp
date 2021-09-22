@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final TaskList tasks;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.tasks = new TaskList();
+        filteredTasks = new FilteredList<>(this.tasks.asUnmodifiableObservableList());
     }
 
     public ModelManager() {
@@ -118,10 +120,28 @@ public class ModelManager implements Model {
 
     //=========== Task Management ==================================================================================
 
-    public void addTask(Task task) {
-        tasks.addTask(task);
+    public void addTask(Task toAdd) {
+        tasks.add(toAdd);
     }
 
+    public void deleteTask(Task toDelete) {
+        tasks.remove(toDelete);
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    public void markDone(Task task) {
+        tasks.markDone(task);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
