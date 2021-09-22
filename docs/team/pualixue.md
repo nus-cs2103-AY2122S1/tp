@@ -19,8 +19,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * Developer Guide:
-        * Added non-functional requirements
-        * Added glossary
+        * Added non-functional requirements and glossary [\#20](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/20)
 
 * **Community**:
 
