@@ -121,20 +121,20 @@ Examples:
 
 ### Searching by resident information: `search`
 
-Finds residents whose names contain any of the given keywords.
+Filters for residents by the provided keywords for each available parameter.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* The search is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
+* The order of the keywords provided for the name does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Residents matching at least one keyword will be returned (i.e. `OR` search).
+* Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `search n/John` returns `john` and `John Doe`
+* `search n/alex david v/true` returns vaccinated residents, `Alex Yeoh` and `David Li`
+* `search v/false f/soc` returns un-vaccinated residents from SoC <br>
 
 ### Deleting a resident : `delete`
 
@@ -164,9 +164,9 @@ Format: `exit`
 Action | Format, Examples
 --------|------------------
 **Add** |  
-**Fet** | 
-**View** |
-**Search** |
+**View** | `view [INDEX]` <br> e.g. `view 30`
+**Fet** | `fet d/DATE` <br> e.g. `fet 15-8-2021`
+**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]` <br> e.g. `search n/john alex v/false f/fass` 
 **Delete** | 
 **Help** | `help`
 **Exit** | `exit`
