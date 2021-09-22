@@ -17,3 +17,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Scheduling and tracking
 * Responsibilities: User assistance
+
+### Kishendran Vendar Kon
+
+<img src="images/kishendranvendarkon.png" width="200px">
+
+[[github](https://github.com/KishendranVendarKon)]
+
+* Role: Testing
+* Responsibilities: In charge of `Storage` component
