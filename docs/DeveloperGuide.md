@@ -310,107 +310,88 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `contHACKS` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Creating a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to create a contact
+2. contHACKS shows a list of existing tags in contHACKS, and asks for input regarding details of the contact
+3. User inputs details of the contact
+4. contHACKS reflects that contact is successfully created
 
-    Use case ends.
+Use case ends.
 
 **Extensions**
+* 2a. There are no tags in contHACKS<br />
+    * 2a1. contHACKS reflects that there are no tags in contHACKS<br />
+      Use case ends.
+      
 
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
-
-(For all use cases below, the **System** is `contHACKS` and the **Actor** is the `user`, unless specified otherwise)
-
-Use case: Creating a contact
-MSS
-User requests to create a contact
-contHACKS shows a list of existing tags in contHACKS,
-and asks for input regarding details of the contact
-User inputs details of the contact
-contHACKS reflects that contact is successfully created
-
-Use case ends.
-
-Extensions
-2a. There are no tags in contHACKS
-contHACKS reflects that there are no tags in contHACKS
-Use case ends.
+* 3a. User does not give a tag to the contact.
+    * 3a1. Contact creation continues without an input tag<br />
+    Use case resumes at step 4.
 
 
-3a. User does not give a tag to the contact.
-3a1. Contact creation continues without an input tag
-Use case resumes at step 4.
+* 3b. User wants to give a tag to the contact being created, and no tags currently exist in contHACKS
+    * 3b1. User continues to create a contact with the tag name
+    * 3b2. contHACKS creates the new tag and the new contact<br />
+    Use case resumes at step 4.
 
-3b. User wants to give a tag to the contact being created, and no tags currently exist in     contHACKS
-3b1. User continues to create a contact with the tag name
-3b2. contHACKS creates the new tag and the new contact
-Use case resumes at step 4.
 
-3c. User gives insufficient details for contact creation
-3c1. contHACKS shows an error message
-Use case resumes at step 2.
+* 3c. User gives insufficient details for contact creation
+    * 3c1. contHACKS shows an error message<br />
+    Use case resumes at step 2.
 
-Use case: Finding a contact
-MSS
-User requests to find a contact based on input details
-contHACKS shows a list of contacts that match input details
+**Use case: Finding a contact**
+
+**MSS**
+
+1. User requests to find a contact based on input details
+2. contHACKS shows a list of contacts that match input details
 
 Use case ends.
 
-Extensions
-1a. There are no contacts
+**Extensions**
+* 1a. There are no contacts
+    Use case ends.
+
+
+* 1b. User finds by name
+    * 1b1. contHACKS returns a list of contacts with names that match the input<br />
+    Use case ends.
+      
+
+* 1c. User finds by tag
+    * 1c1. contHACKS returns a list of contacts that contains the same tag<br />
+    Use case ends.
+
+
+**Use case: Updating a contact**
+
+**MSS**
+
+1. User requests to update a specific contact
+2. contHACKS returns the current details of the contact
+3. User inputs the new details of the contact
+4. contHACKS reflects that contact is successfully updated
+
 Use case ends.
 
-
-1b. User finds by name
-1b1. contHACKS returns a list of contacts with names that match the input
-Use case ends.
-
-1c. User finds by tag
-1c1. contHACKS returns a list of contacts that contains the same tag
-Use case ends.
+**Extensions**
+* 1a. Contact does not exist
+    * 1a1. contHACKS shows an error message.<br />
+    Use case ends.
 
 
-Use case: Updating a contact
-MSS
-User requests to update a specific contact
-contHACKS returns the current details of the contact
-User inputs the new details of the contact
-contHACKS reflects that contact is successfully updated
+* 1b. User just wants to add a new tag to the contact and change nothing else
+    * 1b1. User inputs just the tag, and the index of the contact.<br />
+    Use case resumes at step 4.
 
-Use case ends.
-
-Extensions
-1a. Contact does not exist
-1a1. contHACKS shows an error message.
-Use case ends.
-
-
-1b. User just wants to add a new tag to the contact and change nothing else
-1b1. User inputs just the tag and the index of the contact.
-Use case resumes at step 4.
-
-1c. User gives insufficient details for contact creation
-1c1. contHACKS shows an error message
-Use case resumes at step 2.
+* 1c. User gives insufficient details for contact creation
+    * 1c1. contHACKS shows an error message<br />
+    Use case resumes at step 2.
 
 
 ### Non-Functional Requirements
@@ -424,7 +405,8 @@ Use case resumes at step 2.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tag**: A categorisation given to a contact
+
 
 --------------------------------------------------------------------------------------------------------------------
 
