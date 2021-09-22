@@ -257,13 +257,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+* has a need to manage a significant number of patients
+* needs quick access to a patient's data and profile
+* needs to arrange/deconflict appoinments for doctors
+* prefers desktop applications over other types
+* can type fast and prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+
+**Value proposition**: easily manage patients' information and doctors' appointments faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -273,11 +276,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | clinic receptionist                        | add a new patient              |                                                                        |
+| `* * *`  | clinic receptionist                        | delete a patient               | remove entries that I no longer need                                   |
+| `* * *`  | clinic receptionist                        | view a patient's personal details| view a his/her personal details to better understand them and contact them |
+| `* * *`  | clinic receptionist                        | view a patient's risk profile| view a his/her risk |
+| `* * *`  | clinic receptionist                        | edit a patient's personal details| change their personal details should it change|
+| `* * *`  | clinic receptionist                        | edit a patient's risk profile| change their risk profile should it change |
+| `* * *`  | clinic receptionist                        | find a patient by name         | locate details of persons without having to go through the entire list |
+| `* * *`  | clinic receptionist                        | add an appointment |                                                 |
+| `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
+| `* * *`  | clinic receptionist                        | update an appointment | reschedule the appointment when the patient or doctor asks for it |
+| `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments I have at any time|
+| `* * *`  | clinic receptionist                        | change the appointments that have been scheduled | update the appointment schedules when patient's change their appointments |
+| `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
+| `* *`    | clinic receptionist with many patients to mange| sort patients by name      | locate a patient easily                                                |
+| `* *`    | clinic receptionist with many patients to mange| sort patients by risk      | locate a patient easily                                                |
+| `* *`    | clinic receptionist | add remarks for a patient     | add additional information about the patient |
+| `* *`    | clinic receptionist | edit patients by risk      | change any additional information about the patient                                             |
+| `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
 
 *{More to be added}*
 
