@@ -280,23 +280,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | clinic receptionist                        | delete a patient               | remove entries that I no longer need                                   |
 | `* * *`  | clinic receptionist                        | view a patient's personal details| view a his/her personal details to better understand them and contact them |
 | `* * *`  | clinic receptionist                        | view a patient's risk profile| view a his/her risk |
-| `* * *`  | clinic receptionist                        | edit a patient's personal details| change their personal details should it change|
-| `* * *`  | clinic receptionist                        | edit a patient's risk profile| change their risk profile should it change |
-| `* * *`  | clinic receptionist                        | find a patient by name         | locate details of persons without having to go through the entire list |
+| `* * *`  | clinic receptionist                        | edit a patient's personal details| change his/her personal details should it change|
+| `* * *`  | clinic receptionist                        | edit a patient's risk profile| change his/her risk profile should it change |
+| `* * *`  | clinic receptionist                        | find a patient by name         | locate details of patients without having to go through the entire list |
 | `* * *`  | clinic receptionist                        | add an appointment |                                                 |
 | `* * *`  | clinic receptionist                        | delete an appointment | cancel the appointment |
 | `* * *`  | clinic receptionist                        | update an appointment | reschedule the appointment when the patient or doctor asks for it |
 | `* * *`  | clinic receptionist                        | view the appointments that have been scheduled | see what appointments the clinic has at any time|
-| `* * *`  | clinic receptionist                        | change the appointments that have been scheduled | update the appointment schedules when patient's change their appointments |
+| `* * *`  | clinic receptionist                        | change the appointments that have been scheduled | update the appointment schedules when patient change his/her appointment |
 | `* * *`  | clinic receptionist                        | add a doctor |     |
-| `* * *`  | clinic receptionist                        | view a doctor's personal details| view a his/her personal details to contact them |
+| `* * *`  | clinic receptionist                        | view a doctor's personal details| view a his/her personal details to contact him/her |
 | `* * *`  | clinic receptionist                        | edit a doctor's personal details| edit his/her details should it change |
 | `* * *`  | clinic receptionist                        | delete a doctor | remove entries that I no longer need |
 | `* * *`  | clinic receptionist                        | view a doctor's schedule | schedule appointments during available times                                  |
-| `* *`    | clinic receptionist with many patients to manage| sort patients by name      | locate a patient easily                                                |
-| `* *`    | clinic receptionist with many patients to manage| sort patients by risk      | locate a patient easily                                                |
-| `* *`    | clinic receptionist | add remarks for a patient     | add additional information about the patient |
-| `* *`    | clinic receptionist | edit patients by risk      | change any additional information about the patient                                             |
+| `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
+| `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
+| `* *`    | clinic receptionist with many patients to manage| sort doctors by name      | locate a doctor easily                                                |
+| `* *`    | clinic receptionist with many patients to manage| sort doctors by risk      | locate a doctor easily                                                |
+| `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
+| `* *`    | clinic receptionist | edit patients by risk     | change any additional information about the patient                                             |
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
 
@@ -304,16 +306,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  PlannerMD shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  PlannerMD deletes the person which is reflected immediately in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+  Use case ends.
+
+**Use case: Adding a risk profile tag to a patient**
+
+**MSS**
+
+1.  User requests to find a certain patient by typing his/her name in the CLI
+2.  PlannerMD shows a list of patients with that name
+3.  User requests to add a risk profile a specific person in the list
+4.  PlannerMD adds the risk profile which is reflected immediately in the list
 
     Use case ends.
 
@@ -325,9 +348,87 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Editing the risk profile tag of a patient**
+
+**MSS**
+
+1.  User requests to find a certain patient by typing his/her name in the CLI
+2.  PlannerMD shows a list of patients with that name
+3.  User requests to add a risk profile tag of a specific person in the list
+4.  PlannerMD adds the risk profile tag which is reflected immediately in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+    
+**Use case: Editing personal details of a patient**
+
+**MSS**
+
+1.  User requests to find a certain patient by typing his/her name in the CLI
+2.  PlannerMD shows a list of patients with that name
+3.  User requests to edit the personal details of a specific person in the list
+4.  PlannerMD edits the patient's personal details is be reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Scheduling an appointment**
+
+**MSS**
+
+1.  User requests to find a certain doctor by typing his/her name in the CLI
+2.  PlannerMD shows a list of doctors with that name and the corresponding appointments
+3.  User sees that doctor is available and requests to schedule the appointment
+4.  PlannerMD updates the doctor's schedule which is reflected immediately
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. PlannerMD shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. The appointment time clashes with the doctor's schedule
+
+    * 4a1. User decides to reschedule to a different time.
+    * 4a2. User requests to reschedule to a different time.
+    * 4a3. PlannerMD updates the doctor's schedule which is reflected immediately.
+
+      Use case resumes at step 2.
+    
 
 *{More to be added}*
 
