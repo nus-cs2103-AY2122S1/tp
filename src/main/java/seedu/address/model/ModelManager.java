@@ -25,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final TaskList tasks;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.tasks = new TaskList();
+        filteredTasks = new FilteredList<>(this.tasks.asUnmodifiableObservableList());
     }
 
     public ModelManager() {
@@ -128,7 +130,13 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Task> getFilteredTaskList() {
-        return tasks.asUnmodifiableObservableList();
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
     }
 
 
