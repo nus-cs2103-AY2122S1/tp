@@ -42,8 +42,8 @@ class DeleteTaskCommandTest {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(outOfBoundIndex);
         ModelStubWithOnePerson modelStub = new ModelStubWithOnePerson();
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
-                () -> deleteTaskCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, (
+        ) -> deleteTaskCommand.execute(modelStub));
     }
 
 
