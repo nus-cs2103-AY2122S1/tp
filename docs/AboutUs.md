@@ -38,15 +38,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities:  Deliverables & Deadlines, Model, DG
 
-### Jean Doe
+### Natania Yovela Purwanto
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/nataniayp.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/nataniayp)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing, Parser, Scheduling & Tracking, README
 
 ### James Doe
 
