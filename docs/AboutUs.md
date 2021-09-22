@@ -29,31 +29,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
-### Lim Zi Yang
+### Johnny Doe
 
-<img src="images/gordonlzy.png" width="200px">
+<img src="images/.png" width="200px">
 
-[[github](https://github.com/gordonlzy)] [[portfolio](team/gordonlzy.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Chong Jun Wei
+### Jean Doe
 
-<img src="images/chongjunwei.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/chongjunwei)]
-[[portfolio](team/chongjunwei.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### Rebecca Lau 
+### James Doe
 
-<img src="images/rebeccalaujx.jpg" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/rebeccalaujx)]
-[[portfolio](team/rebeccalaujx.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: UI
