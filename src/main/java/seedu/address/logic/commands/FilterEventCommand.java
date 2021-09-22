@@ -18,7 +18,8 @@ public class FilterEventCommand extends Command {
             + "on the specified date (in YYYY-MM-DD format) and optionally include time in (24hr format),"
             + " and displays them as a list with index numbers.\n"
             + "Parameters: DATE [TIME]\n"
-            + "Example: " + COMMAND_WORD + " 2021-09-20";
+            + "Example: " + COMMAND_WORD + " 2021-09-20\n"
+            + "NOTE: There must only be one spacing between DATE and TIME.";
 
     private final EventDateTimePredicate predicate;
 
