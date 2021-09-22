@@ -5,52 +5,52 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `e0560126@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Aakansha Narain
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aakansha.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Developer
 
-### Jane Doe
+### Charlton Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/charltontan.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Ethan Wong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ethanwong.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ng Jia Yuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ngjiayuan.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Developer
 
-### James Doe
+### Zachary Lau
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zacharylau.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
