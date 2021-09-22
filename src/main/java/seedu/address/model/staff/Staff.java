@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.staff;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Staff in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Staff {
 
     // Identity fields
     private final Name name;
@@ -27,7 +27,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Staff(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -62,20 +62,20 @@ public class Person {
 
     /**
      * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two staffs.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameStaff(Staff otherStaff) {
+        if (otherStaff == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherStaff != null
+                && otherStaff.getName().equals(getName());
     }
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two staffs.
      */
     @Override
     public boolean equals(Object other) {
@@ -83,16 +83,16 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Staff)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        Staff otherStaff = (Staff) other;
+        return otherStaff.getName().equals(getName())
+                && otherStaff.getPhone().equals(getPhone())
+                && otherStaff.getEmail().equals(getEmail())
+                && otherStaff.getAddress().equals(getAddress())
+                && otherStaff.getTags().equals(getTags());
     }
 
     @Override
