@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Rebecca Lau 
 
-<img src="images/rebeccalaujx.jpg" width="200px">
+<img src="images/rebeccalaujx.png" width="200px">
 
 [[github](http://github.com/rebeccalaujx)]
 [[portfolio](team/rebeccalaujx.md)]
