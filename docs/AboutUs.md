@@ -45,7 +45,7 @@ You can reach us at the email `e0560126@u.nus.edu`
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Team Lead
 * Responsibilities: Developer
 
 ### Zachary Lau
