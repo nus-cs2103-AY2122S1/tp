@@ -207,14 +207,15 @@ Format:
 `sortEvents`
 
 ### Filter Events: `filterEvents`
-Filters the list of events for events occurring on a specific date.
+Filters the list of events for events occurring on a specific date and optionally by time too.
 
 Format:
-`filterEvents DATE`
+`filterEvents DATE [TIME]`
 
 Example Usage:
 
 * `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
+* `filterEvents 2021-09-18 0900` - Filters the list of events to show only events occuring on 18th September 2021 9am.
 
 ### Show Event details: `showDetails`
 
@@ -262,9 +263,9 @@ Action | Format, Examples
 **Help** | `help`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
-**Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g. `doneEvent n/240km Marathon d/2022-08-20`
+**Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g., `doneEvent n/240km Marathon d/2022-08-20`
 **Sort Events** | `sortEvents`
-**Filter Events** | `filterEvents DATE` <br> e.g. `filterEvents 2021-09-18`
+**Filter Events** | `filterEvents DATE [TIME]` <br> e.g., `filterEvents 2021-09-18`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
-**Find Participants** | `findParticipant KEYWORD` <br> e.g. `findParticipant Mike`
+**Find Participants** | `findParticipant KEYWORD` <br> e.g., `findParticipant Mike`
