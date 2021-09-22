@@ -216,12 +216,31 @@ Example Usage:
 
 * `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
 
+### Add Participant to Event: `addParticipant`
+
+Format: 
+`addParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Adds Participant with matching participantID to Event.
+
+Example Usage: 
+
+* `addParticipant e/CS2103T Finals p/mikerowe1` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
+
+### Remove Participant from Event: `removeParticipant`
+
+Format:
+`removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Removes Participant with matching participantID from event.
+
+Example Usage:
+
+* `removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participant ID is mikerowe1 from event CS2103T Finals.
+
 ### Show Event details: `showDetails`
 
 Format:
 `showDetails EVENT_NAME` - Displays the details of the Event matching the given name.
 
 Example Usage:
+
 * `showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
 
 ### Show Event Participants: `showParticipants`
@@ -265,6 +284,8 @@ Action | Format, Examples
 **Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g. `doneEvent n/240km Marathon d/2022-08-20`
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents DATE` <br> e.g. `filterEvents 2021-09-18`
+**add Participant to Event** | `addParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant e/2103T Finals p/mikerowe1`
+**remove Participant from Event** | `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant e/CS2103T Finals p/mikerowe1`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
 **Find Participants** | `findParticipant KEYWORD` <br> e.g. `findParticipant Mike`
