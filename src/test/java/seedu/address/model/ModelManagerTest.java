@@ -94,6 +94,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getEventList().remove(0));
+    }
+
+    // TODO: Implement hasEvent tests after adding addEvent and removeEvent features.
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
