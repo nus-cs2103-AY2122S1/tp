@@ -61,15 +61,23 @@ contains the contact information and order details related to clients and partne
 
 </div>
 
-### Adding: `add`
+### Adding: `add` [coming soon]
 
-1 line intro
+Adds a new client or product to the application with an automatically generated ID.
 
 Format:
+* Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]`
+* Add a product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
 
 Notes:
+* Adds a client with name, phone number and optional email and address.
+* Adds a product with name , unit price and optional quantity.
+* The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `price`.
 
 Examples:
+* `add -c Ben -pn 98765432` adds a new `client` `Ben`, whose `phone number` is `98765432`.
+* `add -p pen -$ 10.0 -q 150` adds a new `product` `pen` with a `unit price` of `$10.0` and there are `150`
+  pens in stock.
 
 ### Editing: `edit`
 
@@ -155,7 +163,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | ...
+**Add** | Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]` <br> e.g., `add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd` <br><br> Add a product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]` <br> e.g., `add -p pen -$ 10.0 -q 120`
 **Edit** | Edit a client: `edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]`<br>`edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`.<br><br>Edit a product: `edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`<br>`edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity to `20`.
 **View** | View a client: `view -c ID` <br> `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc. <br><br> View a product: `view -p ID` <br> `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
 **List** | ...
