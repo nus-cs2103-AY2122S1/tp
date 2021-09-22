@@ -15,7 +15,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Updated the user guide to match current project [\#10](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/16)
+        * Updated the user guide to match current project [\#16](https://github.com/AY2122S1-CS2103T-T11-3/tp/pull/16)
     
 * **Community**:
 
