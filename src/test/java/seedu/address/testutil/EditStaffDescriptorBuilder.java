@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditStaffDescriptor;
 import seedu.address.model.staff.Address;
 import seedu.address.model.staff.Email;
 import seedu.address.model.staff.Name;
@@ -15,23 +15,23 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building EditPersonDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditStaffDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditStaffDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+    public EditStaffDescriptorBuilder() {
+        descriptor = new EditStaffDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditStaffDescriptorBuilder(EditStaffDescriptor descriptor) {
+        this.descriptor = new EditStaffDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
-    public EditPersonDescriptorBuilder(Staff staff) {
-        descriptor = new EditPersonDescriptor();
+    public EditStaffDescriptorBuilder(Staff staff) {
+        descriptor = new EditStaffDescriptor();
         descriptor.setName(staff.getName());
         descriptor.setPhone(staff.getPhone());
         descriptor.setEmail(staff.getEmail());
@@ -42,7 +42,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditStaffDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
@@ -50,7 +50,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
+    public EditStaffDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
         return this;
     }
@@ -58,7 +58,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
+    public EditStaffDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
         return this;
     }
@@ -66,7 +66,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
+    public EditStaffDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
         return this;
     }
@@ -75,13 +75,13 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditStaffDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditStaffDescriptor build() {
         return descriptor;
     }
 }

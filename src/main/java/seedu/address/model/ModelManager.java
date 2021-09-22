@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStaffs = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStaffs = new FilteredList<>(this.addressBook.getStaffList());
     }
 
     public ModelManager() {
@@ -96,7 +96,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteStaff(Staff target) {
-        addressBook.removePerson(target);
+        addressBook.removeStaff(target);
     }
 
     @Override

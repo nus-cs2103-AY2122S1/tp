@@ -53,7 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setStaffs(newData.getPersonList());
+        setStaffs(newData.getStaffList());
     }
 
     //// staff-level operations
@@ -89,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Staff key) {
+    public void removeStaff(Staff key) {
         staffs.remove(key);
     }
 
@@ -102,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Staff> getPersonList() {
+    public ObservableList<Staff> getStaffList() {
         return staffs.asUnmodifiableObservableList();
     }
 

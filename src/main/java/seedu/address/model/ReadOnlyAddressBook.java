@@ -9,9 +9,9 @@ import seedu.address.model.staff.Staff;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
+     * Returns an unmodifiable view of the staffs list.
      * This list will not contain any duplicate persons.
      */
-    ObservableList<Staff> getPersonList();
+    ObservableList<Staff> getStaffList();
 
 }
