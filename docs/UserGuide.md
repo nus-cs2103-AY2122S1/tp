@@ -187,7 +187,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add a Tag** | `tag id/PATIENT_INDEX t/TAG_NAME c/TAG_COLOR`<br> e.g, `tag id/1 t/Unvaccinated c/red`
-**Delete a Tag** | `tag -d id/PATIENT_INDEX [n/TAG_NAME_TO_DELETE]`<br> e.g, `tag -d id/1 t/Unvaccinated`
+**Add a Tag** | `tag id/INDEX t/TAG_NAME c/TAG_COLOR`<br> e.g, `tag id/1 t/Unvaccinated c/red`
+**Delete a Tag** | `tag -d id/INDEX [n/TAG_NAME_TO_DELETE]`<br> e.g, `tag -d id/1 t/Unvaccinated`
 **List** | `list`
 **Help** | `help`
