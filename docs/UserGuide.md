@@ -215,7 +215,7 @@ Format:
 Example Usage:
 
 * `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
-* `filterEvents 2021-09-18 0900` - Filters the list of events to show only events occuring on 18th September 2021 9am.
+* `filterEvents 2021-09-18 0900` - Filters the list of events to show only events occurring on 18th September 2021 9am.
 
 ### Show Event details: `showDetails`
 
