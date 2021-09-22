@@ -19,14 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Gabriel Au
 
-<img src="images/janedoe.png" width="200px">
+<img src="images/gabau.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/Gabau)]
+[[portfolio](team/gabau.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: UI, Code Quality, Testing and Integration
 
 ### Jonathan Tan
 
