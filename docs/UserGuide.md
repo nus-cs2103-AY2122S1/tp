@@ -149,7 +149,7 @@ Format: `delete INDEX`
 
 Examples:
 * `view` followed by `delete 2` deletes the 2nd person in the address book.
-* `search n/Betsy` followed by `delete 1` deletes the 1st person named Betsy in the results of the `find` command.
+* `search n/Anne` followed by `delete 1` deletes the 1st person named Anne in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
