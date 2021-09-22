@@ -36,6 +36,18 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Marks a task as done.
+     */
+    public void markDone(Task toMark) {
+        requireNonNull(toMark);
+        if (!internalList.contains(toMark)) {
+            throw new TaskNotFoundException();
+        }
+        int index = internalList.indexOf(toMark);
+        internalList.get(index).setIsDone(true);
+    }
+
     public ObservableList<Task> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }

@@ -71,6 +71,7 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    //======================================== TASK FUNCTIONALITIES =================================================
     /**
      * Adds the given task.
      */
@@ -99,4 +100,6 @@ public interface Model {
     void deleteTask(Task toDelete);
 
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    void markDone(Task task);
 }
