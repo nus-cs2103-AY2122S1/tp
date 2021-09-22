@@ -24,6 +24,8 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Mark an Event as done: `doneEvent`](#mark-an-event-as-done-doneevent)
     * [Sort Events: `sortEvents`](#sort-events-sortevents)
     * [Filter Events: `filterEvents`](#filter-events-filterevents)
+    * [Add Participant to Event: `addParticipant`](#add-participant-to-event-addparticipant)
+    * [Remove Participant from Event: `removeParticipant`](#remove-participant-from-event-removeparticipant)
     * [Show Event details: `showDetails`](#show-event-details-showdetails)
     * [Show Event Participants: `showParticipants`](#show-event-participants-showparticipants)
     * [Find Participant and access details: `findParticipant`](#find-participant-and-access-details-findparticipant)
