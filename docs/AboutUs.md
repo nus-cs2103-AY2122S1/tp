@@ -39,22 +39,22 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Integration
 
-### James Doe
+### Naoki Shum
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/naokishum.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/NaokiShum)]
+[[portfolio](team/naokishum.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Hongshu Wang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hongshuw.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/HongshuW)]
+[[portfolio](team/hongshuw.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
