@@ -40,10 +40,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chong Jun Wei
 
-<img src="images/junwei.png" width="200px">
+<img src="images/chongjunwei.png" width="200px">
 
 [[github](http://github.com/chongjunwei)]
-[[portfolio](team/junwei.md)]
+[[portfolio](team/chongjunwei.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
