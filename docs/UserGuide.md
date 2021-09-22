@@ -6,14 +6,14 @@ title: User Guide
 Sellah is a desktop application optimized for online sellers who prefer CLI over GUI. It is an address book that
 contains the contact information and order details related to clients and partners.
 
-* Table of Contents {:toc}
+* Table of Contents
     * [Quick Start](#quick-start)
     * [Features](#features)
-        * [Add](#adding-add)
-        * [Edit](#editing-edit)
-        * [View](#viewing-view)
-        * [Delete](#deleting-delete)
-        * [List](#listing-list)
+        * [Add (Coming Soon)](#adding-add-coming-soon)
+        * [Edit (Coming Soon)](#editing-edit-coming-soon)
+        * [View (Coming Soon)](#viewing-view-coming-soon)
+        * [Delete (Coming Soon)](#deleting-delete-coming-soon)
+        * [List (Coming Soon)](#listing-list-coming-soon)
         * [Exit](#exiting-exit)
         * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
