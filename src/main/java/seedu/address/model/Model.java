@@ -14,6 +14,7 @@ import seedu.address.model.task.Task;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -70,6 +71,7 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    //======================================== TASK FUNCTIONALITIES =================================================
     /**
      * Adds the given task.
      */
@@ -90,4 +92,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns and unmodifiable view of the filtered task list */
+    //added prior to the ui functionality actually being implemented.
+    ObservableList<Task> getFilteredTaskList();
+
+    void deleteTask(Task toDelete);
+
+    void updateFilteredTaskList(Predicate<Task> predicate);
+
+    void markDone(Task task);
 }
