@@ -292,7 +292,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | user | be able to delete contacts by groups | I don’t have to delete one by one |
 | `* *` | user | be able to add a description about a contact | I can add more details about the contact |
 | `* *` | user | be able to sort my contacts | I can see the contact in a certain order |
-| `* *` | user | to have access to a help page | I can know how to navigate the app |
+| `* *` | user | have access to a help page | I can know how to navigate the app |
 | `*` | potential user exploring the app | be able to see the app populated with sample data | I can easily see how the app works |
 | `*` | user | be able to know which contact I retrieve frequently | I know the contact is frequently contacted |
 | `*` | Long-time user | be able to know which contact I have not retrieved in a while | I know the contact might be obsolete |
