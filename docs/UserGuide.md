@@ -176,7 +176,7 @@ Creates an Event at the specified date and time.
 
 Format: `addEvent n/NAME d/DATE [t/TIME]` 
 
-Examples:
+Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
 * `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240km Marathon" on 20th August 2022.
 
@@ -186,7 +186,7 @@ Removes an Event. If there are multiple events with the same name, specify the D
 
 Format: `removeEvent n/NAME [d/DATE] [t/TIME]` 
 
-Examples:
+Example Usage:
 * `removeEvent n/CS2100 Finals d/2021-11-20  t/0900` - Removes the Event “CS2100 Finals” on 20th November 2021 9:00am.
 * `removeEvent n/240km Marathon d/2022-08-20` - Removes the Event “240km Marathon” on 20th August 2022.
 
@@ -213,7 +213,6 @@ Format:
 `filterEvents DATE`
 
 Example Usage:
-
 * `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
 
 ### Add Participant to Event: `addParticipant`
@@ -221,8 +220,7 @@ Example Usage:
 Format: 
 `addParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Adds Participant with matching participantID to Event.
 
-Example Usage: 
-
+Example Usage:
 * `addParticipant e/CS2103T Finals p/mikerowe1` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
 
 ### Remove Participant from Event: `removeParticipant`
@@ -231,7 +229,6 @@ Format:
 `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Removes Participant with matching participantID from event.
 
 Example Usage:
-
 * `removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participant ID is mikerowe1 from event CS2103T Finals.
 
 ### Show Event details: `showDetails`
@@ -240,7 +237,6 @@ Format:
 `showDetails EVENT_NAME` - Displays the details of the Event matching the given name.
 
 Example Usage:
-
 * `showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
 
 ### Show Event Participants: `showParticipants`
