@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Person;
 
 /**
@@ -58,9 +59,28 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        school.setText(person.getSchool().schName);
-        acadStream.setText(person.getAcadStream().acadStream);
-        remark.setText(person.getRemark().value);
+
+        if (person.getSchool().isEmpty()) {
+            school.setVisible(false);
+            school.setManaged(false);
+        } else {
+            school.setText(person.getSchool().schName);
+        }
+
+        if (person.getAcadStream().isEmpty()) {
+            acadStream.setVisible(false);
+            acadStream.setManaged(false);
+        } else {
+            acadStream.setText(person.getAcadStream().acadStream);
+        }
+
+        if (person.getRemark().isEmpty()) {
+            remark.setVisible(false);
+            remark.setManaged(false);
+        } else {
+            remark.setText(person.getRemark().value);
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
