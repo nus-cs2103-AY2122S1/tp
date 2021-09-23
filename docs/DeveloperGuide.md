@@ -335,6 +335,25 @@ Use case ends.
 
 Use case resumes at step 2.
 
+**Use case: F1 - Find student by name**
+
+**Actor: User (Tutor)**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  TAB shows the list of students.
+3.  User requests to find student with a specified name.
+4.  TAB shows a list of students with matching name.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
