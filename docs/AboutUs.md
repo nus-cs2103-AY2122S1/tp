@@ -36,8 +36,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/hpkoh)]
 [[portfolio](team/hpkoh.md)]
 
-* Role: Developer
-* Responsibilities: Testing
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### Jean Doe
 
