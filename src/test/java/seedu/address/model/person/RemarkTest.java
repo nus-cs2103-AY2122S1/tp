@@ -14,13 +14,13 @@ class RemarkTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidRemark_throwsIllegalArgumentException() {
         String invalidRemark = "*hello";
         assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemark));
     }
 
     @Test
-    public void isValidName() {
+    public void isValidRemark() {
         // null name
         assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 

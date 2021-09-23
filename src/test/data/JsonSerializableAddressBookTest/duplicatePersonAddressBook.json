@@ -4,6 +4,7 @@
     "gender": "FEMALE",
     "phone": "94351253",
     "email": "alice@example.com",
+    "measurement": "180_90_110_70",
     "address": "123, Jurong West Ave 6, #08-111",
     "remark": "dummy remark",
     "tagged": [ "friends" ]
@@ -12,6 +13,7 @@
     "gender": "FEMALE",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "measurement": "180_90_110_70",
     "address": "4th street",
     "remark": ""
   } ]

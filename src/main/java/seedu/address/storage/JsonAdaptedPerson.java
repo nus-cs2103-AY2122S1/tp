@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Measurement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String gender;
     private final String phone;
     private final String email;
+    private final String measurement;
     private final String address;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -40,12 +42,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("measurement") String measurement,
                              @JsonProperty("address") String address, @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
         this.email = email;
+        this.measurement = measurement;
         this.address = address;
         this.remark = remark;
         if (tagged != null) {
@@ -61,6 +65,7 @@ class JsonAdaptedPerson {
         gender = source.getGender().toString();
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        measurement = source.getMeasurement().value;
         address = source.getAddress().value;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
@@ -112,6 +117,15 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (measurement == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Measurement.class.getSimpleName()));
+        }
+        if (!Measurement.isValidMeasurement(measurement, modelGender.value)) {
+            throw new IllegalValueException(Measurement.GENERAL_MESSAGE_CONSTRAINTS);
+        }
+        final Measurement modelMeasurement = new Measurement(measurement);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -130,7 +144,8 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        return new Person(modelName, modelGender, modelPhone, modelEmail, modelMeasurement,
+                modelAddress, modelRemark, modelTags);
     }
 
 }
