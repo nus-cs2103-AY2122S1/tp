@@ -138,7 +138,7 @@ Format: `enroll INDEX s/SUBJECT g/GRADE d/DAY t/START_TIME`
 * Enroll the student identified by `INDEX` from the specific `lesson`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* `START_TIME` can only be integer hour values between 10-20, i.e. lesson can only start at 10 am to 8 pm (each lesson spanning a fixed 1 hour).
+* `START_TIME` can only start be at 9 am to 8 pm (as each lesson spans a fixed 1 hour).
 
 Examples:
 * `enroll 1 s/Science g/P5 d/Wed t/12` will enroll the student indexed `1` for a `P5` `Science` lesson at `12 pm` on `Wed`.
