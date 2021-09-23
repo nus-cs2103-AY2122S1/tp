@@ -25,7 +25,7 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final String telegramHandle;
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -34,11 +34,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegramHandle") String telegramHandle,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
+        this.telegramHandle = telegramHandle;
         this.email = email;
         this.address = address;
         if (tagged != null) {
@@ -51,7 +51,7 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        telegramHandle = source.getTelegramHandle().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
@@ -78,13 +78,13 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (telegramHandle == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TelegramHandle.class.getSimpleName()));
         }
-        if (!TelegramHandle.isValidPhone(phone)) {
+        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
             throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final TelegramHandle modelTelegramHandle = new TelegramHandle(phone);
+        final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));

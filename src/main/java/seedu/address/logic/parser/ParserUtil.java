@@ -56,10 +56,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static TelegramHandle parsePhone(String phone) throws ParseException {
+    public static TelegramHandle parseTelegramHandle(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!TelegramHandle.isValidPhone(trimmedPhone)) {
+        if (!TelegramHandle.isValidTelegramHandle(trimmedPhone)) {
             throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
         return new TelegramHandle(trimmedPhone);

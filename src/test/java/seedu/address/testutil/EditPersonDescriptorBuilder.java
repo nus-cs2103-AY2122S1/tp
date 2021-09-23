@@ -33,7 +33,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
+        descriptor.setTelegramHandle(person.getTelegramHandle());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
@@ -50,8 +50,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code TelegramHandle} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new TelegramHandle(phone));
+    public EditPersonDescriptorBuilder withTelegramHandle(String phone) {
+        descriptor.setTelegramHandle(new TelegramHandle(phone));
         return this;
     }
 

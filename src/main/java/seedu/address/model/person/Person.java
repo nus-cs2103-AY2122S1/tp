@@ -40,7 +40,7 @@ public class Person {
         return name;
     }
 
-    public TelegramHandle getPhone() {
+    public TelegramHandle getTelegramHandle() {
         return telegramHandle;
     }
 
@@ -89,7 +89,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getTelegramHandle().equals(getTelegramHandle())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags());
@@ -106,7 +106,7 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; TelegramHandle: ")
-                .append(getPhone())
+                .append(getTelegramHandle())
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
