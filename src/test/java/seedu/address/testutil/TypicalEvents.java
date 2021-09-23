@@ -20,6 +20,8 @@ public class TypicalEvents {
             new EventTime("1001"));
     public static final Event SAMPLE_EVENT_COPY_DIFFERENT_TIME = new Event(new EventName("Sleep"),
             new EventDate("2021-09-18"), new EventTime("1001"));
+    public static final Event SAMPLE_EVENT_2 = new Event(new EventName("Random Event 1"),
+            new EventDate("1-1-1"), new EventTime("0001"));
 
     private TypicalEvents() {}
 
@@ -35,6 +37,6 @@ public class TypicalEvents {
     }
 
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, ANOTHER_EVENT));
+        return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, ANOTHER_EVENT, SAMPLE_EVENT_2));
     }
 }
