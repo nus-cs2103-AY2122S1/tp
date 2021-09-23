@@ -283,16 +283,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Office` (labelled as `user`), unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a lesson**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list lessons.
+2.  System shows a list of lessons.
+3.  User requests to add a lesson with specified subject, grade, start time and price.
+4.  System adds the lesson.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Subject specified is not alphanumeric.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Grade specified is invalid.
+
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. Start time is out of specified hours.
+
+    * 3c1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3d. Price specified is 0 or negative.
+
+    * 3d1. System shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete a lesson**
+
+**MSS**
+
+1.  User requests to list lessons.
+2.  System shows a list of lessons.
+3.  User requests to delete a specific lesson in the list by its lesson code.
+4.  System deletes the lesson
 
     Use case ends.
 
@@ -302,11 +339,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given lesson code is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: View details of a lesson**
+
+**MSS**
+
+1.  User requests to list lessons.
+2.  System shows a list of lessons, with their respective details.
+
+    Use case ends.
+
+**Use case: Review commands**
+
+**MSS**
+
+1.  User selects help option.
+2.  System lists basic commands and descriptions, as well as the user guide link.
+
+    Use case ends.
 
 *{More to be added}*
 
