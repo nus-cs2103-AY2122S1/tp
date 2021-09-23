@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/ernestcuong.png" width="200px">
 
-[[github](https://https://github.com/ErnestCuong)]
+[[github](https://github.com/ErnestCuong)]
 [[portfolio](team/ernestcuong.md)]
 
 * Role: Developer
