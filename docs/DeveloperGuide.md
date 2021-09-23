@@ -281,6 +281,68 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+| User type/ role | Function | Benefit |  
+| :-- | :-- | :--
+| As a forgetful user | Track contacts | Retrieve Contact details whenever I need to contact somebody
+| Teaching Assistant | Look for contacts for all my students| Disseminate information to them
+| Loves Birthday | Birthday reminders| Won’t miss any of his/her friends’ birthdays
+| Beginner| view tutorials | to see how the app should be used
+| Teaching Assistant| View all the contacts of my students in one page| Contact them individually
+| Beginner| view helpful prompts| to see what can be done with the app
+| advanced user| can disable suggestions| I might accidentally press on it when I don't want it.
+| beginner| see sample commands| To see what I should be typing.
+| As a sociable person| Partition frequent contacts| Easy to access people within each group
+| beginner | receive feedback from the app about incorrect inputs| I can change my input easily
+| user that has used the app quite often| get suggestions on commonly run commands| don't have to keep typing the commands they use frequently.
+| Sociable person| Pin frequent contacts| Access these contacts easily
+| forgetful user| use the help button| remind myself how to use the app
+| As a sociable person| To be able to save up to 100 contacts| I can save 100 contact numbers
+| As a fast typer| Use the app with little lag| Can utilise functions of the app quickly
+| As a fast typer| Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
+| As a user| Can modify contact details| So that I can update my contact details
+| As a user| App need to be bug free| So that I can rely on the app to give me accurate contact details
+| new user| Immediately add my first contact| I don’t need to read a manual to start using the product
+| Experienced user| Quickly add contact without my mouse| i can just type
+| forgetful person| select from existing tags| i can have consistent labelling
+| TA| Generate mailing list from my contacts| Contact my students as a group
+| TA| Generate csv file of my class| Take attendance
+| TA| Generate a mail to link for my selection| So i don’t have to copy paste the students’ email
+| person?| Add new optional fields| i don't need to add blank data or weird tags for new fields
+| youth| Emojis to be supported| So i can add <3 to people i like and :poop to people i don’t
+| University student| User experience to be smooth| So they are able to find who they want to contact easily
+| User with many contacts| Show search suggestions| Easily find contacts
+| User with many contacts| Search timings to be reasonable| Do not have to wait too long for search results
+| Advanced user| Add nicknames to my contacts| Find my close friends using their nicknames
+
+
+Nice to have user stories v1.2
+
+| User type/ role | Function | Benefit |  
+|:--|:--|:--|  
+| As a user| Can modify contact details | So that I can update my contact details
+
+| As a forgetful user| Track contacts| Retrieve Contact details whenever I need to contact somebody
+| Loves Birthday | Birthday reminders| Won’t miss any of his/her friends’ birthdays
+| Beginner| view feedback on wrong commands| to format commands better
+| As a sociable person| To be able to save up to 100 contacts| I can save 100 contact numbers
+| As a fast typer| Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
+| User with many contacts| Search timings to be reasonable| Do not have to wait too long for search results
+| Advanced user| Add nicknames to my contacts| Find my close friends using their nicknames
+| As a user| App need to be bug free| So that I can rely on the app to give me accurate contact details
+
+
+Chosen user stories v1.2
+
+| User type/ role | Function | Benefit |
+|:--|:--|:--|
+| As a forgetful user| Track contacts| Retrieve Contact details whenever I need to contact somebody
+| Beginner| view feedback on wrong commands| to format commands better
+| As a sociable person| To be able to save up to 100 contacts| I can save 100 contact numbers
+| As a fast typer| Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
+| User with many contacts| Search timings to be reasonable| Do not have to wait too long for search results
+| As a user| App need to be bug free| So that I can rely on the app to give me accurate contact details
+| Loves Birthday| Track birthday| Easy way of checking the birthday of friends
+
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
