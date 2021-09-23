@@ -27,14 +27,14 @@ public class TelegramHandleTest {
         // invalid telegram handle numbers
         assertFalse(TelegramHandle.isValidTelegramHandle("")); // empty string
         assertFalse(TelegramHandle.isValidTelegramHandle(" ")); // spaces only
-        assertFalse(TelegramHandle.isValidTelegramHandle("91")); // less than 3 numbers
-        assertFalse(TelegramHandle.isValidTelegramHandle("telegramHandle")); // non-numeric
-        assertFalse(TelegramHandle.isValidTelegramHandle("9011p041")); // alphabets within digits
-        assertFalse(TelegramHandle.isValidTelegramHandle("9312 1534")); // spaces within digits
+        assertFalse(TelegramHandle.isValidTelegramHandle("pauline")); // missing @
+        assertFalse(TelegramHandle.isValidTelegramHandle("@abcd")); // less than 5 characters
+        assertFalse(TelegramHandle.isValidTelegramHandle("@Pauline")); // uppercase letters
+        assertFalse(TelegramHandle.isValidTelegramHandle("@pauline chia")); // spaces within characters
 
         // valid telegram handle numbers
-        assertTrue(TelegramHandle.isValidTelegramHandle("911")); // exactly 3 numbers
-        assertTrue(TelegramHandle.isValidTelegramHandle("93121534"));
-        assertTrue(TelegramHandle.isValidTelegramHandle("124293842033123")); // long telegram handles
+        assertTrue(TelegramHandle.isValidTelegramHandle("@abcde")); // exactly 5 characters
+        assertTrue(TelegramHandle.isValidTelegramHandle("@pauline_chia"));
+        assertTrue(TelegramHandle.isValidTelegramHandle("@abcdefg_1234567890_hijklmnop")); // long telegram handles
     }
 }

@@ -68,8 +68,8 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match telegram handle, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withTelegramHandle("12345")
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("@alice_bob", "alice@email.com", "Main", "Street"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withTelegramHandle("@alice_bob")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 }
