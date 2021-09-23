@@ -13,7 +13,10 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -24,6 +27,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+
+    // TODO: Add Lesson message usage once Eliana's part has been merged.
+    private static final String QUICK_START_INSTRUCTIONS = "💡 Quick Tips:\n"
+            + AddCommand.MESSAGE_USAGE + "\n\n"
+            + DeleteCommand.MESSAGE_USAGE + "\n\n"
+            + FindCommand.MESSAGE_USAGE;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -115,6 +124,7 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay.setFeedbackToUser(QUICK_START_INSTRUCTIONS);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
