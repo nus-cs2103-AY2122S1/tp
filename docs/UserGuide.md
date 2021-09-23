@@ -138,18 +138,25 @@ Examples:
 
 ### Deleting a resident : `delete`
 
-Make changes ->
 Deletes the specified resident from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX...`
 
 * Deletes the resident at the specified `INDEX`.
 * The index refers to the index number shown in the displayed resident list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Able to delete multiple residents at once by inputting multiple indexes, each separated by a space.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd resident in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st resident in the results of the `find` command.
+* `view` followed by `delete 2` deletes the 2nd person in the address book.
+* `view` followed by `delete 1 2 3` deletes the first 3 people in the address book.
+* `search n/Anne` followed by `delete 1` deletes the 1st person named Anne in the results of the `find` command.
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -167,6 +174,6 @@ Action | Format, Examples
 **Fet** | 
 **View** |
 **Search** |
-**Delete** | 
+**Delete** | `delete INDEX...`<br> e.g., `delete 1 2 3`
 **Help** | `help`
 **Exit** | `exit`
