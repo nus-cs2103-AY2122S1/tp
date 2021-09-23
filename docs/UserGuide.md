@@ -195,12 +195,20 @@ Action | Format, Examples
 
 <table>
     <tr>
-        <td><a href="#editing-edit-coming-soon">View</a></td>
+        <td>Action</td>
+        <td>Format, Examples</td>
+    </tr>
+    <tr>
         <td>
-            View a client: `view -c ID`<br>
-            e.g., `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc.<br><br>
-            View a product: `view -p ID`<br>
-            e.g., `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
+            <a href="#editing-edit-coming-soon">Edit</a>
+        </td>
+        <td>
+            Edit a client: `edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]`<br>
+            e.g., `edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`.<br>
+            <br>
+            Edit a product: `edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`<br>
+            e.g., `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity
+            to `20`.
         </td>
     </tr>
 </table>
