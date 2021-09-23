@@ -381,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given phone number/email/unit price/quantity is/are invalid.
+* 1a. The input parameter(s) is/are invalid.
 
     * 1a1. Sellah shows an error message.
 
@@ -390,12 +390,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The command format is incorrect.
 
     * 1b1. Sellah shows an error message.
-
-      Use case resumes at step 1.
-
-* 2a. The client/product already exits.
-
-    * 2a1. Sellah shows an error message.
 
       Use case resumes at step 1.
 
@@ -421,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. The given index/phone number/email/unit price/quantity is/are invalid.
+* 3a. The input parameter(s) is/are invalid.
 
     * 3a1. Sellah shows an error message.
 
@@ -450,9 +444,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The input ID is invalid.
 
     * 3a1. Sellah shows an error message.
+
+      Use case resumes at step 3.
+
+* 3b. The command format is incorrect.
+
+    * 3b1. Sellah shows an error message.
 
       Use case resumes at step 3.
 
