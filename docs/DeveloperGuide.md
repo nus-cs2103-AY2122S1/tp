@@ -369,13 +369,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 Add a client/product**
+**Use case: UC01 - Add a client/product**
 
 **MSS**
 
 1. User requests to add a new client/product.
 2. Sellah adds the client/product.
-3. Sellah displays success message and <ins>shows the updated list of clients/products (UC04)</ins>.
+3. Sellah displays success message and shows the updated list of clients/products.
 
    Use case ends.
 
@@ -401,14 +401,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC02 Edit a client/product**
+**Use case: UC02 - Edit a client/product**
 
 **MSS**
 
-1. User requests to list clients/products.
+1. User <ins>requests to list clients/products (UC04)</ins>.
 2. Sellah shows a list of clients/products.
 3. User requests to edit a specific client/product in the list.
 4. Sellah edits the client/product.
+5. Sellah displays success message and shows the updated list of clients/products.
 
    Use case ends.
 
@@ -432,11 +433,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: UC05 Delete a client/product**
+**Use case: UC05 - Delete a client/product**
 
 **MSS**
 
-1. User requests to list clients/products.
+1. User <ins>requests to list clients/products (UC04)</ins>.
 2. Sellah shows a list of clients/products.
 3. User requests to delete a specific client/product in the list.
 4. Sellah deletes the client/product.
