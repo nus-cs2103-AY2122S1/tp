@@ -373,11 +373,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new client/product.
-2.  Sellah adds the client/product.
-3.  Sellah displays success message and <ins>shows the updated list of clients/products (UC04)</ins>.
+1. User requests to add a new client/product.
+2. Sellah adds the client/product.
+3. Sellah displays success message and <ins>shows the updated list of clients/products (UC04)</ins>.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
