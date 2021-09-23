@@ -22,18 +22,23 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final School school;
+    private final AcadStream acadStream;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, remark, tags);
+    public Person(Name name, Phone phone, Email email, Address address, School school, AcadStream acadStream,
+                  Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, school, acadStream, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.school = school;
+        this.acadStream = acadStream;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -52,6 +57,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public AcadStream getAcadStream() {
+        return acadStream;
     }
 
     public Remark getRemark() {
@@ -98,6 +111,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getSchool().equals(getSchool())
+                && otherPerson.getAcadStream().equals(getAcadStream())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -105,7 +120,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, school, acadStream, remark, tags);
     }
 
     @Override
@@ -117,9 +132,22 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; Remark: ")
-                .append(getRemark());
+                .append(getAddress());
+
+        if (!getSchool().isEmpty()) {
+            builder.append("; School: ")
+                    .append(getSchool());
+        }
+
+        if (!getAcadStream().isEmpty()) {
+            builder.append("; Academic Stream: ")
+                    .append(getAcadStream());
+        }
+
+        if (!getRemark().isEmpty()) {
+            builder.append("; Remark: ")
+                    .append(getRemark());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

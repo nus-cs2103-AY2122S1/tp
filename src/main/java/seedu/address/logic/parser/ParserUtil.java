@@ -9,11 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -82,6 +84,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String school} into a {@code School}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code school} is invalid.
+     */
+    public static School parseSchool(String school) throws ParseException {
+        requireNonNull(school);
+        String trimmedSchName = school.trim();
+        if (!trimmedSchName.isEmpty() && !School.isValidSchName(trimmedSchName)) {
+            throw new ParseException(School.MESSAGE_CONSTRAINTS);
+        }
+        return new School(trimmedSchName);
+    }
+
+    /**
+     * Parses a {@code String acadStream} into an {@code AcadStream}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code acadStream} is invalid.
+     */
+    public static AcadStream parseAcadStream(String acadStream) throws ParseException {
+        requireNonNull(acadStream);
+        String trimmedAcadStream = acadStream.trim();
+        if (!trimmedAcadStream.isEmpty() && !AcadStream.isValidAcadStream(trimmedAcadStream)) {
+            throw new ParseException(AcadStream.MESSAGE_CONSTRAINTS);
+        }
+        return new AcadStream(trimmedAcadStream);
+    }
+
+    /**
      * Parses a {@code String remark} into an {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      */
@@ -132,4 +164,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }
