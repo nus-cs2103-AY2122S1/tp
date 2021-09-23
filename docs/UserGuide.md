@@ -3,10 +3,23 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+NUSpam is a desktop app for managing contacts **targeted at marketers who require fast manipulation and precise handling of contact data.** It enables marketers to more easily manage and make use of email and phone leads, and **minimise tedious and repetitive tasks** such as data entry, email blasts, and mail merge.
 
-* Table of Contents
-{:toc}
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [Viewing help: `help`](#viewing-help-help)
+  * [Adding a person: `add`](#adding-a-person-add)
+  * [Batch importing contacts: `import`](#batch-importing-contacts-import)
+  * [Listing all persons: `list`](#listing-all-persons-list)
+  * [Editing a person: `edit`](#editing-a-person-edit)
+  * [Locating persons by name: `find`](#locating-persons-by-name-find)
+  * [Deleting a person: `delete`](#deleting-a-person-delete)
+  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  * [Exiting the program: `exit`](#exiting-the-program-exit)
+  * [Saving the data](#saving-the-data)
+  * [Editing the data file](#editing-the-data-file)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,9 +27,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `NUSpam.jar` (Coming Soon).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your NUSpam.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,7 +39,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`-n “John Doe” -p “+659875432” -e “johnd@example.com”` : Adds a contact named `John Doe` to the Address Book.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -64,7 +77,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Displays a window containing documentation for command syntax and format.
 
@@ -88,14 +101,26 @@ Examples:
 * `add -n “John Doe” -p “+6501234567” -e “johndoe@example.com” -a “NUS School of Computing” -t “undergraduate,computer science”` adds a contact with name of `John Doe`, phone number `+6501234567`, email `johndoe@example.com`, address `NUS School of Computing`, tags `undergraduate` and `computer science`.
 * `add -n “Jane Deer” -t “woman”` adds a contact with the name of `Jane Deer` and tag of `woman`.
 
+### Batch importing contacts: `import`
 
-### Listing all persons : `list`
+Imports all contacts from a selected *csv* file. Calling the command will open a file browser to help select the file.
+
+Format: `import`
+
+Example:
+
+![import window](images/importWindow.png)
+
+* Select Contacts.csv file
+* click open to import contacts
+
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in the address book.
 
@@ -130,7 +155,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the specified person from the address book.
 
@@ -144,13 +169,13 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
