@@ -303,17 +303,17 @@ Future versions user stories
 
 | As a... | I want to... | So that I can... |
 | --- | --- | --- |
-| Beginner              | see sample commands                               | To see what I should be typing.
-| Beginner              | view tutorials                                    | To see how the app should be used
-| Beginner              | view helpful prompts                              | To see what can be done with the app
+| Beginner              | See sample commands                               | To see what I should be typing.
+| Beginner              | View tutorials                                    | To see how the app should be used
+| Beginner              | View helpful prompts                              | To see what can be done with the app
 | New user              | Immediately add my first contact                  | Use the product without reading a manual
 |  |  |  |
-| Advanced user         | can disable suggestions                           | Avoid accidentally pressing on them
-| Experienced user      | Quickly add contact without my mouse              | I can just type
-| Experienced user      | get suggestions on commonly run commands          | don't have to keep typing the commands they use frequently.
+| Advanced user         | Disable suggestions                               | Avoid accidentally pressing on them
+| Experienced user      | Qickly add contact without my mouse               | Just type
+| Experienced user      | Get suggestions on commonly run commands          | don't have to keep typing the commands they use frequently.
 |  |  |  |
-| Forgetful person      | use the help button                               | Remind myself how to use the app
-| Forgetful person      | select from existing tags                         | Have consistent labelling
+| Forgetful person      | Use the help button                               | Remind myself how to use the app
+| Forgetful person      | Select from existing tags                         | Have consistent labelling
 |  |  |  |
 | Teaching Assistant    | Look for contacts for all my students             | Disseminate information to them
 | Teaching Assistant    | View all the contacts of my students in one page  | Contact them individually
@@ -322,10 +322,10 @@ Future versions user stories
 | Teaching Assistant    | Generate a mail to link for my selection          | Send emails to a group
 |  |  |  |
 | Loves Birthdays       | Birthday reminders                                | Won’t miss any of his/her friends’ birthdays
-| As a sociable person  | Partition frequent contacts                       | Easy to access people within each group
+| Sociable person       | Partition frequent contacts                       | Easy to access people within each group
 | Sociable person       | Pin frequent contacts                             | Access these contacts easily
 |  |  |  |
-| As a fast typer       | Use the app with little lag                       | Can utilise functions of the app quickly
+| Fast typer            | Use the app with little lag                       | Can utilise functions of the app quickly
 |  |  |  |
 | Person                | Add new optional fields                           | Add my own types of data
 | Youth                 | Use Emojis                                        | Add <3 to people i like and poop to people I don’t
