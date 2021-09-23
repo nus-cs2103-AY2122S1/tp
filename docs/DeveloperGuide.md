@@ -259,7 +259,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * has a need to manage a significant number of patients
 * needs quick access to a patient's data and profile
-* needs to arrange/deconflict appoinments for doctors
+* needs to arrange/deconflict appointments for doctors
 * prefers desktop applications over other types
 * can type fast and prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
@@ -295,24 +295,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | clinic receptionist with many patients to manage| sort patients by name     | locate a patient easily                                                |
 | `* *`    | clinic receptionist with many patients to manage| sort patients by risk     | locate a patient easily                                                |
 | `* *`    | clinic receptionist with many patients to manage| sort doctors by name      | locate a doctor easily                                                |
-| `* *`    | clinic receptionist with many patients to manage| sort doctors by risk      | locate a doctor easily                                                |
 | `* *`    | clinic receptionist | add remarks for a patient | add additional information about the patient |            |
-| `* *`    | clinic receptionist | edit patients by risk     | change any additional information about the patient                                             |
-| `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* *`    | clinic receptionist | edit remarks for a patient| change any additional information about the patient                                             |
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  PlannerMD shows a list of persons
+1.  User requests to list of patients and doctors
+2.  PlannerMD shows a list of patients and doctors
 3.  User requests to delete a specific person in the list
 4.  PlannerMD deletes the person which is reflected immediately in the list
 
@@ -328,13 +326,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
   Use case ends.
 
-**Use case: Adding a risk profile tag to a patient**
+**Use case: Adding a risk profile tag to a patient (Coming soon)**
 
 **MSS**
 
 1.  User requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
-3.  User requests to add a risk profile a specific person in the list
+3.  User requests to add a risk profile to a specific person in the list
 4.  PlannerMD adds the risk profile which is reflected immediately in the list
 
     Use case ends.
@@ -351,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Editing the risk profile tag of a patient**
+**Use case: Editing the risk profile tag of a patient (Coming soon)**
 
 **MSS**
 
@@ -374,14 +372,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
     
-**Use case: Editing personal details of a patient**
+**Use case: Editing personal details of a patient (Coming soon)**
 
 **MSS**
 
 1.  User requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
 3.  User requests to edit the personal details of a specific person in the list
-4.  PlannerMD edits the patient's personal details is be reflected immediately
+4.  PlannerMD edits the patient's personal details which is reflected immediately
 
     Use case ends.
 
@@ -397,7 +395,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Scheduling an appointment**
+**Use case: Scheduling an appointment (Coming soon)**
 
 **MSS**
 
@@ -428,9 +426,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
     
-
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
