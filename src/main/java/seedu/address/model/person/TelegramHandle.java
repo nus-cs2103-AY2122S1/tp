@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Person's telegram handle in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegramHandle(String)}
  */
 public class TelegramHandle {
@@ -18,16 +18,16 @@ public class TelegramHandle {
     /**
      * Constructs a {@code TelegramHandle}.
      *
-     * @param phone A valid phone number.
+     * @param telegramHandle A valid telegram handle.
      */
-    public TelegramHandle(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidTelegramHandle(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+    public TelegramHandle(String telegramHandle) {
+        requireNonNull(telegramHandle);
+        checkArgument(isValidTelegramHandle(telegramHandle), MESSAGE_CONSTRAINTS);
+        value = telegramHandle;
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid telegram handle.
      */
     public static boolean isValidTelegramHandle(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -51,18 +51,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code TelegramHandle}.
+     * Parses a {@code String telegramHandle} into a {@code TelegramHandle}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code telegramHandle} is invalid.
      */
-    public static TelegramHandle parseTelegramHandle(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!TelegramHandle.isValidTelegramHandle(trimmedPhone)) {
+    public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
+        requireNonNull(telegramHandle);
+        String trimmedTelegramHandle = telegramHandle.trim();
+        if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
             throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        return new TelegramHandle(trimmedPhone);
+        return new TelegramHandle(trimmedTelegramHandle);
     }
 
     /**
