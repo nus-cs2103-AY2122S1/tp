@@ -335,6 +335,26 @@ Use case ends.
 
 Use case resumes at step 2.
 
+
+**Use case: F2 - Filter students by tags**
+
+**Actor: User (Tutor)**
+
+**MSS**
+
+1.  User request to view all tags.
+2.  TAB shows a list of created tags.
+3.  User requests to filter students by a few specified tags.
+4.  TAB shows a list of students matching the specified tags.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no tags.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
