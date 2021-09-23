@@ -31,6 +31,7 @@ public class Lesson {
     public final LocalDate date;
     public final LocalTime startTime;
     public final LocalTime endTime;
+    public final double price;
     public final List<Person> students;
     // todo consider if students should be a hashset if ordering doesn't matter
     // todo consider if education level should be a field here as well
@@ -43,8 +44,8 @@ public class Lesson {
      * @param startTime A valid start time.
      * @param endTime A valid end time.
      */
-    public Lesson(String subject, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        requireAllNonNull(subject, date, startTime, endTime);
+    public Lesson(String subject, LocalDate date, LocalTime startTime, LocalTime endTime, double price) {
+        requireAllNonNull(subject, date, startTime, endTime, price);
 
         checkArgument(isValidLessonName(subject), SUBJECT_MESSAGE_CONSTRAINTS);
         checkArgument(isTimeInValidRange(startTime, endTime), TIME_RANGE_MESSAGE_CONSTRAINTS);
@@ -54,6 +55,7 @@ public class Lesson {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.price = price;
         this.students = new ArrayList<>();
     }
 
