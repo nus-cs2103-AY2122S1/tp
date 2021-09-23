@@ -21,6 +21,6 @@
 
 For a more detailed documentation of this project, please visit our [Product Website](https://ay2122s1-cs2103t-w12-4.github.io/tp/UserGuide)!
 
-#### Ui Mockup
+#### Ui Mockup for ModuLink
 
 ![Ui Mockup](docs/images/Ui.png)
