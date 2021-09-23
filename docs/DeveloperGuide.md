@@ -303,15 +303,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list of patients and doctors
+1.  Receptionist requests to list of patients and doctors
 2.  PlannerMD shows a list of patients and doctors
-3.  User requests to delete a specific person in the list
+3.  Receptionist requests to delete a specific person in the list
 4.  PlannerMD deletes the person which is reflected immediately in the list
 
     Use case ends.
@@ -330,9 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find a certain patient by typing his/her name in the CLI
+1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
-3.  User requests to add a risk profile to a specific person in the list
+3.  Receptionist requests to add a risk profile to a specific person in the list
 4.  PlannerMD adds the risk profile which is reflected immediately in the list
 
     Use case ends.
@@ -353,9 +353,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find a certain patient by typing his/her name in the CLI
+1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
-3.  User requests to add a risk profile tag of a specific person in the list
+3.  Receptionist requests to add a risk profile tag of a specific person in the list
 4.  PlannerMD adds the risk profile tag which is reflected immediately in the list
 
     Use case ends.
@@ -376,9 +376,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find a certain patient by typing his/her name in the CLI
+1.  Receptionist requests to find a certain patient by typing his/her name in the CLI
 2.  PlannerMD shows a list of patients with that name
-3.  User requests to edit the personal details of a specific person in the list
+3.  Receptionist requests to edit the personal details of a specific person in the list
 4.  PlannerMD edits the patient's personal details which is reflected immediately
 
     Use case ends.
@@ -399,9 +399,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find a certain doctor by typing his/her name in the CLI
+1.  Receptionist requests to find a certain doctor by typing his/her name in the CLI
 2.  PlannerMD shows a list of doctors with that name and the corresponding appointments
-3.  User sees that doctor is available and requests to schedule the appointment
+3.  Receptionist sees that doctor is available and requests to schedule the appointment
 4.  PlannerMD updates the doctor's schedule which is reflected immediately
 
     Use case ends.
@@ -420,8 +420,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4a. The appointment time clashes with the doctor's schedule
 
-    * 4a1. User decides to reschedule to a different time.
-    * 4a2. User requests to reschedule to a different time.
+    * 4a1. Receptionist decides to reschedule to a different time.
+    * 4a2. Receptionist requests to reschedule to a different time.
     * 4a3. PlannerMD updates the doctor's schedule which is reflected immediately.
 
       Use case ends.
