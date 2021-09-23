@@ -17,7 +17,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Delivarables
 ### Charlton Tan
 
-<img src="images/charltontanator.png" width="200px">
+<img src="images/charltonator.png" width="200px">
 
 [[github](http://github.com/charltonator)]
 
