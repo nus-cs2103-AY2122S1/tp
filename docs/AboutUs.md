@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Ngu Yi Yang
 
 <img src="images/johndoe.png" width="200px">
 
@@ -17,19 +17,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Team Lead + Integration
 
-### Jane Doe
+### Rushil Ramesh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rushilramesh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/rushilramesh)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Testing + Model
 
-### Johnny Doe
+### Gabriel Waikin Loh Matienzo
 
 <img src="images/johndoe.png" width="200px">
 
@@ -38,7 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Zhou Yirui
 
 <img src="images/johndoe.png" width="200px">
 
@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Vishnu Sundaresan
 
 <img src="images/johndoe.png" width="200px">
 
