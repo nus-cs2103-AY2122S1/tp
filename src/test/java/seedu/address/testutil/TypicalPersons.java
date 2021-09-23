@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ACAD_STREAM_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ACAD_STREAM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -10,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -62,10 +66,13 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRemark(VALID_REMARK_AMY)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withSchool(VALID_SCHOOL_AMY).withAcadStream(VALID_ACAD_STREAM_AMY).withRemark(VALID_REMARK_AMY)
             .withTags(VALID_TAG_FRIEND).build();
+
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRemark(VALID_REMARK_BOB)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withSchool(VALID_SCHOOL_BOB).withAcadStream(VALID_ACAD_STREAM_BOB).withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

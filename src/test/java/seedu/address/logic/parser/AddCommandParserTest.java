@@ -101,7 +101,8 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + REMARK_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+                + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + REMARK_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -109,8 +110,16 @@ public class AddCommandParserTest {
         // zero tags and no remarks
         Person expectedPerson = new PersonBuilder(AMY).withRemark().withTags().build();
         assertParseSuccess(parser,
-                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
+                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + SCHOOL_DESC_AMY + ACAD_STREAM_DESC_AMY,
                 new AddCommand(expectedPerson));
+
+        // no school and no acad stream
+        Person expectedPerson2 = new PersonBuilder(AMY).withSchool().withAcadStream().build();
+        assertParseSuccess(parser,
+                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + REMARK_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson2));
     }
 
     @Test

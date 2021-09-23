@@ -23,8 +23,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_SCHOOL = "ACSI";
-    public static final String DEFAULT_ACAD_STREAM = "IB";
+    public static final String DEFAULT_SCHOOL = "";
+    public static final String DEFAULT_ACAD_STREAM = "";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
@@ -113,10 +113,26 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code School} of the {@code Person} that we are building as blank.
+     */
+    public PersonBuilder withSchool() {
+        this.school = new School(DEFAULT_SCHOOL);
+        return this;
+    }
+
+    /**
      * Sets the {@code AcadStream} of the {@code Person} that we are building.
      */
     public PersonBuilder withAcadStream(String acadStream) {
         this.acadStream = new AcadStream(acadStream);
+        return this;
+    }
+
+    /**
+     * Sets the {@code AcadStream} of the {@code Person} that we are building as blank.
+     */
+    public PersonBuilder withAcadStream() {
+        this.acadStream = new AcadStream(DEFAULT_ACAD_STREAM);
         return this;
     }
 
@@ -135,6 +151,7 @@ public class PersonBuilder {
         this.remark = new Remark(DEFAULT_REMARK);
         return this;
     }
+
     public Person build() {
         return new Person(name, phone, email, address, school, acadStream, remark, tags);
     }
