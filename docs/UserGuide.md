@@ -192,3 +192,15 @@ Action | Format, Examples
 **List** | List all clients: `list -c` <br> List all products: `list -p`
 **Delete** | Delete a client: `delete -c ID` <br> e.g., `delete -c 20` Deletes all the details of the client with `ID` of `20` including name, address, etc. <br><br> Delete a product: `delete -p ID` <br> e.g., `delete -p 5` Deletes all the details of the product with `ID` of `5` including name, price, etc.
 **Exit** | `exit`
+
+<table>
+    <tr>
+        <td><a href="#editing-edit-coming-soon">View</a></td>
+        <td>
+            View a client: `view -c ID`<br>
+            e.g., `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc.<br><br>
+            View a product: `view -p ID`<br>
+            e.g., `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
+        </td>
+    </tr>
+</table>
