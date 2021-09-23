@@ -77,12 +77,12 @@ Format: `help`
 
 ### Adding a patient: `add`
 
-Adds a person to the address book.
+Adds a patient to the patient records.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A patient can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -97,16 +97,16 @@ Format: `list`
 
 ### Editing a patient's information : `edit`
 
-Edits an existing patient in the address book.
+Edits an existing patient in the patient records.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient’s tags by typing `t/` without
   specifying any tags after it.
 
 Examples:
@@ -139,7 +139,7 @@ Deletes a patient from the patient records using their unique ID.
 
 Format: `delete id/ID`
 
-* Deletes the person with the specified `ID`.
+* Deletes the patient with the specified `ID`.
 
 Examples:
 * `delete id/42` deletes patient with id 42
@@ -153,8 +153,8 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd patient in the patient records.
+* `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 ---
 
