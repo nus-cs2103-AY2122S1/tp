@@ -369,19 +369,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 Add a client/product**
+**Use case: UC01 - Add a client/product**
 
 **MSS**
 
-1.  User requests to add a new client/product.
-2.  Sellah adds the client/product.
-3.  Sellah displays success message and <ins>shows the updated list of clients/products (UC04)</ins>.
+1. User requests to add a new client/product.
+2. Sellah adds the client/product.
+3. Sellah displays success message and shows the updated list of clients/products.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The given phone number/email/unit price/quantity are invalid.
+* 1a. The input parameter(s) is/are invalid.
 
     * 1a1. Sellah shows an error message.
 
@@ -393,23 +393,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 2a. The client/product already exits.
-
-    * 2a1. Sellah shows an error message.
-
-      Use case resumes at step 1.
-
   Use case ends.
 
-**Use case: UC02 Edit a client/product**
+**Use case: UC02 - Edit a client/product**
 
 **MSS**
 
-1. User requests to list clients/products.
+1. User <ins>requests to list clients/products (UC04)</ins>.
 2. Sellah shows a list of clients/products.
 3. User requests to edit a specific client/product in the list.
-4. User enters the new data.
-5. Sellah edits the client/product.
+4. Sellah edits the client/product.
+5. Sellah displays success message and shows the updated list of clients/products.
 
    Use case ends.
 
@@ -417,28 +411,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    * 2a1. Sellah shows an error message.
 
-* 3a. The given index is invalid.
+      Use case ends.
+
+* 3a. The input parameter(s) is/are invalid.
 
     * 3a1. Sellah shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 4a. Sellah detects an error in the entered data.
+* 3b. The command format is incorrect.
 
-    * 4a1. Sellah shows an error message.
-    * 4a2. Sellah requests for the correct data.
-    * 4a3. User enters new data.
+    * 3b1. Sellah shows an error message.
 
-      Steps 4a1-4a3 are repeated until the data entered are correct.<br>
-      Use case resumes at step 5.
+      Use case resumes at step 3.
 
-**Use case: UC05 Delete a client/product**
+**Use case: UC05 - Delete a client/product**
 
 **MSS**
 
-1. User requests to list clients/products.
+1. User <ins>requests to list clients/products (UC04)</ins>.
 2. Sellah shows a list of clients/products.
 3. User requests to delete a specific client/product in the list.
 4. Sellah deletes the client/product.
@@ -451,11 +444,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The input ID is invalid.
 
     * 3a1. Sellah shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
+
+* 3b. The command format is incorrect.
+
+    * 3b1. Sellah shows an error message.
+
+      Use case resumes at step 3.
 
 *{More to be added}*
 
