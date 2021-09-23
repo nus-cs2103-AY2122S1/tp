@@ -262,7 +262,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * has a need to track the compulsory modules they are required to take
 * has a need to track their current CAP
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: keeps track of the number of MCs completed and how many left to complete for the whole course
+of study, which is a feature lacking in current tools.
 
 
 ### User stories
