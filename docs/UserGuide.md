@@ -80,16 +80,16 @@ Format: `help`
 
 Adds a student to the TuitiONE.
 
-Format: `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS e/EDUCATION_LEVEL [t/TAG]…​`
+Format: `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS g/GRADE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-EDUCATION_LEVEL here can only be in a range of P1-P6 (primary school levels) or S1-S5 (secondary school levels).
+GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S5 (secondary school levels).
 A student can have any number of tags (including 0).
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01 e/P2`
-* `add n/Betsy Crowe a/Newgate Prison p/1234567 e/S4`
+* `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/P2`
+* `add n/Betsy Crowe a/Newgate Prison p/1234567 g/S4`
 
 ### Listing all persons: `list`
 
@@ -133,27 +133,28 @@ Examples:
 
 Enroll a student from a given TuitiONE lesson.
 
-Format: `enroll INDEX l/LESSON`
+Format: `enroll INDEX s/SUBJECT g/GRADE d/DAY t/START_TIME`
 
 * Enroll the student identified by `INDEX` from the specific `lesson`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* `START_TIME` can only be integer hour values between 10-20, i.e. lesson can only start at 10 am to 8 pm (each lesson spanning a fixed 1 hour).
 
 Examples:
-* `enroll 1 l/cs2103T` will unenroll the student indexed 1 from lesson "cs2103T"
+* `enroll 1 s/Science g/P5 d/Wed t/12` will enroll the student indexed `1` for a `P5` `Science` lesson at `12 pm` on `Wed`.
 
 ### Unenrolling a student from lesson: `unenroll`
 
 Unenroll a student from a given TuitiONE lesson.
 
-Format: `unenroll INDEX l/LESSON`
+Format: `unenroll INDEX c/LESSON_CODE`
 
-* Unenroll the student identified by `INDEX` from the specific `lesson`.
+* Unenroll the student identified by `INDEX` from the specific `lesson` using its `lesson code`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unenroll 1 l/cs2103T` will unenroll the student indexed 1 from lesson "cs2103T"
+* `unenroll 1 l/Science-P5-Wed-12` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 12 pm`.
 
 ### Clearing all entries : `clear`
 
