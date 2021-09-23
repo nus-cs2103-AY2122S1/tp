@@ -192,3 +192,23 @@ Action | Format, Examples
 **List** | List all clients: `list -c` <br> List all products: `list -p`
 **Delete** | Delete a client: `delete -c ID` <br> e.g., `delete -c 20` Deletes all the details of the client with `ID` of `20` including name, address, etc. <br><br> Delete a product: `delete -p ID` <br> e.g., `delete -p 5` Deletes all the details of the product with `ID` of `5` including name, price, etc.
 **Exit** | `exit`
+
+<table>
+    <tr>
+        <th>Action</th>
+        <th>Format, Examples</th>
+    </tr>
+    <tr>
+        <td>
+            <a href="#editing-edit-coming-soon">Edit</a>
+        </td>
+        <td>
+            Edit a client: `edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]`<br>
+            e.g., `edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`.<br>
+            <br>
+            Edit a product: `edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`<br>
+            e.g., `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity
+            to `20`.
+        </td>
+    </tr>
+</table>
