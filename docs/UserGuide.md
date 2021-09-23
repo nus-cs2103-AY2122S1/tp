@@ -100,10 +100,15 @@ Adds a person to the address book.
 #### Format: 
 * `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 Format birthday as ddMMyyyy
 </div>
 
@@ -248,7 +253,9 @@ CONNECTIONS data are saved in the hard disk automatically after any command that
 
 CONNECTIONS data are saved as a JSON file `[JAR file location]/data/connections.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, CONNECTIONS will discard all data and start with an empty data file at the next run.
 </div>
 
