@@ -187,11 +187,11 @@ If your changes to the data file makes its format invalid, TuitiONE will discard
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS e/EDUCATION_LEVEL [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 e/P2`
+**Add** | `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS g/GRADE [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/P2`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Enroll** | `enroll INDEX l/LESSON`<br> e.g. `enroll 1 l/cs2103T`
-**Unenroll** | `unenroll 1 l/cs2103T`<br> e.g. `unenroll 1 l/cs2103T`
+**Enroll** | `enroll INDEX s/SUBJECT g/GRADE d/DAY t/START_TIME`<br> e.g. `enroll 1 s/Science g/P5 d/Wed t/1230`
+**Unenroll** | `unenroll INDEX c/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
