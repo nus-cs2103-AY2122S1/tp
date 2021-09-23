@@ -124,23 +124,41 @@ Examples:
 
 ### Deleting: `delete` [coming soon]
 
-1 line intro
+Deletes the specified client/product from the tracker.
 
 Format:
 
+* Delete a client: `delete -c ID`
+* Delete a product: `delete -p ID`
+
 Notes:
 
+* Deletes the client/product based on the client/product’s ID.
+* The ID refers to the id shown in the displayed client/product list.
+* If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
+
 Examples:
+
+* `delete -c 135` deletes the client with id 135 in the tracker.
+* `delete -p 197` deletes the product with id 197 in the tracker.
 
 ### Listing: `list` [coming soon]
 
-1 line intro
+Shows a list of all clients/products in the application
 
 Format:
 
+* List clients: `list -c`
+* List products: `list -p`
+
 Notes:
 
+* Shows a list of clients and products if -c/-p is not specified.
+
 Examples:
+
+* `list -c` Shows a list of all clients in the application
+* `list -p` Shows a list of all products in the application
 
 ### Exiting: `exit`
 
@@ -171,6 +189,6 @@ Action | Format, Examples
 **Add** | Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]` <br> e.g., `add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd` <br><br> Add a product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]` <br> e.g., `add -p pen -$ 10.0 -q 120`
 **Edit** | Edit a client: `edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]` <br> e.g., `edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`. <br><br> Edit a product: `edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]` <br> e.g., `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity to `20`.
 **View** | View a client: `view -c ID` <br> e.g., `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc. <br><br> View a product: `view -p ID` <br> e.g., `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
-**List** | ...
-**Delete** | ...
+**List** | List all clients: `list -c` <br> List all products: `list -p`
+**Delete** | Delete a client: `delete -c ID` <br> e.g., `delete -c 20` Deletes all the details of the client with `ID` of `20` including name, address, etc. <br><br> Delete a product: `delete -p ID` <br> e.g., `delete -p 5` Deletes all the details of the product with `ID` of `5` including name, price, etc.
 **Exit** | `exit`
