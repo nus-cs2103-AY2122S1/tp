@@ -200,6 +200,17 @@ Action | Format, Examples
     </tr>
     <tr>
         <td>
+            <a href="#adding-add-coming-soon">Add</a>
+        </td>
+        <td>
+            Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]` <br> 
+            e.g., `add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd` <br><br> 
+            Add a product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]` <br> 
+            e.g., `add -p pen -$ 10.0 -q 120`
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#editing-edit-coming-soon">Edit</a>
         </td>
         <td>
