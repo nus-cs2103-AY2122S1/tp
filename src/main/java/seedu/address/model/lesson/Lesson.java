@@ -24,6 +24,7 @@ public class Lesson {
     public static final String SUBJECT_MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric";
     public static final String TIME_RANGE_MESSAGE_CONSTRAINTS = "Timings should be between 9 am to 9 pm";
     public static final String START_AND_END_TIME_MESSAGE_CONSTRAINTS = "Start time should be before end time";
+    public static final String PRICE_MESSAGE_CONSTRAINT = "Price cannot be 0 or negative";
 
     public static final LocalTime BOUNDED_START_TIME = LocalTime.of(9, 0).minusMinutes(1); // 8:59 am
     public static final LocalTime BOUNDED_END_TIME = LocalTime.of(9 + 12, 0).plusMinutes(1); // 9:01 pm
@@ -51,6 +52,7 @@ public class Lesson {
         checkArgument(isValidLessonName(subject), SUBJECT_MESSAGE_CONSTRAINTS);
         checkArgument(isTimeInValidRange(startTime, endTime), TIME_RANGE_MESSAGE_CONSTRAINTS);
         checkArgument(hasStartBeforeEndTime(startTime, endTime), START_AND_END_TIME_MESSAGE_CONSTRAINTS);
+        checkArgument(isPricePositive(price), PRICE_MESSAGE_CONSTRAINT);
 
         this.subject = subject;
         this.date = date;
@@ -107,6 +109,13 @@ public class Lesson {
      */
     public static boolean hasStartBeforeEndTime(LocalTime testStart, LocalTime testEnd) {
         return (testStart.isBefore(testEnd));
+    }
+
+    /**
+     * Returns true if a given price is more than 0.
+     */
+    public static boolean isPricePositive(double testPrice) {
+        return (testPrice > 0.0);
     }
 
     /**
