@@ -5,14 +5,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.person.Person;
 
 /**
- * Represents a Lesson in the address book.
+ * Represents a Lesson in the tuitiONE book.
  * Guarantees: immutable; subject is valid as declared in {@link #isValidLessonName(String)},
  * start and end times are valid as declared in {@link #isTimeInValidRange(LocalTime, LocalTime)}
  * and {@link #hasStartBeforeEndTime(LocalTime, LocalTime)}
@@ -27,12 +28,12 @@ public class Lesson {
     public static final LocalTime BOUNDED_START_TIME = LocalTime.of(9, 0).minusMinutes(1); // 8:59 am
     public static final LocalTime BOUNDED_END_TIME = LocalTime.of(9 + 12, 0).plusMinutes(1); // 9:01 pm
 
-    public final String subject;
-    public final LocalDate date;
-    public final LocalTime startTime;
-    public final LocalTime endTime;
-    public final double price;
-    public final List<Person> students;
+    private final String subject;
+    private final LocalDate date;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
+    private final double price;
+    private final Set<Person> students;
     // todo consider if students should be a hashset if ordering doesn't matter
     // todo consider if education level should be a field here as well
 
@@ -56,7 +57,35 @@ public class Lesson {
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
-        this.students = new ArrayList<>();
+        this.students = new HashSet<>();
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * Returns an immutable student set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Person> getStudents() {
+        return Collections.unmodifiableSet(students);
     }
 
     /**
@@ -111,12 +140,14 @@ public class Lesson {
         return subject.equals(otherLesson.subject)
                 && date.equals(otherLesson.date)
                 && startTime.equals(otherLesson.startTime)
-                && endTime.equals(otherLesson.endTime); // todo consider if students list should be in this
+                && endTime.equals(otherLesson.endTime)
+                && (price == otherLesson.price); // todo consider if students list should be in this
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(subject, date, startTime, endTime); // todo consider if students list should be in this
+        // todo consider if students list should be in this
+        return Objects.hash(subject, date, startTime, endTime, price);
     }
 
     /**
