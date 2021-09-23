@@ -73,8 +73,9 @@ Format:
 Notes:
 
 * Adds a client with name, phone number and optional email and address.
-* Adds a product with name , unit price and optional quantity.
+* Adds a product with name, unit price and optional quantity.
 * The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `price`.
+* The user will be informed if the client/product to be added already exits.
 
 Examples:
 
