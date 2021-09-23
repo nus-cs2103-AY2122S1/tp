@@ -195,8 +195,8 @@ Action | Format, Examples
 
 <table>
     <tr>
-        <td>Action</td>
-        <td>Format, Examples</td>
+        <th>Action</th>
+        <th>Format, Examples</th>
     </tr>
     <tr>
         <td>
