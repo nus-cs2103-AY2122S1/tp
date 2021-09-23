@@ -12,6 +12,15 @@ public class TrieNode {
     private final String value;
     private boolean isWord;
 
+    private TrieNode(Character character, String previousValue, boolean isWord) {
+        if (character != null) {
+            this.value = previousValue + character;
+        } else {
+            this.value = previousValue;
+        }
+        this.isWord = isWord;
+    }
+
     protected static void setup() {
         ORDER.add(' ');
         for (char c = '0'; c <= '9'; c++) {
@@ -23,15 +32,6 @@ public class TrieNode {
         for (char c = 'A'; c <= 'Z'; c++) {
             ORDER.add(c);
         }
-    }
-
-    private TrieNode(Character character, String previousValue, boolean isWord) {
-        if (character != null) {
-            this.value = previousValue + character;
-        } else {
-            this.value = previousValue;
-        }
-        this.isWord = isWord;
     }
 
     protected static TrieNode create() {

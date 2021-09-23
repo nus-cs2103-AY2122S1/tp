@@ -9,11 +9,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class Trie {
     private static final String NO_VALUE_MESSAGE_FORMAT = "Message %s is not stored in this Trie!";
+    private static final Logger logger = LogsCenter.getLogger(Trie.class);
 
     private final Map<String, Integer> messageCounts = new HashMap<>();
     private final TrieNode root = TrieNode.create();
-
-    private static final Logger logger = LogsCenter.getLogger(Trie.class);
 
     /**
      * Sets up TrieNode class with the proper ordering for checking for children.
