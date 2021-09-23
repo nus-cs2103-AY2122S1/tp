@@ -138,10 +138,11 @@ Format: `enroll INDEX s/SUBJECT g/GRADE d/DAY t/START_TIME`
 * Enroll the student identified by `INDEX` from the specific `lesson`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* `START_TIME` can only start be at 9 am to 8 pm (as each lesson spans a fixed 1 hour).
+* Lessons are only held between 9 am to 9 pm. Hence, `START_TIME` can only be between 9 am to 8 pm (as each lesson spans an hour).
+* `START_TIME` can only be in 24 hour formatting, e.g. `1230` represents `1230 pm`.
 
 Examples:
-* `enroll 1 s/Science g/P5 d/Wed t/12` will enroll the student indexed `1` for a `P5` `Science` lesson at `12 pm` on `Wed`.
+* `enroll 1 s/Science g/P5 d/Wed t/1230` will enroll the student indexed `1` for a `P5` `Science` lesson at `12:30 pm` on `Wed`.
 
 ### Unenrolling a student from lesson: `unenroll`
 
@@ -154,7 +155,7 @@ Format: `unenroll INDEX c/LESSON_CODE`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `unenroll 1 l/Science-P5-Wed-12` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 12 pm`.
+* `unenroll 1 l/Science-P5-Wed-1230` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 12:30 pm`.
 
 ### Clearing all entries : `clear`
 
