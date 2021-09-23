@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TelegramHandle {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "TelegramHandle numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Telegram handles should start with an @, followed by lowercase letters, numbers or underscores. "
+                    + "Minimum length is 5.";
+    public static final String VALIDATION_REGEX = "@[[a-z][0-9]_]{5,}";
     public final String value;
 
     /**
