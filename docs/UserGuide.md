@@ -94,6 +94,7 @@ Format: `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--
 ### Adding a person: `add`
 
 Adds a person to the address book.
+
 Format: `add (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`
 - At least the name field must be provided.
 
