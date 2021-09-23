@@ -102,4 +102,5 @@ public class HelpWindow extends UiPart<Stage> {
             e.printStackTrace();
         }
     }
+
 }
