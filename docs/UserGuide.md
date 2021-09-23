@@ -76,7 +76,7 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-#### Format: 
+#### Format:
 * `help` - List out all available commands
 * `help COMMAND` - Shows help message for the command
 * `help d/` - Opens link to documentation
@@ -88,7 +88,7 @@ Shows a message explaining how to access the help page.
 **Sample Outcome:**
 
 ```
-add: Adds a person to the address book. 
+add: Adds a person to the address book.
 Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...
 Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
 ```
@@ -97,7 +97,7 @@ Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #0
 
 Adds a person to the address book.
 
-#### Format: 
+#### Format:
 * `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">
@@ -141,7 +141,7 @@ Notes:
 **Sample Usage:**
 * `edit 1 p/91234567 e/johndoe@example.com`
   * Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` 
+* `edit 2 n/Betsy Crower t/`
   * Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Adding Tags : `tag`
@@ -217,7 +217,7 @@ Notes:
 
 Deletes the specified person from the address book.
 
-#### Format: 
+#### Format:
 * `delete INDEX`
 
 Notes:
