@@ -1,6 +1,6 @@
-# PlannerMd User Guide
+# PlannerMD User Guide
 
-PlannerMd is a command-line application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requuirements of each patient into a single application. PlannerMd expedites the manual processes found in a clinic and saves clinice receptionists plenty of time while also reducing human error.
+PlannerMD is a command-line application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -13,9 +13,9 @@ PlannerMd is a command-line application that helps clinic receptionists seamless
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `plannerMd.jar` from [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/releases).
+1. Download the latest `plannermd.jar` from [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for plannerMd.
+1. Copy the file to the folder you want to use as the _home folder_ for plannerMD.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
