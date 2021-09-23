@@ -381,7 +381,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given phone number/email/unit price/quantity are invalid.
+* 1a. The given phone number/email/unit price/quantity is/are invalid.
 
     * 1a1. Sellah shows an error message.
 
@@ -408,8 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list clients/products.
 2. Sellah shows a list of clients/products.
 3. User requests to edit a specific client/product in the list.
-4. User enters the new data.
-5. Sellah edits the client/product.
+4. Sellah edits the client/product.
 
    Use case ends.
 
@@ -417,22 +416,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    * 2a1. Sellah shows an error message.
 
-* 3a. The given index is invalid.
+      Use case ends.
+
+* 3a. The given index/phone number/email/unit price/quantity is/are invalid.
 
     * 3a1. Sellah shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-* 4a. Sellah detects an error in the entered data.
+* 3b. The command format is incorrect.
 
-    * 4a1. Sellah shows an error message.
-    * 4a2. Sellah requests for the correct data.
-    * 4a3. User enters new data.
+    * 3b1. Sellah shows an error message.
 
-      Steps 4a1-4a3 are repeated until the data entered are correct.<br>
-      Use case resumes at step 5.
+      Use case resumes at step 3.
 
 **Use case: UC05 Delete a client/product**
 
@@ -455,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. Sellah shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 *{More to be added}*
 
