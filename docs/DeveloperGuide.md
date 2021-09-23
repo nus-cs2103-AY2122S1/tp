@@ -369,14 +369,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Sellah` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Edit a client/product**
+
+**MSS**
+
+1. User requests to list clients/products.
+2. Sellah shows a list of clients/products.
+3. User requests to edit a specific client/product in the list.
+4. User enters the new data.
+5. Sellah edits the client/product.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Sellah shows an error message.
+
+      Use case resumes at step 2.
+
+* 4a. Sellah detects an error in the entered data.
+
+    * 4a1. Sellah shows an error message.
+    * 4a2. Sellah requests for the correct data.
+    * 4a3. User enters new data.
+
+      Steps 4a1-4a3 are repeated until the data entered are correct.<br>
+      Use case resumes at step 5.
+
 **Use case: Delete a client/product**
 
 **MSS**
 
-1. User requests to list clients/products
-2. Sellah shows a list of clients/products
-3. User requests to delete a specific client/products in the list
-4. Sellah deletes the client/products
+1. User requests to list clients/products.
+2. Sellah shows a list of clients/products.
+3. User requests to delete a specific client/product in the list.
+4. Sellah deletes the client/product.
 
    Use case ends.
 
