@@ -391,6 +391,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Add student's grade for an assessment**
+
+**MSS**
+
+1. User enters a command to add the grade for an assessment to a student.
+2. AcademyDirectory checks for existing instance of the assessment.
+3. AcademyDirectory records the input grade for the assessment.
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. The student's name does not match any of the names in the directory.
+
+    * 1a1. AcademyDirectory shows an error message.
+
+      Use case resumes at step 1.
+  
+* 1b. The input grade is not a positive integer.
+
+    * 1b1. AcademyDirectory requests for user to enter a positive integer.
+
+      Use case resumes at step 1.
+
+* 2a. The assessment already exists.
+
+    * 2a1. AcademyDirectory edits the grade for the existing assessment.
+
+      Use case ends.
+
+* 2b. The assessment is new.
+
+    * 2b1. AcademyDirectory adds a new assessment with the input grade.
+
+      Use case ends.
+
+**Use case: Display grades for an assessment**
+
+**MSS**
+
+1. User enters a command to display the grades for an assessment.
+2. AcademyDirectory parses through the students to obtain the grades.
+3. AcademyDirectory displays a list of students with the grades.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The assessment does not exist.
+
+    * 1a1. AcademyDirectory shows an error message.
+    * 1a2. AcademyDirectory requests for the user to try another assessment.
+
+      Use case resumes at step 1.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
