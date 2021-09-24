@@ -145,8 +145,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM] [v/VACCINATION_
 * Edits the resident at the specified `INDEX`. The index refers to the index number shown in the displayed resident list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the resident will be removed i.e adding of tags is not cumulative.
-* You can remove all the resident’s tags by typing `t/` without specifying any tags after it.
+* When editing CCAs, the existing CCAs of the resident will be removed i.e adding of CCAs is not cumulative.
+* You can remove all the resident’s CCAs by typing `c/` without specifying any CCAs after it.
 * Able to edit multiple residents at once by inputting multiple indexes, each separated by a space.
 
 Examples:
