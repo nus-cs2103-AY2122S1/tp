@@ -29,7 +29,7 @@ public class SampleDataUtil {
 
     public static final HashSet<Lesson> EMPTY_LESSON_SET = new HashSet<>();
     public static final Remark EMPTY_REMARK = new Remark("");
-    
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),

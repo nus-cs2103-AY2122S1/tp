@@ -131,7 +131,7 @@ public class PersonBuilder {
         this.remark = new Remark(DEFAULT_REMARK);
         return this;
     }
-  
+
     public Person build() {
         return new Person(name, phone, email, address, remark, tags, lessons);
     }

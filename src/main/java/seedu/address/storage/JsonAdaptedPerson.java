@@ -119,7 +119,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-      
+
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
@@ -128,7 +128,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Set<Lesson> modelLessons = new HashSet<>(personLessons);
-      
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags, modelLessons);
     }
 
