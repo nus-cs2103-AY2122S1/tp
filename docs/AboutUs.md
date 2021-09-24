@@ -18,15 +18,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: In charge of Model
 
-### Jane Doe
+### Lee Zhi Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leezhixuan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/leezhixuan)]
+[[portfolio](team/leezhixuan.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: In charge of Logic
 
 ### Johnny Doe
 
