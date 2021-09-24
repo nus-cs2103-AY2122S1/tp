@@ -136,6 +136,24 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
+### Editing a person : `edit`
+
+Edits an existing resident in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM] [v/VACCINATION_STATUS] [f/FACULTY] [c/CCA]…​`
+
+* Edits the resident at the specified `INDEX`. The index refers to the index number shown in the displayed resident list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the resident will be removed i.e adding of tags is not cumulative.
+* You can remove all the resident’s tags by typing `t/` without specifying any tags after it.
+* Able to edit multiple residents at once by inputting multiple indexes, each separated by a space.
+
+Examples:
+*  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st person to be `johndoe@example.com` and `A101` respectively.
+*  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing CCAs.
+*  `edit 1 2 3 v/true` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated.
+
 ### Deleting a resident : `delete`
 
 Deletes the specified resident from the address book.
