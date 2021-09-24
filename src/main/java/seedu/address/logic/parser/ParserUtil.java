@@ -123,10 +123,18 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String meetingDateTime} into a {@code Appointment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
     public static Appointment parseAppointment(String meetingDateTime) throws ParseException {
-        if (!Appointment.isValidMeetingTime(meetingDateTime)) {
+        requireNonNull(meetingDateTime);
+        String trimmedDateTime = meetingDateTime.trim();
+        if (!Appointment.isValidMeetingTime(trimmedDateTime)) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
         }
-        return new Appointment(meetingDateTime);
+        return new Appointment(trimmedDateTime);
     }
 }

@@ -1,8 +1,5 @@
 package seedu.address.model.appointment;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Phone;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,10 +10,12 @@ import java.time.format.DateTimeParseException;
  */
 public class Appointment {
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting should be in the following format: dd-MMM-yyyy HH:mm where only first alphabet of the month is capitalised.";
-    public final LocalDateTime appointment;
+            "Meeting should be in the following format: dd-MMM-yyyy HH:mm "
+                    + "where only first alphabet of the month is capitalised.";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd-MMM-yyyy HH:mm"); // Specific format as described in argument.
+
+    public final LocalDateTime appointment;
 
     /**
      * Creates an appointment that describes
@@ -24,7 +23,7 @@ public class Appointment {
      * @param dateTimeString the string representation of the desired appointment.
      */
     public Appointment(String dateTimeString) {
-        if(dateTimeString == null || dateTimeString.equals("")) {
+        if (dateTimeString == null || dateTimeString.equals("")) {
             this.appointment = null;
         } else {
             this.appointment = Appointment.parseString(dateTimeString);
@@ -46,6 +45,12 @@ public class Appointment {
                     && appointment.equals(((Appointment) other).appointment)); // state check
     }
 
+    /**
+     * Checks whether the string that is supposed to represent a meeting timing is valid.
+     *
+     * @param meetingDateTime the string to check.
+     * @return true if string is parsable, empty or null.
+     */
     public static boolean isValidMeetingTime(String meetingDateTime) {
         if (meetingDateTime == null || meetingDateTime.equals("")) {
             return true;
@@ -60,23 +65,14 @@ public class Appointment {
     }
 
     /**
-     * Parses and converts the dateTimeString to LocalDateTime object
+     * Parses and converts the dateTimeString to LocalDateTime object.
      *
-     * @param dateTimeString provided by the user
-     * @return DateTime object representing the date and time of the appointment
+     * @param dateTimeString provided by the user.
+     * @return DateTime object representing the date and time of the appointment.
      */
-    private static LocalDateTime parseString(String dateTimeString){
+    private static LocalDateTime parseString(String dateTimeString) {
         assert(dateTimeString != null);
         return LocalDateTime.parse(dateTimeString, FORMATTER);
-    }
-
-    /**
-     * Check whether this appointment object represents a real appointment.
-     *
-     * @return boolean on whether there is a date time in this appointment.
-     */
-    public boolean exists() {
-        return this.appointment != null;
     }
 
     public String getValue() {
