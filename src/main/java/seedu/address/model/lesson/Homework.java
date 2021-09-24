@@ -39,7 +39,7 @@ public class Homework {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.lesson.Homework // instanceof handles nulls
+                || (other instanceof Homework // instanceof handles nulls
                 && description.equals(((Homework) other).description)); // state check
     }
 

@@ -35,6 +35,8 @@ public class Subject {
      * Returns true if a given string is a valid subject.
      *
      * @param test The string to be tested.
+     *
+     * @return true if test is a valid subject
      */
     public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -48,7 +50,7 @@ public class Subject {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.lesson.Subject // instanceof handles nulls
+                || (other instanceof Subject // instanceof handles nulls
                 && subject.equals(((Subject) other).subject)); // state check
     }
 

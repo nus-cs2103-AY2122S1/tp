@@ -64,6 +64,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Lesson> getLessons() {
         return Collections.unmodifiableSet(lessons);
     }

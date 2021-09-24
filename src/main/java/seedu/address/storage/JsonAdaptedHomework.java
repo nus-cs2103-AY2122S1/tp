@@ -34,9 +34,9 @@ class JsonAdaptedHomework {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Homework} object.
+     * Converts this Jackson-friendly adapted homework object into the model's {@code Homework} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted homework.
      */
     public Homework toModelType() throws IllegalValueException {
         if (!Homework.isValidDescription(description)) {

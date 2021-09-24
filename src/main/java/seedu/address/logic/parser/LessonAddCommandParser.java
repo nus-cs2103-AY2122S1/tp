@@ -26,10 +26,13 @@ import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
 
+/**
+ * Parses input arguments and creates a new LessonAddCommand object.
+ */
 public class LessonAddCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the LessonAddCommand
+     * and returns a LessonAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public LessonAddCommand parse(String args) throws ParseException {
@@ -81,9 +84,9 @@ public class LessonAddCommandParser {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> homework} into a {@code Set<Homework>} if {@code homework} is non-empty.
+     * If {@code homework} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Homework>} containing zero homework.
      */
     private Optional<Set<Homework>> parseHomeworkForEdit(Collection<String> homework) throws ParseException {
         assert homework != null;

@@ -59,7 +59,9 @@ public class RecurringLesson extends Lesson {
     private RecurringLesson updateRecurringLessonCount() {
         // Compare lesson date to current date
         // Increment count if date has passed
-        if (getDate().getLocalDate().compareTo(LocalDate.now()) > 0) {
+        LocalDate lessonDate = getDate().getLocalDate();
+        boolean isLessonEarlierThanCurrentDate = lessonDate.compareTo(LocalDate.now()) > 0;
+        if (isLessonEarlierThanCurrentDate) {
             return this;
         }
         recurringLessonsCount++;

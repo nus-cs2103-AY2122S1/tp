@@ -38,6 +38,7 @@ public class Time {
      * Returns if a given string is a valid time.
      *
      * @param test The string to be tested.
+     * @return True is test is valid.
      */
     public static boolean isValidTime(String test) {
         boolean isValid = true;
@@ -67,8 +68,8 @@ public class Time {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.lesson.Time // instanceof handles nulls
-                && value.equals(((seedu.address.model.lesson.Time) other).value)); // state check
+                || (other instanceof Time // instanceof handles nulls
+                && value.equals(((Time) other).value)); // state check
     }
 
     @Override

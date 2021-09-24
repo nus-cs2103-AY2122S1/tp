@@ -108,7 +108,8 @@ public abstract class Lesson {
                 && otherLesson.getStartTime().equals(getStartTime())
                 && otherLesson.getEndTime().equals(getEndTime())
                 && otherLesson.getSubject().equals(getSubject())
-                && otherLesson.getHomework().equals(getHomework());
+                && otherLesson.getHomework().equals(getHomework())
+                && otherLesson.isRecurring() == isRecurring();
     }
 
     @Override
