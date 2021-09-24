@@ -3,6 +3,8 @@
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T09-3/tp/branch/master/graph/badge.svg?token=ROK6R0FQXN)](https://codecov.io/gh/AY2122S1-CS2103T-T09-3/tp)
 ---
 
+![Ui](docs/images/Ui.png)
+
 ## What is CSBook?
 **CSBook is a desktop application for CS Teaching Assistants to manage their students' details.**
 
