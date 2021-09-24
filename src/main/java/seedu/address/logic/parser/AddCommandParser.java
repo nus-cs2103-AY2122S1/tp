@@ -45,17 +45,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        School school = ParserUtil.parseSchool(argMultimap.getValue(PREFIX_SCHOOL).orElse(""));
-
-        AcadStream acadStream = ParserUtil.parseAcadStream(argMultimap.getValue(PREFIX_ACAD_STREAM).orElse(""));
-
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
-        
-
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        School school = ParserUtil.parseSchool(argMultimap.getValue(PREFIX_SCHOOL).orElse(""));
+        AcadStream acadStream = ParserUtil.parseAcadStream(argMultimap.getValue(PREFIX_ACAD_STREAM).orElse(""));
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, school, acadStream, remark, tagList);

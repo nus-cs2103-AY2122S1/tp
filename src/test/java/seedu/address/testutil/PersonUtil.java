@@ -54,8 +54,8 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getSchool().ifPresent(school -> sb.append(PREFIX_SCHOOL).append(school.schName).append(" "));
-        descriptor.getAcadStream().ifPresent(
-                acadStream -> sb.append(PREFIX_ACAD_STREAM).append(acadStream.acadStream).append(" "));
+        descriptor.getAcadStream().ifPresent(acadStream ->
+                sb.append(PREFIX_ACAD_STREAM).append(acadStream.acadStream).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
