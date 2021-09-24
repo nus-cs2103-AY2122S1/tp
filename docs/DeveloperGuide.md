@@ -258,28 +258,35 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
-* prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* is an Avenger for CS1101S (a tutor in CS1101S is known as an Avenger)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+Currently, Avengers are able to utilise Source Academy as a platform to aid in their students'
+learning. However, there is no proper feature that allows Avengers to
+maintain a nominal roll for their class, or to track their students' performance.
+
+Academy Directory is designed to fill that gap! It is specifically tailored to help Avengers
+better manage their students. The app provides ease of communication, and allows Avengers to
+track their students' performance, in terms of attendance, participation and assessments.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                | I want to …​                                                    | So that I can…​                                                     |
+| -------- | --------------------------| ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | CS1101S Avenger           | add, delete and edit student's information                         | update my class list                                                   |
+| `* * *`  | CS1101S Avenger           | retrieve specific details of a student                             | view and analyse the data                                              |
+| `* * *`  | CS1101S Avenger           | keep track of my students' tutorial performance                    | accurately reward class participation marks                            |
+| `* * *`  | CS1101S Avenger           | record my students' assessment results                             | monitor my students' progress and provide timely assistance to them    |
+| `* * *`  | first time user           | access the relevant commands with a "help" command                 | learn how to use the app more easily                                   |
+| `* *`    | CS1101S Avenger           | view the average scores of my students for specific assessments    | focus on the aspects to improve on during tutorial                     |
+| `* *`    | CS1101S Avenger           | add tags to certain students to take note of their weaker topics   | focus on topics that they are struggling with                          |
+| `* `     | experienced user          | make custom commands                                               | I can issue my commonly used commands faster                           |
 
 ### Use cases
 
