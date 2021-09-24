@@ -382,7 +382,7 @@ Use case ends.
 * 1b. User just wants to add a new tag to the contact and change nothing else
     * 1b1. User inputs just the tag, and the index of the contact.<br />
     Use case resumes at step 4.
-      
+
 
 * 1c. User gives insufficient details for contact creation
     * 1c1. contHACKS shows an error message<br />
