@@ -70,6 +70,24 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLessons() {
+        this.lessons = SampleDataUtil.getSampleLessons();
+        return this;
+    }
+
+    /**
+     * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
+     */
+    public PersonBuilder withSampleLesson() {
+        Set<Lesson> lessonSetWithOneLesson = new HashSet<>();
+        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
+        this.lessons = lessonSetWithOneLesson;
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {

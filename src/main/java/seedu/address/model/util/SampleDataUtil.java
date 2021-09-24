@@ -7,7 +7,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.MakeUpLesson;
+import seedu.address.model.lesson.RecurringLesson;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -44,6 +50,23 @@ public class SampleDataUtil {
         };
     }
 
+    public static Set<Lesson> getSampleLessons() {
+        Set<Lesson> sampleLessons = new HashSet<>();
+        sampleLessons.add(new RecurringLesson(new Date("14 Jan 2022"), new Time("14:30"), new Time("15:30"),
+                new Subject("Math"), getSampleHomeworkSet()));
+        sampleLessons.add(new MakeUpLesson(new Date("24 Mar 2022"), new Time("12:30"), new Time("14:00"),
+                new Subject("Science"), getSampleHomeworkSet()));
+        sampleLessons.add(new RecurringLesson(new Date("09 Feb 2022"), new Time("17:30"), new Time("19:30"),
+                new Subject("GP"), getSampleHomeworkSet()));
+
+        return sampleLessons;
+    }
+
+    public static Lesson getSampleLesson() {
+        return new RecurringLesson(new Date("14 Jan 2022"), new Time("14:30"), new Time("15:30"),
+                new Subject("Math"), getSampleHomeworkSet());
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -59,6 +82,17 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a sample homework set.
+     */
+    public static Set<Homework> getSampleHomeworkSet() {
+        HashSet<Homework> hw = new HashSet<>();
+        hw.add(new Homework("TYS Page 20"));
+        hw.add(new Homework("Onsponge textbook"));
+        hw.add(new Homework("Tutorial 12"));
+        return hw;
     }
 
 }

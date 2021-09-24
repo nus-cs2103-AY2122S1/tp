@@ -46,12 +46,13 @@ public class LessonAddCommand extends Command {
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists for this person.";
 
     private final Index index;
     private final Lesson toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Lesson}
+     * Creates a LessonAddCommand to add the specified {@code Lesson}
      */
     public LessonAddCommand(Index index, Lesson lesson) {
         requireNonNull(lesson);
@@ -92,6 +93,10 @@ public class LessonAddCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (personToEdit.getLessons().stream().anyMatch(lesson -> lesson.equals(toAdd))) {
+            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
