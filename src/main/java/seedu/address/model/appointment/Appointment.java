@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Appointment {
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting should be in the following format: dd-MMM-yyyy hh:mm";
-    private final LocalDateTime appointment;
+    public final LocalDateTime appointment;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd-MMM-yyyy hh:mm"); // Specific format as described in argument.
 
@@ -33,6 +33,9 @@ public class Appointment {
 
     @Override
     public String toString() {
+        if (appointment == null) {
+            return "";
+        }
         return appointment.toString();
     }
 
@@ -70,6 +73,10 @@ public class Appointment {
      */
     public boolean exists() {
         return this.appointment != null;
+    }
+
+    public String getValue() {
+        return this.appointment.format(FORMATTER);
     }
 
 }
