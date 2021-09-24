@@ -257,7 +257,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* NUS students
+* NUS CS students
 * has a need to manage their Modular Credits(MCs)
 * has a need to track the compulsory modules they are required to take
 * has a need to track their current CAP
@@ -270,45 +270,44 @@ of study, which is a feature lacking in current tools.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                              | So that I can…​                                                     |
-| -------- | ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | see usage instructions                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | NUS student                                | add the compulsory core modules for my major | keep track of the required module courses                              |
-| `* * *`  | NUS student                                | view the modules I'm currently taking        |                                                                        |
-| `* * *`  | NUS student                                | delete modules                               | remove module entries that I no longer need                            |
-| `* * *`  | NUS student                                | edit the module details                      | modify information for any module entry                                |
-| `* *`    | NUS student                                | add GE modules                               | keep track of General Education(GE) Modules                            |
-| `* *`    | NUS student                                | add Focus Area / Specialisation modules      | keep track of modules in my focus area                                 |
-| `* *`    | NUS student                                | add UE modules                               | keep track of Unrestricted Elective(UE) Modules                        |
-| `* * *`  | NUS student                                | view the modules I have taken                               | keep track of the modules taken in the past             |
-| `* * *`  | NUS student                                | view the modules I'm planning to take in the future         | have ideas about my future module plan                  |
-| `* * *`  | NUS student                                | view the number of MCs I'm currently taking                 | keep track of my degree progress                        |
-| `* * *`  | NUS student                                | view the number of MCs I have taken                         | keep track of my degree progress                        |
-| `* * *`  | NUS student                                | view the number of MCs left to take before graduating       | keep track of my degree progress                        |
-| `* *`    | NUS student                                | add internship semester                      | take note of my internship period                                      |
-| `* * *`  | NUS student                                | keep track of my CAP                         | monitor my learning in NUS                                             |
-| `* *`    | NUS student                                | see on which module I can exercise S/U option| decide how to use my S/Us better                                       |
-| `* *`    | NUS student                                | see how many S/U credits I have left         | have a better understanding of S/U credit usage                        |
-| `* *`    | NUS student                                | view my grade for modules I have taken       | keep track of my grades                                                |
-| `* *`    | NUS student                                | see the marking scheme for each module       | have a full understanding of each module                               |
-| `* * *`  | NUS student                                | mark a module I have taken as done           | only choose the modules I haven’t taken                                |
-| `* *`    | NUS student                                | add ‘DIY’ courses                            | keep track of my DYOM mods                                             |
-| `* *`    | parent of a NUS student                    | understand what my child is doing            | call them only when they are free                                      |
-| `* *`    | NUS student who are preparing their resumes| view which modules to put on my resume       | prepare for job applications                                           |
-| `* *`    | NUS student who needs module help          | see the contact information of professors for the module    | easily reach professors when needed.                    |
-| `* * *`  | NUS student who want to find a specific mod| search for a module by keywords/codes        | search for specific module entries easily                              |
-| `* * *`  | NUS student who is looking for a specific kind of modules    | categorise my modules           | search for a specific type of modules easily                      |
-| `* * *`  | NUS student who is looking for a specific kind of modules    | view the modules according to year/semester           | find specific modules easily                |
-| `* * *`  | NUS student who is making a module plan     | specify modules to take in each semester     | make a plan in advance                                                |
-| `* *`    | NUS student who is making a module plan | change the colour scheme of each module      |  easily differentiate between different modules                           |
-| `* * *`  | NUS student who is making a module plan       | find free time slots in our schedule         | add other modules in my free time slots                             |
-| `* * *`  | NUS student who is looking for modules            | sort the modules according to the level (1k/2k/3k…)            |   know the workload difficulty of the modules |
-| `* *`    | NUS student who have difficulties seeing text in default font style/size    | change the font style/size | be more comfortable for me to use                       |
-| `* *`    | clueless NUS student                                | see the recommended schedule for my major                            | make a better plan according to the suggestion                      |
-| `* * *`  | first time user                            | see some sample module plans when I open the app                      | easily try out its features without needing to add my data first            |
-| `* * *`  | first time user                            | see user guide       | get familiar with the software |
-| `*`      | forgetful NUS student                                | get notified when it's time for class   | attend the classes in time         |
-| `*`      | forgetful NUS student                                | get notified when exam dates approaching    | keep track of them             |
+| Priority | As a …​                                                   | I want to …​                                         | So that I can…​                                                     |
+| -------- | ------------------------------------------------------------ | ------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user                                                         | see usage instructions                                  | refer to instructions when I forget how to use the App                 |
+| `* * *`  | CS student                                                   | view the compulsory core modules for my major           | keep track of the required module courses
+| `* * *`  | CS student                                                   | mark the module as done/selected for current sem        | 
+| `* * *`  | CS student                                                   | view the modules I'm currently taking                   | 
+| `* * *`  | CS student                                                   | delete modules                                          | remove module entries that I no longer need
+| `* * *`  | CS student                                                   | edit the module details                                 | modify information for any module entry
+| `* * *`  | CS student                                                   | add new modules                                         | keep track of my modules(such as GE/UE/Focus Area)
+| `* * *`  | CS student                                                   | view the modules I have taken                           | keep track of the modules that I have taken
+| `* * *`  | CS student                                                   | view the modules I plan to take in the future           | Be able to plan which modules im taking in advance
+| `* * *`  | CS student                                                   | keep track of my CAP                                    | monitor my learning in NUS
+| `* * *`  | CS student                                                   | mark a module I have taken as done                      | only choose the modules I haven’t taken
+| `* * *`  | CS student who want to find a specific mod                   | search for a module by keywords/codes                   | search for specific module entries easily
+| `* * *`  | CS student who is looking for a specific kind of modules     | categorise my modules                                   | search for a specific type of modules easily
+| `* * *`  | CS student who is looking for a specific kind of modules     | view the modules according to year/semester             | find specific modules easily
+| `* * *`  | CS student who is making a module plan                       | change the colour scheme of each module                 | easily differentiate between different modules
+| `* * *`  | CS student who is making a module plan                       | find free time slots in our schedule                    | add other modules in my free time slots
+| `* * *`  | CS student who is looking for modules                        | sort the modules according to the level (1k/2k/3k…)     | know the workload difficulty of the modules
+| `* * *`  | first time user                                              | see some sample module plans when I open the app        | easily try out its features
+| `* *  `  | CS student                                                   | tag modules according to type                           | Specify the type of the module (such as GE/UE/Focus Area)
+| `* *  `  | CS student                                                   | view the number of MCs I have taken                     | keep track of my degree’s MC requirement progress
+| `* *  `  | CS student                                                   | view the number of MCs left to take before graduating   | keep track of my degree progress
+| `* *  `  | CS student                                                   | add internship semester                                 | take note of my internship period
+| `* *  `  | CS student                                                   | see on which module I can exercise S/U option           | decide how to use my S/Us better
+| `* *  `  | CS student                                                   | see how many S/U credits I have left                    | have a better understanding of S/U credit usage
+| `* *  `  | CS student                                                   | view my grade for modules I have taken                  | keep track of my grades
+| `* *  `  | CS student                                                   | see the marking scheme for cs modules                   | have a full understanding of the module
+| `* *  `  | CS student                                                   | add ‘DIY’ courses                                       | keep track of my DYOM mods
+| `* *  `  | CS student who is preparing their resume                     | view which modules to put on my resume                  | prepare for job applications
+| `* *  `  | CS student who needs module help                             | see the contact information of professors for the module| easily reach professors when needed
+| `* *  `  | CS student who is making a module plan                       | specify modules to take in each semester                | make a plan in advance
+| `* *  `  | CS student who does not like the default font style/size     | change the font style/size                              | be more comfortable for them to use
+| `* *  `  | clueless CS student                                          | see the recommended schedule for my major               | make a better plan according to the suggestion
+| `*    `  | forgetful CS student                                         | get notified when it's time for class                   | attend the classes on time
+| `*    `  | forgetful CS student                                         | get notified when exam dates approaching                | keep track of them
+
+
 
 *{More to be added}*
 
