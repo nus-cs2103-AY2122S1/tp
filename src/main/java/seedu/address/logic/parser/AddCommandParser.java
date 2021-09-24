@@ -40,23 +40,16 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_REMARK , PREFIX_TAG);
 
-        // !arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-        //                || !argMultimap.getPreamble().isEmpty()
-        if (areArgAbsent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        School school = areArgAbsent(argMultimap, PREFIX_SCHOOL)
-                ? new School("")
-                : ParserUtil.parseSchool(argMultimap.getValue(PREFIX_SCHOOL).get());
+        School school = ParserUtil.parseSchool(argMultimap.getValue(PREFIX_SCHOOL).orElse(""));
 
-        AcadStream acadStream = areArgAbsent(argMultimap, PREFIX_ACAD_STREAM)
-                ? new AcadStream("")
-                : ParserUtil.parseAcadStream(argMultimap.getValue(PREFIX_ACAD_STREAM).get());
+        AcadStream acadStream = ParserUtil.parseAcadStream(argMultimap.getValue(PREFIX_ACAD_STREAM).orElse(""));
 
-        Remark remark = areArgAbsent(argMultimap, PREFIX_REMARK)
-                ? new Remark("")
-                : ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -68,11 +61,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person person = new Person(name, phone, email, address, school, acadStream, remark, tagList);
 
         return new AddCommand(person);
-    }
-
-    private boolean areArgAbsent(ArgumentMultimap argMultimap, Prefix... prefixes) {
-        return !arePrefixesPresent(argMultimap, prefixes)
-                || !argMultimap.getPreamble().isEmpty();
     }
 
     /**
