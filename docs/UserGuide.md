@@ -3,14 +3,14 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Staff’d helps F&B managers manage details and schedules of their staff. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick start - `to ammend`
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -63,6 +63,40 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+## Basic management of Staff Details
+
+### View a staff
+
+View the staff details of a single staff.
+
+Example:  
+`view n/Candice`  
+`view id/12345678`
+
+### Adding a staff - `add`
+
+Adds a staff to the stored information. The tags and information are optional and can be presented in any order. 
+Upon creation of a staff, the system creates a staff ID for them which can be used to refer to them and access the system.
+
+Format:  
+`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/Tag`
+
+Example:  
+`add n/Joe s/fulltime r/manager p/98765432 e/Joe@example.com a/John street, block 123, #01-01`  
+`add n/Candice s/parttime p/91234567 e/candice@example.com a/Newgate Prison`
+
+### Tag legend - `todo: standardize tags for all commands`
+
+|Tag|Description|
+|---|-----------|
+|n/|Name of Staff|
+|s/|Status (as a full-time/part-time worker)|
+|r/|Role (e.g. Cook, Staff Management)|
+|e/|Email|
+|a/|Address of Staff|
+
+
 
 ### Viewing help : `help`
 

@@ -100,16 +100,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
+    public void addPerson(Person staff) {
+        addressBook.addPerson(staff);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPerson(Person target, Person editedStaff) {
+        requireAllNonNull(target, editedStaff);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setPerson(target, editedStaff);
     }
 
     //=========== Filtered Person List Accessors =============================================================

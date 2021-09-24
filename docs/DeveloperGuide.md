@@ -334,16 +334,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+Performance requirements:
+
+ 1. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+ 1. The number of time periods for each person can go up to 50 without a noticeable sluggishness in performance.
+ 1. The project should respond within 2 seconds.
+
+Technical requirements:
+
+ 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+ 1. The system should work on both 32-bit and 64-bit environments.
+
+Constraints:
+
+ 1. System should be compatible with the saved data from previous versions.
+ 1. The size of the release binary should not exceed 100mb.
+ 1. The system does not require the internet to use.
+
+Business rules:
+
+ 1. The status of an employee only has two.
+ 1. The role of an employee is only active during the scheduled time period.
+
+Quality requirements:
+
+ 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+ 1. The system can be used for basic function without reading the user guide.
+    
+Project scope:
+
+ 1. Does not handle printing of output to paper.
+ 1. Does not send out emails.
+ 1. Does not provide graphical representation of statistics.
 
 *{More to be added}*
 
 ### Glossary
 
+[uml-user-guide]: ## "The Unified Modeling Language User Guide, 2e, G Booch, J Rumbaugh, and I Jacobson"
+
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Java**: A high level, classed based, object-oriented programming language. 
+  Java `11` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java11).
+* **Gradle**: Gradle is a build automation tool for multi-language software development. Installation [here](https://gradle.org/install/).
+* **Time Period**: A time period in the staff's schedule.
+* **Status**: The working status of the staff. i.e. A part-timer or a full-timer.  
+* **Schedule**: The staffs work schedule with a description of the work carried out.
+* **id**: The identification number assigned to the staff by the management.  
+* **Role**: The role of the staff. i.e. Cook, Staff management
+* **Address**: The address of the staff.
+* **Constraints**: The constraints the project is working with.
+* **MSS**: Main success scenario
+* **Non-Functional Requirements**: Requirements specifying the constraints under which 
+  the system is developed and operated.
+* **User**: For the project purposes, the user is specified to be a manager at a F&B outlet.
+* **UI**: The user interface of the application.
+* **Model**: The model that is used by the programme to represent the data.
+* **logic**: The logic used to dictate the behavior of the model.
+* **parser**: The interpreter of the user input.
+* **commons**: Commonly used data structures. 
+* **storage**: The part of the programme which handles the writing to disk of the data in the programme.
+* **index**: The current person on the list of staff that can be viewed.
+* **Use cases**: A use case describes an interaction between the user and the system for a specific functionality of the system. [uml-user-guide][uml-user-guide]
+* **User stories**: User story: User stories are short, simple descriptions of a feature told from the perspective of the person who desires the new capability, usually a user or customer of the system. [Mike Cohn](https://www.mountaingoatsoftware.com/agile/user-stories)
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
