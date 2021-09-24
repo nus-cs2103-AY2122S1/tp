@@ -58,11 +58,12 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .sorted(Comparator.comparing(tag -> tag.tagName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getLessons().stream()
-                .forEach(lesson -> lessons.getChildren()
-                        .add(new Label("\n" + lesson.toString())));
+            .sorted(Comparator.comparing(lesson -> lesson.getDate().getLocalDate()))
+            .forEach(lesson -> lessons.getChildren()
+                .add(new Label("\n" + lesson.toString())));
     }
 
     @Override
