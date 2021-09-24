@@ -10,6 +10,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
 - [**Features**](#features)
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a Participant: `add`](#adding-a-participant-add)
+    * [Listing all Participants: `list`](#listing-all-participants--list)
     * [Editing a Participant: `edit`](#editing-a-participant--edit)
     * [Locating Participants by name: `find`](#locating-participants-by-name-find)
     * [Deleting a Participant: `delete`](#deleting-a-participant--delete)
