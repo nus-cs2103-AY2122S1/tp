@@ -226,6 +226,18 @@ Action | Format, Examples
     </tr>
     <tr>
         <td>
+            <a href="#listing-list-coming-soon">List</a>
+        </td>
+        <td>
+            List all client: <code>list -c</code><br>
+            e.g., <code>list -c</code> Lists all the clients in the application.<br>
+            <br>
+            List all product: <code>list -p</code><br>
+            e.g., <code>list -p</code> Lists all the products in the application.
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#editing-delete-coming-soon">Delete</a>
         </td>
         <td>
