@@ -26,7 +26,7 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 
    * **`view`** : Lists all contacts.
 
-   * **`add`**`n/John Doe r/E401 v/true f/SoC` : Adds a resident named `John Doe` to the application.
+   * **`add`**`n/John Doe r/A100 v/true f/SoC` : Adds a resident named `John Doe` to the application.
 
    * **`delete`**`3` : Deletes the 3rd resident shown in the current list.
 
@@ -49,7 +49,7 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
   e.g `view [INDEX]` can be used as `view` or as `view 100.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[c/CCA]…​` can be used as ` ` (i.e. 0 times), `c/Volleyball`, `c/Frisbee c/Hockey` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME f/FACULTY`, `f/FACULTY n/NAME` is also acceptable.
@@ -74,18 +74,17 @@ Format: `help`
 
 ### Adding a resident’s information : `add`
 
-Make changes ->
-Adds a resident to the address book.
+Adds a resident and their information to the application. 
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A resident can have any number of tags (including 0)
+A resident can have any number of CCAs (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC`
+* `add n/Betsy Crowe c/Basketball e/betsyc@example.com v/false r/B400 p/1234567 c/Hockey f/FASS`
 
 ### Viewing residents’ information : `view`
 
@@ -170,7 +169,7 @@ Format: `exit`
 
 Action | Format, Examples
 --------|------------------
-**Add** |  
+**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **Fet** | `fet d/DATE` <br> e.g. `fet 15-8-2021`
 **Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]` <br> e.g. `search n/john alex v/false f/fass` 
