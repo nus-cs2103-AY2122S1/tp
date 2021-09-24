@@ -4,7 +4,7 @@ title: LeadsForce
 ---
 
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T17-3/tp/branch/master/graph/badge.svg?token=JCJZ65MOLU)](https://codecov.io/gh/AY2122S1-CS2103T-T17-3/tp)
+[![codecov](https://codecov.io/gh/benedictchuajj/tp/branch/master/graph/badge.svg?token=77324c12-7eb0-47de-aa9b-8dea200f09d2)](https://codecov.io/gh/benedictchuajj/tp)
 
 ![Ui](images/Ui.png)
 
