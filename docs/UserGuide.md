@@ -21,7 +21,7 @@ Finding your next lead has never been easier.
   * [Locating clients by keywords: find](#locating-clients-by-keywords--find) 
   * [Exiting the program: exit](#exiting-the-program--exit)
   * [Saving data](#saving-the-data)
-  * [editing-data-file](#editing-data-file)
+  * [Edit data file](#editing-data-file)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -189,7 +189,7 @@ Format: `exit`
 
 LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing data file
+### Edit data file
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
