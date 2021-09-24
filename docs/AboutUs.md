@@ -29,6 +29,8 @@ Email: bryannyeapkk@gmail.com
 
 ### Liu Chen En
 
+<img src="images/twothicc.png" width="200px">
+
 [[github](https://github.com/twothicc)]
 
 Email: chenenliuu@gmail.com
