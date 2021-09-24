@@ -37,6 +37,8 @@ public class Date {
 
     /**
      * Returns if a given string is a valid date.
+     *
+     * @param test The string to be tested.
      */
     public static boolean isValidDate(String test) {
         boolean isValid = true;
@@ -49,6 +51,11 @@ public class Date {
         }
     }
 
+    /**
+     * Returns the LocalDate representation of the date.
+     *
+     * @return LocalDate representation of date.
+     */
     public LocalDate getLocalDate() {
         return LocalDate.parse(this.value, FORMATTER);
     }

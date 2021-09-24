@@ -59,6 +59,11 @@ public abstract class Lesson {
         return Collections.unmodifiableSet(homework);
     }
 
+    /**
+     * Check if the Lesson object is recurring.
+     *
+     * @return True if it is a recurring lesson, false otherwise.
+     */
     public boolean isRecurring() {
         return false;
     }
@@ -73,11 +78,20 @@ public abstract class Lesson {
         return newDate;
     }
 
+    /**
+     * Edit the date of the particular type of lesson.
+     *
+     * @param newDateString The date to be updated with.
+     * @return {@code Lesson} with the updated date.
+     */
     public abstract Lesson updateDate(String newDateString);
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both lessons have the same data fields.
+     * This defines a stronger notion of equality between two lessons.
+     *
+     * @param other The other object to compare.
+     * @return True if all fields are equal.
      */
     @Override
     public boolean equals(Object other) {
@@ -85,11 +99,11 @@ public abstract class Lesson {
             return true;
         }
 
-        if (!(other instanceof seedu.address.model.lesson.Lesson)) {
+        if (!(other instanceof Lesson)) {
             return false;
         }
 
-        seedu.address.model.lesson.Lesson otherLesson = (seedu.address.model.lesson.Lesson) other;
+        Lesson otherLesson = (Lesson) other;
         return otherLesson.getDate().equals(getDate())
                 && otherLesson.getStartTime().equals(getStartTime())
                 && otherLesson.getEndTime().equals(getEndTime())

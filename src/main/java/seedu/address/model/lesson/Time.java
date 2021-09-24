@@ -35,7 +35,9 @@ public class Time {
     }
 
     /**
-     * Returns if a given string is a valid date.
+     * Returns if a given string is a valid time.
+     *
+     * @param test The string to be tested.
      */
     public static boolean isValidTime(String test) {
         boolean isValid = true;
@@ -48,6 +50,11 @@ public class Time {
         }
     }
 
+    /**
+     * Get the LocalTime representation of the time string.
+     *
+     * @return {@code LocalTime} of the time string.
+     */
     public LocalTime getLocalTime() {
         return LocalTime.parse(value);
     }

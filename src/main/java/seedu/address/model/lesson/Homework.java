@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Homework in the address book.
+ * Represents a Homework for a Lesson in the address book.
  */
 public class Homework {
     public static final String MESSAGE_CONSTRAINTS = "Homework description can have a maximum of "
@@ -26,11 +26,15 @@ public class Homework {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid homework description.
+     *
+     * @param test The string to test.
+     * @return True if test is a valid homework description.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
 
     @Override
     public boolean equals(Object other) {

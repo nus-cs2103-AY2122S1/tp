@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Lesson's subject in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSubject(String)}
  */
 public class Subject {
@@ -32,12 +32,13 @@ public class Subject {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid subject.
+     *
+     * @param test The string to be tested.
      */
     public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {
