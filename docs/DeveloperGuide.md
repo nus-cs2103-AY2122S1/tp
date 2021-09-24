@@ -330,6 +330,33 @@ We categorise our user stories into four main epics:
 
       Use case resumes at step 2.
 
+**Use case: L2 Track Student's Lesson Information**
+
+**Actor: User (Tutor)**
+
+**MSS**
+
+1.  User requests to list students
+2.  TAB shows a list of students
+3.  User requests to add a lesson for a specific student in the list
+4.  TAB adds the lesson to the student specified
+    
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+Use case ends.
+
+* 3a. The given index is invalid.
+  * 3a1. TAB shows an error message.
+    
+* 3b. The specified end time is earlier than the start time
+  * 3b1. TAB shows an error message.
+
+Use case resumes at step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
