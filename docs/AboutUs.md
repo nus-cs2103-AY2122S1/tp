@@ -9,11 +9,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Ivan Wong
 
-<img src="images/ivanwong.png" width="200px">
-
+<img src="images/wpinrui.png" width="200px">
 
 [[github](https://github.com/wpinrui)]
-[[portfolio](team/ivanwong.md)]
+[[portfolio](team/wpinrui.md)]
 
 * Role: Team Lead
 * Responsibilities: Deliverables and Deadlines
