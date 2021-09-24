@@ -29,7 +29,7 @@ public class LessonAddCommand extends Command {
 
     public static final String COMMAND_WORD = "ladd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified "
             + "by the index number\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "dd MMM yyyy "
@@ -45,7 +45,7 @@ public class LessonAddCommand extends Command {
             + PREFIX_HOMEWORK + "TYS Page 2 "
             + PREFIX_HOMEWORK + "Textbook Page 52";
 
-    public static final String MESSAGE_ADD_LESSON_SUCCESS = "New lesson added: %1$s";
+    public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor Person: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists for this person.";
 
@@ -103,7 +103,7 @@ public class LessonAddCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, editedPerson));
     }
 
     @Override
