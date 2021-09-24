@@ -22,6 +22,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 public class LessonAddCommand extends Command {
@@ -70,13 +71,14 @@ public class LessonAddCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
+        Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
 
         Set<Lesson> lessons = new HashSet<>(personToEdit.getLessons());
         lessons.add(lesson);
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, lessons);
+                updatedAddress, updatedRemark, updatedTags, lessons);
     }
 
     @Override
