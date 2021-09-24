@@ -8,17 +8,13 @@ Managera is a **desktop app that provides event organisers with a convenient met
 ## Table of Contents
 - [**Quick start**](#quick-start)
 - [**Features**](#features)
-    * [Viewing help: `help`](#viewing-help--help)
-    * [Adding a person: `add`](#adding-a-person-add)
-    * [Listing all persons: `list`](#listing-all-persons--list)
-    * [Editing a person: `edit`](#editing-a-person--edit)
-    * [Locating persons by name: `find`](#locating-persons-by-name-find)
-    * [Deleting a person: `delete`](#deleting-a-person--delete)
-    * [Clearing all entries: `clear`](#clearing-all-entries--clear)
-    * [Exiting the program: `exit`](#exiting-the-program--exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-    * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a Participant: `add`](#adding-a-participant-add)
+    * [Listing all Participants: `list`](#listing-all-participants--list)
+    * [Editing a Participant: `edit`](#editing-a-participant--edit)
+    * [Locating Participants by name: `find`](#locating-participants-by-name-find)
+    * [Deleting a Participant: `delete`](#deleting-a-participant--delete)
+    * [Clearing all Participants: `clear`](#clearing-all-participants--clear)
     * [Adding an event: `addEvent`](#adding-an-event-addevent)
     * [Removing an event: `removeEvent`](#removing-an-event--removeevent)
     * [Mark an Event as done: `doneEvent`](#mark-an-event-as-done-doneevent)
@@ -29,6 +25,10 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Show Event details: `showDetails`](#show-event-details-showdetails)
     * [Show Event Participants: `showParticipants`](#show-event-participants-showparticipants)
     * [Find Participant and access details: `findParticipant`](#find-participant-and-access-details-findparticipant)
+    * [Exiting the program: `exit`](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [**FAQ**](#faq)
 - [**Command summary**](#command-summary)
 
@@ -38,25 +38,31 @@ Managera is a **desktop app that provides event organisers with a convenient met
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for Managera.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. <br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all Participants.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Participant named `John Doe` to Managera.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd Participant shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all Participants.
 
    * **`exit`** : Exits the app.
+     
+   * **`addEvent n/My First Event d/2021-01-01`** : Adds a new Event to the list called 'My First Event'.
+     
+   * **`findParticipant Arnold`** : Returns the details of Participants whose names include 'Arnold'.
+     
+   * **`sortEvents`** : Sorts the current list of Events in chronological order.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -69,74 +75,73 @@ Managera is a **desktop app that provides event organisers with a convenient met
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `addEvent n/NAME d/DATE`, `n/NAME` and `d/DATE` are parameters which can be used as `addEvent n/CS2103T Final d/2021-11-23`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as `addEvent n/CS2103T Final d/2021-11-23`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `t/1700 t/1800`, only `t/1800` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (namely `help`, `list`, `clear`, `sortEvents` and `exit`) will be ignored.<br>
+  e.g. if the command specifies `sortEvents 123`, it will be interpreted as `sortEvents`.
 
 </div>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a Participant: `add`
 
-Adds a person to the address book.
+Adds a Participant to Managera.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A Participant can have any number of tags (including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all Participants : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all Participants in Managera.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a Participant : `edit`
 
-Edits an existing person in the address book.
+Edits an existing Participant in Managera.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the Participant will be removed i.e adding of tags is not cumulative.
+* You can remove all the Participant’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st Participant to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd Participant to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating Participants by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds Participant whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -144,7 +149,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Participants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -152,47 +157,25 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a Participant : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified Participant from Managera.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the Participant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Participant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
+* `list` followed by `delete 2` deletes the 2nd Participant on the current list.
+* `find Betsy` followed by `delete 1` deletes the 1st Participant in the results of the `find` command. 
  
-### Clearing all entries : `clear`
+### Clearing all Participants : `clear`
 
-Clears all entries from the address book.
+Clears all Participants from Managera.
 
 Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._ 
 
 ### Adding an event: `addEvent`
 
@@ -202,7 +185,7 @@ Format: `addEvent n/NAME d/DATE [t/TIME]`
 
 Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
-* `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240km Marathon" on 20th August 2022.
+* `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240 km Marathon" on 20th August 2022.
 
 ### Removing an event : `removeEvent`
 
@@ -212,7 +195,7 @@ Format: `removeEvent n/NAME [d/DATE] [t/TIME]`
 
 Example Usage:
 * `removeEvent n/CS2100 Finals d/2021-11-20  t/0900` - Removes the Event “CS2100 Finals” on 20th November 2021 9:00am.
-* `removeEvent n/240km Marathon d/2022-08-20` - Removes the Event “240km Marathon” on 20th August 2022.
+* `removeEvent n/240km Marathon d/2022-08-20` - Removes the Event “240 km Marathon” on 20th August 2022.
 
 ### Mark an Event as done: `doneEvent`
 
@@ -221,7 +204,7 @@ Format:
 
 Example Usage:
 * `doneEvent n/CS2100 Finals d/2021-11-20  t/0900` - Marks the Event “CS2100 Finals” on 20th November 2021 9:00am as done.
-* `doneEvent n/240km Marathon d/2022-08-20` - Marks the Event “240km Marathon” on 20th August 2022 as done.
+* `doneEvent n/240km Marathon d/2022-08-20` - Marks the Event “240 km Marathon” on 20th August 2022 as done.
 
 
 ### Sort Events: `sortEvents`
@@ -279,12 +262,34 @@ Format:
 Example Usage:
 * `findParticipant Mike` - Filters the list of Participants for Participants who have names containing “Mike”.
 
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+Managera data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+Managera data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Managera will discard all data and start with an empty data file at the next run.
+</div>
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Managera home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -292,13 +297,13 @@ Example Usage:
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**List** | `list`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
 **Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g. `doneEvent n/240km Marathon d/2022-08-20`
@@ -309,3 +314,4 @@ Action | Format, Examples
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
 **Find Participants** | `findParticipant KEYWORD` <br> e.g. `findParticipant Mike`
+**exit** | `exit`
