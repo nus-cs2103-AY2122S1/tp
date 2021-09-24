@@ -57,6 +57,7 @@ Finding your next lead has never been easier.
 
 ## Client Information
 
+
 Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag. 
 
 Client Attribute | Type of Attribute | Argument Tag
@@ -88,8 +89,8 @@ Disposable Income | Integer | disposable-income/
 * Inputs with `…`​ at the end refers to inputs that can be used multiple times in that command
   .<br>
   e.g. `[/tag ATTRIBUTE]…​` can be in the form of `/email @gmail.com` or `/email @gmail.com /risk-appetite 5`
-
 </div>
+
 
 ### Create New Contact: `create`
 
