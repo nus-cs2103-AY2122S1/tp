@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Lesson's date in the address book.
@@ -20,7 +21,9 @@ public class Date {
 
 
     public static final String VALIDATION_REGEX = "^[0-9]{2}\\s[a-zA-Z]{3}\\s[0-9]{4}";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+        .ofPattern("dd MMM uuuu")
+        .withResolverStyle(ResolverStyle.STRICT);
 
     public final String value;
 

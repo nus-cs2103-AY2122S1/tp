@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Lesson's time in the address book.
@@ -19,7 +20,8 @@ public class Time {
             + "2. HH < 24 and mm < 60";
 
     public static final String VALIDATION_REGEX = "^(([0-1]\\d)|(2[0-3])):([0-5]\\d)$";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_TIME;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_TIME
+        .withResolverStyle(ResolverStyle.STRICT);
 
     public final String value;
 
