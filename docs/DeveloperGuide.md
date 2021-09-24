@@ -268,18 +268,59 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Chosen user stories v1.2
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| As a... | I want to... | So that I can... |
+|---|---|---|
+| Forgetful user                | Track contacts                        | Retrieve Contact details whenever I need to contact somebody
+| Beginner user                 | View feedback on wrong commands       | Format commands better
+| Sociable person               | To be able to save up to 100 contacts | I can keep all my friends contacts
+| Fast typer                    | Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
+| User with many contacts       | Search timings to be reasonable       | Do not have to wait too long for search results
+| User                          | App need to be bug free               | So that I can rely on the app to give me accurate contact details
+| Person who loves Birthdays    | Track birthdays                       | Easy way of checking the birthday of friends
 
-*{More to be added}*
+Nice to have user stories v1.2
+
+| As a... | I want to... | So that I can... | 
+|---|---|---|  
+| User                          | Can modify contact details            | So that I can update my contact details
+| Beginner user                 | View feedback on wrong commands       | To format commands better
+| Advanced user                 | Add nicknames to my contacts          | Find my close friends using their nicknames
+
+Future versions user stories
+
+| As a... | I want to... | So that I can... |
+| --- | --- | --- |
+| Beginner              | See sample commands                               | To see what I should be typing.
+| Beginner              | View tutorials                                    | To see how the app should be used
+| Beginner              | View helpful prompts                              | To see what can be done with the app
+| New user              | Immediately add my first contact                  | Use the product without reading a manual
+|  |  |  |
+| Advanced user         | Disable suggestions                               | Avoid accidentally pressing on them
+| Experienced user      | Qickly add contact without my mouse               | Just type
+| Experienced user      | Get suggestions on commonly run commands          | don't have to keep typing the commands they use frequently.
+|  |  |  |
+| Forgetful person      | Use the help button                               | Remind myself how to use the app
+| Forgetful person      | Select from existing tags                         | Have consistent labelling
+|  |  |  |
+| Party Organiser       | Look for contacts details for all my friends      | Send out my invites
+| Party Organiser       | Generate mailing list from my contacts            | Contact all invitees as a group
+| Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
+| Party Organiser       | Generate a mail to link for my selection          | Send emails to a group
+|  |  |  |
+| Loves Birthdays       | Birthday reminders                                | Won’t miss any of his/her friends’ birthdays
+| Sociable person       | Partition frequent contacts                       | Easy to access people within each group
+| Sociable person       | Pin frequent contacts                             | Access these contacts easily
+|  |  |  |
+| Fast typer            | Use the app with little lag                       | Can utilise functions of the app quickly
+|  |  |  |
+| Person                | Add new optional fields                           | Add my own types of data
+| Youth                 | Use Emojis                                        | Add <3 to people i like and poop to people I don’t
+| University student    | User experience to be smooth                      | Find who they want to contact easily
+|  |  |  |
+| User with many contacts| Show search suggestions| Easily find contacts
+| User with many contacts| Search timings to be reasonable| Do not have to wait too long for search results
 
 ### Use cases
 
