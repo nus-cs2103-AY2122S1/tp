@@ -112,7 +112,7 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ScheduleCommand)) {
+        if (!(other instanceof EditCommand)) {
             return false;
         }
 
