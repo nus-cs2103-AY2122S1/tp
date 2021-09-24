@@ -257,27 +257,49 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+A private 1-to-1 home tuition teacher that:
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+1. has a need to manage a significant number of student contacts
+2. has a need to manage admin details of each student, namely, lesson fees and payment
+3. has a need to keep track of lesson details for each student
+4. has a need to manage a busy schedule
+5. prefers desktop apps over other types
+6. can type fast
+7. prefers typing to mouse interactions
+8. is reasonably comfortable using CLI apps
+
+**Value proposition**: Use **TAB** to manage customer contacts and customer relationships faster than 
+a typical mouse/GUI driven app. **TAB** effortlessly keeps track of large amounts of necessary 
+student and lesson information, to empower tutors to provide the best quality home tuition service.  
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+We categorise our user stories into four main epics:
+1. [S] - Keeping track of student information
+2. [L] - Keeping track of lesson information
+3. [U] - Having a simple, efficient, and intuitive UI/UX
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| ID | Priority | As a …​                                 | I want to …​                          | So that I can…​                                                     |
+|----| -------- | ------------------------------------------ | ---------------------------------------- | ---------------------------------------------------------------------- |
+| S1 | `HIGH`   | user                                       | add a new student                        |                                                                        |
+| S2 | `HIGH`   | user                                       | delete a student                         | remove entries that I no longer need                                   |
+| S3 | `HIGH`   | user                                       | categorise my students with tags         |                                                                        |
+| S4 | `HIGH`   | user                                       | keep track of parent contacts            | communicate directly with the parent                                   |
+| S5 | `HIGH`   | user                                       | add remarks to a student                 | keep track of supplementary information                                |
+| S6 | `LOW`    | user                                       | keep track of a student's school         |                                                                        |
+| L1 | `HIGH`   | user                                       | schedule recurring lessons for a student | keep track of when the student's lessons are                           |
+| L2 | `HIGH`   | user                                       | delete a student's lesson                | remove lessons that I no longer have                                   |
+| L3 | `MEDIUM` | user                                       | add makeup lessons for a student         | differentiate between the two different lessons                        |
+| U1 | `HIGH`   | new user                                   | see usage instructions                   | refer to instructions when I forget how to use the App                 |
+| U2 | `HIGH`   | user                                       | find a student by name                   | locate details of persons without having to go through the entire list |
+| U3 | `HIGH`   | user                                       | undo accidental changes                  |                                                                        |
+| U4 | `MEDIUM` | user                                       | view the lessons I have for the week     | easily manage my schedule                                              |
+| U5 | `MEDIUM` | user                                       | filter students by tag                   | view a list of all the students that feature a specific tag            |
+| U6 | `MEDIUM` | user with incomplete information           | skip less important information          | update later when I have the rest of the information                   |
+| U7 | `LOW`    | user                                       | view a calendar of my scheduled lessons  | plan ahead while managing my schedule                                  |
+| U8 | `LOW`    | user with many students stored in **TAB**  | sort students by name                    | locate a person easily                                                 |
+
 
 *{More to be added}*
 
