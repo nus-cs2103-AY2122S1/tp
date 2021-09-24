@@ -326,14 +326,48 @@ Future versions user stories
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add a person**
+
+**MSS**
+
+1.  User chooses to add a person
+2.  User provides the person's details
+3.  Connections create an entry for that person's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User provides incomplete details
+    
+    * 2a1. Connections show an error message.
+      
+      Use case resumes at step 2
+    
+* 2b. User provides details identical to an existing entry in Connections
+
+    * 2b1. Connections remind User that this is a duplicate
+    
+      Use case resumes at Step 1
+    
+
+**Use case: Clear all entries**
+
+**MSS**
+
+1.  User request to clear all entries
+2.  Connections deletes all entries
+
+    Use case ends.
+
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  Connections show a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  Connections delete the person
 
     Use case ends.
 
@@ -349,6 +383,180 @@ Future versions user stories
 
       Use case resumes at step 2.
 
+**Use case: Edit a person's details**
+
+**MSS**
+
+1.  User requests to list persons
+2.  Connections show a list of persons
+3.  User provides his/her index in the list along with the replacement information
+4.  Connections reflect the edits that were made
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    
+    * 3a1. Connections show an error message.
+      
+      Use case resumes at step 2.
+
+**Use case: Exit the program**
+
+**MSS**
+
+1.  User request to exit
+2.  Connections exit
+
+    Use case ends.
+
+**Extensions**
+
+**Use case: Find a person**
+
+**MSS**
+
+1.  User chooses to look for an entry
+2.  Use provides the search term
+3.  Connections return all entries that matches the search term
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Connections is empty
+
+    * 2a1. Connections display a message to indicate no entries
+    
+      Use case ends.
+
+* 2a. No existing entries match the search term provided
+    
+    * 2a1. Connections display a message to indicate no matching entries
+    
+      Use case resumes at step 2.
+
+**Use case: Find people via Tags**
+
+**MSS**
+
+1.  User choose to look for an entry
+2.  User provides the tag
+3.  Connections return all entries that matches the tag
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Connections is empty
+
+    * 2a1. Connections display a message to indicate no entries
+
+      Use case ends.
+
+* 2a. No existing entries match the tag provided
+
+    * 2a1. Connections display a message to indicate no matching entries
+
+      Use case resumes at step 2.
+    
+
+**Use case: List everyone in the address book**
+
+**MSS**
+
+1.  User requests to list all entries
+2.  Connections display all entries
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. Connections is empty
+
+  Use case ends.
+
+**Use Case: Obtaining more information about a command**
+
+**MSS**
+
+1.  User requests for help
+2.  User provides the command
+3.  Connections explain how to use the command and provide examples
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Command provided is not supported
+
+    * 2a1. Connections display an error message
+      
+      Use case ends.
+
+**Use case: Tag a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  Connections show a list of persons
+3.  User provides his index in the list along with the tags to be added
+4.  Connections add those tags from that entry
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Connections is empty
+
+  Use case ends.
+
+* 3a. Index provided is out of range
+
+    * 3a1. Connections display an error message
+    
+      Use case resumes at step 2.
+    
+* 3b. Target entry already has the tag specified
+
+    * 3b1. Connections display an error message
+    
+      Use case resumes at step 2.
+
+**Use case: Untag a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  Connections show a list of persons
+3.  User provides his index in the list along with the tags to be removed
+4.  Connections remove those tags from that entry
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Connections is empty
+
+  Use case ends.
+
+* 3a. Index provided is out of range
+
+    * 3a1. Connections display an error message
+
+      Use case resumes at step 2.
+
+* 3b. Target entry do not have the tag specified
+
+    * 3b1. Connections display an error message
+
+      Use case resumes at step 2.
+    
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -357,12 +565,16 @@ Future versions user stories
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
+
 *{More to be added}*
 
 ### Glossary
-
+* **Connections**: The name of our product
+* **Entry**: An item written or printed in a diary, list, account book, or reference book.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Search Term**: A search term is what users key in when they want to find something specific
+* **Tag**: A label attached to someone or something for the purpose of identification or to give other information.
 
 --------------------------------------------------------------------------------------------------------------------
 
