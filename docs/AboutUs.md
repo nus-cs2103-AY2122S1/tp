@@ -32,7 +32,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/czhi-bin)]
 
 * Role: Developer
-* Responsibilities: Deliverables and deadlines + In charge of Logic 
+* Responsibilities: Deliverables and deadlines + In charge of Logic
 
 ### James
 
