@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons
 2.  Connections show a list of persons
-3.  User provides his index in the list along with the replacement information
+3.  User provides his/her index in the list along with the replacement information
 4.  Connections reflect the edits that were made
 
     Use case ends.
@@ -414,7 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Connections is empty
 
-    * 2a1. Connections display a message to indicate no matching entries
+    * 2a1. Connections display a message to indicate no entries
 
       Use case ends.
 
