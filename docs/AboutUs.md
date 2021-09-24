@@ -27,25 +27,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: In charge of Logic
 
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
 ### Justin Hoe
 
 <img src="images/justinhoejj.png" width="200px">
@@ -65,3 +46,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: tests and documentation
+
+### Lim Ji Wei
+
+<img src="images/jiwei.png" width="200px">
+
+[![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](http://github.com/jiwei99)
+[[portfolio](team/jiwei.md)]
+
+* Role: Developer
+* Responsibilities: In charge of Storage
