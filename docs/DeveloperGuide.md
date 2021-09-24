@@ -263,8 +263,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * lazy and do not want complicated steps
 
 
-**Value proposition**:<br /> 
-Manage contacts faster than a typical mouse/GUI driven app,<br /> 
+**Value proposition**:<br />
+manage contacts faster than a typical mouse/GUI driven app<br />
 with a categorization ability and streamlined creation/reading/updating/deleting processes.
 
 
@@ -321,7 +321,7 @@ Use case ends.
 * 2a. There are no tags in contHACKS<br />
     * 2a1. contHACKS reflects that there are no tags in contHACKS<br />
       Use case ends.
-      
+
 
 * 3a. User does not give a tag to the contact.
     * 3a1. Contact creation continues without an input tag<br />
@@ -355,7 +355,7 @@ Use case ends.
 * 1b. User finds by name
     * 1b1. contHACKS returns a list of contacts with names that match the input<br />
     Use case ends.
-      
+
 
 * 1c. User finds by tag
     * 1c1. contHACKS returns a list of contacts that contains the same tag<br />
@@ -382,7 +382,7 @@ Use case ends.
 * 1b. User just wants to add a new tag to the contact and change nothing else
     * 1b1. User inputs just the tag, and the index of the contact.<br />
     Use case resumes at step 4.
-      
+
 
 * 1c. User gives insufficient details for contact creation
     * 1c1. contHACKS shows an error message<br />
@@ -394,7 +394,7 @@ Use case ends.
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-    
+
 *{More to be added}*
 
 ### Glossary
