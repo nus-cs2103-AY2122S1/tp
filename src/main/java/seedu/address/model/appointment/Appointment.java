@@ -1,6 +1,7 @@
 package seedu.address.model.appointment;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Phone;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +34,13 @@ public class Appointment {
     @Override
     public String toString() {
         return appointment.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Appointment // instanceof handles nulls
+                    && appointment.equals(((Appointment) other).appointment)); // state check
     }
 
     public static boolean isValidMeetingTime(String meetingDateTime) {
