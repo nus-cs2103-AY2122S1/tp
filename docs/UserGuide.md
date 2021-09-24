@@ -205,6 +205,30 @@ Examples:
 * `studiopart s/2 k/Keng i/7`
 * `studiopart s/32 k/Ting a/-1 i/8`
 
+### Adding grades for an assessment:  `grade`
+Avengers will be able to add a student’s grade for a particular assessment.
+
+Format: `grade n/NAME a/ASSESSMENT g/GRADE`
+
+Record the student’s `GRADE` for the `ASSESSMENT`.
+Student’s `NAME` will have to match a name that is saved in the AD.
+The input `GRADE` must be a positive integer.
+
+Example:
+* `grade n/Aaron a/RA1 g/15`
+
+### Displaying the grades for an assessment:  `showgrades`
+Avengers will be able to view the grades of all the students for a particular assessment.
+
+Format: `showgrade a/ASSESSMENT [s/STUDIO_GROUP]`
+
+Display the list of grades that the students achieved for a particular `ASSESSMENT`.
+If `STUDIO_GROUP` is not supplied, the grades of all the students will be displayed. 
+Otherwise, only the grades of the students in the specified `STUDIO_GROUP` will be displayed.
+
+Examples:
+* `showgrade a/RA1`
+* `showgrade a/RA1 s/01A`
 
 
 
@@ -229,4 +253,8 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Attendance** | `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`<br> e.g., `attendance s/1 k/Aaron a/0`
+**Studio Participation** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE`<br> e.g., `studiopart s/12 k/Benny a/3`
+**Grade** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE` <br> e.g., `grade n/Aaron a/RA1 g/15`
+**Show Grades** | `showgrade a/ASSESSMENT [s/STUDIO_GROUP]` <br> e.g., `showgrade a/RA1`
 **Help** | `help`
