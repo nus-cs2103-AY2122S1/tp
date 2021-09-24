@@ -12,16 +12,16 @@ Finding your next lead has never been easier.
 * [Quick Start](#quick-start)
 * [Client Information](#client-information)
 * [Features](#features)
-  * [Create new contact: create](#adding-a-person-add)
-  * Retrieve particular contact: view
-  * [Update existing contact: update](#editing-a-person--edit)
-  * [Delete particular contact: delete](#deleting-a-person--delete)
-  * [Clear all contacts: clear](#clearing-all-entries--clear)
-  * [List all contacts: list](#listing-all-persons--list)
-  * Sort contacts: sort
-  * [Find contacts: find](#locating-clients-by-keywords-find) 
-  * [Exiting application: exit](#exiting-the-program--exit)
-  * Saving data
+  * [Create new contact: create](#create-new-contact--create)
+  * [Retrieve particular contact: view](#retrieve-particular-contact--view)
+  * [Update existing contact: update](#update-existing-contact--update)
+  * [Delete particular contact: delete](#delete-particular-contact--delete)
+  * [Clearing all entries: clear](#clearing-all-entries--clear)
+  * [Sort Contacts: sort](#sort-contacts--sort)
+  * [Locating clients by keywords: find](#locating-clients-by-keywords--find) 
+  * [Exiting the program: exit](#exiting-the-program--exit)
+  * [Saving data](#saving-the-data)
+  * [editing-data-file](#editing-data-file)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -92,7 +92,7 @@ Disposable Income | Integer | disposable-income/
 </div>
 
 
-### Create New Contact: `create`
+### Create New Contact : `create`
 
 Adds a new client to the address book.
 
@@ -106,7 +106,7 @@ Examples:
 * `create Benedict Chua /email benchua@hotmail.com`
 * `create Keith /email keithtan@ymail.com /phone-no 12345678 /risk-appetite 4`
 
-### Retrieve Particular Contact: `view`
+### Retrieve Particular Contact : `view`
 
 View a particular client on your address book to view the client’s information.
 
@@ -114,7 +114,7 @@ Format: `view {client’s id number}`
 
 Example: `view 2` would be used to view client 2's information
 
-### Update Existing Contact: `update`
+### Update Existing Contact : `update`
 
 Update the information of existing users by using the “update” command. This can be used to change the 
 attributes of a client, using the tag of the client’s attribute. 
@@ -153,7 +153,7 @@ Format: `sort /<attribute> {ASC/DESC}`
 Examples:
 * `sort /risk-appetite ASC`
 
-### Locating clients by keywords: `find`
+### Locating clients by keywords : `find`
 
 Finds clients whose contacts match with the given keywords.
 
@@ -189,7 +189,7 @@ Format: `exit`
 
 LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Editing data file
 
 LeadsForce's data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
