@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final TaskList tasks;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +39,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.tasks = new TaskList();
+        filteredTasks = new FilteredList<>(this.tasks.asUnmodifiableObservableList());
     }
 
     public ModelManager() {
@@ -110,6 +116,31 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Task Management ==================================================================================
+
+    public void addTask(Task toAdd) {
+        tasks.add(toAdd);
+    }
+
+    public void deleteTask(Task toDelete) {
+        tasks.remove(toDelete);
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return filteredTasks;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    public void markDone(Task task) {
+        tasks.markDone(task);
     }
 
     //=========== Filtered Person List Accessors =============================================================

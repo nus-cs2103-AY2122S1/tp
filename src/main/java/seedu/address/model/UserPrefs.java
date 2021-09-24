@@ -82,6 +82,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
         return sb.toString();
+
     }
 
 }
