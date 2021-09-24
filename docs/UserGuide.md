@@ -152,8 +152,8 @@ Examples:
 
 Updates the information of a contact.
 
-Edits the person at the specified index. 
-* The index refers to the index number shown in the displayed person list. 
+Edits the person at the specified index.
+* The index refers to the index number shown in the displayed person list.
 * The index number must be a positive integer 1,2,3…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -162,8 +162,8 @@ Edits the person at the specified index.
 
 Format: `update {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]` / <br> `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]`
 
-Examples: 
-* `update 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively. 
+Examples:
+* `update 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively.
 * `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe` and clears all existing tags.
 * `update 3 h/@BenWasHere t/Overseas` Edits the telegram handle of the 3rd person to be `@BenWasHere` and adds an `Overseas` tag.
 
@@ -179,7 +179,7 @@ Delete the specified contact(s) from the address book. It can also be used to de
 * `INDEX_B` should be a positive integer strictly greater than `INDEX_A`.
 
 Format: `delete {INDEX}`/ `delete {INDEX_A, INDEX_B}` / `delete b/{TAG}`
-   
+
 Examples:
 * `delete 2` deletes the 2nd contact.
 * `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
@@ -201,7 +201,7 @@ Adds a description that will be tagged to the contact.
 
 Format: `remark {INDEX} {DESCRIPTION}`
 
-Examples: 
+Examples:
 * `remark 1 punctual`
 * `remark 2 currently overseas`
 ***
@@ -212,10 +212,10 @@ Tags a contact with a category.
 
 Format: `tag {INDEX} {TAG}`
 
-Examples: 
+Examples:
 * `tag Ben CS2103T`
 * `tag Mary Overseas`
-   
+
 ***
 
 ### Add contact to favourite: `fav` <a name="fav"></a>
@@ -257,7 +257,7 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 | help / man    | `help`/`man`                                                                                         | `help`/`man`                             |
 | add           | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                 | `add n/Ben Davies e/ben123@gmail.com                                                                                                                                 m/CS2103T`                              |
 | list / ls     | `list`/`ls`                                                                                          | `list`/`ls`                              |
-| find          | `find {NAME}`/`find {TAG}`                                                                           | `find Ben`/`find CS2103T`                | 
+| find          | `find {NAME}`/`find {TAG}`                                                                           | `find Ben`/`find CS2103T`                |
 | sort          | `sort -m`/`sort -a`                                                                                  | `sort -m`/`sort -a`                      |
 | edit / update | `update {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`| `update 1 p/91234567 e/ben321@gmail.com` |
 | delete        | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`/`delete b/{TAG}`                                      | `delete 2`/`delete 2, 5`/`delete                                                                                                                                     b/CS2103T`                              |
