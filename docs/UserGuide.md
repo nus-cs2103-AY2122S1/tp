@@ -45,7 +45,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. <br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. <br>
    Some example commands you can try:
 
    * **`list`** : Lists all Participants.
@@ -88,7 +88,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/1700 t/1800`, only `t/1800` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (namely `help`, `list`, `clear`, `sortEvents` and `exit`) will be ignored.<br>
   e.g. if the command specifies `sortEvents 123`, it will be interpreted as `sortEvents`.
 
 </div>
