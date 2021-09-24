@@ -3,7 +3,7 @@ layout: page
 title: Ivan's Project Portfolio Page
 ---
 
-### Project: AddressBook Level 3
+### Project: TutorAid
 
 TutorAid is a desktop application used for helping tech-savvy private tutors, who have busy schedules / many students, to keep track of each students' details. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
