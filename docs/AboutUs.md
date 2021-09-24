@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lee Zhi Xuan
 
 <img src="images/leezhixuan.png" width="200px">
 
