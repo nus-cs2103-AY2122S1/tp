@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User request to clear all entries
-2.  Connections becomes empty
+2.  Connections deletes all entries
 
     Use case ends.
 
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Connections is empty
 
-    * 2a1. Connections display a message to indicate no matching entries
+    * 2a1. Connections display a message to indicate no entries
     
       Use case ends.
 
