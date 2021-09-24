@@ -68,19 +68,17 @@ Shows a list of all modules taken for the current semester.
 
 Format: `list`
 
-### Adding a person: `add`
+### Adding a module: `add`
 
-Adds a person to the address book.
+Adds a module to the module tracker.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `FORMAT: add c/CODE n/MC d/DESCRIPTION`
+* Commands must follow the specified format, **no fields should be left blank**.
+* **MC** must be a **positive integer** (1,2,3...).
+* **CODE** must follow the NUSMods module code format.
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add c/CS2103T n/4 d/software engineering`
 
 
 ### Editing a person : `edit` [Coming soon]
