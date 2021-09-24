@@ -427,6 +427,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+**Use case: UC04 - List all client/product**
+
+**MSS**
+
+1. User requests to list clients/products.
+2. Sellah shows a list of clients/products.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty. 
+
+    * 2a1. Sellah shows an error message.
+
+      Use case ends.
+
 **Use case: UC05 - Delete a client/product**
 
 **MSS**
