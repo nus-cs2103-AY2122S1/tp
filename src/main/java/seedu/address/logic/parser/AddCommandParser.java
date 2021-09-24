@@ -40,13 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        Remark remark;
-        if (!arePrefixesPresent(argMultimap, PREFIX_REMARK)
-                || !argMultimap.getPreamble().isEmpty()) {
-            remark = new Remark("");
-        } else {
-            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
-        }
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
