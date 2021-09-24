@@ -224,4 +224,19 @@ Action | Format, Examples
             <code>3</code> to <code>Ben10</code> and the quantity to <code>20</code>.
         </td>
     </tr>
+    <tr>
+        <td>
+            <a href="#editing-delete-coming-soon">Delete</a>
+        </td>
+        <td>
+            Delete a client: <code>delete -c ID </code><br> 
+            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>ID</code> of 
+            <code>20</code> including name, address, etc.<br>
+            <br>
+            Delete a product: <code>delete -p ID </code><br> 
+            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>ID</code> of 
+            <code>5</code> including name, price, etc.
+            <br>
+        </td>
+    </tr>
 </table>
