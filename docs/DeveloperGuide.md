@@ -282,8 +282,8 @@ Chosen user stories v1.2
 
 Nice to have user stories v1.2
 
-| As a... | I want to... | So that I can... | 
-|---|---|---|  
+| As a... | I want to... | So that I can... |
+|---|---|---|
 | User                          | Can modify contact details            | So that I can update my contact details
 | Beginner user                 | View feedback on wrong commands       | To format commands better
 | Advanced user                 | Add nicknames to my contacts          | Find my close friends using their nicknames
