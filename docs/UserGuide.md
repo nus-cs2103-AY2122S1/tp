@@ -75,19 +75,19 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding an applicant/employer: `add`
 
-Adds a person to the address book.
+Adds an applicant to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add applicant  n/<NAME> p/<CONTACT_NUMBER> e/<EMAIL_ADDRESS> s/<PREFERRED_SECTOR>​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Adds an employer to the address book.
+
+Format: `add employer  n/<NAME> p/<CONTACT_NUMBER> e/<EMAIL_ADDRESS> s/<PREFERRED_SECTOR>​`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add applicant/ n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
+* `add employer/ n/Cat p/81234567 e/cat@gmail.com s/Financial_Services`
 
 ### Listing all applicants/employers : `list`
 
