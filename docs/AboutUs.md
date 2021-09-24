@@ -29,14 +29,14 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 * Role: Developer
 * Responsibilities: Integration
 
-### Johnny Doe
+### Yuichiro Fukushima
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Yuichiro.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/yuifuku1118)] [[portfolio](team/yuichiro.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Deliverables and deadlines, Scheduling and tracking
 
 ### Jean Doe
 
