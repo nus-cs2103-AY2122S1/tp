@@ -304,11 +304,10 @@ Future versions user stories
 | Forgetful person      | Use the help button                               | Remind myself how to use the app
 | Forgetful person      | Select from existing tags                         | Have consistent labelling
 |  |  |  |
-| Teaching Assistant    | Look for contacts for all my students             | Disseminate information to them
-| Teaching Assistant    | View all the contacts of my students in one page  | Contact them individually
-| Teaching Assistant    | Generate mailing list from my contacts            | Contact my students as a group
-| Teaching Assistant    | Generate csv file of my class                     | Take attendance
-| Teaching Assistant    | Generate a mail to link for my selection          | Send emails to a group
+| Party Organiser       | Look for contacts details for all my friends      | Send out my invites
+| Party Organiser       | Generate mailing list from my contacts            | Contact all invitees as a group
+| Party Organiser       | Generate csv file of my invitees                  | Take attendance or make external notes
+| Party Organiser       | Generate a mail to link for my selection          | Send emails to a group
 |  |  |  |
 | Loves Birthdays       | Birthday reminders                                | Won’t miss any of his/her friends’ birthdays
 | Sociable person       | Partition frequent contacts                       | Easy to access people within each group
