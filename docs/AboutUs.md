@@ -17,3 +17,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Integration
+
+### Hoang Le Tri Cuong
+
+<img src="images/ernestcuong.png" width="200px">
+
+[[github](https://github.com/ErnestCuong)]
+[[portfolio](team/ernestcuong.md)]
+
+* Role: Developer
+* Responsibilities: Testing

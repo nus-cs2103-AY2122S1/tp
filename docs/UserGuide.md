@@ -168,6 +168,32 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
+### Adding progress for a student : `add -p`
+
+Adds a given string representing progress to a student with a given student index.
+
+Format: `add -p STUDENT_INDEX PROGRESS`
+
+* Adds `PROGRESS` for the student at the specified `STUDENT_INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `add -p 2 completed homework` adds `completed homework` to the 2nd student in the list.
+
+### Deleting progress from a student : `del -p`
+
+Removes the string representing progress from the student with a given student index.
+
+Format: `del -p STUDENT_INDEX`
+
+* Deletes the `PROGRESS` for the student at the specified `STUDENT_INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -192,3 +218,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
+**Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
