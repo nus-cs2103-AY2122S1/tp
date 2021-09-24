@@ -2,8 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -293,9 +293,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User inputs relevant details.
 3.  Staff’d requests for confirmation.
 4.  User confirms.
-5. Staff’d updates the new staff details.
+5.  Staff’d updates the new staff details.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -306,13 +306,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
-
-
-* *a At any time, User chooses to cancel the edit.
-    * a1. Staff’d requests to confirm the cancellation.
-    * a2. User confirms the cancellation.
-
-      Use case ends.
 
 **Use case: UC02 - Edit staff schedule**
 
@@ -322,9 +315,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User inputs relevant details.
 3.  Staff’d requests for confirmation.
 4.  User confirms.
-5. Staff’d updates the new staff schedule.
+5.  Staff’d updates the new staff schedule.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -335,13 +328,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
-
-
-* *a At any time, User chooses to cancel the edit.
-    * a1. Staff’d requests to confirm the cancellation.
-    * a2. User confirms the cancellation.
-
-      Use case ends.
 
 ### Non-Functional Requirements
 
