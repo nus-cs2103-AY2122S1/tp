@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jon.png" width="200px">
 
-[[github](http://github.com/fullfatwasabi)] [[portfolio](team/Jonathan.md)]
+[[github](http://github.com/fullfatwasabi)][[portfolio](team/Jonathan.md)]
 
 * Role: Developer
 * Responsibilities: Tool, Documentation, Scheduling and tracking
