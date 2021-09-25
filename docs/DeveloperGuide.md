@@ -261,26 +261,43 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-- has a need to manage a significant number of contacts
-- prefer desktop apps over other types
-- can type fast
-- prefers typing to mouse interactions
-- is reasonably comfortable using CLI apps
+* has a need to manage a large number of students
+* teaches more than one module
+* prefers desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage student details faster than a typical mouse/GUI driven app
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------| ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | add a new student entry         |                  |
+| `* * *`  | new user                                   | edit a student entry         | can make changes to my students' information without removing and adding them separately                 |
+| `* * *`  | new user                                   | delete a student entry         | remove students that I no longer teach                 |
+| `* * *`  | new user                                   | group my weaker students together         | easily identify these students and focus more of my energies on them                 |
+| `* * *`  | new user                                   | view the students in a particular group        | check on their performance as a group                 |
+| `* * *`  | new user                                   | remove students from a group        | ensure that each group contains the correct students as their performance changes                 |
+| `* * *`  | new user                                   | search for my groups with a parameter        | find a specific group given a detail I know about that group              |
+| `* * *`  | new user                                   | delete a group       | remove certain groups which are no longer needed              |
+| `* * *`  | new user                                   | export my student's information containing their grades        | share/document all the data               |
+| `* *`  | new user                                   | record my student's assessment grade         | keep track of their individual performance                 |
+| `* *`  | new user                                   | search for my students with a parameter        | find specific students given a detail I know about them               |
+| `* *`  | new user                                   | sort my students by their grades        | find the top and bottom performers of my class               |
+| `* *`  | lazy user                                  | be able to autocomplete my student's name       | easily find my student's name in the event that I forget their full name              |
+| `* *`  | lazy user                                  | access commands that I frequent easily      | save time on typing out my most frequently used commands              |
+| `* *`  | lazy user                                  | import my student details from luminus      | avoid having to manually key in my student's information             |
+| `* *`  | user that cares about security             | safeguard my CSBook    | ensure only authorized users can view my student's data            |
+| `* *`  | user that cares about security             | encrypt my student's information    | protect my students' sensitive data from potential malware            |
+| `* *`  | user that cares about security             | backup my student's information   | in the event that my student's information gets corrupted            |
+| `*`  | new user                                   | visualise my student's assessment data        | visualize graphically how my students are performing in class                 |
+| `*`  | lazy user                                  | chat with my student via Telegram directly from the app      | avoid having to open the Telegram app separately             |
+| `*`  | experienced user                           | set-up custom shortcuts     | easily access my most frequently used commands            |
+| `*`  | experienced user                           | be able to undo my commands     | backtrack when a mistake is made            |
 
 _{More to be added}_
 
