@@ -153,7 +153,7 @@ Format: `view INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `view 2`shows the details associated with the 2nd student
+* `view 2` shows the details associated with the 2nd student
 
 
 ### Clearing all entries : `clear`
