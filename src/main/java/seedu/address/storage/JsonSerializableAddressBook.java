@@ -45,7 +45,8 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        participants.addAll(source.getParticipantList().stream().map(JsonAdaptedParticipant::new).collect(Collectors.toList()));
+        participants.addAll(source.getParticipantList().stream()
+            .map(JsonAdaptedParticipant::new).collect(Collectors.toList()));
         //Add on for Managera
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
     }

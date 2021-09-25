@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.nextOfKin.NextOfKin;
+import seedu.address.model.nextofkin.NextOfKin;
 import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Note;
 import seedu.address.model.person.Address;
@@ -31,6 +31,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -128,7 +129,9 @@ public class ParserUtil {
         return tagSet;
     }
 
-
+    /**
+     * Parses {@code String birthDate} into a {@code BirthDate}.
+     */
     public static BirthDate parseBirthDate(String birthDate) throws ParseException {
         requireNonNull(birthDate);
         String trimmedBirthDate = birthDate.trim();
@@ -141,20 +144,24 @@ public class ParserUtil {
         return BirthDate.of(localDate);
     }
 
-
+    /**
+     * Parses {@code String note} into a {@code Note}.
+     */
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
         // format: Importance: <content>
         String[] parts = trimmedNote.split(":");
         if (parts.length != 2) {
-          throw new ParseException(Note.MESSAGE_INVALID_NOTE_FORMAT);
+            throw new ParseException(Note.MESSAGE_INVALID_NOTE_FORMAT);
         }
         Note.Importance importance = parseImportance(parts[0]);
         return new Note(parts[1].trim(), importance);
     }
 
-
+    /**
+     * Parses {@code Collection<String> notes} into a {@code Set<Note>}.
+     */
     public static Set<Note> parseNotes(Collection<String> notes) throws ParseException {
         requireNonNull(notes);
         final Set<Note> tagNotes = new HashSet<>();
@@ -165,13 +172,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code String nextOfKin} into a {@code NextOfKin}.
      */
     public static NextOfKin parseNextOfKin(String nextOfKin) throws ParseException {
         requireNonNull(nextOfKin);
         // TODO: IMPLEMENT THIS
         return new NextOfKin(new Name("Test"), new Phone("12345678"), new Tag("Test"));
     }
+
+    /**
+     * Parses {@code Collection<String> nextOfKins} into a {@code ArrayList<NextOfKin>}.
+     */
     public static ArrayList<NextOfKin> parseNextOfKins(Collection<String> noks) throws ParseException {
         requireNonNull(noks);
         final ArrayList<NextOfKin> nextOfKins = new ArrayList<>();
@@ -181,9 +192,12 @@ public class ParserUtil {
         return nextOfKins;
     }
 
+    /**
+     * Parses {@code String importance} into a {@code Importance in Note}.
+     */
     public static Note.Importance parseImportance(String importance) throws ParseException {
         requireNonNull(importance);
-        switch(importance) {
+        switch (importance) {
         case "VERY_HIGH":
             return Note.Importance.VERY_HIGH;
         case "HIGH":

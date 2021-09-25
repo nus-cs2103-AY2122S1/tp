@@ -2,14 +2,10 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.nextOfKin.NextOfKin;
 import seedu.address.model.participant.Note;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedNote {
 
@@ -23,7 +19,7 @@ public class JsonAdaptedNote {
      */
     @JsonCreator
     public JsonAdaptedNote(@JsonProperty("content") String content,
-                                @JsonProperty("importance") String importance) {
+                           @JsonProperty("importance") String importance) {
         this.content = content;
         this.importance = importance;
     }

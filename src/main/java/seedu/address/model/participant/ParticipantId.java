@@ -1,8 +1,5 @@
 package seedu.address.model.participant;
 
-import java.util.HashMap;
-import java.util.Locale;
-
 public class ParticipantId {
 
     private String id;
@@ -11,11 +8,22 @@ public class ParticipantId {
         this.id = encode(p);
     }
 
+    /**
+     * Factory method for id.
+     *
+     * @param p participant to encode the id.
+     * @return the ParticipantId for given participant.
+     */
     public static ParticipantId of(Participant p) {
         return new ParticipantId(p);
     }
 
-    // simple encoding
+    /**
+     * Encode the given participant to give id.
+     *
+     * @param p participant to encode the id.
+     * @return the id for given participant.
+     */
     public static String encode(Participant p) {
         // may change in the future
         String[] sections = p.getName().fullName.trim().split(" ");

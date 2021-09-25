@@ -1,8 +1,9 @@
-package seedu.address.model.nextOfKin;
+package seedu.address.model.nextofkin;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -15,6 +16,13 @@ public class NextOfKin {
 
     private final Tag tag;
 
+    /**
+     * Constructor for NextOfKin.
+     *
+     * @param name  name of next of kin.
+     * @param phone phone of next of kin.
+     * @param tag   tag to describe relation of the next of kin.
+     */
     public NextOfKin(Name name, Phone phone, Tag tag) {
         requireAllNonNull(name, phone, tag);
         this.name = name;

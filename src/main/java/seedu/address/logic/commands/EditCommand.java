@@ -20,7 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.nextOfKin.NextOfKin;
+import seedu.address.model.nextofkin.NextOfKin;
 import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
@@ -108,8 +108,8 @@ public class EditCommand extends Command {
         ArrayList<NextOfKin> updatedNextOfKins =
             editParticipantDescriptor.getNextOfKins().orElse(participantToEdit.getNextOfKins());
 
-        return new Participant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthDate
-            , updatedNotes, updatedNextOfKins);
+        return new Participant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthDate,
+            updatedNotes, updatedNextOfKins);
     }
 
     @Override
@@ -329,7 +329,7 @@ public class EditCommand extends Command {
             this.nextOfKins = (nextOfKins != null) ? new ArrayList<>(nextOfKins) : null;
         }
 
-        public Optional<ArrayList<NextOfKin>> getNextOfKins()  {
+        public Optional<ArrayList<NextOfKin>> getNextOfKins() {
             return (nextOfKins != null) ? Optional.of(new ArrayList<>((nextOfKins))) : Optional.empty();
 
         }

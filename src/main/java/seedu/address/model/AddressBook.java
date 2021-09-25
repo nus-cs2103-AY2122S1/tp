@@ -9,7 +9,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.participant.Participant;
 import seedu.address.model.participant.UniqueParticipantList;
-import seedu.address.model.person.Person;
 
 /**
  * Wraps all data at the address-book level

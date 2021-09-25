@@ -2,8 +2,9 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.nextOfKin.NextOfKin;
+import seedu.address.model.nextofkin.NextOfKin;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -36,6 +37,11 @@ public class JsonAdaptedNextOfKin {
         tag = new JsonAdaptedTag(source.getTag());
     }
 
+    /**
+     * Convert this Json representation of NextOfKin to NextOfKin object.
+     * @return  NextOfKin object of this JsonAdaptedNextOfKin
+     * @throws IllegalValueException if the given attributes in json fields is illegal
+     */
     public NextOfKin toModelType() throws IllegalValueException {
         final Tag tag = this.tag.toModelType();
 
