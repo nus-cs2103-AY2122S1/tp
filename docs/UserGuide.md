@@ -192,6 +192,7 @@ Action | Format, Examples
 **Fet** | 
 **View** |
 **Search** |
+**Edit** | `edit INDEX... FLAG/UPDATED_PARTICULARS...`<br> e.g., `edit 1 2 3 v/true`
 **Delete** | `delete INDEX...`<br> e.g., `delete 1 2 3`
 **Help** | `help`
 **Exit** | `exit`
