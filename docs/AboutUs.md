@@ -29,7 +29,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 ### Atin Sakkeer Hussain
 
-<img src="images/atin.png" width="200px">
+<img src="images/Atin.jpg" width="200px">
 
 [[github](http://github.com/crypto-code)]
 
