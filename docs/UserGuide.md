@@ -226,6 +226,20 @@ Action | Format, Examples
     </tr>
     <tr>
         <td>
+            <a href="#viewing-view-coming-soon">Edit</a>
+        </td>
+        <td>
+            View a client: <code>view -c ID</code><br>
+            e.g., <code>view -c 20</code> Views all the details of the client with <code>ID</code> of <code>20</code>
+            including name, address, etc.<br>
+            <br>
+            View a product: <code>view -p ID</code><br>
+            e.g., <code>view -p 5</code> Views all the details of the product with <code>ID</code> of
+            <code>5</code> including name, price, etc.
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#listing-list-coming-soon">List</a>
         </td>
         <td>
@@ -238,7 +252,7 @@ Action | Format, Examples
     </tr>
     <tr>
         <td>
-            <a href="#editing-delete-coming-soon">Delete</a>
+            <a href="#deleting-delete-coming-soon">Delete</a>
         </td>
         <td>
             Delete a client: <code>delete -c ID </code><br> 

@@ -427,6 +427,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+**Use case: UC03 - View a client/product**
+
+**MSS**
+
+1. User <ins> requests to list clients/products (UC04) </ins>
+2. Sellah shows a list of clients/products.
+3. User request to see more information of a specific client/product in the list.
+4. Sellah shows the details of the product/item.
+
+  User story ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. Sellah shows an error message.
+
+      Use case ends.
+
+* 3a. The input parameter(s) is/are invalid.
+
+    * 3a1. Sellah shows an error message.
+
+      Use case resumes at step 3.
+
+* 3b. The command format is incorrect.
+
+    * 3b1. Sellah shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. Some optional details are not present.
+
+    * 4a1. Sellah shows a placeholder value at the optional detail.
+
+      Use case ends. 
+
+
+
 **Use case: UC04 - List all client/product**
 
 **MSS**
