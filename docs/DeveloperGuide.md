@@ -270,14 +270,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                             |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | delete contacts                | make sure that the address book remains relevant and up to date        |
+| `* * *`  | user                                       | edit individual contacts       | update any of the fields when necessary                                |
+| `* * *`  | user                                       | add individual contacts        | reach out to them later                                                |
+| `* * *`  | Prof                                       | be able to give my students a way to import in contact details for their peers, TA and profs in the module | - |
+| `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
+| `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
+| `* * *`  | CLI user                                   | avoid using my mouse as much as possible     | -                                                        |
+| `* * *`  | user                                       | group/tag people into teammates, classmates, TA's and Profs | easily manage my contacts                 |
+| `* * *`  | user                                       | connect with seniors who have taken the same module         | have more guidance                        |
+| `* * *`  | TA                                         | be able to get in touch with the students in my class through tele handles | -                          |
+| `* * *`  | new user                                   | know all the different commands                             | fully utilise the tools available         |
+| `* * *`  | new user                                   | learn the command formats                                   | perform tasks quickly and efficiently     |
+| `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
+| `* * *`  | user                                       | be able to store my contact omitting certain fields         | save contact without having to include email or address |
 
 *{More to be added}*
 
