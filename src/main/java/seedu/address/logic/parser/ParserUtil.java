@@ -100,13 +100,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String remark} into an {@code Remark}.
+     * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code remark} is invalid
      */
     public static Remark parseRemark(String remark) throws ParseException {
-        requireNonNull(requireNonNull(remark));
+        requireNonNull(remark);
         String trimmedRemark = remark.trim();
         if (!Remark.isValidRemark(trimmedRemark)) {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
