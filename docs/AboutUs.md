@@ -49,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lim Ji Wei
 
-<img src="images/jiwei.png" width="200px">
+<img src="images/jiwei99.png" width="200px">
 
 [![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](http://github.com/jiwei99)
 [[portfolio](team/jiwei.md)]
