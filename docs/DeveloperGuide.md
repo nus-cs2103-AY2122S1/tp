@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a. The list is empty.
 
-    Use case ends.
+      &nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
     * 3a. The given index is invalid.
 
@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a. The list is empty.
 
-    Use case ends.
+      &nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
     * 3a. The given name is invalid.
 
