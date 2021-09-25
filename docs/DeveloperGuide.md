@@ -285,7 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-1. **Use case: Show a person's details using Index**
+6. **Use case: Show a person's details using Index**
 
     **MSS**
 
@@ -309,7 +309,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
     
 
-2. **Use case: Show a person's details using Name**
+7. **Use case: Show a person's details using Name**
 
     **MSS**
 
