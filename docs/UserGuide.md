@@ -163,18 +163,17 @@ Clears all entries from CSBook.
 
 Format: `clear`
 
-### Creating a group of students: `group`
+### Creating a group: `addgroup`
 
-Creates a group of students with the given group name and the list of students
+Creates a group with the given group name and given description so that students can be added into it. 
 
-Format: `group GROUPNAME STUDENT1 STUDENT2 ... STUDENTN`
+Format: `addgroup n/GROUPNAME d/DESCRIPTION`
 
-* Creates a group with the specified `GROUPNAME`.
-* Adds the following students arguments, `STUDENT1 STUDENT2 ... STUDENTN` into the created group.
+* Creates a group with the specified `GROUPNAME` and `DESCRIPTION`.
 
 Examples:
-* `group CS2103T BrianCheong JunWei Erin ZhiHao JiaXian` creates a group CS2103T with BrianCheong JunWei Erin
-ZhiHao and JiaXian in the group.
+* `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod` 
+where students can be added into.
 
 ### Delete Group: deletegroup
 
