@@ -5,55 +5,52 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-1/tp/issues).
 
 ## Project team
 
-### John Doe
+### Adam Oh Zhi Hong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/adam.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/moreTriangles)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Data & Storage
 
-### Johnny Doe
+### Aishwarya Radhakrishnan Nair
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aishwarya.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/aishh12)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code Quality
+* Responsibilities: Commands
 
-### Jean Doe
+### Atin Sakkeer Hussain
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/atin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/crypto-code)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Integration
+* Responsibilities: Commands
 
-### James Doe
+### Cheong Yee Ming
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yee_ming.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/CheongYeeMing)]
 
-* Role: Developer
+* Role: Testing
+* Responsibilities: Model
+
+
+### Jai Lal Lulla
+
+<img src="images/jai.png" width="200px">
+
+[[github](http://github.com/jai2501)]
+
+* Role: Deliverables and Deadlines
 * Responsibilities: UI
