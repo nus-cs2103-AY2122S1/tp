@@ -2,9 +2,15 @@
 layout: page
 title: User Guide
 ---
-# User Guide for Cohort Connect v1.2
 
-> Type. Explore. Connect.
+<img src = "https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/logo.jpeg?raw=true" align = "left" width="100" height="100" style="margin-right: 20px">
+<div>
+  
+  <h1> CohortConnect v1.2 </h1>
+  
+  <b> Type. Explore. Connect. </b>
+  
+ </div>
 
 CohortConnect is a desktop application for students, professors, and teaching assistants to connect, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface.
 
