@@ -142,6 +142,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Listing all groups : `listgroups`
+
+Shows a list of all groups in the CSBook.
+
+Format: `listgroups`
+
+Examples:
+* `listgroups` displays a list of all the groups, including their group description and number of students in them.
+  ![result for `listgroups`](images/listGroups.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
