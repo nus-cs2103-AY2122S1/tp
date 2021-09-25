@@ -305,16 +305,16 @@ We categorise our user stories into four main epics:
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  TAB shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  TAB deletes the person
 
     Use case ends.
 
@@ -326,7 +326,7 @@ We categorise our user stories into four main epics:
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TAB shows an error message.
 
       Use case resumes at step 2.
 
