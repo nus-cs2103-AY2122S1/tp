@@ -5,12 +5,12 @@
   
   <h1> CohortConnect </h1>
   
-  > Type. Explore. Connect.
+  <b> Type. Explore. Connect. </b>
   
  </div>
 
-<br>
-Cohort connect is a desktop application for students, professors, and teaching assistants to connect, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface.
+<br><br>
+CohortConnect is a desktop application for students, professors, and teaching assistants to connect, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface.
 <br><br>
 
 <div align = "center"> 
