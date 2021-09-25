@@ -23,9 +23,10 @@ CohortConnect is a desktop application for students, professors, and teaching as
     - [Delete a Contact - delete](#Delete)
     - [Edit a Contact - edit](#Edit)
     - [Find a Contact - find](#Find)
-    - [Show a Contact - show](#Show)
-    - [Importing Contacts - import](#Import)
-    - [Exporting Contacts - export](#Export)
+    - [Show a Contact - show](#Show) (Coming Soon)
+    - [Importing Contacts - import ](#Import) (Coming Soon)
+    - [Exporting Contacts - export](#Export) (Coming Soon)
+  - [Coming Soon](#ComingSoon)
   - [FAQ](#FAQ)
   - [Command Summary](#CommandSummary)
 
@@ -200,6 +201,16 @@ Example:
 ```bash
 export Friends.JSON
 ```
+
+<h2 id = "ComingSoon"> </h2>
+
+## Coming Soon
+
+1. Splash Screen
+2. Optional Fields and Telegram handle
+3. Find using Tags
+4. Import and Export Contacts 
+5. Show Function to display details
 
 <h2 id = "FAQ"> </h2>
 
