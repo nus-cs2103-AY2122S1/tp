@@ -5,8 +5,8 @@ title: Dickson's Project Portfolio Page
 
 ### Project: TutorAid
 
-TutorAid is a desktop application used for teaching Software Engineering principles. The user interacts
-with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10kLOC.
+TutorAid is a desktop application used for helping tech-savvy private tutors, who have busy schedules / many students, to keep track of each students' details. 
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project:
 
