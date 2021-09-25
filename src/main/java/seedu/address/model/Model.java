@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.anime.Anime;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Anime> PREDICATE_SHOW_ALL_ANIME = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -37,7 +37,7 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getAniListFilePath();
 
     /**
      * Sets the user prefs' address book file path.
@@ -47,41 +47,41 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyAnimeList addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyAnimeList getAniList();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a Anime with the same identity as {@code Anime} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasAnime(Anime anime);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given Anime.
+     * The Anime must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteAnime(Anime target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given Anime.
+     * {@code Anime} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addAnime(Anime anime);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given Anime {@code target} with {@code editedAnime}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The Anime identity of {@code editedAnime} must not be the same as another existing Anime in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setAnime(Anime target, Anime editedAnime);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered Anime list */
+    ObservableList<Anime> getFilteredAnimeList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered Anime list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredAnimeList(Predicate<Anime> predicate);
 }

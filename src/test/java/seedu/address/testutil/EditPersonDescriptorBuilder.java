@@ -4,9 +4,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.EditCommand.EditAnimeDescriptor;
+import seedu.address.model.anime.Anime;
+import seedu.address.model.anime.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,23 +14,23 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPersonDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditAnimeDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditAnimeDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditPersonDescriptorBuilder(EditAnimeDescriptor descriptor) {
+        this.descriptor = new EditAnimeDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
-        descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setTags(person.getTags());
+    public EditPersonDescriptorBuilder(Anime anime) {
+        descriptor = new EditAnimeDescriptor();
+        descriptor.setName(anime.getName());
+        descriptor.setTags(anime.getTags());
     }
 
     /**
@@ -51,7 +51,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditAnimeDescriptor build() {
         return descriptor;
     }
 }

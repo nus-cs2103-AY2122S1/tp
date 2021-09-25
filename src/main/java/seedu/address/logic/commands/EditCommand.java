@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ANIME;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,8 +16,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.anime.Anime;
+import seedu.address.model.anime.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,52 +40,52 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditAnimeDescriptor editAnimeDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editAnimeDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditAnimeDescriptor editAnimeDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editAnimeDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editAnimeDescriptor = new EditAnimeDescriptor(editAnimeDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Anime> lastShownList = model.getFilteredAnimeList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Anime animeToEdit = lastShownList.get(index.getZeroBased());
+        Anime editedAnime = createEditedPerson(animeToEdit, editAnimeDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!animeToEdit.isSameAnime(editedAnime) && model.hasAnime(editedAnime)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.setAnime(animeToEdit, editedAnime);
+        model.updateFilteredAnimeList(PREDICATE_SHOW_ALL_ANIME);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedAnime));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Anime createEditedPerson(Anime animeToEdit, EditAnimeDescriptor editAnimeDescriptor) {
+        assert animeToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editAnimeDescriptor.getName().orElse(animeToEdit.getName());
+        Set<Tag> updatedTags = editAnimeDescriptor.getTags().orElse(animeToEdit.getTags());
 
-        return new Person(updatedName, updatedTags);
+        return new Anime(updatedName, updatedTags);
     }
 
     @Override
@@ -103,24 +103,24 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editAnimeDescriptor.equals(e.editAnimeDescriptor);
     }
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditAnimeDescriptor {
         private Name name;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditAnimeDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditAnimeDescriptor(EditAnimeDescriptor toCopy) {
             setName(toCopy.name);
             setTags(toCopy.tags);
         }
@@ -165,12 +165,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditAnimeDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditAnimeDescriptor e = (EditAnimeDescriptor) other;
 
             return getName().equals(e.getName())
                     && getTags().equals(e.getTags());

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.anime;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Anime in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Anime {
 
     // Identity fields
     private final Name name;
@@ -24,7 +24,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Set<Tag> tags) {
+    public Anime(Name name, Set<Tag> tags) {
         requireAllNonNull(name, tags);
         this.name = name;
         this.tags.addAll(tags);
@@ -43,21 +43,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both anime have the same name.
+     * This defines a weaker notion of equality between two anime.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameAnime(Anime otherAnime) {
+        if (otherAnime == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherAnime != null
+                && otherAnime.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both anime have the same identity and data fields.
+     * This defines a stronger notion of equality between two anime.
      */
     @Override
     public boolean equals(Object other) {
@@ -65,13 +65,13 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Anime)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getTags().equals(getTags());
+        Anime otherAnime = (Anime) other;
+        return otherAnime.getName().equals(getName())
+                && otherAnime.getTags().equals(getTags());
     }
 
     @Override

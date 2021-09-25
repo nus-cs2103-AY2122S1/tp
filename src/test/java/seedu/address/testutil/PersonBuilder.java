@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.anime.Anime;
+import seedu.address.model.anime.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -30,9 +30,9 @@ public class PersonBuilder {
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        tags = new HashSet<>(personToCopy.getTags());
+    public PersonBuilder(Anime animeToCopy) {
+        name = animeToCopy.getName();
+        tags = new HashSet<>(animeToCopy.getTags());
     }
 
     /**
@@ -51,8 +51,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, tags);
+    public Anime build() {
+        return new Anime(name, tags);
     }
 
 }
