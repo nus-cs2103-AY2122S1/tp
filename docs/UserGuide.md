@@ -115,7 +115,7 @@ Examples:
 
 Delete a specific task that has been added to your app.
 
-Format: 
+Format:
 - <code> delete <i>task_id</i> </code>
 - <code> delete <i>n/task_name (d/date)</i> </code>
 
@@ -127,7 +127,7 @@ Interpretation
   * If <code><i>d/date</code></i> field is provided, search for the task in the given date to delete
     * Useful in cases where there are multiple copies of the same task, recurring tasks, etc.
   * If <code><i>d/date</code></i> field is not provided, deletes **every occurence** of tasks matching the given name
-    
+
 Examples:
 * `delete 3` removes the third item in the task list
 * `delete n/quiz` removes every `quiz` task in the app
@@ -139,7 +139,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit` 
+### Exiting the program : `exit`
 
 Exits the program.
 
