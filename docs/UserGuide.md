@@ -3,7 +3,7 @@
 PlannerMd is a command-line application that helps clinic recptionists seamlessly integrate the daily appointments and the unique requuirements of each patient into a single application. PlannerMd expedites the manual processes found in a clinic and saves clinice receptionists plenty of time while also reducing human error.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,15 +21,15 @@ PlannerMd is a command-line application that helps clinic recptionists seamlessl
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+    * **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -63,85 +63,129 @@ PlannerMd is a command-line application that helps clinic recptionists seamlessl
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+---
+###Managing Patients
 
-### Adding a person: `add`
+### Adding a patient: `add`
 
-Adds a person to the address book.
+Adds a patient to the patient records.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A patient can have any number of tags (including 0)
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Bukit Merah p/1234567 t/COVID`
 
-### Listing all persons : `list`
+### Listing all patients : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all patients in the patient records.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a patient's information : `edit`
 
-Edits an existing person in the address book.
+Edits an existing patient in the patient records.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* You can remove all the patient’s tags by typing `t/` without
+  specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating patients by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `john` will match `John`
+* The order of the keywords does not matter. e.g. `John Lee` will match `Lee
+  John`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Patients matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `John` will return `John Lee`, `John Tan`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a patient : `delete`
 
-Deletes the specified person from the address book.
+#### Using id: `id/` [coming soon]
+Deletes a patient from the patient records using their unique ID.
+
+Format: `delete id/ID`
+
+* Deletes the patient with the specified `ID`.
+
+Examples:
+* `delete id/42` deletes patient with id 42
+  <br/><br/>
+#### Using index
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the patient at the specified `INDEX`.
+* The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd patient in the patient records.
+* `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+
+---
+
+###Managing Tags `tag` [coming soon]
+
+### Add tags to a patient:
+
+Adds a tag to a patient’s risk profile
+
+Format: `tag id/INDEX t/TAG c/COLOR`
+
+* Adds a colour coded tag to a patient
+
+
+Examples:
+`tag id/1 t/Covid c/green` tags patient with id 1 with a green Covid tag
+
+### Delete a patient's tags : `-d`
+
+Deletes a tag to a patient’s risk profile.
+
+Format: `tag -d id/1`
+
+* Deletes the tags of the patient with the specified `ID`.
+
+
+Examples:
+`tag -d id/42` delete all tags from patient with id 42
+
+---
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all patient entries.
 
 Format: `clear`
 
@@ -153,11 +197,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+PlannerMD data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+PlannerMD data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
