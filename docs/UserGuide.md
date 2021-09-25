@@ -91,7 +91,29 @@ Examples:
 
 Shows a list of all students in classMATE.
 
-Format: `liststu`
+Format: `liststu [c/CLASS CODE]`
+
+* If the optional field is not provided, all students stored are listed. Otherwise, only students that belong to the field specified are listed.
+
+Examples:
+
+* `liststu c/G06` Lists all students stored in the class `G06`
+
+### Listing all classes : `listc`
+
+Shows a list of all classes in classMATE.
+
+Format: `listc`
+
+### Listing all groups : `listg` [Coming Soon]
+
+Shows a list of all groups in a specific class in classMATE.
+
+Format: `listg c/CLASS CODE`
+
+Examples:
+
+* `listg c/G06` Lists all groups in the class `G06`
 
 ### Editing a student : `editstu`
 
