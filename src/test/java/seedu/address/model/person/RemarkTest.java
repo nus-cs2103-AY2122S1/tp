@@ -14,21 +14,21 @@ class RemarkTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidRemark_throwsIllegalArgumentException() {
         String invalidRemark = "*hello";
         assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemark));
     }
 
     @Test
-    public void isValidName() {
-        // null name
+    public void isValidRemark() {
+        // null remark
         assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
-        // invalid name
+        // invalid remark
         assertFalse(Remark.isValidRemark("^")); // only non-alphanumeric characters
         assertFalse(Remark.isValidRemark("happy*")); // contains non-alphanumeric characters
 
-        // valid name
+        // valid remark
         assertTrue(Remark.isValidRemark("happy")); // alphabets only
         assertTrue(Remark.isValidRemark("12345")); // numbers only
         assertTrue(Remark.isValidRemark("the 2nd son of Peter")); // alphanumeric characters
