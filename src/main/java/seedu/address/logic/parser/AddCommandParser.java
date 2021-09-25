@@ -55,9 +55,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         // Don't allow adding of lessons with the adding of person.
-        Set<Lesson> lessonSet = new HashSet<>();
+        Set<Lesson> lessonList = new HashSet<>();
 
-        Person person = new Person(name, phone, email, address, remark, tagList, lessonSet);
+        Person person = new Person(name, phone, email, address, remark, tagList, lessonList);
 
         return new AddCommand(person);
     }

@@ -61,7 +61,8 @@ public class LessonAddCommandParser {
                 .orElse(new HashSet<>());
 
         // Check if end time is earlier than start time
-        if (startTime.getLocalTime().compareTo(endTime.getLocalTime()) > 0) {
+        boolean isValidTimeRange = startTime.getLocalTime().compareTo(endTime.getLocalTime()) > 0;
+        if (isValidTimeRange) {
             throw new ParseException("End time cannot be earlier than start time.");
         }
 

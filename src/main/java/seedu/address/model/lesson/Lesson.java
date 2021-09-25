@@ -13,6 +13,9 @@ import java.util.Set;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Lesson {
+    // Types of lesson
+    private static final String RECURRING = "Recurring Lesson";
+    private static final String MAKEUP = "MakeUp Lesson";
 
     // Time fields
     private final Date date;
@@ -121,13 +124,16 @@ public abstract class Lesson {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDate())
-                .append("\n Start: ")
-                .append(getStartTime())
-                .append("    End: ")
-                .append(getEndTime())
-                .append("\n Subject: ")
-                .append(getSubject());
+        String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
+        builder.append(typeOfLesson)
+            .append("\n")
+            .append(getDate())
+            .append("\n Start: ")
+            .append(getStartTime())
+            .append("    End: ")
+            .append(getEndTime())
+            .append("\n Subject: ")
+            .append(getSubject());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
