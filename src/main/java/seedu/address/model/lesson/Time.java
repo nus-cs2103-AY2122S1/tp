@@ -19,6 +19,10 @@ public class Time {
             + "1. Both HH and mm are numerical characters.\n"
             + "2. HH < 24 and mm < 60";
 
+    /*
+    Specifies that the first 2 digits must be < 24
+    and the second last digit must be < 6.
+     */
     public static final String VALIDATION_REGEX = "^(([0-1]\\d)|(2[0-3])):([0-5]\\d)$";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_TIME
         .withResolverStyle(ResolverStyle.STRICT);
@@ -62,6 +66,12 @@ public class Time {
         return LocalTime.parse(value);
     }
 
+    /**
+     * Compares this Time object with the other time object.
+     *
+     * @param other The Time object to compare with.
+     * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
+     */
     public int compareTime(Time other) {
         return getLocalTime().compareTo(other.getLocalTime());
     }

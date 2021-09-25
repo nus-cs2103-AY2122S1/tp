@@ -28,6 +28,12 @@ public abstract class Lesson {
 
     /**
      * Every field must be present and not null.
+     *
+     * @param date Date of lesson.
+     * @param startTime Start time of the lesson.
+     * @param endTime End time of the lesson.
+     * @param subject Subject of the lesson.
+     * @param homework Homework for the lesson.
      */
     public Lesson(Date date, Time startTime, Time endTime, Subject subject, Set<Homework> homework) {
         requireAllNonNull(date, startTime, endTime, homework);

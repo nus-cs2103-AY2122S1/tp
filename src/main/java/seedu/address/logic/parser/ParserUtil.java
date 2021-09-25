@@ -142,12 +142,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Time} into a {@code Time}.
+     * Parses 2 {@code String Time}s into {@code Time}s,
+     * then compare if  the range is valid. The first argument
+     * represents the start and the second, the end.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code Time} is invalid.
+     * @throws ParseException if the time range is invalid.
      */
-    public static Time[] parseTimeRange(String startTime, String endTime) throws ParseException {
+    public static void parseTimeRange(String startTime, String endTime) throws ParseException {
         requireNonNull(startTime);
         requireNonNull(endTime);
 
@@ -159,7 +161,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
         }
 
-        return new Time[] {start, end};
+        return;
     }
 
     /**

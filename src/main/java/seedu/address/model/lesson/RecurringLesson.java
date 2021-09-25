@@ -8,6 +8,9 @@ import java.util.Set;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class RecurringLesson extends Lesson {
+    /**
+     * Count of the number of lessons taken this month for this recurring lesson.
+     */
     private static int recurringLessonsCount = 0;
 
     /**
@@ -56,6 +59,11 @@ public class RecurringLesson extends Lesson {
                 getSubject(), getHomework());
     }
 
+    /**
+     * Checks if the date has passed and update the recurring lesson count accordingly.
+     *
+     * @return {@code RecurringLesson} with the updated date.
+     */
     private RecurringLesson updateRecurringLessonCount() {
         // Compare lesson date to current date
         // Increment count if date has passed
