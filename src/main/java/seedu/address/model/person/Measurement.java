@@ -46,6 +46,9 @@ public class Measurement {
         return isArgsNumber && (args.length == 3 || args.length == 4);
     }
 
+    /**
+     * Returns message constraints based on gender type.
+     */
     public static String getMessageConstraints(GenderType genderType) {
         if (genderType == GenderType.MALE) {
             return MALE_MESSAGE_CONSTRAINTS;

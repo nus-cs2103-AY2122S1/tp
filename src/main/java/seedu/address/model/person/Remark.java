@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's name in the address book.
+ * Represents a Person's remark in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
  */
 public class Remark {
@@ -15,7 +15,7 @@ public class Remark {
     public final String value;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Remark}.
      *
      * @param remark A valid remark.
      */
@@ -26,7 +26,7 @@ public class Remark {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid remark.
      */
     public static boolean isValidRemark(String test) {
         return test.matches(VALIDATION_REGEX);

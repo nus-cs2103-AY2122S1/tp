@@ -54,7 +54,7 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        //different measurement -> returns false
+        // different measurement -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withMeasurement(VALID_MEASUREMENT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
@@ -62,7 +62,7 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        //different remark -> false
+        // different remark -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRemark(VALID_REMARK_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
