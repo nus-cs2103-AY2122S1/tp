@@ -159,6 +159,30 @@ Clears all entries from CSBook.
 
 Format: `clear`
 
+### Creating a group of students: `group`
+
+Creates a group of students with the given group name and the list of students
+
+Format: `group GROUPNAME STUDENT1 STUDENT2 ... STUDENTN`
+
+* Creates a group with the specified `GROUPNAME`.
+* Adds the following students arguments, `STUDENT1 STUDENT2 ... STUDENTN` into the created group.
+
+Examples:
+* `group CS2103T BrianCheong JunWei Erin ZhiHao JiaXian` creates a group CS2103T with BrianCheong JunWei Erin
+ZhiHao and JiaXian in the group.
+
+### Delete Group: deletegroup
+
+Deletes the group with the specified group name.
+
+Format: `deletegroup GROUPNAME`
+
+* Deletes the group with the specified `GROUPNAME`.
+
+Examples:
+* `deletegroup CS2103T` deletes the group CS2103T.
+
 ### Exiting the program : `exit`
 
 Exits the program.
