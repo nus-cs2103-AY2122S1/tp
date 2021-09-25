@@ -257,13 +257,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is tech-savvy
+* is a manager of food-chain services
+* has a need to manage a significant number of staff
+* has a need to manage staff schedules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: It can be complicated and tedious for managers of such food chain services to manually keep track of their staff information, schedules, working hours, and salaries. Staff’d provides a central management system of staff that allows for easy and intuitive tracking and handling of the aforementioned data.
 
 
 ### User stories
@@ -278,6 +281,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Add the staff details (eg contact information, salaries)     | Can quickly and easily access and add staff records   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Edit the staff details (eg contact information, salaries)    | Can quickly and easily access and edit staff records  |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Delete the staff details (eg contact information, salaries)     | Can quickly and easily access and delete staff records   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Add the staffs schedule and makes changes spontaneously    | Can quickly and easily access and add schedule   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Edit the staffs schedule and makes changes spontaneously    | Can quickly and easily access and edit schedule   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Delete the staffs schedule and makes changes spontaneously    | Can quickly and easily access and delete schedule   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Implement flexible salary scheme based on seniority/performance and number of hours worked (eg working over 40 hours in a week results in greater pay per hour)     | Set and edit how salary for any staff is calculated (eg by month or by hour)   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Give bonuses to certain staff or reimburse them for company expenses, or deduct from their pay for miscellaneous reasons (eg broke something)   | Keep a running tab of the money the company owes them or vice versa   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Adds new and different categories of information (eg food preferences) for each staff member     | Store information which may come in useful   |
+| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Adds tags or remarks for different staff     | Can treat some staff specially according to the remarks   |
+| `* * *`  | Careless and forgetful manager (Bob)  | Keep track (view) of staff's ever-changing pay    | Greater accuracy to ensure staff get appropriate pay   |
+| `* * *`  | Careless and forgetful manager (Bob)  | Keep track (view) of staff's scheduling    | To ensure that the schedules are done properly with appropriate manpower each day   |
+| `* * *`  | Careless and forgetful manager (Bob)  | Keep track of staff's details including bank details and contact information    | To allow Bob to have his staff's details on hand when needed ie settling pay or contacting them if they are late   |
+| `* * *`  | Bad at maths manager (Bob)  | Automates the calculation of pay for the staff    | Ensures staff receive the correct pay and takes the time-consuming load off Bob   |
+| `* * *`  | Busy manager (Bob)  | Calculate working hours of the staff based on check-in and check-out times   | Greater accuracy to ensure staff get appropriate pay   |
+| `* * *`  | Busy manager (Bob)  | Has all the necessary functions in on app     | Bob does not have to transfer details and changes between different apps  |
 
 *{More to be added}*
 
