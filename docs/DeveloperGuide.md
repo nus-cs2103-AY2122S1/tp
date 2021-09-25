@@ -265,9 +265,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: This app will help the professors keep track of each student’s performance after each assessment. 
-It can analyse results of individual students, or tutorial groups, and identify students who require additional help, 
-while doing so faster than a typical mouse/GUI driven app. 
+**Value proposition**: This app will help the professors keep track of each student’s performance after each assessment,
+doing so faster than a typical mouse/GUI driven app.
+It can analyse results of individual students, or tutorial groups, and identify students who require additional help,
 
 ### User stories
 
