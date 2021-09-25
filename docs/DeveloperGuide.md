@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* Students, Professors and Teaching Assistants
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Helps to improve connectivity among students and teaching staff
 
 
 ### User stories
@@ -346,11 +347,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
+8. **Use case: Import contacts from JSON file**
+
+   **MSS**
+
+   1. User enters command to import from a JSON file.
+   2. CohortConnect shows a list of persons to be imported.
+   3. User confirms the import.
+   4. CohortConnect shows the updated list of contacts.
+
+      Use case ends.
+
+   **Extensions**
+
+   * 1a. CohortConnect cannot find the JSON file.
+
+      * 1a1. CohortConnect shows an error.
+
+     Use case ends.
+
+   * 2a. User decides to cancel the import.
+
+     Use case ends.
+
+9. **Export contacts to JSON file**
+
+   **MSS**
+
+   1. User enters command to export contacts to a named JSON file.
+   2. CohortConnect shows a success message.
+
+      Use case ends.
+
+   **Extensions**
+
+   * 1a. File name already exists.
+
+      * 1a1. CohortConnect shows an error.
+
+     Use case ends.
+
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Data should be saved locally.
+5. Product is not required to handle communication between users.
 
 *{More to be added}*
 
@@ -358,7 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
