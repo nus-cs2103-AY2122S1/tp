@@ -5,8 +5,8 @@ title: User Guide
 
 Source Control is a **desktop app for CS1101S professors to manage the performance of their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Source Control can give you a quick overview or a closer look of how your students are doing.
 
-* Table of Contents
-  {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -61,10 +61,10 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n <student_name> -g <group_name>`, then `-g <group_name> -n <student_name>` is also acceptable.
 
-* If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.
+* If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `-g T02A -g T03B` and the command only expects one group, only `-g T03B` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `clear`) will be ignored.
+* Extraneous parameters for commands that do not take in parameters (such as `clear`) will be ignored.<br>
   e.g. if the command specifies `clear 123`, it will be interpreted as `clear`.
 
 </div>
@@ -84,7 +84,9 @@ Format: `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>`
 * Every row apart from the first represents a student.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 * If the student does not have as many groups as the number of groups, you should leave several group columns blank.
+
 * If the student does not have a grade for some assessment, you should leave the corresponding assessment column blank.
 </div>
 
