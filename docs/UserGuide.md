@@ -105,18 +105,21 @@ Examples:
 * `view` shows a list of all the residents
 * `view 30` shows the details of the resident at index 30
 
-### Updating FET date : `fet`
+### Retrieve a list of residents with their fet due : `list`
 
-Updates the last done FET date for all residents.
+Retrieve a list of residents whose ART collection or FET are due within the range of the current date and the optional given date.
 
-Format: `fet d/DATE`
+Format: `list k/KEYWORD [d/DATE]`
 
+* The keyword can be either fet or collection, which are both case-insensitive
 * The date inputted has to be in `dd-mm-yyyy` format
-* Date will be stored in a `MMM dd yyyy` format, e.g., (`Sep 21 2021`)
-* The last FET date of all residents will be updated by this command
+* The given Date must be a date later than the current date
 
 Examples:
-* `fet 15-8-2021` sets the FET date of all residents to `Aug 15 2021`
+* `list k/fet` retrieves a list of residents whose FET is due today
+* `list k/fet 30-9-2021` retrieves a list of residents whose FET is due some day between today and `Sep 21 2021`
+* `list k/collection` retrieves a list of residents whose FET is due today
+* `list k/collection 30-9-2021` retrieves a list of residents whose ART Collection is due some day between today and `Sep 21 2021`
 
 ### Searching by resident information: `search`
 
