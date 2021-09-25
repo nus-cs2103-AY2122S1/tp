@@ -283,7 +283,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAB` and the **Actor** is the `user (tutor)`, unless specified otherwise)
+
+**Use case: UC2 – Edit a student**
+
+**MSS:**
+
+1. User requests to list students.
+2. TAB shows a list of students.
+3. User requests to edit a specific student by the index in the list.
+4. TAB edits the corresponding fields of the student.
+
+Use case ends.
+
+**Extensions:**
+
+* 2a. The list is empty.
+
+Use case ends.
+
+* 3a. The given index is invalid.
+
+  * 3a1. TAB shows an error message. 
+
+Use case resumes at step 2.
+
+* 3b. No data fields entered. 
+  * 3b1. TAB shows an error message. 
+
+Use case resumes at step 3.
+
+* 3c. Content to be edited does not satisfy requirements.
+
+  * 3c1. TAB shows an error message with the requirements specified. 
+  * 3c2. User enters new data.
+  * Steps 3c1-3c2 are repeated until the new data filled in is satisfies the requirements.
+
+Use case resumes at step 4.
 
 **Use case: Delete a person**
 
@@ -335,6 +371,24 @@ Use case ends.
 
 Use case resumes at step 2.
 
+**Use Case: UC8 – See quick start instructions**
+
+**MSS:**
+1. User opens the app.
+2. TAB shows quick tips in the command result box.
+
+Use case ends.
+
+
+**Use Case: UC9 – See help guide**
+
+**MSS:**
+
+1. User requests for help.
+2. TAB shows a summary table of all the command usages as well as a link to user guide page.
+
+Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -344,6 +398,8 @@ Use case resumes at step 2.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
+4. Should be portable, i.e. user can transfer data from one device to another easily.
+5. Should allow users to easily navigate the app interface.
 
 ### Glossary
 
