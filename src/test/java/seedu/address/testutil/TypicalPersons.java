@@ -73,8 +73,8 @@ public class TypicalPersons {
             .withAddress("michegan ave")
             .withAcadStream("IELTS").build();
 
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").
-            withPhone("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
+            .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withAcadLevel("S5").build();
