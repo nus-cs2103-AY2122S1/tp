@@ -74,7 +74,7 @@ public abstract class Lesson {
      * @return newDate The date of the same day on the following week.
      */
     public Date updateDateWithWeek() {
-        Date newDate = new Date(getDate().getLocalDate().plusDays(7).toString());
+        Date newDate = new Date(getDate().getLocalDate().plusDays(7).format(Date.FORMATTER));
         return newDate;
     }
 

@@ -21,7 +21,7 @@ public class Date {
 
 
     public static final String VALIDATION_REGEX = "^[0-9]{2}\\s[a-zA-Z]{3}\\s[0-9]{4}";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter
         .ofPattern("dd MMM uuuu")
         .withResolverStyle(ResolverStyle.STRICT);
 
