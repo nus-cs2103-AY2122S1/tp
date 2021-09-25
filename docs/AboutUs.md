@@ -29,14 +29,14 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 * Role: Developer
 * Responsibilities: Integration
 
-### Johnny Doe
+### Gnoh Cheng Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gnohchengyi.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/gnohchengyi)] [[portfolio](team/gnohchengyi.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Code Quality + JavaFX Expert
 
 ### Jean Doe
 
