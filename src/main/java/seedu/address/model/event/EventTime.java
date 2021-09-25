@@ -47,6 +47,9 @@ public class EventTime {
      * @return A boolean indicating if the string is a valid time.
      */
     public static boolean isValidTime(String test) {
+        if (test.length() != 4) {
+            return false;
+        }
         DateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
         sdf.setLenient(false);
         try {
@@ -59,7 +62,7 @@ public class EventTime {
 
     @Override
     public String toString() {
-        return this.hasTime ? this.time.format(DateTimeFormatter.ofPattern("HHmm")) : "";
+        return this.hasTime ? this.time.format(DateTimeFormatter.ofPattern(TIME_FORMAT)) : "";
     }
 
     @Override
