@@ -11,7 +11,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 ### Adam Oh Zhi Hong
 
-<img src="images/adam.png" width="200px">
+<img src="images/moretriangles.png" width="200px">
 
 [[github](https://github.com/moreTriangles)]
 
@@ -20,7 +20,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 ### Aishwarya Radhakrishnan Nair
 
-<img src="images/aishwarya.png" width="200px">
+<img src="images/aishh12.png" width="200px">
 
 [[github](http://github.com/aishh12)]
 
@@ -29,7 +29,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 ### Atin Sakkeer Hussain
 
-<img src="images/Atin.jpg" width="200px">
+<img src="images/crypto-code.png" width="200px">
 
 [[github](http://github.com/crypto-code)]
 
@@ -38,7 +38,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 ### Cheong Yee Ming
 
-<img src="images/yee_ming.png" width="200px">
+<img src="images/cheongyeeming.png" width="200px">
 
 [[github](http://github.com/CheongYeeMing)]
 
@@ -48,7 +48,7 @@ You can reach us at our [github issues](https://github.com/AY2122S1-CS2103T-T10-
 
 ### Jai Lal Lulla
 
-<img src="images/jai.png" width="200px">
+<img src="images/jai2501.png" width="200px">
 
 [[github](http://github.com/jai2501)]
 
