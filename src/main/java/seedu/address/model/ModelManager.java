@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
+import seedu.address.model.participant.Participant;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +22,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Participant> filteredParticipants;
     //Add-ons for Managera
     private final FilteredList<Event> events;
 
@@ -37,7 +37,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredParticipants = new FilteredList<>(this.addressBook.getParticipantList());
         //Add-ons for Managera
         events = new FilteredList<>(this.addressBook.getEventList());
     }
@@ -94,27 +94,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasParticipant(Participant participant) {
+        requireNonNull(participant);
+        return addressBook.hasParticipant(participant);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteParticipant(Participant target) {
+        addressBook.removeParticipant(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addParticipant(Participant participant) {
+        addressBook.addParticipant(participant);
+        updateFilteredParticipantList(PREDICATE_SHOW_ALL_PARTICIPANTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setParticipant(Participant target, Participant editedParticipant) {
+        requireAllNonNull(target, editedParticipant);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setParticipant(target, editedParticipant);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -124,14 +124,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Participant> getFilteredParticipantList() {
+        return filteredParticipants;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredParticipantList(Predicate<Participant> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredParticipants.setPredicate(predicate);
     }
 
     /**
@@ -159,7 +159,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredParticipants.equals(other.filteredParticipants);
     }
 
 }

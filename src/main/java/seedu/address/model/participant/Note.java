@@ -1,4 +1,4 @@
-package seedu.address.model.particpant;
+package seedu.address.model.participant;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,6 +10,9 @@ import java.util.Objects;
  * Unlike tags, the aim of the note is for the client/event organizer to be able to add and remove the note.
  */
 public class Note {
+
+    public static final String MESSAGE_INVALID_NOTE_FORMAT = "Note format should be \"IMPORTANCE: CONTENT\"";
+
 
     /** Importance of the note */
     public enum Importance {

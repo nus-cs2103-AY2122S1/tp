@@ -7,8 +7,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.UniqueParticipantList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
@@ -16,7 +17,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniqueParticipantList participants;
     private final UniqueEventList events;
 
     /*
@@ -27,7 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        participants = new UniqueParticipantList();
         //Add on for Managera
         events = new UniqueEventList();
     }
@@ -48,8 +49,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setParticipants(List<Participant> participants) {
+        this.participants.setParticipants(participants);
     }
 
     /**
@@ -58,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setParticipants(newData.getParticipantList());
         setEvents(newData.getEventList());
     }
 
@@ -67,17 +68,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasParticipant(Participant participant) {
+        requireNonNull(participant);
+        return participants.contains(participant);
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addParticipant(Participant p) {
+        participants.add(p);
     }
 
     /**
@@ -85,18 +86,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setParticipant(Participant target, Participant editedParticipant) {
+        requireNonNull(editedParticipant);
 
-        persons.setPerson(target, editedPerson);
+        participants.setParticipant(target, editedParticipant);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeParticipant(Participant key) {
+        participants.remove(key);
     }
 
     //Add on for Managera
@@ -138,13 +139,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return participants.asUnmodifiableObservableList().size() + " participants";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Participant> getParticipantList() {
+        return participants.asUnmodifiableObservableList();
     }
 
     @Override
@@ -156,11 +157,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && participants.equals(((AddressBook) other).participants));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return participants.hashCode();
     }
 }

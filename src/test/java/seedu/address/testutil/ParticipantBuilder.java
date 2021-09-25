@@ -6,9 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.particpant.BirthDate;
-import seedu.address.model.particpant.Note;
-import seedu.address.model.particpant.Participant;
+import seedu.address.model.nextOfKin.NextOfKin;
+import seedu.address.model.participant.BirthDate;
+import seedu.address.model.participant.Note;
+import seedu.address.model.participant.Participant;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +27,8 @@ public class ParticipantBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final BirthDate DEFAULT_BIRTHDATE = BirthDate.of(2000, 8, 4);
+    public static final NextOfKin DEFAULT_NEXT_OF_KIN = new NextOfKin(new Name("Bebe Bee"), new Phone("80232345"),
+        new Tag("Spouse"));
 
     private Name name;
     private Phone phone;
@@ -34,7 +37,7 @@ public class ParticipantBuilder {
     private Set<Tag> tags;
     private BirthDate birthDate;
     private Set<Note> notes;
-    private ArrayList<Person> nextOfKins;
+    private NextOfKin nextOfKin;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,7 +50,7 @@ public class ParticipantBuilder {
         tags = new HashSet<>();
         birthDate = DEFAULT_BIRTHDATE;
         notes = new HashSet<>();
-        nextOfKins = new ArrayList<>();
+        nextOfKin = new ArrayList<>();
     }
 
     /**
@@ -61,7 +64,7 @@ public class ParticipantBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         birthDate = BirthDate.notSpecified();
         notes = new HashSet<>();
-        nextOfKins = new ArrayList<>();
+        nextOfKins = null;
     }
 
     /**
@@ -75,7 +78,7 @@ public class ParticipantBuilder {
         tags = new HashSet<>(participantToCopy.getTags());
         birthDate = participantToCopy.getBirthDate();
         notes = new HashSet<>(participantToCopy.getNotes());
-        nextOfKins = new ArrayList<>(participantToCopy.getNextOfKins());
+        nextOfKin = participantToCopy.getNextOfKin();
     }
 
     /**
@@ -153,7 +156,7 @@ public class ParticipantBuilder {
 
 
     public Participant build() {
-        return new Participant(name, phone, email, address, tags, birthDate, notes, nextOfKins);
+        return new Participant(name, phone, email, address, tags, birthDate, notes, nextOf);
     }
 
 }

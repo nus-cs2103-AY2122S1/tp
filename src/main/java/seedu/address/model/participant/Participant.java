@@ -1,13 +1,15 @@
-package seedu.address.model.particpant;
+package seedu.address.model.participant;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.nextOfKin.NextOfKin;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,9 +24,10 @@ import seedu.address.model.tag.Tag;
  */
 public class Participant extends Person {
 
+    private final ParticipantId id;
     private final BirthDate birthDate;
     private final Set<Note> notes = new HashSet<>();
-    private final ArrayList<Person> nextOfKins = new ArrayList<>();
+    private final ArrayList<NextOfKin> nextOfKins = new ArrayList<>();
 
 
     /**
@@ -37,15 +40,16 @@ public class Participant extends Person {
      * @param tags       tags of the person.
      * @param birthDate  birthdate of the person.
      * @param notes      notes attached by the manager.
-     * @param nextOfKins nextOfKins of the person.
+     * @param nextOfKin nextOfKin of the person.
      */
     public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
-                       Set<Note> notes, ArrayList<Person> nextOfKins) {
+                       Set<Note> notes, Collection<NextOfKin> nextOfKin) {
         super(name, phone, email, address, tags);
-        requireAllNonNull(birthDate, notes, nextOfKins);
+        requireAllNonNull(birthDate, notes);
         this.birthDate = birthDate;
         this.notes.addAll(notes);
-        this.nextOfKins.addAll(nextOfKins);
+        this.nextOfKins.addAll(nextOfKin);
+        this.id = ParticipantId.of(this);
     }
 
 
@@ -61,11 +65,13 @@ public class Participant extends Person {
      *
      * @return this object's nextOfKins.
      */
-    public ArrayList<Person> getNextOfKins() {
+    public ArrayList<NextOfKin> getNextOfKins() {
         return this.nextOfKins;
     }
 
-
+    public ParticipantId getParticipantId() {
+        return this.id;
+    }
     /**
      * Adds a note to set of notes.
      *
@@ -150,21 +156,23 @@ public class Participant extends Person {
                 .append("; Address: ")
                 .append(getAddress());
 
+
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
 
-        if (!nextOfKins.isEmpty()) {
-            builder.append("; NOK: ");
-            nextOfKins.forEach(builder::append);
-        }
-
         Set<Note> notes = getNotes();
         if (!notes.isEmpty()) {
             builder.append("; Notes: ");
             notes.forEach(builder::append);
+        }
+
+        ArrayList<NextOfKin> nextOfKins = getNextOfKins();
+        if (!nextOfKins.isEmpty()) {
+            builder.append("; Next Of Kins: ");
+            nextOfKins.forEach(builder::append);
         }
 
         return builder.toString();

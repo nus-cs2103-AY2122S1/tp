@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +11,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.nextOfKin.NextOfKin;
+import seedu.address.model.participant.BirthDate;
+import seedu.address.model.participant.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -21,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_IMPORTANCE = "Illegal Importance parsed";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -121,4 +127,77 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+
+    public static BirthDate parseBirthDate(String birthDate) throws ParseException {
+        requireNonNull(birthDate);
+        String trimmedBirthDate = birthDate.trim();
+        if (trimmedBirthDate.equals("NA")) {
+            return BirthDate.notSpecified();
+        } else if (!BirthDate.isValidBirthDate(trimmedBirthDate)) {
+            throw new ParseException(BirthDate.MESSAGE_DATE_CONSTRAINTS);
+        }
+        LocalDate localDate = LocalDate.parse(trimmedBirthDate);
+        return BirthDate.of(localDate);
+    }
+
+
+    public static Note parseNote(String note) throws ParseException {
+        requireNonNull(note);
+        String trimmedNote = note.trim();
+        // format: Importance: <content>
+        String[] parts = trimmedNote.split(":");
+        if (parts.length != 2) {
+          throw new ParseException(Note.MESSAGE_INVALID_NOTE_FORMAT);
+        }
+        Note.Importance importance = parseImportance(parts[0]);
+        return new Note(parts[1].trim(), importance);
+    }
+
+
+    public static Set<Note> parseNotes(Collection<String> notes) throws ParseException {
+        requireNonNull(notes);
+        final Set<Note> tagNotes = new HashSet<>();
+        for (String noteDescription : notes) {
+            tagNotes.add(parseNote(noteDescription));
+        }
+        return tagNotes;
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static NextOfKin parseNextOfKin(String nextOfKin) throws ParseException {
+        requireNonNull(nextOfKin);
+        // TODO: IMPLEMENT THIS
+        return new NextOfKin(new Name("Test"), new Phone("12345678"), new Tag("Test"));
+    }
+    public static ArrayList<NextOfKin> parseNextOfKins(Collection<String> noks) throws ParseException {
+        requireNonNull(noks);
+        final ArrayList<NextOfKin> nextOfKins = new ArrayList<>();
+        for (String nextOfKin : noks) {
+            nextOfKins.add(parseNextOfKin(nextOfKin));
+        }
+        return nextOfKins;
+    }
+
+    public static Note.Importance parseImportance(String importance) throws ParseException {
+        requireNonNull(importance);
+        switch(importance) {
+        case "VERY_HIGH":
+            return Note.Importance.VERY_HIGH;
+        case "HIGH":
+            return Note.Importance.HIGH;
+        case "MEDIUM":
+            return Note.Importance.MEDIUM;
+        case "LOW":
+            return Note.Importance.LOW;
+        case "VERY_LOW":
+            return Note.Importance.VERY_LOW;
+        default:
+            throw new ParseException(MESSAGE_INVALID_IMPORTANCE + " " + importance);
+        }
+    }
+
+
 }
