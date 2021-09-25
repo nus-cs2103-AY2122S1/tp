@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Xiaotong
 
-<img src="images/chenxiaotong.png" width="200px">
+<img src="images/WuaaAj.png" width="200px">
 
 [[github](http://github.com/WuaaAj)]
 [[portfolio](team/johndoe.md)]
