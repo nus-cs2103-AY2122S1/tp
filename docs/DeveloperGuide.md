@@ -373,7 +373,7 @@ Use case ends.
 
 Use case resumes at step 2.
 
-**Use case: UC7 - Find student by student fields**
+**Use case: UC7 – Find student by student fields**
 
 **MSS:**
 
@@ -387,6 +387,23 @@ Use case resumes at step 2.
 **Extensions:**
 
 * 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC8 – Filter students by tags**
+
+**MSS:**
+
+1.  User request to view all tags.
+2.  TAB shows a list of created tags.
+3.  User requests to filter students by a few specified tags.
+4.  TAB shows a list of students matching the specified tags.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. There are no tags.
 
   Use case ends.
 
