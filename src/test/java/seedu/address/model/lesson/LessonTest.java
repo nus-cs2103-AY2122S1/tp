@@ -2,8 +2,6 @@ package seedu.address.model.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,9 +19,6 @@ public class LessonTest {
 
     @Test
     public void updateDateWithWeek_validDateString_success() {
-        DateTimeFormatter FORMATTER = DateTimeFormatter
-            .ofPattern("dd MMM uuuu")
-            .withResolverStyle(ResolverStyle.STRICT);
         String validOneWeekLaterDateString = "21 Jan 2022";
         Lesson lesson = new RecurringLesson(new Date(DATE), new Time(START_TIME), new Time(END_TIME),
             new Subject(SUBJECT), HOMEWORK);

@@ -59,7 +59,7 @@ public class LessonAddCommandParser {
         // Throws ParseException if range is invalid.
         ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_START_TIME).get(),
             argMultimap.getValue(PREFIX_END_TIME).get());
-        
+
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
