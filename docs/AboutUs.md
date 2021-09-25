@@ -13,7 +13,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/junwei3112.png" width="200px">
 
-[[github](https://github.com/JunWei3112)] [[portfolio](team/yeojunwei.md)]
+[[github](https://github.com/JunWei3112)]
+[[portfolio](team/junwei3112.md)]
 
 * Role: Developer
 * Responsibilities: Integration
