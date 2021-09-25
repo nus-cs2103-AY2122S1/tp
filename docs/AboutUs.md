@@ -27,14 +27,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Tey Hao Ze
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Haozeee.png" width="200">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/haozeee)]
+[[portfolio](team/TeyHaoZe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Scheduling and tracking
+* Responsibilities: In charge of defining, assigning and tracking project tasks
 
 ### Jean Doe
 
