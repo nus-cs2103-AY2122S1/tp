@@ -380,7 +380,10 @@ _{More to be added}_
 ### Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Student**: A person that is studying any specific module in university
+- **Module**: An academic unit usually comprising lectures, tutorials and sometimes laboratory sessions. Teaching assistants may assist in teaching tutorial classes to a group of students
+- **Teaching Assistant (TA)**: The intended user of the application, in charge of teaching at least 1 module
+- **CSBook**: The name of the application
 
 ---
 
