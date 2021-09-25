@@ -292,34 +292,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list students.
 2. TAB shows a list of students.
 3. User requests to edit a specific student by the index in the list.
-4. TAB edits the corresponding fields of the student.
-
-Use case ends.
+4. TAB edits the corresponding fields of the student. 
+   Use case ends.
 
 **Extensions:**
 
 * 2a. The list is empty.
+  
+  Use case ends.
 
-Use case ends.
 
 * 3a. The given index is invalid.
 
   * 3a1. TAB shows an error message. 
 
-Use case resumes at step 2.
+    Use case resumes at step 2.
+    
 
 * 3b. No data fields entered. 
   * 3b1. TAB shows an error message. 
 
-Use case resumes at step 3.
+    Use case resumes at step 3.
+    
 
 * 3c. Content to be edited does not satisfy requirements.
 
   * 3c1. TAB shows an error message with the requirements specified. 
   * 3c2. User enters new data.
   * Steps 3c1-3c2 are repeated until the new data filled in is satisfies the requirements.
-
-Use case resumes at step 4.
+    
+    Use case resumes at step 4.
 
 **Use case: Delete a person**
 
@@ -376,8 +378,7 @@ Use case resumes at step 2.
 **MSS:**
 1. User opens the app.
 2. TAB shows quick tips in the command result box.
-
-Use case ends.
+    Use case ends.
 
 
 **Use Case: UC9 – See help guide**
@@ -385,9 +386,9 @@ Use case ends.
 **MSS:**
 
 1. User requests for help.
-2. TAB shows a summary table of all the command usages as well as a link to user guide page.
+2. TAB shows a summary table of all the command usages as well as a link to user guide page. 
 
-Use case ends.
+    Use case ends.
 
 *{More to be added}*
 
@@ -396,16 +397,17 @@ Use case ends.
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
 4. Should be portable, i.e. user can transfer data from one device to another easily.
 5. Should allow users to easily navigate the app interface.
+
+*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Academic Stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
+* **Academic Level**: Mainstream academic years from primary school through junior college in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
