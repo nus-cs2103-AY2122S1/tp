@@ -29,10 +29,10 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Tey Hao Ze
 
-<img src="images/Haozeee.png" width="200">
+<img src="images/haozeee.png" width="200">
 
 [[github](https://github.com/haozeee)]
-[[portfolio](team/TeyHaoZe.md)]
+[[portfolio](team/haozeee.md)]
 
 * Role: Scheduling and tracking
 * Responsibilities: In charge of defining, assigning and tracking project tasks
