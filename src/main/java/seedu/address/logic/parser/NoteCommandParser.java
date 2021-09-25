@@ -11,6 +11,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Note;
 
 public class NoteCommandParser implements Parser<NoteCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the NoteCommand
+     * and returns a NoteCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public NoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,

@@ -5,6 +5,11 @@ import static java.util.Objects.requireNonNull;
 public class Note {
     public final String value;
 
+    /**
+     * Constructor for a Note instance.
+     *
+     * @param value Value of the note.
+     */
     public Note(String value) {
         requireNonNull(value);
         this.value = value;

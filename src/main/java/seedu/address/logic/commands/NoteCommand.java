@@ -22,9 +22,6 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Person: %1$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed note from Person: %1$s";
 
-    private final Index index;
-    private final Note note;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing notes will be overwritten by the input.\n"
@@ -32,6 +29,9 @@ public class NoteCommand extends Command {
             + PREFIX_NOTE + "[NOTE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NOTE + "Likes to swim.";
+
+    private final Index index;
+    private final Note note;
 
     /**
      * @param index Index of the person in currently displayed person list to edit note for.
