@@ -109,17 +109,17 @@ Examples:
 
 Retrieve a list of residents whose ART collection or FET are due within the range of the current date and the optional given date.
 
-Format: `list k/KEYWORD [d/DATE]`
+Format: `list -f [d/DATE]`
 
-* The keyword can be either fet or collection, which are both case-insensitive
+* The falg can be either -f for fet or -c collection
 * The date inputted has to be in `dd-mm-yyyy` format
 * The given Date must be a date later than the current date
 
 Examples:
-* `list k/fet` retrieves a list of residents whose FET is due today
-* `list k/fet 30-9-2021` retrieves a list of residents whose FET is due some day between today and `Sep 21 2021`
-* `list k/collection` retrieves a list of residents whose FET is due today
-* `list k/collection 30-9-2021` retrieves a list of residents whose ART Collection is due some day between today and `Sep 21 2021`
+* `list -f` retrieves a list of residents whose FET is due today
+* `list -f 30-9-2021` retrieves a list of residents whose FET is due some day between today and `Sep 21 2021`
+* `list -c` retrieves a list of residents whose FET is due today
+* `list -c 30-9-2021` retrieves a list of residents whose ART Collection is due some day between today and `Sep 21 2021`
 
 ### Searching by resident information: `search`
 
