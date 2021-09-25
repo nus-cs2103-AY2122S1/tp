@@ -272,12 +272,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | recruiter                                  | add an applicant               | update my list of applicants with new people                           |
+| `* * *`  | recruiter                                  | add an employer                | update my list of employers with new people                            |
 
 *{More to be added}*
 
@@ -285,28 +281,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Adding an applicant**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add an applicant with provided information
+2.  AddressBook adds the applicant to the storage
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The input format is wrong.
+    * 1a1. AddressBook shows an error message.
+      
+      Use case resumes at step 1. 
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Adding an employer**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User requests to add an employer with provided information
+2.  AddressBook adds the employer to the storage
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is wrong.
+    * 1a1. AddressBook shows an error message.
+
+      Use case resumes at step 1.
+
 
 *{More to be added}*
 
