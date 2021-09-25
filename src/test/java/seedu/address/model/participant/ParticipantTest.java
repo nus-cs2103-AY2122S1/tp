@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
@@ -92,10 +91,6 @@ public class ParticipantTest {
         // different note -> returns false
         Person editedAlice = new ParticipantBuilder(aliceP).withNotes(Set.of(new Note("She is vegan",
                 Note.Importance.VERY_HIGH))).build();
-        assertFalse(aliceP.equals(editedAlice));
-
-        // different nextOfKins -> returns false
-        editedAlice = new ParticipantBuilder(aliceP).withNextOfKins(BOB, AMY).build();
         assertFalse(aliceP.equals(editedAlice));
 
     }

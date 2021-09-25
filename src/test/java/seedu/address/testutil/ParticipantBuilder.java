@@ -37,7 +37,7 @@ public class ParticipantBuilder {
     private Set<Tag> tags;
     private BirthDate birthDate;
     private Set<Note> notes;
-    private NextOfKin nextOfKin;
+    private ArrayList<NextOfKin> nextOfKins;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,7 +50,7 @@ public class ParticipantBuilder {
         tags = new HashSet<>();
         birthDate = DEFAULT_BIRTHDATE;
         notes = new HashSet<>();
-        nextOfKin = new ArrayList<>();
+        nextOfKins = new ArrayList<>();
     }
 
     /**
@@ -78,7 +78,7 @@ public class ParticipantBuilder {
         tags = new HashSet<>(participantToCopy.getTags());
         birthDate = participantToCopy.getBirthDate();
         notes = new HashSet<>(participantToCopy.getNotes());
-        nextOfKin = participantToCopy.getNextOfKin();
+        nextOfKins = participantToCopy.getNextOfKins();
     }
 
     /**
@@ -110,6 +110,14 @@ public class ParticipantBuilder {
      */
     public ParticipantBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Participant} that we are building.
+     */
+    public ParticipantBuilder withEmail(String email) {
+        this.email = new Email(email);
         return this;
     }
 
@@ -149,14 +157,14 @@ public class ParticipantBuilder {
     /**
      * Sets the {@code nextOfKins} of the {@code Participant} that we are building.
      */
-    public ParticipantBuilder withNextOfKins(Person... nextOfKins) {
+    public ParticipantBuilder withNextOfKins(NextOfKin... nextOfKins) {
         this.nextOfKins = new ArrayList<>(Arrays.stream(nextOfKins).collect(Collectors.toList()));
         return this;
     }
 
 
     public Participant build() {
-        return new Participant(name, phone, email, address, tags, birthDate, notes, nextOf);
+        return new Participant(name, phone, email, address, tags, birthDate, notes, nextOfKins);
     }
 
 }
