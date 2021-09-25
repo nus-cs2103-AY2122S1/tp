@@ -38,15 +38,15 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 * Role: Developer
 * Responsibilities: Code Quality + JavaFX Expert
 
-### Jean Doe
+### Tanishq Sharma
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanishq4331.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Tanishq4331)]
+[[portfolio](team/tanishq.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing
+* Responsibilities: 
 
 ### James Doe
 
