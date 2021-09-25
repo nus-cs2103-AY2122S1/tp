@@ -150,14 +150,15 @@ Format: `clear`
 
 ### Creating a group: `addgroup`
 
-Creates a group with the given group name so that students can be added into it. 
+Creates a group with the given group name and given description so that students can be added into it. 
 
-Format: `addgroup GROUPNAME`
+Format: `addgroup n/GROUPNAME d/DESCRIPTION`
 
-* Creates a group with the specified `GROUPNAME`.
+* Creates a group with the specified `GROUPNAME` and `DESCRIPTION`.
 
 Examples:
-* `addgroup CS2103T` creates a group called CS2103T where students can be added into.
+* `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod` 
+where students can be added into.
 
 ### Delete Group: deletegroup
 
