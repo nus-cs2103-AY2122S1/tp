@@ -270,14 +270,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                            | So that I can…​                                                                  |
+| -------- | ------------------------------------------ | ------------------------------                | ----------------------------------------------------------------------              |
+| `* * *`  | potential user                             | find a user guide for the app                 | have an idea of the features provided by the app                                    |
+| `* * *`  | Professor                                  | add a new person                              | keep track of all my students and TAs                                               |
+| `* * *`  | Professor                                  | tag contacts                                  | keep track of Lecture/Tutorial groups that different contacts belong to             |
+| `* * *`  | beginner user                              | see all the contacts I have at once           | easily tell who I have added and who I have not                                     |
+| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using PAB3 without manually inputting every piece of information              |
+| `* * *`  | cautious user                              | export my existing contacts to a json file    | move my address book or keep a backup                                               |
+| `* * *`  | beginner user                              | save the data to a json document              | update it manually and have the option to close the program and open it again later |
+| `* * *`  | organised user                             | delete a specific contact with a specific detail | remove entries that I no longer need                                             |
+| `* * *`  | beginner user                              | exit the program when I am done               | I don't have to keep it running all the time                                        |
+| `* * *`  | intermediate user                          | search a person with any specific detail      | locate details of persons without having to go through the entire list              |
+| `* * *`  | intermediate user                          | search a person with the given tag            | view all the contacts with the given tag                                            |
+| `* *`    | beginner user                              | find the user guide for the app on the app    | have an idea of the features of the app without having to leave the app             |
+| `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
+
 
 *{More to be added}*
 
