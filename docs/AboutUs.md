@@ -37,15 +37,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Scheduling and tracking
 * Responsibilities: In charge of defining, assigning and tracking project tasks
 
-### Jean Doe
+### Koh Hong Po
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hpkoh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/hpkoh)]
+[[portfolio](team/hpkoh.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### Chuang Zhe Quan
 
