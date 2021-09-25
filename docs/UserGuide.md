@@ -16,7 +16,23 @@ title: User Guide
 
 CohortConnect is a desktop application for students, professors, and teaching assistants to connect, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface.
 
-# Quick Start
+## Table of Contents
+ - ### [Quick Start](#QuickStart)
+ - ### [Features](#Features)
+    - #### [Adding a new Contact - add](#Add)
+    - #### [Delete a Contact - delete](#Delete)
+    - #### [Edit a Contact - edit](#Edit)
+    - #### [Find a Contact - find](#Find)
+    - #### [Show a Contact - show](#Show)
+    - #### [Importing Contacts - import](#Import)
+    - #### [Exporting Contacts - export](#Export)
+  - ### [FAQ](#FAQ)
+  - ### [Command Summary](#CommandSummary)
+
+
+<h2 id = "QuickStart"> </h2>
+
+## Quick Start
 
 1. Ensure you have Java 11 or above installed in your computer.
 2. Download the latest `addressbook.jar`  release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
@@ -24,11 +40,16 @@ CohortConnect is a desktop application for students, professors, and teaching as
 4. Using Terminal or Command Line, navigate to the folder containing `addressbook.jar`.
 5. Execute `java -jar addressbook.jar`
 
-# Features
+
+<h2 id = "Features"> </h2>
+
+## Features
 
 Notes about command format:
 
 - `[x/xxx]` refers to an optional field
+
+<h3 id = "Add"> </h3>
 
 ## Adding a new Contact - `add`
 
@@ -46,6 +67,8 @@ Example:
 add n/John Doe te/@johndoe123 p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 ```
 
+<h3 id = "Delete"> </h3>
+
 ## Delete a Contact - `delete`
 
 Deletes the specified person from the address book.
@@ -62,6 +85,8 @@ Example:
 delete 7
 ```
 
+<h3 id = "Edit"> </h3>
+
 ## Edit a Contact - `edit`
 
 Edits an existing person in the address book.
@@ -77,6 +102,8 @@ Example:
 ```bash
 edit 1 n/John t/TA
 ```
+
+<h3 id = "Find"> </h3>
 
 ## Find a Contact - `find`
 
@@ -105,6 +132,8 @@ Example 2:
 ```bash
 find friends
 ```
+
+<h3 id = "Show"> </h3>
 
 ## Show a Contact - `show`
 
@@ -136,6 +165,8 @@ Example 2:
 show 4
 ```
 
+<h3 id = "Import"> </h3>
+
 ## Importing Contacts - `import`
 
 Imports contacts from the specified JSON file.
@@ -151,6 +182,8 @@ Example:
 ```bash
 import CS2103T.JSON
 ```
+
+<h3 id = "Export"> </h3>
 
 ## Exporting Contacts - `export`
 
@@ -168,13 +201,17 @@ Example:
 export Friends.JSON
 ```
 
-# FAQ
+<h2 id = "FAQ"> </h2>
+
+## FAQ
 
 Q: On typing and running commands, the error message "XXXX" is shown, what shall I do?
 
 A: Please **strictly** follow the command format to avoid such issues.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<h2 id = "CommandSummary"> </h2>
 
 ## Command summary
 
