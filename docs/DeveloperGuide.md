@@ -259,14 +259,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 A private 1-to-1 home tuition teacher that:
 
-1. has a need to manage a significant number of student contacts
+1. has a need to manage not more than 50 student contacts
 2. has a need to manage admin details of each student, namely, lesson fees and payment
 3. has a need to keep track of lesson details for each student
-4. has a need to manage a busy schedule
-5. prefers desktop apps over other types
-6. can type fast
-7. prefers typing to mouse interactions
-8. is reasonably comfortable using CLI apps
+4. teaches lessons anytime between 8am and 10pm, on any day of the week
+5. has a need to manage a busy schedule of not more than 50 lessons
+6. prefers desktop apps over other types
+7. can type fast
+8. prefers typing to mouse interactions
+9. is reasonably comfortable using CLI apps
 
 **Value proposition**: Use **TAB** to manage customer contacts and customer relationships faster than 
 a typical mouse/GUI driven app. **TAB** effortlessly keeps track of large amounts of necessary 
@@ -305,67 +306,115 @@ We categorise our user stories into four main epics:
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the tutor `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### **Use case: UC1 - Get a list of students**
 
 **MSS**
 
-1.  User requests to list persons
-2.  TAB shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  TAB deletes the person
+1. User requests to list all students
+2. TAB displays a list of all students
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User requests for a filtered list of students
+
+  * 1a1. TAB displays a filtered list of students
+  
+    Use case ends
+  
+<br/>
+
+#### **Use case: UC2 - Delete a student**
+
+**MSS**
+
+1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+2. User requests to delete a specific student in the list
+3. TAB deletes the student
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+   Use case ends.
+
+* 2a. The given index is invalid
+
+    * 2a1. TAB shows an error message
+
+      Use case resumes at step 1.
+
+<br/>
+
+#### **Use case: UC3 - Add Student's Lesson Information**
+
+**MSS**
+
+1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+2. User requests to add a lesson for a specific student in the list
+3. TAB adds the lesson to the student specified
+    
+Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+  
+  Use case ends.
+
+* 2a. The given index is invalid
+* 
+  * 2a1. TAB shows an error message
+    
+    Use case resumes at step 1.
+  
+* 2b. The given lesson to be added is invalid
+
+  * 2b1. TAB shows an error message
+
+    Use case resumes at step 1.
+
+#### **Use case: UC5 - Update Outstanding Fees of a Student**
+
+**MSS**
+
+1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+2. User requests to update the outstanding fees of a specific student in the list
+3. TAB updates the student's outstanding fees
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid
 
-    * 3a1. TAB shows an error message.
+    * 2a1. TAB shows an error message
 
       Use case resumes at step 2.
-
-**Use case: L2 Track Student's Lesson Information**
-
-**Actor: User (Tutor)**
-
-**MSS**
-
-1.  User requests to list students
-2.  TAB shows a list of students
-3.  User requests to add a lesson for a specific student in the list
-4.  TAB adds the lesson to the student specified
-    
-Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  
-Use case ends.
-
-* 3a. The given index is invalid.
-  * 3a1. TAB shows an error message.
-    
-* 3b. The specified end time is earlier than the start time
-  * 3b1. TAB shows an error message.
-
-Use case resumes at step 2.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. The response to any user action should become visible within 2 seconds.
+3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. The source code should be open source.
+6. The product is offered as a free offline service.
+7. The product should not require any internet connectivity.
+8. Student and lesson data should be persistent.
+9. All features should be easily testable.
 
-*{More to be added}*
 
 ### Glossary
 
