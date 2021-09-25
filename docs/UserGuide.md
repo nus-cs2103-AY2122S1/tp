@@ -122,7 +122,7 @@ Examples:
 
 Filters for residents by the provided keywords for each available parameter.
 
-Format: `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]`
+Format: `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
 * The order of the keywords provided for the name does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -134,6 +134,24 @@ Examples:
 * `search n/John` returns `john` and `John Doe`
 * `search n/alex david v/true` returns vaccinated residents, `Alex Yeoh` and `David Li`
 * `search v/false f/soc` returns un-vaccinated residents from SoC <br>
+
+### Editing a person : `edit`
+
+Edits an existing resident in the address book.
+
+Format: `edit INDEX [MORE_INDICES] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM] [v/VACCINATION_STATUS] [f/FACULTY] [c/CCA]…​`
+
+* Edits the resident at the specified `INDEX`. The index refers to the index number shown in the displayed resident list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing CCAs, the existing CCAs of the resident will be removed i.e adding of CCAs is not cumulative.
+* You can remove all the resident’s CCAs by typing `c/` without specifying any CCAs after it.
+* Able to edit multiple residents at once by inputting multiple indexes, each separated by a space.
+
+Examples:
+*  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st person to be `johndoe@example.com` and `A101` respectively.
+*  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing CCAs.
+*  `edit 1 2 3 v/true` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated.
 
 ### Deleting a resident : `delete`
 
@@ -172,7 +190,8 @@ Action | Format, Examples
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **Fet** | `fet d/DATE` <br> e.g. `fet 15-8-2021`
-**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]` <br> e.g. `search n/john alex v/false f/fass` 
+**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...` <br> e.g. `search n/john alex v/false f/fass` 
+**Edit** | `edit INDEX [MORE_INDICES] [FLAG/UPDATED_PARTICULARS]...`<br> e.g., `edit 1 2 3 v/true`
 **Delete** | `delete INDEX [MORE_INDICES]` <br> e.g. `delete 1 2 3`
 **Help** | `help`
 **Exit** | `exit`
