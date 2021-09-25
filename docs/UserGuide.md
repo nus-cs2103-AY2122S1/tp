@@ -83,11 +83,14 @@ Format: `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>`
 * The header for the assessment rows should be in the following format: `<assessment_name>/<max_grade>`. For example, `Rune Trials/600`.
 * Every row apart from the first represents a student.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tips:**<br>
 
 * If the student does not have as many groups as the number of groups, you should leave several group columns blank.
 
 * If the student does not have a grade for some assessment, you should leave the corresponding assessment column blank.
+
 </div>
 
 Examples:
