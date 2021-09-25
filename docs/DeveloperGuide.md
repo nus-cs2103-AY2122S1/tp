@@ -428,16 +428,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should work independent of network connection.
+3. Should respond to users' commands within two seconds.
+4. Should be able to store 5000 unique entries of patients and doctors.
+5. The data should be stored on the user's local machine.
+6. The data should be available for backup and portable to another computer.
+7. The user interface should be simple and intuitive enough for any users.
+8. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+9. The project is expected to adhere to a schedule that delivers a feature set every two weeks.
 
 *{More to be added}*
 
 ### Glossary
 
+* **Appointment**: Arrangement to meet between a doctor and a patient
+* **CLI**: Command Line Interface
+* **Contact**: Records of personal information of a patient/doctor
+* **GUI**: Graphical User Interface
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Patient**: The individual that visits the clinic
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Risk profile**: The health status and severity of the condition of a patient
 
 --------------------------------------------------------------------------------------------------------------------
 
