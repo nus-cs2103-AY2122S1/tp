@@ -29,7 +29,7 @@ Email: bryannyeapkk@gmail.com
 
 ### Liu Chen En
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/twothicc.png" width="200px">
 
 [[github](https://github.com/twothicc)]
 
@@ -44,5 +44,15 @@ Email: chenenliuu@gmail.com
 [[github](https://github.com/TohWeiJie01)]
 
 Email: tohweijie01@gmail.com
+
+* Role: Developer
+
+### Yao Yi
+
+<img src="images/pulpy_y.png" width="200px">
+
+[[github](https://github.com/Pulpy-y)]
+
+Email: yaoyi2000326@gmail.com
 
 * Role: Developer
