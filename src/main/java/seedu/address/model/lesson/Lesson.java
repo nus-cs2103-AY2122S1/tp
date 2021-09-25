@@ -87,7 +87,7 @@ public abstract class Lesson {
     public abstract Lesson updateDate(String newDateString);
 
     /**
-     * Returns true if both lessons have the same data fields.
+     * Check if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.
      *
      * @param other The other object to compare.

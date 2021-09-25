@@ -35,7 +35,6 @@ public class Subject {
      * Returns true if a given string is a valid subject.
      *
      * @param test The string to be tested.
-     *
      * @return true if test is a valid subject
      */
     public static boolean isValidSubject(String test) {

@@ -29,7 +29,7 @@ public class LessonAddCommand extends Command {
 
     public static final String COMMAND_WORD = "ladd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified "
             + "by the index number\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "dd MMM yyyy "
