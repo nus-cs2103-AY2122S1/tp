@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.event.Event;
+
+import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
 
@@ -18,22 +19,20 @@ public class ShowDetailsCommand extends Command {
             + ": Displays the details of the Event matching the given name.\n"
             + "Parameters: EVENT_NAME \n"
             + "Example: " + COMMAND_WORD + " CS2103T Finals ";
+    
+    private static final String MESSAGE_SUCCESS = "Event found!";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET =
-            "Remark command not implemented yet";
+    private final Predicate<Event> eventName;
 
-    public static final String MESSAGE_ARGUMENTS = "Event Name: %1$s";
-
-    private final String eventName;
-
-    public ShowDetailsCommand(String eventName) {
+    public ShowDetailsCommand(Predicate<Event> eventName) {
         this.eventName = eventName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, eventName));
+        requireNonNull(model);
+        model.updateEventList(eventName);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
