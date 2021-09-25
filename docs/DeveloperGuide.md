@@ -270,16 +270,39 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                             |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new client               |                                                                        |
-| `* * *`  | user                                       | delete a client                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a client by name          | locate details of clients without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many clients in the address book | sort clients by name           | locate a client easily                                                 |
+| `* * *`  | user                                       | add a deadline to a sales order                            | I can keep track of when I must complete it by  |
+| `* * *`  | user                                       | keep track of the contact details of my clients            |it is easier to find their contact details      |
+| `* * *`  | user                                       | maintain the preferences and body dimensions of my clients | I can cater to their requirements |
+| `* * *`  | user                                       | mark tasks as done                                         |        |
+| `* * *`  | user                                       | key customer orders into the application                   | I know what I need to complete   |
+| `* * *`  | user                                       | delete a task                                              | get rid of task no longer needed to track       |
+| `* * *`  | user                                       | know the valid commands when I key in the wrong command    | to help me remember what I should do     |
+| `* * *`  | new user                                   | categorise my customers, to group them by categories relevant to me     | I can find the group of customers that I want easily   |
+| `* * *`  | non-tech-savvy user                        | add users in a simple and straightforward way              | I can get up to speed easily   |
+| `* * *`  | user                                       | easily update contact details as these are likely to change over time.  | I can get up to speed easily   |
+| `* * *`  | forgetful user                             | have reminders about deadlines                             | I am on track with my work   |
+| `* * *`  | user                                       | know how much in total sales each of my customers has brought in for me  |      |
+| `* * `   | user                                       | track how much money I’m making each month                 | I can plan my budget accordingly    |
+| `* * `   | experienced user                           | clear past entries                                         | the application is less cluttered   |
+| `* * `   | user                                       | sort my deadlines by date                                  | I can keep track of which are the most urgent.   |
+| `* * `   | user                                       | add notes to tasks                                         | I can add details about special requests or notes for myself, for tasks that might be more difficult and/or take up more time  |
+| `* * `   | user                                       | update the requirements of my clients as their needs and preferences change | I am aware of their latest preference |
+| `* * `   | new user                                   | have a tutorial to guide my on how to use the product      | I can get myself started   |
+| `* * `   | user with poor eyesight                    | the text in the interface to be easily readable            |    |
+| `* * `   | experienced user                           | the application to be fast and easy                        |    |
+| `* * `   | user                                       | keep track of the sales                                    | I don’t have to remember them   |
+| `*`      | user                                       | keep track of outstanding payments                         |    |
+| `*`      | user                                       | know the breakdown of my sales each month                  | to understand better which of my products are more popular   |
+| `*`      | user                                       | backup/undo my actions                                     | I can recover my lost data easily    |
+| `*`      | experienced user                           | sort my clients by how much in sales they have brought in for me | I can focus more on clients that brings me more profit   |
+| `*`      | skilled user                               | define my own shortcuts for commands                       |       |
+| `*`      | user who is picky about UI                 | redesign aspects of the application.                       |       |
+| `*`      | user                                       | know how much I spent on materials                         | I don’t exceed my budget      |
+| `*`      | secure my data/information                 | secure my data/information                                 |     |
+| `*`      | experienced user                           | use the app to track my material usage                     | I know when to order more in advance   |
 
-*{More to be added}*
 
 ### Use cases
 
