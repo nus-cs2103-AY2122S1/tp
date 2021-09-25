@@ -151,7 +151,7 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        //gender
+        // gender
         userInput = targetIndex.getOneBased() + GENDER_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withGender(VALID_GENDER_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

@@ -15,7 +15,7 @@ public class GenderTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidGender_throwsIllegalArgumentException() {
         String invalidGender = "*hello";
         assertThrows(IllegalArgumentException.class, () -> new Gender(invalidGender));
     }
