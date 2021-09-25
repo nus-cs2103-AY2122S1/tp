@@ -72,7 +72,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ---
-###Managing Patients
+### Managing Patients
 
 ### Adding a patient: `add`
 
@@ -157,7 +157,7 @@ Examples:
 
 ---
 
-###Managing Tags `tag` [coming soon]
+### Managing Tags `tag` [coming soon]
 
 ### Add tags to a patient:
 
