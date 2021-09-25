@@ -174,7 +174,7 @@ Action | Format, Examples
 --------|------------------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
 **View** | `view [INDEX]` <br> e.g. `view 30`
-**Fet** | `fet d/DATE` <br> e.g. `fet 15-8-2021`
+**List** | `list k/KEYWORD [d/DATE]` <br> e.g. `list fet 15-8-2021`
 **Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]` <br> e.g. `search n/john alex v/false f/fass` 
 **Delete** | `delete INDEX [MORE_INDICES]` <br> e.g. `delete 1 2 3`
 **Help** | `help`
