@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -41,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_SCHOOL_BOB = "Bob's School";
     public static final String VALID_ACAD_STREAM_AMY = "Amy stream";
     public static final String VALID_ACAD_STREAM_BOB = "Bob stream";
+    public static final String VALID_ACAD_LEVEL_AMY = "S1";
+    public static final String VALID_ACAD_LEVEL_BOB = "P6";
     public static final String VALID_REMARK_AMY = "Amy loves sushi!";
     public static final String VALID_REMARK_BOB = "Bob loves sashimi!";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -58,6 +61,8 @@ public class CommandTestUtil {
     public static final String SCHOOL_DESC_BOB = " " + PREFIX_SCHOOL + VALID_SCHOOL_BOB;
     public static final String ACAD_STREAM_DESC_AMY = " " + PREFIX_ACAD_STREAM + VALID_ACAD_STREAM_AMY;
     public static final String ACAD_STREAM_DESC_BOB = " " + PREFIX_ACAD_STREAM + VALID_ACAD_STREAM_BOB;
+    public static final String ACAD_LEVEL_DESC_AMY = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_AMY;
+    public static final String ACAD_LEVEL_DESC_BOB = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -69,7 +74,9 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SCHOOL_DESC = " " + PREFIX_SCHOOL + "sch123"; // numbers not allowed for schools
     public static final String INVALID_ACAD_STREAM_DESC = " " + PREFIX_ACAD_STREAM
-            + "a' stream"; // ''' not allowed for acad streams;
+            + "a' stream"; // ''' not allowed for acad streams
+    public static final String INVALID_ACAD_LEVEL_DESC = " " + PREFIX_ACAD_LEVEL
+            + "a1"; // 'a' not allowed for acad levels
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -80,11 +87,20 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withSchool(VALID_SCHOOL_AMY).withAcadStream(VALID_ACAD_STREAM_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY)
+                .withAddress(VALID_ADDRESS_AMY)
+                .withSchool(VALID_SCHOOL_AMY)
+                .withAcadStream(VALID_ACAD_STREAM_AMY)
+                .withAcadLevel(VALID_ACAD_LEVEL_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withSchool(VALID_SCHOOL_BOB).withAcadStream(VALID_ACAD_STREAM_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withSchool(VALID_SCHOOL_BOB)
+                .withAcadStream(VALID_ACAD_STREAM_BOB)
+                .withAcadLevel(VALID_ACAD_LEVEL_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

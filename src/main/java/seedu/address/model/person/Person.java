@@ -24,6 +24,7 @@ public class Person {
     private final Address address;
     private final School school;
     private final AcadStream acadStream;
+    private final AcadLevel acadLevel;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -31,7 +32,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, School school, AcadStream acadStream,
-                  Remark remark, Set<Tag> tags) {
+                  AcadLevel acadLevel, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, school, acadStream, remark, tags);
         this.name = name;
         this.phone = phone;
@@ -39,6 +40,7 @@ public class Person {
         this.address = address;
         this.school = school;
         this.acadStream = acadStream;
+        this.acadLevel = acadLevel;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -65,6 +67,10 @@ public class Person {
 
     public AcadStream getAcadStream() {
         return acadStream;
+    }
+
+    public AcadLevel getAcadLevel() {
+        return acadLevel;
     }
 
     public Remark getRemark() {
@@ -113,6 +119,7 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getSchool().equals(getSchool())
                 && otherPerson.getAcadStream().equals(getAcadStream())
+                && otherPerson.getAcadLevel().equals(getAcadLevel())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -120,7 +127,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, school, acadStream, remark, tags);
+        return Objects.hash(name, phone, email, address, school, acadStream, acadLevel, remark, tags);
     }
 
     @Override
@@ -142,6 +149,11 @@ public class Person {
         if (!getAcadStream().isEmpty()) {
             builder.append("; Academic Stream: ")
                     .append(getAcadStream());
+        }
+
+        if (!getAcadLevel().isEmpty()) {
+            builder.append("; Academic Level: ")
+                    .append(getAcadLevel());
         }
 
         if (!getRemark().isEmpty()) {

@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label acadStream;
     @FXML
+    private Label acadLevel;
+    @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
@@ -71,6 +73,13 @@ public class PersonCard extends UiPart<Region> {
             acadStream.setManaged(false);
         } else {
             acadStream.setText(person.getAcadStream().acadStream);
+        }
+
+        if (person.getAcadLevel().isEmpty()) {
+            acadLevel.setVisible(false);
+            acadLevel.setManaged(false);
+        } else {
+            acadLevel.setText(person.getAcadLevel().acadLevel);
         }
 
         if (person.getRemark().isEmpty()) {

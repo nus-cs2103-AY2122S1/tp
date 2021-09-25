@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -36,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_ACAD_LEVEL, PREFIX_REMARK, PREFIX_TAG);
 
         Index index;
 
@@ -65,6 +66,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ACAD_STREAM).isPresent()) {
             editPersonDescriptor.setAcadStream(
                     ParserUtil.parseAcadStream(argMultimap.getValue(PREFIX_ACAD_STREAM).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ACAD_LEVEL).isPresent()) {
+            editPersonDescriptor.setAcadLevel(
+                    ParserUtil.parseAcadLevel(argMultimap.getValue(PREFIX_ACAD_LEVEL).get()));
         }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             editPersonDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));

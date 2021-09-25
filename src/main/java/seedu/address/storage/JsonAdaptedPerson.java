@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -31,8 +32,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private String school;
+    private final String school;
     private final String acadStream;
+    private final String acadLevel;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -43,6 +45,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
+            @JsonProperty("acadLevel") String acadLevel,
             @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
@@ -50,6 +53,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.school = school;
         this.acadStream = acadStream;
+        this.acadLevel = acadLevel;
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -66,6 +70,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         school = source.getSchool().schName;
         acadStream = source.getAcadStream().acadStream;
+        acadLevel = source.getAcadLevel().acadLevel;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -132,6 +137,15 @@ class JsonAdaptedPerson {
         }
         final AcadStream modelAcadStream = new AcadStream(acadStream);
 
+        if (acadLevel == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadLevel.class.getSimpleName()));
+        }
+        if (!acadLevel.isEmpty() && !AcadLevel.isValidAcadLevel(acadLevel)) {
+            throw new IllegalValueException(AcadLevel.MESSAGE_CONSTRAINTS);
+        }
+        final AcadLevel modelAcadLevel = new AcadLevel(acadLevel);
+
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
@@ -139,7 +153,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelSchool, modelAcadStream, modelRemark, modelTags);
+                modelSchool, modelAcadStream, modelAcadLevel, modelRemark, modelTags);
     }
 
 }

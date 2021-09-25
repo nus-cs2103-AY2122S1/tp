@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -111,6 +112,21 @@ public class ParserUtil {
             throw new ParseException(AcadStream.MESSAGE_CONSTRAINTS);
         }
         return new AcadStream(trimmedAcadStream);
+    }
+
+    /**
+     * Parses a {@code String acadLevel} into an {@code AcadLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code acadLevel} is invalid.
+     */
+    public static AcadLevel parseAcadLevel(String acadLevel) throws ParseException {
+        requireNonNull(acadLevel);
+        String trimmedAcadLevel = acadLevel.trim();
+        if (!trimmedAcadLevel.isEmpty() && !AcadLevel.isValidAcadLevel(trimmedAcadLevel)) {
+            throw new ParseException(AcadLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new AcadLevel(trimmedAcadLevel);
     }
 
     /**

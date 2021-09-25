@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -25,6 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SCHOOL = "";
     public static final String DEFAULT_ACAD_STREAM = "";
+    public static final String DEFAULT_ACAD_LEVEL = "";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
@@ -33,6 +35,7 @@ public class PersonBuilder {
     private Address address;
     private School school;
     private AcadStream acadStream;
+    private AcadLevel acadLevel;
     private Remark remark;
     private Set<Tag> tags;
 
@@ -46,6 +49,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         school = new School(DEFAULT_SCHOOL);
         acadStream = new AcadStream(DEFAULT_ACAD_STREAM);
+        acadLevel = new AcadLevel(DEFAULT_ACAD_LEVEL);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
@@ -60,6 +64,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         school = personToCopy.getSchool();
         acadStream = personToCopy.getAcadStream();
+        acadLevel = personToCopy.getAcadLevel();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -137,6 +142,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code AcadLevel} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAcadLevel(String acadLevel) {
+        this.acadLevel = new AcadLevel(acadLevel);
+        return this;
+    }
+
+    /**
+     * Sets the {@code AcadLevel} of the {@code Person} that we are building as blank.
+     */
+    public PersonBuilder withAcadLevel() {
+        this.acadLevel = new AcadLevel(DEFAULT_ACAD_LEVEL);
+        return this;
+    }
+
+    /**
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
@@ -153,6 +174,6 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, school, acadStream, remark, tags);
+        return new Person(name, phone, email, address, school, acadStream, acadLevel, remark, tags);
     }
 }

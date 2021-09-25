@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -22,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -48,7 +50,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
-            + "[" + PREFIX_ACAD_STREAM + "STREAM] "
+            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -108,11 +111,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         School updatedSchool = editPersonDescriptor.getSchool().orElse(personToEdit.getSchool());
         AcadStream updatedAcadStream = editPersonDescriptor.getAcadStream().orElse(personToEdit.getAcadStream());
+        AcadLevel updatedAcadLevel = editPersonDescriptor.getAcadLevel().orElse(personToEdit.getAcadLevel());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchool, updatedAcadStream,
-                updatedRemark, updatedTags);
+                updatedAcadLevel, updatedRemark, updatedTags);
     }
 
     @Override
@@ -144,6 +148,7 @@ public class EditCommand extends Command {
         private Address address;
         private School school;
         private AcadStream acadStream;
+        private AcadLevel acadLevel;
         private Remark remark;
         private Set<Tag> tags;
 
@@ -160,6 +165,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setSchool(toCopy.school);
             setAcadStream(toCopy.acadStream);
+            setAcadLevel(toCopy.acadLevel);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
@@ -168,7 +174,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, school, acadStream, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, school, acadStream, acadLevel, remark,
+                    tags);
         }
 
         public void setName(Name name) {
@@ -219,6 +226,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(acadStream);
         }
 
+        public void setAcadLevel(AcadLevel acadLevel) {
+            this.acadLevel = acadLevel;
+        }
+
+        public Optional<AcadLevel> getAcadLevel() {
+            return Optional.ofNullable(acadLevel);
+        }
+
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
@@ -265,6 +280,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getSchool().equals(e.getSchool())
                     && getAcadStream().equals(e.getAcadStream())
+                    && getAcadLevel().equals(e.getAcadLevel())
                     && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags());
         }

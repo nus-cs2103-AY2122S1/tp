@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -56,6 +57,8 @@ public class PersonUtil {
         descriptor.getSchool().ifPresent(school -> sb.append(PREFIX_SCHOOL).append(school.schName).append(" "));
         descriptor.getAcadStream().ifPresent(acadStream ->
                 sb.append(PREFIX_ACAD_STREAM).append(acadStream.acadStream).append(" "));
+        descriptor.getAcadLevel().ifPresent(acadLevel ->
+                sb.append(PREFIX_ACAD_LEVEL).append(acadLevel.acadLevel).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
