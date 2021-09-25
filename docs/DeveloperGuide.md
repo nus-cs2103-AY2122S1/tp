@@ -291,32 +291,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+6. **Use case: Show a person's details using Index**
 
-**MSS**
+    **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+    1.  User requests to list persons
+    2.  CohortConnect shows a list of persons
+    3.  User requests to show details of person at a specific index in the list
+    4.  CohortConnect shows a pop-up with the person's details
+
+        Use case ends.
+
+    **Extensions**
+
+    * 2a. The list is empty.
 
     Use case ends.
 
-**Extensions**
+    * 3a. The given index is invalid.
 
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
+        * 3a1. CohortConnect shows an error message.
 
       Use case resumes at step 2.
+    
 
-*{More to be added}*
+7. **Use case: Show a person's details using Name**
+
+    **MSS**
+
+    1.  User requests to list persons
+    2.  CohortConnect shows a list of persons
+    3.  User requests to show details of a specific person in the list
+    4.  CohortConnect shows a pop-up with the person's details
+
+        Use case ends.
+
+    **Extensions**
+
+    * 2a. The list is empty.
+
+    Use case ends.
+
+    * 3a. The given name is invalid.
+
+        * 3a1. CohortConnect shows an error message.
+
+        Use case resumes at step 2.
+
+    * 4a. Multiple matching names.
+
+        * 4a1. CohortConnect shows an error message.
+
+        Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
