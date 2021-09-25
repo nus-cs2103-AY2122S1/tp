@@ -17,17 +17,17 @@ title: User Guide
 CohortConnect is a desktop application for students, professors, and teaching assistants to connect, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface.
 
 ## Table of Contents
- - ### [Quick Start](#QuickStart)
- - ### [Features](#Features)
-    - #### [Adding a new Contact - add](#Add)
-    - #### [Delete a Contact - delete](#Delete)
-    - #### [Edit a Contact - edit](#Edit)
-    - #### [Find a Contact - find](#Find)
-    - #### [Show a Contact - show](#Show)
-    - #### [Importing Contacts - import](#Import)
-    - #### [Exporting Contacts - export](#Export)
-  - ### [FAQ](#FAQ)
-  - ### [Command Summary](#CommandSummary)
+ - [Quick Start](#QuickStart)
+ - [Features](#Features)
+    - [Adding a new Contact - add](#Add)
+    - [Delete a Contact - delete](#Delete)
+    - [Edit a Contact - edit](#Edit)
+    - [Find a Contact - find](#Find)
+    - [Show a Contact - show](#Show)
+    - [Importing Contacts - import](#Import)
+    - [Exporting Contacts - export](#Export)
+  - [FAQ](#FAQ)
+  - [Command Summary](#CommandSummary)
 
 
 <h2 id = "QuickStart"> </h2>
