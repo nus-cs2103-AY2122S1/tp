@@ -17,15 +17,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Team Lead
 * Responsibilities: Responsible for overall project coordination.
 
-### Jane Doe
+### Pua Li Xue
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/pualixue.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/pualixue)]
+[[portfolio](team/pualixue.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code Quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards.
 
 ### Tey Hao Ze
 
