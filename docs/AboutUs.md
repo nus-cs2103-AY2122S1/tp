@@ -19,6 +19,7 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 * Role: Team Lead
 * Responsibilities: Documentation, Integration
 
+
 ### Ng Chi Sern
 
 <img src="images/ngchisern.png" width="200px">
@@ -29,31 +30,33 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 * Role: Developer
 * Responsibilities: Integration
 
-### Johnny Doe
 
-<img src="images/johndoe.png" width="200px">
+### Yuichiro Fukushima
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+<img src="images/Yuichiro.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yuifuku1118)] [[portfolio](team/yuichiro.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverables and deadlines, Scheduling and tracking
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
+### Gnoh Cheng Yi
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/gnohchengyi.png" width="200px">
+
+[[github](http://github.com/gnohchengyi)] [[portfolio](team/gnohchengyi.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality + JavaFX Expert
+
+
+### Tanishq Sharma
+
+<img src="images/tanishq4331.png" width="200px">
+
+[[github](https://github.com/Tanishq4331)]
+[[portfolio](team/tanishq.md)]
+
+* Role: Testing
+* Responsibilities: 
