@@ -62,6 +62,10 @@ public class Time {
         return LocalTime.parse(value);
     }
 
+    public int compareTime(Time other) {
+        return getLocalTime().compareTo(other.getLocalTime());
+    }
+
     @Override
     public String toString() {
         return value;

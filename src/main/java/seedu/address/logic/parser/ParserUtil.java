@@ -26,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_TIME_RANGE = "End time cannot be earlier than start time.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -141,6 +142,27 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String Time} into a {@code Time}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Time} is invalid.
+     */
+    public static Time[] parseTimeRange(String startTime, String endTime) throws ParseException {
+        requireNonNull(startTime);
+        requireNonNull(endTime);
+
+        Time start = parseTime(startTime);
+        Time end = parseTime(endTime);
+        boolean isValidRange = end.compareTime(start) > 0;
+        // Check if range is valid
+        if (!isValidRange) {
+            throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
+        }
+
+        return new Time[] {start, end};
+    }
+
+    /**
      * Parses a {@code String subject} into a {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -183,18 +205,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String hw} into a {@code Homework}.
+     * Parses a {@code String individualHomework} into a {@code Homework}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code Homework} is invalid.
      */
-    public static Homework parseHw(String hw) throws ParseException {
-        requireNonNull(hw);
-        String trimmedHw = hw.trim();
-        if (!Homework.isValidDescription(trimmedHw)) {
+    public static Homework parseIndividualPieceOfHomework(String individualHomework) throws ParseException {
+        requireNonNull(individualHomework);
+        String trimmedHomework = individualHomework.trim();
+        if (!Homework.isValidDescription(trimmedHomework)) {
             throw new ParseException(Homework.MESSAGE_CONSTRAINTS);
         }
-        return new Homework(trimmedHw);
+        return new Homework(trimmedHomework);
     }
 
     /**
@@ -205,7 +227,7 @@ public class ParserUtil {
         requireNonNull(homework);
         final Set<Homework> homeworkSet = new HashSet<>();
         for (String description : homework) {
-            homeworkSet.add(parseHw(description));
+            homeworkSet.add(parseIndividualPieceOfHomework(description));
         }
         return homeworkSet;
     }

@@ -67,9 +67,7 @@ public abstract class Lesson {
      *
      * @return True if it is a recurring lesson, false otherwise.
      */
-    public boolean isRecurring() {
-        return false;
-    }
+    public abstract boolean isRecurring();
 
     /**
      * Update the lesson date to the same day on the following week.

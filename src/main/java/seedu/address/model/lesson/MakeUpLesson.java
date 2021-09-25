@@ -33,5 +33,14 @@ public class MakeUpLesson extends Lesson {
                 getSubject(), getHomework());
     }
 
+    /**
+     * Check if the Lesson object is recurring.
+     *
+     * @return False
+     */
+    public boolean isRecurring() {
+        return false;
+    }
+
 }
 

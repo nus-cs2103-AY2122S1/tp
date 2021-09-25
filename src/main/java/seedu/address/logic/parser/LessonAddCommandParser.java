@@ -54,17 +54,17 @@ public class LessonAddCommandParser {
         }
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+
+        // Parse time and check if range is valid.
+        // Throws ParseException if range is invalid.
+        ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_START_TIME).get(),
+            argMultimap.getValue(PREFIX_END_TIME).get());
+        
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        Set<Homework> homework = parseHomeworkForEdit(argMultimap.getAllValues(PREFIX_HOMEWORK))
+        Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
                 .orElse(new HashSet<>());
-
-        // Check if end time is earlier than start time
-        boolean isValidTimeRange = startTime.getLocalTime().compareTo(endTime.getLocalTime()) > 0;
-        if (isValidTimeRange) {
-            throw new ParseException("End time cannot be earlier than start time.");
-        }
 
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
@@ -89,7 +89,7 @@ public class LessonAddCommandParser {
      * If {@code homework} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Homework>} containing zero homework.
      */
-    private Optional<Set<Homework>> parseHomeworkForEdit(Collection<String> homework) throws ParseException {
+    private Optional<Set<Homework>> parseHomeworkForLessonAdd(Collection<String> homework) throws ParseException {
         assert homework != null;
 
         if (homework.isEmpty()) {

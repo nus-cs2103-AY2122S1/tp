@@ -19,7 +19,8 @@ public class Date {
             + "1. dd and yyyy are numerical characters.\n"
             + "2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec";
 
-
+    // Date strings should be formatted as dd MMM uuuu, where dd and uuuu are digits.
+    // and MMM are alphabets e.g. Jan, Mar, Nov, etc.
     public static final String VALIDATION_REGEX = "^[0-9]{2}\\s[a-zA-Z]{3}\\s[0-9]{4}";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter
         .ofPattern("dd MMM uuuu")
