@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 
+/**
+ * Implementation of a Trie data structure for command and tag autocompletion.
+ */
 public class Trie {
     private static final String NO_VALUE_MESSAGE_FORMAT = "Message %s is not stored in this Trie!";
     private static final Logger logger = LogsCenter.getLogger(Trie.class);

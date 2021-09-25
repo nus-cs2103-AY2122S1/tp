@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Implentation of TrieNode data structure to create Tries.
+ */
 public class TrieNode {
     private static final List<Character> ORDER = new ArrayList<>();
 
