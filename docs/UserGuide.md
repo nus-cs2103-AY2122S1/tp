@@ -69,6 +69,26 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 
 </div>
 
+
+### Searching for students: `search`
+
+Finds students who match the input keywords.
+
+Format: `search (-n <student_name> | -i <student_id> | -g <group_name>)`
+
+* Search for students by their name, NUSNET ID, or the group they belong in. 
+* The search is case-insensitive. e.g `hans` will match `Hans`. 
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`. 
+* Only full words will be matched e.g. `Han` will not match `Hans`. 
+* Persons matching at least one keyword will be returned (i.e. `OR` search). 
+e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+
+Examples:
+* `search -n John Doe`
+* `search -i E0123456`
+* `search -g T02B`
+
+
 ### Importing data: `import`
 
 Loads data as specified in the provided CSV file.
@@ -96,6 +116,13 @@ Format: `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>`
 Examples:
 * `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10`
 * `import -f student_data.csv -g 3 -a 30`
+
+
+### Resetting all data: `clear data`
+
+Clears all existing data.
+
+Format: `clear data`
 
 
 ### Saving the data `[coming soon]`
