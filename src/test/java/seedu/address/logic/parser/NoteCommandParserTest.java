@@ -11,7 +11,7 @@ import seedu.address.logic.commands.NoteCommand;
 import seedu.address.model.person.Note;
 
 public class NoteCommandParserTest {
-    private NoteCommandParser parser = new NoteCommandParser();
+    private final NoteCommandParser parser = new NoteCommandParser();
     private final String nonEmptyNote = "Test note.";
 
     @Test
