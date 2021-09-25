@@ -148,18 +148,16 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Creating a group of students: `group`
+### Creating a group: `addgroup`
 
-Creates a group of students with the given group name and the list of students
+Creates a group with the given group name so that students can be added into it. 
 
-Format: `group GROUPNAME STUDENT1 STUDENT2 ... STUDENTN`
+Format: `addgroup GROUPNAME`
 
 * Creates a group with the specified `GROUPNAME`.
-* Adds the following students arguments, `STUDENT1 STUDENT2 ... STUDENTN` into the created group.
 
 Examples:
-* `group CS2103T BrianCheong JunWei Erin ZhiHao JiaXian` creates a group CS2103T with BrianCheong JunWei Erin
-ZhiHao and JiaXian in the group.
+* `addgroup CS2103T` creates a group called CS2103T where students can be added into.
 
 ### Delete Group: deletegroup
 
