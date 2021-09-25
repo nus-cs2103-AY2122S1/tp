@@ -38,14 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Tool, Documentation, Scheduling and tracking
 
-### Jean Doe
+### Sreenivasa Kalpana Surya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tetrerox.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/tetrerox)]
+[[portfolio](team/tetrerox.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration, Code Quality and Documentation
 
 ### He Outong
 
