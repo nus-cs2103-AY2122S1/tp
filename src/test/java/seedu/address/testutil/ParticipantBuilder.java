@@ -62,9 +62,10 @@ public class ParticipantBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        // Participant to be empty
         birthDate = BirthDate.notSpecified();
         notes = new HashSet<>();
-        nextOfKins = null;
+        nextOfKins = new ArrayList<>();
     }
 
     /**

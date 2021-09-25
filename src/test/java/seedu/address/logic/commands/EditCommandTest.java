@@ -86,7 +86,7 @@ public class EditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personInFilteredList = model.getFilteredParticipantList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Participant personInFilteredList = model.getFilteredParticipantList().get(INDEX_FIRST_PERSON.getZeroBased());
         Participant editedPerson = new ParticipantBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditParticipantDescriptorBuilder().withName(VALID_NAME_BOB).build());

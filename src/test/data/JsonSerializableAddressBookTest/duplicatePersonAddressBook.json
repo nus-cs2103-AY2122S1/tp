@@ -1,15 +1,36 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
-  } ],
+  "participants": [ {
+    "id" : "aleyeo",
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tagged" : [ "friends" ],
+    "birthDate" : "2000-08-02",
+    "notes" : [ {
+      "content" : "Vegetarian",
+      "importance" : "VERY_HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Janette Yeoh",
+      "phone" : "93822312",
+      "tag" : "Spouse"
+    }] }, {
+    "id" : "aleyeo",
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tagged" : [ "friends" ],
+    "birthDate" : "2000-08-02",
+    "notes" : [ {
+      "content" : "Vegetarian",
+      "importance" : "VERY_HIGH"
+    } ],
+    "nextOfKins" : [ {
+      "name" : "Janette Yeoh",
+      "phone" : "93822312",
+      "tag" : "Spouse"
+    }] } ],
   "events" : []
 }
