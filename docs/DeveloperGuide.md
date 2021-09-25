@@ -384,7 +384,7 @@ Use case resumes at step 2.
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The list is empty.
 
