@@ -105,18 +105,21 @@ Examples:
 * `view` shows a list of all the residents
 * `view 30` shows the details of the resident at index 30
 
-### Updating FET date : `fet`
+### Retrieve a list of residents with their fet due : `list`
 
-Updates the last done FET date for all residents.
+Retrieve a list of residents whose ART collection or FET are due within the range of the current date and the optional given date.
 
-Format: `fet d/DATE`
+Format: `list [FLAG] [d/DATE]`
 
+* The flag can be either -f for fet or -c collection
 * The date inputted has to be in `dd-mm-yyyy` format
-* Date will be stored in a `MMM dd yyyy` format, e.g., (`Sep 21 2021`)
-* The last FET date of all residents will be updated by this command
+* The given Date must be a date later than the current date
 
 Examples:
-* `fet 15-8-2021` sets the FET date of all residents to `Aug 15 2021`
+* `list -f` retrieves a list of residents whose FET is due today
+* `list -f 30-9-2021` retrieves a list of residents whose FET is due some day between today and `Sep 21 2021`
+* `list -c` retrieves a list of residents whose FET is due today
+* `list -c 30-9-2021` retrieves a list of residents whose ART Collection is due some day between today and `Sep 21 2021`
 
 ### Searching by resident information: `search`
 
@@ -189,7 +192,7 @@ Action | Format, Examples
 --------|------------------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
 **View** | `view [INDEX]` <br> e.g. `view 30`
-**Fet** | `fet d/DATE` <br> e.g. `fet 15-8-2021`
+**List** | `list [FLAG] [d/DATE]` <br> e.g. `list -f 15-8-2021`
 **Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...` <br> e.g. `search n/john alex v/false f/fass` 
 **Edit** | `edit INDEX [MORE_INDICES] [FLAG/UPDATED_PARTICULARS]...`<br> e.g., `edit 1 2 3 v/true`
 **Delete** | `delete INDEX [MORE_INDICES]` <br> e.g. `delete 1 2 3`
