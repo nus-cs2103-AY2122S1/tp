@@ -142,6 +142,26 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Viewing the Task List : `tasks`
+
+Displays all the tasks currently in the list.
+
+Format: `tasks`
+
+### Adding a task with a date: `add TASK_NAME /by DATE`
+
+Adds a task with the given name and a specified deadline.
+
+Format: `add TASK_NAME /by DATE`
+
+* Adds a task with the specified `TASK_NAME`
+* The task has the deadline `DATE`
+* The deadline must be in the format `YYYY-MM-dd`
+
+Examples:
+* `add grade scripts /by 2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
+* `add tutorial preparation /by 2021-10-04` creates the task "tutorial preparation", which is to be completed by the given date.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
