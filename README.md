@@ -17,6 +17,8 @@ Example usages:
 * Find a Participant and view his details
 * Mark Event as Done
 
+* For the detailed documentation of this project, see the **[Managera Product Website](https://ay2122s1-cs2103t-t10-2.github.io/tp/UserGuide.html)**.
+
 **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
