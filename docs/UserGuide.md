@@ -153,6 +153,16 @@ Examples:
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
 
+### Listing all groups : `listgroups`
+
+Shows a list of all groups in the CSBook.
+
+Format: `listgroups`
+
+Examples:
+* `listgroups` displays a list of all the groups, including their group description and number of students in them.
+  ![result for `listgroups`](images/listGroups.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from CSBook.
