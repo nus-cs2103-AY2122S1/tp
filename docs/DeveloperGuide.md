@@ -347,6 +347,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
+8. **Use case: Import contacts from JSON file**
+
+   **MSS**
+
+   1. User enters command to import from a JSON file.
+   2. CohortConnect shows a list of persons to be imported.
+   3. User confirms the import.
+   4. CohortConnect shows the updated list of contacts.
+
+      Use case ends.
+
+   **Extensions**
+
+   * 1a. CohortConnect cannot find the JSON file.
+
+      * 1a1. CohortConnect shows an error.
+
+     Use case ends.
+
+   * 2a. User decides to cancel the import.
+
+     Use case ends.
+
+9. **Export contacts to JSON file**
+
+   **MSS**
+
+   1. User enters command to export contacts to a named JSON file.
+   2. CohortConnect shows a success message.
+
+      Use case ends.
+
+   **Extensions**
+
+   * 1a. File name already exists.
+
+      * 1a1. CohortConnect shows an error.
+
+     Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
