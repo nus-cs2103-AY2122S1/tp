@@ -3,7 +3,6 @@ layout: page
 title: User Guide
 ---
 
-# User Guide
 ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this application is optimized to track personal particulars, grades and attendance of your students across different classes. If you are familiar with Unix commands, this is definitely for you!
 
 ## Table of Contents
