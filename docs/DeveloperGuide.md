@@ -283,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Officer (CSO)`, unless specified otherwise)
 
 **Use case: Delete a person**
 
@@ -308,26 +308,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update Specific Student’s Details**
+**UCXX - Update Specific Student’s Details**
 
 **MSS**
 
-1. CSO requests to list students.
-2. TuitiONE shows a list of students.
-3. CSO updates the details of the specific student (school, address or lesson taken).
+1.  CSO looks for the student to update (UCXX)
+2.  CSO updates the details of the specific student (school, address or lesson taken)
+3.  TuitiONE reflects the updated details of the student.
 
-   Use case ends.
+    Use case ends.
 
 **Extension**
 
-- 2a. The list is empty. 
-  - 2a1. CSO proceeds to add the student who is missing from the list.
-  - 2a2. Continue from step 1.
+* 2a. School entered invalid
 
-- 2b. List does not contain the student. 
-  - 2b1. CSO proceeds to add the student who is missing from the list.
-  - 2b2. Continue from step 1.
+    * 2a1. TuitiONE shows an error message.
+    
+      CSO repeats step 2 with correct input format.
+  
+* 2b. Address entered invalid
 
+    * 2b1. TuitiONE shows an error message.
+
+      CSO repeats step 2 with correct input format.
+  
+* 2c. Lesson Taken entered invalid
+
+    * 2c1. TuitiONE shows an error message.
+
+      CSO repeats step 2 with correct input format.
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
