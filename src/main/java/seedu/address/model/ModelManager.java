@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddClassCommand;
+import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +24,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<TuitionClass> filterdTuition;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +39,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filterdTuition = new FilteredList<>(this.addressBook.getTuitionList());
+
     }
 
     public ModelManager() {
@@ -147,6 +153,70 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+
+    //=========== Filtered Tuition List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<TuitionClass> getFilteredTuitionList() {
+        logger.info("ModelManage: " + filterdTuition.toString());
+        return filterdTuition;
+    }
+
+    @Override
+    public void updateFilteredTuitionList(Predicate<TuitionClass> predicate) {
+        requireNonNull(predicate);
+        filterdTuition.setPredicate(predicate);
+    }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        // short circuit if same object
+//        if (obj == this) {
+//            return true;
+//        }
+//
+//        // instanceof handles nulls
+//        if (!(obj instanceof ModelManager)) {
+//            return false;
+//        }
+//
+//        // state check
+//        ModelManager other = (ModelManager) obj;
+//        return addressBook.equals(other.addressBook)
+//                && userPrefs.equals(other.userPrefs)
+//                && filteredPersons.equals(other.filteredPersons);
+//    }
+
+
+    @Override
+    public boolean hasTuition(TuitionClass tuitionClass) {
+        requireNonNull(tuitionClass);
+        return addressBook.hasTuition(tuitionClass);
+    }
+
+    @Override
+    public void deleteTuition(TuitionClass target) {
+        addressBook.removeTuition(target);
+    }
+
+    @Override
+    public void addTuition(TuitionClass tuitionClass) {
+        addressBook.addTuition(tuitionClass);
+
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setTuition(TuitionClass target, TuitionClass editedTuition) {
+        requireAllNonNull(target, editedTuition);
+
+        addressBook.setTuition(target, editedTuition);
     }
 
 }

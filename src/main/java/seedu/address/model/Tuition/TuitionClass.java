@@ -43,6 +43,19 @@ public class TuitionClass {
         return student;
     }
 
+    /**
+     * Returns true if both Tuition have the same time slot.
+     * This defines a weaker notion of equality between two tuition classes.
+     */
+    public boolean isSameTuition(TuitionClass otherTuition) {
+        if (otherTuition == this) {
+            return true;
+        }
+
+        return otherTuition != null
+                && otherTuition.getTimeslot().equals(getTimeslot());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
