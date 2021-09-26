@@ -272,9 +272,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                         |
 | `* * *`  | user                                       | list all applicants            | keep track of all my applicants                 |
 | `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
+
 
 *{More to be added}*
 
@@ -283,12 +285,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 
+**Use case: Asking for help**
+
+**MSS**
+
+1.  User requests for help to use AddressBook.
+2.  AddressBook informs user on how to access user guide.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User cancels request for help.
+
+  Use case ends.
+
 **Use case: Adding an applicant**
 
 **MSS**
 
-1.  User requests to add an applicant with provided information
-2.  AddressBook adds the applicant to the storage
+1.  User requests to add an applicant with provided information.
+2.  AddressBook adds the applicant to the storage.
+
+    Use case ends.
 
 **Extensions**
 
@@ -296,14 +315,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
       
       Use case resumes at step 1. 
-    
 
 **Use case: List all applicants**
 
 **MSS**
 
-1.  User requests to list all applicants
-2.  AddressBook shows a list of all applicants
+1.  User requests to list all applicants.
+2.  AddressBook shows a list of all applicants.
 
     Use case ends.
 
@@ -311,10 +329,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <u>list applicants (UC??)</u>
-2.  AddressBook displays a list of applicants
-3.  User requests to delete a specific applicant in the displayed list
-4.  AddressBook deletes the applicant
+1.  User requests to <u>list applicants (UC??)</u>.
+2.  AddressBook displays a list of applicants.
+3.  User requests to delete a specific applicant in the displayed list.
+4.  AddressBook deletes the applicant.
 
     Use case ends.
     
@@ -323,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list of applicants is empty.
 
   Use case ends.
-
+    
 * 3a. The given index is invalid.
 
     * 3a1. AddressBook shows an error message.
