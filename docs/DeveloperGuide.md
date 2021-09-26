@@ -273,7 +273,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | recruiter                                  | add an applicant               | update my list of applicants with new people                           |
-| `* * *`  | recruiter                                  | add an employer                | update my list of employers with new people                            |
 
 *{More to be added}*
 
@@ -296,24 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
       
       Use case resumes at step 1. 
-
-
-**Use case: Adding an employer**
-
-**MSS**
-
-1.  User requests to add an employer with provided information
-2.  AddressBook adds the employer to the storage
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The input format is wrong.
-    * 1a1. AddressBook shows an error message.
-
-      Use case resumes at step 1.
-
+    
 
 *{More to be added}*
 
