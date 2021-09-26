@@ -335,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       &nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
-    * 3a. The given name is invalid.
+    * 3a. The given name is not present.
 
         * 3a1. CohortConnect shows an error message.
 
