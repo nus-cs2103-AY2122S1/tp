@@ -118,6 +118,22 @@ Examples:
 * `import -f student_data.csv -g 3 -a 30`
 
 
+### Creating a new group: `add group`
+
+Creates a new group and adds students into the group.
+
+Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]…`
+
+* Creates a new group with the given group name.
+* Students can be identified by their name or NUSNET ID.
+
+Examples:
+* `add group -g FG1 -n John Doe -n Jane Doe`
+* `add group -g FG1`
+* `add group -g FG1 -n John Doe -i E0123456`
+* `add group -g FG1 -i E0123123 -i E0123456`
+
+
 ### Resetting all data: `clear data`
 
 Clears all existing data.
