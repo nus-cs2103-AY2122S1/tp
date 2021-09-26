@@ -161,7 +161,7 @@ Adds a lesson with the corresponding details to the specified student in the add
 Format: `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/SUBJECT [hw/HOMEWORK]`
 
 <div markdown="span" class="alert alert-primary">
-:bulb: The type of lesson will be inferred from the presence of the `recurring/` prefix.
+:bulb: The type of lesson will be inferred from the presence of the "recurring/" prefix.
 </div>
 
 Examples:
@@ -181,7 +181,7 @@ Format: `ldelete INDEX LESSON_INDEX`
 * Deletes the lesson of specified `LESSON_INDEX` for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The lesson index refers to the index number shown in the lesson list of the person. 
-* The index and lesson index **must be a positive integer** 1, 2, 3, …​
+* The index and lesson index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd person in the address book.
