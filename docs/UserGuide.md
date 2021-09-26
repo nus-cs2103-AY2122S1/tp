@@ -73,6 +73,19 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
+### Navigation: `/back`
+
+Go back to the welcome page to redecide.
+
+Format: `/back`
+
+* `/back` should be exactly entered to go back to the initial (welcome) page
+
+Examples:
+* `/back` displays the following output:
+  You exited the current directory!
+
+
 ### Lists all students: `students`
 
 Shows a list of all students inputted into tApp together with their attendance and participation scores for tutorials.
