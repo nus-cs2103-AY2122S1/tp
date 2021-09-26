@@ -30,7 +30,7 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
    * **`add applicant`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to the Address Book.
 
-   * **`delete`**`applicant/3` : Deletes the 3rd applicant shown in the list of all applicants.
+   * **`delete`**` 3` : Deletes the 3rd applicant shown in the list of all applicants.
 
    * **`exit`** : Exits the app.
 
@@ -97,27 +97,19 @@ Shows a list of all employers in the address book.
 
 Format: `list c/employer`
 
-### Deleting an applicant/employer : `delete`
+### Deleting an applicant : `delete`
 
-Deletes a specific applicant and/or employer by index from the address book.
+Deletes a specific applicant by index from the address book.
 
-Format: `delete c/applicant INDEX`
+Format: `delete INDEX`
 
-* Delete command can handle either prefix `c/applicant` or `c/employer`.
+* Deletes an applicant at the specified `INDEX` in the list of all applicants.
 * The index given for `INDEX` **must be a positive integer** 1, 2, 3, …​
 * The index given for `INDEX` uses **1-based indexing**.
-* Prefix `c/applicant` and Value `INDEX`:
-  * Deletes an applicant at the specified `INDEX` in the list of all applicants.
-  * `INDEX` refers to the index number of the applicant to be deleted in the list of all applicants.
-  * `INDEX` should not exceed the total applicant count.
-* Prefix `c/employer` and Value `INDEX`:
-  * Deletes an employer at the specified `INDEX` in the list of all employers.
-  * `INDEX` refers to the index number of the applicant to be deleted in the list of all applicants.
-  * `INDEX` should not exceed the total employer count.
+* The index given for `INDEX` should not exceed the total applicant count.
 
 Examples:
-* `delete c/applicant 2` deletes the 2nd applicant in the list of all applicants.
-* `delete c/employer 3` deletes the 3rd employer in the list of all employers.
+* `delete 2` deletes the 2nd applicant in the list of all applicants.
 
 ### Exiting the program : `exit`
 
@@ -179,6 +171,6 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 Action | Format, Examples
 --------|------------------
 **Add** | `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL s/PREFERRED_SECTOR [t/TAG]…​` <br> e.g., `add c/applicant n/James Ho p/22224444 e/jamesho@example.com s/Software Engineering t/junior dev`
-**Delete** | `delete c/applicant INDEX`<br> e.g., `delete c/applicant 3`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **List** | `list c/applicant`
 **Help** | `help`
