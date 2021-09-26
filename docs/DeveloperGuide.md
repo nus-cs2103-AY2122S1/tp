@@ -284,18 +284,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to see a user guide using the `help` command
-2.  AddressBook shows a link that the user can access to see the user guide
-3.  User clicks on the link
-4.  AddressBook redirects the User to the user guide website 
+1.  User requests for help to use AddressBook
+2.  AddressBook informs user on how to access user guide
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User changes mind and no longer needs to look at the user guide
-
-    * 2a1. AddressBook stops showing the link for the user guide
+* 2a. User cancels request for help 
 
     Use case ends.
 
