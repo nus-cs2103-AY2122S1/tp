@@ -110,7 +110,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [sch/SCHOOL] [strea
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be NJC and clears his/her academic stream data.
+* `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be `NJC` and clears academic stream data.
 
 ### Locating persons by name: `find`
 
