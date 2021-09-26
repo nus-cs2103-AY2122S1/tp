@@ -5,12 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniqueModuleList;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.UniqueModuleList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the mod-tracker level
+ * Duplicates are not allowed (by .isSameModule comparison)
  */
 public class ModTracker implements ReadOnlyModTracker {
 
@@ -30,7 +30,7 @@ public class ModTracker implements ReadOnlyModTracker {
     public ModTracker() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an ModTracker using the Modules in the {@code toBeCopied}
      */
     public ModTracker(ReadOnlyModTracker toBeCopied) {
         this();
@@ -40,15 +40,15 @@ public class ModTracker implements ReadOnlyModTracker {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the Module list with {@code modules}.
+     * {@code modules} must not contain duplicate modules.
      */
     public void setModules(List<Module> modules) {
         this.modules.setModules(modules);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code ModTracker} with {@code newData}.
      */
     public void resetData(ReadOnlyModTracker newData) {
         requireNonNull(newData);
@@ -56,10 +56,10 @@ public class ModTracker implements ReadOnlyModTracker {
         setModules(newData.getModuleList());
     }
 
-    //// person-level operations
+    //// module-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in the mod tracker.
      */
     public boolean hasModule(Module module) {
         requireNonNull(module);
@@ -67,17 +67,17 @@ public class ModTracker implements ReadOnlyModTracker {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a module to the mod tracker.
+     * The module must not already exist in the mod tracker.
      */
     public void addModule(Module m) {
         modules.add(m);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given module {@code target} in the list with {@code editedModule}.
+     * {@code target} must exist in the mod tracker.
+     * The module identity of {@code editedModule} must not be the same as another existing module in the mod tracker.
      */
     public void setModule(Module target, Module editedModule) {
         requireNonNull(editedModule);
@@ -86,8 +86,8 @@ public class ModTracker implements ReadOnlyModTracker {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code ModTracker}.
+     * {@code key} must exist in the mod tracker.
      */
     public void removeModule(Module key) {
         modules.remove(key);
@@ -109,7 +109,7 @@ public class ModTracker implements ReadOnlyModTracker {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
+                || (other instanceof ModTracker // instanceof handles nulls
                 && modules.equals(((ModTracker) other).modules));
     }
 
