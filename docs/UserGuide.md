@@ -87,15 +87,11 @@ Examples:
 * `add c/applicant n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
 * `add c/employer n/Cat p/81234567 e/cat@gmail.com s/Financial_Services`
 
-### Listing all applicants/employers : `list`
+### Listing all applicants : `list`
 
 Shows a list of all applicants in the address book.
 
-Format: `list c/applicant`
-
-Shows a list of all employers in the address book.
-
-Format: `list c/employer`
+Format: `list`
 
 ### Deleting an applicant/employer : `delete`
 
@@ -180,5 +176,5 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL s/PREFERRED_SECTOR [t/TAG]…​` <br> e.g., `add c/applicant n/James Ho p/22224444 e/jamesho@example.com s/Software Engineering t/junior dev`
 **Delete** | `delete c/applicant INDEX`<br> e.g., `delete c/applicant 3`
-**List** | `list c/applicant`
+**List** | `list`
 **Help** | `help`
