@@ -272,6 +272,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                         |
 | `* * *`  | user                                       | list all applicants            | keep track of all my applicants                 |
 | `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
 
@@ -280,6 +281,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+
+**Use case: Adding an applicant**
+
+**MSS**
+
+1.  User requests to add an applicant with provided information
+2.  AddressBook adds the applicant to the storage
+
+**Extensions**
+
+* 1a. The input format is invalid.
+    * 1a1. AddressBook shows an error message.
+      
+      Use case resumes at step 1. 
+    
 
 **Use case: List all applicants**
 
@@ -300,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  AddressBook deletes the applicant
 
     Use case ends.
-
+    
 **Extensions**
 
 * 2a. The list of applicants is empty.
