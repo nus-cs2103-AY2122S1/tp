@@ -346,7 +346,7 @@ Preconditions: The students of the class have been added to TutorAid.
 
 4. TutorAid creates the class.
 
-5. Tutor <u>adds a student to the class (UC15)</u>. 
+5. Tutor <u>adds a student to the class (UC14)</u>. 
 
    Step 5 is repeated until all students have been added.
 
