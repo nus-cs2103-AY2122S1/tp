@@ -308,9 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: L2 Track Student's Lesson Information**
-
-**Actor: User (Tutor)**
+**Use case: UC3 Track Student's Lesson Information**
 
 **MSS**
 
@@ -332,8 +330,39 @@ Use case ends.
     
 * 3b. The specified end time is earlier than the start time
   * 3b1. TAB shows an error message.
+    
+* 3c. There is an existing lesson for that student with the same lesson details.
+  * 3c1. TAB shows an error message. 
 
 Use case resumes at step 2.
+
+**Use case: UC5 – Delete Student’s Lesson Information**
+
+**MSS**
+
+1. User requests to list students. 
+   
+2. TAB shows the list of students.
+
+3. User requests to delete a lesson for the student.
+
+4. TAB deletes the lesson from the specified student in the list.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+Use case ends.
+
+* 3a. The given index of the person is invalid.
+  * 3a1. TAB shows an error message.
+
+* 3b. The given index of the lesson of the person is invalid.
+  * 3b1. TAB shows an error message.
+
+Use case resumes from step 2.
 
 *{More to be added}*
 
