@@ -142,6 +142,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Navigation: `/back`
+
+Go back to the welcome page to redecide.
+
+Format: `/back`
+
+* `/back` should be exactly entered to go back to the initial (welcome) page
+
+Examples:
+* `/back` displays the following output:
+  You exited the current directory!
+
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
