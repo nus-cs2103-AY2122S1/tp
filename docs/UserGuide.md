@@ -148,6 +148,32 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Deleting a student : `delete INDEX`
+
+Delete the specified task from the list of tasks.
+
+Format: `delete INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the task list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples: 
+* `tasks` followed by `delete 2` deletes the 2nd task in the task list.
+
+### Marking a task as done: : `done`
+
+Mark the specified task from the list as done.
+
+Format: `done INDEX`
+
+* Mark the task as done at the specified `INDEX`.
+* The index refers to the index number shown in the task list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `tasks` followed by `done 2` marks the 2nd task in the task list as completed.
+
 ### Exiting the program : `exit`
 
 Exits the program.
