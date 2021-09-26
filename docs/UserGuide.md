@@ -82,5 +82,5 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 
 Examples:
   * `add -n Sherwin -sid A1234567X -cid B01`: Adds the student called Sherwin with student ID A1234567X and class ID B01 to ProgrammerError.
-    
+
   * `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to ProgrammerError.
