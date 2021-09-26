@@ -58,7 +58,7 @@ public class UniqueModuleList implements Iterable<Module>{
 
     /**
      * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * The Module must exist in the list.
      */
     public void remove(Module toRemove) {
         requireNonNull(toRemove);
