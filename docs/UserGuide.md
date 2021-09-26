@@ -26,11 +26,11 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list employer`** : Lists all employers.
+   * **`list`** : Lists all applicants.
 
-   * **`add applicant`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to the Address Book.
 
-   * **`delete`**`applicant/3` : Deletes the 3rd applicant shown in the list of all applicants.
+   * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
 
    * **`exit`** : Exits the app.
 
