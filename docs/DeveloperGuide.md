@@ -294,6 +294,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
+2. **Use case: Find a contact using name**
+
+    **MSS**
+    
+    1.  User enters command to find a contact by name
+    2.  CohortConnect shows list of contacts with matching name
+
+        Use case ends.
+        
+    **Extensions**
+    
+    * 1a. The given name is not present.
+
+        * 1a1. CohortConnect shows an error message.
+    
+    * 2a. The list is empty.
+
+      Use case ends.
+
+    
+3. **Use case: Find a contact using tag**
+
+    **MSS**
+    
+    1.  User enters command to find a contact by tag
+    2.  CohortConnect shows list of contacts labelled with matching tag
+
+        Use case ends.
+        
+    **Extensions**
+    
+    * 1a. The given tag doesn't exist.
+
+        * 1a1. CohortConnect shows an error message.
+        
+    * 2a. The list is empty.
+
+      Use case ends.
+
+
 6. **Use case: Show a person's details using Index**
 
     **MSS**
