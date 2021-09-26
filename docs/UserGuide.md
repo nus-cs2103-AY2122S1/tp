@@ -64,14 +64,14 @@ tApp is a **desktop app for managing contacts, optimized for use via a Command L
 
 </div>
 
-### Viewing help : `help`
+[comment]: <> (TODO)
+### Viewing help : `help` `[coming in v1.3]`
 
 Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Lists all students: `students`
 
@@ -91,55 +91,6 @@ Format: `add NAME`
 Examples:
 * `add Tom Lim` adds Tom Lim to the list and displays a confirmation output
 
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
 ### Navigation: `/back`
 
 Go back to the welcome page to redecide.
@@ -152,8 +103,7 @@ Examples:
 * `/back` displays the following output:
   You exited the current directory!
 
-
-### Viewing the Task List : `tasks`
+### Listing the task list : `tasks`
 
 Displays all the tasks currently in the list.
 
@@ -172,26 +122,52 @@ Format: `add TASK_NAME /by DATE`
 Examples:
 * `add grade scripts /by 2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
 * `add tutorial preparation /by 2021-10-04` creates the task "tutorial preparation", which is to be completed by the given date.
->>>>>>> 2aaedf5cdebb1e81eed3aac296b23edf483e7735
 
-### Clearing all entries : `clear`
+### Marking a student as present: `mark`
 
-Clears all entries from the address book.
+Marks the specified student in the student list as present or absent.
 
-Format: `clear`
+Format: `mark INDEX /wWEEK NUMBER`
 
-### Deleting a student : `delete INDEX`
+* Marks the person as present in the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
-Delete the specified task from the list of tasks.
+Examples:
+
+* `students` followed by `mark 1 /w1` marks the 1st person in the students list as present in week 1.
+* Another `mark 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
+
+Sample Usage:
+
+`> mark 1 /w1`
+
+    > Kho Tze Jit is marked as present for week 1!
+
+`> mark 1 /w1`
+    
+    > Kho Tze Jit is marked as absent for week 1!
+
+### Deleting a student contact: `delete INDEX`
+
+Deletes the specified student from the student list.
 
 Format: `delete INDEX`
 
-* Deletes the task at the specified `INDEX`.
-* The index refers to the index number shown in the task list.
-* The index must be a positive integer 1, 2, 3, …​
+* Deletes the person at the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
 
-Examples: 
-* `tasks` followed by `delete 2` deletes the 2nd task in the task list.
+Examples:
+
+* `students` followed by `delete 1` removes the 1st person in the students list.
+
+Sample Usage:
+
+`> delete 1`
+
+    > Kho Tze Jit is removed from the student list!
 
 ### Marking a task as done: : `done`
 
@@ -214,14 +190,58 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+tApp data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+[comment]: <> (TODO)
+### Editing a person : `edit` `[coming in v1.3]`
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Edits an existing person in the address book.
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+  specifying any tags after it.
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+[comment]: <> (TODO)
+### Locating persons by name: `find` `[coming in v1.3]`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+[comment]: <> (TODO)
+### Clearing all entries from task list : `clear` `[coming in v1.3]`
+
+Clears all entries from the task list.
+
+Format: `clear`
+
+### Editing the data file `[coming in v1.3]`
+
+tApp data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, tApp will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -230,6 +250,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+[comment]: <> (TODO)
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -237,6 +258,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+[comment]: <> (TODO)
 ## Command summary
 
 Action | Format, Examples
