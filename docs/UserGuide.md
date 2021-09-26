@@ -142,6 +142,35 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a Lesson: `ladd`
+
+Adds a lesson with the corresponding details to the student identified by INDEX.
+
+**Types of lesson:**
+* Recurring
+* Makeup
+
+**Lesson fields:**
+* Date of lesson
+* dd MMM yyyy e.g. Tue, 02 Jan 2018
+* Start time HH:mm
+* End time HH:mm
+* Subject
+* Homework
+
+Format: `ladd INDEX [recurring/] date/<dd MMM yyyy> start/<HH:mm> end/<HH:mm> subject/SUBJECT [hw/HOMEWORK]`
+<div>
+The type of lesson will be inferred from the presence of the -recurring flag.
+</div>
+
+Examples:
+
+* `list` followed by `ladd 1 recurring date/16 Sep 2021 start/15:00 end/16:00 subject/Math` (recurring lesson)
+adds the lesson to the 1st person in the address book
+
+* `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
+  (makeup lesson w/ homework) adds the lesson to the 1st person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
