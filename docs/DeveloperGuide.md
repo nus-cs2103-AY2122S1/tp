@@ -313,30 +313,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Source Control` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Import student roster**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User has a comma-separated values (`.csv`) file of the student roster.
+2.  User requests to import the file into Source Control.
+3.  Source Control shows the list of students parsed and imported.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The csv file has badly formatted input.
 
-  Use case ends.
+    * 2a1. Source Control shows an error message displaying the bad input.
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
+    * 2a2. User fixes the csv file.
 
       Use case resumes at step 2.
+
+**Use case: Create a new group**
+
+**MSS**
+
+1.  User requests to create a new group and enters the group name and students' names or Student IDs.
+2.  Source Control creates the group with the specified students.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There is an existing group with the same group name.
+
+    * 1a1. Source Control shows an error message.
+
+      Use case resumes at step 1.
+   
+* 1b. There are multiple students that match any of the specified student names.
+
+    * 1b1. Source Control shows an error message with the different Student IDs.
+
+      Use case resumes at step 1.
 
 *{More to be added}*
 
