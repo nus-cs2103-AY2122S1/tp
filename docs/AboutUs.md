@@ -5,7 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `shermannws@u.nus.edu`
 
 ## Project team
 
@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/shermannws.md)]
 
 - Role: Developer
-- Responsibilities: Dev Ops + Threading
+- Responsibilities: Backend
 
 ### Zhao Peiduo
 
