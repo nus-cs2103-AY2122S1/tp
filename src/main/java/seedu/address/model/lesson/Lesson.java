@@ -119,13 +119,6 @@ public class Lesson {
         return String.format("%s-%s-%s-%s", subject, grade, day, startTime);
     }
 
-    /**
-     * Returns the number of students attending the lesson.
-     */
-    public int getLessonSize() {
-        return students.size();
-    }
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
