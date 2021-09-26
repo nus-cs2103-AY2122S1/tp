@@ -77,10 +77,10 @@ Format: `help`
 
 Adds an applicant to the address book.
 
-Format: `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
+Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
 
 Examples:
-* `add c/applicant n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
+* `add n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
 
 ### Listing all applicants : `list`
 
@@ -150,7 +150,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL s/PREFERRED_SECTOR [t/TAG]…​` <br> e.g., `add c/applicant n/James Ho p/22224444 e/jamesho@example.com s/Software Engineering t/junior dev`
+**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL s/PREFERRED_SECTOR [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com s/Software Engineering t/junior dev`
 **List** | `list`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Help** | `help`
