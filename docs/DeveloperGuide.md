@@ -270,14 +270,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​          | I want to …​                                      | So that I can…​                                                     |
+| -------- | ------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user                | add a task with time                                 | be reminded of when certain tasks are due                              |
+| `* * *`  | user                | delete tasks                                         | not be cluttered with completed/wrong tasks                            |
+| `* * *`  | user                | mark students' attendance                            | keep track of who is present                                           |
+| `* * *`  | user                | mark tasks as complete                               | know which tasks have already been done                                |
+| `* * *`  | user                | view my todo list                                    | know what tasks I have to do                                           |
+| `* * *`  | user                | view my student list                                 | know what students I have                                              |
+| `* * *`  | user                | add a student contact                                | add my student into the list                                           |
+| `* * *`  | user                | delete a student contact                             | remove my student if he quits the course                               |
+| `* * *`  | user                | store my data in a file                              | easily export data from the application                                |
+| `* * *`  | user                | add different links for each student/group contact   | easily access their Github, email etc                                  |
+| `* * *`  | user                | record participation during tutorials                | accurately award participation marks to students                       |
+| `* * *`  | user                | add descriptions to the tasks                        | see the extra detail pertaining to the task                            |
+| `* *`    | user                | set my current directory to either students or tasks | add students/tasks more easily                                         |
+| `* *`    | user                | access the ‘help’ page with all available commands   | refer to instructions when I forget how to use tApp                    |
+| `* *`    | user                | allocate students to different groups                | track their progress based on their groups                             |
+| `* *`    | user                | import data from CSV files                           | get started with the app quickly                                       |
+| `* *`    | user                | edit tasks                                           | correct any errors I made without deleting and creating a new task     |
+| `* *`    | new user            | search for a student                                 | quickly access all information related to the student                  |
 
 *{More to be added}*
 
