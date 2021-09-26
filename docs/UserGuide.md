@@ -134,7 +134,7 @@ application runs.
 
 ### Editing the data file
 
-RecruitIn data is saved as a String in `/data/employers.json` and `/data/applicants.json` for employer and applicant data respectively.
+RecruitIn data is saved as a String in `/data/applicants.json` for applicant data.
 Advanced users are welcome to update data directly by editing that data file.
 
 Example of format of data for one applicant in applicants:
@@ -148,19 +148,6 @@ Example of format of data for one applicant in applicants:
  "tagged" : [ ]
 }]
 ```
-
-Example of format of data for one employer in employers:
-
-```JSON
-"employers" : [ {
- "name" : "Alice Yeoh",
- "phone" : "87438807",
- "email" : "alexyeoh@example.com",
- "preferred sector" : "Software Engineering",
- "tagged" : [ ]
-} ]
-```
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, RecruitIn will discard all data and start with an empty data file at the next run.
 </div>
