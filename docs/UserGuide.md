@@ -192,8 +192,8 @@ contains the data of your previous PAB3 home folder.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student | r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]... ` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete** | `delete {INDEX |-a | -f}`  <br> e.g., `delete 3`
+**Add** | `add n/NAME S/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student \| r/tutor} [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete** | `delete {INDEX \| -a \| -f}`  <br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [s/STUDENT_ID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find FIELD KEYWORD`<br> e.g., `find name James`
 **List** | `list`
