@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use Case 1: Find a contact using name**
+**Use Case 4: Find a contact using name**
  **MSS**
  1.  User enters command to find a contact by name
  2.  CohortConnect shows list of contacts with matching name
@@ -310,7 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Use case ends.
 
     
-**Use Case 3: Find a contact using tag**
+**Use Case 5: Find a contact using tag**
 **MSS**
 1.  User enters command to find a contact by tag
 2.  CohortConnect shows list of contacts labelled with matching tag
