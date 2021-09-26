@@ -10,12 +10,8 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX. It
 
 Given below are my contributions to the project:
 
-* **Code Quality**
-    * Looks after code quality, ensures adherence to coding standards.
-
 * **Documentation**:
     * User Guide:
         * Added documentation for the feature `view` and `exit`
     * Developer Guide:
-        * Contributed to the documentation in the following areas:
-            * Target user profile, Value proposition, User stories, Use cases, Non-functional requirements, Glossary
+        * Target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
