@@ -484,7 +484,84 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-*{More to be added}*
+**Use Case: Add a Student**
+
+**MSS**
+
+1. User requests to add a student with all the desired fields.
+2. TAB adds the student with all the specified fields.
+
+   Use case ends.
+
+**Extension**
+* 1a. User did not input student with all the compulsory fields.
+
+  * 1a1. TAB shows an error message for invalid command format.
+  * 1a2. User inputs student with all the compulsory details (name, phone, email, address).
+      
+    Steps 1a1-1a2 are repeated until the fields inputted are valid.
+
+    Use case resumes from step 2.
+  
+* 1b. User inputs alphabets under the phone number field.
+  
+  * 1b1. TAB shows an error message for invalid phone number format.
+  * 1b2. User inputs student's phone number with only numerical values.
+  
+    Steps 1b1-1b2 are repeated until the phone number inputted is a valid format.
+
+    Use case resumes from step 2.
+
+* 1c. User inputs an invalid email format.
+
+  * 1c1. TAB shows an error message for invalid email format.
+  * 1c2. User inputs the student's email address with the correct format.
+
+    Steps 1c1-1c2 are repeated until the email address inputted is a valid format.
+
+    Use case resumes from step 2.
+
+* 1d. User requests to add student with optional fields.
+
+  * 1d1. User inputs the optional fields with the respective prefixes together with the compulsory fields.
+  
+    Use case resumes from step 2.
+  
+**Use Case: Undo a Command**
+
+**MSS**
+
+1. User makes a request that <u>modifies the storage. E.g. ladd, add, edit, delete,...</u>.
+2. TAB modifies the storage.
+3. User requests to undo the last modification.
+4. TAB undoes the last command.
+
+   Use case ends.
+
+**Extension**
+* 1a. User did not make any request or User requests for commands that does not modify storage.
+
+  * 1a1. TAB shows an error message.
+  
+    User case ends.
+
+**Use Case: Redo a Command**
+
+**MSS**
+
+1. User requests to redo a command.
+2. TAB redoes the previous undone command and modifies the storage accordingly.
+
+   Use case ends.
+
+**Extension**
+* 1a. User did not request for undo command within the session.
+
+    * 1a1. TAB shows an error message for no command to redo.
+  
+      Use case ends.
+    
+
 
 ### Non-Functional Requirements
 
