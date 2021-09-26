@@ -300,28 +300,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
  
 ### Use cases
 
-*{Add things in respective PRs}*
-
-**Use case: Delete a person**
+**Use case: Enroll a student in a lesson**
 
 **MSS**
-*{Add things in respective PRs}*
-
-    Use case ends.
+1. CSO adds the name of Student to be enrolled in Lesson.
+2. System adds the name of Student to the Lesson.  
+   Use case ends.
+   
 
 **Extensions**
+* 1a. System cannot detect Lesson name 
 
-* 2a. The list is empty.
+  * 1a1. System returns error message, requesting CSO to input a valid Lesson name.  
+    Use case resumes from step 1.
+    
 
-  Use case ends.
+* 1a. System cannot detect the Student's name.
+  * 1a1. System returns error message, requesting CSO to input a valid Student’s name.  
+    Use case resumes from step 1.
+    
 
-* 3a. The given index is invalid.
+**Use case: Unenroll a student in a lesson**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. CSO adds the name of Student to be unenrolled in Lesson.
+2. System removes the name of the Student from the Lesson.  
+   Use case ends.
 
-      Use case resumes at step 2.
 
-*{Add things in respective PRs}*
+**Extensions**
+* 1a. System cannot detect Lesson name
+
+    * 1a1. System returns error message, requesting CSO to input a valid Lesson name.  
+      Use case resumes from step 1.
+
+
+* 1a. System cannot detect the Student's name.
+    * 1a1. System returns error message, requesting CSO to input a valid Student’s name.  
+      Use case resumes from step 1.
+
 
 ### Non-Functional Requirements
 
@@ -344,6 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CSO**: Customer Service Officer
 
 --------------------------------------------------------------------------------------------------------------------
 
