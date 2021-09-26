@@ -273,8 +273,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | Recruiter                                  | delete an applicant            | so that I can remove applicants that are no longer being considered    |
-| `* * *`  | Recruiter                                  | delete an employer             | so that I can remove employers that are no longer being considered     |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
@@ -299,29 +297,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list of applicants is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Delete an employer**
-
-**MSS**
-
-1. User requests to list employers
-2. AddressBook shows a list of employers
-3. User requests to delete a specific employer in the list
-4. AddressBook deletes the employer
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. The list of employers is empty.
 
   Use case ends.
 
