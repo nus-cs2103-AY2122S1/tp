@@ -140,6 +140,19 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Navigation: `/back`
+
+Go back to the welcome page to redecide.
+
+Format: `/back`
+
+* `/back` should be exactly entered to go back to the initial (welcome) page
+
+Examples:
+* `/back` displays the following output:
+  You exited the current directory!
+
+
 ### Viewing the Task List : `tasks`
 
 Displays all the tasks currently in the list.
@@ -159,6 +172,7 @@ Format: `add TASK_NAME /by DATE`
 Examples:
 * `add grade scripts /by 2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
 * `add tutorial preparation /by 2021-10-04` creates the task "tutorial preparation", which is to be completed by the given date.
+>>>>>>> 2aaedf5cdebb1e81eed3aac296b23edf483e7735
 
 ### Clearing all entries : `clear`
 
