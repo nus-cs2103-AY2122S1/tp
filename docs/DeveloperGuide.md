@@ -272,7 +272,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | recruiter                                  | list all applicants            | keep track of all my applicants                 |
+| `* * *`  | user                                  | list all applicants            | keep track of all my applicants                 |
 
 *{More to be added}*
 
