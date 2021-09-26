@@ -256,14 +256,23 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+A recruiter that
 * can type fast
 * prefers typing to mouse interactions
+* prefer desktop apps over other types
 * is reasonably comfortable using CLI apps
+* has a need to manage a significant number of applications
+* works for a company that gets applications for variety of roles 
+* has a need to filter and categorise applicants by different fields
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+
+It can be hard for recruiters to keep track of the plethora of clients with different skill sets, availability 
+and experience.
+
+This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates
+they have in mind. Recruiters can manage contacts faster than a typical mouse/GUI driven app.
 
 
 ### User stories
@@ -272,11 +281,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | save applicant data            | refer to it in the future without having to type in their data again   |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                         |
-| `* * *`  | user                                       | list all applicants            | keep track of all my applicants                 |
+| `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                           |
+| `* * *`  | user                                       | list all applicants            | keep track of all my applicants                                        |
 | `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
-
 
 *{More to be added}*
 
@@ -347,14 +356,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
+      
+*{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
 
 ### Glossary
 
