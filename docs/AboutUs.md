@@ -21,9 +21,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Hanif
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hanif-kamal.png" width="200px">
 
-[[github](http://github.com/johndoe)][[portfolio](team/johndoe.md)]
+[[github](http://github.com/hanif-kamal)][[portfolio](team/hanif-kamal.md)]
 
 * Role: Documentation, Code Quality
 * Responsibilities: tbd
