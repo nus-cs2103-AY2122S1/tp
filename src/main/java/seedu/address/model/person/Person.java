@@ -99,6 +99,14 @@ public class Person {
     }
 
     /**
+     * Returns true if this person has at least one contact field not empty.
+     */
+    public boolean hasContactField() {
+        return !(phone.value.isEmpty() && email.value.isEmpty()
+                && parentPhone.value.isEmpty() && parentEmail.value.isEmpty());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

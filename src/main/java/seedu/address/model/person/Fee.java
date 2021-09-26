@@ -11,7 +11,6 @@ public class Fee {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Fees should only contain numbers and at most one decimal point";
-    // TODO: Change VALIDATION_REGEX
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     public final String value;
 

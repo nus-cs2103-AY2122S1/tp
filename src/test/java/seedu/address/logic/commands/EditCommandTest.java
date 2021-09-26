@@ -31,7 +31,7 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
-
+    // TODO: Tests for removing the last contact field
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
