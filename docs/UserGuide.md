@@ -16,7 +16,7 @@ ClassMATE is a **desktop app for managing student contacts, optimized for use vi
 
 1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your classMATE.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -117,16 +117,24 @@ Finds students whose names contain any of the given keywords.
 Format: `findstu KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `findstu John` returns `john` and `John Doe`
 * `findstu alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Locating classes by name: `findc`
+
+Find classes by class codes.
+
+Format: `findc c\CLASSCODE`
+
+* The search is not absolute. e.g `G0` will match `G06`
+
+Examples:
+* `findc A02` returns `A02` if it exists
+* `findc E` returns `E01`, `E02`, `E03`<br>
 
 ### Viewing a student : `viewstu`
 
@@ -170,7 +178,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+classMATE data is saved in the hard disk automatically after any command that changes the data. **There is no need to save manually.**
 
 ### Editing the data file
 
@@ -179,10 +187,6 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
