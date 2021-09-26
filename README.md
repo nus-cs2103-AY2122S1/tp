@@ -14,6 +14,6 @@
 This application is specially designed for insurance agents who can type fast and prefer to use a 
 *Command Line Interface* (CLI) to interact with the aaplication
 
-For the detailed documentation of this project, see the **[Address Book Product Website](https://ay2122s1-cs2103t-t17-4.github.io/tp)**.
+For the detailed documentation of this project, see the **[InsurancePal website](https://ay2122s1-cs2103t-t17-4.github.io/tp)**.
 
 *This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).*
