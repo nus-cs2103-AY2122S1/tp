@@ -308,7 +308,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case 6: View a student's details**
+
+Precondition: The student's details have been added to TutorAid.
+
+**MSS**
+
+1. Tutor requests a list of students
+
+2. TutorAid shows the list of students
+
+3. Tutor finds the specific student in the list and requests to view the student's details
+
+4. TutorAid shows the student's details
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+  * 3a1. TutorAid shows an error message.
+
+    Use case resumes at step 3.
+
+**Use case 13: Set up a class**
+
+Preconditions: The students of the class have been added to TutorAid.
+
+**MSS**
+
+1. Tutor requests to add a class
+
+2. TutorAid requests for details of the class including day of the week, time and price.
+
+3. Tutor enters the details of the class.
+
+4. TutorAid creates the class.
+
+5. Tutor <u>adds a student to the class (UC15)</u>. 
+
+   Step 5 is repeated until all students have been added.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The class appears to overlap with another class as intended by the Tutor.
+
+  * 3a1. TutorAid displays a warning. 
+
+  * 3a2. The tutor dismisses the warning.
+
+    Use case resumes at step 4.
+
+* 3b. The class appears to overlap with another class due to a mistake by the Tutor.
+
+  * 3b1. TutorAid displays a warning. 
+
+  * 3b2. The tutor acknowledges the warning and cancels the creation of the class.
+
+    Use case resumes at step 1.
+
+**Use case 14: Add a student to a class**
+
+Preconditions: The students of the class have been added to TutorAid, and the class has been created correctly.
+
+**MSS**
+
+1. Tutor requests a list of classes
+
+2. TutorAid displays a list of classes
+
+3. Tutor requests to add students to a specific class
+
+4. TutorAid displays the list of students
+
+5. Tutor chooses some students from the list to be added
+
+6. TutorAid shows a confirmation message
+
+7. Tutor confirms the action
+
+8. TutorAid adds the selected students to the class
+
+   Use caase ends.
+
+**Extensions**
+
+* 6a. Tutor declines the confirmation.
+
+  * 6a1. TutorAid stops the action.
+
+    Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
