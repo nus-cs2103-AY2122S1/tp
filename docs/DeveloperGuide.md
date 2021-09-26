@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Format of this DG is based on [AB3 DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -283,32 +283,113 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `tApp` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Set current directory**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to go back to the welcome page to choose either students or tasks directory again. 
+2.  tApp navigates into the welcome page and displays the exit confirm message.
 
     Use case ends.
 
 **Extensions**
 
+* 1a.  The user hasn’t entered either the student or task management directory.
+
+  Use case ends.
+
+**Use case: UC2 - View student list/Enter student directory**
+
+**MSS**
+
+1.  User requests to navigate to the student directory (UC1)
+2.  tApp navigates into the student directory
+3.  tApp displays the list of student contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User is already in the student directory.
+
+  Use case resumes at step 3.
+
 * 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC3 - Add a student contact**
+
+**MSS**
+
+1.  User requests to enter student directory (UC1)
+2.  tApp navigates to student directory
+3.  User requests to add a student contact
+4.  tApp adds the student
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. No name is specified.
+
+    * 3a1. tApp shows an error message.
+
+      Use case ends.
+
+**Use case: UC4 - Mark student as present**
+
+**MSS**
+
+1.  User requests to view students (UC2)
+2.  tApp shows a list of persons
+3.  User requests to mark a specific person as present in the list
+4.  tApp marks the person as present
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty. 
+    
+  Use case ends.
+
+* 2b. User requests to mark a specific person as absent in the list.
+  
+    * 2b1. tApp marks the person as absent.
+
+      Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC5 - Delete a student contact**
+
+**MSS**
+
+1.  User requests to view students (UC2)
+2.  tApp shows a list of persons
+3.  User requests to delete a specific student in the list
+4.  tApp deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
 
   Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. tApp shows an error message.
 
       Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
