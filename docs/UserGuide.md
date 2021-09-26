@@ -73,19 +73,14 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding an applicant/employer: `add`
+### Adding an applicant: `add`
 
 Adds an applicant to the address book.
 
 Format: `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
 
-Adds an employer to the address book.
-
-Format: `add c/employer n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
-
 Examples:
 * `add c/applicant n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
-* `add c/employer n/Cat p/81234567 e/cat@gmail.com s/Financial_Services`
 
 ### Listing all applicants/employers : `list`
 
