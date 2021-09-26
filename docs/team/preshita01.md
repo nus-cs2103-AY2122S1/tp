@@ -9,14 +9,11 @@ TutorAid is a desktop application used for helping tech-savvy private tutors, wh
 
 Given below are my contributions to the project.
 
-* **Documentation in-charge**
-    * As the team member in-charge of documentation, I am responsible for ensuring that the various project documents are up to standard (e.g. Developer guide, User Guide). 
-
 * **Documentation**:
+    * User Guide:
+      * Added the documentation for the features `add` and `delete`
     * Developer Guide:
       * Added on to the target user profile, value proposition, user stories, use cases, non-functional requirements and glossary.
-    * User Guide:
-        * Added the documentation for the features `add` and `delete`
     * README:
         * Added the overview and acknowledgement sections
         * Added the image of TutorAid's GUI
