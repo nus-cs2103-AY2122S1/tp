@@ -21,6 +21,8 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Phone parentPhone;
+    private final Email parentEmail;
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
@@ -28,11 +30,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
+                  Address address, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.parentPhone = parentPhone;
+        this.parentEmail = parentEmail;
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
@@ -48,6 +53,14 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Phone getParentPhone() {
+        return parentPhone;
+    }
+
+    public Email getParentEmail() {
+        return parentEmail;
     }
 
     public Address getAddress() {
@@ -116,6 +129,10 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Parent Phone: ")
+                .append(getParentPhone())
+                .append("; Parent Email: ")
+                .append(getParentEmail())
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Remark: ")
