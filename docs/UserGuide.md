@@ -82,15 +82,11 @@ Format: `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SEC
 Examples:
 * `add c/applicant n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
 
-### Listing all applicants/employers : `list`
+### Listing all applicants : `list`
 
 Shows a list of all applicants in the address book.
 
-Format: `list c/applicant`
-
-Shows a list of all employers in the address book.
-
-Format: `list c/employer`
+Format: `list`
 
 ### Deleting an applicant : `delete`
 
@@ -168,6 +164,6 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 Action | Format, Examples
 --------|------------------
 **Add** | `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL s/PREFERRED_SECTOR [t/TAG]…​` <br> e.g., `add c/applicant n/James Ho p/22224444 e/jamesho@example.com s/Software Engineering t/junior dev`
+**List** | `list`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**List** | `list c/applicant`
 **Help** | `help`
