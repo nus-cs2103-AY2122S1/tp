@@ -256,14 +256,23 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+A recruiter that
 * can type fast
 * prefers typing to mouse interactions
+* prefer desktop apps over other types
 * is reasonably comfortable using CLI apps
+* has a need to manage a significant number of applications
+* works for a company that gets applications for variety of roles 
+* has a need to filter and categorise applicants by different fields
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+
+It can be hard for recruiters to keep track of the plethora of clients with different skill sets, availability 
+and experience.
+
+This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates
+they have in mind. Recruiters can manage contacts faster than a typical mouse/GUI driven app.
 
 
 ### User stories
@@ -272,12 +281,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | save applicant data            | refer to it in the future without having to type in their data again   |
 
 *{More to be added}*
 
