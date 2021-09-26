@@ -273,7 +273,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | recruiter                                  | list all applicants            | keep track of all my applicants                 |
-| `* * *`  | recruiter                                  | list all employers             | keep track of all my employers                  |
 
 *{More to be added}*
 
@@ -287,16 +286,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list all applicants
 2.  AddressBook shows a list of all applicants
-
-    Use case ends.
-
-
-**Use case: List all employers**
-
-**MSS**
-
-1. User requests to list all employers
-2. AddressBook shows a list of all employers
 
     Use case ends.
 
