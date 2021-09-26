@@ -64,13 +64,23 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing help : `help`
+### 1. Viewing sample data
 
-Shows a message explaning how to access the help page.
+Sample Data will be available on starting PE.
+
+### 2. Purge all data: `purge`
+
+Purges all existing data to start adding your own data. \
+Clears all entries data in PE. \
+Example: `purge`
+
+### 3. Viewing help: `help`
+
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Example: `help`
 
 
 ### Adding a person: `add`
