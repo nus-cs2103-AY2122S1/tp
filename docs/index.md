@@ -1,6 +1,6 @@
 ---
 layout: page
-title: AddressBook Level-3
+title: Source Control
 ---
 
 [![CI Status](https://github.com/AY2122S1-CS2103T-W08-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-W08-2/tp/actions)
