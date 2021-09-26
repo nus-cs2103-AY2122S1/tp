@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/chesterwongz.png" width="200px">
 
 [[github](https://github.com/Chesterwongz)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](https://www.linkedin.com/in/zhi-chester-wong-46a6b41b5?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BS8WG6LsATxiSCaqmdnTWtA%3D%3D)]
 
 * Role: Developer
 
@@ -23,7 +23,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/eeliana.png" width="200px">
 
 [[github](http://github.com/eeliana)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 
@@ -31,7 +30,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/lingshanng.png" width="200px">
 
-[[github](http://github.com/lingshanng)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/lingshanng)]
 
 * Role: Developer
 * Responsibility: Code Quality
@@ -41,7 +40,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/xiaoyunnn.png" width="200px">
 
 [[github](http://github.com/Xiaoyunnn)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer, UI Designer
 * Responsibility: UI
@@ -51,6 +49,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/angkoonhwee.png" width="200px">
 
 [[github](http://github.com/angkoonhwee)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
