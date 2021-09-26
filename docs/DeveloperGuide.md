@@ -294,8 +294,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | user | be able to sort my contacts | I can see the contact in a certain order |
 | `* *` | user | have access to a help page | I can know how to navigate the app |
 | `*` | potential user exploring the app | be able to see the app populated with sample data | I can easily see how the app works |
-| `*` | user | be able to know which contact I retrieve frequently | I know the contact is frequently contacted |
-| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I know the contact might be obsolete |
+| `*` | user | be able to know which contact I retrieve frequently | I can know which contact is frequently contacted |
+| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I can know which contact might be obsolete |
 | `*` | user | be able to set up profile picture for the contact | I can recognise the person |
 | `*` | forgetful user | be able to have reminders about upcoming classes | I can conduct classes punctually |
 | `*` | Expert user | be able to set up shortcuts | I can do things faster |
