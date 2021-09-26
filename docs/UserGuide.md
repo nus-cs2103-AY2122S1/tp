@@ -156,9 +156,9 @@ Examples:
 * `liststu` followed by `deletestu 2` deletes the 2nd person in the address book.
 * `findstu Betsy` followed by `deletestu 1` deletes the 1st person in the results of the `findstu` command.
 
-### Clearing all entries : `clear`
+### Clearing all students : `clear`
 
-Clears all entries from the address book.
+Clears all students from memory.
 
 Format: `clear`
 
