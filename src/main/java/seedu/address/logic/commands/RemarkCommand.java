@@ -29,7 +29,7 @@ public class RemarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "r/ [REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "r/ Likes to swim.";
+            + "r/ Likes to run.";
 
     private final Index index;
     private final Remark remark;
