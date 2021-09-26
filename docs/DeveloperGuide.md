@@ -283,32 +283,77 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `tutor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 3: Updating a student’s detail record**
+
+Preconditions: The student's details have been previously added to TutorAid.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Tutor views the list of his/her students
+2.  Tutor identifies the index of the student, and requests to delete the specified student in the list
+3.  TutorAid deletes the student from the list
+4.  Tutor requests to add the student in the list, and provides the updated details of the student
+5.  TutorAid adds the student to the list
+6.  TutorAid displays a message indicating the student has been successfully added
 
     Use case ends.
-
+    
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is invalid.
 
-  Use case ends.
+    * 2a1. TutorAid shows an error message.
+    * 2a2. Tutor re-enters a new index.
+    
+      Steps 2a1 - 2a2 are repeated until a valid index is given.
+      Use case resumes from step 3.
+      
+* 4a. The given syntax is invalid.
 
-* 3a. The given index is invalid.
+    * 4a1. TutorAid shows an error message.
+    * 4a2. Tutor re-enters the student details.
+    
+      Steps 4a1 - 4a2 are repeated until a valid syntax is given.
+      Use case resumes from step 5.
+      
+* 4b. Tutor mistypes the student's updated details.
 
-    * 3a1. AddressBook shows an error message.
+  Use case starts over from step 1.
+  
+**Use case 8: View schedule for the upcoming week**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1.  Tutor enters the end date of the upcoming week, and requests to view the schedule up till that date
+2.  TutorAid shows the sessions and milestones happening in the upcoming week, in a calendar view
+3.  Tutor clicks on a specific date in the calendar
+4.  TutorAid shows the details of the sessions and milestones happening on that specific date, in a list view
+5.  Tutor requests to return to the calendar view
+    Steps 2 - 5 are repeated until Tutor decides to stop viewing the details of sessions and milestones
+    happening on a specific date in the upcoming week.
+
+    Use case ends.
+    
+**Extensions**
+
+* 1a. The given date has an invalid format.
+
+    * 1a1. TutorAid shows an error message.
+    * 1a2. Tutor re-enters the date.
+    
+      Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
+      Use case resumes from step 2.
+
+**Use case 11: View upcoming milestones for all students**
+
+**MSS**
+
+1.  Tutor requests to view the students' upcoming milestones
+2.  TutorAid shows the upcoming milestones in a chronological order
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
