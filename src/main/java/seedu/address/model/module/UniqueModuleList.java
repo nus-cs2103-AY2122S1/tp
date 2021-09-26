@@ -79,11 +79,6 @@ public class UniqueModuleList implements Iterable<Module> {
         }
     }
 
-    public void setModules(seedu.address.model.module.UniqueModuleList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Replaces the contents of this list with {@code modules}.
      * {@code modules} must not contain duplicate modules.
