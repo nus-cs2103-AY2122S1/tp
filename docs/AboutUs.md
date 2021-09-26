@@ -34,6 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/lingshanng)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
+* Responsibility: Code Quality
 
 ### Wu Xiao Yun
 
@@ -42,7 +43,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Xiaoyunnn)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Developer, UI Designer
+* Responsibility: UI
 
 ### Ang Koon Hwee
 
