@@ -31,13 +31,13 @@ ProgrammerError (P|E) is a desktop app for managing students' information, opti
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-   
+
    * **`add -n Sherwin -sid A1234567X -cid B01`**: Adds a student named `Sherwin` to the PE with his Student ID and Class ID.
 
    * **`view -sid A1234567X`** Views a particular student's by its Student ID
-  
+
    * **`update -sid A1234567X -grade 100`** Updates a student's grade with the -grade flag
-   
+
    * **`delete -sid A1234567X`**  : Deletes a student's record by the student ID
 
    * **`purge`**: Deletes all existing contacts
@@ -82,4 +82,5 @@ Format: `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 
 Examples:
 * `add -n Sherwin -sid A1234567X -cid B01`: Adds the student called Sherwin with student ID A1234567X and class ID B01 to ProgrammerError.
+
 * `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to ProgrammerError.

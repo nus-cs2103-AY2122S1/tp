@@ -6,7 +6,7 @@
 * ProgrammerError (P|E in short) is an application developed based on the `AddressBook Level 3` application.
 * This is an application made for CS2100 Teaching Assistants(TAs) to track their students' task progress and performance
 
-##Feature List 
+##Feature List
 1. View Sample Data (shown on starting the application)
 2. Purge Sample Data (Delete all)
     - Purge Existing Sample Data
@@ -33,5 +33,5 @@
     - Sorting key: Student ID
 10. Save data to Hard Disk
     - Save whenever there is a change (create/edit/delete)
-    
+
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
