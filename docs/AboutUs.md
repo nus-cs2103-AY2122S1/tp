@@ -29,30 +29,30 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Jodi Choo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jodichoo.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jodichoo)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Chen Xiaotong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/WuaaAj.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/WuaaAj)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Weng Ying
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wengYing227.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/wengYing227)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
