@@ -369,6 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Applicant**: Represents a person that is searching for a job
+* **Preferred Sector**: Indicates the industry sector that the applicant is applying for
 
 --------------------------------------------------------------------------------------------------------------------
 
