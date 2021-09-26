@@ -559,7 +559,7 @@ We categorise our user stories into four main epics:
 
 <br/>
 
-#### Use Case: Undo an Accidental Modification
+#### Use Case: UC9 - Undo an Accidental Modification
 
 **MSS**
 
@@ -578,7 +578,7 @@ We categorise our user stories into four main epics:
 
 <br/>
 
-#### Use Case: Redo an Undone Modification
+#### Use Case: UC10 - Redo an Undone Modification
 
 **MSS**
 
