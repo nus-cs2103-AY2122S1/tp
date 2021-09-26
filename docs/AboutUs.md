@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Allard Quek
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/allardquek.png" width="200px">
 
 [[homepage](https://allardquek.tech)]
 [[github](https://github.com/AllardQuek)]
