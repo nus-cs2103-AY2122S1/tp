@@ -257,41 +257,58 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of student details in a tuition centre
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Provide a more streamlined platform, as compared to conventional excel which might have numerous irrelevant functions. This platform also offers a more intuitive UI - with a clean and minimalist layout. Helps manage student admin information faster than a typical mouse-driven app. The app is only used for one tuition centre.	
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
-
+| Priority | As a …​                                    | I want to …​                         | So that I can …​                                                 |
+| -------- | ------------------------------------------ | ------------------------------------ | -----------------------------------------------------------------|
+| `* * *`  | Customer Service Officer                   | add a new student                    | keep track of student count and details                          |
+| `* * *`  | Customer Service Officer                   | Delete a student                     | keep track of student count and details                          |
+| `* * *`  | Customer Service Officer                   | Know the level of the student’s      | schedule them into the right lessons (eg. P5 student to P5 lessons) |
+| `* * *`  | Customer Service Officer                   | Lookup a student in the database     | find out the student’s details                                   |
+| `* * *`  | Customer Service Officer                   | Know the lessons a student is enrolled in  | -obvious benefit-                                          |
+| `* * *`  | Customer Service Officer                   | Enrol students from a lesson         | I can keep track of student count and details in lessons         |
+| `* * *`  | Customer Service Officer                   | Unenroll students from a lesson      | keep track of student count and details in lessons               |
+| `* * *`  | Customer Service Officer                   | Know the parent’s contact            | call the parent if he is late or did not attend                  |
+| `* * *`  | Customer Service Officer                   | Know the address                     | send physical letters/ documents                                 |
+| `* * *`  | Customer Service Officer                   | Know the list of all other lessons   | check the status of other lessons                                |
+| `* *`    | Customer Service Officer                   | Update student’s address             | ensure the detail is updated to date                             |
+| `* *`    | Customer Service Officer                   | Update student’s number of lessons   | keep track of his/her schedule if it’s too packed                |
+| `* *`    | Customer Service Officer                   | Update student’s school              | -obvious benefit-                                                |
+| `* *`    | Customer Service Officer                   | Update student’s subjects taken      | keep track of their total tuition fees                           |
+| `* *`    | Customer Service Officer                   | Know how many students are in the lesson | help tutors plan resources accordingly for the lesson        |
+| `* *`    | Customer Service Officer                   | Know what time lessons start/end     | let parents/ teachers/ students know if they need to know lesson timings, or know of any clash in timings    |
+| `* *`    | Customer Service Officer                   | Know students' attendance            | inform teachers or find out why students are missing lessons     |
+| `* *`    | Customer Service Officer                   | Know how much a student has to pay in a month | remind the parents to pay punctually                    |
+| `* *`    | Customer Service Officer                   | Know the command format to enter.    | properly use the app                                             |
+| `*`      | Customer Service Officer                   | Update lesson timings                | keep track of changes in the lesson schedule                     |
+| `*`      | Customer Service Officer                   | Update student’s performance stats   | inform tuition teachers of their proficiency                     |
+| `*`      | Customer Service Officer                   | Know the lessons each teacher has    | remind them of their lessons                                     |
+| `*`      | Customer Service Officer                   | Leave remarks                        | make lessons more convenient for tutors and students in the case they are unable to make it for a specific lesson                 |
+| `*`      | Customer Service Officer                   | Know students performance stats      | update the teachers/ students if they need that information      |
+| `*`      | Customer Service Officer                   | Keep track of student’s outstanding payments | know who has paid and remind parents to pay if they have yet to complete payment |
+ 
 ### Use cases
 
-(For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Office` (labelled as `user`), unless specified otherwise)
+For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Office` (labelled as its abbreviation `CSO` or simply  `user`, unless specified otherwise).
 
 **Use case: Add a lesson**
 
 **MSS**
 
-1.  User requests to list lessons.
+1.  CSO requests to list lessons.
 2.  System shows a list of lessons.
-3.  User requests to add a lesson with specified subject, grade, start time and price.
+3.  CSO requests to add a lesson with specified subject, grade, start time and price.
 4.  System adds the lesson.
 
     Use case ends.
@@ -326,9 +343,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list lessons.
+1.  CSO requests to list lessons.
 2.  System shows a list of lessons.
-3.  User requests to delete a specific lesson in the list by its lesson code.
+3.  CSO requests to delete a specific lesson in the list by its lesson code.
 4.  System deletes the lesson
 
     Use case ends.
@@ -344,12 +361,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
-
+    
 **Use case: View details of a lesson**
 
 **MSS**
 
-1.  User requests to list lessons.
+1.  CSO requests to list lessons.
 2.  System shows a list of lessons, with their respective details.
 
     Use case ends.
@@ -358,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User selects help option.
+1.  CSO selects help option.
 2.  System lists basic commands and descriptions, as well as the user guide link.
 
     Use case ends.
@@ -367,11 +384,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 
-*{More to be added}*
+   1. Performance requirements: the system should respond within 2 seconds.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
+5. Quality requirements: 
+
+   1. User interface not produce excessive colour changes/flashing on command execution
+
+   1. The user interface should use readable text styling, i.e. appropriate size and font
+
+   1. All string output must be in UTF-8 encoding.
+
 
 ### Glossary
 
