@@ -11,6 +11,12 @@ public class Time implements Comparable<Time> {
     private int hour;
     private int min;
 
+    /**
+     * Constructor of time.
+     * @param hour The hour part of the time represented by int.
+     * @param min The min part of the time represented by int.
+     * @throws InvalidTimeException Throws when the time is invalid.
+     */
     public Time(int hour, int min) throws InvalidTimeException {
         if (hour < 0 || hour >= 24 || min < 0 || min >= 60) {
             throw new InvalidTimeException();
@@ -20,7 +26,8 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Returns a string representing the duration between this time and another time
+     * Returns a string representing the duration between this time and another time.
+     * @param otherTime The other time compared to this.
      */
     public String comparedToOther(Time otherTime) {
         Time laterTime = this.compareTo(otherTime) >= 0 ? this : otherTime;
@@ -36,14 +43,30 @@ public class Time implements Comparable<Time> {
         return hourDifference +" hour(s) " + minDifference + "min(s)";
     }
 
+    /**
+     * Gets the hour part of the time.
+     *
+     * @return The hour of the task.
+     */
     public int getHour() {
         return this.hour;
     }
 
+    /**
+     * Gets the min part of the time.
+     *
+     * @return The min of the time.
+     */
     public int getMin() {
         return this.min;
     }
 
+    /**
+     * Compares another Time with this time.
+     * @param other The other time.
+     * @return 1 if this time is later. 0 if this time and the other time are the same
+     * moment. -1 if this time is earlier.
+     */
     public int compareTo(Time other) {
         if (this.getHour() == other.getHour() && this.getMin() == other.getMin()) {
             return 0;

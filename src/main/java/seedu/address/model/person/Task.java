@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import java.util.Date;
-import java.time.LocalTime;
 
 import seedu.address.model.person.exceptions.InvalidTimeException;
 
@@ -14,6 +13,13 @@ public class Task {
     private Time endTime;
     private Date date;
 
+    /**
+     * Constructor of Task given date, startTime, endTime and taskName.
+     * @param date Date of the task.
+     * @param startTime StartTime of the task.
+     * @param endTime EndTime of the task.
+     * @param taskName Name of the task.
+     */
     public Task(Date date, Time startTime, Time endTime, String taskName) {
         this.date = date;
         this.startTime = startTime;
@@ -21,12 +27,28 @@ public class Task {
         this.taskName = taskName;
     }
 
+    /**
+     * Constructor of Task given date, startTime, and endTime.
+     * @param date Date of the task.
+     * @param startTime StartTime of the task.
+     * @param endTime EndTime of the task.
+     */
     public Task(Date date, Time startTime, Time endTime) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    /**
+     * Constructor of Task given date, name and time represented by hour and min.
+     * @param date Date of task.
+     * @param startHour StartHour of task.
+     * @param startMin StartMin of task.
+     * @param endHour EndHour of task.
+     * @param endMin EndMin of task.
+     * @param taskName Name of task.
+     * @throws InvalidTimeException Throws if the given hour and min are invalid.
+     */
     public Task(Date date, int startHour, int startMin, int endHour, int endMin, String taskName) throws InvalidTimeException {
         this.date = date;
         this.startTime = new Time(startHour, startMin);
@@ -34,12 +56,25 @@ public class Task {
         this.taskName = taskName;
     }
 
+    /**
+     * Constructor of Task given date, and time represented by hour and min.
+     * @param date Date of task.
+     * @param startHour StartHour of task.
+     * @param startMin StartMin of task.
+     * @param endHour EndHour of task.
+     * @param endMin EndMin of task.
+     * @throws InvalidTimeException Throws if the given hour and min are invalid.
+     */
     public Task(Date date, int startHour, int startMin, int endHour, int endMin) throws InvalidTimeException {
         this.date = date;
         this.startTime = new Time(startHour, startMin);
         this.endTime = new Time(endHour, endMin);
     }
 
+    /**
+     * Sets name of the task.
+     * @param taskName Name of the task.
+     */
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }

@@ -10,11 +10,15 @@ import seedu.address.model.person.exceptions.OverlapTaskException;
 public class Schedule {
     private Task taskNode = null;
     private Schedule leftNode = null;
-    private Schedule rightNode  = null;
+    private Schedule rightNode = null;
 
     //argument value for interval tree
     private Time maxTime;
 
+    /**
+     * Constructor of Schedule. Let the task become the taskNode of this Schedule object.
+     * @param task The given task.
+     */
     public Schedule(Task task) {
         this.taskNode = task;
         maxTime = task.getEndTime();
@@ -37,6 +41,9 @@ public class Schedule {
         this.maxTime = this.maxTime.compareTo(tempMax) >= 0 ? this.maxTime : tempMax;
     }
 
+    /**
+     * Constructor that builds an empty Schedule node.
+     */
     public Schedule() {
         try {
             this.maxTime = new Time(0, 0);
