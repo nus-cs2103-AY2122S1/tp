@@ -112,41 +112,42 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons with the given search criteria and value.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The search is case-insensitive. e.g friend will also match Friend or FrIend or FRIEND.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Names and tags can be searched, by specifying `n/` or `t/` before the keyword respectively.
+* Partial words will also be matched e.g. Han will match Hans.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
+* `find n/Hans Bo` will return `Hans Gruber`, `Will Han` and `Bo Yang`
+* `find t/friend` will return all the contacts with the tag `friend`
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes a person or multiple contacts from the address book.
 
-Format: `delete INDEX`
+Format: `delete {INDEX | -a | -f}`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Displays a confirmation to delete all contacts returned from any previous find queries.
+* You can use the optional -f argument to clear all contacts from a previous find queries.
+* The -a argument deletes all contacts unless specified by the [-f] argument to delete only the previous find query.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
+* `find Betsy` followed by `delete -f` deletes all the entries of the results of the `find` command.
+* `delete -a` deletes all entries in the address book.
 
 ### Exiting the program : `exit`
 
