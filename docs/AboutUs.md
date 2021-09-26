@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
-### Wu Xiaoyun
+### Wu Xiao Yun
 
 <img src="images/xiaoyunnn.png" width="200px">
 
