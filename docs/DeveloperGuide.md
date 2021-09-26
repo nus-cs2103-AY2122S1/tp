@@ -330,6 +330,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Person**: A single contact in the address book. An individual can be represented by multiple Persons if they are added multiple times.
+* **Tag**: A text string associated with a person. A person can have multiple tags, and a tag can be added to multiple persons.
 
 --------------------------------------------------------------------------------------------------------------------
 
