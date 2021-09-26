@@ -133,7 +133,9 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        logger.info("modelManager---predicate");
         filteredPersons.setPredicate(predicate);
+        logger.info(filteredPersons.toString());
     }
 
     @Override
@@ -172,6 +174,8 @@ public class ModelManager implements Model {
     public void updateFilteredTuitionList(Predicate<TuitionClass> predicate) {
         requireNonNull(predicate);
         filterdTuition.setPredicate(predicate);
+        logger.info("modelManagerTuition---predicate");
+        logger.info(filteredPersons.toString());
     }
 
 //    @Override
@@ -209,7 +213,8 @@ public class ModelManager implements Model {
     public void addTuition(TuitionClass tuitionClass) {
         addressBook.addTuition(tuitionClass);
 
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
+
     }
 
     @Override

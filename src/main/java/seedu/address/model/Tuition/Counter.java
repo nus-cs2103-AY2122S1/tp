@@ -24,4 +24,8 @@ public class Counter {
                 || (other instanceof ClassLimit // instanceof handles nulls
                 && counter == ((Counter) other).counter); // state check
     }
+
+    public int getCounter() {
+        return counter;
+    }
 }

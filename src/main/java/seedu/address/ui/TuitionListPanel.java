@@ -38,7 +38,6 @@ public class TuitionListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(TuitionClass tuitionClass, boolean empty) {
             super.updateItem(tuitionClass, empty);
-            System.out.println("TuitionPanel" + tuitionClass.toString());
 
             if (empty || tuitionClass == null) {
                 setGraphic(null);

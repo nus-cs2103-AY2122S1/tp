@@ -45,4 +45,8 @@ public class Student {
         }
         return true;
     }
+
+    public ArrayList<Person> getStudents() {
+        return students;
+    }
 }

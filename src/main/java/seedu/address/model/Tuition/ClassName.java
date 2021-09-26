@@ -26,4 +26,8 @@ public class ClassName {
                 || (other instanceof ClassLimit // instanceof handles nulls
                 && name == ((ClassName) other).name); // state check
     }
+
+    public String getName() {
+        return name;
+    }
 }

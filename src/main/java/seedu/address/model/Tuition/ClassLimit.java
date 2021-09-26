@@ -26,4 +26,7 @@ public class ClassLimit {
     }
 
 
+    public int getLimit() {
+        return limit;
+    }
 }

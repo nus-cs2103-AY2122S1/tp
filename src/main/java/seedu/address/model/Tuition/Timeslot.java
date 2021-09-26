@@ -24,4 +24,8 @@ public class Timeslot {
                 || (other instanceof ClassLimit // instanceof handles nulls
                 && time == ((Timeslot) other).time); // state check
     }
+
+    public String getTime() {
+        return time;
+    }
 }

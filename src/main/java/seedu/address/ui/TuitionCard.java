@@ -1,12 +1,15 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.ModelManager;
 import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.person.Person;
 
@@ -15,7 +18,10 @@ import seedu.address.model.person.Person;
  */
 public class TuitionCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TuitionListCard.fxml";
+
+    private static final Logger logger = LogsCenter.getLogger(TuitionCard.class);
+
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -48,14 +54,14 @@ public class TuitionCard extends UiPart<Region> {
      */
     public TuitionCard(TuitionClass tuitionClass, int displayedIndex) {
         super(FXML);
-        System.out.println("TuitionCard" + tuitionClass.toString());
+        logger.info("TuitionCard" + tuitionClass.toString());
 
         this.tuitionClass = tuitionClass;
         id.setText(displayedIndex + ". ");
         name.setText(tuitionClass.getName().name);
-        limit.setText(tuitionClass.getLimit().toString());
-        counter.setText(tuitionClass.getCounter().toString());
-        timeSlot.setText(tuitionClass.getTimeslot().time);
+        limit.setText("Class Limit: " + tuitionClass.getLimit().toString());
+        counter.setText("Class session: " + tuitionClass.getCounter().toString());
+        timeSlot.setText("Class time slot: " + tuitionClass.getTimeslot().time);
     }
 
     @Override
