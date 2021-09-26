@@ -341,10 +341,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-    * 4a. Multiple matching names.
+    * 3b. Multiple matching names.
 
-        * 4a1. CohortConnect shows an error message.
-        * 4a2. Displays list of users with the same name.
+        * 3b1. CohortConnect shows an error message.
+        * 3b2. Displays list of users with the same name.
 
         Use case resumes at step 2.
 
