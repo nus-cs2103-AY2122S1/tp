@@ -103,13 +103,15 @@ Deletes a specific applicant by index from the address book.
 
 Format: `delete INDEX`
 
-* Deletes an applicant at the specified `INDEX` in the list of all applicants.
-* The index given for `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The index given for `INDEX` uses **1-based indexing**.
-* The index given for `INDEX` should not exceed the total applicant count.
+* Deletes an applicant at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**.
+* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `delete 2` deletes the 2nd applicant in the list of all applicants.
+* `list` followed by `delete 2` deletes the 2nd applicant in the address book.
+* `find John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
 ### Exiting the program : `exit`
 
