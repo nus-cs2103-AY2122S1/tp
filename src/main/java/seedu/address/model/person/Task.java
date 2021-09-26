@@ -49,7 +49,8 @@ public class Task {
      * @param taskName Name of task.
      * @throws InvalidTimeException Throws if the given hour and min are invalid.
      */
-    public Task(Date date, int startHour, int startMin, int endHour, int endMin, String taskName) throws InvalidTimeException {
+    public Task(Date date, int startHour, int startMin, int endHour, int endMin, String taskName)
+            throws InvalidTimeException {
         this.date = date;
         this.startTime = new Time(startHour, startMin);
         this.endTime = new Time(endHour, endMin);

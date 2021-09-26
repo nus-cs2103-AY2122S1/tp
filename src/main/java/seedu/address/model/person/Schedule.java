@@ -16,6 +16,17 @@ public class Schedule {
     private Time maxTime;
 
     /**
+     * Constructor that builds an empty Schedule node.
+     */
+    public Schedule() {
+        try {
+            this.maxTime = new Time(0, 0);
+        } catch (InvalidTimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
      * Constructor of Schedule. Let the task become the taskNode of this Schedule object.
      * @param task The given task.
      */
@@ -41,16 +52,7 @@ public class Schedule {
         this.maxTime = this.maxTime.compareTo(tempMax) >= 0 ? this.maxTime : tempMax;
     }
 
-    /**
-     * Constructor that builds an empty Schedule node.
-     */
-    public Schedule() {
-        try {
-            this.maxTime = new Time(0, 0);
-        } catch (InvalidTimeException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+
 
     /**
      * Adds a new task to the staff's schedule.

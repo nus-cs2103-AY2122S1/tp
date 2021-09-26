@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Comparator;
-
 import seedu.address.model.person.exceptions.InvalidTimeException;
 
 /**
@@ -40,7 +38,7 @@ public class Time implements Comparable<Time> {
             minDifference += 60;
             hourDifference -= 1;
         }
-        return hourDifference +" hour(s) " + minDifference + "min(s)";
+        return hourDifference + " hour(s) " + minDifference + "min(s)";
     }
 
     /**
