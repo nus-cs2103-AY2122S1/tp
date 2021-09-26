@@ -11,10 +11,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Zen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zenlzb.png" width="200px">
 
 
-[[github](https://github.com/johndoe)][[portfolio](team/johndoe.md)]
+[[github](https://github.com/Zenlzb)][[portfolio](team/zenlzb.md)]
 
 * Role: Team Lead, Integration
 * Responsibilities: tbd
