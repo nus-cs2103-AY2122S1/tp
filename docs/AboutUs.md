@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Jane Doe
 
 <img src="images/johndoe.png" width="200px">
@@ -28,6 +18,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: UI
+
+### Ong Cheng Seong
+
+<img src="images/ChengSeong.png" width="200px">
+
+[[github](https://github.com/chengseong)]
+
+* Role: Developer
+* Responsiblities : Integration and Code Quality
+
 
 ### Johnny Doe
 
@@ -43,7 +43,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/meixuanjin.png" width="200px">
 
 [[github](http://github.com/meixuanjin)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and Deadlines
