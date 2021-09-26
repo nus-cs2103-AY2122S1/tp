@@ -38,8 +38,11 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filterdTuition = new FilteredList<>(this.addressBook.getTuitionList());
+        filteredPersons = new FilteredList<>(addressBook.getPersonList());
+        filterdTuition = new FilteredList<>(addressBook.getTuitionList());
+//        logger.info("ModelManagerPerson: " + filteredPersons.toString());
+//        logger.info("ModelManagerTuition: " + filterdTuition.toString());
+
 
     }
 
@@ -133,7 +136,6 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        logger.info("modelManager---predicate");
         filteredPersons.setPredicate(predicate);
         logger.info(filteredPersons.toString());
     }
@@ -166,7 +168,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<TuitionClass> getFilteredTuitionList() {
-        logger.info("ModelManage: " + filterdTuition.toString());
         return filterdTuition;
     }
 
@@ -174,7 +175,6 @@ public class ModelManager implements Model {
     public void updateFilteredTuitionList(Predicate<TuitionClass> predicate) {
         requireNonNull(predicate);
         filterdTuition.setPredicate(predicate);
-        logger.info("modelManagerTuition---predicate");
         logger.info(filteredPersons.toString());
     }
 

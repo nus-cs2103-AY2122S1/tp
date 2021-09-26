@@ -5,8 +5,11 @@ import static java.util.Objects.requireNonNull;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.JsonUtil;
 
 /**
  * Represents User's preferences.
@@ -15,17 +18,23 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private static final Logger logger = LogsCenter.getLogger(UserPrefs.class);
+
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+        logger.info("UserPrefs---Not--Reset");
+
+    }
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
      */
     public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
+        logger.info("UserPrefs---Reset");
         resetData(userPrefs);
     }
 

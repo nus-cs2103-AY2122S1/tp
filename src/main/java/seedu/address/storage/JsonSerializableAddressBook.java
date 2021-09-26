@@ -2,17 +2,20 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiManager;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -28,15 +31,28 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedTuition> tuitions = new ArrayList<>();
 
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
+
+
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("tuition") List<JsonAdaptedTuition> tuitions) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("tuitions") List<JsonAdaptedTuition> tuitions) {
         this.persons.addAll(persons);
         this.tuitions.addAll(tuitions);
     }
 
+
+//    @JsonCreator
+//    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+//        this.persons.addAll(persons);
+//    }
+//
+//    @JsonCreator
+//    public JsonSerializableAddressBook(@JsonProperty("tuition") List<JsonAdaptedPerson> persons) {
+//        this.persons.addAll(persons);
+//    }
 
 
 
@@ -48,6 +64,9 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         tuitions.addAll(source.getTuitionList().stream().map(JsonAdaptedTuition::new).collect(Collectors.toList()));
+        logger.info("JSAPerson1" + source.getPersonList().toString());
+        logger.info("JSATuition1" + source.getTuitionList().toString());
+
     }
 
     /**
@@ -62,6 +81,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
+            logger.info("JSAPerson: " + person.toString());
             addressBook.addPerson(person);
         }
 
@@ -70,7 +90,11 @@ class JsonSerializableAddressBook {
             if (addressBook.hasTuition(tuitionClass)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUITION);
             }
+            logger.info("JSATuition: " + tuitionClass.toString());
+
+            addressBook.addTuition(tuitionClass);
         }
+
         return addressBook;
     }
 
