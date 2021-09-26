@@ -373,6 +373,40 @@ Use case ends.
 
 Use case resumes at step 2.
 
+**Use case: UC7 – Find student by student fields**
+
+**MSS:**
+
+1.  User requests to list students.
+2.  TAB shows a list of students.
+3.  User requests to find student with a specified name and address.
+4.  TAB shows a list of students with matching name and address.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC8 – Filter students by tags**
+
+**MSS:**
+
+1.  User request to view all tags.
+2.  TAB shows a list of created tags.
+3.  User requests to filter students by a few specified tags.
+4.  TAB shows a list of students matching the specified tags.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. There are no tags.
+
+  Use case ends.
+
 **Use Case: UC8 – See quick start instructions**
 
 **MSS:**
