@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/Zenlzb)][[portfolio](team/zenlzb.md)]
 
 * Role: Team Lead, Integration
-* Responsibilities: tbd
+* Responsibilities: Logic
 
 ### Hanif
 
@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/hanif-kamal)][[portfolio](team/hanif-kamal.md)]
 
 * Role: Documentation, Code Quality
-* Responsibilities: tbd
+* Responsibilities: Model
 
 ### Joshua
 
@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/jyrw)][[portfolio](team/jyrw.md)]
 
 * Role: Documentation, Code Quality
-* Responsibilities: tbd
+* Responsibilities: Storage
 
 ### Aaron
 
@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/e0543860)][[portfolio](team/aaronloh.md)]
 
 * Role: Deliverables and deadlines, Scheduling and tracking
-* Responsibilities: tbd
+* Responsibilities: UI
 
 ### Myat
 
@@ -53,4 +53,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/NUSmhk)][[portfolio](team/nusmhk.md)]
 
 * Role: Testing
-* Responsibilities: tbd
+* Responsibilities: Testing
