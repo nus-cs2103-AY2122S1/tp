@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Kelvin Soo
 
-<img src="images/KelvinSoo.png" width="200px">
+<img src="images/kelvinsoo.png" width="200px">
 
 [[github](http://github.com/KelvinSoo)]
 [[portfolio](team/KelvinSoo.md)]
