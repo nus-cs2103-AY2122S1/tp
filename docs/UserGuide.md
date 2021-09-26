@@ -88,22 +88,13 @@ Examples:
 
 ### Viewing residents’ information : `view`
 
-Shows a numbered list of all the residents in the address book.
+Shows a list of all the residents in the address book.
 
-The optional argument [INDEX] will show the details of the
-resident at the specified index.
-
-The index of the resident is the corresponding number in the list
-shown when `view` (without the [INDEX] parameter) is called.
-
-Format: `view [INDEX]`
-* For an index i, 1 &leq; i &leq; n, where n is the number of
-residents in the address book
+Format: `view`
 
 Examples:
 
-* `view` shows a list of all the residents
-* `view 30` shows the details of the resident at index 30
+* `view` shows a list of all the residents in the address book
 
 ### Updating FET date : `fet`
 
