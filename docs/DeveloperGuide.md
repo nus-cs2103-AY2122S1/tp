@@ -308,6 +308,44 @@ We categorise our user stories into four main epics:
 
 (For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the tutor `user`, unless specified otherwise)
 
+**Use case: UC2 – Edit a student**
+
+**MSS:**
+
+1. User requests to list students.
+2. TAB shows a list of students.
+3. User requests to edit a specific student by the index in the list.
+4. TAB edits the corresponding fields of the student. 
+   Use case ends.
+
+**Extensions:**
+
+* 2a. The list is empty.
+  
+  Use case ends.
+
+
+* 3a. The given index is invalid.
+
+  * 3a1. TAB shows an error message. 
+
+    Use case resumes at step 2.
+    
+
+* 3b. No data fields entered. 
+  * 3b1. TAB shows an error message. 
+
+    Use case resumes at step 3.
+    
+
+* 3c. Content to be edited does not satisfy requirements.
+
+  * 3c1. TAB shows an error message with the requirements specified. 
+  * 3c2. User enters new data.
+  * Steps 3c1-3c2 are repeated until the new data filled in is satisfies the requirements.
+    
+    Use case resumes at step 4.
+
 #### **Use case: UC1 - Get a list of students**
 
 **MSS**
@@ -401,6 +439,57 @@ Use case ends.
 
       Use case resumes at step 2.
 
+**Use case: UC7 – Find student by student fields**
+
+**MSS:**
+
+1.  User requests to list students.
+2.  TAB shows a list of students.
+3.  User requests to find student with a specified name and address.
+4.  TAB shows a list of students with matching name and address.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC8 – Filter students by tags**
+
+**MSS:**
+
+1.  User request to view all tags.
+2.  TAB shows a list of created tags.
+3.  User requests to filter students by a few specified tags.
+4.  TAB shows a list of students matching the specified tags.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. There are no tags.
+
+  Use case ends.
+
+**Use Case: UC8 – See quick start instructions**
+
+**MSS:**
+1. User opens the app.
+2. TAB shows quick tips in the command result box.
+    Use case ends.
+
+
+**Use Case: UC9 – See help guide**
+
+**MSS:**
+
+1. User requests for help.
+2. TAB shows a summary table of all the command usages as well as a link to user guide page. 
+
+    Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -414,13 +503,16 @@ Use case ends.
 7. The product should not require any internet connectivity.
 8. Student and lesson data should be persistent.
 9. All features should be easily testable.
+10. Should be portable, i.e. user can transfer data from one device to another easily.
+11. Should allow users to easily navigate the app interface.
 
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Academic Stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
+* **Academic Level**: Mainstream academic years from primary school through junior college in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
