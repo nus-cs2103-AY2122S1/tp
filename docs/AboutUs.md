@@ -19,41 +19,41 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 - Role: Project Advisor
 
-### Jane Doe
+### Erwin Quek
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/erwinqxy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/erwinqxy)]
+[[portfolio](team/erwinquek.md)]
 
 - Role: Team Lead
-- Responsibilities: UI
+- Responsibilities: Data
 
-### Johnny Doe
+### Samay Sagar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/reddevil1313.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/reddevil1313)] [[portfolio](team/reddevil1313.md)]
 
 - Role: Developer
 - Responsibilities: Data
 
-### Jean Doe
+### Sherman Ng Wei Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shermannws.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/shermannws)]
+[[portfolio](team/shermannws.md)]
 
 - Role: Developer
 - Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zhao Peiduo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhaopeiduo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/ZhaoPeiduo)]
+[[portfolio](team/zhaopeiduo.md)]
 
-- Role: Developer
-- Responsibilities: UI
+* Role: Developer
+* Responsibilities: Data
