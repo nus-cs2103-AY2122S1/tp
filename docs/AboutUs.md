@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Allard Quek
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/allardquek.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://allardquek.tech)]
+[[github](https://github.com/AllardQuek)]
+[[portfolio](team/allardquek.md)]
 
-* Role: Project Advisor
+- Role: Project Advisor
 
 ### Erwin Quek
 
@@ -26,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/erwinqxy)]
 [[portfolio](team/erwinquek.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Team Lead
+- Responsibilities: Data
 
 ### Samay Sagar
 
@@ -35,8 +35,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/reddevil1313)] [[portfolio](team/reddevil1313.md)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Data
 
 ### Sherman Ng Wei Sheng
 
@@ -45,8 +45,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/shermannws)]
 [[portfolio](team/shermannws.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+- Role: Developer
+- Responsibilities: Dev Ops + Threading
 
 ### Zhao Peiduo
 
