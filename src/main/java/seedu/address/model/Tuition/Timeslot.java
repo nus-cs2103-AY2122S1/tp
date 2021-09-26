@@ -2,6 +2,9 @@ package seedu.address.model.Tuition;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents the time slot the tuition class takes
+ */
 public class Timeslot {
     public final String time;
 

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents the tuition classes that this student takes
+ */
 public class Classes {
 
     private ArrayList<TuitionClass> classes;
@@ -34,7 +37,12 @@ public class Classes {
 
     @Override
     public String toString() {
-        return classes.toString();
+        final StringBuilder builder = new StringBuilder();
+        for (TuitionClass t : classes) {
+            builder.append(t.toString());
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 
     @Override

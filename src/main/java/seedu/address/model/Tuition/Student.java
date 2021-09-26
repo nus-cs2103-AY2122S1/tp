@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents students who are in this tuition class
+ */
 public class Student {
     public final ArrayList<Person> students;
 

@@ -2,11 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
+import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,18 +23,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Classes classes;
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags, Classes classes) {
+        requireAllNonNull(name, phone, email, address, tags, classes);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.classes = classes;
     }
 
     public Remark getRemark() {
@@ -57,6 +58,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Classes getClasses() {
+        return classes;
     }
 
     /**
@@ -105,7 +110,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, classes);
     }
 
     @Override
@@ -125,6 +130,11 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        if (classes.getNumofClass() != 0) {
+            builder.append("; Classes: ");
+            classes.getClasses().forEach(builder::append);
         }
         return builder.toString();
     }

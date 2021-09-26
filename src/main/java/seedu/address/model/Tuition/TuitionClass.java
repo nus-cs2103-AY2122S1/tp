@@ -4,8 +4,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 import java.util.Objects;
-import java.util.Set;
 
+/**
+ * Represents a tuition class in the book
+ */
 public class TuitionClass {
     private final ClassName name;
     private final ClassLimit limit;
@@ -68,7 +70,8 @@ public class TuitionClass {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append("Class: ")
+                .append(getName())
                 .append("; Limit: ")
                 .append(getLimit())
                 .append("; Counter: ")

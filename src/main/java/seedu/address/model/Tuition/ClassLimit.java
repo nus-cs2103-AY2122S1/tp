@@ -2,6 +2,9 @@ package seedu.address.model.Tuition;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represent the limit of the participant
+ */
 public class ClassLimit {
     public final int limit;
 

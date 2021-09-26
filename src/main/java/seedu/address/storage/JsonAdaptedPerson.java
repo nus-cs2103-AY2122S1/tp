@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
@@ -25,6 +26,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String remark;
+    private final ArrayList<TuitionClass> classes = new ArrayList<>();
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -35,12 +37,17 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
              @JsonProperty("remark") String remark,
+            @JsonProperty("classes") ArrayList<TuitionClass> classes,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+
+        if (classes != null) {
+            this.classes.addAll(classes);
+        }
 
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -60,6 +67,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        classes.addAll(source.getClasses().getClasses());
     }
 
     /**
@@ -109,7 +117,9 @@ class JsonAdaptedPerson {
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
-        final Remark modelRemark = new Remark(remark);        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags);
+        final Remark modelRemark = new Remark(remark);
+        final Classes modelClasses = new Classes(new ArrayList<TuitionClass>());
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags, modelClasses);
 
     }
 

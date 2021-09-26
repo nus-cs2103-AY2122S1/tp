@@ -2,6 +2,9 @@ package seedu.address.model.Tuition;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+    Represents the number of sessions this tuition class has
+ */
 public class Counter {
     public final int counter;
 

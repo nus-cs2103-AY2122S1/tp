@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -19,12 +21,14 @@ public class PersonBuilder {
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
 
 
+
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
     private Remark remark;
+    private Classes classes;
 
 
     /**
@@ -37,7 +41,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
-
+        classes = new Classes(new ArrayList<>());
     }
 
     /**
@@ -50,6 +54,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         remark = personToCopy.getRemark();
+        classes = personToCopy.getClasses();
+
 
     }
 
@@ -101,8 +107,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Classes} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withClasses(ArrayList<TuitionClass> classes) {
+        this.classes = new Classes(classes);
+        return this;
+    }
+
+
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        return new Person(name, phone, email, address, remark, tags, classes);
     }
 
 }
