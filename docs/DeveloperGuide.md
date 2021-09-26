@@ -285,14 +285,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a student
+2.  TuitiONE adds a student to the list
+
+**Extensions**
+
+* 1a. Wrong syntax for add command.
+
+    * 1a1. TuitiONE shows an error message.
+      
+      Use case ends.
+    
+* 1b. Missing compulsory details in command.
+
+    * 1b1. TuitiONE shows an error message.
+    
+      Use case ends.
+    
+* 1c. Student already exists.
+
+    * 1c1. TuitiONE shows an error message.
+    
+      Use case ends.
+
+**Use case: Delete a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  TuitiONE shows a list of students
+3.  User requests to delete a specific student in the list
+4.  TuitiONE deletes the student
 
     Use case ends.
 
@@ -304,11 +331,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TuitiONE shows an error message.
 
       Use case resumes at step 2.
-
-*{More to be added}*
+    
 
 ### Non-Functional Requirements
 
