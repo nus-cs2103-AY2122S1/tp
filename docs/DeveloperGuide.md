@@ -344,6 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a. Multiple matching names.
 
         * 4a1. CohortConnect shows an error message.
+        * 4a2. Displays list of users with the same name.
 
         Use case resumes at step 2.
 
