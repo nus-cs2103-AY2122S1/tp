@@ -25,3 +25,15 @@ Examples:
 
 - `update -sid A1234567X -grade 100`  Updates the grade of the student with student ID A1234567X to be 100.
 - `update -sid A2345678X -grade 97.5`  Updates the grade of the student with student ID A2345678X to be 97.5.
+
+
+## Command Summary
+Command | Format & Examples
+--------| ----------------------
+**Purge** | purge
+**Help** | help
+**Add** | add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>
+**View** | view -sid <STUDENT_ID>
+**Update** | update -sid <STUDENT_ID> -grade <GRADE_SCORE>
+**Delete** | delete -sid <STUDENT_ID>
+**Exit** | exit
