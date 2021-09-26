@@ -39,7 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Aaron
 
-<img src="images/aaronloh.png" width="200px">
+<img src="images/e0543860.png" width="200px">
 
 [[github](http://github.com/e0543860)][[portfolio](team/aaronloh.md)]
 
