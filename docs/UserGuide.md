@@ -72,6 +72,11 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Viewing Schedule: `schedule` [coming soon]
+
+Displays a read-only weekly schedule.
+
+Format: `schedule`
 
 ### Adding a person: `add`
 
