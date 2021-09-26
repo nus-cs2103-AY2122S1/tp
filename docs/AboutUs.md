@@ -33,7 +33,7 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 
 ### Yuichiro Fukushima
 
-<img src="images/Yuichiro.png" width="200px">
+<img src="images/yuifuku1118.png" width="200px">
 
 [[github](https://github.com/yuifuku1118)] [[portfolio](team/yuichiro.md)]
 
