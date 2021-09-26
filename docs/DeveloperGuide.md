@@ -604,8 +604,8 @@ We categorise our user stories into four main epics:
 3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
 5. The source code should be open source
-6. The product is offered as a free offline service
-7. The product should not require any internet connectivity
+6. The product is offered as a free service
+7. This product is for individual use
 8. Student and lesson data should be persistent
 9. All features should be easily testable
 10. Should be portable, i.e. user can transfer data from one device to another easily
