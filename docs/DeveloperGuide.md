@@ -401,7 +401,7 @@ We categorise our user stories into four main epics:
 
 <br/>
 
-####**Use case: UC4 - Delete a Student**
+#### Use case: UC4 - Delete a Student
 
 **MSS**
 
@@ -425,7 +425,7 @@ We categorise our user stories into four main epics:
 
 <br/>
 
-#### **Use case: UC5 - Add Student's Lesson Information**
+#### Use case: UC5 - Add Student's Lesson Information
 
 **MSS**
 
