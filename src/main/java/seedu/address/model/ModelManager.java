@@ -40,8 +40,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(addressBook.getPersonList());
         filterdTuition = new FilteredList<>(addressBook.getTuitionList());
-//        logger.info("ModelManagerPerson: " + filteredPersons.toString());
-//        logger.info("ModelManagerTuition: " + filterdTuition.toString());
 
 
     }
@@ -137,7 +135,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-        logger.info(filteredPersons.toString());
     }
 
     @Override
