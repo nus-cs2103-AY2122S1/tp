@@ -61,12 +61,12 @@ public class LessonDeleteCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         Set<Lesson> lessons = new HashSet<>(personToEdit.getLessons());
-        List<Lesson> updatedLessons = new HashSet<>(lessons).stream()
+        List<Lesson> lessonList = new HashSet<>(lessons).stream()
             .sorted(Comparator.comparing(lesson -> lesson.getDate().getLocalDate()))
             .collect(Collectors.toList());
-        Lesson toRemove = updatedLessons.get(lessonIndex.getZeroBased());
+        Lesson toRemove = lessonList.get(lessonIndex.getZeroBased());
 
-        Person editedPerson = createEditedPerson(personToEdit, updatedLessons, toRemove);
+        Person editedPerson = createEditedPerson(personToEdit, lessonList, toRemove);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
