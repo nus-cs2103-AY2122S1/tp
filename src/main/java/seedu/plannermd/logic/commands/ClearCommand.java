@@ -2,8 +2,8 @@ package seedu.plannermd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.Model;
+import seedu.plannermd.model.PlannerMd;
 
 /**
  * Clears the PlannerMD.

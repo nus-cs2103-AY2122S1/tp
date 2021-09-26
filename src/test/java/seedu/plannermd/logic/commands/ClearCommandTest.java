@@ -5,9 +5,9 @@ import static seedu.plannermd.testutil.TypicalPersons.getTypicalPlannerMd;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
+import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.UserPrefs;
 
 public class ClearCommandTest {

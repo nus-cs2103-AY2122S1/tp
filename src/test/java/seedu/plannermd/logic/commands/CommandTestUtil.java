@@ -15,8 +15,8 @@ import java.util.List;
 
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
-import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.Model;
+import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
