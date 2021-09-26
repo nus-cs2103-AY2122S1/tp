@@ -397,7 +397,7 @@ We categorise our user stories into four main epics:
 2. User requests to add a lesson for a specific student in the list
 3. TAB adds the lesson to the student specified
     
-Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -406,7 +406,7 @@ Use case ends.
   Use case ends.
 
 * 2a. The given index is invalid
-* 
+
   * 2a1. TAB shows an error message
     
     Use case resumes at step 1.
@@ -478,9 +478,8 @@ Use case ends.
 **MSS:**
 1. User opens the app.
 2. TAB shows quick tips in the command result box.
-    Use case ends.
-
-
+   Use case ends.
+   
 **Use Case: UC9 – See help guide**
 
 **MSS:**
@@ -488,7 +487,7 @@ Use case ends.
 1. User requests for help.
 2. TAB shows a summary table of all the command usages as well as a link to user guide page. 
 
-    Use case ends.
+   Use case ends.
 
 *{More to be added}*
 
