@@ -198,5 +198,4 @@ Action | Format, Examples
 **Find** | `find FIELD KEYWORD`<br> e.g., `find name James`
 **List** | `list`
 **Import** | `import FILENAME` <br> e.g., `import tutors.json`
-**Export** | `export FILENAME` <br> e.g., `export tutors.json`
 **Help** | `help`
