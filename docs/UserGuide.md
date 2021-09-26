@@ -73,51 +73,36 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding an applicant/employer: `add`
+### Adding an applicant: `add`
 
 Adds an applicant to the address book.
 
 Format: `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
 
-Adds an employer to the address book.
-
-Format: `add c/employer n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
-
 Examples:
 * `add c/applicant n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
-* `add c/employer n/Cat p/81234567 e/cat@gmail.com s/Financial_Services`
 
-### Listing all applicants/employers : `list`
+### Listing all applicants : `list`
 
 Shows a list of all applicants in the address book.
 
-Format: `list c/applicant`
+Format: `list`
 
-Shows a list of all employers in the address book.
+### Deleting an applicant : `delete`
 
-Format: `list c/employer`
+Deletes a specific applicant by index from the address book.
 
-### Deleting an applicant/employer : `delete`
+Format: `delete INDEX`
 
-Deletes a specific applicant and/or employer by index from the address book.
-
-Format: `delete c/applicant INDEX`
-
-* Delete command can handle either prefix `c/applicant` or `c/employer`.
-* The index given for `INDEX` **must be a positive integer** 1, 2, 3, …​
-* The index given for `INDEX` uses **1-based indexing**.
-* Prefix `c/applicant` and Value `INDEX`:
-  * Deletes an applicant at the specified `INDEX` in the list of all applicants.
-  * `INDEX` refers to the index number of the applicant to be deleted in the list of all applicants.
-  * `INDEX` should not exceed the total applicant count.
-* Prefix `c/employer` and Value `INDEX`:
-  * Deletes an employer at the specified `INDEX` in the list of all employers.
-  * `INDEX` refers to the index number of the applicant to be deleted in the list of all applicants.
-  * `INDEX` should not exceed the total employer count.
+* Deletes an applicant at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**.
+* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `delete c/applicant 2` deletes the 2nd applicant in the list of all applicants.
-* `delete c/employer 3` deletes the 3rd employer in the list of all employers.
+* `list` followed by `delete 2` deletes the 2nd applicant in the address book.
+* `find John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
 ### Exiting the program : `exit`
 
@@ -134,7 +119,7 @@ application runs.
 
 ### Editing the data file
 
-RecruitIn data is saved as a String in `/data/employers.json` and `/data/applicants.json` for employer and applicant data respectively.
+RecruitIn data is saved as a String in `/data/applicants.json` for applicant data.
 Advanced users are welcome to update data directly by editing that data file.
 
 Example of format of data for one applicant in applicants:
@@ -148,19 +133,6 @@ Example of format of data for one applicant in applicants:
  "tagged" : [ ]
 }]
 ```
-
-Example of format of data for one employer in employers:
-
-```JSON
-"employers" : [ {
- "name" : "Alice Yeoh",
- "phone" : "87438807",
- "email" : "alexyeoh@example.com",
- "preferred sector" : "Software Engineering",
- "tagged" : [ ]
-} ]
-```
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, RecruitIn will discard all data and start with an empty data file at the next run.
 </div>
@@ -179,6 +151,6 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 Action | Format, Examples
 --------|------------------
 **Add** | `add c/applicant n/NAME p/CONTACT_NUMBER e/EMAIL s/PREFERRED_SECTOR [t/TAG]…​` <br> e.g., `add c/applicant n/James Ho p/22224444 e/jamesho@example.com s/Software Engineering t/junior dev`
-**Delete** | `delete c/applicant INDEX`<br> e.g., `delete c/applicant 3`
-**List** | `list c/applicant`
+**List** | `list`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Help** | `help`
