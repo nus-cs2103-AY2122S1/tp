@@ -11,7 +11,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 
 ### Cui Langyuan
 
-<img src="images/langyuan.png.jpg" width="200px">
+<img src="images/clyveycui.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/clyveycui)]
@@ -22,7 +22,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 
 ### Chua Min Hong
 
-<img src="images/minhong.png.jpg" width="200px">
+<img src="images/auhc99.png" width="200px">
 
 [[github](https://github.com/auhc99)]
 [[portfolio](team/minhong.md)]
@@ -32,7 +32,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 
 ### Ryan Chung Yi Sheng
 
-<img src="images/ryan.png.jpg" width="200px">
+<img src="images/nekrozqliphort.png" width="200px">
 
 [[github](https://github.com/NekrozQliphort)] [[portfolio](team/johndoe.md)]
 
@@ -41,7 +41,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 
 ### Luo Dan
 
-<img src="images/luodan.png.jpg" width="200px">
+<img src="images/luodan01.png" width="200px">
 
 [[github](http://github.com/luodan01)]
 [[portfolio](team/luodan.md)]
@@ -51,7 +51,7 @@ You can reach us at the email `AniList@comp.nus.edu.sg`
 
 ### Muhammad Faruq
 
-<img src="images/faruq.png.jpg" width="200px">
+<img src="images/muhammad-faruq.png" width="200px">
 
 [[github](http://github.com/muhammad-faruq)]
 [[portfolio](team/faruq.md)]
