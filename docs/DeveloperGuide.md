@@ -282,6 +282,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | save applicant data            | refer to it in the future without having to type in their data again   |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                           |
+| `* * *`  | user                                       | list all applicants            | keep track of all my applicants                                        |
+| `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
 
 *{More to be added}*
 
@@ -289,29 +293,70 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+
+**Use case: Asking for help**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests for help to use AddressBook.
+2.  AddressBook informs user on how to access user guide.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. User cancels request for help.
 
   Use case ends.
 
+**Use case: Adding an applicant**
+
+**MSS**
+
+1.  User requests to add an applicant with provided information.
+2.  AddressBook adds the applicant to the storage.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+    * 1a1. AddressBook shows an error message.
+      
+      Use case resumes at step 1. 
+
+**Use case: List all applicants**
+
+**MSS**
+
+1.  User requests to list all applicants.
+2.  AddressBook shows a list of all applicants.
+
+    Use case ends.
+
+**Use case: Delete an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC??)</u>.
+2.  AddressBook displays a list of applicants.
+3.  User requests to delete a specific applicant in the displayed list.
+4.  AddressBook deletes the applicant.
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+    
 * 3a. The given index is invalid.
 
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
+      
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -320,12 +365,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicant**: Represents a person that is searching for a job
 
 --------------------------------------------------------------------------------------------------------------------
 
