@@ -287,14 +287,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list applicants
-2.  AddressBook shows a list of applicants
-3.  User requests to delete a specific applicant in the list
+1.  User requests to <u>list applicants (UC??)</u>
+2.  AddressBook displays a list of applicants
+3.  User requests to delete a specific applicant in the displayed list
 4.  AddressBook deletes the applicant
 
     Use case ends.
 
 **Extensions**
+
+* 1a. User requests to <u>Find applicants (UC??)</u>
+
+  Use case resumes at step 2.
 
 * 2a. The list of applicants is empty.
 
