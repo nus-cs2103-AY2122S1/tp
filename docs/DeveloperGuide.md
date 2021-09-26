@@ -257,13 +257,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of clients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* needs help managing tasks
+* needs help keeping financial record of sales
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: lightweight application that helps manage contacts faster than a typical mouse/GUI driven app, 
+and provides simple but helpful features to assist with managing a business.
 
 
 ### User stories
