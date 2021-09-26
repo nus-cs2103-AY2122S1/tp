@@ -151,22 +151,22 @@ Adds a lesson with the corresponding details to the specified student in the add
 * Makeup
 
 **Lesson fields:**
-* Date of lesson
-* dd MMM yyyy e.g. Tue, 02 Jan 2018
-* Start time HH:mm
-* End time HH:mm
+* Date of lesson `dd MMM yyyy`
+  *  e.g. `02 Jan 2018`
+* Start time `HH:mm`
+* End time `HH:mm`
 * Subject
 * Homework
 
-Format: `ladd INDEX [recurring/] date/<dd MMM yyyy> start/<HH:mm> end/<HH:mm> subject/SUBJECT [hw/HOMEWORK]`
+Format: `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/SUBJECT [hw/HOMEWORK]`
 
 <div markdown="span" class="alert alert-primary">
-:bulb: The type of lesson will be inferred from the presence of the -recurring flag.
+:bulb: The type of lesson will be inferred from the presence of the `recurring/` prefix.
 </div>
 
 Examples:
 
-* `list` followed by `ladd 1 recurring date/16 Sep 2021 start/15:00 end/16:00 subject/Math` (recurring lesson)
+* `list` followed by `ladd 1 recurring/ date/16 Sep 2021 start/15:00 end/16:00 subject/Math` (recurring lesson)
 adds the lesson to the 1st student in the address book
 
 * `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
@@ -185,7 +185,7 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd person in the address book.
-* `find Betsy` followed by `delete 1 1` deletes the 1st lesson for the 1st person in the results 
+* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st person in the results 
   of the `find` command.
 
 ### Clearing all entries : `clear`
