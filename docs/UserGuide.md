@@ -72,6 +72,14 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### View student details : `view`
+
+View data of student with specified index in detail.
+
+![view student details](images/viewAlexDetail.png)
+
+Format: `view INDEX`
+
 
 ### Adding a person: `add`
 
@@ -148,6 +156,18 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Undoing previous command : `undo`
+
+Undo the previous command that modified the Storage.
+
+Format: `undo`
+
+### Redoing undone command : `redo`
+
+Redo the previous command that has been undone.
+
+Format: `redo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -190,3 +210,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Undo** | `undo`
+**Redo** | `redo`
