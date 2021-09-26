@@ -14,27 +14,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `Uni-Fy.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your app.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * **`list`** : Lists all contacts.
-
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+1. Type the command in the command box and press Enter to execute it.
+   * Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -44,24 +32,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Italicised words represent parameters that are meant to be supplied by the user
+  * e.g. in add *n/task_name d/date*, the *task_name* keyword represents a task and the *date* keyword represents a date, both to be inputted by the user
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items inside round brackets are optional
+  * e.g. in delete *n/task_name (d/date)*, a user can choose to include the date for the task if there are multiples of it
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
+* In user inputted commands:
+  * Items with n/ before them represent the exact name of the task
+  * Items with tg/ before them represent the tag of the task
+  * Items with d/ before them represent the date of the task
+  * Items with t/ before them represent the time of the task
+    * Date is represented in YYYY-MM-DD format
+    * Time is represented in HH:MM format
 </div>
 
 ### Viewing help : `help`
@@ -73,7 +56,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person: `add` (coming soon)
 
 Adds a person to the address book.
 
@@ -87,7 +70,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Showing tasks : `show` (coming soon)
 
 Shows a list of all persons in the address book.
 
@@ -110,7 +93,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `find` (coming soon)
 
 Finds persons whose names contain any of the given keywords.
 
@@ -128,19 +111,27 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting tasks : `delete` (coming soon)
 
-Deletes the specified person from the address book.
+Delete a specific task that has been added to your app.
 
-Format: `delete INDEX`
+Format:
+- <code> delete <i>task_id</i> </code>
+- <code> delete <i>n/task_name (d/date)</i> </code>
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Interpretation
+* If <code><i>task_id</i></code> field is provided:
+  * Deletes the task corresponding to the <code><i>task_id</i></code>
+* If <code><i>n/task_name</i></code> field is provided:
+  * Deletes the task with name **exactly matching** that given in the <code><i>n/task_name</i></code> field
+  * If <code><i>d/date</code></i> field is provided, search for the task in the given date to delete
+    * Useful in cases where there are multiple copies of the same task, recurring tasks, etc.
+  * If <code><i>d/date</code></i> field is not provided, deletes **every occurence** of tasks matching the given name
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete 3` removes the third item in the task list
+* `delete n/quiz` removes every `quiz` task in the app
+* `delete n/quiz d/2021-10-10` deletes only the `quiz` task on `2021-10-10`
 
 ### Clearing all entries : `clear`
 
@@ -156,14 +147,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+**Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+**Uni-Fy** data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -183,10 +174,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Add** | `TODO`
+**Delete** | <code>delete <i>task_id</i></code> <br> <code>delete <i>n/task_name (d/date)</i> </code> <br> e.g. <code>delete n/quiz d/2021-10-10 </code>
+**Show** | `show`
+**Find** | `TODO`
+**Tag** | `TODO`
 **Help** | `help`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Clear** | `clear`
