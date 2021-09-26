@@ -148,6 +148,24 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Adding a claim: `claim`
+Adds a insurance claim to an existing person in the address book
+
+Format: `claim INDEX t/TITLE d/DESCRIPTION s/STATUS`
+* Adds a insurance claim to the person specified at `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …
+* `TITLE` is a unique identifying description of the claim
+* `DESCRIPTION` is a string describing the nature of the insurance claim
+* `STATUS` is a string describing the status of the insurance claim
+* If the person has a claim with the same title exists, the claim is updated instead
+
+Examples:
+* `claim 1 t/Hospital Claim d/Broke a leg s/Pending`
+* `claim 1 t/Hospital Claim d/Broke left leg`
+    * If a claim titled “Hospital Claim” already exists, the description will be updated to “Broke left leg”
+
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -166,9 +184,6 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
