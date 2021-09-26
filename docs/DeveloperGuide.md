@@ -343,12 +343,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. AddressBook shows an error message.
+      
+  Use case resumes at step 2.
 
-      Use case resumes at step 2.
-
-**Use case: L2 Track Student's Lesson Information**
-
-**Actor: User (Tutor)**
+**Use case: UC3 Track Student's Lesson Information**
 
 **MSS**
 
@@ -357,21 +355,84 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to add a lesson for a specific student in the list
 4.  TAB adds the lesson to the student specified
     
-Use case ends.
+    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
   
-Use case ends.
+  Use case ends.
 
 * 3a. The given index is invalid.
   * 3a1. TAB shows an error message.
-    
+
 * 3b. The specified end time is earlier than the start time
   * 3b1. TAB shows an error message.
+    
+* 3c. There is an existing lesson for that student with the same lesson details.
+  * 3c1. TAB shows an error message. 
+    
+  Use case resumes at step 2.
 
-Use case resumes at step 2.
+**Use case: UC5 – Delete Student’s Lesson Information**
+
+**MSS**
+
+1. User requests to list students. 
+   
+2. TAB shows the list of students.
+
+3. User requests to delete a lesson for the student.
+
+4. TAB deletes the lesson from the specified student in the list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of the person is invalid.
+  * 3a1. TAB shows an error message.
+
+* 3b. The given index of the lesson of the person is invalid.
+  * 3b1. TAB shows an error message.
+
+  Use case resumes from step 2.
+
+**Use case: UC6 – Edit Student’s Lesson Information**
+
+**MSS**
+
+1. User requests to list students.
+
+2. TAB shows the list of students.
+
+3. User requests to edit lesson information of a lesson of the student.
+
+4. TAB edits the lesson information of the lesson for the specified student in the list.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  Use case ends.
+  
+
+* 3a. The given index of the person is invalid.
+    * 3a1. TAB shows an error message.
+
+* 3b. The given index of the lesson of the person is invalid.
+    * 3b1. TAB shows an error message.
+
+* 3c. There is no specified field to edit.
+    * 3c1. TAB shows an error message.
+  
+  Use case resumes from step 2.
 
 **Use case: UC7 – Find student by student fields**
 
@@ -412,9 +473,8 @@ Use case resumes at step 2.
 **MSS:**
 1. User opens the app.
 2. TAB shows quick tips in the command result box.
-    Use case ends.
-
-
+   Use case ends.
+   
 **Use Case: UC9 – See help guide**
 
 **MSS:**
@@ -422,7 +482,7 @@ Use case resumes at step 2.
 1. User requests for help.
 2. TAB shows a summary table of all the command usages as well as a link to user guide page. 
 
-    Use case ends.
+   Use case ends.
 
 *{More to be added}*
 
