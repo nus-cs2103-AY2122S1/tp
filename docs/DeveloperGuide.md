@@ -364,6 +364,37 @@ Use case ends.
 
 Use case resumes from step 2.
 
+**Use case: UC6 – Edit Student’s Lesson Information**
+
+**MSS**
+
+1. User requests to list students.
+
+2. TAB shows the list of students.
+
+3. User requests to edit lesson information of a lesson of the student.
+
+4. TAB edits the lesson information of the lesson for the specified student in the list.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+Use case ends.
+
+* 3a. The given index of the person is invalid.
+    * 3a1. TAB shows an error message.
+
+* 3b. The given index of the lesson of the person is invalid.
+    * 3b1. TAB shows an error message.
+
+* 3c. There is no specified field to edit.
+    * 3c1. TAB shows an error message.
+
+Use case resumes from step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
