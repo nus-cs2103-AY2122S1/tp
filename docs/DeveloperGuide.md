@@ -302,26 +302,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{Add things in respective PRs}*
 
-**Use case: Delete a person**
+**Use case: UCXX – Look up student details**
 
 **MSS**
-*{Add things in respective PRs}*
+1. CSO inputs command to find a specific student by their name (either full name or not).
 
-    Use case ends.
+2. CSO looks through the given results of students.
+
+3. CSO chooses the student of interest.
+
+4. CSO can see student’s details, such as:
+    1. Their grade
+    2. Their enrolled lessons
+    3. Their parent’s contact number
+    4. Their house address
+    5. Their tuition fees
+    
+Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. TuitiONE detects and error in the command formatting.
 
-  Use case ends.
+    * 1a1. TuitiONE reminds CSO of correct input format.
+    
+    * 1a2. CSO inputs search keywords with correct formatting.
+    
+        Steps 1a1-1a2 are repeated until the input is of the correct format.\
+        Use case resumes from step 2.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+* 2a. TuitiONE cannot find any results relevant to the search keyword.
 
-      Use case resumes at step 2.
+    * 2a1. TuitiONE displays a “No students found” message to CSO.
+    
+	    Use case ends.
 
-*{Add things in respective PRs}*
+* *a. At any time, the CSO can go back to the default TuitiONE page.
+
+	* *a1. CSO types in list.
+	
+	* *a2. TuitiONE goes back to displaying list of all student details.
+	
+	    Use case ends.
+
 
 ### Non-Functional Requirements
 
