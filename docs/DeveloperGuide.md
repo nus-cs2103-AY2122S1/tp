@@ -273,6 +273,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                         |
+| `* * *`  | user                                       | list all applicants            | keep track of all my applicants                 |
+| `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
 
 *{More to be added}*
 
@@ -280,14 +282,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+
 **Use case: Adding an applicant**
 
 **MSS**
 
 1.  User requests to add an applicant with provided information
 2.  AddressBook adds the applicant to the storage
-
-    Use case ends.
 
 **Extensions**
 
@@ -297,7 +298,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1. 
     
 
-*{More to be added}*
+**Use case: List all applicants**
+
+**MSS**
+
+1.  User requests to list all applicants
+2.  AddressBook shows a list of all applicants
+
+    Use case ends.
+
+**Use case: Delete an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC??)</u>
+2.  AddressBook displays a list of applicants
+3.  User requests to delete a specific applicant in the displayed list
+4.  AddressBook deletes the applicant
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -310,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicant**: Represents a person that is searching for a job
 
 --------------------------------------------------------------------------------------------------------------------
 
