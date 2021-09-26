@@ -307,7 +307,9 @@ We categorise our user stories into four main epics:
 
 (For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the tutor `user`, unless specified otherwise)
 
-#### **Use case: UC1 - Get a list of students**
+<br/>
+
+#### Use case: UC1 - Get a List of Students
 
 **MSS**
 
@@ -322,17 +324,42 @@ We categorise our user stories into four main epics:
 
   * 1a1. TAB displays a filtered list of students with the specified tag
   
-    Use case ends
+    Use case ends.
   
 * 1b. User requests for a list of students that match a specified name or address value
 
-  * 1b1. TAB displays a list of students with matching name or address.
+  * 1b1. TAB displays a list of students with matching name or address
 
-    Use case ends
+    Use case ends.
 
 <br/>
 
-####**Use case: UC3 – Edit a Student**
+#### Use Case: UC2 - Add a New Student
+
+**MSS**
+
+1. User requests to add a new student with specified fields
+2. TAB adds the student with the specified fields
+
+   Use case ends.
+
+**Extension**
+
+* 1a. TAB detects that the entered student data does not satisfy requirements
+
+    * 1a1. TAB displays an error message and the recommended changes
+
+      Use case resumes at step 2.
+
+* 1b. TAB detects a duplicate student
+
+    * 1b1. TAB displays an error message
+
+      Use case ends.
+
+<br/>
+
+#### Use case: UC3 – Edit a Student
 
 **MSS:**
 
@@ -342,37 +369,39 @@ We categorise our user stories into four main epics:
 
    Use case ends.
 
-**Extensions:**
+**Extensions**
 
 * 1a. The list is empty
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 2a. The given index is invalid
 
-    * 2a1. TAB shows an error message.
+    * 2a1. TAB displays an error message
 
       Use case resumes at step 1.
 
-* 2b. No fields to be edited is specified
+* 2b. No fields to be edited are specified
 
     * 2b1. TAB shows an error message
 
       Use case resumes at step 1.
 
-* 2c. Content to be edited does not satisfy requirements
+* 2c. TAB detects that the entered student data does not satisfy requirements
 
-    * 2c1. TAB shows an error message with the requirements specified
+    * 2c1. TAB displays an error message and the recommended changes
 
-    * 2c2. User enters new data
+      Use case resumes at step 1.
 
-    * Steps 2c1-2c2 are repeated until the input data satisfies the requirements
+* 2d. TAB detects a duplicate student
 
-      Use case resumes at step 3.
+    * 2d1. TAB shows an error message
+
+      Use case ends.
 
 <br/>
 
-####**Use case: UC4 - Delete a student**
+####**Use case: UC4 - Delete a Student**
 
 **MSS**
 
@@ -390,13 +419,13 @@ We categorise our user stories into four main epics:
 
 * 2a. The given index is invalid
 
-    * 2a1. TAB shows an error message
+    * 2a1. TAB displays an error message
 
       Use case resumes at step 1.
 
 <br/>
 
-#### **Use case: UC3 - Add Student's Lesson Information**
+#### **Use case: UC5 - Add Student's Lesson Information**
 
 **MSS**
 
@@ -418,19 +447,21 @@ We categorise our user stories into four main epics:
     
     Use case resumes at step 1.
   
-* 2b. The given lesson to be added is invalid
+* 2b. TAB detects that the entered lesson data does not satisfy requirements
 
-  * 2b1. TAB shows an error message
+    * 2b1. TAB displays an error message and the recommended changes
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
-#### **Use case: UC5 - Update Outstanding Fees of a Student**
+<br/>
+
+#### Use case: UC5 – Edit Student’s Lesson Information
 
 **MSS**
 
 1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
-2. User requests to update the outstanding fees of a specific student in the list
-3. TAB updates the student's outstanding fees
+2. User requests to edit certain fields of a specific lesson of a specific student in the list
+3. TAB updates the corresponding fields of the lesson for the specified student
 
    Use case ends.
 
@@ -440,131 +471,154 @@ We categorise our user stories into four main epics:
 
   Use case ends.
 
-* 2a. The given index is invalid
+* 2a. The specified student has no lessons
 
-    * 2a1. TAB shows an error message
+  Use case ends.
 
-      Use case resumes at step 2.
-    
+* 2b. The given index of the student is invalid
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2c. The given index of the lesson of the student is invalid
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2b. No lesson fields to be edited are specified
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2d. TAB detects that the entered lesson data does not satisfy requirements
+
+    * 2d1. TAB displays an error message and the recommended changes
+
+      Use case resumes at step 1.
+
+* 2e. TAB detects clashing lessons
+
+    * 2e1. TAB displays an error message
+
+      Use case ends.
+
 <br/>
 
-####**Use Case: UC8 – View Quick Start Instructions**
+#### Use case: UC6 – Delete Student’s Lesson Information
 
-**MSS:**
+**MSS**
+
+1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+2. User requests to delete a specific lesson for a specific student
+3. TAB deletes the specified lesson from the specified student in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The given index of the student is invalid
+
+    * 2a1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2b. The given index of the lesson of the specified student is invalid
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+<br/>
+
+#### Use Case: UC7 – View Quick Start Instructions
+
+**MSS**
+
 1. User opens the app
 2. TAB displays quick start instructions
 
    Use case ends.
    
-####**Use Case: UC9 – Get Help**
+<br/>
 
-**MSS:**
+#### Use Case: UC8 – Get Help
+
+**MSS**
 
 1. User requests for help
 2. TAB displays a summary table of all the command usages as well as a link to an online user guide page
 
    Use case ends.
 
-**Use Case: Add a Student**
+<br/>
+
+#### Use Case: Undo an Accidental Modification
 
 **MSS**
 
-1. User requests to add a student with all the desired fields.
-2. TAB adds the student with all the specified fields.
+1. User requests to undo a previous modification to TAB's data within the session
+2. TAB undoes the previous modification
 
    Use case ends.
 
 **Extension**
-* 1a. User did not input student with all the compulsory fields.
 
-  * 1a1. TAB shows an error message for invalid command format.
-  * 1a2. User inputs student with all the compulsory details (name, phone, email, address).
-      
-    Steps 1a1-1a2 are repeated until the fields inputted are valid.
+* 1a. There are no previous modifications
 
-    Use case resumes from step 2.
+  * 1a1. TAB shows an error message
   
-* 1b. User inputs alphabets under the phone number field.
-  
-  * 1b1. TAB shows an error message for invalid phone number format.
-  * 1b2. User inputs student's phone number with only numerical values.
-  
-    Steps 1b1-1b2 are repeated until the phone number inputted is a valid format.
+    Use case ends.
 
-    Use case resumes from step 2.
+<br/>
 
-* 1c. User inputs an invalid email format.
-
-  * 1c1. TAB shows an error message for invalid email format.
-  * 1c2. User inputs the student's email address with the correct format.
-
-    Steps 1c1-1c2 are repeated until the email address inputted is a valid format.
-
-    Use case resumes from step 2.
-
-* 1d. User requests to add student with optional fields.
-
-  * 1d1. User inputs the optional fields with the respective prefixes together with the compulsory fields.
-  
-    Use case resumes from step 2.
-  
-**Use Case: Undo a Command**
+#### Use Case: Redo an Undone Modification
 
 **MSS**
 
-1. User makes a request that <u>modifies the storage. E.g. ladd, add, edit, delete,...</u>.
-2. TAB modifies the storage.
-3. User requests to undo the last modification.
-4. TAB undoes the last command.
+1. User requests to redo a modification to TAB's data that was previously undone within the session
+2. TAB reverts the previous undo command
 
    Use case ends.
 
 **Extension**
-* 1a. User did not make any request or User requests for commands that does not modify storage.
 
-  * 1a1. TAB shows an error message.
-  
-    User case ends.
+* 1a. There are no previous undo requests within the session
 
-**Use Case: Redo a Command**
-
-**MSS**
-
-1. User requests to redo a command.
-2. TAB redoes the previous undone command and modifies the storage accordingly.
-
-   Use case ends.
-
-**Extension**
-* 1a. User did not request for undo command within the session.
-
-    * 1a1. TAB shows an error message for no command to redo.
+    * 1a1. TAB shows an error message
   
       Use case ends.
     
-
+<br/>
 
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. The response to any user action should become visible within 2 seconds.
-3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage.
-4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5. The source code should be open source.
-6. The product is offered as a free offline service.
-7. The product should not require any internet connectivity.
-8. Student and lesson data should be persistent.
-9. All features should be easily testable.
-10. Should be portable, i.e. user can transfer data from one device to another easily.
-11. Should allow users to easily navigate the app interface.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed
+2. The response to any user action should become visible within 2 seconds
+3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+5. The source code should be open source
+6. The product is offered as a free offline service
+7. The product should not require any internet connectivity
+8. Student and lesson data should be persistent
+9. All features should be easily testable
+10. Should be portable, i.e. user can transfer data from one device to another easily
+11. Should allow users to easily navigate the app interface
 
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Session**: A session begins when the app is started and ends when the app is exited
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Academic Stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
-* **Academic Level**: Mainstream academic years from primary school through junior college in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
+* **Academic Level**: Mainstream academic years from primary school through junior college in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
