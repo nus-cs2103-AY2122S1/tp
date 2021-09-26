@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Tang Zhiying
 
-<img src="images/zhiying.png" width="200px">
+<img src="images/zhing22.png" width="200px">
 
 [[github](https://github.com/zhing22)]
 
