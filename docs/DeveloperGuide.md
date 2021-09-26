@@ -308,23 +308,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update a specific Student’s Details**
+**Use case: Update Specific Student’s Details**
 
 **MSS**
 
-1. CSO requests to list students
-2. TuitiONE shows a list of students
-3. CSO update the details of the specific student (school, address, lesson taken)
-Use case ends.
+1. CSO requests to list students.
+2. TuitiONE shows a list of students.
+3. CSO updates the details of the specific student (school, address or lesson taken).
+
+   Use case ends.
 
 **Extension**
 
 - 2a. The list is empty. 
-
-  Use case ends.
+  - 2a1. CSO proceeds to add the student who is missing from the list.
+  - 2a2. Continue from step 1.
 
 - 2b. List does not contain the student. 
-  - 2b1. CSO proceed to add the student missing from the list.
+  - 2b1. CSO proceeds to add the student who is missing from the list.
   - 2b2. Continue from step 1.
 
 *{More to be added}*
