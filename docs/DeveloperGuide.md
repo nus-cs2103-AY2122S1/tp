@@ -257,14 +257,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* targets professors of CS1101S 
+* has a need to manage a significant number of students 
+* has a need to analyse students' performance
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: This app will help the professors keep track of each student’s performance after each assessment,
+doing so faster than a typical mouse/GUI driven app.
+It can analyse results of individual students, or tutorial groups, and identify students who require additional help,
 
 ### User stories
 
@@ -272,12 +275,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | CS1101S Professor                          | Upload large amounts of data from a file      | Upload all assessment scores of all students at once          |
+| `* *`  | Long-time user                         | Clear all data        | Remove records from the previous semester            |
+| `*`  | CS1101S Professor                          | Export data      | Share interesting findings with my colleagues          |
+| `*`  | New user | Import data from the previous semester | Have an idea of how intakes of the previous cohort performed |
+| `* * *`  | CS1101S Professor                          | Add a new assessment        | Keep track of assessment scores of students           |
+| `* * *`  | CS1101S Professor                          | Add a new student        | Add a new student without having to make a new file               |
+| `* * *`  | CS1101S Professor                          | Allocate a student into existing group       | Allocate groupings without having to make a new file                  |
+| `* * *`  | CS1101S Professor                          | Organise students into groups      | Encourage peer learning          |
+| `* *`  | CS1101S Professor | Remove a specific student   | Update the system accordingly when a student drops the module  |
+| `*`  | CS1101S Professor | Annotate a student with a tag  | See categories of students quickly |
+| `* *`  | CS1101S Professor | Add remarks to particular students | Be aware of any special conditions the student is facing |
+| `*`  | CS1101S Professor | Upload students’ feedback about their tutors | Provide timely feedback to the tutors |
+| `* *`  | CS1101S Professor | Add attendance records for each class  | Track the students present at each class |
+| `* *`  | CS1101S Professor | Edit assessment score for a particular student | Make changes after the initial grading |
+| `* * *`  | CS1101S Professor                          | Search for specific student     | Track his/her progress to facilitate better learning          |
+| `* * *`  | CS1101S Professor | Search for students by classes and groups  | Track them by groups easily |
+| `* * *`  | CS1101S Professor | Check a student’s grades | See individual performance |
+| `* *`  | CS1101S Professor | Check attendance records for each student | Track if the student has been attending classes diligently |
+| `* * *`  | CS1101S Professor | Analyse the performances of individual students | Give special assistance to those in need |
+| `* * *`  | CS1101S Professor | Analyse performance of cohort in each assessment | See how the cohort is performing |
+| `*`  | CS1101S Professor | Analyse the cohort performance for each question | Understand which are the topics students require more help with |
+| `* *`  | CS1101S Professor | Analyse the performances of students in groups | See which studio is under-performing and check in with the tutor |
+| `*`  | Detailed user | View the performances under different kinds of graph | Have better visualisation about the performances of students |
+| `* *`  | CS1101S Professor | Calculate overall grades  | Easily decide on grade ranges |
+| `*`  | CS1101S Professor | Compare between different batches of students | See if the module is too hard this semester as compared to previous semesters |
+| `*`  | CS1101S Professor | Check the overall performance of the tutors based on several indicators | Identify excellent tutors to be called back next semester |
+| `* * *`  | New user | Get command prompts when typing | Do not have to keep checking user guide |
+| `* *`  | Expert user | Have shortcuts for commands | Save time |
+| `*`  | Forgetful user | Access the user guide with an easy to remember command | Lookup how to use a command/what command to use |
+| `*`  | Long-term user | Store meeting timings | Not miss any meetings that have been planned |
+| `* *`  | Potential user | View the app populated with sample data | See how the app looks like when in use |
+| `*`  | Forgetful user | Have reminders about upcoming meetings | Avoid missing any important events |
+| `*`  | CS1101S Professor | Add TODO bug fixes accumulated throughout the semester | Fix them during CP3108 |
 
 *{More to be added}*
 
