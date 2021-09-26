@@ -1,16 +1,18 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-
-**LeadsForce** is a new way to streamline the process for student financial advisors to find the right clients to contact. We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly. Finding your next lead has never been easier. 
+[![CI Status](https://github.com/AY2122S1-CS2103T-T17-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T17-3/tp/actions)
 
 ![Ui](docs/images/Ui.png)
+**LeadsForce** is a new way to streamline the process for student financial advisors to find the right clients to contact. We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly. Finding your next lead has never been easier.
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org#https://se-education.org/#contributing) for more info.
+For detailed documentation of this project, refer to the [LeadsForce](https://ay2122s1-cs2103t-t17-3.github.io/tp/) Website.
+
+## About Us
+For details on our project team members, do check out the [AboutUs](https://ay2122s1-cs2103t-t17-3.github.io/tp/AboutUs.html) page.
+
+## User Guide
+Curious to know how to use LeadsForce? We've got you! You may refer to the [User Guide](https://ay2122s1-cs2103t-t17-3.github.io/tp/UserGuide.html) for more details.
+
+## Developer Guide
+If you would like to contribute to this project, do head over to [Developer Guide](https://ay2122s1-cs2103t-t17-3.github.io/tp/DeveloperGuide.html) to get started!
+
+## Acknowledgments
+This project is morphed from the AddressBook-Level3 project, created by the SE-EDU initiative.
