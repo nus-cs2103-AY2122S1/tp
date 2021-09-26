@@ -272,16 +272,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | list all applicants            | keep track of all my applicants                 |
 | `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: List all applicants**
+
+**MSS**
+
+1.  User requests to list all applicants
+2.  AddressBook shows a list of all applicants
+
+    Use case ends.
 
 **Use case: Delete an applicant**
 
@@ -317,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicant**: Represents a person that is searching for a job
 
 --------------------------------------------------------------------------------------------------------------------
 
