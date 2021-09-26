@@ -74,8 +74,6 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        logger.info("ADBStorage----" + addressBook.getPersonList().toString() );
-        logger.info("ADBStorage++++" + addressBook.getTuitionList().toString() );
 
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
