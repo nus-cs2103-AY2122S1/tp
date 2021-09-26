@@ -2,8 +2,7 @@ package seedu.address.model.group;
 
 import seedu.address.model.person.Student;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -17,7 +16,7 @@ public class Group {
     private final Description description;
 
     // Data fields
-    private final ArrayList<Student> students;
+    private final Set<Student> students = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -26,7 +25,6 @@ public class Group {
         requireAllNonNull(groupName, description);
         this.groupName = groupName;
         this.description = description;
-        this.students = new ArrayList<>();
     }
 
     public GroupName getGroupName() {
@@ -37,8 +35,8 @@ public class Group {
         return description;
     }
 
-    public ArrayList<Student> getStudents() {
-        return students;
+    public Set<Student> getStudents() {
+        return Collections.unmodifiableSet(students);
     }
 
     /**
@@ -88,7 +86,7 @@ public class Group {
                 .append(getDescription());
 
 
-        ArrayList<Student> students = getStudents();
+        Set<Student> students = getStudents();
         if(!students.isEmpty()) {
             builder.append("; Students: ");
             students.forEach(builder::append);
