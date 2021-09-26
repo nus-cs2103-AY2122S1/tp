@@ -3,7 +3,6 @@ layout: page
 title: User Guide
 ---
 
-# User Guide
 ProgrammerError (P|E) is a desktop app for managing students' information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this application is optimized to track personal particulars, grades and attendance of your students across different classes. If you are familiar with Unix commands, this is definitely for you!
 
 ## Table of Contents
@@ -133,12 +132,13 @@ Exits ProgrammerError and closes the GUI.
 ProgrammerError data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ## <a name="command-summary"></a>Command Summary
+
 Command | Format & Examples
 --------| ----------------------
-**Purge** | purge
-**Help** | help
-**Add** | add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>
-**View** | view -sid <STUDENT_ID>
-**Update** | update -sid <STUDENT_ID> -grade <GRADE_SCORE>
-**Delete** | delete -sid <STUDENT_ID>
-**Exit** | exit
+**Purge** | `purge`
+**Help** | `help`
+**Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+**View** | `view -sid <STUDENT_ID>`
+**Update** | `update -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+**Delete** | `delete -sid <STUDENT_ID>`
+**Exit** | `exit`
