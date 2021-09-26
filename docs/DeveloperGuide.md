@@ -273,6 +273,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | list all applicants            | keep track of all my applicants                 |
+| `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
 
 *{More to be added}*
 
@@ -289,7 +290,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
+**Use case: Delete an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC??)</u>
+2.  AddressBook displays a list of applicants
+3.  User requests to delete a specific applicant in the displayed list
+4.  AddressBook deletes the applicant
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 

@@ -49,7 +49,7 @@ Email: tohweijie01@gmail.com
 
 ### Yao Yi
 
-<img src="images/pulpy_y.png" width="200px">
+<img src="images/pulpy-y.png" width="200px">
 
 [[github](https://github.com/Pulpy-y)]
 
