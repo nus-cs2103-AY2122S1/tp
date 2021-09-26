@@ -301,50 +301,11 @@ We categorise our user stories into four main epics:
 | U7 | `LOW`    | user                                       | view a calendar of my scheduled lessons  | plan ahead while managing my schedule                                  |
 | U8 | `LOW`    | user with many students stored in **TAB**  | sort students by name                    | locate a person easily                                                 |
 
-
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the tutor `user`, unless specified otherwise)
-
-**Use case: UC2 – Edit a student**
-
-**MSS:**
-
-1. User requests to list students.
-2. TAB shows a list of students.
-3. User requests to edit a specific student by the index in the list.
-4. TAB edits the corresponding fields of the student. 
-   Use case ends.
-
-**Extensions:**
-
-* 2a. The list is empty.
-  
-  Use case ends.
-
-
-* 3a. The given index is invalid.
-
-  * 3a1. TAB shows an error message. 
-
-    Use case resumes at step 2.
-    
-
-* 3b. No data fields entered. 
-  * 3b1. TAB shows an error message. 
-
-    Use case resumes at step 3.
-    
-
-* 3c. Content to be edited does not satisfy requirements.
-
-  * 3c1. TAB shows an error message with the requirements specified. 
-  * 3c2. User enters new data.
-  * Steps 3c1-3c2 are repeated until the new data filled in is satisfies the requirements.
-    
-    Use case resumes at step 4.
 
 #### **Use case: UC1 - Get a list of students**
 
@@ -357,15 +318,61 @@ We categorise our user stories into four main epics:
 
 **Extensions**
 
-* 1a. User requests for a filtered list of students
+* 1a. User requests for a list of students filtered by a specified tag
 
-  * 1a1. TAB displays a filtered list of students
+  * 1a1. TAB displays a filtered list of students with the specified tag
   
     Use case ends
   
+* 1b. User requests for a list of students that match a specified name or address value
+
+  * 1b1. TAB displays a list of students with matching name or address.
+
+    Use case ends
+
 <br/>
 
-#### **Use case: UC2 - Delete a student**
+####**Use case: UC3 – Edit a Student**
+
+**MSS:**
+
+1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+2. User requests to edit certain fields of specific student in the list
+3. TAB updates the corresponding fields of the student
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. TAB shows an error message.
+
+      Use case resumes at step 1.
+
+* 2b. No fields to be edited is specified
+
+    * 2b1. TAB shows an error message
+
+      Use case resumes at step 1.
+
+* 2c. Content to be edited does not satisfy requirements
+
+    * 2c1. TAB shows an error message with the requirements specified
+
+    * 2c2. User enters new data
+
+    * Steps 2c1-2c2 are repeated until the input data satisfies the requirements
+
+      Use case resumes at step 3.
+
+<br/>
+
+####**Use case: UC4 - Delete a student**
 
 **MSS**
 
@@ -438,54 +445,23 @@ We categorise our user stories into four main epics:
     * 2a1. TAB shows an error message
 
       Use case resumes at step 2.
+    
+<br/>
 
-**Use case: UC7 – Find student by student fields**
-
-**MSS:**
-
-1.  User requests to list students.
-2.  TAB shows a list of students.
-3.  User requests to find student with a specified name and address.
-4.  TAB shows a list of students with matching name and address.
-
-    Use case ends.
-
-**Extensions:**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC8 – Filter students by tags**
+####**Use Case: UC8 – View Quick Start Instructions**
 
 **MSS:**
+1. User opens the app
+2. TAB displays quick start instructions
 
-1.  User request to view all tags.
-2.  TAB shows a list of created tags.
-3.  User requests to filter students by a few specified tags.
-4.  TAB shows a list of students matching the specified tags.
-
-    Use case ends.
-
-**Extensions:**
-
-* 2a. There are no tags.
-
-  Use case ends.
-
-**Use Case: UC8 – See quick start instructions**
-
-**MSS:**
-1. User opens the app.
-2. TAB shows quick tips in the command result box.
    Use case ends.
    
-**Use Case: UC9 – See help guide**
+####**Use Case: UC9 – Get Help**
 
 **MSS:**
 
-1. User requests for help.
-2. TAB shows a summary table of all the command usages as well as a link to user guide page. 
+1. User requests for help
+2. TAB displays a summary table of all the command usages as well as a link to an online user guide page
 
    Use case ends.
 
