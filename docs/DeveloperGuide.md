@@ -272,9 +272,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
@@ -285,20 +283,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete an applicant**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to <u>list applicants (UC??)</u>
+2.  AddressBook displays a list of applicants
+3.  User requests to delete a specific applicant in the displayed list
+4.  AddressBook deletes the applicant
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list of applicants is empty.
 
   Use case ends.
 
@@ -307,8 +305,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
