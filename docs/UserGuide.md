@@ -1,7 +1,35 @@
 ---
 layout: page
 title: User Guide
----
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick start
+
+1. Ensure you have Java `11` or above installed in your Computer.
+
+1. Download the latest `dash.jar` from here (not available yet).
+
+1. Copy the file to the folder you want to use as the _home folder_ for Dash.
+
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+   ![Ui](images/Ui.png)
+
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
+
+* **`contacts`** : Switches to the contacts tab.
+
+* **`contacts`** : Switches to the tasks tab.
+
+* **`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`**`3` : Adds a contact with specified details.
+
+* **`clear`** : Deletes all contacts.
+
+* **`exit`** : Exits the app.
+
+1. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
