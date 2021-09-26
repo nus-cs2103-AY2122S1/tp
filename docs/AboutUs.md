@@ -47,6 +47,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Deliverables and Deadlines
 
+### Siddharth Srivastava
+
+<img src="images/siddharthSrivastava.png" width="200px">
+
+[[github](https://github.com/Siddharth-Sid)]
+
+[comment]: <> ([[portfolio]&#40;team/johndoe.md&#41;])
+
+* Role: Developer
+* Responsibilities: Testing
+
 ### James Doe
 
 <img src="images/johndoe.png" width="200px">
