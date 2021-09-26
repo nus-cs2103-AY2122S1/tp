@@ -25,13 +25,14 @@ public class Person {
     private final Email parentEmail;
     private final Address address;
     private final Remark remark;
+    private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
-                  Address address, Remark remark, Set<Tag> tags) {
+                  Address address, Fee outstandingFee, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, remark, tags);
         this.name = name;
         this.phone = phone;
@@ -39,6 +40,7 @@ public class Person {
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
         this.address = address;
+        this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -65,6 +67,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Fee getFee() {
+        return outstandingFee;
     }
 
     public Remark getRemark() {
@@ -110,7 +116,10 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getParentPhone().equals(getParentPhone())
+                && otherPerson.getParentEmail().equals(getParentEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getFee().equals(getFee())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -135,6 +144,8 @@ public class Person {
                 .append(getParentEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Outstanding Fees: ")
+                .append(getFee())
                 .append("; Remark: ")
                 .append(getRemark());
 
