@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 
-**Use case: Asking for help**
+**Use case: UC01 - Asking for help**
 
 **MSS**
 
@@ -308,8 +308,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User cancels request for help.
 
   Use case ends.
+  
+**Use case: UC02 - List all applicants**
 
-**Use case: Adding an applicant**
+**MSS**
+
+1.  User requests to list all applicants.
+2.  AddressBook shows a list of all applicants.
+
+    Use case ends.
+
+**Use case: UC03 - Adding an applicant**
 
 **MSS**
 
@@ -325,20 +334,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       
       Use case resumes at step 1. 
 
-**Use case: List all applicants**
+**Use case: UC04 - Delete an applicant**
 
 **MSS**
 
-1.  User requests to list all applicants.
-2.  AddressBook shows a list of all applicants.
-
-    Use case ends.
-
-**Use case: Delete an applicant**
-
-**MSS**
-
-1.  User requests to <u>list applicants (UC??)</u>.
+1.  User requests to <u>list applicants (UC01)</u>.
 2.  AddressBook displays a list of applicants.
 3.  User requests to delete a specific applicant in the displayed list.
 4.  AddressBook deletes the applicant.
