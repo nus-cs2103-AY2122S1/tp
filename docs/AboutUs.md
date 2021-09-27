@@ -15,7 +15,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/huizhuansam)]
 [[portfolio](team/johndoe.md)]
 
-- Role: Scheduling and tracking
+- Role: Scheduling and tracking, Deliverables and Deadlines
 - Responsibilities: User assistance
 
 ### Kishendran Vendar Kon
