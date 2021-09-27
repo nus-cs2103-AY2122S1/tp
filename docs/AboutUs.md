@@ -9,12 +9,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Shruthi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shruthi0310.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/shruthi0310)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
