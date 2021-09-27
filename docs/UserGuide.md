@@ -7,7 +7,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Table of Contents
 {:toc}
-
+ 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -159,6 +159,9 @@ Examples:
 * `listm` followed by `setm 5 d/Mon d/Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
 * `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday 
 
+
+### Clearing all entries in facility list: `clearf`
+
 ### Splitting members into facilities : `split`
 
 Splits members into facilities based on its capacity and members' availability.
@@ -171,9 +174,22 @@ Format: `split d/DAY`
 Examples:
 * `split d/Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
 
+### Clearing all entries in facility list: `clearf`
+
+Clears all entries from the address book.
+
+Format: `clearf`
+
+### Clearing all entries in member list: `clearm`
+
+Clears all members from the member list.
+
+Format: `clearm`
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+* SportsPA data are saved in the hard disk automatically after any command that changes the data. They are saved as a JSON file [JAR file location]/data/sportspa.json
+* If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
 
 ### Editing the data file
 
