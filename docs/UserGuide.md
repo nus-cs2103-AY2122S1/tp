@@ -158,6 +158,12 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Group** |
-**Search** | `search (-n <student_name> `<code>\|</code>` -i <student_id> `<code>\|</code>` -g <group_name>` <br> e.g. `search -n John Doe` , `search -g T02B`
+**Search** | `search (-n <student_name> `&#124;` -i <student_id> `&#124;` -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
+**Search2** | <code>(-n <student_name> | -i <student_id> | -g <group_name>)</code>
+**Search3** | <code>(-n <student_name> \| -i <student_id> \| -g <group_name>)</code>
+**Search4** | <code>(-n <student_name> </code><code>\|</code><code> -i <student_id> </code><code>\|</code><code> -g <group_name>)</code>
+**Search5** | `(-n <student_name> `<code>\|</code>` -i <student_id> `<code>\|</code>` -g <group_name>)`
+**Search6** | `(-n <student_name> ``\|`` -i <student_id> ``\|`` -g <group_name>)`
+**Search7** | `search (-n <student_name> | -i <student_id> | -g <group_name>)`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
 **Clear** | `clear data`
