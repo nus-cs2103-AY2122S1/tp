@@ -276,7 +276,7 @@ student and lesson information, to empower tutors to provide the best quality ho
 
 ### User stories
 
-We categorise our user stories into four main epics:
+We categorise our user stories into three main epics:
 1. [S] - Keeping track of student information
 2. [L] - Keeping track of lesson information
 3. [U] - Having a simple, efficient, and intuitive UI/UX
