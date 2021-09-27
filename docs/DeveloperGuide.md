@@ -339,9 +339,9 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
   
     Use case ends.
   
-* 1b. User requests for a list of students that match a specified name or address value
+* 1b. User requests for a list of students that match a specified keyword
 
-  * 1b1. TAB displays a list of students with matching name or address
+  * 1b1. TAB displays a list of students with data matching the keyword
 
     Use case ends.
 
