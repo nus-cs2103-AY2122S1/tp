@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Jane Doe
+### Rachel Cheah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rachelcheah.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/RachelCheah)]
+
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking project progress
 
 ### Ong Cheng Seong
 
