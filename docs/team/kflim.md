@@ -11,13 +11,17 @@ It is built in Java and is an ongoing project.
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
-  * What it does: 
-  * Justification: 
-  * Highlights: 
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**: Added the functionality to view the list of instructions
+  * What it does: Allows the user to view all the commands that are supported
+  * Justification: This feature improves the product significantly because a new user will be unfamiliar with the 
+  instructions and the user would not need to view the user guide to know how to use the application. It can also
+  help the existing users to remember how to use the instructions if they forget some of them.
+  * Highlights: This feature will need to be updated in the future if there are any syntax changes to current instructions
+  or when new instructions are implemented.
+  * Credits: This idea is similar to how Windows implemented the help system on the CLI.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: 
+  [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17)
 
 * **Project management**:
 
@@ -25,14 +29,13 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the feature `help`
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added documentation for non-functional requirements
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
+  * PRs reviewed (with non-trivial review comments): 
+  [\#72](https://github.com/nus-cs2103-AY2122S1/ip/pull/72), 
+  [\#103](https://github.com/nus-cs2103-AY2122S1/ip/pull/103)
 
 * **Tools**:
-
-* _{you can add/remove categories in the list above}_

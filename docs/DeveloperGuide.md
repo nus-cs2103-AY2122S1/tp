@@ -257,13 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* NUS Student Entrepreneurs
+* Proficient in Unix CLI
+* Has many meetings and is in contact with different people (students, mentors, stakeholders, clients, partners)
+* Carries Laptop around (prefers Laptop)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+* Users familiar with Unix commands can quickly master using the app efficiently.
+*  Allow users to keep track of tasks/meetings associated with contacts.
+*  Enhanced contact searchability and organisation.
+*  Eliminates the need to remember and recall interpersonal details of contacts.
+
 
 
 ### User stories
@@ -272,7 +277,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | view the list of instructions  | know what instructions are available                                   |
 | `* * *`  | user                                       | add a new person               |                                                                        |
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
@@ -308,13 +313,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: View instructions**
+
+**MSS**
+
+1.  User requests to view instructions
+2.  ContactSh shows a general list of instructions
+3.  User requests to view a specific instruction
+4.  ContactSh shows the user will see the full details of that command, which includes the format and description of the command.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User requests to view an invalid instruction.
+
+    * 3a1. ContactSh shows an error message and gives a suggestion to view the full instruction list for supported instructions.
+
+      Use case resumes at step 4.
+
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+be able to accomplish most of the tasks faster using commands than using the mouse.
+4. In case of a crash, all changes to data should be saved and available upon reboot of the application.
+5. Should be easy to learn and use at all times regardless of skill with the CLI.
+6. The project is expected to push major updates according to the module schedule.
 
 *{More to be added}*
 
@@ -322,6 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Crash**: An event where the application stops functioning properly and exits
 
 --------------------------------------------------------------------------------------------------------------------
 
