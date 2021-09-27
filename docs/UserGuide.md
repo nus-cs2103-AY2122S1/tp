@@ -64,6 +64,39 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Viewing a student: `student -v`
+
+Views a particular student's details given by the specified index from the 
+address book.
+
+Format: `student -v INDEX`
+
+* Views the student detail specified at `INDEX`. `INDEX` should be a positive number
+* `-v` refers to the view command
+
+Examples:
+* `student -v 3` view the student detail at index 3.
+
+### Editing a student: `student -e`
+
+Edits the detail of the specific student.
+
+Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]`
+
+* Edits the detail of the student specified by the `INDEX`. `INDEX` should be a 
+  positive number and refers to the index number of a student in the list of students.
+* `-e` refers to the edit command
+* It is a requirement that **at least one of the optional fields should be provided**.
+* `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN`
+* `START_TIME` and `END_TIME` takes in the time in 24-hour format, for example `0800` 
+  for 8am.
+
+Examples:
+
+* `student -a 3 -c 88888888 -em johnny@mail.com` Edits the contact number and email
+  address of the third student in the students' list to 88888888 and johnny@mail.com
+  respectively.
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -169,6 +202,33 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+### Grouping students  `[coming in v1.2]`
+
+Groups students by their names together. This grouping helps to distinguish between various tuition groups.
+
+Format: `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...`
+
+* Groups students into a group specified at `GROUPNAME`
+* -g refers to the group command
+* You can specify as many Index numbers as required.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `student -g Team2 1 3 5` creates a group "Team2" that includes students at index 1, 3 and 5.
+
+### Adding a task `[coming in v1.2]`
+
+Adds a task to the address book
+
+Format: `task -a n/NAME`
+
+* Adds a task with the name `NAME`
+* -a refers to the add command
+
+Examples:
+* `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
 
 --------------------------------------------------------------------------------------------------------------------
 
