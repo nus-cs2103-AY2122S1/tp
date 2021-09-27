@@ -55,8 +55,10 @@ public class LessonAddCommandParser {
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
-        // Parse time and check if range is valid.
-        // Throws ParseException if range is invalid.
+        /* Parse time and check if range is valid.
+        Throws ParseException if either time is invalid
+        or if range is invalid.
+         */
         ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_START_TIME).get(),
             argMultimap.getValue(PREFIX_END_TIME).get());
 
