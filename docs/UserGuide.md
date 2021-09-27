@@ -24,17 +24,17 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`add student`**`-n John Doe -i E0123456` : Adds a student named `John Doe` with NUSNET ID `E0123456` to the Address Book.
+    * **`add student`**`-n John Doe -i E0123456` : Adds a student named `John Doe` with NUSNET ID `E0123456` into the database.
 
-    * **`add group`**`-g T01A -n John Doe` : Adds a group called `T01A` and adds a student name `John Doe` into the group.
+    * **`add group`**`-g T01A -n John Doe` : Adds a group called `T01A` into the database and student `John Doe` into the group.
 
     * **`add alloc`**`-g T01A -n John Doe` : Adds student `John Doe` into group `T01`.
 
     * **`add score`**`-a P01 -n John Doe -s 12`: Adds score for assessment `P01` as `12` for student `John Doe`.
 
-    * **`search`**`-n John Doe` : Searches for a student called `John Doe`.
+    * **`search`**`-n John Doe` : Searches for student `John Doe`.
 
-    * **`clear`** : Deletes all contacts.
+    * **`clear`** : Clears all existing data.
 
     * **`exit`** : Exits the app.
 
