@@ -28,6 +28,10 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 
     * **`add group`**`-g T01A -n John Doe` : Adds a group called `T01A` and adds a student name `John Doe` into the group.
 
+    * **`add alloc`**`-g T01A -n John Doe` : Adds student `John Doe` into group `T01`.
+
+    * **`add score`**`-a P01 -n John Doe -s 12`: Adds score for assessment `P01` as `12` for student `John Doe`.
+
     * **`search`**`-n John Doe` : Searches for a student called `John Doe`.
 
     * **`clear`** : Deletes all contacts.
@@ -97,6 +101,29 @@ Examples:
 * `add student -n John Doe -i E0123456`
 * `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
 
+### Adding a student into a group: `add alloc`
+
+Allocates an existing student into an existing group.
+
+Format: `add alloc -g <group_name>  (-n <student_name> | -i <student_id>)`
+* Adds the student into an existing group specified by the group name.
+* Students can be identified by their name or NUSNET ID.
+
+Examples:
+* `add alloc -g T01A -n John Doe`
+* `add alloc -g T02A -i E0123456`
+
+### Adding an assessment: `add score`
+
+Adds score of an existing assessment into the database.
+
+Format: `add score -a <assessment_name>  (-n <student_name> | -i <student_id>) -s <score>`  
+* Adds student’s score for an existing assessment into the database.
+* Students can be identified by their name or NUSNET ID.
+
+Examples:
+* `add score -a P01 -n John Doe -s 12`
+* `add score -a P02 -i E0123456 -s 12.5`
 
 ### Searching for students: `search`
 
