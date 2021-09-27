@@ -288,28 +288,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Batch Import**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to batch import
+2.  AddressBook shows file selection window
+3.  User selects the file 
+4.  AddressBook adds the data
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The file is not in the correct format.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Filter by fields**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User inputs filter requirement
+2.  AddressBook shows matching results
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command is not in the correct format.
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -324,7 +333,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
