@@ -15,8 +15,8 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/huizhuansam)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Scheduling and tracking
-* Responsibilities: User assistance
+- Role: Scheduling and tracking
+- Responsibilities: User assistance
 
 ### Kishendran Vendar Kon
 
@@ -24,5 +24,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[github](https://github.com/KishendranVendarKon)]
 
-* Role: Testing
-* Responsibilities: In charge of `Storage` component
+- Role: Testing
+- Responsibilities: In charge of `Storage` component
+
+### Lee Zheng Han
+
+<img src="images/zhenghanlee.png" width="200px">
+
+[[github](https://github.com/zhenghanlee)]
+
+- Role: Documentation, VSCode Expert
+- Responsibility: Search by categories
