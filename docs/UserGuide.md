@@ -143,7 +143,7 @@ Examples:
 
 Filter persons matching the specified tags, based on the specified filter condition.
 
-Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]`
+Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
 
 * `all` indicates that a person must have all specified tags to be matched.
 * `any` indicates that a person with at least one specified tag will be matched.
