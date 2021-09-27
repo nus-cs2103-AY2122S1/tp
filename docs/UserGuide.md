@@ -14,7 +14,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `addressbook.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases). [coming soon]
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -64,6 +64,38 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Listing all facilities : `listf`
+
+Shows a list of all facilities.
+
+Format: `listf`
+
+### Finding a facility : `findf`
+
+Finds facilities whose location contains any of the given keywords
+
+Format: `findf KEYWORD [MORE_KEYWORDS]`
+* Search is case-insensitive. Eg. Utown will match utown
+* Only the location is searched
+* Only full words will be matched eg. Utown will not match town
+* Facilities matching at least one keyword will be returned (i.e. OR search) e.g Utown Redhill will return Utown Field, Redhill Sports Complex
+
+Examples:
+* `find redhill` returns `Redhill Sports Complex` and `Redhill Field`
+  
+### Deleting a facility : `deletef`
+
+Deletes a facility from the facility list.
+
+Format: `deletef INDEX`
+* Deletes the facility at the specified INDEX
+* INDEX refers to the index number shown in the displayed facility list
+* INDEX must be a positive integer 1, 2, 3… 
+
+Examples:
+* `listf` followed by `deletef 2` deletes the 2nd person in the facility list
+* `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the findf command
+
 ### Adding a member: `addm`
 
 Adds a member to the list of people in the CCA
@@ -96,6 +128,48 @@ Format: `findm KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findm Bob` returns bob and Bob Doe
 * `findm john bobby` returns John Lee, Bobby Tan
+  
+### Deleting a member : `deletem`
+
+Deletes a member from the member list
+
+Format: `deletem INDEX`
+
+* Deletes the member at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed member list. 
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listm` followed by `deletem 2` deletes the member at index 2 of the member list
+* `findm John` followed by `deletem 1` deletes the 1st person in the results of the `findm` command 
+
+### Setting member availability: `setm`
+
+Sets the availability of a given member.
+
+Format: `setm INDEX d/DAY [d/DAY]…​`
+
+* Sets the availability of the member at the specified `INDEX` to be the specified `DAY(s)`
+* Availability is defined as days of the week when member is free
+* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+* The index refers to the index number shown in the displayed member list
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listm` followed by `setm 5 d/Mon d/Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
+* `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday 
+
+### Splitting members into facilities : `split`
+
+Splits members into facilities based on its capacity and members' availability.
+
+Format: `split d/DAY`
+
+* Allocate members available at the specified `DAY` to each facility
+* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+
+Examples:
+* `split d/Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
 
 ### Saving the data
 
