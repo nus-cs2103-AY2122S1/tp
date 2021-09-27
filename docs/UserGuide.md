@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Source Control is a **desktop app for CS1101S professors to manage the performance of their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Source Control can give you a quick overview or a closer look of how your students are doing.
+Source Control is a **desktop app for CS1101S professors to manage the performance of their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Source Control can give you both a quick overview and a closer look of how your students are doing.
 
 * Table of Contents 
 {:toc}
@@ -35,9 +35,7 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
     * **`search`**`-n John Doe` : Searches for student `John Doe`.
 
     * **`clear`** : Clears all existing data.
-
-    * **`exit`** : Exits the app.
-
+    
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -73,6 +71,19 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 
 </div>
 
+### Adding a student : `add student`
+
+Adds a student into the database.
+
+Format: `add student -n <student_name> -i <student_id>  [-g <group_name>]...`
+
+* Adds a new student with the given name and NUSNET ID into the database.
+* Adds the student into the groups the student belongs to.
+
+Examples:
+* `add student -n John Doe -i E0123456`
+* `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
+
 ### Creating a new group: `add group`
 
 Creates a new group and adds students into the group.
@@ -87,19 +98,6 @@ Examples:
 * `add group -g FG1`
 * `add group -g FG1 -n John Doe -i E0123456`
 * `add group -g FG1 -i E0123123 -i E0123456`
-
-### Adding a student : `add student`
-
-Adds a student into the database.
-
-Format: `add student -n <student_name> -i <student_id>  [-g <group_name>]...`
-
-* Adds a new student with the given name and NUSNET ID into the database.
-* Adds the student into the groups the student belongs to.
-
-Examples:
-* `add student -n John Doe -i E0123456`
-* `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
 
 ### Adding a student into a group: `add alloc`
 
@@ -198,10 +196,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Group** | `add group -g <group_name> [(-n <student_name> \| -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
-**Add Allocation** | `add alloc -g <group_name> (-n <student_name> \| -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
-**Add Assessment** | `add score -a <assessment_name> (-n <student_name> \| -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
-**Search** | `search (-n <student_name> \| -i <student_id> \| -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
+**Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
+**Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
+**Add Assessment** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
+**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
 **Clear** | `clear data`
