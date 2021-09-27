@@ -389,7 +389,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extensions**
 
 * 2a. The list is empty.
-
+  
   Use case ends.
 
 * 3a. The given index is invalid.
@@ -515,7 +515,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     * 2a1. TuitiONE shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 2. 
 
 **UC10: Review commands**
 
