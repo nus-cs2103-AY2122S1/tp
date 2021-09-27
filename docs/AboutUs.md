@@ -17,7 +17,7 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 [[github](https://github.com/nguyiyang)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead 
+* Role: Team Lead
 * Responsibilities: Integration
 
 ### Rushil Ramesh

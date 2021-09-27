@@ -17,4 +17,3 @@ Given below are my contributions to the project.
   * README:
     * Added a mockup for classMATE [\#54]()
     * Added details of the project and Continuous Integration badge
-  

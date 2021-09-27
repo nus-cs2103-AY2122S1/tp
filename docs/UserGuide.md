@@ -170,7 +170,7 @@ Format: `viewstu INDEX`
 
 Examples:
 
-* `liststu` followed by `viewstu 2` shows second student in the student list 
+* `liststu` followed by `viewstu 2` shows second student in the student list.
 * `findstu Betsy` followed by `viewstu 1` shows the 1st student in the results of the find command.
 ### Deleting a student : `deletestu`
 
