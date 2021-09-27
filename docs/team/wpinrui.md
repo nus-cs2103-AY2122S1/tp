@@ -9,10 +9,9 @@ TutorAid is a desktop application used for helping tech-savvy private tutors, wh
 
 Given below are my contributions to the project.
 
-* **Team Lead**
-  * As the team lead, I am in charge of ensuring that deadlines are met and project objectives are fulfilled.
-* **Documentation**
-  * I have contributed to the documentation in the following areas:
-    * User Guide: Unset payment made
-    * User Guide: Set payment made
-    * Developer Guide: Target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
+* **Documentation**:
+  * User Guide: 
+    * Added documentation for the features `paid` and `unpaid`
+  * Developer Guide: 
+    * Target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
+
