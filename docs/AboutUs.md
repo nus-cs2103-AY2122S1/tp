@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Deliverables and deadlines
 
-### Johnny Doe
+### Hu Linglong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/huisthat.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/huisthat)] [[portfolio](team/huisthat.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
 
 ### Jean Doe
 
