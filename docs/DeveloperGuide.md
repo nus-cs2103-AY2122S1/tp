@@ -249,7 +249,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a new contact 
+1. User requests to add a new contact
 2. FAST displays a message indicating success
 3. FAST displays the new contact below
 
@@ -260,7 +260,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The given command syntax is invalid
     * 1a1. FAST shows an error message
     * 2a2. FAST shows an example of add command to user
-  
+
       Use case ends
 
 **Use case: UC02 - Delete Contact**
@@ -268,18 +268,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons (UC06)
-2. User requests to delete a specific person in the list 
+2. User requests to delete a specific person in the list
 3. FAST deletes the person
 
-    Use case ends
+   Use case ends
 
 **Extensions**
 
 * 2a. The given index is invalid
-  * 2a1. FAST shows an error message
-  * 2a2. FAST shows an example of delete command to user
-  
-    Use case ends.
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of delete command to user
+
+      Use case ends.
 
 **Use case: UC03 - Edit Contact**
 
@@ -301,9 +301,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 2b. The given command syntax is invalid
-    * 2b1. FAST displays an error message 
+    * 2b1. FAST displays an error message
     * 2b2. FAST displays an example of the edit command to the user
-  
+
       Use case ends.
 
 
@@ -311,11 +311,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons (UC06) 
-2. User requests to add a remark to a specific person in the list 
+1. User requests to list persons (UC06)
+2. User requests to add a remark to a specific person in the list
 3. FAST displays the new remark in the contact
 
-    Use case ends
+   Use case ends
 
 **Extensions**
 
@@ -335,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2c. User removes an existing remark
     * 2c1. FAST displays a message that the remark has been removed
-  
+
       Use case ends
 
 
@@ -343,40 +343,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User searches for a name 
+1. User searches for a name
 2. FAST shows a list of persons with the specified name or people whose name contains the search query
 
-    Use case ends
+   Use case ends
 
 **Extensions**
 
 * 1a. The given search query is invalid
     * 1a1. FAST shows an error message
     * 1a2. FAST shows an example of find command to user
-  
+
       Use case ends
-  
+
 
 * 1b FAST cannot find any contacts with the given search query
     * 1b1. FAST displays a message to inform user no contacts that matches the query was found
-  
-       Use case ends
+
+      Use case ends
 
 
 **Use case: UC06 - List Contacts**
 
 **MSS**
 
-1. User requests to list contacts 
+1. User requests to list contacts
 2. FAST displays a list of contacts
 
-    Use case ends
+   Use case ends
 
 **Extensions**
 
 * 2a. The list is empty.
-      
-    Use case ends
+
+  Use case ends
 
 *{More to be added}*
 
