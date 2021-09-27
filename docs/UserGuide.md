@@ -78,7 +78,6 @@ Displays a read-only weekly schedule.
 
 Format: `schedule`
 
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
