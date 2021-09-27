@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lua Yi Da
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/luayida99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/luayida99)]
+[[portfolio](team/luayida99.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Deliverables and deadlines
 
 ### Johnny Doe
 
