@@ -186,6 +186,42 @@ Examples:
 * `liststu` followed by `deletestu 2` deletes the 2nd person in the address book.
 * `findstu Betsy` followed by `deletestu 1` deletes the 1st person in the results of the `findstu` command.
 
+### Adding a group: `addsg` [Coming Soon]
+Adds a group to classMATE
+
+Format: `addsg n/NAME tp/TYPE g/GROUPNAME [t/TAG]`
+
+* Adds the student to a group in the class
+* Type refers to the assignment that the group will work together for
+
+Example:
+* `liststu c/G06`shows that Betsy is a student in class G06.
+  `addsg n/Betsy tp/OP1 g/A` then adds a student called Betsy to OP1 Group A in class G06
+
+### Viewing a Group: `viewg` [Coming Soon]
+View a group's details in classMATE
+
+Format: `viewg INDEX`
+
+* Views the group's details at the specified INDEX.
+* The index refers to the index number shown in the displayed group list.
+* The index must be a positive integer 1, 2, 3...
+
+Examples:
+* `listg n/G06` followed by `viewg 2` shows the 2nd group in the list of group in class G06
+
+### Deleting a Group: `deleteg` [Coming Soon]
+Delete a group from classMATE by their index in the group list
+
+Format: `deleteg INDEX`
+
+* Deletes the group at the specified INDEX.
+* The index refers to the index number shown in the displayed group list.
+* The index must be a positive integer 1, 2, 3...
+
+Examples:
+* `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
