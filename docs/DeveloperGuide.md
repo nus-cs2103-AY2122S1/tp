@@ -336,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user                                       | add my clients information     | easily refer to it         |
 | `* * *`  | user                                       | delete contact information     | remove contacts who I no longer keep in touch with                                                                       |
-| `* * *`  | user                                       | lookup a client in the address book | retrieve relevant information | 
+| `* * *`  | user                                       | lookup a client in the address book | retrieve relevant information |
 | `* * *`  | user                                       | search for a client by their name |                         |
 | `* * *`  | user                                       | save my address book locally   | access the information again when I reopen the application |
 | `* * *`  | user                                       | see hints in error messages when I input a wrong command | know how to rectify my command |
