@@ -11,7 +11,7 @@ src/main/resources/docs/
 # VSCode/Eclipse files
 /.vscode/
 /.classpath
-/.settings
+/.settings/
 
 # Storage/log files
 /data/
