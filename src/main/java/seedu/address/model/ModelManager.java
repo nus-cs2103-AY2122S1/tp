@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.module.Module;
 
 /**
  * Represents the in-memory model of the mod tracker data.
@@ -21,7 +20,7 @@ public class ModelManager implements Model {
 
     private final ModTracker modTracker;
     private final UserPrefs userPrefs;
-    private final FilteredList<Module> filteredModules;
+    private final FilteredList<seedu.address.model.module.Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given modTracker and userPrefs.
@@ -89,42 +88,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasModule(Module module) {
+    public boolean hasModule(seedu.address.model.module.Module module) {
         requireNonNull(module);
         return modTracker.hasModule(module);
     }
 
     @Override
-    public void deleteModule(Module target) {
+    public void deleteModule(seedu.address.model.module.Module target) {
         modTracker.removeModule(target);
     }
 
     @Override
-    public void addModule(Module module) {
+    public void addModule(seedu.address.model.module.Module module) {
         modTracker.addModule(module);
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 
     @Override
-    public void setModule(Module target, Module editedModule) {
+    public void setModule(seedu.address.model.module.Module target, seedu.address.model.module.Module editedModule) {
         requireAllNonNull(target, editedModule);
 
         modTracker.setModule(target, editedModule);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Module List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
      * {@code versionedModTracker}
      */
     @Override
-    public ObservableList<Module> getFilteredModuleList() {
+    public ObservableList<seedu.address.model.module.Module> getFilteredModuleList() {
         return filteredModules;
     }
 
     @Override
-    public void updateFilteredModuleList(Predicate<Module> predicate) {
+    public void updateFilteredModuleList(Predicate<seedu.address.model.module.Module> predicate) {
         requireNonNull(predicate);
         filteredModules.setPredicate(predicate);
     }
