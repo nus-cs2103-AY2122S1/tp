@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -127,7 +128,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Set<Lesson> modelLessons = new HashSet<>(personLessons);
+        final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags, modelLessons);
     }

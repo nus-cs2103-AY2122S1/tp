@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
@@ -42,7 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
-        lessons = new HashSet<>();
+        lessons = new TreeSet<>();
     }
 
     /**
@@ -55,7 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
-        lessons = new HashSet<>(personToCopy.getLessons());
+        lessons = new TreeSet<>(personToCopy.getLessons());
     }
 
     /**
@@ -86,7 +87,7 @@ public class PersonBuilder {
      * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
      */
     public PersonBuilder withSampleLesson() {
-        Set<Lesson> lessonSetWithOneLesson = new HashSet<>();
+        Set<Lesson> lessonSetWithOneLesson = new TreeSet<>();
         lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
         this.lessons = lessonSetWithOneLesson;
         return this;

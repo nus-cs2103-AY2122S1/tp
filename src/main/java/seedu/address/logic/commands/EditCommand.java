@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -229,7 +230,7 @@ public class EditCommand extends Command {
         }
 
         public void setLessons(Set<Lesson> lessons) {
-            this.lessons = (lessons != null) ? new HashSet<>(lessons) : null;
+            this.lessons = (lessons != null) ? new TreeSet<>(lessons) : null;
         }
 
         @Override

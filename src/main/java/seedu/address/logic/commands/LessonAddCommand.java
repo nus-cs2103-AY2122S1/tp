@@ -8,9 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -74,7 +74,7 @@ public class LessonAddCommand extends Command {
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
 
-        Set<Lesson> lessons = new HashSet<>(personToEdit.getLessons());
+        Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
         lessons.add(lesson);
 
         return new Person(updatedName, updatedPhone, updatedEmail,
