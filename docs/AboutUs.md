@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/fullfatwasabi.png" width="200px">
 
-[[github](http://github.com/fullfatwasabi)][[portfolio](team/Jonathan.md)]
+[[github](http://github.com/fullfatwasabi)][[portfolio](team/fullfatwasabi.md)]
 
 * Role: Developer
 * Responsibilities: Tool, Documentation, Scheduling and tracking
@@ -64,7 +64,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/mweeruien.png" width="200px">
 
-[[github](http://github.com/mweeruien)][[portfolio](team/Megan.md)]
+[[github](http://github.com/mweeruien)][[portfolio](team/mweeruien.md)]
 
 * Role: Developer
 * Responsibilities: Team Lead, Deliverables and deadlines, and Assistant GUI Expert
