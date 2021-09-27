@@ -1,7 +1,7 @@
 # AY2122S1-CS2103T-W17-4 TP Uni-Fy
 
 
-[![CI Status](https://github.com/AY2122S1-CS2103T-W17-4/tp/workflows/Java%20CI/badge.svg))](https://github.com/AY2122S1-CS2103T-W17-4/tp/actions)
+[![CI Status](https://github.com/AY2122S1-CS2103T-W17-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-W17-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp/branch/master/graph/badge.svg?token=AV4MFDJWM3)](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp)
 
 ![Ui](docs/images/Ui.png)
