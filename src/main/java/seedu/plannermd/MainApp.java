@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing PlannerMd ]===========================");
+        logger.info("=============================[ Initializing PlannerMD ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
