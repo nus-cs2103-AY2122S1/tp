@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Zhang Ziqing
 
-<img src="images/j![img.png](img.png)ohndoe.png" width="200px">
+<img src="images/zhangziqing.png" width="200px">
 
 [[github](http://github.com/ziqing26)]
 [[portfolio](team/zhangziqing.md)]
