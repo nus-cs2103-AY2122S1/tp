@@ -20,7 +20,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Lau Teng Hon
 
-<img src="images/th.png" width="200px">
+<img src="images/th-429b.png" width="200px">
 
 [[github](https://github.com/Th-429B)]
 [[portfolio](team/tenghon.md)]
