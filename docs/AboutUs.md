@@ -44,7 +44,7 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 <img src="images/zhouyirui.png" width="200px">
 
 [[github](http://github.com/zhouyirui)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/zhouyirui.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality
