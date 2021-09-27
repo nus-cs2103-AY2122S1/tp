@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Richard Li
 
-<img src="images/richardli.jpeg" width="200px">
+<img src="images/rldefa.jpeg" width="200px">
 
 [[github](http://github.com/rldefa)] [[portfolio](team/richardli.md)]
 
