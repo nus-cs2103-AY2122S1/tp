@@ -302,6 +302,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Office` (labelled as its abbreviation `CSO` or simply  `user`, unless specified otherwise).
 
+**Use case: View details of a lesson**
+
+**MSS**
+
+1.  CSO requests to list lessons.
+2.  System shows a list of lessons, with their respective details.
+
+    Use case ends.
+
 **Use case: Add a lesson**
 
 **MSS**
@@ -346,9 +355,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 1.  CSO requests to list lessons.
 2.  System shows a list of lessons.
 3.  CSO requests to delete a specific lesson in the list by its lesson code.
-4.  System deletes the lesson
-
-    Use case ends.
+4.  System deletes the lesson.
 
 **Extensions**
 
@@ -361,15 +368,55 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
     * 3a1. System shows an error message.
 
       Use case resumes at step 2.
-    
-**Use case: View details of a lesson**
+
+**Use case: UCXX – Look up student details**
 
 **MSS**
+1. CSO inputs command to find a specific student by their name (either full name or not).
 
-1.  CSO requests to list lessons.
-2.  System shows a list of lessons, with their respective details.
+2. CSO looks through the given results of students.
 
-    Use case ends.
+3. CSO chooses the student of interest.
+
+4. CSO can see student’s details, such as:
+    1. Their grade
+    2. Their enrolled lessons
+    3. Their parent’s contact number
+    4. Their house address
+    5. Their tuition fees
+    
+Use case ends.
+
+**Extensions**
+
+* 1a. TuitiONE detects and error in the command formatting.
+
+    * 1a1. TuitiONE reminds CSO of correct input format.
+    
+    * 1a2. CSO inputs search keywords with correct formatting.
+    
+        Steps 1a1-1a2 are repeated until the input is of the correct format.\
+        Use case resumes from step 2.
+
+* 2a. TuitiONE cannot find any results relevant to the search keyword.
+
+    * 2a1. TuitiONE displays a “No students found” message to CSO.
+    
+	    Use case ends.
+
+* *a. At any time, the CSO can go back to the default TuitiONE page.
+
+	* *a1. CSO types in list.
+	
+	* *a2. TuitiONE goes back to displaying list of all student details.
+	
+	    Use case ends.
+
+* 3a. The given lesson code is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
 
 **Use case: Review commands**
 
@@ -380,14 +427,11 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-
-   1. Performance requirements: the system should respond within 2 seconds.
+    1. Performance requirements: the system should respond within 2 seconds.
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
 5. Quality requirements: 
