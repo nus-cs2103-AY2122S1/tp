@@ -50,8 +50,8 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -136,9 +136,9 @@ Format: `list`
 Edits an existing staff in the Staff List.
 
 Format:\
-`edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`\
-`edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`
+`edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`\
+`edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
 
 * Edits the staff of the specified `NAME`, `INDEX`, or `ID`.
@@ -160,8 +160,39 @@ Examples:\
 |-i|ID|Contact with that id will be edited.|
 |-t|Tag|Contacts with that tag will be edited.|
 
+### Adding a staff's schedule: `addSchedule`
 
-### Locating Staff by name: `find`
+Adds a time period where the staff is working to the staff’s schedule.
+
+Format: 
+* `addSchedule [n/name] [day-startTime-endTime]`
+* `addSchedule [id/ID] [day-startTime-endTime]`
+* `addSchedule [n/name] [t/nonrecurr] [d/date] [startTime-endTime]`
+* `addSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
+
+Note:
+* There are two ways to identify the staff to add the time period to: by their name or by their staff ID.
+* Also, there are two types of time periods that can be added - recurring and non-recurring.
+* The default is a recurring schedule which will occur every week. For the addition of the non-recurring time periods, 
+  the date which the staff works has to be specified.
+
+Examples:
+* `addSchedule n/Candice Mon-0800-1200`
+* `addSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
+
+### View a staff schedule : `viewSchedule`
+
+Views a specific staff’s schedule.
+
+Format: 
+* `viewSchedlue [n/name]`
+* `viewSchedlue [id/ID]`
+
+Examples:
+* `viewSchedule n/Candice`
+* `viewSchedule id/12345678`
+
+### Locating persons by name: `find
 
 Finds staff whose names contain any of the given keywords.
 
@@ -244,10 +275,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
