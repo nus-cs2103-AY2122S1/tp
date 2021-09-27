@@ -48,7 +48,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Leong Hong Fai
 
-<img src="images/fai.png" width="200px">
+<img src="images/leonghongfai.png" width="200px">
 
 [[github](http://github.com/leonghongfai)]
 [[portfolio](team/johndoe.md)]
