@@ -257,13 +257,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This product is for CS2103/T TAs who are:
+* Familiar with command line and code 
+* Worried about using too many applications to manage his students' projects and grades. 
+* Able to tolerate a steep learning curve 
+* Disorganized, forgetful 
+* Busy with other school projects and modules
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+
+TAs are required to access different platforms (LumiNUS, GitHub & CS2103/T website) and manage multiple groups and students.
+
+This application aims to integrate different tools into a centralised platform that can improve a TA’s efficiency. It helps to ensure instructors complete all tasks on the relevant platforms by stipulated deadlines.
 
 
 ### User stories
@@ -310,18 +316,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Commands used should be intuitive, and not too lengthy. 
+5. System should respond almost immediately upon entering a command. 
+6. Error messages shown should inform the user of what is wrong and what the correct command syntax should be.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student contact**: A student entry with the corresponding student’s name, tutorial attendance, and tutorial participation.
+* **Task**: An entry with a textual description of a piece of work to do, and a time that specifies the date that piece of work should be completed by 
+* **Directory**: The list commands entered will be applied to (either student or task)
 
 --------------------------------------------------------------------------------------------------------------------
 
