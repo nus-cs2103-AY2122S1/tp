@@ -9,51 +9,38 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Bryan Wee Shun Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bryanwee023.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bryanwee023)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: UI, Scheduling and Tracking, Git Expert
 
-### Johnny Doe
+### Hay Man Hnin Lwin
+
+<img src="images/gracewang2322.png" width="200px">
+
+[[github](http://github.com/gracewang2322)]
+
+* Role: Developer
+* Responsibilities: Documentation, Deliverables and Deadlines
+
+### Wang Pei
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/wangpeialex)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing, Storage
 
-### Jean Doe
+### Bernardus Krishna
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bernarduskrishna.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/bernarduskrishna)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality, Model, Logic
