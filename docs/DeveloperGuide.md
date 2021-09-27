@@ -312,11 +312,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. New users should be able to easily see where to find information on how to use the application.
+5. Should inform user of the necessary amendments to make to their input when receiving a bad input.
+6. Data should be transferable between different devices that are both running InsurancePal.
+7. Each command should be successfully executed within 1 second.
+8. Should not exit unexpectedly as a result of software implementation regardless of user input.
+9. Should not modify information stored without explicit permission or instruction by the user.
+10. Should not allow duplicate entries.
 
 ### Glossary
 
