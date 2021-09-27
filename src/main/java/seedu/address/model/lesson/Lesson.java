@@ -12,7 +12,7 @@ import java.util.Set;
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public abstract class Lesson {
+public abstract class Lesson implements Comparable<Lesson> {
     // Types of lesson
     private static final String RECURRING = "Recurring Lesson";
     private static final String MAKEUP = "MakeUp Lesson";
@@ -145,6 +145,20 @@ public abstract class Lesson {
             homework.forEach(builder::append);
         }
         return builder.toString();
+    }
+
+    /**
+     * Compares this Lesson object with the other Lesson object.
+     *
+     * @param other The Lesson object to compare with.
+     * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
+     */
+    @Override
+    public int compareTo(Lesson other) {
+        int compareDate = getDate().compareTo(other.getDate());
+        int compareTime = getStartTime().compareTo(other.getStartTime());
+        // Compare time if date is equal
+        return compareDate == 0 ? compareTime : compareDate;
     }
 
 }
