@@ -9,40 +9,40 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Shruthi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shruthi0310.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/shruthi0310)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Felix Ong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/felix-ong.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/felix-ong)]
+[[portfolio](team/felix-ong.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Xing Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/moley456.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Moley456)]
+[[portfolio](team/Moley456.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Seow Xiu Wen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yoyociti.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/YoYoCiti)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer

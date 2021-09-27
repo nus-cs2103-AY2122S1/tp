@@ -14,7 +14,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `addressbook.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases). [coming soon]
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -64,83 +64,115 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing help : `help`
+### Listing all facilities : `listf`
 
-Shows a message explaning how to access the help page.
+Shows a list of all facilities.
 
-![help message](images/helpMessage.png)
+Format: `listf`
 
-Format: `help`
+### Finding a facility : `findf`
 
+Finds facilities whose location contains any of the given keywords
 
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `findf KEYWORD [MORE_KEYWORDS]`
+* Search is case-insensitive. Eg. Utown will match utown
+* Only the location is searched
+* Only full words will be matched eg. Utown will not match town
+* Facilities matching at least one keyword will be returned (i.e. OR search) e.g Utown Redhill will return Utown Field, Redhill Sports Complex
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `find redhill` returns `Redhill Sports Complex` and `Redhill Field`
+  
+### Deleting a facility : `deletef`
 
-### Listing all persons : `list`
+Deletes a facility from the facility list.
 
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+Format: `deletef INDEX`
+* Deletes the facility at the specified INDEX
+* INDEX refers to the index number shown in the displayed facility list
+* INDEX must be a positive integer 1, 2, 3… 
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `listf` followed by `deletef 2` deletes the 2nd person in the facility list
+* `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the findf command
 
-### Locating persons by name: `find`
+### Adding a member: `addm`
 
-Finds persons whose names contain any of the given keywords.
+Adds a member to the list of people in the CCA
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `addm n/NAME p/PHONE_NUMBER [d/DAYS]`
+* `[d/DAYS]` is an optional field indicating a list of days for which the member is available for that week
+* Members added without availability will have an empty list of days
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `addm n/John p/91234567 d/Mon d/Tues` adds John to the member list and indicates his availability on Monday and Tuesday
+* `addm n/Bob p/91228372` adds Bob to the member list with zero available days by default
 
-### Deleting a person : `delete`
+### Listing all members: `listm`
 
-Deletes the specified person from the address book.
+Shows a list of all members
 
-Format: `delete INDEX`
+Format: `listm`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+### Finding a member `findm`
+
+Finds members whose names contains any of the given keywords
+
+Format: `findm KEYWORD [MORE_KEYWORDS]`
+* Search is case-insensitive. Eg. John will match john
+* `[MORE_KEYWORDS]` is an optional field
+* Only the name of the member is searched
+* Only full words will be matched eg. Johnny will not match John
+* Names matching at least one keyword will be returned (i.e. OR search) e.g John Henry will return John, Henry
+
+Examples:
+* `findm Bob` returns bob and Bob Doe
+* `findm john bobby` returns John Lee, Bobby Tan
+  
+### Deleting a member : `deletem`
+
+Deletes a member from the member list
+
+Format: `deletem INDEX`
+
+* Deletes the member at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed member list. 
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `listm` followed by `deletem 2` deletes the member at index 2 of the member list
+* `findm John` followed by `deletem 1` deletes the 1st person in the results of the `findm` command 
+
+### Setting member availability: `setm`
+
+Sets the availability of a given member.
+
+Format: `setm INDEX d/DAY [d/DAY]…​`
+
+* Sets the availability of the member at the specified `INDEX` to be the specified `DAY(s)`
+* Availability is defined as days of the week when member is free
+* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+* The index refers to the index number shown in the displayed member list
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listm` followed by `setm 5 d/Mon d/Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
+* `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday 
+
+
+### Clearing all entries in facility list: `clearf`
+
+### Splitting members into facilities : `split`
+
+Splits members into facilities based on its capacity and members' availability.
+
+Format: `split d/DAY`
+
+* Allocate members available at the specified `DAY` to each facility
+* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+
+Examples:
+* `split d/Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
 
 ### Clearing all entries in facility list: `clearf`
 
@@ -153,12 +185,6 @@ Format: `clearf`
 Clears all members from the member list.
 
 Format: `clearm`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Saving the data
 
