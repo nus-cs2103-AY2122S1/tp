@@ -161,7 +161,7 @@ Examples:\
 |-t|Tag|Contacts with that tag will be edited.|
 
 
-### Locating persons by name: `find
+### Locating persons by name: `find`
 
 Finds staff whose names contain any of the given keywords.
 
