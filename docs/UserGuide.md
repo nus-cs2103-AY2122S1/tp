@@ -222,9 +222,9 @@ Format: `deleteg INDEX`
 Examples:
 * `listg n/G06` followed by `deleteg 2` deletes the 2nd group in the list of group in class G06
 
-### Clearing all entries : `clear`
+### Clearing all students : `clear`
 
-Clears all entries from the address book.
+Clears all students from memory.
 
 Format: `clear`
 

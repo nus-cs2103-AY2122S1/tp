@@ -257,13 +257,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* CS2101 Tutors with multiple tutorial classes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manage and store student details faster than a typical mouse/GUI driven app. Organise students within classes and groups.
 
 
 ### User stories
@@ -273,9 +273,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* *`  | new user                                       | view sample data              | see what the app looks like when in use                               |
+| `* * *`  | user                                       | add a new student              |                                                                        |
+| `* * *`  | user                                       | view a student's details       | easily check the details and progress of the students                  |
+| `* * *`  | user                                       | add a new class                |                                                                        |
+| `* * `   | user                                       | add a class schedule           | plan my week in advance  
+| `* * *`  | user                                       | view a class' details          | easily check the details of a particular class                         |
+| `* * *`  | user                                       | delete a student               | remove entries that I no longer need       
+| `* * *`  | user                                       | delete a class                 | remove classes that I no longer need                                                                 |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | find a class by code           | locate details of a class without having to go through the entire list |
+| `* * *`  | user                                       | view all classes               | see which classes I'm taking                                           |
+| `* * *`  | user                                       | view all students in a class   | see the students enrolled in a particular class                                         |
+| `* *`    | experienced user                           | add class participation details to a student | track the paricipation of each student                   |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
@@ -313,8 +323,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Readable font.
+5.  Lightweight program.
+6.  Light Mode.
+7.  Able to function in the background.
+8.  Able to respond to user actions within three seconds.
 
 *{More to be added}*
 
