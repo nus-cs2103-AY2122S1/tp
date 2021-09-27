@@ -84,6 +84,20 @@ Examples:
 * `add group -g FG1 -n John Doe -i E0123456`
 * `add group -g FG1 -i E0123123 -i E0123456`
 
+### Adding a student : `add student`
+
+Adds a student into the database.
+
+Format: `add student -n <student_name> -i <student_id>  [-g <group_name>]...`
+
+* Adds a new student with the given name and NUSNET ID into the database.
+* Adds the student into the groups the student belongs to.
+
+Examples:
+* `add student -n John Doe -i E0123456`
+* `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
+
+
 ### Searching for students: `search`
 
 Finds students who match the input keywords.
@@ -158,6 +172,7 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Group** |
+**Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
 **Clear** | `clear data`
