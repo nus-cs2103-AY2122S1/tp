@@ -105,7 +105,7 @@ Examples:
 
 Allocates an existing student into an existing group.
 
-Format: `add alloc -g <group_name>  (-n <student_name> | -i <student_id>)`
+Format: `add alloc -g <group_name> (-n <student_name> | -i <student_id>)`
 * Adds the student into an existing group specified by the group name.
 * Students can be identified by their name or NUSNET ID.
 
@@ -117,7 +117,7 @@ Examples:
 
 Adds score of an existing assessment into the database.
 
-Format: `add score -a <assessment_name>  (-n <student_name> | -i <student_id>) -s <score>`  
+Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>`
 * Adds student’s score for an existing assessment into the database.
 * Students can be identified by their name or NUSNET ID.
 
@@ -200,6 +200,8 @@ Action | Format, Examples
 --------|------------------
 **Add Group** | `add group -g <group_name> [(-n <student_name> \| -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
+**Add Allocation** | `add alloc -g <group_name> (-n <student_name> \| -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
+**Add Assessment** | `add score -a <assessment_name> (-n <student_name> \| -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
 **Search** | `search (-n <student_name> \| -i <student_id> \| -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
 **Clear** | `clear data`
