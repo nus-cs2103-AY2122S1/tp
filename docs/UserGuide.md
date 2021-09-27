@@ -94,6 +94,24 @@ Examples:
     * person with name: `benny tan`, address: `West Jurong`, email: `benny.tan@gmail.com`
     * person with name: `benjamin` address: `yishun east ave 1` email: `benj@gmail.com`
 
+### Filter persons by tags: `filter`
+
+Filter persons matching the specified tags, based on the specified filter condition.
+
+Format: `filter cond/{all | any | none} TAG [MORE_TAGS]`
+
+* `all` indicates that a person must have all specified tags to be matched
+* `any` indicates that a person with at least one specified tag will be matched
+* `none` indicates that a person must have none of the specified tags to be matched
+* Invalid arguments for `cond/` will result in an error. e.g. `cond/every`
+* The specified tag must match the existing tag **exactly**. e.g. `Math` will not match `Mathematics` 
+* The filter is **case-sensitive**. e.g. `filter cond/all MATH` does not return the same result as `filter cond/all math`
+
+Examples:
+* `filter cond/all math Sec1` will return persons who have both `math` and `Sec1` tags.
+* `filter cond/any English Zoom` will return persons with only the `English` tag, or only the `Zoom` tag, or both tags.
+* `filter cond/none Inactive paid` will return persons without both `Inactive` and `paid` tags.
+
 ### Adding a person: `add`
 
 Adds a person to the address book.
