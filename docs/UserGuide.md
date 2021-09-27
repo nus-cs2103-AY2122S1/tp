@@ -95,6 +95,39 @@ Format: `deletef INDEX`
 Examples:
 * `listf` followed by `deletef 2` deletes the 2nd person in the facility list
 * `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the findf command
+
+### Adding a member: `addm`
+
+Adds a member to the list of people in the CCA
+
+Format: `addm n/NAME p/PHONE_NUMBER [d/DAYS]`
+* `[d/DAYS]` is an optional field indicating a list of days for which the member is available for that week
+* Members added without availability will have an empty list of days
+
+Examples:
+* `addm n/John p/91234567 d/Mon d/Tues` adds John to the member list and indicates his availability on Monday and Tuesday
+* `addm n/Bob p/91228372` adds Bob to the member list with zero available days by default
+
+### Listing all members: `listm`
+
+Shows a list of all members
+
+Format: `listm`
+
+### Finding a member `findm`
+
+Finds members whose names contains any of the given keywords
+
+Format: `findm KEYWORD [MORE_KEYWORDS]`
+* Search is case-insensitive. Eg. John will match john
+* `[MORE_KEYWORDS]` is an optional field
+* Only the name of the member is searched
+* Only full words will be matched eg. Johnny will not match John
+* Names matching at least one keyword will be returned (i.e. OR search) e.g John Henry will return John, Henry
+
+Examples:
+* `findm Bob` returns bob and Bob Doe
+* `findm john bobby` returns John Lee, Bobby Tan
   
 ### Deleting a member : `deletem`
 
@@ -105,7 +138,6 @@ Format: `deletem INDEX`
 * Deletes the member at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed member list. 
 * The index **must be a positive integer** 1, 2, 3, …​
-
 
 Examples:
 * `listm` followed by `deletem 2` deletes the member at index 2 of the member list
@@ -138,6 +170,22 @@ Format: `split d/DAY`
 
 Examples:
 * `split d/Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
+
+### Saving the data
+
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+</div>
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
