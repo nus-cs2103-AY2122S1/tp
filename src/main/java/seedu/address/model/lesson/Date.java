@@ -12,7 +12,7 @@ import java.time.format.ResolverStyle;
  * Represents a Lesson's date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd MMM yyyy "
             + "and adhere to the following constraints:\n"
@@ -81,5 +81,15 @@ public class Date {
         return value.hashCode();
     }
 
+    /**
+     * Compares this Date object with the other Date object.
+     *
+     * @param other The Date object to compare with.
+     * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
+     */
+    @Override
+    public int compareTo(Date other) {
+        return getLocalDate().compareTo(other.getLocalDate());
+    }
 }
 
