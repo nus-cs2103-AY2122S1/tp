@@ -64,6 +64,39 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Viewing a student: `student -v`
+
+Views a particular student's details given by the specified index from the 
+address book.
+
+Format: `student -v INDEX`
+
+* Views the student detail specified at `INDEX`. `INDEX` should be a positive number
+* `-v` refers to the view command
+
+Examples:
+* `student -v 3` view the student detail at index 3.
+
+### Editing a student: `student -e`
+
+Edits the detail of the specific student.
+
+Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]`
+
+* Edits the detail of the student specified by the `INDEX`. `INDEX` should be a 
+  positive number and refers to the index number of a student in the list of students.
+* `-e` refers to the edit command
+* It is a requirement that **at least one of the optional fields should be provided**.
+* `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN`
+* `START_TIME` and `END_TIME` takes in the time in 24-hour format, for example `0800` 
+  for 8am.
+
+Examples:
+
+* `student -a 3 -c 88888888 -em johnny@mail.com` Edits the contact number and email
+  address of the third student in the students' list to 88888888 and johnny@mail.com
+  respectively.
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
