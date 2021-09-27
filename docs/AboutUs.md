@@ -47,12 +47,12 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Calvin Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/calvintan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Cyn7hius)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation
