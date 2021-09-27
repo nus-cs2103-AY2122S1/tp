@@ -55,8 +55,8 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 * Parameters in `[square brackets]` are optional. <br>
   e.g. `-n <student_name> [-g <group_name>]` can be used as `-n John Doe -g T01A`, or as `-n John Doe`.
 
-* Items with `…​`  after them can be used multiple times including zero times.<br>
-  e.g. `[-g <group_name>]…​` can be used as ` ` (i.e. 0 times), or `-g T01A -g R01A`.
+* Items with `...​`  after them can be used multiple times including zero times.<br>
+  e.g. `[-g <group_name>]...` can be used as ` ` (i.e. 0 times), or `-g T01A -g R01A`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n <student_name> -g <group_name>`, then `-g <group_name> -n <student_name>` is also acceptable.
@@ -73,7 +73,7 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 
 Creates a new group and adds students into the group.
 
-Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]…`
+Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
 
 * Creates a new group with the given group name.
 * Students can be identified by their name or NUSNET ID.
@@ -171,8 +171,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Group** |
+**Add Group** | `add group -g <group_name> [(-n <student_name> \| -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
-**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
+**Search** | `search (-n <student_name> \| -i <student_id> \| -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
 **Clear** | `clear data`
