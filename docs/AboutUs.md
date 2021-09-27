@@ -28,14 +28,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Team Lead
 * Responsibilities: Integration (Tentative)
 
-### Johnny Doe
+### Toh Wang Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/trash-bin99.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/trash-bin99)] 
+[[portfolio](team/wangbin.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing
 
 ### Lim Peiyuan
 
