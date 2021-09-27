@@ -284,37 +284,132 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01 - Adding an item**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User adds item into inventory.
+2.  BogoBogo saves item into inventory.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User did not specify the name of item.
+    * 1a1. BogoBogo notifies user of missing details.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. User is adding the item for the first time, and did not specify the id, price or cost of the item.
+    * 1b1. BogoBogo requests user for the missing details.
+    * 1b2. User enters the missing details.
 
-    * 3a1. AddressBook shows an error message.
+      Use case resumes at step 2. 
+      
+* 1c. The given id does not match with the given name.
+    * 1c1. BogoBogo notifies user of the mismatch.
 
       Use case resumes at step 2.
+      
+**UC02 - Deleting an item**
 
+**MSS**
+
+1.  User requests to delete item from inventory.
+2.  BogoBogo deletes item from inventory.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User did not specify the name or serial number of the item.
+    * 1a1. BogoBogo notifies user of missing details.
+
+      Use case ends.
+
+* 1b. The specified item is not in the inventory.
+    * 1b1. BogoBogo notifies user that item is not found.
+     
+      Use case ends.
+      
+* 1c. The given id does not match with the given name.
+    * 1c1. BogoBogo notifies user of the mismatch.
+     
+      Use case ends.
+
+**UC03 - Getting details of an item**
+
+**MSS**
+
+1.  User searches for the details of an item in the inventory.
+2.  BogoBogo deletes item from inventory.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User did not specify the name or serial number of the item.
+    * 1a1. BogoBogo notifies user of missing details.
+
+      Use case ends.
+
+* 1b. The specified item is not in the inventory.
+    * 1b1. BogoBogo notifies user that item is not found.
+     
+      Use case ends.
+      
+* 1c. The given id does not match with the given name.
+    * 1c1. BogoBogo notifies user of the mismatch.
+     
+      Use case ends.
+     
+**UC04 - Recording an Order**
+
+**MSS**
+
+1. User requests to start an order.
+2. BogoBogo requests for item names and quantities.
+3. User adds an item into the order.
+4. BogoBogo saves item into the order.
+
+   Step 3-4 is repeated until the user wishes to end the order.
+  
+5. User requests to end the order.
+6. BogoBogo shows the summary of the order and prompts the user to confirm the order.
+7. User confirms the order.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User adds an item that is not in the inventory.
+    * 3a1. BogoBogo notifies user that item is not found.
+     
+      Use case resumes at step 3.
+      
+* 3b. There is an insufficient supply of added items in the inventory.
+    * 3a1. BogoBogo notifies user of the supply shortage.
+     
+      Use case resumes at step 3.
+      
+* 4a. User incorrectly added an item into the order.
+    * 3a1. User removes specified item from the order.
+      
+      Use case resumes at step 3.
+
+* 7a. The order is empty.
+    * 7a1. BogoBogo notifies user that the order is empty.
+      
+      Use case ends.
+      
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 distinct inventory items without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -322,7 +417,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Item**: An inventory good that the business owner is/was selling
+* **Order**: Information regarding a transaction whereby the business sells a list of items to a customerfor revenue
 
 --------------------------------------------------------------------------------------------------------------------
 
