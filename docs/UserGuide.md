@@ -1,5 +1,5 @@
 ---
-layout: page  
+layout: page
 title: User Guide
 ---
 
@@ -70,20 +70,20 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 
 View the staff details of a single staff.
 
-Example:  
-`view n/Candice`  
+Example:\
+`view n/Candice`\
 `view id/12345678`
 
 ### Adding a staff - `add`
 
-Adds a staff to the stored information. The tags and information are optional and can be presented in any order. 
+Adds a staff to the stored information. The tags and information are optional and can be presented in any order.
 Upon creation of a staff, the system creates a staff ID for them which can be used to refer to them and access the system.
 
-Format:  
+Format:\
 `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/Tag`
 
-Example:  
-`add n/Joe s/fulltime r/manager p/98765432 e/Joe@example.com a/John street, block 123, #01-01`  
+Example:\
+`add n/Joe s/fulltime r/manager p/98765432 e/Joe@example.com a/John street, block 123, #01-01`\
 `add n/Candice s/parttime p/91234567 e/candice@example.com a/Newgate Prison`
 
 ### Tag legend - `todo: standardize tags for all commands`
@@ -135,22 +135,22 @@ Format: `list`
 
 Edits an existing staff in the Staff List.
 
-Format:  
-`edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`  
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`  
-`edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`  
+Format:\
+`edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`\
+`edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]​`
 
 
-* Edits the staff of the specified `NAME`, `INDEX`, or `ID`. 
+* Edits the staff of the specified `NAME`, `INDEX`, or `ID`.
 The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the staff will be removed i.e adding of tags is not cumulative.
 * You can remove all the staff’s tags by typing `t/` without specifying any tags after it.
 
-Examples:  
-`edit -i 1 p/91234567 e/johndoe@example.com`  
-`edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`  
+Examples:\
+`edit -i 1 p/91234567 e/johndoe@example.com`\
+`edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
 `edit -n Candice p/12345678 e/noBOByouaretoochubby@tafclub.com`  
 `edit -id 12345678 n/Candice p/12345678 e/nobobyouaretoofat@tafclub.com`
 
@@ -189,10 +189,10 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
 * If there are multiple staffs of the same name/tag group, Staff'd will prompt you again to be more specific.
 
-Examples:  
-`delete -n Candice`  
+Examples:\
+`delete -n Candice`\
 `delete -i 12345678`  
-`delete -t {group}`  
+`delete -t {group}` 
 
 [comment]: <> (* `list` followed by `delete 2` deletes the 2nd staff in the staff list.)
 [comment]: <> (* `find Betsy` followed by `delete 1` deletes the 1st staff in the results of the `find` command.)

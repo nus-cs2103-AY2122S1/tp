@@ -344,8 +344,8 @@ Business rules:
 Quality requirements:
 
  1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
- 1. The system can be used for basic function without reading the user guide.
-    
+ 2. The system can be used for basic function without reading the user guide.
+
 Project scope:
 
  1. Does not handle printing of output to paper.
@@ -360,25 +360,25 @@ Project scope:
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Java**: A high level, classed based, object-oriented programming language. 
+* **Java**: A high level, classed based, object-oriented programming language.
   Java `11` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java11).
 * **Gradle**: Gradle is a build automation tool for multi-language software development. Installation [here](https://gradle.org/install/).
 * **Time Period**: A time period in the staff's schedule.
-* **Status**: The working status of the staff. i.e. A part-timer or a full-timer.  
+* **Status**: The working status of the staff. i.e. A part-timer or a full-timer.
 * **Schedule**: The staffs work schedule with a description of the work carried out.
-* **id**: The identification number assigned to the staff by the management.  
+* **id**: The identification number assigned to the staff by the management.
 * **Role**: The role of the staff. i.e. Cook, Staff management
 * **Address**: The address of the staff.
 * **Constraints**: The constraints the project is working with.
 * **MSS**: Main success scenario
-* **Non-Functional Requirements**: Requirements specifying the constraints under which 
+* **Non-Functional Requirements**: Requirements specifying the constraints under which
   the system is developed and operated.
 * **User**: For the project purposes, the user is specified to be a manager at a F&B outlet.
 * **UI**: The user interface of the application.
 * **Model**: The model that is used by the programme to represent the data.
 * **logic**: The logic used to dictate the behavior of the model.
 * **parser**: The interpreter of the user input.
-* **commons**: Commonly used data structures. 
+* **commons**: Commonly used data structures.
 * **storage**: The part of the programme which handles the writing to disk of the data in the programme.
 * **index**: The current person on the list of staff that can be viewed.
 * **Use cases**: A use case describes an interaction between the user and the system for a specific functionality of the system. [uml-user-guide][uml-user-guide]
