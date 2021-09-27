@@ -300,16 +300,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
  
 ### Use cases
 
-For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Office` (labelled as its abbreviation `CSO` or simply  `user`, unless specified otherwise).
+
+**Use case: Enroll a student in a lesson**
+
+**MSS**
+1. CSO adds the name of Student to be enrolled in Lesson.
+2. System adds the name of Student to the Lesson.  
+   Use case ends.
+   
+**Extensions**
+* 1a. System cannot detect Lesson name 
+  
+  * 1a1. System returns error message, requesting CSO to input a valid Lesson name.  
+    
+    Use case resumes from step 1.
+    
+
+* 1a. System cannot detect the Student's name.
+  
+  * 1a1. System returns error message, requesting CSO to input a valid Student’s name.  
+    
+    Use case resumes from step 1.
+
+
+**Use case: Unenroll a student in a lesson**
+
+**MSS**
+1. CSO adds the name of Student to be unenrolled in Lesson.
+2. System removes the name of the Student from the Lesson.  
+   Use case ends.
+
+
+**Extensions**
+* 1a. System cannot detect Lesson name
+
+* 1a. System cannot detect the Student's name.
+    
+    * 1a1. System returns error message, requesting CSO to input a valid Student’s name.  
+      Use case resumes from step 1.
+      
+      
+    * 1a1. System returns error message, requesting CSO to input a valid Lesson name.  
+      
+      Use case resumes from step 1.
 
 **Use case: View details of a lesson**
 
 **MSS**
 
 1.  CSO requests to list lessons.
-2.  System shows a list of lessons, with their respective details.
-
-    Use case ends.
+2.  System shows a list of lessons, with their respective details.  
+Use case ends.
 
 **Use case: Add a lesson**
 
@@ -318,12 +359,10 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 1.  CSO requests to list lessons.
 2.  System shows a list of lessons.
 3.  CSO requests to add a lesson with specified subject, grade, start time and price.
-4.  System adds the lesson.
-
-    Use case ends.
-
+4.  System adds the lesson.  
+Use case ends.
+    
 **Extensions**
-
 * 3a. Subject specified is not alphanumeric.
 
     * 3a1. System shows an error message.
@@ -360,8 +399,6 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
 
 * 3a. The given lesson code is invalid.
 
@@ -416,16 +453,15 @@ Use case ends.
 
     * 3a1. System shows an error message.
 
-      Use case resumes at step 2.
 
 **Use case: Review commands**
 
 **MSS**
 
 1.  CSO selects help option.
-2.  System lists basic commands and descriptions, as well as the user guide link.
-
+2.  System lists basic commands and descriptions, as well as the user guide link.  
     Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -447,6 +483,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CSO**: Customer Service Officer
 
 --------------------------------------------------------------------------------------------------------------------
 
