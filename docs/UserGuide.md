@@ -64,6 +64,26 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Removing a favourite : `remove`
+
+Removes a favourited user from the favourites list.
+
+Format: `remove n/NAME id/STUDENT_NUMBER`
+
+Examples:
+* `remove n/John Doe id/A0212345X`
+* `remove n/Betsy Crowe id/A0123456X`
+
+### Viewing a user's profile in more detail  : `view`
+
+Opens the specified user's profile.
+
+Format: `view id/STUDENT_NUMBER`
+
+Examples:
+* `view id/A0212345X`
+* `view id/A0123456X`
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -183,6 +203,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**Remove** | `remove n/NAME id/STUDENT_NUMBER`
+**View** | `view id/STUDENT_NUMBER`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
@@ -190,3 +212,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+
