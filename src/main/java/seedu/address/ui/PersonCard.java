@@ -60,9 +60,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getLessons().stream()
-                .forEach(lesson -> lessons.getChildren()
-                        .add(new Label("\n" + lesson.toString())));
+        person.getLessons().stream().sorted()
+            .forEach(lesson -> lessons.getChildren()
+                .add(new Label("\n" + lesson.toString())));
     }
 
     @Override
