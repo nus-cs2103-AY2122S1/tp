@@ -14,7 +14,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `addressbook.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases). [coming soon]
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -64,6 +64,38 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Listing all facilities : `listf`
+
+Shows a list of all facilities.
+
+Format: `listf`
+
+### Finding a facility : `findf`
+
+Finds facilities whose location contains any of the given keywords
+
+Format: `findf KEYWORD [MORE_KEYWORDS]`
+* Search is case-insensitive. Eg. Utown will match utown
+* Only the location is searched
+* Only full words will be matched eg. Utown will not match town
+* Facilities matching at least one keyword will be returned (i.e. OR search) e.g Utown Redhill will return Utown Field, Redhill Sports Complex
+
+Examples:
+* `find redhill` returns `Redhill Sports Complex` and `Redhill Field`
+  
+### Deleting a facility : `deletef`
+
+Deletes a facility from the facility list.
+
+Format: `deletef INDEX`
+* Deletes the facility at the specified INDEX
+* INDEX refers to the index number shown in the displayed facility list
+* INDEX must be a positive integer 1, 2, 3… 
+
+Examples:
+* `listf` followed by `deletef 2` deletes the 2nd person in the facility list
+* `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the findf command
+  
 ### Deleting a member : `deletem`
 
 Deletes a member from the member list
