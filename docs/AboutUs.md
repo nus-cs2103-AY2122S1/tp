@@ -37,15 +37,15 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Lim Peiyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/py0000.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Py0000)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code Quality
 
 ### Calvin Tan
 
