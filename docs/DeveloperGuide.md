@@ -270,16 +270,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                             |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | new user                                   | understand why my command fails| be guided towards using the App correctly                              |
+| `* * *`  | user                                       | add a new staff                |                                                                        |
+| `* * *`  | user with many new staff                   | add multiple staff             | add several new staff quickly                                          |
+| `* * *`  | user                                       | delete a staff                 | remove entries that I no longer need                                   |
+| `* * *`  | user with many retiring staff              | delete multiple staff          | remove multiple entries that I no longer need                          |
+| `* * *`  | user                                       | edit a staff's details         | update relevant information where necessary                            |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
+| `* * *`  | user                                       | add a staff's schedule         | keep track of their schedule and update the overall work schedule      |
+| `* * *`  | user                                       | delete a staff's schedule      | remove schedule and update the overall work schedule                   |
+| `* * *`  | user                                       | view a staff's schedule        | view an individual staff's schedule and the overall work schedule      |
+| `* * *`  | user                                       | edit a staff's schedule        | make changes to their schedule and update the overall work schedule    |
 
 ### Use cases
 
