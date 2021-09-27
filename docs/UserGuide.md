@@ -65,6 +65,17 @@ having the benefits of a Graphical User Interface (GUI). If you can type fast, A
 
 </div>
 
+
+### Module add task: `add task`
+
+Create a new task for a specific module
+
+Format: `module add <module name>, <task name>`
+
+Examples:
+* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
+* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
