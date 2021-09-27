@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 LeadsForce is a desktop app that is optimized for use via a Command Line Interface (CLI) while still having the benefits
