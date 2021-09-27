@@ -257,27 +257,28 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* social worker who has a need to manage a significant number of elderly contacts with limited or no family support, and contact them regularly to check on their well-being
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  
+Since social workers need to contact many different elderly every day, we created this app to help them easily avoid missing out on any elderly while reducing the hassle of manually checking the frequency of contacts for each elderly.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                 | I want to …​                             | So that I can…​                                                     |
+| -------- | ------------------------------------------ | ------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | social worker                              | add entries                                 | keep track of new elderly who come under my care                       |
+| `* * *`  | social worker                              | delete entries                              | keep track of elderly who are no longer under my care                  |
+| `* * *`  | social worker                              | see elderlies' contacts and home address    | know how to contact them                                               |
+| `* * *`  | social worker                              | add deadlines to contact a elderly          | remember to check in on them                                           |
+| `* * *`  | social worker                              | add an ‘until’ date for recurring deadlines | know when to stop visiting a elderly on a recurring basis              |
+| `* * *`  | social worker                              | see data from my previous session           | save time spent importing entries each session                         |
 
 *{More to be added}*
 
