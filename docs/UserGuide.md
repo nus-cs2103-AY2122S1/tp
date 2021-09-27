@@ -151,7 +151,7 @@ The index refers to the index number shown in the displayed staff list. The inde
 Examples:\
 `edit -i 1 p/91234567 e/johndoe@example.com`\
 `edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
-`edit -n Candice p/12345678 e/noBOByouaretoochubby@tafclub.com`  
+`edit -n Candice p/12345678 e/noBOByouaretoochubby@tafclub.com`\
 `edit -id 12345678 n/Candice p/12345678 e/nobobyouaretoofat@tafclub.com`
 
 |Tag|Name|Description|
@@ -191,8 +191,8 @@ Format: `delete INDEX`
 
 Examples:\
 `delete -n Candice`\
-`delete -i 12345678`  
-`delete -t {group}` 
+`delete -i 12345678`\
+`delete -t {group}`
 
 [comment]: <> (* `list` followed by `delete 2` deletes the 2nd staff in the staff list.)
 [comment]: <> (* `find Betsy` followed by `delete 1` deletes the 1st staff in the results of the `find` command.)
