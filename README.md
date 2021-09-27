@@ -15,4 +15,50 @@
 
 ## Features
 
+### Module
 
+#### Module add
+
+* Create a new module
+* Format: `module add <module name>`
+
+#### Module add task
+
+* Create a new task for a specific module
+* Format: `module add <module name>, <task name>`
+
+#### Module add student
+
+* Add a student to a specific module
+* Format: `module add <module name>, <student id>`
+
+#### Module delete student
+
+* Delete a student from a specific module
+* Format: `module delete <module name>, <student id>`
+
+#### Module delete
+
+* Delete a module
+* Format: `module delete <module name>`
+
+
+### Task
+
+#### Task done
+
+* Mark a student’s task as complete
+* Format: `task done <module name>, <task name>, <student id>`
+
+#### Task undone
+
+* Mark a student’s task as incomplete
+* Format: `task undone <module name>, <task name>, <student id>`
+
+
+### Student
+
+#### Student get
+
+* Retrieve a student's information
+* Format: `student get <student id>`
