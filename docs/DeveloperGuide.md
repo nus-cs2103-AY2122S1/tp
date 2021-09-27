@@ -281,6 +281,8 @@ We categorise our user stories into four main epics:
 2. [L] - Keeping track of lesson information
 3. [U] - Having a simple, efficient, and intuitive UI/UX
 
+Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
+
 | ID  | Priority | As a …​                                 | I want to …​                            | So that I can…​                                                     |
 |-----| -------- | ------------------------------------------ | ------------------------------------------ | ---------------------------------------------------------------------- |
 | S1  | `HIGH`   | user                                       | add a new student                          | track student information with **TAB**                                 |
