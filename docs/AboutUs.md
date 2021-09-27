@@ -19,20 +19,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Gabriel Au
 
-<img src="images/janedoe.png" width="200px">
+<img src="images/gabau.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/Gabau)]
+[[portfolio](team/gabau.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: UI, Code Quality, Testing and Integration
 
 ### Jonathan Tan
 
 <img src="images/fullfatwasabi.png" width="200px">
 
-[[github](http://github.com/fullfatwasabi)] [[portfolio](team/Jonathan.md)]
+[[github](http://github.com/fullfatwasabi)][[portfolio](team/Jonathan.md)]
 
 * Role: Developer
 * Responsibilities: Tool, Documentation, Scheduling and tracking
@@ -46,11 +47,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### He Outong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/irvinghe000.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/IrvingHe000)]
+[[portfolio](team/outong.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing, Integration, Tool expert
