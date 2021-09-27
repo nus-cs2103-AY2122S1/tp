@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventDateTimePredicate;
-import seedu.address.model.event.EventTime;
 
 public class FilterEventCommandParser implements Parser<FilterEventCommand> {
 
@@ -20,25 +20,22 @@ public class FilterEventCommandParser implements Parser<FilterEventCommand> {
      */
     @Override
     public FilterEventCommand parse(String userInput) throws ParseException {
-        String[] dateTime = userInput.trim().split(" ");
-        if (dateTime.length == 0 || dateTime.length > 2) {
+        ArgumentMultimap argMultiMap =
+                ArgumentTokenizer.tokenize(userInput, PREFIX_DATE, PREFIX_TIME);
+        if (!arePrefixesPresent(argMultiMap, PREFIX_DATE) || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterEventCommand.MESSAGE_USAGE));
         }
-        if (dateTime.length == 1) { // date only
-            if (!EventDate.isValidDate(dateTime[0])) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterEventCommand.MESSAGE_USAGE));
-            } else {
-                return new FilterEventCommand(new EventDateTimePredicate(Arrays.asList(dateTime)));
-            }
-        } else {
-            if (!EventDate.isValidDate(dateTime[0]) || !EventTime.isValidTime(dateTime[1])) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterEventCommand.MESSAGE_USAGE));
-            } else {
-                return new FilterEventCommand(new EventDateTimePredicate(Arrays.asList(dateTime)));
-            }
+        String eventDate = ParserUtil.parseEventDate(argMultiMap.getValue(PREFIX_DATE));
+        String eventTime = ParserUtil.parseEventTime(argMultiMap.getValue(PREFIX_TIME));
+        ArrayList<String> eventDateTime = new ArrayList<>();
+        if (eventDate != null) {
+            eventDateTime.add(eventDate);
         }
+        if (eventTime != null) {
+            eventDateTime.add(eventTime);
+        }
+        EventDateTimePredicate predicate = new EventDateTimePredicate(eventDateTime);
+        return new FilterEventCommand(predicate);
     }
 
     /**

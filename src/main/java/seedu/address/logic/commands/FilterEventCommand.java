@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,9 +19,10 @@ public class FilterEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the event list for events occurring "
             + "on the specified date (in YYYY-MM-DD format) and optionally include time in (24hr format),"
             + " and displays them as a list with index numbers.\n"
-            + "Parameters: DATE [TIME]\n"
-            + "Example: " + COMMAND_WORD + " 2021-09-20\n"
-            + "NOTE: There must only be one spacing between DATE and TIME.";
+            + "Parameters: "
+            + PREFIX_DATE + "DATE"
+            + "[" + PREFIX_TIME + "TIME]\n"
+            + "Example: " + COMMAND_WORD + " d/2021-09-20\n";
 
     private final EventDateTimePredicate predicate;
 
