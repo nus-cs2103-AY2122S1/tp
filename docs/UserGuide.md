@@ -72,6 +72,27 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Finding a person by fields: `find`
+
+Finds persons whose fields match the given keywords.
+
+Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] `
+
+* There should be at least one field i.e. `find` is an invalid command.
+* The search is case-insensitive. e.g`hans` will match `Hans`
+* The order of the keywords does not matter. e.g `Clementi West` will match `West Clementi`
+* The keyword does not need to match the field exactly. e.g. `john@gmail.com` will match `leejohn@gmail.com`
+* A field just needs to match at least one keyword. e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`
+* All fields specified need to match for person to be matched.<br>
+  e.g. `find n/john a/Clementi`
+    * will match person named `john` with address `West Clementi Street`
+    * will not match person named `john` with address `Bedok Reservoir`
+
+Examples:
+* `find n/John Lee` matches `john`, `johnny Doe`, `Aileen`
+* `find a/Jurong east n/Ben e/gmail` matches
+    * person with name: `benny tan`, address: `West Jurong`, email: `benny.tan@gmail.com`
+    * person with name: `benjamin` address: `yishun east ave 1` email: `benj@gmail.com`
 
 ### Adding a person: `add`
 
@@ -111,24 +132,6 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be `NJC` and clears academic stream data.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
