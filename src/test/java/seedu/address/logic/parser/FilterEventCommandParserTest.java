@@ -35,10 +35,10 @@ public class FilterEventCommandParserTest {
         // no leading and trailing whitespaces
         FilterEventCommand expectedFilterEventCommand =
                 new FilterEventCommand(new EventDateTimePredicate(Arrays.asList("2021-9-1")));
-        assertParseSuccess(parser, "2021-9-1", expectedFilterEventCommand);
+        assertParseSuccess(parser, " d/2021-9-1", expectedFilterEventCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "       2021-9-1      ", expectedFilterEventCommand);
+        // multiple whitespaces
+        assertParseSuccess(parser, "       d/2021-9-1      ", expectedFilterEventCommand);
     }
 
     @Test
@@ -46,9 +46,9 @@ public class FilterEventCommandParserTest {
         // no leading and trailing whitespaces
         FilterEventCommand expectedFilterEventCommand =
                 new FilterEventCommand(new EventDateTimePredicate(Arrays.asList("2021-9-1", "0900")));
-        assertParseSuccess(parser, "2021-9-1 0900", expectedFilterEventCommand);
+        assertParseSuccess(parser, " d/2021-9-1 t/0900", expectedFilterEventCommand);
 
-        // only leading and trailing whitespaces (no multiple spaces in between)
-        assertParseSuccess(parser, "       2021-9-1 0900   ", expectedFilterEventCommand);
+        // only leading and trailing whitespaces (multiple spaces in between)
+        assertParseSuccess(parser, "   \n \t    d/2021-9-1  \t \n  t/0900 \n  ", expectedFilterEventCommand);
     }
 }
