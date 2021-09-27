@@ -15,6 +15,6 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added non-functional requirements and glossary terms. [\#3](), [\#4]()
 * **UI**
-    * Mockup: 
+    * Mockup:
         * Designed UI mockup [\#2]()
-          
+    
