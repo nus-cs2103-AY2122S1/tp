@@ -144,6 +144,12 @@ Examples:
 * `delete /id 4,6,7`(deletes clients with client id 4, client id 6 and client 7)
 * `delete /email keithtan@gmail.com`(deletes a client whose email address is keithtan@gmail.com)
 
+### List all contacts : `list`
+
+Shows a list of all tasks in the list.
+
+Format: `list`
+
 ### Sort Contacts : `sort`
 
 Sorts clients in order based off the inputted attribute
