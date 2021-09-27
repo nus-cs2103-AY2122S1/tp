@@ -292,6 +292,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AcademyDirectory` and the **Actor** is the `User`, unless specified otherwise)
 
+**Use case: Seeking help**
+
+**MSS**
+
+1. User requests for assistance
+2. Academy Directory shows a list of all commands available
+3. User requests for help in a specific command
+4. Academy Directory shows the User Guide instructions for that command
+   
+   Use case ends
+
+**Extensions**
+* 3a. User requests for the syntax of all commands
+  *  3a1. Academy Directory shows a list of all the commands and their associated syntax.
+    
+     Use case ends
+* 3b. User requests for help in a command that does not exist
+  * 3b1. Academy Directory shows an error message
+    
+    Use case resumes at step 2.
+
 **Use case: Delete a student**
 
 **MSS**
@@ -471,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to _3000_ student without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should work in computer with `32-bit` or `64-bit` processor.
 5. Should run on user computer with double-click - no installer or additional libraries required.
 

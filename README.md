@@ -1,18 +1,13 @@
 [![CI Status](https://github.com/AY2122S1-CS2103T-T15-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-T15-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T15-3/tp/branch/master/graph/badge.svg?token=2XF6JTBSXF)](https://codecov.io/gh/AY2122S1-CS2103T-T15-3/tp)
 
-![Ui](docs/images/Ui.png)
-
 # Academy Directory
-
---------------------------------------------------
 
 ### Introduction
 
 * Academy Directory (AD) is a desktop app for CS1101S tutors to manage students’
   contact, grades, tutorial attendance, and assignment completion.
   It is optimized primarily for usage in teaching CS1101S - Programming Methodology I, at the National University of Singapore.<br>
-
 
 * The project simulates an ongoing software project for a desktop application used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC)
@@ -36,6 +31,8 @@
 5. Help
     * List out available commands
     * Display the input format for the individual commands
+
+![Ui](docs/images/Ui.png)
 
 ### Acknowledgement
 
