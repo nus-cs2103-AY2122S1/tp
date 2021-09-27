@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chen Xiaotong
 
-<img src="images/WuaaAj.png" width="200px">
+<img src="images/wuaaaj.png" width="200px">
 
 [[github](http://github.com/WuaaAj)]
 [[portfolio](team/johndoe.md)]
@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Weng Ying
 
-<img src="images/wengYing227.png" width="200px">
+<img src="images/wengying227.png" width="200px">
 
 [[github](http://github.com/wengYing227)]
 [[portfolio](team/johndoe.md)]
