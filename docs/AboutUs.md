@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/charliemoweng.png" width="200px">
 
 [[github](http://github.com/charliemoweng)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/wangmengzhe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
