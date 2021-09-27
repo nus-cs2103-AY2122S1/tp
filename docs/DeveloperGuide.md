@@ -230,14 +230,35 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                 | I want to …​                                              | So that I can…​                                                               |
+| -------- | ------------------------------------------ | ------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| `* * *`  | user                                       | use the application offline                                  | I do not need an internet connection to view my contacts                         |
+| `* * *`  | FA                                         | delete contact info                                          | I will not have useless data in my app                                           |
+| `* * *`  | FA                                         | store my clients contact info                                | contacting them in the future is easier                                          |
+| `* * *`  | user                                       | see all of my contacts                                       | know who is in my contacts                                                       |
+| `* * *`  | new user                                   | learn how to use the app                                     | I can effectively use the app                                                    |
+| `* *`    | busy person                                | use the app with friendlier syntax that's easier to type     | adding contacts is less troublesome                                              |
+| `* *`    | busy person                                | see all the available commands at a glance                   | I can focus on managing my client base rather than dealing with the syntax       |
+| `* *`    | FA                                         | update my clients contact info                               | the info I have is up to date                                                    |
+| `* *`    | forgetful person                           | quickly check for the highest priority client                | i can move on to the next client quickly without delay                           |
+| `* *`    | FA with many clients                       | tag my clients' info                                         | I can see different groups of clients according to the tags                      |
+| `*`      | FA                                         | store my clients contact information                         | I do not need to store them on my phone                                          |
+| `*`      | numbers person                             | delete multiple contacts in one go                           | I do not have to delete contacts individually                                    |
+| `*`      | FA with many clients                       | search through my clients                                    | I can easily find a specific client                                              |
+| `*`      | FA                                         | have fast access to important numbers (e.g. office, partners | I can quickly contact my partners should something arise                         |
+| `*`      | potential user                             | see how the app works with sample data                       | I can understand what the app will look like with real data                      |
+| `*`      | FA                                         | group my clients according to their investment strategies    | easily manage each group                                                         |
+| `*`      | FA                                         | archive data that might be obsolete at the moment            | I do not flood my app with obsolete data and can still access them in the future |
+| `*`      | FA                                         | store appointments info of my clients                        | I will not forget about important meetings                                       |
+| `*`      | person with many devices                   | import and export the client info                            | i can switch between devices quickly                                             |
+| `*`      | FA with many clients                       | view stats of my client base                                 | I can know how much income i am making                                           |
+| `*`      | FA                                         | reminded to contact potential clients                        | I can disturb potential clients into signing on                                  |
+| `*`      | FA                                         | check the number of clients and deals currently              | I can check if i have fulfilled my monthly quota                                 |
+| `*`      | FA                                         | store extra info that could be useful                        | i can remember extra details that could be useful in clinching a deal            |
+| `*`      | FA                                         | see frequently contacted clients                             | I don't have to keep searching for the same person over and over again           |
+| `*`      | FA                                         | list out all my investment plans                             | I know what investment plans I am selling                                        |
+| `*`      | user                                       | color-code my contacts                                       | It looks fancier/helps to differentiate between the tags                         |
+| `*`      | Responsible FA                             | be reminded of clashes in my appointments                    | I will not lose any potential clients                                            |
 
 *{More to be added}*
 
