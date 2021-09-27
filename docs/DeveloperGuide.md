@@ -300,6 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
  
 ### Use cases
 
+
 **Use case: Enroll a student in a lesson**
 
 **MSS**
@@ -307,18 +308,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System adds the name of Student to the Lesson.  
    Use case ends.
    
-
 **Extensions**
 * 1a. System cannot detect Lesson name 
-
+  
   * 1a1. System returns error message, requesting CSO to input a valid Lesson name.  
+    
     Use case resumes from step 1.
     
 
 * 1a. System cannot detect the Student's name.
+  
   * 1a1. System returns error message, requesting CSO to input a valid Student’s name.  
-    Use case resumes from step 1.
     
+    Use case resumes from step 1.
+
 
 **Use case: Unenroll a student in a lesson**
 
@@ -331,21 +334,140 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. System cannot detect Lesson name
 
-    * 1a1. System returns error message, requesting CSO to input a valid Lesson name.  
-      Use case resumes from step 1.
-
-
 * 1a. System cannot detect the Student's name.
+    
     * 1a1. System returns error message, requesting CSO to input a valid Student’s name.  
       Use case resumes from step 1.
+      
+      
+    * 1a1. System returns error message, requesting CSO to input a valid Lesson name.  
+      
+      Use case resumes from step 1.
+
+**Use case: View details of a lesson**
+
+**MSS**
+
+1.  CSO requests to list lessons.
+2.  System shows a list of lessons, with their respective details.  
+Use case ends.
+
+**Use case: Add a lesson**
+
+**MSS**
+
+1.  CSO requests to list lessons.
+2.  System shows a list of lessons.
+3.  CSO requests to add a lesson with specified subject, grade, start time and price.
+4.  System adds the lesson.  
+Use case ends.
+    
+**Extensions**
+* 3a. Subject specified is not alphanumeric.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. Grade specified is invalid.
+
+    * 3b1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3c. Start time is out of specified hours.
+
+    * 3c1. System shows an error message.
+
+      Use case resumes at step 2.
+
+* 3d. Price specified is 0 or negative.
+
+    * 3d1. System shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Delete a lesson**
+
+**MSS**
+
+1.  CSO requests to list lessons.
+2.  System shows a list of lessons.
+3.  CSO requests to delete a specific lesson in the list by its lesson code.
+4.  System deletes the lesson.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+* 3a. The given lesson code is invalid.
+
+    * 3a1. System shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UCXX – Look up student details**
+
+**MSS**
+1. CSO inputs command to find a specific student by their name (either full name or not).
+
+2. CSO looks through the given results of students.
+
+3. CSO chooses the student of interest.
+
+4. CSO can see student’s details, such as:
+    1. Their grade
+    2. Their enrolled lessons
+    3. Their parent’s contact number
+    4. Their house address
+    5. Their tuition fees
+    
+Use case ends.
+
+**Extensions**
+
+* 1a. TuitiONE detects and error in the command formatting.
+
+    * 1a1. TuitiONE reminds CSO of correct input format.
+    
+    * 1a2. CSO inputs search keywords with correct formatting.
+    
+        Steps 1a1-1a2 are repeated until the input is of the correct format.\
+        Use case resumes from step 2.
+
+* 2a. TuitiONE cannot find any results relevant to the search keyword.
+
+    * 2a1. TuitiONE displays a “No students found” message to CSO.
+    
+	    Use case ends.
+
+* *a. At any time, the CSO can go back to the default TuitiONE page.
+
+	* *a1. CSO types in list.
+	
+	* *a2. TuitiONE goes back to displaying list of all student details.
+	
+	    Use case ends.
+
+* 3a. The given lesson code is invalid.
+
+    * 3a1. System shows an error message.
+
+
+**Use case: Review commands**
+
+**MSS**
+
+1.  CSO selects help option.
+2.  System lists basic commands and descriptions, as well as the user guide link.  
+    Use case ends.
 
 
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-
-   1. Performance requirements: the system should respond within 2 seconds.
+    1. Performance requirements: the system should respond within 2 seconds.
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
 5. Quality requirements: 
