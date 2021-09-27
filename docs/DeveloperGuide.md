@@ -312,7 +312,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard  | paste and use the data outside of **TAB**                              |
 | U8  | `LOW`    | user who uses many tags                    | view all tags                              | remember my tags easily                                                |
 | U9  | `LOW`    | expert user                                | customise the commands and input fields    | choose not to follow the given template                                |
-| U10 | `LOW`    | user                                       | be reminded to update data after a lesson  | I can ensure that data stays up to date                                |
+| U10 | `LOW`    | user                                       | be reminded to update data after a lesson  | ensure that data stays up to date                                |
 
 *{More to be added}*
 
