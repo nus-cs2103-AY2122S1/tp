@@ -301,7 +301,7 @@ We categorise our user stories into four main epics:
 | L4  | `MEDIUM` | user                                       | add makeup lessons for a student           | differentiate between the two different lessons                        |
 | L5  | `MEDIUM` | user                                       | view the lessons I have for the week       | easily manage my schedule                                              |
 | L6  | `MEDIUM` | user                                       | view a calendar of my scheduled lessons    | plan ahead while managing my schedule                                  |
-| U1  | `HIGH`   | new user                                   | see usage instructions                     | refer to instructions when I forget how to use **TAB**                 |
+| U1  | `HIGH`   | new user                                   | see usage instructions                     | refer to instructions whenever I need guidance on how to use **TAB**   |
 | U2  | `HIGH`   | new user                                   | purge all current data                     | remove all sample/experimental data I used while exploring **TAB**     |
 | U3  | `HIGH`   | user                                       | find a student by name                     | locate details of persons without having to go through the entire list |
 | U4  | `HIGH`   | user                                       | undo accidental changes                    |                                                                        |
@@ -309,7 +309,7 @@ We categorise our user stories into four main epics:
 | U6  | `MEDIUM` | user with incomplete information           | skip less important information to add     | update later when I have the rest of the information                   |
 | U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard  | paste and use the data outside of **TAB**                              |
 | U8  | `LOW`    | user who uses many tags                    | view all tags                              | remember my tags easily                                                |
-| U9  | `LOW`    | expert user                                | customise the commands and input fields    | be not limited by a template                                           |
+| U9  | `LOW`    | expert user                                | customise the commands and input fields    | choose not to follow the given template                                |
 | U10 | `LOW`    | user                                       | be reminded to update data after a lesson  | I can ensure that data stays up to date                                |
 
 *{More to be added}*
