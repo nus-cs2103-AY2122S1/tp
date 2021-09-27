@@ -170,6 +170,33 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 _Details coming soon ..._
 
+### Grouping students  `[coming in v1.2]`
+
+Groups students by their names together. This grouping helps to distinguish between various tuition groups.
+
+Format: `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...`
+
+* Groups students into a group specified at `GROUPNAME`
+* -g refers to the group command
+* You can specify as many Index numbers as required.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `student -g Team2 1 3 5` creates a group "Team2" that includes students at index 1, 3 and 5.
+
+### Adding a task `[coming in v1.2]`
+
+Adds a task to the address book
+
+Format: `task -a n/NAME`
+
+* Adds a task with the name `NAME`
+* -a refers to the add command
+
+Examples:
+* `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
