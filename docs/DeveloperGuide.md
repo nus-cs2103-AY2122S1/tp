@@ -257,13 +257,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage lessons and contact details for a significant number of students
+* has a need to assign tasks to many students
+* wants to keep track of students' progress easily
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage students' schedules and progress faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -273,10 +275,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | add a new student              |                                                                        |
+| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a student by name         | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | group students together        | locate similar through their groupings easily                          |
+| `* * *`  | tutor                                      | add a new task                 | remember tasks I have created easily                                   |
+| `* * *`  | tutor                                      | assign tasks to students       | reuse similar tasks for my students                                    |
+| `* * *`  | tutor                                      | mark tasks as completed        | track my students' task progress                                       |
+| `* * *`  | user                                       | delete a task                  | remove tasks that I no longer need                                     |
+| `* * *`  | busy tutor                                 | view current lesson schedules  | plan my working and resting hours accordingly                          |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* *`    | tutor                                      | store exam dates of students   | prioritize and help a large number of students better                  |
+| `* *`    | busy tutor                                 | be warned if schedules clash   | minimize error in my planning                                          |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
