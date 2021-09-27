@@ -31,14 +31,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI, Code Quality, Testing and Integration
 
-### Jonathan Tan
+### Johnny Doe
 
 <img src="images/fullfatwasabi.png" width="200px">
-
-[[github](http://github.com/fullfatwasabi)][[portfolio](team/Jonathan.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Tool, Documentation, Scheduling and tracking
+* Responsibilities: Data
 
 [comment]: <> (### Jean Doe)
 
