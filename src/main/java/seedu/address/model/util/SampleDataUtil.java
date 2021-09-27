@@ -28,7 +28,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final HashSet<Lesson> EMPTY_LESSON_SET = new TreeSet<>();
+    public static final TreeSet<Lesson> EMPTY_LESSON_SET = new TreeSet<>();
     public static final Remark EMPTY_REMARK = new Remark("");
 
     public static Person[] getSamplePersons() {
