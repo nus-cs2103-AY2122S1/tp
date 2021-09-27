@@ -41,13 +41,13 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 
 ### Zhou Yirui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhouyirui.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/zhouyirui)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code Quality
 
 ### Vishnu Sundaresan
 
