@@ -35,9 +35,7 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
     * **`search`**`-n John Doe` : Searches for student `John Doe`.
 
     * **`clear`** : Clears all existing data.
-
-    * **`exit`** : Exits the app.
-
+    
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
