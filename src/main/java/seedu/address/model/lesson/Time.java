@@ -12,7 +12,7 @@ import java.time.format.ResolverStyle;
  * Represents a Lesson's time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be of the format HH:mm "
             + "and adhere to the following constraints:\n"
@@ -66,16 +66,6 @@ public class Time {
         return LocalTime.parse(value);
     }
 
-    /**
-     * Compares this Time object with the other time object.
-     *
-     * @param other The Time object to compare with.
-     * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
-     */
-    public int compareTime(Time other) {
-        return getLocalTime().compareTo(other.getLocalTime());
-    }
-
     @Override
     public String toString() {
         return value;
@@ -93,5 +83,15 @@ public class Time {
         return value.hashCode();
     }
 
+    /**
+     * Compares this Time object with the other time object.
+     *
+     * @param other The Time object to compare with.
+     * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
+     */
+    @Override
+    public int compareTo(Time other) {
+        return getLocalTime().compareTo(other.getLocalTime());
+    }
 }
 

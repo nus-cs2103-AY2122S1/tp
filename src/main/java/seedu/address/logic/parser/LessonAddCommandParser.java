@@ -98,7 +98,7 @@ public class LessonAddCommandParser {
         Collection<String> homeworkSet = homework.size() == 1 && homework.contains("")
                 ? Collections.emptySet()
                 : homework;
-        return Optional.of(ParserUtil.parseHomework(homeworkSet));
+        return Optional.of(ParserUtil.parseHomeworkList(homeworkSet));
     }
 
 

@@ -155,7 +155,7 @@ public class ParserUtil {
 
         Time start = parseTime(startTime);
         Time end = parseTime(endTime);
-        boolean isValidRange = end.compareTime(start) > 0;
+        boolean isValidRange = end.compareTo(start) > 0;
         // Check if range is valid
         if (!isValidRange) {
             throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
@@ -224,7 +224,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> homework} into a {@code Set<Homework>}.
      */
-    public static Set<Homework> parseHomework(Collection<String> homework)
+    public static Set<Homework> parseHomeworkList(Collection<String> homework)
             throws ParseException {
         requireNonNull(homework);
         final Set<Homework> homeworkSet = new HashSet<>();
