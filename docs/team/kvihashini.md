@@ -17,4 +17,3 @@ Given below are my contributions to the project.
 * **UI**
     * Mockup:
         * Designed UI mockup [\#2]()
-    
