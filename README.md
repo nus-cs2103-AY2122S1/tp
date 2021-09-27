@@ -18,3 +18,7 @@ If you are interested in developing **Source Control**, the **[Developer Guide](
 
 ## About Us
 If you are interested in contacting **Source Control** team, visit the [**About Us** website](https://ay2122s1-cs2103t-w08-2.github.io/tp/AboutUs.html).
+
+## Acknowledgements
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Original project: [AddressBook Level-3](https://se-education.org/addressbook-level3) project created as part of the [SE-EDU](https://se-education.org) initiative
