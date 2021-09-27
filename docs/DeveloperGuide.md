@@ -290,10 +290,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User chooses to edit the staff details.
-2.  User inputs relevant details.
-3.  Staff’d requests for confirmation.
-4.  User confirms.
-5.  Staff’d updates the new staff details.
+1.  User inputs relevant details.
+1.  Staff’d requests for confirmation.
+1.  User confirms.
+1.  Staff’d updates the new staff details.
 
     Use case ends.
 
@@ -312,10 +312,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User chooses to edit a staff's schedule.
-2.  User inputs relevant details.
-3.  Staff’d requests for confirmation.
-4.  User confirms.
-5.  Staff’d updates the new staff schedule.
+1.  User inputs relevant details.
+1.  Staff’d requests for confirmation.
+1.  User confirms.
+1.  Staff’d updates the new staff schedule.
 
     Use case ends.
 
