@@ -125,33 +125,33 @@ Finds persons whose fields match the given keywords.
 Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] `
 
 * There should be at least one field i.e. `find` is an invalid command.
-* The search is case-insensitive. e.g`hans` will match `Hans`
-* The order of the keywords does not matter. e.g `Clementi West` will match `West Clementi`
-* The keyword does not need to match the field exactly. e.g. `john@gmail.com` will match `leejohn@gmail.com`
-* A field just needs to match at least one keyword. e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g.`hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Clementi West` will match `West Clementi`.
+* The keyword does not need to match the field exactly. e.g. `john@gmail.com` will match `leejohn@gmail.com`.
+* A field just needs to match at least one keyword. e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
 * All fields specified need to match for person to be matched.<br>
   e.g. `find n/john a/Clementi`
-    * will match person named `john` with address `West Clementi Street`
-    * will not match person named `john` with address `Bedok Reservoir`
+    * will match person named `john` with address `West Clementi Street`.
+    * will not match person named `john` with address `Bedok Reservoir`.
 
 Examples:
-* `find n/John Lee` matches `john`, `johnny Doe`, `Aileen`
+* `find n/John Lee` matches `john`, `johnny Doe`, `Aileen`.
 * `find a/Jurong east n/Ben e/gmail` matches
-    * person with name: `benny tan`, address: `West Jurong`, email: `benny.tan@gmail.com`
-    * person with name: `benjamin` address: `yishun east ave 1` email: `benj@gmail.com`
+    * person with name: `benny tan`, address: `West Jurong`, email: `benny.tan@gmail.com`.
+    * person with name: `benjamin` address: `yishun east ave 1` email: `benj@gmail.com`.
 
 ### Filter persons by tags: `filter`
 
 Filter persons matching the specified tags, based on the specified filter condition.
 
-Format: `filter cond/{all | any | none} TAG [MORE_TAGS]`
+Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]`
 
-* `all` indicates that a person must have all specified tags to be matched
-* `any` indicates that a person with at least one specified tag will be matched
-* `none` indicates that a person must have none of the specified tags to be matched
-* Invalid arguments for `cond/` will result in an error. e.g. `cond/every`
-* The specified tag must match the existing tag **exactly**. e.g. `Math` will not match `Mathematics`
-* The filter is **case-sensitive**. e.g. `filter cond/all MATH` does not return the same result as `filter cond/all math`
+* `all` indicates that a person must have all specified tags to be matched.
+* `any` indicates that a person with at least one specified tag will be matched.
+* `none` indicates that a person must have none of the specified tags to be matched.
+* Invalid arguments for `cond/` will result in an error. e.g. `cond/every`.
+* The specified tag must match the existing tag **exactly**. e.g. `Math` will not match `Mathematics`.
+* The filter is **case-sensitive**. e.g. `filter cond/all MATH` does not return the same result as `filter cond/all math`.
 
 Examples:
 * `filter cond/all math Sec1` will return persons who have both `math` and `Sec1` tags.
