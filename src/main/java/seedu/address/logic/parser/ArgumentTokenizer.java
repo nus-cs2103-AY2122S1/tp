@@ -28,6 +28,11 @@ public class ArgumentTokenizer {
         return extractArguments(argsString, positions);
     }
 
+    public static ArgumentMultimap tokenizeWithoutPreamble(String argsString, Prefix... prefixes) {
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
+        return extractArgumentsWithoutPreamble(argsString, positions);
+    }
+
     /**
      * Finds all zero-based prefix positions in the given arguments string.
      *
@@ -92,6 +97,28 @@ public class ArgumentTokenizer {
         // Insert a PrefixPosition to represent the preamble
         PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
         prefixPositions.add(0, preambleMarker);
+
+        // Add a dummy PrefixPosition to represent the end of the string
+        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
+        prefixPositions.add(endPositionMarker);
+
+        // Map prefixes to their argument values (if any)
+        ArgumentMultimap argMultimap = new ArgumentMultimap();
+        for (int i = 0; i < prefixPositions.size() - 1; i++) {
+            // Extract and store prefixes and their arguments
+            Prefix argPrefix = prefixPositions.get(i).getPrefix();
+            String argValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            argMultimap.put(argPrefix, argValue);
+        }
+
+        return argMultimap;
+    }
+
+    private static ArgumentMultimap extractArgumentsWithoutPreamble(String argsString,
+            List<PrefixPosition> prefixPositions) {
+
+        // Sort by start position
+        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
 
         // Add a dummy PrefixPosition to represent the end of the string
         PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
