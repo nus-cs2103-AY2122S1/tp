@@ -64,14 +64,35 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage students�
 
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
+### Seeking help : `help`
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+First-time tutors can seek in-depth assistance using AD with a `help` command, either
+generally or specifically.
 
+#### Viewing general help
+Format: `help` or `help --all`
+
+* The first command `help` displays a menu of all commands available to use, as a list, and how
+  to navigate each command.
+* The second command `help --all` displays the same menu of all commands available alongside the
+  syntax for each command.
+
+#### Viewing specific help
+
+Format: `help COMMAND_NAME`
+
+* Display all information related to the command, which includes
+  * What the command is about.
+  * Why the command is needed.
+  * What the syntax for the command is.
+  * Example of usage and expected results.
+    
+Examples:
+* `help add`: Displays the exact same content as what is shown on this User Guide for the `add` command
+  or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-person-add).
+* `help list`
 
 ### Adding a student: `add`
 
@@ -245,6 +266,13 @@ Examples:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: What are "Studios" in this application?<br>
+**A**: Studios are tutorials held in CS1101S and are essential in aiding the students to improve their grasp on the concepts taught during the lecture.
+
+**Q**: What are "Avengers" in this application?<br>
+**A**: ‘Avenger’ is a special term to call a CS1101S tutor. They are the people who organize a Studio session to improve on CS1101S concepts taught in lecture, recording attendance and grades.
+The two terms are used throughout the UG in substitute of ‘tutorial’ and ‘tutor’, in consideration of the targeted audience of our application as CS1101S teaching assistants.
 
 --------------------------------------------------------------------------------------------------------------------
 
