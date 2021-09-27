@@ -165,6 +165,21 @@ Examples:
 * `claim 1 t/Hospital Claim d/Broke left leg`
     * If a claim titled “Hospital Claim” already exists, the description will be updated to “Broke left leg”
 
+### Schedule appointment: `schedule`
+Schedule a meeting with a specific person
+
+Format: `schedule INDEX m/MEETING_TIME`
+* Schedule a meeting with the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* `MEETING_TIME` must be of the format `dd-mmm-yyyy hh:mm`
+* First letter of month is capitalised while rest are not.
+* Only store 1 appointment for each user
+* Use the same command with different datetime to change the meeting timing
+* You can remove the appointment by specifying `m/` without any datetime after it.
+
+Examples:
+* `schedule 3 m/05-Feb-2022 15:30`
+* `schedule 5 m/05-Dec-2021 20:00`
+
 
 ### Exiting the program : `exit`
 
