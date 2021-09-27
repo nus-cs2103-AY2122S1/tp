@@ -9,17 +9,16 @@
 
 ### Introduction
 
-* Academy Directory (AD) is a desktop app for CS1101S tutors to manage students’ 
-  contact, grades, tutorial attendance, and assignment completion. 
+* Academy Directory (AD) is a desktop app for CS1101S tutors to manage students’
+  contact, grades, tutorial attendance, and assignment completion.
   It is optimized primarily for usage in teaching CS1101S - Programming Methodology I, at the National University of Singapore.<br>
 
 
 * The project simulates an ongoing software project for a desktop application used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) 
+  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC)
     than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
   * It is optimized for CLI usage and suitable to fast typists.
-    
 
 ### Feature List (for version 1.2)
 1. Student
@@ -41,6 +40,5 @@
 ### Acknowledgement
 
 This project is based on the AddressBook-Level3 project
-created by the [SE-EDU initiative](https://se-education.org).
-
+created by the [SE-EDU initiative](https://se-education.org). 
 It is developed as a student project for CS2103/T - Software Engineering module at NUS.

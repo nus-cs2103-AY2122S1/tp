@@ -354,13 +354,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The given index for the Studio group is invalid.
 
   * 1a1. AcademyDirectory shows an error message.
-      
+    
       Use case resumes at step 1.
 
 * 1b. The given index for the Studio group's Studio session is invalid.
 
   * 1b1. AcademyDirectory shows an error message.
-  
+    
       Use case resumes at step 1.
 
 * 2a. The list is empty.
@@ -431,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AcademyDirectory shows an error message.
 
       Use case resumes at step 1.
-  
+    
 * 1b. The input grade is not a positive integer.
 
     * 1b1. AcademyDirectory requests for user to enter a positive integer.

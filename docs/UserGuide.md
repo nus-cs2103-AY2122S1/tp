@@ -206,7 +206,7 @@ A tutee’s Studio participation counter cannot be reduced below 0.
 If `INDEX` is not supplied, the command will edit the Studio participation of the tutee in the last created Studio session. Otherwise, it will execute the edit in the specified Studio session if `INDEX` is valid.
 
 Examples:
-* `studiopart s/12 k/Benny a/3` 
+* `studiopart s/12 k/Benny a/3`
 * `studiopart s/2 k/Keng i/7`
 * `studiopart s/32 k/Ting a/-1 i/8`
 
@@ -228,7 +228,7 @@ Avengers will be able to view the grades of all the students for a particular as
 Format: `showgrade a/ASSESSMENT [s/STUDIO_GROUP]`
 
 Display the list of grades that the students achieved for a particular `ASSESSMENT`.
-If `STUDIO_GROUP` is not supplied, the grades of all the students will be displayed. 
+If `STUDIO_GROUP` is not supplied, the grades of all the students will be displayed.
 Otherwise, only the grades of the students in the specified `STUDIO_GROUP` will be displayed.
 
 Examples:
