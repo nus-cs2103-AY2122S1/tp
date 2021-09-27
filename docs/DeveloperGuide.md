@@ -281,25 +281,36 @@ We categorise our user stories into four main epics:
 2. [L] - Keeping track of lesson information
 3. [U] - Having a simple, efficient, and intuitive UI/UX
 
-| ID | Priority | As a …​                                 | I want to …​                          | So that I can…​                                                     |
-|----| -------- | ------------------------------------------ | ---------------------------------------- | ---------------------------------------------------------------------- |
-| S1 | `HIGH`   | user                                       | add a new student                        |                                                                        |
-| S2 | `HIGH`   | user                                       | delete a student                         | remove entries that I no longer need                                   |
-| S3 | `HIGH`   | user                                       | categorise my students with tags         |                                                                        |
-| S4 | `HIGH`   | user                                       | keep track of parent contacts            | communicate directly with the parent                                   |
-| S5 | `HIGH`   | user                                       | add remarks to a student                 | keep track of supplementary information                                |
-| S6 | `LOW`    | user                                       | keep track of a student's school         |                                                                        |
-| L1 | `HIGH`   | user                                       | schedule recurring lessons for a student | keep track of when the student's lessons are                           |
-| L2 | `HIGH`   | user                                       | delete a student's lesson                | remove lessons that I no longer have                                   |
-| L3 | `MEDIUM` | user                                       | add makeup lessons for a student         | differentiate between the two different lessons                        |
-| U1 | `HIGH`   | new user                                   | see usage instructions                   | refer to instructions when I forget how to use the App                 |
-| U2 | `HIGH`   | user                                       | find a student by name                   | locate details of persons without having to go through the entire list |
-| U3 | `HIGH`   | user                                       | undo accidental changes                  |                                                                        |
-| U4 | `MEDIUM` | user                                       | view the lessons I have for the week     | easily manage my schedule                                              |
-| U5 | `MEDIUM` | user                                       | filter students by tag                   | view a list of all the students that feature a specific tag            |
-| U6 | `MEDIUM` | user with incomplete information           | skip less important information          | update later when I have the rest of the information                   |
-| U7 | `LOW`    | user                                       | view a calendar of my scheduled lessons  | plan ahead while managing my schedule                                  |
-| U8 | `LOW`    | user with many students stored in **TAB**  | sort students by name                    | locate a person easily                                                 |
+| ID  | Priority | As a …​                                 | I want to …​                            | So that I can…​                                                     |
+|-----| -------- | ------------------------------------------ | ------------------------------------------ | ---------------------------------------------------------------------- |
+| S1  | `HIGH`   | user                                       | add a new student                          | track student information with **TAB**                                 |
+| S2  | `HIGH`   | user                                       | delete a student                           | remove entries that I no longer need                                   |
+| S3  | `HIGH`   | user                                       | edit a student                             | update student information                                             |
+| S4  | `HIGH`   | user                                       | categorise my students with tags           |                                                                        |
+| S5  | `HIGH`   | user                                       | keep track of parent contacts              | communicate directly with the parent                                   |
+| S6  | `HIGH`   | user                                       | add remarks to a student                   | keep track of supplementary information                                |
+| S7  | `MEDIUM` | user                                       | keep track of a student's school           |                                                                        |
+| S8  | `MEDIUM` | user                                       | keep track of a student's academic level   | be reminded of the content that is relevant to the student             |
+| S9  | `MEDIUM` | user                                       | keep track of a student's outstanding fees | be reminded of the fees I have yet to collect                          |
+| S10 | `LOW`    | user                                       | have an archive for removed students       | revisit the archived data if the need arises                           |
+| S11 | `LOW`    | user with many students stored in **TAB**  | sort students by name                      | locate a student easily                                                |
+| S12 | `LOW`    | user with many students stored in **TAB**  | sort students by tag                       | locate a student easily                                                |
+| L1  | `HIGH`   | user                                       | schedule recurring lessons for a student   | keep track of when the student's lessons are                           |
+| L2  | `HIGH`   | user                                       | delete a student's lesson                  | remove lessons that I no longer have                                   |
+| L3  | `MEDIUM` | user                                       | edit a student's lesson                    | update lesson information                                              |
+| L4  | `MEDIUM` | user                                       | add makeup lessons for a student           | differentiate between the two different lessons                        |
+| L5  | `MEDIUM` | user                                       | view the lessons I have for the week       | easily manage my schedule                                              |
+| L6  | `MEDIUM` | user                                       | view a calendar of my scheduled lessons    | plan ahead while managing my schedule                                  |
+| U1  | `HIGH`   | new user                                   | see usage instructions                     | refer to instructions when I forget how to use **TAB**                 |
+| U2  | `HIGH`   | new user                                   | purge all current data                     | remove all sample/experimental data I used while exploring **TAB**     |
+| U3  | `HIGH`   | user                                       | find a student by name                     | locate details of persons without having to go through the entire list |
+| U4  | `HIGH`   | user                                       | undo accidental changes                    |                                                                        |
+| U5  | `MEDIUM` | user                                       | filter students by tag                     | view a list of all the students that feature a specific tag            |
+| U6  | `MEDIUM` | user with incomplete information           | skip less important information to add     | update later when I have the rest of the information                   |
+| U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard  | paste and use the data outside of **TAB**                              |
+| U8  | `LOW`    | user who uses many tags                    | view all tags                              | remember my tags easily                                                |
+| U9  | `LOW`    | expert user                                | customise the commands and input fields    | be not limited by a template                                           |
+| U10 | `LOW`    | user                                       | be reminded to update data after a lesson  | I can ensure that data stays up to date                                |
 
 *{More to be added}*
 
