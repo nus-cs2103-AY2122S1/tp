@@ -263,9 +263,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
 
 
 ### User stories
@@ -324,7 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Crash**: An event where the application stops functioning properly and exits
 
 --------------------------------------------------------------------------------------------------------------------
 
