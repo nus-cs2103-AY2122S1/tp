@@ -157,10 +157,7 @@ Format: `setm INDEX d/DAY [d/DAY]…​`
 
 Examples:
 * `listm` followed by `setm 5 d/Mon d/Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
-* `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday 
-
-
-### Clearing all entries in facility list: `clearf`
+* `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday
 
 ### Splitting members into facilities : `split`
 
@@ -185,6 +182,12 @@ Format: `clearf`
 Clears all members from the member list.
 
 Format: `clearm`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ### Saving the data
 
