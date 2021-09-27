@@ -48,12 +48,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Zhang Ziqing
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/j![img.png](img.png)ohndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ziqing26)]
+[[portfolio](team/zhangziqing.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
+
+  Hello I am a CS undergraduate from New College who like playing around with cool stuff, experienced flute player (13 years) and anime lover! Reach out to me via [email](mailto:zhangziqing@u.nus.edu).
