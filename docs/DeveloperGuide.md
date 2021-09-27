@@ -392,7 +392,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
 8. TutorAid adds the selected students to the class
 
-   Use caase ends.
+   Use case ends.
 
 **Extensions**
 
