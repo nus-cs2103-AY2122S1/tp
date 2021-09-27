@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-SeniorLove is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+**SeniorLove** is a contact management desktop app which aims to facilitate community workers' visits to the elderly. It is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Senior Love can get your contact management tasks done faster than traditional GUI apps.
 
 ##Table of Contents
 - [Quick start](#quick-start)
@@ -52,8 +52,17 @@ SeniorLove is a **desktop app for managing contacts, optimized for use via a Com
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Features
+* Add elderly with contact details
+* Delete elderly or deadline
+* List elderly details
+* Find an elderly
+* Schedule a visit to an elderly
+* Mark the current scheduled visit as done (update the last visited date and delete the current visit)
+* View help
+
+
+## Notes about command format:
 
 <div markdown="block" class="alert alert-info">
 
@@ -156,12 +165,11 @@ Examples:
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Show a message linking users to the user guide.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Clearing all entries : `clear`
 
@@ -204,10 +212,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISITED] [v/VISIT_DATE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 1800 v/2021-11-08`
+**delete** | `delete [/v] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
+**edit** | `visit INDEX at/ VISIT_DATE`<br> e.g.,`visit 3 at/ 1900-11-08 1800`
+**find** | `find n/NAME`<br> e.g., `find n/yida`
+**list** | `list`
+**clear** | `clear`
+**exit** | `exit`
+**help** | `help`
