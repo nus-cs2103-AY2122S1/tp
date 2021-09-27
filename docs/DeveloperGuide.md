@@ -257,17 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-A private 1-to-1 home tuition teacher that:
+A private 1-to-1 home tuition teacher in Singapore that:
 
 1. has a need to manage not more than 50 student contacts
 2. has a need to manage admin details of each student, namely, lesson fees and payment
 3. has a need to keep track of lesson details for each student
-4. teaches lessons anytime between 8am and 10pm, on any day of the week
+4. teaches lessons anytime between 8am and 10pm (UTC+8), on any day of the week
 5. has a need to manage a busy schedule of not more than 50 lessons
 6. prefers desktop apps over other types
 7. can type fast
 8. prefers typing to mouse interactions
 9. is reasonably comfortable using CLI apps
+10. tutors students belonging to Singapore’s education system
 
 **Value proposition**: Use **TAB** to manage customer contacts and customer relationships faster than 
 a typical mouse/GUI driven app. **TAB** effortlessly keeps track of large amounts of necessary 
@@ -627,11 +628,17 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 ### Glossary
 
+* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6)
+* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
+* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Session**: A session begins when the app is started and ends when the app is exited
+* **Outstanding fees**: Tuition fees that have yet to be collected
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Academic Stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
-* **Academic Level**: Mainstream academic years from primary school through junior college in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6)
+* **Recurring lesson**: A lesson that will occur more than once in patterned intervals
+* **Session**: A session begins when the app is started and ends when the app is exited
+* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
+  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
