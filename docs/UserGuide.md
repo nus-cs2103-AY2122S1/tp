@@ -171,7 +171,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Group** |
+**Add Group** | `add group -g <group_name> [(-n <student_name> \| -i <student_id>)]…` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
