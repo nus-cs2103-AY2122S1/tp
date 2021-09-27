@@ -283,39 +283,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
-
-**MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+(For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `Tutor`, unless specified otherwise)
 
 **Use case 4: Update a student's progress**
 
 **MSS**
 
-1.  Tutor views the list of his/her students
-2.  Tutor identifies the student index to update their progress
-3.  Tutor updates progress for that student
-4.  TutorAid updates the progress for the student at the specified index number
+1. Tutor views the list of his/her students
+2. TutorAid displays the list of students
+3. Tutor identifies the student index to update their progress
+4. Tutor updates progress for that student
+5. TutorAid registers the new progress for the student at the specified index number
 
     Use case ends.
 
@@ -333,17 +311,84 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. Invalid add/delete progress syntax
+* 4a. Invalid add/delete progress syntax
 
-    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
 
-    * 3a2. Tutor re-enters the command
+    * 4a2. Tutor re-enters the command
 
-      Steps 3a1 - 3a2 are repeated until a valid syntax is given. Use case resumes from step 4
-* 4a. Incorrectly updating the progress of another student
+      Steps 3a1 - 3a2 are repeated until a valid syntax is given. Use case resumes from step 5
+  
+* 5a. Incorrectly updating the progress of another student
 
-    * 4a1. Tutor uses add/delete progress commands to revert the incorrect changes. Use case resume from step 3
+    * 5a1. Tutor uses add/delete progress commands to revert the incorrect changes. Use case resume from step 3
 
+**Use case 7: Add a todo list for a session**
+
+**MSS**
+
+1. Tutor views his schedule
+2. TutorAid displays the schedule
+3. Tutor identifies the session to add a todo list
+4. Tutor adds a todo task to that session
+5. TutorAid registers the task to the session
+6. Tutor repeats from step 2 until he/she finishes adding all the tasks
+
+    Use case ends.
+
+**Extensions**
+* 1a. Invalid view schedule command syntax
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+  
+    * 1a2. Tutor re-enters the command.
+  
+      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
+
+* 4a. Invalid add task command syntax
+
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the syntax entered is correct. Use case resumes from step 5.
+
+* 4b. The session does not exist.
+
+    * 4b2. TutorAid displays an error message that the session does not exist.
+    
+    Use case ends.
+
+**Use case 9: Check which students should be present for the class**
+
+**MSS**
+
+1. Tutor views his schedule
+2. TutorAid displays the schedule
+3. Tutor identifies the session to check for students
+4. Tutor views the list of students in that session
+5. TutorAid displays the list of students in the session
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Invalid view schedule command syntax
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
+
+* 4a. Invalid view session students command syntax
+
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the syntax entered is correct. Use case resumes from step 5.
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
