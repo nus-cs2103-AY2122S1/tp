@@ -283,30 +283,140 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Financial Advisor Smart Tracker (FAST)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new contact 
+2. FAST displays a message indicating success
+3. FAST displays the new contact below
 
+   Use case ends
+
+**Extensions**
+
+* 1a. The given command syntax is invalid
+    * 1a1. FAST shows an error message
+    * 2a2. FAST shows an example of add command to user
+  
+      Use case ends
+
+**Use case: UC02 - Delete Contact**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to delete a specific person in the list 
+3. FAST deletes the person
+
+    Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+  * 2a1. FAST shows an error message
+  * 2a2. FAST shows an example of delete command to user
+  
     Use case ends.
+
+**Use case: UC03 - Edit Contact**
+
+**MSS**
+
+1. User requests to list contacts (UC06)
+2. User requests to edit a contact
+3. FAST displays the updated contact
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of edit command to user
+
+      Use case ends.
+
+
+* 2b. The given command syntax is invalid
+    * 2b1. FAST displays an error message 
+    * 2b2. FAST displays an example of the edit command to the user
+  
+      Use case ends.
+
+
+**Use case: UC04 - Add a remark**
+
+**MSS**
+
+1. User requests to list persons (UC06) 
+2. User requests to add a remark to a specific person in the list 
+3. FAST displays the new remark in the contact
+
+    Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of remark command to user
+
+      Use case ends
+
+
+* 2b. The given command syntax is invalid
+    * 2b1. FAST displays an error message
+    * 2b2. FAST displays an example of the remark command to the user
+
+      Use case ends
+
+
+* 2c. User removes an existing remark
+    * 2c1. FAST displays a message that the remark has been removed
+  
+      Use case ends
+
+
+**Use case: UC05 - Find Contact**
+
+**MSS**
+
+1. User searches for a name 
+2. FAST shows a list of persons with the specified name or people whose name contains the search query
+
+    Use case ends
+
+**Extensions**
+
+* 1a. The given search query is invalid
+    * 1a1. FAST shows an error message
+    * 1a2. FAST shows an example of find command to user
+  
+      Use case ends
+  
+
+* 1b FAST cannot find any contacts with the given search query
+    * 1b1. FAST displays a message to inform user no contacts that matches the query was found
+  
+       Use case ends
+
+
+**Use case: UC06 - List Contacts**
+
+**MSS**
+
+1. User requests to list contacts 
+2. FAST displays a list of contacts
+
+    Use case ends
 
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+      
+    Use case ends
 
 *{More to be added}*
 
