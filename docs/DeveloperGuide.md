@@ -300,30 +300,237 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case 2: Delete a student**
+  
+**MSS**
+1. Tutor views the list of his/her students.
+2. Tutor identifies the contact of the student that is to be deleted and takes note of the index number.
+3. Tutor enters the index number along with the ‘delete’ command.
+4. TutorAid successfully deletes the contact of the student corresponding to the given index number.
+   Use case ends.
+   
+**Extensions**
+*  1a. TutorAid detects an error in the list command
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command. 
+    * 1a2. User re-enters the command.
+    
+        Steps 1a1-1a2 are repeated until the data entered are correct.
+      
+        Use case resumes from step 2.
+  
+*  3a. TutorAid detects a wrongly formatted command to delete a student (e.g. missing fields in the component, typos in the command)
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command. 
+    * 3a2. User re-enters the command with a revised format.
+   
+        Steps 3a1-3a2 are repeated until the command entered is correct.
+   
+        Use case resumes from step 4.
+
+*  3b. TutorAid detects an invalid student index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
+    *  3b1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    *  3b2. User re-enters the command with another student index number.
+
+        Steps 3b1-3b2 are repeated until the command entered is correct.
+
+        Use case resumes from step 4.
+
+**Use Case 15: Edit students in a class**
 
 **MSS**
+1. Tutor views the list of his/her students.
+2. Tutor identifies the contact of the student who is to be removed from a specific class and takes note of the index number.
+3. Tutor views the list of his/her classes.
+4. Tutor identifies the class he/she wishes to modify and takes note of the index number.
+5. Tutor keys in the student index number and the class index number along with the command to remove a student from a class.
+6. TutorAid successfully removes the student corresponding to the given index number from the class corresponding to the given class index number.
+Use case ends.
+   
+**Extensions**
+*  1a. TutorAid detects an error in the `list` command (e.g. command is misspelt)
+    *  1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    *  1a2. User re-enters the command.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+        Steps 1a1-1a2 are repeated until the data entered are correct.
 
-    Use case ends.
+        Use case resumes from step 2.
+    
+*  3a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+   *  3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+   *  3a2. User re-enters the command.
+
+        Steps 3a1-3a2 are repeated until the data entered are correct.
+
+        Use case resumes from step 4.
+
+*  5a. TutorAid detects a wrongly formatted command to remove a student from a class (e.g. missing fields in the component, typos in the command)
+    *  5a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    *  5a2. User re-enters the command with a revised format.
+
+        Steps 5a1-5a2 are repeated until the command entered is correct.
+
+        Use case resumes from step 6.
+
+*  5b. TutorAid detects an invalid student/class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
+    *  5b1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    *  5b2. User re-enters the command with another student/class index number.
+
+        Steps 5b1-5b2 are repeated until the command entered is correct.
+
+        Use case resumes from step 5.
+
+**Use Case 16: Edit timing of a recurring class**
+
+**MSS**
+1. Tutor identifies the class he/she wishes to modify and takes note of the index number.
+2. Tutor keys in the command to modify the timing of a class, along with the new day, start and end timings of the class, and the class index number.
+3. TutorAid successfully updates the start and end timings of the class corresponding to the given class index number.
+Use case ends.
 
 **Extensions**
+*  1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+    *  1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    *  1a2. User re-enters the command.
 
-* 2a. The list is empty.
+        Steps 1a1-1a2 are repeated until the data entered are correct.
 
-  Use case ends.
+        Use case resumes from step 2.
+    
+*  2a. TutorAid detects a wrongly formatted command to edit the timing of a recurring class (e.g. missing fields in the component, typos in the command)
+    *  2a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    *  2a2. User re-enters the command with the revised format.
 
-* 3a. The given index is invalid.
+        Steps 2a1-2a2 are repeated until the command entered is correct.
 
-    * 3a1. AddressBook shows an error message.
+        Use case resumes from step 3.
+    
+*  2b. TutorAid detects an invalid class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
+    *  2b1. TutorAid displays an error message highlighting the invlaid class index number and requests the tutor to re-enter the command.
+    *  2b2. User re-enters the command with the class index number.
 
-      Use case resumes at step 2.
+        Steps 2b1-2b2 are repeated until the command entered is correct.
 
-*{More to be added}*
+        Use case resumes from step 3.
+
+*  2c. TutorAid detects an invalid day (e.g. a misspelled day)
+    *  2c1. TutorAid displays an error message highlighting the invalid input for the day and requests the tutor to re-enter the command.
+    *  2c2. User re-enters the command with the day.
+
+        Steps 2c1-2c2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+*  2d. TutorAid detects an invalid start/end timings (e.g. wrongly formatted timing, hours stated is less than 0 or more than 23, minutes stated is less than 0 or more than 59)
+    *  2d1. TutorAid displays an error message highlighting the invalid timings and requests the tutor to re-enter the command.
+    *  2d2. User re-enters the command with a different pair of timings.
+
+        Steps 2d1-2d2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+*  2e. TutorAid detects a clash with another existing class (e.g. overlapping timings on the same day)
+    *  2e1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key in another different day and pair of timings.
+    *  2e2. User re-enters the command with A different day and/or different pair of timings.
+
+        Steps 2e1-2e2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+**Use Case 17: Edit timing of an ad-hoc class**
+
+**MSS**
+1. Tutor identifies the class he/she wishes to modify and takes note of the index number.
+2. Tutor keys in the command to modify the timing of a class, along with the new date, start and end timings of the class, and the class index number.
+3. TutorAid successfully updates the start and end timings of the class corresponding to the given class index number.
+Use case ends.
+
+**Extensions**
+*  1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+    *  1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    *  1a2. User re-enters the command.
+        
+        Steps 1a1-1a2 are repeated until the data entered are correct.
+
+        Use case resumes from step 2.
+
+*  2a. TutorAid detects a wrongly formatted command to edit the timing of a ad-hoc class (e.g. missing fields in the component, typos in the command)
+    *  2a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    *  2a2. User re-enters the command with a revised format.
+
+       Steps 2a1-2a2 are repeated until the command entered is correct. 
+       
+       Use case resumes from step 3.
+
+*  2b. TutorAid detects an invalid class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
+    *  2b1. TutorAid displays an error message highlighting the invlaid class index number and requests the tutor to re-enter the command.
+    *  2b2. User re-enters the command with another class index number.
+
+        Steps 2b1-2b2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+*  2c. TutorAid detects an invalid date (e.g. a wrongly formatted date, non-existent date, day is less than 1 and more than 31, month is less than 1 and more than 12, year is less than the current year)
+    *  2c1. TutorAid displays an error message highlighting the invalid input for the date and requests the tutor to re-enter the command.
+    *  2c2. User re-enters the command with another date.
+
+        Steps 2c1-2c2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+*  2d. TutorAid detects an invalid start/end timings (e.g. wrongly formatted timing, hours stated is less than 0 or more than 23, minutes stated is less than 0 or more than 59)
+    *  2d1. TutorAid displays an error message highlighting the invalid timings and requests the tutor to re-enter the command.
+    *  2d2. User re-enters the command with another pair of timings.
+
+        Steps 2d1-2d2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+*  2e. TutorAid detects a clash with another existing class (e.g. overlapping timings on the same date)
+    *  2e1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key in another different day and pair of timings.
+    *  2e2. User re-enters the command with A different day and/or different pair of timings.
+        
+        Steps 2e1-2e2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+**Use Case 18: Edit pricing of a class**
+
+**MSS**
+1. Tutor identifies the class he/she wishes to modify and takes note of the index number.
+2. Tutor keys in the command to modify the pricing of a class, along with the new price of the class and the class index number.
+3. TutorAid successfully updates the pricing of the class corresponding to the given class index number.
+Use case ends.
+
+**Extensions**
+*  1a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
+    *  1a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    *  1a2. User re-enters the command.
+
+        Steps 1a1-1a2 are repeated until the data entered are correct.
+
+        Use case resumes from step 2.
+*  2a. TutorAid detects a wrongly formatted command to edit the pricing of a class (e.g. missing fields in the component, typos in the command)
+    *  2a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
+    *  2a2. User re-enters the command with a revised format.
+
+        Steps 2a1-2a2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+*  2b. TutorAid detects an invalid class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
+    *  2b1. TutorAid displays an error message highlighting the invlaid class index number and requests the tutor to re-enter the command.
+    *  2b2. User re-enters the command with another class index number.
+
+        Steps 2b1-2b2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
+
+*  2c. TutorAid detects an invalid price (e.g. price not stated to 2 decimal places, negative price)
+    *  2c1. TutorAid displays an error message highlighting the invalid price and requests the tutor to re-enter the command.
+    *  2c2. User re-enters the command with another date.
+
+        Steps 2c1-2c2 are repeated until the command entered is correct.
+
+        Use case resumes from step 3.
 
 ### Non-Functional Requirements
 1.  The system should be able to run on any machine that has Java 11 or higher installed.
