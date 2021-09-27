@@ -158,6 +158,6 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add Group** |
-**Search** |  `&&` <code>\|\|</code> `!`
+**Search** | <code>search (-n <student_name> \| -i <student_id> \| -g <group_name></code> <br> e.g. `search -n John Doe` , `search -g T02B`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
 **Clear** | `clear data`
