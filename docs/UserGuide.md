@@ -142,6 +142,34 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a task : `task -d`
+
+Deletes the specific task from the students' task list.
+
+Format: `task -d INDEX`
+
+* Deletes the task specified at `INDEX`. The index should be a positive number.
+* `-d` refers to the deletion command.
+* The index refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `task -d 1` deletes the task at index 1
+
+### Assigning tasks to students : `task -ass`
+
+Assigns a specific task to students’ task list.
+
+Format: `task -ass n/STUDENT t/TASKNAME`
+
+* Assigns the task specified at `TASKNAME` to the “Student” object specified at `STUDENT`.
+* `-ass` refers to the assignment command.
+* `n/` refers to the name field that follows it.
+* `t/` refers to the task field that follows it.
+
+Examples:
+* `task -ass n/Ashley t/CS2100 Lab 1` adds the task “CS2100 Lab 1” to the student “Ashley”
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -156,7 +184,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Tutor Master data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
