@@ -320,8 +320,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Contact**: A client to be stored in FAST, includes information on the client
+* **CLI**: Command Line Interface
+* **DG**: Developer Guide.  
+* **FA**: Financial Advisor
+* **FAST**: Financial Advisor Smart Tracker, the name of this software
+* **FXML**: FX Markup Language, the format in which the GUI layout is stored in
+* **Java 11**: Version of the programming language, used in the coding of this software
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Remark**: A comment/note about a specific contact
+* **UG**: User Guide
+* **URL**: Uniform Resource Locator, known more commonly as a link to a website.
+* **XML**: Extensible MarkUp Language, used to format the layout of this software
 
 
 --------------------------------------------------------------------------------------------------------------------
