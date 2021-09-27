@@ -307,7 +307,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | U2  | `HIGH`   | new user                                   | purge all current data                     | remove all sample/experimental data I used while exploring **TAB**     |
 | U3  | `HIGH`   | user                                       | find a student by name                     | locate details of persons without having to go through the entire list |
 | U4  | `HIGH`   | user                                       | undo accidental changes                    |                                                                        |
-| U5  | `MEDIUM` | user                                       | filter students by tag                     | view a list of all the students that feature a specific tag            |
+| U5  | `MEDIUM` | user                                       | filter students by tags                     | view a list of all the students that feature the specified tags            |
 | U6  | `MEDIUM` | user with incomplete information           | skip less important information to add     | update later when I have the rest of the information                   |
 | U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard  | paste and use the data outside of **TAB**                              |
 | U8  | `LOW`    | user who uses many tags                    | view all tags                              | remember my tags easily                                                |
