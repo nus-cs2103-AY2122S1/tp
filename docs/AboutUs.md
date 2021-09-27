@@ -32,10 +32,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: UI, Code Quality, Testing and Integration
 
 ### Jonathan Tan
-<img src="images/fullfatwasabi.png" width="200px">
 
 <img src="images/fullfatwasabi.png" width="200px">
-[[github](http://github.com/fullfatwasabi)][[portfolio](team/fullfatwasabi.md)]
+
+[[github](http://github.com/fullfatwasabi)]
+[[portfolio](team/fullfatwasabi.md)]
 
 * Role: Developer
 * Responsibilities: Tool, Documentation, Scheduling and tracking

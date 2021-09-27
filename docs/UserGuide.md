@@ -160,39 +160,8 @@ Examples:\
 |-i|ID|Contact with that id will be edited.|
 |-t|Tag|Contacts with that tag will be edited.|
 
-### Adding a staff's schedule: `addSchedule`
 
-Adds a time period where the staff is working to the staff’s schedule.
-
-Format: 
-* `addSchedule [n/name] [day-startTime-endTime]`
-* `addSchedule [id/ID] [day-startTime-endTime]`
-* `addSchedule [n/name] [t/nonrecurr] [d/date] [startTime-endTime]`
-* `addSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
-
-Note:
-* There are two ways to identify the staff to add the time period to: by their name or by their staff ID.
-* Also, there are two types of time periods that can be added - recurring and non-recurring.
-* The default is a recurring schedule which will occur every week. For the addition of the non-recurring time periods, 
-  the date which the staff works has to be specified.
-
-Examples:
-* `addSchedule n/Candice Mon-0800-1200`
-* `addSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
-
-### View a staff schedule : `viewSchedule`
-
-Views a specific staff’s schedule.
-
-Format: 
-* `viewSchedlue [n/name]`
-* `viewSchedlue [id/ID]`
-
-Examples:
-* `viewSchedule n/Candice`
-* `viewSchedule id/12345678`
-
-### Locating persons by name: `find
+### Locating persons by name: `find`
 
 Finds staff whose names contain any of the given keywords.
 
@@ -245,6 +214,68 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+## Basic Management of Staff Schedules
+
+### Adding a staff's schedule: `addSchedule`
+
+Adds a time period where the staff is working to the staff’s schedule.
+
+Format:
+* `addSchedule [n/name] [day-startTime-endTime]`
+* `addSchedule [id/ID] [day-startTime-endTime]`
+* `addSchedule [n/name] [t/nonrecurr] [d/date] [startTime-endTime]`
+* `addSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
+
+Note:
+* There are two ways to identify the staff to add the time period to: by their name or by their staff ID.
+* Also, there are two types of time periods that can be added - recurring and non-recurring.
+* The default is a recurring schedule which will occur every week. For the addition of the non-recurring time periods,
+  the date which the staff works has to be specified.
+
+Examples:
+* `addSchedule n/Candice Mon-0800-1200`
+* `addSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
+
+### View a staff schedule : `viewSchedule`
+
+Views a specific staff’s schedule.
+
+Format:
+* `viewSchedlue [n/name]`
+* `viewSchedlue [id/ID]`
+
+Examples:
+* `viewSchedule n/Candice`
+* `viewSchedule id/12345678`
+
+
+### Deleting a staff schedule: `deleteSchedule`
+
+Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their name or by their staff ID. The deleted period must be the same as a period previously entered by the manager. If the period is a non-recurring period, the date must be specified.
+
+Format: <br>
+`deleteSchedule [n/name] [day-startTime-endTime]` <br>
+`deleteSchedule [id/ID] [day-startTime-endTime]` <br>
+`deleteSchedule [n/name] [t/nonrecurr]  [d/date] [startTime-endTime]` <br>
+`deleteSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
+
+Example: <br>
+`deleteSchedule n/Joe Mon-0800-1200` <br>
+`deleteSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
+
+### Editing a staff schedule: `editSchedule`
+
+Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
+
+Format: <br>
+`editSchedule [n/name] [old/day-startTime-endTime] [new/day-startTime-endTime]` <br>
+`editSchedule [id/ID] [old/day-startTime-endTime] [new/day-startTime-endTime]`
+
+Example: <br>
+`editSchedule n/Candice old/Mon-0800-1200 new/Mon-0900-1200` <br>
+`editSchedule n/12345678 old/Thurs-1200-1800 new/Thurs-1400-1700`
+
 
 ### Saving the data
 
