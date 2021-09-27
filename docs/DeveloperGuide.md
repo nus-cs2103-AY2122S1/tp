@@ -371,8 +371,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Student**: A student in the database, identified by their name and ID (their NUSNET ID). Each student can be in multiple groups, and can have scores for multiple assessments.
+* **Group**: A group of students, identified by its name.
+* **Assessment**: An assessment is identified by its name. Each assessment has a maximum score.
+* **Score**: The score that a student has attained for an assignment. Should be between 0 and the maximum score for the assessment. Each student can only have 1 score per assessment.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
