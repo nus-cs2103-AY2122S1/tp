@@ -96,6 +96,49 @@ Examples:
 * `listf` followed by `deletef 2` deletes the 2nd person in the facility list
 * `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the findf command
   
+### Deleting a member : `deletem`
+
+Deletes a member from the member list
+
+Format: `deletem INDEX`
+
+* Deletes the member at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed member list. 
+* The index **must be a positive integer** 1, 2, 3, …​
+
+
+Examples:
+* `listm` followed by `deletem 2` deletes the member at index 2 of the member list
+* `findm John` followed by `deletem 1` deletes the 1st person in the results of the `findm` command 
+
+### Setting member availability: `setm`
+
+Sets the availability of a given member.
+
+Format: `setm INDEX d/DAY [d/DAY]…​`
+
+* Sets the availability of the member at the specified `INDEX` to be the specified `DAY(s)`
+* Availability is defined as days of the week when member is free
+* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+* The index refers to the index number shown in the displayed member list
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listm` followed by `setm 5 d/Mon d/Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
+* `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday 
+
+### Splitting members into facilities : `split`
+
+Splits members into facilities based on its capacity and members' availability.
+
+Format: `split d/DAY`
+
+* Allocate members available at the specified `DAY` to each facility
+* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+
+Examples:
+* `split d/Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
