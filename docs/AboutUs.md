@@ -22,7 +22,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/zhing22.png" width="200px">
 
-[[github](https://github.com/zhing22)]
+[[github](https://github.com/zhing22)] 
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Documentation + Code quality
