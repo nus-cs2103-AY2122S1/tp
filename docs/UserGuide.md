@@ -15,9 +15,9 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 
 [comment]: <> (1. Ensure you have Java `11` or above installed in your Computer.)
 
-[comment]: <> (1. Download the latest `addressbook.jar` from [here]&#40;https://github.com/se-edu/addressbook-level3/releases&#41;.)
+[comment]: <> (1. Download the latest `TuitiONE.jar` from [here]&#40;https://github.com/AY2122S1-CS2103T-F13-4/tp/releases&#41;.)
 
-[comment]: <> (1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.)
+[comment]: <> (1. Copy the file to the folder you want to use as the _home folder_ for your TuitiONE.)
 
 [comment]: <> (1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>)
 
@@ -80,10 +80,10 @@ Format: `help`
 
 Adds a student to the TuitiONE.
 
-Format: `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS e/EDUCATION_LEVEL [t/TAG]…​`
+Format: `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS g/GRADE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-EDUCATION_LEVEL here can only be in a range of P1-P6 (primary school levels) or S1-S5 (secondary school levels).
+GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S5 (secondary school levels).
 A student can have any number of tags (including 0).
 </div>
 
@@ -185,7 +185,7 @@ If your changes to the data file makes its format invalid, TuitiONE will discard
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS e/EDUCATION_LEVEL [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 e/P2`
+**Add** | `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS g/GRADE [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 e/P2`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Enroll** | `enroll INDEX l/LESSON`<br> e.g. `enroll 1 l/cs2103T`
