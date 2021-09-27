@@ -14,3 +14,4 @@ We are a team based in the [School of Computing, National University of Singapor
 * [GitHub page](https://github.com/kflim)
 * [Portfolio](team/kflim.md)
 * Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
