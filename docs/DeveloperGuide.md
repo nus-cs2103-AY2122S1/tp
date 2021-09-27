@@ -308,6 +308,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case 4: Update a student's progress**
+
+**MSS**
+
+1.  Tutor views the list of his/her students
+2.  Tutor identifies the student index to update their progress
+3.  Tutor updates progress for that student
+4.  TutorAid updates the progress for the student at the specified index number
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Invalid list command syntax
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
+
+* 1b. The list is empty.
+
+  Use case ends.
+
+* 3a. Invalid add/delete progress syntax
+
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 3a2. Tutor re-enters the command
+
+      Steps 3a1 - 3a2 are repeated until a valid syntax is given. Use case resumes from step 4
+* 4a. Incorrectly updating the progress of another student
+
+    * 4a1. Tutor uses add/delete progress commands to revert the incorrect changes. Use case resume from step 3
+
 *{More to be added}*
 
 ### Non-Functional Requirements
