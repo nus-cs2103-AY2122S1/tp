@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wang Ruofan
 
-<img src="images/wangruofan.png" width="200px">
+<img src="images/ruofan1023.png" width="200px">
 
 [[github](http://github.com/ruofan1023)] [[portfolio](team/ruofan.md)]
 
