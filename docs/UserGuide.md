@@ -3,42 +3,65 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+**SeniorLove** is a contact management desktop app which aims to facilitate community workers' visits to the elderly. It is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Senior Love can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
-
+##Table of Contents
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Adding elderly details](#adding-a-person-add)
+  - [Deleting an elderly or corresponding visit](#deleting-a-person--delete)
+  - [Listing all elderly](#listing-all-persons--list)
+  - [Locating elderly by name](#locating-persons-by-name-find)
+  - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
+  - [Marking one visit as done](#marking-one-visit-as-done--done)
+  - [Viewing help](#viewing-help--help)
+  - [Clearing all entries](#clearing-all-entries--clear)
+  - [Exiting the app](#exiting-the-program--exit)
+- [FAQ](#faq)
+- [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `seniorLove.jar` from [here](https://github.com/AY2122S1-CS2103-T14-1/tp).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your SeniorLove.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 l/Chinese a/John street, block 123, #01-01` : Adds an elderly contact named `John Doe` to the SeniorLove.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd elderly shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`list`** : Lists all elderly.
+
+   * **`find`**`Hans` : Find all elderly whose names contain Hans.
+
+   * **`clear`** : Deletes all elderly.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Features
+* Add elderly with contact details
+* Delete elderly or deadline
+* List elderly details
+* Find an elderly
+* Schedule a visit to an elderly
+* Mark the current scheduled visit as done (update the last visited date and delete the current visit)
+* View help
+
+
+## Notes about command format:
 
 <div markdown="block" class="alert alert-info">
 
@@ -66,7 +89,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Show a message linking users to the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -105,11 +128,6 @@ Examples:
 * `delete 1` deletes the elderly’s details of the elderly at list index 1.
 * `delete v/ 1` deletes the elderly’s visit of the elderly at list index 1.
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
 
 ### Editing a person : `edit`
 
@@ -128,6 +146,27 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+
+### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -144,7 +183,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Scheduling a visit to an elderly : `visit`
+
+### Marking one visit as done : `done`
 
 ### Clearing all entries : `clear`
 
@@ -187,10 +229,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISITED] [v/VISIT_DATE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 1800 v/2021-11-08`
+**delete** | `delete [/v] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
+**edit** | `visit INDEX at/ VISIT_DATE`<br> e.g.,`visit 3 at/ 1900-11-08 1800`
+**find** | `find n/NAME`<br> e.g., `find n/yida`
+**list** | `list`
+**clear** | `clear`
+**exit** | `exit`
+**help** | `help`
