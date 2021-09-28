@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* NUS computer science university students
+* has a need to manage a significant number of contacts of friends and staff
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Through an address book, this product aims to store information, such as faculty, course, frequency of meeting, phone numbers, etc, of friends or staff, so that the student will be able to remember and refer when needed. Manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -272,9 +273,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | potential user exploring the app           | see the app populated with sample data | easily see how the app will look when in use                   |
+| `* * *`  | user ready to start using the app          | view a list of basic commands  | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user ready to start using the app          | purge all current data         | get rid of sample/experiment data I used for exploring the App         |
+| `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
+| `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
+| `* * *`  | <Add on from here onwards>                 | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
