@@ -416,17 +416,17 @@ Preconditions: There is at least one student added to TutorAid.
 
 **MSS**
 
-1. User views list of students
-2. User identifies the student index to update payment record
-3. User updates payment for student
-4. TutorAid successfully updates the payment for a student corresponding to the given index number.
+1.  User views list of students
+2.  User identifies the student index to update payment record
+3.  User updates payment for student
+4.  TutorAid successfully updates the payment for a student corresponding to the given index number.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
 * 1a. Invalid list command syntax
-
+  
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
 
