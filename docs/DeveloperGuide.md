@@ -299,8 +299,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | manually edit member's allocation to facilities | accomodate to last minute changes or requests made by members|
 | `* *`    | user                                       | see all the dates              | know when are the days of training                                     |
 | `* *`    | lazy user                                  | add a list of people's contacts into the application| I don't have to individually add them manually     |
-
-
+| `* *`    | user with many members added into the app  | sort persons by name           | locate a person easily       |
+| `* * `    | expert user | create shortcut for tasks | save time on frequently performed tasks
+| `* *` | long time user | add groups of people | quickly add in new members
+| `*`      | user | hide private contact details | minimise chance of someone else seeing them by accident
+| `*` | user | transfer my app's data to someone else | access accurate and updated data |                                             |
+| `*` | user |archive/hide temporary data | not get distracted by irrelevant data
+| `*` | user | unarchive archived data | view the neccessary data again
+| `*` | user | export allocations into a readable format | share with club members' their allocated training session and venue
+| `*` | user | recover data | retrieve the data I accidentally deleted
+| `*` | long time user | delete data associated with a particular club | minimize exposure of confidential data I no longer need
+| `*` | long time user | delete groups of people | remove graduating members
+| `*` | long time user | keep track of people from different clubs | allocate members at one go regardless of what club they are from
 
 ### Use cases
 
