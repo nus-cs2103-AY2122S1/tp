@@ -38,16 +38,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### Jean Doe
+### Ho Wen Zhong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wz27.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/wz27)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
+* Role: Integration, Scheduling and Tracking
+* Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of
+  the software to create a whole. In charge of defining, assigning, and tracking project tasks.
+  
 ### James Doe
 
 <img src="images/johndoe.png" width="200px">
