@@ -146,9 +146,9 @@ Examples:
 
 Displays the specified student’s name, phone number, progress and payment status, along with their parent’s name and phone number.
 
-Format: `view INDEX`
+Format: `view STUDENT_INDEX`
 
-* Display details of the student at the specified INDEX.
+* Display details of the student at the specified STUDENT_INDEX.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
