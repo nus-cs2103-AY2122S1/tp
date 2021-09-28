@@ -16,7 +16,7 @@ ________________________________________________________________________________
 
 1. Download the latest `SportsPA.jar` (coming soon).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for SportsPA.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -52,13 +52,13 @@ ________________________________________________________________________________
 * Items in square brackets are optional.<br>
   e.g `n/NAME p/PHONE_NUMBER [d/DAYS]` can be used as `n/Ben p/91111111 d/Mon` or as `n/John p/91111111`.
   
-* Items with …​ after them can be used any number of times, excluding zero.
-  e.g `setm INDEX d/DAYS...` can be used as `setm 3 d/Mon`, `setm 3 d/Mon d/Tue`, etc.
+* Items with …​ after them can be used any number of times, including zero.
+  e.g `setm INDEX d/DAY [d/DAY]…​` can be used as `setm 3 d/Mon`, `setm 3 d/Mon d/Tue`, etc.
   
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME l/LOCATION`, `l/LOCATION n/NAME` is also acceptable.
   
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `listf`, `clearm` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -75,8 +75,8 @@ Adds a facility to the facility list.
 
 Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
 
-* TIME specifies the start time and is to be inputted in the format HH:MM
-* CAPACITY specifies the maximum allowed people in the facility
+* `TIME` specifies the start time and is to be inputted in the format HH:MM
+* `CAPACITY` specifies the maximum allowed people in the facility
 * All fields are required
 
 Examples:
@@ -90,25 +90,26 @@ Format: `listf`
 
 ### Finding a facility : `findf`
 
-Finds facilities whose location contains any of the given keywords
+Finds facilities whose location contains any of the given keywords.
 
 Format: `findf KEYWORD [MORE_KEYWORDS]`
-* Search is case-insensitive. Eg. Utown will match utown
+* Search is case-insensitive. Eg. `Utown` will match `utown`
 * Only the location is searched
-* Only full words will be matched eg. Utown will not match town
-* Facilities matching at least one keyword will be returned (i.e. OR search) e.g Utown Redhill will return Utown Field, Redhill Sports Complex
+* Only full words will be matched eg. `Utown` will not match `town`
+* Facilities matching at least one keyword will be returned (i.e. OR search) e.g `Utown Redhill` will return `Utown Field`, `Redhill Sports Complex`
 
 Examples:
 * `find redhill` returns `Redhill Sports Complex` and `Redhill Field`
+* `find utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
   
 ### Deleting a facility : `deletef`
 
 Deletes a facility from the facility list.
 
 Format: `deletef INDEX`
-* Deletes the facility at the specified INDEX
-* INDEX refers to the index number shown in the displayed facility list
-* INDEX must be a positive integer 1, 2, 3… 
+* Deletes the facility at the specified `INDEX`
+* `INDEX` refers to the index number shown in the displayed facility list
+* `INDEX` **must be a positive integer** 1, 2, 3… 
 
 Examples:
 * `listf` followed by `deletef 2` deletes the 2nd person in the facility list
@@ -116,7 +117,7 @@ Examples:
 
 ### Adding a member: `addm`
 
-Adds a member to the list of people in the CCA
+Adds a member to the members list
 
 Format: `addm n/NAME p/PHONE_NUMBER [d/DAYS]`
 * `[d/DAYS]` is an optional field indicating a list of days for which the member is available for that week
@@ -137,15 +138,15 @@ Format: `listm`
 Finds members whose names contains any of the given keywords
 
 Format: `findm KEYWORD [MORE_KEYWORDS]`
-* Search is case-insensitive. Eg. John will match john
+* Search is case-insensitive. Eg. `John` will match `john`
 * `[MORE_KEYWORDS]` is an optional field
 * Only the name of the member is searched
-* Only full words will be matched eg. Johnny will not match John
-* Names matching at least one keyword will be returned (i.e. OR search) e.g John Henry will return John, Henry
+* Only full words will be matched eg. `Johnny` will not match `John`
+* Names matching at least one keyword will be returned (i.e. OR search) e.g `John Henry` will return `John, Henry`
 
 Examples:
-* `findm Bob` returns bob and Bob Doe
-* `findm john bobby` returns John Lee, Bobby Tan
+* `findm Bob` returns `bob` and `Bob Doe`
+* `findm john bobby` returns `John Lee`, `Bobby Tan`
   
 ### Deleting a member : `deletem`
 
@@ -191,7 +192,7 @@ Examples:
 
 ### Clearing all entries in facility list: `clearf`
 
-Clears all entries from the address book.
+Clears all entries from the facility list.
 
 Format: `clearf`
 
@@ -209,8 +210,11 @@ Format: `exit`
 
 ### Saving the data
 
-* SportsPA data are saved in the hard disk automatically after any command that changes the data. They are saved as a JSON file [JAR file location]/data/sportspa.json
-* If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
+* SportsPA data are saved in the hard disk automatically after any command that changes the data. They are saved as a JSON file `[JAR file location]/data/sportspa.json`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
+</div>
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -218,7 +222,7 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SportsPA home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -234,7 +238,7 @@ Action | Format, Examples
 **Delete member**| `deletem INDEX` <br> eg. `deletem 1`
 **Exit**| `exit`
 **Find member**| `findm KEYWORD` <br> eg. `findm John`, `findm John Bob`
-**Find facility**| `findf KEYWORD` <br> eg. `findf Court`, `findf Court Hall`
+**Find facility**| `findf KEYWORD` <br> eg. `findf Clementi`, `findf Utown`
 **Help**| `help`
 **List members**| `listm`
 **List facilities**| `listf`
