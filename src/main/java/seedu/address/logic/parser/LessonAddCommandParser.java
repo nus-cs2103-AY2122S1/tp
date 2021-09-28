@@ -25,6 +25,7 @@ import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
+import seedu.address.model.lesson.TimeRange;
 
 /**
  * Parses input arguments and creates a new LessonAddCommand object.
@@ -59,11 +60,13 @@ public class LessonAddCommandParser {
         Throws ParseException if either time is invalid
         or if range is invalid.
          */
-        ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_START_TIME).get(),
-            argMultimap.getValue(PREFIX_END_TIME).get());
-
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
+        TimeRange timeRange = new TimeRange(startTime, endTime);
+        if (!timeRange.isValidTimeRange(startTime, endTime)) {
+            throw new ParseException(TimeRange.MESSAGE_INVALID_TIME_RANGE);
+        }
+
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
                 .orElse(new HashSet<>());

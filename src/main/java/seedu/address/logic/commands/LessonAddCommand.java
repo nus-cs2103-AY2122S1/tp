@@ -11,6 +11,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -48,6 +50,7 @@ public class LessonAddCommand extends Command {
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor Person: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists for this person.";
+    public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
     private final Index index;
     private final Lesson toAdd;
@@ -99,6 +102,16 @@ public class LessonAddCommand extends Command {
 
         if (personToEdit.getLessons().stream().anyMatch(lesson -> lesson.equals(toAdd))) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
+        Stream<Lesson> lessonsOnSameDate = personToEdit.getLessons().stream()
+            .filter(lesson -> lesson.getDate().equals(toAdd.getDate()));
+
+        boolean isClashingLesson = lessonsOnSameDate
+            .anyMatch(lesson -> lesson.getTimeRange().compareTo(toAdd.getTimeRange()) == 0);
+
+        if (isClashingLesson) {
+            throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
         model.setPerson(personToEdit, editedPerson);

@@ -26,7 +26,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TIME_RANGE = "End time cannot be earlier than start time.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -139,29 +138,6 @@ public class ParserUtil {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
         return new Time(trimmedTime);
-    }
-
-    /**
-     * Parses 2 {@code String Time}s into {@code Time}s,
-     * then compare if  the range is valid. The first argument
-     * represents the start and the second, the end.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the time range is invalid.
-     */
-    public static void parseTimeRange(String startTime, String endTime) throws ParseException {
-        requireNonNull(startTime);
-        requireNonNull(endTime);
-
-        Time start = parseTime(startTime);
-        Time end = parseTime(endTime);
-        boolean isValidRange = end.compareTo(start) > 0;
-        // Check if range is valid
-        if (!isValidRange) {
-            throw new ParseException(MESSAGE_INVALID_TIME_RANGE);
-        }
-
-        return;
     }
 
     /**

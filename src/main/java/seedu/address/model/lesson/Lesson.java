@@ -21,6 +21,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Date date;
     private final Time startTime;
     private final Time endTime;
+    private final TimeRange timeRange;
 
     // Data fields
     private final Subject subject;
@@ -42,6 +43,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         this.endTime = endTime;
         this.subject = subject;
         this.homework.addAll(homework);
+        this.timeRange = new TimeRange(startTime, endTime);
     }
 
     public Date getDate() {
@@ -58,6 +60,10 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public Subject getSubject() {
         return subject;
+    }
+
+    public TimeRange getTimeRange() {
+        return timeRange;
     }
 
     /**
