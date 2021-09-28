@@ -620,6 +620,8 @@ Preconditions: There is at least one student added to TutorAid.
 
     Use case ends.
     
+**Extensions**
+    
 * 1a. TutorAid detects an error in the view milestones command.
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
