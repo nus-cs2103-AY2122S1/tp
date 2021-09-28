@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -150,6 +151,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseFee_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFee((String) null));
+    }
+
+    @Test
+    public void parseFee_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFee(INVALID_FEE));
+    }
+
+    @Test
+    public void parseFee_validValueWithoutWhitespace_returnsFee() throws Exception {
+        Fee expectedFee = new Fee(VALID_FEE);
+        assertEquals(expectedFee, ParserUtil.parseFee(VALID_FEE));
+    }
+
+    @Test
+    public void parseFee_validValueWithWhitespace_returnsTrimmedFee() throws Exception {
+        String feeWithWhitespace = WHITESPACE + VALID_FEE + WHITESPACE;
+        Fee expectedFee = new Fee(VALID_FEE);
+        assertEquals(expectedFee, ParserUtil.parseFee(feeWithWhitespace));
     }
 
     @Test
