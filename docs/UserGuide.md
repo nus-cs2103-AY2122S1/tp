@@ -51,6 +51,7 @@ Examples:
 
 Deletes the specified anime from the list.<br>
 Format: `delete INDEX`
+
 - Deletes the anime at the specified `INDEX`.
 - The index must be a positive integer 1, 2, 3, ...
 
