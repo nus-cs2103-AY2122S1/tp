@@ -35,7 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Participants in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -83,7 +83,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given Participant {@code target} in the list with {@code editedParticipant}.
      * {@code target} must exist in Managera.
-     * The person identity of {@code editedParticipant} must not be the same as another existing Participant in Managera.
+     * The person identity of {@code editedParticipant} must not be the same as another
+     * existing Participant in Managera.
      */
     public void setParticipant(Participant target, Participant editedParticipant) {
         requireNonNull(editedParticipant);
@@ -117,8 +118,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a participant to the Managera.
+     * The participant must not already exist in the Managera.
      */
     public void addEvent(Event e) {
         events.add(e);
@@ -128,7 +129,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in Managera.
      */
     public void removeEvent(Event key) {
         events.remove(key);

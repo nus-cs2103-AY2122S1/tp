@@ -20,7 +20,7 @@ import seedu.address.model.participant.Participant;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Participants list contains duplicate participant(s).";
+    public static final String MESSAGE_DUPLICATE_PARTICIPANT = "Participants list contains duplicate participant(s).";
     //Add on for Managera
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
 
@@ -46,7 +46,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         participants.addAll(source.getParticipantList().stream()
-            .map(JsonAdaptedParticipant::new).collect(Collectors.toList()));
+                .map(JsonAdaptedParticipant::new).collect(Collectors.toList()));
         //Add on for Managera
         events.addAll(source.getEventList().stream().map(JsonAdaptedEvent::new).collect(Collectors.toList()));
     }
@@ -62,7 +62,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedParticipant jsonAdaptedParticipant : participants) {
             Participant participant = jsonAdaptedParticipant.toModelType();
             if (addressBook.hasParticipant(participant)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PARTICIPANT);
             }
             addressBook.addParticipant(participant);
         }

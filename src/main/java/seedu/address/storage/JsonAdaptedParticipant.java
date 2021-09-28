@@ -34,7 +34,6 @@ public class JsonAdaptedParticipant {
     private final String birthDate;
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
     private final List<JsonAdaptedNextOfKin> nextOfKins = new ArrayList<>();
-    // TODO: JsonAdaptedNotes (To be implemented)
 
     /**
      * Constructs a {@code JsonAdaptedParticipant} with the given participant details.

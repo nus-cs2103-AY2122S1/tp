@@ -73,14 +73,15 @@ public interface Model {
      * Adds the given Participant.
      * {@code participant} must not already exist in Managera.
      */
-    void addParticipant(Participant person);
+    void addParticipant(Participant participant);
 
     /**
      * Replaces the given Participant {@code target} with {@code editedParticipant}.
      * {@code target} must exist in Managera.
-     * The Participant identity of {@code editedParticipant} must not be the same as another existing Participant in Managera.
+     * The Participant identity of {@code editedParticipant} must not be the same
+     * as another existing Participant in Managera.
      */
-    void setParticipant(Participant target, Participant editedPerson);
+    void setParticipant(Participant target, Participant editedParticipant);
 
     /** Returns an unmodifiable view of the filtered Participant list */
     ObservableList<Participant> getFilteredParticipantList();

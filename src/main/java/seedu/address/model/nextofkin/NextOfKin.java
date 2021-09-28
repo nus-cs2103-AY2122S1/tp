@@ -76,11 +76,7 @@ public class NextOfKin {
     @Override
     public String toString() {
 
-        return getName()
-            + "; Phone: "
-            + getPhone()
-            + "; Relationship: "
-            + getTag();
+        return getName() + "; Phone: " + getPhone() + "; Relationship: " + getTag();
     }
 
 

@@ -50,15 +50,15 @@ public class EditCommand extends Command {
         + PREFIX_PHONE + "91234567 "
         + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Participant: %1$s";
+    public static final String MESSAGE_EDIT_PARTICIPANT_SUCCESS = "Edited Participant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This participant already exists in Managera.";
+    public static final String MESSAGE_DUPLICATE_PARTICIPANT = "This participant already exists in Managera.";
 
     private final Index index;
     private final EditParticipantDescriptor editParticipantDescriptor;
 
     /**
-     * @param index of the Participant in the filtered Participant list to edit
+     * @param index                     of the Participant in the filtered Participant list to edit
      * @param editParticipantDescriptor details to edit the Participant with
      */
     public EditCommand(Index index, EditParticipantDescriptor editParticipantDescriptor) {
@@ -75,19 +75,19 @@ public class EditCommand extends Command {
         List<Participant> lastShownList = model.getFilteredParticipantList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
         }
 
         Participant participantToEdit = lastShownList.get(index.getZeroBased());
         Participant editedParticipant = createEditedParticipant(participantToEdit, editParticipantDescriptor);
 
-        if (!participantToEdit.isSamePerson(editedParticipant) && model.hasParticipant(editedParticipant)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!participantToEdit.isSameParticipant(editedParticipant) && model.hasParticipant(editedParticipant)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PARTICIPANT);
         }
 
         model.setParticipant(participantToEdit, editedParticipant);
         model.updateFilteredParticipantList(PREDICATE_SHOW_ALL_PARTICIPANTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedParticipant));
+        return new CommandResult(String.format(MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant));
     }
 
     /**
@@ -228,10 +228,10 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                && getPhone().equals(e.getPhone())
-                && getEmail().equals(e.getEmail())
-                && getAddress().equals(e.getAddress())
-                && getTags().equals(e.getTags());
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getTags().equals(e.getTags());
         }
     }
 

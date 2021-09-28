@@ -61,7 +61,7 @@ public class Participant extends Person {
     }
 
     /**
-     * Returns an Arraylist of Person that represents the participant's next of kins.
+     * Returns an Arraylist of next of kin that represents the participant's next of kins.
      *
      * @return this object's nextOfKins.
      */

@@ -131,16 +131,16 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
-        private final ObservableList<Participant> persons = FXCollections.observableArrayList();
+        private final ObservableList<Participant> participants = FXCollections.observableArrayList();
         private final ObservableList<Event> events = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Participant> participants) {
-            this.persons.setAll(participants);
+            this.participants.setAll(participants);
         }
 
         @Override
         public ObservableList<Participant> getParticipantList() {
-            return persons;
+            return participants;
         }
 
         @Override
