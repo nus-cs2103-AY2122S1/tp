@@ -265,29 +265,36 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage students' schedules and progress faster than a typical mouse/GUI driven app
+**Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app. 
+The app is purely offline, and does not include any online feature.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new student              |                                                                        |
-| `* * *`  | user                                       | delete a student               | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a student by name         | locate details of persons without having to go through the entire list |
-| `* * *`  | user                                       | group students together        | locate similar through their groupings easily                          |
-| `* * *`  | tutor                                      | add a new task                 | remember tasks I have created easily                                   |
-| `* * *`  | tutor                                      | assign tasks to students       | reuse similar tasks for my students                                    |
-| `* * *`  | tutor                                      | mark tasks as completed        | track my students' task progress                                       |
-| `* * *`  | user                                       | delete a task                  | remove tasks that I no longer need                                     |
-| `* * *`  | busy tutor                                 | view current lesson schedules  | plan my working and resting hours accordingly                          |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `* *`    | tutor                                      | store exam dates of students   | prioritize and help a large number of students better                  |
-| `* *`    | busy tutor                                 | be warned if schedules clash   | minimize error in my planning                                          |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                           | So that I can…​                                                     |
+| -------- | ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new student                            |                                                                        |
+| `* * *`  | user                                       | delete a student                             | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a student by name                       | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | group students together                      | locate similar through their groupings easily                          |
+| `* * *`  | tutor                                      | add a new task                               | remember tasks I have created easily                                   |
+| `* * *`  | tutor                                      | assign tasks to students                     | reuse similar tasks for my students                                    |
+| `* * *`  | tutor                                      | mark tasks as completed                      | track my students' task progress                                       |
+| `* * *`  | user                                       | delete a task                                | remove tasks that I no longer need                                     |
+| `* * *`  | busy tutor                                 | view current lesson schedules                | plan my working and resting hours accordingly                          |
+| `* *`    | tutor                                      | set deadlines for tasks                      | collect assignments in a timely manner                                 |
+| `* *`    | tutor                                      | input students' grade for tasks              | track how my students are coping                                       |
+| `* *`    | user                                       | hide private contact details                 | minimize chance of someone else seeing them by accident                |
+| `* *`    | tutor                                      | store exam dates of students                 | prioritize and help a large number of students better                  |
+| `* *`    | busy tutor                                 | be warned if schedules clash                 | minimize error in my planning                                          |
+| `* *`    | busy tutor                                 | track who has paid their fees                | send reminders to students who have not paid                           |
+| `*`      | tutor                                      | record students' attendance                  | track which lessons students have missed and help them catch up        |
+| `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                 |
+| `*`      | tutor                                      | monitor number of tasks assigned to a student| assign tasks to students while ensuring they can manage the workload   |
+
 
 *{More to be added}*
 
