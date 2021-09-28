@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.exceptions.DuplicateParticipantException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.ParticipantBuilder;
 
@@ -54,7 +55,7 @@ public class AddressBookTest {
         List<Participant> newParticipants = Arrays.asList(ALEX, editedAlex);
         AddressBookStub newData = new AddressBookStub(newParticipants);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateParticipantException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
