@@ -1,5 +1,8 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
 /**
@@ -7,10 +10,10 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidTimeRange(Time, Time)}
  */
 public class TimeRange implements Comparable<TimeRange> {
-    public static final String MESSAGE_INVALID_TIME_RANGE = "End time cannot be earlier than start time.";
+    public static final String MESSAGE_CONSTRAINTS = "End time cannot be earlier than start time.";
 
-    private Time start;
-    private Time end;
+    private final Time start;
+    private final Time end;
 
     /**
      * Construst a TimeRange object.
@@ -19,8 +22,11 @@ public class TimeRange implements Comparable<TimeRange> {
      * @param end End of the range.
      */
     public TimeRange(Time start, Time end) {
+        requireNonNull(start);
+        requireNonNull(end);
         this.start = start;
         this.end = end;
+        checkArgument(isValidTimeRange(start, end), MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -30,7 +36,7 @@ public class TimeRange implements Comparable<TimeRange> {
      * @param end End of the range.
      * @return True if start is earlier than or same time as end.
      */
-    public boolean isValidTimeRange(Time start, Time end) {
+    public static boolean isValidTimeRange(Time start, Time end) {
         return end.compareTo(start) >= 0;
     }
 
@@ -39,7 +45,7 @@ public class TimeRange implements Comparable<TimeRange> {
      *
      * @param time The time to be tested.
      */
-    private boolean isClashing(Time time) {
+    public boolean isClashing(Time time) {
         return start.compareTo(time) <= 0 // same or later than start time
             && end.compareTo(time) > 0; // earlier than end time
     }

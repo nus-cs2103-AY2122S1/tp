@@ -64,7 +64,7 @@ public class LessonAddCommandParser {
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         TimeRange timeRange = new TimeRange(startTime, endTime);
         if (!timeRange.isValidTimeRange(startTime, endTime)) {
-            throw new ParseException(TimeRange.MESSAGE_INVALID_TIME_RANGE);
+            throw new ParseException(TimeRange.MESSAGE_CONSTRAINTS);
         }
 
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
