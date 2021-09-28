@@ -79,6 +79,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [i/INSURANCE]…​`
 
+* `INSURANCE` is limited to the following, with any capitalization: `life`, `health`, `general`
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
@@ -102,6 +104,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [i/INSUR
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* `INSURANCE` is limited to the following, with any capitalization: `life`, `health`, `general`
 * When editing tags or insurances, the existing tags/insurances of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags/insurances by typing `t/`/`i/` without
     specifying any tags/insurances after it.
