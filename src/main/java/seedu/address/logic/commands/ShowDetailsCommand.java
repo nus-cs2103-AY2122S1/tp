@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.function.Predicate;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -24,6 +24,9 @@ public class ShowDetailsCommand extends Command {
 
     private final Predicate<Event> eventName;
 
+    /**
+     * Creates an ShowDetailsCommand to find Event with the specified {@code eventName}
+     */
     public ShowDetailsCommand(Predicate<Event> eventName) {
         requireNonNull(eventName);
         this.eventName = eventName;
@@ -33,20 +36,20 @@ public class ShowDetailsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         FilteredList<Event> filteredEventList = model.getEventList().filtered(eventName);
-        
+
         if (filteredEventList.size() == 0) {
             throw new CommandException(Messages.MESSAGE_EVENT_NOT_FOUND);
         }
-        
+
         Event desiredEvent = filteredEventList.get(0);
         String displayedMessage = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
                 desiredEvent.getName(),
                 desiredEvent.getDate(),
                 desiredEvent.getTime().toString().equals("") ? "N/A" : desiredEvent.getTime(),
-                desiredEvent.getIsDone() ? "Completed": "Uncompleted");
-        
+                desiredEvent.getIsDone() ? "Completed" : "Uncompleted");
+
         return new CommandResult(displayedMessage);
-        
+
     }
 
     @Override
