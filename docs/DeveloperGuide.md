@@ -262,8 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* is enrolled in CS2103T in NUS
+* is an international student who just came to Singapore
+* wish to meet new friends and form CS2103T project groups
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Socius is a simple desktop app for managing CS2103T tutorial classmates’ contacts for international students, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Socius can get your contact management tasks done faster than traditional GUI apps. 
+
+Socius helps you to gather information about your CS2103T tutorial classmates and facilitate the forming of project groups with them.
 
 
 ### User stories
@@ -315,8 +321,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should follow Standardised Date format (ISO 8601).
+5.  Should be able to work on computers with 50? MB of free storage space.
+6.  Performance requirements: the program should respond within one second.
+7.  Should show readable messages to users and prevent code from crashing when errors occur.
 
 ### Glossary
 
