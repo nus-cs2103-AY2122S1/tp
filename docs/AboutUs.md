@@ -46,10 +46,10 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Time Keeper
 * Responsibilities: In charge of defining, assigning, and tracking project tasks. Ensure project deliverables are done on time.
 
+
 ### Feng Zhunyi
 
-
-<img src="images/feng_zhunyi.JPG" width="200px">
+<img src="images/Feng_Zhunyi.JPG" width="200px">
 
 
 
