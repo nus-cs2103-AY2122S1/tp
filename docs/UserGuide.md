@@ -4,24 +4,24 @@ title: User Guide
 ---
 
 LeadsForce is a desktop app that is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-It provides a new way to streamline the process for student financial advisors to find the right clients to contact. 
-We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly. 
+It provides a new way to streamline the process for student financial advisors to find the right clients to contact.
+We aim to help you manage your leads by making it effortless to store information regarding them and retrieving this information seamlessly.
 Finding your next lead has never been easier.
 ## Table of Contents
 
 * [Quick Start](#quick-start)
 * [Client Information](#client-information)
 * [Features](#features)
-  * [Create new contact: create](#create-new-contact--create)
-  * [Retrieve particular contact: view](#retrieve-particular-contact--view)
-  * [Update existing contact: update](#update-existing-contact--update)
-  * [Delete particular contact: delete](#delete-particular-contact--delete)
-  * [Clearing all entries: clear](#clearing-all-entries--clear)
-  * [Sort Contacts: sort](#sort-contacts--sort)
-  * [Locating clients by keywords: find](#locating-clients-by-keywords--find) 
-  * [Exiting the program: exit](#exiting-the-program--exit)
-  * [Saving data](#saving-the-data)
-  * [Edit data file](#editing-data-file)
+    * [Create new contact: create](#create-new-contact--create)
+    * [Retrieve particular contact: view](#retrieve-particular-contact--view)
+    * [Update existing contact: update](#update-existing-contact--update)
+    * [Delete particular contact: delete](#delete-particular-contact--delete)
+    * [Clearing all entries: clear](#clearing-all-entries--clear)
+    * [Sort Contacts: sort](#sort-contacts--sort)
+    * [Locating clients by keywords: find](#locating-clients-by-keywords--find)
+    * [Exiting the program: exit](#exiting-the-program--exit)
+    * [Saving data](#saving-the-data)
+    * [Edit data file](#editing-data-file)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -41,15 +41,15 @@ Finding your next lead has never been easier.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+    * **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -58,7 +58,7 @@ Finding your next lead has never been easier.
 ## Client Information
 
 
-Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag. 
+Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag.
 
 Client Attribute | Type of Attribute | Argument Tag
 -----------------|-----------------|-----------------
@@ -116,18 +116,18 @@ Example: `view 2` would be used to view client 2's information
 
 ### Update Existing Contact : `update`
 
-Update the information of existing users by using the “update” command. This can be used to change the 
-attributes of a client, using the tag of the client’s attribute. 
+Update the information of existing users by using the “update” command. This can be used to change the
+attributes of a client, using the tag of the client’s attribute.
 
-* Multiple attributes could be changed with one command. 
+* Multiple attributes could be changed with one command.
 
 Format: `update {Client’s id number} /<attribute> {changed value of attribute} ...`
 
 Examples:
- 
-* `update 15 /name Dominic` command changes the name of client 15 to “Dominic”. 
-* `update 3 /contact-number 12345678 /risk-appetite 5` command changes the contact number to “12345678” and 
-   the risk appetite to 5 for the client who’s id number is 3. 
+
+* `update 15 /name Dominic` command changes the name of client 15 to “Dominic”.
+* `update 3 /contact-number 12345678 /risk-appetite 5` command changes the contact number to “12345678” and
+  the risk appetite to 5 for the client who’s id number is 3.
 
 ### Delete particular contact : `delete`
 
@@ -141,6 +141,12 @@ Format: `delete /<attribute> {value}`
 Examples:
 * `delete /id 4,6,7`(deletes clients with client id 4, client id 6 and client 7)
 * `delete /email keithtan@gmail.com`(deletes a client whose email address is keithtan@gmail.com)
+
+### List all contacts : `list`
+
+Shows a list of all tasks in the list.
+
+Format: `list`
 
 ### Sort Contacts : `sort`
 
