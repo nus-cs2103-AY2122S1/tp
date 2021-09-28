@@ -345,10 +345,6 @@
     -fx-prompt-text-fill: transparent;
 }
 
-.text-field:focused #commandTextField {
-    -fx-prompt-text-fill: transparent;
-}
-
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
