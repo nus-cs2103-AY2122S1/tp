@@ -1,13 +1,14 @@
 ---
-User Guide
+layout: page
+title: User Guide
 ---
 
 SportsPA is a desktop application used to manage membership and training sessions of NUS sports CCAs.
 
-Table of Contents
-* [Quick Start](#Quick start)
-* [Feature](#Features)
+* Table of Contents
+{:toc}
 
+_____________________________________________________________________________________________________________
 
 ## Quick start
 
@@ -68,7 +69,7 @@ Shows message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a facility: `addf` [coming soon]
+### Adding a facility: `addf`
 
 Adds a facility to the facility list.
 
@@ -211,7 +212,6 @@ Format: `exit`
 * SportsPA data are saved in the hard disk automatically after any command that changes the data. They are saved as a JSON file [JAR file location]/data/sportspa.json
 * If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
 
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
