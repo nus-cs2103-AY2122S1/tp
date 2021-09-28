@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* managers of restaurant in charge of overseeing the list of customers, employees and suppliers
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This application is created with the purpose of helping restaurant managers to manage the employees’ information (shift schedule, contact), diners (reservation timing, diner contacts) and suppliers (supplier meet up timing/weekly collection schedule, contacts), and at the same time manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -349,7 +350,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A contact containing details about the particular person
+* **Customer**: One of the types of contact, used to represent a customer of the restaurant
+* **Loyalty** points: Points stored by each customer
+* **Employee**: One of the types of contact, used to represent an employee of the restaurant
+* **Employment type** : Used to distinguish the different categories of employees (Part-time, Full-time etc.)
+* **Shift**: Time slot that employee is supposed to be working
+* **Supplier**: One of the types of contact, used to represent a supplier of the restaurant
+* **Reservation**: Reservations can be made by customers for a specific timeslot in the restaurant
+* **Waiting list**: List of customers who are unable to get a reservation due to maxed-out reservations
 
 --------------------------------------------------------------------------------------------------------------------
 
