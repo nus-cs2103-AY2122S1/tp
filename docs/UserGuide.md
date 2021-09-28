@@ -11,7 +11,7 @@ title: User Guide
   - [Adding elderly details](#add-elderly-details--add)
   - [Deleting an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
   - [Listing all elderly](#listing-all-persons--list)
-  - [Locating elderly by name](#locating-persons-by-name-find)
+  - [Locating elderly by name](#locating-persons-by-name--find)
   - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
   - [Marking one visit as done](#marking-one-visit-as-done--done)
   - [Viewing help](#viewing-help--help)
@@ -87,7 +87,7 @@ title: User Guide
 
 </div>
 
-### Add elderly details: `add`
+### Add elderly details : `add`
 
 Adds an elderly and all relevant details into SeniorLove.
 
@@ -108,7 +108,7 @@ Examples:
 * `add n/Jane /p54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 v/2021-10-31` adds an elderly and details with `LAST_VISITED` and `VISIT_DATE`.
 
 
-### Delete an elderly or corresponding visit: `delete`
+### Delete an elderly or corresponding visit : `delete`
 
 Deletes either an elderly’s details or an elderly’s visit from SeniorLove.
 
@@ -147,7 +147,7 @@ Shows a list of all the elderly and their associated details in the address book
 Format: `list`
 
 
-### Locating persons by name: `find`
+### Locating persons by name : `find`
 
 Finds elderly whose names contain any of the given keywords.
 
