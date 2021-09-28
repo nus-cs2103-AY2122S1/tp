@@ -6,7 +6,7 @@
 # CohortConnect
 > Type. Explore. Connect.
   
- </div>
+</div>
 
 <br>
 Cohort connect is a desktop application for students, professors, and teaching assistants to connect, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
