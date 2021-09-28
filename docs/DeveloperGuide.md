@@ -272,12 +272,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | view all the members           | so that I can see the list of members in the club                      |
+| `* * *`  | user                                       | view all the facilities        | so that I can see the list of facilities available                     |
+| `* *`    | potential user exploring the app           | see the app populated with user data | see how the app works when its in use                            |
+| `* *`    | new user                                   | see usage instructions         | refer to instructions when i forget how to use the app                 |
+| `* *`    | new user                                   | purge all current data         | get rid of sample/experimental data I used when exploring the app and start entering my required data      |
+| `* *`    | user                                       | edit a person's details        | have an updated version of their contact                               |
+| `* *`    | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a facility by name        | locate details of facility without having to go through the entire list|
+| `* *`    | user                                       | edit a facility's data         | update the maximum capacity of each facility when group size regulations have shifted                        |
+| `* *`    | user                                       | quickly key in attendance data | save time compared to adding them individually                         |
+| `* *`    | user                                       | see the total attendance of each member| assess the level of commitment of members                      |
+| `* *`    | user                                       | manually edit member's allocation to facilities | accomodate to last minute changes or requests made by members|
+| `* *`    | user                                       | see all the dates              | know when are the days of training                                     |
+| `* *`    | lazy user                                  | add a list of people's contacts into the application| I don't have to individually add them manually     |
 
 *{More to be added}*
 
