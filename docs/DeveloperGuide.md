@@ -326,13 +326,13 @@ Precondition: The student's details have been added to TutorAid.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 3a. The given index is invalid
 
-  * 3a1. TutorAid shows an error message.
+  * 3a1. TutorAid shows an error message
 
-    Use case resumes at step 3.
+    Use case resumes at step 3
 
-**Use case 13: Set up a class**
+**Use case 13: Set up a recurring class**
 
 Preconditions: The students of the class have been added to TutorAid.
 
@@ -340,35 +340,43 @@ Preconditions: The students of the class have been added to TutorAid.
 
 1. Tutor requests to add a class
 
-2. TutorAid requests for details of the class including day of the week, time and price.
+2. TutorAid requests for details of the class including day of the week, time and price
 
-3. Tutor enters the details of the class.
+3. Tutor enters the details of the class
 
-4. TutorAid creates the class.
+4. TutorAid creates the class
 
-5. Tutor <u>adds a student to the class (UC14)</u>. 
+5. Tutor <u>adds a student to the class (UC14)</u>
 
-   Step 5 is repeated until all students have been added.
+   Step 5 is repeated until all students have been added
 
    Use case ends.
 
-**Extensions**
+**Extensions** 
 
-* 3a. The class appears to overlap with another class as intended by the Tutor.
+* 3a. The class appears to overlap with another class as intended by the Tutor
 
-  * 3a1. TutorAid displays a warning. 
+  * 3a1. TutorAid displays a warning
 
-  * 3a2. The tutor dismisses the warning.
+  * 3a2. The tutor dismisses the warning
 
-    Use case resumes at step 4.
+    Use case resumes at step 4
 
-* 3b. The class appears to overlap with another class due to a mistake by the Tutor.
+* 3b. The class appears to overlap with another class due to a mistake by the Tutor
 
-  * 3b1. TutorAid displays a warning. 
+  * 3b1. TutorAid displays a warning
 
-  * 3b2. The tutor acknowledges the warning and cancels the creation of the class.
+  * 3b2. The tutor acknowledges the warning and cancels the creation of the class
 
-    Use case resumes at step 1.
+    Use case resumes at step 1
+  
+* 3c. TutorAid detects invalid input
+
+  * 3c1. TutorAid displays a warning
+
+  * 3c2. The tutor acknowledges the warning
+
+    Use case resumes at step 3
 
 **Use case 14: Add a student to a class**
 
