@@ -386,6 +386,7 @@ Preconditions: The student's details have been previously added to TutorAid.
 5. TutorAid registers the new progress for the student at the specified index number
 
    Use case ends.
+
 **Extensions**
 
 * 1a. Invalid list command syntax
@@ -396,7 +397,7 @@ Preconditions: The student's details have been previously added to TutorAid.
 
       Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
 
-* 1b. The list is empty.
+* 1b. The list is empty. Use case ends.
 
 * 4a. Invalid add/delete progress syntax
 
