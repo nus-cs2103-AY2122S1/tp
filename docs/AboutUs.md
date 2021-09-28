@@ -48,12 +48,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Gabriel Goh Kheng Lin
 
-<img src="images/johndoe.png" width="200px">
+<img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/kawaiigabrielneko)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Insurance, Glossary
