@@ -24,7 +24,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/lzher385.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/johndoe)] [[portfolio](team/lzher385.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -43,17 +43,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/lzher385.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Lim Yu Zher
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lzher385.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lzher385)]
+[[portfolio](team/lzher385.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation, In charge of `link` feature
