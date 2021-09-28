@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -31,20 +32,29 @@ public class LessonAddCommand extends Command {
     public static final String COMMAND_WORD = "ladd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified "
-            + "by the index number\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + "dd MMM yyyy "
-            + PREFIX_START_TIME + "HH:mm "
-            + PREFIX_END_TIME + "HH:mm "
-            + PREFIX_SUBJECT + "SUBJECT "
-            + "[" + PREFIX_HOMEWORK + "HOMEWORK]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "10 Oct 2021 "
-            + PREFIX_START_TIME + "14:30 "
-            + PREFIX_END_TIME + "15:30 "
-            + PREFIX_SUBJECT + "Science "
-            + PREFIX_HOMEWORK + "TYS Page 2 "
-            + PREFIX_HOMEWORK + "Textbook Page 52";
+        + "by the index number\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_RECURRING + "] "
+        + PREFIX_DATE + "dd MMM yyyy "
+        + PREFIX_START_TIME + "HH:mm "
+        + PREFIX_END_TIME + "HH:mm "
+        + PREFIX_SUBJECT + "SUBJECT "
+        + "[" + PREFIX_HOMEWORK + "HOMEWORK]...\n"
+        + "Examples:\n"
+        + "Makeup lesson: " + COMMAND_WORD + " 1 "
+        + PREFIX_DATE + "10 Oct 2021 "
+        + PREFIX_START_TIME + "14:30 "
+        + PREFIX_END_TIME + "15:30 "
+        + PREFIX_SUBJECT + "Science "
+        + PREFIX_HOMEWORK + "TYS Page 2 "
+        + PREFIX_HOMEWORK + "Textbook Page 52\n"
+        + "Recurring lesson: " + COMMAND_WORD + " 1 "
+        + PREFIX_RECURRING + " "
+        + PREFIX_DATE + "09 Dec 2021 "
+        + PREFIX_START_TIME + "10:30 "
+        + PREFIX_END_TIME + "12:30 "
+        + PREFIX_SUBJECT + "Math "
+        + PREFIX_HOMEWORK + "TYS Page 2 ";
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor Person: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
