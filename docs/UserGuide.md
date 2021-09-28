@@ -73,14 +73,15 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ### View student details : `view`
-> ❕❕ <b>Note:</b> This feature is subject to changes
+
+> <span style="background:rgba(255, 0, 0, 0.2)">❕❕ <b>Note:</b> This feature is subject to changes</span>
+
 
 View data of student with specified index in detail.
 
 ![view student details](images/viewAlexDetail.png)
 
 Format: `view INDEX`
-
 
 ### Adding a person: `add`
 
