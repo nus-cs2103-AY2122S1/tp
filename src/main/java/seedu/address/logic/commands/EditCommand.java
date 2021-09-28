@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -15,6 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -35,6 +37,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_GROUP_NAME + "GROUP NAME] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -90,9 +93,10 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        GroupName updatedGroupName = editStudentDescriptor.getGroupName().orElse(studentToEdit.getGroupName());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedGroupName, updatedAddress);
     }
 
     @Override
@@ -121,6 +125,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private GroupName groupName;
         private Address address;
 
         public EditStudentDescriptor() {}
@@ -132,6 +137,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setGroupName(toCopy.groupName);
             setAddress(toCopy.address);
         }
 
@@ -166,6 +172,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setGroupName(GroupName groupName) {
+            this.groupName = groupName;
+        }
+
+        public Optional<GroupName> getGroupName() {
+            return Optional.ofNullable(groupName);
+        }
+
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -192,6 +206,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getGroupName().equals(e.getGroupName())
                     && getAddress().equals(e.getAddress());
         }
     }

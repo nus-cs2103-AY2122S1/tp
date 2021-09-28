@@ -1,9 +1,12 @@
 package seedu.address.storage;
 
+import javax.swing.*;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -20,6 +23,7 @@ class JsonAdaptedStudent {
     private final String name;
     private final String phone;
     private final String email;
+    private final String groupName;
     private final String address;
 
     /**
@@ -27,10 +31,12 @@ class JsonAdaptedStudent {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("address") String address) {
+                              @JsonProperty("email") String email, @JsonProperty("groupName") String groupName,
+                              @JsonProperty("address") String address) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.groupName = groupName;
         this.address = address;
     }
 
@@ -41,6 +47,7 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        groupName = source.getGroupName().name;
         address = source.getAddress().value;
     }
 
@@ -74,6 +81,12 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
+        if (groupName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName()));
+        }
+        // TODO: check if groupName is valid
+        final GroupName modelGroupName = new GroupName(groupName);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -82,7 +95,7 @@ class JsonAdaptedStudent {
         }
         final Address modelAddress = new Address(address);
 
-        return new Student(modelName, modelPhone, modelEmail, modelAddress);
+        return new Student(modelName, modelPhone, modelEmail, modelGroupName, modelAddress);
     }
 
 }

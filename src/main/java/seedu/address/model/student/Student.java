@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.group.GroupName;
+
 /**
  * Represents a Student in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -16,16 +18,18 @@ public class Student {
     private final Email email;
 
     // Data fields
+    private final GroupName groupName;
     private final Address address;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address) {
+    public Student(Name name, Phone phone, Email email, GroupName groupName, Address address) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.groupName = groupName;
         this.address = address;
     }
 
@@ -39,6 +43,10 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+
+    public GroupName getGroupName() {
+        return groupName;
     }
 
     public Address getAddress() {
@@ -76,13 +84,14 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getGroupName().equals(getGroupName())
                 && otherStudent.getAddress().equals(getAddress());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address);
+        return Objects.hash(name, phone, email, groupName, address);
     }
 
     @Override
@@ -93,6 +102,8 @@ public class Student {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; GroupName")
+                .append(getGroupName())
                 .append("; Address: ")
                 .append(getAddress());
 
