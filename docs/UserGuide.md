@@ -150,12 +150,12 @@ Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
 * `none` indicates that a person must have none of the specified tags to be matched.
 * Invalid arguments for `cond/` will result in an error. e.g. `cond/every`.
 * The specified tag must match the existing tag **exactly**. e.g. `Math` will not match `Mathematics`.
-* The filter is **case-sensitive**. e.g. `filter cond/all MATH` does not return the same result as `filter cond/all math`.
+* The filter is **case-sensitive**. e.g. `filter cond/all t/MATH` does not return the same result as `filter cond/all t/math`.
 
 Examples:
-* `filter cond/all math Sec1` will return persons who have both `math` and `Sec1` tags.
-* `filter cond/any English Zoom` will return persons with only the `English` tag, or only the `Zoom` tag, or both tags.
-* `filter cond/none Inactive paid` will return persons without both `Inactive` and `paid` tags.
+* `filter cond/all t/math t/Sec1` will return persons who have both `math` and `Sec1` tags.
+* `filter cond/any t/English t/Zoom` will return persons with only the `English` tag, or only the `Zoom` tag, or both tags.
+* `filter cond/none t/Inactive t/paid` will return persons without both `Inactive` and `paid` tags.
 
 ### Deleting a person : `delete`
 
@@ -268,6 +268,6 @@ Action | Format, Examples
 **Delete** |`delete INDEX`<br><br> e.g., `delete 3`
 **Edit** |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [sch/SCHOOL] [stream/STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** |`find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …]`<br><br> e.g., `find n/James Tan a/clementi`
-**Filter** |<code>filter cond/{all &#124; any &#124; none} t/TAG [t/MORE_TAGS]…</code> <br><br> e.g., `filter cond/all Sec1 zoom`
+**Filter** |<code>filter cond/{all &#124; any &#124; none} t/TAG [t/MORE_TAGS]…</code> <br><br> e.g., `filter cond/all t/Sec1 t/zoom`
 **List** |`list`
 **Help** |`help`
