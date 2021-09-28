@@ -37,15 +37,15 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   - **`list`** : Lists all contacts.
+   - `list` : Lists all contacts.
 
-   - **`add`**`-n “John Doe” -p “+659875432” -e “johnd@example.com”` : Adds a contact named `John Doe` to the Address Book.
+   - `add -n "John Doe" -p "+659875432" -e "johnd@example.com"` : Adds a contact named `John Doe` to the Address Book.
 
-   - **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   - `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   - **`clear`** : Deletes all contacts.
+   - `clear` : Deletes all contacts.
 
-   - **`exit`** : Exits the app.
+   - `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -72,8 +72,7 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
 > > Note:
 > >
 > > All flags will have a long version and a short version that can be used. The long version will be prefixed with
-
-    `--` while the short versions will be prefixed with `-`. (Eg. `--phone` and `-p`)
+> > `--` while the short versions will be prefixed with `-`. (Eg. `--phone` and `-p`)
 
 </div>
 
@@ -95,14 +94,14 @@ Format: `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--
 
 Adds a person to the address book.
 
-Format: `add (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`
+Format: `add (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`
 
 - At least the name field must be provided.
 
 Examples:
 
-- `add -n “John Doe” -p “+6501234567” -e “johndoe@example.com” -a “NUS School of Computing” -t “undergraduate,computer science”` adds a contact with name of `John Doe`, phone number `+6501234567`, email `johndoe@example.com`, address `NUS School of Computing`, tags `undergraduate` and `computer science`.
-- `add -n “Jane Deer” -t “woman”` adds a contact with the name of `Jane Deer` and tag of `woman`.
+- `add -n "John Doe" -p "+6501234567" -e "johndoe@example.com" -a "NUS School of Computing" -t "undergraduate,computer science"` adds a contact with name of `John Doe`, phone number `+6501234567`, email `johndoe@example.com`, address `NUS School of Computing`, tags `undergraduate` and `computer science`.
+- `add -n "Jane Deer" -t "woman"` adds a contact with the name of `Jane Deer` and tag of `woman`.
 
 ### Batch importing contacts: `import`
 
@@ -144,7 +143,7 @@ Examples:
 
 Finds persons whose name, phone number, email, address and/or tag contain contains any of the given keywords.
 
-Format: `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`
+Format: `find (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`
 
 - At least one of the optional fields must be provided.
 - The search is case-insensitive. e.g `hans` will match `Hans`
@@ -223,12 +222,12 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                       |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” ...` <br> e.g., `add -n "James Ho" -p "22224444" -e "jamesho@example.com" -a "123, Clementi Rd, 1234665" -t "friend"` |
+| **Add**    | `add (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" ...` <br> e.g., `add -n "James Ho" -p "22224444" -e "jamesho@example.com" -a "123, Clementi Rd, 1234665" -t "friend"` |
 | **Clear**  | `clear`                                                                                                                                                                |
 | **Delete** | `delete "UID1,UID2,..."`<br> e.g., `delete "3,2,7"`                                                                                                                    |
 | **Edit**   | `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]"…​`<br> e.g., `edit "2" -n "James Lee" -e "jameslee@example.com"`                                           |
 | **Exit**   | `exit`                                                                                                                                                                 |
-| **Find**   | `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`<br> e.g., `find -n "James Jake"`               |
+| **Find**   | `find (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`<br> e.g., `find -n "James Jake"`               |
 | **Help**   | `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--find/-f) (--clear/-c) (--list/-l)`<br> e.g., `help -e`                                         |
 | **Import** | `import`                                                                                                                                                               |
 | **List**   | `list`                                                                                                                                                                 |
