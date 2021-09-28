@@ -14,9 +14,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest tutormaster.jar.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the home folder for your TutorMaster.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,13 +24,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`help`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`student -v 3`**: Views the 3rd student in the Address Book.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -261,7 +261,7 @@ Examples:
 
 Edits a task in the address book
 
-Format: `task -e INDEX [-n NAME] [-d DEADLINE] [-c COMPLETED]`
+Format: `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]`
 
 * Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
 * -e refers to the edit command
@@ -270,7 +270,7 @@ Format: `task -e INDEX [-n NAME] [-d DEADLINE] [-c COMPLETED]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 -d 20211231 -c true` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
+* `task -e 4 d/20211231 c/true` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
 
 --------------------------------------------------------------------------------------------------------------------
 
