@@ -37,15 +37,14 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-### Jean Doe
+### Adam Ho
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/adam-ky.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/adam-ky)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Time Keeper
+* Responsibilities: In charge of defining, assigning, and tracking project tasks. Ensure project deliverables are done on time.
 
 ### James Doe
 
