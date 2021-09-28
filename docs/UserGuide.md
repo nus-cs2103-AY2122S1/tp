@@ -64,11 +64,23 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing help : `help`
+### Give a list of instructions : `help`
 
-Shows a message explaning how to access the help page.
+Shows the user a list of instructions that can be used to navigate the app.
 
-![help message](images/helpMessage.png)
+Format: help [“command-name”]
+
+* If no command-name is entered, the user will see the list of all the keywords for each command
+
+* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and description of the command.
+
+Sample outcome (User typed “help sort”):
+
+```
+Sort persons by the alphabetical order of their name
+Format: sort [-r]
+-r returns a sorted list in reverse order
+```
 
 Format: `help`
 
