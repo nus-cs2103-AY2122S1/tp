@@ -28,7 +28,7 @@ can get your student management tasks done faster than traditional GUI apps.
 
    * **`list`** : Lists all contacts.
 
-   * **`add`** `-s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` : 
+   * **`add -s`** sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` : 
      Adds a student named `John Doe` to TutorAid, along with the student's contact number, parent's name and parent's 
      contact number.
 
@@ -72,7 +72,6 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a student: `add`
 Adds a new student to TutorAid.
 
@@ -85,9 +84,9 @@ Examples:
 The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
 </div>
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in TutorAid in the order that they were added.
 
 Format: `list`
 
@@ -184,9 +183,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
