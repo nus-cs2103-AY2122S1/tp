@@ -51,6 +51,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/leofeng10.JPG" width="200px">
 
+[[github](http://github.com/Leofeng10)]
 
 
 * Role: Developer
