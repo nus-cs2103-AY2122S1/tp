@@ -283,16 +283,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the 
+`CS2100 Teaching Assistant (CS2100 TA in short)`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 Purge/Delete all sample student records**
+
+Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of sample student records
+3.  CS2100 TA requests to purge sample student records
+4.  ProgrammerError deletes all sample student records
+    Use case ends.
+    
+
+**Use case: UC2 Create a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to create a student record
+4.  ProgrammerError requests for the student's details
+5.  CS2100 TA specifies the student's details
+6.  ProgrammerError creates a student record
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student details given are incomplete
+
+    * 2a1. ProgrammerError shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC3 View a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to view a specific student record
+4.  ProgrammerError shows the student record's details 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. ProgrammerError shows an error message.
+    
+      Use case resumes at step 2.
+
+**Use case: UC4 Delete a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to delete a specific student record in the list
+4.  ProgrammerError deletes the student record
 
     Use case ends.
 
@@ -304,11 +361,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProgrammerError shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC5 Update a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to update a specific student record
+4.  ProgrammerError updates the student record
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ProgrammerError shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC6 Automatic sort student records**
+
+**MSS**
+
+1.  CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
+2.  CS2100 TA requests to list student records
+3.  ProgrammerError automatically sort the changed student records
+
+    Use case ends.
+
+**Use case: UC7 Automatic save and load student records**
+
+**MSS**
+
+1.  CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
+2.  ProgrammerError automatically save the changed student records to hard disk
+3.  CS2100 TA restarts the application
+4.  ProgrammerError shows the saved data 
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
