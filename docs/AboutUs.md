@@ -40,10 +40,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Chng Xian Lin
 
-<img src="images/chngxianlin.png" width="200px">
+<img src="images/xianlinc.png" width="200px">
 
 [[github](http://github.com/xianlinc)]
-[[portfolio](team/chngxianlin.md)]
+[[portfolio](team/xianlinc.md)]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality + Ensure adherence to coding standards + In charge of feature 'note'
