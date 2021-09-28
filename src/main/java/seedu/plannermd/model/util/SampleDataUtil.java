@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-<<<<<<< HEAD:src/main/java/seedu/plannermd/model/util/SampleDataUtil.java
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.person.Address;
@@ -12,18 +11,8 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
-=======
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
->>>>>>> tutorial-adding-command:src/main/java/seedu/address/model/util/SampleDataUtil.java
 
 /**
  * Contains utility methods for populating {@code PlannerMd} with sample data.
