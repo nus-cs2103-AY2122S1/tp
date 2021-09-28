@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lim Zhe Kang
 
-<img src="images/zhekang.png" width="200px">
+<img src="images/limzk126.png" width="200px">
 
 [[github](http://github.com/limzk126)]
 [[portfolio](team/johndoe.md)]
@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Testing
 * Responsibilities: Ensure the testing of the project is done properly and on time.
 
-### Johnny Doe
+### Chan Sze Ann, Eugene
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/eugenecsa.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/eugenecsa)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Code Quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 ### Jean Doe
 
