@@ -263,8 +263,8 @@ CS2100 TAs who
 * keep track of the students' grades
 * prefer and comfortable with CLI tools
 * can type fast
-* is proficient with Unix commands
-* prefers typing to mouse interactions
+* are proficient with Unix commands
+* prefer typing to mouse interactions
 
 **Value proposition**:
 
