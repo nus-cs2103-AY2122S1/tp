@@ -301,33 +301,33 @@ Preconditions: There is at least one student added to TutorAid.
 **Extensions**
 
 * 1a. Invalid list command syntax
-      
+  
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
-    
+
       Steps 1a1-1a2 are repeated until the syntax entered is correct.
       Use case resumes from step 2.
-    
+
 * 3a. Invalid paid/unpaid command syntax
 
     * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 3a2. User re-enters the command
-    
+
       Steps 3a1 - 3a2 are repeated until a valid syntax is given
       Use case resumes from step 4
-    
+
 * 3b. The given student index is invalid
-    
+ 
     * 3b1. TutorAid shows an error message
     * 3b2. User enters a new index with paid/unpaid command
-      
+  
       Steps 3a1 - 3a2 are repeated until a valid index is given
       Use case resumes from step 4
-      
+    
 * 4a. Incorrect update of payment for a different student instead
 
     * 4a1. User enters the paid/unpaid command to revert the incorrect change made.
-  
+
       Use case resumes from step 3
 
 **Use case 10: Reset payment status for all students at the end of the month**
@@ -349,15 +349,15 @@ Preconditions: There is at least one student added to TutorAid.
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
-  
+
       Steps 1a1-1a2 are repeated until the data entered are correct.
       Use case resumes from step 2.
-  
+
 * 3a. TutorAid detects an error in the reset payment command
 
     * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 3a2. User re-enters the command.
-  
+
       Steps 3a1-3a2 are repeated until the data entered are correct.
       Use case resumes from step 4.
 
@@ -381,7 +381,7 @@ Preconditions: There is at least one student added to TutorAid.
 
       Steps 1a1-1a2 are repeated until the data entered are correct.
       Use case resumes from step 2.
-  
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
