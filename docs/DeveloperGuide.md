@@ -278,15 +278,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                                                                               | So that I can…​                                                     
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
 | `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        
-| `* * *`  | user ready to start using the app          | purge all current data         |  get rid of sample/experimental data I used for exploring the app      
-| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall Grade)| so that I can identify and track their progress separately
-| `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record                                       
-| `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class    
-| `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly                                       
-| `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and grade 
-| `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made                       
-| `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors         
-| `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class           
+| `* * *`  | user ready to start using the app          | purge all current data         |  get rid of sample/experimental data I used for exploring the app.      
+| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall Grade)| so that I can identify and track their progress separately.
+| `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.                                       
+| `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class.   
+| `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly.                                      
+| `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and grade.
+| `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made.                   
+| `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.         
+| `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.           
 | `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.                                           
 | `* * `  | busy CS2100 TA                              | view students' statstics formatted in a standard form                                            | avoid sorting the information on my own.                               
 | `* * `  |  CS2100 TA                                  | use the app to track students' performance                                                       | identify those who need more help.                                     
