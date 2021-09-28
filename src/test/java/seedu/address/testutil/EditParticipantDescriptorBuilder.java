@@ -72,7 +72,7 @@ public class EditParticipantDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditParticipantDescriptor}
      * that we are building.
      */
     public EditParticipantDescriptorBuilder withTags(String... tags) {
