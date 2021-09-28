@@ -262,8 +262,14 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* is enrolled in CS2103T in NUS
+* is an international student who just came to Singapore
+* wish to meet new friends and form CS2103T project groups
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Socius is a simple desktop app for managing CS2103T tutorial classmates’ contacts for international students, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Socius can get your contact management tasks done faster than traditional GUI apps. 
+
+Socius helps you to gather information about your CS2103T tutorial classmates and facilitate the forming of project groups with them.
 
 
 ### User stories
