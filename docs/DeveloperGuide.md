@@ -359,27 +359,6 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 2.  ProgrammerError shows a list of student records
 3.  CS2100 TA requests to delete a specific student record in the list
 4.  ProgrammerError deletes the student record
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-    * 3a1. ProgrammerError shows an error message.
-    
-      Use case resumes at step 2.
-
-**Use case: UC4 Delete a student record**
-
-**MSS**
-
-1.  CS2100 TA requests to list student records
-2.  ProgrammerError shows a list of student records
-3.  CS2100 TA requests to delete a specific student record in the list
-4.  ProgrammerError deletes the student record
 
     Use case ends.
 
@@ -388,7 +367,6 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 * 2a. The list is empty.
 
   Use case ends.
-
 
 * 3a. The given index is invalid.
 
