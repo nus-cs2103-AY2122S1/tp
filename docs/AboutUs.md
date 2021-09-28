@@ -63,7 +63,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/kflim.png" width="200px">
 
-* [GitHub page](https://github.com/kflim)
-* [Portfolio](team/kflim.md)
+[[GitHub page](https://github.com/kflim)]
+[Portfolio](team/johndoe.md)
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
