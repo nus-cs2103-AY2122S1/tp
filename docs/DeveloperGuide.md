@@ -429,6 +429,92 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
+**Use case: UC6 - View task list**
+
+**MSS**
+
+1.  User requests to view the list of tasks
+2.  tApp displays all the tasks currently in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The task list is empty.
+
+    * 2a1. tApp displays message that there are no tasks
+
+      Use case ends.
+
+**Use case: UC7 - Add task with time**
+
+**MSS**
+
+1.  User requests to create a task with the specified deadline
+2.  tApp creates the task and stores it in the task list
+3.  tApp displays the task that was just created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The task list is empty.
+
+    * 1a1. tApp displays an error message stating that the task name is invalid
+
+      Use case ends.
+
+* 1b. The task list is empty.
+
+    * 1b1. tApp displays an error message requesting the user to follow the correct format
+
+      Use case ends.
+
+**Use case: UC8 - Delete a task**
+
+**MSS**
+
+1.  User requests to view their list of tasks
+2.  tApp displays all the tasks currently in the list
+3.  User requests to delete a specific task from the list of tasks
+4.  tApp deletes the task
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 2a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC9 - Mark a task as done**
+
+**MSS**
+
+1.  User requests to view their list of tasks
+2.  tApp displays all the tasks currently in the list
+3.  User requests to mark a specific task as done
+4.  tApp marks the task as done
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+      Use case ends.
+
+* 3a. The given index is invalid.
+  
+    * 3a1.  tApp shows an error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
