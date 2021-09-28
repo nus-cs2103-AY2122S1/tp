@@ -2,12 +2,7 @@
   "persons": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "alice@example.com",
-<<<<<<< HEAD
-    "tagged": [ "friends" ]
-=======
-    "address": "123, Jurong West Ave 6, #08-111"
->>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
+    "email": "alice@example.com"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
