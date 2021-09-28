@@ -257,13 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+CS2100 TAs who
+* have to manage a number of students across different classes
+* keep track of the students' attendance
+* keep track of the students' grades
+* prefer and comfortable with CLI tools
 * can type fast
+* is proficient with Unix commands
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students. 
 
 
 ### User stories
