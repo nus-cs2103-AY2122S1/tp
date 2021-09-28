@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -19,8 +21,6 @@ public class ShowDetailsCommand extends Command {
             + ": Displays the details of the Event matching the given name.\n"
             + "Parameters: EVENT_NAME \n"
             + "Example: " + COMMAND_WORD + " CS2103T Finals ";
-    
-    private static final String MESSAGE_SUCCESS = "Event found!";
 
     private final Predicate<Event> eventName;
 
@@ -31,12 +31,19 @@ public class ShowDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Event desiredEvent = model.getEventList().filtered(eventName).get(0);
-        String displayedMessage = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s", 
-                desiredEvent.getName(), 
-                desiredEvent.getDate(), 
+        FilteredList<Event> filteredEventList = model.getEventList().filtered(eventName);
+        
+        if (filteredEventList.size() == 0) {
+            throw new CommandException(Messages.MESSAGE_EVENT_NOT_FOUND);
+        }
+        
+        Event desiredEvent = filteredEventList.get(0);
+        String displayedMessage = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s",
+                desiredEvent.getName(),
+                desiredEvent.getDate(),
                 desiredEvent.getTime().toString().equals("") ? "N/A" : desiredEvent.getTime());
         return new CommandResult(displayedMessage);
+        
     }
 
     @Override
