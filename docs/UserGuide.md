@@ -64,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing a student: `student -v`
+### Viewing a student: `student -v` `[coming in v1.2]`
 
 Views a particular student's details given by the specified index from the 
 address book.
@@ -77,7 +77,7 @@ Format: `student -v INDEX`
 Examples:
 * `student -v 3` view the student detail at index 3.
 
-### Editing a student: `student -e`
+### Editing a student: `student -e` `[coming in v1.2]`
 
 Edits the detail of the specific student.
 
@@ -86,6 +86,7 @@ Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_T
 * Edits the detail of the student specified by the `INDEX`. `INDEX` should be a 
   positive number and refers to the index number of a student in the list of students.
 * `-e` refers to the edit command
+* Commands in `[ ]` are optional
 * It is a requirement that **at least one of the optional fields should be provided**.
 * `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN`
 * `START_TIME` and `END_TIME` takes in the time in 24-hour format, for example `0800` 
@@ -96,6 +97,20 @@ Examples:
 * `student -a 3 -c 88888888 -em johnny@mail.com` Edits the contact number and email
   address of the third student in the students' list to 88888888 and johnny@mail.com
   respectively.
+
+### Deleting a student: `student -d` `[coming in v1.2]`
+
+Deletes the specific student given by the specified index from the address book.
+
+Format: `student -d INDEX`
+
+* Deletes the student specified by the `INDEX`. 
+* `-d` refers to the edit command
+* `INDEX` should be a positive number and refers to the index number of a student in the list of students.
+
+Examples:
+
+* `student -d 3` deleted the third student in the address book
 
 ### Viewing help : `help`
 
@@ -161,7 +176,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `delete` 
 
 Deletes the specified person from the address book.
 
@@ -229,6 +244,33 @@ Format: `task -a n/NAME`
 
 Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
+
+### Viewing a task `[coming in v1.2]`
+
+Views a task in the address book
+
+Format: `task -v INDEX`
+
+* Views a task with the index `INDEX`
+* -v refers to the view command
+
+Examples:
+* `task -v 2` shows the attributes of the 2nd task on the student’s task list
+
+### Editing a task `[coming in v1.2]`
+
+Edits a task in the address book
+
+Format: `task -e INDEX [-n NAME] [-d DEADLINE] [-c COMPLETED]`
+
+* Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
+* -e refers to the edit command
+* Commands in `[ ]` are optional
+* It is a requirement that at least one of the optional fields should be provided
+* The current value will be updated to the value input by the user
+
+Examples:
+* `task -e 4 -d 20211231 -c true` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
 
 --------------------------------------------------------------------------------------------------------------------
 
