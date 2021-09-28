@@ -360,8 +360,8 @@ Extensions
 
 MSS
 
-1. User enters command to find a contact by name
-2. CohortConnect shows list of contacts with matching name
+1. User enters command to find a contact by name.
+2. CohortConnect shows list of contacts with matching name.
 
    Use case ends.
         
@@ -378,8 +378,8 @@ Extensions
 
 MSS
 
-1. User enters command to find a contact by tag
-2. CohortConnect shows list of contacts labelled with matching tag
+1. User enters command to find a contact by tag.
+2. CohortConnect shows list of contacts labelled with matching tag.
     
     Use case ends.
 
@@ -396,10 +396,10 @@ Extensions
 
 MSS
 
-1.  User requests to list persons
-2.  CohortConnect shows a list of persons
-3.  User requests to show details of person at a specific index in the list
-4.  CohortConnect shows a pop-up with the person's details
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of person at a specific index in the list.
+4.  CohortConnect shows a pop-up with the person's details.
 
     Use case ends.
 
@@ -417,10 +417,10 @@ Extensions
 
 MSS
 
-1.  User requests to list persons
-2.  CohortConnect shows a list of persons
-3.  User requests to show details of a specific person in the list
-4.  CohortConnect shows a pop-up with the person's details
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list.
+4.  CohortConnect shows a pop-up with the person's details.
     
     Use case ends.
 
