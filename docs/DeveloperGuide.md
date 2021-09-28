@@ -355,6 +355,14 @@ Preconditions: The student's details have been previously added to TutorAid.
 
 **Extensions**
 
+* 1a. TutorAid detects an error in the list command.
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+      Use case resumes from step 2.
+
 * 2a. The given index is invalid.
 
     * 2a1. TutorAid shows an error message.
@@ -533,6 +541,14 @@ Precondition: The student's details have been added to TutorAid.
 
       Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
       Use case resumes from step 2.
+      
+* 1b. TutorAid detects an error in the view schedule command.
+
+    * 1b1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1b2. User re-enters the command.
+
+      Steps 1b1-1b2 are repeated until the command entered is correct.
+      Use case resumes from step 2.
 
 **Use case 9: Check which students should be present for the class**
 
@@ -603,6 +619,16 @@ Preconditions: There is at least one student added to TutorAid.
 2.  TutorAid shows the upcoming milestones in a chronological order
 
     Use case ends.
+    
+**Extensions**
+    
+* 1a. TutorAid detects an error in the view milestones command.
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+      Use case resumes from step 2.
 
 **Use case 12: View income for the month**
 
