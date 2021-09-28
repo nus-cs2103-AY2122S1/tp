@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -257,14 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* NUS Student Entrepreneurs
+* Proficient in Unix CLI
+* Has many meetings and is in contact with different people (students, mentors,
+  stakeholders, clients, partners)
+* Carries Laptop around (prefers Laptop)
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+* Users familiar with Unix commands can quickly master using the app efficiently.
+* Allow users to keep track of tasks/meetings associated with contacts.
+* Enhanced contact searchability and organisation.
+* Eliminates the need to remember and recall interpersonal details of contacts.
 
 ### User stories
 
@@ -272,14 +276,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| | **experienced user** |	**manipulate multiple contacts with one command** | **improve my work efficiency** |
+| `**` | experienced user | delete multiple contacts using only one command | improve my work efficiency |
+| `**` | experienced user |	move multiple contacts using only one command | improve my work efficiency |
+| `**` | experienced user |	add multiple contacts using only one command | improve my work efficiency |
+| `**` | experienced user |	search for contacts using abbreviations | improve my work efficiency |
+| | **expert CL user** | **use high-level CLI instructions** | **directly use the app at a high-level** |
+| `**` | expert CL user | make command combinations | execute multiple instructions in one line |
+| `**` | expert CL user | redirect input/output | input/output from/to files instead of stdin |
+| `**` | expert CL user | create scripts | automate specific tasks |
+| | **beginner user** | **learn commands fast** | **spend less time on learning** |
+| `***` | beginner user | view the user guide easily | learn the commands as and when I need |
+| `***` | beginner user | view the list of instructions | know what instructions are available |
+| `***` | beginner user | see examples of contacts | have an idea of how contacts will be presented |
+| | **student entrepreneur** | **organise my contacts according to specific groups** | **find the ones i want easily** |
+| `**` | student entrepreneur | categorize my business contacts | organize them better |
+| `**` | student entrepreneur | differentiate between business and student contacts | differentiate easily |
+| `***` | student entrepreneur | view my contacts in an organized manner | have a better overview |
+| | **intermediate user** | **sort and filter my contacts** | **sieve out irrelevant contacts** |
+| `***` | intermediate user | look through the list of contacts| see the contacts I have added |
+| `***` | intermediate user | search for contact names | directly find the contact of a person in mind |
+| `***` | intermediate user | assign tasks to contacts | know what I should contact them for |
+| `***` | intermediate user | delete tasks from contacts | remove task which are done |
+| `**` | intermediate user | sort contacts by tasks | identify connections between contacts |
+| `**` | intermediate user | choose what information about my contacts to view | read the information easier |
+| `***` | intermediate user | view task from contacts | see what tasks are connected to said contact |
+| | **experienced user** | **update large number of contacts at once** | **exclude manually adding them myself** |
+| `**` | experienced user | import a list of contacts | add a large number of contacts at once |
+| `**` | experienced user | export a list of contacts | send them to other people |
+| | **general user** | | |		
+| `**` | general CLI user| use commands from cli | exclude the need to learn new commands |
+| `***` | user | update contact details | keep track of their details |
+| `***` | user | delete contacts | get rid of contacts who are no longer relevant |
+| `***` | new user | save contacts | keep track of them |
+| `***` | new user | purge all example contacts | start adding my own contacts |
 
 ### Use cases
 
@@ -338,15 +368,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -355,16 +385,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -372,6 +402,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
