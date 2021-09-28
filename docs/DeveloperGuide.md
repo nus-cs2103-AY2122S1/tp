@@ -285,31 +285,240 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Viewing help**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to see the help menu
+2. AddressBook shows the user how to access the help webpage
+3. User accesses the help webpage
 
-    Use case ends.
+   Use case ends.
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. AddressBook adds the person
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given details are of an invalid format
+ 
+    * 2a1. AddressBook shows an error message
+     
+      Use case ends.
+
+**Use case: List all persons**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+    * 2a1. AddressBook displays an empty list of persons
+     
+      Use case ends.
+
+**Use case: Edit a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to edit a specific person in the list
+4. AddressBook edits the person
+
+   Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
+ 
   Use case ends.
 
 * 3a. The given index is invalid.
-
     * 3a1. AddressBook shows an error message.
-
+     
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Finding a person**
 
+**MSS**
+
+1. User requests to find a person using keywords
+2. AddressBook shows a list of persons whose names match at least one keyword
+ 
+   Use case ends.
+
+**Use case: Delete a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to delete a specific person in the list
+4. AddressBook delete the person
+ 
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+ 
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+
+**Use case: Clear the AddressBook**
+
+**MSS**
+
+1. User requests to clear the AddressBook
+2. AddressBook clears all entries in it
+ 
+   Use case ends.
+
+**Use case: Add reveneue to a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to add revenue to a specific person in the list
+4. AddressBook adds revenue to the person
+ 
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+ 
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+    
+* 3b. The given revenue is of an invalid format
+    * 3b1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+
+**Use case: Add a claim to a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to add a claim to a specific person in the list
+4. AddressBook adds the claim to the person
+ 
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+ 
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+* 3b. The given claim is of an invalid format
+    * 3b1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+     
+**Use case: Add a note to a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to add a note to a specific person in the list
+4. AddressBook adds a note to the person
+ 
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+ 
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+
+**Use case: Schedule a meeting**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to schedule a meeting with a specific person in the list
+4. AddressBook schedules a meeting with the person
+ 
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+ 
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+
+* 3b. The given meeting time is of an invalid format
+    * 3b1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+     
+**Use case: Add insurance to a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User requests to add insurance to a specific person in the list
+4. AddressBook adds insurance to the person
+ 
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+ 
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+
+* 3b. The given insurance is of an invalid format
+    * 3b1. AddressBook shows an error message.
+     
+      Use case resumes at step 2.
+     
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
