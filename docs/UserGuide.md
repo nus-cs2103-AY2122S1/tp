@@ -13,7 +13,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ gr
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest tutormaster.jar.
+1. Download the latest `tutormaster.jar`.
 
 1. Copy the file to the folder you want to use as the home folder for your TutorMaster.
 
@@ -29,7 +29,7 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ gr
 
    * **`student -v 3`**: Views the 3rd student in the persons list.
 
-   * **`clear`** : Deletes all students.
+   * **`clear`** : Clears all entries.
 
    * **`exit`** : Exits the app.
 
@@ -93,8 +93,8 @@ persons list.
 
 Format: `student -v INDEX`
 
-* Views the student detail specified at `INDEX`. `INDEX` should be a positive number
-* `-v` refers to the view command
+* Views the student detail specified at `INDEX`. `INDEX` should be a positive number.
+* `-v` refers to the view command.
 
 Examples:
 * `student -v 3` view the student detail at index 3.
@@ -108,16 +108,15 @@ Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_T
 * Edits the detail of the student specified by the `INDEX`. `INDEX` should be a 
   positive number and refers to the index number of a student in the list of students.
 * `-e` refers to the edit command
-* Commands in `[ ]` are optional
 * It is a requirement that **at least one of the optional fields should be provided**.
 * `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN`
 * `START_TIME` and `END_TIME` takes in the time in 24-hour format, for example `0800` 
   for 8am.
 
-Examples:
+Example:
 
-* `student -a 3 -c 88888888 -em johnny@mail.com` Edits the contact number and email
-  address of the third student in the students' list to 88888888 and johnny@mail.com
+* `student -e 3 c/88888888 e/johnny@mail.com` Edits the contact number and email
+  address of the third student in the student list to 88888888 and johnny@mail.com
   respectively.
 
 ### Deleting a student: `student -d` `[coming in v1.2]`
@@ -134,30 +133,6 @@ Examples:
 
 * `student -d 3` deleted the third student in the persons list
 
-### Clearing all entries : `clear`
-
-Clears all entries in Tutor Master.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-Tutor Master data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-Tutor Master data are saved as a JSON file `[JAR file location]/data/tutormaster.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Tutor Master will discard all data and start with an empty data file at the next run.
-</div>
-
 ### Listing all students : `list`
 
 Shows a list of all students in the persons list.
@@ -168,7 +143,7 @@ Format: `list`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -186,11 +161,11 @@ Examples:
 
 Groups students by their names together. This grouping helps to distinguish between various tuition groups.
 
-Format: `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...`
+Format: `student -g GROUPNAME INDEX…​`
 
 * Groups students into a group specified at `GROUPNAME`
-* -g refers to the group command
-* You can specify as many Index numbers as required.
+* `-g` refers to the group command
+* You can specify as many index numbers as required.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -204,7 +179,7 @@ Adds a task to the task list.
 Format: `task -a n/NAME`
 
 * Adds a task with the name `NAME`
-* -a refers to the add command
+* `-a` refers to the add command
 
 Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
@@ -216,7 +191,7 @@ Views a task in the task list.
 Format: `task -v INDEX`
 
 * Views a task with the index `INDEX`
-* -v refers to the view command
+* `-v` refers to the view command
 
 Examples:
 * `task -v 2` shows the attributes of the 2nd task on the student’s task list
@@ -228,13 +203,12 @@ Edits a task in the task list.
 Format: `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]`
 
 * Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
-* -e refers to the edit command
-* Commands in `[ ]` are optional
-* It is a requirement that at least one of the optional fields should be provided
+* `-e` refers to the edit command
+* It is a requirement that **at least one of the optional fields should be provided**
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/20211231 c/true` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
+* `task -e 4 d/20211231 c/t` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
 
 ### Deleting a task `[coming in v1.2]`
 
@@ -260,6 +234,30 @@ Format: `task -ass STUDENTINDEX TASKINDEX`
 
 Examples:
 * `task -ass 2 4` adds the task at the index 4 to the student at the index 2
+
+### Clearing all entries : `clear`
+
+Clears all entries in Tutor Master.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+Tutor Master data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+Tutor Master data are saved as a JSON file `[JAR file location]/data/tutormaster.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Tutor Master will discard all data and start with an empty data file at the next run.
+</div>
 
 ### Archiving data files `[coming in v2.0]`
 
