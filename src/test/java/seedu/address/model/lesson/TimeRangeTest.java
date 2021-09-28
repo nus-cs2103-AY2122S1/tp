@@ -16,8 +16,8 @@ public class TimeRangeTest {
     public void constructor_invalidTimeRange_throwsIllegalArgumentException() {
         Time validStartTime = new Time("12:00");
         Time validEndTime = new Time("10:00");
-        assertThrows(IllegalArgumentException.class,
-            () -> new TimeRange(validStartTime, validEndTime));
+        assertThrows(IllegalArgumentException.class, () ->
+            new TimeRange(validStartTime, validEndTime));
     }
 
     @Test

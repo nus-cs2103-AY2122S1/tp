@@ -9,8 +9,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
