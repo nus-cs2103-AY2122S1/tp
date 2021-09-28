@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -96,7 +96,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -414,6 +414,30 @@ Preconditions: There is at least one student added to TutorAid.
       Steps 3a1 - 3a2 are repeated until a valid index is given
       Use case resumes from step 4
 
+**Use case 6: View a student's details**
+
+Precondition: The student's details have been added to TutorAid.
+
+**MSS**
+
+1. Tutor requests a list of students
+
+2. TutorAid shows the list of students
+
+3. Tutor finds the specific student in the list and requests to view the student's details
+
+4. TutorAid shows the student's details
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid
+
+    * 3a1. TutorAid shows an error message
+
+      Use case resumes at step 3
+
 **Use Case 8: View schedule for the upcoming week**
 
 **MSS**
@@ -478,6 +502,105 @@ Preconditions: There is at least one student added to TutorAid.
 
     Use case ends.
 
+**Use case 12: View income for the month**
+
+Preconditions: There is at least one student added to TutorAid.
+
+**MSS**
+
+1. Tutor keys in the view income command to view income earned for the month
+2. Tutor successfully views income earned for the month
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the view income command
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the data entered are correct.
+      Use case resumes from step 2.
+
+**Use case 13: Set up a recurring class**
+
+Preconditions: The students of the class have been added to TutorAid.
+
+**MSS**
+
+1. Tutor requests to add a class
+
+2. TutorAid requests for details of the class including day of the week, time and price
+
+3. Tutor enters the details of the class
+
+4. TutorAid creates the class
+
+5. Tutor <u>adds a student to the class (UC14)</u>
+
+   Step 5 is repeated until all students have been added
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The class appears to overlap with another class as intended by the Tutor
+
+    * 3a1. TutorAid displays a warning
+
+    * 3a2. The tutor dismisses the warning
+
+      Use case resumes at step 4
+
+* 3b. The class appears to overlap with another class due to a mistake by the Tutor
+
+    * 3b1. TutorAid displays a warning
+
+    * 3b2. The tutor acknowledges the warning and cancels the creation of the class
+
+      Use case resumes at step 1
+
+* 3c. TutorAid detects invalid input
+
+    * 3c1. TutorAid displays a warning
+
+    * 3c2. The tutor acknowledges the warning
+
+      Use case resumes at step 3
+
+**Use case 14: Add a student to a class**
+
+Preconditions: The students of the class have been added to TutorAid, and the class has been created correctly.
+
+**MSS**
+
+1. Tutor requests a list of classes
+
+2. TutorAid displays a list of classes
+
+3. Tutor requests to add students to a specific class
+
+4. TutorAid displays the list of students
+
+5. Tutor chooses some students from the list to be added
+
+6. TutorAid shows a confirmation message
+
+7. Tutor confirms the action
+
+8. TutorAid adds the selected students to the class
+
+   Use case ends.
+
+**Extensions**
+
+* 6a. Tutor declines the confirmation.
+
+    * 6a1. TutorAid stops the action.
+
+      Use case resumes at step 3.
+
 **Use Case 15: Edit students in a class**
 
 **MSS**
@@ -529,27 +652,6 @@ Preconditions: There is at least one student added to TutorAid.
        Steps 5b1-5b2 are repeated until the command entered is correct.
 
        Use case resumes from step 5.
-
-**Use case 12: View income for the month**
-
-Preconditions: There is at least one student added to TutorAid.
-
-**MSS**
-
-1. Tutor keys in the view income command to view income earned for the month
-2. Tutor successfully views income earned for the month
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. TutorAid detects an error in the view income command
-
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. User re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the data entered are correct.
-      Use case resumes from step 2.
 
 **Use Case 15: Edit students in a class**
 

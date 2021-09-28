@@ -5,9 +5,17 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
+
+### Ivan Wong
+
+<img src="images/wpinrui.png" width="200px">
+
+[[github](https://github.com/wpinrui)]
+[[portfolio](team/wpinrui.md)]
+
+* Role: Team Lead
+* Responsibilities: Deliverables and Deadlines
 
 ### Yeo Jun Wei
 
