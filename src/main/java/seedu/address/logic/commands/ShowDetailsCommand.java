@@ -31,8 +31,12 @@ public class ShowDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateEventList(eventName);
-        return new CommandResult(MESSAGE_SUCCESS);
+        Event desiredEvent = model.getEventList().filtered(eventName).get(0);
+        String displayedMessage = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s", 
+                desiredEvent.getName(), 
+                desiredEvent.getDate(), 
+                desiredEvent.getTime().toString().equals("") ? "N/A" : desiredEvent.getTime());
+        return new CommandResult(displayedMessage);
     }
 
     @Override
