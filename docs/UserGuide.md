@@ -128,19 +128,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a friend : `delete`
 
-Deletes the specified person from the address book.
+Deletes a friend from gitGud’s friend’s list using gitGud’s unique friend identifier.
 
-Format: `delete INDEX`
+Format: `friend --delete FRIEND_ID`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `FRIEND_ID`.
+* The `FRIEND_ID` must currently exist in the database.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
 
 ### Clearing all entries : `clear`
 
