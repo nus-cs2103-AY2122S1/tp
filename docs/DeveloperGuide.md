@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. Tutor identifies the session to add a todo list
 4. Tutor adds a todo task to that session
 5. TutorAid registers the task to the session
-6. Tutor repeats from step 2 until he/she finishes adding all the tasks
+6. Tutor repeats from step 4 until he/she finishes adding all the tasks
 
     Use case ends.
 
