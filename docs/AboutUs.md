@@ -49,7 +49,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Feng Zhunyi
 
-<img src="images/Feng_Zhunyi.JPG" width="200px">
+<img src="images/leofeng10.JPG" width="200px">
 
 
 
