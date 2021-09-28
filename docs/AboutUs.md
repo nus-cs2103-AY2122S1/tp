@@ -58,3 +58,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Deliverable and Deadline, UI
 * Responsibilities: Ensure project deliverables are done on time and in the right format. In charge of UI ensuring it fits the use case.
+
+### Lim Kai Fang
+
+<img src="images/kflim.png" width="200px">
+
+[[GitHub page](https://github.com/kflim)]
+[Portfolio](team/johndoe.md)
+* Role: Documentation
+* Responsibilities: Responsible for the quality of various project documents.
