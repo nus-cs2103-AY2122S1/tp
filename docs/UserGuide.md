@@ -12,7 +12,7 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
   - [Batch importing contacts: `import`](#batch-importing-contacts-import)
   - [Listing all persons: `list`](#listing-all-persons-list)
   - [Editing a person: `edit`](#editing-a-person-edit)
-  - [Locating persons by name: `find`](#locating-persons-by-name-find)
+  - [Locating persons by name: `find`](#locating-persons-find)
   - [Deleting a person: `delete`](#deleting-a-person-delete)
   - [Clearing all entries: `clear`](#clearing-all-entries-clear)
   - [Exiting the program: `exit`](#exiting-the-program-exit)
@@ -140,15 +140,15 @@ Examples:
 - `edit "1" -p "91234567" -e "johndoe@example.com"` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit "2" -n "Betsy Crower" -t ""` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose name, phone number, email, address and/or tag contain contains any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `Find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`
 
+- At least one of the optional fields must be provided.
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
