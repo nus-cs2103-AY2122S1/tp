@@ -35,3 +35,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
 - Role: Documentation, VSCode Expert
 - Responsibility: Search by categories
+
+### Loh Xian Ze, Bryan
+
+<img src="images/anonymxtrix.png" width="200px">
+
+[[github](https://github.com/anonymxtrix)]
+
+- Role: Code quality, Git expert
+- Responsibility: Logic
