@@ -296,7 +296,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case 1: Add user**
 
-**MSS**
+MSS
 1. User enters command to add a contact.
 2. CohortConnect shows a successfully added message.
 3. CohortConnect shows the updated list of contacts.
@@ -321,7 +321,7 @@ Extensions
 
 **Use Case 2: Edit user**
 
-**MSS**
+MSS
 1. User enters command to edit a contact.
 2. CohortConnect shows a successfully edited message.
 3. CohortConnect shows the updated list of contacts.
@@ -339,7 +339,7 @@ Extensions
 
 **Use Case 3: Delete user**
 
-**MSS**
+MSS
 1. User enters command to delete a contact.
 2. CohortConnect shows a successfully deleted message.
 3. CohortConnect shows the updated list of contacts.
