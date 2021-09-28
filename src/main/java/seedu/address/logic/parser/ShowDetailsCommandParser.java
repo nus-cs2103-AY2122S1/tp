@@ -9,7 +9,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 public class ShowDetailsCommandParser implements Parser<ShowDetailsCommand> {
     @Override
     public ShowDetailsCommand parse(String userInput) throws ParseException {
-        String trimmedArg = userInput.trim();
+        String trimmedArg = userInput.trim().replaceAll("\\s+", " ");
         if (trimmedArg.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowDetailsCommand.MESSAGE_USAGE));

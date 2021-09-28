@@ -25,6 +25,7 @@ public class ShowDetailsCommand extends Command {
     private final Predicate<Event> eventName;
 
     public ShowDetailsCommand(Predicate<Event> eventName) {
+        requireNonNull(eventName);
         this.eventName = eventName;
     }
 
