@@ -77,15 +77,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
+Format: `add applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
+* `add applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`
+* `add applicant n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
 
 ### Deleting an applicant: `delete applicant`
 
