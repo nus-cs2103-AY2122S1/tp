@@ -27,7 +27,7 @@ public class Insurance {
 
     public static Insurance of(String insuranceName) {
         for (InsuranceType type : InsuranceType.values()) {
-            if (type.getTypeName().equals(insuranceName)) {
+            if (type.getTypeName().equalsIgnoreCase(insuranceName)) {
                 return new Insurance(type);
             }
         }
