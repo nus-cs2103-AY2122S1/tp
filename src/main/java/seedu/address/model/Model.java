@@ -59,34 +59,34 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a Participant with the same identity as {@code participant} exists in Managera.
      */
     boolean hasParticipant(Participant participant);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given Participant.
+     * The Participant must exist in Managera.
      */
     void deleteParticipant(Participant target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given Participant.
+     * {@code participant} must not already exist in Managera.
      */
     void addParticipant(Participant person);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given Participant {@code target} with {@code editedParticipant}.
+     * {@code target} must exist in Managera.
+     * The Participant identity of {@code editedParticipant} must not be the same as another existing Participant in Managera.
      */
     void setParticipant(Participant target, Participant editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered Participant list */
     ObservableList<Participant> getFilteredParticipantList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered Participant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredParticipantList(Predicate<Participant> predicate);

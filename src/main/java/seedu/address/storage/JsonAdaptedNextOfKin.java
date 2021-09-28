@@ -18,7 +18,7 @@ public class JsonAdaptedNextOfKin {
     private final JsonAdaptedTag tag;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedNextOfKin} with the given NextOfKin details.
      */
     @JsonCreator
     public JsonAdaptedNextOfKin(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -29,7 +29,7 @@ public class JsonAdaptedNextOfKin {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code NextOfKin} into this class for Jackson use.
      */
     public JsonAdaptedNextOfKin(NextOfKin source) {
         name = source.getName().fullName;

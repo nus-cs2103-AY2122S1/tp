@@ -40,7 +40,7 @@ public class ParticipantBuilder {
     private ArrayList<NextOfKin> nextOfKins;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code ParticipantBuilder} with the default details.
      */
     public ParticipantBuilder() {
         name = new Name(DEFAULT_NAME);

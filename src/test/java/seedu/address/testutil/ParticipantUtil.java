@@ -38,7 +38,7 @@ public class ParticipantUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditParticipantDescriptor}'s details.
      */
     public static String getEditParticipantDescriptorDetails(EditCommand.EditParticipantDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();

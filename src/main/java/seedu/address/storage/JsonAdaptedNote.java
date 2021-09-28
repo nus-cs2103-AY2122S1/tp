@@ -15,7 +15,7 @@ public class JsonAdaptedNote {
     private final String importance;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedNote} with the given note details.
      */
     @JsonCreator
     public JsonAdaptedNote(@JsonProperty("content") String content,
@@ -25,7 +25,7 @@ public class JsonAdaptedNote {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Note} into this class for Jackson use.
      */
     public JsonAdaptedNote(Note source) {
         content = source.getContent();

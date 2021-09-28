@@ -117,7 +117,7 @@ public class ModelManager implements Model {
         addressBook.setParticipant(target, editedParticipant);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Participant List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of

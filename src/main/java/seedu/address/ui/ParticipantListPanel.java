@@ -18,7 +18,7 @@ public class ParticipantListPanel extends UiPart<Region> {
     private ListView<Participant> participantListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ParticipantListPanel} with the given {@code ObservableList}.
      */
     public ParticipantListPanel(ObservableList<Participant> participantList) {
         super(FXML);
@@ -27,7 +27,7 @@ public class ParticipantListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Participant} using a {@code PersonCard}.
      */
     class ParticipantListViewCell extends ListCell<Participant> {
         @Override

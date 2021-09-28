@@ -58,8 +58,8 @@ public class EditCommand extends Command {
     private final EditParticipantDescriptor editParticipantDescriptor;
 
     /**
-     * @param index                     of the person in the filtered person list to edit
-     * @param editParticipantDescriptor details to edit the person with
+     * @param index of the Participant in the filtered Participant list to edit
+     * @param editParticipantDescriptor details to edit the Participant with
      */
     public EditCommand(Index index, EditParticipantDescriptor editParticipantDescriptor) {
         requireNonNull(index);
@@ -91,8 +91,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Participant} with the details of {@code participantToEdit}
+     * edited with {@code editParticipantDescriptor}.
      */
     private static Participant createEditedParticipant(Participant participantToEdit,
                                                        EditParticipantDescriptor editParticipantDescriptor) {
@@ -236,8 +236,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the Participant with. Each non-empty field value will replace the
+     * corresponding field value of the Participant.
      */
     public static class EditParticipantDescriptor {
         private Name name;

@@ -12,7 +12,7 @@ import seedu.address.model.participant.UniqueParticipantList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameParticipant comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -65,7 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a participant with the same identity as {@code participant} exists in the address book.
      */
     public boolean hasParticipant(Participant participant) {
         requireNonNull(participant);
@@ -73,17 +73,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a Particpant to the Managera.
+     * The Participant must not already exist in Managera.
      */
     public void addParticipant(Participant p) {
         participants.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given Participant {@code target} in the list with {@code editedParticipant}.
+     * {@code target} must exist in Managera.
+     * The person identity of {@code editedParticipant} must not be the same as another existing Participant in Managera.
      */
     public void setParticipant(Participant target, Participant editedParticipant) {
         requireNonNull(editedParticipant);
@@ -93,7 +93,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in Managera.
      */
     public void removeParticipant(Participant key) {
         participants.remove(key);

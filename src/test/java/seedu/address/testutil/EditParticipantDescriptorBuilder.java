@@ -25,7 +25,7 @@ public class EditParticipantDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditParticipantDescriptor} with fields containing {@code participant}'s details
      */
     public EditParticipantDescriptorBuilder(Participant participant) {
         descriptor = new EditParticipantDescriptor();
@@ -40,7 +40,7 @@ public class EditParticipantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditParticipantDescriptor} that we are building.
      */
     public EditParticipantDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -48,7 +48,7 @@ public class EditParticipantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditParticipantDescriptor} that we are building.
      */
     public EditParticipantDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -56,7 +56,7 @@ public class EditParticipantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditParticipantDescriptor} that we are building.
      */
     public EditParticipantDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -64,7 +64,7 @@ public class EditParticipantDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditParticipantDescriptor} that we are building.
      */
     public EditParticipantDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));

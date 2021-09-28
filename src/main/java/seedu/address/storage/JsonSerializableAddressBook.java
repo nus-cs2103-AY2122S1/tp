@@ -29,7 +29,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and events.
+     * Constructs a {@code JsonSerializableAddressBook} with the given participants and events.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("participants") List<JsonAdaptedParticipant> participants,
