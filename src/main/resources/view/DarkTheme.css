@@ -1,3 +1,8 @@
+.root {
+    -primary-color: #2a4d69;
+    -secondary-color: #e7eff6;
+}
+
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
@@ -97,7 +102,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: #e7eff6;
+    -fx-background-color: -secondary-color;
 }
 
 .list-cell #cardPane {
@@ -131,17 +136,17 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#2a4d69, 20%);
+     -fx-background-color: derive(-primary-color, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#2a4d69, 20%);
+     -fx-background-color: derive(-primary-color, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
 }
 
 .pane-without-border {
-    -fx-background-color: derive(#2a4d69, 20%);
+    -fx-background-color: derive(-primary-color, 20%);
 }
 
 .result-display {
@@ -156,12 +161,12 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: #e7eff6;
+    -fx-background-color: -secondary-color;
     -fx-background-radius: 0;
 }
 
 .status-bar {
-    -fx-background-color: derive(#e7eff6, 30%);
+    -fx-background-color: derive(-secondary-color, 30%);
 }
 
 .status-bar .label {
@@ -200,7 +205,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#2a4d69, 20%);
+    -fx-background-color: derive(-primary-color, 20%);
 }
 
 .menu-bar .label {
@@ -333,6 +338,10 @@
     -fx-font-family: "Open Sans Bold";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
+}
+
+.text-field:empty #commandTextField {
+    -fx-prompt-text-fill: transparent;
 }
 
 #filterField, #personListPanel, #personWebpage {

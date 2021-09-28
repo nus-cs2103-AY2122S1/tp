@@ -21,7 +21,7 @@ public class ResultDisplay extends UiPart<Region> {
      */
     public ResultDisplay() {
         super(FXML);
-        resultDisplay.setText("Welcome to PlannerMd");
+        resultDisplay.setText("Welcome to PlannerMD");
     }
 
     public void setFeedbackToUser(String feedbackToUser) {
