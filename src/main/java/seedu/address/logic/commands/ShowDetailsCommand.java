@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Shows the details of an existing Event in the Managera Event list.
  */
 public class ShowDetailsCommand extends Command {
 
