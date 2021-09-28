@@ -276,9 +276,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new person               |                                                                        |
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| `* *`    | user with many members added into the app  | sort persons by name           | locate a person easily       |
+| `* * `    | expert user | create shortcut for tasks | save time on frequently performed tasks
+| `* *` | long time user | add groups of people | quickly add in new members
+| `*`      | user | hide private contact details | minimise chance of someone else seeing them by accident
+| `*` | user | transfer my app's data to someone else | access accurate and updated data |                                             |
+| `*` | user |archive/hide temporary data | not get distracted by irrelevant data
+| `*` | user | unarchive archived data | view the neccessary data again
+| `*` | user | export allocations into a readable format | share with club members' their allocated training session and venue
+| `*` | user | recover data | retrieve the data I accidentally deleted
+| `*` | long time user | delete data associated with a particular club | minimize exposure of confidential data I no longer need
+| `*` | long time user | delete groups of people | remove graduating members
+| `*` | long time user | keep track of people from different clubs | allocate members at one go regardless of what club they are from
 *{More to be added}*
 
 ### Use cases
