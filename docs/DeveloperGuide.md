@@ -232,7 +232,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
@@ -288,146 +287,190 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
 | `* * *`  | user                                       | be able to store my contact omitting certain fields         | save contact without having to include email or address |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-2. **Use case: Find a contact using name**
+**Use Case 1: Add user**
 
-    **MSS**
+MSS
+
+1. User enters command to add a contact.
+2. CohortConnect shows a successfully added message.
+3. CohortConnect shows the updated list of contacts.
+
+Extensions
+
+* 1a. The input command is invalid.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect requests for correct format.
+  * 1a3. User enters new data.
+  * 1a1-1a3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+
+* 1b. User enters an existing name.
+  * 1b1. CohortConnect prompts that name is already taken.
+  * 1b2. CohortConnect requests for correct format.
+  * 1b3. User enters new data.
+  * Steps 1b1-1b3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+
+**Use Case 2: Edit user**
+
+MSS
+
+1. User enters command to edit a contact.
+2. CohortConnect shows a successfully edited message.
+3. CohortConnect shows the updated list of contacts.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The given index is not present.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect requests for correct format.
+  * 1a3. User enters new data.
+  * Steps 1a1-1a3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+
+**Use Case 3: Delete user**
+
+MSS
+
+1. User enters command to delete a contact.
+2. CohortConnect shows a successfully deleted message.
+3. CohortConnect shows the updated list of contacts.
+
+   Use case ends.
+
+Extensions
     
-    1.  User enters command to find a contact by name.
-    2.  CohortConnect shows list of contacts with matching name.
+* 1a. The given index is not present.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect requests for correct format.
+  * 1a3. User enters new data.
+  * Steps 1a1-1a3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+  
+**Use Case 4: Find a contact using name**
 
-        Use case ends.
+MSS
+
+1. User enters command to find a contact by name.
+2. CohortConnect shows list of contacts with matching name.
+
+   Use case ends.
         
-    **Extensions**
+Extensions
+
+* 1a. The given name is not present.
+  * 1a1. CohortConnect shows an error message.
+  * Use case ends.
+
+* 2a. The list is empty.
+  * Use case ends.
     
-    * 1a. The given name is not present.
+**Use Case 5: Find a contact using tag**
 
-        * 1a1. CohortConnect shows an error message.
-        * Use case ends.
+MSS
+
+1. User enters command to find a contact by tag.
+2. CohortConnect shows list of contacts labelled with matching tag.
     
-    * 2a. The list is empty.
+    Use case ends.
 
-      Use case ends.
-
+Extensions
     
-3. **Use case: Find a contact using tag**
-
-    **MSS**
-    
-    1.  User enters command to find a contact by tag.
-    2.  CohortConnect shows list of contacts labelled with matching tag.
-
-        Use case ends.
+* 1a. The given tag doesn't exist.
+  * 1a1. CohortConnect shows an error message.
+  * Use case ends.
         
-    **Extensions**
-    
-    * 1a. The given tag doesn't exist.
-
-        * 1a1. CohortConnect shows an error message.
-        * Use case ends.
-        
-    * 2a. The list is empty.
-
-      Use case ends.
+* 2a. The list is empty.
+  * Use case ends.
 
 
-6. **Use case: Show a person's details using Index**
+**Use Case 6: Show a person's details using Index**
 
-    **MSS**
+MSS
 
-    1.  User requests to list persons
-    2.  CohortConnect shows a list of persons
-    3.  User requests to show details of person at a specific index in the list
-    4.  CohortConnect shows a pop-up with the person's details
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of person at a specific index in the list.
+4.  CohortConnect shows a pop-up with the person's details.
 
-        Use case ends.
+    Use case ends.
 
-    **Extensions**
+Extensions
 
-    * 2a. The list is empty.
+* 2a. The list is empty.
+  * Use case ends.
 
-      &nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
-
-    * 3a. The given index is invalid.
-
-        * 3a1. CohortConnect shows an error message.
-
-      Use case resumes at step 2.
+* 3a. The given index is invalid.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 2.
     
 
-7. **Use case: Show a person's details using Name**
+**Use Case 7: Show a person's details using Name**
 
-    **MSS**
+MSS
 
-    1.  User requests to list persons
-    2.  CohortConnect shows a list of persons
-    3.  User requests to show details of a specific person in the list
-    4.  CohortConnect shows a pop-up with the person's details
+1.  User requests to list persons.
+2.  CohortConnect shows a list of persons.
+3.  User requests to show details of a specific person in the list.
+4.  CohortConnect shows a pop-up with the person's details.
+    
+    Use case ends.
 
-        Use case ends.
+**Extensions**
 
-    **Extensions**
+* 2a. The list is empty.
+  * Use case ends.
 
-    * 2a. The list is empty.
+* 3a. The given name is not present.
+  * 3a1. CohortConnect shows an error message.
+  * Use case resumes at step 2.
 
-      &nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
+* 3b. Multiple matching names.
+  * 3b1. CohortConnect shows an error message.
+  * 3b2. Displays list of users with the same name.
+  * Use case resumes at step 2.
 
-    * 3a. The given name is invalid.
+**Use Case 8: Import contacts from JSON file**
 
-        * 3a1. CohortConnect shows an error message.
+MSS
 
-        Use case resumes at step 2.
+1. User enters command to import from a JSON file.
+2. CohortConnect shows a list of persons to be imported.
+3. User confirms the import.
+4. CohortConnect shows the updated list of contacts.
+   
+   Use case ends.
 
-    * 4a. Multiple matching names.
+Extensions
 
-        * 4a1. CohortConnect shows an error message.
+* 1a. CohortConnect cannot find the JSON file.
+  * 1a1. CohortConnect shows an error.
+  * Use case ends.
 
-        Use case resumes at step 2.
+* 2a. User decides to cancel the import.
+  * Use case ends.
 
-8. **Use case: Import contacts from JSON file**
+**Use Case 9: Export contacts to JSON file**
 
-   **MSS**
+MSS
 
-   1. User enters command to import from a JSON file.
-   2. CohortConnect shows a list of persons to be imported.
-   3. User confirms the import.
-   4. CohortConnect shows the updated list of contacts.
+1. User enters command to export contacts to a named JSON file.
+2. CohortConnect shows a success message.
+   
+   Use case ends.
 
-      Use case ends.
+Extensions
 
-   **Extensions**
-
-   * 1a. CohortConnect cannot find the JSON file.
-
-      * 1a1. CohortConnect shows an error.
-
-     Use case ends.
-
-   * 2a. User decides to cancel the import.
-
-     Use case ends.
-
-9. **Export contacts to JSON file**
-
-   **MSS**
-
-   1. User enters command to export contacts to a named JSON file.
-   2. CohortConnect shows a success message.
-
-      Use case ends.
-
-   **Extensions**
-
-   * 1a. File name already exists.
-
-      * 1a1. CohortConnect shows an error.
-
-     Use case ends.
+* 1a. File name already exists.
+  * 1a1. CohortConnect shows an error.
+  * Use case ends.
 
 ### Non-Functional Requirements
 
@@ -437,13 +480,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Data should be saved locally.
 5. Product is not required to handle communication between users.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -470,7 +513,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -487,7 +529,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -495,4 +536,3 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
