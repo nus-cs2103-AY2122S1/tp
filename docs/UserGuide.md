@@ -65,26 +65,28 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ gr
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+Views a info page for a list of commands and examples
 
 Format: `help`
 
 
-### Adding a student: `add`
+### Adding a student: `student -a`
 
-Adds a student to the persons list.
+Adds a student to the students list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `student -a -n NAME [-c CONTACT] [-em EMAIL] [-s DAY/STARTTIME/ENDTIME]​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+* Adds a student with the specified `NAME`
+* `-a` refers to the add command
+* Commands in `[ ]` are optional
+* `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN` while `STARTTIME` and `ENDTIME` takes in the time in 24 hour format, for example 0800 for 8am.
+
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `student -a -n John -c 12345678 -em john@mail.com -s TUE/1600/1800`<br>
+  adds a student with the name John, contact number 12345678, email john@mail.com and a lesson every tuesday from 4pm to 6pm
+* `student -a -n Barbara -c 12344321`<br>
+  adds a student with the name Barbara and contact number 12344321
 
 ### Viewing a student: `student -v` `[coming in v1.2]`
 
