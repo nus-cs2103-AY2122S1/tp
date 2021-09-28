@@ -5,7 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
@@ -19,41 +18,42 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Lau Teng Hon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/th-429b.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Th-429B)]
+[[portfolio](team/tenghon.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Integration (Tentative)
 
-### Johnny Doe
+### Toh Wang Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/trash-bin99.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/trash-bin99)] 
+[[portfolio](team/wangbin.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing
 
-### Jean Doe
+### Lim Peiyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/py0000.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Py0000)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code Quality
 
-### James Doe
+### Calvin Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/calvintan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/Cyn7hius)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation
