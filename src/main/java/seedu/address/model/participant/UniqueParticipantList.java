@@ -27,7 +27,7 @@ public class UniqueParticipantList implements Iterable<Participant> {
 
     private final ObservableList<Participant> internalList = FXCollections.observableArrayList();
     private final ObservableList<Participant> internalUnmodifiableList =
-        FXCollections.unmodifiableObservableList(internalList);
+            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent participant as the given argument.

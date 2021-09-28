@@ -22,7 +22,7 @@ public class JsonAdaptedNextOfKin {
      */
     @JsonCreator
     public JsonAdaptedNextOfKin(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("tag") JsonAdaptedTag tag) {
+                                @JsonProperty("tag") JsonAdaptedTag tag) {
         this.name = name;
         this.phone = phone;
         this.tag = tag;

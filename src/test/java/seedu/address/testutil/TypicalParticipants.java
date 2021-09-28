@@ -27,8 +27,8 @@ public class TypicalParticipants {
 
     public static final Participant BERNICE = new Participant(new Name("Bernice Yu"), new Phone("99272758"), new Email(
             "berniceyu" + "@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-            SampleDataUtil.getTagSet("colleagues", "friends"), BirthDate.of(1970, 4,
-        2), SampleDataUtil.getNoteSet(new Note("Allergic to Alcohol", Note.Importance.VERY_HIGH)),
+            SampleDataUtil.getTagSet("colleagues", "friends"), BirthDate.of(1970, 4,2),
+            SampleDataUtil.getNoteSet(new Note("Allergic to Alcohol", Note.Importance.VERY_HIGH)),
             List.of(new NextOfKin(new Name("Bennett Yu"), new Phone("83612412"), new Tag("Parent"))));
 
     public static final Participant CHARLOTTE = new Participant(new Name("Charlotte Oliveiro"), new Phone("93210283"),
