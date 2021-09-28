@@ -14,9 +14,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest tutormaster.jar.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the home folder for your TutorMaster.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,13 +24,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`help`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`student -v 3`**: Views the 3rd student in the Address Book.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -63,6 +63,54 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+### Viewing a student: `student -v` `[coming in v1.2]`
+
+Views a particular student's details given by the specified index from the 
+address book.
+
+Format: `student -v INDEX`
+
+* Views the student detail specified at `INDEX`. `INDEX` should be a positive number
+* `-v` refers to the view command
+
+Examples:
+* `student -v 3` view the student detail at index 3.
+
+### Editing a student: `student -e` `[coming in v1.2]`
+
+Edits the detail of the specific student.
+
+Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]`
+
+* Edits the detail of the student specified by the `INDEX`. `INDEX` should be a 
+  positive number and refers to the index number of a student in the list of students.
+* `-e` refers to the edit command
+* Commands in `[ ]` are optional
+* It is a requirement that **at least one of the optional fields should be provided**.
+* `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN`
+* `START_TIME` and `END_TIME` takes in the time in 24-hour format, for example `0800` 
+  for 8am.
+
+Examples:
+
+* `student -a 3 -c 88888888 -em johnny@mail.com` Edits the contact number and email
+  address of the third student in the students' list to 88888888 and johnny@mail.com
+  respectively.
+
+### Deleting a student: `student -d` `[coming in v1.2]`
+
+Deletes the specific student given by the specified index from the address book.
+
+Format: `student -d INDEX`
+
+* Deletes the student specified by the `INDEX`. 
+* `-d` refers to the edit command
+* `INDEX` should be a positive number and refers to the index number of a student in the list of students.
+
+Examples:
+
+* `student -d 3` deleted the third student in the address book
 
 ### Viewing help : `help`
 
@@ -128,7 +176,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `delete` 
 
 Deletes the specified person from the address book.
 
@@ -197,6 +245,60 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+### Grouping students  `[coming in v1.2]`
+
+Groups students by their names together. This grouping helps to distinguish between various tuition groups.
+
+Format: `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...`
+
+* Groups students into a group specified at `GROUPNAME`
+* -g refers to the group command
+* You can specify as many Index numbers as required.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `student -g Team2 1 3 5` creates a group "Team2" that includes students at index 1, 3 and 5.
+
+### Adding a task `[coming in v1.2]`
+
+Adds a task to the address book
+
+Format: `task -a n/NAME`
+
+* Adds a task with the name `NAME`
+* -a refers to the add command
+
+Examples:
+* `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
+
+### Viewing a task `[coming in v1.2]`
+
+Views a task in the address book
+
+Format: `task -v INDEX`
+
+* Views a task with the index `INDEX`
+* -v refers to the view command
+
+Examples:
+* `task -v 2` shows the attributes of the 2nd task on the student’s task list
+
+### Editing a task `[coming in v1.2]`
+
+Edits a task in the address book
+
+Format: `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]`
+
+* Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
+* -e refers to the edit command
+* Commands in `[ ]` are optional
+* It is a requirement that at least one of the optional fields should be provided
+* The current value will be updated to the value input by the user
+
+Examples:
+* `task -e 4 d/20211231 c/true` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
 
 --------------------------------------------------------------------------------------------------------------------
 
