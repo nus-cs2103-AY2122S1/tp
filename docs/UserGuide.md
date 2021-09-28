@@ -147,6 +147,29 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Add task:
+
+Add a task to the current list of tasks attached to a person. 
+
+Format: `addtask INDEX task/TASKNAME`
+
+* Adds a task to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* The name of the task is specified by the TASKNAME. 
+
+Examples:
+* `addtask 1 task/call for meeting` Adds the task "call for meeting" to the list of task of the person in 1st person.
+### Delete task:
+
+Deletes a task from the specified person.
+
+Format: `deltask INDEX ti/TASK_INDEX`
+
+* Deletes a task attached to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* The task deleted is specified by the TASK_INDEX. The task_index refers to the index number displayed in the tasklist of said person. The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `deltask 2 ti/2` Deletes the 2nd task attached to the 2nd person.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -210,3 +233,5 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Add Task** | `addtask INDEX task/TASKNAME` <br> e.g., `addtask 2 task/celebrate $1 million revenue`
+**Delete Task** | `deltask INDEX ti/TASK_INDEX` <br> e.g., `deltask 2 ti/2`
