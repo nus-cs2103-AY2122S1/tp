@@ -48,9 +48,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Feng Zhunyi
 
-<img src="images/Feng_zhunyi.JPG" width="200px">
+<img src="images/Feng_Zhunyi.JPG" width="200px">
 
 
 * Role: Developer
