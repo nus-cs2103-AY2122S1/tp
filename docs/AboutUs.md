@@ -5,19 +5,14 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us through the following email addresses:
+* Lua Yi Da `e0543409@u.nus.edu`
+* Chen Yiyang `e0563851@u.nus.edu`
+* Hong Ai Ling `ailing.hong@u.nus.edu`
+* Hu Linglong `e0580032@u.nus.edu`
+* Zhang Ziqing `zhangziqing@u.nus.edu`
 
 ## Project team
-
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
 
 ### Lua Yi Da
 
@@ -29,18 +24,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Deliverables and deadlines
 
-### Hu Linglong
-
-<img src="images/huisthat.png" width="200px">
-
-[[github](http://github.com/huisthat)] [[portfolio](team/huisthat.md)]
-
-* Role: Documentation
-* Responsibilities: Responsible for the quality of various project documents.
-
 ### Chen Yiyang
 
-<img src="images/chen-yiyang.png.png" width="200px">
+<img src="images/chen-yiyang.png" width="200px">
 
 [[github](https://github.com/Chen-Yiyang)]
 [[portfolio](team/chen-yiyang.md)]
@@ -48,12 +34,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Integration
 
+### Hong Ai Ling
+
+<img src="images/ailing35.png" width="200px">
+
+[[github](https://github.com/ailing35)]
+[[portfolio](team/ailing35.md)]
+
+* Role: Developer
+* Responsibilities: Code quality
+
+### Hu Linglong
+
+<img src="images/huisthat.png" width="200px">
+
+[[github](http://github.com/huisthat)] 
+[[portfolio](team/huisthat.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
+
 ### Zhang Ziqing
 
-<img src="images/zhangziqing.png" width="200px">
+<img src="images/ziqing26.png" width="200px">
 
 [[github](http://github.com/ziqing26)]
-[[portfolio](team/zhangziqing.md)]
+[[portfolio](team/ziqing26.md)]
 
 * Role: Developer
 * Responsibilities: Testing
