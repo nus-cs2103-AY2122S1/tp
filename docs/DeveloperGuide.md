@@ -255,13 +255,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profiles**:
+* Gamer who plays competitive games
+* Student in a University
+* Busy (can only play at specific times based on a weekly schedule)
+* Plays multiple online competitive multiplayer games (e.g., Apex legends, Minecraft, Valorant, etc)
+* Has a group of similar persona gamer friends who like him are busy
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+University student gamer who is busy but wants to keep track of equally busy friends who want to play online competitive multiplayer games together.
+
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
@@ -301,6 +303,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. gitGud shows an error message.
 
       Use case resumes at step 1.
+
+
+**Use case: List friends whose `FRIEND_ID` contains a keyword**
+
+**MSS**
+
+1. User requests to list friends in gitGud using a keyword filter.
+2. gitGud shows a filtered list of friends whose `FRIEND_ID` contains the keyword.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user does not provide a keyword.
+
+    * 2a1. All friends are listed.
+
+      Use case ends.
+
+
+**Use case: List games whose `GAME_NAME` contains a keyword**
+
+**MSS**
+
+1. User requests to list games in gitGud using a keyword filter.
+2. gitGud shows a filtered list of games whose `GAME_NAME` contains the keyword.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user does not provide a keyword.
+
+    * 2a1. All games are listed.
+
+      Use case ends.
 
 *{More to be added}*
 
