@@ -16,8 +16,8 @@ TAB comes with a clean Graphical User Interface (GUI) while optimised for user i
 Use TAB to effortlessly manage your students' contact details faster than a typical mouse/GUI driven app!
 
 ![Ui](images/Ui.png)
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using TAB, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing TAB, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
