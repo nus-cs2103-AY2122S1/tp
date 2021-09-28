@@ -253,15 +253,13 @@ Examples:
 
 Assigns a specific task to students’ task list.
 
-Format: `task -ass n/STUDENTINDEX t/TASKINDEX` 
+Format: `task -ass STUDENTINDEX TASKINDEX` 
 
 * Assigns the task specified at index `TASKINDEX` to the “Student” object specified at index `STUDENTINDEX`.
 * `-ass` refers to the assignment command.
-* `n/` refers to the name field that follows it.
-* `t/` refers to the task field that follows it.
 
 Examples:
-* `task -ass n/2 t/4` adds the task at the index 4 to the student at the index 2
+* `task -ass 2 4` adds the task at the index 4 to the student at the index 2
 
 ### Archiving data files `[coming in v2.0]`
 
