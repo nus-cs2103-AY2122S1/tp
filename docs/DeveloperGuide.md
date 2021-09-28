@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 3.
 
-* 3a. Tutor realises that they added the details wrongly
+* 2a. Tutor realises that they added the details wrongly
 
   * 2a1. Tutor <u>deletes the student (UC02)</u> who was just added
 
@@ -457,7 +457,7 @@ Preconditions: There is at least one student added to TutorAid.
 **Extensions**
 
 * 1a. Invalid list command syntax
-  
+
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
 
@@ -476,7 +476,7 @@ Preconditions: There is at least one student added to TutorAid.
 
     * 3b1. TutorAid shows an error message
     * 3b2. User enters a new index with paid/unpaid command
-    
+
       Steps 3a1 - 3a2 are repeated until a valid index is given
       Use case resumes from step 4
 
