@@ -163,7 +163,33 @@ Examples:
 
 ### Scheduling a visit to an elderly : `visit`
 
+Updates the time for the next visit to the elderly with the given index of the elderly in the address book.
+
+Format: `visit INDEX  at/ VISIT_DATE`
+
+* `INDEX` corresponds to the elderly’s index in the address book. It is a strictly positive integer, and must be included.
+* The visit date is in the format of `yyyy-mm-dd`, and it must be included.
+* If there is already an existing visit scheduled for the elderly, this command will schedule a new visit that overwrites the existing one.
+
+Examples:
+* `visit 1 2021-12-31` schedules a meeting to the first elderly in the address book on 31th December 2021.
+
+
+
 ### Marking one visit as done : `done`
+
+Marks a scheduled visit to an elderly as done.
+
+Format: `done INDEX`
+
+* `INDEX` is the index of the elderly visited by the user. There must be a scheduled visit for the elderly before the visit can be marked as done.
+* Once a scheduled visit is marked as done, it will update the last visit time of the elderly, and now there is no longer a scheduled next visit for the elderly.
+
+Examples:
+* `done 1` marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
+
+
+
 
 ### Viewing help : `help`
 
