@@ -107,7 +107,7 @@ public class ParserUtil {
         requireNonNull(fee);
         String trimmedFee = fee.trim();
         if (!Fee.isValidFee(trimmedFee)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
         }
         return new Fee(trimmedFee);
     }
