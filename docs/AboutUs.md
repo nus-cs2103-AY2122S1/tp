@@ -50,10 +50,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### James Doe
 
-<img src="images/zhunyi.JPG" width="200px">
+<img src="images/Feng_zhunyi.JPG" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Integration
