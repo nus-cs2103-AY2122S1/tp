@@ -228,7 +228,7 @@ _Details coming soon ..._
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., ok don't `edit 2 n/James Lee e/jameslee@example.com`                                 |
 | **Exit**   | `exit`                                                                                                                                                                |
-| **Find**   | `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`<br> e.g., `find James Jake`                   |
-| **Help**   | `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--find/-f) (--clear/-c) (--list/-l)`                                                            |
+| **Find**   | `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`<br> e.g., `find -n "James Jake"`              |
+| **Help**   | `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--find/-f) (--clear/-c) (--list/-l)`<br> e.g., `help -e`                                        |
 | **Import** | `import`                                                                                                                                                              |
 | **List**   | `list`                                                                                                                                                                |
