@@ -46,3 +46,13 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: Documentation
+
+### Dickson
+
+<img src="images/dt-td.png" width="200px">
+
+[[github](http://github.com/dt-td)]
+[[portfolio](team/dt-td.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality

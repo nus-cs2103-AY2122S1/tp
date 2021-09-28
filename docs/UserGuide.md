@@ -102,6 +102,20 @@ Format: `del -s STUDENT_INDEX`
 Example:
 * `del -s 2` deletes the 2nd student in TutorAid.
 
+### Viewing a student : `view`
+
+Displays the specified student’s name, phone number, progress and payment status, along with their parent’s name and phone number.
+
+Format: `view STUDENT_INDEX`
+
+* Display details of the student at the specified STUDENT_INDEX.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `view 2` shows the details associated with the 2nd student
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -208,3 +222,5 @@ Action | Format, Examples
 **Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
+**View** | `view STUDENT_INDEX`<br> e.g., `view 2`
+**Exit** | `exit`
