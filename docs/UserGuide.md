@@ -154,17 +154,17 @@ Exits the program.
 
 Format: `exit`
 
-### Creating a folder: `mkdir`
+### Creating a group: `mkdir`
 
-Creates a folder for contacts to be added into.
+Creates a group for contacts to be added into.
 
-Format: `mkdir FOLDER_NAME`
+Format: `mkdir GROUP_NAME`
 
-* Creates a folder with the name FOLDER_NAME.
+* Creates a group with the name `GROUP_NAME`.
 
 Examples:
 
-* `mkdir CS2103` creates a folder with the name `CS2103`.
+* `mkdir CS2103` creates a group with the name `CS2103`.
 
 ### Saving the data
 
