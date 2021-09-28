@@ -202,4 +202,3 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
-**Add Folder** | `mkdir FOLDER_NAME` <br> e.g. `mkdir CS2103`
