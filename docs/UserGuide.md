@@ -221,14 +221,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., ok don't `edit 2 n/James Lee e/jameslee@example.com`                                 |
-| **Exit**   | `exit`                                                                                                                                                                |
-| **Find**   | `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`<br> e.g., `find -n "James Jake"`              |
-| **Help**   | `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--find/-f) (--clear/-c) (--list/-l)`<br> e.g., `help -e`                                        |
-| **Import** | `import`                                                                                                                                                              |
-| **List**   | `list`                                                                                                                                                                |
+| Action     | Format, Examples                                                                                                                                                       |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**    | `add (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” ...` <br> e.g., `add -n "James Ho" -p "22224444" -e "jamesho@example.com" -a "123, Clementi Rd, 1234665" -t "friend"` |
+| **Clear**  | `clear`                                                                                                                                                                |
+| **Delete** | `delete "UID1,UID2,..."`<br> e.g., `delete "3,2,7"`                                                                                                                    |
+| **Edit**   | `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]"…​`<br> e.g., `edit "2" -n "James Lee" -e "jameslee@example.com"`                                           |
+| **Exit**   | `exit`                                                                                                                                                                 |
+| **Find**   | `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`<br> e.g., `find -n "James Jake"`               |
+| **Help**   | `help (--edit/-e) (--import/-i) (--add/-a) (--exit/-x) (--delete/-d) (--find/-f) (--clear/-c) (--list/-l)`<br> e.g., `help -e`                                         |
+| **Import** | `import`                                                                                                                                                               |
+| **List**   | `list`                                                                                                                                                                 |
