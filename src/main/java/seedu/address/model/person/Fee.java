@@ -12,7 +12,7 @@ public class Fee {
     public static final String MESSAGE_CONSTRAINTS =
             "Fees should be formatted with a decimal point '.' as a separator between the dollars and cents, "
             + "and adhere to the following constraints:\n"
-            + "1. Fees should only contain numbers and at most one decimal point. "
+            + "1. Fees should only contain numbers and at most one decimal point.\n"
             + "2. Fees should not start or end with a decimal point and should have at most two decimal places.";
 
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
