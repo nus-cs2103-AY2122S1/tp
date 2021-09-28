@@ -4,36 +4,64 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
+<<<<<<< HEAD
     "tagged" : [ "friends" ]
+=======
+    "address" : "123, Jurong West Ave 6, #08-111"
+>>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
+<<<<<<< HEAD
     "tagged" : [ "owesMoney", "friends" ]
+=======
+    "address" : "311, Clementi Ave 2, #02-25"
+>>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
+<<<<<<< HEAD
     "tagged" : [ ]
+=======
+    "address" : "wall street"
+>>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
+<<<<<<< HEAD
     "tagged" : [ "friends" ]
+=======
+    "address" : "10th street"
+>>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
+<<<<<<< HEAD
     "tagged" : [ ]
+=======
+    "address" : "michegan ave"
+>>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
+<<<<<<< HEAD
     "tagged" : [ ]
+=======
+    "address" : "little tokyo"
+>>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
+<<<<<<< HEAD
     "tagged" : [ ]
+=======
+    "address" : "4th street"
+>>>>>>> ed3518739726e76a5b701c04a3aa5ae462f86185
   } ]
 }
