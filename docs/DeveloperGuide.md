@@ -282,34 +282,94 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+
+
+
+
+
+
+
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `SeniorLove` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User adds in a new senior’s name together with phone number, language and address
+2. SeniorLove shows a new entry for the elderly just added
+   
+    Use case ends.
+
+**Extensions**
+
+* 1a. User also inputs last visited and visit date.
+    * 1a1. SeniorLoves shows a new entry for the elderly added, with the optional details as well. 
+      
+      Use case ends.
+
+* 2a. User inputs a name that is already inside SeniorLove’s list.
+    * 2a1. SeniorLove shows an error message notifying the user that the name already exists.
+    
+      Use case resumes at step 1.
+
+* 3a. User inputs a new senior’s name with some compulsory details missing.
+    * 3a1. SeniorLove shows an error message notifying the user about the missing details.
+      
+      Use case resumes at step 1.
+
+
 
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to list seniors
+2. SeniorLove shows a list of seniors
+3. User requests to delete a specific senior in the list
+4. SeniorLove deletes the senior 
 
     Use case ends.
 
 **Extensions**
-
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
+    * 3a1. SeniorLove shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Mark a visit as done**
+
+**MSS**
+
+1. User requests to list seniors
+2. SeniorLove shows a list of seniors
+3. User requests to mark a specific visit as done
+4. SeniorLove mark a specific visit as done
+
+    Use case ends.
+
+**Extension**
+
+* 3a. There is no current pending visit.
+    * 3a1. SeniorLove shows an error message.
+
+      Use case resumes at step 2.
+
+
+
+
+
+
+
+
+
+
 
 ### Non-Functional Requirements
 
