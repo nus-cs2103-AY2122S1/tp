@@ -1,11 +1,10 @@
 [![Java CI](https://github.com/AY2122S1-CS2103T-T10-1/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2122S1-CS2103T-T10-1/tp/actions/workflows/gradle.yml)    [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T10-1/tp/branch/master/graph/badge.svg?token=GVVTTMGRUF)](https://codecov.io/gh/AY2122S1-CS2103T-T10-1/tp)
 
 <img src = "docs/images/logo.jpeg" align = "left" width="100" height="100">
+
 <div>
-  
 # CohortConnect
 > Type. Explore. Connect.
-  
 </div>
 
 <br>
