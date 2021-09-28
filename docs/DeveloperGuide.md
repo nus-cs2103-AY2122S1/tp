@@ -285,36 +285,135 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a maximum capacity to each facility          | check whether we are complying with the group size regulations                                                 |
 | `* * *`  | user                                       | update the members' availability weekly           | regularly organise the next training session                                                 |
 | `* * *`  | user                                       | split the members into groups based on their availability         | allocate them to different facilities adhering to the group size regulations                                               |
+| `* * *`  | user                                       | view all the members           | so that I can see the list of members in the club                      |
+| `* * *`  | user                                       | view all the facilities        | so that I can see the list of facilities available                     |
+| `* *`    | potential user exploring the app           | see the app populated with user data | see how the app works when its in use                            |
+| `* *`    | new user                                   | see usage instructions         | refer to instructions when i forget how to use the app                 |
+| `* *`    | new user                                   | purge all current data         | get rid of sample/experimental data I used when exploring the app and start entering my required data      |
+| `* *`    | user                                       | edit a person's details        | have an updated version of their contact                               |
+| `* *`    | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* *`    | user                                       | find a facility by name        | locate details of facility without having to go through the entire list|
+| `* *`    | user                                       | edit a facility's data         | update the maximum capacity of each facility when group size regulations have shifted                        |
+| `* *`    | user                                       | quickly key in attendance data | save time compared to adding them individually                         |
+| `* *`    | user                                       | see the total attendance of each member| assess the level of commitment of members                      |
+| `* *`    | user                                       | manually edit member's allocation to facilities | accomodate to last minute changes or requests made by members|
+| `* *`    | user                                       | see all the dates              | know when are the days of training                                     |
+| `* *`    | lazy user                                  | add a list of people's contacts into the application| I don't have to individually add them manually     |
+
 
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SportsPA` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Get help**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests for help
+2.  SportsPA shows a pop-up message on accessing the help page
+3.  User navigates to the help page
 
     Use case ends.
 
+**Use case: UC02 - Add a facility**
+
+**MSS** 
+
+1. User requests to add a facility to the list
+2. SportsPA adds the facility to the list
+
+   Use case ends.
+   
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. SportsPA detects missing field(s).
 
-  Use case ends.
+    * 1a1. SportsPA shows an error message.
+    
+    Use case resumes at step 1.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: UC03 - List all facilities**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User requests to list all facilities
+2. SportsPA shows the list of all facilities to the user
+
+   Use case ends.
+   
+**Use case: UC04 - Find facilities using keyword(s)**
+
+**MSS**
+
+1. User enters keyword or multiple keywords
+2. SportsPA shows the list of facilities whose locations matches given keyword(s)
+
+   Use case ends.
+   
+**Extensions**
+
+* 1a. SportsPA detects missing field(s).
+
+    * 1a1. SportsPA shows an error message.
+    
+    Use case resumes at step 1.
+    
+* 1a. No facilities have locations matching the given keyword(s)
+
+    * 1a1. SportsPA informs user
+    
+    Use case ends.
+    
+**Use case: UC05 - Delete a facility**
+
+**MSS**
+
+1. User requests to <span style="text-decoration: underline">list facilities (UC03)</span> or <span style="text-decoration: underline">find facilities using keyword(s) (UC04)</span>
+2. SportsPA shows the list of facilities
+3. User requests to delete a specific facility in the list
+4. SportsPA deletes the facility from the list
+
+   Use case ends.
+   
+**Extensions**
+
+* 2a. The list is empty
+    
+    Use case ends.
+    
+* 3a. User inputs an invalid index
+
+    * 3a1. SportsPA shows an error message
+    
+    Use case resumes at step 3.
+   
+**Use case: UC06 - Add a member**
+
+**MSS**
+
+1. User requests to add a member to the list
+2. SportsPA adds the member to the list
+
+   Use case ends.
+   
+**Extensions**
+
+* 1a. SportsPA detects missing field(s).
+
+    * 1a1. SportsPA shows an error message.
+    
+    Use case resumes at step 1.
+    
+**Use case: UC07 - List all members**
+
+**MSS**
+
+1. User requests to list all members
+2. SportsPA shows the list of all members
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
