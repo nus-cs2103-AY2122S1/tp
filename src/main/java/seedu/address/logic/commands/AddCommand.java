@@ -41,7 +41,7 @@ public class AddCommand extends Command {
     private final Participant toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Participant}
      */
     public AddCommand(Participant participant) {
         requireNonNull(participant);
