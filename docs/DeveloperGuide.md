@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC3 - Delete a task to from a person**
+**Use case: UC4 - Delete a task to from a person**
 
 **MSS**
 
