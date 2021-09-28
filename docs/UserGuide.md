@@ -13,10 +13,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+<div markdown="block" class="alert alert-info">
+**:information_source: JDK Installation Guide**<br>
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+You can install the required JDK and JRE from the 
+[Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+to help you with the installation. Select the corresponding OS you are working on for a detailed guide.
+</div>
+
+1. Download the latest `TAB.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
+
+1. Copy the file to the folder you want to use as the _home folder_ for your TAB.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
