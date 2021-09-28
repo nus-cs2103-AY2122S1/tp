@@ -29,14 +29,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Deng Huaiyu
 
-<img src="images/johndoe.png" width="200px">
+<img src="https://user-images.githubusercontent.com/46596402/135088054-5b3f15b1-da21-4f71-8dae-1eecdefbf08d.jpg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
+* Role: Code Quality
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 ### Jean Doe
 
