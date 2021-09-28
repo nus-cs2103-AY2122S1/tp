@@ -294,22 +294,87 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use Case 1: Add user**
+
+MSS
+
+1. User enters command to add a contact.
+2. CohortConnect shows a successfully added message.
+3. CohortConnect shows the updated list of contacts.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The input command is invalid.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect requests for correct format.
+  * 1a3. User enters new data.
+  * 1a1-1a3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+
+* 1b. User enters an existing name.
+  * 1b1. CohortConnect prompts that name is already taken.
+  * 1b2. CohortConnect requests for correct format.
+  * 1b3. User enters new data.
+  * Steps 1b1-1b3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+
+**Use Case 2: Edit user**
+
+MSS
+
+1. User enters command to edit a contact.
+2. CohortConnect shows a successfully edited message.
+3. CohortConnect shows the updated list of contacts.
+
+   Use case ends.
+
+Extensions
+
+* 1a. The given index is not present.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect requests for correct format.
+  * 1a3. User enters new data.
+  * Steps 1a1-1a3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+
+**Use Case 3: Delete user**
+
+MSS
+
+1. User enters command to delete a contact.
+2. CohortConnect shows a successfully deleted message.
+3. CohortConnect shows the updated list of contacts.
+
+   Use case ends.
+
+Extensions
+    
+* 1a. The given index is not present.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect requests for correct format.
+  * 1a3. User enters new data.
+  * Steps 1a1-1a3 are repeated until the data entered are valid.
+  * Use case resumes from step 2.
+  
 **Use Case 4: Find a contact using name**
 
- MSS
+MSS
 
- 1.  User enters command to find a contact by name
- 2.  CohortConnect shows list of contacts with matching name
- 
-     Use case ends.
- Extensions
-    
+1. User enters command to find a contact by name
+2. CohortConnect shows list of contacts with matching name
+
+   Use case ends.
+        
+Extensions
+
 * 1a. The given name is not present.
   * 1a1. CohortConnect shows an error message.
+  * Use case ends.
 
 * 2a. The list is empty.
   * Use case ends.
-
     
 **Use Case 5: Find a contact using tag**
 
@@ -378,6 +443,7 @@ MSS
 **Use Case 8: Import contacts from JSON file**
 
 MSS
+
 1. User enters command to import from a JSON file.
 2. CohortConnect shows a list of persons to be imported.
 3. User confirms the import.
