@@ -72,7 +72,6 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a student: `add`
 Adds a new student to TutorAid.
 
@@ -85,9 +84,9 @@ Examples:
 The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
 </div>
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in TutorAid in the order that they were added.
 
 Format: `list`
 

@@ -17,6 +17,16 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Team Lead
 * Responsibilities: Deliverables and Deadlines
 
+### Yeo Jun Wei
+
+<img src="images/junwei3112.png" width="200px">
+
+[[github](https://github.com/JunWei3112)]
+[[portfolio](team/junwei3112.md)]
+
+* Role: Developer
+* Responsibilities: Integration
+
 ### Hoang Le Tri Cuong
 
 <img src="images/ernestcuong.png" width="200px">
@@ -36,4 +46,3 @@ We are a team based in the [School of Computing, National University of Singapor
 
 * Role: Developer
 * Responsibilities: Documentation
-
