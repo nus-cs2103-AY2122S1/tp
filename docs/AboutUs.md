@@ -53,7 +53,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" width="200px">
 
 [[github](http://github.com/kawaiigabrielneko)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kawaiigabrielneko.md)]
 
 * Role: Developer
 * Responsibilities: Insurance, Glossary
