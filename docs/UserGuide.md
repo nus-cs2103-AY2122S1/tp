@@ -74,8 +74,7 @@ Format: `help`
 
 ### View student details : `view`
 
-> <span style="background:rgba(255, 0, 0, 0.2)">❕❕ <b>Note:</b> This feature is subject to changes</span>
-
+> ❕❕ <b>Note:</b> This feature is subject to changes
 
 View data of student with specified index in detail.
 
