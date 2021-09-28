@@ -385,6 +385,7 @@ Preconditions: The student's details have been previously added to TutorAid.
 4. Tutor updates progress for that student
 5. TutorAid registers the new progress for the student at the specified index number
 
+   Use case ends.
 **Extensions**
 
 * 1a. Invalid list command syntax
@@ -396,6 +397,7 @@ Preconditions: The student's details have been previously added to TutorAid.
       Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
 
 * 1b. The list is empty.
+
 * 4a. Invalid add/delete progress syntax
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -414,10 +416,12 @@ Preconditions: There is at least one student added to TutorAid.
 
 **MSS**
 
-1.  User views list of students
-2.  User identifies the student index to update payment record
-3.  User updates payment for student
-4.  TutorAid successfully updates the payment for a student corresponding to the given index number.
+1. User views list of students
+2. User identifies the student index to update payment record
+3. User updates payment for student
+4. TutorAid successfully updates the payment for a student corresponding to the given index number.
+
+   Use case ends.
 
 **Extensions**
 
