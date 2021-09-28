@@ -283,33 +283,105 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `tutor`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case 5: Updating payment for student**
+
+Preconditions: There is at least one student added to TutorAid.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User views list of students
+2.  User identifies the student index to update payment record
+3.  User updates payment for student
+4.  TutorAid successfully updates the payment for a student corresponding to the given index number.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Invalid list command syntax
+      
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+    
+      Steps 1a1-1a2 are repeated until the syntax entered is correct.
+      Use case resumes from step 2.
+    
+* 3a. Invalid paid/unpaid command syntax
 
-  Use case ends.
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. User re-enters the command
+    
+      Steps 3a1 - 3a2 are repeated until a valid syntax is given
+      Use case resumes from step 4
+    
+* 3b. The given student index is invalid
+    
+    * 3b1. TutorAid shows an error message
+    * 3b2. User enters a new index with paid/unpaid command
+      
+      Steps 3a1 - 3a2 are repeated until a valid index is given
+      Use case resumes from step 4
+      
+* 4a. Incorrect update of payment for a different student instead
 
-* 3a. The given index is invalid.
+    * 4a1. User enters the paid/unpaid command to revert the incorrect change made.
+  
+      Use case resumes from step 3
 
-    * 3a1. AddressBook shows an error message.
+**Use case 10: Reset payment status for all students at the end of the month**
 
-      Use case resumes at step 2.
+Preconditions: There is at least one student added to TutorAid.
 
-*{More to be added}*
+**MSS**
 
+1.  Tutor views the list of his/her students
+2.  Tutor identifies that all students have made payment for the month
+3.  Tutor keys in the reset payment command to set all student payments as unpaid
+4.  Tutor successfully resets payment for all students
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the list command
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+  
+      Steps 1a1-1a2 are repeated until the data entered are correct.
+      Use case resumes from step 2.
+  
+* 3a. TutorAid detects an error in the reset payment command
+
+    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 3a2. User re-enters the command.
+  
+      Steps 3a1-3a2 are repeated until the data entered are correct.
+      Use case resumes from step 4.
+
+**Use case 12: View income for the month**
+
+Preconditions: There is at least one student added to TutorAid.
+
+**MSS**
+
+1. Tutor keys in the view income command to view income earned for the month
+2. Tutor successfully views income earned for the month
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TutorAid detects an error in the view income command
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+    * 1a2. User re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the data entered are correct.
+      Use case resumes from step 2.
+  
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
