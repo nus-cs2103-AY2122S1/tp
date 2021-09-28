@@ -49,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of
   the software to create a whole. In charge of defining, assigning, and tracking project tasks.
   
-### James Doe
+### Andrew Baruch
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leopardmerkava.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/LeopardMerkava)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Deliverable and Deadline, UI
+* Responsibilities: Ensure project deliverables are done on time and in the right format. In charge of UI ensuring it fits the use case.
