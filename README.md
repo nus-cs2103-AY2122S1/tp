@@ -3,8 +3,11 @@
 <img src = "docs/images/logo.jpeg" align = "left" width="100" height="100">
 
 <div>
+
 # CohortConnect
+
 > Type. Explore. Connect.
+
 </div>
 
 <br>
