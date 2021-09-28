@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Documentation
 * Responsibilities: Responsible for the quality of various project documents.
 
-### Jean Doe
+### Chen Yiyang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chen-yiyang.png.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Chen-Yiyang)]
+[[portfolio](team/chen-yiyang.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration
 
 ### Zhang Ziqing
 
