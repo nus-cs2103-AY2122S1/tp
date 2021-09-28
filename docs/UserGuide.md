@@ -13,6 +13,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+
 <div markdown="block" class="alert alert-info">
 **:information_source: JDK Installation Guide**<br>
 
