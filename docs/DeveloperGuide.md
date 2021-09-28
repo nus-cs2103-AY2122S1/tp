@@ -232,7 +232,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
 
@@ -296,6 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case 1: Add user**
 
 MSS
+
 1. User enters command to add a contact.
 2. CohortConnect shows a successfully added message.
 3. CohortConnect shows the updated list of contacts.
@@ -321,6 +321,7 @@ Extensions
 **Use Case 2: Edit user**
 
 MSS
+
 1. User enters command to edit a contact.
 2. CohortConnect shows a successfully edited message.
 3. CohortConnect shows the updated list of contacts.
@@ -339,6 +340,7 @@ Extensions
 **Use Case 3: Delete user**
 
 MSS
+
 1. User enters command to delete a contact.
 2. CohortConnect shows a successfully deleted message.
 3. CohortConnect shows the updated list of contacts.
@@ -355,14 +357,16 @@ Extensions
   * Use case resumes from step 2.
   
 **Use Case 4: Find a contact using name**
- **MSS**
- 1.  User enters command to find a contact by name.
- 2.  CohortConnect shows list of contacts with matching name.
- 
-     Use case ends.
+
+MSS
+
+1. User enters command to find a contact by name.
+2. CohortConnect shows list of contacts with matching name.
+
+   Use case ends.
         
-**Extensions**
-    
+Extensions
+
 * 1a. The given name is not present.
   * 1a1. CohortConnect shows an error message.
   * Use case ends.
@@ -371,13 +375,15 @@ Extensions
   * Use case ends.
     
 **Use Case 5: Find a contact using tag**
-**MSS**
-1.  User enters command to find a contact by tag.
-2.  CohortConnect shows list of contacts labelled with matching tag.
+
+MSS
+
+1. User enters command to find a contact by tag.
+2. CohortConnect shows list of contacts labelled with matching tag.
     
     Use case ends.
-        
-**Extensions**
+
+Extensions
     
 * 1a. The given tag doesn't exist.
   * 1a1. CohortConnect shows an error message.
@@ -387,7 +393,9 @@ Extensions
 
 
 **Use Case 6: Show a person's details using Index**
-**MSS**
+
+MSS
+
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
 3.  User requests to show details of person at a specific index in the list.
@@ -395,7 +403,7 @@ Extensions
 
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 2a. The list is empty.
   * Use case ends.
@@ -406,7 +414,9 @@ Extensions
     
 
 **Use Case 7: Show a person's details using Name**
-**MSS**
+
+MSS
+
 1.  User requests to list persons.
 2.  CohortConnect shows a list of persons.
 3.  User requests to show details of a specific person in the list.
@@ -429,7 +439,9 @@ Extensions
   * Use case resumes at step 2.
 
 **Use Case 8: Import contacts from JSON file**
-**MSS**
+
+MSS
+
 1. User enters command to import from a JSON file.
 2. CohortConnect shows a list of persons to be imported.
 3. User confirms the import.
@@ -437,7 +449,7 @@ Extensions
    
    Use case ends.
 
-**Extensions**
+Extensions
 
 * 1a. CohortConnect cannot find the JSON file.
   * 1a1. CohortConnect shows an error.
@@ -447,13 +459,15 @@ Extensions
   * Use case ends.
 
 **Use Case 9: Export contacts to JSON file**
-**MSS**
+
+MSS
+
 1. User enters command to export contacts to a named JSON file.
 2. CohortConnect shows a success message.
    
    Use case ends.
 
-**Extensions**
+Extensions
 
 * 1a. File name already exists.
   * 1a1. CohortConnect shows an error.
@@ -500,7 +514,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -517,7 +530,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -525,4 +537,3 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
