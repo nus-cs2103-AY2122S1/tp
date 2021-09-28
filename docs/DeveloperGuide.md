@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Format of this DG is based on [AB3 DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,71 +257,194 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This product is for CS2103/T TAs who are:
+* Familiar with command line and code 
+* Worried about using too many applications to manage his students' projects and grades. 
+* Able to tolerate a steep learning curve 
+* Disorganized, forgetful 
+* Busy with other school projects and modules
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+
+TAs are required to access different platforms (LumiNUS, GitHub & CS2103/T website) and manage multiple groups and students.
+
+This application aims to integrate different tools into a centralised platform that can improve a TA’s efficiency. It helps to ensure instructors complete all tasks on the relevant platforms by stipulated deadlines.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​          | I want to …​                                      | So that I can…​                                                     |
+| -------- | ------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | user                | add a task with time                                 | be reminded of when certain tasks are due                              |
+| `* * *`  | user                | delete tasks                                         | not be cluttered with completed/wrong tasks                            |
+| `* * *`  | user                | mark students' attendance                            | keep track of who is present                                           |
+| `* * *`  | user                | mark tasks as complete                               | know which tasks have already been done                                |
+| `* * *`  | user                | view my todo list                                    | know what tasks I have to do                                           |
+| `* * *`  | user                | view my student list                                 | know what students I have                                              |
+| `* * *`  | user                | add a student contact                                | add my student into the list                                           |
+| `* * *`  | user                | delete a student contact                             | remove my student if he quits the course                               |
+| `* * *`  | user                | store my data in a file                              | easily export data from the application                                |
+| `* * *`  | user                | add different links for each student/group contact   | easily access their Github, email etc                                  |
+| `* * *`  | user                | record participation during tutorials                | accurately award participation marks to students                       |
+| `* * *`  | user                | add descriptions to the tasks                        | see the extra detail pertaining to the task                            |
+| `* *`    | user                | set my current directory to either students or tasks | add students/tasks more easily                                         |
+| `* *`    | user                | access the ‘help’ page with all available commands   | refer to instructions when I forget how to use tApp                    |
+| `* *`    | user                | allocate students to different groups                | track their progress based on their groups                             |
+| `* *`    | user                | import data from CSV files                           | get started with the app quickly                                       |
+| `* *`    | user                | edit tasks                                           | correct any errors I made without deleting and creating a new task     |
+| `* *`    | new user            | search for a student                                 | quickly access all information related to the student                  |
+| `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
+| `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
+| `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
+| `* *`    | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
+| `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
+| `* *`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
+| `* *`    | user                | create events as a type of task                      | keep track of tasks that occur at a specified time                     |
+| `* *`    | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
+| `* *`    | user                | set automated reminders upon startup                 | not forget any task                                                    |
+| `*`      | expert user         | create command line shortcuts to access tasks        | easily access data and save time                                       |
+| `*`      | user                | set recurring tasks                                  | not create tasks that I have to complete regularly                     |
+| `*`      | user                | customise the order of the menu                      | easily access the features I use most                                  |
+| `*`      | user                | broadcasts task to a certain group                   | efficiently add new module wide tasks                                  |
+| `*`      | user                | assign priority levels for tasks                     | what tasks require my earliest attention                               |
+| `*`      | user                | string multiple commands into a single line          | manage my tasks more efficiently                                       |
+| `*`      | user                | view both my students’ tasks and my own tasks        | be informed of the week’s progress                                     |
+| `*`      | expert user         | create custom commands                               | make managing tasks more convenient, and more tailored to my needs     |
+| `*`      | user                | filter the CS2103/T textbook                         | refresh my memory on concepts I forgot                                 |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `tApp` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Set current directory**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to go back to the welcome page to choose either students or tasks directory again. 
+2.  tApp navigates into the welcome page and displays the exit confirm message.
 
     Use case ends.
 
 **Extensions**
 
+* 1a.  The user hasn’t entered either the student or task management directory.
+
+  Use case ends.
+
+**Use case: UC2 - View student list/Enter student directory**
+
+**MSS**
+
+1.  User requests to navigate to the student directory (UC1)
+2.  tApp navigates into the student directory
+3.  tApp displays the list of student contacts
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User is already in the student directory.
+
+  Use case resumes at step 3.
+
 * 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC3 - Add a student contact**
+
+**MSS**
+
+1.  User requests to enter student directory (UC1)
+2.  tApp navigates to student directory
+3.  User requests to add a student contact
+4.  tApp adds the student
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. No name is specified.
+
+    * 3a1. tApp shows an error message.
+
+      Use case ends.
+
+**Use case: UC4 - Mark student as present**
+
+**MSS**
+
+1.  User requests to view students (UC2)
+2.  tApp shows a list of persons
+3.  User requests to mark a specific person as present in the list
+4.  tApp marks the person as present
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty. 
+    
+  Use case ends.
+
+* 2b. User requests to mark a specific person as absent in the list.
+  
+    * 2b1. tApp marks the person as absent.
+
+      Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC5 - Delete a student contact**
+
+**MSS**
+
+1.  User requests to view students (UC2)
+2.  tApp shows a list of persons
+3.  User requests to delete a specific student in the list
+4.  tApp deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
 
   Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. tApp shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Commands used should be intuitive, and not too lengthy. 
+5. System should respond almost immediately upon entering a command. 
+6. Error messages shown should inform the user of what is wrong and what the correct command syntax should be.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student contact**: A student entry with the corresponding student’s name, tutorial attendance, and tutorial participation.
+* **Task**: An entry with a textual description of a piece of work to do, and a time that specifies the date that piece of work should be completed by 
+* **Directory**: The list commands entered will be applied to (either student or task)
 
 --------------------------------------------------------------------------------------------------------------------
 
