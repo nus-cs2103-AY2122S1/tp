@@ -119,7 +119,7 @@ Examples:
 
 ### Finding a person by fields: `find`
 
-Finds persons whose fields match the given keywords.
+Finds all persons whose fields match the given keywords.
 
 Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] `
 
@@ -134,14 +134,14 @@ Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] `
     * will not match person named `john` with address `Bedok Reservoir`.
 
 Examples:
-* `find n/John Lee` matches `john`, `johnny Doe`, `Aileen`.
-* `find a/Jurong east n/Ben e/gmail` matches
+* `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
+* `find a/Jurong east n/Ben e/gmail` returns 
     * person with name: `benny tan`, address: `West Jurong`, email: `benny.tan@gmail.com`.
     * person with name: `benjamin` address: `yishun east ave 1` email: `benj@gmail.com`.
 
 ### Filter persons by tags: `filter`
 
-Filter persons matching the specified tags, based on the specified filter condition.
+Filter and returns all persons matching the specified tags, based on the specified filter condition.
 
 Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
 
