@@ -279,10 +279,18 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
+**Adding a student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+**Edit a student** | `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]​` <br> e.g., `student -e 3 c/88888888 e/johnny@mail.com` 
+**View a student** | `student -v INDEX​` <br> e.g., `student -v 3`
+**Delete a student** | `student -d INDEX​` <br> e.g., `student -d 3`
+**Find a student** | `find KEYWORD [MORE_KEYWORDS]​` <br> e.g., `find alex david`
+**List all students** | `list`
+**Group students** | `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...​` <br> e.g., `student -g Team2 1 3 5`
+**Add a task** | `task -a n/NAME​` <br> e.g., `task -a n/CS2100 Lab 1`
+**Edit a task** | `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]​` <br> e.g., `task -e 4 d/20211231 c/true`
+**View a task** | `task -v INDEX​` <br> e.g., `task -v 2`
+**Delete a task** | `task -d INDEX​` <br> e.g., `task -d 1`
+**Assign a task to a student** | `task -ass STUDENTINDEX TASKINDEX​` <br> e.g., `task -ass 2 4`
+**Clear all entries** | `clear`
+**Exit** | `exit`
