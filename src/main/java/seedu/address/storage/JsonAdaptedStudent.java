@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import javax.swing.*;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,8 +8,8 @@ import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -82,7 +80,8 @@ class JsonAdaptedStudent {
         final Email modelEmail = new Email(email);
 
         if (groupName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                GroupName.class.getSimpleName()));
         }
         // TODO: check if groupName is valid
         final GroupName modelGroupName = new GroupName(groupName);

@@ -31,8 +31,8 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
@@ -89,7 +89,7 @@ public class AddCommandParserTest {
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_GROUP_NAME_BOB
-                        +VALID_ADDRESS_BOB,
+                        + VALID_ADDRESS_BOB,
                 expectedMessage);
     }
 

@@ -13,10 +13,10 @@ import seedu.address.model.student.exceptions.StudentNotFoundException;
 
 /**
  * A list of students that enforces uniqueness between its elements and does not allow nulls.
- * A student is considered unique by comparing using {@code Student#isSameStudent(Student)}. As such, adding and updating of
- * students uses Student#isSameStudent(Student) for equality so as to ensure that the student being added or updated is
- * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses Student#equals(Object) so
- * as to ensure that the student with exactly the same fields will be removed.
+ * A student is considered unique by comparing using {@code Student#isSameStudent(Student)}. As such, adding and
+ * updating of students uses Student#isSameStudent(Student) for equality so as to ensure that the student being added
+ * or updated is unique in terms of identity in the UniqueStudentList. However, the removal of a student uses
+ * Student#equals(Object) so as to ensure that the student with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -49,6 +49,17 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Removes the equivalent student from the list.
+     * The student must exist in the list.
+     */
+    public void remove(Student toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new StudentNotFoundException();
+        }
+    }
+
+    /**
      * Replaces the student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the list.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
@@ -66,17 +77,6 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         internalList.set(index, editedStudent);
-    }
-
-    /**
-     * Removes the equivalent student from the list.
-     * The student must exist in the list.
-     */
-    public void remove(Student toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new StudentNotFoundException();
-        }
     }
 
     public void setStudent(UniqueStudentList replacement) {

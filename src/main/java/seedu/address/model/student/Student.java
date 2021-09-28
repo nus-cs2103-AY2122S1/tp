@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -18,7 +19,7 @@ public class Student {
     private final Email email;
 
     // Data fields
-    private final GroupName groupName;
+    private final Group group;
     private final Address address;
 
     /**
@@ -29,7 +30,7 @@ public class Student {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.groupName = groupName;
+        this.group = new Group(groupName);
         this.address = address;
     }
 
@@ -46,7 +47,7 @@ public class Student {
     }
 
     public GroupName getGroupName() {
-        return groupName;
+        return group.getGroupName();
     }
 
     public Address getAddress() {
@@ -91,7 +92,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, groupName, address);
+        return Objects.hash(name, phone, email, group, address);
     }
 
     @Override
