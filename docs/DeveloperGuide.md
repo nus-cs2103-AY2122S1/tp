@@ -295,13 +295,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `CohortConnect` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use Case 4: Find a contact using name**
- **MSS**
+
+ MSS
+
  1.  User enters command to find a contact by name
  2.  CohortConnect shows list of contacts with matching name
  
      Use case ends.
-        
-**Extensions**
+ Extensions
     
 * 1a. The given name is not present.
   * 1a1. CohortConnect shows an error message.
@@ -311,13 +312,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     
 **Use Case 5: Find a contact using tag**
-**MSS**
-1.  User enters command to find a contact by tag
-2.  CohortConnect shows list of contacts labelled with matching tag
+
+MSS
+
+1. User enters command to find a contact by tag
+2. CohortConnect shows list of contacts labelled with matching tag
     
     Use case ends.
-        
-**Extensions**
+
+Extensions
     
 * 1a. The given tag doesn't exist.
   * 1a1. CohortConnect shows an error message.
@@ -327,7 +330,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 **Use Case 6: Show a person's details using Index**
-**MSS**
+
+MSS
+
 1.  User requests to list persons
 2.  CohortConnect shows a list of persons
 3.  User requests to show details of person at a specific index in the list
@@ -335,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 2a. The list is empty.
   * Use case ends.
@@ -346,7 +351,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 
 **Use Case 7: Show a person's details using Name**
-**MSS**
+
+MSS
+
 1.  User requests to list persons
 2.  CohortConnect shows a list of persons
 3.  User requests to show details of a specific person in the list
@@ -369,7 +376,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Use case resumes at step 2.
 
 **Use Case 8: Import contacts from JSON file**
-**MSS**
+
+MSS
 1. User enters command to import from a JSON file.
 2. CohortConnect shows a list of persons to be imported.
 3. User confirms the import.
@@ -377,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
    Use case ends.
 
-**Extensions**
+Extensions
 
 * 1a. CohortConnect cannot find the JSON file.
   * 1a1. CohortConnect shows an error.
@@ -387,13 +395,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Use case ends.
 
 **Use Case 9: Export contacts to JSON file**
-**MSS**
+
+MSS
+
 1. User enters command to export contacts to a named JSON file.
 2. CohortConnect shows a success message.
    
    Use case ends.
 
-**Extensions**
+Extensions
 
 * 1a. File name already exists.
   * 1a1. CohortConnect shows an error.
