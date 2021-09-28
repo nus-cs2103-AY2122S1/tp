@@ -362,7 +362,7 @@ Preconditions: The student's details have been previously added to TutorAid.
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
 
-      Steps 1a1-1a2 are repeated until the data entered are correct.
+      Steps 1a1-1a2 are repeated until the command entered is correct.
       Use case resumes from step 2.
 
 * 2a. The given index is invalid.
@@ -414,7 +414,7 @@ Preconditions: The student's details have been previously added to TutorAid.
     * 1b1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1b2. User re-enters the command.
 
-      Steps 1b1-1b2 are repeated until the data entered are correct.
+      Steps 1b1-1b2 are repeated until the command entered is correct.
       Use case resumes from step 2.
       
 **Use Case 11: View upcoming milestones for all students**
@@ -433,7 +433,7 @@ Preconditions: The student's details have been previously added to TutorAid.
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
 
-      Steps 1a1-1a2 are repeated until the data entered are correct.
+      Steps 1a1-1a2 are repeated until the command entered is correct.
       Use case resumes from step 2.
 
 **Use Case 15: Edit students in a class**
