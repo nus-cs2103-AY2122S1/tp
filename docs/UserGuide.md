@@ -8,8 +8,8 @@ title: User Guide
 ##Table of Contents
 - [Quick start](#quick-start)
 - [Features](#features)
-  - [Adding elderly details](#adding-a-person-add)
-  - [Deleting an elderly or corresponding visit](#deleting-a-person--delete)
+  - [Adding elderly details](#add-elderly-details--add)
+  - [Deleting an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
   - [Listing all elderly](#listing-all-persons--list)
   - [Locating elderly by name](#locating-persons-by-name-find)
   - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
