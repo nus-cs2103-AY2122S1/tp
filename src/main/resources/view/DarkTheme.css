@@ -154,6 +154,7 @@
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
+    -fx-wrap-text: true;
 }
 
 .result-display .label {
