@@ -19,6 +19,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final BirthDate birthDate;
 
     // Data fields
     private final Address address;
@@ -27,13 +28,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate) {
+        requireAllNonNull(name, phone, email, address, tags, birthDate);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.birthDate = birthDate;
     }
 
     public Name getName() {
@@ -52,6 +54,9 @@ public class Person {
         return address;
     }
 
+    public BirthDate getBirthDate() {
+        return birthDate;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -92,13 +97,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getBirthDate().equals(getBirthDate());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, birthDate);
     }
 
     @Override
@@ -110,7 +116,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Date of Birth")
+                .append(getBirthDate());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

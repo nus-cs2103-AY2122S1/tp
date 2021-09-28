@@ -78,15 +78,15 @@ Format: `help`
 
 Adds a patient to the patient records.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/BIRTH_DATE [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A patient can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Bukit Merah p/1234567 t/COVID`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Bukit Merah p/1234567 dob/20/07/1964 t/COVID`
 
 ### Listing all patients : `list`
 
@@ -98,7 +98,7 @@ Format: `list`
 
 Edits an existing patient in the patient records.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [t/TAG]…​`
 
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -226,7 +226,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 1234665 dob/20/07/1964 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`

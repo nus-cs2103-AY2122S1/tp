@@ -1,11 +1,7 @@
 package seedu.plannermd.logic.parser;
 
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.plannermd.logic.parser.CliSyntax.*;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -17,6 +13,7 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -42,9 +39,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        BirthDate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTH_DATE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email, address, tagList, birthDate);
 
         return new AddCommand(person);
     }

@@ -24,6 +24,7 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -97,9 +98,11 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        BirthDate updatedBirthDate = editPersonDescriptor.getBirthDate().orElse(personToEdit.getBirthDate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthDate);
     }
 
     @Override
@@ -129,6 +132,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private BirthDate birthDate;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -143,6 +147,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setBirthDate(toCopy.birthDate);
         }
 
         /**
@@ -184,6 +189,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setBirthDate(BirthDate birthDate) {
+            this.birthDate = birthDate;
+        }
+
+        public Optional<BirthDate> getBirthDate() {
+            return Optional.ofNullable(birthDate);
+        }
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -220,6 +232,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getBirthDate().equals(e.getBirthDate())
                     && getTags().equals(e.getTags());
         }
     }

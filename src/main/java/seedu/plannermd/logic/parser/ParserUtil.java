@@ -13,6 +13,7 @@ import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -78,6 +79,21 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String birthDate} into an {@code BirthDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthDate} is invalid.
+     */
+    public static BirthDate parseBirthDate(String birthDate) throws ParseException {
+        requireNonNull(birthDate);
+        String trimmedBirthDate = birthDate.trim();
+        if (!BirthDate.isValidDob(trimmedBirthDate)) {
+            throw new ParseException(BirthDate.MESSAGE_CONSTRAINTS);
+        }
+        return new BirthDate(trimmedBirthDate);
     }
 
     /**

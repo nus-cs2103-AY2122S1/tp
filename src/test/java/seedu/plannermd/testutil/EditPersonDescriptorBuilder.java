@@ -36,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setBirthDate(person.getBirthDate());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +69,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code BirthDate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withBirthDate(String birthDate) {
+        descriptor.setAddress(new Address(birthDate));
         return this;
     }
 
