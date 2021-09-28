@@ -296,6 +296,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 2.  ProgrammerError shows a list of sample student records
 3.  CS2100 TA requests to purge sample student records
 4.  ProgrammerError deletes all sample student records
+    
     Use case ends.
     
 
