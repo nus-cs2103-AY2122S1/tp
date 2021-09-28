@@ -375,6 +375,42 @@ Preconditions: The student's details have been previously added to TutorAid.
 
   Use case starts over from step 1.
 
+**Use case 4: Update a student's progress**
+
+**MSS**
+
+1. Tutor views the list of his/her students
+2. TutorAid displays the list of students
+3. Tutor identifies the student index to update their progress
+4. Tutor updates progress for that student
+5. TutorAid registers the new progress for the student at the specified index number
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid list command syntax
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
+
+* 1b. The list is empty. Use case ends.
+
+* 4a. Invalid add/delete progress syntax
+
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 4a2. Tutor re-enters the command
+
+      Steps 3a1 - 3a2 are repeated until a valid syntax is given. Use case resumes from step 5
+
+* 5a. Incorrectly updating the progress of another student
+
+    * 5a1. Tutor uses add/delete progress commands to revert the incorrect changes. Use case resume from step 3
+
 **Use case 5: Updating payment for student**
 
 Preconditions: There is at least one student added to TutorAid.
@@ -438,6 +474,42 @@ Precondition: The student's details have been added to TutorAid.
 
       Use case resumes at step 3
 
+**Use case 7: Add a todo list for a session**
+
+**MSS**
+
+1. Tutor views his schedule
+2. TutorAid displays the schedule
+3. Tutor identifies the session to add a todo list
+4. Tutor adds a todo task to that session
+5. TutorAid registers the task to the session
+6. Tutor repeats from step 4 until he/she finishes adding all the tasks
+
+   Use case ends.
+
+**Extensions**
+* 1a. Invalid view schedule command syntax
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
+
+* 4a. Invalid add task command syntax
+
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the syntax entered is correct. Use case resumes from step 5.
+
+* 4b. The session does not exist.
+
+    * 4b2. TutorAid displays an error message that the session does not exist.
+
+  Use case ends.
+
 **Use Case 8: View schedule for the upcoming week**
 
 **MSS**
@@ -461,6 +533,36 @@ Precondition: The student's details have been added to TutorAid.
 
       Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
       Use case resumes from step 2.
+
+**Use case 9: Check which students should be present for the class**
+
+**MSS**
+
+1. Tutor views his schedule
+2. TutorAid displays the schedule
+3. Tutor identifies the session to check for students
+4. Tutor views the list of students in that session
+5. TutorAid displays the list of students in the session
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid view schedule command syntax
+
+    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the syntax entered is correct. Use case resumes from step 2.
+
+* 4a. Invalid view session students command syntax
+
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 4a2. Tutor re-enters the command.
+
+      Steps 4a1-4a2 are repeated until the syntax entered is correct. Use case resumes from step 5.
 
 **Use case 10: Reset payment status for all students at the end of the month**
 
