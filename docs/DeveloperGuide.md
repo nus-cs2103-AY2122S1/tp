@@ -299,7 +299,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | manually edit member's allocation to facilities | accomodate to last minute changes or requests made by members|
 | `* *`    | user                                       | see all the dates              | know when are the days of training                                     |
 | `* *`    | lazy user                                  | add a list of people's contacts into the application| I don't have to individually add them manually     |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user with many members added into the app  | sort persons by name           | locate a person easily       |
 | `* * `    | expert user | create shortcut for tasks | save time on frequently performed tasks
 | `* *` | long time user | add groups of people | quickly add in new members
