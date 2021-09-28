@@ -3,11 +3,10 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TutorMaster is a desktop app for freelance tutors to manage their students’ grades, assignment submission and tuition fee payment. It is optimised for use via a Command Line Interface (CLI) while still benefiting from a Graphical User Interface (GUI).
 
 * Table of Contents
-{:toc}
-
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -26,9 +25,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`help`** : Lists all contacts.
 
-   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the Address Book.
+   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the persons list.
 
-   * **`student -v 3`**: Views the 3rd student in the Address Book.
+   * **`student -v 3`**: Views the 3rd student in the persons list.
 
    * **`clear`** : Deletes all students.
 
@@ -64,10 +63,33 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+
+### Adding a student: `add`
+
+Adds a student to the persons list.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
 ### Viewing a student: `student -v` `[coming in v1.2]`
 
 Views a particular student's details given by the specified index from the 
-address book.
+persons list.
 
 Format: `student -v INDEX`
 
@@ -100,7 +122,7 @@ Examples:
 
 ### Deleting a student: `student -d` `[coming in v1.2]`
 
-Deletes the specific student given by the specified index from the address book.
+Deletes the specific student given by the specified index from the persons list.
 
 Format: `student -d INDEX`
 
@@ -110,57 +132,41 @@ Format: `student -d INDEX`
 
 Examples:
 
-* `student -d 3` deleted the third student in the address book
+* `student -d 3` deleted the third student in the persons list
 
-### Viewing help : `help`
+### Clearing all entries : `clear`
 
-Shows a message explaning how to access the help page.
+Clears all entries in Tutor Master.
 
-![help message](images/helpMessage.png)
+Format: `clear`
 
-Format: `help`
+### Exiting the program : `exit`
 
+Exits the program.
 
-### Adding a person: `add`
+Format: `exit`
 
-Adds a person to the address book.
+### Saving the data
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Tutor Master data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+### Editing the data file
+
+Tutor Master data are saved as a JSON file `[JAR file location]/data/tutormaster.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Tutor Master will discard all data and start with an empty data file at the next run.
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+### Listing all students : `list`
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
+Shows a list of all students in the persons list.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Locating students by name: `find`
 
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -174,49 +180,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete` 
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ### Grouping students  `[coming in v1.2]`
 
@@ -235,7 +199,7 @@ Examples:
 
 ### Adding a task `[coming in v1.2]`
 
-Adds a task to the address book
+Adds a task to the task list.
 
 Format: `task -a n/NAME`
 
@@ -247,7 +211,7 @@ Examples:
 
 ### Viewing a task `[coming in v1.2]`
 
-Views a task in the address book
+Views a task in the task list.
 
 Format: `task -v INDEX`
 
@@ -259,7 +223,7 @@ Examples:
 
 ### Editing a task `[coming in v1.2]`
 
-Edits a task in the address book
+Edits a task in the task list.
 
 Format: `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]`
 
@@ -272,12 +236,42 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]`
 Examples:
 * `task -e 4 d/20211231 c/true` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
 
+### Deleting a task `[coming in v1.2]`
+
+Deletes the specific task from the students' task list.
+
+Format: `task -d INDEX`
+
+* Deletes the task specified at `INDEX`. The index should be a positive number.
+* `-d` refers to the deletion command.
+* The index refers to the index number shown in the displayed task list.
+
+Examples:
+* `task -d 1` deletes the task at index 1
+
+### Assigning tasks to students `[coming in v1.2]`
+
+Assigns a specific task to students’ task list.
+
+Format: `task -ass STUDENTINDEX TASKINDEX` 
+
+* Assigns the task specified at index `TASKINDEX` to the “Student” object specified at index `STUDENTINDEX`.
+* `-ass` refers to the assignment command.
+
+Examples:
+* `task -ass 2 4` adds the task at the index 4 to the student at the index 2
+
+### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutor Master home folder.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
