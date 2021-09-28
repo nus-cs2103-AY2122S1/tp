@@ -270,14 +270,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a (describes user) | I want to (functionality)                                          | So that I can (rationale)                                 |   |   |
-|----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|---|---|
-| ***      | user                  | Be able to easily add my friends personal info/data (name, userid) | I have a list of friends who I can possibly play with     |   |   |
-| ***      | user                  | Be able to add description to a friend’s profile                   | I can store information relevant a friend                 |   |   |
-| ***      | user                  | Be able to link my friends to the games they play                  | So that I can associate my friends with a particular game |   |   |
-| ***      | user                  | Be able to view a list of my friends information                   | I can see who my friends are                              |   |   |
-| ***      | user                  | Delete a friend from the contact list                              | Remove friends that were mistakenly added                 |   |   |
-| ***      | user                  | See full information of a friend from the contact list             | I can get any information I want about the friend         |   |   |
+| Priority | As a (describes user) | I want to (functionality)                                          | So that I can (rationale)                                 |
+|----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|
+| ***      | user                  | Be able to easily add my friends personal info/data (name, userid) | I have a list of friends who I can possibly play with     |
+| ***      | user                  | Be able to add description to a friend’s profile                   | I can store information relevant a friend                 |
+| ***      | user                  | Be able to link my friends to the games they play                  | So that I can associate my friends with a particular game |
+| ***      | user                  | Be able to view a list of my friends information                   | I can see who my friends are                              |
+| ***      | user                  | Delete a friend from the contact list                              | Remove friends that were mistakenly added                 |
+| ***      | user                  | See full information of a friend from the contact list             | I can get any information I want about the friend         |
 
 *{More to be added}*
 
