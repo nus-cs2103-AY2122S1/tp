@@ -204,5 +204,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
+**Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 **View** | `view STUDENT_INDEX`<br> e.g., `view 2`
 **Exit** | `exit`
