@@ -3,8 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.Tuition.TuitionClass;
+import seedu.address.model.Tuition.UniqueTuitionList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -13,8 +17,10 @@ import seedu.address.model.person.UniquePersonList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
+    private static final Logger logger = LogsCenter.getLogger(AddressBook.class);
 
     private final UniquePersonList persons;
+    private final UniqueTuitionList tuitons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        tuitons = new UniqueTuitionList();
     }
 
     public AddressBook() {}
@@ -48,12 +55,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setTuition(List<TuitionClass> tuitionClasses) {
+        this.tuitons.setTuitions(tuitionClasses);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setTuition(newData.getTuitionList());
     }
 
     //// person-level operations
@@ -107,6 +123,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<TuitionClass> getTuitionList() {
+        return tuitons.asUnmodifiableObservableList();
+    }
+
+
+
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
@@ -117,4 +141,50 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+
+    /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setTuitions(List<TuitionClass> tuitionClasses) {
+        this.tuitons.setTuitions(tuitionClasses);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasTuition(TuitionClass tuitionClass) {
+        requireNonNull(tuitionClass);
+        return tuitons.contains(tuitionClass);
+    }
+
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addTuition(TuitionClass t) {
+        tuitons.add(t);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setTuition(TuitionClass target, TuitionClass editedTuition) {
+        requireNonNull(editedTuition);
+
+        tuitons.setTuition(target, editedTuition);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTuition(TuitionClass key) {
+        tuitons.remove(key);
+    }
+
+
 }

@@ -1,10 +1,15 @@
 package seedu.address.commons.util;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.UserPrefs;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 /**
  * Writes and reads files
@@ -12,6 +17,8 @@ import java.nio.file.Paths;
 public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
+    private static final Logger logger = LogsCenter.getLogger(FileUtil.class);
+
 
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
@@ -69,6 +76,7 @@ public class FileUtil {
      * Assumes file exists
      */
     public static String readFromFile(Path file) throws IOException {
+        logger.info(new String(Files.readAllBytes(file), CHARSET));
         return new String(Files.readAllBytes(file), CHARSET);
     }
 
