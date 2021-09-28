@@ -18,14 +18,15 @@ TutorMaster is a desktop app for freelance tutors to manage their students’ gr
 1. Copy the file to the folder you want to use as the home folder for your TutorMaster.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`help`** : Lists all contacts.
+   * **`help`** : Displays a help message with a link to the User Guide.
 
-   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the persons list.
+   * **`student -a n/John Doe`**: Adds a contact named `John Doe` to the students list.
 
    * **`student -v 3`**: Views the 3rd student in the persons list.
 
@@ -101,7 +102,7 @@ Examples:
 
 ### Editing a student: `student -e` `[coming in v1.2]`
 
-Edits the detail of the specific student.
+Edits the detail of a specific student.
 
 Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]`
 
@@ -135,7 +136,7 @@ Examples:
 
 ### Listing all students : `list`
 
-Shows a list of all students in the persons list.
+Shows a list of all students in the students list.
 
 Format: `list`
 
