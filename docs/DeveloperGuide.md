@@ -300,8 +300,6 @@ MSS
 2. CohortConnect shows a successfully added message.
 3. CohortConnect shows the updated list of contacts.
 
-   Use case ends.
-
 Extensions
 
 * 1a. The input command is invalid.
@@ -387,6 +385,7 @@ Extensions
     
 * 1a. The given tag doesn't exist.
   * 1a1. CohortConnect shows an error message.
+  * Use case ends.
         
 * 2a. The list is empty.
   * Use case ends.
