@@ -289,16 +289,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SociusApplication` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person in the list
+2. AddressBook adds the person
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The format of the request is invalid.
+
+    * 1a1. Socius shows an error message.     
+    * 1a2. User enters a new request. 
+    * Steps 1a1-1a2 are repeated until the data entered are correct. 
+
+  Use case resumes at step 2.
+
+
+**Use case: Edit a person**
 
 **MSS**
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+3.  User requests to edit the personal details of a specific person in the list
+4.  Socius edits the personal details of the person
 
     Use case ends.
 
@@ -310,9 +330,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
 
-      Use case resumes at step 2.
+        Use case resumes at step 4.
+
+
+
+**Use case: Delete a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  Socius deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct.
+
+      Use case resumes at step 4.
+
+
+**Use case: Display a person**
+
+**MSS**
+
+1.  User requests to list persons
+2.  Socius shows a list of persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
 
 *{More to be added}*
 
@@ -330,6 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Standardised Date Format(ISO 8601)**: YYYY-MM-DD. E.g. 2021-09-28
 
 --------------------------------------------------------------------------------------------------------------------
 
