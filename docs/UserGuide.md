@@ -144,7 +144,7 @@ Examples:
 
 Finds persons whose name, phone number, email, address and/or tag contain contains any of the given keywords.
 
-Format: `Find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`
+Format: `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`
 
 - At least one of the optional fields must be provided.
 - The search is case-insensitive. e.g `hans` will match `Hans`
@@ -226,7 +226,7 @@ _Details coming soon ..._
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Clear**  | `clear`                                                                                                                                                               |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., ok don't `edit 2 n/James Lee e/jameslee@example.com`                                 |
+| **Find**   | `find (-n/--name) “[NAME]” (-p/--phone) “[PHONE]” (-e/--email) “[EMAIL]” (-a/--address) “[ADDRESS]” (-t/--tag) “[TAG]”`<br> e.g., `find James Jake`                   |
 | **List**   | `list`                                                                                                                                                                |
 | **Help**   | `help`                                                                                                                                                                |
