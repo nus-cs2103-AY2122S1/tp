@@ -257,13 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+
+* a NUS Sports CCA leader
+* has a need to manage a significant number of member’s contacts
+* has a need to organise training sessions in multiple facilities amidst changing COVID restrictions
+* can type faster than average
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+* Sports CCAs have many members and it can be hard for the leaders to keep track of everyone’s information and availability to organise training sessions, especially with COVID restrictions.
+* SportsPA will help NUS Sports CCA leaders to be able to better manage their members’ contacts and attendance as well as training facilities to better organise CCA sessions.
+
 
 
 ### User stories
@@ -272,14 +277,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
+| `* * *`  | user                                       | add a new person        | keep track of them in the club                 | |
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | add a facility          | facilitate planning of training sessions |
+| `* * *`  | user                                       | add the available time slots of the facilities   | allocate members to train there               |
+| `* * *`  | user                                       | delete a facility          | remove facilities that are no longer relevant                                                 |
+| `* * *`  | user                                       | add a maximum capacity to each facility          | check whether we are complying with the group size regulations                                                 |
+| `* * *`  | user                                       | update the members' availability weekly           | regularly organise the next training session                                                 |
+| `* * *`  | user                                       | split the members into groups based on their availability         | allocate them to different facilities adhering to the group size regulations                                               |
 
-*{More to be added}*
 
 ### Use cases
 
