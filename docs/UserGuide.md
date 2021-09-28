@@ -117,7 +117,7 @@ Examples:
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be `NJC` and clears academic stream data.
 
-### Finding a person by fields: `find`
+### Finding persons by fields: `find`
 
 Finds all persons whose fields match the given keywords.
 
@@ -139,7 +139,7 @@ Examples:
     * person with name: `benny tan`, address: `West Jurong`, email: `benny.tan@gmail.com`.
     * person with name: `benjamin` address: `yishun east ave 1` email: `benj@gmail.com`.
 
-### Filter persons by tags: `filter`
+### Filtering persons by tags: `filter`
 
 Filter and returns all persons matching the specified tags, based on the specified filter condition.
 
