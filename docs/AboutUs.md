@@ -56,7 +56,7 @@ You can reach us through the following email addresses:
 
 ### Zhang Ziqing
 
-<img src="images/zhangziqing.png" width="200px">
+<img src="images/ziqing26.png" width="200px">
 
 [[github](http://github.com/ziqing26)]
 [[portfolio](team/ziqing26.md)]
