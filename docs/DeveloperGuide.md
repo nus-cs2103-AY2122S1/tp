@@ -296,6 +296,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                | import data from CSV files                           | get started with the app quickly                                       |
 | `* *`    | user                | edit tasks                                           | correct any errors I made without deleting and creating a new task     |
 | `* *`    | new user            | search for a student                                 | quickly access all information related to the student                  |
+| `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
+| `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
+| `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
+| `* *`    | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
+| `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
+| `* *`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
+| `* *`    | user                | create events as a type of task                      | keep track of tasks that occur at a specified time                     |
+| `* *`    | expert user         | view the changes I made to my todo list              | recover tasks that are accidentally deleted                            |
+| `* *`    | user                | set automated reminders upon startup                 | not forget any task                                                    |
+| `*`      | expert user         | create command line shortcuts to access tasks        | easily access data and save time                                       |
+| `*`      | user                | set recurring tasks                                  | not create tasks that I have to complete regularly                     |
+| `*`      | user                | customise the order of the menu                      | easily access the features I use most                                  |
+| `*`      | user                | broadcasts task to a certain group                   | efficiently add new module wide tasks                                  |
+| `*`      | user                | assign priority levels for tasks                     | what tasks require my earliest attention                               |
+| `*`      | user                | string multiple commands into a single line          | manage my tasks more efficiently                                       |
+| `*`      | user                | view both my students’ tasks and my own tasks        | be informed of the week’s progress                                     |
+| `*`      | expert user         | create custom commands                               | make managing tasks more convenient, and more tailored to my needs     |
+| `*`      | user                | filter the CS2103/T textbook                         | refresh my memory on concepts I forgot                                 |
+
 
 *{More to be added}*
 
