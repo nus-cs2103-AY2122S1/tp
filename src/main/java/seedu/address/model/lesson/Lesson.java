@@ -85,6 +85,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         return newDate;
     }
 
+    public boolean isOver() {
+        return getDate().isOver();
+    }
+
     /**
      * Edit the date of the particular type of lesson.
      *

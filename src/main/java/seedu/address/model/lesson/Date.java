@@ -64,6 +64,15 @@ public class Date implements Comparable<Date> {
         return LocalDate.parse(this.value, FORMATTER);
     }
 
+    /**
+     * Check if the date has passed.
+     *
+     * @return true if date is earlier than now.
+     */
+    public boolean isOver() {
+        return getLocalDate().compareTo(LocalDate.now()) < 0;
+    }
+
     @Override
     public String toString() {
         return value;

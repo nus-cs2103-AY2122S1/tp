@@ -29,8 +29,11 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public Lesson updateDate(String newDateString) {
-        return new MakeUpLesson(new Date(newDateString), getStartTime(), getEndTime(),
-                getSubject(), getHomework());
+        Date newDate = new Date(newDateString);
+
+        return newDate.compareTo(getDate()) > 0
+            ? new MakeUpLesson(newDate, getStartTime(), getEndTime(), getSubject(), getHomework())
+            : this;
     }
 
     /**

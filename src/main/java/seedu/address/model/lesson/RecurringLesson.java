@@ -55,8 +55,12 @@ public class RecurringLesson extends Lesson {
      */
     @Override
     public Lesson updateDate(String newDateString) {
-        return new RecurringLesson(new Date(newDateString), getStartTime(), getEndTime(),
-                getSubject(), getHomework());
+        Date newDate = new Date(newDateString);
+
+        return newDate.compareTo(getDate()) > 0
+            ? new RecurringLesson(new Date(newDateString), getStartTime(), getEndTime(),
+            getSubject(), getHomework())
+            : this;
     }
 
     /**
