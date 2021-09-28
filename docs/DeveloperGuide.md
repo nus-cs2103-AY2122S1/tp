@@ -298,8 +298,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     **MSS**
     
-    1.  User enters command to find a contact by name
-    2.  CohortConnect shows list of contacts with matching name
+    1.  User enters command to find a contact by name.
+    2.  CohortConnect shows list of contacts with matching name.
 
         Use case ends.
         
@@ -308,6 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a. The given name is not present.
 
         * 1a1. CohortConnect shows an error message.
+        * Use case ends.
     
     * 2a. The list is empty.
 
@@ -318,8 +319,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     **MSS**
     
-    1.  User enters command to find a contact by tag
-    2.  CohortConnect shows list of contacts labelled with matching tag
+    1.  User enters command to find a contact by tag.
+    2.  CohortConnect shows list of contacts labelled with matching tag.
 
         Use case ends.
         
@@ -328,6 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a. The given tag doesn't exist.
 
         * 1a1. CohortConnect shows an error message.
+        * Use case ends.
         
     * 2a. The list is empty.
 
