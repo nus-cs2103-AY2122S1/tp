@@ -174,6 +174,15 @@ Examples:
 * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`
 command.
   
+### Sorting persons by name: `sort`
+
+Sort persons by the alphabetical order of their name.
+
+Format: `sort [-r]`
+
+* The default sort with no options provided displays a list of persons sorted in ascending ASCII alphabetical order of their name.
+* If the optional -r flag is provided, a list of persons sorted in reverse order is displayed.
+  
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -209,4 +218,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Sort** | `sort [-r]`
 **Help** | `help`
