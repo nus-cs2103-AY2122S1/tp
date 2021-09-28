@@ -29,24 +29,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Deliverables and deadlines + Scheduling and Tracking
 
-### Johnny Doe
+### Richard Li
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rldefa.jpeg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/rldefa)] [[portfolio](team/richardli.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Git Expert
+* Responsibilities: Integration
 
-### Jean Doe
+### Chng Xian Lin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chngxianlin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/xianlinc)]
+[[portfolio](team/chngxianlin.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code Quality
+* Responsibilities: Looks after code quality + Ensure adherence to coding standards + In charge of feature 'note'
 
 ### James Doe
 
