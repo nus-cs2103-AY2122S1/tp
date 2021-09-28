@@ -1,20 +1,19 @@
 ---
-layout: page
-title: User Guide
+User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+SportsPA is a desktop application used to manage membership and training sessions of NUS sports CCAs.
 
-* Table of Contents
-{:toc}
- 
---------------------------------------------------------------------------------------------------------------------
+Table of Contents
+* [Quick Start](#Quick start)
+* [Feature](#Features)
+
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases). [coming soon]
+1. Download the latest `SportsPA.jar` (coming soon).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -24,17 +23,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`listf`** : Lists all facilities.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`addf`**`n/Court 1 l/University Sports Centre t/1700 c/10` : Adds the venue named `Court 1` to the facilities list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`deletem`**`3` : Deletes 3rd member in the members list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clearm`** : Clears the members list
 
    * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -44,25 +41,45 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 **:information_source: Notes about the command format:**<br>
 
+* Characters with the slash symbols are used to indicate the type of parameter supplied by user.
+  <br> eg. in `addm n/NAME p/PHONE_NUMBER`, `n/` and `p/` are the symbols used before entering a parameter
+  for `NAME` and `PHONE_NUMBER` respectively.
+  
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `findm KEYWORD`, `KEYWORD` is a parameter which can be used as `findm Ben`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
+  e.g `n/NAME p/PHONE_NUMBER [d/DAYS]` can be used as `n/Ben p/91111111 d/Mon` or as `n/John p/91111111`.
+  
+* Items with …​ after them can be used any number of times, excluding zero.
+  e.g `setm INDEX d/DAYS...` can be used as `setm 3 d/Mon`, `setm 3 d/Mon d/Tue`, etc.
+  
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
+  e.g. if the command specifies `n/NAME l/LOCATION`, `l/LOCATION n/NAME` is also acceptable.
+  
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+### Getting help: `help`
+
+Shows message explaining how to access the help page.
+
+Format: `help`
+
+### Adding a facility: `addf` [coming soon]
+
+Adds a facility to the facility list.
+
+Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
+
+* TIME specifies the start time and is to be inputted in the format HH:MM
+* CAPACITY specifies the maximum allowed people in the facility
+* All fields are required
+
+Examples:
+`addf n/Court 1 l/University Sports Hall t/1500 c/5` adds Court 1 at University Sports Hall at 3pm with a capacity of 5
 
 ### Listing all facilities : `listf`
 
@@ -194,16 +211,6 @@ Format: `exit`
 * SportsPA data are saved in the hard disk automatically after any command that changes the data. They are saved as a JSON file [JAR file location]/data/sportspa.json
 * If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
 
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
@@ -219,10 +226,17 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
+**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAYS]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/Mon`
+**Clear facilities**|`clearf`
+**Clear member**| `clearm`
+**Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
+**Delete member**| `deletem INDEX` <br> eg. `deletem 1`
+**Exit**| `exit`
+**Find member**| `findm KEYWORD` <br> eg. `findm John`, `findm John Bob`
+**Find facility**| `findf KEYWORD` <br> eg. `findf Court`, `findf Court Hall`
+**Help**| `help`
+**List members**| `listm`
+**List facilities**| `listf`
+**Set member availability**| `setm INDEX d/DAY...` <br> eg.`setm 3 d/Tue d/Wed`
+**Split members**| `split d/DAY` <br> eg. `split d/Mon`
