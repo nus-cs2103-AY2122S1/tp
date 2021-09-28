@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC4 - Delete a task to from a person**
+**Use case: UC4 - Delete a task from a person**
 
 **MSS**
 
@@ -356,6 +356,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Ailurus shows a list of tasks
 3.  User requests to delete a specific task in the list
 4.  Ailurus deletes the task
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index of person is invalid
+
+    * 1a1. Ailurus shows an error message.
+
+      Use case ends.
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index of task is invalid.
+
+    * 3a1. Ailurus shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC5 - Mark a task as done**
+
+**MSS**
+
+1.  User requests to list tasks of a specific person
+2.  Ailurus shows a list of tasks
+3.  User requests to mark a specific task as done
+4.  Ailurus marks task as done
 
     Use case ends.
 
