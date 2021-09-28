@@ -300,16 +300,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TutorMaster` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all students
+2.  TutorMaster shows a list of students in the students list
+3.  User requests to delete a specific student in the list
+4.  TutorMaster deletes the student from the students list
 
     Use case ends.
 
@@ -321,11 +321,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TutorMaster shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Delete a task**
+
+**MSS**
+
+1.  User requests to list all tasks
+2.  TutorMaster shows a list of tasks in the tasks list
+3.  User requests to delete a specific task in the list
+4.  TutorMaster deletes the task from the tasks list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorMaster shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Assign a task to a student**
+
+**MSS**
+
+1.  User requests to list all tasks
+2.  TutorMaster shows a list of tasks in the tasks list
+3.  User requests to list all students
+4.  TutorMaster shows a list of students in the students list
+5.  User requests to assign a task to a student
+6.  TutorMaster assigns the task to the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The tasks list is empty.
+
+  Use case ends.
+  
+* 4a. The students list is empty.
+
+  Use case ends.
+
+* 5a. The given task name or student name is invalid.
+
+    * 5a1. TutorMaster shows an error message.
+
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 
