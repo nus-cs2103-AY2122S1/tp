@@ -368,12 +368,34 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+## Person
+Action | Format | Advanced Format
+--------|--------|----------
+**Create** | `person /create NAME [g:GROUP_NAME]` | `p /c NAME [g:GROUP_NAME]`
+**Edit** | `person NAME /edit n:NAME` | `p NAME /e n:NAME`
+**Delete** | `person /delete NAME` | `p NAME /d n:NAME`
+**Remove** | `person NAME /remove or /r g:GROUP_NAME ` | `p NAME /r g:GROUP_NAME`
+**Note** | `person NAME /note` | `p NAME /n`
+
+## Group
+Action | Format |  Advanced Format
+--------|--------|----------
+**Create** | `group / c g:GROUP_NAME` | `g / c g:GROUP_NAME`
+**Edit** | `group g:GROUP_NAME /edit g:GROUP_NAME` | `g GROUP_NAME /e g:GROUP_NAME`
+**Delete** | `group g:GROUP_NAME /delete g:GROUP_NAME` | `g g:GROUP_NAME /d g:GROUP_NAME`
+**Note** | `group g:GROUP_NAME /note` | `g g:GROUP_NAME /n g:GROUP_NAME`
+**Create subgroup** | `group GROUP_NAME /create sg:SUB_GROUP_NAME` | `g g:GROUP_NAME /c sg:SUB_GROUP_NAME`
+**Edit subgroup** | `group GROUP_NAME:SUB_GROUP_NAME /edit sg:SUB_GROUP_NAME` | `g g:GROUP_NAME:SUB_GROUP_NAME /e sg:SUB_GROUP_NAME`
+**Delete subgroup** | `group GROUP_NAME /delete sg:SUB_GROUP_NAME` | `g GROUP_NAME /d sg:SUB_GROUP_NAME`
+**Note subgroup** |  `group GROUP_NAME /note sg:SUB_GROUP_NAME` | `g GROUP_NAME /n sg:SUB_GROUP_NAME`
+
+## General
+Action | Format | Advanced Format
+--------|--------|----------
+**Help** | `help` | `-`
+**List person** | `list person`  | `l p`
+**List group** | `list group` | `l g`
+**List subgroup** | `list /subgroup  g:GROUP_NAME` | `l /sg g:GROUP_NAME`
+**find person** | `find /person PERSON_NAME` | `f /p n:PERSON_NAME`
+**find group** | `find /group GROUP_NAME` | `f /g g:GROUP_NAME`
+**find subgroup** | `find /subgroup or /sg GROUP_NAME` | `f /sg g:GROUP_NAME`
