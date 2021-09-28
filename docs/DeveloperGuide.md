@@ -257,13 +257,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+CS2100 TAs who
+* have to manage a number of students across different classes
+* keep track of the students' attendance
+* keep track of the students' grades
+* prefer and comfortable with CLI tools
 * can type fast
+* is proficient with Unix commands
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students. 
 
 
 ### User stories
@@ -272,6 +277,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                                               | So that I can…​                                                     |
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        |
+| `* * *`  | user ready to start using the app          | purge all current data         |  get rid of sample/experimental data I used for exploring the app      |
+| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall Grade)| so that I can identify and track their progress separately|
+| `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record                                       |
+| `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class    |
+| `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly                                       |
+| `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and grade |
+| `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made                       |
+| `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors          |
+| `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class           |
 | `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.                                           |
 | `* * `  | busy CS2100 TA                              | view students' statstics formatted in a standard form                                            | avoid sorting the information on my own.                               |
 | `* * `  |  CS2100 TA                                  | use the app to track students' performance                                                       | identify those who need more help.                                     |
@@ -296,21 +311,78 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.                                         |
 | `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.                                 |
 
-
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the 
+`CS2100 Teaching Assistant (CS2100 TA in short)`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 Purge/Delete all sample student records**
+
+Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of sample student records
+3.  CS2100 TA requests to purge sample student records
+4.  ProgrammerError deletes all sample student records
+    
+    Use case ends.
+    
+
+**Use case: UC2 Create a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to create a student record
+4.  ProgrammerError requests for the student's details
+5.  CS2100 TA specifies the student's details
+6.  ProgrammerError creates a student record
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student details given are incomplete
+
+    * 2a1. ProgrammerError shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC3 View a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to view a specific student record
+4.  ProgrammerError shows the student record's details 
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. ProgrammerError shows an error message.
+    
+      Use case resumes at step 2.
+
+**Use case: UC4 Delete a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to delete a specific student record in the list
+4.  ProgrammerError deletes the student record
 
     Use case ends.
 
@@ -322,24 +394,80 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ProgrammerError shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC5 Update a student record**
+
+**MSS**
+
+1.  CS2100 TA requests to list student records
+2.  ProgrammerError shows a list of student records
+3.  CS2100 TA requests to update a specific student record
+4.  ProgrammerError updates the student record
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ProgrammerError shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC6 Automatic sort student records**
+
+**MSS**
+
+1.  CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
+2.  CS2100 TA requests to list student records
+3.  ProgrammerError automatically sort the changed student records
+
+    Use case ends.
+
+**Use case: UC7 Automatic save and load student records**
+
+**MSS**
+
+1.  CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
+2.  ProgrammerError automatically save the changed student records to hard disk
+3.  CS2100 TA restarts the application
+4.  ProgrammerError shows the saved data 
+
+    Use case ends.
+
+{More to be added}
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  The data should be stored locally and should be in a human editable csv file.
+4.  The product should be for a single user at a time (i.e. not a multi-user product).
+5.  No DBMS should be used to store data.
+6.  The software should follow the Object-oriented paradigm primarily. (with the possibility of allowing a mix of other styles when justifiable).
+7.  The final product should be a result of evolving the given code base. (i.e. allowed to replace all existing code with new code, as long as it is done incrementally)
+8.  The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for:
 
-*{More to be added}*
+- standard screen resolutions 1920x1080 and higher
+- screen scales 100% and 125%
+
+9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for:
+
+- resolutions 1280x720 and higher
+- screen scales 150%
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Student ID**: An NUS student's matriculation number
+- **TA**: A CS2100 teaching assistant
 
 --------------------------------------------------------------------------------------------------------------------
 
