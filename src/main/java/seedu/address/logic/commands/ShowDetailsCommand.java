@@ -43,6 +43,7 @@ public class ShowDetailsCommand extends Command {
                 desiredEvent.getName(),
                 desiredEvent.getDate(),
                 desiredEvent.getTime().toString().equals("") ? "N/A" : desiredEvent.getTime());
+        
         return new CommandResult(displayedMessage);
         
     }
