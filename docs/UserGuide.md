@@ -62,7 +62,6 @@ Table of Contents
 
 </div>
 
-<<<<<<< HEAD
 ### Getting help: `help`
 
 Shows message explaining how to access the help page.
