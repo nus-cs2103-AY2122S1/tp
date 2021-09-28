@@ -123,21 +123,21 @@ Finds all persons whose fields match the given keywords.
 
 Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] `
 
-* There should be at least one field i.e. `find` is an invalid command.
+* At least one field must be provided. i.e. `find` by itself is an invalid command.
 * The search is case-insensitive. e.g.`hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Clementi West` will match `West Clementi`.
 * The keyword does not need to match the field exactly. e.g. `john@gmail.com` will match `leejohn@gmail.com`.
 * A field just needs to match at least one keyword. e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
 * All fields specified need to match for person to be matched.<br>
   e.g. `find n/john a/Clementi`
-    * will match person named `john` with address `West Clementi Street`.
-    * will not match person named `john` with address `Bedok Reservoir`.
+    * will match person named `john` with address `West Clementi Street`
+    * will not match person named `john` with address `Bedok Reservoir`
 
 Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
-* `find a/Jurong east n/Ben e/gmail` returns 
-    * person with name: `benny tan`, address: `West Jurong`, email: `benny.tan@gmail.com`.
-    * person with name: `benjamin` address: `yishun east ave 1` email: `benj@gmail.com`.
+* `find a/Jurong east n/Ben e/gmail`  
+    * will match a person named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
+    * will match a person name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
 
 ### Filtering persons by tags: `filter`
 
