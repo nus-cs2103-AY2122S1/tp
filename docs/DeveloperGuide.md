@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* handles large volumes of internal and external communications
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* requires fast manipulation and precise handling of contact data
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app, and minimise tedious and repetitive tasks such as data entry, email blasts, and mail merge
 
 
 ### User stories
@@ -272,12 +273,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | new user                                   | get help                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | batch import contacts          | quickly get started                                                    |
+| `* * *`  | user                                       | search for a specific field    | filter my result easily                                                |
+| `* * *`  | user                                       | update contact details         | the information stays updated                                          |
+| `* * *`  | user                                       | purge all data                 | easily start over                                                      |
+| `* * *`  | careless user                              | have case-insensitive commands | speed up my typing                                                     |
+| `*`      | careless user                              | be warned about incorrect data format | minimise errors                                                 |
+| `*`      | with incomplete contact data               | have autofill suggestions      | make the contact data complete                                         |
 
 *{More to be added}*
 
@@ -285,28 +288,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Batch Import**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to batch import
+2.  AddressBook shows file selection window
+3.  User selects the file 
+4.  AddressBook adds the data
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The file is not in the correct format.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: Filter by fields**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
 
-      Use case resumes at step 2.
+1.  User inputs filter requirement
+2.  AddressBook shows matching results
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command is not in the correct format.
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -321,7 +333,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 

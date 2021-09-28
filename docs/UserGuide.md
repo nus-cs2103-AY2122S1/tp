@@ -158,17 +158,23 @@ Examples:
 
 ### Deleting a person: `delete`
 
-Deletes the specified person from the address book.
+Deletes the person of choice from the address book.
 
-Format: `delete INDEX`
+Format: `delete "UID1,UID2,..."`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes a specific user(s) based on the User ID. ​
+* The number of UID in the input is arbitrary.
+* At least one User ID must be provided.​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete "1,2"` deletes two person with UID 1 and 2 in the address book.
+
+Format: `delete -a"`
+* Deletes ALL users in the current scope. ​
+* A warning will pop up for further confirmation.
+
+Examples:
+* `find Betsy` followed by `delete -a` deletes ALL person in the results of the `find` command.
 
 ### Clearing all entries: `clear`
 
@@ -178,7 +184,7 @@ Format: `clear`
 
 ### Exiting the program: `exit`
 
-Exits the program.
+Shuts down and exits the program.
 
 Format: `exit`
 
