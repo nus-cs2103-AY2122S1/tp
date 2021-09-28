@@ -270,14 +270,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                                                               | So that I can…​                                                     |
+| -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.                                           |
+| `* * `  | busy CS2100 TA                              | view students' statstics formatted in a standard form                                            | avoid sorting the information on my own.                               |
+| `* * `  |  CS2100 TA                                  | use the app to track students' performance                                                       | identify those who need more help.                                     |
+| `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.                 |
+| `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.                    |
+| `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.                                |
+| `* *`   | CS2100 TA                                   | update attendance to keep track of participation grade%                                          | I can fulfil my obligations as a TA.                                   |
+| `* *`   | CS2100 TA                                   | edit a student's participation score                                                             | the records are up to date.                                            |
+| `* *`   | CS2100 TA                                   | upload the students' performance to LumiNUS conveniently                                         |                                                                        |
+| `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/grade from the database.       |
+| `* *`   | CS2100 TA who loves using the keyboard      | type commands                                                                                    | practice my typing skills.                                             | 
+| `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |                                                                        |
+| `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.                               |
+| `* *`   | CS2100 TA                                   | use tags to identify the topics which many students have difficulty in                           | prepare more notes on the topic.                                       |
+| `*`     | CS2100 TA with multiple classes             | filter the contact list by classes  | easily identify those in the current class.                |                                                                        |
+| `*`     | archive previous batch statistics           | compare current batch performance with them                                                      |                                                                        |
+| `*`     | expert user                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.                             |                             
+| `*`     | CS2100 TA                                   | use tags to mark the weak areas of a student                                                     | provide more targetted help to my students.                            |
+| `*`     | user                                        | add a time to a task                                                                             | record when a task need to be done.                                    |
+| `*`     | user                                        | see the pending task that has the next earliest deadline                                         | know what I need to do next.                                           |
+| `*`     | a student                                   | easily view my participation statistics                                                          | verify that it was recorded correctly.                                 |
+| `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.                                         |
+| `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.                                 |
+
 
 *{More to be added}*
 
