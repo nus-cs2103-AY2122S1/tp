@@ -413,12 +413,6 @@ Preconditions: There is at least one student added to TutorAid.
   
       Steps 3a1 - 3a2 are repeated until a valid index is given
       Use case resumes from step 4
-    
-* 4a. Incorrect update of payment for a different student instead
-
-    * 4a1. User enters the paid/unpaid command to revert the incorrect change made.
-
-      Use case resumes from step 3
 
 **Use Case 8: View schedule for the upcoming week**
 
