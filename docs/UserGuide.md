@@ -107,6 +107,7 @@ Examples:
 * `add n/Janet /p54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31` adds an elderly and details without the `LAST_VISITED`.
 * `add n/Jane /p54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 v/2021-10-31` adds an elderly and details with `LAST_VISITED` and `VISIT_DATE`.
 
+
 ### Delete an elderly or corresponding visit: `delete`
 
 Deletes either an elderly’s details or an elderly’s visit from SeniorLove.
@@ -138,17 +139,19 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all the elderly and their associated details in the address book.
 
 Format: `list`
 
+
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds elderly whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find n/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -158,8 +161,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+
 
 ### Scheduling a visit to an elderly : `visit`
 
@@ -175,7 +179,6 @@ Examples:
 * `visit 1 2021-12-31` schedules a meeting to the first elderly in the address book on 31th December 2021.
 
 
-
 ### Marking one visit as done : `done`
 
 Marks a scheduled visit to an elderly as done.
@@ -189,8 +192,6 @@ Examples:
 * `done 1` marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
 
 
-
-
 ### Viewing help : `help`
 
 Show a message linking users to the user guide.
@@ -199,11 +200,13 @@ Show a message linking users to the user guide.
 
 Format: `help`
 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
 
 ### Exiting the program : `exit`
 
@@ -211,9 +214,11 @@ Exits the program.
 
 Format: `exit`
 
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -222,6 +227,7 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
+
 
 ### Archiving data files `[coming in v2.0]`
 
