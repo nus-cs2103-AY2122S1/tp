@@ -154,6 +154,18 @@ Exits the program.
 
 Format: `exit`
 
+### Creating a group: `mkdir`
+
+Creates a group for contacts to be added into.
+
+Format: `mkdir GROUP_NAME`
+
+* Creates a group with the name `GROUP_NAME`.
+
+Examples:
+
+* `mkdir CS2103` creates a group with the name `CS2103`.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
