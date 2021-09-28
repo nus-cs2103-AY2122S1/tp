@@ -165,6 +165,18 @@ Examples:
 * `claim 1 t/Hospital Claim d/Broke left leg`
     * If a claim titled “Hospital Claim” already exists, the description will be updated to “Broke left leg”
 
+### Adding a note: `note`
+Adds a note to an existing person in the address book
+
+Format: `note INDEX n/NOTE`
+* Adds a note to the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3,...
+
+Examples:
+* `list` followed by `note 2 n/Meet for lunch` adds a note that says Meet for lunch to the 2nd person in the address book.
+* `find Betsy` followed by `note 1 n/Birthday on 12 Dec` adds a note that says Birthday on 12 Dec  to the 1st person in the results of the find command.
+
 ### Schedule appointment: `schedule`
 Schedule a meeting with a specific person
 
