@@ -154,6 +154,18 @@ Exits the program.
 
 Format: `exit`
 
+### Creating a folder: `mkdir`
+
+Creates a folder for contacts to be added into.
+
+Format: `mkdir FOLDER_NAME`
+
+* Creates a folder with the name FOLDER_NAME.
+
+Examples:
+
+* `mkdir CS2103` creates a folder with the name `CS2103`.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -190,3 +202,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Add Folder** | `mkdir FOLDER_NAME` <br> e.g. `mkdir CS2103`
