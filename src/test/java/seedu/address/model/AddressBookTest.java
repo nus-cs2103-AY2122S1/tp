@@ -23,7 +23,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.participant.Participant;
 import seedu.address.model.participant.exceptions.DuplicateParticipantException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.ParticipantBuilder;
 
 public class AddressBookTest {
