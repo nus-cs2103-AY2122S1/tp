@@ -73,6 +73,7 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ### View student details : `view`
+> ❕❕ <b>Note:</b> This feature is subject to changes
 
 View data of student with specified index in detail.
 
