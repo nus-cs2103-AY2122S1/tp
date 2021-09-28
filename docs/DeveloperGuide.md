@@ -423,15 +423,27 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  A TA with above average typing speed for code should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  The data should be stored locally and should be in a human editable csv file.
+4.  The product should be for a single user at a time (i.e. not a multi-user product).
+5.  No DBMS should be used to store data.
+6.  The software should follow the Object-oriented paradigm primarily. (with the possibility of allowing a mix of other styles when justifiable).
+7.  The final product should be a result of evolving the given code base. (i.e. allowed to replace all existing code with new code, as long as it is done incrementally)
+8.  The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for:
 
-*{More to be added}*
+- standard screen resolutions 1920x1080 and higher
+- screen scales 100% and 125%
+
+9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for:
+
+- resolutions 1280x720 and higher
+- screen scales 150%
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Student ID**: An NUS student's matriculation number
+- **TA**: A CS2100 teaching assistant
 
 --------------------------------------------------------------------------------------------------------------------
 
