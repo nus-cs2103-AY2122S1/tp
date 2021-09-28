@@ -2,8 +2,28 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+Table of Contents
+- [**Acknowledgements**](#acknowledgements)
+- [**Setting up, getting started**](#setting-up-getting-started)
+- [**Design**](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+- [**Implementation**](#implementation)
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a person](#deleting-a-person)
+    * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,70 +174,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
@@ -257,56 +213,191 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* No time/busy
+* Might not be tech-savvy
+* Many contacts to manage
 * has a need to manage a significant number of contacts
-* prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* Need to profile clients
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: Financial Advisors are busy. We will help them save time by optimising our system for them. FAST keeps track of client details and information for them.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                 | I want to …​                                              | So that I …​                                                                |
+| -------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `* * *`  | user                                       | use the application offline                                  | can view my contacts without an internet connection                            |
+| `* * *`  | FA                                         | delete contact info                                          | will not have useless data in my app                                           |
+| `* * *`  | FA                                         | store my clients contact info                                | can contact them in the future more easily                                     |
+| `* * *`  | user                                       | see all of my contacts                                       | know who is in my contacts                                                     |
+| `* * *`  | new user                                   | learn how to use the app                                     | can effectively use the app                                                    |
+| `* * *`  | busy person                                | use the app with friendlier syntax that's easier to type     | can add contacts with less trouble                                             |
+| `* * *`  | busy person                                | see all the available commands at a glance                   | can focus on managing my client base rather than dealing with the syntax       |
+| `* * *`  | FA                                         | update my clients contact info                               | have up to date information                                                    |
+| `* * *`  | forgetful person                           | quickly check for the highest priority client                | can move on to the next client quickly without delay                           |
+| `* * *`  | FA with many clients                       | tag my clients' info                                         | can see different groups of clients according to the tags                      |
+| `* *`    | FA                                         | store my clients contact information                         | do not need to store them on my phone                                          |
+| `* *`    | numbers person                             | delete multiple contacts in one go                           | do not have to delete contacts individually                                    |
+| `* *`    | FA with many clients                       | search through my clients                                    | can easily find a specific client                                              |
+| `* *`    | FA                                         | have fast access to important numbers (e.g. office, partners | can quickly contact my partners should something arise                         |
+| `* *`    | potential user                             | see how the app works with sample data                       | can understand what the app will look like with real data                      |
+| `* *`    | FA                                         | group my clients according to their investment strategies    | can easily manage each group                                                   |
+| `* *`    | FA                                         | archive data that might be obsolete at the moment            | do not flood my app with obsolete data and can still access them in the future |
+| `*`      | FA                                         | store appointments info of my clients                        | will not forget about important meetings                                       |
+| `*`      | person with many devices                   | import and export the client info                            | can switch between devices quickly                                             |
+| `*`      | FA with many clients                       | view stats of my client base                                 | can know how much income I am making                                           |
+| `*`      | FA                                         | reminded to contact potential clients                        | can disturb potential clients into signing on                                  |
+| `*`      | FA                                         | check the number of clients and deals currently              | can check if i have fulfilled my monthly quota                                 |
+| `*`      | FA                                         | store extra info that could be useful                        | can remember extra details that could be useful in clinching a deal            |
+| `*`      | FA                                         | see frequently contacted clients                             | don't have to keep searching for the same person over and over again           |
+| `*`      | FA                                         | list out all my investment plans                             | know what investment plans I am selling                                        |
+| `*`      | user                                       | color-code my contacts                                       | can differentiate between the tags, and it looks nicer                         |
+| `*`      | Responsible FA                             | be reminded of clashes in my appointments                    | will not lose any potential clients                                            |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Financial Advisor Smart Tracker (FAST)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new contact
+2. FAST displays a message indicating success
+3. FAST displays the new contact below
 
-    Use case ends.
+   Use case ends
+
+**Extensions**
+
+* 1a. The given command syntax is invalid
+    * 1a1. FAST shows an error message
+    * 2a2. FAST shows an example of add command to user
+
+      Use case ends
+
+**Use case: UC02 - Delete Contact**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to delete a specific person in the list
+3. FAST deletes the person
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of delete command to user
+
+      Use case ends.
+
+**Use case: UC03 - Edit Contact**
+
+**MSS**
+
+1. User requests to list contacts (UC06)
+2. User requests to edit a contact
+3. FAST displays the updated contact
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of edit command to user
+
+      Use case ends.
+
+
+* 2b. The given command syntax is invalid
+    * 2b1. FAST displays an error message
+    * 2b2. FAST displays an example of the edit command to the user
+
+      Use case ends.
+
+
+**Use case: UC04 - Add a remark**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to add a remark to a specific person in the list
+3. FAST displays the new remark in the contact
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of remark command to user
+
+      Use case ends
+
+
+* 2b. The given command syntax is invalid
+    * 2b1. FAST displays an error message
+    * 2b2. FAST displays an example of the remark command to the user
+
+      Use case ends
+
+
+* 2c. User removes an existing remark
+    * 2c1. FAST displays a message that the remark has been removed
+
+      Use case ends
+
+
+**Use case: UC05 - Find Contact**
+
+**MSS**
+
+1. User searches for a name
+2. FAST shows a list of persons with the specified name or people whose name contains the search query
+
+   Use case ends
+
+**Extensions**
+
+* 1a. The given search query is invalid
+    * 1a1. FAST shows an error message
+    * 1a2. FAST shows an example of find command to user
+
+      Use case ends
+
+
+* 1b FAST cannot find any contacts with the given search query
+    * 1b1. FAST displays a message to inform user no contacts that matches the query was found
+
+      Use case ends
+
+
+**Use case: UC06 - List Contacts**
+
+**MSS**
+
+1. User requests to list contacts
+2. FAST displays a list of contacts
+
+   Use case ends
 
 **Extensions**
 
 * 2a. The list is empty.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+  Use case ends
 
 *{More to be added}*
 
@@ -315,13 +406,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should work fully offline, and not rely on external URLs for important guides and documentation
+5.  Application should be usable by a single user
 
 ### Glossary
 
+* **Contact**: A client to be stored in FAST, includes information on the client
+* **CLI**: Command Line Interface
+* **DG**: Developer Guide.  
+* **FA**: Financial Advisor
+* **FAST**: Financial Advisor Smart Tracker, the name of this software
+* **FXML**: FX Markup Language, the format in which the GUI layout is stored in
+* **Java 11**: Version of the programming language, used in the coding of this software
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Remark**: A comment/note about a specific contact
+* **UG**: User Guide
+* **URL**: Uniform Resource Locator, known more commonly as a link to a website.
+* **XML**: Extensible MarkUp Language, used to format the layout of this software
+
 
 --------------------------------------------------------------------------------------------------------------------
 
