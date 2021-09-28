@@ -52,5 +52,9 @@ public class EditPersonDescriptorTest {
         //different birth date -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        //same birth date -> returns true
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_AMY).build();
+        assertTrue(DESC_AMY.equals(editedAmy));
     }
 }
