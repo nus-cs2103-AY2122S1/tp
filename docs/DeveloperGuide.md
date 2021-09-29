@@ -326,7 +326,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Notes**: A short paragraph that is written for a person to remind the user about details of that person
+* **Above average typing speed**: More than 40 words per minute
 
 --------------------------------------------------------------------------------------------------------------------
 
