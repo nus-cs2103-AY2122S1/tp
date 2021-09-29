@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ong Cheng Seong
 
-<img src="images/ChengSeong.png" width="200px">
+<img src="images/chengseong.png" width="200px">
 
 [[github](https://github.com/chengseong)]
 
