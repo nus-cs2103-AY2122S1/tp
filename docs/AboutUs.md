@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Gabriel Goh Kheng Lin
 
-<img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png" width="200px">
+<img src="images/kawaiigabrielneko.png" width="200px">
 
 [[github](http://github.com/kawaiigabrielneko)]
 [[portfolio](team/kawaiigabrielneko.md)]
