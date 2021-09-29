@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;

@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;

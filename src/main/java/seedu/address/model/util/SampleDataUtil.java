@@ -2,7 +2,6 @@ package seedu.address.model.util;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;

@@ -60,16 +60,16 @@ public class AddCommandParserTest {
         Student expectedStudent = new StudentBuilder(BOB).build();
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB +
-            GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB +
-            GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB +
-            GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+            + GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
     }
 
     @Test
