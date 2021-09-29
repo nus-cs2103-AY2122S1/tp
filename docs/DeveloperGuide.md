@@ -344,6 +344,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should not be stored in a **Database Management system**(DBMS).
+5.  Should be stored *locally* and can be *manually* edited by the user.
+6.  Program should be delivered to users in a single **JAR** file.
+7.  Program should be able to run with just a *double-click* and no CLI required.
+8.  Should be runnable on both `32-bit` and `64-bit` processors.
+9.  New users should be able to navigate and use the program effectively.
+10.  Software should not exceed **100MB**.
+11.  Documents should not exceed **15MB** per file.
 
 *{More to be added}*
 
