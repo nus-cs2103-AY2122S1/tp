@@ -4,6 +4,7 @@ import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
