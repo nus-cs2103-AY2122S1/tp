@@ -2,8 +2,33 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+- [**Acknowledgements**](#acknowledgements)
+- [**Setting up, getting started**](#setting-up-getting-started)
+- [**Design**](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+- [**Implementation**](#implementation)
+    * [Undo/redo feature](#proposed-undoredo-feature)
+        + [Proposed implementation](#proposed-implementation)
+        + [Design considerations](#design-considerations)
+    * [Data archiving](#proposed-data-archiving)
+
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a person](#deleting-a-person)
+    * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -278,51 +303,270 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Event organiser                             | remove a participant from an event | maintain an accurate list of participants attending the event                  |
 | `* * *`  | Event organiser that has concluded an event | mark the event as done             | safely ignore events in my list that have already passed                       |
 | `* *`    | Event organiser with many events            | sort events by date and time       | keep track of which events occur when and prepare accordingly                  |
-| `* *`    | Event organiser with many participants      | find a participant by name         | I can contact the participant to inform him of updates or changes to the event |
+| `*`      | Event organiser with many participants      | find a participant by name         | I can contact the participant to inform him of updates or changes to the event |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Managera` and the **Actor** is an `Event Organiser`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add an Event**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Event Organiser requests to add an Event, specifying the name and date of the Event.
+2.  Managera adds the new Event with the given name and date to its Event list.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Event Organiser omits name and/or date parameters required for adding an Event.
 
-  Use case ends.
+    * 1a1. Managera shows an error message citing missing parameters.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. AddressBook shows an error message.
+* 1b. Event Organiser provides an Event time in addition to name and date.
 
-      Use case resumes at step 2.
+    * 1b1. Managera adds the new Event with the given name, date and time to its Event list.
 
-*{More to be added}*
+      Use case ends.
+
+**Use case: UC02 - Add Participant to Event**
+
+Preconditions: At least one Event and one Participant have been added to Managera.
+
+**MSS**
+
+1.  Event Organiser requests to add a Participant to an Event, specifying the Event's name and Participant's ID.
+2.  Managera adds the Participant with the specified ID to the specified Event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Event Organiser omits parameters required for adding a Participant to an Event.
+
+    * 1a1. Managera shows an error message citing missing parameters.
+
+      Use case resumes at step 1.
+
+* 1b. Event Organiser provides an invalid Participant ID.
+
+    * 1b1. Managera shows an error message stating that the given ID does not correspond to an existing Participant.
+
+      Use case resumes at step 1.
+
+* 1c. Event Organiser provides an invalid Event name.
+
+    * 1c1. Managera shows an error message stating that the given name does not correspond to an existing Event.
+
+      Use case resumes at step 1.
+
+**Use case: UC03 - Remove an Event**
+
+Preconditions: At least one Event has been added to Managera.
+
+**MSS**
+
+1.  Event Organiser requests to remove an Event, specifying the name of the Event.
+2.  Managera removes the Event with the given name from its Event list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Event Organiser omits name parameter required for removing an Event.
+
+    * 1a1. Managera shows an error message citing missing parameter.
+
+      Use case resumes at step 1.
+
+* 1b. Event Organiser provides an invalid Event name.
+
+    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing Event.
+
+      Use case resumes at step 1.
+
+* 1c. Event Organiser provides an Event date and time in addition to name.
+
+    * 1c1. Managera removes the new Event with the given name, date and time to its Event list.
+
+      Use case ends.
+
+**Use case: UC04 - Remove Participant from Event**
+
+Preconditions: At least one Event and one Participant have been added to Managera. 
+
+**MSS**
+
+1.  Event Organiser requests to remove a Participant from an Event, specifying the Event's name and Participant's ID.
+2.  Managera removes the Participant with the specified ID from the specified Event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Event Organiser provides invalid Participant ID.
+
+    * 1a1. Managera shows an error message stating that the given ID does not correspond to an existing Participant.
+
+      Use case resumes at step 1.
+
+* 1b. Event Organiser provides invalid Event name.
+
+    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing Event.
+
+      Use case resumes at step 1.
+
+* 1c. Event Organiser provides valid Event name and participant ID, but corresponding Participant is not in the corresponding Event's participant list.
+
+    * 1c1. Managera shows an error message stating that the Participant is not taking part in the given Event.
+
+      Use case resumes at step 1.
+
+**Use case: UC05 - Mark Event as done**
+
+Preconditions: At least one Event has been added to Managera.
+
+**MSS**
+
+1.  Event Organiser requests to mark an Event as done, specifying the name of the Event.
+2.  Managera marks the Event with the given name in its Event list as done.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Event Organiser omits name parameter required for marking an Event as done.
+
+    * 1a1. Managera shows an error message citing missing parameter.
+
+      Use case resumes at step 1.
+
+* 1b. Event Organiser provides invalid Event name.
+
+    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing Event.
+
+      Use case resumes at step 1.
+
+* 1c. Event Organiser provides an Event date and time in addition to name.
+
+    * 1c1. Managera marks the Event with the given name, date and time in its Event list as done.
+
+      Use case ends.
+
+**Use case: UC06 - Sort Events by time**
+
+Preconditions: At least one Event has been added to Managera.
+
+**MSS**
+
+1.  Event Organiser requests to sort the current list of Events.
+2.  Managera sorts the list of Events in chronological order and displays the list.
+
+    Use case ends.
+
+**Use case: UC07 - Find Participant and access details**
+
+**Preconditions: At least one Participant has been added to Managera.**
+
+**MSS**
+
+1.  Event Organiser requests Participant details, specifying a Participant name.
+2.  Managera displays the details of all Participants with the given name.
+
+    Use case ends.
+
+**Use case: UC08 - Filter Events by date**
+
+Preconditions: At least one Event has been added to Managera.
+
+**MSS**
+
+1.  Event Organiser requests to filter Events from the current list of Events that take place on a specified date.
+2.  Managera finds the Events that take place on the given date and displays them in a list.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Event Organiser omits date parameter required for filtering Events.
+
+    * 1a1. Managera shows an error message citing missing parameter.
+
+      Use case resumes at step 1.
+
+**Use case: UC09 - Show Event details**
+
+Preconditions: At least one Event has been added to Managera.
+
+**MSS**
+
+1.  Event Organiser requests Event details, specifying an Event name.
+2.  Managera displays the details of the Event with the given name.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Event Organiser omits name parameter required for showing Event details.
+
+    * 1a1. Managera shows an error message citing missing parameter.
+
+      Use case resumes at step 1.
+
+* 1b. Event Organiser provides invalid Event name.
+
+    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing Event.
+
+      Use case resumes at step 1.
+
+**Use case: UC10 - Show Event Participants**
+
+Preconditions: At least one Event has been added to Managera.
+
+**MSS**
+
+1.  Event Organiser requests a list of Event Participants, specifying an Event name.
+2.  Managera displays the list of Participants of the Event with the given name.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Event Organiser omits name parameter required for show Event participants.
+
+    * 1a1. Managera shows an error message citing missing parameter.
+
+      Use case resumes at step 1.
+
+* 1b. Event Organiser provides invalid Event name.
+
+    * 1b1. Managera shows an error message stating that the given name does not correspond to an existing Event.
+
+      Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+3.  Should be able to hold up to 100 events without a noticeable sluggishness in performance for typical usage.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  Should work without having to use an installer or compiler.
+6.  Should work without requiring an internet connection.
+7.  Saved data should be kept in a single file to allow for easy transfer to a different device.
+8.  The system should respond within two seconds.
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command Line Interface (CLI)**: A CLI is a text-based interface that processes commands to a computer program in the form of lines of text.
+* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.
 
 --------------------------------------------------------------------------------------------------------------------
 

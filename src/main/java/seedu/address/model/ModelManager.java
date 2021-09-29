@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,17 +12,17 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
+import seedu.address.model.participant.Participant;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the Managera data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Participant> filteredParticipants;
     //Add-ons for Managera
     private final FilteredList<Event> events;
 
@@ -38,7 +37,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredParticipants = new FilteredList<>(this.addressBook.getParticipantList());
         //Add-ons for Managera
         events = new FilteredList<>(this.addressBook.getEventList());
     }
@@ -95,49 +94,47 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasParticipant(Participant participant) {
+        requireNonNull(participant);
+        return addressBook.hasParticipant(participant);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteParticipant(Participant target) {
+        addressBook.removeParticipant(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addParticipant(Participant participant) {
+        addressBook.addParticipant(participant);
+        updateFilteredParticipantList(PREDICATE_SHOW_ALL_PARTICIPANTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setParticipant(Participant target, Participant editedParticipant) {
+        requireAllNonNull(target, editedParticipant);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setParticipant(target, editedParticipant);
     }
 
-    public void sortEvents() {
-        addressBook.sortEvents();
-    }
-
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Participant List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Participant> getFilteredParticipantList() {
+        return filteredParticipants;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredParticipantList(Predicate<Participant> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredParticipants.setPredicate(predicate);
     }
+
+    //=========== Event List Accessor =========================================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
@@ -146,6 +143,13 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Event> getEventList() {
         return events;
+    }
+
+    /**
+     * Sorts the events in the addressBook.
+     */
+    public void sortEvents() {
+        addressBook.sortEvents();
     }
 
     @Override
@@ -164,7 +168,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredParticipants.equals(other.filteredParticipants);
     }
 
 }
