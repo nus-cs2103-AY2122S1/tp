@@ -121,8 +121,13 @@ public class LessonAddCommand extends Command {
         Stream<Lesson> lessonsOnSameDate = personToEdit.getLessons().stream()
             .filter(lesson -> lesson.getDate().equals(toAdd.getDate()));
 
+        /*
+        Check if time ranges overlap each other or if one time range is
+        completely contained in the other range.
+         */
         boolean isClashingLesson = lessonsOnSameDate
-            .anyMatch(lesson -> lesson.getTimeRange().isClashing(toAdd.getTimeRange()));
+            .anyMatch(lesson -> lesson.getTimeRange().isClashing(toAdd.getTimeRange())
+            || toAdd.getTimeRange().isClashing(lesson.getTimeRange()));
 
         if (isClashingLesson) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
