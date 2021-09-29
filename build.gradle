@@ -73,5 +73,5 @@ shadowJar {
 defaultTasks 'clean', 'test'
 
 javafx {
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
 }
