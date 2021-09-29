@@ -123,8 +123,6 @@ Finds all students whose fields match the given keywords.
 
 Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL]`
 
-* You can find a student by name, address, email, phone, school, academic stream and academic level. 
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the find command:**<br>
@@ -163,13 +161,15 @@ Filters students in the address book by their tags, based on the given filter co
 
 Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
 
-* `all` indicates that a student must have all the specified tags to be matched.
-* `any` indicates that a student with at least one of the specified tag will be matched.
-* `none` indicates that a student must have none of the specified tags to be matched.
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the filter command:**<br>
+
+* `all` indicates that a student must have all the specified tags to be matched.
+
+* `any` indicates that a student with at least one of the specified tag will be matched.
+
+* `none` indicates that a student must have none of the specified tags to be matched.
 
 * The filter condition will not accept other arguments besides `all`, `any` and `none`.
   e.g. `cond/every` will result in an error.
