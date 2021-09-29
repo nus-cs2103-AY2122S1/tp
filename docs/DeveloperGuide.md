@@ -318,6 +318,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+5.  Should handle invalid user input gracefully and not crash.
+6.  On invalid user input, should prompt the user with information on the correct input format expected so that the user can learn how to use the commands.
+
+Project scope
+- The app is not required to handle communication with people, only keeping track of metadata associated with contacts
+- The app is not required to handle integration with message apps like Telegram and WhatsApp
 
 *{More to be added}*
 
