@@ -10,7 +10,12 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidTimeRange(Time, Time)}
  */
 public class TimeRange implements Comparable<TimeRange> {
-    public static final String MESSAGE_CONSTRAINTS = "End time cannot be earlier than start time.";
+    public static final String MESSAGE_CONSTRAINTS = "Lesson time range should adhere to the following constraints:\n"
+        + "1. End time cannot be earlier than start time.\n"
+        + "2. Lesson should be conducted between 8am and 10pm, inclusive";
+
+    private static final Time DAY_START = new Time("08:00");
+    private static final Time DAY_END = new Time("22:00");
 
     private final Time start;
     private final Time end;
@@ -38,14 +43,17 @@ public class TimeRange implements Comparable<TimeRange> {
     }
 
     /**
-     * Checks if the start is earlier than the end.
+     * Checks if the start is earlier than the end and
+     * the range is between 8am and 10pm, inclusive.
      *
      * @param start Start of the range.
      * @param end End of the range.
      * @return True if start is earlier than or same time as end.
      */
     public static boolean isValidTimeRange(Time start, Time end) {
-        return end.compareTo(start) >= 0;
+        return end.compareTo(start) >= 0
+            && start.compareTo(DAY_START) >= 0 // Same or later than 8am
+            && end.compareTo(DAY_END) <= 0; // Same or earlier than 10pm
     }
 
     /**
