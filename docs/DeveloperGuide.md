@@ -257,27 +257,56 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* managers of restaurant in charge of overseeing the list of customers, employees and suppliers
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This application is created with the purpose of helping restaurant managers to manage the employees’ information (shift schedule, contact), diners (reservation timing, diner contacts) and suppliers (supplier meet up timing/weekly collection schedule, contacts), and at the same time manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| As a ... | I can ...                                                                                                             | so that ...                                                                            | Category       | Priority |
+| -------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------- | -------- |
+| Manager  | log in                                                                                                                | \-                                                                                     | Administrative | High     |
+|          | View specific table capacity                                                                                          | I can assign the correct group to the correct table                                    | Administrative | High     |
+|          | Update table availability                                                                                             | I can ensure that people will not assign any more customers to that table              | Administrative | High     |
+|          | Check table availability                                                                                              | I can assign a new group to the table                                                  | Administrative | High     |
+|          | Add reservations (number of people, time, reserve table availability)                                                 | \-                                                                                     | Customer       | High     |
+|          | Check if a particular timeslot is available for reservation                                                           | Organise the customer's reservation slots                                              | Customer       | High     |
+|          | Add/View/Change/Delete particulars for customer(number, initials, allergies, special requests, number of people etc.) | I can contact the customers and also provide them with personalised dining experiences | Customer       | High     |
+|          | View the amount of unclaimed loyalty points a customer has                                                            | I can give them the option of redeeming the points for a reward                        | Customer       | High     |
+|          | Change the amount of loyalty points a customer has                                                                    | We can track the amount of loyalty points a customer has                               | Customer       | High     |
+|          | View reservations on a particular day                                                                                 | manage the reservations better                                                         | Customer       | High     |
+|          | Add customers to waiting list                                                                                         | Manage walk in customers                                                               | Customer       | Low      |
+|          | Add waiting list customers particulars                                                                                | Organise walk in customers turn to enter the restaurant                                | Customer       | Low      |
+|          | View customer's special payment method(vouchers)                                                                      | I can keep track of finances correctly                                                 | Customer       | Low      |
+|          | Add/View/Change/Delete employees' personal information                                                                | \-                                                                                     | Employee       | High     |
+|          | View/Change the number of leaves remaining a particular employee has                                                  | I can ensure he is only claiming leaves that he is entitled to                         | Employee       | High     |
+|          | View/Change who is supposed to be on shift today                                                                      | I know who is turning up for work today                                                | Employee       | High     |
+|          | View/Change who is supposed to be on shift this week                                                                  | I am aware of the week's scheduling                                                    | Employee       | High     |
+|          | View/Change who is supposed to be on shift this month                                                                 | I know who is turning up for work this month                                           | Employee       | High     |
+|          | View work shifts that have yet to be filled                                                                           | I can assign employees in to fill the manpower needs                                   | Employee       | High     |
+|          | Add employees to available slots in a work shift                                                                      | there would be no lack of personnel                                                    | Employee       | High     |
+|          | View/Change the monthly salary for a particular employee                                                              | I know if he is earning too much or too little                                         | Employee       | High     |
+|          | View/Change the job type for a particular employee (full time, part time etc)                                         | I know his payout scheme and if he deserves his pay                                    | Employee       | High     |
+|          | View which shifts a particular employee is working in a week                                                          | I know when he should be turning up                                                    | Employee       | Low      |
+|          | Add observations of an employee during a shift                                                                        | I can review them with him/her afterwards                                              | Employee       | Low      |
+|          | View/Change number of hours worked by a particular employee per period                                                | I can reward employees (employee of the month)                                         | Employee       | Low      |
+|          | Add/View/Update/Delete supplier particular(name, contact info, food type)                                             | \-                                                                                     | Supplier       | High     |
+|          | View all suppliers delivering today                                                                                   | I can know who to expect today                                                         | Supplier       | High     |
+|          | View all suppliers delivering this week                                                                               | I can know who to expect this week                                                     | Supplier       | High     |
+|          | View all deliveries for a particular supplier                                                                         | I can know the deliveries made by the supplier                                         | Supplier       | High     |
+|          | Add/View/Update/Delete delivery datetime by a particular supplier                                                     | I know what deliveries i will have for what time                                       | Supplier       | High     |
+|          | View status of deliveries                                                                                             | I know which delivies have been completed and which are outstanding                    | Supplier       | High     |
+|          | Update deliveries as done                                                                                             | I won't accidentally wait for deliveries that have already been completed              | Supplier       | High     |
+|          | View past deliveries                                                                                                  | I can keep a receipt of the deliveries made in a specific period                       | Supplier       | High     |
+|          | View all suppliers by food type                                                                                       | I can know which supplier i have for a particular food type                            | Supplier       | Low      |
 
 *{More to be added}*
 
@@ -341,13 +370,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should not be stored in a **Database Management system**(DBMS).
+5.  Should be stored *locally* and can be *manually* edited by the user.
+6.  Program should be delivered to users in a single **JAR** file.
+7.  Program should be able to run with just a *double-click* and no CLI required.
+8.  Should be runnable on both `32-bit` and `64-bit` processors.
+9.  New users should be able to navigate and use the program effectively.
+10.  Software should not exceed **100MB**.
+11.  Documents should not exceed **15MB** per file.
+12.  Developer Guide and User Guide should be *PDF-friendly*(no expandable panels, embedded videos, animated GIFs etc.).
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact**: A contact containing details about the particular person
+* **Customer**: One of the types of contact, used to represent a customer of the restaurant
+* **Loyalty** points: Points stored by each customer
+* **Employee**: One of the types of contact, used to represent an employee of the restaurant
+* **Employment type** : Used to distinguish the different categories of employees (Part-time, Full-time etc.)
+* **Shift**: Time slot that employee is supposed to be working
+* **Supplier**: One of the types of contact, used to represent a supplier of the restaurant
+* **Reservation**: Reservations can be made by customers for a specific timeslot in the restaurant
+* **Waiting list**: List of customers who are unable to get a reservation due to maxed-out reservations
 
 --------------------------------------------------------------------------------------------------------------------
 
