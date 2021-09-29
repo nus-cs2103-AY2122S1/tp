@@ -207,7 +207,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Action | Format, Examples
 --------|------------------
 **Add friend** | `friend FRIEND_ID [--name "NAME"]` <br> e.g., `friend Draco --name "Marcus Tang"`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
 **Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"` 
 **Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
 **Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
