@@ -4,6 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.4'
     id 'application'
     id 'jacoco'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 mainClassName = 'seedu.address.Main'
@@ -66,7 +67,11 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'CohortConnect.jar'
 }
 
 defaultTasks 'clean', 'test'
+
+javafx {
+    modules = ['javafx.controls', 'javafx.fxml']
+}
