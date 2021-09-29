@@ -3,6 +3,7 @@ package seedu.plannermd.model.person;
 import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -115,7 +116,8 @@ public class Person {
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            // print tags in lexicographical order
+            tags.stream().sorted(Comparator.comparing(tag -> tag.tagName)).forEach(builder::append);
         }
         return builder.toString();
     }

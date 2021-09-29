@@ -15,6 +15,7 @@ import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.FindCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.ListCommand;
+import seedu.plannermd.logic.commands.TagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 
 /**
@@ -61,6 +62,9 @@ public class PlannerMdParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
