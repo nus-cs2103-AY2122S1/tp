@@ -30,7 +30,7 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 
    * **`list`** : Lists all people in your ModuLink favourites list.
 
-   * **`find`**`Joseph`: Finds people whose names contain the keyword 'Joseph'. 
+   * **`find`**`Joseph`: Finds people whose names contain the keyword 'Joseph' in all profiles in ModuLink. 
    
    * **`filter`**`mod/CS2103T`: Filters to show all profiles taking the CS2103T module.
 
@@ -77,6 +77,20 @@ Examples:
 * `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com t/Need a member for CS2101`
 * `create n/Betsy Crowe id/A0222594A p/24680135 e/betsycrowe@example.com`
 
+### Adding a person: `add`
+
+Adds a person to the address book.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* 
 ### Removing a favourite : `remove`
 
 Removes a favourited user from the favourites list.
@@ -86,6 +100,12 @@ Format: `remove n/NAME id/STUDENT_ID`
 Examples:
 * `remove n/John Doe id/A0212345X`
 * `remove n/Betsy Crowe id/A0123456X`
+
+### Listing all persons : `list`
+
+Shows a list of all persons that the user has added to their favourites list.
+
+Format: `list`
 
 ### Viewing a user's profile in more detail  : `view`
 
@@ -139,27 +159,6 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons that the user has added to their favourites list.
-
-Format: `list`
-
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -196,11 +195,11 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [t/TAG]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com t/Need a team for CS2103T`
+**Add** | `add id/STUDENT_ID` <br> e.g., `add id/A0222594A`
 **Remove** | `remove n/NAME id/STUDENT_ID`
+**List** | `list`
 **View** | `view id/STUDENT_ID`
 **Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM` 
 **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
-**Add** | `add id/STUDENT_ID` <br> e.g., `add id/A0222594A`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**List** | `list`
 **Help** | `help`
+**Exit** | `exit`
