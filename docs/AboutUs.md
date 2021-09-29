@@ -32,12 +32,13 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 
 ### Gabriel Waikin Loh Matienzo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gabrielwlm.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/GabrielWLM)]
+[[portfolio](team/gabrielwlm.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation + Data
 
 ### Zhou Yirui
 
