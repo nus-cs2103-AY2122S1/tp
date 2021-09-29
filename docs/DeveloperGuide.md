@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to batch import
 2.  AddressBook shows file selection window
-3.  User selects the file 
+3.  User selects the file
 4.  AddressBook adds the data
 
     Use case ends.

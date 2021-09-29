@@ -44,3 +44,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
 - Role: Code quality, Git expert
 - Responsibility: Logic
+
+### Zhou Jiahao
+
+<img src="images/zhou-jiahao-1998.png" width="200px">
+
+[[github](https://github.com/Zhou-Jiahao-1998)]
+
+- Role: Integration
+- Responsibility: Search by categories
