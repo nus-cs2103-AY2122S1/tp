@@ -91,6 +91,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Student
@@ -114,6 +115,17 @@ _(todo: add description)_
 ### Storage
 
 _(todo: add description)_
+
+
+### Viewing a student's details : `view`
+
+> ❕❕ <b>Note:</b> This feature is subject to changes
+
+View data of student with specified index in detail.
+
+![view student details](images/viewAlexDetail.png)
+
+Format: `view INDEX`
 
 
 ### Viewing schedule: `schedule` [coming soon]
@@ -332,6 +344,18 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Undoing previous command : `undo`
+
+Undo the previous command that modified the Storage.
+
+Format: `undo`
+
+### Redoing undone command : `redo`
+
+Redo the previous command that has been undone.
+
+Format: `redo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -374,5 +398,8 @@ Action | Format, Examples
 **Find** |`find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …] [p/PHONE_KEYWORD …] [sch/SCHOOL_KEYWORD …] [stream/ACAD_STREAM_KEYWORD …] [lvl/ACAD_LEVEL_KEYWORD …]`<br><br> e.g., `find n/James Tan a/clementi sch/NUS`
 **Filter** |<code>filter cond/{all &#124; any &#124; none} t/TAG [t/MORE_TAGS]…</code> <br><br> e.g., `filter cond/all t/Sec1 t/zoom`
 **List** |`list`
+**View** | `view INDEX`
 **Schedule** | `schedule`
 **Help** |`help`
+**Undo** | `undo`
+**Redo** | `redo`
