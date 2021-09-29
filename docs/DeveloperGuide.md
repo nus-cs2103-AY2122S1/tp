@@ -283,14 +283,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InsurancePal` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Viewing help**
 
 **MSS**
 
 1. User requests to see the help menu
-2. AddressBook shows the user how to access the help webpage
+2. InsurancePal shows the user how to access the help webpage
 3. User accesses the help webpage
 
    Use case ends.
@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a person
-2. AddressBook adds the person
+2. InsurancePal adds the person
 
    Use case ends.
 
@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given details are of an invalid format
  
-    * 2a1. AddressBook shows an error message
+    * 2a1. InsurancePal shows an error message
      
       Use case ends.
 
@@ -317,14 +317,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty
-    * 2a1. AddressBook displays an empty list of persons
+    * 2a1. InsurancePal displays an empty list of persons
      
       Use case ends.
 
@@ -333,9 +333,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 3. User requests to edit a specific person in the list
-4. AddressBook edits the person
+4. InsurancePal edits the person
 
    Use case ends.
 
@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
 
@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find a person using keywords
-2. AddressBook shows a list of persons whose names match at least one keyword
+2. InsurancePal shows a list of persons whose names match at least one keyword
  
    Use case ends.
 
@@ -364,9 +364,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 3. User requests to delete a specific person in the list
-4. AddressBook delete the person
+4. InsurancePal delete the person
  
    Use case ends.
 
@@ -377,16 +377,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
 
-**Use case: Clear the AddressBook**
+**Use case: Clear the InsurancePal**
 
 **MSS**
 
-1. User requests to clear the AddressBook
-2. AddressBook clears all entries in it
+1. User requests to clear the InsurancePal
+2. InsurancePal clears all entries in it
  
    Use case ends.
 
@@ -395,9 +395,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 3. User requests to add revenue to a specific person in the list
-4. AddressBook adds revenue to the person
+4. InsurancePal adds revenue to the person
  
    Use case ends.
 
@@ -408,12 +408,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
     
 * 3b. The given revenue is of an invalid format
-    * 3b1. AddressBook shows an error message.
+    * 3b1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
 
@@ -422,9 +422,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 3. User requests to add a claim to a specific person in the list
-4. AddressBook adds the claim to the person
+4. InsurancePal adds the claim to the person
  
    Use case ends.
 
@@ -435,11 +435,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
 * 3b. The given claim is of an invalid format
-    * 3b1. AddressBook shows an error message.
+    * 3b1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
      
@@ -448,9 +448,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 3. User requests to add a note to a specific person in the list
-4. AddressBook adds a note to the person
+4. InsurancePal adds a note to the person
  
    Use case ends.
 
@@ -461,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
 
@@ -470,9 +470,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 3. User requests to schedule a meeting with a specific person in the list
-4. AddressBook schedules a meeting with the person
+4. InsurancePal schedules a meeting with the person
  
    Use case ends.
 
@@ -483,12 +483,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
 
 * 3b. The given meeting time is of an invalid format
-    * 3b1. AddressBook shows an error message.
+    * 3b1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
      
@@ -497,9 +497,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. InsurancePal shows a list of persons
 3. User requests to add insurance to a specific person in the list
-4. AddressBook adds insurance to the person
+4. InsurancePal adds insurance to the person
  
    Use case ends.
 
@@ -510,12 +510,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
 
 * 3b. The given insurance is of an invalid format
-    * 3b1. AddressBook shows an error message.
+    * 3b1. InsurancePal shows an error message.
      
       Use case resumes at step 2.
      
