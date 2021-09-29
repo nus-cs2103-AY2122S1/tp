@@ -10,6 +10,7 @@ public class AcadLevel {
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * Valid academic streams include case-insensitive p1 to p6, y1 to y6, s1 to s5 and j1 to j2.
      */
     public static final String VALIDATION_REGEX = "(([pyPY][1-6][\\s]*)|([sS][1-5][\\s]*)|([jJ][1-2][\\s]*))";
 
