@@ -275,13 +275,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete contacts                | make sure that the address book remains relevant and up to date        |
 | `* * *`  | user                                       | edit individual contacts       | update any of the fields when necessary                                |
 | `* * *`  | user                                       | add individual contacts        | reach out to them later                                                |
-| `* * *`  | Prof                                       | be able to give my students a way to import in contact details for their peers, TA and profs in the module | - |
+| `* * *`  | Prof                                       | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
 | `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
 | `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
 | `* * *`  | CLI user                                   | avoid using my mouse as much as possible     | -                                                        |
 | `* * *`  | user                                       | group/tag people into teammates, classmates, TA's and Profs | easily manage my contacts                 |
 | `* * *`  | user                                       | connect with seniors who have taken the same module         | have more guidance                        |
-| `* * *`  | TA                                         | be able to get in touch with the students in my class through tele handles | -                          |
+| `* * *`  | TA                                         | be able to get in touch with the students in my class through Telegram handles | -                          |
 | `* * *`  | new user                                   | know all the different commands                             | fully utilise the tools available         |
 | `* * *`  | new user                                   | learn the command formats                                   | perform tasks quickly and efficiently     |
 | `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
@@ -423,7 +423,7 @@ MSS
     
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 2a. The list is empty.
   * Use case ends.
@@ -451,8 +451,10 @@ MSS
 Extensions
 
 * 1a. CohortConnect cannot find the JSON file.
-  * 1a1. CohortConnect shows an error.
-  * Use case ends.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect prompts for new filename.
+  * 1a3. User enters new filename.
+  * Steps 1a1-1a3 are repeated until the filename received is valid.
 
 * 2a. User decides to cancel the import.
   * Use case ends.
@@ -469,8 +471,10 @@ MSS
 Extensions
 
 * 1a. File name already exists.
-  * 1a1. CohortConnect shows an error.
-  * Use case ends.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect prompts for new filename.
+  * 1a3. User enters new filename.
+  * Steps 1a1-1a3 are repeated until the filename received is valid.
 
 ### Non-Functional Requirements
 
@@ -486,6 +490,7 @@ Extensions
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
+* **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays. 
 
 --------------------------------------------------------------------------------------------------------------------
 
