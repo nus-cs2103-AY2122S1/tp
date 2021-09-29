@@ -12,10 +12,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -56,8 +58,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Fee fee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_FEE).orElse(""));
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // Don't allow adding of lessons with the adding of person.
+        Set<Lesson> lessonList = new TreeSet<>();
 
-        Person person = new Person(name, phone, email, parentPhone, parentEmail, address, fee, remark, tagList);
+        Person person = new Person(name, phone, email, parentPhone, parentEmail,
+            address, fee, remark, tagList, lessonList);
+
 
         return new AddCommand(person);
     }

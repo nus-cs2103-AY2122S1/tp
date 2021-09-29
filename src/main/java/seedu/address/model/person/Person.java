@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,13 +29,15 @@ public class Person {
     private final Remark remark;
     private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Lesson> lessons = new TreeSet<>();
 
     /**
      * Every field must be present and not null.
      */
+
     public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
-                  Address address, Fee outstandingFee, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, remark, tags);
+                  Address address, Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
+        requireAllNonNull(name, phone, email, address, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +47,7 @@ public class Person {
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
+        this.lessons.addAll(lessons);
     }
 
     public Name getName() {
@@ -83,6 +88,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
     }
 
     /**
@@ -129,7 +142,8 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getFee().equals(getFee())
                 && otherPerson.getRemark().equals(getRemark())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getLessons().equals(getLessons());
     }
 
     @Override

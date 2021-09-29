@@ -17,12 +17,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -116,9 +118,11 @@ public class EditCommand extends Command {
         Fee updatedFee = editPersonDescriptor.getFee().orElse(personToEdit.getFee());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        // This command does not allow the editing of lessons.
+        Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
-                updatedAddress, updatedFee, updatedRemark, updatedTags);
+                updatedAddress, updatedFee, updatedRemark, updatedTags, updatedLessons);
     }
 
     @Override
@@ -153,6 +157,7 @@ public class EditCommand extends Command {
         private Fee outstandingFee;
         private Remark remark;
         private Set<Tag> tags;
+        private Set<Lesson> lessons;
 
         public EditPersonDescriptor() {}
 
@@ -170,6 +175,7 @@ public class EditCommand extends Command {
             setFee(toCopy.outstandingFee);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
+            setLessons(toCopy.lessons);
         }
 
         /**
@@ -261,6 +267,19 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Returns an unmodifiable lesson set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code lessons} is null.
+         */
+        public Optional<Set<Lesson>> getLessons() {
+            return (lessons != null) ? Optional.of(Collections.unmodifiableSet(lessons)) : Optional.empty();
+        }
+
+        public void setLessons(Set<Lesson> lessons) {
+            this.lessons = (lessons != null) ? new TreeSet<>(lessons) : null;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -284,7 +303,8 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getFee().equals(e.getFee())
                     && getRemark().equals(e.getRemark())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getLessons().equals(e.getLessons());
         }
     }
 }

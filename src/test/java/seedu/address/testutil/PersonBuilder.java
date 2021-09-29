@@ -2,7 +2,9 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -36,6 +38,7 @@ public class PersonBuilder {
     private Fee fee;
     private Remark remark;
     private Set<Tag> tags;
+    private Set<Lesson> lessons;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,6 +53,7 @@ public class PersonBuilder {
         fee = new Fee(DEFAULT_FEE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
+        lessons = new TreeSet<>();
     }
 
     /**
@@ -65,6 +69,7 @@ public class PersonBuilder {
         fee = personToCopy.getFee();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
+        lessons = new TreeSet<>(personToCopy.getLessons());
     }
 
     /**
@@ -80,6 +85,24 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLessons() {
+        this.lessons = SampleDataUtil.getSampleLessons();
+        return this;
+    }
+
+    /**
+     * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
+     */
+    public PersonBuilder withSampleLesson() {
+        Set<Lesson> lessonSetWithOneLesson = new TreeSet<>();
+        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
+        this.lessons = lessonSetWithOneLesson;
         return this;
     }
 
@@ -147,7 +170,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a person with the specified information.
+     *
+     * @return {@code Person} container the information given.
+     */
     public Person build() {
-        return new Person(name, phone, email, parentPhone, parentEmail, address, fee, remark, tags);
+        return new Person(name, phone, email, parentPhone, parentEmail,
+            address, fee, remark, tags, lessons);
     }
 }

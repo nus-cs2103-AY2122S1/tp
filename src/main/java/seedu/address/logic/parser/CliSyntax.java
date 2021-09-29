@@ -15,4 +15,13 @@ public class CliSyntax {
     public static final Prefix PREFIX_FEE = new Prefix("f/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
+    /* Prefix definitions for lesson */
+    public static final Prefix PREFIX_RECURRING = new Prefix("recurring/");
+    public static final Prefix PREFIX_DATE = new Prefix("date/");
+    public static final Prefix PREFIX_START_TIME = new Prefix("start/");
+    public static final Prefix PREFIX_END_TIME = new Prefix("end/");
+    public static final Prefix PREFIX_SUBJECT = new Prefix("subject/");
+    public static final Prefix PREFIX_HOMEWORK = new Prefix("hw/");
+
 }
