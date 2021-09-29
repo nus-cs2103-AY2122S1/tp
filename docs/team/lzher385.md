@@ -13,12 +13,7 @@ Given below are my contributions to the project.
   * What it does: allows the user to associate a friend in his contact list with a game that was previously recorded.
   * Justification: This feature improves the product significantly because a user is able to note down what games his/her friends play.
   
-
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
-
 * **Code contributed**: [RepoSense link]()
-
 
 * **Documentation**:
   * User Guide:
