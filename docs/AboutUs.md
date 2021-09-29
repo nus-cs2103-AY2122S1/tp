@@ -56,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kawaiigabrielneko.md)]
 
 * Role: Developer
-* Responsibilities: Insurance, Glossary
+* Responsibilities: Insurance + Glossary
