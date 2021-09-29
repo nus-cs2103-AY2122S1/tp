@@ -78,14 +78,14 @@ Displays a read-only weekly schedule.
 
 Format: `schedule`
 
-### Adding a person: `add`
+### Adding a Student: `add`
 
-Adds a person to the address book.
+Adds a student to the tuition address book.
 
 Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A student can have any number of tags (including 0)
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -102,15 +102,15 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
 * `add n/Betsy Crowe t/cousin a/Newgate p/91234567 f/150.50 r/hasnt pay tuition fee for Aug t/retainee`
 
-### Listing all persons : `list`
+### Listing all Students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a Student : `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
 Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
@@ -118,34 +118,34 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 
 **:information_source: Notes about the edit command:**<br>
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
-  e.g. `edit 2` means that you wish to edit the second person in the displayed list.
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
+  e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
 
 * You must provide at least one field.<br>
   e.g. entering just `edit 2` alone is not a valid command. You need to include the field you wish to edit.
 
 * Existing values will be updated to the entered values.<br>
-  e.g. `edit 2 f/0` will override the outstanding fees of the second student in the displayed list to `0`.
+  e.g. `edit 2 f/0` will override the outstanding fees of the 2nd student in the displayed list to `0`.
 
 * When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
   e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
 
 * You can delete the data in optional fields by supplying a parameter with no arguments.<br>
-  e.g. `edit 2 r/` will remove the remarks for the second student in the displayed list.
+  e.g. `edit 2 r/` will remove the remarks for the 2nd student in the displayed list.
 
 * You cannot remove a contact field if it is the only remaining means of contact you have with a student.<br>
   e.g. no student should have all contact fields empty. `edit 2 pp/` will not work if the student does not have
   any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
 
 * You can delete all tags of the specified student’s by typing `t/` without any arguments.<br>
-  e.g. `edit 2 t/` will remove all existing tags from the second student in the displayed list.
+  e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
 
 </div>
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be `NJC` and clears academic stream data.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+* `edit 3 sch/NJC stream/` Edits the school of the 3rd student to be `NJC` and clears academic stream data.
 
 ### Locating persons by name: `find`
 
