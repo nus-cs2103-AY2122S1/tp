@@ -287,7 +287,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `SeniorLove` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
 
@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 
-**Use case: Delete a person**
+**Use case: UC02 - Delete a person**
 
 **MSS**
 
@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: Mark a visit as done**
+**Use case: UC03 - Mark a visit as done**
 
 **MSS**
 
