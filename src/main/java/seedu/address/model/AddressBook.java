@@ -7,17 +7,17 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.Tuition.TuitionClass;
-import seedu.address.model.Tuition.UniqueTuitionList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tuition.TuitionClass;
+import seedu.address.model.tuition.UniqueTuitionList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-    private static final Logger logger = LogsCenter.getLogger(AddressBook.class);
+    private static final Logger LOGGER = LogsCenter.getLogger(AddressBook.class);
 
     private final UniquePersonList persons;
     private final UniqueTuitionList tuitons;
@@ -59,6 +59,25 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code persons} must not contain duplicate persons.
      */
     public void setTuition(List<TuitionClass> tuitionClasses) {
+        this.tuitons.setTuitions(tuitionClasses);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setTuition(TuitionClass target, TuitionClass editedTuition) {
+        requireNonNull(editedTuition);
+
+        tuitons.setTuition(target, editedTuition);
+    }
+
+    /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setTuitions(List<TuitionClass> tuitionClasses) {
         this.tuitons.setTuitions(tuitionClasses);
     }
 
@@ -128,8 +147,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
-
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -140,15 +157,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
-    }
-
-
-    /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setTuitions(List<TuitionClass> tuitionClasses) {
-        this.tuitons.setTuitions(tuitionClasses);
     }
 
     /**
@@ -165,17 +173,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTuition(TuitionClass t) {
         tuitons.add(t);
-    }
-
-    /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    public void setTuition(TuitionClass target, TuitionClass editedTuition) {
-        requireNonNull(editedTuition);
-
-        tuitons.setTuition(target, editedTuition);
     }
 
     /**

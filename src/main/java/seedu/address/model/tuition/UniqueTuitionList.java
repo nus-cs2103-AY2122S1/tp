@@ -1,5 +1,4 @@
-package seedu.address.model.Tuition;
-
+package seedu.address.model.tuition;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -9,18 +8,19 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.Tuition.exceptions.DuplicateTuitionException;
-import seedu.address.model.Tuition.exceptions.TuitionNotFoundException;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
+import seedu.address.model.tuition.exceptions.TuitionNotFoundException;
 
 /**
  * A list of tuition that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code TuitionClass#isSameTuition(TuitionClass)}. As such, adding and updating of
- * tuition uses TuitionClass#isSameTuition(TuitionClass) for equality so as to ensure that the Tuition being added or updated is
- * unique in terms of identity in the UniqueTuitionList. However, the removal of a person uses TuitionClass#equals(Object) so
- * as to ensure that the TuitionClass with exactly the same fields will be removed.
+ * A person is considered unique by comparing using {@code TuitionClass#isSameTuition(TuitionClass)}.
+ * As such, adding and updating of tuition uses TuitionClass#isSameTuition(TuitionClass) for
+ * equality to ensure that the Tuition being added or updated is
+ * unique in terms of identity in the UniqueTuitionList.
+ * However, the removal of a person uses TuitionClass#equals(Object) to ensure
+ * that the TuitionClass with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -83,7 +83,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         }
     }
 
-    public void setTuitions(seedu.address.model.Tuition.UniqueTuitionList replacement) {
+    public void setTuitions(seedu.address.model.tuition.UniqueTuitionList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -117,7 +117,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof seedu.address.model.person.UniquePersonList // instanceof handles nulls
-                && internalList.equals(((seedu.address.model.Tuition.UniqueTuitionList) other).internalList));
+                && internalList.equals(((seedu.address.model.tuition.UniqueTuitionList) other).internalList));
     }
 
     @Override

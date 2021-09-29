@@ -1,18 +1,20 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Tuition.*;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.tuition.ClassLimit;
+import seedu.address.model.tuition.ClassName;
+import seedu.address.model.tuition.Counter;
+import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.Timeslot;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -73,7 +75,7 @@ class JsonAdaptedTuition {
         }
         final ClassName modelName = new ClassName(name);
 
-       final ClassLimit modelLimit = new ClassLimit(limit);
+        final ClassLimit modelLimit = new ClassLimit(limit);
 
         final Counter modelCounter = new Counter(counter);
 

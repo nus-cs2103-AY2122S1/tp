@@ -1,31 +1,25 @@
 package seedu.address.logic.parser;
 
-import seedu.address.MainApp;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddClassCommand;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Tuition.*;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
-
-import seedu.address.logic.commands.AddClassCommand;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddClassCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tuition.ClassLimit;
+import seedu.address.model.tuition.ClassName;
+import seedu.address.model.tuition.Counter;
+import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.Timeslot;
+import seedu.address.model.tuition.TuitionClass;
 
 public class AddClassCommandParser implements Parser<AddClassCommand> {
 
@@ -37,20 +31,24 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
      */
     public AddClassCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LIMIT, PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LIMIT,
+                        PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LIMIT, PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LIMIT,
+                PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddClassCommand.MESSAGE_USAGE));
         }
 
         ClassName name = ParserUtil.parseClassName(argMultimap.getValue(PREFIX_NAME).get());
         ClassLimit limit = ParserUtil.parseLimit(argMultimap.getValue(PREFIX_LIMIT).get());
         Counter counter = ParserUtil.parseCounter(argMultimap.getValue(PREFIX_COUNTER).get());
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_TIMESLOT).get());
-//        Student student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
+        //Student student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
 
-        Student student = new Student(new ArrayList<>());//TODO parseStudent
+        //TODO parseStudent
+        Student student = new Student(new ArrayList<>());
 
         TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student);
 
