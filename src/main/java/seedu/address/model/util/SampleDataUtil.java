@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -37,6 +38,16 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
+        };
+    }
+
+    public static Facility[] getSampleFacilities() {
+        return new Facility[] {
+            new Facility("Kent Ridge Multi-Purpose Sports Hall"),
+            new Facility("Utown Sports Hall 1"),
+            new Facility("Utown Sports Hall 2"),
+            new Facility("Kallang Tennis Centre"),
+            new Facility("Kent Ridge Outdoor Tennis Courts")
         };
     }
 
