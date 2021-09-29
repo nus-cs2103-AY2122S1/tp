@@ -488,21 +488,34 @@ Use case ends
 
 **Extensions:**
 
-- 1a. User requests to search for reservation availability at a date.
-    - 1a1. RHRH shows all the available slots on the indicated date.  
-      Use case ends.
+* 1a. User requests to search for reservation availability at a date.
+    * 1a1. RHRH shows all the available slots on the indicated date.
+      
+    Use case ends.
 
-- 1b. User requests to search for reservation availability at a time.
-    - 1b1. RHRH shows the availability for the indicated time today.  
-      Use case ends.
+* 1b. User requests to search for reservation availability at a time.
+    * 1b1. RHRH shows the availability for the indicated time today
+      
+    Use case ends.
 
-- 1c. RHRH detects information missing from the command entered.
-    - 1c1. RHRH requests user to enter the command again with sufficient information.  
-      Use case ends.
+* 1c. RHRH detects information missing from the command entered.
+    * 1c1. RHRH requests for the missing details to be filled in.
+    * 1c2. User enters missing data.
 
-- 1d. RHRH detects wrong format of date/time.
-    - 1d1. RHRH requests user to enter the command again with a suitable date/time format.  
-      Use case ends
+    Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+
+
+    Use case resumes from step 2.
+
+* 1d. RHRH detects an incorrect format of date/time.
+    * 1d1. RHRH requests for the format to be corrected.
+    * 1d2. User enters the command again.
+
+    Steps 1d1 - 1d2 are repeated until the command is correctly formatted.
+
+
+    Use case resumes from step 2.
+
 
 ### Non-Functional Requirements
 
