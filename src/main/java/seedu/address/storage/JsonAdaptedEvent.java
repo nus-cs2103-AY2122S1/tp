@@ -12,7 +12,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
-import seedu.address.model.particpant.Participant;
+import seedu.address.model.participant.Participant;
 
 /**
  * Json friendly {@link Event}
