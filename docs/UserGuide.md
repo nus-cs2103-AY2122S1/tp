@@ -121,7 +121,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
   e.g. `edit 2` means that you wish to edit the second person in the displayed list.
 
-* At least one field must be provided.<br>
+* You must provide at least one field.<br>
   e.g. entering just `edit 2` alone is not a valid command. You need to include the field you wish to edit.
 
 * Existing values will be updated to the entered values.<br>
