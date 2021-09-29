@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
@@ -22,21 +23,28 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Phone parentPhone;
+    private final Email parentEmail;
     private final Address address;
     private final Remark remark;
+    private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Lesson> lessons = new HashSet<>();
+    private final Set<Lesson> lessons = new TreeSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark,
-                  Set<Tag> tags, Set<Lesson> lessons) {
+
+    public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
+                  Address address, Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
         requireAllNonNull(name, phone, email, address, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.parentPhone = parentPhone;
+        this.parentEmail = parentEmail;
         this.address = address;
+        this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
         this.lessons.addAll(lessons);
@@ -54,8 +62,20 @@ public class Person {
         return email;
     }
 
+    public Phone getParentPhone() {
+        return parentPhone;
+    }
+
+    public Email getParentEmail() {
+        return parentEmail;
+    }
+
     public Address getAddress() {
         return address;
+    }
+
+    public Fee getFee() {
+        return outstandingFee;
     }
 
     public Remark getRemark() {
@@ -92,6 +112,14 @@ public class Person {
     }
 
     /**
+     * Returns true if this person has at least one contact field not empty.
+     */
+    public boolean hasContactField() {
+        return !(phone.value.isEmpty() && email.value.isEmpty()
+                && parentPhone.value.isEmpty() && parentEmail.value.isEmpty());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -109,7 +137,10 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getParentPhone().equals(getParentPhone())
+                && otherPerson.getParentEmail().equals(getParentEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getFee().equals(getFee())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getLessons().equals(getLessons());
@@ -129,8 +160,14 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Parent Phone: ")
+                .append(getParentPhone())
+                .append("; Parent Email: ")
+                .append(getParentEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Outstanding Fees: ")
+                .append(getFee())
                 .append("; Remark: ")
                 .append(getRemark());
 

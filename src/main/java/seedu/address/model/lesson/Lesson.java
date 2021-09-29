@@ -12,12 +12,14 @@ import java.util.Set;
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public abstract class Lesson {
+public abstract class Lesson implements Comparable<Lesson> {
+    // Types of lesson
+    private static final String RECURRING = "Recurring Lesson";
+    private static final String MAKEUP = "Makeup Lesson";
 
     // Time fields
     private final Date date;
-    private final Time startTime;
-    private final Time endTime;
+    private final TimeRange timeRange;
 
     // Data fields
     private final Subject subject;
@@ -25,12 +27,16 @@ public abstract class Lesson {
 
     /**
      * Every field must be present and not null.
+     *
+     * @param date Date of lesson.
+     * @param timeRange Time range of the lesson.
+     * @param subject Subject of the lesson.
+     * @param homework Homework for the lesson.
      */
-    public Lesson(Date date, Time startTime, Time endTime, Subject subject, Set<Homework> homework) {
-        requireAllNonNull(date, startTime, endTime, homework);
+    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
+        requireAllNonNull(date, timeRange, subject, homework);
         this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
     }
@@ -39,16 +45,12 @@ public abstract class Lesson {
         return date;
     }
 
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
-    }
-
     public Subject getSubject() {
         return subject;
+    }
+
+    public TimeRange getTimeRange() {
+        return timeRange;
     }
 
     /**
@@ -64,9 +66,7 @@ public abstract class Lesson {
      *
      * @return True if it is a recurring lesson, false otherwise.
      */
-    public boolean isRecurring() {
-        return false;
-    }
+    public abstract boolean isRecurring();
 
     /**
      * Update the lesson date to the same day on the following week.
@@ -74,8 +74,12 @@ public abstract class Lesson {
      * @return newDate The date of the same day on the following week.
      */
     public Date updateDateWithWeek() {
-        Date newDate = new Date(getDate().getLocalDate().plusDays(7).toString());
+        Date newDate = new Date(getDate().getLocalDate().plusDays(7).format(Date.FORMATTER));
         return newDate;
+    }
+
+    public boolean isOver() {
+        return getDate().isOver();
     }
 
     /**
@@ -87,7 +91,7 @@ public abstract class Lesson {
     public abstract Lesson updateDate(String newDateString);
 
     /**
-     * Returns true if both lessons have the same data fields.
+     * Check if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.
      *
      * @param other The other object to compare.
@@ -105,36 +109,50 @@ public abstract class Lesson {
 
         Lesson otherLesson = (Lesson) other;
         return otherLesson.getDate().equals(getDate())
-                && otherLesson.getStartTime().equals(getStartTime())
-                && otherLesson.getEndTime().equals(getEndTime())
-                && otherLesson.getSubject().equals(getSubject())
-                && otherLesson.getHomework().equals(getHomework())
-                && otherLesson.isRecurring() == isRecurring();
+            && otherLesson.getTimeRange().equals(getTimeRange())
+            && otherLesson.getSubject().equals(getSubject())
+            && otherLesson.getHomework().equals(getHomework())
+            && otherLesson.isRecurring() == isRecurring();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(date, startTime, endTime, subject, homework);
+        return Objects.hash(date, timeRange, subject, homework);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDate())
-                .append("\n Start: ")
-                .append(getStartTime())
-                .append("    End: ")
-                .append(getEndTime())
-                .append("\n Subject: ")
-                .append(getSubject());
+        String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
+        builder.append(typeOfLesson)
+            .append("\n")
+            .append(getDate())
+            .append("\nTime: ")
+            .append(getTimeRange())
+            .append("\nSubject: ")
+            .append(getSubject());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
-            builder.append("\n Homework: ");
+            builder.append("\nHomework: ");
             homework.forEach(builder::append);
         }
         return builder.toString();
+    }
+
+    /**
+     * Compares this Lesson object with the other Lesson object.
+     *
+     * @param other The Lesson object to compare with.
+     * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
+     */
+    @Override
+    public int compareTo(Lesson other) {
+        int compareDate = getDate().compareTo(other.getDate());
+        int compareTime = getTimeRange().compareTo(other.getTimeRange());
+        // Compare time if date is equal
+        return compareDate == 0 ? compareTime : compareDate;
     }
 
 }

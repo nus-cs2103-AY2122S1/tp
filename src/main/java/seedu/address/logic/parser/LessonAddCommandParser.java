@@ -24,7 +24,7 @@ import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
+import seedu.address.model.lesson.TimeRange;
 
 /**
  * Parses input arguments and creates a new LessonAddCommand object.
@@ -54,24 +54,26 @@ public class LessonAddCommandParser {
         }
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
-        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        Set<Homework> homework = parseHomeworkForEdit(argMultimap.getAllValues(PREFIX_HOMEWORK))
-                .orElse(new HashSet<>());
 
-        // Check if end time is earlier than start time
-        if (startTime.getLocalTime().compareTo(endTime.getLocalTime()) > 0) {
-            throw new ParseException("End time cannot be earlier than start time.");
-        }
+        /* Parse time and check if range is valid.
+        Throws ParseException if either time is invalid
+        or if range is invalid.
+         */
+        String startTime = argMultimap.getValue(PREFIX_START_TIME).get();
+        String endTime = argMultimap.getValue(PREFIX_END_TIME).get();
+        TimeRange timeRange = ParserUtil.parseTimeRange(startTime, endTime);
+
+        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
+        Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
+                .orElse(new HashSet<>());
 
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            RecurringLesson lesson = new RecurringLesson(date, startTime, endTime, subject, homework);
+            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework);
             return new LessonAddCommand(index, lesson);
         }
 
-        MakeUpLesson lesson = new MakeUpLesson(date, startTime, endTime, subject, homework);
+        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework);
         return new LessonAddCommand(index, lesson);
     }
 
@@ -88,7 +90,7 @@ public class LessonAddCommandParser {
      * If {@code homework} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Homework>} containing zero homework.
      */
-    private Optional<Set<Homework>> parseHomeworkForEdit(Collection<String> homework) throws ParseException {
+    private Optional<Set<Homework>> parseHomeworkForLessonAdd(Collection<String> homework) throws ParseException {
         assert homework != null;
 
         if (homework.isEmpty()) {
@@ -97,7 +99,7 @@ public class LessonAddCommandParser {
         Collection<String> homeworkSet = homework.size() == 1 && homework.contains("")
                 ? Collections.emptySet()
                 : homework;
-        return Optional.of(ParserUtil.parseHomework(homeworkSet));
+        return Optional.of(ParserUtil.parseHomeworkList(homeworkSet));
     }
 
 

@@ -8,20 +8,22 @@ import java.util.Set;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class RecurringLesson extends Lesson {
+    /**
+     * Count of the number of lessons taken this month for this recurring lesson.
+     */
     private static int recurringLessonsCount = 0;
 
     /**
      * Every field must be present and not null.
      *
      * @param date Date of lesson.
-     * @param startTime Start time of the lesson.
-     * @param endTime End time of the lesson.
+     * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public RecurringLesson(Date date, Time startTime, Time endTime,
+    public RecurringLesson(Date date, TimeRange timeRange,
                            Subject subject, Set<Homework> homework) {
-        super(date, startTime, endTime, subject, homework);
+        super(date, timeRange, subject, homework);
         updateRecurringLessonCount();
     }
 
@@ -52,10 +54,19 @@ public class RecurringLesson extends Lesson {
      */
     @Override
     public Lesson updateDate(String newDateString) {
-        return new RecurringLesson(new Date(newDateString), getStartTime(), getEndTime(),
-                getSubject(), getHomework());
+        Date newDate = new Date(newDateString);
+
+        return newDate.compareTo(getDate()) > 0
+            ? new RecurringLesson(new Date(newDateString), getTimeRange(),
+            getSubject(), getHomework())
+            : this;
     }
 
+    /**
+     * Checks if the date has passed and update the recurring lesson count accordingly.
+     *
+     * @return {@code RecurringLesson} with the updated date.
+     */
     private RecurringLesson updateRecurringLessonCount() {
         // Compare lesson date to current date
         // Increment count if date has passed
@@ -67,7 +78,7 @@ public class RecurringLesson extends Lesson {
         recurringLessonsCount++;
         // Update the date
         Date newDate = super.updateDateWithWeek();
-        return new RecurringLesson(newDate, getStartTime(), getEndTime(),
+        return new RecurringLesson(newDate, getTimeRange(),
                 getSubject(), getHomework());
     }
 

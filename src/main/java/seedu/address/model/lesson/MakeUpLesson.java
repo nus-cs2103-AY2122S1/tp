@@ -11,14 +11,13 @@ public class MakeUpLesson extends Lesson {
      * Every field must be present and not null.
      *
      * @param date Date of lesson.
-     * @param startTime Start time of the lesson.
-     * @param endTime End time of the lesson.
+     * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public MakeUpLesson(Date date, Time startTime, Time endTime,
+    public MakeUpLesson(Date date, TimeRange timeRange,
                            Subject subject, Set<Homework> homework) {
-        super(date, startTime, endTime, subject, homework);
+        super(date, timeRange, subject, homework);
     }
 
     /**
@@ -29,8 +28,20 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public Lesson updateDate(String newDateString) {
-        return new MakeUpLesson(new Date(newDateString), getStartTime(), getEndTime(),
-                getSubject(), getHomework());
+        Date newDate = new Date(newDateString);
+
+        return newDate.compareTo(getDate()) > 0
+            ? new MakeUpLesson(newDate, getTimeRange(), getSubject(), getHomework())
+            : this;
+    }
+
+    /**
+     * Check if the Lesson object is recurring.
+     *
+     * @return False
+     */
+    public boolean isRecurring() {
+        return false;
     }
 
 }

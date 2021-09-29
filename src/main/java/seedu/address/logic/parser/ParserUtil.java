@@ -13,8 +13,10 @@ import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
+import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -71,6 +73,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Email parseEmail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(trimmedEmail);
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -86,6 +103,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String fee} into an {@code Fee}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code fee} is invalid.
+     */
+    public static Fee parseFee(String fee) throws ParseException {
+        requireNonNull(fee);
+        String strippedFee = fee.strip();
+        if (!Fee.isValidFee(strippedFee)) {
+            throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
+        }
+        return new Fee(strippedFee);
+    }
+
+    /**
      * Parses a {@code String remark} into an {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      */
@@ -93,21 +125,6 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
-        return new Email(trimmedEmail);
     }
 
     /**
@@ -139,6 +156,24 @@ public class ParserUtil {
         }
         return new Time(trimmedTime);
     }
+
+    /**
+     * Parses {@code String Time} and {@code String Time} into a {@code TimeRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Time} pr {@code TimeRange} is invalid.
+     */
+    public static TimeRange parseTimeRange(String start, String end) throws ParseException {
+        requireNonNull(start);
+        requireNonNull(end);
+        Time startTime = parseTime(start);
+        Time endTime = parseTime(end);
+        if (!TimeRange.isValidTimeRange(startTime, endTime)) {
+            throw new ParseException(TimeRange.MESSAGE_CONSTRAINTS);
+        }
+        return new TimeRange(startTime, endTime);
+    }
+
 
     /**
      * Parses a {@code String subject} into a {@code Subject}.
@@ -183,29 +218,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String hw} into a {@code Homework}.
+     * Parses a {@code String individualHomework} into a {@code Homework}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code Homework} is invalid.
      */
-    public static Homework parseHw(String hw) throws ParseException {
-        requireNonNull(hw);
-        String trimmedHw = hw.trim();
-        if (!Homework.isValidDescription(trimmedHw)) {
+    public static Homework parseIndividualPieceOfHomework(String individualHomework) throws ParseException {
+        requireNonNull(individualHomework);
+        String trimmedHomework = individualHomework.trim();
+        if (!Homework.isValidDescription(trimmedHomework)) {
             throw new ParseException(Homework.MESSAGE_CONSTRAINTS);
         }
-        return new Homework(trimmedHw);
+        return new Homework(trimmedHomework);
     }
 
     /**
      * Parses {@code Collection<String> homework} into a {@code Set<Homework>}.
      */
-    public static Set<Homework> parseHomework(Collection<String> homework)
+    public static Set<Homework> parseHomeworkList(Collection<String> homework)
             throws ParseException {
         requireNonNull(homework);
         final Set<Homework> homeworkSet = new HashSet<>();
         for (String description : homework) {
-            homeworkSet.add(parseHw(description));
+            homeworkSet.add(parseIndividualPieceOfHomework(description));
         }
         return homeworkSet;
     }
