@@ -166,6 +166,13 @@ Examples:
 
 * `mkdir CS2103` creates a group with the name `CS2103`.
 
+## Adding contacts to folder
+To organize and group contacts into an arbitrary folder
+Format: `echo CONTACT_INDEX >> FOLDER_NAME`
+- `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
+- `FOLDER_NAME` must be an existing folder
+    - Command fails if there is no existing folder with that name
+    
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -190,12 +197,7 @@ _Details coming soon ..._
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-## Adding contacts to folder
-To organize and group contacts into an arbitrary folder
-Format: `echo CONTACT_INDEX >> FOLDER_NAME`
-- `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
-- `FOLDER_NAME` must be an existing folder
-    - Command fails if there is no existing folder with that name
+
     
 ## Command summary
 
