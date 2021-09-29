@@ -9,51 +9,61 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Leeroy Liu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leeroy999.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/leeroy999)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities:
+    * Responsible for overall project coordination.
+    * Ensure deadlines are met
 
-### Johnny Doe
+### Phua Guan Wei
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gwphua.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/gwphua)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities:
+    * Documentation
+    * Code quality
+    * GUI
 
-### James Doe
+### Samuel Lau Yi Ren
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/samuel-bit-prog.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/samuel-bit-prog)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+    * Intellij Expert
+    * Git Expert
+    * Program and component structure
+
+### Chi Xu
+
+<img src="images/tsiyuk.png" width="200px">
+
+[[github](http://github.com/tsiyuk)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities:
+    * Dev-ops & Continuous
+    * Integration
+
+### Liu Zhilan
+
+<img src="images/liuzhi1an.png" width="200px">
+
+[[github](http://github.com/liuzhi1an)] [[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: testing

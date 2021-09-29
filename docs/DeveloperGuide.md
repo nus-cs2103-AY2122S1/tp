@@ -444,6 +444,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC6 - Add an event**
+
+**MSS**
+
+1.  User requests to add an event, providing necessary details.
+2.  Ailurus adds the event.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Invalid format or incomplete details provided by user
+
+    * 1a1. Ailurus shows an error message about missing or invalid input.
+
+      Use case ends.
+
+**Use case: UC7 - Delete an event**
+
+**MSS**
+
+1.  User requests to list events
+2.  Ailurus shows a list of events
+3.  User requests to delete a specific event in the list
+4.  Ailurus deletes the event
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Invalid format or incomplete details provided by user
+
+    * 1a1. Ailurus shows an error message about missing or invalid input.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -451,13 +487,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should run on user computer with double-click - no installer or additional libraries required.
+5.  The system should respond within two seconds.
+    *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
