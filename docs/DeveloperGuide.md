@@ -364,6 +364,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Link a friend to a particular game**
+
+**MSS**
+
+1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`).
+2. gitGud associates the friend with the game provided.
+
+**Extensions**
+
+* 2a. The given `FRIEND_ID` is invalid.
+
+    * 2a1. gitGud shows an error message.
+    * 2a2. User can list friends currently in gitGud or add new friends.
+
+      Use case resumes at step 1.
+
+
+* 2b. The given `GAME_NAME` is invalid.
+
+    * 2b1. gitGud shows an error message.
+    * 2b2. User can list games currently in gitGud or add new games.
+
+      Use case resumes at step 1.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -376,8 +400,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Competitive Game/s**: Multiplayer games with a ranking system
+* **Busy**: Maximum of 7hrs/week to play games
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
