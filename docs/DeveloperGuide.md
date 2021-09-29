@@ -323,7 +323,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use case: UC1 - Get a List of Students
+**Use case: UC1 - Get a list of students**
 
 **MSS**
 
@@ -348,7 +348,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use Case: UC2 - Add a New Student
+**Use case: UC2 - Add a new student**
 
 **MSS**
 
@@ -373,11 +373,11 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use case: UC3 – Edit a Student
+**Use case: UC3 – Edit a student**
 
-**MSS:**
+**MSS**
 
-1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+1. User <ins>gets a list of students (UC1)</ins>
 2. User requests to edit certain fields of specific student in the list
 3. TAB updates the corresponding fields of the student
 
@@ -415,11 +415,11 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use case: UC4 - Delete a Student
+**Use case: UC4 - Delete a student**
 
 **MSS**
 
-1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+1. User <ins>gets a list of students (UC1)</ins>
 2. User requests to delete a specific student in the list
 3. TAB deletes the student
 
@@ -439,11 +439,11 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use case: UC5 - Add Student's Lesson Information
+**Use case: UC5 - Add a student's lesson information**
 
 **MSS**
 
-1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+1. User <ins>gets a list of students (UC1)</ins>
 2. User requests to add a lesson for a specific student in the list
 3. TAB adds the lesson to the student specified
     
@@ -469,11 +469,11 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use case: UC5 – Edit Student’s Lesson Information
+**Use case: UC6 – Edit a student’s lesson information**
 
 **MSS**
 
-1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+1. User <ins>gets a list of students (UC1)</ins>
 2. User requests to edit certain fields of a specific lesson of a specific student in the list
 3. TAB updates the corresponding fields of the lesson for the specified student
 
@@ -521,11 +521,11 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use case: UC6 – Delete Student’s Lesson Information
+**Use case: UC7 – Delete a student’s lesson information**
 
 **MSS**
 
-1. User [<ins>gets a list of students (UC1)</ins>](Use-case:-UC1---Get-a-list-of-students)
+1. User <ins>gets a list of students (UC1)</ins>
 2. User requests to delete a specific lesson for a specific student
 3. TAB deletes the specified lesson from the specified student in the list
 
@@ -551,7 +551,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use Case: UC7 – View Quick Start Instructions
+**Use Case: UC8 – View quick start instructions**
 
 **MSS**
 
@@ -562,7 +562,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
    
 <br/>
 
-#### Use Case: UC8 – Get Help
+**Use case: UC9 – Get help**
 
 **MSS**
 
@@ -573,7 +573,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use Case: UC9 - Undo an Accidental Modification
+**Use case: UC10 - Undo an accidental modification**
 
 **MSS**
 
@@ -592,7 +592,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 <br/>
 
-#### Use Case: UC10 - Redo an Undone Modification
+**Use case: UC11 - Redo an undone modification**
 
 **MSS**
 
