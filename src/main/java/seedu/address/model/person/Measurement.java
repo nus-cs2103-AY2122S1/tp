@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Measurement {
     public static final String GENERAL_MESSAGE_CONSTRAINTS =
-            "Body measurements should be ok the format height_waist_shoulder_[bust] in cm, and it should not be blank";
+            "Body measurements should be of the format height_waist_shoulder[_bust] in cm, and it should not be blank";
     public static final String MALE_MESSAGE_CONSTRAINTS =
             "Body measurements should be of the format height_waist_shoulder in cm, and it should not be blank";
     public static final String FEMALE_MESSAGE_CONSTRAINTS =
@@ -32,6 +32,7 @@ public class Measurement {
      * Returns true if a given string is a valid measurement.
      */
     public static boolean isValidMeasurement(String test, GenderType genderType) {
+        requireNonNull(genderType);
         String[] args = test.split("_");
         boolean isArgsNumber = isNumber(args);
         return isArgsNumber && (genderType == GenderType.MALE ? args.length == 3 : args.length == 4);
@@ -41,6 +42,7 @@ public class Measurement {
      * Returns true if a given string is a valid measurement.
      */
     public static boolean isValidMeasurement(String test) {
+        requireNonNull(test);
         String[] args = test.split("_");
         boolean isArgsNumber = isNumber(args);
         return isArgsNumber && (args.length == 3 || args.length == 4);
@@ -50,6 +52,7 @@ public class Measurement {
      * Returns message constraints based on gender type.
      */
     public static String getMessageConstraints(GenderType genderType) {
+        requireNonNull(genderType);
         if (genderType == GenderType.MALE) {
             return MALE_MESSAGE_CONSTRAINTS;
         } else {

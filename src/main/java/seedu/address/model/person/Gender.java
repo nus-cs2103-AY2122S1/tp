@@ -41,8 +41,10 @@ public class Gender {
         String gender = input.toLowerCase();
         if (gender.equals("m") || gender.equals("male")) {
             return GenderType.MALE;
-        } else {
+        } else if (gender.equals("f") || gender.equals("female")) {
             return GenderType.FEMALE;
+        } else {
+            return null;
         }
     }
 
