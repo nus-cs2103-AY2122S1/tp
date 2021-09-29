@@ -257,63 +257,159 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* small business owner / entrepreneur
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage a small business' inventory and finances faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                         | I want to …​                                               | So that I can…​                                      |
+| -------- | ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| `* * *`  | small business owner            | add items into the inventory list                          | account for newly stocked items                      |
+| `* * *`  | small business owner            | record item related information (name, price, cost, id)    | record and track items' details easily               |
+| `* * *`  | small business owner            | delete items from the inventory                            | account for discarded or sold items                  |
+| `* * *`  | small business owner            | look at all my inventory items, with their count           | review and track my inventory                        |
+| `* * *`  | small business owner            | record new orders and update the inventory accordingly     | account for newly confirmed orders                   |
+| `* * *`  | small business owner            | list past transactions                                     | review verify transaction details                    |
+| `* * *`  | budget-savvy business owner     | track the cost that each item incurs                       | manage business costs closely                        |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Bogo Bogo` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01 - Adding an item**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User adds item into inventory.
+2.  BogoBogo saves item into inventory.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User did not specify the name of item.
+    * 1a1. BogoBogo notifies user of missing details.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+* 1b. User is adding the item for the first time, and did not specify the id, price or cost of the item.
+    * 1b1. BogoBogo requests user for the missing details.
+    * 1b2. User enters the missing details.
 
-    * 3a1. AddressBook shows an error message.
+      Use case resumes at step 2. 
+      
+* 1c. The given id does not match with the given name.
+    * 1c1. BogoBogo notifies user of the mismatch.
 
       Use case resumes at step 2.
+      
+**UC02 - Deleting an item**
 
+**MSS**
+
+1.  User requests to delete item from inventory.
+2.  BogoBogo deletes item from inventory.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User did not specify the name or serial number of the item.
+    * 1a1. BogoBogo notifies user of missing details.
+
+      Use case ends.
+
+* 1b. The specified item is not in the inventory.
+    * 1b1. BogoBogo notifies user that item is not found.
+     
+      Use case ends.
+      
+* 1c. The given id does not match with the given name.
+    * 1c1. BogoBogo notifies user of the mismatch.
+     
+      Use case ends.
+
+**UC03 - Getting details of an item**
+
+**MSS**
+
+1.  User searches for the details of an item in the inventory.
+2.  BogoBogo deletes item from inventory.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User did not specify the name or serial number of the item.
+    * 1a1. BogoBogo notifies user of missing details.
+
+      Use case ends.
+
+* 1b. The specified item is not in the inventory.
+    * 1b1. BogoBogo notifies user that item is not found.
+     
+      Use case ends.
+      
+* 1c. The given id does not match with the given name.
+    * 1c1. BogoBogo notifies user of the mismatch.
+     
+      Use case ends.
+     
+**UC04 - Recording an Order**
+
+**MSS**
+
+1. User requests to start an order.
+2. BogoBogo requests for item names and quantities.
+3. User adds an item into the order.
+4. BogoBogo saves item into the order.
+
+   Step 3-4 is repeated until the user wishes to end the order.
+  
+5. User requests to end the order.
+6. BogoBogo shows the summary of the order and prompts the user to confirm the order.
+7. User confirms the order.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User adds an item that is not in the inventory.
+    * 3a1. BogoBogo notifies user that item is not found.
+     
+      Use case resumes at step 3.
+      
+* 3b. There is an insufficient supply of added items in the inventory.
+    * 3a1. BogoBogo notifies user of the supply shortage.
+     
+      Use case resumes at step 3.
+      
+* 4a. User incorrectly added an item into the order.
+    * 3a1. User removes specified item from the order.
+      
+      Use case resumes at step 3.
+
+* 7a. The order is empty.
+    * 7a1. BogoBogo notifies user that the order is empty.
+      
+      Use case ends.
+      
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 distinct inventory items without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -321,7 +417,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Item**: An inventory good that the business owner is/was selling
+* **Order**: Information regarding a transaction whereby the business sells a list of items to a customerfor revenue
 
 --------------------------------------------------------------------------------------------------------------------
 
