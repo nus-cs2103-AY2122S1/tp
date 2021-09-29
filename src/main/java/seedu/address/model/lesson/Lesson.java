@@ -34,7 +34,7 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param homework Homework for the lesson.
      */
     public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
-        requireAllNonNull(date,homework);
+        requireAllNonNull(date, timeRange, subject, homework);
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;

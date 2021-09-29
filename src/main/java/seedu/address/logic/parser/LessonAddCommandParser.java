@@ -24,7 +24,6 @@ import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
 import seedu.address.model.lesson.TimeRange;
 
 /**
