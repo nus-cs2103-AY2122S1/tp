@@ -72,7 +72,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### View student details : `view`
+### Viewing a student's details : `view`
 
 > ❕❕ <b>Note:</b> This feature is subject to changes
 
@@ -209,6 +209,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**View** | `view INDEX`
 **List** | `list`
 **Help** | `help`
 **Undo** | `undo`
