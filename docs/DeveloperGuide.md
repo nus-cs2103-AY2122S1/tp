@@ -278,6 +278,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | general user                               | add a new applicant under a position      | store his information within the system                                |
+| `* * *`  | general user                               | delete an applicant from under a position | Remove applicants that are no longer related to this position          |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add a new person               |                                                                        |
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
@@ -291,6 +293,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: Add a new applicant**
+
+**MSS**
+
+1.  User requests to add a new applicant, with all the necessary parameters/details 
+2.  MrTechRecruiter adds the new applicant and shows a success message
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The format is invalid.
+    * 3a1. MrTechRecruiter shows an error message.
+
+  Use case resumes at step 1.
+
+**Use case: Delete an applicant**
+
+**MSS**
+
+1.  User requests to list applicants
+2.  MrTechRecruiter shows a list of applicants
+3.  User requests to delete a specific person in the list using the exact name
+4.  MrTechRecruiter deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given name is invalid.
+
+    * 3a1. MrTechRecruiter shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Search for applicants through keywords**
 
 **MSS**
@@ -298,7 +339,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User enters the keywords to search by
 2. MrTechRecruiter performs the search according to the keywords
 3. MrTechRecruiter displays the search results
-    
+
    Use case ends.
 
 **Extensions**
@@ -313,6 +354,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. AddressBook shows an error message.
 
       Use case ends.
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -331,10 +374,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Job position**: A job opening within the user's company that is looking for potential hires
+* **Applicant**: A potential hire that is applying for a particular job position
 * **CLI**: Command-line interface. CLI programs take in input in the form of text-based commands, usually input by the user, to execute the program's various functions.
 * **CAP**: Cumulative average point. Similar to grade point average (GPA), it is a numerical measure of a student's average academic performance across their duration of study.
 * **Rejection rate**: The percentage of applicants that are rejected, for a given job position.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -361,22 +405,30 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1.  _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting an applicant
 
-1. Deleting a person while all persons are being shown
+1. Deleting an applicant from MrTechRecruiter
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: Multiple applicants in MrTechRecruiter. John Doe exists within MrTechRecruiter but Mary Jane does not.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete applicant n/John Doe`<br>
+      Expected: John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete applicant n/Mary Jane`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. _{ more test cases …​ }_
+
+### Adding a new applicant
+
+1. Adding an applicant to MrTechRecruiter
+
+    1. Prerequisites: -
+
+    1. Test case: `add applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`<br>
+         Expected: John Doe, with all the relevant details that were passed as parameters is added to MrTechRecruiter.
 
 1. _{ more test cases …​ }_
 
