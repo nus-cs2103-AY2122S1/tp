@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -257,63 +257,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* has a need to manage a significant number of contacts
 * prefer desktop apps over other types
-* has trouble managing the multitude of details related to the members of his club
-* Want to assign tasks for members
-* has a need to organize and plan events for members
-* Likes typing and comfortable with CLI
+* can type fast
 * prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-
-* manage contacts faster than a typical mouse/GUI driven app
-* manage club events and tasks/activities for large amount of members
-* Contact and personal information of members collated in an easily accessible location
-* Able to update details relating to members
-* Categorise members into groups for smoother planning
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-#### Member-related Functions
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add a new person               | update the increase or change in members
-| `* * *`  | user                                       | have address fields for persons | send over mail |
-| `* * *`  | user                                       | kick a person                | remove members or troublemakers from the club |
-| `* * *`  | user                                       | have email address field for persons |  contact them through mail |
-| `* * *`  | user                                       | create tasks for my participants or myself | know who has what tasks assigned to them |
-
-#### Task Functions
-
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | create tasks for my participants or myself | know who has what tasks assigned to them |
-| `* * *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
-| `* * *`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
-| `* * *`  | user                                       | add a deadline to task | keep track of my deadlines |
-| `* * *`  | user                                       | delete already obscure tasks that I do not need to keep track of | have a cleaner task list |
-
-
-#### Storage Functions
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | load participants from other files | access and manage different sets of data |
-| `* * *`  | user                                       | write my data to a file as save data | access them and resume at a later date |
-
-#### Event Functions
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add all participants of a particular event to one group | send notifications to only those involved |
-
-
-#### Other miscellaneous Functions
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new person               |                                                                        |
+| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
@@ -322,33 +283,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Ailurus` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Add a person**
-
-**MSS**
-
-1.  User requests to add a person, providing necessary details.
-2.  Ailurus adds the person.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. Invalid format or incomplete details provided by user
-
-    * 1a1. Ailurus shows an error message about missing or invalid input.
-
-      Use case ends.
-
-**Use case: UC2 - Delete a person**
+**Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  Ailurus shows a list of persons
+2.  AddressBook shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  Ailurus deletes the person
+4.  AddressBook deletes the person
 
     Use case ends.
 
@@ -360,16 +304,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. Ailurus shows an error message.
+    * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC3 - Add a task to a person**
+**Use case: UC6 - Add an event**
 
 **MSS**
 
-1.  User requests to add a task to a specific person, providing details if necessary.
-2.  Ailurus adds the task to the person.
+1.  User requests to add an event, providing necessary details.
+2.  Ailurus adds the event.
 
     Use case ends.
 
@@ -381,79 +325,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1b. The given index is invalid.
-
-    * 1b1. Ailurus shows an error message about invalid index.
-
-      Use case ends.
-
-**Use case: UC4 - Delete a task from a person**
+**Use case: UC7 - Delete an event**
 
 **MSS**
 
-1.  User requests to list tasks of a specific person
-2.  Ailurus shows a list of tasks
-3.  User requests to delete a specific task in the list
-4.  Ailurus deletes the task
+1.  User requests to list events
+2.  Ailurus shows a list of events
+3.  User requests to delete a specific event in the list
+4.  Ailurus deletes the event
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index of person is invalid
+* 1a. Invalid format or incomplete details provided by user
 
-    * 1a1. Ailurus shows an error message.
-
-      Use case ends.
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index of task is invalid.
-
-    * 3a1. Ailurus shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC5 - Mark a task as done**
-
-**MSS**
-
-1.  User requests to list tasks of a specific person
-2.  Ailurus shows a list of tasks
-3.  User requests to mark a specific task as done
-4.  Ailurus marks task as done
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given index of person is invalid
-
-    * 1a1. Ailurus shows an error message.
+    * 1a1. Ailurus shows an error message about missing or invalid input.
 
       Use case ends.
 
-* 2a. The list is empty.
 
-  Use case ends.
-
-* 3a. The given index of task is invalid.
-
-    * 3a1. Ailurus shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should run on user computer with double-click - no installer or additional libraries required.
+5.  The system should respond within two seconds.
+    *{More to be added}*
 
 ### Glossary
 
@@ -475,15 +375,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -492,16 +392,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -509,6 +409,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
