@@ -314,30 +314,170 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case (UC01): Add a Customer**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User keys in basic information shared among different classes of people like **name, email, phone number**.
+2. RHRH prompts the user to enter the class of the person being entered into the system.
+3. User enters the keyword corresponding to the customer class.
+4. RHRH prompts the user to enter the following optional customer-specific information 1 at a time:
+   1. Customer ID
+   2. Loyalty points
+   3. Allergies
+   4. Special request
+5. Upon entering the last customer-specific information, the customer will be added successfully.
+Use case ends
 
-    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. RHRH detects an incorrect format command entered.
+     * 1a1. RHRH requests for the format to be corrected.
+     * 1a2. User enters the command again. <br/>
 
-  Use case ends.
+     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+     Use case resumes from step 2.
 
-      Use case resumes at step 2.
 
-*{More to be added}*
+ * 1b. RHRH detects missing details in the command entered.
+     * 1b1. RHRH requests for the missing details to be filled in.
+     * 1b2. User enters missing data.
+
+     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes at step 2.
+     
+     
+ * 1c. RHRH detects an incorrect format for the email/phone number entered. 
+     * 1c1. RHRH requests for the format to be corrected.
+     * 1c2. User enters the command again.
+     
+     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+	    
+     
+     Use case resumes from step 2.
+
+ * 3a.  RHRH detects an invalid class entered. 
+	   * 3a1. RHRH requests for the class to be corrected.
+	   * 3a2. User enters the class again.
+	
+    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+	
+ 
+    Use case resumes from step 4.
+    
+**Use case (UC02): Add a Supplier**
+
+**MSS**
+
+1. User keys in basic information shared among different classes of people like **name, email, phone number**.
+2. RHRH prompts the user to enter the class of the person being entered into the system.
+3. User enters the keyword corresponding to the supplier class.
+4. RHRH prompts the user to enter the following supplier-specific information 1 at a time:
+   1. Supplier ID
+   2. Type of supply 
+5. Upon entering the last supplier-specific information, the supplier will be added successfully.
+Use case ends
+
+
+**Extensions**
+
+* 1a. RHRH detects an incorrect format command entered.
+     * 1a1. RHRH requests for the format to be corrected.
+     * 1a2. User enters the command again. <br/>
+
+     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes from step 2.
+
+
+ * 1b. RHRH detects missing details in the command entered.
+     * 1b1. RHRH requests for the missing details to be filled in.
+     * 1b2. User enters missing data.
+
+     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes at step 2.
+     
+     
+ * 1c. RHRH detects an incorrect format for the email/phone number entered. 
+     * 1c1. RHRH requests for the format to be corrected.
+     * 1c2. User enters the command again.
+     
+     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+	    
+     
+     Use case resumes from step 2.
+
+ * 3a.  RHRH detects an invalid class entered. 
+	   * 3a1. RHRH requests for the class to be corrected.
+	   * 3a2. User enters the class again.
+	
+    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+	
+ 
+    Use case resumes from step 4.
+    
+**Use case (UC03): Add an Employee**
+
+**MSS**
+
+1. User keys in basic information shared among different classes of people like **name, email, phone number**.
+2. RHRH prompts the user to enter the class of the person being entered into the system.
+3. User enters the keyword corresponding to the employee class.
+4. RHRH prompts the user to enter the following employee-specific information 1 at a time:
+   1. Employee ID
+   2. Employment type
+   3. Monthly salary
+5. Upon entering the last employee-specific information, the employee will be added successfully.
+Use case ends
+
+
+**Extensions**
+
+* 1a. RHRH detects an incorrect format command entered.
+     * 1a1. RHRH requests for the format to be corrected.
+     * 1a2. User enters the command again. <br/>
+
+     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes from step 2.
+
+
+ * 1b. RHRH detects missing details in the command entered.
+     * 1b1. RHRH requests for the missing details to be filled in.
+     * 1b2. User enters missing data.
+
+     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes at step 2.
+     
+     
+ * 1c. RHRH detects an incorrect format for the email/phone number entered. 
+     * 1c1. RHRH requests for the format to be corrected.
+     * 1c2. User enters the command again.
+     
+     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+	    
+     
+     Use case resumes from step 2.
+
+ * 3a.  RHRH detects an invalid class entered. 
+	   * 3a1. RHRH requests for the class to be corrected.
+	   * 3a2. User enters the class again.
+	
+    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+	
+ 
+    Use case resumes from step 4.
 
 ### Non-Functional Requirements
 
