@@ -3,10 +3,10 @@
 
 ![Ui](docs/images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**NUSpam is a desktop app for managing contacts** targeted at marketers who require fast manipulation and precise handling of contact data. It enables marketers to more easily manage and make use of email and phone leads, and minimise tedious and repetitive tasks such as data entry, email blasts, and mail merge.
 
-- If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-- If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+- If you are interested in using NUSpam, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s1-cs2103t-w13-2.github.io/tp/UserGuide.html#quick-start).
+- If you are interested about developing NUSpam, the [**Developer Guide**](https://ay2122s1-cs2103t-w13-2.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 ## Acknowledgements
 
