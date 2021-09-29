@@ -166,6 +166,12 @@ Examples:
 
 * `mkdir CS2103` creates a folder with the name `CS2103`.
 
+### Viewing list of folders: `ls -folders`
+
+Retrieve list of all folders created
+
+Format: `ls -folders`
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
