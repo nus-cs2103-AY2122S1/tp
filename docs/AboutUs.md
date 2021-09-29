@@ -31,7 +31,7 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Taufiq Bin Abdul Rahman
 
-<img src="images/tau_bar.png" width="200px">
+<img src="images/tau-bar.png" width="200px">
 
 [[github](https://github.com/tau-bar)]
 [[portfolio](team/tau-bar.md)]
