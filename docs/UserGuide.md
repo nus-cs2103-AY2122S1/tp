@@ -3,12 +3,13 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+
+_(todo: add TAB introduction, how to read this user guide etc)_
 
 ## Quick start
 
@@ -75,13 +76,45 @@ to help you with the installation. Select the corresponding OS you are working o
 
 </div>
 
-### Viewing help : `help`
+
+
+### Help 
+
+_(todo: add description)_
+
+
+#### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Student
+
+_(todo: add description)_
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Lesson
+
+_(todo: add description)_
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Others
+
+_(todo: add description)_
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Storage
+
+_(todo: add description)_
+
 
 ### Viewing schedule: `schedule` [coming soon]
 
