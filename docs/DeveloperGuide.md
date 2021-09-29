@@ -257,7 +257,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* instructor from cs2103
+* has a need to manage a significant number of contacts of students and tutors
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
