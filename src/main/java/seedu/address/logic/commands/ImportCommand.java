@@ -18,12 +18,12 @@ import static java.util.Objects.requireNonNull;
 
 public class ImportCommand extends Command {
 
-    public static final int NUMBER_OF_FIELDS = 5;
+    public static final int NUMBER_OF_FIELDS = 4;
     public static final String COMMAND_WORD = "import";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = " contacts added successfully";
+    public static final String MESSAGE_SUCCESS = "Contacts added successfully";
 
     private final File csvFile;
 
@@ -53,48 +53,46 @@ public class ImportCommand extends Command {
             throw new CommandException("File was not selected");
         }
 
-        int addedCounter = 0;
-        ArrayList<String> wronglyFormattedEntries = new ArrayList<>();
-        ArrayList<String> duplicateEntries = new ArrayList<>();
+        int rowCounter = 0;
+        ArrayList<Integer> wronglyFormattedEntries = new ArrayList<>();
+        ArrayList<Name> nameList = new ArrayList<>();
+        ArrayList<Phone> phoneList = new ArrayList<>();
+        ArrayList<Email> emailList = new ArrayList<>();
+        ArrayList<Address> addressList = new ArrayList<>();
+        ArrayList<Set<Tag>> tagList = new ArrayList<>();
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(csvFile));
             String line;
             br.readLine();
+            rowCounter += 1;
 
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                System.out.println("name: " + values[1]);
-                System.out.println("phone: " + values[2]);
-                System.out.println("email: " + values[3]);
-                System.out.println("address: " + values[4]);
-
+                rowCounter += 1;
 
                 try {
-                    Name name = ParserUtil.parseName(values[1]);
-                    Phone phone = ParserUtil.parsePhone(values[2]);
-                    Email email = ParserUtil.parseEmail(values[3]);
-                    Address address = ParserUtil.parseAddress(values[4]);
-                    Set<Tag> tagList = ParserUtil.parseTags(new ArrayList<String>());
-
+                    Name name = ParserUtil.parseName(values[0]);
+                    nameList.add(name);
+                    Phone phone = ParserUtil.parsePhone(values[1]);
+                    phoneList.add(phone);
+                    Email email = ParserUtil.parseEmail(values[2]);
+                    emailList.add(email);
+                    Address address = ParserUtil.parseAddress(values[3]);
+                    addressList.add(address);
+                    Set<Tag> tags = ParserUtil.parseTags(new ArrayList<String>());
 
                     if (values.length == NUMBER_OF_FIELDS + 1) {
-                        String[] strTags = values[5].split(" ");
+                        String[] strTags = values[4].split(" ");
                         System.out.println("tags: " + Arrays.toString(strTags));
-                        tagList = ParserUtil.parseTags(Arrays.asList(strTags));
+                        tags = ParserUtil.parseTags(Arrays.asList(strTags));
                     }
 
-                    Person person = new Person(name, phone, email, address, tagList);
-                    if (model.hasPerson(person)) {
-                        duplicateEntries.add(values[0]);
-                        continue;
-                    }
-
-                    model.addPerson(person);
-                    addedCounter += 1;
+                    tagList.add(tags);
 
                 } catch (ParseException e) {
-                    wronglyFormattedEntries.add(values[0]);
+                    e.printStackTrace();
+                    wronglyFormattedEntries.add(rowCounter);
                 }
 
             }
@@ -103,17 +101,28 @@ public class ImportCommand extends Command {
             e.printStackTrace();
         }
 
-        String resultString = addedCounter + MESSAGE_SUCCESS;
-
-        if (duplicateEntries.size() > 0) {
-            resultString += "\nEntries at indexes " + duplicateEntries + " were already in the Address Book";
-        }
-
         if (wronglyFormattedEntries.size() > 0) {
-            resultString += "\nEntries at indexes " + wronglyFormattedEntries + " were wrongly formatted";
+            String errorString = "Failed! \nEntries at row " + wronglyFormattedEntries + " were wrongly formatted";
+            throw new CommandException(errorString);
         }
 
-        return new CommandResult(resultString);
+        for (int i = 0; i < rowCounter - 1; i++) {
+            Name name = nameList.get(i);
+            Phone phone = phoneList.get(i);
+            Email email = emailList.get(i);
+            Address address = addressList.get(i);
+            Set<Tag> tags = tagList.get(i);
+
+            Person person = new Person(name, phone, email, address, tags);
+            if (model.hasPerson(person)) {
+                continue;
+            }
+
+            model.addPerson(person);
+
+        }
+
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
