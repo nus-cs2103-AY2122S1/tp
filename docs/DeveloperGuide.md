@@ -259,18 +259,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * prefer desktop apps over other types
 * has trouble managing the multitude of details related to the members of his club
-* Want to assign tasks for members
+* want to assign tasks for members
 * has a need to organize and plan events for members
-* Likes typing and comfortable with CLI
+* likes typing and comfortable with CLI
 * prefers typing to mouse interactions
 
 **Value proposition**: 
 
 * manage contacts faster than a typical mouse/GUI driven app
 * manage club events and tasks/activities for large amount of members
-* Contact and personal information of members collated in an easily accessible location
-* Able to update details relating to members
-* Categorise members into groups for smoother planning
+* contact and personal information of members collated in an easily accessible location
+* able to update details relating to members
+* categorise members into groups for smoother planning
 
 
 ### User stories
@@ -281,20 +281,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add a new person               | update the increase or change in members
-| `* * *`  | user                                       | have address fields for persons | send over mail |
+| `* * *`  | user                                       | add a new person               | update the increase or change in members |
+| `* * *`  | user                                       | have address fields for persons | |
 | `* * *`  | user                                       | kick a person                | remove members or troublemakers from the club |
-| `* * *`  | user                                       | have email address field for persons |  contact them through mail |
-| `* * *`  | user                                       | create tasks for my participants or myself | know who has what tasks assigned to them |
+| `* * *`  | user                                       | have email address field for persons | |
 
 #### Task Functions
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | create tasks for my participants or myself | know who has what tasks assigned to them |
-| `* * *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
-| `* * *`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
-| `* * *`  | user                                       | add a deadline to task | keep track of my deadlines |
+| `* * *`  | user                                       | create tasks for my participants or myself | |
+| `* *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
+| `*`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
+| `* *`  | user                                       | add a deadline to task | keep track of what is due |
 | `* * *`  | user                                       | delete already obscure tasks that I do not need to keep track of | have a cleaner task list |
 
 
