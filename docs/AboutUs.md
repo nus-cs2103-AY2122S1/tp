@@ -39,22 +39,12 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Scheduling
 * Responsibilities: In charge of `delete` feature
 
-### Jean Doe
+### Lim Yu Zher
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lzher385.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lzher385)]
+[[portfolio](team/lzher385.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation
+* Responsibilities: In charge of `link` feature
