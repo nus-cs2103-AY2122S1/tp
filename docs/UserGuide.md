@@ -116,7 +116,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the add command:**<br>
+**:information_source: Notes about the edit command:**<br>
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
   e.g. `edit 2` means that you wish to edit the second person in the displayed list.
