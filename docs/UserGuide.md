@@ -137,7 +137,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
   e.g. no student should have all contact fields empty. `edit 2 pp/` will not work if the student does not have
   any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
 
-* You can delete all tags of the specified student’s by typing `t/` without any arguments.<br>
+* You can delete all tags of a student by typing `t/` without any arguments.<br>
   e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
 
 </div>
