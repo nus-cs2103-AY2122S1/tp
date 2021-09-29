@@ -3,10 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
@@ -16,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -60,10 +60,12 @@ public class LessonDeleteCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        Set<Lesson> lessons = new HashSet<>(personToEdit.getLessons());
-        List<Lesson> lessonList = new HashSet<>(lessons).stream()
-            .sorted(Comparator.comparing(lesson -> lesson.getDate().getLocalDate()))
-            .collect(Collectors.toList());
+        Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
+        if (lessonIndex.getZeroBased() >= lessons.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        }
+
+        List<Lesson> lessonList = lessons.stream().sorted().collect(Collectors.toList());
         Lesson toRemove = lessonList.get(lessonIndex.getZeroBased());
 
         Person editedPerson = createEditedPerson(personToEdit, lessonList, toRemove);
@@ -79,6 +81,7 @@ public class LessonDeleteCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Removes specified {@code Lesson} from the updatedLessons for this person.
      */
     private static Person createEditedPerson(Person personToEdit,
                                              List<Lesson> updatedLessons, Lesson toRemove) {
@@ -87,15 +90,19 @@ public class LessonDeleteCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
+        Phone updatedParentPhone = personToEdit.getParentPhone();
+        Email updatedParentEmail = personToEdit.getParentEmail();
         Address updatedAddress = personToEdit.getAddress();
+        Fee updatedOutstandingFee = personToEdit.getFee();
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
 
         updatedLessons.remove(toRemove);
-        HashSet<Lesson> updatedLessonSet = new HashSet<>(updatedLessons);
+        TreeSet<Lesson> updatedLessonSet = new TreeSet<>(updatedLessons);
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-            updatedAddress, updatedRemark, updatedTags, updatedLessonSet);
+            updatedParentPhone, updatedParentEmail, updatedAddress,
+            updatedOutstandingFee, updatedRemark, updatedTags, updatedLessonSet);
     }
 
     @Override

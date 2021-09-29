@@ -6,7 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LessonDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class LessonDeleteCommandParser {
+public class LessonDeleteCommandParser implements Parser<LessonDeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the LessonDeleteCommand
      * and returns a LessonDeleteCommand object for execution.
