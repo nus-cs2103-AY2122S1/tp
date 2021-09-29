@@ -257,24 +257,63 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
 * prefer desktop apps over other types
-* can type fast
+* has trouble managing the multitude of details related to the members of his club
+* Want to assign tasks for members
+* has a need to organize and plan events for members
+* Likes typing and comfortable with CLI
 * prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+* manage contacts faster than a typical mouse/GUI driven app
+* manage club events and tasks/activities for large amount of members
+* Contact and personal information of members collated in an easily accessible location
+* Able to update details relating to members
+* Categorise members into groups for smoother planning
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
+#### Member-related Functions
+
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | add a new person               | update the increase or change in members
+| `* * *`  | user                                       | have address fields for persons | send over mail |
+| `* * *`  | user                                       | kick a person                | remove members or troublemakers from the club |
+| `* * *`  | user                                       | have email address field for persons |  contact them through mail |
+| `* * *`  | user                                       | create tasks for my participants or myself | know who has what tasks assigned to them |
+
+#### Task Functions
+
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | create tasks for my participants or myself | know who has what tasks assigned to them |
+| `* * *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
+| `* * *`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
+| `* * *`  | user                                       | add a deadline to task | keep track of my deadlines |
+| `* * *`  | user                                       | delete already obscure tasks that I do not need to keep track of | have a cleaner task list |
+
+
+#### Storage Functions
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | load participants from other files | access and manage different sets of data |
+| `* * *`  | user                                       | write my data to a file as save data | access them and resume at a later date |
+
+#### Event Functions
+| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | user                                       | add all participants of a particular event to one group | send notifications to only those involved |
+
+
+#### Other miscellaneous Functions
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
