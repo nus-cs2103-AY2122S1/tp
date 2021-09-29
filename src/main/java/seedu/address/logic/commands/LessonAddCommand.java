@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -82,15 +83,19 @@ public class LessonAddCommand extends Command {
         Name updatedName = personToEdit.getName();
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
+        Phone updatedParentPhone = personToEdit.getParentPhone();
+        Email updatedParentEmail = personToEdit.getParentEmail();
         Address updatedAddress = personToEdit.getAddress();
+        Fee updatedOutstandingFee = personToEdit.getFee();
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
 
         Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
         lessons.add(lesson);
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedRemark, updatedTags, lessons);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
+                updatedParentEmail, updatedAddress, updatedOutstandingFee, updatedRemark,
+            updatedTags, lessons);
     }
 
     @Override
