@@ -32,10 +32,12 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Deng Huaiyu
 
-<img src="https://user-images.githubusercontent.com/46596402/135088054-5b3f15b1-da21-4f71-8dae-1eecdefbf08d.jpg" width="200px">
+<img src="images/norayuuu.png" width="200px">
+
+[[github](https://github.com/NoraYUuu)]
 
 * Role: Code Quality
-* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+* Responsibilities: Looks after code quality and ensures adherence to coding standards.
 
 ### Adam Ho
 
