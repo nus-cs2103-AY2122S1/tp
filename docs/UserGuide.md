@@ -81,8 +81,6 @@ to help you with the installation. Select the corresponding OS you are working o
 
 --------------------------------------------------------------------------------------------------------------------
 
-_(todo: add description)_
-
 #### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -94,8 +92,6 @@ Format: `help`
 ### Student
 
 --------------------------------------------------------------------------------------------------------------------
-
-_(todo: add description)_
 
 #### Adding a student: `add`
 
@@ -271,9 +267,6 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-_(todo: add description)_
-
-
 #### Adding a lesson: `ladd`
 
 Adds a lesson with the corresponding details to the specified student in the address book.
@@ -330,9 +323,6 @@ Format: `schedule`
 
 --------------------------------------------------------------------------------------------------------------------
 
-_(todo: add description)_
-
-
 #### Clearing all entries: `clear`
 
 Clears all entries from the address book.
@@ -360,8 +350,6 @@ Format: `exit`
 ### Storage
 
 --------------------------------------------------------------------------------------------------------------------
-
-_(todo: add description)_
 
 #### Saving the data
 
