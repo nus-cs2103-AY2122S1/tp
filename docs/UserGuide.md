@@ -297,7 +297,7 @@ Action | Format, Examples
 **Clear** |`clear`
 **Delete** |`delete INDEX`<br><br> e.g., `delete 3`
 **Edit** |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [sch/SCHOOL] [stream/STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** |`find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …]`<br><br> e.g., `find n/James Tan a/clementi`
+**Find** |`find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL]`<br><br> e.g., `find n/James Tan a/clementi`
 **Filter** |<code>filter cond/{all &#124; any &#124; none} t/TAG [t/MORE_TAGS]…</code> <br><br> e.g., `filter cond/all t/Sec1 t/zoom`
 **List** |`list`
 **Help** |`help`
