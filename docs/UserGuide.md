@@ -67,7 +67,7 @@ to help you with the installation. Select the corresponding OS you are working o
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -89,44 +89,74 @@ Displays a read-only weekly schedule.
 
 Format: `schedule`
 
-### Adding a person: `add`
+### Adding a student: `add`
 
-Adds a person to the address book.
+Adds a student to the tuition address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A student can have any number of tags (including 0)
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the add command:**<br>
+
+* At least one contact field is required.<br>
+  e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
+  included in the add command.
+
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 sch/John's School stream/John stream lvl/J1`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate p/1234567 r/hasnt pay tuition fee for Aug t/cousin`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
+* `add n/Betsy Crowe t/cousin a/Newgate p/91234567 f/150.50 r/hasnt pay tuition fee for Aug t/retainee`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a student : `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can delete the data for optional fields by typing sch//stream//lvl/ without specifying content after the prefixes.  
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the edit command:**<br>
+
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
+  e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
+
+* You must provide at least one field.<br>
+  e.g. entering just `edit 2` alone is not a valid command. You need to include the field you wish to edit.
+
+* Existing values will be updated to the entered values.<br>
+  e.g. `edit 2 f/0` will override the outstanding fees of the 2nd student in the displayed list to `0`.
+
+* When editing tags, all existing tags of the student will be removed and replaced with the tags specified.<br>
+  e.g. `edit 2 t/SEC2 t/IP` will erase the student's original tags and replace it with the new tags `SEC2` and `IP`.
+
+* You can delete the data in optional fields by supplying a parameter with no arguments.<br>
+  e.g. `edit 2 r/` will remove the remarks for the 2nd student in the displayed list.
+
+* You cannot remove a contact field if it is the only remaining means of contact you have with a student.<br>
+  e.g. no student should have all contact fields empty. `edit 2 pp/` will not work if the student does not have
+  any `PHONE_NUMBER`, `EMAIL`, or `PARENT_EMAIL`.
+
+* You can delete all tags of a student by typing `t/` without any arguments.<br>
+  e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
+
+</div>
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be `NJC` and clears academic stream data.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+* `edit 3 sch/NJC stream/` Edits the school of the 3rd student to be `NJC` and clears academic stream data.
 
 ### Finding students by fields: `find`
 
@@ -304,11 +334,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** |`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [t/TAG]…​` <br><br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 sch/DHS lvl/Y1 t/cousin`
+**Add** |`add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARKS] [t/TAG]…​` <br><br> e.g., `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 f/50 r/retainee t/cousin`
 **Clear** |`clear`
 **Delete** |`delete INDEX`<br><br> e.g., `delete 3`
-**Edit** |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [sch/SCHOOL] [stream/STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** |`edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** |`find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …] [p/PHONE_KEYWORD …] [sch/SCHOOL_KEYWORD …] [stream/ACAD_STREAM_KEYWORD …] [lvl/ACAD_LEVEL_KEYWORD …]`<br><br> e.g., `find n/James Tan a/clementi sch/NUS`
 **Filter** |<code>filter cond/{all &#124; any &#124; none} t/TAG [t/MORE_TAGS]…</code> <br><br> e.g., `filter cond/all t/Sec1 t/zoom`
 **List** |`list`
+**Schedule** | `schedule`
 **Help** |`help`
