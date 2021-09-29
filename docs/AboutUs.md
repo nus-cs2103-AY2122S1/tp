@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/limzk126.png" width="200px">
 
 [[github](http://github.com/limzk126)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/limzk126.md)]
 
 * Role: Testing
 * Responsibilities: Ensure the testing of the project is done properly and on time.
