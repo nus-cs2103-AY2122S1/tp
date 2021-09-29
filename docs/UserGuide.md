@@ -72,6 +72,56 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Creating a new module: `module add`
+
+Adds a new module to TAB3
+
+Format: `module add <module name>`
+
+Examples:
+* `Module add CS2103`: Adds module CS2103 to TAB3
+* `Module add CS2100`: Adds module CS2100 to TAB3
+
+### Creating a new task for a specific module: `module add task`
+
+Adds a new task to the specified module
+
+Format: `module add <module name>, <task name>`
+
+Examples:
+* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
+* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
+
+### Add student to a specific module: `module add student`
+
+Add a new student to the specified module
+Also automatically copies over the task list from the module to the student
+
+Format: `module add <module name>, <student name>`
+
+Examples:
+* `module add CS2103, A1234567A`: Adds student with id A1234567A to module CS2103
+* `module add CS2100, A7654321A`: Adds student with id A7654321A to module CS2100
+
+### Delete student from a specific module: `module delete student`
+
+Deletes the specified student from the specified module
+
+Format: `module delete <module name>, <student id>`
+
+Examples:
+* `module delete CS2103, A1234567A`: Removes student with id A1234567A from module CS2103’s list of students
+* `module delete CS2100, A7654321A`: Removes student with id A7654321A from module CS2100’s list of students
+
+### Delete module from TAB3: `module delete`
+
+Deletes the specified module from TAB3
+
+Format: `module delete <module name>`
+
+Examples:
+* `module delete CS2103`: Deletes module CS2103 from TAB3
+* `module delete CS2100`: Deletes module CS2100 from TAB3
 
 ### Adding a person: `add`
 
