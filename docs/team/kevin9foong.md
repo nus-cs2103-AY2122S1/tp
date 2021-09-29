@@ -23,7 +23,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added the documentation for the features `add friend`, `add game` and `link game and friend`.
+    * Added the documentation for the features `add friend`, `add game`, `delete game` and `link game and friend`.
   * Developer Guide:
     * Added the value proposition for gitGud.
     * Added use case for `add friend`.
@@ -38,4 +38,4 @@ Given below are my contributions to the project.
   
 * **Miscellaneous** 
   * Set up initial project website. 
-  * Initial set up for  team repo & organization.
+  * Initial set up for team repo & organization.
