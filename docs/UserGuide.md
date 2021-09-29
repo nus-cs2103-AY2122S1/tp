@@ -117,45 +117,75 @@ Examples:
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be `NJC` and clears academic stream data.
 
-### Finding persons by fields: `find`
+### Finding students by fields: `find`
 
-Finds all persons whose fields match the given keywords.
+Finds all students whose fields match the given keywords.
 
-Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] `
+Format: `find [n/KEYWORD …] [a/KEYWORD …] [e/KEYWORD …] [p/KEYWORD …] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL]`
 
-* At least one field must be provided. i.e. `find` by itself is an invalid command.
-* The search is case-insensitive. e.g.`hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Clementi West` will match `West Clementi`.
-* The keyword does not need to match the field exactly. e.g. `john@gmail.com` will match `leejohn@gmail.com`.
-* A field just needs to match at least one keyword. e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
-* All fields specified need to match for person to be matched.<br>
+* You can find a student by name, address, email, phone, school, academic stream and academic level. 
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the find command:**<br>
+
+* You must provide at least one field.<br>
+  e.g. entering just `find` alone is not a valid command. You need to include the fields you wish to search for.
+
+* The search is case-insensitive.<br>
+  e.g.`hans` will match `Hans`.
+  
+* The order of the keywords does not matter.<br>
+  e.g. `Clementi West` will match `West Clementi`.
+  
+* The keyword does not need to match the field exactly.<br>
+  e.g. `john@gmail.com` will match `leejohn@gmail.com`.
+  
+* A field just needs to match at least one keyword.<br>
+  e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
+  
+* A student is only considered a match when all fields which you are searching for match their keywords.<br>
   e.g. `find n/john a/Clementi`
-    * will match person named `john` with address `West Clementi Street`
-    * will not match person named `john` with address `Bedok Reservoir`
+    * will match student named `john` with address `West Clementi Street`
+    * will not match student named `john` with address `Bedok Reservoir`
+
+</div>
 
 Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
 * `find a/Jurong east n/Ben e/gmail`  
-    * will match a person named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-    * will match a person name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
+    * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
+    * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
 
-### Filtering persons by tags: `filter`
+### Filtering students by tags: `filter`
 
-Filter and returns all persons matching the specified tags, based on the specified filter condition.
+Filters students in the address book by their tags, based on the given filter condition.
 
 Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
 
-* `all` indicates that a person must have all specified tags to be matched.
-* `any` indicates that a person with at least one specified tag will be matched.
-* `none` indicates that a person must have none of the specified tags to be matched.
-* Invalid arguments for `cond/` will result in an error. e.g. `cond/every`.
-* The specified tag must match the existing tag **exactly**. e.g. `Math` will not match `Mathematics`.
-* The filter is **case-sensitive**. e.g. `filter cond/all t/MATH` does not return the same result as `filter cond/all t/math`.
+* `all` indicates that a student must have all the specified tags to be matched.
+* `any` indicates that a student with at least one of the specified tag will be matched.
+* `none` indicates that a student must have none of the specified tags to be matched.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the filter command:**<br>
+
+* The filter condition will not accept other arguments besides `all`, `any` and `none`.
+  e.g. `cond/every` will result in an error.
+  
+* You must use the exact spelling of the existing tag.<br>
+  e.g. `Math` will not match `Mathematics`.
+  
+* The tags are **case-sensitive**.<br>
+  e.g. `filter cond/all t/MATH` does not return the same result as `filter cond/all t/math`.
+
+</div>
 
 Examples:
-* `filter cond/all t/math t/Sec1` will return persons who have both `math` and `Sec1` tags.
-* `filter cond/any t/English t/Zoom` will return persons with only the `English` tag, or only the `Zoom` tag, or both tags.
-* `filter cond/none t/Inactive t/paid` will return persons without both `Inactive` and `paid` tags.
+* `filter cond/all t/math t/Sec1` will return students who have both `math` and `Sec1` tags.
+* `filter cond/any t/English t/Zoom` will return students with only the `English` tag, or only the `Zoom` tag, or both tags.
+* `filter cond/none t/Inactive t/paid` will return students without both `Inactive` and `paid` tags.
 
 ### Deleting a person : `delete`
 
