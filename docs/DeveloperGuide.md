@@ -331,7 +331,7 @@ Use case ends
 
 **Extensions**
 
-     * 1a1. RHRH requests for the format to be corrected.
+* 1a1. RHRH requests for the format to be corrected.
      * 1a2. User enters the command again. <br/>
 
      Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
@@ -358,11 +358,11 @@ Use case ends
      
      Use case resumes from step 2.
 
- * 3a.  RHRH detects an invalid class entered. 
-	   * 3a1. RHRH requests for the class to be corrected.
-	   * 3a2. User enters the class again.
+ * 3a. RHRH detects an invalid class entered. 
+   * 3a1. RHRH requests for the class to be corrected.
+   * 3a2. User enters the class again.
 	
-    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
 	
  
     Use case resumes from step 4.
@@ -412,11 +412,11 @@ Use case ends
      
      Use case resumes from step 2.
 
- * 3a.  RHRH detects an invalid class entered. 
-	   * 3a1. RHRH requests for the class to be corrected.
-	   * 3a2. User enters the class again.
+ * 3a. RHRH detects an invalid class entered. 
+   * 3a1. RHRH requests for the class to be corrected.
+   * 3a2. User enters the class again.
 	
-    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
 	
  
     Use case resumes from step 4.
@@ -468,15 +468,15 @@ Use case ends
      Use case resumes from step 2.
 
  * 3a.  RHRH detects an invalid class entered. 
-	   * 3a1. RHRH requests for the class to be corrected.
-	   * 3a2. User enters the class again.
+   * 3a1. RHRH requests for the class to be corrected.
+   * 3a2. User enters the class again.
 	
-    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
 	
  
     Use case resumes from step 4.
 
-**Use case (UC4): Search for reservation availability**
+**Use case (UC04): Search for reservation availability**
 
 **MSS**
 
@@ -491,10 +491,12 @@ Use case ends
       
     Use case ends.
 
+
 * 1b. User requests to search for reservation availability at a time.
     * 1b1. RHRH shows the availability for the indicated time today
       
     Use case ends.
+
 
 * 1c. RHRH detects information missing from the command entered.
     * 1c1. RHRH requests for the missing details to be filled in.
