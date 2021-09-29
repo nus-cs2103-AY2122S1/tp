@@ -331,7 +331,7 @@ Project scope
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Experienced Computing Student**: A student that has already completed introductory module in their respective universities.
 
 --------------------------------------------------------------------------------------------------------------------
 
