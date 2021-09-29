@@ -312,30 +312,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RHRH` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case (UC05): Add a reservation**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User keys in reservations details.
+2. RHRH <u>finds the reservation slot based on the date/time entered (UC04)</U>.
+3. RHRH displays all reservation slots on that date/time to users.
+4. User selects the reservation slot.
+5. RHRH requests for confirmation on the selected reservation slot.
+6. User confirms.
+7. Reservation is added.
+
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. RHRH detects an incorrect format command entered.
+    * 1a1. RHRH requests for the format to be corrected.
+    * 1a2. User enters the command again. <br/>
+    
+    Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
 
-  Use case ends.
 
-* 3a. The given index is invalid.
+    Use case resumes from step 2.
+      
 
-    * 3a1. AddressBook shows an error message.
+* 1b. RHRH detects missing details in the command entered.
+    * 1b1. RHRH requests for the missing details to be filled in.
+    * 1b2. User enters missing data.
+      
+    Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
 
-      Use case resumes at step 2.
+
+    Use case resumes at step 2.
+
+* 2a. RHRH is unable to find a reservation slot based on the date/time entered.
+    * 2a1. RHRH informs the user that the reservation slot is taken.
+    * 2a2. RHRH prompts user to choose another date/time.
+    * 2a3. User enters new date/time. <br/>
+      
+    Steps 2a1 - 2a2 are repeated until there is a reservation slot available.
+  
+
+    Use case resumes at step 3.
+
+
+
 
 *{More to be added}*
 
