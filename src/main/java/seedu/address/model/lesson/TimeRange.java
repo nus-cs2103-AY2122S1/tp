@@ -16,7 +16,7 @@ public class TimeRange implements Comparable<TimeRange> {
     private final Time end;
 
     /**
-     * Construst a TimeRange object.
+     * Constructs a TimeRange object.
      *
      * @param start Start of the range.
      * @param end End of the range.

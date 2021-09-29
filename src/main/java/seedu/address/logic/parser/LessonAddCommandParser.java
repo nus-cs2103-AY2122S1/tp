@@ -62,10 +62,10 @@ public class LessonAddCommandParser {
          */
         Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
-        TimeRange timeRange = new TimeRange(startTime, endTime);
-        if (!timeRange.isValidTimeRange(startTime, endTime)) {
+        if (!TimeRange.isValidTimeRange(startTime, endTime)) {
             throw new ParseException(TimeRange.MESSAGE_CONSTRAINTS);
         }
+        TimeRange timeRange = new TimeRange(startTime, endTime);
 
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
