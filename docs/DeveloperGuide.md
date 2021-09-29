@@ -255,7 +255,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profiles**:
+**Target user profile**:
 * Gamer who plays competitive games
 * Student in a University
 * Busy (can only play at specific times based on a weekly schedule)
