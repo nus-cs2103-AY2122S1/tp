@@ -1,59 +1,49 @@
 ---
-layout: page
-title: About Us
+layout: page title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We believe in providing **simplicity** in everything we do here. If you're the kind of person who likes to organize your
+communication-based data easily with just a keyboard, you will enjoy UNIon. By re-purposing Unix commands, we ensure
+that you can get up to speed quickly and be productive with your data.
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+# Our Team
 
-## Project team
+## Lee Hur Sebastian
 
-### John Doe
+### Role: Team Lead
 
-<img src="images/johndoe.png" width="200px">
+![Sebastian](images/sebbycake.png) <br/>
+[![Sebastian LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/sebastian-lee-329b45198/) &nbsp;
+[![Sebastian GitHub](images/github.png)](https://github.com/sebbycake)
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+## Lye Wen Jun
 
-* Role: Project Advisor
+### Role: Code Quality
 
-### Jane Doe
+![Wen Jun](images/xlzior.png) <br/>
+[![Wen Jun LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/wen-jun-lye/) &nbsp;
+[![Wen Jun GitHub](images/github.png)](https://github.com/xlzior/)
 
-<img src="images/johndoe.png" width="200px">
+## Lee Wei, David
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Role: Documentation
 
-* Role: Team Lead
-* Responsibilities: UI
+![David](images/itsyme.png) <br/>
+[![David LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/david-lee-4a147a1b1/) &nbsp;
+[![David GitHub](images/github.png)](https://github.com/itsyme)
 
-### Johnny Doe
+## Rehman Sajid
 
-<img src="images/johndoe.png" width="200px">
+### Role: Integration
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+![Rehhmann](images/rehmmann.png) <br/>
+[![Rehhmann LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/rehman-sajid/) &nbsp;
+[![Rehhmann GitHub](images/github.png)](https://github.com/rehmmann/)
 
-* Role: Developer
-* Responsibilities: Data
+## Ching Jia Rong
 
-### Jean Doe
+### Role: Testing
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+![Jia Rong](images/jiarong15.png) <br/>
+[![Jia Rong LinkedIn](images/linkedin.png)](https://www.linkedin.com/in/jiarong15//) &nbsp;
+[![Jia Rong GitHub](images/github.png)](https://github.com/jiarong15)
