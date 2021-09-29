@@ -58,13 +58,13 @@ Adds a person to the address book.
 
 Format:
 
-```lua
+```
 add n/<NAME> te/<TELEGRAM> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
 
-```lua
+```
 add n/John Doe te/@johndoe123 p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 ```
 
@@ -76,13 +76,13 @@ Deletes the specified person from the address book.
 
 Format:
 
-```bash
+```
 delete <INDEX>
 ```
 
 Example:
 
-```bash
+```
 delete 7
 ```
 
@@ -94,13 +94,13 @@ Edits an existing person in the address book.
 
 Format: 
 
-```bash
+```
 edit <INDEX> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
 
-```bash
+```
 edit 1 n/John t/TA
 ```
 
@@ -112,25 +112,25 @@ Finds an existing contact using the given string or tag.
 
 Format 1: 
 
-```bash
+```
 find <STRING>
 ```
 
 Example 1:
 
-```bash
+```
 find John
 ```
 
 Format 2: 
 
-```bash
+```
 find t/<TAG>
 ```
 
 Example 2:
 
-```bash
+```
 find friends
 ```
 
@@ -142,13 +142,13 @@ Shows detailed information of a contact. This can be done using the name of the 
 
 Format 1: 
 
-```lua
+```
 show <NAME>
 ```
 
 Example 1:
 
-```bash
+```
 show John Doe
 ```
 
@@ -156,13 +156,13 @@ If the exact name is not given, the show function will act similar to find and t
 
 Format 2: 
 
-```lua
+```
 show <INDEX>
 ```
 
 Example 2:
 
-```bash
+```
 show 4
 ```
 
@@ -174,13 +174,13 @@ Imports contacts from the specified JSON file.
 
 Format:
 
-```bash
+```
 import filename.JSON
 ```
 
 Example:
 
-```bash
+```
 import CS2103T.JSON
 ```
 
@@ -192,13 +192,13 @@ Exports contacts to the specified JSON file.
 
 Format
 
-```bash
+```
 export filename.JSON
 ```
 
 Example:
 
-```bash
+```
 export Friends.JSON
 ```
 
