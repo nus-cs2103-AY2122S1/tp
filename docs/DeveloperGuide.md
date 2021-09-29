@@ -311,16 +311,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SafeFor(H)All app` and the **Actor** is the `Hall admin`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Delete a resident**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Actor requests to list residents
+2.  System shows a list of residents
+3.  Actor requests to delete a specific resident in the list
+4.  System deletes the resident
 
     Use case ends.
 
@@ -332,9 +332,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: UC02 - Remind residents to take FET**
+
+**MSS**
+
+1. Actor filters residents, specifying desired FET due date.
+2. System shows the list of residents filtered.
+3. Actor requests for a list of the email addresses of the residents shown. 
+4. System outputs the list email addresses. 
+5. Actor sends an email to these residents to remind them to take their FET soon.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC03 - View residents involved in an event**
+
+**MSS**
+
+1. Actor navigates to the `events` tab of the application.
+2. Actor requests to view an event.
+3. System shows the list of residents involved in the event and their relevant personal information.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC04 - View any unvaccinated residents involved in an event**
+
+**MSS**
+
+1. Actor <u>views residents involved in an event (UC03)</u>
+2. Actor filters for unvaccinated residents.
+3. System shows the list of unvaccinated residents.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The list is empty.
+
+  Use case ends.
 
 *{More to be added}*
 
