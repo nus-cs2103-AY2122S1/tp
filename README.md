@@ -15,5 +15,5 @@ Socius is an application which serves as a platform for CS2103T students to bett
 
 
 * For the detailed documentation of this project, see
-  the **[Socius Product Website](https://se-education.org/addressbook-level3)**.
+  the **[Socius Product Website](https://ay2122s1-cs2103t-w08-4.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
