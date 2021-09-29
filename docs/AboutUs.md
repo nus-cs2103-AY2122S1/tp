@@ -29,14 +29,15 @@ For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Integration, Code Quality
 * Responsibilities: In charge of `list` feature
 
-### Johnny Doe
+### Taufiq Bin Abdul Rahman
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tau_bar.jpg" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/tau-bar)]
+[[portfolio](team/tau-bar.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Scheduling
+* Responsibilities: In charge of `delete` feature
 
 ### Jean Doe
 
