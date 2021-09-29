@@ -199,7 +199,7 @@ Example:
 
 ```
 corder -n milk  // Cancel order of item named milk
-corder -s 12345  // Cancel order of item with serial no. 12345 
+corder -s 12345  // Cancel order of item with serial no. 12345
 ```
 
 ### End ordering: `eorder` [Coming soon]
