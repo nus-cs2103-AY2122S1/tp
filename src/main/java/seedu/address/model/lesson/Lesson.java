@@ -122,17 +122,18 @@ public abstract class Lesson implements Comparable<Lesson> {
 
         Lesson otherLesson = (Lesson) other;
         return otherLesson.getDate().equals(getDate())
-                && otherLesson.getStartTime().equals(getStartTime())
-                && otherLesson.getEndTime().equals(getEndTime())
-                && otherLesson.getSubject().equals(getSubject())
-                && otherLesson.getHomework().equals(getHomework())
-                && otherLesson.isRecurring() == isRecurring();
+            && otherLesson.getStartTime().equals(getStartTime())
+            && otherLesson.getEndTime().equals(getEndTime())
+            && otherLesson.getSubject().equals(getSubject())
+            && otherLesson.getHomework().equals(getHomework())
+            && otherLesson.getTimeRange().equals(getTimeRange())
+            && otherLesson.isRecurring() == isRecurring();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(date, startTime, endTime, subject, homework);
+        return Objects.hash(date, startTime, endTime, subject, homework, timeRange);
     }
 
     @Override
@@ -142,16 +143,16 @@ public abstract class Lesson implements Comparable<Lesson> {
         builder.append(typeOfLesson)
             .append("\n")
             .append(getDate())
-            .append("\n Start: ")
+            .append("\nStart: ")
             .append(getStartTime())
             .append("    End: ")
             .append(getEndTime())
-            .append("\n Subject: ")
+            .append("\nSubject: ")
             .append(getSubject());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
-            builder.append("\n Homework: ");
+            builder.append("\nHomework: ");
             homework.forEach(builder::append);
         }
         return builder.toString();

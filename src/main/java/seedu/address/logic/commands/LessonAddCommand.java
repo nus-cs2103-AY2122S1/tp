@@ -132,7 +132,7 @@ public class LessonAddCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LessonAddCommand // instanceof handles nulls
-                && index == ((LessonAddCommand) other).index
+                && index.equals(((LessonAddCommand) other).index)
                 && toAdd.equals(((LessonAddCommand) other).toAdd));
     }
 }
