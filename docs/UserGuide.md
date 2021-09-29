@@ -1,14 +1,13 @@
 ---
-layout: page
-title: User Guide
+layout: page title: User Guide
 ---
 
-BogoBogo is a **desktop app for managing inventories, optimized for use via a Command Line Interface** (CLI) 
-while still having the benefits of a Graphical User Interface (GUI). If you can type fast, 
-BogoBogo can get your inventory management tasks done faster than traditional GUI apps.
+BogoBogo is a **desktop app for managing inventories, optimized for use via a Command Line Interface** (CLI)
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BogoBogo can get your
+inventory management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+* Table of Contents {:toc}
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -19,21 +18,24 @@ BogoBogo can get your inventory management tasks done faster than traditional GU
 
 3. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
+   contains some sample data.<br>
 
 **TODO: Repalce sample ui image when ui is done**
 ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
    Some example commands you can try:
 
-   - **`add`**`apple -sp 8.5 -s A012345 -c 1000 -cp 5.2` : Adds apple with sales price 8.5, serial number A012345, quantity 1000, and cost price 5.2, into the inventory.
+    - **`add`**`apple -sp 8.5 -s A012345 -c 1000 -cp 5.2` : Adds apple with sales price 8.5, serial number A012345,
+      quantity 1000, and cost price 5.2, into the inventory.
 
-   - **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    - **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   - **`clear`** : Deletes all contacts.
+    - **`clear`** : Deletes all contacts.
 
-   - **`exit`** : Exits the app.
+    - **`exit`** : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -57,10 +59,12 @@ BogoBogo can get your inventory management tasks done faster than traditional GU
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
+  the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -73,7 +77,6 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
 
 ### Adding an item: `add` [Coming soon]
 
@@ -90,12 +93,11 @@ Flag    |  Argument    | Description
 `-cp`   | cost price    | Cost price of the item to add.
 
 Examples:
+
 ```
 add apple -sp 8.5 -s A012345 -c 1000 -cp 5.2
 add banana -sp 7.5 -s A012346 -c 800 -cp 4.8
 ```
-
-
 
 ### Deleting an item : `delete` [coming soon]
 
@@ -115,12 +117,12 @@ Flag    |  Argument      | Description
 - The `count` **must be a positive integer**.
 
 Examples:
+
 ```
 delete -n milk -c 10  // delete by name
 delete -s A01234 -c 10  // delete by serial number
 delete -n milk -s A01111 -c 12  // delete 12 milks
 ```
-
 
 ### Get quantity of the item: `count` [Coming soon]
 
@@ -135,29 +137,34 @@ Flag    |  Argument      | Description
 `-c`    | count          | Quantity of the item to delete.
 
 Examples:
+
 ```
 count milk  // count by name
 count A01111  // count by serial number
 ```
 
-
 ### Manage orders
-Remove items from the inventory by logging in an order. To enter order logging mode, use `sorder`. Exit the mode with `eorder`.
+
+Remove items from the inventory by logging in an order. To enter order logging mode, use `sorder`. Exit the mode
+with `eorder`.
 
 ![mange orders workflow](images/manageOrdersWorkflow.png)
 
 ### Start ordering: `sorder` [Coming soon]
+
 Starts a new list of orders.
 
 Format: `sorder`
 
 Example:
+
 ```
 sorder
 >> Please enter item name and quantity.
 ```
 
 ### Input an item into order: `iorder` [Coming soon]
+
 Add an item into the current list of orders.
 
 Format:
@@ -170,12 +177,14 @@ Flag    |  Argument      | Description
 `-c`    | count          | Quantity of the item to add.
 
 Example:
+
 ```
 iorder -n milk -c 5  // Input order of item named milk
 iorder -s 12345 -c 5  // Input order of item with serial no.12345
 ```
 
 ### Cancel an item from order: `corder` [Coming soon]
+
 Cancels the specified order from the current list of orders.
 
 Format:
@@ -187,23 +196,24 @@ Flag    |  Argument      | Description
 `-s`    | serial number  | Serial number of the item to add.
 
 Example:
+
 ```
 corder -n milk  // Cancel order of item named milk
 corder -s 12345  // Cancel order of item with serial no. 12345 
 ```
 
 ### End ordering: `eorder` [Coming soon]
+
 Saves the current list of orders
 
 Format: `eorder`
 
 Example:
+
 ```
 eorder
 >> Order is placed!
 ```
-
-
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -213,8 +223,8 @@ _Details coming soon ..._
 
 ## FAQ [Coming soon]
 
-**Q**: 
-**A**: 
+**Q**:
+**A**:
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -222,7 +232,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add {name} -sp {sales price} -s {serial number} -c {count} -cp {cost price}` <br> e.g., `add apple -sp 8.5 -s A012345 -c 1000 -cp 5.2`
+**
+Add** | `add {name} -sp {sales price} -s {serial number} -c {count} -cp {cost price}` <br> e.g., `add apple -sp 8.5 -s A012345 -c 1000 -cp 5.2`
 **Delete** | `delete [-n {name} \| -s {serial number}] -c {count}` <br> e.g., `delete -n milk -c 10`
 **Count** | `count [-n {name} \| -s {serial number}]` <br> e.g., `count milk`
 **Start ordering** | `sorder`
