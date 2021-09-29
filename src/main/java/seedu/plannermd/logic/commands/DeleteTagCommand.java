@@ -1,6 +1,7 @@
 package seedu.plannermd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -9,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
@@ -17,13 +17,13 @@ import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.tag.Tag;
 
 /**
- * Adds a tag to an existing person in the plannermd.
+ * Deletes a tag from an existing person in the plannermd.
  */
-public class TagCommand extends Command {
+public class DeleteTagCommand extends Command {
 
-    public static final String COMMAND_WORD = "tag";
+    public static final String COMMAND_WORD = "tag -d";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tag from the person identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: "
             + PREFIX_ID + "ID (must be a positive integer) "
@@ -31,17 +31,17 @@ public class TagCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "1 "
             + PREFIX_TAG + "healthy";
 
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Patient: %1$s";
-    public static final String MESSAGE_NOT_ADDED = "A tag must be provided.";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag from Patient: %1$s";
+    public static final String MESSAGE_INVALID_TAG = "The tag does not exist.";
 
     private final Index index;
     private final Tag tag;
 
     /**
-     * @param index of the person in the filtered person list to be added a tag
-     * @param tag   the tag to be added
+     * @param index of the person in the filtered person list for deleting a tag
+     * @param tag   the tag to be deleted
      */
-    public TagCommand(Index index, Tag tag) {
+    public DeleteTagCommand(Index index, Tag tag) {
         requireNonNull(index);
         requireNonNull(tag);
 
@@ -54,21 +54,26 @@ public class TagCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(personToEdit.getTags());
-        newTags.add(tag);
+        Set<Tag> existingTags = new HashSet<>(personToEdit.getTags());
+
+        if (!existingTags.contains(tag)) {
+            throw new CommandException(MESSAGE_INVALID_TAG);
+        }
+
+        existingTags.remove(tag);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), newTags
+                personToEdit.getAddress(), existingTags
         );
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPerson));
     }
 
     @Override
@@ -79,12 +84,12 @@ public class TagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagCommand)) {
+        if (!(other instanceof DeleteTagCommand)) {
             return false;
         }
 
         // state check
-        TagCommand c = (TagCommand) other;
+        DeleteTagCommand c = (DeleteTagCommand) other;
         return index.equals(c.index)
                 && tag.equals(c.tag);
     }
