@@ -190,7 +190,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `ls -contacts`
 **Help** | `help`
-**View groups** | `ls -groups`
-**Create group** | `mkdir GROUP_NAME` e.g. `mkdir CS2103`
-**Delete group** | `rmdir GROUP_NAME` e.g. `rmdir CS1010`
-**Add contact to group** | `echo INDEX >> GROUP_NAME` e.g. `echo 3 >> CS2103`
+**View folders** | `ls -folders`
+**Create folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
+**Delete folder** | `rmdir FOLDER_NAME` e.g. `rmdir CS1010`
+**Add contact to folder** | `echo INDEX >> FOLDER_NAME` e.g. `echo 3 >> CS2103`
