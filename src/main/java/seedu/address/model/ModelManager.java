@@ -11,9 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddClassCommand;
-import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.person.Person;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,9 +22,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private  FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
     private final FilteredList<TuitionClass> filterdTuition;
-
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -175,25 +173,27 @@ public class ModelManager implements Model {
         logger.info(filteredPersons.toString());
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        // short circuit if same object
-//        if (obj == this) {
-//            return true;
-//        }
-//
-//        // instanceof handles nulls
-//        if (!(obj instanceof ModelManager)) {
-//            return false;
-//        }
-//
-//        // state check
-//        ModelManager other = (ModelManager) obj;
-//        return addressBook.equals(other.addressBook)
-//                && userPrefs.equals(other.userPrefs)
-//                && filteredPersons.equals(other.filteredPersons);
-//    }
+    /*
 
+    @Override
+    public boolean equals(Object obj) {
+    // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(obj instanceof ModelManager)) {
+            return false;
+        }
+
+       // state check
+       ModelManager other = (ModelManager) obj;
+       return addressBook.equals(other.addressBook)
+                && userPrefs.equals(other.userPrefs)
+                && filteredPersons.equals(other.filteredPersons);
+    }
+
+    */
 
     @Override
     public boolean hasTuition(TuitionClass tuitionClass) {

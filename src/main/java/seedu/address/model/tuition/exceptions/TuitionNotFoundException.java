@@ -1,4 +1,4 @@
-package seedu.address.model.Tuition.exceptions;
+package seedu.address.model.tuition.exceptions;
 
 public class TuitionNotFoundException extends RuntimeException{
 }

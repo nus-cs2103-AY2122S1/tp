@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.Tuition.TuitionClass;
+import seedu.address.model.tuition.TuitionClass;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;

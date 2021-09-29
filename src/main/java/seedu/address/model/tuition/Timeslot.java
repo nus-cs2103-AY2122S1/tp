@@ -1,4 +1,4 @@
-package seedu.address.model.Tuition;
+package seedu.address.model.tuition;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,6 +8,11 @@ import static java.util.Objects.requireNonNull;
 public class Timeslot {
     public final String time;
 
+    /**
+     * Constructor for time slot.
+     *
+     * @param time
+     */
     public Timeslot(String time) {
         requireNonNull(time);
         this.time = time;
