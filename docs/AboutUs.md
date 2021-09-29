@@ -15,7 +15,7 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 <img src="images/nguyiyang.png" width="200px">
 
 [[github](https://github.com/nguyiyang)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/nguyiyang.md)]
 
 * Role: Team Lead
 * Responsibilities: Integration
@@ -51,7 +51,7 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 
 ### Vishnu Sundaresan
 
-<img src="images/vishnusundaresan.png" width="200px">
+<img src="images/juliussneezer04.png" width="200px">
 
 [[github](http://github.com/juliussneezer04)]
 [[portfolio](team/vishnusundaresan.md)]
