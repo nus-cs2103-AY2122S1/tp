@@ -47,5 +47,4 @@ public class TuitionListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

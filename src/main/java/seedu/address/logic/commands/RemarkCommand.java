@@ -96,6 +96,4 @@ public class RemarkCommand extends Command {
         return index.equals(e.index)
                 && remark.equals(e.remark);
     }
-
-
 }
