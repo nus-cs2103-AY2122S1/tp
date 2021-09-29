@@ -47,10 +47,10 @@ public interface Model {
     /**
      * Replaces modTracker data with the data in {@code modTracker}.
      */
-    void setModTracker(ReadOnlyModTracker modTracker);
+    void setModuleTracker(ReadOnlyModuleTracker moduleTracker);
 
-    /** Returns the ModTracker */
-    ReadOnlyModTracker getModTracker();
+    /** Returns the ModuleTracker */
+    ReadOnlyModuleTracker getModuleTracker();
 
     /**
      * Returns true if a module with the same identity as {@code module} exists in the modTracker.
