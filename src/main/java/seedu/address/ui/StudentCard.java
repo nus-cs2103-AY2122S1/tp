@@ -32,8 +32,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
     private Label groupName;
@@ -48,7 +46,6 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         groupName.setText(student.getGroupName().name);
         phone.setText(student.getPhone().value);
-        address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
     }
 

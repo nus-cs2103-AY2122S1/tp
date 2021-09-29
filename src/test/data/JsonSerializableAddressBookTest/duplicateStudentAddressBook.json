@@ -3,13 +3,11 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "groupName": "CS2103T",
-    "address": "123, Jurong West Ave 6, #08-111"
+    "groupName": "CS2103T"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "groupName": "CS2103T",
-    "address": "4th street"
+    "groupName": "CS2103T"
   } ]
 }

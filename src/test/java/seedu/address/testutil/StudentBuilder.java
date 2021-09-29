@@ -43,7 +43,6 @@ public class StudentBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         groupName = studentToCopy.getGroupName();
-        address = studentToCopy.getAddress();
     }
 
     /**
@@ -87,7 +86,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, groupName, address);
+        return new Student(name, phone, email, groupName);
     }
 
 }

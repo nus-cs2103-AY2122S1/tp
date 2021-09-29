@@ -20,18 +20,16 @@ public class Student {
 
     // Data fields
     private final Group group;
-    private final Address address;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, GroupName groupName, Address address) {
-        requireAllNonNull(name, phone, email, address);
+    public Student(Name name, Phone phone, Email email, GroupName groupName) {
+        requireAllNonNull(name, phone, email, groupName);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.group = new Group(groupName);
-        this.address = address;
     }
 
     public Name getName() {
@@ -48,10 +46,6 @@ public class Student {
 
     public GroupName getGroupName() {
         return group.getGroupName();
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -85,14 +79,13 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getGroupName().equals(getGroupName())
-                && otherStudent.getAddress().equals(getAddress());
+                && otherStudent.getGroupName().equals(getGroupName());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, group, address);
+        return Objects.hash(name, phone, email, group);
     }
 
     @Override
@@ -104,9 +97,7 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; GroupName")
-                .append(getGroupName())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getGroupName());
 
         return builder.toString();
     }
