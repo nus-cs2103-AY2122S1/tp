@@ -423,7 +423,7 @@ MSS
     
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 2a. The list is empty.
   * Use case ends.
@@ -451,8 +451,10 @@ MSS
 Extensions
 
 * 1a. CohortConnect cannot find the JSON file.
-  * 1a1. CohortConnect shows an error.
-  * Use case ends.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect for new filename.
+  * 1a3. User enters new filename.
+  * Steps 1a1-1a3 are repeated until the filename received is valid.
 
 * 2a. User decides to cancel the import.
   * Use case ends.
@@ -469,8 +471,10 @@ MSS
 Extensions
 
 * 1a. File name already exists.
-  * 1a1. CohortConnect shows an error.
-  * Use case ends.
+  * 1a1. CohortConnect shows an error message.
+  * 1a2. CohortConnect for new filename.
+  * 1a3. User enters new filename.
+  * Steps 1a1-1a3 are repeated until the filename received is valid.
 
 ### Non-Functional Requirements
 
