@@ -21,19 +21,21 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Attendance attendance;
+    private final Participation participation;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
+        this.attendance = new Attendance();
+        this.participation = new Participation();
     }
 
     public Name getName() {
@@ -48,8 +50,13 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public Participation getParticipation() {
+        return participation;
     }
 
     /**
@@ -91,14 +98,14 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getAttendance().equals(getAttendance());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags, attendance);
     }
 
     @Override
@@ -109,8 +116,10 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Attendance: ")
+                .append(getAttendance())
+                .append("; Participation: ")
+                .append(getParticipation());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
