@@ -22,6 +22,10 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    public static final String USER_TIP = "Try deleting a person using: "
+            + COMMAND_WORD + " INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
+
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
