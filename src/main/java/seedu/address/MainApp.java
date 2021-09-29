@@ -72,7 +72,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyModuleTracker> modTrackerOptional;
         ReadOnlyModuleTracker initialData;
         try {
-            modTrackerOptional = storage.readModTracker();
+            modTrackerOptional = storage.readModuleTracker();
             if (!modTrackerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ModuleTracker");
             }
