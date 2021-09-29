@@ -37,7 +37,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/NoraYUuu)]
 
 * Role: Code Quality
-* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+* Responsibilities: Looks after code quality and ensures adherence to coding standards.
 
 ### Adam Ho
 
