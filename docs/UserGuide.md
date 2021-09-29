@@ -165,29 +165,29 @@ Examples:
 
 ![result for 'list --game'](images/UiListGame.png)
 
-### Clearing all entries : `clear`
+### Getting a single friend's complete data
 
-Clears all entries from the friends list.
+Takes a look at a particular friend's complete data by searching their `FRIEND_ID`. A friend's complete data includes:
+* List of games the friend plays
+* In-game username for each game
 
-Format: `clear`
+Format: `get [--friend] FRIEND_ID`
+* The `FRIEND_ID` must currently exist in the database
 
-### Exiting the program : `exit`
+Examples:
+* `get --friend Draco` Gets the complete data for friend "Draco", which includes the list of games he plays and his username for each game
+* `get kev` Gets the complete data for friend "kev"
 
-Exits the program.
+### Getting a single game's complete data
 
-Format: `exit`
+Gets all the relevant information for a game that was previously added, this includes:
+* All the friends (represented by their `FRIEND_ID`) that play the game
 
-### Saving the data
+Format: `get --game GAME_NAME`
+* The `GAME_NAME` must currently exist in the database
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
+Examples:
+* `get --game CSGO` Gets all the relevant information for the game "CSGO". This includes all the friends in your database that play the game
 
 --------------------------------------------------------------------------------------------------------------------
 
