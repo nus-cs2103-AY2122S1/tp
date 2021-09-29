@@ -18,26 +18,26 @@ import seedu.address.commons.core.LogsCenter;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final ModTracker modTracker;
+    private final ModuleTracker moduleTracker;
     private final UserPrefs userPrefs;
     private final FilteredList<seedu.address.model.module.Module> filteredModules;
 
     /**
-     * Initializes a ModelManager with the given modTracker and userPrefs.
+     * Initializes a ModelManager with the given moduleTracker and userPrefs.
      */
-    public ModelManager(ReadOnlyModTracker modTracker, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyModuleTracker moduleTracker, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(modTracker, userPrefs);
+        requireAllNonNull(moduleTracker, userPrefs);
 
-        logger.fine("Initializing with mod tracker: " + modTracker + " and user prefs " + userPrefs);
+        logger.fine("Initializing with mod tracker: " + moduleTracker + " and user prefs " + userPrefs);
 
-        this.modTracker = new ModTracker(modTracker);
+        this.moduleTracker = new ModuleTracker(moduleTracker);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredModules = new FilteredList<>(this.modTracker.getModuleList());
+        filteredModules = new FilteredList<>(this.moduleTracker.getModuleList());
     }
 
     public ModelManager() {
-        this(new ModTracker(), new UserPrefs());
+        this(new ModuleTracker(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,32 +75,32 @@ public class ModelManager implements Model {
         userPrefs.setModTrackerFilePath(modTrackerFilePath);
     }
 
-    //=========== ModTracker ================================================================================
+    //=========== ModuleTracker ================================================================================
 
     @Override
-    public void setModTracker(ReadOnlyModTracker modTracker) {
-        this.modTracker.resetData(modTracker);
+    public void setModuleTracker(ReadOnlyModuleTracker moduleTracker) {
+        this.moduleTracker.resetData(moduleTracker);
     }
 
     @Override
-    public ReadOnlyModTracker getModTracker() {
-        return modTracker;
+    public ReadOnlyModuleTracker getModuleTracker() {
+        return moduleTracker;
     }
 
     @Override
     public boolean hasModule(seedu.address.model.module.Module module) {
         requireNonNull(module);
-        return modTracker.hasModule(module);
+        return moduleTracker.hasModule(module);
     }
 
     @Override
     public void deleteModule(seedu.address.model.module.Module target) {
-        modTracker.removeModule(target);
+        moduleTracker.removeModule(target);
     }
 
     @Override
     public void addModule(seedu.address.model.module.Module module) {
-        modTracker.addModule(module);
+        moduleTracker.addModule(module);
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 
@@ -108,7 +108,7 @@ public class ModelManager implements Model {
     public void setModule(seedu.address.model.module.Module target, seedu.address.model.module.Module editedModule) {
         requireAllNonNull(target, editedModule);
 
-        modTracker.setModule(target, editedModule);
+        moduleTracker.setModule(target, editedModule);
     }
 
     //=========== Filtered Module List Accessors =============================================================
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return modTracker.equals(other.modTracker)
+        return moduleTracker.equals(other.moduleTracker)
                 && userPrefs.equals(other.userPrefs)
                 && filteredModules.equals(other.filteredModules);
     }

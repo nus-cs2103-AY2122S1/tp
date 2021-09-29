@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ModuleTracker;
 import seedu.address.model.ReadOnlyModuleTracker;
-import seedu.address.model.person.Module;
+import seedu.address.model.module.Module;
 
 /**
  * An Immutable ModuleTracker that is serializable to JSON format.

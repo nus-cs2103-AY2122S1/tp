@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Module;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.Mc;
+import seedu.address.model.module.Code;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.Title;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +27,7 @@ class JsonAdaptedModule {
     private final String code;
     private final String title;
     private final String description;
-    private final String mc;
+    private final int mc;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -35,7 +35,7 @@ class JsonAdaptedModule {
      */
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("code") String code, @JsonProperty("title") String title,
-                             @JsonProperty("description") String description, @JsonProperty("mc") String mc,
+                             @JsonProperty("description") String description, @JsonProperty("mc") int mc,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.code = code;
         this.title = title;
@@ -50,10 +50,10 @@ class JsonAdaptedModule {
      * Converts a given {@code Module} into this class for Jackson use.
      */
     public JsonAdaptedModule(Module source) {
-        code = source.getName().fullName;
-        title = source.getPhone().value;
-        description = source.getEmail().value;
-        mc = source.getAddress().value;
+        code = source.getCode().value;
+        title = source.getTitle().value;
+        description = source.getDescription().value;
+        mc = source.getMc().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -65,45 +65,45 @@ class JsonAdaptedModule {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Module toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> moduleTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            moduleTags.add(tag.toModelType());
         }
 
         if (code == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Code.class.getSimpleName()));
         }
-        if (!Name.isValidName(code)) {
+        if (!Code.isValidCode(code)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(code);
+        final Code modelCode = new Code(code);
 
         if (title == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Title.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(title)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Title.isValidTitle(title)) {
+            throw new IllegalValueException(Title.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(title);
+        final Title modelTitle = new Title(title);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(description)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(description);
+        final Description modelDescription = new Description(description);
 
-        if (mc == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+//        if (mc == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+//        }
+        if (!Mc.isValidMc(mc)) {
+            throw new IllegalValueException(Mc.MESSAGE_CONSTRAINTS);
         }
-        if (!Address.isValidAddress(mc)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(mc);
+        final Mc modelMc = new Mc(mc);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Module(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(moduleTags);
+        return new Module(modelCode, modelTitle, modelDescription, modelMc, modelTags);
     }
 
 }

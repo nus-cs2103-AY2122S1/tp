@@ -69,20 +69,20 @@ public class MainApp extends Application {
      * or an empty mod tracker will be used instead if errors occur when reading {@code storage}'s mod tracker.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyModTracker> modTrackerOptional;
-        ReadOnlyModTracker initialData;
+        Optional<ReadOnlyModuleTracker> modTrackerOptional;
+        ReadOnlyModuleTracker initialData;
         try {
             modTrackerOptional = storage.readModTracker();
             if (!modTrackerOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample ModTracker");
+                logger.info("Data file not found. Will be starting with a sample ModuleTracker");
             }
             initialData = modTrackerOptional.orElseGet(SampleDataUtil::getSampleModTracker);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty ModTracker");
-            initialData = new ModTracker();
+            logger.warning("Data file not in the correct format. Will be starting with an empty ModuleTracker");
+            initialData = new ModuleTracker();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty ModTracker");
-            initialData = new ModTracker();
+            logger.warning("Problem while reading from the file. Will be starting with an empty ModuleTracker");
+            initialData = new ModuleTracker();
         }
 
         return new ModelManager(initialData, userPrefs);

@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.ModTracker;
-import seedu.address.model.ReadOnlyModTracker;
+import seedu.address.model.ModuleTracker;
+import seedu.address.model.ReadOnlyModuleTracker;
 import seedu.address.model.module.Code;
 import seedu.address.model.module.Description;
 import seedu.address.model.module.Mc;
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyModTracker getSampleModTracker() {
-        ModTracker sampleMt = new ModTracker();
+    public static ReadOnlyModuleTracker getSampleModTracker() {
+        ModuleTracker sampleMt = new ModuleTracker();
         for (Module sampleModule : getSampleModules()) {
             sampleMt.addModule(sampleModule);
         }
