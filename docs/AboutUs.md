@@ -11,50 +11,50 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 ### Chen Hsiao Ting
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/hsiaotingluv.png" width="200px">
 
 [[github](https://github.com/hsiaotingluv)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chenhsiaoting.md)]
 
 * Role: Project Advisor
 * Responsibilities: Project Advisor
 
 ### Chan Choon Yong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/choonyongchan.png" width="200px">
 
 [[github](https://github.com/choonyongchan)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/chanchoonyong.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
 ### Kevin Nathanael Mingtarja
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kevinmingtarja.png" width="200px">
 
 [[github](https://github.com/kevinmingtarja)] 
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/kevinnathanaelmingtarja.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
 ### Lim Boon Kee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bklimey.png" width="200px">
 
 [[github](https://github.com/bklimey)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/limboonkee.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
 ### Nathan Wong Hung Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/e0543978.png" width="200px">
 
 [[github](https://github.com/e0543978)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/nathanwonghungrui.md)]
 
 * Role: Developer
 * Responsibilities: UI
