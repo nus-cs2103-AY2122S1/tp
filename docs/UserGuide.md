@@ -78,7 +78,7 @@ Displays a read-only weekly schedule.
 
 Format: `schedule`
 
-### Adding a Student: `add`
+### Adding a student: `add`
 
 Adds a student to the tuition address book.
 
