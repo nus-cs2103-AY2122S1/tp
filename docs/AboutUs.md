@@ -8,15 +8,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### John Doe
+### Khor Ethan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/squeakysquak.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/squeakysquak)]
+[[portfolio](team/ethan.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Scheduling & Tracking
 
 ### Lau Teng Hon
 
@@ -50,7 +50,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Calvin Tan
 
-<img src="images/calvintan.png" width="200px">
+<img src="images/cyn7hius.png" width="200px">
 
 [[github](https://github.com/Cyn7hius)]
 [[portfolio](team/johndoe.md)]
