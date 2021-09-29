@@ -25,7 +25,7 @@ You can reach us at the email `vishnu04@comp.nus.edu.sg`
 <img src="images/rushilramesh.png" width="200px">
 
 [[github](http://github.com/rushilramesh)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/rushilramesh.md)]
 
 * Role: Developer
 * Responsibilities: Testing + Model
