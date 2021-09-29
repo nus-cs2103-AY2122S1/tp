@@ -12,7 +12,6 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
