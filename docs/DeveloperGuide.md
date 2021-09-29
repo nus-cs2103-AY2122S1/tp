@@ -272,14 +272,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | general user                               | add a new applicant under a position      | store his information within the system                                |
+| `* * *`  | general user                               | add new job positions | Add applicants to these positions.
+| `* * *`  | general user                               | delete existing job positions | Remove irrelevant, out-of-date jobs.
+| `* * *`  | general user                               | add a new applicant under a position      | Store his information within the system                                |
 | `* * *`  | general user                               | delete an applicant from under a position | Remove applicants that are no longer related to this position          |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a new position**
+
+**MSS**
+
+1. User requests to add a new position, with necessary details
+2. MrTechRecruiter adds the new position and shows a success message
+
+   Use case ends.
+
+* 1a. The format is invalid.
+    * 1a1. MrTechRecruiter shows an error message.
+    
+    Use case ends.
+    
+
+**Use case: Delete a new position**
+
+**MSS**
+
+1. User requests to list positions
+2. MrTechRecruiter shows a list of positions
+3. User requests to delete a specific position in the list
+4. MrTechRecruiter deletes the position
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    Use case ends.
+* 3a The given name of the position is invalid.
+  * 3a1. MrTechRecruiter shows an error message.
+    
+  * Use case resumes at step 2.
+
 
 **Use case: Add a new applicant**
 
@@ -293,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The format is invalid.
-    * 3a1. MrTechRecruiter shows an error message.
+    * 1a1. MrTechRecruiter shows an error message.
 
   Use case resumes at step 1.
 
@@ -324,9 +363,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 applications and 100 positions without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The locally stored information should be password-protected.  
 
 *{More to be added}*
 
@@ -388,6 +428,8 @@ testers are expected to do more *exploratory* testing.
          Expected: John Doe, with all the relevant details that were passed as parameters is added to MrTechRecruiter.
 
 1. _{ more test cases …​ }_
+
+
 
 ### Saving data
 
