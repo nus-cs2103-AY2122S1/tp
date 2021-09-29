@@ -213,6 +213,8 @@ Action | Format, Examples
 **Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
 **List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`
 **List Games** | `list --game [KEYWORD]`<br> e.g., `list --game`, `list --game Valorant`
+**Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`
+**Get game** | `get --game GAME_NAME`<br> e.g., `get --game Valorant`
 **Clear** | `clear`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
