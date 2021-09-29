@@ -352,6 +352,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 9.  New users should be able to navigate and use the program effectively.
 10.  Software should not exceed **100MB**.
 11.  Documents should not exceed **15MB** per file.
+12.  Developer Guide and User Guide should be *PDF-friendly*.
 
 *{More to be added}*
 
