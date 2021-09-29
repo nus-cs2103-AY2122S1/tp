@@ -35,13 +35,15 @@ public class TimeRangeTest {
     }
 
     @Test
-    public void isClashing() {
+    public void isClashing_timeRange() {
         TimeRange timeRange = new TimeRange(new Time("09:00"), new Time("12:00"));
+        TimeRange clashingTimeRange = new TimeRange(new Time("09:00"), new Time("10:00"));
+        TimeRange nonClashingTimeRange = new TimeRange(new Time("13:00"), new Time("15:00"));
 
-        // time outside range; not clashing
-        assertFalse(timeRange.isClashing(new Time("20:00")));
+        // time ranges not clashing
+        assertFalse(timeRange.isClashing(nonClashingTimeRange));
 
-        // time within range; clashing
-        assertTrue(timeRange.isClashing(new Time("10:00")));
+        // time ranges clashing
+        assertTrue(timeRange.isClashing(clashingTimeRange));
     }
 }

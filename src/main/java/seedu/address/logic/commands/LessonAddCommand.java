@@ -117,7 +117,7 @@ public class LessonAddCommand extends Command {
             .filter(lesson -> lesson.getDate().equals(toAdd.getDate()));
 
         boolean isClashingLesson = lessonsOnSameDate
-            .anyMatch(lesson -> lesson.getTimeRange().compareTo(toAdd.getTimeRange()) == 0);
+            .anyMatch(lesson -> lesson.getTimeRange().isClashing(toAdd.getTimeRange()));
 
         if (isClashingLesson) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
