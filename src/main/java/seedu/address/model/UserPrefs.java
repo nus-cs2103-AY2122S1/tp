@@ -9,23 +9,21 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.JsonUtil;
 
 /**
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final Logger LOGGER = LogsCenter.getLogger(UserPrefs.class);
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private static final Logger logger = LogsCenter.getLogger(UserPrefs.class);
-
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
     public UserPrefs() {
-        logger.info("UserPrefs---Not--Reset");
+        LOGGER.info("UserPrefs---Not--Reset");
 
     }
 
@@ -34,7 +32,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
-        logger.info("UserPrefs---Reset");
+        LOGGER.info("UserPrefs---Reset");
         resetData(userPrefs);
     }
 

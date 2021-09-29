@@ -9,15 +9,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Tuition.ClassLimit;
-import seedu.address.model.Tuition.ClassName;
-import seedu.address.model.Tuition.Counter;
-import seedu.address.model.Tuition.Timeslot;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.ClassLimit;
+import seedu.address.model.tuition.ClassName;
+import seedu.address.model.tuition.Counter;
+import seedu.address.model.tuition.Timeslot;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

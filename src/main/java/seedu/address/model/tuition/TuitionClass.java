@@ -1,9 +1,8 @@
-package seedu.address.model.Tuition;
-
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+package seedu.address.model.tuition;
 
 import java.util.Objects;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents a tuition class in the book
@@ -15,6 +14,15 @@ public class TuitionClass {
     private final Timeslot timeslot;
     private final Student student;
 
+    /**
+     * Constructor for Tuition Class.
+     *
+     * @param name
+     * @param limit
+     * @param counter
+     * @param timeslot
+     * @param student
+     */
     public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, Student student) {
         this.name = name;
         this.limit = limit;

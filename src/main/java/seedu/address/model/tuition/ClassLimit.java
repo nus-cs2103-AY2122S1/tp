@@ -1,4 +1,4 @@
-package seedu.address.model.Tuition;
+package seedu.address.model.tuition;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,6 +8,11 @@ import static java.util.Objects.requireNonNull;
 public class ClassLimit {
     public final int limit;
 
+    /**
+     * Constructor for class limit.
+     *
+     * @param limit
+     */
     public ClassLimit(int limit) {
         requireNonNull(limit);
         this.limit = limit;

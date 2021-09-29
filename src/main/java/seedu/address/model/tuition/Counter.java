@@ -1,4 +1,4 @@
-package seedu.address.model.Tuition;
+package seedu.address.model.tuition;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,6 +8,11 @@ import static java.util.Objects.requireNonNull;
 public class Counter {
     public final int counter;
 
+    /**
+     * Constructor for counter.
+     *
+     * @param counter
+     */
     public Counter(int counter) {
         requireNonNull(counter);
         this.counter = counter;

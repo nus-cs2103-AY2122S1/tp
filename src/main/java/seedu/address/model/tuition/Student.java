@@ -1,11 +1,11 @@
-package seedu.address.model.Tuition;
+package seedu.address.model.tuition;
 
-import seedu.address.model.person.Classes;
-import seedu.address.model.person.Person;
+import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.person.Classes;
+import seedu.address.model.person.Person;
 
 /**
  * Represents students who are in this tuition class
@@ -13,6 +13,11 @@ import static java.util.Objects.requireNonNull;
 public class Student {
     public final ArrayList<Person> students;
 
+    /**
+     * Constructor for student class.
+     *
+     * @param students
+     */
     public Student(ArrayList<Person> students) {
         requireNonNull(students);
         this.students = students;
@@ -35,9 +40,15 @@ public class Student {
                 && equalClasses(((Student) other).students)); // state check
     }
 
+    /**
+     *
+     * @param cmpStudents
+     * @return
+     */
     public boolean equalClasses(ArrayList<Person> cmpStudents) {
-        if (cmpStudents.size() != this.students.size())
+        if (cmpStudents.size() != this.students.size()) {
             return false;
+        }
         for (int i = 0; i < students.size(); i++) {
             if (!cmpStudents.get(i).equals(this.students.get(i))) {
                 return false;

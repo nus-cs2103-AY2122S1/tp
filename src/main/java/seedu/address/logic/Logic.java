@@ -8,8 +8,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.Tuition.TuitionClass;
 import seedu.address.model.person.Person;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * API of the Logic component
