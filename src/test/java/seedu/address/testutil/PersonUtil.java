@@ -10,7 +10,6 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.participant.Participant;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -20,10 +19,10 @@ import seedu.address.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code participant}.
+     * Returns an add command string for adding the {@code person}.
      */
-    public static String getAddCommand(Participant participant) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(participant);
+    public static String getAddCommand(Person person) {
+        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

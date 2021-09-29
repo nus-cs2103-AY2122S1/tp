@@ -1,5 +1,5 @@
 {
-  "persons": [
+  "participants": [
     {
       "name": "Valid Person",
       "phone": "9482424",
@@ -39,5 +39,6 @@
           "tag": "Spouse"
         }
       ]
-    },
     }
+  ]
+}
