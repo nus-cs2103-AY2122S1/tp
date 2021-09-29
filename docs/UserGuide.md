@@ -108,7 +108,7 @@ Shows a list of all students in the address book.
 
 Format: `list`
 
-### Editing a Student : `edit`
+### Editing a student : `edit`
 
 Edits an existing student in the address book.
 
