@@ -26,35 +26,35 @@ public class Fee {
     public Fee(String fee) {
         requireNonNull(fee);
         checkArgument(isValidFee(fee), MESSAGE_CONSTRAINTS);
-        value = friendlyFee(fee);
+        value = formatFee(fee);
     }
 
     /**
-     * Removes leading zeroes and postfixes second decimal place.
+     * Removes leading zeroes and postfixes decimal places.
      *
      * @param fee A valid fee.
-     * @return The user-friendly fee.
+     * @return The formatted fee.
      */
-    private String friendlyFee(String fee) {
-        String friendlyFee = fee;
-        if (friendlyFee.startsWith("0")) { // remove all leading zeroes
-            friendlyFee = friendlyFee.replaceFirst("^0+", "");
+    private String formatFee(String fee) {
+        String formattedFee = fee;
+        if (formattedFee.startsWith("0")) { // remove all leading zeroes
+            formattedFee = formattedFee.replaceFirst("^0+", "");
         }
-        if (friendlyFee.startsWith(".")) { // prefix missing zero
-            friendlyFee = "0" + friendlyFee;
+        if (formattedFee.startsWith(".")) { // prefix missing zero that was removed
+            formattedFee = "0" + formattedFee;
+        }
+        if (!formattedFee.isEmpty() && !formattedFee.contains(".")) { // postfix missing decimal places
+            formattedFee = formattedFee + ".00";
         }
         int length = fee.length();
         if (length >= 2 && fee.charAt(length - 2) == '.') { // postfix missing zero
-            friendlyFee = friendlyFee + "0";
+            formattedFee = formattedFee + "0";
         }
-        if (friendlyFee.equals("0.00")) { // ensure only one representation of zero
-            friendlyFee = "0";
-        }
-        return fillEmptyString(friendlyFee);
+        return fillEmptyString(formattedFee);
     }
 
     private String fillEmptyString(String fee) {
-        return fee.isEmpty() ? "0" : fee;
+        return fee.isEmpty() ? "0.00" : fee;
     }
 
     /**

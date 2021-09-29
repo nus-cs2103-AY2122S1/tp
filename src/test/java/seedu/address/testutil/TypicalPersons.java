@@ -30,17 +30,20 @@ import seedu.address.model.person.Person;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-
+    // all fields present
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com").withPhone("94351253")
             .withParentPhone("93251352").withParentEmail("papapauline@example.com")
             .withFee("").withRemark("She likes Cheesecake")
             .withTags("friends").build();
+    // all fields present with multiple tags
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
             .withParentPhone("94328765").withParentEmail("ben@example.com")
             .withFee("99.99").withRemark("He likes chocolate ice cream")
             .withTags("owesMoney", "friends").build();
+
+    // some optional fields missing
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withRemark("He likes french fries").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")

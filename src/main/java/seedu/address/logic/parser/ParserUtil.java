@@ -105,11 +105,11 @@ public class ParserUtil {
      */
     public static Fee parseFee(String fee) throws ParseException {
         requireNonNull(fee);
-        String trimmedFee = fee.trim();
-        if (!Fee.isValidFee(trimmedFee)) {
+        String strippedFee = fee.strip();
+        if (!Fee.isValidFee(strippedFee)) {
             throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
         }
-        return new Fee(trimmedFee);
+        return new Fee(strippedFee);
     }
 
     /**
