@@ -16,7 +16,8 @@ You can reach us at the email `e0588244.nus.edu.sg`
 [[github](https://github.com/kaixin-hc)]
 [[portfolio](team/kaixin-hc.md)]
 
-* Role: Team Lead, Project Management, Developer
+* Role: Team Lead, Developer
+* Responsibilities: Project Management
 
 ### Xu Yukun
 
@@ -25,7 +26,7 @@ You can reach us at the email `e0588244.nus.edu.sg`
 [[github](http://github.com/yukun99)]
 [[portfolio](team/yukun99.md)]
 
-* Role: Team Lead, Developer
+* Role: Developer
 * Responsibilities: Code Quality, Java + IntelliJ expert
 
 ### Elton Goh
@@ -50,10 +51,10 @@ You can reach us at the email `e0588244.nus.edu.sg`
 
 ### Jonathan Kwok
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/halphasx.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/HalphasX)]
+[[portfolio](team/halphasx.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables, Integration
