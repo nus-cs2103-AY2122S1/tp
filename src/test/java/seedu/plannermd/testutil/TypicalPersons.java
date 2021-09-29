@@ -65,7 +65,7 @@ public class TypicalPersons {
     public static PlannerMd getTypicalPlannerMd() {
         PlannerMd ab = new PlannerMd();
         for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+            ab.addPatient(person);
         }
         return ab;
     }

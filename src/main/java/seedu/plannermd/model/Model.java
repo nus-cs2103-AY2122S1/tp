@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +53,37 @@ public interface Model {
     ReadOnlyPlannerMd getPlannerMd();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the PlannerMD.
+     * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
      */
-    boolean hasPerson(Person person);
+    boolean hasPatient(Patient patient);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the PlannerMD.
+     * Deletes the given patient.
+     * The patient must exist in the PlannerMD.
      */
-    void deletePerson(Person target);
+    void deletePatient(Patient target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the PlannerMD.
+     * Adds the given patient.
+     * {@code patient} must not already exist in the PlannerMD.
      */
-    void addPerson(Person person);
+    void addPatient(Patient patient);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the PlannerMD.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the PlannerMD.
+     * The person identity of {@code editedPatient} must not be the same as another existing patient in the PlannerMD.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPatient(Patient target, Patient editedPatient);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /**
+     * Returns an unmodifiable view of the filtered patient list
+     */
+    ObservableList<Patient> getFilteredPatientList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPatientList(Predicate<Patient> predicate);
 }

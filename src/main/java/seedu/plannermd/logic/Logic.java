@@ -8,7 +8,7 @@ import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 
 /**
  * API of the Logic component
@@ -30,8 +30,8 @@ public interface Logic {
      */
     ReadOnlyPlannerMd getPlannerMd();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of patients */
+    ObservableList<Patient> getFilteredPatientList();
 
     /**
      * Returns the user prefs' plannermd file path.

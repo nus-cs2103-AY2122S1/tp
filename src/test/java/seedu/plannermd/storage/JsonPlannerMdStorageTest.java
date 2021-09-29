@@ -72,14 +72,14 @@ public class JsonPlannerMdStorageTest {
         assertEquals(original, new PlannerMd(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addPatient(HOON);
+        original.removePatient(ALICE);
         jsonPlannerMdStorage.savePlannerMd(original, filePath);
         readBack = jsonPlannerMdStorage.readPlannerMd(filePath).get();
         assertEquals(original, new PlannerMd(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addPatient(IDA);
         jsonPlannerMdStorage.savePlannerMd(original); // file path not specified
         readBack = jsonPlannerMdStorage.readPlannerMd().get(); // file path not specified
         assertEquals(original, new PlannerMd(readBack));

@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
 import seedu.plannermd.testutil.PersonBuilder;
@@ -28,7 +29,7 @@ public class PlannerMdTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), plannerMd.getPersonList());
+        assertEquals(Collections.emptyList(), plannerMd.getPatientList());
     }
 
     @Test
@@ -56,31 +57,31 @@ public class PlannerMdTest {
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> plannerMd.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> plannerMd.hasPatient(null));
     }
 
     @Test
     public void hasPerson_personNotInPlannerMd_returnsFalse() {
-        assertFalse(plannerMd.hasPerson(ALICE));
+        assertFalse(plannerMd.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personInPlannerMd_returnsTrue() {
-        plannerMd.addPerson(ALICE);
-        assertTrue(plannerMd.hasPerson(ALICE));
+        plannerMd.addPatient(ALICE);
+        assertTrue(plannerMd.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInPlannerMd_returnsTrue() {
-        plannerMd.addPerson(ALICE);
+        plannerMd.addPatient(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(plannerMd.hasPerson(editedAlice));
+        assertTrue(plannerMd.hasPatient(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> plannerMd.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> plannerMd.getPatientList().remove(0));
     }
 
     /**
@@ -94,7 +95,7 @@ public class PlannerMdTest {
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Patient> getPatientList() {
             return persons;
         }
     }

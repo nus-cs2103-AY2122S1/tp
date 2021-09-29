@@ -24,7 +24,7 @@ public class PlannerMdBuilder {
      * Adds a new {@code Person} to the {@code PlannerMd} that we are building.
      */
     public PlannerMdBuilder withPerson(Person person) {
-        plannerMd.addPerson(person);
+        plannerMd.addPatient(person);
         return this;
     }
 

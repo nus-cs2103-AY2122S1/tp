@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.plannermd.commons.exceptions.IllegalValueException;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 
 /**
  * An Immutable PlannerMd that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.plannermd.model.person.Person;
 @JsonRootName(value = "plannermd")
 class JsonSerializablePlannerMd {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedPatient> patients = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializablePlannerMd} with the given persons.
      */
     @JsonCreator
-    public JsonSerializablePlannerMd(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializablePlannerMd(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
+        this.patients.addAll(patients);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializablePlannerMd {
      * @param source future changes to this will not affect the created {@code JsonSerializablePlannerMd}.
      */
     public JsonSerializablePlannerMd(ReadOnlyPlannerMd source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        patients.addAll(source.getPatientList().stream().map(JsonAdaptedPatient::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ class JsonSerializablePlannerMd {
      */
     public PlannerMd toModelType() throws IllegalValueException {
         PlannerMd plannerMd = new PlannerMd();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (plannerMd.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedPatient jsonAdaptedPatient : patients) {
+            Patient patient = jsonAdaptedPatient.toModelType();
+            if (plannerMd.hasPatient(patient)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PATIENT);
             }
-            plannerMd.addPerson(person);
+            plannerMd.addPatient(patient);
         }
         return plannerMd;
     }

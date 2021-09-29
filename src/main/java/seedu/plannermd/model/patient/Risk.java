@@ -48,10 +48,28 @@ public class Risk {
     }
 
     /**
+     * Returns true if a given string is a valid risk
+     * including unclassified risk.
+     */
+    public static boolean isValidUnclassifiableRisk(String test) {
+        return isValidRisk(test) || test.equals(RiskLevel.UNCLASSIFIED.name());
+    }
+
+    /**
      * Factory method to return an unclassified risk.
      */
     public static Risk getUnclassifiedRisk() {
         return new Risk();
+    }
+
+    /**
+     * Factory method to return a risk that can be unclassified.
+     */
+    public static Risk getUnclassifiableRisk(String risk) {
+        if (risk.equals(RiskLevel.UNCLASSIFIED.name())) {
+            return getUnclassifiedRisk();
+        }
+        return new Risk(risk);
     }
 
     /**
