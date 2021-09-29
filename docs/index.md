@@ -7,7 +7,7 @@ title: Tuition Address Book (TAB)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-F13-3/tp/branch/master/graph/badge.svg?token=ZHYAC5NIS7)](https://codecov.io/gh/AY2122S1-CS2103T-F13-3/tp)
 
 
-> Are you a busy private 1-to-1 home tutor who finds it difficult to remember all your students' information?
+Are you a busy private 1-to-1 home tutor who finds it difficult to remember all your students' information?
 
 **Tuition Address Book (TAB)** is an all-in-one *desktop application* that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
 
