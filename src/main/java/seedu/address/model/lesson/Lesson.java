@@ -152,8 +152,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         int compareDate = getDate().compareTo(other.getDate());
         int compareTime = getTimeRange().compareTo(other.getTimeRange());
         // Compare time if date is equal
-        return compareDate == 0
-            ? compareTime : compareDate;
+        return compareDate == 0 ? compareTime : compareDate;
     }
 
 }

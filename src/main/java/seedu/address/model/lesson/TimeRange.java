@@ -49,13 +49,32 @@ public class TimeRange implements Comparable<TimeRange> {
     }
 
     /**
-     * Checks if the given time is within the time range.
+     * Checks if the given start time is within the time range.
      *
      * @param time The time to be tested.
      */
-    public boolean isClashing(Time time) {
+    private boolean isStartClashing(Time time) {
         return start.compareTo(time) <= 0 // same or later than start time
             && end.compareTo(time) > 0; // earlier than end time
+    }
+
+    /**
+     * Checks if the given end time is within the time range.
+     *
+     * @param time The time to be tested.
+     */
+    private boolean isEndClashing(Time time) {
+        return start.compareTo(time) < 0 // later than start time
+            && end.compareTo(time) > 0; // earlier than end time
+    }
+
+    /**
+     * Checks if the given time range overlaps with this time range.
+     *
+     * @param other The TimeRange to be tested.
+     */
+    public boolean isClashing(TimeRange other) {
+        return isStartClashing(other.start) || isEndClashing(other.end);
     }
 
     @Override
@@ -84,8 +103,10 @@ public class TimeRange implements Comparable<TimeRange> {
      */
     @Override
     public int compareTo(TimeRange other) {
-        boolean isStartClashing = isClashing(other.start);
-        boolean isEndClashing = isClashing(other.end);
-        return isStartClashing || isEndClashing ? 0 : start.compareTo(other.start);
+        /*
+        start.compareTo(other.start) will not return 0 because it will
+        be labelled as clashing with this time range.
+         */
+        return isClashing(other) ? 0 : start.compareTo(other.start);
     }
 }
