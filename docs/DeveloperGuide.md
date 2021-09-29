@@ -274,13 +274,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                                       | So that I can…​                                        |
-| -------- | ------------------------------------------ | ----------------------------------------------------- | --------------------------------------------------------- |
-| `* * *`  | user                                       | create a group                                        | group related contacts together                           |
-| `* * *`  | user                                       | view all the groups that I created                    |                                                           |
-| `* * *`  | user                                       | delete a group                                        | remove groups when they become irrelevant                 |
-| `* * *`  | user                                       | add a user to a group                                 | group related contacts together and find them efficiently |
-| `* * *`  | experienced computing student              | use my knowledge of Unix commands to navigate the app | use the app without learning a new set of commands        |
+| Priority | As a …​                                 | I want to …​                                       | So that I can…​                                         |
+| -------- | ------------------------------------------ | ----------------------------------------------------- | ---------------------------------------------------------- |
+| `* * *`  | user                                       | create a folder                                       | folder related contacts together                           |
+| `* * *`  | user                                       | view all the folders that I created                   |                                                            |
+| `* * *`  | user                                       | delete a folder                                       | remove folders when they become irrelevant                 |
+| `* * *`  | user                                       | add a user to a folder                                | folder related contacts together and find them efficiently |
+| `* * *`  | experienced computing student              | use my knowledge of Unix commands to navigate the app | use the app without learning a new set of commands         |
 
 *{More to be added}*
 
