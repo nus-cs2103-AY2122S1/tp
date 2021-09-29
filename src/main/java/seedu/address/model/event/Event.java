@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import seedu.address.model.particpant.Participant;
+import seedu.address.model.participant.Participant;
 
 /**
  * This is an Event class.

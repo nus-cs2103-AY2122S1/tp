@@ -1,6 +1,6 @@
 {
   "_comment": "AddressBook save file which contains the same Event values as in TypicalEvents#getTypicalAddressBook()",
-  "persons" : [ ],
+  "participants" : [ ],
   "events" : [
     {
       "name" : "Sleep",
