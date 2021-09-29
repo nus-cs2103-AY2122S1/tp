@@ -83,7 +83,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Viewing Schedule: `schedule` [coming soon]
+### Viewing schedule: `schedule` [coming soon]
 
 Displays a read-only weekly schedule.
 
@@ -128,23 +128,75 @@ Examples:
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 * `edit 3 sch/NJC stream/` Edits the school of the 3rd person to be `NJC` and clears academic stream data.
 
-### Locating persons by name: `find`
+### Finding students by fields: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds all students whose fields match the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …] [p/PHONE_KEYWORD …] [sch/SCHOOL_KEYWORD …] [stream/ACAD_STREAM_KEYWORD …] [lvl/ACAD_LEVEL_KEYWORD …]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the find command:**<br>
+
+* You must provide at least one field.<br>
+  e.g. entering just `find` alone is not a valid command. You need to include the fields you wish to search for.
+
+* The search is case-insensitive.<br>
+  e.g.`hans` will match `Hans`.
+  
+* The order of the keywords does not matter.<br>
+  e.g. `Clementi West` will match `West Clementi`.
+  
+* The keyword does not need to match the field exactly.<br>
+  e.g. `john@gmail.com` will match `leejohn@gmail.com`.
+  
+* A field just needs to match at least one keyword.<br>
+  e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
+  
+* A student is only considered a match when all fields which you are searching for match their keywords.<br>
+  e.g. `find n/john a/Clementi`
+    * will match student named `john` with address `West Clementi Street`
+    * will not match student named `john` with address `Bedok Reservoir`
+
+</div>
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
+* `find a/Jurong east n/Ben e/gmail`  
+    * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
+    * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
+
+### Filtering students by tags: `filter`
+
+Filters students in the address book by their tags, based on the given filter condition.
+
+Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the filter command:**<br>
+
+* `all` indicates that a student must have all the specified tags to be matched.
+
+* `any` indicates that a student with at least one of the specified tag will be matched.
+
+* `none` indicates that a student must have none of the specified tags to be matched.
+
+* The filter condition will not accept other arguments besides `all`, `any` and `none`.
+  e.g. `cond/every` will result in an error.
+  
+* You must use the exact spelling of the existing tag.<br>
+  e.g. `Math` will not match `Mathematics`.
+  
+* The tags are **case-sensitive**.<br>
+  e.g. `filter cond/all t/MATH` does not return the same result as `filter cond/all t/math`.
+
+</div>
+
+Examples:
+* `filter cond/all t/math t/Sec1` will return students who have both `math` and `Sec1` tags.
+* `filter cond/any t/English t/Zoom` will return students with only the `English` tag, or only the `Zoom` tag, or both tags.
+* `filter cond/none t/Inactive t/paid` will return students without both `Inactive` and `paid` tags.
 
 ### Deleting a person : `delete`
 
@@ -256,6 +308,7 @@ Action | Format, Examples
 **Clear** |`clear`
 **Delete** |`delete INDEX`<br><br> e.g., `delete 3`
 **Edit** |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [sch/SCHOOL] [stream/STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** |`find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** |`find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …] [p/PHONE_KEYWORD …] [sch/SCHOOL_KEYWORD …] [stream/ACAD_STREAM_KEYWORD …] [lvl/ACAD_LEVEL_KEYWORD …]`<br><br> e.g., `find n/James Tan a/clementi sch/NUS`
+**Filter** |<code>filter cond/{all &#124; any &#124; none} t/TAG [t/MORE_TAGS]…</code> <br><br> e.g., `filter cond/all t/Sec1 t/zoom`
 **List** |`list`
 **Help** |`help`
