@@ -19,8 +19,6 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     // Time fields
     private final Date date;
-    private final Time startTime;
-    private final Time endTime;
     private final TimeRange timeRange;
 
     // Data fields
@@ -31,31 +29,20 @@ public abstract class Lesson implements Comparable<Lesson> {
      * Every field must be present and not null.
      *
      * @param date Date of lesson.
-     * @param startTime Start time of the lesson.
-     * @param endTime End time of the lesson.
+     * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public Lesson(Date date, Time startTime, Time endTime, Subject subject, Set<Homework> homework) {
-        requireAllNonNull(date, startTime, endTime, homework);
+    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
+        requireAllNonNull(date,homework);
         this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
-        this.timeRange = new TimeRange(startTime, endTime);
     }
 
     public Date getDate() {
         return date;
-    }
-
-    public Time getStartTime() {
-        return startTime;
-    }
-
-    public Time getEndTime() {
-        return endTime;
     }
 
     public Subject getSubject() {
@@ -122,18 +109,16 @@ public abstract class Lesson implements Comparable<Lesson> {
 
         Lesson otherLesson = (Lesson) other;
         return otherLesson.getDate().equals(getDate())
-            && otherLesson.getStartTime().equals(getStartTime())
-            && otherLesson.getEndTime().equals(getEndTime())
+            && otherLesson.getTimeRange().equals(getTimeRange())
             && otherLesson.getSubject().equals(getSubject())
             && otherLesson.getHomework().equals(getHomework())
-            && otherLesson.getTimeRange().equals(getTimeRange())
             && otherLesson.isRecurring() == isRecurring();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(date, startTime, endTime, subject, homework, timeRange);
+        return Objects.hash(date, timeRange, subject, homework);
     }
 
     @Override
@@ -143,10 +128,8 @@ public abstract class Lesson implements Comparable<Lesson> {
         builder.append(typeOfLesson)
             .append("\n")
             .append(getDate())
-            .append("\nStart: ")
-            .append(getStartTime())
-            .append("    End: ")
-            .append(getEndTime())
+            .append("\nTime: ")
+            .append(getTimeRange())
             .append("\nSubject: ")
             .append(getSubject());
 
@@ -167,7 +150,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public int compareTo(Lesson other) {
         int compareDate = getDate().compareTo(other.getDate());
-        int compareTime = getStartTime().compareTo(other.getStartTime());
+        int compareTime = getTimeRange().compareTo(other.getTimeRange());
         // Compare time if date is equal
         return compareDate == 0 ? compareTime : compareDate;
     }

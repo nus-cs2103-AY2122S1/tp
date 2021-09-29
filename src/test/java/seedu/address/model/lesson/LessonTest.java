@@ -35,7 +35,8 @@ public class LessonTest {
     @Test
     public void updateDateWithWeek_validDateString_success() {
         String validOneWeekLaterDateString = "21 Jan 2022";
-        Lesson lesson = new RecurringLesson(new Date(DATE), new Time(START_TIME), new Time(END_TIME),
+        Lesson lesson = new RecurringLesson(new Date(DATE),
+            new TimeRange(new Time(START_TIME), new Time(END_TIME)),
             new Subject(SUBJECT), HOMEWORK);
         assertEquals(new Date(validOneWeekLaterDateString), lesson.updateDateWithWeek());
     }

@@ -31,8 +31,8 @@ public class LessonUtil {
             sb.append(PREFIX_RECURRING + " ");
         }
         sb.append(PREFIX_DATE + lesson.getDate().toString() + " ");
-        sb.append(PREFIX_START_TIME + lesson.getStartTime().value + " ");
-        sb.append(PREFIX_END_TIME + lesson.getEndTime().value + " ");
+        sb.append(PREFIX_START_TIME + lesson.getTimeRange().getStart().value + " ");
+        sb.append(PREFIX_END_TIME + lesson.getTimeRange().getEnd().value + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
         lesson.getHomework().stream().forEach(
             s -> sb.append(PREFIX_HOMEWORK + s.description + " ")

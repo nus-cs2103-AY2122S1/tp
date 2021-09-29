@@ -60,12 +60,9 @@ public class LessonAddCommandParser {
         Throws ParseException if either time is invalid
         or if range is invalid.
          */
-        Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
-        if (!TimeRange.isValidTimeRange(startTime, endTime)) {
-            throw new ParseException(TimeRange.MESSAGE_CONSTRAINTS);
-        }
-        TimeRange timeRange = new TimeRange(startTime, endTime);
+        String startTime = argMultimap.getValue(PREFIX_START_TIME).get();
+        String endTime = argMultimap.getValue(PREFIX_END_TIME).get();
+        TimeRange timeRange = ParserUtil.parseTimeRange(startTime, endTime);
 
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
@@ -73,11 +70,11 @@ public class LessonAddCommandParser {
 
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            RecurringLesson lesson = new RecurringLesson(date, startTime, endTime, subject, homework);
+            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework);
             return new LessonAddCommand(index, lesson);
         }
 
-        MakeUpLesson lesson = new MakeUpLesson(date, startTime, endTime, subject, homework);
+        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework);
         return new LessonAddCommand(index, lesson);
     }
 

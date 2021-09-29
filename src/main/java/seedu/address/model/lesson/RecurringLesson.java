@@ -17,14 +17,13 @@ public class RecurringLesson extends Lesson {
      * Every field must be present and not null.
      *
      * @param date Date of lesson.
-     * @param startTime Start time of the lesson.
-     * @param endTime End time of the lesson.
+     * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public RecurringLesson(Date date, Time startTime, Time endTime,
+    public RecurringLesson(Date date, TimeRange timeRange,
                            Subject subject, Set<Homework> homework) {
-        super(date, startTime, endTime, subject, homework);
+        super(date, timeRange, subject, homework);
         updateRecurringLessonCount();
     }
 
@@ -58,7 +57,7 @@ public class RecurringLesson extends Lesson {
         Date newDate = new Date(newDateString);
 
         return newDate.compareTo(getDate()) > 0
-            ? new RecurringLesson(new Date(newDateString), getStartTime(), getEndTime(),
+            ? new RecurringLesson(new Date(newDateString), getTimeRange(),
             getSubject(), getHomework())
             : this;
     }
@@ -79,7 +78,7 @@ public class RecurringLesson extends Lesson {
         recurringLessonsCount++;
         // Update the date
         Date newDate = super.updateDateWithWeek();
-        return new RecurringLesson(newDate, getStartTime(), getEndTime(),
+        return new RecurringLesson(newDate, getTimeRange(),
                 getSubject(), getHomework());
     }
 

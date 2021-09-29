@@ -13,6 +13,7 @@ import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
+import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -139,6 +140,24 @@ public class ParserUtil {
         }
         return new Time(trimmedTime);
     }
+
+    /**
+     * Parses {@code String Time} and {@code String Time} into a {@code TimeRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Time} pr {@code TimeRange} is invalid.
+     */
+    public static TimeRange parseTimeRange(String start, String end) throws ParseException {
+        requireNonNull(start);
+        requireNonNull(end);
+        Time startTime = parseTime(start);
+        Time endTime = parseTime(end);
+        if (!TimeRange.isValidTimeRange(startTime, endTime)) {
+            throw new ParseException(TimeRange.MESSAGE_CONSTRAINTS);
+        }
+        return new TimeRange(startTime, endTime);
+    }
+
 
     /**
      * Parses a {@code String subject} into a {@code Subject}.

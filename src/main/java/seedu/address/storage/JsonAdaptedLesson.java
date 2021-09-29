@@ -17,6 +17,7 @@ import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Time;
+import seedu.address.model.lesson.TimeRange;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -56,8 +57,8 @@ class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         date = source.getDate().value;
-        startTime = source.getStartTime().value;
-        endTime = source.getEndTime().value;
+        startTime = source.getTimeRange().getStart().value;
+        endTime = source.getTimeRange().getEnd().value;
         subject = source.getSubject().subject;
         homework.addAll(source.getHomework().stream()
                 .map(JsonAdaptedHomework::new)
@@ -101,6 +102,11 @@ class JsonAdaptedLesson {
         }
         final Time modelEndTime = new Time(endTime);
 
+        if (!TimeRange.isValidTimeRange(modelStartTime, modelEndTime)) {
+            throw new IllegalValueException(TimeRange.MESSAGE_CONSTRAINTS);
+        }
+        final TimeRange modelTimeRange = new TimeRange(modelStartTime, modelEndTime);
+
         if (subject == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
         }
@@ -111,8 +117,8 @@ class JsonAdaptedLesson {
 
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
         return isRecurring
-                ? new RecurringLesson(modelDate, modelStartTime, modelEndTime, modelSubject, modelHomework)
-                : new MakeUpLesson(modelDate, modelStartTime, modelEndTime, modelSubject, modelHomework);
+                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework)
+                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework);
     }
 
 }

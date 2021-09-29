@@ -29,6 +29,14 @@ public class TimeRange implements Comparable<TimeRange> {
         checkArgument(isValidTimeRange(start, end), MESSAGE_CONSTRAINTS);
     }
 
+    public Time getStart() {
+        return start;
+    }
+
+    public Time getEnd() {
+        return end;
+    }
+
     /**
      * Checks if the start is earlier than the end.
      *
