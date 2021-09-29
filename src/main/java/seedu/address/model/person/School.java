@@ -14,6 +14,7 @@ public class School {
     /*
      * The first character of the school name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * School name can be any alphabetic combination with space and/or single quotation mark.
      */
     public static final String VALIDATION_REGEX = "[a-zA-Z'][a-zA-Z' ]*";
 

@@ -14,6 +14,7 @@ public class AcadStream {
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * Academic stream can be any alphabetic character with or without space.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
 
