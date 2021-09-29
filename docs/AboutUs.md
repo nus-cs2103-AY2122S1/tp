@@ -29,12 +29,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Wang Guanlin (Joseph)
+### Johnny Doe
 
-<img src="images/wangguanlinjoseph.png" width="200px">
+<img src="images/johndoe.png" width="200px">
 
-[[github](https://github.com/WangGLJoseph)] 
-[[portfolio](team/wangguanlinjoseph.md)]
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -49,12 +49,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Wang Guanlin (Joseph)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wangguanlinjoseph.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+[[github](https://github.com/WangGLJoseph)]
+[[portfolio](team/wangguanlinjoseph.md)]
