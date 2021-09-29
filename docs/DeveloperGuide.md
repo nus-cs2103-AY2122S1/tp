@@ -315,15 +315,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  When a new version is released, it should be possible to update the most recent version if the user has installed the previous version.
+5.  Installing a new update shall not in any way, modify or erase existing data and value from the previous version, and the new update should be compatible with the data produced earlier within the system.
+6.  Should be able to store notes in English language, and provisions shall be made to support all languages.
+7.  The system should be able to handle notes with large capacity without any performance liability so that users can keep track of each activity without any issues.
+8.  Whenever a change is made to the application, the progress is instantly saved to the system.
+9.  The system should be able to reply to the prompt or command from the user within 3 seconds.
+10.  The system should cater to mentor professor such that mentor professor can access the application without any difficulty.
+11.  Should ensure personal data privacy and security of data access. 
+12. Software testing will require the use of automated testing. The test will be deleted after successful implementation of the software system.
 
-*{More to be added}*
 
 ### Glossary
 
+* **Automated testing**: Testing for each feature will not be manually handled, it will be automatically tested
+* **Autocomplete**: A functionality to complete words or strings without users typing every characters of the string
+* **Command structure**: A template structure for each command line
+* **Dummy data**: A substitute mock data which is used for testing environment
+* **Group**: An object to store multiple persons based on a particular category catering to users’ needs
+* **Help page**: A tutorial page for novice users or users who want to review the basic usage of the software application
+* **Key power features**: Essential features that will be used often when running the software application
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Metadata**: Personal data about a person object.
+* **Note**: A general description of each person to record their activities, while also showing the most recent time when the note is updated
+* **Personal data privacy**: Personal user data that should not be able to be viewed with others
+* **Pin**: Highlight a person from a group that will then be available on top of the other persons in your group list
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Reminder**: A prompt to remind the user on any activity related to a person or a particular group.
+* **Subgroup**: A child group of _groups_ to store multiple persons based on a more specific category than _groups_. A _subgroup_ can be created by specifying the parent group of the _subgroup_
+* **Trie**: A tree data structure to store strings of each tags and commands for the autocomplete function
+* **Ungrouped**: A default group which stores the value of person(s) who is not inside any groups
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## **Appendix: Instructions for manual testing**
 
