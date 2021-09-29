@@ -1,12 +1,12 @@
 ---
-layout: page
-title: User Guide
+layout: page title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (
+CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact
+management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+* Table of Contents {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,19 +18,21 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
+   contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+    * **`list`** : Lists all contacts.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+    * **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#Features) below for details of each command.
 
@@ -54,11 +56,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
+  the parameter will be taken.<br>
 
 [comment]: <> (  Change this example e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.)
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -108,6 +112,7 @@ Shows a list of subgroups in group specified.
 Format: `list /subgroup g:GROUP_NAME`<br>
 Advanced user Format: `list /sg g:GROUP_NAME`
 Examples:
+
 * `list /subgroup g:Orbital`
 * `list /sg g:Orbital`
 
@@ -123,6 +128,7 @@ Advanced user Format:  `find /p n:KEYWORD [g:GROUP_NAME]`
 * The keyword must not include backslash (`/`) or colon (`:`).
 
 Examples:
+
 * `find /person n:Elton g:Orbital Team 1`
 * `find /p n:John`
 
@@ -137,6 +143,7 @@ Advanced user Format: `find /g g:KEYWORD`
 * The keyword must not include backslash (`/`) or colon (`:`).
 
 Examples:
+
 * `find /group g:Orbital_Team_1`
 * `find /g g:W08`
 
@@ -151,10 +158,12 @@ Advanced user Format: `find /sg sg:KEYWORD g:GROUP_NAME`
 * The keyword must not include backslash (`/`) or colon (`:`).
 
 Examples:
+
 * `find /subgroup sg:W08 g:CS2103T`
 * `find /subgroup sg:Artemis g:Orbital`
 
 ### Working with people
+
 #### Adding a person: `person /create`
 
 Creates a person.
@@ -167,6 +176,7 @@ Advanced user Format: `p /c n:NAME [g:GROUP_NAME]`
 * `GROUP_NAME`: name of the group to add the user to.
 
 Examples:
+
 * `person /create n:John Lim g:CS2103T`
 * `p /c n:Mary`
 
@@ -180,6 +190,7 @@ Advanced user Format: `p /d n:NAME`
 * Deletes an existing person with the `NAME`.
 
 Examples:
+
 * `person /delete n:John Lim g:CS2103T`
 * `p /d n:Mary`
 
@@ -194,6 +205,7 @@ Advanced user Format:`p NAME /e n:NEW_NAME`
 * Edits an existing person with the name `NAME` and replaces the fields with the new parameters.
 
 Examples:
+
 * `person John Lim /edit n:John Cena`
 * `p Mary /e n:Little Lamb`
 
@@ -209,6 +221,7 @@ Advanced user Format:`p NAME /r g:GROUP_NAME [g:SUB_GROUP_NAME]`
     * `SUB_GROUP_NAME`: Removes an existing person with the name `NAME` from a `SUB_GROUP_NAME` in `GROUP_NAME`.
 
 Examples:
+
 * `person John Lim /remove g:CS2103T`
 * `p John Lim /r g:CS2103T sg:W08`
 
@@ -222,6 +235,7 @@ Advanced user Format:`p NAME /n`
 * Pops up a note window for an existing person with the `NAME` to take note.
 
 Examples:
+
 * `person John Lim /note`
 * `p John Lim /n`
 
@@ -239,6 +253,7 @@ Advanced user Format: `g /c g:GROUP_NAME`
 * The new group's name must not include backslash (`/`) or colon (`:`).
 
 Examples:
+
 * `group /create g:CS2103T` will create a new group called CS2103T.
 * `g /c g:Orbital`
 
@@ -250,6 +265,7 @@ Format: `group /delete g:GROUP_NAME`<br>
 Advanced user Format: `g /d g:GROUP_NAME`
 
 Examples :
+
 * `group /delete g:CS2103T` will delete the group CS2103T.
 * `g /d g:Orbital`
 
@@ -265,6 +281,7 @@ Advanced user Format: `g group_name /e g:NEW_NAME`
 * The new group's name must not include backslash (`/`) or colon (`:`).
 
 Examples :
+
 * `group CS2103T /edit g:CS2101` will rename the group CS2103T to CS2101
 * `g Orbitan /e g:Orbital`
 
@@ -280,6 +297,7 @@ Advanced user Format: `g group_name /c sg:SUBGROUP_NAME`
 * The new subgroup's name must not include backslash (`/`) or colon (`:`).
 
 Examples :
+
 * `group Orbital /create g:Artemis` will create a new subgroup Artemis in group Orbital.
 * `g CS2103T /c g:ip`
 
@@ -293,6 +311,7 @@ Advanced user Format: `g group_name /d sg:SUBGROUP_NAME`
 * Deletes an existing subgroup of `group_name` with the name `subgroup_name`.
 
 Examples :
+
 * `group Orbital /delete g:Artemis` will delete the subgroup Artemis from Orbital.
 * `g CS2103T /d g:ip`
 
@@ -308,10 +327,11 @@ Advanced user Format: `g GROUP_NAME:SUPGROUP_NAME /e sg:SUBGROUP_NAME`
 * The new subgroup's name must not include backslash (`/`) or colon (`:`).
 
 Examples :
+
 * `group Orbital:Artemis /edit g:Apollo` will rename the subgroup Artemis to Apollo.
 * `g CS2103T:tp /e g:ip`
 
-###  Adding notes on a group: `group group_name /note`
+### Adding notes on a group: `group group_name /note`
 
 Adds notes on a group and saves the time when the note is added.
 
@@ -322,10 +342,11 @@ Advanced user Format: `g group_name /n`
 * The time when the note is edited will be saved.
 
 Examples :
+
 * `group Orbital /note` will prompt a popup window where the user can edit the notes for Orbital.
 * `g CS2103T /n`
 
-###  Adding notes on a subgroup: `group group_name /note`
+### Adding notes on a subgroup: `group group_name /note`
 
 Adds notes on a subgroup and saves the time when the note is added.
 
@@ -336,6 +357,7 @@ Advanced user Format: `g group_name /n sg:SUB_GROUP`
 * The time when the note is edited will be saved.
 
 Examples :
+
 * `group Orbital /note sg: Artemis` will prompt a popup window where the user can edit the notes for Artemis.
 * `g CS2103T /e sg: ip`
 
@@ -343,11 +365,13 @@ Examples :
 
 ### Saving the data
 
-Notor data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Notor data are saved in the hard disk automatically after any command that changes the data. There is no need to save
+manually.
 
 ### Editing the data file
 
-Notor data are saved as a JSON file `[JAR file location]/data/Notor.json`. Advanced users are welcome to update data directly by editing that data file.
+Notor data are saved as a JSON file `[JAR file location]/data/Notor.json`. Advanced users are welcome to update data
+directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
@@ -362,13 +386,15 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 ## Person
+
 Action | Format | Advanced Format
 --------|--------|----------
 **Create** | `person /create NAME [g:GROUP_NAME]` | `p /c NAME [g:GROUP_NAME]`
@@ -378,6 +404,7 @@ Action | Format | Advanced Format
 **Note** | `person NAME /note` | `p NAME /n`
 
 ## Group
+
 Action | Format |  Advanced Format
 --------|--------|----------
 **Create** | `group / c g:GROUP_NAME` | `g / c g:GROUP_NAME`
@@ -385,11 +412,13 @@ Action | Format |  Advanced Format
 **Delete** | `group g:GROUP_NAME /delete g:GROUP_NAME` | `g g:GROUP_NAME /d g:GROUP_NAME`
 **Note** | `group g:GROUP_NAME /note` | `g g:GROUP_NAME /n g:GROUP_NAME`
 **Create subgroup** | `group GROUP_NAME /create sg:SUB_GROUP_NAME` | `g g:GROUP_NAME /c sg:SUB_GROUP_NAME`
-**Edit subgroup** | `group GROUP_NAME:SUB_GROUP_NAME /edit sg:SUB_GROUP_NAME` | `g g:GROUP_NAME:SUB_GROUP_NAME /e sg:SUB_GROUP_NAME`
+**Edit
+subgroup** | `group GROUP_NAME:SUB_GROUP_NAME /edit sg:SUB_GROUP_NAME` | `g g:GROUP_NAME:SUB_GROUP_NAME /e sg:SUB_GROUP_NAME`
 **Delete subgroup** | `group GROUP_NAME /delete sg:SUB_GROUP_NAME` | `g GROUP_NAME /d sg:SUB_GROUP_NAME`
 **Note subgroup** |  `group GROUP_NAME /note sg:SUB_GROUP_NAME` | `g GROUP_NAME /n sg:SUB_GROUP_NAME`
 
 ## General
+
 Action | Format | Advanced Format
 --------|--------|----------
 **Help** | `help` | `-`
