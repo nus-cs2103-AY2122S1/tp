@@ -11,9 +11,11 @@ public class Measurement {
     public static final String GENERAL_MESSAGE_CONSTRAINTS =
             "Body measurements should be of the format height_waist_shoulder[_bust] in cm, and it should not be blank";
     public static final String MALE_MESSAGE_CONSTRAINTS =
-            "Body measurements should be of the format height_waist_shoulder in cm, and it should not be blank";
+            "A male's body measurements should be of the format height_waist_shoulder in cm,"
+                    + " and it should not be blank";
     public static final String FEMALE_MESSAGE_CONSTRAINTS =
-            "Body measurements should be of the format height_waist_shoulder_bust in cm, and it should not be blank";
+            "A female's body measurements should be of the format height_waist_shoulder_bust in cm,"
+                    + " and it should not be blank";
     public static final String IS_NUMBER_REGEX = "\\d+";
     public final String value;
 
