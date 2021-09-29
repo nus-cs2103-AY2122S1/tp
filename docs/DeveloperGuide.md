@@ -256,15 +256,28 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
+* Gamer who plays competitive games
+* Student in a University
+* Busy (can only play at specific times based on a weekly schedule)
+* Plays multiple online competitive multiplayer games (e.g., Apex legends, Minecraft, Valorant, etc)
+* Has a group of similar persona gamer friends who like him are busy
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+University student gamer who is busy but wants to keep track of equally busy friends who want to play online competitive multiplayer games together.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
+**Value proposition**: 
+#### Problem: 
+For busy university student gamers who love playing multiplayer competitive games with their friends, it can
+often be challenging scheduling times to play games with friends out of a packed schedule. 
+Additionally, it can be challenging to make the most out of the limited time available by choosing 
+the right friends to play with - those you have the most fun playing with or have great performance at the game.
+
+#### How gitGud solves the problem and make users' life easier:
+gitGud allows users to store both yours and your friends' available timeslots and find matching times to play multiplayer
+competitive games together - allowing users to identify and coordinate gaming sessions with friends. 
+It also allows users to keep track of each friend's competitive gaming performance and rate how much fun they had gaming with a friend
+after each gaming session. These factors are used for gitGud to recommend and help users to decide which friends to play with
+for future multiplayer competitive gaming sessions.
 
 ### User stories
 
@@ -272,18 +285,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a (describes user) | I want to (functionality)                                          | So that I can (rationale)                                 |
 |----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|
-| ***      | user                  | Be able to easily add my friends personal info/data (name, userid) | I have a list of friends who I can possibly play with     |
-| ***      | user                  | Be able to add description to a friend’s profile                   | I can store information relevant a friend                 |
-| ***      | user                  | Be able to link my friends to the games they play                  | So that I can associate my friends with a particular game |
-| ***      | user                  | Be able to view a list of my friends information                   | I can see who my friends are                              |
-| ***      | user                  | Delete a friend from the contact list                              | Remove friends that were mistakenly added                 |
-| ***      | user                  | See full information of a friend from the contact list             | I can get any information I want about the friend         |
+| ***      | user                  | be able to easily add my friends personal info/data (name, userid) | store a list of friends who I can possibly play with      |
+| ***      | user                  | be able to link my friends to the games they play                  | associate my friends with a particular game               |
+| ***      | user                  | be able to view a list of my friends information                   | see who my friends are                                    |
+| ***      | user                  | be able to delete a friend from the contact list                   | remove friends that were mistakenly added                 |
+| ***      | user                  | be able to see full information of a friend from the contact list  | get any information I want about the friend               |
 
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `gitGud` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: UC1 - Add a friend** 
+
+**MSS**
+
+1. User requests to add a friend and specifies a `FRIEND_ID`. 
+2. gitGud adds a friend into the friends list and informs user of successful addition of friend.
+
+**Extensions** 
+
+* 1a. gitGud detects that the `FRIEND_ID` provided already exists and is not unique. 
+    * 1a1. gitGud informs user that it has failed to add a friend.<br>
+      1a2. User makes another request to add a friend with a different `FRIEND_ID`.<br> 
+      Use case continues from step 2.
 
 **Use case: Delete a friend**
 
@@ -302,6 +328,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+
+**Use case: List friends whose `FRIEND_ID` contains a keyword**
+
+**MSS**
+
+1. User requests to list friends in gitGud using a keyword filter.
+2. gitGud shows a filtered list of friends whose `FRIEND_ID` contains the keyword.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user does not provide a keyword.
+
+    * 2a1. All friends are listed.
+
+      Use case ends.
+
+
+**Use case: List games whose `GAME_NAME` contains a keyword**
+
+**MSS**
+
+1. User requests to list games in gitGud using a keyword filter.
+2. gitGud shows a filtered list of games whose `GAME_NAME` contains the keyword.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user does not provide a keyword.
+
+    * 2a1. All games are listed.
+
+      Use case ends.
+
+**Use case: Link a friend to a particular game**
+
+**MSS**
+
+1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`).
+2. gitGud associates the friend with the game provided.
+
+**Extensions**
+
+* 2a. The given `FRIEND_ID` is invalid.
+
+    * 2a1. gitGud shows an error message.
+    * 2a2. User can list friends currently in gitGud or add new friends.
+
+      Use case resumes at step 1.
+
+
+* 2b. The given `GAME_NAME` is invalid.
+
+    * 2b1. gitGud shows an error message.
+    * 2b2. User can list games currently in gitGud or add new games.
+
+      Use case resumes at step 1.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -314,8 +400,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Competitive Game/s**: Multiplayer games with a ranking system
+* **Busy**: Maximum of 7hrs/week to play games
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 

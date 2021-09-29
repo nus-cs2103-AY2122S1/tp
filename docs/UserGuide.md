@@ -45,23 +45,20 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `get --game GAME_NAME`, `GAME_NAME` is a parameter which can be used as `get --game CSGO`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `friend FRIEND_ID [--name NAME]` can be used as `friend Draco --name “Marcus Tang”` or as `friend Draco`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used one or more times.<br>
+  e.g. `GAME_NAME:IN_GAME_USERNAME…` can be used as `Valorant:biscuitismydog`, `Valorant:biscuitismydog Minecraft:Draco` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `--name “Marcus Tang” --name Taufiq`, only `--name Taufiq` will be taken.
+  
+* If a name provided has spaces in-between, use double quotation marks to wrap the name in the command e.g. wrap the name
+  'Apex Legends' as `"Apex Legends"`. 
+  
 </div>
 
 ### Viewing help : `help`
@@ -72,61 +69,17 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding a friend: `friend`
 
-### Adding a person: `add`
+Adds a new friend to gitGud friend’s list with an associated **unique** friend identifier.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `friend FRIEND_ID [--name NAME]`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `friend Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and 
+which does not currently have an associated real-life name.
+* `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and 
+has the real-life name 'Taufiq'.
 
 ### Deleting a friend : `delete`
 
@@ -140,33 +93,101 @@ Format: `friend --delete FRIEND_ID`
 Examples:
 * `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
 
-### Clearing all entries : `clear`
+### Adding a game: `game`
 
-Clears all entries from the address book.
+Adds a game into the gitGud game list.
 
-Format: `clear`
+Format: `game GAME_NAME`
 
-### Exiting the program : `exit`
+Examples:
+* `game Valorant` Adds a brand-new game into the game list with the name 'Valorant'.
 
-Exits the program.
+### Deleting a game: `game --delete`
 
-Format: `exit`
+Deletes a game from the gitGud game list.
 
-### Saving the data
+Format: `game --delete GAME_NAME`
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Examples:
+* `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
 
-### Editing the data file
+### Link games with a friend: `link`
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Links game(s) and the associated in-game username(s) for each game to a friend for the provided gitGud FRIEND_ID to 
+his/her friend information.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
+Format: `link FRIEND_ID GAME_NAME:IN_GAME_USERNAME1 GAME2_NAME:IN_GAME_USERNAME2...`
 
-### Archiving data files `[coming in v2.0]`
+* Add multiple games and in-game usernames for a friend by listing the game:in-game-username pairs separated by a space.
+* For game names or in-game usernames with spaces in-between, wrap the name string with double quotation marks. 
+For example, the game 'Apex Legends' linked to an in-game username 'tau-bar' would be represented as the pair 
+  `"Apex Legends":tau-bar`.
+  
+Examples:
+* `link Draco Valorant:biscuitismydog Minecraft:Draco` 
+  Links two games, ‘Valorant’ with the in-game username ‘biscuitismydog’ and ‘Minecraft’ with the 
+  in-game username ‘Draco’, to the friend with the gitGud FRIEND_ID ‘Draco’.
+* `link tau-bar “Apex Legends”:tau-dominator` 
+  Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’, 
+  to the friend with the gitGud FRIEND_ID ‘tau-bar’.
 
-_Details coming soon ..._
+### Listing multiple friends’ data: `list --friend`
+
+Lists all friends stored in gitGud whose friend id contains any of the given keywords.
+
+Format: `list [--friend [KEYWORD]]`
+
+* The `--friend` flag is optional, if no flag is added or if `KEYWORD` is left empty, all friends stored in gitGud will be listed
+* The filter keyword is case insensitive e.g `Tau_bar` will match `tau_bar`
+* Only the `FRIEND_ID` of friends is filtered
+* Partial matches will be displayed e.g. `tau` will match `tau_bar`
+
+Examples:
+* `list` or  `list --friend` Lists all friends stored in gitGud
+* `list --friend ta` Lists all friends stored in gitGud that have `ta` in their name
+
+![result for 'list --game'](images/UiListFriend.png)
+
+### Listing multiple games’ data: `list --game`
+
+Lists all games stored in gitGud whose friend id contains any of the given keywords.
+
+Format: `list --game [KEYWORD]`
+
+* If `KEYWORD` is left empty, all games stored in gitGud will be listed
+* The filter keyword is case insensitive e.g `valorant` will match `Valorant`
+* Only the `GAME_NAME` of games is filtered
+* Partial matches will be displayed e.g. `Valo` will match `Valorant`
+
+Examples:
+* `list --game` Lists all games stored in gitGud
+* `list --game Valo` Lists all friends stored in gitGud that have `Valo` in their name
+
+![result for 'list --game'](images/UiListGame.png)
+
+### Getting a single friend's complete data
+
+Takes a look at a particular friend's complete data by searching their `FRIEND_ID`. A friend's complete data includes:
+* List of games the friend plays
+* In-game username for each game
+
+Format: `get [--friend] FRIEND_ID`
+* The `FRIEND_ID` must currently exist in the database
+
+Examples:
+* `get --friend Draco` Gets the complete data for friend "Draco", which includes the list of games he plays and his username for each game
+* `get kev` Gets the complete data for friend "kev"
+
+### Getting a single game's complete data
+
+Gets all the relevant information for a game that was previously added, this includes:
+* All the friends (represented by their `FRIEND_ID`) that play the game
+
+Format: `get --game GAME_NAME`
+* The `GAME_NAME` must currently exist in the database
+
+Examples:
+* `get --game CSGO` Gets all the relevant information for the game "CSGO". This includes all the friends in your database that play the game
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -175,16 +196,25 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: What happens if I add multiple flags that clash? e.g. `list --friend tau --game Val`  
+**A**: Only the first valid flag is taken and subsequent flags will be ignored.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add friend** | `friend FRIEND_ID [--name "NAME"]` <br> e.g., `friend Draco --name "Marcus Tang"`
+**Delete** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
+**Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"` 
+**Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
+**Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
+**List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`
+**List Games** | `list --game [KEYWORD]`<br> e.g., `list --game`, `list --game Valorant`
+**Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`
+**Get game** | `get --game GAME_NAME`<br> e.g., `get --game Valorant`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`

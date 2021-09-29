@@ -5,48 +5,39 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+For any inquiries, please reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Kevin Foong Wei Tong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kevin9foong.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kevin9foong)]
+[[portfolio](team/kevin9foong.md)]
 
-* Role: Project Advisor
+* Role: Team Lead, Deadlines & Delivery
+* Responsibilities: In charge of the `add` feature.
 
-### Jane Doe
+### Marcus Tang Xin Kye
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/marcustxk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/lzher385.md)]
+[[github](https://github.com/marcustxk)]
+[[portfolio](team/marcustxk.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Integration, Code Quality
+* Responsibilities: In charge of `list` feature
 
-### Johnny Doe
+### Taufiq Bin Abdul Rahman
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tau-bar.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/lzher385.md)]
+[[github](https://github.com/tau-bar)]
+[[portfolio](team/tau-bar.md)]
 
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/lzher385.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Scheduling
+* Responsibilities: In charge of `delete` feature
 
 ### Lim Yu Zher
 
@@ -55,5 +46,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/lzher385)]
 [[portfolio](team/lzher385.md)]
 
-* Role: Developer
-* Responsibilities: Documentation, In charge of `link` feature
+* Role: Documentation
+* Responsibilities: In charge of `link` feature
