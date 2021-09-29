@@ -55,7 +55,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `--name “Marcus Tang” --name Taufiq`, only `--name Taufiq` will be taken.
-
+  
+* If a name provided has spaces in-between, use double quotation marks to wrap the name in the command e.g. wrap the name
+  'Apex Legends' as `"Apex Legends"`. 
+  
 </div>
 
 ### Viewing help : `help`
@@ -66,20 +69,67 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding a friend: `friend`
 
-### Adding a person: `add`
+Adds a new friend to gitGud friend’s list with an associated **unique** friend identifier.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `friend FRIEND_ID [--name NAME]`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `friend Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and 
+which does not currently have an associated real-life name.
+* `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and 
+has the real-life name 'Taufiq'.
+
+### Deleting a friend : `delete`
+
+Deletes a friend from gitGud’s friend’s list using gitGud’s unique friend identifier.
+
+Format: `friend --delete FRIEND_ID`
+
+* Deletes the person with the specified `FRIEND_ID`.
+* The `FRIEND_ID` must currently exist in the database.
+
+Examples:
+* `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
+
+### Adding a game: `game`
+
+Adds a game into the gitGud game list.
+
+Format: `game GAME_NAME`
+
+Examples:
+* `game Valorant` Adds a brand-new game into the game list with the name 'Valorant'.
+
+### Deleting a game: `game --delete`
+
+Deletes a game from the gitGud game list.
+
+Format: `game --delete GAME_NAME`
+
+Examples:
+* `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
+
+### Link games with a friend: `link`
+
+Links game(s) and the associated in-game username(s) for each game to a friend for the provided gitGud FRIEND_ID to 
+his/her friend information.
+
+Format: `link FRIEND_ID GAME_NAME:IN_GAME_USERNAME1 GAME2_NAME:IN_GAME_USERNAME2...`
+
+* Add multiple games and in-game usernames for a friend by listing the game:in-game-username pairs separated by a space.
+* For game names or in-game usernames with spaces in-between, wrap the name string with double quotation marks. 
+For example, the game 'Apex Legends' linked to an in-game username 'tau-bar' would be represented as the pair 
+  `"Apex Legends":tau-bar`.
+  
+Examples:
+* `link Draco Valorant:biscuitismydog Minecraft:Draco` 
+  Links two games, ‘Valorant’ with the in-game username ‘biscuitismydog’ and ‘Minecraft’ with the 
+  in-game username ‘Draco’, to the friend with the gitGud FRIEND_ID ‘Draco’.
+* `link tau-bar “Apex Legends”:tau-dominator` 
+  Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’, 
+  to the friend with the gitGud FRIEND_ID ‘tau-bar’.
 
 ### Listing multiple friends’ data: `list --friend`
 
@@ -115,38 +165,9 @@ Examples:
 
 ![result for 'list --game'](images/UiListGame.png)
 
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Deleting a friend : `delete`
-
-Deletes a friend from gitGud’s friend’s list using gitGud’s unique friend identifier.
-
-Format: `friend --delete FRIEND_ID`
-
-* Deletes the person with the specified `FRIEND_ID`.
-* The `FRIEND_ID` must currently exist in the database.
-
-Examples:
-* `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
-
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the friends list.
 
 Format: `clear`
 
@@ -168,10 +189,6 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -189,11 +206,13 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
+**Add friend** | `friend FRIEND_ID [--name "NAME"]` <br> e.g., `friend Draco --name "Marcus Tang"`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"` 
+**Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
+**Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
 **List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`
 **List Games** | `list --game [KEYWORD]`<br> e.g., `list --game`, `list --game Valorant`
+**Clear** | `clear`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
