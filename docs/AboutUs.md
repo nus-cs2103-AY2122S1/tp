@@ -1,5 +1,6 @@
 ---
-layout: page title: About Us
+layout: page 
+title: About Us
 ---
 
 We believe in providing **simplicity** in everything we do here. If you're the kind of person who likes to organize your
