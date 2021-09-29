@@ -144,7 +144,6 @@ count A01111  // count by serial number
 ### Manage orders
 Remove items from the inventory by logging in an order. To enter order logging mode, use `sorder`. Exit the mode with `eorder`.
 
-**TODO: Add manageOrdersWorkflow.png to folder**
 ![mange orders workflow](images/manageOrdersWorkflow.png)
 
 ### Start ordering: `sorder` [Coming soon]
