@@ -308,7 +308,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Search for reservation availability**
+
+**MSS**
+
+1. User requests to search for reservation availability at a date and time.
+2. RHRH shows the availability for the indicated date time.  
+   Use case ends.
+   
+**Extensions:**
+
+- 1a. User requests to search for reservation availability at a date.
+    - 1a1. RHRH shows all the available slots on the indicated date.  
+      Use case ends.
+
+- 1b. User requests to search for reservation availability at a time.
+    - 1b1. RHRH shows the availability for the indicated time today.  
+      Use case ends.
+
+- 1c. RHRH detects information missing from the command entered. 
+    - 1c1. RHRH requests user to enter the command again with sufficient information.  
+      Use case ends.
+
+- 1d. RHRH detects wrong format of date/time.
+    - 1d1. RHRH requests user to enter the command again with a suitable date/time format.  
+      Use case ends.
+
+ 
 
 ### Non-Functional Requirements
 
