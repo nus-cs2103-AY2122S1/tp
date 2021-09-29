@@ -306,7 +306,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | L6  | `MEDIUM` | user                                       | view a calendar of my scheduled lessons    | plan ahead while managing my schedule                                  |
 | U1  | `HIGH`   | new user                                   | see usage instructions                     | refer to instructions whenever I need guidance on how to use **TAB**   |
 | U2  | `HIGH`   | new user                                   | purge all current data                     | remove all sample/experimental data I used while exploring **TAB**     |
-| U3  | `HIGH`   | user                                       | find a student by keyword                  | locate details of persons without having to go through the entire list |
+| U3  | `HIGH`   | user                                       | find a student by keyword                  | locate details of students without having to go through the entire list |
 | U4  | `HIGH`   | user                                       | undo accidental changes                    |                                                                        |
 | U5  | `MEDIUM` | user                                       | filter students by tags                    | view a list of all the students that feature the specified tags        |
 | U6  | `MEDIUM` | user with incomplete information           | skip less important information to add     | update later when I have the rest of the information                   |
