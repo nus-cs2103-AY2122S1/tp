@@ -65,4 +65,19 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Removes any leading 0s in {@code s}.
+     * @param s cannot be null
+     */
+    public static String removeLeadingZeroes(String s) {
+        requireNonNull(s);
+
+        String result;
+        int index = 0;
+        while (index < s.length() && s.charAt(index) == '0') {
+            index++;
+        }
+        return s.substring(index);
+    }
 }
