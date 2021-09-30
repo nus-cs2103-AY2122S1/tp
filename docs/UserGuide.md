@@ -3,6 +3,13 @@ layout: page
 title: User Guide
 ---
 
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Introduction
+
 Are you a busy private 1-to-1 home tutor who finds it difficult to remember all your students' information?
 
 **Tuition Address Book (TAB)** is an all-in-one *desktop application* that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
@@ -11,18 +18,9 @@ TAB comes with a clean Graphical User Interface (GUI) while optimised for user i
 
 Use TAB to effortlessly manage your students' contact details faster than a typical mouse/GUI driven app!
 
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## Introduction
-
-_(todo: add TAB introduction, how to read this user guide etc)_
-
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
 
 <div markdown="block" class="alert alert-info">
 
@@ -32,7 +30,7 @@ You can install the required JDK and JRE from the
 [Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
 
 Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-to help you with the installation. Select the corresponding OS you are working on for a detailed guide.
+to help you with the installation. Follow the guide for your operation system for detailed instructions.
 </div>
 
 2. Download the latest `TAB.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
