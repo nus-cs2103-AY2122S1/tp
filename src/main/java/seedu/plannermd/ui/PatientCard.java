@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.patient.Risk;
 
 /**
  * An UI component that displays information of a {@code Patient}.
@@ -40,6 +41,8 @@ public class PatientCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane risk;
 
     /**
      * Creates a {@code PatientCode} with the given {@code Patient} and index to display.
@@ -55,6 +58,26 @@ public class PatientCard extends UiPart<Region> {
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        setRisk(patient.getRisk());
+    }
+
+    private void setRisk(Risk risk) {
+        Label riskLabel = new Label(risk.toString());
+        switch (risk.riskLevel) {
+        case HIGH:
+            riskLabel.setStyle("-fx-background-color: red");
+            break;
+        case MEDIUM:
+            riskLabel.setStyle("-fx-background-color: #fcba03");
+            break;
+        case LOW:
+            riskLabel.setStyle("-fx-background-color: green");
+            break;
+        default:
+            // unclassified risk
+            return;
+        }
+        this.risk.getChildren().add(riskLabel);
     }
 
     @Override
