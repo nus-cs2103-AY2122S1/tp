@@ -58,9 +58,5 @@ We are a team based in the [School of Computing, National University of Singapor
 [[portfolio](team/leofeng10.md)]
 
 
-
-
->>>>>>> 9c0e177f1290f4c1c3e77ad442dcfcd13bff57fa
-
 * Role: Developer
 * Responsibilities: Integration
