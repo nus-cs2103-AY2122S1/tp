@@ -7,10 +7,7 @@
 
 ## About Uni-Fy
 
-**Uni-Fy** is a desktop application targeted towards university students with busy timetables and tight schedules.
-
-Uni-Fy aims to:
-
+**Uni-Fy** is a desktop application targeted towards university students with busy timetables and tight schedules, with the aim to:
 * **Track** the many activities happening throughout your academic years.
 * **Schedule and prioritise** your numerous academic tasks.
 * Provide you with more **control** over your time.
