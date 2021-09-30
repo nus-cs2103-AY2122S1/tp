@@ -18,6 +18,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -33,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String QUICK_START_INSTRUCTIONS = "💡 Quick Tips:\n"
             + AddCommand.USER_TIP + "\n\n"
             + DeleteCommand.USER_TIP + "\n\n"
+            + LessonAddCommand.USER_TIP + "\n\n"
             + ClearCommand.USER_TIP + "\n\n"
             + HelpCommand.USER_TIP + "\n\n"
             + "Have fun exploring the app! ʕ•́ᴥ•̀ʔっ♡";

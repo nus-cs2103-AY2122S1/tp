@@ -57,6 +57,23 @@ public class LessonAddCommand extends Command {
         + PREFIX_SUBJECT + "Math "
         + PREFIX_HOMEWORK + "TYS Page 2 ";
 
+    public static final String USER_TIP = "Try adding a lesson to a student using: "
+            + COMMAND_WORD + " "
+            + "[" + PREFIX_RECURRING + "] "
+            + PREFIX_DATE + "dd MMM yyyy "
+            + PREFIX_START_TIME + "HH:mm "
+            + PREFIX_END_TIME + "HH:mm "
+            + PREFIX_SUBJECT + "SUBJECT "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK]...\n"
+            + "Example of adding a recurring lesson: "
+            + COMMAND_WORD + " 1 "
+            + PREFIX_RECURRING + " "
+            + PREFIX_DATE + "09 Dec 2021 "
+            + PREFIX_START_TIME + "10:30 "
+            + PREFIX_END_TIME + "12:30 "
+            + PREFIX_SUBJECT + "Math "
+            + PREFIX_HOMEWORK + "TYS Page 2 ";
+
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor Person: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists for this person.";
