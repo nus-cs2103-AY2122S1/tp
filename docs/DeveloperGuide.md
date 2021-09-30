@@ -395,6 +395,7 @@ Use case ends.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The user should have basic knowledge of the Command Line Interface to operate the application smoothly.
+5.  Should be able to hold more than 100 contacts with no noticeable drop in performance.
 
 *{More to be added}*
 
