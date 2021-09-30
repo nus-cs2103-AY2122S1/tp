@@ -77,11 +77,11 @@ to help you with the installation. Select the corresponding OS you are working o
 
 </div>
 
-### Help 
+### Getting Help 
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing help : `help`
+#### Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -89,7 +89,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Student
+### Managing Students
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,7 +156,7 @@ Examples:
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 * `edit 3 sch/NJC stream/` Edits the school of the 3rd student to be `NJC` and clears academic stream data.
 
-#### Deleting a person: `delete`
+#### Deleting a student: `delete`
 
 Deletes the specified person from the address book.
 
@@ -186,6 +186,10 @@ Shows a list of all students in the address book.
 
 Format: `list`
 
+### Finding Students
+
+--------------------------------------------------------------------------------------------------------------------
+
 #### Finding students by fields: `find`
 
 Finds all students whose fields match the given keywords.
@@ -201,34 +205,28 @@ Format: `find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …]
 
 * The search is case-insensitive.<br>
   e.g.`hans` will match `Hans`.
-  
+
 * The order of the keywords does not matter.<br>
   e.g. `Clementi West` will match `West Clementi`.
-  
+
 * The keyword does not need to match the field exactly.<br>
   e.g. `john@gmail.com` will match `leejohn@gmail.com`.
-  
+
 * A field just needs to match at least one keyword.<br>
   e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
-  
+
 * A student is only considered a match when all fields which you are searching for match their keywords.<br>
   e.g. `find n/john a/Clementi`
-    * will match student named `john` with address `West Clementi Street`
-    * will not match student named `john` with address `Bedok Reservoir`
+  * will match student named `john` with address `West Clementi Street`
+  * will not match student named `john` with address `Bedok Reservoir`
 
 </div>
 
 Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
-* `find a/Jurong east n/Ben e/gmail`  
-    * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-    * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
-
-#### Viewing all tags: `tag`
-
-Shows all the tags that user has created in TAB.
-
-Format: `tag`
+* `find a/Jurong east n/Ben e/gmail`
+  * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
+  * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
 
 #### Filtering students by tags: `filter`
 
@@ -263,7 +261,7 @@ Examples:
 * `filter cond/none t/Inactive t/paid` will return students without both `Inactive` and `paid` tags.
 
 
-### Lesson
+### Managing Lessons
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -297,7 +295,7 @@ adds the lesson to the 1st student in the address book
 * `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
   (makeup lesson w/ homework) adds the lesson to the 1st student in the results of the `find` command.
 
-### Deleting a lesson : `ldelete`
+#### Deleting a lesson : `ldelete`
 
 Deletes the specified lesson from the specified student in the address book.
 
@@ -313,13 +311,32 @@ Examples:
 * `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st person in the results 
   of the `find` command.
 
+### Viewing the Schedule
+
+--------------------------------------------------------------------------------------------------------------------
+
 #### Viewing schedule: `schedule` [coming soon]
 
 Displays a read-only weekly schedule.
 
 Format: `schedule`
 
-### Others
+### Managing Data
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Saving the data
+
+AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### Editing the data file
+
+AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+</div>
+### Miscellaneous Commands
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -328,6 +345,12 @@ Format: `schedule`
 Clears all entries from the address book.
 
 Format: `clear`
+
+#### Viewing all tags: `tag`
+
+Shows all the tags that user has created in TAB.
+
+Format: `tag`
 
 #### Undoing previous command: `undo`
 
@@ -346,26 +369,6 @@ Format: `redo`
 Exits the program.
 
 Format: `exit`
-
-### Storage
-
---------------------------------------------------------------------------------------------------------------------
-
-#### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-#### Editing the data file
-
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
-</div>
-
-#### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
