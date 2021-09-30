@@ -230,43 +230,174 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                 | I want to …​                                              | So that I …​                                                                |
+| -------- | ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `* * *`  | user                                       | use the application offline                                  | can view my contacts without an internet connection                            |
+| `* * *`  | FA                                         | delete contact info                                          | will not have useless data in my app                                           |
+| `* * *`  | FA                                         | store my clients contact info                                | can contact them in the future more easily                                     |
+| `* * *`  | user                                       | see all of my contacts                                       | know who is in my contacts                                                     |
+| `* * *`  | new user                                   | learn how to use the app                                     | can effectively use the app                                                    |
+| `* * *`  | busy person                                | use the app with friendlier syntax that's easier to type     | can add contacts with less trouble                                             |
+| `* * *`  | busy person                                | see all the available commands at a glance                   | can focus on managing my client base rather than dealing with the syntax       |
+| `* * *`  | FA                                         | update my clients contact info                               | have up to date information                                                    |
+| `* * *`  | forgetful person                           | quickly check for the highest priority client                | can move on to the next client quickly without delay                           |
+| `* * *`  | FA with many clients                       | tag my clients' info                                         | can see different groups of clients according to the tags                      |
+| `* *`    | FA                                         | store my clients contact information                         | do not need to store them on my phone                                          |
+| `* *`    | numbers person                             | delete multiple contacts in one go                           | do not have to delete contacts individually                                    |
+| `* *`    | FA with many clients                       | search through my clients                                    | can easily find a specific client                                              |
+| `* *`    | FA                                         | have fast access to important numbers (e.g. office, partners | can quickly contact my partners should something arise                         |
+| `* *`    | potential user                             | see how the app works with sample data                       | can understand what the app will look like with real data                      |
+| `* *`    | FA                                         | group my clients according to their investment strategies    | can easily manage each group                                                   |
+| `* *`    | FA                                         | archive data that might be obsolete at the moment            | do not flood my app with obsolete data and can still access them in the future |
+| `*`      | FA                                         | store appointments info of my clients                        | will not forget about important meetings                                       |
+| `*`      | person with many devices                   | import and export the client info                            | can switch between devices quickly                                             |
+| `*`      | FA with many clients                       | view stats of my client base                                 | can know how much income I am making                                           |
+| `*`      | FA                                         | reminded to contact potential clients                        | can disturb potential clients into signing on                                  |
+| `*`      | FA                                         | check the number of clients and deals currently              | can check if i have fulfilled my monthly quota                                 |
+| `*`      | FA                                         | store extra info that could be useful                        | can remember extra details that could be useful in clinching a deal            |
+| `*`      | FA                                         | see frequently contacted clients                             | don't have to keep searching for the same person over and over again           |
+| `*`      | FA                                         | list out all my investment plans                             | know what investment plans I am selling                                        |
+| `*`      | user                                       | color-code my contacts                                       | can differentiate between the tags, and it looks nicer                         |
+| `*`      | Responsible FA                             | be reminded of clashes in my appointments                    | will not lose any potential clients                                            |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `Financial Advisor Smart Tracker (FAST)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add Contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new contact
+2. FAST displays a message indicating success
+3. FAST displays the new contact below
 
-    Use case ends.
+   Use case ends
+
+**Extensions**
+
+* 1a. The given command syntax is invalid
+    * 1a1. FAST shows an error message
+    * 2a2. FAST shows an example of add command to user
+
+      Use case ends
+
+**Use case: UC02 - Delete Contact**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to delete a specific person in the list
+3. FAST deletes the person
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of delete command to user
+
+      Use case ends.
+
+**Use case: UC03 - Edit Contact**
+
+**MSS**
+
+1. User requests to list contacts (UC06)
+2. User requests to edit a contact
+3. FAST displays the updated contact
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of edit command to user
+
+      Use case ends.
+
+
+* 2b. The given command syntax is invalid
+    * 2b1. FAST displays an error message
+    * 2b2. FAST displays an example of the edit command to the user
+
+      Use case ends.
+
+
+**Use case: UC04 - Add a remark**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to add a remark to a specific person in the list
+3. FAST displays the new remark in the contact
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The given index is invalid
+    * 2a1. FAST shows an error message
+    * 2a2. FAST shows an example of remark command to user
+
+      Use case ends
+
+
+* 2b. The given command syntax is invalid
+    * 2b1. FAST displays an error message
+    * 2b2. FAST displays an example of the remark command to the user
+
+      Use case ends
+
+
+* 2c. User removes an existing remark
+    * 2c1. FAST displays a message that the remark has been removed
+
+      Use case ends
+
+
+**Use case: UC05 - Find Contact**
+
+**MSS**
+
+1. User searches for a name
+2. FAST shows a list of persons with the specified name or people whose name contains the search query
+
+   Use case ends
+
+**Extensions**
+
+* 1a. The given search query is invalid
+    * 1a1. FAST shows an error message
+    * 1a2. FAST shows an example of find command to user
+
+      Use case ends
+
+
+* 1b FAST cannot find any contacts with the given search query
+    * 1b1. FAST displays a message to inform user no contacts that matches the query was found
+
+      Use case ends
+
+
+**Use case: UC06 - List Contacts**
+
+**MSS**
+
+1. User requests to list contacts
+2. FAST displays a list of contacts
+
+   Use case ends
 
 **Extensions**
 
 * 2a. The list is empty.
 
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+  Use case ends
 
 *{More to be added}*
 

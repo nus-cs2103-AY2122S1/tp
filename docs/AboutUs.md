@@ -8,15 +8,15 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project team
 
-### John Doe
+### Khor Ethan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/squeakysquak.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/squeakysquak)]
+[[portfolio](team/ethan.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Scheduling & Tracking
 
 ### Lau Teng Hon
 
@@ -28,28 +28,29 @@ We are a team based in the [School of Computing, National University of Singapor
 * Role: Team Lead
 * Responsibilities: Integration (Tentative)
 
-### Johnny Doe
+### Toh Wang Bin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/trash-bin99.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/trash-bin99)] 
+[[portfolio](team/wangbin.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing
+
+### Lim Peiyuan
+
+<img src="images/py0000.png" width="200px">
+
+[[github](https://github.com/Py0000)]
+[[portfolio](team/peiyuan.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality
 
 ### Calvin Tan
 
-<img src="images/calvintan.png" width="200px">
+<img src="images/cyn7hius.png" width="200px">
 
 [[github](https://github.com/Cyn7hius)]
 [[portfolio](team/johndoe.md)]
