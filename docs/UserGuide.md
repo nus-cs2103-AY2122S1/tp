@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+CSBook is a **desktop app for teaching assistants (TAs) to manage their students, optimized for use via a Command Line Interface** (CLI) while still having the
+benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can get your student management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,9 +15,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `CSBook.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for CSBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,13 +25,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all students.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T` : Adds a student named `Jia Xian` to CSBook
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -67,42 +68,35 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a student: `add`
 
-Adds a person to the address book.
+Adds a student to the CSBook.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
+* `add n/Jun Wei t/@albino_api e/albinoape@u.nus.edu g/CS2101`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the CSBook.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a student : `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the CSBook.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUP_NAME]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 t/@albino_monkey e/e0540014X@u.nus.edu` Edits the telegram handle and email address of the 1st student to be `@albino_monkey` and `e0540014X@u.nus.edu` respectively.
+*  `edit 2 n/Jiaxian` Edits the name of the 2nd student to be `Jiaxian`.
 
 ### Locating students by name: `find`
 
@@ -133,7 +127,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `list` followed by `delete 2` deletes the 2nd student in CSBook.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### View details of a group
@@ -201,7 +195,7 @@ CSBook data are saved in the hard disk automatically after any command that chan
 CSBook data are saved as a JSON file `[JAR file location]/data/CSBook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
