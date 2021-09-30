@@ -1,5 +1,7 @@
 [![Java CI](https://github.com/AY2122S1-CS2103T-W13-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-W13-4/tp/actions/workflows/gradle.yml)
 
+![gitGud](docs/images/gitgud.png)
+
 ## What is gitGud? 
 
 gitGud is a desktop application for managing friends' gaming information. 
