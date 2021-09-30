@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Sourabh Jaiswal
 
-<img src="images/srj31.png.png" width="200px">
+<img src="images/srj31.png" width="200px">
 
 [[github](http://github.com/srj31)]
 [[portfolio](team/srj31.md)]
