@@ -504,7 +504,7 @@ Use case ends
     * 1c1. RHRH requests for the missing details to be filled in.
     * 1c2. User enters missing data.
 
-    Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+    Steps 1c1 - 1c2 are repeated until the date/time is correctly formatted.
 
 
     Use case resumes from step 2.
