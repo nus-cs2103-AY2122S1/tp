@@ -39,11 +39,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Siddharth Srivastava
 
-<img src="images/Siddharth-Sid.png" width="200px">
+<img src="images/siddharth-sid.png" width="200px">
 
-[[github](https://github.com/Siddharth-Sid)]
-
-[comment]: <> ([[portfolio]&#40;team/johndoe.md&#41;])
+[[github](https://github.com/siddharth-sid)]
 
 * Role: Developer
 * Responsibilities: Testing
