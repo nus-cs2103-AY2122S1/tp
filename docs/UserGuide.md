@@ -3,14 +3,14 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MTR can get your application management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick start (coming soon)
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -71,6 +71,29 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Adding a position: `add position`
+
+Adds a position to the application management system.
+
+Format: `add position t/TITLE desc/DESCRIPTION`
+
+Examples:
+* `add postion t/software engineer desc/work in a team that builds a facial recognition application`
+
+
+### Deleting a position: `delete position`
+
+Deletes the specified position from the application management system.
+
+Format: `delete position t/TITLE`
+
+* Deletes the position with the specified `POSITION`.
+* The name refers to the name of the position as displayed in the position list.
+* The name must match exactly.
+
+Examples:
+* `delete position pos/software engineer` deletes the position with the exact name `software engineer`.
 
 
 ### Adding an applicant: `add applicant`
