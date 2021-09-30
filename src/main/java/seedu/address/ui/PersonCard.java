@@ -29,15 +29,21 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
+    @FXML
+    private Label name;
     @FXML
     private Label phone;
     @FXML
+    private Label email;
+    @FXML
+    private Label parentPhone;
+    @FXML
+    private Label parentEmail;
+    @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label outstandingFee;
     @FXML
     private Label school;
     @FXML
@@ -46,6 +52,8 @@ public class PersonCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane lessons;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,34 +63,70 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        address.setText("Address: " + person.getAddress().value);
+
+        if (person.getPhone().isEmpty()) {
+            phone.setVisible(false);
+            phone.setManaged(false);
+        } else {
+            phone.setText("Phone: " + person.getPhone().value);
+        }
+
+        if (person.getEmail().isEmpty()) {
+            email.setVisible(false);
+            email.setManaged(false);
+        } else {
+            email.setText("Email: " + person.getPhone().value);
+        }
+
+        if (person.getParentPhone().isEmpty()) {
+            parentPhone.setVisible(false);
+            parentPhone.setManaged(false);
+        } else {
+            parentPhone.setText("Parent Phone: " + person.getPhone().value);
+        }
+
+        if (person.getParentEmail().isEmpty()) {
+            parentEmail.setVisible(false);
+            parentEmail.setManaged(false);
+        } else {
+            parentEmail.setText("Parent Email: " + person.getPhone().value);
+        }
 
         if (person.getSchool().isEmpty()) {
             school.setVisible(false);
             school.setManaged(false);
         } else {
-            school.setText(person.getSchool().schName);
+            school.setText("School " + person.getSchool().schName);
         }
 
         if (person.getAcadStream().isEmpty()) {
             acadStream.setVisible(false);
             acadStream.setManaged(false);
         } else {
-            acadStream.setText(person.getAcadStream().acadStream);
+            acadStream.setText("Academic Stream: " + person.getAcadStream().acadStream);
         }
 
         if (person.getRemark().isEmpty()) {
             remark.setVisible(false);
             remark.setManaged(false);
         } else {
-            remark.setText(person.getRemark().value);
+            remark.setText("Remark: " + person.getRemark().value);
+        }
+
+        if (person.getFee().isEmpty()) {
+            outstandingFee.setVisible(false);
+            outstandingFee.setManaged(false);
+        } else {
+            outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
         }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getLessons().stream().sorted()
+            .forEach(lesson -> lessons.getChildren()
+                .add(new Label("\n" + lesson.toString())));
     }
 
     @Override

@@ -3,18 +3,30 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
+    "parentPhone": "94351253",
+    "parentEmail": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+<<<<<<< HEAD
     "school": "",
     "acadStream": "",
+=======
+    "outstandingFee": "0",
+>>>>>>> master
     "remark" : "",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "parentPhone": "94351253",
+    "parentEmail": "alice@example.com",
     "address": "4th street",
+<<<<<<< HEAD
     "school": "",
     "acadStream": "",
+=======
+    "outstandingFee": "0",
+>>>>>>> master
     "remark" : ""
   } ]
 }
