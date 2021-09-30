@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/AY2122S1-CS2103-F10-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/CS2103-AY2122S1-F10-4/tp/actions)
+[![CI Status](https://github.com/AY2122S1-CS2103-F10-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103-F10-4/tp/actions)
 
 # About Student Insurant Agent Sales Assistant (SIASA) application
 
