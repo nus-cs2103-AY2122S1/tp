@@ -120,6 +120,36 @@ Examples:
 * `find Quiz GEQ1000` returns GEQ1000 Quiz 1,  GEQ1000 Quiz 2
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
 
+
+### Setting Priority Level for Tasks: `tag` (coming soon)
+
+Set a task's priority.
+
+Format:
+- <code> tag n/task_name (d/date) tg/level </i> </code>
+- <code> tag task_id (d/date) tg/level </i> </code>
+
+Interpretation
+* If <code><i>n/task_name</i></code> field is provided:
+  * Depending on the <code><i>tg/level </i></code> provided it sets priority of the task with the name exactly matching the <code><i>n/task_name </i></code> or <code><i>task_id</i></code> to 
+    * Urgent
+    * Important
+    * Medium
+    * Low
+  * The <code><i>tg/level</i></code> field is case-insensitive
+  * If <code><i>date</i></code> field is provided, it sets priority for the task in the given date
+    * Useful in cases when there are multiple copies of the same task , recurring tasks, etc.
+  * If <code><i>d/date</i></code> field is not provided, it sets priority for every occurrence of tasks matching the given name
+  
+* If <code><i>task_id</i></code> is provided:
+
+
+Examples:
+* `tag 5 tg/Urgent` sets the priority of task 5 in the task list to `Urgent`
+* `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
+
+
+
 ### Deleting tasks : `delete` (coming soon)
 
 Delete a specific task that has been added to your app.
@@ -187,7 +217,7 @@ Action | Format, Examples
 **Delete** | <code>delete <i>task_id</i></code> <br> <code>delete <i>n/task_name (d/date)</i> </code> <br> e.g. <code>delete n/quiz d/2021-10-10 </code>
 **Show** | `show`
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
-**Tag** | `TODO`
+**Tag** | <code> tag n/task_name (d/date) tg/level </i> </code> <br>e.g.  `tag n/quiz d/2021-10-10 tg/Important`
 **Help** | `help`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Clear** | `clear`
