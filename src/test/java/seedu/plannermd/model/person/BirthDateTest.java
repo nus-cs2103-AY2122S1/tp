@@ -22,16 +22,16 @@ public class BirthDateTest {
     @Test
     public void isValidBirthDate() {
         // null address
-        assertThrows(NullPointerException.class, () -> BirthDate.isValidDob(null));
+        assertThrows(NullPointerException.class, () -> BirthDate.isValidBirthDate(null));
 
         // invalid addresses
-        assertFalse(BirthDate.isValidDob("")); // empty string
-        assertFalse(BirthDate.isValidDob("2021-02-02")); // in YYYY-MM-DD format
-        assertFalse(BirthDate.isValidDob("12/31/2021")); // in MM/DD/YYYY format
+        assertFalse(BirthDate.isValidBirthDate("")); // empty string
+        assertFalse(BirthDate.isValidBirthDate("2021-02-02")); // in YYYY-MM-DD format
+        assertFalse(BirthDate.isValidBirthDate("12/31/2021")); // in MM/DD/YYYY format
 
         // valid addresses
-        assertTrue(BirthDate.isValidDob("2/2/2222"));
-        assertTrue(BirthDate.isValidDob("12/2/2021")); // one character
-        assertTrue(BirthDate.isValidDob("28/03/2021")); //
+        assertTrue(BirthDate.isValidBirthDate("2/2/2222"));
+        assertTrue(BirthDate.isValidBirthDate("12/2/2021")); // one character
+        assertTrue(BirthDate.isValidBirthDate("28/03/2021")); //
     }
 }

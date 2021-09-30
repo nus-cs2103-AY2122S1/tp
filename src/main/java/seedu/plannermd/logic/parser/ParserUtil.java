@@ -90,7 +90,7 @@ public class ParserUtil {
     public static BirthDate parseBirthDate(String birthDate) throws ParseException {
         requireNonNull(birthDate);
         String trimmedBirthDate = birthDate.trim();
-        if (!BirthDate.isValidDob(trimmedBirthDate)) {
+        if (!BirthDate.isValidBirthDate(trimmedBirthDate)) {
             throw new ParseException(BirthDate.MESSAGE_CONSTRAINTS);
         }
         return new BirthDate(trimmedBirthDate);

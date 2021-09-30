@@ -1,23 +1,18 @@
 package seedu.plannermd.model.person;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
-import java.util.Date;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.text.SimpleDateFormat;
 
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's email in the plannermd.
- * Guarantees: immutable; is valid as declared in {@link #isValidDob(String)}
+ * Represents a Person's birth date in the plannermd.
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthDate(String)}
  */
 public class BirthDate {
 
@@ -40,26 +35,27 @@ public class BirthDate {
     public final String value;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs a {@code BirthDate}.
      *
-     * @param birthDate A valid email address.
+     * @param birthDate A valid birth date.
      */
     public BirthDate(String birthDate) {
         requireNonNull(birthDate);
-        checkArgument(isValidDob(birthDate), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidBirthDate(birthDate), MESSAGE_CONSTRAINTS);
         value = birthDate;
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid birth date.
      */
-    public static boolean isValidDob(String test) {
+    public static boolean isValidBirthDate(String test) {
+        //Done to check if input isn't just the date
         if (test.split(" ", 2).length > 1) {
             return false;
         }
 
         try {
-            System.out.println(LocalDateTime.parse(test, formatter));
+            LocalDateTime.parse(test, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
