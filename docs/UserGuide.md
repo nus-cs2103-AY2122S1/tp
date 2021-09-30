@@ -6,7 +6,7 @@ title: User Guide
 Ailurus is a **desktop app** that helps to organise committees account for details of their members. It
 provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
 
-It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ailurus can get your contact management tasks done faster than traditional GUI apps.
+It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ailurus can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
@@ -43,7 +43,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `ailurus.jar` from [here](https://https://github.com/AY2122S1-CS2103T-T15-2/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Ailurus.
 
