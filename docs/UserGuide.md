@@ -43,13 +43,13 @@ to help you with the installation. Follow the guide for your operation system fo
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all students.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the address book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a student named `John Doe` to TAB.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -101,7 +101,7 @@ Format: `help`
 
 #### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to TAB.
 
 Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
@@ -125,7 +125,7 @@ Examples:
 
 #### Editing a student: `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in TAB.
 
 Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
@@ -164,7 +164,7 @@ Examples:
 
 #### Deleting a student: `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified student from TAB.
 
 Format: `delete INDEX`
 
@@ -173,7 +173,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `list` followed by `delete 2` deletes the 2nd student in TAB.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 #### Viewing a student's details: `view`
@@ -188,7 +188,7 @@ Format: `view INDEX`
 
 #### Listing all students: `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in TAB.
 
 Format: `list`
 
@@ -236,7 +236,7 @@ Examples:
 
 #### Filtering students by tags: `filter`
 
-Filters students in the address book by their tags, based on the given filter condition.
+Filters students in TAB by their tags, based on the given filter condition.
 
 Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
 
@@ -273,7 +273,7 @@ Examples:
 
 #### Adding a lesson: `ladd`
 
-Adds a lesson with the corresponding details to the specified student in the address book.
+Adds a lesson with the corresponding details to the specified student in TAB.
 
 **Types of lesson:**
 * Recurring
@@ -296,14 +296,14 @@ Format: `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/
 Examples:
 
 * `list` followed by `ladd 1 recurring/ date/16 Sep 2021 start/15:00 end/16:00 subject/Math` (recurring lesson)
-adds the lesson to the 1st student in the address book
+adds the lesson to the 1st student in TAB.
 
 * `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
   (makeup lesson w/ homework) adds the lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
 
-Deletes the specified lesson from the specified student in the address book.
+Deletes the specified lesson from the specified student in TAB.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
@@ -313,7 +313,7 @@ Format: `ldelete INDEX LESSON_INDEX`
 * The index and lesson index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in the address book.
+* `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
 * `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
 
@@ -349,7 +349,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 
 #### Clearing all entries: `clear`
 
-Clears all entries from the address book.
+Clears all entries from TAB.
 
 Format: `clear`
 
