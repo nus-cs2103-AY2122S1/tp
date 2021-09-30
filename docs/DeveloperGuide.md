@@ -293,16 +293,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClassMATE` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  ClassMATE shows a list of students
+3.  User requests to delete a specific student in the list
+4.  ClassMATE deletes the student
 
     Use case ends.
 
@@ -314,9 +314,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ClassMATE shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: List students**
+
+**MSS**
+
+1.  User requests to list students
+2.  ClassMATE shows a list of students
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User decides to specify a class to list students
+
+    * 1a1. ClassMATE shows a list of students in the specified  tutorial class
+
+      Use case ends.
+
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: Add a tutorial class**
+
+**MSS**
+
+1.  User requests to add a tutorial class.
+2.  ClassMATE adds the tutorial class.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The tutorial class already exists.
+    *  1a1. ClassMATE shows a message informing the user.
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -325,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Readable font.
+4.  Readable font, at least size 12.
 5.  Lightweight program.
 6.  Light Mode.
 7.  Able to function in the background.
@@ -337,6 +375,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Tutorial class**: A CS2101 tutorial class. Each student can only have up to one tutorial class
+* **Student**: An NUS student taking the CS2101 module.
 
 --------------------------------------------------------------------------------------------------------------------
 
