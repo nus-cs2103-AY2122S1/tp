@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.ModuleTracker;
-import seedu.address.model.person.Module;
+import seedu.address.model.module.Module;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -10,25 +10,25 @@ import seedu.address.model.person.Module;
  */
 public class AddressBookBuilder {
 
-    private ModuleTracker addressBook;
+    private ModuleTracker moduleTracker;
 
     public AddressBookBuilder() {
-        addressBook = new ModuleTracker();
+        moduleTracker = new ModuleTracker();
     }
 
     public AddressBookBuilder(ModuleTracker addressBook) {
-        this.addressBook = addressBook;
+        this.moduleTracker = addressBook;
     }
 
     /**
      * Adds a new {@code Module} to the {@code ModuleTracker} that we are building.
      */
-    public AddressBookBuilder withPerson(Module person) {
-        addressBook.addModule(person);
+    public AddressBookBuilder withModule(Module module) {
+        moduleTracker.addModule(module);
         return this;
     }
 
     public ModuleTracker build() {
-        return addressBook;
+        return moduleTracker;
     }
 }
