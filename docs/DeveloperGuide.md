@@ -269,7 +269,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Categories: Administrative, Customer, Employee, Supplier
+
+Priorities: High, Low
 
 | As a ... | I can ...                                                                                                             | so that ...                                                                            | Category       | Priority |
 | -------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------- | -------- |
