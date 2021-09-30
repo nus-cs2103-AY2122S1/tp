@@ -294,7 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The format is invalid.
-    * 3a1. MrTechRecruiter shows an error message.
+    * 1a1. MrTechRecruiter shows an error message.
 
   Use case resumes at step 1.
 
@@ -331,9 +331,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
 **Extensions**
 
-* 2a. No current job positions.
+* 1a. No current job positions.
   
-    * 2a1. MrTechRecruiter shows an 'No job positions' message.
+    * 1a1. MrTechRecruiter shows an 'No job positions' message.
       
       Use case ends.
     
@@ -343,7 +343,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
 
-    
+**Use case: Viewing average rejection rates for a particular job position.**
+
+**MSS**
+
+1. User requests to see average rejection rates of a job position.
+2. MrTechRecruiter displays the job position and its corresponding rejection rate.
+   Use case ends.
+
+**Extensions**
+
+* 1a. Job position does not exist.
+
+    * 1a1. MrTechRecruiter shows an 'No such job position found' message.
+
+      Use case ends.
+
+* 2b. Job position has relatively high rejection rate.
+
+    * 2b1. MrTechRecruiter highlights its high rejection rate.
+
+      Use case ends. 
+   
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -413,6 +434,19 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`<br>
          Expected: John Doe, with all the relevant details that were passed as parameters is added to MrTechRecruiter.
+
+1. _{ more test cases …​ }_
+
+### View average rate of a job
+
+1. View average rate of a job in MrTechRecruiter
+
+    1. Prerequisites: <br>
+       a. Job must exist in address book. <br>
+       b. Average rate already tabulated for the job.
+
+    1. Test case: `average software engineer`<br>
+       Expected: Software Engineer: 10%
 
 1. _{ more test cases …​ }_
 
