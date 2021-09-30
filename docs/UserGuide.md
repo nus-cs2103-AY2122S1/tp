@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TAB3 is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still 
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAB3 can get your contact management 
+tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -64,6 +66,17 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
+
+### Module add task: `add task`
+
+Create a new task for a specific module
+
+Format: `module add <module name>, <task name>`
+
+Examples:
+* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
+* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -72,6 +85,23 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Create a new student: `student add`
+
+Create a new student
+
+Format: `student add <student id>, <student name>, <student teleHandle>, <student email>`
+
+Examples:
+* `student add A0123456A, John Doe, @johndoe, john.doe@u.nus.edu`: add student John Doe
+
+### Get student information: `student get`
+
+Get the student’s information (name, id, telehandle, email)
+
+Format: `student get <student id>`
+
+Examples:
+* `student get A0123456A`: get information of the student with student id A0123456A
 
 ### Adding a person: `add`
 
