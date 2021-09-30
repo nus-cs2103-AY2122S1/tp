@@ -18,16 +18,6 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 * Role: Project Advisor
 
-### Heng Chen Kai, Darren
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
 ### Tan Chin Han, Benjamin
 
 <img src="images/benjamintan99.png" width="200px">
@@ -36,6 +26,15 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 * Role: Developer
 * Responsibilities: Documentation, Deliverables & Deadlines
+=======
+### Darren Heng
+
+<img src="images/darren2pro.png" width="200px">
+
+[[github](http://github.com/darren2pro)] [[portfolio](team/darren2pro.md)]
+
+* Role: Developer
+* Responsibilities: Testing
 
 ### Gao Haochun
 
