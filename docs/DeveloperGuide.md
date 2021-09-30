@@ -276,7 +276,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add tasks                      |                                                                         |
 | `* * *`  | user                                       | delete tasks                  | remove tasks that I no longer need to track                            |
 | `* * *`  | user                                       | find tasks                     | locate details of a task without having to go through the entire list  |
-| `* *`    | user                                       |                                | minimize chance of someone else seeing them by accident                |
+| `* *`    | user                                       | tag tasks                      | set a tasks priority               |
 | `*`      | user with many persons in the address book |                                | locate a person easily                                                 |
 
 *{More to be added}*
@@ -347,6 +347,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User requests to find tasks that contains some keywords with a due date.
     * 1a1. Uni-Fy displays the list of tasks with matching keywords with that due date.
   Use case ends.
+
+
+**Use case: Tag a task**
+
+**MSS**
+
+1.  User requests to tag tasks that contains some keywords
+2.  Uni-Fy sets priority for that particular task(s) with the matching keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to tag tasks that contains some keywords with a due date.
+    * 1a1. Uni-Fy sets priority for the particular task(s) with matching keywords with that due date.
+      Use case ends.
 
 *{More to be added}*
 
