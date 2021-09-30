@@ -3,6 +3,13 @@ layout: page
 title: User Guide
 ---
 
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Introduction
+
 Are you a busy private 1-to-1 home tutor who finds it difficult to remember all your students' information?
 
 **Tuition Address Book (TAB)** is an all-in-one *desktop application* that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
@@ -11,18 +18,9 @@ TAB comes with a clean Graphical User Interface (GUI) while optimised for user i
 
 Use TAB to effortlessly manage your students' contact details faster than a typical mouse/GUI driven app!
 
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## Introduction
-
-_(todo: add TAB introduction, how to read this user guide etc)_
-
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
 
 <div markdown="block" class="alert alert-info">
 
@@ -32,7 +30,7 @@ You can install the required JDK and JRE from the
 [Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
 
 Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-to help you with the installation. Select the corresponding OS you are working on for a detailed guide.
+to help you with the installation. Follow the guide for your operation system for detailed instructions.
 </div>
 
 2. Download the latest `TAB.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
@@ -47,7 +45,7 @@ to help you with the installation. Select the corresponding OS you are working o
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the address book.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -69,9 +67,9 @@ to help you with the installation. Select the corresponding OS you are working o
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -91,7 +89,7 @@ to help you with the installation. Select the corresponding OS you are working o
 
 #### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -103,12 +101,12 @@ Format: `help`
 
 #### Adding a student: `add`
 
-Adds a student to the tuition address book.
+Adds a student to the address book.
 
 Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of tags (including 0)
+A student can have any number of tags (including 0).
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -166,17 +164,17 @@ Examples:
 
 #### Deleting a student: `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 #### Viewing a student's details: `view`
 
@@ -234,7 +232,7 @@ Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
 * `find a/Jurong east n/Ben e/gmail`
   * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-  * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
+  * will match a student named `benjamin`, with address `yishun east ave 1`, and email `benj@gmail.com`
 
 #### Filtering students by tags: `filter`
 
@@ -309,14 +307,14 @@ Deletes the specified lesson from the specified student in the address book.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
-* Deletes the lesson of specified `LESSON_INDEX` for the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The lesson index refers to the index number shown in the lesson list of the person. 
+* Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The lesson index refers to the index number shown in the lesson list of the student. 
 * The index and lesson index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd person in the address book.
-* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st person in the results 
+* `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in the address book.
+* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
 
 ### Viewing the Schedule
@@ -335,14 +333,14 @@ Format: `schedule`
 
 #### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAB data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Miscellaneous Commands
@@ -363,7 +361,7 @@ Format: `tag`
 
 #### Undoing previous command: `undo`
 
-Undo the previous command that modified the Storage.
+Undo the previous command that modified the data.
 
 Format: `undo`
 
