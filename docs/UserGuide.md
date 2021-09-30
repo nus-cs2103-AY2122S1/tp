@@ -7,22 +7,8 @@ gitGud is a **desktop application for managing friends' gaming information**. gi
 (GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. If you can 
 type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
 
-Table of Contents
-* [Quick start](#quick-start)
-* [Features](#features)
-    * [Viewing help - `help`](#viewing-help-help)
-    * [Adding a friend - `friend`](#adding-a-friend-friend)
-    * [Deleting a friend - `friend --delete`](#deleting-a-friend-friend---delete)
-    * [Adding a game - `game`](#adding-a-game-game)
-    * [Deleting a game - `game --delete`](#deleting-a-game-game---delete)
-    * [Linking games with a friend - `link`](#link-games-with-a-friend-link)
-    * [Listing multiple friends data - `list --friend`](#listing-multiple-friends-data-list---friend)
-    * [Listing multiple games data - `list --game`](#listing-multiple-games-data-list---game)
-    * [Getting a single friend's complete data - `get -- friend`](#getting-a-single-friends-complete-data-get---friend)
-    * [Getting a single game's complete data - `get --game`](#getting-a-single-games-complete-data-get---game)
-* [FAQ](#faq)
-* [Command summary](#command-summary)
-
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
