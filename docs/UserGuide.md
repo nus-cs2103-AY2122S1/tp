@@ -168,6 +168,16 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Retrieving additional information of students': `retrieve`
+
+Retrieves additional information of students if present. Currently supported information includes: 
+- Studio Participation
+- Telegram Handle
+- Email address
+- Contact Number, if any
+
+Format: `retrieve INFORMATION [of STUDENT_NAME]`
+
 ### Exiting the program : `exit`
 
 Exits the program.
