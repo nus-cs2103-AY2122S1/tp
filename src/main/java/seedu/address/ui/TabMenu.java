@@ -1,17 +1,11 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import seedu.address.model.person.Person;
-
-import java.util.Comparator;
 
 /**
  * An UI component that displays the Tab Pane.
