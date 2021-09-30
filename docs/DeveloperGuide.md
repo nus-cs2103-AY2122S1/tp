@@ -577,6 +577,8 @@ Use case ends.
 10.  Software should not exceed **100MB**.
 11.  Documents should not exceed **15MB** per file.
 12.  Developer Guide and User Guide should be *PDF-friendly*(no expandable panels, embedded videos, animated GIFs etc.).
+13.  Does not require a server component as the software will not perform automated tasks.
+14.  Should only allow use by **authorized** personnel.
 
 *{More to be added}*
 
