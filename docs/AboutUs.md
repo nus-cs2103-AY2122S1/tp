@@ -26,7 +26,7 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 * Role: Developer
 * Responsibilities: Documentation, Deliverables & Deadlines
-=======
+
 ### Darren Heng
 
 <img src="images/darren2pro.png" width="200px">
@@ -38,10 +38,9 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 ### Gao Haochun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/harry-gao-h.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/harry-gao-h)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code quality, Scheduling & Tracking
