@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/Siddharth-Sid.png" width="200px">
 
-[[github](https://github.com/Siddharth-Sid)]
+[[github](https://github.com/siddharth-sid)]
 
 [comment]: <> ([[portfolio]&#40;team/johndoe.md&#41;])
 
