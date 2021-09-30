@@ -117,16 +117,6 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
 * `add n/Betsy Crowe t/cousin a/Newgate p/91234567 f/150.50 r/hasnt pay tuition fee for Aug t/retainee`
 
-#### Viewing a student's details: `view`
-
-> ❕❕ <b>Note:</b> This feature is subject to changes
-
-View data of student with specified index in detail.
-
-![view student details](images/viewAlexDetail.png)
-
-Format: `view INDEX`
-
 #### Editing a student: `edit`
 
 Edits an existing student in the address book.
@@ -179,6 +169,16 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+#### Viewing a student's details: `view`
+
+> ❕❕ <b>Note:</b> This feature is subject to changes
+
+View data of student with specified index in detail.
+
+![view student details](images/viewAlexDetail.png)
+
+Format: `view INDEX`
 
 #### Listing all students: `list`
 
