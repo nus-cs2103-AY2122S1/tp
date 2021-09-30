@@ -5,7 +5,10 @@ title: User Guide
 
 ![gitGud](images/gitgud.png)
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+gitGud is a **desktop application for managing friends' gaming information**. gitGud uses a simple **Graphical User Interface 
+(GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. If you can 
+type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
+
 
 * Table of Contents
   {:toc}
@@ -16,27 +19,25 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `gitgud.jar` from [here](https://github.com/AY2122S1-CS2103T-W13-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your gitGud application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`** : Lists all contacts.
+   * **`list --friend`** : Lists all friends.
 
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`friend`**`Draco --name Marcus` : Adds a friend __Marcus__ with gitGud FRIEND_ID of __Draco__ to the application.
 
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`friend --delete`**`Draco` : Deletes friend with gitGud FRIEND_ID of __Draco__.
 
-    * **`clear`** : Deletes all contacts.
+   * **`exit`** : Exits the app.
 
-    * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -63,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -83,7 +84,7 @@ Examples:
 * `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
   has the real-life name 'Taufiq'.
 
-### Deleting a friend : `delete`
+### Deleting a friend: `friend --delete`
 
 Deletes a friend from gitGud’s friend’s list using gitGud’s unique friend identifier.
 
@@ -133,7 +134,7 @@ Examples:
   Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’,
   to the friend with the gitGud FRIEND_ID ‘tau-bar’.
 
-### Listing multiple friends’ data: `list --friend`
+### Listing multiple friends data: `list --friend`
 
 Lists all friends stored in gitGud whose friend id contains any of the given keywords.
 
@@ -150,7 +151,7 @@ Examples:
 
 ![result for 'list --game'](images/UiListFriend.png)
 
-### Listing multiple games’ data: `list --game`
+### Listing multiple games data: `list --game`
 
 Lists all games stored in gitGud whose friend id contains any of the given keywords.
 
@@ -167,7 +168,7 @@ Examples:
 
 ![result for 'list --game'](images/UiListGame.png)
 
-### Getting a single friend's complete data
+### Getting a single friend's complete data: `get --friend`
 
 Takes a look at a particular friend's complete data by searching their `FRIEND_ID`. A friend's complete data includes:
 * List of games the friend plays
@@ -180,7 +181,7 @@ Examples:
 * `get --friend Draco` Gets the complete data for friend "Draco", which includes the list of games he plays and his username for each game
 * `get kev` Gets the complete data for friend "kev"
 
-### Getting a single game's complete data
+### Getting a single game's complete data: `get --game`
 
 Gets all the relevant information for a game that was previously added, this includes:
 * All the friends (represented by their `FRIEND_ID`) that play the game
@@ -195,12 +196,14 @@ Examples:
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I **_transfer_** my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: What happens if I add multiple flags that clash? e.g. `list --friend tau --game Val`
+**Q**: What happens if I add _**multiple flags**_ that clash? e.g. `list --friend tau --game Val`  
 **A**: Only the first valid flag is taken and subsequent flags will be ignored.
 
+**Q**: How do I _**update**_ a friend’s data that is already on the database?<br>
+**A**: You can delete the friend and then add the friend with the new data.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -208,15 +211,14 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
+**Viewing Help** | `help`
 **Add friend** | `friend FRIEND_ID [--name "NAME"]` <br> e.g., `friend Draco --name "Marcus Tang"`
-**Delete** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
-**Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"`
+**Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
+**Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"` 
 **Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
 **Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
 **List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`
 **List Games** | `list --game [KEYWORD]`<br> e.g., `list --game`, `list --game Valorant`
 **Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`
 **Get game** | `get --game GAME_NAME`<br> e.g., `get --game Valorant`
-**Clear** | `clear`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Help** | `help`
+
