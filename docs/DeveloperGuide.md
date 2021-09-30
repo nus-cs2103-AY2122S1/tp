@@ -286,32 +286,102 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UNIon` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**System: UNIon**\
+**Use case: UC01 - Add a new folder**\
+**Actor: User**\
+**Guarantees:**
+   * A new folder with the specified name is created as part of the application.
 
-**MSS**
+**MSS:**
+   1. User keys in folder name after `mkdir` keyword.
+   2. UNIon accepts input and a new folder is created.
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+   Use case ends.
+
+**Extensions:**
+   > 1a. UNIon detects error in the format specified by user.
+      >> 1a1. No new folder is created\
+      >> 1a2. User keys folder name `mkdir` keyword.\
+      >> Steps 1a1-1a2 are repeated until the data entered are correct.
+
+**System: UNIon**\
+**Use case: UC02 - Add a new contact to UNIon**\
+**Actor: User**\
+**Guarantees:**
+   * A new contact with the specified details is stored as a standalone in the application.
+
+**MSS:**
+
+   1. User inputs contact details after `Add` keyword.
+   2. UNIon accepts input and adds contact to the pool of contacts.
+
+   Use case ends.
+
+**Extensions:**
+   > 1a. UNIon detects error in format given by user.
+      >> 1a1. No new contact was registered by UNIon\
+      >> 1a2. User inputs details after `Add` keyword.\
+      >> Steps 1a1-1a2 are repeated until the data format entered are correct.
+
+**System: UNIon**\
+**Use case: UC03 - Add existing contact to a existing folder**\
+**Actor: User**\
+**Preconditions:** Folder and contact already exists in UNIon\
+**MSS:**
+
+   1. <u> User adds a new folder named A (UC01) </u>
+   2. <u> User adds a new contact named Clarence (UC02) </u>
+   3. User specifies the contact index to be added to the named folder.
+   4. UNIon adds the contact specified into the respective folder.
+
+   Use case ends.
+
+**Extensions:**
+   > 3a. User inputs an invalid index.
+      >> 3a1. Contact not added to folder.
+      >> 3a2. User inputs contact index to the named folder.\
+      >> Steps 3a1-3a2 are repeated until the data format entered are correct.
+
+   > 3b. User specifies a folder name that does not exist.
+      >> 3b1. Contact not added to any folder.
+      >> 3b2. User inputs contact index to named folder.\
+      >> Steps 3b1-3b2 are repeated until the data format entered are correct.
+
+**System: UNIon**\
+**Use case: UC04 - Delete specified folder**\
+**Actor: User**\
+**Guarantees:** Folder specified is deleted from UNIon \
+**Preconditions:** Folder must already exist in UNIon
+**MSS:**
+   1. User specifies folder name after `rmdir`.
+   2. UNIon removes the specified folder from its system.
 
     Use case ends.
 
 **Extensions**
+   > 1a. UNIon detects error of input by user.
+      >> 1a1. Folder remains in the UNIon.\
+      >> 1a2. User respecifies the folder to be removed.\
+      Steps 1a1 - 1a2 are repeated until data format is correct.
 
-* 2a. The list is empty.
+**System: UNIon**\
+**Use case: UC05 - Remove all contacts**\
+**Actor: User**\
+**Guarantees:** All contacts are deleted from UNIon
 
-  Use case ends.
+**MSS:**
+   1. User inputs command to remove all contacts
+   2. UNIon clears all the contacts it has stoerd till thus far.
 
-* 3a. The given index is invalid.
+   Use case ends.
 
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
+**Extensions**
+   > 1a. UNIon detects error of input by user.
+      >> 1a1. All contacts remain in UNIon.
+      >> 1a2. User re-inputs command.\
+      Steps 1a1 - 1a2 are repeated until data format is correct.
 
 ### Non-Functional Requirements
 
