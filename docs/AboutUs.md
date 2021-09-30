@@ -54,3 +54,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/WangGLJoseph)]
 [[portfolio](team/wangguanlinjoseph.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Felissa Faustine
+
+<img src="images/felissa.png" width="200px">
+
+[[github](http://github.com/felissaf)]
+[[portfolio](team/felissa.md)]
+
+* Role: Developer
+* Responsibilities: UI
