@@ -10,13 +10,13 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 ### Lin Fangyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lmaoboxhack.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/lmaoboxhack)]
+[[portfolio](team/lmaoboxhack.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: Integration
 
 ### Tan Chin Han, Benjamin
 
