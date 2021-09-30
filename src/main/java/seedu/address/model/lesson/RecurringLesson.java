@@ -77,7 +77,7 @@ public class RecurringLesson extends Lesson {
         }
         recurringLessonsCount++;
         // Update the date
-        Date newDate = super.updateDateWithWeek();
+        Date newDate = getDate().updateDateWithWeek();
         return new RecurringLesson(newDate, getTimeRange(),
                 getSubject(), getHomework());
     }
