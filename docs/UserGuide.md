@@ -98,7 +98,7 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISITED] [v/VIS
 * `PHONE_NUMBER` is the elderly’s phone number. **This must be included.**
 * `LANGUAGE` is the elderly’s preferred language for communication. **This must be included.**
 * `ADDRESS` is the elderly’s address to be visited. **This must be included.**
-* `LAST_VISITED` is the last date that the social worker has visited the elderly. **This is optional to include.**
+* `LAST_VISITED` is the last date that the user has visited the elderly. **This is optional to include.**
 * `VISIT_DATE` is the next scheduled date for the elderly’s visit. **This is optional to include.**
 
 Examples:
