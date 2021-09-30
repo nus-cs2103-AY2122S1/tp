@@ -1,9 +1,8 @@
 ---
-layout: page
-title: User Guide
+User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Student Insurance Agent Sales Assistant (SIASA) **is a Command Line Interface (CLI) application that enables student financial advisors to quickly and easily keep track of their contacts** (potential clients and existing clients), financial plans sold and provide them with insightful, actionable statistics and querying functionalities to aid their operations.
 
 * Table of Contents
 {:toc}
