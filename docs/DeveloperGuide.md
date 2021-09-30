@@ -258,7 +258,8 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
-* regularly organises birthday parties for these contact
+* sociable and has multiple different friend groups that can partially overlap
+* regularly organises birthday parties for these contacts
 * regularly invites other contacts to these parties
 * needs to keep track of different groups who are invited to different parties
 * prefer desktop apps over other types
@@ -266,7 +267,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: keep track of upcoming birthdays and invite lists of these parties
+**Value proposition**:
+* receive reminders about birthdays or lookup upcoming birthdays
+* retrieve contact details of all members of a group quickly and easily
+* partition contacts by group
+* keep track of upcoming birthdays and invite lists of these parties
 
 
 ### User stories
