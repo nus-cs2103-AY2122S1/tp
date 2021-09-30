@@ -297,21 +297,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `gitGud` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Add a friend**
+**Use case: UC01 - Add a friend** 
 
 **MSS**
 
 1. User requests to add a friend and specifies a `FRIEND_ID`.
 2. gitGud adds a friend into the friends list and informs user of successful addition of friend.
 
-**Extensions**
+    Use case ends.
+
+**Extensions** 
 
 * 1a. gitGud detects that the `FRIEND_ID` provided already exists and is not unique.
     * 1a1. gitGud informs user that it has failed to add a friend.<br>
       1a2. User makes another request to add a friend with a different `FRIEND_ID`.<br>
       Use case continues from step 2.
 
-**Use case: Delete a friend**
+**Use case: UC02 - Delete a friend**
 
 **MSS**
 
@@ -329,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 
 
-**Use case: List friends whose `FRIEND_ID` contains a keyword**
+**Use case: UC03 - List friends whose `FRIEND_ID` contains a keyword**
 
 **MSS**
 
@@ -347,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: List games whose `GAME_NAME` contains a keyword**
+**Use case: UC04 - List games whose `GAME_NAME` contains a keyword**
 
 **MSS**
 
@@ -364,12 +366,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Link a friend to a particular game**
+
+**Use case: UC05 - Link a friend to a particular game**
 
 **MSS**
 
 1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`).
 2. gitGud associates the friend with the game provided.
+
+    Use case ends.
 
 **Extensions**
 
@@ -388,15 +393,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-*{More to be added}*
+
+**Use case: UC06 - Get a friend's complete information**
+
+**MSS**
+
+1. User <u>list friends (UC03)</u> and chooses a `FRIEND_ID`.
+2. User requests for complete information about `FRIEND_ID`.
+3. gitGud displays the complete information related to  `FRIEND_ID`.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given `FRIEND_ID` is invalid.
+    * 3a1. gitGud shows an error message.
+
+      Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 100 friends or games without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Does not require internet connection.
+5. The code should be open source.
 
 ### Glossary
 
