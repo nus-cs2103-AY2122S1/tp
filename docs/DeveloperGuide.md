@@ -556,14 +556,14 @@ Use case ends.
 * 2a. RHRH is unable to find a reservation slot based on the date and/or time entered.
     * 2a1. RHRH informs the user that the reservation slot is taken.
     * 2a2. RHRH prompts user to choose another date and/or time.
-    * 2a3. User enters new date/time. <br/>
+    * 2a3. User enters new date and/or time. <br/>
       
     Steps 2a1 - 2a2 are repeated until there is a reservation slot available.
   
 
     Use case resumes from step 3.
 
-
+*{More to be added}*
 
 ### Non-Functional Requirements
 
