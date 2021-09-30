@@ -14,6 +14,8 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide
       * Wrote documentation for revenue feature
+  * Developer Guide
+      * Added target user profile, value proposition and user stories to the developer guide
 * **Community**:
 * **Tools**:
 
