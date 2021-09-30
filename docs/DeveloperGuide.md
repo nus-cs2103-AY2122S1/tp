@@ -286,8 +286,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new applicant, with all the necessary parameters/details 
-2.  MrTechRecruiter adds the new applicant and shows a success message
+1.  User requests to add a new applicant, with all the necessary parameters/details.
+2.  MrTechRecruiter adds the new applicant and shows a success message.
 
     Use case ends.
 
@@ -302,11 +302,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list applicants
-2.  MrTechRecruiter shows a list of applicants
-3.  User requests to delete a specific person in the list using the exact name
-4.  MrTechRecruiter deletes the person
-
+1.  User requests to list applicants.
+2.  MrTechRecruiter shows a list of applicants.
+3.  User requests to delete a specific person in the list using the exact name.
+4.  MrTechRecruiter deletes the person. <br>
     Use case ends.
 
 **Extensions**
@@ -347,8 +346,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see average rejection rates of a job position.
-2. MrTechRecruiter displays the job position and its corresponding rejection rate.
+1. User keys in the particular job position using the 'find' function.
+2. MrTechRecruiter displays the job position and its corresponding rejection rate. <br>
    Use case ends.
 
 **Extensions**
@@ -445,8 +444,8 @@ testers are expected to do more *exploratory* testing.
        a. Job must exist in address book. <br>
        b. Average rate already tabulated for the job.
 
-    1. Test case: `average software engineer`<br>
-       Expected: Software Engineer: 10%
+    1. Test case: `find software engineer`<br>
+       Expected: Software Engineer: [redacted], rejection rate: 10%
 
 1. _{ more test cases …​ }_
 
