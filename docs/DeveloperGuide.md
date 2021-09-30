@@ -257,27 +257,55 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* works as an insurance agent
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has a need to manage a large number of his/her Singaporean clients and their details
+* has a need to be reminded about his/her meeting timings with clients
+* has a need to manage revenue and costs for his clients
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts of clients faster than a typical mouse/GUI driven app and to also be able
+to collate details of clients in one application.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority   | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -----------| ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | insurance agent                            | add clients' names to the contact page        | connect with them easier on future meetups.              |
+| `* * *`  | insurance agent whose clients live in Singapore                            | add the address of clients to the contact page              | plan meetups with them in the future easily                                                                 |
+| `* * *`  | insurance agent                            | add clients' contact number to the contact page               | contact them when I want to                                  |
+| `* * *`  | insurance agent                            | keep track of clients' claim status         | update the client about it |
+| `* * *`  | insurance agent                                     | add total revenue from each of my clients  |  determine the quality of my clients|
+| `* * *`  | insurance agent                                     | add total costs from each of my clients         | determine how much to spend on gifts for clients.|
+| `* * *`  | user                                                | save my total costs for future use         | save time on having to type them everytime.|
+| `* * *`  | insurance agent                                     | keep notes about the client      | remember the health condition and ailments of all my clients.|
+| `* * *`  | insurance agent                                     |  wants to record the time and place of my appointments          | be punctual|
+| `* * *`  | user                                     | save my contacts upon closing my address book        | save time on having to type them everytime |
+| `* * *`  | organised user                                    | all the contacts in my address book to be arranged alphabetically by their First Name         | find whoever I am looking for faster|
+| `* * *`  | organised and shrewd insurance agent                                     | sort my clients based on how much money I am making from them         | know which clients to prioritise|
+| `* * *`  | insurance agent                                     | be able to easily calculate the commissions I get from my clients        | know the revenue obtained from each client |
+| `* * *`  | organised insurance agent                                    | remember what insurance my client already has        |  sell the client insurance he/she does not have yet |
+| `* * *`  | user with many contacts in the address book                                     | search for contacts in my contacts list whose name matches my input         |  navigate to the person I am looking for quickly |
+| `* * *`  | user                                     | be able to delete people from my contact list         | remove a client from my contact list I no longer need to keep in contact with|
+| `* * *`  | user                                    | be able to use programs on Windows and Mac         | use it on all my laptops |
+| `* * *`  | user                                    | exit the program safely        | free up resources on his computer |
+| `* * *`  | new user                                     |  be able to install the application        | I can use it |
+| `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
+| `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
+| `* *`    | insurance agent                                      | keep track of the birthday of my clients   | maintain customer relations with them|
+| `* *`    | insurance agent that labels my clients    | delete labels that I have assigned  | correct mislabels and inaccurate labels
+| `* *`    | user                                       | import my contacts from a different source   | easily add multiple contacts at once
+| `* *`    | user                                       | be able to filter out the contacts in my address book based on address   | better plan out my appointments
+| `* *`    | user                                       | see my contact list as a user interface   | read the list easily|
+| `* *`    | experienced user                                      | be able to back up my client data  | not lose the data|
+| `* *`    | expert insurance agent                                      | give my clients a nickname   | more easily search for my regular contacts |
+| `* *`    | insurance agent with a lot of clients                                       | create labels for my clients   |  classify and keep track of each of their characteristics|
+| `* *`    | insurance agent                                      | be able to see the labels attached to each client easily   |  quickly reference it when I am about to meet the client|
+| `* *`    | user                                       | edit the information of entries in my address book   | ensure the information is accurate and up to date.|
+| `* *`    | insurance agent with a lot of clients                                       | create labels for my clients   |  classify and keep track of each of their characteristics|
+| `*`      | user | see how much space the program is using          | easily manage my computer memory |
 
 *{More to be added}*
 
