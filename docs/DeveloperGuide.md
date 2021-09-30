@@ -294,9 +294,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 * 1a. The format is invalid.
-    * 1a1. MrTechRecruiter shows an error message.
+  * 1a1. MrTechRecruiter shows an error message.
     
-    Use case ends.
+  Use case ends.
     
 
 **Use case: Delete a new position**
@@ -313,11 +313,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
+  
+    * 2a1. MrTechRecruiter displays a message that no position is in the list.
+  
     Use case ends.
-* 3a The given name of the position is invalid.
-  * 3a1. MrTechRecruiter shows an error message.
+
+* 3a The given name of the position is invalid. 
+
+    * 3a1. MrTechRecruiter shows an error message.
     
-  * Use case resumes at step 2.
+    Use case resumes at step 2.
 
 
 **Use case: Add a new applicant**
@@ -334,7 +339,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The format is invalid.
     * 1a1. MrTechRecruiter shows an error message.
 
-  Use case resumes at step 1.
+    Use case resumes at step 1.
 
 **Use case: Delete an applicant**
 
