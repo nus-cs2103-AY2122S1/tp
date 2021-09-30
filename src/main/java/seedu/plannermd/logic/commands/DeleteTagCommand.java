@@ -49,6 +49,13 @@ public class DeleteTagCommand extends Command {
         this.tag = tag;
     }
 
+    /**
+     * Executes the command to delete a tag from a patient.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} which represents the result after executing this command.
+     * @throws CommandException if index or tag is invalid.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();

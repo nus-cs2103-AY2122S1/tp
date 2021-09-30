@@ -49,6 +49,13 @@ public class TagCommand extends Command {
         this.tag = tag;
     }
 
+    /**
+     * Executes the command to add a tag to a patient.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} which represents the result after executing this command.
+     * @throws CommandException if index is invalid.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
