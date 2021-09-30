@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ClassMATE is a **desktop app for managing student contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, classMATE can get your contact management tasks done faster than traditional GUI apps.
+ClassMATE is a **desktop app for managing student contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClassMATE can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -16,7 +16,7 @@ ClassMATE is a **desktop app for managing student contacts, optimized for use vi
 
 1. Download the latest `classmate.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your classMATE.
+1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,7 +26,7 @@ ClassMATE is a **desktop app for managing student contacts, optimized for use vi
 
    * **`liststu`** : Lists all students.
 
-   * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06 atd/1 as/OP1` : Adds a student named `John Doe` to classMATE.
+   * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06 atd/1 as/OP1` : Adds a student named `John Doe` to ClassMATE.
 
    * `deletestu 3` : Deletes the 3rd student shown in the current list.
 
@@ -74,7 +74,7 @@ Format: `help`
 
 ### Adding a student: `addstu`
 
-Adds a student to classMATE.
+Adds a student to ClassMATE.
 
 Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CLASS_CODE atd/ATTENDANCE as/ASSIGNMENT [t/TAG]…​`
 
@@ -88,7 +88,7 @@ Examples:
 
 ### Editing a student : `editstu`
 
-Edits an existing student in classMATE.
+Edits an existing student in ClassMATE.
 
 Format: `editstu INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -105,7 +105,7 @@ Examples:
 
 ### Viewing a student : `viewstu`
 
-View a student's details in classMATE
+View a student's details in ClassMATE
 
 Format: `viewstu INDEX`
 
@@ -134,7 +134,7 @@ Examples:
 
 ### Deleting a student : `deletestu`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the student list.
 
 Format: `deletestu INDEX`
 
@@ -148,7 +148,7 @@ Examples:
 
 ### Listing all students : `liststu`
 
-Shows a list of all students in classMATE.
+Shows a list of all students in ClassMATE.
 
 Format: `liststu [c/CLASS_CODE]`
 
@@ -160,7 +160,7 @@ Examples:
 
 ### Adding a class : `addc`
 
-Adds a class to classMATE.
+Adds a class to ClassMATE.
 
 Format: `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`
 
@@ -171,7 +171,7 @@ Examples:
 
 ### Deleting a class: `deletec`
 
-Deletes a class from classMATE
+Deletes a class from ClassMATE
 
 Format: `deletec INDEX`
 
@@ -200,7 +200,7 @@ Examples:
 
 ### Listing all classes : `listc`
 
-Shows a list of all classes in classMATE.
+Shows a list of all classes in ClassMATE.
 
 Format: `listc`
 
@@ -217,7 +217,7 @@ Examples:
 * `findc E` returns `E01`, `E02`, `E03`<br>
 
 ### Adding a group: `addsg` [Coming Soon]
-Adds a group to classMATE
+Adds a group to ClassMATE
 
 Format: `addsg n/NAME tp/TYPE g/GROUP_NAME [t/TAG]`
 
@@ -229,7 +229,7 @@ Example:
   `addsg n/Betsy tp/OP1 g/A` then adds a student called Betsy to OP1 Group A in class G06
 
 ### Viewing a Group: `viewg` [Coming Soon]
-View a group's details in classMATE
+View a group's details in ClassMATE
 
 Format: `viewg INDEX`
 
@@ -242,7 +242,7 @@ Examples:
 
 ### Listing all groups : `listg` [Coming Soon]
 
-Shows a list of all groups in a specific class in classMATE.
+Shows a list of all groups in a specific class in ClassMATE.
 
 Format: `listg c/CLASS_CODE`
 
@@ -250,7 +250,7 @@ Examples:
 * `listg c/G06` Lists all groups in the class `G06`
 
 ### Deleting a Group: `deleteg` [Coming Soon]
-Delete a group from classMATE by their index in the group list
+Delete a group from ClassMATE by their index in the group list
 
 Format: `deleteg INDEX`
 
@@ -275,14 +275,14 @@ Format: `exit`
 
 ### Saving the data
 
-classMATE data is saved in the hard disk automatically after any command that changes the data. **There is no need to save manually.**
+ClassMATE data is saved in the hard disk automatically after any command that changes the data. **There is no need to save manually.**
 
 ### Editing the data file
 
-classMATE data are saved as a JSON file `[JAR file location]/data/classmate.json`. Advanced users are welcome to update data directly by editing that data file.
+ClassMATE data are saved as a JSON file `[JAR file location]/data/classmate.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, classMATE will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, ClassMATE will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ If your changes to the data file makes its format invalid, classMATE will discar
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous classMATE home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClassMATE home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -311,4 +311,4 @@ Action | Format, Examples
 `**List all classes** | `liststu`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
 **Clear all students** | `clear`
-**Exit classMATE** | `exit`
+**Exit ClassMATE** | `exit`
