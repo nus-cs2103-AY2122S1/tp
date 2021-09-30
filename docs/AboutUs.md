@@ -49,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Add Feature + Algorithms
 
-### James Doe
+### Loo Wee Sing Caspian Michael
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/Dr-Octavius.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/Dr-Octavius.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Show Feature + Algorithms
