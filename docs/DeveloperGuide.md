@@ -273,7 +273,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   |                                | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       |                                |                                                                        |
+| `* * *`  | user                                       | add tasks                      |                                                                         |
 | `* * *`  | user                                       | delete tasks                  | remove tasks that I no longer need to track                            |
 | `* * *`  | user                                       | find tasks                     | locate details of a task without having to go through the entire list  |
 | `* *`    | user                                       |                                | minimize chance of someone else seeing them by accident                |
@@ -284,6 +284,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is `Uni-Fy` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a task**
+
+**MSS**
+
+1.  User requests to add a task at a certain date and time.
+2.  Uni-Fy adds the task at the given date and time and displays success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to add a task at a certain date without time. 
+    * 1a1. Uni-Fy adds the task at the given date and time of 23:59 and displays success message
+    
+      Use case ends.
+* 1b. User enters invalid date format.
+  * 1b1. Uni-Fy shows an error message.
+    
+    Use case resumes at step 1. 
 
 **Use case: Delete a person**
 
