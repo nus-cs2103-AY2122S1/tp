@@ -83,7 +83,7 @@ to help you with the installation. Select the corresponding OS you are working o
 
 #### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -95,7 +95,7 @@ Format: `help`
 
 #### Adding a student: `add`
 
-Adds a student to the tuition address book.
+Adds a student to the address book.
 
 Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
