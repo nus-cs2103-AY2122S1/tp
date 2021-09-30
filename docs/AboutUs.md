@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Timothy Wong
 
-<img src="images/timothywong.png" width="200px">
+<img src="images/timothywongej.png" width="200px">
 
 [[github](https://github.com/timothywongej)]
 [[portfolio](team/timothywong.md)]
@@ -20,7 +20,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jason Ang
 
-<img src="images/jasonang.png" width="200px">
+<img src="images/kdeasymoneysniper.png" width="200px">
 
 [[github](http://github.com/kdeasymoneysniper)]
 [[portfolio](team/jasonang.md)]
@@ -30,7 +30,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Dion
 
-<img src="images/dion.png" width="200px">
+<img src="images/NoobMaster19.png" width="200px">
 
 [[github](http://github.com/noobmaster19)] [[portfolio](team/noobmaster.md)]
 
@@ -39,7 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ang Yang Cheng
 
-<img src="images/angyangcheng.png" width="200px">
+<img src="images/djiangel.png" width="200px">
 
 [[github](http://github.com/djiangel)]
 [[portfolio](team/angyangcheng.md)]
@@ -49,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Shivam Tiwari
 
-<img src="images/Shivam.png" width="200px">
+<img src="images/Shivlock221b.png" width="200px">
 
 [[github](https://github.com/Shivlock221b)]
 [[portfolio](team/johndoe.md)]
