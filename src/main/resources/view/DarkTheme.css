@@ -281,6 +281,11 @@
     -fx-text-fill: white;
 }
 
+.schedule-pane {
+     -fx-border-color: derive(#1d1d1d, 20%);
+     -fx-border-width: 10px;
+}
+
 .scroll-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
