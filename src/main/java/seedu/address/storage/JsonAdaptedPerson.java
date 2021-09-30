@@ -11,11 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Experience;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -58,6 +58,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        experience = source.getExperience().years;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -107,7 +108,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (experience == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Experience.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Experience.class.getSimpleName()));
         }
         if (!Experience.isValidExperience(experience)) {
             throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
