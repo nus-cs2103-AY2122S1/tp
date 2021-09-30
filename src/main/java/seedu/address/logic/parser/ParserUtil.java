@@ -14,6 +14,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.ClassLimit;
+import seedu.address.model.tuition.ClassName;
+import seedu.address.model.tuition.Counter;
+import seedu.address.model.tuition.Timeslot;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -121,4 +125,59 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String limit} into an {@code ClassLimit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     *
+     */
+    public static ClassLimit parseLimit(String limit) {
+        requireNonNull(limit);
+        String trimmedLimit = limit.trim();
+
+        return new ClassLimit(Integer.valueOf(trimmedLimit));
+    }
+
+    /**
+     * Parses a {@code String counter} into an {@code Counter}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     *
+     */
+    public static Counter parseCounter(String counter) {
+        requireNonNull(counter);
+        String trimmedCounter = counter.trim();
+
+        return new Counter(Integer.valueOf(trimmedCounter));
+    }
+
+    /**
+     * Parses a {@code String className} into a {@code ClassName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ClassName parseClassName(String className) throws ParseException {
+        requireNonNull(className);
+        String trimmedName = className.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassName(trimmedName);
+    }
+
+
+    /**
+     * Parses a {@code String timeslot} into a {@code Timeslot}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     */
+    public static Timeslot parseTimeslot(String timeslot) {
+        requireNonNull(timeslot);
+        String trimmedName = timeslot.trim();
+
+        return new Timeslot(trimmedName);
+    }
+
 }
