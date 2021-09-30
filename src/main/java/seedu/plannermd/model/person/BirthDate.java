@@ -1,10 +1,14 @@
 package seedu.plannermd.model.person;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 
 import static java.util.Objects.requireNonNull;
@@ -30,7 +34,7 @@ public class BirthDate {
             .optionalEnd()
             .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-            .toFormatter();
+            .toFormatter().withResolverStyle(ResolverStyle.SMART);
 
     public final String value;
 
@@ -53,9 +57,9 @@ public class BirthDate {
         if (test.split(" ", 2).length > 1) {
             return false;
         }
-
         try {
             LocalDateTime.parse(test, formatter);
+            System.out.println(LocalDate.from(LocalDateTime.parse(test, formatter)));
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -77,6 +81,12 @@ public class BirthDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public int calculateAge() {
+        System.out.println(Math.abs(Period.between(LocalDate.now(), LocalDate.parse(value, formatter)).getMonths()));
+        System.out.println(Math.abs(Period.between(LocalDate.now(), LocalDate.parse(value, formatter)).getDays()));
+        return Math.abs(Period.between(LocalDate.now(), LocalDate.parse(value, formatter)).getYears());
     }
 
 }

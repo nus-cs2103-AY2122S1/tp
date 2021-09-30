@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a patient: `add`
 
-Adds a patient to the patient records.
+Adds a patient to the patient records. (Note: for date of birth, PlannerMD will convert any value beyond the last valid day-of-month to be the last valid day-of-month.)
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`
 
