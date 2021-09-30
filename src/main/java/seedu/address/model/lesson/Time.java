@@ -94,4 +94,3 @@ public class Time implements Comparable<Time> {
         return getLocalTime().compareTo(other.getLocalTime());
     }
 }
-

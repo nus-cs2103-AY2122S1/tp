@@ -112,6 +112,26 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have at least one clashing {@code Lesson}.
+     *
+     * @param otherPerson The other person to be compared with.
+     * @return True if and only if there is at least one clash.
+     */
+    public boolean hasClashingLessons(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+        boolean isClash = false;
+        for (Lesson lesson : lessons) {
+            if (isClash) {
+                break;
+            }
+            isClash = otherPerson.getLessons().stream().anyMatch(lesson::isClashing);
+        }
+        return isClash;
+    }
+
+    /**
      * Returns true if this person has at least one contact field not empty.
      */
     public boolean hasContactField() {

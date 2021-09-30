@@ -37,6 +37,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true of the list contains a person with a clashing lesson.
+     *
+     * @param toCheck The person to check.
+     * @return True if there is a clash in lesson timing, false otherwise.
+     */
+    public boolean hasClashes(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasClashingLessons);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

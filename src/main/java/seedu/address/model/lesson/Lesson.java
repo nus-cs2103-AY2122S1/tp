@@ -78,6 +78,16 @@ public abstract class Lesson implements Comparable<Lesson> {
         return newDate;
     }
 
+    /**
+     * Returns true both lessons clash.
+     *
+     * @param otherLesson The other lesson to be compared with.
+     * @return True if and only if lessons clash.
+     */
+    public boolean isClashing(Lesson otherLesson) {
+        return date.equals(otherLesson.date) && timeRange.isClashing(otherLesson.timeRange);
+    }
+
     public boolean isOver() {
         return getDate().isOver();
     }
