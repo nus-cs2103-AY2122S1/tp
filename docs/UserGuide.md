@@ -3,12 +3,15 @@ layout: page
 title: User Guide
 ---
 
+![gitGud](images/gitgud.png)
+
 gitGud is a **desktop application for managing friends' gaming information**. gitGud uses a simple **Graphical User Interface 
 (GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. If you can 
 type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
 
+
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -55,10 +58,10 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `--name “Marcus Tang” --name Taufiq`, only `--name Taufiq` will be taken.
-  
+
 * If a name provided has spaces in-between, use double quotation marks to wrap the name in the command e.g. wrap the name
-  'Apex Legends' as `"Apex Legends"`. 
-  
+  'Apex Legends' as `"Apex Legends"`.
+
 </div>
 
 ### Viewing help: `help`
@@ -76,10 +79,10 @@ Adds a new friend to gitGud friend’s list with an associated **unique** friend
 Format: `friend FRIEND_ID [--name NAME]`
 
 Examples:
-* `friend Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and 
-which does not currently have an associated real-life name.
-* `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and 
-has the real-life name 'Taufiq'.
+* `friend Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and
+  which does not currently have an associated real-life name.
+* `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
+  has the real-life name 'Taufiq'.
 
 ### Deleting a friend: `friend --delete`
 
@@ -113,22 +116,22 @@ Examples:
 
 ### Link games with a friend: `link`
 
-Links game(s) and the associated in-game username(s) for each game to a friend for the provided gitGud FRIEND_ID to 
+Links game(s) and the associated in-game username(s) for each game to a friend for the provided gitGud FRIEND_ID to
 his/her friend information.
 
 Format: `link FRIEND_ID GAME_NAME:IN_GAME_USERNAME1 GAME2_NAME:IN_GAME_USERNAME2...`
 
 * Add multiple games and in-game usernames for a friend by listing the game:in-game-username pairs separated by a space.
-* For game names or in-game usernames with spaces in-between, wrap the name string with double quotation marks. 
-For example, the game 'Apex Legends' linked to an in-game username 'tau-bar' would be represented as the pair 
+* For game names or in-game usernames with spaces in-between, wrap the name string with double quotation marks.
+  For example, the game 'Apex Legends' linked to an in-game username 'tau-bar' would be represented as the pair
   `"Apex Legends":tau-bar`.
-  
+
 Examples:
-* `link Draco Valorant:biscuitismydog Minecraft:Draco` 
-  Links two games, ‘Valorant’ with the in-game username ‘biscuitismydog’ and ‘Minecraft’ with the 
+* `link Draco Valorant:biscuitismydog Minecraft:Draco`
+  Links two games, ‘Valorant’ with the in-game username ‘biscuitismydog’ and ‘Minecraft’ with the
   in-game username ‘Draco’, to the friend with the gitGud FRIEND_ID ‘Draco’.
-* `link tau-bar “Apex Legends”:tau-dominator` 
-  Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’, 
+* `link tau-bar “Apex Legends”:tau-dominator`
+  Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’,
   to the friend with the gitGud FRIEND_ID ‘tau-bar’.
 
 ### Listing multiple friends data: `list --friend`

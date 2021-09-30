@@ -27,15 +27,15 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added the value proposition for gitGud.
     * Added use case for `add friend`.
-  * README: 
+  * README:
     * Updated Github Actions build status badge to reflect status of gitGud team repository.
-    * Updated description and organised layout of README. 
-  
-* **Community**: 
-  
+    * Updated description and organised layout of README.
+
+* **Community**:
+
 * **Tools**:
   * Integrated the Github plugin (codecov) to the team repo.
-  
-* **Miscellaneous** 
-  * Set up initial project website. 
+
+* **Miscellaneous**
+  * Set up initial project website.
   * Initial set up for team repo & organization.

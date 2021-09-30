@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to link a friend with a game he/she plays.
   * What it does: allows the user to associate a friend in his contact list with a game that was previously recorded.
   * Justification: This feature improves the product significantly because a user is able to note down what games his/her friends play.
-  
+
 * **Code contributed**: [RepoSense link]()
 
 * **Documentation**:
@@ -21,4 +21,3 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added glossary for gitGud.
     * Added user story for `link` feature.
-  
