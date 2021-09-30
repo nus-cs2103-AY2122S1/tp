@@ -121,6 +121,26 @@ Examples:
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
 
 
+### Showing Tasks: `show` (coming soon)
+
+Show all tasks that have been added to the app in a specific week.
+
+Format:
+- <code> show <i>week_number</i> </code>
+- <code> show <i>d/date</i> </code>
+
+Interpretation
+* If <code><i>week_number</i></code> field is provided:
+  * Searches for the task with the given date and show it on the GUI
+  * Useful in cases where user wants to show all tasks in the given week
+* If <code><i>d/date</i></code> field is provided:
+  * Show tasks matching the given the date
+
+Examples:
+* `show 1` displays tasks in week `1`
+* `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
+
+
 ### Setting Priority Level for Tasks: `tag` (coming soon)
 
 Set a task's priority.
@@ -131,7 +151,7 @@ Format:
 
 Interpretation
 * If <code><i>n/task_name</i></code> field is provided:
-  * Depending on the <code><i>tg/level </i></code> provided it sets priority of the task with the name exactly matching the <code><i>n/task_name </i></code> or <code><i>task_id</i></code> to 
+  * Depending on the <code><i>tg/level </i></code> provided it sets priority of the task with the name exactly matching the <code><i>n/task_name </i></code> or <code><i>task_id</i></code> to
     * Urgent
     * Important
     * Medium
@@ -140,14 +160,13 @@ Interpretation
   * If <code><i>date</i></code> field is provided, it sets priority for the task in the given date
     * Useful in cases when there are multiple copies of the same task , recurring tasks, etc.
   * If <code><i>d/date</i></code> field is not provided, it sets priority for every occurrence of tasks matching the given name
-  
+
 * If <code><i>task_id</i></code> is provided:
 
 
 Examples:
 * `tag 5 tg/Urgent` sets the priority of task 5 in the task list to `Urgent`
 * `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
-
 
 
 ### Deleting tasks : `delete` (coming soon)
