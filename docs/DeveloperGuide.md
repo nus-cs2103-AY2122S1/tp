@@ -335,9 +335,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The given details are of an invalid format
- 
+
     * 2a1. InsurancePal shows an error message
-     
+
       Use case ends.
 
 **Use case: List all persons**
@@ -353,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty
     * 2a1. InsurancePal displays an empty list of persons
-     
+
       Use case ends.
 
 **Use case: Edit a person**
@@ -370,12 +370,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
- 
+
   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
-     
+
       Use case resumes at step 2.
 
 **Use case: Finding a person**
@@ -384,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to find a person using keywords
 2. InsurancePal shows a list of persons whose names match at least one keyword
- 
+
    Use case ends.
 
 **Use case: Delete a person**
@@ -395,18 +395,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. InsurancePal shows a list of persons
 3. User requests to delete a specific person in the list
 4. InsurancePal delete the person
- 
+
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
- 
+
   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
-     
+
       Use case resumes at step 2.
 
 **Use case: Clear the InsurancePal**
@@ -415,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to clear the InsurancePal
 2. InsurancePal clears all entries in it
- 
+
    Use case ends.
 
 **Use case: Add reveneue to a person**
@@ -426,23 +426,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. InsurancePal shows a list of persons
 3. User requests to add revenue to a specific person in the list
 4. InsurancePal adds revenue to the person
- 
+
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
- 
+
   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
-     
+
       Use case resumes at step 2.
-    
+
 * 3b. The given revenue is of an invalid format
     * 3b1. InsurancePal shows an error message.
-     
+  
       Use case resumes at step 2.
 
 **Use case: Add a claim to a person**
@@ -453,24 +453,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. InsurancePal shows a list of persons
 3. User requests to add a claim to a specific person in the list
 4. InsurancePal adds the claim to the person
- 
+
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
- 
+
   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
-     
+ 
       Use case resumes at step 2.
 * 3b. The given claim is of an invalid format
     * 3b1. InsurancePal shows an error message.
-     
+ 
       Use case resumes at step 2.
-     
+
 **Use case: Add a note to a person**
 
 **MSS**
@@ -479,18 +479,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. InsurancePal shows a list of persons
 3. User requests to add a note to a specific person in the list
 4. InsurancePal adds a note to the person
- 
+
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
- 
+
   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
-     
+
       Use case resumes at step 2.
 
 **Use case: Schedule a meeting**
@@ -501,25 +501,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. InsurancePal shows a list of persons
 3. User requests to schedule a meeting with a specific person in the list
 4. InsurancePal schedules a meeting with the person
- 
+
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
- 
+
   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
-     
+
       Use case resumes at step 2.
 
 * 3b. The given meeting time is of an invalid format
     * 3b1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
-     
+
 **Use case: Add insurance to a person**
 
 **MSS**
@@ -528,25 +528,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. InsurancePal shows a list of persons
 3. User requests to add insurance to a specific person in the list
 4. InsurancePal adds insurance to the person
- 
+
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
- 
+
   Use case ends.
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
-     
+
       Use case resumes at step 2.
 
 * 3b. The given insurance is of an invalid format
     * 3b1. InsurancePal shows an error message.
-     
+
       Use case resumes at step 2.
-     
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
