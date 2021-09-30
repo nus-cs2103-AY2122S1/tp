@@ -336,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Student**: A NUS CS student
 * **Group status**: The group status of a student for a group project in a module
 * **Command**: A command for the program. A full list of command can be seen in the [UserGuide](https://ay2122s1-cs2103t-w12-4.github.io/tp/UserGuide.html).
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Contact detail**: Contact details consist of the user names, email, telegram handle.
 
 --------------------------------------------------------------------------------------------------------------------
 
