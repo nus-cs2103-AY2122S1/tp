@@ -66,56 +66,48 @@ public class PersonCard extends UiPart<Region> {
         address.setText("Address: " + person.getAddress().value);
 
         if (person.getPhone().isEmpty()) {
-            phone.setVisible(false);
             phone.setManaged(false);
         } else {
             phone.setText("Phone: " + person.getPhone().value);
         }
 
         if (person.getEmail().isEmpty()) {
-            email.setVisible(false);
             email.setManaged(false);
         } else {
-            email.setText("Email: " + person.getPhone().value);
+            email.setText("Email: " + person.getEmail().value);
         }
 
         if (person.getParentPhone().isEmpty()) {
-            parentPhone.setVisible(false);
             parentPhone.setManaged(false);
         } else {
-            parentPhone.setText("Parent Phone: " + person.getPhone().value);
+            parentPhone.setText("Parent Phone: " + person.getParentPhone().value);
         }
 
         if (person.getParentEmail().isEmpty()) {
-            parentEmail.setVisible(false);
             parentEmail.setManaged(false);
         } else {
-            parentEmail.setText("Parent Email: " + person.getPhone().value);
+            parentEmail.setText("Parent Email: " + person.getParentEmail().value);
         }
 
         if (person.getSchool().isEmpty()) {
-            school.setVisible(false);
             school.setManaged(false);
         } else {
-            school.setText("School " + person.getSchool().schName);
+            school.setText("School: " + person.getSchool().schName);
         }
 
         if (person.getAcadStream().isEmpty()) {
-            acadStream.setVisible(false);
             acadStream.setManaged(false);
         } else {
             acadStream.setText("Academic Stream: " + person.getAcadStream().acadStream);
         }
 
         if (person.getRemark().isEmpty()) {
-            remark.setVisible(false);
             remark.setManaged(false);
         } else {
             remark.setText("Remark: " + person.getRemark().value);
         }
 
         if (person.getFee().isEmpty()) {
-            outstandingFee.setVisible(false);
             outstandingFee.setManaged(false);
         } else {
             outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
