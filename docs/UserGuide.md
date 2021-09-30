@@ -232,7 +232,7 @@ Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
 * `find a/Jurong east n/Ben e/gmail`
   * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-  * will match a student name: `benjamin`, with address `yishun east ave 1`, and email `benj@gmail.com`
+  * will match a student named `benjamin`, with address `yishun east ave 1`, and email `benj@gmail.com`
 
 #### Filtering students by tags: `filter`
 
