@@ -33,18 +33,17 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
         // One whitespace required before first prefix.
-        trimmedArgs = " " + trimmedArgs;
+        String trimmedArgs = " " + args.trim();
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_EXPECTED_SALARY, PREFIX_TAG);
+
+        if (argMultimap.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
 
         FindDescriptor findDescriptor = new FindDescriptor(argMultimap);
 
