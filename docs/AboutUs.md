@@ -25,9 +25,9 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/amzhy.png" width="200px">
 
 [[github](http://github.com/amzhy)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/ammar.md)]
 
-* Role: Testing
+* Role: Developer
 * Responsibilities: Ensures the testing of the project is done properly on time
 
 ### Deng Huaiyu
