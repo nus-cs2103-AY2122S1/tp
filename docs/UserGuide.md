@@ -76,20 +76,20 @@ Format: `help`
 
 Adds a position to the application management system.
 
-Format: `add position pos/POSITION desc/DESCRPTION`
+Format: `add position t/TITLE desc/DESCRIPTION`
 
 Examples:
-* `add postion pos/software engineer desc/work in a team that builds a facial recognition application`
+* `add postion t/software engineer desc/work in a team that builds a facial recognition application`
 
 
 ### Deleting a position: `delete position`
 
 Deletes the specified position from the application management system.
 
-Format: `delete position pos/POSITION`
+Format: `delete position t/TITLE`
 
 * Deletes the position with the specified `POSITION`.
-* The name refers to the name of the positions as shown in the displayed position list.
+* The name refers to the name of the position as displayed in the position list.
 * The name must match exactly.
 
 Examples:
