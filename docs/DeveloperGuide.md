@@ -321,16 +321,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  **Interoperability**: Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  **Capacity/Efficiency**: Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3.  **Quality**: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  **Performance**: Should be able to respond to a command within a response time of 2 seconds.
+5.  **Quality**: A new user should be able to understand and use ModuLink easily with the help of the [UserGuide](https://ay2122s1-cs2103t-w12-4.github.io/tp/UserGuide.html).
+6.  **Privacy**: Only users that have signed up can see the contact details of other users.
+7.  **Portable**: Registered users can sign in ModuLink on other computers and still see their favourite profiles.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module**: A NUS CS module listed on [NUSmods](https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4)
+* **Student**: A NUS CS student
+* **Group status**: The group status of a student for a group project in a module
+* **Command**: A command for the program. A full list of command can be seen in the [UserGuide](https://ay2122s1-cs2103t-w12-4.github.io/tp/UserGuide.html).
+* **Contact detail**: Contact details consist of the user names, email, telegram handle.
 
 --------------------------------------------------------------------------------------------------------------------
 
