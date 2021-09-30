@@ -2,13 +2,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.participant.Participant;
 
 /**
  * Shows a list of participants of an existing Event in the Managera Event list.
@@ -42,7 +46,13 @@ public class ShowParticipantsCommand extends Command {
         }
 
         Event desiredEvent = filteredEventList.get(0);
-        String displayedMessage = String.format("Event is %s, insert list here!", desiredEvent.getName());
+        List<Participant> participantList = desiredEvent.getParticipants();
+        String displayedMessage = String.format("Event Name: %s\nParticipants:\n%s", desiredEvent.getName(),
+                Stream.iterate(0, i -> i + 1)
+                        .limit(participantList.size())
+                        .map(i -> (i + 1) + ". " + participantList.get(i).getName() + "\n")
+                        .collect(Collectors.joining())
+                );
 
         return new CommandResult(displayedMessage);
 
