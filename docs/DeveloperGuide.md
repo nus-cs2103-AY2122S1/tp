@@ -273,10 +273,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   |                                | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add tasks                      |                                                                         |
-| `* * *`  | user                                       | delete tasks                  | remove tasks that I no longer need to track                            |
+| `* * *`  | user                                       | add tasks                      |                                                                        |
+| `* * *`  | user                                       | delete tasks                   | remove tasks that I no longer need to track                            |
 | `* * *`  | user                                       | find tasks                     | locate details of a task without having to go through the entire list  |
-| `* *`    | user                                       |                                | minimize chance of someone else seeing them by accident                |
+| `* *`    | user                                       | show tasks                     | show the tasks that I have for the week or according to the date       |
 | `*`      | user with many persons in the address book |                                | locate a person easily                                                 |
 
 *{More to be added}*
@@ -347,6 +347,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User requests to find tasks that contains some keywords with a due date.
     * 1a1. Uni-Fy displays the list of tasks with matching keywords with that due date.
   Use case ends.
+
+**Use case: Show tasks**
+
+**MSS**
+
+1.  User requests to show tasks based on a given date or week number
+2.  Uni-Fy displays the list of tasks occurring in that week or on the given date.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty. 
+  Use case ends.
+
+* 2a. The given index is invalid.
+    * 3a1. Uni-Fy shows an error message.
+      Use case reverts to step 1.
 
 *{More to be added}*
 
