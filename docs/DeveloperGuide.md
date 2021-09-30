@@ -336,9 +336,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the keywords to search by
-2. MrTechRecruiter performs the search according to the keywords
-3. MrTechRecruiter displays the search results
+1. User enters the keywords for MrTechRecruiter to search for.
+2. MrTechRecruiter performs the search according to the keywords.
+3. MrTechRecruiter displays the search results.
 
    Use case ends.
 
@@ -346,12 +346,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-        Use case ends.
+      Use case ends.
 
 
 * 1a. An invalid flag is specified.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. MrTechRecruiter shows an error message.
 
       Use case ends.
 
@@ -362,9 +362,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be portable and work without requiring an installer.
+4. Should be portable (i.e. work without requiring an installer).
 5. Should not depend on a remote server.
-6. Should work for standard screen resolutions and higher.
+6. Should work for standard (i.e. industry-standard Full HD 1080p resolution) screen resolutions and higher.
 7. Should be packaged into a single, compact (~100MB) file.
 8. Developer & User guides should be PDF friendly.
 
