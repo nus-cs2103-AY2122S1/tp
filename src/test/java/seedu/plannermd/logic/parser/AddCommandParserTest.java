@@ -42,7 +42,7 @@ import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 
-public class AddPatientCommandParserTest {
+public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test

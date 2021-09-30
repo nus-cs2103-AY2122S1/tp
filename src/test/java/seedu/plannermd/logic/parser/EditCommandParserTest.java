@@ -43,7 +43,7 @@ import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
 
-public class EditPatientCommandParserTest {
+public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 

@@ -16,7 +16,7 @@ import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class DeletePatientCommandParserTest {
+public class DeleteCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 

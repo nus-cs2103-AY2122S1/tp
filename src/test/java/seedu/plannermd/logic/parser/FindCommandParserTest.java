@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
-public class FindPatientCommandParserTest {
+public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
