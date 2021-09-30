@@ -314,7 +314,7 @@ Action | Format, Examples
 **Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g., `doneEvent n/240km Marathon d/2022-08-20`
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
-**List Events** | `listEvent`
+**List Events** | `listEvents`
 **add Participant to Event** | `addParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant e/2103T Finals p/mikerowe1`
 **remove Participant from Event** | `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant e/CS2103T Finals p/mikerowe1`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
