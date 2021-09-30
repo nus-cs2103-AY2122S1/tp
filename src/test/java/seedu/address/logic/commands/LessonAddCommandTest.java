@@ -39,17 +39,6 @@ public class LessonAddCommandTest {
     }
 
     @Test
-    public void execute_duplicateLesson_throwsCommandException() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withSampleLesson().build();
-        LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, SampleDataUtil.getSampleLesson());
-        ModelStub modelStub = new ModelStubWithPerson(editedPerson);
-
-        assertThrows(CommandException.class,
-                LessonAddCommand.MESSAGE_DUPLICATE_LESSON, () -> lessonAddCommand.execute(modelStub));
-    }
-
-    @Test
     public void equals() {
         LessonAddCommand addSampleLessonCommand = new LessonAddCommand(INDEX_FIRST_PERSON,
                 SampleDataUtil.getSampleLesson());
@@ -125,6 +114,11 @@ public class LessonAddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClashingLesson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 

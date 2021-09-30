@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  * Represents a Lesson's TimeRange in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidTimeRange(Time, Time)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTimeRange(String)}
  */
 public class TimeRange implements Comparable<TimeRange> {
     public static final String MESSAGE_CONSTRAINTS = "Lesson time range should adhere to the following constraints:\n"
@@ -21,13 +21,13 @@ public class TimeRange implements Comparable<TimeRange> {
     public static final String VALIDATION_REGEX = "^(([01]?[0-9]|2[0-3])[0-5][0-9])-(([01]?[0-9]|2[0-3])[0-5][0-9])";
 
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
-    private static final LocalTime DAY_START = LocalTime.of(8,0,0);
-    private static final LocalTime DAY_END = LocalTime.of(22,0,0);
+    private static final LocalTime DAY_START = LocalTime.of(8, 0, 0);
+    private static final LocalTime DAY_END = LocalTime.of(22, 0, 0);
+
+    public final String value;
 
     private final LocalTime start;
     private final LocalTime end;
-
-    public final String value;
 
     /**
      * Constructs a TimeRange object.
@@ -38,7 +38,7 @@ public class TimeRange implements Comparable<TimeRange> {
         requireNonNull(value);
         checkArgument(isValidTimeRange(value), MESSAGE_CONSTRAINTS);
         this.value = value;
-        String[] startEndTimes = value.split("-",2);
+        String[] startEndTimes = value.split("-", 2);
         start = LocalTime.parse(startEndTimes[0], DATE_TIME_FORMAT);
         end = LocalTime.parse(startEndTimes[1], DATE_TIME_FORMAT);
     }
@@ -66,7 +66,7 @@ public class TimeRange implements Comparable<TimeRange> {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
-        String[] startEndTimes = test.split("-",2);
+        String[] startEndTimes = test.split("-", 2);
         if (startEndTimes.length < 2) { // There must be a '-'
             return false;
         }

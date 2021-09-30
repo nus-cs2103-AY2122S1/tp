@@ -1,11 +1,10 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.model.lesson.Lesson;
@@ -31,13 +30,11 @@ public class LessonUtil {
             sb.append(PREFIX_RECURRING + " ");
         }
         sb.append(PREFIX_DATE + lesson.getDate().toString() + " ");
-        sb.append(PREFIX_START_TIME + lesson.getTimeRange().getStart().value + " ");
-        sb.append(PREFIX_END_TIME + lesson.getTimeRange().getEnd().value + " ");
+        sb.append(PREFIX_TIME + lesson.getTimeRange().value + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
         lesson.getHomework().stream().forEach(
             s -> sb.append(PREFIX_HOMEWORK + s.description + " ")
         );
         return sb.toString();
     }
-
 }

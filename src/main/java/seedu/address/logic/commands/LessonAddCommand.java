@@ -54,7 +54,6 @@ public class LessonAddCommand extends Command {
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor Person: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists for this person.";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
     private final Index index;
@@ -109,7 +108,7 @@ public class LessonAddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasClashingLesson(editedPerson)) {
+        if (!personToEdit.hasClashingLessons(editedPerson )&& model.hasClashingLesson(editedPerson)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
