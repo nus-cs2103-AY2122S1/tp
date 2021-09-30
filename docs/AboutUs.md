@@ -39,7 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Siddharth Srivastava
 
-<img src="images/siddharthSrivastava.png" width="200px">
+<img src="images/Siddharth-Sid.png" width="200px">
 
 [[github](https://github.com/Siddharth-Sid)]
 
