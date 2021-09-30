@@ -45,7 +45,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/harry-gao-h)]
 
 * Role: Developer
-* Responsibilities: Code quality + Scheduling & Tracking
+* Responsibilities: Code quality, Scheduling & Tracking
 
 ### James Doe
 
