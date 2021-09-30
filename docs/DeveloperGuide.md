@@ -488,6 +488,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**Use case: Retrieve information**
+
+**MSS**
+
+1. User enters a command to retrieve information
+2. AcademyDirectory obtain the queried information from the students.
+3. AcademyDirectory displays the list of information queried.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User specifies exact student name.
+
+    * 1a1. AcademyDirectory displays the queried information associated with the queried student.
+  
+         Use case ends.
+  
+* 1a. User's queried information is not supported 
+    * 1a1. AcademyDirectory shows an error message.
+    * 1a2. AcademyDirectory requests for the user to try another information.
+  
+        Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
