@@ -365,9 +365,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **User**: A community worker using the app to manage multiple elderlies
-* **Visit**: A visit to an elderly's home scheduled by the user
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **User**: Refers to Social Worker, a community worker using the app to manage multiple elderlies.
+* **Social Worker**: Workers at community centres to provide supports for needy seniors. They manage multiple elderlies and visit them regularly.
+* **Elderly**: The seniors who need social support due to limited family support. They are managed by social workers.
+* **Visit**: A visit to an elderly's home scheduled by the user.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
 
 --------------------------------------------------------------------------------------------------------------------
 
