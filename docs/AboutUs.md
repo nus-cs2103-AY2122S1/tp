@@ -49,12 +49,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code Quality
 * Responsibilities: Looks after code quality + Ensure adherence to coding standards + In charge of feature 'note'
 
-### James Doe
+### Gabriel Goh Kheng Lin
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kawaiigabrielneko.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kawaiigabrielneko)]
+[[portfolio](team/kawaiigabrielneko.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Insurance + Glossary
