@@ -3,7 +3,13 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Are you a busy private 1-to-1 home tutor who finds it difficult to remember all your students' information?
+
+**Tuition Address Book (TAB)** is an all-in-one *desktop application* that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
+
+TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
+
+Use TAB to effortlessly manage your students' contact details faster than a typical mouse/GUI driven app!
 
 * Table of Contents
 {:toc}
