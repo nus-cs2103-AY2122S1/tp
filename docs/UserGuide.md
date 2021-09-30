@@ -183,7 +183,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `TODO`
+**Add** | <code> add <i>n/task_name d/date (t/time) </i> </code> <br>e.g.  `add n/CS2103 test d/2021-12-01 t/16:30`
 **Delete** | <code>delete <i>task_id</i></code> <br> <code>delete <i>n/task_name (d/date)</i> </code> <br> e.g. <code>delete n/quiz d/2021-10-10 </code>
 **Show** | `show`
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
