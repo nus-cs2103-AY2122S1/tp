@@ -13,20 +13,21 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
-import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
-import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.ClearCommand;
 import seedu.plannermd.logic.commands.ExitCommand;
-import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
+import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
+import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
+import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
-import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
-import seedu.plannermd.testutil.PersonBuilder;
 import seedu.plannermd.testutil.PersonUtil;
+import seedu.plannermd.testutil.patient.PatientBuilder;
+import seedu.plannermd.testutil.patient.PatientUtil;
 
 public class PlannerMdParserTest {
 
@@ -34,9 +35,9 @@ public class PlannerMdParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddPatientCommand command = (AddPatientCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddPatientCommand(person), command);
+        Patient patient = new PatientBuilder().build();
+        AddPatientCommand command = (AddPatientCommand) parser.parseCommand(PatientUtil.getAddCommand(patient));
+        assertEquals(new AddPatientCommand(patient), command);
     }
 
     @Test
@@ -54,8 +55,8 @@ public class PlannerMdParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPatientCommand.EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Patient patient = new PatientBuilder().build();
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder(patient).build();
         EditPatientCommand command = (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditPatientCommand(INDEX_FIRST_PERSON, descriptor), command);
@@ -72,7 +73,7 @@ public class PlannerMdParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindPatientCommand command = (FindPatientCommand) parser.parseCommand(
                 FindPatientCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPatientCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindPatientCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
     }
 
     @Test

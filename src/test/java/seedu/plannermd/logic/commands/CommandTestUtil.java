@@ -6,6 +6,7 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 
@@ -18,6 +19,7 @@ import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
@@ -50,6 +52,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String RISK_DESC_AMY = " " + PREFIX_RISK + VALID_RISK_AMY;
+    public static final String RISK_DESC_BOB = " " + PREFIX_RISK + VALID_RISK_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -115,15 +119,15 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredPatientList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the patient at the given {@code targetIndex} in the
      * {@code model}'s plannermd.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showPatientAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPatientList().size());
 
-        Person person = model.getFilteredPatientList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Patient patient = model.getFilteredPatientList().get(targetIndex.getZeroBased());
+        final String[] splitName = patient.getName().fullName.split("\\s+");
+        model.updateFilteredPatientList(new NameContainsKeywordsPredicate<Patient>(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPatientList().size());
     }

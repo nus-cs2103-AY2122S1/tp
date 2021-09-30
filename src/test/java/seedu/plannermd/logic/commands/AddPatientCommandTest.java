@@ -23,39 +23,40 @@ import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
-import seedu.plannermd.testutil.PersonBuilder;
+import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class AddPatientCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddPatientCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_patientAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPatientAdded modelStub = new ModelStubAcceptingPatientAdded();
+        Patient validPatient = new PatientBuilder().build();
 
-        CommandResult commandResult = new AddPatientCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPatientCommand(validPatient).execute(modelStub);
 
-        assertEquals(String.format(AddPatientCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPatient), modelStub.patientsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddPatientCommand addPatientCommand = new AddPatientCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Patient validPatient = new PatientBuilder().build();
+        AddPatientCommand addPatientCommand = new AddPatientCommand(validPatient);
+        ModelStub modelStub = new ModelStubWithPerson(validPatient);
 
-        assertThrows(CommandException.class, AddPatientCommand.MESSAGE_DUPLICATE_PATIENT, () -> addPatientCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddPatientCommand.MESSAGE_DUPLICATE_PATIENT, () -> addPatientCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Patient alice = new PatientBuilder().withName("Alice").build();
+        Patient bob = new PatientBuilder().withName("Bob").build();
         AddPatientCommand addAliceCommand = new AddPatientCommand(alice);
         AddPatientCommand addBobCommand = new AddPatientCommand(bob);
 
@@ -170,21 +171,21 @@ public class AddPatientCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the patient being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingPatientAdded extends ModelStub {
+        final ArrayList<Patient> patientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return personsAdded.stream().anyMatch(patient::isSamePerson);
+            return patientsAdded.stream().anyMatch(patient::isSamePerson);
         }
 
         @Override
         public void addPatient(Patient patient) {
             requireNonNull(patient);
-            personsAdded.add(patient);
+            patientsAdded.add(patient);
         }
 
         @Override

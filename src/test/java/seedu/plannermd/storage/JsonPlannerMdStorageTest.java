@@ -3,10 +3,10 @@ package seedu.plannermd.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.plannermd.testutil.Assert.assertThrows;
-import static seedu.plannermd.testutil.TypicalPersons.ALICE;
-import static seedu.plannermd.testutil.TypicalPersons.HOON;
-import static seedu.plannermd.testutil.TypicalPersons.IDA;
-import static seedu.plannermd.testutil.TypicalPersons.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
+import static seedu.plannermd.testutil.patient.TypicalPatients.HOON;
+import static seedu.plannermd.testutil.patient.TypicalPatients.IDA;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -51,13 +51,13 @@ public class JsonPlannerMdStorageTest {
     }
 
     @Test
-    public void readPlannerMd_invalidPersonPlannerMd_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readPlannerMd("invalidPersonPlannerMd.json"));
+    public void readPlannerMd_invalidPatientPlannerMd_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readPlannerMd("invalidPatientPlannerMd.json"));
     }
 
     @Test
-    public void readPlannerMd_invalidAndValidPersonPlannerMd_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readPlannerMd("invalidAndValidPersonPlannerMd.json"));
+    public void readPlannerMd_invalidAndValidPatientPlannerMd_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readPlannerMd("invalidAndValidPatientPlannerMd.json"));
     }
 
     @Test

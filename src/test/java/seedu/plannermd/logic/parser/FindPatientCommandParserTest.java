@@ -17,14 +17,15 @@ public class FindPatientCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPatientCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPatientCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindPatientCommand expectedFindPatientCommand =
-                new FindPatientCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindPatientCommand(new NameContainsKeywordsPredicate<>(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindPatientCommand);
 
         // multiple whitespaces between keywords

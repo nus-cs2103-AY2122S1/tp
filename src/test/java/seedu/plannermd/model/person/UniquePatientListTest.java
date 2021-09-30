@@ -4,10 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_RISK_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.testutil.Assert.assertThrows;
-import static seedu.plannermd.testutil.TypicalPersons.ALICE;
-import static seedu.plannermd.testutil.TypicalPersons.BOB;
+import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
+import static seedu.plannermd.testutil.patient.TypicalPatients.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,10 +16,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.UniquePatientList;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
 import seedu.plannermd.model.person.exceptions.PersonNotFoundException;
-import seedu.plannermd.testutil.PersonBuilder;
+import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class UniquePatientListTest {
 
@@ -43,7 +45,10 @@ public class UniquePatientListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePatientList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .withRisk(VALID_RISK_BOB)
                 .build();
         assertTrue(uniquePatientList.contains(editedAlice));
     }
@@ -86,7 +91,9 @@ public class UniquePatientListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePatientList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE)
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .withRisk(VALID_RISK_BOB)
                 .build();
         uniquePatientList.setPatient(ALICE, editedAlice);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
@@ -144,14 +151,14 @@ public class UniquePatientListTest {
 
     @Test
     public void setPersons_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePatientList.setPatients((List<Person>) null));
+        assertThrows(NullPointerException.class, () -> uniquePatientList.setPatients((List<Patient>) null));
     }
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniquePatientList.add(ALICE);
-        List<Person> personList = Collections.singletonList(BOB);
-        uniquePatientList.setPatients(personList);
+        List<Patient> patientList = Collections.singletonList(BOB);
+        uniquePatientList.setPatients(patientList);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
         expectedUniquePatientList.add(BOB);
         assertEquals(expectedUniquePatientList, uniquePatientList);
@@ -159,8 +166,8 @@ public class UniquePatientListTest {
 
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePatientList.setPatients(listWithDuplicatePersons));
+        List<Patient> listWithDuplicatePatients = Arrays.asList(ALICE, ALICE);
+        assertThrows(DuplicatePersonException.class, () -> uniquePatientList.setPatients(listWithDuplicatePatients));
     }
 
     @Test

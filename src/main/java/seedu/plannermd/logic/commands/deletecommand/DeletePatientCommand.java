@@ -35,7 +35,7 @@ public class DeletePatientCommand extends DeleteCommand {
         List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());

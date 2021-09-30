@@ -96,9 +96,10 @@ public class PatientBuilder {
 
     /**
      * Sets the {@code Risk} of the {@code Patient} that we are building.
+     * Accepts UNCLASSIFIED risk.
      */
     public PatientBuilder withRisk(String risk) {
-        this.risk = new Risk(risk);
+        this.risk = Risk.getUnclassifiableRisk(risk);
         return this;
     }
 

@@ -73,7 +73,7 @@ public class EditPatientCommand extends EditCommand {
         List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         Patient patientToEdit = lastShownList.get(index.getZeroBased());

@@ -20,7 +20,8 @@ public class EditPatientDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditPatientCommand.EditPatientDescriptor descriptorWithSameValues = new EditPatientCommand.EditPatientDescriptor(DESC_AMY);
+        EditPatientCommand.EditPatientDescriptor descriptorWithSameValues =
+                new EditPatientCommand.EditPatientDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,7 +37,8 @@ public class EditPatientDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditPatientCommand.EditPatientDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditPatientCommand.EditPatientDescriptor editedAmy =
+                new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false

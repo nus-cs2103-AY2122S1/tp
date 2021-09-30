@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static seedu.plannermd.testutil.Assert.assertThrows;
-import static seedu.plannermd.testutil.TypicalPersons.ALICE;
-import static seedu.plannermd.testutil.TypicalPersons.BENSON;
+import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
+import static seedu.plannermd.testutil.patient.TypicalPatients.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        PlannerMd plannerMd = new PlannerMdBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        PlannerMd plannerMd = new PlannerMdBuilder().withPatient(ALICE).withPatient(BENSON).build();
         PlannerMd differentPlannerMd = new PlannerMd();
         UserPrefs userPrefs = new UserPrefs();
 

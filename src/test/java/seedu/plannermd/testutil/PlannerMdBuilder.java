@@ -1,12 +1,12 @@
 package seedu.plannermd.testutil;
 
 import seedu.plannermd.model.PlannerMd;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 
 /**
  * A utility class to help with building PlannerMd objects.
  * Example usage: <br>
- *     {@code PlannerMd ab = new PlannerMdBuilder().withPerson("John", "Doe").build();}
+ *     {@code PlannerMd ab = new PlannerMdBuilder().withPatient("John", "Doe").build();}
  */
 public class PlannerMdBuilder {
 
@@ -23,8 +23,8 @@ public class PlannerMdBuilder {
     /**
      * Adds a new {@code Person} to the {@code PlannerMd} that we are building.
      */
-    public PlannerMdBuilder withPerson(Person person) {
-        plannerMd.addPatient(person);
+    public PlannerMdBuilder withPatient(Patient patient) {
+        plannerMd.addPatient(patient);
         return this;
     }
 

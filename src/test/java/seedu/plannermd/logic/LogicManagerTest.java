@@ -1,14 +1,15 @@
 package seedu.plannermd.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.RISK_DESC_AMY;
 import static seedu.plannermd.testutil.Assert.assertThrows;
-import static seedu.plannermd.testutil.TypicalPersons.AMY;
+import static seedu.plannermd.testutil.patient.TypicalPatients.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -17,20 +18,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.CommandResult;
-import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
+import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
+import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.UserPrefs;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.storage.JsonPlannerMdStorage;
 import seedu.plannermd.storage.JsonUserPrefsStorage;
 import seedu.plannermd.storage.StorageManager;
-import seedu.plannermd.testutil.PersonBuilder;
+import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -59,7 +60,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -80,10 +81,10 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddPatientCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+                + ADDRESS_DESC_AMY + RISK_DESC_AMY;
+        Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPatient(expectedPerson);
+        expectedModel.addPatient(expectedPatient);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
