@@ -14,9 +14,7 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage studentsâ
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Download the file to the folder you want to use as the _home folder_ for your Academy Directory.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,11 +24,7 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage studentsâ
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
+   * **`attendance`** : Mark a student attendance.
 
    * **`exit`** : Exits the app.
 
