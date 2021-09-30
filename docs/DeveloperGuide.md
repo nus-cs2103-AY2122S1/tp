@@ -257,7 +257,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* A student, 
+* A student,
   * Students generally have different types of tasks they need to organize and deadlines to keep track of.
   * Students have many contacts from various places such as modules, CCAs, etc, that they would like to organize better.
 
@@ -270,7 +270,7 @@ _{Explain here how the data archiving feature will be implemented}_
   * Tasks and deadlines are easier to be specified with typing, instead of clicking through multiple options with a laptop trackpad
   * Students may encounter situations where they need to type information/deadlines very quickly (e.g. during a lecture)
 
-**Value proposition**: 
+**Value proposition**:
  * Manage contacts and tasks faster than a typical mouse/GUI driven app.
 
 ### User stories
@@ -304,8 +304,8 @@ _{Explain here how the data archiving feature will be implemented}_
 1. User switches to the task tab
 2. Dash shows the list of tasks
 3. User requests to add a task, specifying task info
-4. Dash adds task to the list 
-   
+4. Dash adds task to the list
+
 Use case ends.
 
 <u>Extensions:</u>
@@ -320,7 +320,7 @@ Use case resumes at step 2.
 <u>MSS:</u>
 
 1. User switches to the task tab
-2. Dash shows the list of tasks 
+2. Dash shows the list of tasks
 3. User requests to delete a task, specifying the index to be deleted
 4. Dash deletes the task
 
@@ -345,7 +345,7 @@ Use case resumes at step 2.
 2. Dash shows the list of tasks
 3. User inputs the task index to be edited, specifying updated info for the task
 4. Dash edits the task
-   
+
 Use case ends.
 
 <u>Extension:</u>
@@ -382,14 +382,14 @@ Use case ends.
 2. Dash shows a list of contacts
 3. User requests to add a contact, specifying contact info
 4. Dash adds contact to the list
-   
+
 Use case ends.
 
 <u>Extension:</u>
 
 3. The contact info is invalid
     * a. Dash shows an error message
-    
+
 Use case resumes at step 2.
 
 #### Use case 06: Delete a contact
@@ -411,7 +411,7 @@ Use case ends.
 
 3. The given index is invalid
     * a. Dash shows an error message
-    
+
 Use case resumes at step 2.
 
 #### Use case 07: Edit a contact
