@@ -45,13 +45,9 @@ public class Patient extends Person {
             return false;
         }
 
-        Patient otherPerson = (Patient) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getRisk().equals(getRisk());
+        Patient otherPatient = (Patient) other;
+        return super.equals(otherPatient)
+                && otherPatient.getRisk().equals(getRisk());
     }
 
     @Override

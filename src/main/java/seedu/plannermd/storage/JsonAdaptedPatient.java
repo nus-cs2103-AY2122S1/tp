@@ -15,12 +15,11 @@ import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
-import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Patient}.
  */
 class JsonAdaptedPatient {
 

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.plannermd.commons.core.index.Index;
@@ -131,10 +132,10 @@ public class ParserUtil {
      */
     public static Risk parseRisk(String risk) throws ParseException {
         requireNonNull(risk);
-        String trimmedRisk = risk.trim();
-        if (!Risk.isValidRisk(trimmedRisk)) {
+        String trimmedAndUpperCaseRisk = risk.trim().toUpperCase();
+        if (!Risk.isValidRisk(trimmedAndUpperCaseRisk)) {
             throw new ParseException(Risk.MESSAGE_CONSTRAINTS);
         }
-        return new Risk(trimmedRisk);
+        return new Risk(trimmedAndUpperCaseRisk);
     }
 }
