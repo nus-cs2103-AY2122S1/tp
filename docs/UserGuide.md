@@ -68,9 +68,11 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 
 ### Creating a profile with tags : `create`
 
-Creates your user profile. You can also choose to add tags to indicate your group availabilty.
+Creates your user profile. You can also choose to add tags to indicate your group availability.
 
 Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+
+:information_source: Note: STUDENT_ID must be unique
 
 Examples:
 * `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com t/Need a team for CS2103T`
@@ -79,18 +81,14 @@ Examples:
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to your favourites list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+Format: `add id/STUDENT_ID`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-* 
+* `add n/John Doe id/A0222594A`
+* `add n/Betsy Crowe id/A0222594A`
+
 ### Removing a favourite : `remove`
 
 Removes a favourited user from the favourites list.
