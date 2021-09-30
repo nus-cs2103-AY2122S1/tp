@@ -29,18 +29,19 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Find feature + Javadocs
 
-### Johnny Doe
+### Hardik Narang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/naranghardik16.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/naranghardik16.md)]
+[[github](http://github.com/naranghardik16)]
+[[portfolio](team/naranghardik16.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Priority Feature + Design
 
 ### Sourabh Jaiswal
 
-<img src="images/srj31.png.png" width="200px">
+<img src="images/srj31.png" width="200px">
 
 [[github](http://github.com/srj31)]
 [[portfolio](team/srj31.md)]
