@@ -100,7 +100,7 @@ Adds a student to the address book.
 Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of tags (including 0)
+A student can have any number of tags (including 0).
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -226,7 +226,7 @@ Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
 * `find a/Jurong east n/Ben e/gmail`
   * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-  * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
+  * will match a student name: `benjamin`, with address `yishun east ave 1`, and email `benj@gmail.com`
 
 #### Filtering students by tags: `filter`
 
@@ -355,7 +355,7 @@ Format: `tag`
 
 #### Undoing previous command: `undo`
 
-Undo the previous command that modified the Storage.
+Undo the previous command that modified the data.
 
 Format: `undo`
 
