@@ -6,7 +6,7 @@ title: User Guide
 Ailurus is a **desktop app** that helps to organise committees account for details of their members. It
 provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
 
-It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+It is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Ailurus can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
