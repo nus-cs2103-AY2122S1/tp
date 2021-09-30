@@ -87,11 +87,14 @@ public class TimeRange implements Comparable<TimeRange> {
      * @param other The TimeRange to be tested.
      */
     public boolean isClashing(TimeRange other) {
-        if (start.compareTo(other.start) >= 0 && start.compareTo(other.end) <= 0) {
-            return true; // Start time is within the other time range
+        if (start.compareTo(other.start) <= 0 && end.compareTo(other.end) >= 0) {
+            return true; // starts before other and ends after other
         }
-        if (end.compareTo(other.start) >= 0 && end.compareTo(other.end) <= 0) {
-            return true; // End time is within the other time range
+        if (start.compareTo(other.start) > 0 && start.compareTo(other.end) < 0) {
+            return true; // start time is within the other time range
+        }
+        if (end.compareTo(other.start) > 0 && end.compareTo(other.end) < 0) {
+            return true; // end time is within the other time range
         }
         return false;
     }

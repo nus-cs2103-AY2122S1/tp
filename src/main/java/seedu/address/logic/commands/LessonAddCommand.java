@@ -108,7 +108,7 @@ public class LessonAddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!personToEdit.hasClashingLessons(editedPerson) && model.hasClashingLesson(editedPerson)) {
+        if (personToEdit.hasClashingLessons(editedPerson) || model.hasClashingLesson(editedPerson)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 

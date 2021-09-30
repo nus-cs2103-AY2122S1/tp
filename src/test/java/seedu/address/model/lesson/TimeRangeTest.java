@@ -37,13 +37,21 @@ public class TimeRangeTest {
     @Test
     public void isClashing_timeRange() {
         TimeRange timeRange = new TimeRange("0900-1200");
-        TimeRange clashingTimeRange = new TimeRange("0900-1000");
         TimeRange nonClashingTimeRange = new TimeRange("1300-1500");
+        TimeRange startDuringEndAfter = new TimeRange("1030-1300");
+        TimeRange startBeforeEndDuring = new TimeRange("0900-1000");
+        TimeRange startBeforeEndAfter = new TimeRange("0800-1300");
+        TimeRange startDuringEndDuring = new TimeRange("1000-1100");
+        TimeRange duplicateTimeRange = new TimeRange("0900-1200");
 
         // time ranges not clashing
         assertFalse(timeRange.isClashing(nonClashingTimeRange));
 
         // time ranges clashing
-        assertTrue(timeRange.isClashing(clashingTimeRange));
+        assertTrue(timeRange.isClashing(startDuringEndAfter));
+        assertTrue(timeRange.isClashing(startBeforeEndDuring));
+        assertTrue(timeRange.isClashing(startBeforeEndAfter));
+        assertTrue(timeRange.isClashing(startDuringEndDuring));
+        assertTrue(timeRange.isClashing(duplicateTimeRange));
     }
 }
