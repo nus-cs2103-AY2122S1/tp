@@ -36,11 +36,14 @@ public class TagCommandParser implements Parser {
                     TagCommand.MESSAGE_USAGE + "\n" + DeleteTagCommand.MESSAGE_USAGE), ive);
         }
 
+        if (argMultimap.getAllValues(PREFIX_TAG).size() > 1) {
+            throw new ParseException("Please enter only one tag.");
+        }
+
         String tagString = argMultimap.getValue(PREFIX_TAG).orElse("");
         if (tagString.equals("")) {
             throw new ParseException(MESSAGE_NOT_ADDED);
         }
-
         Tag tag = ParserUtil.parseTag(tagString);
 
         String preamble = argMultimap.getPreamble();
