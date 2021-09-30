@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: derive(#DDDDDD, 100%);
+    background-color: #DDDDDD ; /* Used in the default.html file */
 }
 
 .label {
@@ -100,15 +100,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #6a6a6a;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #444444;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #AAAAAA;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -137,9 +137,15 @@
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #FF6347;
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
+}
+
+.pane-with-border-2 {
+    -fx-background-color: #DDDDDD;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
 }
 
 .status-bar {
