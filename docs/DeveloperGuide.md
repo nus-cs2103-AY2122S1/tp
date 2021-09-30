@@ -344,14 +344,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
       Use case ends.
 
 
-* 1a. An invalid flag is specified.
+* 2a. An invalid flag is specified.
 
-    * 1a1. MrTechRecruiter shows an error message.
+    * 2a1. MrTechRecruiter shows an error message.
 
       Use case ends.
 
