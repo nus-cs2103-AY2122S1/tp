@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TAB3 is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still 
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAB3 can get your contact management 
+tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -63,6 +65,17 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+
+### Module add task: `add task`
+
+Create a new task for a specific module
+
+Format: `module add <module name>, <task name>`
+
+Examples:
+* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
+* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
 
 ### Viewing help : `help`
 
