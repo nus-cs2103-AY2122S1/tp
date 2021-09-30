@@ -239,7 +239,7 @@ If your changes to the data file makes its format invalid, InsurancePal will dis
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InsurancePall home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous InsurancePal home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
