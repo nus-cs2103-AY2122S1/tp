@@ -39,7 +39,7 @@ to help you with the installation. Select the corresponding OS you are working o
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the address book.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -61,9 +61,9 @@ to help you with the installation. Select the corresponding OS you are working o
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -158,17 +158,17 @@ Examples:
 
 #### Deleting a student: `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 #### Viewing a student's details: `view`
 
@@ -301,14 +301,14 @@ Deletes the specified lesson from the specified student in the address book.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
-* Deletes the lesson of specified `LESSON_INDEX` for the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The lesson index refers to the index number shown in the lesson list of the person. 
+* Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The lesson index refers to the index number shown in the lesson list of the student. 
 * The index and lesson index **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd person in the address book.
-* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st person in the results 
+* `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in the address book.
+* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
 
 ### Viewing the Schedule
@@ -327,14 +327,14 @@ Format: `schedule`
 
 #### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAB data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 #### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAB data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Miscellaneous Commands
