@@ -80,7 +80,8 @@ Adds a person to the address book.
 Format: `add applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0). <br>
+If the job position exists, its rejection rate should change accordingly.
 </div>
 
 Examples:
@@ -99,18 +100,6 @@ Format: `delete applicant n/NAME`
 
 Examples:
 * `delete applicant n/John Doe` deletes the applicant with the exact name John Doe.
-
-### View average rejection rates by job position: `average job position` `[coming soon]`
-
-Obtains the average rejection rate for that particular job position found in the address book.
-
-Format: `average [j/JOB POSITION]`
-
-* Shows average rejection rate in terms of % (out of 100).
-* *Special sub-command*: `average all` which shows all job positions (in alphabetical order) with their corresponding rejection rates.
-
-Example:
-* `average Junior Software Engineer` shows the message `Junior Software Engineer: 10%`.
 
 ### Listing all persons : `list` `[coming soon]`
 
