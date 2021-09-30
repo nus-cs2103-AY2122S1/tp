@@ -3,12 +3,14 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Introduction
+
+_(todo: add TAB introduction, how to read this user guide etc)_
 
 ## Quick start
 
@@ -75,7 +77,11 @@ to help you with the installation. Select the corresponding OS you are working o
 
 </div>
 
-### Viewing help : `help`
+### Getting Help 
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -83,23 +89,11 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Viewing a student's details : `view`
+### Managing Students
 
-> ❕❕ <b>Note:</b> This feature is subject to changes
+--------------------------------------------------------------------------------------------------------------------
 
-View data of student with specified index in detail.
-
-![view student details](images/viewAlexDetail.png)
-
-Format: `view INDEX`
-
-### Viewing schedule: `schedule` [coming soon]
-
-Displays a read-only weekly schedule.
-
-Format: `schedule`
-
-### Adding a student: `add`
+#### Adding a student: `add`
 
 Adds a student to the tuition address book.
 
@@ -123,13 +117,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
 * `add n/Betsy Crowe t/cousin a/Newgate p/91234567 f/150.50 r/hasnt pay tuition fee for Aug t/retainee`
 
-### Listing all students : `list`
-
-Shows a list of all students in the address book.
-
-Format: `list`
-
-### Editing a student : `edit`
+#### Editing a student: `edit`
 
 Edits an existing student in the address book.
 
@@ -168,7 +156,41 @@ Examples:
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 * `edit 3 sch/NJC stream/` Edits the school of the 3rd student to be `NJC` and clears academic stream data.
 
-### Finding students by fields: `find`
+#### Deleting a student: `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+#### Viewing a student's details: `view`
+
+> ❕❕ <b>Note:</b> This feature is subject to changes
+
+View data of student with specified index in detail.
+
+![view student details](images/viewAlexDetail.png)
+
+Format: `view INDEX`
+
+#### Listing all students: `list`
+
+Shows a list of all students in the address book.
+
+Format: `list`
+
+### Finding Students
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Finding students by fields: `find`
 
 Finds all students whose fields match the given keywords.
 
@@ -183,30 +205,30 @@ Format: `find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …]
 
 * The search is case-insensitive.<br>
   e.g.`hans` will match `Hans`.
-  
+
 * The order of the keywords does not matter.<br>
   e.g. `Clementi West` will match `West Clementi`.
-  
+
 * The keyword does not need to match the field exactly.<br>
   e.g. `john@gmail.com` will match `leejohn@gmail.com`.
-  
+
 * A field just needs to match at least one keyword.<br>
   e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
-  
+
 * A student is only considered a match when all fields which you are searching for match their keywords.<br>
   e.g. `find n/john a/Clementi`
-    * will match student named `john` with address `West Clementi Street`
-    * will not match student named `john` with address `Bedok Reservoir`
+  * will match student named `john` with address `West Clementi Street`
+  * will not match student named `john` with address `Bedok Reservoir`
 
 </div>
 
 Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
-* `find a/Jurong east n/Ben e/gmail`  
-    * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-    * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
+* `find a/Jurong east n/Ben e/gmail`
+  * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
+  * will match a student name: `benjamin`, with address `yishun east ave 1`, and email: `benj@gmail.com`
 
-### Filtering students by tags: `filter`
+#### Filtering students by tags: `filter`
 
 Filters students in the address book by their tags, based on the given filter condition.
 
@@ -238,26 +260,12 @@ Examples:
 * `filter cond/any t/English t/Zoom` will return students with only the `English` tag, or only the `Zoom` tag, or both tags.
 * `filter cond/none t/Inactive t/paid` will return students without both `Inactive` and `paid` tags.
 
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+### Managing Lessons
 
-Format: `delete INDEX`
+--------------------------------------------------------------------------------------------------------------------
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Viewing all tags: `tag`
-Shows all the tags that user has created in TAB.
-
-Format: `tag`
-
-### Adding a Lesson: `ladd`
+#### Adding a lesson: `ladd`
 
 Adds a lesson with the corresponding details to the specified student in the address book.
 
@@ -287,7 +295,7 @@ adds the lesson to the 1st student in the address book
 * `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
   (makeup lesson w/ homework) adds the lesson to the 1st student in the results of the `find` command.
 
-### Deleting a lesson : `ldelete`
+#### Deleting a lesson : `ldelete`
 
 Deletes the specified lesson from the specified student in the address book.
 
@@ -303,35 +311,25 @@ Examples:
 * `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st person in the results 
   of the `find` command.
 
-### Clearing all entries : `clear`
+### Viewing the Schedule
 
-Clears all entries from the address book.
+--------------------------------------------------------------------------------------------------------------------
 
-Format: `clear`
+#### Viewing schedule: `schedule` [coming soon]
 
-### Undoing previous command : `undo`
+Displays a read-only weekly schedule.
 
-Undo the previous command that modified the Storage.
+Format: `schedule`
 
-Format: `undo`
+### Managing Data
 
-### Redoing undone command : `redo`
+--------------------------------------------------------------------------------------------------------------------
 
-Redo the previous command that has been undone.
-
-Format: `redo`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
+#### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+#### Editing the data file
 
 AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -339,9 +337,39 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Miscellaneous Commands
 
-_Details coming soon ..._
+--------------------------------------------------------------------------------------------------------------------
+
+#### Clearing all entries: `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+#### Viewing all tags: `tag`
+
+Shows all the tags that user has created in TAB.
+
+Format: `tag`
+
+#### Undoing previous command: `undo`
+
+Undo the previous command that modified the Storage.
+
+Format: `undo`
+
+#### Redoing undone command: `redo`
+
+Redo the previous command that has been undone.
+
+Format: `redo`
+
+#### Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
