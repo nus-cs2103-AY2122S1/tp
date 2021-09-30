@@ -262,8 +262,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* wants to find people to form groups with for his CS modules
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: search for and contact students in the same modules to quickly form groups.
 
 
 ### User stories
@@ -272,12 +273,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | add a contact as a favourite   | easily keep track of my favourites' activity                           |
+| `* * *`  | user                                       | remove a contact as a favourite| remove users I no longer am interested in                              |
+| `* * *`  | new user                                   | create a profile               | start using the app                                                    |
+| `* *  `  | potential user exploring the app           | view those taking similar mods | easily find potential groupmates                                       |
+| `* * *`  | user                                       | list the modules I am taking   | allow other users to view me as a potential groupmate                  |
+| `* *`    | user who formed a group                    | update group status for my modules | let other users know I have a group for a module                   |
+| `* *`    | proficient user                            | filter profiles using tags     | save time browsing profiles                                            |
+| `* *`    | proficient user                            | filter profiles by module      | save time browsing profiles                                            |
+| `* *`    | long time user                             | update the modules I am taking | find new favourites and groupmates for new modules that I am taking    |
+| `*`    | user searching for groupmates              | view potential groupmates' github| browse their work to decide if we would work well together           |
+| `*`    | user searching for groupmates              | view other profiles in more detail | find out more about the other user and potential groupmates          |
+| `*`    | user looking for a specific person         | search a user by student ID      | quickly view their profile                                             |
+
+
 
 *{More to be added}*
 
