@@ -9,7 +9,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventDateTimePredicate;
+import seedu.address.model.event.EventTime;
 
 public class FilterEventCommandParser implements Parser<FilterEventCommand> {
 
@@ -25,13 +27,18 @@ public class FilterEventCommandParser implements Parser<FilterEventCommand> {
         if (!arePrefixesPresent(argMultiMap, PREFIX_DATE) || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterEventCommand.MESSAGE_USAGE));
         }
-        String eventDate = ParserUtil.parseEventDate(argMultiMap.getValue(PREFIX_DATE));
-        String eventTime = ParserUtil.parseEventTime(argMultiMap.getValue(PREFIX_TIME));
+        String eventDate = argMultiMap.getValue(PREFIX_DATE).get();
+        String eventTime = argMultiMap.getValue(PREFIX_TIME).orElse("");
         ArrayList<String> eventDateTime = new ArrayList<>();
-        if (eventDate != null) {
+        if (eventDate == null || !EventDate.isValidDate(eventDate)) {
+            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
+        } else {
             eventDateTime.add(eventDate);
         }
-        if (eventTime != null) {
+        if (eventTime == null || (!eventTime.equals("") && !EventTime.isValidTime(eventTime))) {
+            throw new ParseException(EventTime.MESSAGE_CONSTRAINTS);
+        }
+        if (!eventTime.equals("") && EventTime.isValidTime(eventTime)) {
             eventDateTime.add(eventTime);
         }
         EventDateTimePredicate predicate = new EventDateTimePredicate(eventDateTime);
