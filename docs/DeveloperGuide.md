@@ -265,16 +265,16 @@ _{Explain here how the data archiving feature will be implemented}_
 University student gamer who is busy but wants to keep track of equally busy friends who want to play online competitive multiplayer games together.
 
 
-**Value proposition**: 
-#### Problem: 
+**Value proposition**:
+#### Problem:
 For busy university student gamers who love playing multiplayer competitive games with their friends, it can
-often be challenging scheduling times to play games with friends out of a packed schedule. 
-Additionally, it can be challenging to make the most out of the limited time available by choosing 
+often be challenging scheduling times to play games with friends out of a packed schedule.
+Additionally, it can be challenging to make the most out of the limited time available by choosing
 the right friends to play with - those you have the most fun playing with or have great performance at the game.
 
 #### How gitGud solves the problem and make users' life easier:
 gitGud allows users to store both yours and your friends' available timeslots and find matching times to play multiplayer
-competitive games together - allowing users to identify and coordinate gaming sessions with friends. 
+competitive games together - allowing users to identify and coordinate gaming sessions with friends.
 It also allows users to keep track of each friend's competitive gaming performance and rate how much fun they had gaming with a friend
 after each gaming session. These factors are used for gitGud to recommend and help users to decide which friends to play with
 for future multiplayer competitive gaming sessions.
@@ -301,16 +301,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a friend and specifies a `FRIEND_ID`. 
+1. User requests to add a friend and specifies a `FRIEND_ID`.
 2. gitGud adds a friend into the friends list and informs user of successful addition of friend.
 
     Use case ends.
 
 **Extensions** 
 
-* 1a. gitGud detects that the `FRIEND_ID` provided already exists and is not unique. 
+* 1a. gitGud detects that the `FRIEND_ID` provided already exists and is not unique.
     * 1a1. gitGud informs user that it has failed to add a friend.<br>
-      1a2. User makes another request to add a friend with a different `FRIEND_ID`.<br> 
+      1a2. User makes another request to add a friend with a different `FRIEND_ID`.<br>
       Use case continues from step 2.
 
 **Use case: UC02 - Delete a friend**

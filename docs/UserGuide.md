@@ -3,10 +3,12 @@ layout: page
 title: User Guide
 ---
 
+![gitGud](images/gitgud.png)
+
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,15 +26,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+    * **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -55,10 +57,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `--name “Marcus Tang” --name Taufiq`, only `--name Taufiq` will be taken.
-  
+
 * If a name provided has spaces in-between, use double quotation marks to wrap the name in the command e.g. wrap the name
-  'Apex Legends' as `"Apex Legends"`. 
-  
+  'Apex Legends' as `"Apex Legends"`.
+
 </div>
 
 ### Viewing help : `help`
@@ -76,10 +78,10 @@ Adds a new friend to gitGud friend’s list with an associated **unique** friend
 Format: `friend FRIEND_ID [--name NAME]`
 
 Examples:
-* `friend Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and 
-which does not currently have an associated real-life name.
-* `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and 
-has the real-life name 'Taufiq'.
+* `friend Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and
+  which does not currently have an associated real-life name.
+* `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
+  has the real-life name 'Taufiq'.
 
 ### Deleting a friend : `delete`
 
@@ -113,22 +115,22 @@ Examples:
 
 ### Link games with a friend: `link`
 
-Links game(s) and the associated in-game username(s) for each game to a friend for the provided gitGud FRIEND_ID to 
+Links game(s) and the associated in-game username(s) for each game to a friend for the provided gitGud FRIEND_ID to
 his/her friend information.
 
 Format: `link FRIEND_ID GAME_NAME:IN_GAME_USERNAME1 GAME2_NAME:IN_GAME_USERNAME2...`
 
 * Add multiple games and in-game usernames for a friend by listing the game:in-game-username pairs separated by a space.
-* For game names or in-game usernames with spaces in-between, wrap the name string with double quotation marks. 
-For example, the game 'Apex Legends' linked to an in-game username 'tau-bar' would be represented as the pair 
+* For game names or in-game usernames with spaces in-between, wrap the name string with double quotation marks.
+  For example, the game 'Apex Legends' linked to an in-game username 'tau-bar' would be represented as the pair
   `"Apex Legends":tau-bar`.
-  
+
 Examples:
-* `link Draco Valorant:biscuitismydog Minecraft:Draco` 
-  Links two games, ‘Valorant’ with the in-game username ‘biscuitismydog’ and ‘Minecraft’ with the 
+* `link Draco Valorant:biscuitismydog Minecraft:Draco`
+  Links two games, ‘Valorant’ with the in-game username ‘biscuitismydog’ and ‘Minecraft’ with the
   in-game username ‘Draco’, to the friend with the gitGud FRIEND_ID ‘Draco’.
-* `link tau-bar “Apex Legends”:tau-dominator` 
-  Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’, 
+* `link tau-bar “Apex Legends”:tau-dominator`
+  Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’,
   to the friend with the gitGud FRIEND_ID ‘tau-bar’.
 
 ### Listing multiple friends’ data: `list --friend`
@@ -196,7 +198,7 @@ Examples:
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: What happens if I add multiple flags that clash? e.g. `list --friend tau --game Val`  
+**Q**: What happens if I add multiple flags that clash? e.g. `list --friend tau --game Val`
 **A**: Only the first valid flag is taken and subsequent flags will be ignored.
 
 
@@ -208,7 +210,7 @@ Action | Format, Examples
 --------|------------------
 **Add friend** | `friend FRIEND_ID [--name "NAME"]` <br> e.g., `friend Draco --name "Marcus Tang"`
 **Delete** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
-**Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"` 
+**Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"`
 **Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
 **Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
 **List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`

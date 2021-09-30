@@ -1,12 +1,14 @@
 [![Java CI](https://github.com/AY2122S1-CS2103T-W13-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-W13-4/tp/actions/workflows/gradle.yml)
 
-## What is gitGud? 
+![gitGud](docs/images/gitgud.png)
 
-gitGud is a desktop application for managing friends' gaming information. 
-<br />It uses a simple Graphical User Interface (GUI) combined with an optimized Command Line Interface (CLI) to give you a smooth and efficient experience. 
+## What is gitGud?
+
+gitGud is a desktop application for managing friends' gaming information.
+<br />It uses a simple Graphical User Interface (GUI) combined with an optimized Command Line Interface (CLI) to give you a smooth and efficient experience.
 <br />If you can type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
 
-## Product Screenshot(s): 
+## Product Screenshot(s):
 
 ![Ui](docs/images/Ui.png)
 
