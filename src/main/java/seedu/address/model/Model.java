@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<TuitionClass> PREDICATE_SHOW_ALL_TUITIONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +86,36 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the filtered tuition list */
+    ObservableList<TuitionClass> getFilteredTuitionList();
+
+    /**
+     * Updates the filter of the filtered tuition list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTuitionList(Predicate<TuitionClass> predicate);
+
+    boolean hasTuition(TuitionClass tuitionClass);
+
+    /**
+     * Deletes the given person.
+     * The person must exist in the address book.
+     */
+    void deleteTuition(TuitionClass target);
+
+    /**
+     * Adds the given person.
+     * {@code person} must not already exist in the address book.
+     */
+    void addTuition(TuitionClass tuitionClass);
+
+    /**
+     * Replaces the given person {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    void setTuition(TuitionClass target, TuitionClass editedTuition);
+
+
 }

@@ -1,14 +1,18 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Classes;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.TuitionClass;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -20,12 +24,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "She likes aardvarks.";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Remark remark;
+    private Classes classes;
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +44,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        remark = new Remark(DEFAULT_REMARK);
+        classes = new Classes(new ArrayList<>());
     }
 
     /**
@@ -47,6 +57,10 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        remark = personToCopy.getRemark();
+        classes = personToCopy.getClasses();
+
+
     }
 
     /**
@@ -62,6 +76,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
         return this;
     }
 
@@ -89,8 +111,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Classes} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withClasses(ArrayList<TuitionClass> classes) {
+        this.classes = new Classes(classes);
+        return this;
+    }
+
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, remark, tags, classes);
     }
 
 }

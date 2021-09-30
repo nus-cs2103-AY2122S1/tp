@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tuition.TuitionClass;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -146,6 +147,66 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns an unmodifiable view of the filtered tuition list
+         */
+        @Override
+        public ObservableList<TuitionClass> getFilteredTuitionList() {
+            return null;
+        }
+
+        /**
+         * Updates the filter of the filtered tuition list to filter by the given {@code predicate}.
+         *
+         * @param predicate
+         * @throws NullPointerException if {@code predicate} is null.
+         */
+        @Override
+        public void updateFilteredTuitionList(Predicate<TuitionClass> predicate) {
+
+        }
+
+        @Override
+        public boolean hasTuition(TuitionClass tuitionClass) {
+            return false;
+        }
+
+        /**
+         * Deletes the given person.
+         * The person must exist in the address book.
+         *
+         * @param target
+         */
+        @Override
+        public void deleteTuition(TuitionClass target) {
+
+        }
+
+        /**
+         * Adds the given person.
+         * {@code person} must not already exist in the address book.
+         *
+         * @param tuitionClass
+         */
+        @Override
+        public void addTuition(TuitionClass tuitionClass) {
+
+        }
+
+        /**
+         * Replaces the given person {@code target} with {@code editedPerson}.
+         * {@code target} must exist in the address book.
+         * The person identity of {@code editedPerson} must not be the same as
+         * another existing person in the address book.
+         *
+         * @param target
+         * @param editedTuition
+         */
+        @Override
+        public void setTuition(TuitionClass target, TuitionClass editedTuition) {
+
         }
     }
 
