@@ -13,7 +13,6 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
-  - [Accessing the main menu : `menu`](#accessing-the-main-menu--menu)
   - [Add](#add)
     - [Adding a person: `padd`](#adding-a-person-padd)
     - [Adding a task: `tadd`](#adding-a-task-tadd)
@@ -34,6 +33,7 @@ It is optimized for use via a Command Line Interface** (CLI) while still having 
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
   - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+  - [Opening up the Menu page `[coming in v2.0]`](#opening-up-the-menu-page-coming-in-v20)
 - [FAQ](#faq)
 - [Command summary](#command-summary)
 
@@ -100,12 +100,6 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
-### Accessing the Main Menu : `menu`
-
-Opens up the Main Menu page.
-
-Format: `menu`
 
 ### Add
 
@@ -307,6 +301,10 @@ If your changes to the data file makes its format invalid, Ailurus will discard 
 
 _Details coming soon ..._
 
+### Opening up the Menu page. `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -321,7 +319,6 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **help** | `help`
-**menu** | `menu`
 **padd** | `padd /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS [/t TAG]…​` <br> e.g., `padd /n James Ho /p 22224444 /e jamesho@example.com /a 123, Clementi Rd, 1234665 /t friend /t colleague`
 **tadd** | `tadd /n TASKNAME /p PERSON_ID` <br> e.g., `tadd /n Collect payment from participants /p 3`
 **eadd** | `eadd /n EVENTNAME [/p PERSON_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
