@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowDetailsCommand;
+import seedu.address.logic.commands.SortEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -82,6 +83,8 @@ public class AddressBookParser {
 
 
         // TODO: sortEvents:
+        case SortEventCommand.COMMAND_WORD:
+            return new SortEventCommand();
 
         // TODO: filterEvents (Use Parser):
 

@@ -145,6 +145,13 @@ public class ModelManager implements Model {
         return events;
     }
 
+    /**
+     * Sorts the events in the addressBook.
+     */
+    public void sortEvents() {
+        addressBook.sortEvents();
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

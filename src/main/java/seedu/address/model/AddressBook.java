@@ -135,6 +135,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.remove(key);
     }
 
+    @Override
+    public void sortEvents() {
+        events.sort();
+    }
+
     //// util methods
 
     @Override
