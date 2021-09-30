@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Feng Zhunyi
 
-<img src="images/Feng_Zhunyi.JPG" width="200px">
+<img src="images/leofeng10.JPG" width="200px">
 
 
 * Role: Developer
