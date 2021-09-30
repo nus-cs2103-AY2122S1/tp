@@ -79,7 +79,7 @@ Adds a position to the application management system.
 Format: `add position pos/POSITION desc/DESCRPTION`
 
 Examples:
-* `add postion pos/software engineer desc/work in a team that builds a face recognition application`
+* `add postion pos/software engineer desc/work in a team that builds a facial recognition application`
 
 
 ### Deleting a position: `delete position`
