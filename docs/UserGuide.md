@@ -3,7 +3,8 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+UNIon is a desktop app for organizing various types of contacts, optimized for use for the vast majority of computing students. 
+If you are already familiar with Unix commands, then UNIon will be easy for you to use. 
 
 * Table of Contents
 {:toc}
@@ -14,7 +15,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `union.jar` from [here](https://github.com/AY2122S1-CS2103-T16-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -172,7 +173,7 @@ Retrieve list of all folders created
 
 Format: `ls -folders`
 
-## Adding contacts to folder
+### Adding contacts to folder
 To organize and group contacts into an arbitrary folder
 Format: `echo CONTACT_INDEX >> FOLDER_NAME`
 - `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
