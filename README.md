@@ -2,13 +2,13 @@
 
 ![gitGud](docs/images/gitgud.png)
 
-## What is gitGud? 
+## What is gitGud?
 
-gitGud is a desktop application for managing friends' gaming information. 
-<br />It uses a simple Graphical User Interface (GUI) combined with an optimized Command Line Interface (CLI) to give you a smooth and efficient experience. 
+gitGud is a desktop application for managing friends' gaming information.
+<br />It uses a simple Graphical User Interface (GUI) combined with an optimized Command Line Interface (CLI) to give you a smooth and efficient experience.
 <br />If you can type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
 
-## Product Screenshot(s): 
+## Product Screenshot(s):
 
 ![Ui](docs/images/Ui.png)
 
