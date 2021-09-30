@@ -100,18 +100,17 @@ Format: `delete applicant n/NAME`
 Examples:
 * `delete applicant n/John Doe` deletes the applicant with the exact name John Doe.
 
-### View average rejection rates by job position: `average` [coming soon]
+### View average rejection rates by job position: `average job position` `[coming soon]`
 
-Obtains the average rejection rate for each job position found in the address book.
+Obtains the average rejection rate for that particular job position found in the address book.
 
-Format: `average`
+Format: `average [j/JOB POSITION]`
 
 * Shows average rejection rate in terms of % (out of 100).
-* Rejection rates shown in alphabetical order in accordance to job position.
-* No need for other inputs, the word `average` suffices.
+* *Special sub-command*: `average all` which shows all job positions (in alphabetical order) with their corresponding rejection rates.
 
 Example:
-* `average` Junior Software Engineer(backend): 10% (displayed)
+* `average Junior Software Engineer` shows the message `Junior Software Engineer: 10%`.
 
 ### Listing all persons : `list` `[coming soon]`
 
