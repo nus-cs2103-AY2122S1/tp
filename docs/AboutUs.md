@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/leopardmerkava.png" width="200px">
 
 [[github](https://github.com/LeopardMerkava)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/leopardmerkava.md)]
 
 * Role: Deliverable and Deadline, UI
 * Responsibilities: Ensure project deliverables are done on time and in the right format. In charge of UI ensuring it fits the use case.
