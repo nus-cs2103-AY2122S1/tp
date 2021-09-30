@@ -3,7 +3,7 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 
-public interface ReadOnlyModTracker {
+public interface ReadOnlyModuleTracker {
 
     /**
     * Returns an unmodifiable view of the modules list.

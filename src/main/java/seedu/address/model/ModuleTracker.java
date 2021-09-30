@@ -12,7 +12,7 @@ import seedu.address.model.module.UniqueModuleList;
  * Wraps all data at the mod-tracker level
  * Duplicates are not allowed (by .isSameModule comparison)
  */
-public class ModTracker implements ReadOnlyModTracker {
+public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
 
@@ -27,12 +27,12 @@ public class ModTracker implements ReadOnlyModTracker {
         modules = new UniqueModuleList();
     }
 
-    public ModTracker() {}
+    public ModuleTracker() {}
 
     /**
-     * Creates an ModTracker using the Modules in the {@code toBeCopied}
+     * Creates an ModuleTracker using the Modules in the {@code toBeCopied}
      */
-    public ModTracker(ReadOnlyModTracker toBeCopied) {
+    public ModuleTracker(ReadOnlyModuleTracker toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class ModTracker implements ReadOnlyModTracker {
     }
 
     /**
-     * Resets the existing data of this {@code ModTracker} with {@code newData}.
+     * Resets the existing data of this {@code ModuleTracker} with {@code newData}.
      */
-    public void resetData(ReadOnlyModTracker newData) {
+    public void resetData(ReadOnlyModuleTracker newData) {
         requireNonNull(newData);
 
         setModules(newData.getModuleList());
@@ -86,7 +86,7 @@ public class ModTracker implements ReadOnlyModTracker {
     }
 
     /**
-     * Removes {@code key} from this {@code ModTracker}.
+     * Removes {@code key} from this {@code ModuleTracker}.
      * {@code key} must exist in the mod tracker.
      */
     public void removeModule(Module key) {
@@ -109,8 +109,8 @@ public class ModTracker implements ReadOnlyModTracker {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ModTracker // instanceof handles nulls
-                && modules.equals(((ModTracker) other).modules));
+                || (other instanceof ModuleTracker // instanceof handles nulls
+                && modules.equals(((ModuleTracker) other).modules));
     }
 
     @Override

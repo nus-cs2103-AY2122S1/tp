@@ -16,14 +16,12 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ModuleTracker;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyModTracker;
+import seedu.address.testutil.ModuleBuilder;
+import seedu.address.model.ReadOnlyModuleTracker;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -49,13 +47,11 @@ public class AddCommandTest {
         Module validModule = new ModuleBuilder().build();
         AddCommand addCommand = new AddCommand(validModule);
         ModelStub modelStub = new ModelStubWithModule(validModule);
-
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_MODULE, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-
         Module cs1231 = new ModuleBuilder().withCode("CS1231").build();
         Module cs1101s = new ModuleBuilder().withCode("CS1101S").build();
         AddCommand addCs1231Command = new AddCommand(cs1231);
@@ -118,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setModTracker(ReadOnlyModTracker newData) {
+        public void setModuleTracker(ReadOnlyModuleTracker newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyModTracker getModTracker() {
+        public ReadOnlyModuleTracker getModuleTracker() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -190,8 +186,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyModuleTracker getModuleTracker() {
+            return new ModuleTracker();
         }
     }
 
