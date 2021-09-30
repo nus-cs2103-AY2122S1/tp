@@ -43,8 +43,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](https://github.com/siddharth-sid)]
 
-[comment]: <> ([[portfolio]&#40;team/johndoe.md&#41;])
-
 * Role: Developer
 * Responsibilities: Testing
 
