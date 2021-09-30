@@ -42,6 +42,7 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
+    @Override
     public Patient toModelType() throws IllegalValueException {
         Person person = super.toModelType();
 
