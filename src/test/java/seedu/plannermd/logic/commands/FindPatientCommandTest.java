@@ -19,7 +19,6 @@ import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.UserPrefs;
-import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -31,10 +30,10 @@ public class FindPatientCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate<Patient> firstPredicate =
-                new NameContainsKeywordsPredicate<>(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate<Patient> secondPredicate =
-                new NameContainsKeywordsPredicate<>(Collections.singletonList("second"));
+        NameContainsKeywordsPredicate firstPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        NameContainsKeywordsPredicate secondPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindPatientCommand findFirstCommand = new FindPatientCommand(firstPredicate);
         FindPatientCommand findSecondCommand = new FindPatientCommand(secondPredicate);
@@ -59,7 +58,7 @@ public class FindPatientCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate<Patient> predicate = preparePredicate(" ");
+        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -69,7 +68,7 @@ public class FindPatientCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate<Patient> predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindPatientCommand command = new FindPatientCommand(predicate);
         expectedModel.updateFilteredPatientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -79,7 +78,7 @@ public class FindPatientCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate<Patient> preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate<>(Arrays.asList(userInput.split("\\s+")));
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

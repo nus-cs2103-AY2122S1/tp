@@ -73,7 +73,7 @@ public class PlannerMdParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindPatientCommand command = (FindPatientCommand) parser.parseCommand(
                 FindPatientCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPatientCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
+        assertEquals(new FindPatientCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

@@ -25,7 +25,7 @@ public class FindPatientCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindPatientCommand expectedFindPatientCommand =
-                new FindPatientCommand(new NameContainsKeywordsPredicate<>(Arrays.asList("Alice", "Bob")));
+                new FindPatientCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindPatientCommand);
 
         // multiple whitespaces between keywords

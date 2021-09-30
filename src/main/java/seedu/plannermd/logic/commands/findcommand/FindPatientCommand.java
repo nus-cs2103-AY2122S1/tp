@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.model.Model;
-import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -19,9 +18,9 @@ public class FindPatientCommand extends FindCommand {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate<Patient> predicate;
+    private final NameContainsKeywordsPredicate predicate;
 
-    public FindPatientCommand(NameContainsKeywordsPredicate<Patient> predicate) {
+    public FindPatientCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

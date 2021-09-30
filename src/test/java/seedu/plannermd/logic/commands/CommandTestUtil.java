@@ -127,7 +127,7 @@ public class CommandTestUtil {
 
         Patient patient = model.getFilteredPatientList().get(targetIndex.getZeroBased());
         final String[] splitName = patient.getName().fullName.split("\\s+");
-        model.updateFilteredPatientList(new NameContainsKeywordsPredicate<Patient>(Arrays.asList(splitName[0])));
+        model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPatientList().size());
     }

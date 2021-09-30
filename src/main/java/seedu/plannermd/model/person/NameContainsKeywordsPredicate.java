@@ -8,7 +8,7 @@ import seedu.plannermd.commons.util.StringUtil;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate<T extends Person> implements Predicate<T> {
+public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
@@ -25,7 +25,7 @@ public class NameContainsKeywordsPredicate<T extends Person> implements Predicat
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate<? extends Person>) other).keywords)); // state check
+                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }

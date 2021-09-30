@@ -6,13 +6,14 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -85,5 +86,5 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPatientList(Predicate<Patient> predicate);
+    void updateFilteredPatientList(Predicate<Person> predicate);
 }
