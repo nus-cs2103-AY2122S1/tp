@@ -59,14 +59,14 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withSchool("CCHM").withTags("friends").build();
 
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822244")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withAcadStream("IELTS").build();
 
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824278")
             .withEmail("lydia@example.com").withAddress("little tokyo").build();
 
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824422")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added

@@ -18,7 +18,9 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHOOL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PARENT_EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -142,7 +144,7 @@ public class AddCommandParserTest {
         Person expectedPerson2 = new PersonBuilder(AMY).withSchool().withAcadStream().build();
         assertParseSuccess(parser,
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB
+                        + PARENT_PHONE_DESC_AMY + PARENT_EMAIL_DESC_AMY
                         + ADDRESS_DESC_AMY + FEE_DESC_AMY
                         + REMARK_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson2));
