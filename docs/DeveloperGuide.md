@@ -283,9 +283,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add a new person               |                                                                        |
 | `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | easily search all relevant applicants through keywords         | I can compare applicants' relevant information |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user                                       | easily search all relevant applicants through keywords         | compare applicants' relevant information |
+| `* *`    | user                                       | hide private contact details   | ensure confidentiality of applicants' information. |
+| `*`      | user with many applicants in the address book | sort applicants by name           | locate an applicant easily                                                 |
 
 *{More to be added}*
 
@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+        Use case ends.
 
 
 * 1a. An invalid flag is specified.
