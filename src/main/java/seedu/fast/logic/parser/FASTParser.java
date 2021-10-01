@@ -21,7 +21,7 @@ import seedu.fast.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class FASTParser {
+public class FastParser {
 
     /**
      * Used for initial separation of command word and args.

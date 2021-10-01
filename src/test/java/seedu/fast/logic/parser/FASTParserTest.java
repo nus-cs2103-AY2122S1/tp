@@ -29,9 +29,9 @@ import seedu.fast.testutil.EditPersonDescriptorBuilder;
 import seedu.fast.testutil.PersonBuilder;
 import seedu.fast.testutil.PersonUtil;
 
-public class FASTParserTest {
+public class FastParserTest {
 
-    private final FASTParser parser = new FASTParser();
+    private final FastParser parser = new FastParser();
 
     @Test
     public void parseCommand_add() throws Exception {

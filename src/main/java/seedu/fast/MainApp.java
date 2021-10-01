@@ -22,12 +22,8 @@ import seedu.fast.model.ReadOnlyAddressBook;
 import seedu.fast.model.ReadOnlyUserPrefs;
 import seedu.fast.model.UserPrefs;
 import seedu.fast.model.util.SampleDataUtil;
-import seedu.fast.storage.AddressBookStorage;
-import seedu.fast.storage.JsonAddressBookStorage;
-import seedu.fast.storage.JsonUserPrefsStorage;
-import seedu.fast.storage.Storage;
-import seedu.fast.storage.StorageManager;
-import seedu.fast.storage.UserPrefsStorage;
+import seedu.fast.storage.*;
+import seedu.fast.storage.FastStorage;
 import seedu.fast.ui.Ui;
 import seedu.fast.ui.UiManager;
 
@@ -56,8 +52,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        FastStorage fastStorage = new JsonFastStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(fastStorage, userPrefsStorage);
 
         initLogging(config);
 

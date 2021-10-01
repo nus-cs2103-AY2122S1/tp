@@ -10,7 +10,7 @@ import seedu.fast.model.ReadOnlyAddressBook;
 /**
  * Represents a storage for {@link seedu.fast.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface FastStorage {
 
     /**
      * Returns the file path of the data file.

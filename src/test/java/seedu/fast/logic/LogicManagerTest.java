@@ -27,7 +27,7 @@ import seedu.fast.model.ModelManager;
 import seedu.fast.model.ReadOnlyAddressBook;
 import seedu.fast.model.UserPrefs;
 import seedu.fast.model.person.Person;
-import seedu.fast.storage.JsonAddressBookStorage;
+import seedu.fast.storage.JsonFastStorage;
 import seedu.fast.storage.JsonUserPrefsStorage;
 import seedu.fast.storage.StorageManager;
 import seedu.fast.testutil.PersonBuilder;
@@ -43,8 +43,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonFastStorage addressBookStorage =
+                new JsonFastStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -71,8 +71,8 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonFastStorage addressBookStorage =
+                new JsonFastIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
@@ -149,8 +149,8 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonFastIoExceptionThrowingStub extends JsonFastStorage {
+        private JsonFastIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
