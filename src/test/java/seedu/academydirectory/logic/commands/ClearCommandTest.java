@@ -13,7 +13,7 @@ import seedu.academydirectory.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyAcademyDirectory_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 

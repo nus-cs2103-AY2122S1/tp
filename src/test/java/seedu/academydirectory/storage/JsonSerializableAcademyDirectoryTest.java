@@ -24,9 +24,9 @@ public class JsonSerializableAcademyDirectoryTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableAcademyDirectory dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAcademyDirectory.class).get();
-        AcademyDirectory addressBookFromFile = dataFromFile.toModelType();
-        AcademyDirectory typicalPersonsAddressBook = TypicalPersons.getTypicalAcademyDirectory();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+        AcademyDirectory academyDirectoryFromFile = dataFromFile.toModelType();
+        AcademyDirectory typicalPersonsAcademyDirectory = TypicalPersons.getTypicalAcademyDirectory();
+        assertEquals(academyDirectoryFromFile, typicalPersonsAcademyDirectory);
     }
 
     @Test

@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAcademyDirectoryStorage addressBookStorage = new JsonAcademyDirectoryStorage(getTempFilePath("ab"));
+        JsonAcademyDirectoryStorage academyDirectoryStorage = new JsonAcademyDirectoryStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(academyDirectoryStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,11 +48,11 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void academyDirectoryReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonAcademyDirectoryStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonAcademyDirectoryStorageTest} class.
          */
         AcademyDirectory original = getTypicalAcademyDirectory();
         storageManager.saveAcademyDirectory(original);
@@ -61,7 +61,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getAcademyDirectoryFilePath() {
         assertNotNull(storageManager.getAcademyDirectoryFilePath());
     }
 

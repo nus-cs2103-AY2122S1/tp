@@ -10,7 +10,7 @@ import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.logic.commands.Command;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
-import seedu.academydirectory.logic.parser.AddressBookParser;
+import seedu.academydirectory.logic.parser.AcademyDirectoryParser;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
@@ -26,7 +26,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final AcademyDirectoryParser academyDirectoryParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +34,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        academyDirectoryParser = new AcademyDirectoryParser();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = academyDirectoryParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {

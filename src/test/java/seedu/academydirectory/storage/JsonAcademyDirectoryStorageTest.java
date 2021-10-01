@@ -20,17 +20,17 @@ import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 
 public class JsonAcademyDirectoryStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAcademyDirectoryStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readAcademyDirectory_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readAcademyDirectory(null));
     }
 
-    private java.util.Optional<ReadOnlyAcademyDirectory> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyAcademyDirectory> readAcademyDirectory(String filePath) throws Exception {
         return new JsonAcademyDirectoryStorage(Paths.get(filePath)).readAcademyDirectory(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -42,69 +42,69 @@ public class JsonAcademyDirectoryStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readAcademyDirectory("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAcademyDirectory.json"));
+        assertThrows(DataConversionException.class, () -> readAcademyDirectory("notJsonFormatAcademyDirectory.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAcademyDirectory.json"));
+    public void readAcademyDirectory_invalidPersonAAcademyDirectory_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAcademyDirectory("invalidPersonAcademyDirectory.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAcademyDirectory.json"));
+    public void readAcademyDirectory_invalidAndValidPersonAcademyDirectory_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAcademyDirectory("invalidAndValidPersonAcademyDirectory.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+    public void readAndSaveAcademyDirectory_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempAcademyDirectory.json");
         AcademyDirectory original = getTypicalAcademyDirectory();
-        JsonAcademyDirectoryStorage jsonAddressBookStorage = new JsonAcademyDirectoryStorage(filePath);
+        JsonAcademyDirectoryStorage jsonAcademyDirectoryStorage = new JsonAcademyDirectoryStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAcademyDirectory(original, filePath);
-        ReadOnlyAcademyDirectory readBack = jsonAddressBookStorage.readAcademyDirectory(filePath).get();
+        jsonAcademyDirectoryStorage.saveAcademyDirectory(original, filePath);
+        ReadOnlyAcademyDirectory readBack = jsonAcademyDirectoryStorage.readAcademyDirectory(filePath).get();
         assertEquals(original, new AcademyDirectory(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        jsonAddressBookStorage.saveAcademyDirectory(original, filePath);
-        readBack = jsonAddressBookStorage.readAcademyDirectory(filePath).get();
+        jsonAcademyDirectoryStorage.saveAcademyDirectory(original, filePath);
+        readBack = jsonAcademyDirectoryStorage.readAcademyDirectory(filePath).get();
         assertEquals(original, new AcademyDirectory(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveAcademyDirectory(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAcademyDirectory().get(); // file path not specified
+        jsonAcademyDirectoryStorage.saveAcademyDirectory(original); // file path not specified
+        readBack = jsonAcademyDirectoryStorage.readAcademyDirectory().get(); // file path not specified
         assertEquals(original, new AcademyDirectory(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveAcademyDirectory_nullAcademyDirectory_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveAcademyDirectory(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code academyDirectory} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAcademyDirectory addressBook, String filePath) {
+    private void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory, String filePath) {
         try {
             new JsonAcademyDirectoryStorage(Paths.get(filePath))
-                    .saveAcademyDirectory(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveAcademyDirectory(academyDirectory, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new AcademyDirectory(), null));
+    public void saveAcademyDirectory_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveAcademyDirectory(new AcademyDirectory(), null));
     }
 }

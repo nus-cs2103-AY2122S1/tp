@@ -22,25 +22,25 @@ import seedu.academydirectory.model.person.Person;
 import seedu.academydirectory.model.person.exceptions.DuplicatePersonException;
 import seedu.academydirectory.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class AcademyDirectoryTest {
 
-    private final AcademyDirectory addressBook = new AcademyDirectory();
+    private final AcademyDirectory academyDirectory = new AcademyDirectory();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), academyDirectory.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> academyDirectory.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyAcademyDirectory_replacesData() {
         AcademyDirectory newData = getTypicalAcademyDirectory();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        academyDirectory.resetData(newData);
+        assertEquals(newData, academyDirectory);
     }
 
     @Test
@@ -51,40 +51,40 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AcademyDirectoryStub newData = new AcademyDirectoryStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> academyDirectory.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> academyDirectory.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInAcademyDirectory_returnsFalse() {
+        assertFalse(academyDirectory.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInAcademyDirectory_returnsTrue() {
+        academyDirectory.addPerson(ALICE);
+        assertTrue(academyDirectory.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInAcademyDirectory_returnsTrue() {
+        academyDirectory.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(academyDirectory.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> academyDirectory.getPersonList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAcademyDirectory whose persons list can violate interface constraints.
      */
     private static class AcademyDirectoryStub implements ReadOnlyAcademyDirectory {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();

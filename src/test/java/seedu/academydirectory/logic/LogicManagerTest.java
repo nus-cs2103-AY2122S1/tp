@@ -43,10 +43,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAcademyDirectoryStorage addressBookStorage =
-                new JsonAcademyDirectoryStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAcademyDirectoryStorage academyDirectoryStorage =
+                new JsonAcademyDirectoryStorage(temporaryFolder.resolve("academyDirectory.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(academyDirectoryStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -70,12 +70,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAcademyDirectoryStorage addressBookStorage =
-                new JsonAcademyDirectoryIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonAcademyDirectoryIoExceptionThrowingStub
+        JsonAcademyDirectoryStorage academyDirectoryStorage =
+                new JsonAcademyDirectoryIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAcademyDirectory.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(academyDirectoryStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -155,7 +155,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAcademyDirectory(ReadOnlyAcademyDirectory addressBook, Path filePath) throws IOException {
+        public void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
