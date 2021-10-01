@@ -60,7 +60,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Felissa Faustine
 
-<img src="images/felissa.png" width="200px">
+<img src="images/felissaf.png" width="200px">
 
 [[github](http://github.com/felissaf)]
 [[portfolio](team/felissa.md)]
