@@ -21,17 +21,17 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## Glossary
 
-* **Autocomplete**: A functionality to complete `Tag`s or `Command`s without users typing the complete strings
+* **Autocomplete**: A functionality to complete a `Tag` or a `Command` without users typing the complete strings
 * **Command structure**: The order in which parameters and command words must be written in order for the command to be correctly parsed
 * **Dummy data**: Sample data used in testing or example data present on first launch of application
-* **Group**: A container containing `Person`s with shared traits that is created by the user
+* **Group**: A container containing `Person` objects with shared traits that is created by the user
 * **Key power features**: Essential features that will be used often when running the software application
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Metadata**: Personal data about a `Person` object
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
-* **Pin**: Fixing a `Person` to the top of the current list of `Person`s or a `Group`
+* **Pin**: Fixing a `Person` to the top of the current list of `Person` objects or a `Group`
 * **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is automatically in the parent `Group` as well
-* **Tag**: A string descriptor attached to **Group**s or `Person` objects
+* **Tag**: A string descriptor attached to `Group` objects or `Person` objects
 * **Ungrouped**: Used to describe a `Person` object with no grouping
 
 --------------------------------------------------------------------------------------------------------------------
