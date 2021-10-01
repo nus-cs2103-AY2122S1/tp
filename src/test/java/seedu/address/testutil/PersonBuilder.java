@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.Measurement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_GENDER = "FEMALE";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_MEASUREMENT = "160_50_60_70";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "dummy remark";
 
@@ -29,6 +31,7 @@ public class PersonBuilder {
     private Gender gender;
     private Phone phone;
     private Email email;
+    private Measurement measurement;
     private Address address;
     private Remark remark;
     private Set<Tag> tags;
@@ -41,6 +44,7 @@ public class PersonBuilder {
         gender = new Gender(DEFAULT_GENDER);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        measurement = new Measurement(DEFAULT_MEASUREMENT);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
@@ -54,6 +58,7 @@ public class PersonBuilder {
         gender = personToCopy.getGender();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        measurement = personToCopy.getMeasurement();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
@@ -108,6 +113,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Measurement} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMeasurement(String measurement) {
+        this.measurement = new Measurement(measurement);
+        return this;
+    }
+
+    /**
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
@@ -116,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, gender, phone, email, address, remark, tags);
+        return new Person(name, gender, phone, email, measurement, address, remark, tags);
     }
 
 }
