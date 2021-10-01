@@ -56,7 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AcademyDirectoryStorage academyDirectoryStorage = new JsonAcademyDirectoryStorage(userPrefs.getAcademyDirectoryFilePath());
+        AcademyDirectoryStorage academyDirectoryStorage =
+                new JsonAcademyDirectoryStorage(userPrefs.getAcademyDirectoryFilePath());
         storage = new StorageManager(academyDirectoryStorage, userPrefsStorage);
 
         initLogging(config);
@@ -69,9 +70,10 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s academy directory and {@code userPrefs}. <br>
-     * The data from the sample academy directory will be used instead if {@code storage}'s academy directory is not found,
-     * or an empty academy directory will be used instead if errors occur when reading {@code storage}'s academy directory.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s academy directory and {@code userPrefs}.
+     * <br> The data from the sample academy directory will be used instead if {@code storage}'s academy directory
+     * is not found, or an empty academy directory will be used instead if errors occur when reading {@code storage}'s
+     * academy directory.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAcademyDirectory> academyDirectoryOptional;

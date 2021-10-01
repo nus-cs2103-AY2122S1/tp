@@ -31,7 +31,8 @@ public class JsonAcademyDirectoryStorageTest {
     }
 
     private java.util.Optional<ReadOnlyAcademyDirectory> readAcademyDirectory(String filePath) throws Exception {
-        return new JsonAcademyDirectoryStorage(Paths.get(filePath)).readAcademyDirectory(addToTestDataPathIfNotNull(filePath));
+        return new JsonAcademyDirectoryStorage(Paths.get(filePath))
+                .readAcademyDirectory(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -57,7 +58,8 @@ public class JsonAcademyDirectoryStorageTest {
 
     @Test
     public void readAcademyDirectory_invalidAndValidPersonAcademyDirectory_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAcademyDirectory("invalidAndValidPersonAcademyDirectory.json"));
+        assertThrows(DataConversionException.class, () ->
+                readAcademyDirectory("invalidAndValidPersonAcademyDirectory.json"));
     }
 
     @Test

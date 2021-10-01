@@ -15,7 +15,8 @@ import seedu.academydirectory.testutil.TypicalPersons;
 
 public class JsonSerializableAcademyDirectoryTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAcademyDirectoryTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src",
+            "test", "data", "JsonSerializableAcademyDirectoryTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAcademyDirectory.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAcademyDirectory.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAcademyDirectory.json");
