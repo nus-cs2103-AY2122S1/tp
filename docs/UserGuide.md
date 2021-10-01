@@ -14,9 +14,9 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `mrtechrecruiter.jar` from [here](https://github.com/AY2122S1-CS2103-F10-1/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for MrTechRecruiter.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,13 +24,13 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all applicants.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add applicant`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer` : Adds an applicant named `John Doe` to the `software engineer` position.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete applicant`**`n/John Doe` : Deletes `John Doe` from the applicant list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all applicants.
 
    * **`exit`** : Exits the app.
 
@@ -66,9 +66,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
 ### Viewing help : `help` `[coming soon]`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
@@ -79,7 +77,7 @@ Adds a position to the application management system.
 Format: `add position t/TITLE desc/DESCRIPTION`
 
 Examples:
-* `add postion t/software engineer desc/work in a team that builds a facial recognition application`
+* `add position t/software engineer desc/work in a team that builds a facial recognition application`
 
 
 ### Deleting a position: `delete position`
@@ -93,12 +91,12 @@ Format: `delete position t/TITLE`
 * The name must match exactly.
 
 Examples:
-* `delete position pos/software engineer` deletes the position with the exact name `software engineer`.
+* `delete position t/software engineer` deletes the position with the exact name `software engineer`.
 
 
 ### Adding an applicant: `add applicant`
 
-Adds a person to the address book.
+Adds an applicant to MrTechRecruiter.
 
 Format: `add applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
 
@@ -112,7 +110,7 @@ Examples:
 
 ### Deleting an applicant: `delete applicant`
 
-Deletes the specified person from the address book.
+Deletes the specified applicant from MrTechRecruiter.
 
 Format: `delete applicant n/NAME`
 
@@ -125,7 +123,7 @@ Examples:
 
 ### View average rejection rates by job position: `average job position` `[coming soon]`
 
-Obtains the average rejection rate for that particular job position found in the address book.
+Obtains the average rejection rate for that particular job position found in MrTechRecruiter.
 
 Format: `average [j/JOB POSITION]`
 
@@ -135,50 +133,34 @@ Format: `average [j/JOB POSITION]`
 Example:
 * `average Junior Software Engineer` shows the message `Junior Software Engineer: 10%`.
 
-### Listing all persons : `list` `[coming soon]`
+### Listing all positions : `list position`
 
-Shows a list of all persons in the address book.
+Shows a list of all positions in MrTechRecruiter.
 
-Format: `list`
+Format: `list position`
 
-### Editing a person : `edit` `[coming soon]`
+### Listing all applicants : `list applicant`
 
-Edits an existing person in the address book.
+Shows a list of all applicants in MrTechRecruiter.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `list applicant`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+### Searching for applicants using keywords: `find` [coming soon]
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Finds all applicants whose categorical information match the specified search terms.
 
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only applicants matching ALL specified search terms specified will be returned.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find n/Mary p/12345678` returns applicants whose names contain `mary` AND whose numbers contain `12345678`
 
 ### Clearing all entries : `clear` `[coming soon]`
 
-Clears all entries from the address book.
+Clears all entries from MrTechRecruiter.
 
 Format: `clear`
 
@@ -190,15 +172,19 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+All data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Data is saved as a JSON file `[JAR file location]/data/POSITION-TITLE.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, MrTechRecruiter will discard all data and start with an empty data file at the next run.
 </div>
+
+### Editing a person : `edit` `[coming soon]`
+
+Edits an existing applicant in MrTechRecruiter.
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -209,7 +195,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MrTechRecruiter home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

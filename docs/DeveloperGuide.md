@@ -257,13 +257,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+This product is for HR departments of tech companies that have a large number of applicants and complicated recruitment processes.
+
+Additionally, the user:
+
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+An efficient applicant management system for HR departments of technology companies to track application statuses and store applicant information.
 
 
 ### User stories
@@ -276,14 +282,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | general user                               | delete existing job positions | Remove irrelevant, out-of-date jobs.
 | `* * *`  | general user                               | add a new applicant under a position      | Store his information within the system                                |
 | `* * *`  | general user                               | delete an applicant from under a position | Remove applicants that are no longer related to this position          |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | easily search all relevant applicants through keywords         | compare applicants' relevant information |
+| `* *`    | user                                       | hide private applicant details   | ensure confidentiality of applicants' information. |
+| `*`      | user with many applicants in the address book | sort applicants by name           | locate an applicant easily                                                 |
 | `* * *`  | general user                               | view the average rejection rates of all job positions | gauge how competitive a job might be          |
 
 
 *{More to be added}*
 
 ### Use cases
+(For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise)
 
-(For all use cases below, the **System** is the `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a new position**
 
@@ -295,10 +305,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 * 1a. The format is invalid.
-    * 1a1. MrTechRecruiter shows an error message.
+
+  * 1a1. MrTechRecruiter shows an error message.
     
-    Use case ends.
-    
+  Use case ends.
+
 
 **Use case: Delete a new position**
 
@@ -314,11 +325,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
+
+    * 2a1. MrTechRecruiter displays a message that no position is in the list.
+  
     Use case ends.
-* 3a The given name of the position is invalid.
-  * 3a1. MrTechRecruiter shows an error message.
+
+* 3a The given name of the position is invalid. 
+
+    * 3a1. MrTechRecruiter shows an error message.
     
-  * Use case resumes at step 2.
+    Use case resumes at step 2.
 
 
 **Use case: Add a new applicant**
@@ -335,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The format is invalid.
     * 1a1. MrTechRecruiter shows an error message.
 
-  Use case resumes at step 1.
+      Use case resumes at step 1.
 
 **Use case: Delete an applicant**
 
@@ -404,14 +420,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends. 
    
+
+**Use case: Search for applicants through keywords**
+
+**MSS**
+
+1. User enters the keywords for MrTechRecruiter to search for.
+2. MrTechRecruiter performs the search according to the keywords.
+3. MrTechRecruiter displays the search results.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+      Use case ends.
+
+
+* 2a. An invalid flag is specified.
+
+    * 2a1. MrTechRecruiter shows an error message.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  A new user should be able to easily navigate through MrTechRecruiter and perform basic tasks (e.g. adding/deleting).
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A new user should be able to easily navigate through MrTechRecruiter and perform basic tasks (e.g. adding/deleting).
+5. Should be portable (i.e. work without requiring an installer).
+6. Should not depend on a remote server.
+7. Should work for standard (i.e. industry-standard Full HD 1080p resolution) screen resolutions and higher.
+8. Should be packaged into a single, compact (~100MB) file.
+9. Developer & User guides should be PDF friendly.
+
 
 
 *{More to be added}*
@@ -422,6 +468,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Job position**: A job opening within the user's company that is looking for potential hires
 * **Applicant**: A potential hire that is applying for a particular job position
+* **CLI**: Command-line interface. CLI programs take in input in the form of text-based commands, usually input by the user, to execute the program's various functions.
+* **CAP**: Cumulative average point. Similar to grade point average (GPA), it is a numerical measure of a student's average academic performance across their duration of study.
 * **Rejection rate**: The percentage of jobs for a particular job position that was not accepted by the employee or employer. 
                       Calculation = `No. of rejected jobs` / `Total no. of jobs applied`. 
 --------------------------------------------------------------------------------------------------------------------
