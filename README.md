@@ -6,8 +6,10 @@
   Example usages:
   * as an application management tool for HRs
   * as a case study
-* The project simulates an ongoing software project for a desktop application (called _MrTechRecruiter_) used for managing job applications.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC).
+
+* The project simulates an ongoing software project for a desktop application (called _MrTechRecruiter_) used for managing job application.
+  * It is **written in OOP fashion**.
+
   * It comes with a **reasonable level of user and developer documentation**.
 * It is named `MrTechRecruiter` (`MTR` for short) because it is created for recruiters in tech companies to better manage job applications.
 * For the detailed documentation of this project, see the **[MrTechRecruiter Product Website](https://ay2122s1-cs2103-f10-1.github.io/tp/)**.

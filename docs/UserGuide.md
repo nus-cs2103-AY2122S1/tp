@@ -3,25 +3,25 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MTR can get your application management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick start (coming soon)
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
@@ -34,7 +34,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing help : `help`
+### Viewing help : `help` `[coming soon]`
 
 Shows a message explaning how to access the help page.
 
@@ -72,28 +72,76 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+### Adding a position: `add position`
 
-### Adding a person: `add`
+Adds a position to the application management system.
+
+Format: `add position t/TITLE desc/DESCRIPTION`
+
+Examples:
+* `add postion t/software engineer desc/work in a team that builds a facial recognition application`
+
+
+### Deleting a position: `delete position`
+
+Deletes the specified position from the application management system.
+
+Format: `delete position t/TITLE`
+
+* Deletes the position with the specified `POSITION`.
+* The name refers to the name of the position as displayed in the position list.
+* The name must match exactly.
+
+Examples:
+* `delete position pos/software engineer` deletes the position with the exact name `software engineer`.
+
+
+### Adding an applicant: `add applicant`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`
+* `add applicant n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
 
-### Listing all persons : `list`
+### Deleting an applicant: `delete applicant`
+
+Deletes the specified person from the address book.
+
+Format: `delete applicant n/NAME`
+
+* Deletes the applicant with the specified `NAME`.
+* The name refers to the name of the applicant as shown in the displayed person list.
+* The name must match exactly.
+
+Examples:
+* `delete applicant n/John Doe` deletes the applicant with the exact name John Doe.
+
+### View average rejection rates by job position: `average job position` `[coming soon]`
+
+Obtains the average rejection rate for that particular job position found in the address book.
+
+Format: `average [j/JOB POSITION]`
+
+* Shows average rejection rate in terms of % (out of 100).
+* *Special sub-command*: `average all` which shows all job positions (in alphabetical order) with their corresponding rejection rates.
+
+Example:
+* `average Junior Software Engineer` shows the message `Junior Software Engineer: 10%`.
+
+### Listing all persons : `list` `[coming soon]`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person : `edit` `[coming soon]`
 
 Edits an existing person in the address book.
 
@@ -128,27 +176,13 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
+### Clearing all entries : `clear` `[coming soon]`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program : `exit` `[coming soon]`
 
 Exits the program.
 
@@ -183,10 +217,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Add Applicant** | `add applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 pos/software engineer`
+**Delete Applicant** | `delete applicant n/NAME`<br> e.g., `delete applicant John Doe`
+**Clear [coming soon]** | `clear`
+**Edit [coming soon]** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**List [coming soon]** | `list`
+**Help [coming soon]** | `help`
