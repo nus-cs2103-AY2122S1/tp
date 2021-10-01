@@ -6,7 +6,7 @@ title: User Guide
 MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MTR can get your application management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 
    * **`clear`** : Deletes all applicants.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -101,7 +101,8 @@ Adds an applicant to MrTechRecruiter.
 Format: `add applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+An applicant can have any number of tags (including 0). <br>
+If the job position exists, its rejection rate should change accordingly.
 </div>
 
 Examples:
@@ -121,25 +122,14 @@ Format: `delete applicant n/NAME`
 Examples:
 * `delete applicant n/John Doe` deletes the applicant with the exact name John Doe.
 
-### View average rejection rates by job position: `average job position` `[coming soon]`
 
-Obtains the average rejection rate for that particular job position found in MrTechRecruiter.
-
-Format: `average [j/JOB POSITION]`
-
-* Shows average rejection rate in terms of % (out of 100).
-* *Special sub-command*: `average all` which shows all job positions (in alphabetical order) with their corresponding rejection rates.
-
-Example:
-* `average Junior Software Engineer` shows the message `Junior Software Engineer: 10%`.
-
-### Listing all positions : `list position`
+### Listing all positions : `list position` [coming soon]
 
 Shows a list of all positions in MrTechRecruiter.
 
 Format: `list position`
 
-### Listing all applicants : `list applicant`
+### Listing all applicants : `list applicant` [coming soon]
 
 Shows a list of all applicants in MrTechRecruiter.
 
