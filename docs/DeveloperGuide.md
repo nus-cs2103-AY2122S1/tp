@@ -257,13 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a tutor overseeing students for an academic module or subject
+* has a need to manage a significant number of tudents
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage students' academic progress faster than a typical mouse/GUI driven app
 
 
 ### User stories
@@ -285,21 +286,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is `TAB3` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Teaching Assistant’s Buddy` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Create a new student**
 
 **MSS**
 
 1. User requests to create a new student by listing down the student's information
-2. TAB3 creates the student
+2. System creates the student
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Student's ID is already in TAB3.
-    * 1a1. TAB3 shows an error message.
+* 1a. Student's ID is already in system.
+    * 1a1. System shows an error message.
 
       Use case ends.
 
@@ -307,15 +308,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete a specific student using the student's ID in TAB3
-2. TAB3 deletes the student
+1. User requests to delete a specific student using the student's ID in system
+2. System deletes the student
 
     Use case ends.
 
 **Extensions**
 
 * 1a. Student's ID is not found.
-    * 1a1. TAB3 shows an error message.
+    * 1a1. System shows an error message.
   
       Use case ends.
     
@@ -323,19 +324,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete a specific student from a module in TAB3
-2. TAB3 deletes the student from the module
+1. User requests to delete a specific student from a module in system
+2. System deletes the student from the module
 
    Use case ends.
 
 **Extensions**
 
 * 1a. Student's ID is not found.
-    * 1a1. TAB3 shows an error message.
+    * 1a1. System shows an error message.
 
       Use case ends.
 * 1b. Module is not found.
-    * 1b1. TAB3 shows an error message.
+    * 1b1. System shows an error message.
 
       Use case ends.
 
@@ -343,15 +344,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a new module in TAB3
-2. TAB3 creates the module
+1. User requests to create a new module in System
+2. System creates the module
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Module is already in TAB3.
-    * 1a1. TAB3 shows an error message.
+* 1a. Module is already in System.
+    * 1a1. System shows an error message.
 
       Use case ends.
 
@@ -359,15 +360,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete a module in TAB3
-2. TAB3 deletes the module
+1. User requests to delete a module in System
+2. System deletes the module
 
    Use case ends.
 
 **Extensions**
 
 * 1a. Module is not found.
-    * 1a1. TAB3 shows an error message.
+    * 1a1. System shows an error message.
 
       Use case ends.
 
@@ -375,19 +376,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a task to a module in TAB3
-2. TAB3 deletes the task from the module
+1. User requests to add a task to a module in System
+2. System deletes the task from the module
 
    Use case ends.
 
 **Extensions**
 
 * 1a. Task is not found.
-    * 1a1. TAB3 shows an error message.
+    * 1a1. System shows an error message.
 
       Use case ends.
 * 1b. Module is not found.
-    * 1b1. TAB3 shows an error message.
+    * 1b1. System shows an error message.
 
       Use case ends.
     
@@ -396,14 +397,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to mark a task as done
-2. TAB3 marks the task as done
+2. System marks the task as done
 
    Use case ends.
 
 **Extensions**
 
 * 1a. Task is not found.
-    * 1a1. TAB3 shows an error message.
+    * 1a1. System shows an error message.
 
       Use case ends.
 
@@ -411,9 +412,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to respond to a user command within 2 seconds.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be able to handle 500 students without significant lag in response time.
 
 *{More to be added}*
 
