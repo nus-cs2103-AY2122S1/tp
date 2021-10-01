@@ -25,6 +25,7 @@ Given below are my contributions to the project.
     * Added value propositions
     * Added user stories
     * Added use cases
+    * Added Birth Date field to Person class 
 
 * **Community**:
 
