@@ -38,7 +38,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns true of the list contains a person with a clashing lesson.
+     * Returns true if the list contains a person with a clashing lesson.
      *
      * @param toCheck The lesson to check.
      * @return True if there is a clash in lesson timing, false otherwise.
