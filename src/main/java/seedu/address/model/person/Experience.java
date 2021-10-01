@@ -12,7 +12,7 @@ public class Experience {
             "Year of experience should be a positive integer";
 
 
-    public final Integer years;
+    public final Integer value;
 
     /**
      * Constructs a {@code Experience}.
@@ -22,7 +22,7 @@ public class Experience {
     public Experience(Integer experience) {
         requireNonNull(experience);
         checkArgument(isValidExperience(experience), MESSAGE_CONSTRAINTS);
-        years = experience;
+        value = experience;
     }
 
     /**
@@ -34,18 +34,18 @@ public class Experience {
 
     @Override
     public String toString() {
-        return Integer.toString(years);
+        return Integer.toString(value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Experience // instanceof handles nulls
-                && years.equals(((Experience) other).years)); // state check
+                && value.equals(((Experience) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return years.hashCode();
+        return value.hashCode();
     }
 }
