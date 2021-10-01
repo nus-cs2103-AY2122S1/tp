@@ -278,8 +278,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user ready to start using the app          | purge all current data         | get rid of sample/experiment data I used for exploring the App         |
 | `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
-| `* * *`  | <Add on from here onwards>                 | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
+| `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
