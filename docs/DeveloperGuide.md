@@ -312,6 +312,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Search for a specific contact**
+
+**MSS**
+
+1. User searches a contact by name
+2. ComputingConnection shows the contact with the searched name
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Searched contact is invalid.
+
+   * 2a1. ComputingConnection shows an error message.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
