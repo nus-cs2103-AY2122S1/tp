@@ -38,7 +38,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_visit() throws Exception {
-        final Visit visit = new Visit("Some visit.");
+        final Visit visit = new Visit("2020-11-11");
         VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_VISIT + visit.value);
         assertEquals(new VisitCommand(INDEX_FIRST_PERSON, visit), command);

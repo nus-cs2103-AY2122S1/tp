@@ -14,14 +14,16 @@ import seedu.address.model.person.Visit;
 
 public class VisitCommandParserTest {
     private VisitCommandParser parser = new VisitCommandParser();
-    private final String nonEmptyVisit = "Some visit.";
+    private final String testVisit = "2021-11-11";
 
     @Test
     public void parse_indexSpecified_success() {
+        final Visit visit = new Visit(testVisit);
+
         // have visit
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_VISIT + nonEmptyVisit;
-        VisitCommand expectedCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit(nonEmptyVisit));
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_VISIT + testVisit;
+        VisitCommand expectedCommand = new VisitCommand(INDEX_FIRST_PERSON, visit);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no visit
@@ -38,6 +40,6 @@ public class VisitCommandParserTest {
         assertParseFailure(parser, VisitCommand.COMMAND_WORD, expectedMessage);
 
         // no index
-        assertParseFailure(parser, VisitCommand.COMMAND_WORD + " " + nonEmptyVisit, expectedMessage);
+        assertParseFailure(parser, VisitCommand.COMMAND_WORD + " " + testVisit, expectedMessage);
     }
 }

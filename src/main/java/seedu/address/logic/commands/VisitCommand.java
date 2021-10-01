@@ -24,7 +24,7 @@ public class VisitCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing visit will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_VISIT + " [VISIT]\n"
+            + PREFIX_VISIT + " [VISIT_DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_VISIT + " 2020-11-12";
 
