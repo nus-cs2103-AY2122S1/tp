@@ -36,7 +36,7 @@ public class JsonAdaptedPatientTest {
     private static final String VALID_RISK = BENSON.getRisk().toString();
 
     @Test
-    public void toModelType_validpatientDetails_returnspatient() throws Exception {
+    public void toModelType_validPatientDetails_returnsPatient() throws Exception {
         JsonAdaptedPatient patient = new JsonAdaptedPatient(BENSON);
         assertEquals(BENSON, patient.toModelType());
     }

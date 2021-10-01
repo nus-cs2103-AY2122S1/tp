@@ -22,14 +22,14 @@ class RiskTest {
 
     @Test
     public void isValidRisk() {
-        // null address
+        // null risk
         assertThrows(NullPointerException.class, () -> Risk.isValidRisk(null));
 
-        // invalid addresses
+        // invalid risks
         assertFalse(Risk.isValidRisk("")); // empty string
         assertFalse(Risk.isValidRisk(" ")); // spaces only
 
-        // valid addresses
+        // valid risks
         assertTrue(Risk.isValidRisk("HIGH"));
         assertTrue(Risk.isValidRisk("MEDIUM")); // one character
         assertTrue(Risk.isValidRisk("LOW")); // long address

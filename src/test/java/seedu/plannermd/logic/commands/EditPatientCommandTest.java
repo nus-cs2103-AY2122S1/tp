@@ -101,7 +101,7 @@ public class EditPatientCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicatePatientUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_SECOND_PERSON, descriptor);
@@ -110,7 +110,7 @@ public class EditPatientCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicatePatientFilteredList_failure() {
         showPatientAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in plannermd
@@ -122,7 +122,7 @@ public class EditPatientCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidPatientIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
         EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(outOfBoundIndex, descriptor);

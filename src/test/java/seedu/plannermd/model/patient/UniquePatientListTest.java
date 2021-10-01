@@ -1,4 +1,4 @@
-package seedu.plannermd.model.person;
+package seedu.plannermd.model.patient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -16,8 +16,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.patient.UniquePatientList;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
 import seedu.plannermd.model.person.exceptions.PersonNotFoundException;
 import seedu.plannermd.testutil.patient.PatientBuilder;
@@ -27,23 +25,23 @@ public class UniquePatientListTest {
     private final UniquePatientList uniquePatientList = new UniquePatientList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePatientList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_patientNotInList_returnsFalse() {
         assertFalse(uniquePatientList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_patientInList_returnsTrue() {
         uniquePatientList.add(ALICE);
         assertTrue(uniquePatientList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_patientWithSameIdentityFieldsInList_returnsTrue() {
         uniquePatientList.add(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE)
                 .withAddress(VALID_ADDRESS_BOB)
@@ -54,33 +52,33 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePatientList.add(null));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicatePatient_throwsDuplicatePatientException() {
         uniquePatientList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePatientList.add(ALICE));
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
+    public void setPatient_nullTargetPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePatientList.setPatient(null, ALICE));
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
+    public void setPatient_nullEditedPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePatientList.setPatient(ALICE, null));
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
+    public void setPatient_targetPatientNotInList_throwsPersonNotFoundException() {
         assertThrows(PersonNotFoundException.class, () -> uniquePatientList.setPatient(ALICE, ALICE));
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
+    public void setPatient_editedPatientIsSamePerson_success() {
         uniquePatientList.add(ALICE);
         uniquePatientList.setPatient(ALICE, ALICE);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
@@ -89,7 +87,7 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
+    public void setPatient_editedPatientHasSameIdentity_success() {
         uniquePatientList.add(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
@@ -102,7 +100,7 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
+    public void setPatient_editedPatientHasDifferentIdentity_success() {
         uniquePatientList.add(ALICE);
         uniquePatientList.setPatient(ALICE, BOB);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
@@ -111,24 +109,24 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setPatient_editedPatientHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniquePatientList.add(ALICE);
         uniquePatientList.add(BOB);
         assertThrows(DuplicatePersonException.class, () -> uniquePatientList.setPatient(ALICE, BOB));
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePatientList.remove(null));
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_patientDoesNotExist_throwsPatientNotFoundException() {
         assertThrows(PersonNotFoundException.class, () -> uniquePatientList.remove(ALICE));
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
+    public void remove_existingPatient_removesPatient() {
         uniquePatientList.add(ALICE);
         uniquePatientList.remove(ALICE);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
@@ -136,12 +134,12 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
+    public void setPatients_nullUniquePatientList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePatientList.setPatients((UniquePatientList) null));
     }
 
     @Test
-    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
+    public void setPatients_uniquePatientList_replacesOwnListWithProvidedUniquePatientList() {
         uniquePatientList.add(ALICE);
         UniquePatientList expectedUniquePatientList = new UniquePatientList();
         expectedUniquePatientList.add(BOB);
@@ -150,12 +148,12 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
+    public void setPatients_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePatientList.setPatients((List<Patient>) null));
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
+    public void setPatients_list_replacesOwnListWithProvidedList() {
         uniquePatientList.add(ALICE);
         List<Patient> patientList = Collections.singletonList(BOB);
         uniquePatientList.setPatients(patientList);
@@ -165,7 +163,7 @@ public class UniquePatientListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setPatients_listWithDuplicatePatients_throwsDuplicatePersonException() {
         List<Patient> listWithDuplicatePatients = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePatientList.setPatients(listWithDuplicatePatients));
     }
