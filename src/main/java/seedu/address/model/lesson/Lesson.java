@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.person.Person;
-
-
 /**
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
