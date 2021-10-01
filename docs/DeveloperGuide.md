@@ -269,7 +269,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Categories: Administrative, Customer, Employee, Supplier
+
+Priorities: High, Low
 
 | As a ... | I can ...                                                                                                             | so that ...                                                                            | Category       | Priority |
 | -------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------- | -------- |
@@ -312,30 +314,254 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RHRH` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case (UC01): Add a Customer**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User keys in basic information shared among different classes of people like **name, email, phone number**.
+2. RHRH prompts the user to enter the class of the person being entered into the system.
+3. User enters the keyword corresponding to the customer class.
+4. RHRH prompts the user to enter the following optional customer-specific information 1 at a time:
+   1. Customer ID
+   2. Loyalty points
+   3. Allergies
+   4. Special request
+5. Upon entering the last customer-specific information, the customer will be added successfully.
+Use case ends
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a1. RHRH requests for the format to be corrected.
+     * 1a2. User enters the command again. <br/>
 
-  Use case ends.
+     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
 
-* 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+     Use case resumes from step 2.
 
-      Use case resumes at step 2.
+ * 1b. RHRH detects missing details in the command entered.
+     * 1b1. RHRH requests for the missing details to be filled in.
+     * 1b2. User enters missing data.
+
+     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes at step 2.
+     
+     
+ * 1c. RHRH detects an incorrect format for the email/phone number entered. 
+     * 1c1. RHRH requests for the format to be corrected.
+     * 1c2. User enters the command again.
+     
+     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+	    
+     
+     Use case resumes from step 2.
+
+ * 3a. RHRH detects an invalid class entered. 
+   * 3a1. RHRH requests for the class to be corrected.
+   * 3a2. User enters the class again.
+	
+   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+	
+ 
+    Use case resumes from step 4.
+    
+**Use case (UC02): Add a Supplier**
+
+**MSS**
+
+1. User keys in basic information shared among different classes of people like **name, email, phone number**.
+2. RHRH prompts the user to enter the class of the person being entered into the system.
+3. User enters the keyword corresponding to the supplier class.
+4. RHRH prompts the user to enter the following supplier-specific information 1 at a time:
+   1. Supplier ID
+   2. Type of supply 
+5. Upon entering the last supplier-specific information, the supplier will be added successfully.
+Use case ends
+
+
+**Extensions**
+
+* 1a. RHRH detects an incorrect format command entered.
+     * 1a1. RHRH requests for the format to be corrected.
+     * 1a2. User enters the command again. <br/>
+
+     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes from step 2.
+
+
+ * 1b. RHRH detects missing details in the command entered.
+     * 1b1. RHRH requests for the missing details to be filled in.
+     * 1b2. User enters missing data.
+
+     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes at step 2.
+     
+     
+ * 1c. RHRH detects an incorrect format for the email/phone number entered. 
+     * 1c1. RHRH requests for the format to be corrected.
+     * 1c2. User enters the command again.
+     
+     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+	    
+     
+     Use case resumes from step 2.
+
+ * 3a. RHRH detects an invalid class entered. 
+   * 3a1. RHRH requests for the class to be corrected.
+   * 3a2. User enters the class again.
+	
+   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+	
+ 
+    Use case resumes from step 4.
+    
+**Use case (UC03): Add an Employee**
+
+**MSS**
+
+1. User keys in basic information shared among different classes of people like **name, email, phone number**.
+2. RHRH prompts the user to enter the class of the person being entered into the system.
+3. User enters the keyword corresponding to the employee class.
+4. RHRH prompts the user to enter the following employee-specific information 1 at a time:
+   1. Employee ID
+   2. Employment type
+   3. Monthly salary
+5. Upon entering the last employee-specific information, the employee will be added successfully.
+Use case ends
+
+
+**Extensions**
+
+* 1a. RHRH detects an incorrect format command entered.
+     * 1a1. RHRH requests for the format to be corrected.
+     * 1a2. User enters the command again. <br/>
+
+     Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes from step 2.
+
+
+ * 1b. RHRH detects missing details in the command entered.
+     * 1b1. RHRH requests for the missing details to be filled in.
+     * 1b2. User enters missing data.
+
+     Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+
+     Use case resumes at step 2.
+     
+     
+ * 1c. RHRH detects an incorrect format for the email/phone number entered. 
+     * 1c1. RHRH requests for the format to be corrected.
+     * 1c2. User enters the command again.
+     
+     Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
+	    
+     
+     Use case resumes from step 2.
+
+ * 3a.  RHRH detects an invalid class entered. 
+   * 3a1. RHRH requests for the class to be corrected.
+   * 3a2. User enters the class again.
+	
+   Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
+	
+ 
+    Use case resumes from step 4.
+
+**Use case (UC04): Search for reservation availability**
+
+**MSS**
+
+1. User requests to search for reservation availability at a date and time.
+2. RHRH shows the availability for the indicated date time.  
+   Use case ends.
+
+**Extensions:**
+
+* 1a. User requests to search for reservation availability at a date.
+    * 1a1. RHRH shows all the available slots on the indicated date.
+      
+    Use case ends.
+
+
+* 1b. User requests to search for reservation availability at a time.
+    * 1b1. RHRH shows the availability for the indicated time today
+      
+    Use case ends.
+
+
+* 1c. RHRH detects information missing from the command entered.
+    * 1c1. RHRH requests for the missing details to be filled in.
+    * 1c2. User enters missing data.
+
+    Steps 1c1 - 1c2 are repeated until the date/time is correctly formatted.
+
+
+    Use case resumes from step 2.
+
+* 1d. RHRH detects an incorrect format of date/time.
+    * 1d1. RHRH requests for the format to be corrected.
+    * 1d2. User enters the command again.
+
+    Steps 1d1 - 1d2 are repeated until the command is correctly formatted.
+
+
+    Use case resumes from step 2.
+
+**Use case (UC05): Add a reservation**
+
+**MSS**
+
+1. User keys in reservations details.
+2. RHRH <u>finds the reservation slot based on the date and/or time entered (UC04)</U>.
+3. RHRH displays all reservation slots on that date and/or time to users.
+4. User selects the reservation slot.
+5. RHRH requests for confirmation on the selected reservation slot.
+6. User confirms.
+7. Reservation is added.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. RHRH detects an incorrect format command entered.
+    * 1a1. RHRH requests for the format to be corrected.
+    * 1a2. User enters the command again. <br/>
+    
+    Steps 1a1 - 1a2 are repeated until the command is correctly formatted.
+
+
+    Use case resumes from step 2.
+      
+
+* 1b. RHRH detects missing details in the command entered.
+    * 1b1. RHRH requests for the missing details to be filled in.
+    * 1b2. User enters missing data.
+      
+    Steps 1b1 - 1b2 are repeated until the command is correctly formatted.
+
+
+    Use case resumes from step 2.
+
+* 2a. RHRH is unable to find a reservation slot based on the date and/or time entered.
+    * 2a1. RHRH informs the user that the reservation slot is taken.
+    * 2a2. RHRH prompts user to choose another date and/or time.
+    * 2a3. User enters new date and/or time. <br/>
+      
+    Steps 2a1 - 2a2 are repeated until there is a reservation slot available.
+  
+
+    Use case resumes from step 3.
 
 *{More to be added}*
 
@@ -344,6 +570,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Should not be stored in a **Database Management system**(DBMS).
+5.  Should be stored *locally* and can be *manually* edited by the user.
+6.  Program should be delivered to users in a single **JAR** file.
+7.  Program should be able to run with just a *double-click* and no CLI required.
+8.  Should be runnable on both `32-bit` and `64-bit` processors.
+9.  New users should be able to navigate and use the program effectively.
+10.  Software should not exceed **100MB**.
+11.  Documents should not exceed **15MB** per file.
+12.  Developer Guide and User Guide should be *PDF-friendly*(no expandable panels, embedded videos, animated GIFs etc.).
+13.  Does not require a server component as the software will not perform automated tasks.
+14.  Should only allow use by **authorized** personnel.
 
 *{More to be added}*
 
