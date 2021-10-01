@@ -281,7 +281,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | <Add on from here onwards>                 | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `*`      | user with many persons in the address book | sort contacts by name           | locate a contact easily                                                 |
+| `*`      | expert user                                | sort contacts by meeting frequency| reconnect with neglected friends                                     |
+| `*`      | expert user                                | sort contacts by faculty           | consult them should i need help for a project                       |
+| `*`      | expert user                                | sort events based on scheduling           | i know what is coming up next                       |
 
 *{More to be added}*
 
