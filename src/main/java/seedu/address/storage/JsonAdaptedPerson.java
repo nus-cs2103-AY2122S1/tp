@@ -111,6 +111,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Experience.class.getSimpleName()));
         }
+
         if (!Experience.isValidExperience(Integer.parseInt(experience))) {
             throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
         }
