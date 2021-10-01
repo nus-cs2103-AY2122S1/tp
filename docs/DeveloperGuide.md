@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User keys in the particular job position using the 'find' function.
+1. User searches for a particular job position using the 'find' function.
 2. MrTechRecruiter displays the job position and its corresponding rejection rate.
    
    Use case ends.
