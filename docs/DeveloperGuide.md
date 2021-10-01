@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see average rejection rates for all job positions.
+1. User requests to see a list of all job positions
 2. MrTechRecruiter displays the list of job positions, and their respective rejection rates.
  
    Use case ends.
