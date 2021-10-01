@@ -278,13 +278,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | general user                               | add a new applicant under a position      | store his information within the system                                |
+| `* * *`  | general user                               | add new job positions | Add applicants to these positions.
+| `* * *`  | general user                               | delete existing job positions | Remove irrelevant, out-of-date jobs.
+| `* * *`  | general user                               | add a new applicant under a position      | Store his information within the system                                |
 | `* * *`  | general user                               | delete an applicant from under a position | Remove applicants that are no longer related to this position          |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | easily search all relevant applicants through keywords         | compare applicants' relevant information |
-| `* *`    | user                                       | hide private contact details   | ensure confidentiality of applicants' information. |
+| `* *`    | user                                       | hide private applicant details   | ensure confidentiality of applicants' information. |
 | `*`      | user with many applicants in the address book | sort applicants by name           | locate an applicant easily                                                 |
 | `* * *`  | general user                               | view the average rejection rates of all job positions | gauge how competitive a job might be          |
 
@@ -293,6 +293,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise)
+
+**Use case: Add a new position**
+
+**MSS**
+
+1. User requests to add a new position, with necessary details
+2. MrTechRecruiter adds the new position and shows a success message
+
+   Use case ends.
+
+* 1a. The format is invalid.
+  * 1a1. MrTechRecruiter shows an error message.
+    
+  Use case ends.
+    
+
+**Use case: Delete a new position**
+
+**MSS**
+
+1. User requests to list positions
+2. MrTechRecruiter shows a list of positions
+3. User requests to delete a specific position in the list
+4. MrTechRecruiter deletes the position
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+    * 2a1. MrTechRecruiter displays a message that no position is in the list.
+  
+    Use case ends.
+
+* 3a The given name of the position is invalid. 
+
+    * 3a1. MrTechRecruiter shows an error message.
+    
+    Use case resumes at step 2.
+
 
 **Use case: Add a new applicant**
 
@@ -308,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The format is invalid.
     * 1a1. MrTechRecruiter shows an error message.
 
-  Use case resumes at step 1.
+      Use case resumes at step 1.
 
 **Use case: Delete an applicant**
 

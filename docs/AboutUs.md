@@ -27,6 +27,7 @@ You can reach us at the email `e0518538@u.nus.edu`
 * Role: Developer
 * Responsibilities: Documentation, Deliverables & Deadlines
 
+
 ### Darren Heng
 
 <img src="images/darren2pro.png" width="200px">
@@ -35,6 +36,7 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 * Role: Developer
 * Responsibilities: Testing
+
 
 ### Gao Haochun
 
