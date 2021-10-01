@@ -24,13 +24,13 @@ MrTechRecruiter (MTR) is a **desktop app for managing job applications, optimize
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`list`** : Lists all applicants.
+   * **`list`** : Lists all applicants.
 
-    * **`add applicant`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer` : Adds an applicant named `John Doe` to the `software engineer` position.
+   * **`add applicant`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer` : Adds an applicant named `John Doe` to the `software engineer` position.
 
-    * **`delete applicant`**`n/John Doe` : Deletes `John Doe` from the applicant list.
+   * **`delete applicant`**`n/John Doe` : Deletes `John Doe` from the applicant list.
 
-    * **`clear`** : Deletes all applicants.
+   * **`clear`** : Deletes all applicants.
 
     * **`exit`** : Exits the app.
 
@@ -122,13 +122,14 @@ Format: `delete applicant n/NAME`
 Examples:
 * `delete applicant n/John Doe` deletes the applicant with the exact name John Doe.
 
-### Listing all positions : `list position`
+
+### Listing all positions : `list position` [coming soon]
 
 Shows a list of all positions in MrTechRecruiter.
 
 Format: `list position`
 
-### Listing all applicants : `list applicant`
+### Listing all applicants : `list applicant` [coming soon]
 
 Shows a list of all applicants in MrTechRecruiter.
 

@@ -10,13 +10,13 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 ### Lin Fangyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lmaoboxhack.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/lmaoboxhack)]
+[[portfolio](team/lmaoboxhack.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: Integration
 
 ### Tan Chin Han, Benjamin
 
@@ -26,7 +26,8 @@ You can reach us at the email `e0518538@u.nus.edu`
 
 * Role: Developer
 * Responsibilities: Documentation, Deliverables & Deadlines
-=======
+
+
 ### Darren Heng
 
 <img src="images/darren2pro.png" width="200px">
@@ -36,12 +37,12 @@ You can reach us at the email `e0518538@u.nus.edu`
 * Role: Developer
 * Responsibilities: Testing
 
+
 ### Gao Haochun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/harry-gao-h.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/harry-gao-h)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code quality, Scheduling & Tracking
