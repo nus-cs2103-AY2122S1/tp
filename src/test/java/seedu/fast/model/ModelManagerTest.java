@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.core.GuiSettings;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
-import seedu.fast.testutil.AddressBookBuilder;
+import seedu.fast.testutil.FastBuilder;
 
 public class ModelManagerTest {
 
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Fast addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Fast addressBook = new FastBuilder().withPerson(ALICE).withPerson(BENSON).build();
         Fast differentAddressBook = new Fast();
         UserPrefs userPrefs = new UserPrefs();
 

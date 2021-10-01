@@ -8,22 +8,22 @@ import seedu.fast.model.person.Person;
  * Example usage: <br>
  *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class FastBuilder {
 
     private Fast addressBook;
 
-    public AddressBookBuilder() {
+    public FastBuilder() {
         addressBook = new Fast();
     }
 
-    public AddressBookBuilder(Fast addressBook) {
+    public FastBuilder(Fast addressBook) {
         this.addressBook = addressBook;
     }
 
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Person person) {
+    public FastBuilder withPerson(Person person) {
         addressBook.addPerson(person);
         return this;
     }

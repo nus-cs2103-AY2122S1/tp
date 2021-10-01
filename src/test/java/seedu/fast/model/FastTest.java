@@ -22,7 +22,7 @@ import seedu.fast.model.person.Person;
 import seedu.fast.model.person.exceptions.DuplicatePersonException;
 import seedu.fast.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class FastTest {
 
     private final Fast addressBook = new Fast();
 
