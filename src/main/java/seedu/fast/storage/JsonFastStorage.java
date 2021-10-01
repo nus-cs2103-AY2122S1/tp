@@ -32,17 +32,17 @@ public class JsonFastStorage implements FastStorage {
     }
 
     @Override
-    public Optional<ReadOnlyFast> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyFast> readFast() throws DataConversionException {
+        return readFast(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readFast()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyFast> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyFast> readFast(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableFast> jsonAddressBook = JsonUtil.readJsonFile(

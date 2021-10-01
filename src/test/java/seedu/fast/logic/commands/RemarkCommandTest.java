@@ -2,7 +2,7 @@ package seedu.fast.logic.commands;
 
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.fast.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class RemarkCommandTest {
 
     private static final String REMARK_STUB = "Some remark";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalFast(), new UserPrefs());
 
     @Test
     void execute_addRemarkUnfilteredList_success() {
@@ -30,7 +30,7 @@ class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new Fast(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);

@@ -52,7 +52,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        FastStorage fastStorage = new JsonFastStorage(userPrefs.getAddressBookFilePath());
+        FastStorage fastStorage = new JsonFastStorage(userPrefs.getFastFilePath());
         storage = new StorageManager(fastStorage, userPrefsStorage);
 
         initLogging(config);
@@ -73,11 +73,11 @@ public class MainApp extends Application {
         Optional<ReadOnlyFast> addressBookOptional;
         ReadOnlyFast initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readFast();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleFast);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new Fast();

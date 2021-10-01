@@ -1,7 +1,7 @@
 package seedu.fast.logic.commands;
 
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.fast.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import seedu.fast.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyFast_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,10 +21,10 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new Fast());
+    public void execute_nonEmptyFast_success() {
+        Model model = new ModelManager(getTypicalFast(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalFast(), new UserPrefs());
+        expectedModel.setFast(new Fast());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

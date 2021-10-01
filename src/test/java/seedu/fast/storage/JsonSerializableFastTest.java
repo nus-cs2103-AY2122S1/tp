@@ -25,7 +25,7 @@ public class JsonSerializableFastTest {
         JsonSerializableFast dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableFast.class).get();
         Fast addressBookFromFile = dataFromFile.toModelType();
-        Fast typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        Fast typicalPersonsAddressBook = TypicalPersons.getTypicalFast();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

@@ -10,25 +10,25 @@ import seedu.fast.model.person.Person;
  */
 public class FastBuilder {
 
-    private Fast addressBook;
+    private Fast fast;
 
     public FastBuilder() {
-        addressBook = new Fast();
+        fast = new Fast();
     }
 
-    public FastBuilder(Fast addressBook) {
-        this.addressBook = addressBook;
+    public FastBuilder(Fast fast) {
+        this.fast = fast;
     }
 
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
     public FastBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+        fast.addPerson(person);
         return this;
     }
 
     public Fast build() {
-        return addressBook;
+        return fast;
     }
 }

@@ -7,7 +7,7 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalPersons.ALICE;
-import static seedu.fast.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,23 +24,23 @@ import seedu.fast.testutil.PersonBuilder;
 
 public class FastTest {
 
-    private final Fast addressBook = new Fast();
+    private final Fast fast = new Fast();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), fast.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> fast.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Fast newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyFast_replacesData() {
+        Fast newData = getTypicalFast();
+        fast.resetData(newData);
+        assertEquals(newData, fast);
     }
 
     @Test
@@ -51,36 +51,36 @@ public class FastTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         FastStub newData = new FastStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> fast.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> fast.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInFast_returnsFalse() {
+        assertFalse(fast.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInFast_returnsTrue() {
+        fast.addPerson(ALICE);
+        assertTrue(fast.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInFast_returnsTrue() {
+        fast.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(fast.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> fast.getPersonList().remove(0));
     }
 
     /**

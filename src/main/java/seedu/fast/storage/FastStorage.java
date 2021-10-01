@@ -24,12 +24,12 @@ public interface FastStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyFast> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyFast> readFast() throws DataConversionException, IOException;
 
     /**
      * @see #getFastFilePath()
      */
-    Optional<ReadOnlyFast> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyFast> readFast(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyFast} to the storage.

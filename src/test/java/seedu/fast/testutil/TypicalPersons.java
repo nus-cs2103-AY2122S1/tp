@@ -62,7 +62,7 @@ public class TypicalPersons {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static Fast getTypicalAddressBook() {
+    public static Fast getTypicalFast() {
         Fast ab = new Fast();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

@@ -24,7 +24,7 @@ public interface Storage extends FastStorage, UserPrefsStorage {
     Path getFastFilePath();
 
     @Override
-    Optional<ReadOnlyFast> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyFast> readFast() throws DataConversionException, IOException;
 
     @Override
     void saveFast(ReadOnlyFast addressBook) throws IOException;

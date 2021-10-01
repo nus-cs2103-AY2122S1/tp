@@ -55,14 +55,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyFast> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(fastStorage.getFastFilePath());
+    public Optional<ReadOnlyFast> readFast() throws DataConversionException, IOException {
+        return readFast(fastStorage.getFastFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyFast> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyFast> readFast(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return fastStorage.readAddressBook(filePath);
+        return fastStorage.readFast(filePath);
     }
 
     @Override

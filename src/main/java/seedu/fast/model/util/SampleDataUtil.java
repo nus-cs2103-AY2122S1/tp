@@ -44,7 +44,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyFast getSampleAddressBook() {
+    public static ReadOnlyFast getSampleFast() {
         Fast sampleAb = new Fast();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

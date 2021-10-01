@@ -99,12 +99,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getFastFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setFastFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyFast newData) {
+        public void setFast(ReadOnlyFast newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyFast getAddressBook() {
+        public ReadOnlyFast getFast() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyFast getAddressBook() {
+        public ReadOnlyFast getFast() {
             return new Fast();
         }
     }

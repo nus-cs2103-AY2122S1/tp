@@ -26,9 +26,9 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see seedu.fast.model.Model#getAddressBook()
+     * @see seedu.fast.model.Model#getFast()
      */
-    ReadOnlyFast getAddressBook();
+    ReadOnlyFast getFast();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -36,7 +36,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getFastFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

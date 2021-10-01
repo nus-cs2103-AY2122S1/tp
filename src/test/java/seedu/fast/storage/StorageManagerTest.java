@@ -2,7 +2,7 @@ package seedu.fast.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.fast.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import java.nio.file.Path;
 
@@ -48,20 +48,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void fastReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        Fast original = getTypicalAddressBook();
+        Fast original = getTypicalFast();
         storageManager.saveFast(original);
-        ReadOnlyFast retrieved = storageManager.readAddressBook().get();
+        ReadOnlyFast retrieved = storageManager.readFast().get();
         assertEquals(original, new Fast(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getFastFilePath() {
         assertNotNull(storageManager.getFastFilePath());
     }
 
