@@ -19,6 +19,23 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Autocomplete**: A functionality to complete `Tag`s or `Command`s without users typing the complete strings
+* **Command structure**: The order in which parameters and command words must be written in order for the command to be correctly parsed
+* **Dummy data**: Sample data used in testing or example data present on first launch of application
+* **Group**: A container containing `Person`s with shared traits that is created by the user
+* **Key power features**: Essential features that will be used often when running the software application
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Metadata**: Personal data about a `Person` object
+* **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
+* **Pin**: Fixing a `Person` to the top of the current list of `Person`s or a `Group`
+* **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is automatically in the parent `Group` as well
+* **Tag**: A string descriptor attached to **Group**s or `Person` objects
+* **Ungrouped**: Used to describe a `Person` object with no grouping
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -324,27 +341,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10.  The system should cater to mentor professor such that mentor professor can access the application without any difficulty.
 11.  Should ensure personal data privacy and security of data access. 
 12. Software testing will require the use of automated testing. The test will be deleted after successful implementation of the software system.
-
-
-### Glossary
-
-* **Automated testing**: Testing for each feature will not be manually handled, it will be automatically tested
-* **Autocomplete**: A functionality to complete words or strings without users typing every characters of the string
-* **Command structure**: A template structure for each command line
-* **Dummy data**: A substitute mock data which is used for testing environment
-* **Group**: An object to store multiple persons based on a particular category catering to users’ needs
-* **Help page**: A tutorial page for novice users or users who want to review the basic usage of the software application
-* **Key power features**: Essential features that will be used often when running the software application
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Metadata**: Personal data about a person object.
-* **Note**: A general description of each person to record their activities, while also showing the most recent time when the note is updated
-* **Personal data privacy**: Personal user data that should not be able to be viewed with others
-* **Pin**: Highlight a person from a group that will then be available on top of the other persons in your group list
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Reminder**: A prompt to remind the user on any activity related to a person or a particular group.
-* **Subgroup**: A child group of _groups_ to store multiple persons based on a more specific category than _groups_. A _subgroup_ can be created by specifying the parent group of the _subgroup_
-* **Trie**: A tree data structure to store strings of each tags and commands for the autocomplete function
-* **Ungrouped**: A default group which stores the value of person(s) who is not inside any groups
 
 --------------------------------------------------------------------------------------------------------------------
 
