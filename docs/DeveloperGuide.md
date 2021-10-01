@@ -280,10 +280,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | beginner user                              | assign tags or categories to users | categorise contacts by groups                                      |
 | `* * *`  | beginner user                              | edit a contact                 | categorise contacts by groups                                          |             
-| `*`      | <Add on from here onwards>                 | delete a person                | remove entries that I no longer need                                   |
-| `*`      | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `*`      | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `*`      | slightly familiar user                     | schedule an upcoming event     | keep track of my schedules with my contacts better                     |
+| `*`      | slightly familiar user                     | tag a category to an event     | so that I can easily view or filter the events based on type           |
+| `*`      | slightly familiar user                     | tag an event to a contact      | so that I can easily view contacts in a particular event               |
 
 *{More to be added}*
 
@@ -307,28 +306,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Delete a person**
+**Use case: Update a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to update a contact
+2.  ComputingConnection shows the current details of the contact with editable fields
+3.  User edits the fields
+4.  ComputingConnecction updates the contact accordingly
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The user cancels the update.
+    * 2a1. ComputingConnection exits the update page.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The user leaves a required field empty.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ComputingConnection shows an error message to prompt user to edit that field.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 *{More to be added}*
 
