@@ -12,41 +12,41 @@ import seedu.academydirectory.commons.exceptions.DataConversionException;
 import seedu.academydirectory.commons.exceptions.IllegalValueException;
 import seedu.academydirectory.commons.util.FileUtil;
 import seedu.academydirectory.commons.util.JsonUtil;
-import seedu.academydirectory.model.ReadOnlyAddressBook;
+import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonAcademyDirectoryStorage implements AcademyDirectoryStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonAcademyDirectoryStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonAcademyDirectoryStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getAcademyDirectoryFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyAcademyDirectory> readAcademyDirectory() throws DataConversionException {
+        return readAcademyDirectory(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readAcademyDirectory()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyAcademyDirectory> readAcademyDirectory(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableAcademyDirectory> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableAcademyDirectory.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -60,21 +60,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveAcademyDirectory(ReadOnlyAcademyDirectory addressBook) throws IOException {
+        saveAcademyDirectory(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveAcademyDirectory(ReadOnlyAcademyDirectory)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAcademyDirectory(ReadOnlyAcademyDirectory addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAcademyDirectory(addressBook), filePath);
     }
 
 }

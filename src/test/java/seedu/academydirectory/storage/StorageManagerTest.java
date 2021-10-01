@@ -2,7 +2,7 @@ package seedu.academydirectory.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
 
 import java.nio.file.Path;
 
@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.academydirectory.commons.core.GuiSettings;
-import seedu.academydirectory.model.AddressBook;
-import seedu.academydirectory.model.ReadOnlyAddressBook;
+import seedu.academydirectory.model.AcademyDirectory;
+import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -24,7 +24,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonAcademyDirectoryStorage addressBookStorage = new JsonAcademyDirectoryStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -54,15 +54,15 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        AcademyDirectory original = getTypicalAcademyDirectory();
+        storageManager.saveAcademyDirectory(original);
+        ReadOnlyAcademyDirectory retrieved = storageManager.readAcademyDirectory().get();
+        assertEquals(original, new AcademyDirectory(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getAcademyDirectoryFilePath());
     }
 
 }

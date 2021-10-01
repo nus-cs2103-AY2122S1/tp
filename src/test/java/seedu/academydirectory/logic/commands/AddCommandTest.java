@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
-import seedu.academydirectory.model.AddressBook;
+import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.Model;
-import seedu.academydirectory.model.ReadOnlyAddressBook;
+import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyUserPrefs;
 import seedu.academydirectory.model.person.Person;
 import seedu.academydirectory.testutil.PersonBuilder;
@@ -99,12 +99,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getAcademyDirectoryFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setAcademyDirectoryFilePath(Path academyDirectoryFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAcademyDirectory(ReadOnlyAcademyDirectory newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAcademyDirectory getAcademyDirectory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,8 +186,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyAcademyDirectory getAcademyDirectory() {
+            return new AcademyDirectory();
         }
     }
 

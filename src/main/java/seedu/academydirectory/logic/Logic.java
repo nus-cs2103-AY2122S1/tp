@@ -7,7 +7,7 @@ import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.ReadOnlyAddressBook;
+import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.person.Person;
 
 /**
@@ -24,19 +24,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the AcademyDirectory.
      *
-     * @see seedu.academydirectory.model.Model#getAddressBook()
+     * @see seedu.academydirectory.model.Model#getAcademyDirectory()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyAcademyDirectory getAcademyDirectory();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' academy directory file path.
      */
-    Path getAddressBookFilePath();
+    Path getAcademyDirectoryFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

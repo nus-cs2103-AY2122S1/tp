@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' academy directory file path.
      */
-    Path getAddressBookFilePath();
+    Path getAcademyDirectoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' academy directory file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAcademyDirectoryFilePath(Path academyDirectoryFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces academy directory data with the data in {@code academyDirectory}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the AcademyDirectory */
+    ReadOnlyAcademyDirectory getAcademyDirectory();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the academy directory.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the academy directory.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the academy directory.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the academy directory.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the academy directory.
      */
     void setPerson(Person target, Person editedPerson);
 

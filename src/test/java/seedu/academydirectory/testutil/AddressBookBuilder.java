@@ -1,6 +1,6 @@
 package seedu.academydirectory.testutil;
 
-import seedu.academydirectory.model.AddressBook;
+import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.person.Person;
 
 /**
@@ -10,13 +10,13 @@ import seedu.academydirectory.model.person.Person;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private AcademyDirectory addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        addressBook = new AcademyDirectory();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(AcademyDirectory addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -28,7 +28,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBook build() {
+    public AcademyDirectory build() {
         return addressBook;
     }
 }

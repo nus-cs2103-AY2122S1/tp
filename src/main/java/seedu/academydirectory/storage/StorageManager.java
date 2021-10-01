@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.commons.exceptions.DataConversionException;
-import seedu.academydirectory.model.ReadOnlyAddressBook;
+import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyUserPrefs;
 import seedu.academydirectory.model.UserPrefs;
 
@@ -17,15 +17,15 @@ import seedu.academydirectory.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private AcademyDirectoryStorage academyDirectoryStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AcademyDirectoryStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AcademyDirectoryStorage academyDirectoryStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.academyDirectoryStorage = academyDirectoryStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -47,33 +47,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ AcademyDirectory methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getAcademyDirectoryFilePath() {
+        return academyDirectoryStorage.getAcademyDirectoryFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyAcademyDirectory> readAcademyDirectory() throws DataConversionException, IOException {
+        return readAcademyDirectory(academyDirectoryStorage.getAcademyDirectoryFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyAcademyDirectory> readAcademyDirectory(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return academyDirectoryStorage.readAcademyDirectory(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory) throws IOException {
+        saveAcademyDirectory(academyDirectory, academyDirectoryStorage.getAcademyDirectoryFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        academyDirectoryStorage.saveAcademyDirectory(academyDirectory, filePath);
     }
 
 }

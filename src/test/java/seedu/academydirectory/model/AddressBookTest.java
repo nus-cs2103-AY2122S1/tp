@@ -7,7 +7,7 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_ADDRES
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 import static seedu.academydirectory.testutil.TypicalPersons.ALICE;
-import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import seedu.academydirectory.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final AcademyDirectory addressBook = new AcademyDirectory();
 
     @Test
     public void constructor() {
@@ -38,7 +38,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        AcademyDirectory newData = getTypicalAcademyDirectory();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -49,7 +49,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        AcademyDirectoryStub newData = new AcademyDirectoryStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -86,10 +86,10 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AcademyDirectoryStub implements ReadOnlyAcademyDirectory {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AcademyDirectoryStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

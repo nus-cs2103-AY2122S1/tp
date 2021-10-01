@@ -19,26 +19,26 @@ import seedu.academydirectory.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final AcademyDirectory addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAcademyDirectory addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new AcademyDirectory(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AcademyDirectory(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,25 +66,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getAcademyDirectoryFilePath() {
+        return userPrefs.getAcademyDirectoryFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setAcademyDirectoryFilePath(Path academyDirectoryFilePath) {
+        requireNonNull(academyDirectoryFilePath);
+        userPrefs.setAcademyDirectoryFilePath(academyDirectoryFilePath);
     }
 
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAcademyDirectory(ReadOnlyAcademyDirectory addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyAcademyDirectory getAcademyDirectory() {
         return addressBook;
     }
 
