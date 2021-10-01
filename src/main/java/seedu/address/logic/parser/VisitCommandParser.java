@@ -15,7 +15,7 @@ import seedu.address.model.person.Visit;
  */
 public class VisitCommandParser implements Parser<VisitCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
+     * Parses the given {@code String} of arguments in the context of the {@code VisitCommand}
      * and returns a {@code VisitCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */

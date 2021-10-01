@@ -15,8 +15,8 @@ public class VisitTest {
         assertTrue(visit.equals(visit));
 
         // same values -> returns true
-        Visit remarkCopy = new Visit(visit.value);
-        assertTrue(visit.equals(remarkCopy));
+        Visit visitCopy = new Visit(visit.value);
+        assertTrue(visit.equals(visitCopy));
 
         // different types -> returns false
         assertFalse(visit.equals(1));
