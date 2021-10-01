@@ -290,23 +290,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a staff's schedule      | remove schedule and update the overall work schedule                   |
 | `* * *`  | user                                       | view a staff's schedule        | view an individual staff's schedule and the overall work schedule      |
 | `* * *`  | user                                       | edit a staff's schedule        | make changes to their schedule and update the overall work schedule    |
-| `* *`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Add the staff details (eg contact information, salaries)     | Can quickly and easily access and add staff records   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Edit the staff details (eg contact information, salaries)    | Can quickly and easily access and edit staff records  |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Delete the staff details (eg contact information, salaries)     | Can quickly and easily access and delete staff records   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Add the staffs schedule and makes changes spontaneously    | Can quickly and easily access and add schedule   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Edit the staffs schedule and makes changes spontaneously    | Can quickly and easily access and edit schedule   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Delete the staffs schedule and makes changes spontaneously    | Can quickly and easily access and delete schedule   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Implement flexible salary scheme based on seniority/performance and number of hours worked (eg working over 40 hours in a week results in greater pay per hour)     | Set and edit how salary for any staff is calculated (eg by month or by hour)   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Give bonuses to certain staff or reimburse them for company expenses, or deduct from their pay for miscellaneous reasons (eg broke something)   | Keep a running tab of the money the company owes them or vice versa   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Adds new and different categories of information (eg food preferences) for each staff member     | Store information which may come in useful   |
-| `* * *`  | Meticulous and flexible F&B Manager (Ben)  | Adds tags or remarks for different staff     | Can treat some staff specially according to the remarks   |
-| `* * *`  | Careless and forgetful manager (Bob)  | Keep track (view) of staff's ever-changing pay    | Greater accuracy to ensure staff get appropriate pay   |
-| `* * *`  | Careless and forgetful manager (Bob)  | Keep track (view) of staff's scheduling    | To ensure that the schedules are done properly with appropriate manpower each day   |
-| `* * *`  | Careless and forgetful manager (Bob)  | Keep track of staff's details including bank details and contact information    | To allow Bob to have his staff's details on hand when needed ie settling pay or contacting them if they are late   |
-| `* * *`  | Bad at maths manager (Bob)  | Automates the calculation of pay for the staff    | Ensures staff receive the correct pay and takes the time-consuming load off Bob   |
-| `* * *`  | Busy manager (Bob)  | Calculate working hours of the staff based on check-in and check-out times   | Greater accuracy to ensure staff get appropriate pay   |
-| `* * *`  | Busy manager (Bob)  | Has all the necessary functions in on app     | Bob does not have to transfer details and changes between different apps  |
 
 *{More to be added}*
 
