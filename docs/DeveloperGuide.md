@@ -379,7 +379,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 **MSS**
 
-1. CSO searches for student (UC02).
+1. CSO <ins>searches for student (UC02)</ins>.
 2. TuitiONE shows a list of relevant students.
 3. CSO requests to delete a specific student in the list.
 4. TuitiONE deletes the student.
@@ -503,7 +503,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 **MSS**
 
-1.  CSO looks for the student to update (UC02).
+1.  CSO <ins>looks for the student to update (UC02)</ins>.
 2.  CSO updates the details of the specific student.
 3.  TuitiONE reflects the updated details of the student.
 
