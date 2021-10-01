@@ -20,9 +20,9 @@ You can reach us at the email `e0559714@u.nus.edu`
 * Role: Team lead
 * Responsibilities: 
   1. Team lead: Responsible for overall project coordination 
-  2. Scheduling and tracking, in charge of defining, assigning, and tracking project tasks 
+  2. Scheduling and tracking: in charge of defining, assigning, and tracking project tasks 
   3. Deliverables and deadlines: Ensure project deliverables are done on time and in the right format 
-  4. In charge of Logic component
+  4. Logic package gatekeeper: In charge of merging any commits related Logic package on main repo
 
 
 ### Chan Choon Yong
@@ -32,11 +32,12 @@ You can reach us at the email `e0559714@u.nus.edu`
 [[github](https://github.com/choonyongchan)]
 [[portfolio](team/chanchoonyong.md)]
 
-* Role: Tester
+* Role: Tester, Manager
 * Responsibilities:
-  1. Testing: Ensures the testing of the project is done properly and on time 
-  2. Team progress: Check weekly tp progress 
-  3. In charge of Test component
+  1. Quality Assurance (QA) Analyst [Testing]: Ensures the testing of the project is done properly and on time.
+  2. Progress Manager: Check weekly tp progress
+  3. Test package gatekeeper: In charge of merging any commits related Test package on main repo
+
 
 
 ### Kevin Nathanael Mingtarja
@@ -48,9 +49,10 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 * Role: Developer
 * Responsibilities:
-  1. Code quality: Looks after code quality, ensures adherence to coding standards, etc 
-  2. Integration: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole 
-  3. In charge of Model component
+  1. Code Quality Assurance (QA) Analyst [Code quality]: Looks after code quality, ensures adherence to coding standards, etc.
+  2. Integration: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
+  3. Model package gatekeeper: In charge of merging any commits related to Model package on main repo
+
 
 
 ### Lim Boon Kee
@@ -62,8 +64,8 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 * Role: Documentation
 * Responsibilities:
-  1. Team Documentation: Responsible for recording various team documents such as meeting minutes, planning, brainstorm materials etc 
-  2. In charge of Storage component
+  1. Team Documentation (Meeting minutes, planning, brainstorm materials): Responsible for the quality of various team documents.
+  2. Storage package gatekeeper: In charge of merging any commits related to Storage package on main repo
 
 
 ### Nathan Wong Hung Rui
@@ -75,6 +77,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 * Role: Documentation, Tool Expert
 * Responsibilities: 
-  1. Project Documentation: Responsible for the quality of various project documents such as User Guide & Developer Guide etc 
-  2. Intellij expert & Git expert: Helps other team members with matters related to the specific tool. 
-  3. In charge of Ui component
+  1. Project Documentation (UG & DG): Responsible for the quality of various project documents. 
+  2. UI (JavaFX): In-charged of UI direction
+  3. Tool expert: e.g. Intellij expert, Git expert, etc. Helps other team members with matters related to the specific tool.
+  4. UI package gatekeeper: In charge of merging any commits related Logic package on main repo
