@@ -288,11 +288,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user with many applicants in the address book | sort applicants by name           | locate an applicant easily                                                 |
 | `* * *`  | general user                               | view the average rejection rates of all job positions | gauge how competitive a job might be          |
 
+
 *{More to be added}*
 
 ### Use cases
-
 (For all use cases below, the **System** is `MrTechRecruiter` and the **Actor** is the `user`, unless specified otherwise)
+
 
 **Use case: Add a new position**
 
@@ -304,10 +305,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 * 1a. The format is invalid.
+
   * 1a1. MrTechRecruiter shows an error message.
     
   Use case ends.
-    
+
 
 **Use case: Delete a new position**
 
@@ -323,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-  
+
     * 2a1. MrTechRecruiter displays a message that no position is in the list.
   
     Use case ends.
@@ -459,6 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 9. Developer & User guides should be PDF friendly.
 
 
+
 *{More to be added}*
 
 ### Glossary
@@ -524,6 +527,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
 ### View average rate of a job
 
 1. View average rate of a job in MrTechRecruiter
@@ -536,6 +540,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Software Engineer: [redacted], rejection rate: 10%
 
 1. _{ more test cases …​ }_
+
 
 ### Saving data
 
