@@ -257,13 +257,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is tech-savvy
+* is a manager of food-chain services
+* has a need to manage a significant number of staff
+* has a need to manage staff schedules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: It can be complicated and tedious for managers of such food chain services to manually keep track of their staff information, schedules, working hours, and salaries. Staff’d provides a central management system of staff that allows for easy and intuitive tracking and handling of the aforementioned data.
 
 
 ### User stories
@@ -287,6 +290,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a staff's schedule      | remove schedule and update the overall work schedule                   |
 | `* * *`  | user                                       | view a staff's schedule        | view an individual staff's schedule and the overall work schedule      |
 | `* * *`  | user                                       | edit a staff's schedule        | make changes to their schedule and update the overall work schedule    |
+
+*{More to be added}*
+
 
 ### Use cases
 
