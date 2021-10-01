@@ -35,7 +35,7 @@ public class VisitCommand extends Command {
     private final Visit visit;
 
     /**
-     * @param index of the person in the filtered person list to edit the remark
+     * @param index of the person in the filtered person list to edit the visit
      * @param visit of the person to be updated to
      */
     public VisitCommand(Index index, Visit visit) {
@@ -63,7 +63,7 @@ public class VisitCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether the remark is added to or removed from
+     * Generates a command execution success message based on whether the visit is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {

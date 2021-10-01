@@ -11,12 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Visit;
 
 /**
- * Parses input arguments and creates a new {@code RemarkCommand} object
+ * Parses input arguments and creates a new {@code VisitCommand} object
  */
 public class VisitCommandParser implements Parser<VisitCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
-     * and returns a {@code RemarkCommand} object for execution.
+     * and returns a {@code VisitCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public VisitCommand parse(String args) throws ParseException {
@@ -30,8 +30,8 @@ public class VisitCommandParser implements Parser<VisitCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VisitCommand.MESSAGE_USAGE), ive);
         }
 
-        String remark = argMultimap.getValue(PREFIX_VISIT).orElse("");
+        String visit = argMultimap.getValue(PREFIX_VISIT).orElse("");
 
-        return new VisitCommand(index, new Visit(remark));
+        return new VisitCommand(index, new Visit(visit));
     }
 }

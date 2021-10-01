@@ -24,11 +24,11 @@ import seedu.address.model.person.Visit;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for VisitCommand.
  */
 public class VisitCommandTest {
 
-    private static final String VISIT_STUB = "Some remark";
+    private static final String VISIT_STUB = "Some visit";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

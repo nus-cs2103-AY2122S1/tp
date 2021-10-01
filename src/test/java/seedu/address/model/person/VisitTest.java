@@ -9,23 +9,23 @@ public class VisitTest {
 
     @Test
     public void equals() {
-        Visit remark = new Visit("Hello");
+        Visit visit = new Visit("Hello");
 
         // same object -> returns true
-        assertTrue(remark.equals(remark));
+        assertTrue(visit.equals(visit));
 
         // same values -> returns true
-        Visit remarkCopy = new Visit(remark.value);
-        assertTrue(remark.equals(remarkCopy));
+        Visit remarkCopy = new Visit(visit.value);
+        assertTrue(visit.equals(remarkCopy));
 
         // different types -> returns false
-        assertFalse(remark.equals(1));
+        assertFalse(visit.equals(1));
 
         // null -> returns false
-        assertFalse(remark.equals(null));
+        assertFalse(visit.equals(null));
 
         // different visit -> returns false
         Visit differentVisit = new Visit("Bye");
-        assertFalse(remark.equals(differentVisit));
+        assertFalse(visit.equals(differentVisit));
     }
 }

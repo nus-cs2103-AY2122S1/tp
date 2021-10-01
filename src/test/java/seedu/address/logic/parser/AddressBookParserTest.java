@@ -38,10 +38,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_visit() throws Exception {
-        final Visit remark = new Visit("Some visit.");
+        final Visit visit = new Visit("Some visit.");
         VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_VISIT + remark.value);
-        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, remark), command);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_VISIT + visit.value);
+        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, visit), command);
     }
 
     @Test

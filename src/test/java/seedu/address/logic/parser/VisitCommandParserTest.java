@@ -18,13 +18,13 @@ public class VisitCommandParserTest {
 
     @Test
     public void parse_indexSpecified_success() {
-        // have remark
+        // have visit
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_VISIT + nonEmptyVisit;
         VisitCommand expectedCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit(nonEmptyVisit));
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // no remark
+        // no visit
         userInput = targetIndex.getOneBased() + " " + PREFIX_VISIT;
         expectedCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit(""));
         assertParseSuccess(parser, userInput, expectedCommand);
