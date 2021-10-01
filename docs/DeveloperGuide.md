@@ -304,8 +304,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list applicants.
 2.  MrTechRecruiter shows a list of applicants.
-3.  User requests to delete a specific person in the list using the exact name.
-4.  MrTechRecruiter deletes the person.
+3.  User requests to delete a specific applicant in the list using the exact name.
+4.  MrTechRecruiter deletes the applicant.
 
     Use case ends.
 
