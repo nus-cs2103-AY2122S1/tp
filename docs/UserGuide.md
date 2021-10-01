@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TAB3 is a **desktop app for managing tutees, optimized for use via a Command Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you can type fast, TAB3 can get your tutee management 
+Teaching Assistant’s Buddy (TAB) is a **desktop app for managing tutees, optimized for use via a Command Line Interface** (CLI) while still 
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAB can get your tutee management 
 tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -16,19 +16,19 @@ tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/TAB3/releases).
+1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/TAB/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for TAB3.
+1. Copy the file to the folder you want to use as the _home folder_ for TAB.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`add module CS2103`** and pressing Enter will add the module CS2103 to TAB3.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`add module CS2103`** and pressing Enter will add the module CS2103 to TAB.<br>
    Some example commands you can try:
 
-   * **`module add CS2103`** : Adds the module CS2103 to TAB3
+   * **`module add CS2103`** : Adds the module CS2103 to TAB
 
-   * **`student add A0123456A, John Doe, @johndoe, john.doe@u.nus.edu`** : Adds student John Doe to TAB3
+   * **`student add A0123456A, John Doe, @johndoe, john.doe@u.nus.edu`** : Adds student John Doe to TAB
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -65,13 +65,13 @@ Examples:
 
 ### Creating a new module: `module add`
 
-Adds a new module to TAB3
+Adds a new module to TAB
 
 Format: `module add <module name>`
 
 Examples:
-* `module add CS2103`: Adds module CS2103 to TAB3
-* `module add CS2100`: Adds module CS2100 to TAB3
+* `module add CS2103`: Adds module CS2103 to TAB
+* `module add CS2100`: Adds module CS2100 to TAB
 
 ### Creating a new task for a specific module: `module add task`
 
@@ -104,15 +104,15 @@ Examples:
 * `module delete CS2103, A1234567A`: Removes student with id A1234567A from module CS2103’s list of students
 * `module delete CS2100, A7654321A`: Removes student with id A7654321A from module CS2100’s list of students
 
-### Delete module from TAB3: `module delete`
+### Delete module from TAB: `module delete`
 
-Deletes the specified module from TAB3
+Deletes the specified module from TAB
 
 Format: `module delete <module name>`
 
 Examples:
-* `module delete CS2103`: Deletes module CS2103 from TAB3
-* `module delete CS2100`: Deletes module CS2100 from TAB3
+* `module delete CS2103`: Deletes module CS2103 from TAB
+* `module delete CS2100`: Deletes module CS2100 from TAB
 
 ### Create a new student: `student add`
 
