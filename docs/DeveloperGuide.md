@@ -258,7 +258,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * is a tutor overseeing students for an academic module or subject
-* has a need to manage a significant number of tudents
+* has a need to manage a moderate to large number of students 
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -415,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to respond to a user command within 2 seconds.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be able to handle 500 students without significant lag in response time.
+4. Should be able to handle up to 100 students without significant lag in response time.
 
 *{More to be added}*
 
@@ -423,6 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module**: An academic module or subject that is frequently found in universities and institutes of higher learning
 
 --------------------------------------------------------------------------------------------------------------------
 
