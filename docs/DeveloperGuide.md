@@ -331,16 +331,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  When a new version is released, it should be possible to update the most recent version if the user has installed the previous version.
-5.  Installing a new update shall not in any way, modify or erase existing data and value from the previous version, and the new update should be compatible with the data produced earlier within the system.
-6.  Should be able to store notes in English language, and provisions shall be made to support all languages.
-7.  The system should be able to handle notes with large capacity without any performance liability so that users can keep track of each activity without any issues.
-8.  Whenever a change is made to the application, the progress is instantly saved to the system.
-9.  The system should be able to reply to the prompt or command from the user within 3 seconds.
-10.  The system should cater to mentor professor such that mentor professor can access the application without any difficulty.
-11.  Should ensure personal data privacy and security of data access. 
-12. Software testing will require the use of automated testing. The test will be deleted after successful implementation of the software system.
+3.  A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Installing a new update shall not in any way, modify or erase existing data and value from the previous version, and the new update should be compatible with the data produced earlier within the system.
+5.  Should be able to store notes in English language, and provisions shall be made to support all languages.
+6.  The system should be able to handle notes with at most 1000 lines without any noticeable decrease in performance, so that users can keep extensive notes on their mentees.
+7.  The user should not lose any data if the system exits prematurely.
+8.  The system should be able to reply to the prompt or command from the user within 3 seconds.
+9.  The system should be intuitive to use for a mentor professor.
+10.  Should ensure personal data privacy and security of data access. 
+11. Software testing will require the use of automated testing. The test will be deleted after successful implementation of the software system.
 
 --------------------------------------------------------------------------------------------------------------------
 
