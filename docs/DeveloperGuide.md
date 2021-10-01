@@ -289,28 +289,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Update a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to update a contact
+2.  ComputingConnection shows the current details of the contact with editable fields
+3.  User edits the fields
+4.  ComputingConnecction updates the contact accordingly
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The user cancels the update.
+    * 2a1. ComputingConnection exits the update page.
 
-  Use case ends.
+      Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The user leaves a required field empty.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ComputingConnection shows an error message to prompt user to edit that field.
 
-      Use case resumes at step 2.
+      Use case ends.
 
 *{More to be added}*
 
