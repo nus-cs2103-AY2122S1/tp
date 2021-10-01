@@ -278,7 +278,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user ready to start using the app          | purge all current data         | get rid of sample/experiment data I used for exploring the App         |
 | `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
-| `* * *`  | <Add on from here onwards>                 | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
+| `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
+| `* * *`    | slightly familiar user                                       | edit information pertaining to a specific contact   | stay updated with the new details of all my contacts               |
 | `*`      | slightly familiar user                     | schedule an upcoming event     | keep track of my schedules with my contacts better                     |
 | `*`      | slightly familiar user                     | tag a category to an event     | so that I can easily view or filter the events based on type           |
 | `*`      | slightly familiar user                     | tag an event to a contact      | so that I can easily view contacts in a particular event               |
@@ -310,6 +312,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The user leaves a required field empty.
 
     * 3a1. ComputingConnection shows an error message to prompt user to edit that field.
+
+      Use case ends.
+
+**Use case: Search for a specific contact**
+
+**MSS**
+
+1. User searches a contact by name
+2. ComputingConnection shows the contact with the searched name
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Searched contact is invalid.
+
+   * 2a1. ComputingConnection shows an error message.
 
       Use case ends.
 
