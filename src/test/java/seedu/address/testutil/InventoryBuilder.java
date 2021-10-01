@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.newmodel.item.Item;
 import seedu.address.newmodel.Inventory;
+import seedu.address.newmodel.item.Item;
 
 /**
  * A utility class to help with building Inventory objects.

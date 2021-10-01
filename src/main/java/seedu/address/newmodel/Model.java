@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.newmodel.ReadOnlyInventory;
 import seedu.address.newmodel.item.Item;
 
 /**

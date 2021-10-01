@@ -26,7 +26,7 @@ public class TypicalItems {
     public static final Item CHOCOCHIP = new ItemBuilder().withName("Chocholate Chip Cookie")
             .withId("#444444")
             .withTags("baked").build();
-    public static final Item DALGONA_COFFEE  = new ItemBuilder().withName("Dalgona Coffee")
+    public static final Item DALGONA_COFFEE = new ItemBuilder().withName("Dalgona Coffee")
             .withId("#555555").build();
     public static final Item EGGNOG = new ItemBuilder().withName("Egg Nog")
             .withId("#666666").build();
