@@ -38,7 +38,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("expectedSalary") String expectedSalary, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("expectedSalary") String expectedSalary,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -107,7 +108,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (expectedSalary == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpectedSalary.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ExpectedSalary.class.getSimpleName()));
         }
         if (!ExpectedSalary.isValidExpectedSalary(expectedSalary)) {
             throw new IllegalValueException(ExpectedSalary.MESSAGE_CONSTRAINTS);

@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.ExpectedSalaryContainsKeywordPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
@@ -96,7 +96,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
-                    predicateList.add(new ExpectedSalaryContainsKeywordPredicate(Arrays.asList(keywords)));
+                    predicateList.add(new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords)));
                 }
             }
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {

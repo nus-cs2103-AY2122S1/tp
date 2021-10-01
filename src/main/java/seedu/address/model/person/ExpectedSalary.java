@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.StringUtil;
 
 /**
  * Represents a Person's expected salary in the address book.
@@ -11,8 +11,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ExpectedSalary {
 
-    public static final String MESSAGE_CONSTRAINTS = "Expected salary should only contain numbers (no decimals), " +
-            "should be non-negative, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Expected salary should only contain numbers (no decimals), "
+            + "should be non-negative, and it should not be blank";
 
     /*
      * The first character of the salary must not be a whitespace,
