@@ -11,7 +11,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 ### Chen Hsiao Ting
 
-<img src="Documents/Y2S1/CS2103T/tp/docs/images/hsiaotingluv.png" width="200px">
+<img src="images/hsiaotingluv.png" width="200px">
 
 
 [[github](https://github.com/hsiaotingluv)]
@@ -27,7 +27,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 ### Chan Choon Yong
 
-<img src="Documents/Y2S1/CS2103T/tp/docs/images/choonyongchan.png" width="200px">
+<img src="images/choonyongchan.png" width="200px">
 
 [[github](https://github.com/choonyongchan)]
 [[portfolio](team/chanchoonyong.md)]
@@ -42,7 +42,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 ### Kevin Nathanael Mingtarja
 
-<img src="Documents/Y2S1/CS2103T/tp/docs/images/kevinmingtarja.png" width="200px">
+<img src="images/kevinmingtarja.png" width="200px">
 
 [[github](https://github.com/kevinmingtarja)] 
 [[portfolio](team/kevinnathanaelmingtarja.md)]
@@ -70,7 +70,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 ### Nathan Wong Hung Rui
 
-<img src="Documents/Y2S1/CS2103T/tp/docs/images/e0543978.png" width="200px">
+<img src="images/e0543978.png" width="200px">
 
 [[github](https://github.com/e0543978)]
 [[portfolio](team/nathanwonghungrui.md)]
