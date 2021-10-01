@@ -104,11 +104,7 @@ public class LessonAddCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, toAdd);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        if (personToEdit.hasClashingLessons(editedPerson) || model.hasClashingLesson(editedPerson)) {
+        if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 

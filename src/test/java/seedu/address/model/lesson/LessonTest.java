@@ -95,7 +95,7 @@ public class LessonTest {
         }
 
         @Override
-        public boolean hasClashingLesson(Person person) {
+        public boolean hasClashingLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

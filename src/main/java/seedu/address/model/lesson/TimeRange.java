@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class TimeRange implements Comparable<TimeRange> {
     public static final String MESSAGE_CONSTRAINTS = "Lesson time range should adhere to the following constraints:\n"
-        + "1. End time cannot be earlier than start time.\n"
+        + "1. Start time must be before end time.\n"
         + "2. Lesson should be conducted between 8am and 10pm, inclusive";
 
     public static final String VALIDATION_REGEX = "^(([01]?[0-9]|2[0-3])[0-5][0-9])-(([01]?[0-9]|2[0-3])[0-5][0-9])";
@@ -73,7 +73,7 @@ public class TimeRange implements Comparable<TimeRange> {
         try {
             LocalTime startTime = LocalTime.parse(startEndTimes[0], DATE_TIME_FORMAT);
             LocalTime endTime = LocalTime.parse(startEndTimes[1], DATE_TIME_FORMAT);
-            return endTime.compareTo(startTime) >= 0 // End cannot come before start
+            return endTime.compareTo(startTime) > 0 // End cannot be same or before start
                     && startTime.compareTo(DAY_START) >= 0 // Same or later than 8am
                     && endTime.compareTo(DAY_END) <= 0; // Same or earlier than 10pm
         } catch (DateTimeParseException e) { // Double check even though regex already ensures values can be parsed
