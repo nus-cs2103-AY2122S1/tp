@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.fast.commons.exceptions.DataConversionException;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.ReadOnlyUserPrefs;
 import seedu.fast.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public interface Storage extends FastStorage, UserPrefsStorage {
     Path getFastFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyFast> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveFast(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveFast(ReadOnlyFast addressBook) throws IOException;
 
 }

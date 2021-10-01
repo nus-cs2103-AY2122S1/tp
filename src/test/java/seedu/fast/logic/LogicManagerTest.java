@@ -24,7 +24,7 @@ import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.Model;
 import seedu.fast.model.ModelManager;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.UserPrefs;
 import seedu.fast.model.person.Person;
 import seedu.fast.storage.JsonFastStorage;
@@ -155,7 +155,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveFast(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveFast(ReadOnlyFast addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

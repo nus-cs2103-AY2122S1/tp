@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.exceptions.DataConversionException;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.ReadOnlyUserPrefs;
 import seedu.fast.model.UserPrefs;
 
@@ -55,23 +55,23 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+    public Optional<ReadOnlyFast> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(fastStorage.getFastFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyFast> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return fastStorage.readAddressBook(filePath);
     }
 
     @Override
-    public void saveFast(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveFast(ReadOnlyFast addressBook) throws IOException {
         saveFast(addressBook, fastStorage.getFastFilePath());
     }
 
     @Override
-    public void saveFast(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveFast(ReadOnlyFast addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         fastStorage.saveFast(addressBook, filePath);
     }

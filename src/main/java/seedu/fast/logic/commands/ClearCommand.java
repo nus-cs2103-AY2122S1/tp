@@ -2,7 +2,7 @@ package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.fast.model.AddressBook;
+import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setAddressBook(new Fast());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

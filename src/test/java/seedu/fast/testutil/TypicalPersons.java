@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.fast.model.AddressBook;
+import seedu.fast.model.Fast;
 import seedu.fast.model.person.Person;
 
 /**
@@ -62,8 +62,8 @@ public class TypicalPersons {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Fast getTypicalAddressBook() {
+        Fast ab = new Fast();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

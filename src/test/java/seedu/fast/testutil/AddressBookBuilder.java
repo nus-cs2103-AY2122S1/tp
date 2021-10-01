@@ -1,6 +1,6 @@
 package seedu.fast.testutil;
 
-import seedu.fast.model.AddressBook;
+import seedu.fast.model.Fast;
 import seedu.fast.model.person.Person;
 
 /**
@@ -10,13 +10,13 @@ import seedu.fast.model.person.Person;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private Fast addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        addressBook = new Fast();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(Fast addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -28,7 +28,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBook build() {
+    public Fast build() {
         return addressBook;
     }
 }

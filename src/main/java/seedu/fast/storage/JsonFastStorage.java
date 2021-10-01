@@ -12,7 +12,7 @@ import seedu.fast.commons.exceptions.DataConversionException;
 import seedu.fast.commons.exceptions.IllegalValueException;
 import seedu.fast.commons.util.FileUtil;
 import seedu.fast.commons.util.JsonUtil;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.ReadOnlyFast;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -32,7 +32,7 @@ public class JsonFastStorage implements FastStorage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException {
+    public Optional<ReadOnlyFast> readAddressBook() throws DataConversionException {
         return readAddressBook(filePath);
     }
 
@@ -42,7 +42,7 @@ public class JsonFastStorage implements FastStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyFast> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableFast> jsonAddressBook = JsonUtil.readJsonFile(
@@ -60,16 +60,16 @@ public class JsonFastStorage implements FastStorage {
     }
 
     @Override
-    public void saveFast(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveFast(ReadOnlyFast addressBook) throws IOException {
         saveFast(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveFast(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveFast(ReadOnlyFast)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveFast(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveFast(ReadOnlyFast addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 

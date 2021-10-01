@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.fast.commons.core.GuiSettings;
-import seedu.fast.model.AddressBook;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.Fast;
+import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -54,10 +54,10 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        Fast original = getTypicalAddressBook();
         storageManager.saveFast(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        ReadOnlyFast retrieved = storageManager.readAddressBook().get();
+        assertEquals(original, new Fast(retrieved));
     }
 
     @Test

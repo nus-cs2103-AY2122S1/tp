@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.fast.model.AddressBook;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.Fast;
+import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
@@ -44,8 +44,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyFast getSampleAddressBook() {
+        Fast sampleAb = new Fast();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

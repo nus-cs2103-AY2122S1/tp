@@ -7,7 +7,7 @@ import seedu.fast.commons.core.GuiSettings;
 import seedu.fast.logic.commands.CommandResult;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.logic.parser.exceptions.ParseException;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.person.Person;
 
 /**
@@ -28,7 +28,7 @@ public interface Logic {
      *
      * @see seedu.fast.model.Model#getAddressBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyFast getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

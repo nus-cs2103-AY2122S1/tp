@@ -13,7 +13,7 @@ import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.logic.parser.FastParser;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.Model;
-import seedu.fast.model.ReadOnlyAddressBook;
+import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.person.Person;
 import seedu.fast.storage.Storage;
 
@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyFast getAddressBook() {
         return model.getAddressBook();
     }
 

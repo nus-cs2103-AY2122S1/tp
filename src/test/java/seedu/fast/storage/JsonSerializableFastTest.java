@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.exceptions.IllegalValueException;
 import seedu.fast.commons.util.JsonUtil;
-import seedu.fast.model.AddressBook;
+import seedu.fast.model.Fast;
 import seedu.fast.testutil.TypicalPersons;
 
 public class JsonSerializableFastTest {
@@ -24,8 +24,8 @@ public class JsonSerializableFastTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableFast dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableFast.class).get();
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        Fast addressBookFromFile = dataFromFile.toModelType();
+        Fast typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
