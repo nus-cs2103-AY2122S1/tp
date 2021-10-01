@@ -305,7 +305,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list applicants.
 2.  MrTechRecruiter shows a list of applicants.
 3.  User requests to delete a specific person in the list using the exact name.
-4.  MrTechRecruiter deletes the person. <br>
+4.  MrTechRecruiter deletes the person.
+    
     Use case ends.
 
 **Extensions**
@@ -326,6 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to see average rejection rates for all job positions.
 2. MrTechRecruiter displays the list of job positions, and their respective rejection rates.
+ 
    Use case ends.
    
 **Extensions**
@@ -347,7 +349,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User keys in the particular job position using the 'find' function.
-2. MrTechRecruiter displays the job position and its corresponding rejection rate. <br>
+2. MrTechRecruiter displays the job position and its corresponding rejection rate.
+   
    Use case ends.
 
 **Extensions**
