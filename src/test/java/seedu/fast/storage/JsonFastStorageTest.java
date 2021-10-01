@@ -20,7 +20,7 @@ import seedu.fast.model.Fast;
 import seedu.fast.model.ReadOnlyFast;
 
 public class JsonFastStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonFastStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -47,22 +47,22 @@ public class JsonFastStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readFast("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readFast("notJsonFormatFast.json"));
     }
 
     @Test
     public void readFast_invalidPersonFast_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readFast("invalidPersonAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readFast("invalidPersonFast.json"));
     }
 
     @Test
     public void readFast_invalidAndValidPersonFast_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readFast("invalidAndValidPersonAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readFast("invalidAndValidPersonFast.json"));
     }
 
     @Test
     public void readAndSaveFast_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path filePath = testFolder.resolve("TempFast.json");
         Fast original = getTypicalFast();
         JsonFastStorage jsonAddressBookStorage = new JsonFastStorage(filePath);
 
