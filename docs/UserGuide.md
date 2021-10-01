@@ -14,7 +14,7 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `[name of RHRH jar file]` from [here](`link to jar file on github`).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your RHRH.
 
@@ -63,7 +63,7 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](`link to RHRH help message example`)
 
 Format: `help`
 
@@ -163,7 +163,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -197,7 +196,7 @@ RHRH data are saved in the hard disk automatically after any command that change
 
 ### Editing the data file
 
-RHRH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+RHRH data are saved as a JSON file `[JAR file location]/data/[name of RHRH data file].json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, RHRH will discard all data and start with an empty data file at the next run.
