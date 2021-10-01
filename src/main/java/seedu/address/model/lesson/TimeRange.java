@@ -14,7 +14,8 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidTimeRange(String)}
  */
 public class TimeRange implements Comparable<TimeRange> {
-    public static final String MESSAGE_CONSTRAINTS = "Lesson time range should adhere to the following constraints:\n"
+    public static final String MESSAGE_CONSTRAINTS = "Lesson time range should be formatted as HHmm-HHmm "
+        + "and adhere to the following constraints:\n"
         + "1. Start time must be before end time.\n"
         + "2. Lesson should be conducted between 8am and 10pm, inclusive";
 
