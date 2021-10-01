@@ -50,13 +50,13 @@ public class StorageManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return fastStorage.getAddressBookFilePath();
+    public Path getFastFilePath() {
+        return fastStorage.getFastFilePath();
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(fastStorage.getAddressBookFilePath());
+        return readAddressBook(fastStorage.getFastFilePath());
     }
 
     @Override
@@ -66,14 +66,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, fastStorage.getAddressBookFilePath());
+    public void saveFast(ReadOnlyAddressBook addressBook) throws IOException {
+        saveFast(addressBook, fastStorage.getFastFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveFast(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        fastStorage.saveAddressBook(addressBook, filePath);
+        fastStorage.saveFast(addressBook, filePath);
     }
 
 }
