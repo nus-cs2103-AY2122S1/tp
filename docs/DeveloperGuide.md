@@ -290,6 +290,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user                                | sort contacts by meeting frequency| reconnect with neglected friends                                     |
 | `*`      | expert user                                | sort contacts by faculty           | consult them should i need help for a project                       |
 | `*`      | expert user                                | sort events based on scheduling           | i know what is coming up next                       |
+| `*`      | expert user                                | delete past events           | in order to clear up the database and reduce clutter                       |
+| `*`      | expert user                                | mass delete information that is not required anymore          | i get rid of redundant info                      |
 
 *{More to be added}*
 
@@ -351,6 +353,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. Searched contact is invalid.
 
    * 2a1. ComputingConnection shows an error message.
+
+      Use case ends.
+
+**Use case: Delete a specific contact**
+
+**MSS**
+
+1. User searches a contact by name.
+2. ComputingConnection shows the contact with the searched name.
+3. User Requests to delete the contact.
+4. Computing connection deletes the contact.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Searched contact is invalid.
+
+    * 2a1. ComputingConnection shows an error message.
 
       Use case ends.
 
