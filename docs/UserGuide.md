@@ -80,7 +80,7 @@ Adds a person to the address book.
 Format: `add applicant n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0). <br>
+An applicant can have any number of tags (including 0). <br>
 If the job position exists, its rejection rate should change accordingly.
 </div>
 
