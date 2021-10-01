@@ -22,8 +22,12 @@ import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.ReadOnlyUserPrefs;
 import seedu.fast.model.UserPrefs;
 import seedu.fast.model.util.SampleDataUtil;
-import seedu.fast.storage.*;
 import seedu.fast.storage.FastStorage;
+import seedu.fast.storage.JsonFastStorage;
+import seedu.fast.storage.JsonUserPrefsStorage;
+import seedu.fast.storage.Storage;
+import seedu.fast.storage.StorageManager;
+import seedu.fast.storage.UserPrefsStorage;
 import seedu.fast.ui.Ui;
 import seedu.fast.ui.UiManager;
 
