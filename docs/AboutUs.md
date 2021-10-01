@@ -28,7 +28,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Joe Wel
 
-<img src="images/joewel.png" width="200px">
+<img src="images/tanjoewel.png" width="200px">
 
 [[github](http://github.com/tanjoewel)]
 [[portfolio](team/joewel.md)]
