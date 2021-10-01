@@ -5,17 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class RemarkTest {
+public class VisitTest {
 
     @Test
     public void equals() {
-        Remark remark = new Remark("Hello");
+        Visit remark = new Visit("Hello");
 
         // same object -> returns true
         assertTrue(remark.equals(remark));
 
         // same values -> returns true
-        Remark remarkCopy = new Remark(remark.value);
+        Visit remarkCopy = new Visit(remark.value);
         assertTrue(remark.equals(remarkCopy));
 
         // different types -> returns false
@@ -24,8 +24,8 @@ public class RemarkTest {
         // null -> returns false
         assertFalse(remark.equals(null));
 
-        // different remark -> returns false
-        Remark differentRemark = new Remark("Bye");
-        assertFalse(remark.equals(differentRemark));
+        // different visit -> returns false
+        Visit differentVisit = new Visit("Bye");
+        assertFalse(remark.equals(differentVisit));
     }
 }

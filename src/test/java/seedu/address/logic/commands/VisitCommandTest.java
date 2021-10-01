@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VISIT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VISIT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -20,47 +20,47 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.Visit;
 import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
  */
-public class RemarkCommandTest {
+public class VisitCommandTest {
 
-    private static final String REMARK_STUB = "Some remark";
+    private static final String VISIT_STUB = "Some remark";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_addRemarkUnfilteredList_success() {
+    public void execute_addVisitUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withRemark(REMARK_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withVisit(VISIT_STUB).build();
 
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(editedPerson.getRemark().value));
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit(editedPerson.getVisit().value));
 
-        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
+        String expectedMessage = String.format(VisitCommand.MESSAGE_ADD_VISIT_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(visitCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_deleteRemarkUnfilteredList_success() {
+    public void execute_deleteVisitUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withRemark("").build();
+        Person editedPerson = new PersonBuilder(firstPerson).withVisit("").build();
 
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON,
-                new Remark(editedPerson.getRemark().toString()));
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON,
+                new Visit(editedPerson.getVisit().toString()));
 
-        String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedPerson);
+        String expectedMessage = String.format(VisitCommand.MESSAGE_DELETE_VISIT_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(visitCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -69,24 +69,24 @@ public class RemarkCommandTest {
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withRemark(REMARK_STUB).build();
+                .withVisit(VISIT_STUB).build();
 
-        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(editedPerson.getRemark().value));
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit(editedPerson.getVisit().value));
 
-        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
+        String expectedMessage = String.format(VisitCommand.MESSAGE_ADD_VISIT_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(visitCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        RemarkCommand remarkCommand = new RemarkCommand(outOfBoundIndex, new Remark(VALID_REMARK_BOB));
+        VisitCommand visitCommand = new VisitCommand(outOfBoundIndex, new Visit(VALID_VISIT_BOB));
 
-        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(visitCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
@@ -100,19 +100,19 @@ public class RemarkCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        RemarkCommand remarkCommand = new RemarkCommand(outOfBoundIndex, new Remark(VALID_REMARK_BOB));
+        VisitCommand visitCommand = new VisitCommand(outOfBoundIndex, new Visit(VALID_VISIT_BOB));
 
-        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(visitCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON,
-                new Remark(VALID_REMARK_AMY));
+        final VisitCommand standardCommand = new VisitCommand(INDEX_FIRST_PERSON,
+                new Visit(VALID_VISIT_AMY));
 
         // same values -> returns true
-        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON,
-                new Remark(VALID_REMARK_AMY));
+        VisitCommand commandWithSameValues = new VisitCommand(INDEX_FIRST_PERSON,
+                new Visit(VALID_VISIT_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -125,11 +125,11 @@ public class RemarkCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_SECOND_PERSON,
-                new Remark(VALID_REMARK_AMY))));
+        assertFalse(standardCommand.equals(new VisitCommand(INDEX_SECOND_PERSON,
+                new Visit(VALID_VISIT_AMY))));
 
-        // different remark -> returns false
-        assertFalse(standardCommand.equals(new RemarkCommand(INDEX_FIRST_PERSON,
-                new Remark(VALID_REMARK_BOB))));
+        // different visit -> returns false
+        assertFalse(standardCommand.equals(new VisitCommand(INDEX_FIRST_PERSON,
+                new Visit(VALID_VISIT_BOB))));
     }
 }

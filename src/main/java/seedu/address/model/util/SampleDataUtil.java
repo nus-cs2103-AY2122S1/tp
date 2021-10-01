@@ -11,7 +11,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.Visit;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Remark EMPTY_REMARK = new Remark("");
+    public static final Visit EMPTY_REMARK = new Visit("");
 
     public static Person[] getSamplePersons() {
         return new Person[] {
