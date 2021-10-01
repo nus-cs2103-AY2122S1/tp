@@ -63,11 +63,12 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 |e/|Email|
 |a/|Address of Staff|
 
-### View a staff
+### View a staff - `view`
 
 View the staff details of a single staff.
 
-Example:\
+Examples:
+
 `view n/Candice`\
 `view id/12345678`
 
@@ -76,10 +77,12 @@ Example:\
 Adds a staff to the stored information. The tags and information are optional and can be presented in any order.
 Upon creation of a staff, the system creates a staff ID for them which can be used to refer to them and access the system.
 
-Format:\
+Format:
+
 `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/Tag`
 
-Example:\
+Examples:
+
 `add n/Joe s/fulltime r/manager p/98765432 e/Joe@example.com a/John street, block 123, #01-01`\
 `add n/Candice s/parttime p/91234567 e/candice@example.com a/Newgate Prison`
 
@@ -121,7 +124,8 @@ Format: `list`
 
 Deletes the specified staff from the staff list.
 
-Format: \
+Formats:
+
 `delete n/name`\
 `delete id/ID`\
 `delete t/group`
@@ -130,7 +134,8 @@ Format: \
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
 * If there are multiple staffs of the same name/tag group, Staff'd will prompt you again to be more specific.
 
-Examples:\
+Examples:
+
 `delete n/Candice`\
 `delete id/12345678`\
 `delete t/cashiers`
@@ -142,7 +147,8 @@ Examples:\
 
 Edits an existing staff in the Staff List.
 
-Format:\
+Formats:
+
 `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`\
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`\
 `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
@@ -155,7 +161,8 @@ The index refers to the index number shown in the displayed staff list. The inde
 * When editing tags, the existing tags of the staff will be removed i.e adding of tags is not cumulative.
 * You can remove all the staff’s tags by typing `t/` without specifying any tags after it.
 
-Examples:\
+Examples:
+
 `edit -i 1 p/91234567 e/johndoe@example.com`\
 `edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
 `edit -n Candice p/12345678 e/noBOByouaretoochubby@tafclub.com`\
@@ -172,7 +179,9 @@ Examples:\
 
 Finds staff whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format:
+
+`find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -183,7 +192,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li` 
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 
@@ -205,19 +216,21 @@ Format: `exit`
 
 Adds a time period where the staff is working to the staff’s schedule.
 
-Format: \
+Formats:
+
 `addSchedule [n/name] [day-startTime-endTime]` \
 `addSchedule [id/ID] [day-startTime-endTime]` \
 `addSchedule [n/name] [t/nonrecurr] [d/date] [startTime-endTime]` \
 `addSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
 
-Note:
+
 * There are two ways to identify the staff to add the time period to: by their name or by their staff ID.
 * Also, there are two types of time periods that can be added - recurring and non-recurring.
 * The default is a recurring schedule which will occur every week. For the addition of the non-recurring time periods,
   the date which the staff works has to be specified.
 
-Examples: \
+Examples:
+
 `addSchedule n/Candice Mon-0800-1200` \
 `addSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
 
@@ -225,11 +238,13 @@ Examples: \
 
 Views a specific staff’s schedule.
 
-Format: \
+Formats:
+
 `viewSchedlue [n/name]` \
 `viewSchedlue [id/ID]`
 
-Examples: \
+Examples:
+
 `viewSchedule n/Candice` \
 `viewSchedule id/12345678`
 
@@ -238,13 +253,15 @@ Examples: \
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their name or by their staff ID. The deleted period must be the same as a period previously entered by the manager. If the period is a non-recurring period, the date must be specified.
 
-Format: \
+Formats:
+
 `deleteSchedule [n/name] [day-startTime-endTime]` \
 `deleteSchedule [id/ID] [day-startTime-endTime]`\
 `deleteSchedule [n/name] [t/nonrecurr]  [d/date] [startTime-endTime]` \
 `deleteSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
 
-Example: \
+Examples:
+
 `deleteSchedule n/Joe Mon-0800-1200` \
 `deleteSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
 
@@ -252,11 +269,13 @@ Example: \
 
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
 
-Format: \
+Formats:
+
 `editSchedule [n/name] [old/day-startTime-endTime] [new/day-startTime-endTime]` \
 `editSchedule [id/ID] [old/day-startTime-endTime] [new/day-startTime-endTime]`
 
-Example: \
+Examples:
+
 `editSchedule n/Candice old/Mon-0800-1200 new/Mon-0900-1200` \
 `editSchedule n/12345678 old/Thurs-1200-1800 new/Thurs-1400-1700`
 
