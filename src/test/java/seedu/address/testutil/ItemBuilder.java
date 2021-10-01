@@ -3,10 +3,10 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
-import seedu.address.newmodel.item.Name;
 import seedu.address.newmodel.item.Item;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.newmodel.item.Name;
+import seedu.address.newmodel.tag.Tag;
+import seedu.address.newmodel.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.

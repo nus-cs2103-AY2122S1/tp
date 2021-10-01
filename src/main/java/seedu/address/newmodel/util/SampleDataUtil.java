@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.newmodel.Inventory;
 import seedu.address.newmodel.ReadOnlyInventory;
-import seedu.address.newmodel.item.Name;
 import seedu.address.newmodel.item.Item;
-import seedu.address.model.tag.Tag;
+import seedu.address.newmodel.item.Name;
+import seedu.address.newmodel.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
