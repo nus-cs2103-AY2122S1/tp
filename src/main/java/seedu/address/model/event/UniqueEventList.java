@@ -3,6 +3,7 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -87,6 +88,10 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+    }
+
+    public void sort() {
+        internalList.sort(Comparator.naturalOrder());
     }
 
     /**
