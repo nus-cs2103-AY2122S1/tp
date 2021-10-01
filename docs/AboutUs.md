@@ -9,15 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+[comment]: <> (### John Doe)
 
-<img src="images/johndoe.png" width="200px">
+[comment]: <> (<img src="images/johndoe.png" width="200px">)
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[comment]: <> ([[homepage]&#40;http://www.comp.nus.edu.sg/~damithch&#41;])
 
-* Role: Project Advisor
+[comment]: <> ([[github]&#40;https://github.com/johndoe&#41;])
+
+[comment]: <> ([[portfolio]&#40;team/johndoe.md&#41;])
+
+[comment]: <> (* Role: Project Advisor)
 
 ### Gabriel Au
 
@@ -30,22 +32,24 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Responsibilities: UI, Code Quality, Testing and Integration
 
 ### Jonathan Tan
+
 <img src="images/fullfatwasabi.png" width="200px">
 
-[[github](http://github.com/fullfatwasabi)][[portfolio](team/fullfatwasabi.md)]
+[[github](http://github.com/fullfatwasabi)]
+[[portfolio](team/fullfatwasabi.md)]
 
 * Role: Developer
 * Responsibilities: Tool, Documentation, Scheduling and tracking
 
-### Jean Doe
+### Sreenivasa Kalpana Surya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tetrerox.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tetrerox)]
+[[portfolio](team/tetrerox.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Integration, Code Quality and Documentation
 
 ### He Outong
 
@@ -56,3 +60,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Testing, Integration, Tool expert
+
+### Megan Wee Rui En
+
+<img src="images/mweeruien.png" width="200px">
+
+[[github](http://github.com/mweeruien)][[portfolio](team/mweeruien.md)]
+
+* Role: Developer
+* Responsibilities: Team Lead, Deliverables and deadlines, and Assistant GUI Expert
