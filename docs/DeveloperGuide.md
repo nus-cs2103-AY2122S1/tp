@@ -357,27 +357,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-*{More to be added}*
+**Use case: Find and view a tutorial class**
+
+**MSS**
+
+1.  User requests to find a tutorial class
+2.  ClassMATE shows a list of classes with the given keyword
+3.  User requests to view a specific class in the list
+4.  ClassMATE shows the class details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ClassMATE shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Readable font, at least size 12.
-5.  Lightweight program.
-6.  Light Mode.
-7.  Able to function in the background.
-8.  Able to respond to user actions within three seconds.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold at least 1000 students, 400 groups and 100 classes without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Readable font, at least size 12.
+5. Should not cause noticeable lag for other applications when running.
+6. Light Mode.
+7. Able to function in the background.
+8. Able to respond to user actions within three seconds.
+9. A tutorial class should be able to hold up to 20 students.
+10. A group should be able to hold up to 5 students.
+11. Each action should not take more than 3 commands.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, (MAC) OS-X
 * **Private student detail**: A student detail that is not meant to be shared with others
 * **Tutorial class**: A CS2101 tutorial class. Each student can only have up to one tutorial class
-* **Student**: An NUS student taking the CS2101 module.
+* **Student**: An NUS student taking the CS2101(T) module
+* **Group**: A group is a subsection of the class and contains a few students for the purpose of small activities or group project
 
 --------------------------------------------------------------------------------------------------------------------
 

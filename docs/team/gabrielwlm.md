@@ -18,5 +18,6 @@ Given below are my contributions to the project.
         * Rearranged order of the features to improve readability [\#76]()
         * Updated command summary [\#76]()
     * Developer Guide:
-        * Added glossary [\#79]()
-        * Added use cases [\#79]()
+        * Added glossary terms [\#81]()
+        * Added use cases [\#81]()
+        * Added non-functional requirements [\#81]()
