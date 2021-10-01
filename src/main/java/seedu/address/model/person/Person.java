@@ -117,7 +117,6 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append(getAddress())
                 .append("; Visit: ")
                 .append(getVisit());
 
