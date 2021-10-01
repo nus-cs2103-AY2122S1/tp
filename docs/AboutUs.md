@@ -20,7 +20,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 * Role: Team lead
 * Responsibilities: 
   1. Team lead: Responsible for overall project coordination 
-  2. Scheduling and tracking: in charge of defining, assigning, and tracking project tasks 
+  2. Scheduling and tracking: In charge of defining, assigning, and tracking project tasks 
   3. Deliverables and deadlines: Ensure project deliverables are done on time and in the right format 
   4. Logic package gatekeeper: In charge of merging any commits related Logic package on main repo
 
