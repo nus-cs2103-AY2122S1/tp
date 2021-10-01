@@ -19,41 +19,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Wang Mengzhe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/charliemoweng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/charliemoweng)]
+[[portfolio](team/wangmengzhe.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Wang Ruofan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ruofan1023.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ruofan1023)] [[portfolio](team/ruofan.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Joe Wel
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/joewel.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/tanjoewel)]
+[[portfolio](team/joewel.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Wang Guanlin (Joseph)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wangguanlinjoseph.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/WangGLJoseph)]
+[[portfolio](team/wangguanlinjoseph.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Felissa Faustine
+
+<img src="images/felissa.png" width="200px">
+
+[[github](http://github.com/felissaf)]
+[[portfolio](team/felissa.md)]
 
 * Role: Developer
 * Responsibilities: UI
