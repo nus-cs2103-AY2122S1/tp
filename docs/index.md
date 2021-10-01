@@ -8,13 +8,9 @@ title: Staff'd
 
 ![Ui](images/Ui.png)
 
-<<<<<<< HEAD
-**Staff'd is a desktop application to help managers manage their staffs.** Staff’d helps F&B managers manage details and schedules of their staff. 
-It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
-While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
-=======
+
 **Staff'd is a desktop application for managing your staff.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
->>>>>>> a94cde192b6f382cdcef2ff005952055a02086c8
+
 
 * If you are interested in using Staff'd, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing Staff'd, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
