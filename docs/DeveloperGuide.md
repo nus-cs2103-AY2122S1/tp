@@ -279,9 +279,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | <Add on from here onwards>                 | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `*`      | slightly familiar user                     | schedule an upcoming event     | keep track of my schedules with my contacts better                     |
+| `*`      | slightly familiar user                     | tag a category to an event     | so that I can easily view or filter the events based on type           |
+| `*`      | slightly familiar user                     | tag an event to a contact      | so that I can easily view contacts in a particular event               |
 
 *{More to be added}*
 
