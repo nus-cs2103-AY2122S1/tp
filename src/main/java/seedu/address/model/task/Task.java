@@ -49,8 +49,7 @@ public class Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTaskDescription())
-                .append("; Task Description: ");
+        builder.append(getTaskDescription());
         return builder.toString();
     }
 }
