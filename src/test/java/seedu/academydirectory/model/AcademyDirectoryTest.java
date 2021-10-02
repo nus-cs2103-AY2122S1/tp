@@ -1,0 +1,102 @@
+package seedu.academydirectory.model;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academydirectory.testutil.Assert.assertThrows;
+import static seedu.academydirectory.testutil.TypicalPersons.ALICE;
+import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.person.exceptions.DuplicatePersonException;
+import seedu.academydirectory.testutil.PersonBuilder;
+
+public class AcademyDirectoryTest {
+
+    private final AcademyDirectory academyDirectory = new AcademyDirectory();
+
+    @Test
+    public void constructor() {
+        assertEquals(Collections.emptyList(), academyDirectory.getPersonList());
+    }
+
+    @Test
+    public void resetData_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> academyDirectory.resetData(null));
+    }
+
+    @Test
+    public void resetData_withValidReadOnlyAcademyDirectory_replacesData() {
+        AcademyDirectory newData = getTypicalAcademyDirectory();
+        academyDirectory.resetData(newData);
+        assertEquals(newData, academyDirectory);
+    }
+
+    @Test
+    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+        // Two persons with the same identity fields
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        AcademyDirectoryStub newData = new AcademyDirectoryStub(newPersons);
+
+        assertThrows(DuplicatePersonException.class, () -> academyDirectory.resetData(newData));
+    }
+
+    @Test
+    public void hasPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> academyDirectory.hasPerson(null));
+    }
+
+    @Test
+    public void hasPerson_personNotInAcademyDirectory_returnsFalse() {
+        assertFalse(academyDirectory.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPerson_personInAcademyDirectory_returnsTrue() {
+        academyDirectory.addPerson(ALICE);
+        assertTrue(academyDirectory.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPerson_personWithSameIdentityFieldsInAcademyDirectory_returnsTrue() {
+        academyDirectory.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(academyDirectory.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> academyDirectory.getPersonList().remove(0));
+    }
+
+    /**
+     * A stub ReadOnlyAcademyDirectory whose persons list can violate interface constraints.
+     */
+    private static class AcademyDirectoryStub implements ReadOnlyAcademyDirectory {
+        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+
+        AcademyDirectoryStub(Collection<Person> persons) {
+            this.persons.setAll(persons);
+        }
+
+        @Override
+        public ObservableList<Person> getPersonList() {
+            return persons;
+        }
+    }
+
+}
