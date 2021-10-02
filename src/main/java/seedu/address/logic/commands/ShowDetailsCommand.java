@@ -35,7 +35,7 @@ public class ShowDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Event> filteredEventList = model.getEventList().filtered(eventName);
+        FilteredList<Event> filteredEventList = model.getFilteredEventList().filtered(eventName);
 
         if (filteredEventList.size() == 0) {
             throw new CommandException(Messages.MESSAGE_EVENT_NOT_FOUND);

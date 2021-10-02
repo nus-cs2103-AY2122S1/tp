@@ -17,8 +17,9 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Participant> PREDICATE_SHOW_ALL_PARTICIPANTS = unused -> true;
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
+    Predicate<Participant> PREDICATE_SHOW_ALL_PARTICIPANTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,8 +93,14 @@ public interface Model {
      */
     void updateFilteredParticipantList(Predicate<Participant> predicate);
 
-    /** Returns an unmodifiable view of list of Events */
-    ObservableList<Event> getEventList();
+    /** Returns an unmodifiable view of list of Events *///getFilteredEventList
+    ObservableList<Event> getFilteredEventList();
+
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEventList(Predicate<Event> predicate);
 
     /** Sorts the event lists chronologically */
     void sortEvents();

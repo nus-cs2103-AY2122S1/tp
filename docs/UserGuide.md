@@ -20,6 +20,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Mark an Event as done: `doneEvent`](#mark-an-event-as-done-doneevent)
     * [Sort Events: `sortEvents`](#sort-events-sortevents)
     * [Filter Events: `filterEvents`](#filter-events-filterevents)
+    * [Listing all Events: `listEvents`](#list-events-listevent)
     * [Add Participant to Event: `addParticipant`](#add-participant-to-event-addparticipant)
     * [Remove Participant from Event: `removeParticipant`](#remove-participant-from-event-removeparticipant)
     * [Show Event details: `showDetails`](#show-event-details-showdetails)
@@ -210,17 +211,22 @@ Example Usage:
 ### Sort Events: `sortEvents`
 Sorts the current list of Events in chronological order with the earlier events at the top and later events at the bottom.
 
-Format:
-`sortEvents`
+Format: `sortEvents`
 
 ### Filter Events: `filterEvents`
-Filters the list of events for events occurring on a specific date.
+Filters the list of events for events occurring on a specific date and optionally by time too.
 
-Format:
-`filterEvents DATE`
+Format: `filterEvents d/DATE [t/TIME]`
 
 Example Usage:
-* `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
+* `filterEvents d/2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
+* `filterEvents d/2021-09-18 t/0900` - Filters the list of events to show only events occurring on 18th September 2021 9am.
+
+### List Events: `listEvent`
+
+Show a list of all events in Managera.
+
+Format: `listEvent`
 
 ### Add Participant to Event: `addParticipant`
 
@@ -306,12 +312,13 @@ Action | Format, Examples
 **Clear** | `clear`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
-**Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g. `doneEvent n/240km Marathon d/2022-08-20`
+**Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g., `doneEvent n/240km Marathon d/2022-08-20`
 **Sort Events** | `sortEvents`
-**Filter Events** | `filterEvents DATE` <br> e.g. `filterEvents 2021-09-18`
+**Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
+**List Events** | `listEvents`
 **add Participant to Event** | `addParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant e/2103T Finals p/mikerowe1`
 **remove Participant from Event** | `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant e/CS2103T Finals p/mikerowe1`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
-**Find Participants** | `findParticipant KEYWORD` <br> e.g. `findParticipant Mike`
+**Find Participants** | `findParticipant KEYWORD` <br> e.g., `findParticipant Mike`
 **exit** | `exit`
