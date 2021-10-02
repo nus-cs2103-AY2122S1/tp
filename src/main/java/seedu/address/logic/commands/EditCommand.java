@@ -15,6 +15,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Description;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -91,7 +93,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         GroupName updatedGroupName = editStudentDescriptor.getGroupName().orElse(studentToEdit.getGroupName());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedGroupName);
+        // TODO zhi hao?
+
+        return new Student(updatedName, updatedPhone, updatedEmail,
+                new Group(new GroupName("hi"), new Description("bye"))); // TODO zhi hao :)
     }
 
     @Override

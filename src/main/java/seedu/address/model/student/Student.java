@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
@@ -24,12 +25,12 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, GroupName groupName) {
-        requireAllNonNull(name, phone, email, groupName);
+    public Student(Name name, Phone phone, Email email, Group group) {
+        requireAllNonNull(name, phone, email, group);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.group = new Group(groupName);
+        this.group = group;
     }
 
     public Name getName() {
@@ -44,8 +45,17 @@ public class Student {
         return email;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    // TODO zhi hao pls check if can remove thx :)
     public GroupName getGroupName() {
         return group.getGroupName();
+    }
+
+    public Description getGroupDescription() {
+        return group.getDescription();
     }
 
     /**
