@@ -1,12 +1,13 @@
 package seedu.address.model.folder;
 
-import seedu.address.model.person.Person;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.person.Person;
+
 
 /**
  * Represents a Folder in UNIon.
@@ -30,6 +31,9 @@ public class Folder {
         this.contacts = contacts;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Folder(FolderName folderName) {
         requireAllNonNull(folderName);
 
