@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEASUREMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -22,6 +24,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Measurement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -40,8 +44,10 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_MEASUREMENT + "MEASUREMENT] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -84,6 +90,13 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (!Measurement.isValidMeasurement(editedPerson.getMeasurement().value,
+                editedPerson.getGender().value)) {
+            throw new CommandException(Measurement.getMessageConstraints(
+                    editedPerson.getGender().value)
+            );
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
@@ -97,13 +110,16 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Measurement updatedMeasurement = editPersonDescriptor.getMeasurement().orElse(personToEdit.getMeasurement());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedGender, updatedPhone, updatedEmail,
+                updatedMeasurement, updatedAddress, updatedRemark, updatedTags);
     }
 
     @Override
@@ -130,8 +146,10 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Gender gender;
         private Phone phone;
         private Email email;
+        private Measurement measurement;
         private Address address;
         private Remark remark;
         private Set<Tag> tags;
@@ -144,8 +162,10 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setGender(toCopy.gender);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setMeasurement(toCopy.measurement);
             setAddress(toCopy.address);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
@@ -155,7 +175,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, gender, phone, email, measurement, address, remark, tags);
         }
 
         public void setName(Name name) {
@@ -164,6 +184,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
         }
 
         public void setPhone(Phone phone) {
@@ -180,6 +208,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setMeasurement(Measurement measurement) {
+            this.measurement = measurement;
+        }
+
+        public Optional<Measurement> getMeasurement() {
+            return Optional.ofNullable(measurement);
         }
 
         public void setAddress(Address address) {
@@ -231,8 +267,10 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
+                    && getGender().equals(e.getGender())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getMeasurement().equals(e.getMeasurement())
                     && getAddress().equals(e.getAddress())
                     && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags());

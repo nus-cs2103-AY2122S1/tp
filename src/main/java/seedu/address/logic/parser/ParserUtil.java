@@ -11,6 +11,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Measurement;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -54,6 +56,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -66,6 +83,36 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String measurement} into a {@code Measurement}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code measurement} is invalid
+     */
+    public static Measurement parseMeasurement(String measurement, Gender gender) throws ParseException {
+        requireNonNull(measurement);
+        String trimmedMeasurement = measurement.trim();
+        if (!Measurement.isValidMeasurement(trimmedMeasurement, gender.value)) {
+            throw new ParseException(Measurement.getMessageConstraints(gender.value));
+        }
+        return new Measurement(trimmedMeasurement);
+    }
+
+    /**
+     * Parses a {@code String measurement} into a {@code Measurement}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code measurement} is invalid
+     */
+    public static Measurement parseMeasurement(String measurement) throws ParseException {
+        requireNonNull(measurement);
+        String trimmedMeasurement = measurement.trim();
+        if (!Measurement.isValidMeasurement(trimmedMeasurement)) {
+            throw new ParseException(Measurement.GENERAL_MESSAGE_CONSTRAINTS);
+        }
+        return new Measurement(trimmedMeasurement);
     }
 
     /**
@@ -142,7 +189,6 @@ public class ParserUtil {
 
     /**
      * Simple check that validates label is not empty string after trimming.
-     * @return
      */
     public static Label parseLabel(String label) throws ParseException {
         requireNonNull(label);

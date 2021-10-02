@@ -17,10 +17,12 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Gender gender;
     private final Phone phone;
     private final Email email;
 
     // Data fields
+    private final Measurement measurement;
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
@@ -28,11 +30,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Gender gender, Phone phone, Email email, Measurement measurement,
+                  Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, gender, phone, email, measurement, address, remark, tags);
         this.name = name;
+        this.gender = gender;
         this.phone = phone;
         this.email = email;
+        this.measurement = measurement;
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
@@ -42,12 +47,20 @@ public class Person {
         return name;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
     public Phone getPhone() {
         return phone;
     }
 
     public Email getEmail() {
         return email;
+    }
+
+    public Measurement getMeasurement() {
+        return measurement;
     }
 
     public Address getAddress() {
@@ -95,8 +108,10 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
+                && otherPerson.getGender().equals(getGender())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getMeasurement().equals(getMeasurement())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
@@ -105,17 +120,21 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, remark, tags);
+        return Objects.hash(name, gender, phone, email, measurement, address, remark, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Gender: ")
+                .append(getGender())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Measurement: ")
+                .append(getMeasurement())
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Remark: ")
