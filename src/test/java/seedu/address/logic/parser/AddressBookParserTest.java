@@ -41,7 +41,7 @@ public class AddressBookParserTest {
         final Visit visit = new Visit("2020-11-11");
         VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_VISIT + visit.value);
-        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, visit), command);
+        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, new Visit("11 Nov 2020")), command);
     }
 
     @Test

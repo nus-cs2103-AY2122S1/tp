@@ -44,6 +44,7 @@ public class VisitCommand extends Command {
         this.index = index;
         this.visit = visit;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
