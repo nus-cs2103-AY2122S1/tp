@@ -262,13 +262,13 @@ A recruiter that
 * prefer desktop apps over other types
 * is reasonably comfortable using CLI apps
 * has a need to manage a significant number of applications
-* works for a company that gets applications for variety of roles 
+* works for a company that gets applications for variety of roles
 * has a need to filter and categorise applicants by different fields
 
 
-**Value proposition**: 
+**Value proposition**:
 
-It can be hard for recruiters to keep track of the plethora of clients with different skill sets, availability 
+It can be hard for recruiters to keep track of the plethora of clients with different skill sets, availability
 and experience.
 
 This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates
@@ -308,7 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User cancels request for help.
 
   Use case ends.
-  
+
 **Use case: UC02 - List all applicants**
 
 **MSS**
@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The input format is invalid.
     * 1a1. AddressBook shows an error message.
-      
+
       Use case resumes at step 1. 
 
 **Use case: UC04 - Delete an applicant**
@@ -344,19 +344,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  AddressBook deletes the applicant.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The list of applicants is empty.
 
   Use case ends.
-    
+
 * 3a. The given index is invalid.
 
     * 3a1. AddressBook shows an error message.
 
       Use case resumes at step 2.
-      
+
 *{More to be added}*
 
 ### Non-Functional Requirements
