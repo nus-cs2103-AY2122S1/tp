@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.format.FormatStyle;
 import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.time.format.DateTimeFormatter;
@@ -52,10 +53,9 @@ public class BirthDate {
 
 //    public BirthDate(LocalDate birthDate) {
 //        requireNonNull(birthDate);
-//        checkArgument(isValidBirthDate(birthDate), MESSAGE_CONSTRAINTS);
+//        stringValue = birthDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+//        checkArgument(isValidBirthDate(stringValue), MESSAGE_CONSTRAINTS);
 //        value = birthDate;
-//        DateFormat fmt = new SimpleDateFormat("sMM/dd/yyyy");
-//        stringValue = birthDate.format(fmt);
 //    }
 
 
