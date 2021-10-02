@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/naranghardik16.md)]
 
 * Role: Developer
-* Responsibilities: Priority Feature + Design
+* Responsibilities: Priority Feature + UI/UX
 
 ### Sourabh Jaiswal
 
