@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Task {
     private final TaskDescription taskDescription;
 
-     /**
+    /**
      * Constructs a {@code Task}.
      *
      * @param taskDescription A valid task description
