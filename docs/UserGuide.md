@@ -167,13 +167,25 @@ Examples:
 
 * `mkdir CS2103` creates a folder with the name `CS2103`.
 
+### Removing a folder: `rmdir`
+
+Deletes a specified folder
+
+Format `rmdir FOLDER_NAME`
+
+* Creates a folder with the name `FOLDER_NAME`.
+
+Examples:
+
+* `rmdir CS1010` deletes a folder with the name `CS1010`.
+
 ### Viewing list of folders: `ls -folders`
 
 Retrieve list of all folders created
 
 Format: `ls -folders`
 
-### Adding contacts to folder
+### Adding contacts to folder: `echo`
 To organize and group contacts into an arbitrary folder
 Format: `echo CONTACT_INDEX >> FOLDER_NAME`
 - `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
@@ -221,3 +233,4 @@ Action | Format, Examples
 **Create folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
 **Delete folder** | `rmdir FOLDER_NAME` e.g. `rmdir CS1010`
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` e.g. `echo 3 >> CS2103`
+
