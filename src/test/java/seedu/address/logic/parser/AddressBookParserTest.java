@@ -78,7 +78,8 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD + " "
                         + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" ")));
         ArrayList<Predicate<Person>> expectedPredicates = new ArrayList<>();
-        expectedPredicates.add(new NameContainsKeywordsPredicate((keywords)));
+        expectedPredicates.add(new NameContainsKeywordsPredicate(keywords));
+
         assertEquals(new FindCommand(expectedPredicates), command);
     }
 

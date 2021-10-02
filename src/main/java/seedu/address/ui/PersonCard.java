@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label role;
+    @FXML
     private Label expectedSalary;
     @FXML
     private FlowPane tags;
@@ -54,7 +56,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText("Phone Number: " + person.getPhone().value);
         address.setText("Address: " + person.getAddress().value);
         email.setText("Email: " + person.getEmail().value);
+        role.setText("Applied Role: " + person.getRole().role);
         expectedSalary.setText("Expected Salary: $" + person.getExpectedSalary().value);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

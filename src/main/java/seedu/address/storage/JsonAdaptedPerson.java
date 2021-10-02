@@ -16,6 +16,7 @@ import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String role;
     private final String expectedSalary;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -38,13 +40,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("expectedSalary") String expectedSalary,
+            @JsonProperty("role") String role, @JsonProperty("expectedSalary") String expectedSalary,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         this.expectedSalary = expectedSalary;
+
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -58,7 +62,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        role = source.getRole().role;
         expectedSalary = source.getExpectedSalary().value;
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -107,6 +113,14 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+
         if (expectedSalary == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ExpectedSalary.class.getSimpleName()));
@@ -117,7 +131,8 @@ class JsonAdaptedPerson {
         final ExpectedSalary modelExpectedSalary = new ExpectedSalary(expectedSalary);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelExpectedSalary, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelExpectedSalary, modelTags);
     }
 
 }

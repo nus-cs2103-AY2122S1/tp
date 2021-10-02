@@ -20,6 +20,9 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+    // Category fields
+    private final Role role;
+
     // Data fields
     private final Address address;
     private final ExpectedSalary expectedSalary;
@@ -28,12 +31,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, ExpectedSalary expectedSalary, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, expectedSalary, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, ExpectedSalary expectedSalary, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, expectedSalary, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         this.expectedSalary = expectedSalary;
         this.tags.addAll(tags);
     }
@@ -52,6 +58,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public ExpectedSalary getExpectedSalary() {
@@ -98,13 +108,15 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getRole().equals(getRole())
+                && otherPerson.getExpectedSalary().equals(getExpectedSalary())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, role, expectedSalary, tags);
     }
 
     @Override
@@ -117,6 +129,8 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Applied Role: ")
+                .append(getRole())
                 .append("; Expected Salary: ")
                 .append(getExpectedSalary());
 

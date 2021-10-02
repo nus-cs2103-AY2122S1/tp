@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -35,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ROLE_AMY = "Software Engineer";
+    public static final String VALID_ROLE_BOB = "Software Tester";
     public static final String VALID_EXPECTED_SALARY_AMY = "3750";
     public static final String VALID_EXPECTED_SALARY_BOB = "2600";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -48,6 +51,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
+    public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
     public static final String EXPECTED_SALARY_DESC_AMY = " " + PREFIX_EXPECTED_SALARY + VALID_EXPECTED_SALARY_AMY;
     public static final String EXPECTED_SALARY_DESC_BOB = " " + PREFIX_EXPECTED_SALARY + VALID_EXPECTED_SALARY_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -57,6 +62,7 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "Softw@re Eng1n33r"; // '@' not allowed in roles
     public static final String INVALID_EXPECTED_SALARY_DESC = " " + PREFIX_EXPECTED_SALARY
             + "-120"; // '-' not allowed for expected salaries
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags

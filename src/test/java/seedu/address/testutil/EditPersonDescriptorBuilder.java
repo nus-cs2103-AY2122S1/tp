@@ -11,6 +11,7 @@ import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setRole(person.getRole());
         descriptor.setExpectedSalary(person.getExpectedSalary());
         descriptor.setTags(person.getTags());
     }
@@ -78,6 +80,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withExpectedSalary(String expectedSalary) {
         descriptor.setExpectedSalary(new ExpectedSalary(expectedSalary));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Role} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRole(String role) {
+        descriptor.setRole(new Role(role));
         return this;
     }
 

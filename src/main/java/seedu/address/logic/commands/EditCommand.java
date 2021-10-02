@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -26,6 +27,7 @@ import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EXPECTED_SALARY + "EXPECTED_SALARY]"
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -100,11 +103,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         ExpectedSalary updatedExpectedSalary = editPersonDescriptor.getExpectedSalary()
                 .orElse(personToEdit.getExpectedSalary());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedExpectedSalary, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedRole, updatedExpectedSalary, updatedTags);
     }
 
     @Override
@@ -134,6 +139,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Role role;
         private ExpectedSalary expectedSalary;
         private Set<Tag> tags;
 
@@ -148,6 +154,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRole(toCopy.role);
             setExpectedSalary(toCopy.expectedSalary);
             setTags(toCopy.tags);
         }
@@ -156,7 +163,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, expectedSalary, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, expectedSalary, tags);
         }
 
         public void setName(Name name) {
@@ -189,6 +196,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setRole(Role role) {
+            this.role = role;
+        }
+
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
         }
 
         public void setExpectedSalary(ExpectedSalary expectedSalary) {
@@ -235,6 +250,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getRole().equals(e.getRole())
                     && getExpectedSalary().equals(e.getExpectedSalary())
                     && getTags().equals(e.getTags());
         }

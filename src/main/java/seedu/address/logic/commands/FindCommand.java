@@ -32,6 +32,8 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        // Accumulate the predicates via stream
         Predicate<Person> combinedPredicate = predicates.stream().reduce(person -> true, Predicate::and);
         model.updateFilteredPersonList(combinedPredicate);
         return new CommandResult(
