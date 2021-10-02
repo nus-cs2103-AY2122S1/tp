@@ -41,7 +41,6 @@ public class AddCommandTest {
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
-
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
@@ -191,5 +190,4 @@ public class AddCommandTest {
             return new PlannerMd();
         }
     }
-
 }

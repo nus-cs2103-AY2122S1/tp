@@ -3,7 +3,11 @@ package seedu.plannermd.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.plannermd.logic.commands.CommandTestUtil.*;
+import static seedu.plannermd.logic.commands.CommandTestUtil.BIRTH_DATE_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalPersons.AMY;
 

@@ -6,7 +6,12 @@ import java.util.stream.Collectors;
 
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
-import seedu.plannermd.model.person.*;
+import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.Email;
+import seedu.plannermd.model.person.Name;
+import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 
 /**

@@ -1,7 +1,33 @@
 package seedu.plannermd.logic.parser;
 
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.plannermd.logic.commands.CommandTestUtil.*;
+import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.plannermd.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.plannermd.logic.commands.CommandTestUtil.BIRTH_DATE_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.BIRTH_DATE_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_BIRTH_DATE_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_BIRTH_DATE_DESC;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.plannermd.testutil.TypicalPersons.AMY;
@@ -10,7 +36,12 @@ import static seedu.plannermd.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.logic.commands.AddCommand;
-import seedu.plannermd.model.person.*;
+import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.Email;
+import seedu.plannermd.model.person.Name;
+import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.testutil.PersonBuilder;
 

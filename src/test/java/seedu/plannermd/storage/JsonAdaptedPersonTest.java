@@ -5,13 +5,7 @@ import static seedu.plannermd.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FO
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalPersons.BENSON;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoField;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -119,21 +113,17 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_BIRTH_DATE_1, VALID_TAGS);
         String expectedMessage = BirthDate.MESSAGE_CONSTRAINTS;
+
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-    @Test
-    public void toModelType_invalidBirthDate2_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
+        JsonAdaptedPerson person2 =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_BIRTH_DATE_2, VALID_TAGS);
-        String expectedMessage = BirthDate.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-    @Test
-    public void toModelType_invalidBirthDate3_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
+        String expectedMessage2 = BirthDate.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage2, person2::toModelType);
+
+        JsonAdaptedPerson person3 =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_BIRTH_DATE_3, VALID_TAGS);
-        String expectedMessage = BirthDate.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        String expectedMessage3 = BirthDate.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage3, person3::toModelType);
     }
 
     @Test

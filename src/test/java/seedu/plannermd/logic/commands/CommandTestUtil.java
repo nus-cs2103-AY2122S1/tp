@@ -2,7 +2,12 @@ package seedu.plannermd.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.plannermd.logic.parser.CliSyntax.*;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;

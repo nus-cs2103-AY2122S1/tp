@@ -5,11 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.plannermd.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.plannermd.model.person.Address;
-import seedu.plannermd.model.person.Email;
-import seedu.plannermd.model.person.Name;
-import seedu.plannermd.model.person.Person;
-import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.*;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -76,7 +72,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code BirthDate} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withBirthDate(String birthDate) {
-        descriptor.setAddress(new Address(birthDate));
+        descriptor.setBirthDate(new BirthDate(birthDate));
         return this;
     }
 

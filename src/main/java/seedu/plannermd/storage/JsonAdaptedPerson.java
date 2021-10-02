@@ -1,5 +1,6 @@
 package seedu.plannermd.storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +11,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.plannermd.commons.exceptions.IllegalValueException;
-import seedu.plannermd.model.person.*;
+import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.Email;
+import seedu.plannermd.model.person.Name;
+import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -52,7 +58,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        birthDate = source.getBirthDate().value;
+        birthDate = source.getBirthDate().stringValue;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

@@ -1,5 +1,7 @@
 package seedu.plannermd.model.person;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -8,8 +10,6 @@ import java.time.temporal.ChronoField;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
-
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.util.AppUtil.checkArgument;
@@ -36,8 +36,8 @@ public class BirthDate {
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .toFormatter().withResolverStyle(ResolverStyle.SMART);
 
-    public final String value;
-
+    public final String stringValue;
+    public final LocalDate value;
     /**
      * Constructs a {@code BirthDate}.
      *
@@ -46,8 +46,18 @@ public class BirthDate {
     public BirthDate(String birthDate) {
         requireNonNull(birthDate);
         checkArgument(isValidBirthDate(birthDate), MESSAGE_CONSTRAINTS);
-        value = birthDate;
+        stringValue = birthDate;
+        value = LocalDate.from(LocalDateTime.parse(birthDate, formatter));
     }
+
+//    public BirthDate(LocalDate birthDate) {
+//        requireNonNull(birthDate);
+//        checkArgument(isValidBirthDate(birthDate), MESSAGE_CONSTRAINTS);
+//        value = birthDate;
+//        DateFormat fmt = new SimpleDateFormat("sMM/dd/yyyy");
+//        stringValue = birthDate.format(fmt);
+//    }
+
 
     /**
      * Returns if a given string is a valid birth date.
@@ -59,16 +69,23 @@ public class BirthDate {
         }
         try {
             LocalDateTime.parse(test, formatter);
-            System.out.println(LocalDate.from(LocalDateTime.parse(test, formatter)));
+            LocalDate inputDate = LocalDate.from(LocalDateTime.parse(test, formatter));
+            if (inputDate.isAfter(LocalDate.now())) {
+                return false;
+            }
             return true;
         } catch (DateTimeParseException e) {
             return false;
         }
     }
 
+//    public static boolean isValidBirthDate(LocalDate date) {
+//        return date.isAfter(LocalDate.now());
+//    }
+
     @Override
     public String toString() {
-        return value.toString();
+        return stringValue;
     }
 
     @Override
@@ -84,9 +101,7 @@ public class BirthDate {
     }
 
     public int calculateAge() {
-        System.out.println(Math.abs(Period.between(LocalDate.now(), LocalDate.parse(value, formatter)).getMonths()));
-        System.out.println(Math.abs(Period.between(LocalDate.now(), LocalDate.parse(value, formatter)).getDays()));
-        return Math.abs(Period.between(LocalDate.now(), LocalDate.parse(value, formatter)).getYears());
+        return Math.abs(Period.between(LocalDate.now(), value).getYears());
     }
 
 }

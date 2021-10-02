@@ -20,32 +20,31 @@ public class BirthDateTest {
     }
 
     @Test
-    public void isValidBirthDate() {
-        // null address
-        assertThrows(NullPointerException.class, () -> BirthDate.isValidBirthDate(null));
-
-//         invalid addresses
+    public void isValidBirthDate_validBirthDate_success() {
+        assertTrue(BirthDate.isValidBirthDate("12/2/2021")); // one character
+        assertTrue(BirthDate.isValidBirthDate("28/03/2021"));
+    }
+    @Test
+    public void isValidBirthDate_invalidBirthDate_success() {
         assertFalse(BirthDate.isValidBirthDate("")); // empty string
         assertFalse(BirthDate.isValidBirthDate("2021-02-02")); // in YYYY-MM-DD format
         assertFalse(BirthDate.isValidBirthDate("12/31/2021")); // in MM/DD/YYYY format
+        assertFalse(BirthDate.isValidBirthDate("28/03/2022")); // birth date can't be in the future
+        assertFalse(BirthDate.isValidBirthDate("28/03/2022 2222"));
 
-//         valid addresses
-        assertTrue(BirthDate.isValidBirthDate("2/02/2222"));
-        assertTrue(BirthDate.isValidBirthDate("12/02/2021")); // one character
-        assertTrue(BirthDate.isValidBirthDate("28/03/2021")); //
     }
 
     @Test
-    public void calculate_age_success1() {
+    public void isValidBirthDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> BirthDate.isValidBirthDate(null));
+    }
+
+    @Test
+    public void calculateAge_validAge_returnsCorrectAge() {
         BirthDate bd = new BirthDate("20/07/1999");
-        System.out.println(bd.calculateAge());
         assertTrue(bd.calculateAge() == 22);
-    }
 
-    @Test
-    public void calculate_age_success2() {
-        BirthDate bd = new BirthDate("30/9/1999");
-        System.out.println(bd.calculateAge());
+        bd = new BirthDate("30/9/1999");
         assertTrue(bd.calculateAge() == 22);
     }
 }
