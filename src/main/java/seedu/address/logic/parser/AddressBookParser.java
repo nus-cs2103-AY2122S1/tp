@@ -9,10 +9,8 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-
 import seedu.address.logic.commands.SwitchTabContactsCommand;
 import seedu.address.logic.commands.SwitchTabTasksCommand;
-
 import seedu.address.logic.commands.personcommand.AddPersonCommand;
 import seedu.address.logic.commands.personcommand.ClearPeopleCommand;
 import seedu.address.logic.commands.personcommand.DeletePersonCommand;
