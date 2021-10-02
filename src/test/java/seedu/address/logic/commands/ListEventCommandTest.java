@@ -22,7 +22,7 @@ public class ListEventCommandTest {
     private Model expectedModel;
 
     @BeforeEach
-    public void setUo() {
+    public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
