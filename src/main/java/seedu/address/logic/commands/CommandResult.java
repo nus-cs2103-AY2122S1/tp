@@ -17,13 +17,20 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private final boolean showContacts;
+
+    private final boolean showTasks;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showContacts,
+                         boolean showTasks) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showContacts = showContacts;
+        this.showTasks = showTasks;
     }
 
     /**
@@ -31,7 +38,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -40,6 +47,14 @@ public class CommandResult {
 
     public boolean isShowHelp() {
         return showHelp;
+    }
+
+    public boolean isSwitchContactsTab() {
+        return showContacts;
+    }
+
+    public boolean isSwitchTasksTab() {
+        return showTasks;
     }
 
     public boolean isExit() {
