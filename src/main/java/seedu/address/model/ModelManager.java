@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -116,11 +115,17 @@ public class ModelManager implements Model {
 
     //=========== Task Management ==================================================================================
 
+    /**
+     * adding a task to tasklist.
+     */
     public void addTask(Task toAdd) {
         addressBook.addTask(toAdd);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
+    /**
+     * deleting a task from tasklist.
+     */
     public void deleteTask(Task toDelete) {
         addressBook.deleteTask(toDelete);
 

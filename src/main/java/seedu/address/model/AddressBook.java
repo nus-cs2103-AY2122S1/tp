@@ -3,13 +3,13 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.task.Task;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList;
+
 
 /**
  * Wraps all data at the address-book level
@@ -111,7 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// task-level operations
 
-    public void addTask(Task toAdd){
+    public void addTask(Task toAdd) {
         tasks.add(toAdd);
     }
 
