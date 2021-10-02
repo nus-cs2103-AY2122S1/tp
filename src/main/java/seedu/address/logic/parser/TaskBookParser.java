@@ -11,22 +11,14 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SwitchTabContactsCommand;
 import seedu.address.logic.commands.SwitchTabTasksCommand;
-import seedu.address.logic.commands.personcommand.AddPersonCommand;
-import seedu.address.logic.commands.personcommand.ClearPeopleCommand;
-import seedu.address.logic.commands.personcommand.DeletePersonCommand;
-import seedu.address.logic.commands.personcommand.EditPersonCommand;
-import seedu.address.logic.commands.personcommand.FindPersonCommand;
-import seedu.address.logic.commands.personcommand.ListPeopleCommand;
+import seedu.address.logic.commands.taskcommand.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.personcommand.AddPersonCommandParser;
-import seedu.address.logic.parser.personcommand.DeletePersonCommandParser;
-import seedu.address.logic.parser.personcommand.EditPersonCommandParser;
-import seedu.address.logic.parser.personcommand.FindPersonCommandParser;
+import seedu.address.logic.parser.taskcommand.AddTaskCommandParser;
 
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class TaskBookParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -50,23 +42,8 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddPersonCommand.COMMAND_WORD:
-            return new AddPersonCommandParser().parse(arguments);
-
-        case EditPersonCommand.COMMAND_WORD:
-            return new EditPersonCommandParser().parse(arguments);
-
-        case DeletePersonCommand.COMMAND_WORD:
-            return new DeletePersonCommandParser().parse(arguments);
-
-        case ClearPeopleCommand.COMMAND_WORD:
-            return new ClearPeopleCommand();
-
-        case FindPersonCommand.COMMAND_WORD:
-            return new FindPersonCommandParser().parse(arguments);
-
-        case ListPeopleCommand.COMMAND_WORD:
-            return new ListPeopleCommand();
+        case AddTaskCommand.COMMAND_WORD:
+            return new AddTaskCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -75,10 +52,10 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
-            return new SwitchTabContactsCommand(0);
+            return new SwitchTabContactsCommand(1);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
-            return new SwitchTabTasksCommand(0);
+            return new SwitchTabTasksCommand(1);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
