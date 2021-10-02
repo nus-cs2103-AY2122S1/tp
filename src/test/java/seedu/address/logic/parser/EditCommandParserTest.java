@@ -168,7 +168,7 @@ public class EditCommandParserTest {
 
         // employment type
         userInput = targetIndex.getOneBased() + EMPLOYMENT_TYPE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_EMAIL_BOB).build();
+        descriptor = new EditPersonDescriptorBuilder().withEmploymentType(VALID_EMPLOYMENT_TYPE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

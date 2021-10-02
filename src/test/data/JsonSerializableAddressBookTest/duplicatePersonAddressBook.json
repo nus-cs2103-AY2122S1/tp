@@ -4,13 +4,13 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "employment type": "Full time",
+    "employmentType": "Full time",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "employment type": "Part time",
+    "employmentType": "Part time",
     "address": "4th street"
   } ]
 }
