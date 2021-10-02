@@ -173,7 +173,7 @@ Deletes a specified folder
 
 Format `rmdir FOLDER_NAME`
 
-* Creates a folder with the name `FOLDER_NAME`.
+* Deletes folder with the name `FOLDER_NAME`.
 
 Examples:
 
