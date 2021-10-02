@@ -37,14 +37,6 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_visit() throws Exception {
-        final Visit visit = new Visit("2020-11-11");
-        VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_VISIT + visit.value);
-        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, new Visit("11 Nov 2020")), command);
-    }
-
-    @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));

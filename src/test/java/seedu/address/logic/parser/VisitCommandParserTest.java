@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,9 +19,9 @@ public class VisitCommandParserTest {
 
     @Test
     public void parse_indexSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_VISIT + testVisit;
-        VisitCommand expectedCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit("11 Nov 2020"));
+        VisitCommand expectedCommand = new VisitCommand(targetIndex, new Visit("11 Nov 2020"));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
