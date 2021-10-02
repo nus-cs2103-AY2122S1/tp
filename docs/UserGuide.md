@@ -30,6 +30,8 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to RecruitIn.
 
+   * **`find`**`n/John Mary` : Finds all applicants with either `John` or `Mary` as values for name prefix.
+
    * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
 
    * **`exit`** : Exits the app.
@@ -77,16 +79,32 @@ Format: `help`
 
 Adds an applicant to RecruitIn.
 
-Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
+Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE et/EMPLOYMENT_TYPE [t/TAG]​`
 
 Examples:
-* `add n/Bob p/87654321 e/bob@gmail.com s/Software_Engineering`
+* `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering s/4000 l/High School y/2 et/Full time`
 
 ### Listing all applicants : `list`
 
 Shows a list of all applicants in RecruitIn.
 
 Format: `list`
+
+### Finding an applicant : `find`
+
+Finds applicants by specific prefixes.
+
+Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [et/EMPLOYMENT_TYPE] [t/TAG]`
+
+* Find command must take at least 1 prefix input.
+* Find command can only take 1 input for each prefix.
+* Input for each prefix can contain multiple search terms separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
+
+Examples:
+* `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
+* `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
+* `find n/John Mary t/friend colleague`
+* `find n/Bob p/87654321 e/bob@gmail.com  a/Chinatown r/Software Engineering s/4000 l/High School y/2 et/Full time`
 
 ### Deleting an applicant : `delete`
 
@@ -150,7 +168,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL s/PREFERRED_SECTOR [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com s/Software Engineering t/junior dev`
+**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE et/EMPLOYMENT_TYPE [t/TAG]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering s/4000 l/High School y/2 et/Full time t/friend`
 **List** | `list`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [et/EMPLOYMENT_TYPE] [t/TAG]`<br> e.g., `find n/John Mary`
 **Help** | `help`
