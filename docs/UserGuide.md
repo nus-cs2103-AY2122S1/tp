@@ -214,5 +214,4 @@ Action | Format, Examples
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
 **Tag** | <code> tag n/task_name (d/date) tg/level </i> </code> <br>e.g.  `tag n/quiz d/2021-10-10 tg/Important`
 **Help** | `help`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Clear** | `clear`
