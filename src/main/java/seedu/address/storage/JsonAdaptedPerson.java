@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String role;
+    private final String expectedSalary;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -38,13 +40,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("role") String role,
+            @JsonProperty("role") String role, @JsonProperty("expectedSalary") String expectedSalary,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
+        this.expectedSalary = expectedSalary;
+
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -59,6 +63,8 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         role = source.getRole().role;
+        expectedSalary = source.getExpectedSalary().value;
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,8 +121,18 @@ class JsonAdaptedPerson {
         }
         final Role modelRole = new Role(role);
 
+        if (expectedSalary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ExpectedSalary.class.getSimpleName()));
+        }
+        if (!ExpectedSalary.isValidExpectedSalary(expectedSalary)) {
+            throw new IllegalValueException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+        }
+        final ExpectedSalary modelExpectedSalary = new ExpectedSalary(expectedSalary);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelExpectedSalary, modelTags);
     }
 
 }

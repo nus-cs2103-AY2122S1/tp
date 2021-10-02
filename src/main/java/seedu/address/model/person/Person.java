@@ -25,18 +25,22 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final ExpectedSalary expectedSalary;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, role, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, ExpectedSalary expectedSalary, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, expectedSalary, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
+        this.expectedSalary = expectedSalary;
         this.tags.addAll(tags);
     }
 
@@ -58,6 +62,10 @@ public class Person {
 
     public Role getRole() {
         return role;
+    }
+
+    public ExpectedSalary getExpectedSalary() {
+        return expectedSalary;
     }
 
     /**
@@ -101,13 +109,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRole().equals(getRole())
+                && otherPerson.getExpectedSalary().equals(getExpectedSalary())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, tags);
+        return Objects.hash(name, phone, email, address, role, expectedSalary, tags);
     }
 
     @Override
@@ -121,7 +130,9 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Applied Role: ")
-                .append(getRole());
+                .append(getRole())
+                .append("; Expected Salary: ")
+                .append(getExpectedSalary());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
