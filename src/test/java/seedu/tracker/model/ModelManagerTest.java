@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.model.Model.PREDICATE_SHOW_ALL_MODULES;
 import static seedu.tracker.testutil.Assert.assertThrows;
-import static seedu.tracker.testutil.TypicalModules.CS2103T;
 import static seedu.tracker.testutil.TypicalModules.CS2101;
+import static seedu.tracker.testutil.TypicalModules.CS2103T;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
