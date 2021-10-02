@@ -19,8 +19,8 @@ public class Note {
         VERY_HIGH, HIGH, MEDIUM, LOW, VERY_LOW
     }
 
-    private final String content;
-    private final Importance importance;
+    public final String content;
+    public final Importance importance;
 
     /**
      * Constructor for note.

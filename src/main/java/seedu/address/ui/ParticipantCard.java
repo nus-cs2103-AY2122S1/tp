@@ -40,6 +40,14 @@ public class ParticipantCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label participantId;
+    @FXML
+    private Label birthDate;
+    @FXML
+    private FlowPane notes;
+    @FXML
+    private FlowPane nextOfKins;
 
     /**
      * Creates a {@code ParticipantCode} with the given {@code Participant} and index to display.
@@ -55,6 +63,15 @@ public class ParticipantCard extends UiPart<Region> {
         participant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                
+        participantId.setText(participant.getParticipantId().toString());
+        birthDate.setText(participant.getBirthDate().toString());
+        participant.getNotes().stream()
+                .sorted(Comparator.comparing(Object::toString))
+                .forEach(note -> notes.getChildren().add(new Label(note.toString())));
+        participant.getNextOfKins().stream()
+                .sorted(Comparator.comparing(nok -> nok.getName().fullName))
+                .forEach(nok -> nextOfKins.getChildren().add(new Label(nok.toString())));
     }
 
     @Override
