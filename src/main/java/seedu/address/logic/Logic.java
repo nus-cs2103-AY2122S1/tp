@@ -7,8 +7,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyModuleTracker;
-import seedu.address.model.person.Module;
+import seedu.address.model.module.Module;
 
 /**
  * API of the Logic component
@@ -26,17 +27,17 @@ public interface Logic {
     /**
      * Returns the ModuleTracker.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see Model#getModuleTracker()
      */
-    ReadOnlyModuleTracker getAddressBook();
+    ReadOnlyModuleTracker getModuleTracker();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Module> getFilteredPersonList();
+    ObservableList<Module> getFilteredModuleList();
 
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getModTrackerFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
