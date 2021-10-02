@@ -56,7 +56,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/irvinghe000.png" width="200px">
 
 [[github](http://github.com/IrvingHe000)]
-[[portfolio](team/outong.md)]
+[[portfolio](team/irvinghe000.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Integration, Tool expert
