@@ -1,10 +1,12 @@
 package seedu.address.model.folder;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_NAME_CCA;
+import static seedu.address.testutil.TypicalPersons.CCA;
+import static seedu.address.testutil.TypicalPersons.CS2103;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalPersons.*;
+import org.junit.jupiter.api.Test;
 
 class FolderTest {
 
@@ -21,13 +23,13 @@ class FolderTest {
         assertTrue(CCA.isSameFolder(ccaDuplicate));
 
         // name differs in case, all other attributes same -> returns false
-        Folder editedCCA = new Folder(new FolderName(VALID_FOLDER_NAME_CCA.toLowerCase()));
-        assertFalse(CCA.isSameFolder(editedCCA));
+        Folder editedCca = new Folder(new FolderName(VALID_FOLDER_NAME_CCA.toLowerCase()));
+        assertFalse(CCA.isSameFolder(editedCca));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_FOLDER_NAME_CCA + " ";
-        editedCCA = new Folder(new FolderName(nameWithTrailingSpaces));
-        assertFalse(CCA.isSameFolder(editedCCA));
+        editedCca = new Folder(new FolderName(nameWithTrailingSpaces));
+        assertFalse(CCA.isSameFolder(editedCca));
     }
 
     @Test
@@ -49,7 +51,7 @@ class FolderTest {
         assertFalse(CCA.equals(CS2103));
 
         // different name -> returns false
-        Folder editedCCA = new Folder(new FolderName("ABC"));
-        assertFalse(CCA.equals(editedCCA));
+        Folder editedCca = new Folder(new FolderName("ABC"));
+        assertFalse(CCA.equals(editedCca));
     }
 }

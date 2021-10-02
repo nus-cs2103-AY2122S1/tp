@@ -1,11 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_NAME_CCA;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.CreateFolderCommand;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_NAME_CCA;
 
 class CreateFolderCommandParserTest {
 

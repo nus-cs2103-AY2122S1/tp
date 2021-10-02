@@ -1,19 +1,22 @@
 package seedu.address.model.folder;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.folder.exceptions.DuplicateFolderException;
-import seedu.address.model.folder.exceptions.FolderNotFoundException;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.CCA;
 import static seedu.address.testutil.TypicalPersons.CS2103;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.folder.exceptions.DuplicateFolderException;
+import seedu.address.model.folder.exceptions.FolderNotFoundException;
+
+
 
 class UniqueFolderListTest {
     private final UniqueFolderList uniqueFolderList = new UniqueFolderList();
@@ -157,7 +160,8 @@ class UniqueFolderListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueFolderList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniqueFolderList
+                .asUnmodifiableObservableList()
+                .remove(0));
     }
 }
