@@ -23,6 +23,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private Attendance attendance;
 
     /**
      * Every field must be present and not null.
@@ -34,6 +35,11 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.attendance = new Attendance(10); // for now we just assume its 10.
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
     }
 
     public Name getName() {
@@ -50,6 +56,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
     }
 
     /**
@@ -92,13 +102,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getAttendance().equals(getAttendance());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, attendance);
     }
 
     @Override
@@ -110,7 +121,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Attendance: ")
+                .append(getAttendance());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

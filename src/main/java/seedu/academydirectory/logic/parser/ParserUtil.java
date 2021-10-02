@@ -22,6 +22,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status is not 0 or 1.";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -33,6 +35,18 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneOrZero} into an {@code boolean} and returns it.
+     * @throws ParseException if the specified input is invalid (not one or zero).
+     */
+    public static boolean parseOneOrZero(String oneOrZero) throws ParseException {
+        String trimmedIndex = oneOrZero.trim();
+        if (!trimmedIndex.equals("0") && !trimmedIndex.equals("1")) {
+            throw new ParseException(MESSAGE_INVALID_ATTENDANCE_STATUS);
+        }
+        return trimmedIndex.equals("1");
     }
 
     /**
