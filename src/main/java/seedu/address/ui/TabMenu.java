@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
@@ -23,7 +24,13 @@ public class TabMenu extends UiPart<Region> {
     private Tab tab1;
 
     @FXML
+    private Label tab1Name = new Label("Contacts");
+
+    @FXML
     private Tab tab2;
+
+    @FXML
+    private Label tab2Name = new Label("Tasks");
 
     @FXML
     private GridPane contactsContainerBox;
@@ -69,7 +76,6 @@ public class TabMenu extends UiPart<Region> {
     public int getCurrentTabNumber() {
         return currentTabNumber;
     }
-
 
 
     @Override

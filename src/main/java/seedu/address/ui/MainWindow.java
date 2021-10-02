@@ -120,31 +120,20 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
         tabMenu = new TabMenu();
         tabMenuPlaceholder.getChildren().add(tabMenu.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         tabMenu.getGridPane().add(personListPanel.getRoot(), 0, 0);
 
-        tabMenu.getTabMenu().getSelectionModel().selectedItemProperty()
-                .addListener(new ChangeListener<Tab>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Tab> old,
-                                        Tab oldTab, Tab newTab) {
-                        int index = tabMenu.getTabMenu().getSelectionModel().getSelectedIndex();
-                        logic.setTabNumber(index);
-                    }
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-                });
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
     }
 

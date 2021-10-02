@@ -6,18 +6,22 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SwitchTabContactsCommand;
 import seedu.address.logic.commands.SwitchTabTasksCommand;
+import seedu.address.logic.commands.personcommand.AddPersonCommand;
+import seedu.address.logic.commands.personcommand.ClearPeopleCommand;
+import seedu.address.logic.commands.personcommand.DeletePersonCommand;
+import seedu.address.logic.commands.personcommand.EditPersonCommand;
+import seedu.address.logic.commands.personcommand.FindPersonCommand;
+import seedu.address.logic.commands.personcommand.ListPeopleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.personcommand.AddPersonCommandParser;
+import seedu.address.logic.parser.personcommand.DeletePersonCommandParser;
+import seedu.address.logic.parser.personcommand.EditPersonCommandParser;
+import seedu.address.logic.parser.personcommand.FindPersonCommandParser;
 
 /**
  * Parses user input.
@@ -46,23 +50,23 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddPersonCommand.COMMAND_WORD:
+            return new AddPersonCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditPersonCommand.COMMAND_WORD:
+            return new EditPersonCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeletePersonCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearPeopleCommand.COMMAND_WORD:
+            return new ClearPeopleCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindPersonCommand.COMMAND_WORD:
+            return new FindPersonCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListPeopleCommand.COMMAND_WORD:
+            return new ListPeopleCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
