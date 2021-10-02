@@ -24,7 +24,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final TaskList tasks;
     private final FilteredList<Task> filteredTasks;
 
     /**
@@ -34,13 +33,10 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.tasks = new TaskList();
-        filteredTasks = new FilteredList<>(this.tasks.asUnmodifiableObservableList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -121,11 +117,13 @@ public class ModelManager implements Model {
     //=========== Task Management ==================================================================================
 
     public void addTask(Task toAdd) {
-        tasks.add(toAdd);
+        addressBook.addTask(toAdd);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
     public void deleteTask(Task toDelete) {
-        tasks.remove(toDelete);
+        addressBook.deleteTask(toDelete);
+
     }
 
     @Override
@@ -140,7 +138,7 @@ public class ModelManager implements Model {
     }
 
     public void markDone(Task task) {
-        tasks.markDone(task);
+        addressBook.markDone(task);
     }
 
     //=========== Filtered Person List Accessors =============================================================

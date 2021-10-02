@@ -1,11 +1,15 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 /**
@@ -46,6 +50,13 @@ public class TaskList implements Iterable<Task> {
         }
         int index = internalList.indexOf(toMark);
         internalList.get(index).setIsDone(true);
+    }
+
+
+    public void setTasks(List<Task> tasks) {
+        requireAllNonNull(tasks);
+
+        internalList.setAll(tasks);
     }
 
     public ObservableList<Task> asUnmodifiableObservableList() {
