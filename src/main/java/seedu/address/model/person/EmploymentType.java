@@ -41,7 +41,7 @@ public class EmploymentType {
      */
     public static boolean isValidEmploymentType(String test) {
         return test.equals(Type.FULL_TIME.term) || test.equals(Type.PART_TIME.term)
-                || test.equals(Type.TEMPORARY.term) || test.equals(Type.INTERNSHIP.term) ;
+                || test.equals(Type.TEMPORARY.term) || test.equals(Type.INTERNSHIP.term);
     }
 
     @Override
