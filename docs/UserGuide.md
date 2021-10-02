@@ -25,11 +25,11 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
+    
     * **`list`** : Lists all applicants.
-
+    
     * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to RecruitIn.
-
+   
     * **`find`**`n/John Mary` : Finds all applicants with either `John` or `Mary` as values for name prefix.
 
     * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
@@ -131,8 +131,7 @@ Format: `exit`
 ### Saving the data
 
 RecruitIn data is saved to the hard disk whenever there is a command that edits, updates or adds data.
-There is no need to save data manually with a command. Data also automatically loads when the
-application runs.
+There is no need to save data manually with a command. Data also automatically loads when the application runs.
 
 
 ### Editing the data file
@@ -147,7 +146,11 @@ Example of format of data for one applicant in applicants:
  "name" : "Alice Yeoh",
  "phone" : "87438807",
  "email" : "alexyeoh@example.com",
- "preferred sector" : "Software Engineering",
+ "role" : "Software Engineering",
+ "expectedSalary" : "3600",
+ "education" : "High School",
+ "experience" : "2",
+ "employmentType" : "Full time",       
  "tagged" : [ ]
 }]
 ```
