@@ -291,15 +291,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
 
 
 **Use case: UC01 - Asking for help**
 
 **MSS**
 
-1.  User requests for help to use AddressBook.
-2.  AddressBook informs user on how to access user guide.
+1.  User requests for help to use RecruitIn.
+2.  RecruitIn informs user on how to access user guide.
 
     Use case ends.
 
@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all applicants.
-2.  AddressBook shows a list of all applicants.
+2.  RecruitIn shows a list of all applicants.
 
     Use case ends.
 
@@ -323,14 +323,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add an applicant with provided information.
-2.  AddressBook adds the applicant to the storage.
+2.  RecruitIn adds the applicant to the storage.
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The input format is invalid.
-    * 1a1. AddressBook shows an error message.
+    * 1a1. RecruitIn shows an error message.
       
       Use case resumes at step 1. 
 
@@ -339,9 +339,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list applicants (UC01)</u>.
-2.  AddressBook displays a list of applicants.
+2.  RecruitIn displays a list of applicants.
 3.  User requests to delete a specific applicant in the displayed list.
-4.  AddressBook deletes the applicant.
+4.  RecruitIn deletes the applicant.
 
     Use case ends.
     
@@ -353,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
       

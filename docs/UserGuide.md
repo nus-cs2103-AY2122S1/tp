@@ -28,7 +28,7 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
    * **`list`** : Lists all applicants.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to RecruitIn.
 
    * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
 
@@ -75,7 +75,7 @@ Format: `help`
 
 ### Adding an applicant: `add`
 
-Adds an applicant to the address book.
+Adds an applicant to RecruitIn.
 
 Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS s/PREFERRED_SECTOR [t/TAG]​`
 
@@ -84,13 +84,13 @@ Examples:
 
 ### Listing all applicants : `list`
 
-Shows a list of all applicants in the address book.
+Shows a list of all applicants in RecruitIn.
 
 Format: `list`
 
 ### Deleting an applicant : `delete`
 
-Deletes a specific applicant by index from the address book.
+Deletes a specific applicant by index from the list in RecruitIn.
 
 Format: `delete INDEX`
 
@@ -101,7 +101,7 @@ Format: `delete INDEX`
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd applicant in the address book.
+* `list` followed by `delete 2` deletes the 2nd applicant listed in RecruitIn.
 * `find John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
 ### Exiting the program : `exit`
@@ -112,7 +112,7 @@ Format: `exit`
 
 ### Saving the data
 
-ReceruitIn data is saved to the hard disk whenever there is a command that edits, updates or adds data.
+RecruitIn data is saved to the hard disk whenever there is a command that edits, updates or adds data.
 There is no need to save data manually with a command. Data also automatically loads when the 
 application runs.
 
