@@ -22,13 +22,7 @@ public class TabMenu extends UiPart<Region> {
     private Tab tab1;
 
     @FXML
-    private Label tab1Name = new Label("Contacts");
-
-    @FXML
     private Tab tab2;
-
-    @FXML
-    private Label tab2Name = new Label("Tasks");
 
     @FXML
     private GridPane contactsContainerBox;
