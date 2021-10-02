@@ -142,11 +142,11 @@ Shows a list of all students in the students list.
 
 Format: `list`
 
-### Locating students by name: `find`
+### Locating students by name: `student -f`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find KEYWORD…​`
+Format: `student -f KEYWORD…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -156,8 +156,8 @@ Format: `find KEYWORD…​`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `student -f John` returns `john` and `John Doe`
+* `student -f alex david` returns `Alex Yeoh`, `David Li`<br>
 
 
 ### Grouping students  `[coming in v1.2]`
