@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.nextofkin.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
 
@@ -48,7 +50,7 @@ public class ParticipantCard extends UiPart<Region> {
     @FXML
     private FlowPane notes;
     @FXML
-    private FlowPane nextOfKins;
+    private Label nextOfKins;
 
     /**
      * Creates a {@code ParticipantCode} with the given {@code Participant} and index to display.
@@ -70,9 +72,8 @@ public class ParticipantCard extends UiPart<Region> {
         participant.getNotes().stream()
                 .sorted(Comparator.comparing(Object::toString))
                 .forEach(note -> notes.getChildren().add(noteLabel(note)));
-        participant.getNextOfKins().stream()
-                .sorted(Comparator.comparing(nok -> nok.getName().fullName))
-                .forEach(nok -> nextOfKins.getChildren().add(new Label(nok.toString())));
+        nextOfKins.setText(participant.getNextOfKins().stream().map(NextOfKin::toString).collect(Collectors.joining()));
+        
     }
 
     /**

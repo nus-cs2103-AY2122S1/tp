@@ -34,7 +34,7 @@
             <Label fx:id="participantId" styleClass="cell_small_label" text="\$participantId" />
             <Label fx:id="birthDate" styleClass="cell_small_label" text="\$birthDate" />
             <FlowPane fx:id="notes" />
-            <FlowPane fx:id="nextOfKins" />
+            <Label fx:id="nextOfKins" styleClass="cell_small_label" text="\$nextOfKins" />
         </VBox>
     </GridPane>
 </HBox>

@@ -48,6 +48,13 @@ public class NextOfKin {
     }
 
     /**
+     * Returns a String representation of the next of kin's tags.
+     */
+    public String getTagString() {
+        return tag.tagName;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -76,7 +83,7 @@ public class NextOfKin {
     @Override
     public String toString() {
 
-        return getName() + "; Phone: " + getPhone() + "; Relationship: " + getTag();
+        return getName() + "; Phone: " + getPhone() + "; Relationship: " + getTagString();
     }
 
 
