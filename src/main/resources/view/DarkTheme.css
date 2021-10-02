@@ -337,7 +337,7 @@
     -fx-background-radius: 0;
 }
 
-#tags {
+#tags, #notes {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
