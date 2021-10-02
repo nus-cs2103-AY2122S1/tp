@@ -19,5 +19,4 @@ class CreateFolderCommandParserTest {
                 " " + VALID_FOLDER_NAME_CCA,
                 expectedCreateFolderCommand);
     }
-
 }
