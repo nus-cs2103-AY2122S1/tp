@@ -50,6 +50,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        employmentType = personToCopy.getEmploymentType();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
