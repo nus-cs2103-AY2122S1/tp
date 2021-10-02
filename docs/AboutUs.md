@@ -51,10 +51,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Loo Wee Sing Caspian Michael
 
-<img src="images/Dr-Octavius.png" width="200px">
+<img src="images/dr_octavius.png" width="200px">
 
 [[github](http://github.com/johndoe)]
-[[portfolio](team/Dr-Octavius.md)]
+[[portfolio](team/dr_octavius.md)]
 
 * Role: Developer
-* Responsibilities: Show Feature + Algorithms
+* Responsibilities: Show Feature + Code Logic
