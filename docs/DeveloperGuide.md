@@ -285,21 +285,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
 | `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                           |
 | `* * *`  | user                                       | list all applicants            | keep track of all my applicants                                        |
-| `* * *`  | user                                       | delete an applicant            | so that I can remove applicants that are no longer being considered    |
+| `* * *`  | user                                       | find applicants by their applied roles | so I can filter out applicants applying for a specific role   |
+| `* * *`  | user                                       | find applicants by their expected salary | so I can filter out applicants that match the salary range of the hiring company.   |
+| `* * *`  | user                                       | Find applicants by highest level of education | So I can filter out applicants that match the desired highest level of education  |
+| `* * *`  | user                                       | Find applicants by years of experience  | So that I can filter out applicants with desired years of experience    |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RecruitIn` and the **Actor** is the `user`, unless specified otherwise)
 
 
 **Use case: UC01 - Asking for help**
 
 **MSS**
 
-1.  User requests for help to use AddressBook.
-2.  AddressBook informs user on how to access user guide.
+1.  User requests for help to use RecruitIn.
+2.  RecruitIn informs user on how to access user guide.
 
     Use case ends.
 
@@ -314,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all applicants.
-2.  AddressBook shows a list of all applicants.
+2.  RecruitIn shows a list of all applicants.
 
     Use case ends.
 
@@ -323,14 +327,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add an applicant with provided information.
-2.  AddressBook adds the applicant to the storage.
+2.  RecruitIn adds the applicant to the storage.
 
     Use case ends.
 
 **Extensions**
 
 * 1a. The input format is invalid.
-    * 1a1. AddressBook shows an error message.
+    * 1a1. RecruitIn shows an error message.
       
       Use case resumes at step 1. 
 
@@ -339,24 +343,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list applicants (UC01)</u>.
-2.  AddressBook displays a list of applicants.
+2.  RecruitIn displays a list of applicants.
 3.  User requests to delete a specific applicant in the displayed list.
-4.  AddressBook deletes the applicant.
+4.  RecruitIn deletes the applicant.
 
     Use case ends.
     
 **Extensions**
 
+* 1a. User requests to <u>find applicant (UC05)</u>
+
+  Use case resumes at step 2.
+
 * 2a. The list of applicants is empty.
 
   Use case ends.
     
-* 3a. The given index is invalid.
+* 3a. The delete command is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
-      
+
+**Use case: UC05 - Finding an applicant**
+
+**MSS**
+
+1.  User requests to find an applicant with the provided information.
+2.  RecruitIn displays the applicants that match the provided information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+    * 1a1. RecruitIn shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -369,7 +397,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Applicant**: Represents a person that is searching for a job
-* **Preferred Sector**: Indicates the industry sector that the applicant is applying for
 
 --------------------------------------------------------------------------------------------------------------------
 
