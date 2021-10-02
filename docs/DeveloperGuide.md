@@ -356,7 +356,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
-      
+
+**Use case: UC05 - Finding an applicant**
+
+**MSS**
+
+1.  User requests to find an applicant with the provided information.
+2.  RecruitIn displays the applicants that match the provided information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+    * 1a1. RecruitIn shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
