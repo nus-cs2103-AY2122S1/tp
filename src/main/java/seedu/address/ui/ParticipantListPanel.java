@@ -10,9 +10,12 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.participant.Participant;
 
+/**
+ * Panel containing the list of participants.
+ */
 public class ParticipantListPanel extends UiPart<Region> {
     private static final String FXML = "ParticipantListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(ParticipantListPanel.class);
 
     @FXML
     private ListView<Participant> participantListView;
@@ -23,11 +26,11 @@ public class ParticipantListPanel extends UiPart<Region> {
     public ParticipantListPanel(ObservableList<Participant> participantList) {
         super(FXML);
         participantListView.setItems(participantList);
-        participantListView.setCellFactory(listView -> new ParticipantListPanel.ParticipantListViewCell());
+        participantListView.setCellFactory(listView -> new ParticipantListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Participant} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Participant} using a {@code ParticipantCard}.
      */
     class ParticipantListViewCell extends ListCell<Participant> {
         @Override
@@ -38,7 +41,7 @@ public class ParticipantListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(participant, getIndex() + 1).getRoot());
+                setGraphic(new ParticipantCard(participant, getIndex() + 1).getRoot());
             }
         }
     }
