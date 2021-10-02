@@ -34,11 +34,7 @@
           </Menu>
         </MenuBar>
 
-        <VBox fx:id="tabMenuPlaceholder" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-        </VBox>
+        <StackPane fx:id="tabMenuPlaceholder" styleClass="pane-with-border"  VBox.vgrow="ALWAYS" />
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border-2">
           <padding>

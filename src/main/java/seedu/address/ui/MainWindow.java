@@ -9,7 +9,6 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -53,7 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private VBox tabMenuPlaceholder;
+    private StackPane tabMenuPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -119,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
         tabMenuPlaceholder.getChildren().add(tabMenu.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        tabMenu.getGridPane().add(personListPanel.getRoot(), 0, 0);
+        tabMenu.getGridPane().add(personListPanel.getRoot(), 0, 1);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
