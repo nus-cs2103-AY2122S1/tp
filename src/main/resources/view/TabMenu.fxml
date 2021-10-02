@@ -12,13 +12,13 @@
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <TabPane fx:id="tabMenu" VBox.vgrow="NEVER" tabClosingPolicy="UNAVAILABLE">
     <Tab fx:id="tab1" text="Contacts">
-      <GridPane fx:id="containerBox" styleClass="pane-with-border-2" minWidth="340" prefWidth="340" >
+      <GridPane fx:id="contactsContainerBox" styleClass="pane-with-border-2" minWidth="340" prefWidth="340" >
         <children>
 
         </children>
         <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" minWidth="75.0" percentWidth="75.0" prefWidth="75.0" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="25.0" percentWidth="25.0" prefWidth="25.0" />
+          <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" percentWidth="100.0" prefWidth="100.0" />
+
         </columnConstraints>
       </GridPane>
 

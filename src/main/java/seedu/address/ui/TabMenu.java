@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -24,13 +26,15 @@ public class TabMenu extends UiPart<Region> {
     private Tab tab2;
 
     @FXML
-    private GridPane containerBox;
+    private GridPane contactsContainerBox;
 
     @FXML
     private VBox leftBox;
 
     @FXML
     private VBox rightBox;
+
+    private int currentTabNumber = 0;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -39,9 +43,34 @@ public class TabMenu extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Returns the {@code containerBox} object.
+     *
+     * @return the containerBox object.
+     */
     public GridPane getGridPane() {
-        return containerBox;
+        return contactsContainerBox;
     }
+
+    /**
+     * Switches the current tab.
+     *
+     * @param i the index of the selected tab.
+     */
+    public void switchTab(int i) {
+        this.tabMenu.getSelectionModel().select(i);
+        currentTabNumber = i;
+    }
+
+    public TabPane getTabMenu() {
+        return tabMenu;
+    }
+
+    public int getCurrentTabNumber() {
+        return currentTabNumber;
+    }
+
+
 
     @Override
     public boolean equals(Object other) {

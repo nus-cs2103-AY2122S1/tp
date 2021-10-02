@@ -357,25 +357,22 @@
     -fx-font-size: 11;
 }
 
-.tab{
+.tab {
     -fx-background-insets: 0 1 0 1,0,0;
 }
-.tab-pane .tab
-{
+
+.tab-pane .tab {
     -fx-background-color: #FF6347;
 }
 
-.tab-pane .tab:selected
-{
+.tab-pane .tab:selected {
     -fx-background-color: #444444;
 }
 
 .tab .tab-label {
-    -fx-alignment: LEFT;
     -fx-text-fill: #FFFFFF;
 }
 
 .tab:selected .tab-label {
-    -fx-alignment: LEFT;
     -fx-text-fill: #FF6347;
 }

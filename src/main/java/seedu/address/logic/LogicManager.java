@@ -27,6 +27,9 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    //TODO add TaskBookParser
+
+    private int tabNumber = 0;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -35,6 +38,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        //TODO add TaskBookParser initialiser
     }
 
     @Override
@@ -42,7 +46,15 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command;
+        switch (tabNumber) {
+        case (0): command = addressBookParser.parseCommand(commandText);
+            break;
+        case (1): command = addressBookParser.parseCommand(commandText); //TODO add for taskBookParser
+            break;
+        default: command = addressBookParser.parseCommand(commandText);
+        }
+
         commandResult = command.execute(model);
 
         try {
@@ -77,5 +89,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void setTabNumber(int i) {
+        tabNumber = i;
     }
 }

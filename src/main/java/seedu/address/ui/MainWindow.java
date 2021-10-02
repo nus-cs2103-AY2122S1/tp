@@ -2,9 +2,14 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -129,6 +134,18 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         tabMenu.getGridPane().add(personListPanel.getRoot(), 0, 0);
+
+        tabMenu.getTabMenu().getSelectionModel().selectedItemProperty()
+                .addListener(new ChangeListener<Tab>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Tab> old,
+                                        Tab oldTab, Tab newTab) {
+                        int index = tabMenu.getTabMenu().getSelectionModel().getSelectedIndex();
+                        logic.setTabNumber(index);
+                    }
+
+                });
+
     }
 
     /**
@@ -153,6 +170,22 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Switches to Contacts Tab
+     */
+    public void handleSwitchContactsTab() {
+        tabMenu.switchTab(0);
+        logic.setTabNumber(0);
+    }
+
+    /**
+     * Switches to Tasks Tab
+     */
+    public void handleSwitchTasksTab() {
+        tabMenu.switchTab(1);
+        logic.setTabNumber(1);
     }
 
     void show() {
@@ -188,6 +221,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isSwitchContactsTab()) {
+                handleSwitchContactsTab();
+            }
+
+            if (commandResult.isSwitchTasksTab()) {
+                handleSwitchTasksTab();
             }
 
             if (commandResult.isExit()) {
