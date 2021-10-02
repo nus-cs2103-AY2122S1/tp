@@ -66,14 +66,14 @@ public class ParticipantCard extends UiPart<Region> {
         participant.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-                
+
         participantId.setText(participant.getParticipantId().toString());
         birthDate.setText(participant.getBirthDate().toString());
         participant.getNotes().stream()
                 .sorted(Comparator.comparing(Object::toString))
                 .forEach(note -> notes.getChildren().add(noteLabel(note)));
         nextOfKins.setText(participant.getNextOfKins().stream().map(NextOfKin::toString).collect(Collectors.joining()));
-        
+
     }
 
     /**
@@ -84,30 +84,31 @@ public class ParticipantCard extends UiPart<Region> {
     public Label noteLabel(Note note) {
         Label label = new Label();
         label.setText(note.content);
-        
+
         switch(note.importance) {
         case VERY_HIGH:
-            label.setStyle("-fx-background-color: #ff0000; -fx-text-fill: white; -fx-padding: 1 3 1 3; " +
-                    "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+            label.setStyle("-fx-background-color: #ff0000; -fx-text-fill: white; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
             break;
         case HIGH:
-            label.setStyle("-fx-background-color: #ffa600; -fx-text-fill: black; -fx-padding: 1 3 1 3; " +
-                    "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+            label.setStyle("-fx-background-color: #ffa600; -fx-text-fill: black; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
             break;
         case MEDIUM:
-            label.setStyle("-fx-background-color: #ffff00; -fx-text-fill: black; -fx-padding: 1 3 1 3; " +
-                    "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+            label.setStyle("-fx-background-color: #ffff00; -fx-text-fill: black; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
             break;
         case LOW:
-            label.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black; -fx-padding: 1 3 1 3; " +
-                    "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+            label.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
             break;
         case VERY_LOW:
-            label.setStyle("-fx-background-color: #0000ff; -fx-text-fill: white; -fx-padding: 1 3 1 3; " +
-                    "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
+            label.setStyle("-fx-background-color: #0000ff; -fx-text-fill: white; -fx-padding: 1 3 1 3; "
+                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
             break;
+        default:
         }
-        
+
         return label;
     }
 
