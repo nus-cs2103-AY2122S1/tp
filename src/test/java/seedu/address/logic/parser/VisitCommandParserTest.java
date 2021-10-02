@@ -17,14 +17,6 @@ public class VisitCommandParserTest {
     private final String testVisit = "2020-11-11";
 
     @Test
-    public void parse_indexSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_VISIT + testVisit;
-        VisitCommand expectedCommand = new VisitCommand(targetIndex, new Visit("11 Nov 2020"));
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, VisitCommand.MESSAGE_USAGE);
 
