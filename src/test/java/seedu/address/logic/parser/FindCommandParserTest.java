@@ -31,10 +31,10 @@ public class FindCommandParserTest {
         predicates.add(namePredicate);
 
         FindCommand expectedFindCommand = new FindCommand(predicates);
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, "n/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " n/\n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
 }

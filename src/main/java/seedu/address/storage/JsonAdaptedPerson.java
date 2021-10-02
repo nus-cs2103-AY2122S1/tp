@@ -113,6 +113,9 @@ class JsonAdaptedPerson {
         if (employmentType == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EmploymentType.class.getSimpleName()));
         }
+        if (!EmploymentType.isValidEmploymentType(employmentType)) {
+            throw new IllegalValueException(EmploymentType.MESSAGE_CONSTRAINTS);
+        }
         final EmploymentType modelEmploymentType = new EmploymentType(employmentType);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
