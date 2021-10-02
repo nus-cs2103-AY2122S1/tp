@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import seedu.address.model.group.Description;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
@@ -16,12 +18,13 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
+    public static final String DEFAULT_DESCRIPTION = "software eng mod";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private GroupName groupName;
+    private Group group;
     private Address address;
 
     /**
@@ -31,7 +34,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        groupName = new GroupName(DEFAULT_GROUP_NAME);
+        group = new Group(new GroupName(DEFAULT_GROUP_NAME), new Description(DEFAULT_DESCRIPTION));
         address = new Address(DEFAULT_ADDRESS);
     }
 
@@ -42,7 +45,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
-        groupName = studentToCopy.getGroupName();
+        group = studentToCopy.getGroup();
     }
 
     /**
@@ -80,13 +83,18 @@ public class StudentBuilder {
     /**
      * Sets the {@code GroupName} of the {@code Student} that we are building.
      */
-    public StudentBuilder withGroupName(String groupName) {
-        this.groupName = new GroupName(groupName);
+    public StudentBuilder withGroup(String groupName, String description) {
+        this.group = new Group(new GroupName(groupName), new Description(description));
         return this;
     }
 
+    /**
+     * Builds a student
+     * @return built student
+     */
     public Student build() {
-        return new Student(name, phone, email, groupName);
+        // TODO zhi hao
+        return new Student(name, phone, email, group);
     }
 
 }

@@ -25,12 +25,12 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, GroupName groupName, Description groupDescription) {
-        requireAllNonNull(name, phone, email, groupName);
+    public Student(Name name, Phone phone, Email email, Group group) {
+        requireAllNonNull(name, phone, email, group);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.group = new Group(groupName, groupDescription);
+        this.group = group;
     }
 
     public Name getName() {
@@ -45,6 +45,11 @@ public class Student {
         return email;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    // TODO zhi hao pls check if can remove thx :)
     public GroupName getGroupName() {
         return group.getGroupName();
     }

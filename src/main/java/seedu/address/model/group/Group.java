@@ -1,10 +1,13 @@
 package seedu.address.model.group;
 
-import seedu.address.model.person.Student;
-
-import java.util.*;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.student.Student;
 
 /**
  * Represents a Group in the CSBook.
@@ -87,7 +90,7 @@ public class Group {
 
 
         Set<Student> students = getStudents();
-        if(!students.isEmpty()) {
+        if (!students.isEmpty()) {
             builder.append("; Students: ");
             students.forEach(builder::append);
         }

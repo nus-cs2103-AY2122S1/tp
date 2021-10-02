@@ -95,7 +95,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
+        //invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + GROUP_NAME_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 

@@ -16,6 +16,9 @@ public class Description {
 
     public final String description;
 
+    /**
+     * Creates a Description with the given description.
+     */
     public Description(String description) {
         requireNonNull(description);
         checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
