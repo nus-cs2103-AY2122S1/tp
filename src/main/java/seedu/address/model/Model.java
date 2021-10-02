@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskList;
+
 
 /**
  * The API of the Model component.
@@ -75,6 +78,36 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Replaces task list data with the data in {@code taskList}.
+     */
+    void setTaskList(TaskList taskList);
+
+    /** Returns the TaskList */
+    TaskList getTaskList();
+
+    /**
+     * Returns true if a task with the same description as {@code task} exists in the task list.
+     */
+    boolean hasTask(Task task);
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the task list.
+     */
+    void deleteTask(Task target);
+
+    /**
+     * Adds the given task.
+     */
+    void addTask(Task task);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     */
+    void setTask(Task target, Task editedTask);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
