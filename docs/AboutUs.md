@@ -5,21 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
-
-[comment]: <> (### John Doe)
-
-[comment]: <> (<img src="images/johndoe.png" width="200px">)
-
-[comment]: <> ([[homepage]&#40;http://www.comp.nus.edu.sg/~damithch&#41;])
-
-[comment]: <> ([[github]&#40;https://github.com/johndoe&#41;])
-
-[comment]: <> ([[portfolio]&#40;team/johndoe.md&#41;])
-
-[comment]: <> (* Role: Project Advisor)
 
 ### Gabriel Au
 
@@ -56,7 +42,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/irvinghe000.png" width="200px">
 
 [[github](http://github.com/IrvingHe000)]
-[[portfolio](team/outong.md)]
+[[portfolio](team/irvinghe000.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Integration, Tool expert
