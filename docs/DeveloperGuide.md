@@ -4,6 +4,7 @@ title: Developer Guide
 ---
 ## Table of Contents
 - [**Acknowledgements**](#acknowledgements)
+- [**Introduction**](#introduction)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
     * [Architecture](#architecture)
@@ -35,6 +36,15 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Introduction**
+
+Managera is a desktop application for managing your event details and its corresponding participant credentials. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+
+* For the detailed documentation of this project, see the **[Managera Product Website](https://ay2122s1-cs2103t-t10-2.github.io/tp/UserGuide.html)**.
 
 --------------------------------------------------------------------------------------------------------------------
 
