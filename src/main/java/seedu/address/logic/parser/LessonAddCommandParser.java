@@ -24,7 +24,7 @@ import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
+import seedu.address.model.lesson.TimeRange;
 
 /**
  * Parses input arguments and creates a new LessonAddCommand object.
@@ -59,22 +59,21 @@ public class LessonAddCommandParser {
         Throws ParseException if either time is invalid
         or if range is invalid.
          */
-        ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_START_TIME).get(),
-            argMultimap.getValue(PREFIX_END_TIME).get());
+        String startTime = argMultimap.getValue(PREFIX_START_TIME).get();
+        String endTime = argMultimap.getValue(PREFIX_END_TIME).get();
+        TimeRange timeRange = ParserUtil.parseTimeRange(startTime, endTime);
 
-        Time startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-        Time endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
                 .orElse(new HashSet<>());
 
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            RecurringLesson lesson = new RecurringLesson(date, startTime, endTime, subject, homework);
+            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework);
             return new LessonAddCommand(index, lesson);
         }
 
-        MakeUpLesson lesson = new MakeUpLesson(date, startTime, endTime, subject, homework);
+        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework);
         return new LessonAddCommand(index, lesson);
     }
 

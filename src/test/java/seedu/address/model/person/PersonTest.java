@@ -2,9 +2,13 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FEE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -24,6 +28,21 @@ public class PersonTest {
     }
 
     @Test
+    public void hasContactField() {
+        // all contact fields present -> returns true
+        assertTrue(ALICE.hasContactField());
+
+        // some contact fields not present -> returns true
+        Person editedAlice = new PersonBuilder(ALICE).withPhone(EMPTY_FIELD).withEmail(EMPTY_FIELD).build();
+        assertTrue(editedAlice.hasContactField());
+
+        //all contact fields missing -> returns false
+        editedAlice = new PersonBuilder(ALICE).withPhone(EMPTY_FIELD).withEmail(EMPTY_FIELD)
+                .withParentPhone(EMPTY_FIELD).withParentEmail(EMPTY_FIELD).build();
+        assertFalse(editedAlice.hasContactField());
+    }
+
+    @Test
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
@@ -33,7 +52,8 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withParentPhone(VALID_PARENT_PHONE_BOB).withParentEmail(VALID_PARENT_EMAIL_BOB)
+                .withFee(VALID_FEE_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
