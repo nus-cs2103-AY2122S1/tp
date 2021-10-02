@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,14 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* is tech-savvy
-* is a manager of food-chain services
-* has a need to manage a significant number of staff
-* has a need to manage staff schedules
-* prefer desktop apps over other types
 * can type fast
+* is tech-savvy
 * prefers typing to mouse interactions
+* is a manager of food-chain services
+* prefer desktop apps over other types
+* has a need to manage staff schedules
 * is reasonably comfortable using CLI apps
+* has a need to manage a significant number of staff
 
 **Value proposition**: It can be complicated and tedious for managers of such food chain services to manually keep track of their staff information, schedules, working hours, and salaries. Staff’d provides a central management system of staff that allows for easy and intuitive tracking and handling of the aforementioned data.
 
@@ -275,21 +275,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                             |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | new user                                   | understand why my command fails| be guided towards using the App correctly                              |
 | `* * *`  | user                                       | add a new staff                |                                                                        |
-| `* * *`  | user with many new staff                   | add multiple staff             | add several new staff quickly                                          |
 | `* * *`  | user                                       | delete a staff                 | remove entries that I no longer need                                   |
-| `* * *`  | user with many retiring staff              | delete multiple staff          | remove multiple entries that I no longer need                          |
 | `* * *`  | user                                       | edit a staff's details         | update relevant information where necessary                            |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-| `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
 | `* * *`  | user                                       | add a staff's schedule         | keep track of their schedule and update the overall work schedule      |
 | `* * *`  | user                                       | delete a staff's schedule      | remove schedule and update the overall work schedule                   |
-| `* * *`  | user                                       | view a staff's schedule        | view an individual staff's schedule and the overall work schedule      |
 | `* * *`  | user                                       | edit a staff's schedule        | make changes to their schedule and update the overall work schedule    |
+| `* * *`  | user                                       | view a staff's schedule        | view an individual staff's schedule and the overall work schedule      |
+| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
+| `* * *`  | new user                                   | understand why my command fails| be guided towards using the App correctly                              |
+| `* * *`  | user with many new staff                   | add multiple staff             | add several new staff quickly                                          |
+| `* * *`  | user with many retiring staff              | delete multiple staff          | remove multiple entries that I no longer need                          |
+| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
+| `* *`    | user in charge of salary calculation       | use Staff'd to calculate the salaries  | Manage salary payments accurately and quickly                  |
+| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
 
 *{More to be added}*
 
@@ -372,7 +372,7 @@ Business rules:
 Quality requirements:
 
  1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
- 2. The system can be used for basic function without reading the user guide.
+ 1. The system can be used for basic function without reading the user guide.
 
 Project scope:
 
