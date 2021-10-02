@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -89,13 +88,34 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasFolder_nullFolder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasFolder(null));
+    }
+
+    @Test
+    public void hasFolder_folderNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasFolder(CCA));
+    }
+
+    @Test
+    public void hasFolder_folderInAddressBook_returnsTrue() {
+        modelManager.addFolder(CCA);
+        assertTrue(modelManager.hasFolder(CCA));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
     @Test
+    public void getFilteredFolderList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredFolderList().remove(0));
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).withFolder(CCA).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

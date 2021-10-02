@@ -1,19 +1,8 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -21,58 +10,69 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class CreateFolderCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullFolder_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CreateFolderCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_folderAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingFolderAdded modelStub = new ModelStubAcceptingFolderAdded();
+        Folder validFolder = new Folder(new FolderName("Folder 1"));
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new CreateFolderCommand(validFolder).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(CreateFolderCommand.MESSAGE_SUCCESS, validFolder), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validFolder), modelStub.foldersAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateFolder_throwsCommandException() {
+        Folder validFolder = new Folder(new FolderName("Folder 1"));
+        CreateFolderCommand createFolderCommand = new CreateFolderCommand(validFolder);
+        ModelStub modelStub = new ModelStubWithFolder(validFolder);
 
-        assertThrows(CommandException.class, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> createFolderCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Folder nus = new Folder(new FolderName("NUS"));
+        Folder cs = new Folder(new FolderName("CS"));
+        CreateFolderCommand addNusCommand = new CreateFolderCommand(nus);
+        CreateFolderCommand addCsCommand = new CreateFolderCommand(cs);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addNusCommand.equals(addNusCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        CreateFolderCommand addNusCommandDuplicate = new CreateFolderCommand(nus);
+        assertTrue(addNusCommand.equals(addNusCommandDuplicate));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addNusCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addNusCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different folder -> returns false
+        assertFalse(addNusCommand.equals(addCsCommand));
     }
 
     /**
@@ -171,39 +171,39 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single folder.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithFolder extends CreateFolderCommandTest.ModelStub {
+        private final Folder folder;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithFolder(Folder folder) {
+            requireNonNull(folder);
+            this.folder = folder;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasFolder(Folder folder) {
+            requireNonNull(folder);
+            return this.folder.isSameFolder(folder);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the folder being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingFolderAdded extends CreateFolderCommandTest.ModelStub {
+        final ArrayList<Folder> foldersAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasFolder(Folder folder) {
+            requireNonNull(folder);
+            return foldersAdded.stream().anyMatch(folder::isSameFolder);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addFolder(Folder folder) {
+            requireNonNull(folder);
+            foldersAdded.add(folder);
         }
 
         @Override
@@ -211,5 +211,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
