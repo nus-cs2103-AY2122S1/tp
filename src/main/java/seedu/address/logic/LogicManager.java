@@ -11,6 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.TaskBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -27,7 +28,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    //TODO add TaskBookParser
+    private final TaskBookParser taskBookParser;
 
     private int tabNumber = 0;
 
@@ -38,7 +39,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-        //TODO add TaskBookParser initialiser
+        taskBookParser = new TaskBookParser();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class LogicManager implements Logic {
         switch (tabNumber) {
         case (0): command = addressBookParser.parseCommand(commandText);
             break;
-        case (1): command = addressBookParser.parseCommand(commandText); //TODO add for taskBookParser
+        case (1): command = taskBookParser.parseCommand(commandText);
             break;
         default: command = addressBookParser.parseCommand(commandText);
         }
