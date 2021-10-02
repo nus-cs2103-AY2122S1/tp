@@ -9,6 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Code;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.Mc;
+import seedu.address.model.module.Title;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -36,63 +40,61 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String code} into a {@code Code}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code code} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static Code parseCode(String code) throws ParseException {
+        requireNonNull(code);
+        String trimmedCode = code.trim();
+        if (!Code.isValidCode(trimmedCode)) {
+            throw new ParseException(Code.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new Code(trimmedCode);
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String title} into a {@code Title}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code title} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (!Title.isValidTitle(trimmedTitle)) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Title(trimmedTitle);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String description} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code description} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Description(trimmedDescription);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
+     * Parses {@code mc} into an {@code Mc} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified mc is invalid (not non-zero unsigned integer).
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Mc parseMc(String mc) throws ParseException {
+        String trimmedMc = mc.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedMc)) {
+            throw new ParseException(Mc.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Mc(Integer.parseInt(trimmedMc));
     }
 
     /**

@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,9 +19,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Code;
+import seedu.address.model.module.Description;
+import seedu.address.model.module.Mc;
+import seedu.address.model.module.Title;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Module;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -37,14 +41,14 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_CODE + "CODE] "
+            + "[" + PREFIX_TITLE + "TITLE] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "[" + PREFIX_MC + "MC] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_DESCRIPTION + "Module  "
+            + PREFIX_MC + "2";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -68,7 +72,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Module> lastShownList = model.getFilteredPersonList();
+        List<Module> lastShownList = model.getFilteredModuleList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -77,12 +81,12 @@ public class EditCommand extends Command {
         Module personToEdit = lastShownList.get(index.getZeroBased());
         Module editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToEdit.isSameModule(editedPerson) && model.hasModule(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setModule(personToEdit, editedPerson);
+        model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
@@ -93,13 +97,20 @@ public class EditCommand extends Command {
     private static Module createEditedPerson(Module personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+//        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+//        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+//        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+//        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+
+        //create a dummy module to return for v1.2
+        Code updatedCode = new Code("MA1521");
+        Title updatedTitle = new Title("Calculus for Computing");
+        Description updatedDescription = new Description("Foundation for calculus and its related subjects required for computing students");
+        Mc updatedMc = new Mc(4);
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Module(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Module(updatedCode, updatedTitle, updatedDescription, updatedMc, updatedTags);
+//        return new Module(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override

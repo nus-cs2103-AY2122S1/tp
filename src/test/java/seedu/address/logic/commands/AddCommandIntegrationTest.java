@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Module;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.module.Module;
+import seedu.address.testutil.ModuleBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -27,19 +27,19 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Module validPerson = new PersonBuilder().build();
+        Module validModule = new ModuleBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        expectedModel.addModule(validModule);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddCommand(validModule), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, validModule), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Module personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        Module personInList = model.getModuleTracker().getModuleList().get(0);
+        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_MODULE);
     }
 
 }
