@@ -6,10 +6,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EmploymentType {
 
     public enum Type {
-        FULL_TIME("full time"),
-        PART_TIME("part time"),
-        TEMPORARY("temporary"),
-        INTERNSHIP("internship");
+        FULL_TIME("Full time"),
+        PART_TIME("Part time"),
+        TEMPORARY("Temporary"),
+        INTERNSHIP("Internship");
 
         private final String term;
         Type(String term) {
@@ -18,7 +18,7 @@ public class EmploymentType {
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Employment type can only be one of the following: "
-            + "full time, part time, temporary or internship";
+            + "Full time, Part time, Temporary or Internship";
 
     public final String employmentType;
 
