@@ -12,9 +12,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.ShowDetailsCommand;
 import seedu.address.logic.commands.SortEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -87,7 +89,11 @@ public class AddressBookParser {
             return new SortEventCommand();
 
         // TODO: filterEvents (Use Parser):
+        case FilterEventCommand.COMMAND_WORD:
+            return new FilterEventCommandParser().parse(arguments);
 
+        case ListEventCommand.COMMAND_WORD:
+            return new ListEventCommand();
         // TODO: addParticipant (Use Parser):
 
         // TODO: removeParticipant (Use Parser):
