@@ -8,7 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
+import seedu.address.model.participant.Participant;
 
 public class EventCard extends UiPart<Region> {
 
@@ -43,7 +43,7 @@ public class EventCard extends UiPart<Region> {
         date.setText(event.getDate().toString());
         time.setText(event.getTime().toString());
         event.getParticipants().stream()
-                .sorted(Comparator.comparing(Person::getFullName))
+                .sorted(Comparator.comparing(Participant::getFullName))
                 .forEach(participant -> participants.getChildren().add(new Label(participant.getFullName())));
     }
 
