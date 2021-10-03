@@ -5,6 +5,8 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -21,13 +23,17 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Integer DEFAULT_EXPERIENCE = 0;
     public static final String DEFAULT_ROLE = "Software Engineer";
+    public static final String DEFAULT_EXPECTED_SALARY = "3200";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Experience experience;
     private Role role;
+    private ExpectedSalary expectedSalary;
     private Set<Tag> tags;
 
     /**
@@ -38,7 +44,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        experience = new Experience(DEFAULT_EXPERIENCE);
         role = new Role(DEFAULT_ROLE);
+        expectedSalary = new ExpectedSalary(DEFAULT_EXPECTED_SALARY);
         tags = new HashSet<>();
     }
 
@@ -50,7 +58,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        experience = personToCopy.getExperience();
         role = personToCopy.getRole();
+        expectedSalary = personToCopy.getExpectedSalary();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -95,6 +105,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Experience} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExperience(Integer experience) {
+        this.experience = new Experience(experience);
+        return this;
+    }
+
+    /**
+     *  * Sets the {@code ExpectedSalary} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExpectedSalary(String expectedSalary) {
+        this.expectedSalary = new ExpectedSalary(expectedSalary);
+        return this;
+    }
+
+    /**
      * Sets the {@code Role} of the {@code Person} that we are building.
      */
     public PersonBuilder withRole(String role) {
@@ -103,7 +129,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, role, tags);
+        return new Person(name, phone, email, address, role, expectedSalary, experience, tags);
     }
 
 }

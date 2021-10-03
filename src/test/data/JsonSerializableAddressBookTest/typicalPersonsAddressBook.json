@@ -6,6 +6,8 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "role" : "Preschool Teacher",
+    "expectedSalary" : "2500",
+    "experience" : 0,
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +15,8 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "role" : "Doctor",
+    "expectedSalary" : "2700",
+    "experience" : 1,
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +24,8 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "role" : "Electrical Engineer",
+    "expectedSalary" : "5500",
+    "experience" : 2,
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +33,8 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "role" : "Sales Assistant",
+    "expectedSalary" : "3500",
+    "experience" : 3,
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +42,8 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "role" : "Toilet Cleaner",
+    "expectedSalary" : "5700",
+    "experience" : 4,
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +51,8 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "role" : "NTUC Cashier",
+    "expectedSalary" : "1900",
+    "experience" : 5,
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +60,8 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "role" : "Waiter",
+    "expectedSalary" : "900",
+    "experience" : 6,
     "tagged" : [ ]
   } ]
 }

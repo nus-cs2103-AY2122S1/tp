@@ -31,6 +31,7 @@ public class FindCommandParserTest {
         predicates.add(namePredicate);
 
         FindCommand expectedFindCommand = new FindCommand(predicates);
+
         assertParseSuccess(parser, "n/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords

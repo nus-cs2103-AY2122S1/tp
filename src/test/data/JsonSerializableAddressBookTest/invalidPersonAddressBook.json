@@ -4,6 +4,8 @@
     "phone": "9482424",
     "email": "invalid@email!3e",
     "role" : "Detective",
-    "address": "4th street"
+    "address": "4th street",
+    "experience" : 0,
+    "expectedSalary" : "6300"
   } ]
 }
