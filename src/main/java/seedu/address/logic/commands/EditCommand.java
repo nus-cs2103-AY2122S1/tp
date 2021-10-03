@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -24,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -45,6 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE] "
             + "[" + PREFIX_EXPECTED_SALARY + "EXPECTED_SALARY]"
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -106,10 +109,12 @@ public class EditCommand extends Command {
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         ExpectedSalary updatedExpectedSalary = editPersonDescriptor.getExpectedSalary()
                 .orElse(personToEdit.getExpectedSalary());
+        Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRole, updatedExpectedSalary, updatedTags);
+                updatedRole, updatedExpectedSalary, updatedExperience, updatedTags);
     }
 
     @Override
@@ -141,6 +146,7 @@ public class EditCommand extends Command {
         private Address address;
         private Role role;
         private ExpectedSalary expectedSalary;
+        private Experience experience;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -156,6 +162,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setRole(toCopy.role);
             setExpectedSalary(toCopy.expectedSalary);
+            setExperience(toCopy.experience);
             setTags(toCopy.tags);
         }
 
@@ -163,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, expectedSalary, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, expectedSalary, experience, tags);
         }
 
         public void setName(Name name) {
@@ -214,6 +221,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(expectedSalary);
         }
 
+        public void setExperience(Experience experience) {
+            this.experience = experience;
+        }
+
+        public Optional<Experience> getExperience() {
+            return Optional.ofNullable(experience);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -252,6 +267,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getRole().equals(e.getRole())
                     && getExpectedSalary().equals(e.getExpectedSalary())
+                    && getExperience().equals(e.getExperience())
                     && getTags().equals(e.getTags());
         }
     }

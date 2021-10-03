@@ -35,6 +35,7 @@ public class FindCommandTest {
         ArrayList<Predicate<Person>> firstPredicateList = new ArrayList<>();
         NameContainsKeywordsPredicate firstPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+
         firstPredicateList.add(firstPredicate);
 
         ArrayList<Predicate<Person>> secondPredicateList = new ArrayList<>();

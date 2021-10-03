@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label expectedSalary;
     @FXML
+    private Label experience;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -58,6 +60,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText("Email: " + person.getEmail().value);
         role.setText("Applied Role: " + person.getRole().role);
         expectedSalary.setText("Expected Salary: $" + person.getExpectedSalary().value);
+        experience.setText("Years of Experience: $" + person.getExperience().value);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

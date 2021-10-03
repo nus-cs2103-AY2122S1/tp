@@ -6,6 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "role": "Preschool Teacher",
     "expectedSalary" : "7500",
+    "experience" : 0,
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -13,6 +14,7 @@
     "email": "pauline@example.com",
     "role": "Preschool Teacher",
     "expectedSalary" : "7500",
+    "experience" : 1,
     "address": "4th street"
   } ]
 }

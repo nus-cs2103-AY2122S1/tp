@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String role;
     private final String expectedSalary;
+    private final String experience;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,11 +43,12 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("role") String role, @JsonProperty("expectedSalary") String expectedSalary,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("experience") String experience, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.experience = experience;
         this.role = role;
         this.expectedSalary = expectedSalary;
 
@@ -64,7 +67,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         role = source.getRole().role;
         expectedSalary = source.getExpectedSalary().value;
-
+        experience = source.getExperience().value.toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -113,6 +116,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
@@ -130,9 +134,20 @@ class JsonAdaptedPerson {
         }
         final ExpectedSalary modelExpectedSalary = new ExpectedSalary(expectedSalary);
 
+        if (experience == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Experience.class.getSimpleName()));
+        }
+
+        if (!Experience.isValidExperience(Integer.parseInt(experience))) {
+            throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
+        }
+        final Experience modelExperience = new Experience(Integer.parseInt(experience));
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelExpectedSalary, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole,
+                modelExpectedSalary, modelExperience, modelTags);
     }
 
 }

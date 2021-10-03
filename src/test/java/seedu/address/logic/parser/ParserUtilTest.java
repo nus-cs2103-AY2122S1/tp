@@ -29,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE = "Softw@re Eng1n33r";
     private static final String INVALID_EXPECTED_SALARY = "-1200";
+    private static final String INVALID_EXPERIENCE = "-1";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -37,7 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_EXPECTED_SALARY = "1200";
-
+    private static final String VALID_EXPERIENCE = "1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -199,6 +200,16 @@ public class ParserUtilTest {
         String expectedSalaryWithWhitespace = WHITESPACE + VALID_EXPECTED_SALARY + WHITESPACE;
         ExpectedSalary expectedExpectedSalary = new ExpectedSalary(VALID_EXPECTED_SALARY);
         assertEquals(expectedExpectedSalary, ParserUtil.parseExpectedSalary(expectedSalaryWithWhitespace));
+    }
+
+    @Test
+    public void parseExperience_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExperience((String) null));
+    }
+
+    @Test
+    public void parseExperience_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExperience(INVALID_EXPERIENCE));
     }
 
     @Test

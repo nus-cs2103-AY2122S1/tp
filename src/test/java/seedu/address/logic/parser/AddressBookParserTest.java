@@ -79,7 +79,6 @@ public class AddressBookParserTest {
                         + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" ")));
         ArrayList<Predicate<Person>> expectedPredicates = new ArrayList<>();
         expectedPredicates.add(new NameContainsKeywordsPredicate(keywords));
-
         assertEquals(new FindCommand(expectedPredicates), command);
     }
 

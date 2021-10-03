@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -97,6 +98,7 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+
     /**
      * Parses a {@code String expectedSalary} into an {@code ExpectedSalary}.
      * Leading and trailing whitespaces will be trimmed.
@@ -126,6 +128,20 @@ public class ParserUtil {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
         return new Role(trimmedRole);
+    }
+
+    /**
+     * Parses a {@code Integer experience} into an {@code Experience}.
+     *
+     * @throws ParseException if the given {@code experience} is invalid.
+     */
+    public static Experience parseExperience(String experience) throws ParseException {
+        requireNonNull(experience);
+        Integer years = Integer.parseInt(experience.trim());
+        if (!Experience.isValidExperience(years)) {
+            throw new ParseException(Experience.MESSAGE_CONSTRAINTS);
+        }
+        return new Experience(years);
     }
 
     /**

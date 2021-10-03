@@ -1,8 +1,8 @@
 package seedu.address.testutil;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -38,6 +38,8 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_ROLE + person.getRole().role + " ");
         sb.append(PREFIX_EXPECTED_SALARY + person.getExpectedSalary().value + " ");
+        sb.append(PREFIX_EXPERIENCE + person.getExperience().value.toString() + " ");
+
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -57,6 +59,8 @@ public class PersonUtil {
         descriptor.getExpectedSalary()
                 .ifPresent(expectedSalary -> sb.append(PREFIX_EXPECTED_SALARY).append(expectedSalary.value)
                         .append(" "));
+        descriptor.getExperience().ifPresent(experience ->
+                sb.append(PREFIX_EXPERIENCE).append(experience.value).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
