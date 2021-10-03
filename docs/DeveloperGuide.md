@@ -12,7 +12,7 @@ title: Developer Guide
    - [Model component](#model-component)
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
-5. [Implementation]
+5. [Implementation](#implementation)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
 6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
