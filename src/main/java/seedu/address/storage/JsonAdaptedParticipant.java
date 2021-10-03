@@ -69,10 +69,10 @@ public class JsonAdaptedParticipant {
      */
     public JsonAdaptedParticipant(Participant source) {
         id = source.getParticipantId().toString();
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        name = source.getFullName();
+        phone = source.getPhoneValue();
+        email = source.getEmailValue();
+        address = source.getAddressValue();
         tagged.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
