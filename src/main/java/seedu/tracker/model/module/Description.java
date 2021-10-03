@@ -1,11 +1,10 @@
 package seedu.tracker.model.module;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tracker.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Module's description in the module tracker.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ * Guarantees: immutable.}
  */
 public class Description {
 
