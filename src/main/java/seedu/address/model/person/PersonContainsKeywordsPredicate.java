@@ -1,16 +1,16 @@
 package seedu.address.model.person;
 
-import java.util.Arrays;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
-import seedu.address.logic.parser.ArgumentMultimap;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Arrays;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import seedu.address.logic.parser.ArgumentMultimap;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -26,8 +26,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         String[] generalKeywords = keywords.getPreamble().split(" ");
-        boolean checkGeneral = generalKeywords[0].equals(WILDCARD_KEYWORD) ||
-                Arrays.stream(generalKeywords).anyMatch(x -> {
+        boolean checkGeneral = generalKeywords[0].equals(WILDCARD_KEYWORD)
+                || Arrays.stream(generalKeywords).anyMatch(x -> {
                     boolean checkAttribute = Stream.of(person.getName().fullName, person.getPhone().value,
                             person.getEmail().value, person.getAddress().value).anyMatch(y -> y.contains(x));
                     boolean checkAttributeTag = person.getTags().stream().anyMatch(y -> y.tagName.contains(x));
