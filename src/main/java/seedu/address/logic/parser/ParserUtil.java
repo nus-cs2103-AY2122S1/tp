@@ -60,7 +60,7 @@ public class ParserUtil {
     public static FolderName parseFolderName(String folderName) throws ParseException {
         requireNonNull(folderName);
         String trimmedName = folderName.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!FolderName.isValidName(trimmedName)) {
             throw new ParseException(FolderName.MESSAGE_CONSTRAINTS);
         }
         return new FolderName(trimmedName);
