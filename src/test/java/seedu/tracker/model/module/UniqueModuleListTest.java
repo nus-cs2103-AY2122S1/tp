@@ -3,15 +3,16 @@ package seedu.tracker.model.module;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS1101S;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TAG_UE;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TITLE_CS1101S;
+import static seedu.tracker.testutil.Assert.assertThrows;
+import static seedu.tracker.testutil.TypicalModules.CS2101;
+import static seedu.tracker.testutil.TypicalModules.CS2103T;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static seedu.tracker.logic.commands.CommandTestUtil.*;
-import static seedu.tracker.testutil.Assert.assertThrows;
-import static seedu.tracker.testutil.TypicalModules.CS2101;
-import static seedu.tracker.testutil.TypicalModules.CS2103T;
 
 import org.junit.jupiter.api.Test;
 
@@ -164,7 +165,7 @@ class UniqueModuleListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueModuleList.asUnmodifiableObservableList().remove(0));
+            -> uniqueModuleList.asUnmodifiableObservableList().remove(0));
     }
 
 }

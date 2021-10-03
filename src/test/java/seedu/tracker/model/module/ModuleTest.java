@@ -2,9 +2,8 @@ package seedu.tracker.model.module;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CS1101S;
-import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CS2101;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CS2100;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CP3108A;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS1101S;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_MC_CP3108A;
@@ -46,11 +45,11 @@ class ModuleTest {
         assertFalse(CS2103T.isSameModule(editedCS2103T));
 
         // code differs in case, all other attributes same -> returns false
-        Module editedCS2101 = new ModuleBuilder(CS2101).withCode(VALID_CODE_CS2101.toLowerCase()).build();
+        Module editedCS2101 = new ModuleBuilder(CS2101).withCode(VALID_CODE_CS2100.toLowerCase()).build();
         assertFalse(CS2101.isSameModule(editedCS2101));
 
         // code has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_CODE_CS2101 + " ";
+        String nameWithTrailingSpaces = VALID_CODE_CS2100 + " ";
         editedCS2101 = new ModuleBuilder(CS2101).withCode(nameWithTrailingSpaces).build();
         assertFalse(CS2101.isSameModule(editedCS2101));
     }

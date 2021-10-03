@@ -11,7 +11,7 @@ public class Mc {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "MC credit should only be an Integer, and it should be greater than 0.";
+            "MC credit should only be an Integer, and it should not be less than 0.";
     public final int value;
 
     /**
@@ -29,7 +29,7 @@ public class Mc {
      * Returns true if a given string is a valid mc credit.
      */
     public static boolean isValidMc(int test) {
-        return test > 0;
+        return test >= 0;
     }
 
     @Override

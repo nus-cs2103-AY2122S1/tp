@@ -28,13 +28,13 @@ public class TitleTest {
         assertFalse(Title.isValidTitle("")); // empty string
         assertFalse(Title.isValidTitle(" ")); // spaces only
         assertFalse(Title.isValidTitle("^")); // only non-alphanumeric characters
-        assertFalse(Title.isValidTitle("peter*")); // contains non-alphanumeric characters
 
         // valid title
-        assertTrue(Title.isValidTitle("peter jack")); // alphabets only
+        assertTrue(Title.isValidTitle("programming methodology")); // alphabets only
         assertTrue(Title.isValidTitle("12345")); // numbers only
-        assertTrue(Title.isValidTitle("peter the 2nd")); // alphanumeric characters
-        assertTrue(Title.isValidTitle("Capital Tan")); // with capital letters
-        assertTrue(Title.isValidTitle("David Roger Jackson Ray Jr 2nd")); // long titles
+        assertTrue(Title.isValidTitle("programming methodology 2")); // alphanumeric characters
+        assertTrue(Title.isValidTitle("Programming Methodology 2")); // with capital letters
+        assertTrue(Title.isValidTitle("Memory, Heritage & History")); // with non-alphanumeric characters
+        assertTrue(Title.isValidTitle("Software Engineering & Object-Oriented Programming")); // long titles
     }
 }
