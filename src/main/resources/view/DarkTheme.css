@@ -37,6 +37,20 @@
     -fx-padding: 0 0 0 0;
     -fx-min-height: 0;
     -fx-max-height: 0;
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -fx-outer-border, -fx-text-box-border, grey;
+}
+
+.tab.dark {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.tab.dark .tab-label {
+    -fx-text-fill: white;
+
 }
 
 .table-view {
