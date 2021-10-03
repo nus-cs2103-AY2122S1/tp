@@ -11,6 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.nextofkin.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Participant}.
@@ -59,18 +60,18 @@ public class ParticipantCard extends UiPart<Region> {
         super(FXML);
         this.participant = participant;
         id.setText(displayedIndex + ". ");
-        name.setText(participant.getName().fullName);
-        phone.setText(participant.getPhone().value);
-        address.setText(participant.getAddress().value);
-        email.setText(participant.getEmail().value);
+        name.setText(participant.getFullName());
+        phone.setText(participant.getPhoneValue());
+        address.setText(participant.getAddressValue());
+        email.setText(participant.getEmailValue());
         participant.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(Tag::getTagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
 
-        participantId.setText(participant.getParticipantId().toString());
-        birthDate.setText(participant.getBirthDate().toString());
+        participantId.setText(participant.getParticipantIdValue());
+        birthDate.setText(participant.getBirthDateString());
         participant.getNotes().stream()
-                .sorted(Comparator.comparing(Object::toString))
+                .sorted(Comparator.comparing(Note::toString))
                 .forEach(note -> notes.getChildren().add(noteLabel(note)));
         nextOfKins.setText(participant.getNextOfKins().stream().map(NextOfKin::toString).collect(Collectors.joining()));
 
