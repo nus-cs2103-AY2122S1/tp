@@ -31,8 +31,8 @@ class RiskTest {
 
         // valid risks
         assertTrue(Risk.isValidRisk("HIGH"));
-        assertTrue(Risk.isValidRisk("MEDIUM")); // one character
-        assertTrue(Risk.isValidRisk("LOW")); // long address
+        assertTrue(Risk.isValidRisk("MEDIUM"));
+        assertTrue(Risk.isValidRisk("LOW"));
     }
 
     @Test
