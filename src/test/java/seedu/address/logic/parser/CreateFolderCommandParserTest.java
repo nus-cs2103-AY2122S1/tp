@@ -24,6 +24,16 @@ class CreateFolderCommandParserTest {
     }
 
     @Test
+    public void parse_folderNameWithWhitespace_success() {
+        Folder expectedFolder = new Folder(new FolderName(VALID_FOLDER_NAME_CCA + " " + VALID_FOLDER_NAME_CCA));
+        CreateFolderCommand expectedCreateFolderCommand = new CreateFolderCommand(expectedFolder);
+        CreateFolderCommandParser createFolderCommandParser = new CreateFolderCommandParser();
+        CommandParserTestUtil.assertParseSuccess(createFolderCommandParser,
+                " " + VALID_FOLDER_NAME_CCA + " " + VALID_FOLDER_NAME_CCA,
+                expectedCreateFolderCommand);
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         CreateFolderCommandParser createFolderCommandParser = new CreateFolderCommandParser();
         assertThrows(ParseException.class, () -> createFolderCommandParser.parse(" "));
