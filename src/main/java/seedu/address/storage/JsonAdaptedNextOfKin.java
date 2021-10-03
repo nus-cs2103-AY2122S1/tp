@@ -32,8 +32,8 @@ public class JsonAdaptedNextOfKin {
      * Converts a given {@code NextOfKin} into this class for Jackson use.
      */
     public JsonAdaptedNextOfKin(NextOfKin source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
+        name = source.getFullName();
+        phone = source.getPhoneValue();
         tag = new JsonAdaptedTag(source.getTag());
     }
 

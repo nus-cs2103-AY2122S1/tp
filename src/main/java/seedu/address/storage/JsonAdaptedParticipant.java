@@ -68,15 +68,15 @@ public class JsonAdaptedParticipant {
      * Converts a given {@code Participant} into this class for Json use.
      */
     public JsonAdaptedParticipant(Participant source) {
-        id = source.getParticipantId().toString();
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        id = source.getParticipantIdValue();
+        name = source.getFullName();
+        phone = source.getPhoneValue();
+        email = source.getEmailValue();
+        address = source.getAddressValue();
         tagged.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
-        birthDate = source.getBirthDate().toString();
+        birthDate = source.getBirthDateString();
         notes.addAll(source.getNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
         nextOfKins.addAll(source.getNextOfKins().stream().map(JsonAdaptedNextOfKin::new).collect(Collectors.toList()));
         // TODO: Notes to be implemented

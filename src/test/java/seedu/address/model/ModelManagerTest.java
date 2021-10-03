@@ -124,7 +124,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALEX.getName().fullName.split("\\s+");
+        String[] keywords = ALEX.getFullName().split("\\s+");
         modelManager.updateFilteredParticipantList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

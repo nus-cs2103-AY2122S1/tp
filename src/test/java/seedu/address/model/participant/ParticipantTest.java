@@ -31,8 +31,8 @@ public class ParticipantTest {
     public void withBirthDateTest() {
         Participant aliceP = new ParticipantBuilder(ALICE).withBirthDate(2000, 8, 4).build();
         Participant bobP = new ParticipantBuilder(BOB).build();
-        assertEquals("2000-08-04", aliceP.getBirthDate().toString());
-        assertEquals("N/A", bobP.getBirthDate().toString());
+        assertEquals("2000-08-04", aliceP.getBirthDateString());
+        assertEquals("N/A", bobP.getBirthDateString());
     }
 
     @Test
