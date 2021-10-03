@@ -334,9 +334,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given details are of an invalid format
+* 1a. The given details are of an invalid format
 
-    * 2a1. InsurancePal shows an error message
+    * 1a1. InsurancePal shows an error message
 
       Use case ends.
 
