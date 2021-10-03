@@ -8,14 +8,15 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.patient.Risk;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Patient}.
  */
-public class PersonCard extends UiPart<Region> {
+public class PatientCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "PatientListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,7 +26,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on PlannerMd level 4</a>
      */
 
-    public final Person person;
+    public final Patient patient;
 
     @FXML
     private HBox cardPane;
@@ -51,24 +52,23 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane risk;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PatientCode} with the given {@code Patient} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PatientCard(Patient patient, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.patient = patient;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
+        name.setText(patient.getName().fullName);
+        phone.setText(patient.getPhone().value);
         // To be updated when the DOB field in the Person class has been implemented.
         dateOfBirth.setText("28/02/1999 (Age: 22)");
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        address.setText(patient.getAddress().value);
+        email.setText(patient.getEmail().value);
         setPatientRemark("Some random remark");
-        // To be updated when the risk field in a patient has been implemented.
-        setPatientRiskTag("Low");
-        person.getTags().stream()
+        patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        setRisk(patient.getRisk());
     }
 
     /**
@@ -78,29 +78,30 @@ public class PersonCard extends UiPart<Region> {
      * @param patientRemark The remark for a particular patient.
      */
     private void setPatientRemark(String patientRemark) {
-        if (patientRemark == null) {
+        if (patientRemark == null || patientRemark.equals("".trim())) {
             personDetailsBox.getChildren().remove(remark);
         } else {
             remark.setText("Remarks: " + patientRemark);
         }
     }
 
-    private void setPatientRiskTag(String patientRisk) {
-        Label riskLabel = new Label(patientRisk);
-        switch (patientRisk) {
-        case "High":
+    private void setRisk(Risk risk) {
+        Label riskLabel = new Label(risk.toString());
+        switch (risk.riskLevel) {
+        case HIGH:
             riskLabel.setStyle("-fx-background-color: red");
             break;
-        case "Medium":
+        case MEDIUM:
             riskLabel.setStyle("-fx-background-color: #fcba03");
             break;
-        case "Low":
+        case LOW:
             riskLabel.setStyle("-fx-background-color: green");
             break;
         default:
-            break;
+            // unclassified risk
+            return;
         }
-        risk.getChildren().add(riskLabel);
+        this.risk.getChildren().add(riskLabel);
     }
 
     @Override
@@ -111,13 +112,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof PatientCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        PatientCard card = (PatientCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && patient.equals(card.patient);
     }
 }
