@@ -57,7 +57,11 @@ public class Participant extends Person {
      * @return this object's birthDate.
      */
     public BirthDate getBirthDate() {
-        return this.birthDate;
+        return birthDate;
+    }
+
+    public String getBirthDateString() {
+        return birthDate.toString();
     }
 
     /**
@@ -66,19 +70,24 @@ public class Participant extends Person {
      * @return this object's nextOfKins.
      */
     public ArrayList<NextOfKin> getNextOfKins() {
-        return this.nextOfKins;
+        return nextOfKins;
     }
 
     public ParticipantId getParticipantId() {
-        return this.id;
+        return id;
     }
+
+    public String getParticipantIdValue() {
+        return id.toString();
+    }
+
     /**
      * Adds a note to set of notes.
      *
      * @param note note to be added.
      */
     public void addNote(Note note) {
-        this.notes.add(note);
+        notes.add(note);
     }
 
     /**
@@ -87,7 +96,7 @@ public class Participant extends Person {
      * @param note    A Note to be removed.
      */
     public void removeNote(Note note) {
-        this.notes.remove(note);
+        notes.remove(note);
     }
 
     /**
@@ -141,8 +150,7 @@ public class Participant extends Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(), this.getTags(),
-                this.birthDate, this.notes, this.nextOfKins);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getTags(), birthDate, notes, nextOfKins);
     }
 
     @Override

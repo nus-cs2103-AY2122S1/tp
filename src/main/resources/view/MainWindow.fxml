@@ -47,11 +47,11 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="participantList" styleClass="pane-with-border" minWidth="340" prefWidth="340" prefHeight="500" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <StackPane fx:id="participantListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
         </VBox>
         <VBox fx:id="eventList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>

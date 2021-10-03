@@ -34,10 +34,17 @@ public class NextOfKin {
         return name;
     }
 
+    public String getFullName() {
+        return name.toString();
+    }
+
     public Phone getPhone() {
         return phone;
     }
 
+    public String getPhoneValue() {
+        return phone.toString();
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

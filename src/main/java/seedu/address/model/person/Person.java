@@ -40,16 +40,32 @@ public class Person {
         return name;
     }
 
+    public String getFullName() {
+        return name.toString();
+    }
+
     public Phone getPhone() {
         return phone;
+    }
+
+    public String getPhoneValue() {
+        return phone.toString();
     }
 
     public Email getEmail() {
         return email;
     }
 
+    public String getEmailValue() {
+        return email.toString();
+    }
+
     public Address getAddress() {
         return address;
+    }
+
+    public String getAddressValue() {
+        return address.toString();
     }
 
     /**
