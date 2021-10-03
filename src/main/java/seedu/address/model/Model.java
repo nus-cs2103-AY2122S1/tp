@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.folder.Folder;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Folder> PREDICATE_SHOW_ALL_FOLDERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +86,24 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the filtered folder list */
+    ObservableList<Folder> getFilteredFolderList();
+
+    /**
+     * Updates the filter of the filtered folder list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredFolderList(Predicate<Folder> predicate);
+
+    /**
+     * Adds the given folder.
+     * {@code folder} must not already exist in the address book.
+     */
+    void addFolder(Folder folder);
+
+    /**
+     * Returns true if a folder with the same identity as {@code folder} exists in the address book.
+     */
+    boolean hasFolder(Folder folder);
 }

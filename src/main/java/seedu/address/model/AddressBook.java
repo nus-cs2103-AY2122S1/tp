@@ -5,17 +5,19 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.UniqueFolderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSamePerson and .isSameFolder comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    private final UniqueFolderList folders;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,12 +27,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        folders = new UniqueFolderList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons and Folders in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -48,12 +51,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the folder list with {@code folders}.
+     * {@code folders} must not contain duplicate folders.
+     */
+    public void setFolders(List<Folder> folders) {
+        this.folders.setFolders(folders);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setFolders(newData.getFolderList());
     }
 
     //// person-level operations
@@ -93,6 +105,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// folder-level operations
+
+    /**
+     * Returns true if a folder with the same identity as {@code folder} exists in the address book.
+     */
+    public boolean hasFolder(Folder folder) {
+        requireNonNull(folder);
+        return folders.contains(folder);
+    }
+
+    /**
+     * Adds a folder to the address book.
+     * The folder must not already exist in the address book.
+     */
+    public void addFolder(Folder f) {
+        folders.add(f);
+    }
+
+
+
     //// util methods
 
     @Override
@@ -104,6 +136,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Folder> getFolderList() {
+        return folders.asUnmodifiableObservableList();
     }
 
     @Override
