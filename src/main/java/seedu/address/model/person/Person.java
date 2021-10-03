@@ -20,20 +20,28 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+    // Category fields
+    private final Role role;
+    private final ExpectedSalary expectedSalary;
+    private final Experience experience;
+
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Experience experience;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Experience experience, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, experience, tags);
+
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, ExpectedSalary expectedSalary, Experience experience, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, expectedSalary, experience, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
+        this.expectedSalary = expectedSalary;
         this.experience = experience;
         this.tags.addAll(tags);
     }
@@ -54,10 +62,18 @@ public class Person {
         return address;
     }
 
+
+    public Role getRole() {
+        return role;
+    }
+
+    public ExpectedSalary getExpectedSalary() {
+        return expectedSalary;
+    }
+
     public Experience getExperience() {
         return experience;
     }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -100,6 +116,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getRole().equals(getRole())
+                && otherPerson.getExpectedSalary().equals(getExpectedSalary())
                 && otherPerson.getExperience().equals(getExperience())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -107,7 +125,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, experience, tags);
+        return Objects.hash(name, phone, email, address, role, expectedSalary, experience, tags);
     }
 
     @Override
@@ -120,6 +138,10 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Applied Role: ")
+                .append(getRole())
+                .append("; Expected Salary: ")
+                .append(getExpectedSalary())
                 .append("; Years of Experience: ")
                 .append(getExperience());
 

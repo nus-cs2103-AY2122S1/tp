@@ -8,8 +8,11 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Person;
 
-public class TagContainsKeywordsPredicate implements Predicate<Person> {
 
+/**
+ * Tests that a {@code Person}'s {@code Tag}s matches any of the keywords given.
+ */
+public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public TagContainsKeywordsPredicate(List<String> keywords) {

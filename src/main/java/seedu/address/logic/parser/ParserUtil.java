@@ -11,9 +11,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,6 +96,38 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+
+    /**
+     * Parses a {@code String expectedSalary} into an {@code ExpectedSalary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code expectedSalary} is invalid.
+     */
+    public static ExpectedSalary parseExpectedSalary(String expectedSalary) throws ParseException {
+        requireNonNull(expectedSalary);
+        String trimmedExpectedSalary = expectedSalary.trim();
+        if (!ExpectedSalary.isValidExpectedSalary(trimmedExpectedSalary)) {
+            throw new ParseException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+        }
+        return new ExpectedSalary(trimmedExpectedSalary);
+    }
+
+    /** Parses a {@code String role} into an {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param role String to be parsed into a Role object.
+     * @return Role object
+     * @throws ParseException if the given {@code Role} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(trimmedRole);
     }
 
     /**

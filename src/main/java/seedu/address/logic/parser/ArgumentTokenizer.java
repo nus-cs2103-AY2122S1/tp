@@ -124,8 +124,7 @@ public class ArgumentTokenizer {
     }
 
     private static ArgumentMultimap extractArgumentsWithoutPreamble(String argsString,
-                                                                    List<PrefixPosition> prefixPositions) {
-
+            List<PrefixPosition> prefixPositions) {
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
 
