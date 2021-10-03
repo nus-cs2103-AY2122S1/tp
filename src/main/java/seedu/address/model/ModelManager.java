@@ -159,6 +159,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void markEventAsDone(Event target) {
+        requireNonNull(target);
+        addressBook.markEventAsDone(target);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

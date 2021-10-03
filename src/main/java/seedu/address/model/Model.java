@@ -93,6 +93,12 @@ public interface Model {
      */
     void updateFilteredParticipantList(Predicate<Participant> predicate);
 
+    /**
+     * MArks the given Event {@code target} as done.
+     * {@code target} must exist in Managera.
+     */
+    void markEventAsDone(Event target);
+
     /** Returns an unmodifiable view of list of Events *///getFilteredEventList
     ObservableList<Event> getFilteredEventList();
 

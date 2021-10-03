@@ -17,7 +17,7 @@ public class FilterEventCommand extends Command {
     public static final String COMMAND_WORD = "filterEvents";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the event list for events occurring "
-            + "on the specified date (in YYYY-MM-DD format) and optionally include time in (24hr format),"
+            + "on the specified date (in YYYY-MM-DD format) and optionally include time (in 24hr format),"
             + " and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_DATE + "DATE"

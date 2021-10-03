@@ -12,19 +12,19 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventNamePredicate;
 
-public class ShowDetailsCommandTest {
+public class ShowEventDetailsCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ShowDetailsCommand(null));
+        assertThrows(NullPointerException.class, () -> new ShowEventDetailsCommand(null));
     }
 
     @Test
     public void execute_eventNotInList_throwsCommandException() {
         EventNamePredicate predicate = preparePredicate(" ");
-        ShowDetailsCommand command = new ShowDetailsCommand(predicate);
+        ShowEventDetailsCommand command = new ShowEventDetailsCommand(predicate);
         assertThrows(CommandException.class, MESSAGE_EVENT_NOT_FOUND, () -> command.execute(model));
     }
 

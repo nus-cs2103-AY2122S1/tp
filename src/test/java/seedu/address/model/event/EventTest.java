@@ -20,8 +20,8 @@ public class EventTest {
     @Test
     public void markAsDone() {
         assertFalse(SAMPLE_EVENT.getIsDone());
-        SAMPLE_EVENT.markAsDone();
-        assertTrue(SAMPLE_EVENT.getIsDone());
+        Event doneEvent = SAMPLE_EVENT.markAsDone();
+        assertTrue(doneEvent.getIsDone());
     }
 
     @Test
