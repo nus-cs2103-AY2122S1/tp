@@ -83,9 +83,9 @@ public class ParticipantCard extends UiPart<Region> {
      */
     public Label noteLabel(Note note) {
         Label label = new Label();
-        label.setText(note.content);
+        label.setText(note.getContent());
 
-        switch(note.importance) {
+        switch(note.getImportance()) {
         case VERY_HIGH:
             label.setStyle("-fx-background-color: #ff0000; -fx-text-fill: white; -fx-padding: 1 3 1 3; "
                     + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
