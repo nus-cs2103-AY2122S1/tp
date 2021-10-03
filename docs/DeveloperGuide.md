@@ -376,11 +376,12 @@ Preconditions: The student's details have been previously added to TutorAid.
 
 **MSS**
 
-1. Tutor views the list of his/her students
+1. Tutor requests to view the list of his/her students
+2. TutorAid shows the list of students, including each student's index number
 2. Tutor identifies the index of the student, and requests to delete the specified student in the list
 3. TutorAid deletes the student from the list
-4. Tutor requests to add the student in the list, and provides the updated details of the student
-5. TutorAid adds the student to the list
+4. Tutor requests to add the student back into the list, and provides the updated details of the student
+5. TutorAid adds the updated student to the list
 6. TutorAid displays a message indicating the student has been successfully added
 
 **Extensions**
@@ -408,10 +409,6 @@ Preconditions: The student's details have been previously added to TutorAid.
 
       Steps 4a1 - 4a2 are repeated until a valid syntax is given.
       Use case resumes from step 5.
-
-* 4b. Tutor mistypes the student's updated details.
-
-  Use case starts over from step 1.
 
 **Use case 4: Update a student's progress**
 
@@ -571,7 +568,7 @@ Precondition: The student's details have been added to TutorAid.
 
       Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
       Use case resumes from step 2.
-      
+
 * 1b. TutorAid detects an error in the view schedule command.
 
     * 1b1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -649,9 +646,9 @@ Preconditions: There is at least one student added to TutorAid.
 2.  TutorAid shows the upcoming milestones in a chronological order
 
     Use case ends.
-    
+
 **Extensions**
-    
+
 * 1a. TutorAid detects an error in the view milestones command.
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
