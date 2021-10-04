@@ -9,7 +9,7 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Resident {
-    
+
     // Identity fields
     private final Name name;
     private final Room room;
@@ -42,10 +42,10 @@ public class Resident {
     public Name getName() {
         return name;
     }
-    
+
     public Room getRoom() {
         return room;
-    } 
+    }
 
     public Phone getPhone() {
         return phone;

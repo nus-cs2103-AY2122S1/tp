@@ -19,12 +19,12 @@ public class Room {
      * The room must be 4 characters
      * The first character of the room must be A-E to represent the block
      * The second character of the room must be 1-4 to represent the level
-     * The third character of the room must be 0-2 
+     * The third character of the room must be 0-2
      * The fourth character of the room must be 0-9
      * This check assumes 5 blocks, 4 levels and 30 rooms a level
      */
     public static final String VALIDATION_REGEX = "/^[a-eA-E][1-4][0-2][0-9]$";
-    
+
     public final String room;
 
     /**

@@ -1,7 +1,7 @@
 package safeforhall.model.resident;
 
 import static java.util.Objects.requireNonNull;
-import static safeforhall.commons.util.CollectionUtil.*;
+import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -13,9 +13,9 @@ import safeforhall.model.resident.exceptions.ResidentNotFoundException;
 
 /**
  * A list of residents that enforces uniqueness between its elements and does not allow nulls.
- * A resident is considered unique by comparing using {@code Resident#isSameResident(Resident)}. As such, adding and 
- * updating of residents uses Resident#isSameResident(Resident) for equality so as to ensure that the resident being 
- * added or updated is unique in terms of identity in the UniqueResidentList. However, the removal of a resident uses 
+ * A resident is considered unique by comparing using {@code Resident#isSameResident(Resident)}. As such, adding and
+ * updating of residents uses Resident#isSameResident(Resident) for equality so as to ensure that the resident being
+ * added or updated is unique in terms of identity in the UniqueResidentList. However, the removal of a resident uses
  * Resident#equals(Object) so as to ensure that the resident with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
