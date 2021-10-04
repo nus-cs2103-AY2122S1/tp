@@ -1,113 +1,50 @@
 package seedu.address.model.person;
 
-import seedu.address.model.person.exceptions.InvalidTimeException;
-import seedu.address.model.person.exceptions.OverlapTaskException;
+import java.time.DayOfWeek;
 
 /**
  * Represents the schedule for the staff, which contains all the task for the staff.
- * Built as a interval tree.
  */
 public class Schedule {
-    private Task taskNode = null;
-    private Schedule leftNode = null;
-    private Schedule rightNode = null;
+    private static final int DAY_OF_WEEK = 7;
+    private static final int PERIOD_OF_DAY = 2;
 
-    //argument value for interval tree
-    private Time maxTime;
+    private Task[][] tasks;
 
-    /**
-     * Constructor that builds an empty Schedule node.
-     */
     public Schedule() {
-        try {
-            this.maxTime = new Time(0, 0);
-        } catch (InvalidTimeException e) {
-            System.out.println(e.getMessage());
+        this.tasks = new Task[DAY_OF_WEEK][PERIOD_OF_DAY];
+        for (int day = 0; day < DAY_OF_WEEK; day++) {
+            tasks[day][0] = null;
+            tasks[day][1] = null;
         }
     }
 
     /**
-     * Constructor of Schedule. Let the task become the taskNode of this Schedule object.
-     * @param task The given task.
+     * Adds a new task for a staff.
+     * @param dayOfWeek The day of the task in a week.
+     * @param period The period of the task.
+     * @param taskName The name of the task.
      */
-    public Schedule(Task task) {
-        this.taskNode = task;
-        maxTime = task.getEndTime();
+    public void addTask(DayOfWeek dayOfWeek, Period period, String taskName) {
+        Task task = new Task(dayOfWeek, period, taskName);
+        tasks[dayOfWeek.getValue() - 1][period.getOrder()] = task;
     }
 
     /**
-     * Update the maxTime for the current node.
+     * Removes a new task for a staff.
+     * @param dayOfWeek The day of the task in a week.
+     * @param period The period of the task.
      */
-    public void updateMax() {
-        Time tempMax;
-        if (leftNode != null && rightNode != null) {
-            tempMax = leftNode.maxTime.compareTo(rightNode.maxTime) >= 0 ? leftNode.maxTime : rightNode.maxTime;
-        } else if (leftNode != null) {
-            tempMax = leftNode.maxTime;
-        } else if (rightNode != null) {
-            tempMax = rightNode.maxTime;
-        } else {
-            tempMax = this.maxTime;
-        }
-        this.maxTime = this.maxTime.compareTo(tempMax) >= 0 ? this.maxTime : tempMax;
-    }
-
-
-
-    /**
-     * Adds a new task to the staff's schedule.
-     * @param newTask The new task.
-     * @throws OverlapTaskException Throws when the task is overlapped with other tasks of the user.
-     */
-    public void add(Task newTask) throws OverlapTaskException {
-        if (taskNode == null) {
-            taskNode = newTask;
-        } else {
-            if (newTask.getEndTime().compareTo(taskNode.getStartTime()) <= 0) {
-                if (leftNode == null) {
-                    leftNode = new Schedule();
-                }
-                leftNode.add(newTask);
-            } else if (newTask.getStartTime().compareTo(taskNode.getEndTime()) >= 0) {
-                if (rightNode == null) {
-                    rightNode = new Schedule();
-                }
-                rightNode.add(newTask);
-            } else {
-                throw new OverlapTaskException();
-            }
-        }
-        updateMax();
+    public void removeTask(DayOfWeek dayOfWeek, Period period) {
+        tasks[dayOfWeek.getValue() - 1][period.getOrder()] = null;
     }
 
     /**
-     * Tests whether the staff is working at a moment.
-     *
-     * @param time The time want to find.
-     * @return Whether the staff is working at the given moment.
+     * Checks whether a staff is working in a certain period.
+     * @param dayOfWeek The day want to check.
+     * @param period The period want to check.
      */
-    public boolean isWorking(Time time) {
-        return search(time) != null;
+    public boolean isWorking(DayOfWeek dayOfWeek, Period period) {
+        return tasks[dayOfWeek.getValue() - 1][period.getOrder()] != null;
     }
-
-    /**
-     * Finds the interval that containing t.
-     *
-     * @param time The moment want to search.
-     * @return The interval containing time. Null if this interval does not exist.
-     */
-    public Schedule search(Time time) {
-        Schedule cur = this;
-        while (cur != null && taskNode.inInterval(time)) {
-            if (cur.leftNode == null) {
-                cur = cur.rightNode;
-            } else if (time.compareTo(cur.leftNode.maxTime) > 0) {
-                cur = cur.rightNode;
-            } else {
-                cur = cur.leftNode;
-            }
-        }
-        return cur;
-    }
-
 }
