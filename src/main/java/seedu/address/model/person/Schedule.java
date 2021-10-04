@@ -11,6 +11,9 @@ public class Schedule {
 
     private Task[][] tasks;
 
+    /**
+     * Initialize schedule object.
+     */
     public Schedule() {
         this.tasks = new Task[DAY_OF_WEEK][PERIOD_OF_DAY];
         for (int day = 0; day < DAY_OF_WEEK; day++) {
@@ -22,29 +25,29 @@ public class Schedule {
     /**
      * Adds a new task for a staff.
      * @param dayOfWeek The day of the task in a week.
-     * @param period The period of the task.
+     * @param slot The slot of the task.
      * @param taskName The name of the task.
      */
-    public void addTask(DayOfWeek dayOfWeek, Period period, String taskName) {
-        Task task = new Task(dayOfWeek, period, taskName);
-        tasks[dayOfWeek.getValue() - 1][period.getOrder()] = task;
+    public void addTask(DayOfWeek dayOfWeek, Slot slot, String taskName) {
+        Task task = new Task(dayOfWeek, slot, taskName);
+        tasks[dayOfWeek.getValue() - 1][slot.getOrder()] = task;
     }
 
     /**
      * Removes a new task for a staff.
      * @param dayOfWeek The day of the task in a week.
-     * @param period The period of the task.
+     * @param slot The period of the task.
      */
-    public void removeTask(DayOfWeek dayOfWeek, Period period) {
-        tasks[dayOfWeek.getValue() - 1][period.getOrder()] = null;
+    public void removeTask(DayOfWeek dayOfWeek, Slot slot) {
+        tasks[dayOfWeek.getValue() - 1][slot.getOrder()] = null;
     }
 
     /**
      * Checks whether a staff is working in a certain period.
      * @param dayOfWeek The day want to check.
-     * @param period The period want to check.
+     * @param slot The period want to check.
      */
-    public boolean isWorking(DayOfWeek dayOfWeek, Period period) {
-        return tasks[dayOfWeek.getValue() - 1][period.getOrder()] != null;
+    public boolean isWorking(DayOfWeek dayOfWeek, Slot slot) {
+        return tasks[dayOfWeek.getValue() - 1][slot.getOrder()] != null;
     }
 }
