@@ -69,9 +69,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s FAST address book and {@code userPrefs}. <br>
-     * The data from the sample FAST address book will be used instead if {@code storage}'s FAST address book is not found,
-     * or an empty FAST address book will be used instead if errors occur when reading {@code storage}'s FAST address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s FAST and {@code userPrefs}. <br>
+     * The data from the sample FAST will be used instead if {@code storage}'s FAST is not found,
+     * or an empty FAST will be used instead if errors occur when reading {@code storage}'s FAST.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyFast> fastOptional;
