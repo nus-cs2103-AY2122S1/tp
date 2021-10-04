@@ -40,8 +40,7 @@ public class Score {
      */
     public static String reformatScore(String score) {
         String[] parts = score.split("\\."); // split along decimal point
-        assert parts.length == 2 || parts.length == 1; // integral part must exist
-                                                       // decimal part is optional
+        assert parts.length == 2 || parts.length == 1; // integral part must exist and decimal part is optional
         String integral = parts[0];
         String decimal = parts.length == 2 ? parts[1] : "00";
         assert decimal.length() <= 2; // decimal part contains at most 2 digits
