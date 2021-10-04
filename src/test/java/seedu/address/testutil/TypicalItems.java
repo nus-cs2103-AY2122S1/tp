@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.newmodel.Inventory;
-import seedu.address.newmodel.item.Item;
+import seedu.address.model.Inventory;
+import seedu.address.model.item.Item;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Item} objects to be used in tests.
  */
 public class TypicalItems {
 
@@ -23,7 +23,7 @@ public class TypicalItems {
     public static final Item BANANA_MUFFIN = new ItemBuilder().withName("Banana Muffin")
             .withId("#333333")
             .withTags("baked", "bestseller").build();
-    public static final Item CHOCOCHIP = new ItemBuilder().withName("Chocholate Chip Cookie")
+    public static final Item CHOCOCHIP = new ItemBuilder().withName("Chocolate Chip Cookie")
             .withId("#444444")
             .withTags("baked").build();
     public static final Item DALGONA_COFFEE = new ItemBuilder().withName("Dalgona Coffee")

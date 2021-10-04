@@ -1,0 +1,32 @@
+{
+  "_comment": "Inventory save file which contains the same item values as in TypicalItems#getTypicalInventory()",
+  "items" : [ {
+    "name" : "Apple Pie",
+    "id" : "#222222",
+    "tagged" : [ "baked" ]
+  }, {
+    "name" : "Banana Muffin",
+    "id" : "#333333",
+    "tagged" : [ "baked", "bestseller" ]
+  }, {
+    "name" : "Chocolate Chip Cookie",
+    "id" : "#444444",
+    "tagged" : [ "baked" ]
+  }, {
+    "name" : "Dalgona Coffee",
+    "id" : "#555555",
+    "tagged" : [ ]
+  }, {
+    "name" : "Egg Nog",
+    "id" : "#666666",
+    "tagged" : [ ]
+  }, {
+    "name" : "Forest Cake",
+    "id" : "#777777",
+    "tagged" : [ ]
+  }, {
+    "name" : "Granola Bar",
+    "phone" : "#888888",
+    "tagged" : [ ]
+  } ]
+}
