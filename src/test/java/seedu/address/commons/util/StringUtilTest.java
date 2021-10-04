@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("NumericOverflow")
 public class StringUtilTest {
 
     //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
