@@ -42,6 +42,19 @@ public class Person {
         this.classes = classes;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name) {
+        requireAllNonNull(name);
+        this.name = name;
+        this.phone = null;
+        this.email = null;
+        this.address = null;
+        this.remark = null;
+        this.classes = null;
+    }
+
     public Remark getRemark() {
         return remark;
     }

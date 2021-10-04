@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -58,6 +59,9 @@ public class TuitionCard extends UiPart<Region> {
         limit.setText("Class Limit: " + tuitionClass.getLimit().toString());
         counter.setText("Class session: " + tuitionClass.getCounter().toString());
         timeSlot.setText("Class time slot: " + tuitionClass.getTimeslot().time);
+        ArrayList<String> studentNames = tuitionClass.getStudent().getStudents();
+        String students = processStudents(studentNames);
+        student.setText("Students: " + students);
     }
 
     @Override
@@ -76,5 +80,26 @@ public class TuitionCard extends UiPart<Region> {
         TuitionCard card = (TuitionCard) other;
         return id.getText().equals(card.id.getText())
                 && tuitionClass.equals(card.tuitionClass);
+    }
+
+    /**
+     * Convert students from an arraylist to a string to be displayed in UI
+     * @param students an arraylist from a tuition class
+     * @return a string of all the student names combined
+     */
+    private String processStudents(ArrayList<String> students) {
+        String studentString = "";
+        if (students.size() == 0) {
+            studentString = "No student yet.";
+            return studentString;
+        }
+        String lastStudent = students.get(students.size() - 1);
+        for (String name: students) {
+            studentString += name;
+            if (!name.equals(lastStudent)) {
+                studentString += ", ";
+            }
+        }
+        return studentString;
     }
 }
