@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a Student's assessment.
