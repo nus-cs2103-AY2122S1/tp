@@ -4,18 +4,21 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+'class Trie<T>
+'class "Trie<Tag>" as Trie_Tag_List
 
-UniqueTagList *-right-> "*" Tag
+AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" Trie
+Trie -[hidden]down- UniquePersonList
+Trie -[hidden]down- UniquePersonList
+
+Trie *-right-> "*" String
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person -up-> "*" String
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> Note
 @enduml
