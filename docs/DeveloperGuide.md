@@ -294,8 +294,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | user | be able to sort my contacts | I can see the contact in a certain order |
 | `* *` | user | have access to a help page | I can know how to navigate the app |
 | `*` | potential user exploring the app | be able to see the app populated with sample data | I can easily see how the app works |
-| `*` | user | be able to know which contact I retrieve frequently | I know the contact is frequently contacted |
-| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I know the contact might be obsolete |
+| `*` | user | be able to know which contact I retrieve frequently | I can know which contact is frequently contacted |
+| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I can know which contact might be obsolete |
 | `*` | user | be able to set up profile picture for the contact | I can recognise the person |
 | `*` | forgetful user | be able to have reminders about upcoming classes | I can conduct classes punctually |
 | `*` | Expert user | be able to set up shortcuts | I can do things faster |
@@ -394,6 +394,8 @@ Use case ends.
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The user should have basic knowledge of the Command Line Interface to operate the application smoothly.
+5.  Should be able to hold more than 100 contacts with no noticeable drop in performance.
 
 *{More to be added}*
 
