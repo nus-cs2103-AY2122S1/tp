@@ -22,26 +22,27 @@ public class Student {
 
     // Data fields
     private final Address address;
+    private final Grade grade;
+
+
+
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, ParentContact parentContact, Email email, Address address, Set<Tag> tags) {
+    public Student(Name name, ParentContact parentContact, Email email, Address address, Grade grade, Set<Tag> tags) {
         requireAllNonNull(name, parentContact, email, address, tags);
         this.name = name;
         this.parentContact = parentContact;
         this.email = email;
         this.address = address;
+        this.grade = grade;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
-    }
-
-    public ParentContact getPhone() {
-        return parentContact;
     }
 
     public Email getEmail() {
@@ -50,6 +51,14 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public ParentContact getParentContact() {
+        return parentContact;
+    }
+
+    public Grade getGrade() {
+        return grade;
     }
 
     /**
@@ -89,7 +98,7 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
-                && otherStudent.getPhone().equals(getPhone())
+                && otherStudent.getParentContact().equals(getParentContact())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getAddress().equals(getAddress())
                 && otherStudent.getTags().equals(getTags());
@@ -106,7 +115,7 @@ public class Student {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
+                .append(getParentContact())
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
