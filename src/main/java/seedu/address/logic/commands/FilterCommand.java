@@ -14,6 +14,10 @@ public class FilterCommand extends Command {
 
     private final String category;
 
+    /**
+     * constructor for FilterCommand
+     * @param category type of contacts to be filtered
+     */
     public FilterCommand(String category) {
         requireNonNull(category);
         this.category = category;
