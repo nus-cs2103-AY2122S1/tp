@@ -6,26 +6,29 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Fonts.css"/>
+        <URL value="@Fonts.css" />
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+      <VBox fx:id="mainVbox" prefHeight="471.0" prefWidth="925.0">
+        <MenuBar fx:id="menuBar" prefHeight="75.0" prefWidth="932.0" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
@@ -33,28 +36,43 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
-
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
-
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            <HBox fx:id="windowHbox" prefHeight="513.0" prefWidth="954.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="434.0" prefWidth="474.0" styleClass="pane-with-border">
+                     <children>
+                                      <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                      <padding>
+                        <Insets bottom="5" left="10" right="10" top="5" />
+                      </padding>
+                    </StackPane>
+                                      <StackPane fx:id="commandBoxPlaceholder" prefHeight="27.0" prefWidth="264.0" styleClass="pane-with-border">
+                      <padding>
+                        <Insets bottom="5" left="10" right="10" top="5" />
+                      </padding>
+                    </StackPane>
+                                      <StackPane fx:id="statusbarPlaceholder" prefHeight="17.0" prefWidth="472.0" VBox.vgrow="NEVER" />
+                     </children>
+                  </VBox>
+                  <TabPane prefHeight="322.0" prefWidth="193.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+                    <tabs>
+                      <Tab closable="false" styleClass="dark" text="Staff View">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                                        <VBox fx:id="personList" minWidth="340" prefHeight="431.0" prefWidth="432.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                  <padding>
+                                    <Insets bottom="10" left="10" right="10" top="10" />
+                                  </padding>
+                                  <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </HBox>
       </VBox>
     </Scene>
   </scene>
