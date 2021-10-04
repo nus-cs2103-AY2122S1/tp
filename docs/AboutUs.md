@@ -30,7 +30,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Dion
 
-<img src="images/NoobMaster19.png" width="200px">
+<img src="images/noobmaster19.png" width="200px">
 
 [[github](http://github.com/noobmaster19)] [[portfolio](team/noobmaster.md)]
 
@@ -49,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Shivam Tiwari
 
-<img src="images/Shivlock221b.png" width="200px">
+<img src="images/shivlock221b.png" width="200px">
 
 [[github](https://github.com/Shivlock221b)]
 [[portfolio](team/johndoe.md)]
