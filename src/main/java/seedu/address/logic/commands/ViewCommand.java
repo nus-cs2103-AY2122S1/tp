@@ -7,10 +7,6 @@ import java.util.function.Predicate;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-
-
-
-
 /**
  * Represents a command to view.
  *
