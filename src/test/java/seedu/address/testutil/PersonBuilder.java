@@ -16,12 +16,14 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_MODULE_CODE = "CS2103T";
 
     private Name name;
-    private Phone phone;
     private Email email;
+    private String moduleCode;
+    private Phone phone;
+    private String teleHandle;
     private Set<Tag> tags;
 
     /**
@@ -29,8 +31,8 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        moduleCode = DEFAULT_MODULE_CODE;
         tags = new HashSet<>();
     }
 
