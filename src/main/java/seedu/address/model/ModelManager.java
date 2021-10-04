@@ -130,6 +130,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateScheduleDisplay(Predicate<Person> predicate) {
+        //todo: implement the schedule display
+
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
