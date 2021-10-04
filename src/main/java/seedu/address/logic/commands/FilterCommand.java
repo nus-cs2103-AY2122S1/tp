@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Filters contacts in the address book by category.
  */
-public class FilterCommand extends Command{
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
