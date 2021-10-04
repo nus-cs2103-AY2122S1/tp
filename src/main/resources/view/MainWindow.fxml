@@ -40,19 +40,16 @@
                <children>
                   <VBox prefHeight="434.0" prefWidth="474.0" styleClass="pane-with-border">
                      <children>
-            
                                       <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
                       <padding>
                         <Insets bottom="5" left="10" right="10" top="5" />
                       </padding>
                     </StackPane>
-            
                                       <StackPane fx:id="commandBoxPlaceholder" prefHeight="27.0" prefWidth="264.0" styleClass="pane-with-border">
                       <padding>
                         <Insets bottom="5" left="10" right="10" top="5" />
                       </padding>
                     </StackPane>
-            
                                       <StackPane fx:id="statusbarPlaceholder" prefHeight="17.0" prefWidth="472.0" VBox.vgrow="NEVER" />
                      </children>
                   </VBox>
@@ -62,7 +59,6 @@
                            <content>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                        
                                                         <VBox fx:id="personList" minWidth="340" prefHeight="431.0" prefWidth="432.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                   <padding>
                                     <Insets bottom="10" left="10" right="10" top="10" />
