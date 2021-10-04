@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DoneEventCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterEventCommand;
@@ -17,7 +18,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.ShowDetailsCommand;
+import seedu.address.logic.commands.ShowEventDetailsCommand;
 import seedu.address.logic.commands.SortEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -72,8 +73,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ShowDetailsCommand.COMMAND_WORD:
-            return new ShowDetailsCommandParser().parse(arguments);
+        case ShowEventDetailsCommand.COMMAND_WORD:
+            return new ShowEventDetailsCommandParser().parse(arguments);
 
         //Add new Commands and cases here:
 
@@ -82,7 +83,8 @@ public class AddressBookParser {
         // TODO: removeEvent (Use Parser):
 
         // TODO: doneEvent (Use Parser):
-
+        case DoneEventCommand.COMMAND_WORD:
+            return new DoneEventCommandParser().parse(arguments);
 
         // TODO: sortEvents:
         case SortEventCommand.COMMAND_WORD:

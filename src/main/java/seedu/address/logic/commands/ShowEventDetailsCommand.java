@@ -13,7 +13,7 @@ import seedu.address.model.event.Event;
 /**
  * Shows the details of an existing Event in the Managera Event list.
  */
-public class ShowDetailsCommand extends Command {
+public class ShowEventDetailsCommand extends Command {
 
     public static final String COMMAND_WORD = "showDetails";
 
@@ -27,7 +27,7 @@ public class ShowDetailsCommand extends Command {
     /**
      * Creates an ShowDetailsCommand to find Event with the specified {@code eventName}
      */
-    public ShowDetailsCommand(Predicate<Event> eventName) {
+    public ShowEventDetailsCommand(Predicate<Event> eventName) {
         requireNonNull(eventName);
         this.eventName = eventName;
     }
@@ -55,7 +55,7 @@ public class ShowDetailsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ShowDetailsCommand // instanceof handles nulls
-                && eventName.equals(((ShowDetailsCommand) other).eventName)); // state check
+                || (other instanceof ShowEventDetailsCommand // instanceof handles nulls
+                && eventName.equals(((ShowEventDetailsCommand) other).eventName)); // state check
     }
 }

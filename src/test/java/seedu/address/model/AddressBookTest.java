@@ -117,6 +117,15 @@ public class AddressBookTest {
     }
 
     @Test
+    public void markEventAsDone_eventInAddressBook_isMarkedAsDone() {
+        addressBook.addEvent(SAMPLE_EVENT);
+        assertTrue(addressBook.getEventList().contains(SAMPLE_EVENT));
+        addressBook.markEventAsDone(SAMPLE_EVENT);
+        assertTrue(addressBook.hasEvent(SAMPLE_EVENT.markAsDone()));
+        assertTrue(SAMPLE_EVENT.markAsDone().getIsDone());
+    }
+
+    @Test
     public void addEvent_eventNotInAddressBook_returnTrue() {
         addressBook.addEvent(SAMPLE_EVENT);
         assertTrue(addressBook.hasEvent(SAMPLE_EVENT));
