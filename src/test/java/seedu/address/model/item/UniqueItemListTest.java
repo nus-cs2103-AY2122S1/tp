@@ -1,4 +1,4 @@
-package seedu.address.newmodel.item;
+package seedu.address.model.item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.newmodel.item.exceptions.DuplicateItemException;
-import seedu.address.newmodel.item.exceptions.ItemNotFoundException;
+import seedu.address.model.item.exceptions.DuplicateItemException;
+import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.testutil.ItemBuilder;
 
 public class UniqueItemListTest {

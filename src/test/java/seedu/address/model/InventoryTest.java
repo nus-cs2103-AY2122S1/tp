@@ -1,4 +1,4 @@
-package seedu.address.newmodel;
+package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.newmodel.item.Item;
-import seedu.address.newmodel.item.exceptions.DuplicateItemException;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.testutil.ItemBuilder;
 
 public class InventoryTest {
