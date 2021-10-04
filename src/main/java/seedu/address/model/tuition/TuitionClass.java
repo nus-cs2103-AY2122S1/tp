@@ -114,4 +114,16 @@ public class TuitionClass {
         this.student = new Student(students);
         return this;
     }
+
+    public TuitionClass addStudent(Person person) {
+        ArrayList<String> nowStudents = this.student.students;
+        String name = person.getName().fullName;
+        for (String s: nowStudents) {
+            if (s.equals(name)) {
+                return null;
+            }
+        }
+        nowStudents.add(person.getName().fullName);
+        return this;
+    }
 }

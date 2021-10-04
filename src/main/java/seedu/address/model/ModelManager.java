@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
+import seedu.address.model.tuition.Student;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
@@ -219,6 +221,25 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedTuition);
 
         addressBook.setTuition(target, editedTuition);
+    }
+
+    @Override
+    public Person getStudentIndex(Index index) {
+        requireNonNull(index);
+        return addressBook.getPerson(index);
+    }
+
+    @Override
+    public TuitionClass getTuitionClassIndex(Index index) {
+        requireNonNull(index);
+        return addressBook.getTuition(index);
+    }
+
+    @Override
+    public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
+        requireNonNull(tuitionClass);
+        requireNonNull(person);
+        return addressBook.addToClass(tuitionClass, person);
     }
 
 }

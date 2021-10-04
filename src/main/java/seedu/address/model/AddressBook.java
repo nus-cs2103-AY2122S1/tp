@@ -7,8 +7,10 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tuition.Student;
 import seedu.address.model.tuition.TuitionClass;
 import seedu.address.model.tuition.UniqueTuitionList;
 
@@ -101,6 +103,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    public Person getPerson(Index index) {
+        requireNonNull(index);
+        if (persons.personListSize() < index.getOneBased()) {
+            return null;
+        }
+        return persons.getPerson(index.getOneBased() - 1);
+    }
+
+    public TuitionClass getTuition(Index index) {
+        requireNonNull(index);
+        if (tuitons.tuitionListSize() < index.getOneBased()) {
+            return null;
+        }
+        return tuitons.getTuitionClass(index.getOneBased() - 1);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -183,5 +201,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         tuitons.remove(key);
     }
 
+    public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
+        return tuitionClass.addStudent(person);
+    }
 
 }
