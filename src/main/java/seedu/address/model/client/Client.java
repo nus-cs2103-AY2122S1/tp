@@ -9,7 +9,7 @@ import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
 
 /**
- * Represents a Client in the address book.
+ * Represents a Client in the app.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Client implements Category {
