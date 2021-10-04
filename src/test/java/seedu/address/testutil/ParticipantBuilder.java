@@ -1,20 +1,24 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.nextofkin.NextOfKin;
+import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
+import seedu.address.model.participant.Email;
+import seedu.address.model.participant.Name;
+import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,10 +26,10 @@ import seedu.address.model.util.SampleDataUtil;
 public class ParticipantBuilder {
 
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NAME = VALID_NAME_AMY;
+    public static final String DEFAULT_PHONE = VALID_PHONE_AMY;
+    public static final String DEFAULT_EMAIL = VALID_EMAIL_AMY;
+    public static final String DEFAULT_ADDRESS = VALID_ADDRESS_AMY;
     public static final BirthDate DEFAULT_BIRTHDATE = BirthDate.of(2000, 8, 4);
     public static final NextOfKin DEFAULT_NEXT_OF_KIN = new NextOfKin(new Name("Bebe Bee"), new Phone("80232345"),
         new Tag("Spouse"));
@@ -48,21 +52,6 @@ public class ParticipantBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        birthDate = DEFAULT_BIRTHDATE;
-        notes = new HashSet<>();
-        nextOfKins = new ArrayList<>();
-    }
-
-    /**
-     * Initializes the ParticipantBuilder with the data of {@code personToCopy}.
-     */
-    public ParticipantBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
-        // Participant to be empty
         birthDate = BirthDate.notSpecified();
         notes = new HashSet<>();
         nextOfKins = new ArrayList<>();

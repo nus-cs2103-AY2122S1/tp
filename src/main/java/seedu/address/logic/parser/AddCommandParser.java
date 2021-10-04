@@ -16,14 +16,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.nextofkin.NextOfKin;
+import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
+import seedu.address.model.participant.Email;
+import seedu.address.model.participant.Name;
+import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
