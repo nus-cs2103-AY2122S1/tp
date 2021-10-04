@@ -91,12 +91,13 @@ public class EditCommand extends Command {
         assert studentToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(studentToEdit.getName());
-        ParentContact updatedParentContact = editPersonDescriptor.getPhone().orElse(studentToEdit.getPhone());
+        ParentContact updatedParentContact = editPersonDescriptor.getPhone().orElse(studentToEdit.getParentContact());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(studentToEdit.getAddress());
+        Grade updatedGrade = editPersonDescriptor.getGrade().orElse(studentToEdit.getGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress, updatedTags);
+        return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress, updatedGrade, updatedTags);
     }
 
     @Override
@@ -126,6 +127,7 @@ public class EditCommand extends Command {
         private ParentContact parentContact;
         private Email email;
         private Address address;
+        private Grade grade;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -179,6 +181,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setGrade(Grade grade) {
+            this.grade = grade;
+        }
+
+        public Optional<Grade> getGrade() {
+            return Optional.ofNullable(grade);
         }
 
         /**
