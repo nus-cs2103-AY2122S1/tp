@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Grade;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Represents a Lesson in the tuitiONE book.
@@ -35,7 +35,7 @@ public class Lesson {
     private final DayOfWeek day;
     private final LocalTime startTime;
     private final double price;
-    private final Set<Person> students; // todo consider linking students to classes
+    private final Set<Student> students; // todo consider linking students to classes
 
     /**
      * Constructs a {@code Lesson}.
@@ -85,7 +85,7 @@ public class Lesson {
      * Returns an immutable student set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getStudents() {
+    public Set<Student> getStudents() {
         return Collections.unmodifiableSet(students);
     }
 
