@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonFastStorage addressBookStorage = new JsonFastStorage(getTempFilePath("ab"));
+        JsonFastStorage fastStorage = new JsonFastStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(fastStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -51,8 +51,8 @@ public class StorageManagerTest {
     public void fastReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonFastStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonFastStorageTest} class.
          */
         Fast original = getTypicalFast();
         storageManager.saveFast(original);

@@ -155,7 +155,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveFast(ReadOnlyFast addressBook, Path filePath) throws IOException {
+        public void saveFast(ReadOnlyFast fast, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

@@ -24,9 +24,9 @@ public class JsonSerializableFastTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableFast dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableFast.class).get();
-        Fast addressBookFromFile = dataFromFile.toModelType();
-        Fast typicalPersonsAddressBook = TypicalPersons.getTypicalFast();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+        Fast fastFromFile = dataFromFile.toModelType();
+        Fast typicalPersonsFast = TypicalPersons.getTypicalFast();
+        assertEquals(fastFromFile, typicalPersonsFast);
     }
 
     @Test

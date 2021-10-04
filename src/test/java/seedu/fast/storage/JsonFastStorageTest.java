@@ -64,24 +64,24 @@ public class JsonFastStorageTest {
     public void readAndSaveFast_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempFast.json");
         Fast original = getTypicalFast();
-        JsonFastStorage jsonAddressBookStorage = new JsonFastStorage(filePath);
+        JsonFastStorage jsonFastStorage = new JsonFastStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveFast(original, filePath);
-        ReadOnlyFast readBack = jsonAddressBookStorage.readFast(filePath).get();
+        jsonFastStorage.saveFast(original, filePath);
+        ReadOnlyFast readBack = jsonFastStorage.readFast(filePath).get();
         assertEquals(original, new Fast(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        jsonAddressBookStorage.saveFast(original, filePath);
-        readBack = jsonAddressBookStorage.readFast(filePath).get();
+        jsonFastStorage.saveFast(original, filePath);
+        readBack = jsonFastStorage.readFast(filePath).get();
         assertEquals(original, new Fast(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveFast(original); // file path not specified
-        readBack = jsonAddressBookStorage.readFast().get(); // file path not specified
+        jsonFastStorage.saveFast(original); // file path not specified
+        readBack = jsonFastStorage.readFast().get(); // file path not specified
         assertEquals(original, new Fast(readBack));
 
     }
@@ -92,12 +92,12 @@ public class JsonFastStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code fast} at the specified {@code filePath}.
      */
-    private void saveFast(ReadOnlyFast addressBook, String filePath) {
+    private void saveFast(ReadOnlyFast fast, String filePath) {
         try {
             new JsonFastStorage(Paths.get(filePath))
-                    .saveFast(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveFast(fast, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

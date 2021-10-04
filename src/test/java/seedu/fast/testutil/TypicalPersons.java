@@ -60,14 +60,14 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code Fast} with all the typical persons.
      */
     public static Fast getTypicalFast() {
-        Fast ab = new Fast();
+        Fast fast = new Fast();
         for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+            fast.addPerson(person);
         }
-        return ab;
+        return fast;
     }
 
     public static List<Person> getTypicalPersons() {

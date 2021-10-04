@@ -12,7 +12,7 @@ import seedu.fast.model.ReadOnlyUserPrefs;
 import seedu.fast.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of FAST data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -21,7 +21,7 @@ public class StorageManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code FastStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(FastStorage fastStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -47,7 +47,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ FAST methods ==============================
 
     @Override
     public Path getFastFilePath() {
@@ -66,14 +66,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveFast(ReadOnlyFast addressBook) throws IOException {
-        saveFast(addressBook, fastStorage.getFastFilePath());
+    public void saveFast(ReadOnlyFast fast) throws IOException {
+        saveFast(fast, fastStorage.getFastFilePath());
     }
 
     @Override
-    public void saveFast(ReadOnlyFast addressBook, Path filePath) throws IOException {
+    public void saveFast(ReadOnlyFast fast, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        fastStorage.saveFast(addressBook, filePath);
+        fastStorage.saveFast(fast, filePath);
     }
 
 }

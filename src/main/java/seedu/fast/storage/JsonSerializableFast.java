@@ -24,7 +24,7 @@ class JsonSerializableFast {
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableFast} with the given persons.
      */
     @JsonCreator
     public JsonSerializableFast(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
@@ -32,29 +32,29 @@ class JsonSerializableFast {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyFast} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableFast}.
      */
     public JsonSerializableFast(ReadOnlyFast source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this FAST into the model's {@code Fast} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public Fast toModelType() throws IllegalValueException {
-        Fast addressBook = new Fast();
+        Fast fast = new Fast();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (fast.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            fast.addPerson(person);
         }
-        return addressBook;
+        return fast;
     }
 
 }

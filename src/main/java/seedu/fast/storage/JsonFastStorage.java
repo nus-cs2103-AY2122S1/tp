@@ -45,14 +45,14 @@ public class JsonFastStorage implements FastStorage {
     public Optional<ReadOnlyFast> readFast(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableFast> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableFast> jsonFast = JsonUtil.readJsonFile(
                 filePath, JsonSerializableFast.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonFast.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonFast.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,8 +60,8 @@ public class JsonFastStorage implements FastStorage {
     }
 
     @Override
-    public void saveFast(ReadOnlyFast addressBook) throws IOException {
-        saveFast(addressBook, filePath);
+    public void saveFast(ReadOnlyFast fast) throws IOException {
+        saveFast(fast, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonFastStorage implements FastStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveFast(ReadOnlyFast addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveFast(ReadOnlyFast fast, Path filePath) throws IOException {
+        requireNonNull(fast);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableFast(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableFast(fast), filePath);
     }
 
 }

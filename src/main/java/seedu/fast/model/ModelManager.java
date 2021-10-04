@@ -14,7 +14,7 @@ import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the FAST address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -24,13 +24,13 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given fast and userPrefs.
      */
     public ModelManager(ReadOnlyFast fast, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(fast, userPrefs);
 
-        logger.fine("Initializing with address book: " + fast + " and user prefs " + userPrefs);
+        logger.fine("Initializing with FAST address book: " + fast + " and user prefs " + userPrefs);
 
         this.fast = new Fast(fast);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -71,12 +71,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setFastFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setFastFilePath(addressBookFilePath);
+    public void setFastFilePath(Path fastFilePath) {
+        requireNonNull(fastFilePath);
+        userPrefs.setFastFilePath(fastFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== FAST ================================================================================
 
     @Override
     public void setFast(ReadOnlyFast fast) {
@@ -116,7 +116,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedFast}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {

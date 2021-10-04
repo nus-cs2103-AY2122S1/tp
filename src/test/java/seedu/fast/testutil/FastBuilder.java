@@ -4,9 +4,9 @@ import seedu.fast.model.Fast;
 import seedu.fast.model.person.Person;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building FAST objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code Fast fast = new FastBuilder().withPerson("John", "Doe").build();}
  */
 public class FastBuilder {
 
@@ -21,7 +21,7 @@ public class FastBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code Fast} that we are building.
      */
     public FastBuilder withPerson(Person person) {
         fast.addPerson(person);
