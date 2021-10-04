@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 

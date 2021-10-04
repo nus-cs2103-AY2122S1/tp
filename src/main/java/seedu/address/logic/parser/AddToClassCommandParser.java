@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddToClassCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.stream.Stream;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddToClassCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class AddToClassCommandParser implements Parser<AddToClassCommand> {
 
@@ -17,14 +17,15 @@ public class AddToClassCommandParser implements Parser<AddToClassCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_STUDENT, PREFIX_TUITION_CLASS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT, PREFIX_TUITION_CLASS)
-                || !argMultimap.getPreamble().isEmpty()) {
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToClassCommand.MESSAGE_USAGE));
+                    || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddToClassCommand.MESSAGE_USAGE));
         }
 
         Index studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT).get());
         Index classIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUITION_CLASS).get());
         return new AddToClassCommand(studentIndex, classIndex);
-}
+    }
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

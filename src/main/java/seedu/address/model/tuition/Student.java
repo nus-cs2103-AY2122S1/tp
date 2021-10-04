@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 
 import seedu.address.model.person.Classes;
-import seedu.address.model.person.Person;
 
 /**
  * Represents students who are in this tuition class

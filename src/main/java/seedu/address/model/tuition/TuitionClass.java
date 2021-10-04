@@ -106,7 +106,7 @@ public class TuitionClass {
     }
 
     /**
-     * Change the students in this class to the students in the input.
+     * Changes the students in this class to the students in the input.
      * @param students a list of students names to be added.
      * @return this TuitionClass
      */
@@ -115,6 +115,11 @@ public class TuitionClass {
         return this;
     }
 
+    /**
+     * Adds a new student to an existing class if the student is not already in the class.
+     * @param person student to be added
+     * @return the tuition class after modification
+     */
     public TuitionClass addStudent(Person person) {
         ArrayList<String> nowStudents = this.student.students;
         String name = person.getName().fullName;

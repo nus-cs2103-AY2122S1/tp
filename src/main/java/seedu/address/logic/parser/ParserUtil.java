@@ -181,9 +181,9 @@ public class ParserUtil {
      * @return a single student object containing an arraylist
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Student parseStudent(List students) throws ParseException{
+    public static Student parseStudent(List students) throws ParseException {
         requireNonNull(students);
-        String trimmedStudents = (String)students.get(0);
+        String trimmedStudents = (String) students.get(0);
         String[] studentNames = trimmedStudents.split(",");
         ArrayList<String> studentList = new ArrayList<>();
         for (String s: studentNames) {

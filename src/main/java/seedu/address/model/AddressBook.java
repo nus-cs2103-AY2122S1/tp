@@ -10,7 +10,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.tuition.Student;
 import seedu.address.model.tuition.TuitionClass;
 import seedu.address.model.tuition.UniqueTuitionList;
 

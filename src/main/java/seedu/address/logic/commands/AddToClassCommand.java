@@ -1,32 +1,47 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.TuitionClass;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
-public class AddToClassCommand extends Command{
+
+
+
+public class AddToClassCommand extends Command {
     public static final String COMMAND_WORD = "addtoclass";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add students to existing class. "
             + "Parameters: "
             + PREFIX_STUDENT + "STUDENT_INDEX"
             + PREFIX_TUITION_CLASS + "CLASS_INDEX";
-    private static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found.";
-    private static final String MESSAGE_CLASS_NOT_FOUND = "This tuition class is not found.";
     public static final String MESSAGE_SUCCESS = "New student %1$s is added to class: %2$s";
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
+    private static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found.";
+    private static final String MESSAGE_CLASS_NOT_FOUND = "This tuition class is not found.";
+    private Index studentIndex;
+    private Index classIndex;
 
-    private Index studentIndex, classIndex;
-
+    /**
+     * Constructor for AddToClass command.
+     * @param studentIndex index of student to be added.
+     * @param classIndex index of class to be added to.
+     */
     public AddToClassCommand(Index studentIndex, Index classIndex) {
         this.classIndex = classIndex;
         this.studentIndex = studentIndex;
     }
 
+    /**
+     * Adds an existing student to an existing class.
+     * @param model {@code Model} which the command should operate on.
+     * @return a CommandResult to be shown to users.
+     * @throws CommandException if the student or class is not found, or the student is in the class already.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

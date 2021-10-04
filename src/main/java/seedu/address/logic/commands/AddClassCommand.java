@@ -2,15 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.Student;
 import seedu.address.model.tuition.TuitionClass;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class AddClassCommand extends Command {
     public static final String COMMAND_WORD = "addclass";
