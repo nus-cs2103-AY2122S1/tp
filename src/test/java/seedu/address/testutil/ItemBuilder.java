@@ -3,18 +3,18 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.newmodel.item.Item;
-import seedu.address.newmodel.item.Name;
-import seedu.address.newmodel.tag.Tag;
-import seedu.address.newmodel.util.SampleDataUtil;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Item objects.
  */
 public class ItemBuilder {
 
-    public static final String DEFAULT_NAME = "Banana Muffin";
-    public static final String DEFAULT_ID = "#111111";
+    public static final String DEFAULT_NAME = "Cream Puff";
+    public static final String DEFAULT_ID = "#654321";
 
     private Name name;
     private String id;
