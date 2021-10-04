@@ -13,10 +13,9 @@ public class AddClassCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CLASS = "This time slot has already been taken in the address book";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tuition whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add tuition class given name, limit, sessions, timeslot, and student \n"
+            + "Parameters: NAME LIMIT COUNTER TIMESLOT STUDENT\n"
+            + "Example: " + COMMAND_WORD + " n/Physics l/10 c/4 ts/Mon 4pm, s/";
 
     private TuitionClass toAdd;
 
