@@ -34,13 +34,16 @@ public class AppointmentCommandParser implements Parser {
         }
 
         String date = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
-
-        try {
-            // converts the date to the specified format
-            date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        } catch (DateTimeParseException dtpe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AppointmentCommand.MESSAGE_USAGE), dtpe);
+        if (!date.equals("")) {
+            try {
+                // converts the date to the specified format
+                date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            } catch (DateTimeParseException dtpe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AppointmentCommand.MESSAGE_USAGE), dtpe);
+            }
+        } else {
+            date = Appointment.NO_APPOINTMENT;
         }
 
         return new AppointmentCommand(index, new Appointment(date));

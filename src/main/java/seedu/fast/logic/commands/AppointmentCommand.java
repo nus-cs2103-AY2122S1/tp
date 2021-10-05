@@ -30,6 +30,7 @@ public class AppointmentCommand extends Command {
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s";
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
 
     private final Index index;
     private final Appointment appointment;
@@ -72,9 +73,14 @@ public class AppointmentCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit, Person editedPerson) {
-        String message = (personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT))
-                ? MESSAGE_ADD_APPOINTMENT_SUCCESS
-                : MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
+        String message = "";
+        if (editedPerson.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT)) {
+            message = MESSAGE_DELETE_APPOINTMENT_SUCCESS;
+        } else if (personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT)) {
+            message = MESSAGE_ADD_APPOINTMENT_SUCCESS;
+        } else {
+            message = MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
+        }
         return String.format(message, editedPerson.getName().fullName, editedPerson.getAppointment().getDate());
     }
 
