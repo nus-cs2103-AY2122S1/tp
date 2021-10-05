@@ -93,7 +93,7 @@ public class StudentBuilder {
      * @return built student
      */
     public Student build() {
-        // TODO zhi hao
+        // TODO Double confirm, do we need to load a group from the model for this testUtil method/class?
         return new Student(name, phone, email, group);
     }
 

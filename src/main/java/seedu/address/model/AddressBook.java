@@ -58,7 +58,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
-        // setGroups(newData.getGroupList()); //TODO Load group data
+        // setGroups(newData.getGroupList()); //TODO Load group data in the future
     }
 
     //// student-level operations
