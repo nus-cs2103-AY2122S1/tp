@@ -5,8 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.UniqueProductList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +19,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueClientList clients;
+    private final UniqueProductList products;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +31,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        clients = new UniqueClientList();
+        products = new UniqueProductList();
     }
 
     public AddressBook() {}
@@ -48,6 +56,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the client list with {@code clients}.
+     * {@code clients} must not contain duplicate clients.
+     */
+    public void setClients(List<Client> clients) {
+        this.clients.setClients(clients);
+    }
+
+    /**
+     * Replaces the contents of the product list with {@code products}.
+     * {@code products} must not contain duplicate products.
+     */
+    public void setProducts(List<Product> products) {
+        this.products.setProducts(products);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -67,11 +91,43 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     */
+    public boolean hasClient(Client client) {
+        requireNonNull(client);
+        return clients.contains(client);
+    }
+
+    /**
+     * Returns true if a product with the same identity as {@code product} exists in the address book.
+     */
+    public boolean hasProduct(Product product) {
+        requireNonNull(product);
+        return products.contains(product);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Adds a client to the address book.
+     * The client must not already exist in the address book.
+     */
+    public void addClient(Client c) {
+        clients.add(c);
+    }
+
+    /**
+     * Adds a product to the address book.
+     * The product must not already exist in the address book.
+     */
+    public void addProduct(Product p) {
+        products.add(p);
     }
 
     /**
@@ -107,12 +163,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Client> getClientList() {
+        return clients.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Product> getProductList() {
+        return products.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons));
     }
-
+    
     @Override
     public int hashCode() {
         return persons.hashCode();
