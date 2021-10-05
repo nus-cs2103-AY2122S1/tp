@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.academydirectory.commons.core.GuiSettings;
@@ -127,6 +130,15 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public <T> ObservableList<T> getFilteredStudentListView(Function<? super Student, ? extends T> function) {
+        requireNonNull(function);
+        return filteredStudents
+                .stream()
+                .map(function)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override

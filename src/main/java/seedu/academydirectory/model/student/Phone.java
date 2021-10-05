@@ -7,7 +7,7 @@ import static seedu.academydirectory.commons.util.AppUtil.checkArgument;
  * Represents a Student's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements Information {
 
 
     public static final String MESSAGE_CONSTRAINTS =
