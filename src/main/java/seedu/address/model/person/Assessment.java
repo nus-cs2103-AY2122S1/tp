@@ -49,6 +49,10 @@ public class Assessment {
         return type + name.substring(1);
     }
 
+    public String getName() {
+        return value;
+    }
+
     public void setScores(String id, Score score) {
         scores.put(id, score);
     }
@@ -56,6 +60,19 @@ public class Assessment {
     @Override
     public String toString() {
         return value;
+    }
+
+    /**
+     * Returns true if both assessments have the same name.
+     * This defines a weaker notion of equality between two assessments.
+     */
+    public boolean isSameAssessment(Assessment otherAssessment) {
+        if (otherAssessment == this) {
+            return true;
+        }
+
+        return otherAssessment != null
+                && otherAssessment.getName().equals(getName());
     }
 
     @Override
