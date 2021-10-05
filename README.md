@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/ay2122s1-cs2103t-t12-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/ay2122s1-cs2103t-t12-4/tp/actions)
+[![CI Status](https://github.com/ay2122s1-cs2103t-t12-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T12-4/tp/actions)
 
 # TutAssistor
 

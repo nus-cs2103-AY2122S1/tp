@@ -1,5 +1,6 @@
 package seedu.address.model.tuition;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
@@ -12,7 +13,7 @@ public class TuitionClass {
     private final ClassLimit limit;
     private final Counter counter;
     private final Timeslot timeslot;
-    private final Student student;
+    private Student student;
 
     /**
      * Constructor for Tuition Class.
@@ -102,5 +103,32 @@ public class TuitionClass {
                 .append("; Students: ")
                 .append(getStudent());
         return builder.toString();
+    }
+
+    /**
+     * Changes the students in this class to the students in the input.
+     * @param students a list of students names to be added.
+     * @return this TuitionClass
+     */
+    public TuitionClass changeStudents(ArrayList<String> students) {
+        this.student = new Student(students);
+        return this;
+    }
+
+    /**
+     * Adds a new student to an existing class if the student is not already in the class.
+     * @param person student to be added
+     * @return the tuition class after modification
+     */
+    public TuitionClass addStudent(Person person) {
+        ArrayList<String> nowStudents = this.student.students;
+        String name = person.getName().fullName;
+        for (String s: nowStudents) {
+            if (s.equals(name)) {
+                return null;
+            }
+        }
+        nowStudents.add(person.getName().fullName);
+        return this;
     }
 }

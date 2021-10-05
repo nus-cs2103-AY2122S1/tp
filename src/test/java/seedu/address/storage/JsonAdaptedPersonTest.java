@@ -16,7 +16,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tuition.TuitionClass;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -34,7 +33,9 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final ArrayList<TuitionClass> VALID_CLASSES = BENSON.getClasses().getClasses();
+    private static final List<JsonAdaptedTuition> VALID_CLASSES = BENSON.getClasses().getClasses().stream()
+            .map(JsonAdaptedTuition::new)
+            .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

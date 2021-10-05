@@ -37,6 +37,22 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns a person with the same name as the input person.
+     * @param toGet the person to be gotten.
+     * @return a person object with the same name as the input.
+     */
+    public Person getSameNamePerson(Person toGet) {
+        requireAllNonNull(toGet);
+        for (Person person: internalList) {
+            if (person.getSameNamePerson(toGet) != null) {
+                Person returnPerson = person.getSameNamePerson(toGet);
+                return returnPerson;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -133,5 +149,13 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    public Person getPerson(int index) {
+        return this.internalList.get(index);
+    }
+
+    public int personListSize() {
+        return this.internalList.size();
     }
 }

@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tuition.TuitionClass;
@@ -101,6 +102,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    public Person getPerson(Index index) {
+        requireNonNull(index);
+        if (persons.personListSize() < index.getOneBased()) {
+            return null;
+        }
+        return persons.getPerson(index.getOneBased() - 1);
+    }
+
+    public TuitionClass getTuition(Index index) {
+        requireNonNull(index);
+        if (tuitons.tuitionListSize() < index.getOneBased()) {
+            return null;
+        }
+        return tuitons.getTuitionClass(index.getOneBased() - 1);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -183,5 +200,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         tuitons.remove(key);
     }
 
+    public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
+        return tuitionClass.addStudent(person);
+    }
+
+    /**
+     * Returns a person with the same name as the input person.
+     * @param otherPerson the person to be checked
+     * @return the person with the same name as input.
+     */
+    public Person getSameNamePerson(Person otherPerson) {
+        return this.persons.getSameNamePerson(otherPerson);
+    }
+
+    /**
+     * Updates the tuition class when a new student is added
+     * or information of the tuition class has been changed.
+     * @param tuitionClass the tuition class that has been changed.
+     */
+    public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
+        for (Person person: persons) {
+            person.updateTuitionClass(tuitionClass);
+        }
+    }
 
 }

@@ -27,7 +27,7 @@ import seedu.address.model.tuition.TuitionClass;
  */
 public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
-    public static final ArrayList<Person> SAMPLE_STUDENT = new ArrayList<>();
+    public static final ArrayList<String> SAMPLE_STUDENT = new ArrayList<>();
     public static final Student SAMPLE_STUDENTS = new Student(SAMPLE_STUDENT);
     public static final TuitionClass SAMPLE_TUITION_CLASS =
             new TuitionClass(new ClassName("Physics"),

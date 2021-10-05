@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -206,6 +207,31 @@ public class AddCommandTest {
          */
         @Override
         public void setTuition(TuitionClass target, TuitionClass editedTuition) {
+
+        }
+
+        @Override
+        public Person getStudent(Index index) {
+            return null;
+        }
+
+        @Override
+        public TuitionClass getTuitionClass(Index index) {
+            return null;
+        }
+
+        @Override
+        public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
+            return null;
+        }
+
+        @Override
+        public Person getSameNamePerson(Person otherPerson) {
+            return null;
+        }
+
+        @Override
+        public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
 
         }
     }

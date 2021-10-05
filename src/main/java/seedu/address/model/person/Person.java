@@ -2,12 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * Represents a Person in the address book.
@@ -42,6 +44,19 @@ public class Person {
         this.classes = classes;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name) {
+        requireAllNonNull(name);
+        this.name = name;
+        this.phone = null;
+        this.email = null;
+        this.address = null;
+        this.remark = null;
+        this.classes = null;
+    }
+
     public Remark getRemark() {
         return remark;
     }
@@ -67,11 +82,31 @@ public class Person {
     }
 
     /**
+     * Adds a new tuition class to the student's class list.
+     * @param tuitionClass The tuition class to be added.
+     * @return the updated Classes object.
+     */
+    public Classes addClass(TuitionClass tuitionClass) {
+        Classes updatedClass = this.getClasses().addClass(tuitionClass);
+        return updatedClass;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Adds a new tag to the person.
+     * @param tag tag to be added
+     * @return the updated set of tag
+     */
+    public Set<Tag> addTag(Tag tag) {
+        this.tags.add(tag);
+        return this.tags;
     }
 
     /**
@@ -85,6 +120,18 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public Person getSameNamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return this;
+        }
+        boolean sameName = otherPerson != null
+                && otherPerson.getName().equals(getName());
+        if (sameName) {
+            return this;
+        }
+        return null;
     }
 
     /**
@@ -139,6 +186,22 @@ public class Person {
             classes.getClasses().forEach(builder::append);
         }
         return builder.toString();
+    }
+
+    /**
+     * Updates the tuition class when a new student is added
+     * or information of the tuition class has been changed.
+     * @param tuitionClass the tuition class that has been changed.
+     */
+    public void updateTuitionClass(TuitionClass tuitionClass) {
+        ArrayList<TuitionClass> tuitionClasses = classes.getClasses();
+        String tuitionName = tuitionClass.getName().getName();
+        for (TuitionClass tuition: tuitionClasses) {
+            if (tuition.getName().getName().equals(tuitionName)) {
+                int position = tuitionClasses.indexOf(tuition);
+                tuitionClasses.set(position, tuitionClass);
+            }
+        }
     }
 
 }

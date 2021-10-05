@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -17,6 +19,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Counter;
+import seedu.address.model.tuition.Student;
 import seedu.address.model.tuition.Timeslot;
 
 /**
@@ -179,5 +182,26 @@ public class ParserUtil {
 
         return new Timeslot(trimmedName);
     }
+
+    /**
+     * Parses a {@code List students} into a {@code Student}.
+     * @param students a list of students, each of which is a string
+     * @return a single student object containing an arraylist
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Student parseStudent(List students) throws ParseException {
+        requireNonNull(students);
+        String trimmedStudents = (String) students.get(0);
+        String[] studentNames = trimmedStudents.split(",");
+        ArrayList<String> studentList = new ArrayList<>();
+        for (String s: studentNames) {
+            if (!Name.isValidName(s)) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
+            studentList.add(s);
+        }
+        return new Student(studentList);
+    }
+
 
 }

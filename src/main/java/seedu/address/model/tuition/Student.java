@@ -5,20 +5,19 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 
 import seedu.address.model.person.Classes;
-import seedu.address.model.person.Person;
 
 /**
  * Represents students who are in this tuition class
  */
 public class Student {
-    public final ArrayList<Person> students;
+    public final ArrayList<String> students;
 
     /**
      * Constructor for student class.
      *
      * @param students
      */
-    public Student(ArrayList<Person> students) {
+    public Student(ArrayList<String> students) {
         requireNonNull(students);
         this.students = students;
     }
@@ -45,7 +44,7 @@ public class Student {
      * @param cmpStudents
      * @return
      */
-    public boolean equalClasses(ArrayList<Person> cmpStudents) {
+    public boolean equalClasses(ArrayList<String> cmpStudents) {
         if (cmpStudents.size() != this.students.size()) {
             return false;
         }
@@ -57,7 +56,7 @@ public class Student {
         return true;
     }
 
-    public ArrayList<Person> getStudents() {
+    public ArrayList<String> getStudents() {
         return students;
     }
 }
