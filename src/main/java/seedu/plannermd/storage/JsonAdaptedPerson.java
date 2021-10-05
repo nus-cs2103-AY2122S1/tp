@@ -1,6 +1,5 @@
 package seedu.plannermd.storage;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,11 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.plannermd.commons.exceptions.IllegalValueException;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
-import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -108,7 +107,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (birthDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, BirthDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT
+                    , BirthDate.class.getSimpleName()));
         }
         if (!BirthDate.isValidBirthDate(birthDate)) {
             throw new IllegalValueException(BirthDate.MESSAGE_CONSTRAINTS);

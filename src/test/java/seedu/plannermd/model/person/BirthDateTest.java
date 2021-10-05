@@ -23,6 +23,7 @@ public class BirthDateTest {
     public void isValidBirthDate_validBirthDate_success() {
         assertTrue(BirthDate.isValidBirthDate("12/2/2021")); // one character
         assertTrue(BirthDate.isValidBirthDate("28/03/2021"));
+        assertTrue(BirthDate.isValidBirthDate("3/3/2021"));
     }
     @Test
     public void isValidBirthDate_invalidBirthDate_success() {
