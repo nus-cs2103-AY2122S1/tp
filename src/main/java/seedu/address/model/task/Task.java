@@ -24,15 +24,14 @@ public class Task {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof Task && taskName.equals(((Task) other ).getTaskName()));
+                || (other instanceof Task && taskName.equals(((Task) other).getTaskName()));
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTaskName(String test) {
-        boolean x = test.matches(VALIDATION_REGEX);
-        return x;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

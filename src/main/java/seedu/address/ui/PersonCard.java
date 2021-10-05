@@ -42,7 +42,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Text TaskList;
+    private Text taskList;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,7 +58,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        TaskList.setText(person.getTasks().toString());
+        taskList.setText(person.getTasks().toString());
     }
 
     @Override
