@@ -35,6 +35,7 @@ public class FindCommand extends Command {
 
         // Accumulate the predicates via stream
         Predicate<Person> combinedPredicate = predicates.stream().reduce(person -> true, Predicate::and);
+
         model.updateFilteredPersonList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));

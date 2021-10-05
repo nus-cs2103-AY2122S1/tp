@@ -4,6 +4,9 @@
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street",
-    "expectedSalary" : "900"
+    "role": "Software Engineer",
+    "employmentType": "Full time",
+    "expectedSalary" : "900",
+    "experience": "1"
   } ]
 }

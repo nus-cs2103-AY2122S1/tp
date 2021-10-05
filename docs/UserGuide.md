@@ -133,7 +133,6 @@ Format: `exit`
 RecruitIn data is saved to the hard disk whenever there is a command that edits, updates or adds data.
 There is no need to save data manually with a command. Data also automatically loads when the application runs.
 
-
 ### Editing the data file
 
 RecruitIn data is saved as a String in `/data/applicants.json` for applicant data.

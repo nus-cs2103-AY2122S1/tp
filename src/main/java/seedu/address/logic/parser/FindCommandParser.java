@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -33,6 +35,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
@@ -42,7 +45,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_EXPECTED_SALARY, PREFIX_EXPERIENCE, PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
+                        PREFIX_EXPECTED_SALARY, PREFIX_EXPERIENCE, PREFIX_TAG);
 
         // If find command has no prefix, it is invalid
         if (argMultimap.isEmpty()) {
@@ -72,6 +76,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicateList.add(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
+
             if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_PHONE).get();
                 String trimmedArg = arg.trim();
@@ -80,6 +85,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicateList.add(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
+
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_EMAIL).get();
                 String trimmedArg = arg.trim();
@@ -88,6 +94,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicateList.add(new EmailContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
+
             if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_ADDRESS).get();
                 String trimmedArg = arg.trim();
@@ -96,14 +103,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicateList.add(new AddressContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
-            if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_EXPERIENCE).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    predicateList.add(new ExperienceContainsKeywordsPredicate(Arrays.asList(keywords)));
-                }
-            }
+
+
             if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_ROLE).get();
                 String trimmedArg = arg.trim();
@@ -112,6 +113,16 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicateList.add(new RoleContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
+
+            if (argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()) {
+                String arg = argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get();
+                String trimmedArg = arg.trim();
+                if (!trimmedArg.isEmpty()) {
+                    String[] keywords = splitByWhiteSpace(trimmedArg);
+                    predicateList.add(new EmploymentTypeContainsKeywordsPredicate(Arrays.asList(keywords)));
+                }
+            }
+
             if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_EXPECTED_SALARY).get();
                 String trimmedArg = arg.trim();
@@ -120,6 +131,17 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicateList.add(new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords)));
                 }
             }
+
+            if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
+                String arg = argMultimap.getValue(PREFIX_EXPERIENCE).get();
+                String trimmedArg = arg.trim();
+                if (!trimmedArg.isEmpty()) {
+                    String[] keywords = splitByWhiteSpace(trimmedArg);
+                    predicateList.add(new ExperienceContainsKeywordsPredicate(Arrays.asList(keywords)));
+                }
+            }
+
+
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_TAG).get();
                 String trimmedArg = arg.trim();
@@ -137,5 +159,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         private static String[] splitByWhiteSpace(String arg) {
             return arg.split("\\s+");
         }
+
     }
 }

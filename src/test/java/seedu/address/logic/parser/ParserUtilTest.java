@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE = "Softw@re Eng1n33r";
+    private static final String INVALID_EMPLOYMENT_TYPE = "intern";
     private static final String INVALID_EXPECTED_SALARY = "-1200";
     private static final String INVALID_EXPERIENCE = "-1";
     private static final String INVALID_TAG = "#friend";
@@ -37,6 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ROLE = "Software Engineer";
+    private static final String VALID_EMPLOYMENT_TYPE = "Internship";
     private static final String VALID_EXPECTED_SALARY = "1200";
     private static final String VALID_EXPERIENCE = "1";
     private static final String VALID_TAG_1 = "friend";
@@ -177,6 +180,29 @@ public class ParserUtilTest {
         String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
         Role expectedRole = new Role(VALID_ROLE);
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
+    }
+
+    @Test
+    public void parseEmploymentType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmploymentType((String) null));
+    }
+
+    @Test
+    public void parseEmploymentType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmploymentType(INVALID_EMPLOYMENT_TYPE));
+    }
+
+    @Test
+    public void parseEmploymentType_validValueWithoutWhitespace_returnsEmploymentType() throws Exception {
+        EmploymentType employmentType = new EmploymentType(VALID_EMPLOYMENT_TYPE);
+        assertEquals(employmentType, ParserUtil.parseEmploymentType(VALID_EMPLOYMENT_TYPE));
+    }
+
+    @Test
+    public void parseEmploymentType_validValueWithWhitespace_returnsTrimmedEmploymentType() throws Exception {
+        String employmentTypeWithWhitespace = WHITESPACE + VALID_EMPLOYMENT_TYPE + WHITESPACE;
+        EmploymentType expectedEmploymentType = new EmploymentType(VALID_EMPLOYMENT_TYPE);
+        assertEquals(expectedEmploymentType, ParserUtil.parseEmploymentType(employmentTypeWithWhitespace));
     }
 
     @Test
