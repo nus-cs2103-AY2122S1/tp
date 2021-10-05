@@ -4,8 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -22,9 +20,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;

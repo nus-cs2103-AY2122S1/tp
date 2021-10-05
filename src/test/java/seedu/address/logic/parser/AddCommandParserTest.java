@@ -7,15 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMPLOYMENT_TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMPLOYMENT_TYPE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMPLOYMENT_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.EXPECTED_SALARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPECTED_SALARY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EXPERIENCE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPERIENCE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMPLOYMENT_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPECTED_SALARY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPERIENCE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -50,15 +48,15 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Role;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -71,46 +69,54 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
-                        + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + ROLE_DESC_BOB
+                + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
+                + ADDRESS_DESC_BOB + ROLE_DESC_BOB
+                + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                 + EXPERIENCE_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
+                + ADDRESS_DESC_BOB + ROLE_DESC_BOB
+                + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
+                + ADDRESS_DESC_BOB + ROLE_DESC_BOB
+                + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple addresses - last employment type accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
+                + ADDRESS_DESC_BOB + ROLE_DESC_BOB
+                + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple roles - last role accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + ROLE_DESC_AMY + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
+                        + ROLE_DESC_AMY + ROLE_DESC_BOB
+                        + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                         + EXPERIENCE_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
-        // multiple employment types - last address accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                        + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_AMY + EXPECTED_SALARY_DESC_BOB
+        // multiple employment types - last employment type accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_AMY
+                        + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB
                         + EXPERIENCE_DESC_BOB
                         + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson))
+                new AddCommand(expectedPerson));
 
         // multiple expected salaries - last expected salary accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_AMY + EXPECTED_SALARY_DESC_BOB
+                        + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
+                        + EXPECTED_SALARY_DESC_AMY + EXPECTED_SALARY_DESC_BOB
                         + EXPERIENCE_DESC_BOB
                         + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
@@ -135,7 +141,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_BOB
+                + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY
                 + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY, new AddCommand(expectedPerson));
     }
 
@@ -176,7 +182,7 @@ public class AddCommandParserTest {
         // missing employmentType prefix
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + ROLE_BOB +  VALID_EMPLOYMENT_TYPE_BOB + EXPECTED_SALARY_DESC_BOB
+                        + ROLE_DESC_BOB + VALID_EMPLOYMENT_TYPE_BOB + EXPECTED_SALARY_DESC_BOB
                         + EXPERIENCE_DESC_BOB, expectedMessage);
 
         // missing expected salary prefix

@@ -84,7 +84,8 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY;
+                + ADDRESS_DESC_AMY + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY
+                + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY;
 
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();

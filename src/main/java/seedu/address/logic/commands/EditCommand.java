@@ -176,7 +176,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, employmentType, expectedSalary, experience, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,
+                    role, employmentType, expectedSalary, experience, tags);
         }
 
         public void setName(Name name) {
@@ -225,6 +226,7 @@ public class EditCommand extends Command {
 
         public Optional<EmploymentType> getEmploymentType() {
             return Optional.ofNullable(employmentType);
+        }
 
         public void setExpectedSalary(ExpectedSalary expectedSalary) {
             this.expectedSalary = expectedSalary;

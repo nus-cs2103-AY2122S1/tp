@@ -61,7 +61,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Experience experience = ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, role, employmentType, expectedSalary, experience, tagList);
+        Person person = new Person(name, phone, email, address, role, employmentType,
+                expectedSalary, experience, tagList);
         return new AddCommand(person);
     }
 

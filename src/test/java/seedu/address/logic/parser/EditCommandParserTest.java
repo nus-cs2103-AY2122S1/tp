@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMPLOYMENT_TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMPLOYMENT_TYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EXPECTED_SALARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPECTED_SALARY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EXPERIENCE_DESC_AMY;
@@ -55,14 +56,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Role;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -143,7 +144,9 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withRole(VALID_ROLE_AMY).withEmploymentType(VALID_EMPLOYMENT_TYPE_AMY).withExpectedSalary(VALID_EXPECTED_SALARY_AMY)
+                .withRole(VALID_ROLE_AMY)
+                .withEmploymentType(VALID_EMPLOYMENT_TYPE_AMY)
+                .withExpectedSalary(VALID_EXPECTED_SALARY_AMY)
                 .withExperience(VALID_EXPERIENCE_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
@@ -225,9 +228,11 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY
+                + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY
+                + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB
-                + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB + TAG_DESC_HUSBAND;
+                + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
+                + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)

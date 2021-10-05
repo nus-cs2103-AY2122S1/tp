@@ -145,7 +145,7 @@ public class Person {
                 .append("; Applied Role: ")
                 .append(getRole())
                 .append("; Employment Type: ")
-                .append(getEmploymentType());
+                .append(getEmploymentType())
                 .append("; Expected Salary: ")
                 .append(getExpectedSalary())
                 .append("; Years of Experience: ")

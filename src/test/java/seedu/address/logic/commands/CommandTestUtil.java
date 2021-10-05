@@ -76,8 +76,10 @@ public class CommandTestUtil {
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "Softw@re Eng1n33r"; // '@' not allowed in roles
     public static final String INVALID_EMPLOYMENT_TYPE_DESC =
             " " + PREFIX_EMPLOYMENT_TYPE + "intern"; // "intern" not allowed as employment type
-    public static final String INVALID_EXPECTED_SALARY_DESC = " " + PREFIX_EXPECTED_SALARY + "-120"; // '-' not allowed for expected salaries
-    public static final String INVALID_EXPERIENCE_DESC = " " + PREFIX_EXPERIENCE + "-1"; // negative value not allowed for experience
+    public static final String INVALID_EXPECTED_SALARY_DESC = " "
+            + PREFIX_EXPECTED_SALARY + "-120"; // '-' not allowed for expected salaries
+    public static final String INVALID_EXPERIENCE_DESC = " "
+            + PREFIX_EXPERIENCE + "-1"; // negative value not allowed for experience
 
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 

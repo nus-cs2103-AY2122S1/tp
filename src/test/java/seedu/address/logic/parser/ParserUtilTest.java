@@ -18,7 +18,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
-import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -237,19 +236,6 @@ public class ParserUtilTest {
     @Test
     public void parseExperience_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseExperience(INVALID_EXPERIENCE));
-    }
-
-    @Test
-    public void parseExperience_validValueWithoutWhitespace_returnsExperience() throws Exception {
-        Experience expectedExperience = new Experience(VALID_EXPERIENCE);
-        assertEquals(expectedExperience, ParserUtil.parseExperience(VALID_EXPERIENCE));
-    }
-
-    @Test
-    public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
-        String experienceWithWhitespace = WHITESPACE + VALID_EXPERIENCE + WHITESPACE;
-        Experience expectedExperience = new Experience(VALID_EXPERIENCE);
-        assertEquals(expectedExperience, ParserUtil.parseExperience(experienceWithWhitespace));
     }
 
     @Test
