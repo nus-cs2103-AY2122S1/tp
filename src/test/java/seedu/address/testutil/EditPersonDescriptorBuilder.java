@@ -30,7 +30,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Student student) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(student.getName());
-        descriptor.setPhone(student.getPhone());
+        descriptor.setPhone(student.getParentContact());
         descriptor.setEmail(student.getEmail());
         descriptor.setAddress(student.getAddress());
         descriptor.setTags(student.getTags());
