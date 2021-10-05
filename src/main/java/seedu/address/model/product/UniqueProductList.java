@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.product.exceptions.DuplicateProductException;
 import seedu.address.model.product.exceptions.ProductNotFoundException;
 
@@ -63,7 +62,7 @@ public class UniqueProductList implements Iterable<Product> {
         }
 
         if (!target.isSameProduct(editedProduct) && contains(editedProduct)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateProductException();
         }
 
         internalList.set(index, editedProduct);
