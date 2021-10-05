@@ -8,7 +8,7 @@ import seedu.fast.logic.parser.ParserUtil;
  */
 public class PriorityTag extends Tag {
 
-    public static final String PRIORITY_TAG_PREFIX = "p_";
+    public static final String PRIORITY_TAG_PREFIX = "pr/";
 
     public static final String PRIORITY_VALIDATION_REGEX = LowPriority.command + "|"
             + MediumPriority.command + "|"
