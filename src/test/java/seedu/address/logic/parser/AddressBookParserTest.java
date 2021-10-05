@@ -22,11 +22,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-<<<<<<< HEAD
 import seedu.address.logic.commands.AddFacilityCommand;
-=======
 
->>>>>>> c6ae837d941aae6bd5fe0ffdcde7e1ade8f80634
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facility.*;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
