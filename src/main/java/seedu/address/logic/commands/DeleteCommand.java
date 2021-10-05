@@ -13,8 +13,7 @@ public abstract class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
-
+    
     public DeleteCommand() {
 
     }
