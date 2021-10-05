@@ -126,7 +126,7 @@ public class Person {
             if (isClash) {
                 break;
             }
-            isClash = toCheck.isClashing(lesson);
+            isClash = lesson.isClashing(toCheck);
         }
         return isClash;
     }
