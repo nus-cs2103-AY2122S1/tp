@@ -123,8 +123,8 @@ Format: `remark INDEX r/REMARK`
 * Existing remark will be updated to the input remark.
 
 Examples:
-*  `remark 1 r/` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `remark 2 r/Chronic diabetic, monthly insulin pick up` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+*  `remark 1 r/` Edit the remark of the 1st patient to be blank.
+*  `remark 2 r/Chronic diabetic, monthly insulin pick up` Edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
 
 ### Locating patients by name: `find`
 
@@ -244,6 +244,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Remark** | `remark INDEX r/REMARK`<br> e.g.,`remark 2 r/Chronic diabetic, monthly insulin pick up`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add a Tag** | `tag id/INDEX t/TAG_NAME c/TAG_COLOR`<br> e.g, `tag id/1 t/Unvaccinated c/red`
 **Delete a Tag** | `tag -d id/INDEX [n/TAG_NAME_TO_DELETE]`<br> e.g, `tag -d id/1 t/Unvaccinated`

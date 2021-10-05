@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
-    
+
 **Use case: Editing personal details of a patient (Coming soon)**
 
 **MSS**
