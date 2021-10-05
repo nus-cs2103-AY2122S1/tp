@@ -49,6 +49,7 @@ public class AddToClassCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person studentToAdd = model.getStudent(studentIndex);
+        Person studentToChange = model.getStudent(studentIndex);
         TuitionClass tuitionClass = model.getTuitionClass(classIndex);
 
         if (studentToAdd == null) {
@@ -69,7 +70,14 @@ public class AddToClassCommand extends Command {
         }
         studentToAdd.addClass(modifiedClass);
         studentToAdd.addTag(new Tag(modifiedClass.getName().getName()));
-        model.updateTuitionClassInPersonObject(modifiedClass);
+        updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentToAdd.getName().fullName, modifiedClass));
+    }
+
+    private void updateModel(Model model, TuitionClass tuitionClass,
+                             TuitionClass modifiedClass, Person studentToAdd, Person studentToChange) {
+        model.updateTuitionClassInPersonObject(modifiedClass);
+        model.setPerson(studentToChange, studentToAdd);
+        model.setTuition(tuitionClass, modifiedClass);
     }
 }
