@@ -1,16 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindTagsCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonTagsContainsTagsPredicate;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.FindTagsCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.PersonTagsContainsTagsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -29,8 +28,8 @@ public class FindTagsCommandParser implements Parser<FindTagsCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagsCommand.MESSAGE_USAGE));
         }
 
-        List<Tag> tagKeywords = Arrays.stream(trimmedArgs.split("\\s+")).
-                map(Tag::new).collect(Collectors.toList());
+        List<Tag> tagKeywords = Arrays.stream(trimmedArgs.split("\\s+"))
+                .map(Tag::new).collect(Collectors.toList());
 
         return new FindTagsCommand(new PersonTagsContainsTagsPredicate(tagKeywords));
     }
