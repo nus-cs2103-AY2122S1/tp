@@ -10,6 +10,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ExportCommandParser implements Parser<ExportCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ExportCommand
+     * and returns an ExportCommand object for execution.
+     *
+     * @param args String that user enters
+     * @return ExportCommand
+     * @throws ParseException If the user input does not conform to the expected format.
+     */
     public ExportCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {

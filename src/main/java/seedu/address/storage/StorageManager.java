@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -78,8 +77,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void exportJson(ReadOnlyAddressBook addressBook) throws IOException {
-        addressBookStorage.exportJson(addressBook);
+    public void exportToJson(ReadOnlyAddressBook addressBook) throws IOException {
+        addressBookStorage.exportToJson(addressBook);
     }
 
 }

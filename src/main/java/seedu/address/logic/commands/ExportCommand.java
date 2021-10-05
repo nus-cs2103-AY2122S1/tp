@@ -6,15 +6,9 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 
-import seedu.address.MainApp;
-import seedu.address.commons.core.Config;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
 
 /**
  * Exports the contacts into a named JSON file.
@@ -36,6 +30,11 @@ public class ExportCommand extends Command {
 
     private final String fileName;
 
+    /**
+     * Creates an ExportCommand to export the AddressBook to a specified fileName.
+     *
+     * @param fileName Name of the JSON file.
+     */
     public ExportCommand(String fileName) {
         requireNonNull(fileName);
         this.fileName = fileName;
@@ -46,7 +45,7 @@ public class ExportCommand extends Command {
         Path filePath = Path.of(fileName + ".json");
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
         try {
-            temporaryStorage.exportJson(model.getAddressBook());
+            temporaryStorage.exportToJson(model.getAddressBook());
         } catch (FileAlreadyExistsException faee) {
             throw new CommandException(String.format(MESSAGE_EXPORT_FAILURE, fileName));
         } catch (IOException ioe) {

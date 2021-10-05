@@ -48,7 +48,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (jsonAddressBook.isEmpty()) {
             return Optional.empty();
         }
 
@@ -79,7 +79,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void exportJson(ReadOnlyAddressBook addressBook) throws IOException {
+    public void exportToJson(ReadOnlyAddressBook addressBook) throws IOException {
         if (FileUtil.isFileExists(filePath)) {
             throw new FileAlreadyExistsException("File exists");
         }
