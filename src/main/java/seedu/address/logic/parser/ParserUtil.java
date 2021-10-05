@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Assessment;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Score;
 import seedu.address.model.tag.Tag;
@@ -61,6 +62,21 @@ public class ParserUtil {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
         return new Score(trimmedScore);
+    }
+
+    /**
+     * Parses a {@code String assessment} into an {@code Assessment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code assessment} is invalid.
+     */
+    public static Assessment parseAssessment(String assessment) throws ParseException {
+        requireNonNull(assessment);
+        String trimmedAssessment = assessment.trim();
+        if (!Assessment.isValidAssessment(trimmedAssessment)) {
+            throw new ParseException(Assessment.MESSAGE_CONSTRAINTS);
+        }
+        return new Assessment(trimmedAssessment);
     }
 
 //    /**
