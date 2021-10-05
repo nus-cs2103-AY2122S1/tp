@@ -1,16 +1,15 @@
 package seedu.address.model.client;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.client.exceptions.DuplicateClientException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.client.exceptions.ClientNotFoundException;
+import seedu.address.model.client.exceptions.DuplicateClientException;
 
 /**
  * A list of clients that enforces uniqueness between its elements and does not allow nulls.
@@ -30,7 +29,7 @@ public class UniqueClientList implements Iterable<Client> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent client as the given argument.
      */
     public boolean contains(Client toCheck) {
         requireNonNull(toCheck);
@@ -52,18 +51,18 @@ public class UniqueClientList implements Iterable<Client> {
     /**
      * Replaces the client {@code target} in the list with {@code editedClient}.
      * {@code target} must exist in the list.
-     * The client identity of {@code editedClient} must not be the same as another existing person in the list.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the list.
      */
-    public void setPerson(Client target, Client editedClient) {
+    public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new ClientNotFoundException();
         }
 
         if (!target.isSameClient(editedClient) && contains(editedClient)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateClientException();
         }
 
         internalList.set(index, editedClient);
@@ -76,7 +75,7 @@ public class UniqueClientList implements Iterable<Client> {
     public void remove(Client toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new ClientNotFoundException();
         }
     }
 
@@ -113,8 +112,8 @@ public class UniqueClientList implements Iterable<Client> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueClientList // instanceof handles nulls
-                && internalList.equals(((UniqueClientList) other).internalList));
+                       || (other instanceof UniqueClientList // instanceof handles nulls
+                                   && internalList.equals(((UniqueClientList) other).internalList));
     }
 
     @Override
@@ -123,7 +122,7 @@ public class UniqueClientList implements Iterable<Client> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code clients} contains only unique clients.
      */
     private boolean clientsAreUnique(List<Client> clients) {
         for (int i = 0; i < clients.size() - 1; i++) {
