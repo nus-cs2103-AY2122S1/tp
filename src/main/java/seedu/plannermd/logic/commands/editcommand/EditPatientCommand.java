@@ -104,7 +104,8 @@ public class EditPatientCommand extends EditCommand {
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         Risk updatedRisk = editPatientDescriptor.getRisk().orElse(patientToEdit.getRisk());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags, updatedRisk);
+        return new Patient(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedRemark, updatedTags, updatedRisk);
     }
 
     @Override

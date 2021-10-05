@@ -3,9 +3,10 @@ package seedu.plannermd.model.person;
 import static java.util.Objects.requireNonNull;
 
 public class Remark {
-    private static final Remark EMPTY_REMARK = new Remark("");
 
     public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, and it should not be blank";
+
+    private static final Remark EMPTY_REMARK = new Remark("");
 
     public final String value;
 
