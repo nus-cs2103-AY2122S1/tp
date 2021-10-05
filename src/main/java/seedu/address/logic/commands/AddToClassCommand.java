@@ -64,11 +64,11 @@ public class AddToClassCommand extends Command {
         }
 
         TuitionClass modifiedClass = model.addToClass(tuitionClass, studentToAdd);
+        if (modifiedClass == null) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_EXISTS, studentToAdd.getName().toString()));
+        }
         studentToAdd.addClass(modifiedClass);
         studentToAdd.addTag(new Tag(modifiedClass.getName().getName()));
-        if (modifiedClass == null) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_EXISTS, studentToAdd));
-        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentToAdd.getName().fullName, modifiedClass));
     }
 }
