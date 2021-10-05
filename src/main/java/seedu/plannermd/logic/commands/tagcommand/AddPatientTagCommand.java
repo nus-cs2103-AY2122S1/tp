@@ -68,7 +68,7 @@ public class AddPatientTagCommand extends AddTagCommand {
         newTags.add(tag);
         Patient editedPatient = new Patient(
                 patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), newTags, patientToEdit.getRisk()
+                patientToEdit.getAddress(), patientToEdit.getRemark(), newTags, patientToEdit.getRisk()
         );
 
         model.setPatient(patientToEdit, editedPatient);
