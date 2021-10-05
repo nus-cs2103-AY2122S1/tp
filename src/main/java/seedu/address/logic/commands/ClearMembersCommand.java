@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ClearMembersCommand extends Command {
 
     public static final String COMMAND_WORD = "clearm";
-    public static final String MESSAGE_SUCCESS = "Members have been cleared!";
+    public static final String MESSAGE_SUCCESS = "Member list has been cleared!";
 
 
     @Override
