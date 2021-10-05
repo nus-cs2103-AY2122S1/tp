@@ -1,7 +1,7 @@
 package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
+import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
 import org.junit.jupiter.api.Test;
 

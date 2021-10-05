@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.academydirectory.commons.exceptions.IllegalValueException;
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
-import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.student.Student;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.academydirectory.model.person.Person;
 @JsonRootName(value = "academy directory")
 class JsonSerializableAcademyDirectory {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAcademyDirectory} with the given persons.
+     * Constructs a {@code JsonSerializableAcademyDirectory} with the given students.
      */
     @JsonCreator
-    public JsonSerializableAcademyDirectory(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAcademyDirectory(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+        this.students.addAll(students);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableAcademyDirectory {
      * @param source future changes to this will not affect the created {@code JsonSerializableAcademyDirectory}.
      */
     public JsonSerializableAcademyDirectory(ReadOnlyAcademyDirectory source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ class JsonSerializableAcademyDirectory {
      */
     public AcademyDirectory toModelType() throws IllegalValueException {
         AcademyDirectory academyDirectory = new AcademyDirectory();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (academyDirectory.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
+            if (academyDirectory.hasStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            academyDirectory.addPerson(person);
+            academyDirectory.addStudent(student);
         }
         return academyDirectory;
     }
