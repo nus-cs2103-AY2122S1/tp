@@ -5,7 +5,7 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_STUDIO_ATTEND
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_STUDIO_SESSION;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.ArrayList;
 
@@ -23,13 +23,13 @@ public class AttendanceCommandParserTest {
     @Test
     public void parse_indexSpecified_success() {
         // have attendance
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + " "
                 + PREFIX_STUDIO_SESSION + nonEmptySession
                 + PREFIX_STUDIO_ATTENDANCE
                 + attendanceStatusInt;
         ArrayList<Index> indexArrayList = new ArrayList<>();
-        indexArrayList.add(INDEX_FIRST_PERSON);
+        indexArrayList.add(INDEX_FIRST_STUDENT);
         AttendanceCommand expectedCommand =
                 new AttendanceCommand(attendanceStatus, 1, indexArrayList);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -40,7 +40,7 @@ public class AttendanceCommandParserTest {
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE);
 
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_STUDENT;
         String userInputNoIndex = " "
                 + PREFIX_STUDIO_SESSION
                 + nonEmptySession
