@@ -35,7 +35,7 @@ public class TeleHandle {
      * @return True if the given string is a valid Telegram handle, false otherwise.
      */
     public static boolean isValidTeleHandle(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
     @Override

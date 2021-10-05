@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,7 +38,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label teleHandle;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane moduleCodes;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,8 +52,12 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+        person.getModuleCodes().stream()
+                        .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
+                                .forEach(moduleCode -> moduleCodes.getChildren().add(new Label(moduleCode.value)));
+        phone.setText(person.getPhone().value);
+        teleHandle.setText(person.getTeleHandle().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
