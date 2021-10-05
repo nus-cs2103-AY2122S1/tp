@@ -11,10 +11,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.TuitionClass;
 
-
-
-
-
 public class AddToClassCommand extends Command {
     public static final String COMMAND_WORD = "addtoclass";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add students to existing class. "

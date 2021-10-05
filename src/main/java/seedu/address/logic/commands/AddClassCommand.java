@@ -76,3 +76,4 @@ public class AddClassCommand extends Command {
         }
     }
 }
+

@@ -110,6 +110,15 @@ public class Person {
     }
 
     /**
+     * Removes tag from the person.
+     * @param tag tag to be removed
+     */
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+    }
+
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
