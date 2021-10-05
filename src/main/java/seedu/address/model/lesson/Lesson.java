@@ -89,6 +89,16 @@ public class Lesson {
         return Collections.unmodifiableSet(students);
     }
 
+    public void addStudent(Person person) {
+        requireAllNonNull(person);
+        this.students.add(person);
+    }
+
+    public void removeStudent(Person person) {
+        requireAllNonNull(person);
+        this.students.remove(person);
+    }
+
     /**
      * Returns true if a given string is a valid lesson name.
      */
