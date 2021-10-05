@@ -49,22 +49,6 @@ public class ViewPersonCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ViewPersonCommand viewPersonCommand = new ViewPersonCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(ViewPersonCommand.MESSAGE_VIEW_PERSON_SUCCESS, personToView);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        //expectedModel.viewPerson(personToView);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(viewPersonCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
