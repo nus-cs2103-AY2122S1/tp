@@ -1,14 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.model.facility.Facility;
-
 import static java.util.Objects.requireNonNull;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CAPACITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+
+import seedu.address.model.Model;
+import seedu.address.model.facility.Facility;
 
 /**
  * Adds a facility to SportsPA.

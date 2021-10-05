@@ -1,11 +1,12 @@
 package seedu.address.model.facility;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 /**
  * Represents a list of facilities.
