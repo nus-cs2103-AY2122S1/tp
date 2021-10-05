@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ModelManager;
 import seedu.academydirectory.model.UserPrefs;
@@ -54,7 +55,7 @@ public class RetrieveCommandTest {
     }
 
     @Test
-    public void execute_singlePrefix() {
+    public void execute_singlePrefixNonEmptyModel() {
         InformationWantedFunction function = new InformationWantedFunction(PREFIX_ADDRESS);
 
         ObservableList<Information> expectedResponse = model.getAcademyDirectory()
@@ -65,8 +66,21 @@ public class RetrieveCommandTest {
                 .collect(Collectors.joining("\n"));
 
         RetrieveCommand command = new RetrieveCommand(function);
-        ObservableList<Information> actualResponse = expectedModel.getFilteredStudentListView(function);
+        ObservableList<Information> actualResponse = model.getFilteredStudentListView(function);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedResponse, actualResponse);
+    }
+
+    @Test
+    public void execute_singlePrefixEmptyModel() {
+        Model emptyModel = new ModelManager();
+
+        InformationWantedFunction function = new InformationWantedFunction(PREFIX_ADDRESS);
+        String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
+
+        RetrieveCommand command = new RetrieveCommand(function);
+        ObservableList<Information> actualResponse = emptyModel.getFilteredStudentListView(function);
+        assertCommandSuccess(command, emptyModel, expectedMessage, emptyModel);
+        assertEquals(FXCollections.observableArrayList(), actualResponse);
     }
 }
