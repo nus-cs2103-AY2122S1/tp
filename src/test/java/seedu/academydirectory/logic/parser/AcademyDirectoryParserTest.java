@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
-import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,17 +17,17 @@ import seedu.academydirectory.logic.commands.AddCommand;
 import seedu.academydirectory.logic.commands.ClearCommand;
 import seedu.academydirectory.logic.commands.DeleteCommand;
 import seedu.academydirectory.logic.commands.EditCommand;
-import seedu.academydirectory.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.academydirectory.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.FindCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.person.NameContainsKeywordsPredicate;
-import seedu.academydirectory.model.person.Person;
-import seedu.academydirectory.testutil.EditPersonDescriptorBuilder;
-import seedu.academydirectory.testutil.PersonBuilder;
-import seedu.academydirectory.testutil.PersonUtil;
+import seedu.academydirectory.model.student.NameContainsKeywordsPredicate;
+import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.testutil.EditStudentDescriptorBuilder;
+import seedu.academydirectory.testutil.StudentBuilder;
+import seedu.academydirectory.testutil.StudentUtil;
 
 public class AcademyDirectoryParserTest {
 
@@ -35,9 +35,9 @@ public class AcademyDirectoryParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Student student = new StudentBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
+        assertEquals(new AddCommand(student), command);
     }
 
     @Test
@@ -49,17 +49,17 @@ public class AcademyDirectoryParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Student student = new StudentBuilder().build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
 
     @Test

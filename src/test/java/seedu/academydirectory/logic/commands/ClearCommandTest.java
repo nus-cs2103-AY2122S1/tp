@@ -1,7 +1,7 @@
 package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
+import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyAcademyDirectory_success() {
         Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
         expectedModel.setAcademyDirectory(new AcademyDirectory());

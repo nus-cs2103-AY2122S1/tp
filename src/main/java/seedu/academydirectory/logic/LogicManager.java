@@ -14,7 +14,7 @@ import seedu.academydirectory.logic.parser.AcademyDirectoryParser;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
-import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.storage.Storage;
 
 /**
@@ -60,8 +60,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Student> getFilteredStudentList() {
+        return model.getFilteredStudentList();
     }
 
     @Override

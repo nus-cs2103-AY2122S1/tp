@@ -85,7 +85,7 @@ Format: `help COMMAND_NAME`
     
 Examples:
 * `help add`: Displays the exact same content as what is shown on this User Guide for the `add` command
-  or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-person-add).
+  or [here](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/docs/UserGuide.md#adding-a-student-add).
 * `help list`
 
 ### Adding a student: `add`
@@ -110,9 +110,9 @@ Examples:
 * `add n/Aaron Tan t/@sausage e/e0123456@u.nus.edu p/90312311`
 * `add n/Betsy Lim t/@unislave e/e0123456@u.nus.edu`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the address book.
 
 Format: `list`
 
@@ -130,9 +130,9 @@ Examples:
 * `edit 1 p/91234567 e/e0425205@u.nus.com`  Edits the phone number and email address of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.
 * `edit 2 n/Aaron Tan`  Edits the name of the 2nd student to be Aaron Tan.
 
-### Locating persons by name: `find`
+### Locating students by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -140,7 +140,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
