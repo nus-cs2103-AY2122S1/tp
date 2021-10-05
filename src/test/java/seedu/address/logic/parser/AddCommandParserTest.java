@@ -63,7 +63,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + NATIONALITY_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
-        // multiple addresses - last address accepted
+        // multiple nationalities - last nationality accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_AMY
                 + NATIONALITY_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
@@ -98,7 +98,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + NATIONALITY_DESC_BOB,
                 expectedMessage);
 
-        // missing address prefix
+        // missing nationality prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_NATIONALITY_BOB,
                 expectedMessage);
 
@@ -121,7 +121,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + NATIONALITY_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid address
+        // invalid nationality
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_NATIONALITY_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Nationality.MESSAGE_CONSTRAINTS);
 

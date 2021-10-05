@@ -47,7 +47,7 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
+        // different nationality -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNationality(VALID_NATIONALITY_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
