@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,9 +23,11 @@ import seedu.fast.logic.commands.ExitCommand;
 import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.commands.ListCommand;
+import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.Person;
+import seedu.fast.model.person.Remark;
 import seedu.fast.testutil.EditPersonDescriptorBuilder;
 import seedu.fast.testutil.PersonBuilder;
 import seedu.fast.testutil.PersonUtil;
@@ -97,5 +100,13 @@ public class FastParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_remark() throws Exception {
+        final Remark remark = new Remark("Some remark.");
+        RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + remark);
+        assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, remark), command);
     }
 }
