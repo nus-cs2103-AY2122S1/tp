@@ -56,8 +56,9 @@ public class PersonTest {
         // Alice has a non-empty visit -> returns true
         assertTrue(ALICE.hasVisit());
 
-        // Bensen has an empty visit -> returns false
-        assertFalse(BENSON.hasVisit());
+        // new person has an empty visit -> returns false
+        Person noVisitAlice = new PersonBuilder(ALICE).withVisit("").build();
+        assertFalse(noVisitAlice.hasVisit());
     }
 
     @Test

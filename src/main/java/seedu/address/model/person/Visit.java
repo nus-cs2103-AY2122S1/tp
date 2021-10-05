@@ -24,7 +24,7 @@ public class Visit {
      * @return whether the visit is empty
      */
     public boolean hasVisit() {
-        return !this.value.isEmpty();
+        return !(this.value == null || this.value.isEmpty());
     }
 
     @Override
