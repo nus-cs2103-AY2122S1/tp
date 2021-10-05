@@ -21,18 +21,18 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Nationality nationality;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Nationality nationality, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, nationality, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.nationality = nationality;
         this.tags.addAll(tags);
     }
 
@@ -48,8 +48,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Nationality getNationality() {
+        return nationality;
     }
 
     /**
@@ -91,14 +91,14 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, nationality, tags);
     }
 
     @Override
@@ -109,8 +109,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Nationality: ")
+                .append(getNationality());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
