@@ -424,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given tag is non-existing.
+* 3b. The given tag is non-existent.
 
     * 3b1. PlannerMD shows an error message.
 
