@@ -255,7 +255,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 **Target user profile**:
- 
+
 A private tutor that:
 * has a need to manage a significant number of students' details
 * prefers desktop apps over other types
@@ -299,6 +299,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `TutorAid` and the **Actor** is the `tutor`, unless specified otherwise)
+
+**Use Case 1: Add a student**
+
+**MSS**
+
+1. Tutor collates information related to the student to be added
+
+2. Tutor adds the student by passing the student's name and other details to TutorAid
+
+3. TutorAid adds the student and displays a message indicating that this has been done
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Tutor enters the `add` command without using the correct format
+
+  * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command
+
+  * 1a2. Tutor re-enters the command, along with the necessary arguments
+
+    Steps 1a1-1a2 are repeated until the data entered is correct.
+
+    Use case resumes from step 3.
+
+* 2a. Tutor realises that they added the details wrongly
+
+  * 2a1. Tutor <u>deletes the student (UC02)</u> who was just added
+
+    Use case resumes from step 2
 
 **Use Case 2: Delete a student**
 
@@ -435,7 +465,7 @@ Preconditions: There is at least one student added to TutorAid.
 **Extensions**
 
 * 1a. Invalid list command syntax
-  
+
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
     * 1a2. User re-enters the command.
 
@@ -451,10 +481,10 @@ Preconditions: There is at least one student added to TutorAid.
       Use case resumes from step 4
 
 * 3b. The given student index is invalid
- 
+
     * 3b1. TutorAid shows an error message
     * 3b2. User enters a new index with paid/unpaid command
-  
+
       Steps 3a1 - 3a2 are repeated until a valid index is given
       Use case resumes from step 4
 
@@ -781,58 +811,6 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
        Use case resumes from step 5.
 
-**Use Case 15: Edit students in a class**
-
-**MSS**
-1. Tutor views the list of his/her students.
-2. Tutor identifies the contact of the student who is to be removed from a specific class and takes note of the index number.
-3. Tutor views the list of his/her classes.
-4. Tutor identifies the class he/she wishes to modify and takes note of the index number.
-5. Tutor keys in the student index number and the class index number along with the command to remove a student from a class.
-6. TutorAid successfully removes the student corresponding to the given index number from the class corresponding to the given class index number.
-   Use case ends.
-
-**Extensions**
-*  1a. TutorAid detects an error in the `list` command (e.g. command is misspelt)
-
-    *  1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-
-    *  1a2. User re-enters the command.
-
-       Steps 1a1-1a2 are repeated until the data entered are correct.
-
-       Use case resumes from step 2.
-
-*  3a. TutorAid detects an error in the command to list classes (e.g. command is misspelt)
-
-    *  3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-
-    *  3a2. User re-enters the command.
-
-       Steps 3a1-3a2 are repeated until the data entered are correct.
-
-       Use case resumes from step 4.
-
-*  5a. TutorAid detects a wrongly formatted command to remove a student from a class (e.g. missing fields in the component, typos in the command)
-
-    *  5a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-
-    *  5a2. User re-enters the command with a revised format.
-
-       Steps 5a1-5a2 are repeated until the command entered is correct.
-
-       Use case resumes from step 6.
-
-*  5b. TutorAid detects an invalid student/class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
-
-    *  5b1. TutorAid displays an error message and requests the tutor to re-enter the command.
-
-    *  5b2. User re-enters the command with another student/class index number.
-
-       Steps 5b1-5b2 are repeated until the command entered is correct.
-
-       Use case resumes from step 5.
-
 **Use Case 16: Edit timing of a recurring class**
 
 **MSS**
@@ -865,7 +843,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
 *  2b. TutorAid detects an invalid class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
 
-    *  2b1. TutorAid displays an error message highlighting the invlaid class index number and requests the tutor to re-enter the command.
+    *  2b1. TutorAid displays an error message highlighting the invalid class index number and requests the tutor to re-enter the command.
 
     *  2b2. User re-enters the command with the class index number.
 
@@ -922,7 +900,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
        Use case resumes from step 2.
 
-*  2a. TutorAid detects a wrongly formatted command to edit the timing of a ad-hoc class (e.g. missing fields in the component, typos in the command)
+*  2a. TutorAid detects a wrongly formatted command to edit the timing of an ad-hoc class (e.g. missing fields in the component, typos in the command)
 
     *  2a1. TutorAid displays an error message highlighting the wrongly formatted command and requests the tutor to re-enter the command.
 
@@ -934,7 +912,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
 *  2b. TutorAid detects an invalid class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
 
-    *  2b1. TutorAid displays an error message highlighting the invlaid class index number and requests the tutor to re-enter the command.
+    *  2b1. TutorAid displays an error message highlighting the invalid class index number and requests the tutor to re-enter the command.
 
     *  2b2. User re-enters the command with another class index number.
 
@@ -964,7 +942,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
 *  2e. TutorAid detects a clash with another existing class (e.g. overlapping timings on the same date)
 
-    *  2e1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key a different day and/or pair of timings.
+    *  2e1. TutorAid displays an error message highlighting the clash in classes and requests the tutor to key a different day and/or a pair of timings.
 
     *  2e2. User re-enters the command with A different day and/or different pair of timings.
 
@@ -1003,7 +981,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
 *  2b. TutorAid detects an invalid class index number (e.g. a negative index number, a non-integer index number, a non-existent index number)
 
-    *  2b1. TutorAid displays an error message highlighting the invlaid class index number and requests the tutor to re-enter the command.
+    *  2b1. TutorAid displays an error message highlighting the invalid class index number and requests the tutor to re-enter the command.
 
     *  2b2. User re-enters the command with another class index number.
 
