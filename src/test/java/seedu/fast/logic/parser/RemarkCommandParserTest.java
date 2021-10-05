@@ -1,16 +1,16 @@
 package seedu.fast.logic.parser;
 
-import seedu.fast.commons.core.index.Index;
-import seedu.fast.logic.commands.RemarkCommand;
-import seedu.fast.model.person.Remark;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.fast.commons.core.index.Index;
+import seedu.fast.logic.commands.RemarkCommand;
+import seedu.fast.model.person.Remark;
 
 public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();

@@ -6,8 +6,8 @@ import static seedu.fast.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.AddCommand;
+import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.ClearCommand;
 import seedu.fast.logic.commands.Command;
 import seedu.fast.logic.commands.DeleteCommand;

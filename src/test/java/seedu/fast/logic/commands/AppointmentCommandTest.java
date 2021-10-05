@@ -1,27 +1,23 @@
 package seedu.fast.logic.commands;
 
-import seedu.fast.commons.core.Messages;
-import seedu.fast.commons.core.index.Index;
-import seedu.fast.model.Fast;
-import seedu.fast.model.Model;
-import seedu.fast.model.ModelManager;
-import seedu.fast.model.UserPrefs;
-import seedu.fast.model.person.Appointment;
-import seedu.fast.model.person.Person;
-import seedu.fast.testutil.PersonBuilder;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.fast.commons.core.Messages;
+import seedu.fast.commons.core.index.Index;
+import seedu.fast.model.Model;
+import seedu.fast.model.ModelManager;
+import seedu.fast.model.UserPrefs;
+import seedu.fast.model.person.Appointment;
 
 public class AppointmentCommandTest {
     private static final String APPOINTMENT_STUB = "10 Oct 2021";
@@ -58,7 +54,8 @@ public class AppointmentCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        AppointmentCommand apptCommand = new AppointmentCommand(outOfBoundIndex, new Appointment(VALID_APPOINTMENT_BOB));
+        AppointmentCommand apptCommand = new AppointmentCommand(outOfBoundIndex,
+                new Appointment(VALID_APPOINTMENT_BOB));
 
         assertCommandFailure(apptCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -70,7 +67,8 @@ public class AppointmentCommandTest {
         // ensures that outOfBoundIndex is still in bounds of FAST list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFast().getPersonList().size());
 
-        AppointmentCommand apptCommand = new AppointmentCommand(outOfBoundIndex, new Appointment(VALID_APPOINTMENT_BOB));
+        AppointmentCommand apptCommand = new AppointmentCommand(outOfBoundIndex,
+                new Appointment(VALID_APPOINTMENT_BOB));
         assertCommandFailure(apptCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 }

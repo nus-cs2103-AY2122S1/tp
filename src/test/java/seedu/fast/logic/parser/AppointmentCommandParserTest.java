@@ -1,16 +1,17 @@
 package seedu.fast.logic.parser;
 
-import seedu.fast.commons.core.index.Index;
-import seedu.fast.logic.commands.AppointmentCommand;
-import seedu.fast.model.person.Appointment;
-
-import org.junit.jupiter.api.Test;
 
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.fast.commons.core.index.Index;
+import seedu.fast.logic.commands.AppointmentCommand;
+import seedu.fast.model.person.Appointment;
 
 public class AppointmentCommandParserTest {
     private AppointmentCommandParser parser = new AppointmentCommandParser();
@@ -24,13 +25,15 @@ public class AppointmentCommandParserTest {
     public void parse_indexSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + appt;
-        AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON, new Appointment(formattedAppt));
+        AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
+                new Appointment(formattedAppt));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AppointmentCommand.MESSAGE_USAGE);
 
         // no parameters
         assertParseFailure(parser, AppointmentCommand.COMMAND_WORD, expectedMessage);
@@ -40,7 +43,7 @@ public class AppointmentCommandParserTest {
 
         // no date
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT ;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT;
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
@@ -48,7 +51,8 @@ public class AppointmentCommandParserTest {
     public void parse_invalidDateFormat_failure() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + invalidFormatAppt;
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AppointmentCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
@@ -56,7 +60,8 @@ public class AppointmentCommandParserTest {
     public void parse_appointmentMonthOutOfBound_failure() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + invalidApptMonth;
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AppointmentCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
@@ -64,7 +69,8 @@ public class AppointmentCommandParserTest {
     public void parse_appointmentDayOutOfBound_failure() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + invalidApptDay;
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AppointmentCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 }

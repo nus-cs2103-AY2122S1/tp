@@ -1,8 +1,8 @@
 package seedu.fast.model.person;
 
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.Objects;
 
 /**
  * Represents an appointment with the Person in the address book.
