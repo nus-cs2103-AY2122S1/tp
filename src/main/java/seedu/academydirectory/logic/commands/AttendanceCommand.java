@@ -1,7 +1,7 @@
 package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
-import seedu.academydirectory.model.person.Attendance;
-import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.student.Attendance;
+import seedu.academydirectory.model.student.Student;
 
 public class AttendanceCommand extends Command {
 
@@ -47,25 +47,25 @@ public class AttendanceCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         for (Index index : indexArrayList) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
         }
 
         for (Index index : indexArrayList) {
-            Person personToEdit = lastShownList.get(index.getZeroBased());
+            Student personToEdit = lastShownList.get(index.getZeroBased());
             Attendance attendanceToEdit = personToEdit.getAttendance();
             attendanceToEdit = attendanceToEdit.update(studioSession, attendanceStatus);
-            Person editedPerson = new Person(
+            Student editedPerson = new Student(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                     personToEdit.getAddress(), personToEdit.getTags());
             editedPerson.setAttendance(attendanceToEdit);
-            model.setPerson(personToEdit, editedPerson);
+            model.setStudent(personToEdit, editedPerson);
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
 
 

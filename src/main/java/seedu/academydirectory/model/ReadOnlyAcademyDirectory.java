@@ -1,7 +1,7 @@
 package seedu.academydirectory.model;
 
 import javafx.collections.ObservableList;
-import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.student.Student;
 
 /**
  * Unmodifiable view of an academy directory
@@ -9,9 +9,9 @@ import seedu.academydirectory.model.person.Person;
 public interface ReadOnlyAcademyDirectory {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the students list.
+     * This list will not contain any duplicate students.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Student> getStudentList();
 
 }

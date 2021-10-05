@@ -9,10 +9,10 @@ import java.util.Set;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.person.Address;
-import seedu.academydirectory.model.person.Email;
-import seedu.academydirectory.model.person.Name;
-import seedu.academydirectory.model.person.Phone;
+import seedu.academydirectory.model.student.Address;
+import seedu.academydirectory.model.student.Email;
+import seedu.academydirectory.model.student.Name;
+import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.tag.Tag;
 
 /**

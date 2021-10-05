@@ -1,12 +1,12 @@
 package seedu.academydirectory.testutil;
 
 import seedu.academydirectory.model.AcademyDirectory;
-import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.student.Student;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AcademyDirectoryBuilder().withPerson("John", "Doe").build();}
+ *     {@code AddressBook ab = new AcademyDirectoryBuilder().withStudent("John", "Doe").build();}
  */
 public class AcademyDirectoryBuilder {
 
@@ -21,10 +21,10 @@ public class AcademyDirectoryBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Student} to the {@code AddressBook} that we are building.
      */
-    public AcademyDirectoryBuilder withPerson(Person person) {
-        academyDirectory.addPerson(person);
+    public AcademyDirectoryBuilder withStudent(Student student) {
+        academyDirectory.addStudent(student);
         return this;
     }
 
