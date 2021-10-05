@@ -247,8 +247,9 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISITED] [v/VISIT_DATE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 1800 v/2021-11-08`
-**delete** | `delete [/v] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
-**edit** | `visit INDEX at/ VISIT_DATE`<br> e.g.,`visit 3 at/ 1900-11-08 1800`
+**delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
+**visit** | `visit INDEX at/ VISIT_DATE`<br> e.g.,`visit 3 at/ 1900-11-08`
+**edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find n/NAME`<br> e.g., `find n/yida`
 **list** | `list`
 **clear** | `clear`

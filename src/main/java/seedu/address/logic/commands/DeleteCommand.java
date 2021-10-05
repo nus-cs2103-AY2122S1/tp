@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -23,11 +24,20 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Deleted Visit for Person: %1$s";
+    private static final Visit EMPTY_VISIT = new Visit("");
 
     private final Index targetIndex;
+    private final boolean isVisit;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.isVisit = false;
+    }
+
+    public DeleteCommand(Index targetIndex, boolean isVisit) {
+        this.targetIndex = targetIndex;
+        this.isVisit = isVisit;
     }
 
     @Override
@@ -40,9 +50,19 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+
+        if (isVisit) {
+            Person editedPerson =
+                    new Person(personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail(),
+                            personToDelete.getAddress(), EMPTY_VISIT, personToDelete.getTags());
+            model.setPerson(personToDelete, editedPerson);
+            return new CommandResult(String.format(MESSAGE_DELETE_VISIT_SUCCESS, personToDelete));
+        } else {
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        }
     }
+
 
     @Override
     public boolean equals(Object other) {
