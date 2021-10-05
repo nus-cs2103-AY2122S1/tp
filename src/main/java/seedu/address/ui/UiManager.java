@@ -23,7 +23,7 @@ public class UiManager implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private Logic logic;
-    private MainWindow mainWindow;
+    private static MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -43,7 +43,7 @@ public class UiManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
+            mainWindow.fillInnerParts(false);
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -86,4 +86,11 @@ public class UiManager implements Ui {
         System.exit(1);
     }
 
+    public static void showViewWindow() {
+        mainWindow.fillInnerParts(true);
+    }
+
+    public static void hideViewWindow() {
+        mainWindow.fillInnerParts(false);
+    }
 }

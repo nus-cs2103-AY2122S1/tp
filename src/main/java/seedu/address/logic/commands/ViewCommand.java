@@ -7,6 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiManager;
 
 import java.util.List;
 
@@ -14,7 +15,6 @@ import java.util.List;
  * Lists all persons in the address book to the user.
  */
 public class ViewCommand extends Command {
-
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -41,6 +41,14 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewPerson(personToView);
+        UiManager.showViewWindow();
         return new CommandResult(MESSAGE_VIEW_PERSON_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
     }
 }
