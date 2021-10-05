@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Facility> filteredFacilities;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredFacilities = new FilteredList<>(this.addressBook.getFacilityList());
     }
 
     public ModelManager() {
@@ -106,6 +109,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addFacility(Facility facility) {
+        addressBook.addFacility(facility);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -146,6 +154,19 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    //=========== Filtered Facility List Accessors =============================================================
+
+    @Override
+    public ObservableList<Facility> getFilteredFacilityList() {
+        return filteredFacilities;
+    }
+
+    @Override
+    public void updateFilteredFacilityList(Predicate<Facility> predicate) {
+        requireNonNull(predicate);
+        filteredFacilities.setPredicate(predicate);
     }
 
 }

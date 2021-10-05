@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -40,6 +45,19 @@ public class SampleDataUtil {
         };
     }
 
+    public static Facility[] getSampleFacilities() {
+        return new Facility[] {
+            new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
+                    new Time("11:30"), new Capacity("5")),
+            new Facility(new FacilityName("NUS Field 2"), new Location("Opp University Hall"),
+                    new Time("13:30"), new Capacity("8")),
+            new Facility(new FacilityName("Court 2"), new Location("University Sports Hall"),
+                    new Time("20:30"), new Capacity("10")),
+            new Facility(new FacilityName("Court 3"), new Location("University Sports Hall"),
+                    new Time("12:30"), new Capacity("6"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -56,5 +74,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }
