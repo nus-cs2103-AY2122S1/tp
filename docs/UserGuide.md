@@ -168,9 +168,69 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+## Upcoming Features
 
-_Details coming soon ..._
+### Creating A Client `[coming in v1.2]`
+
+Adds a client to the list
+
+Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
+
+### Deleting A Client
+
+Deletes the specified client from the client list.
+
+Format: `delete INDEX`
+
+- Deletes the client at the specified INDEX.
+- The index refers to the index number shown in the displayed client list.
+- The index must be a positive integer 1, 2, 3, …​
+
+### Listing All Clients
+
+Shows a list of all clients in the client list.
+
+Format: `listclient`
+
+### List Of Client\'s Policies
+
+Shows the list of policies that belong to a specific client.
+
+Format: `listpolicy CLIENT_INDEX`
+
+- List policies for the client at the specified CLIENT_INDEX.
+- The index refers to the index number shown in the displayed client list.
+- The index must be a positive integer 1, 2, 3, …​
+
+### Clear All
+Clear all clients and policies.
+
+Format: `clear`
+
+### Creating A Policy
+
+Adds a policy to the policy list.
+
+Format: `addpolicy n/NAME_OF_POLICY e/EXPIRY_DATE p/PRICE c/COMMISSION cl/CLIENT_INDEX`
+
+### Deleting A Policy
+
+Deletes a policy from the policy list.
+
+Format: `deletepolicy INDEX`
+
+### Listing All Policies
+
+Shows a list of all policies.
+
+Format: `listpolicy`
+
+### Clear Client's Policy
+
+Clear all policies from a client.
+
+Format: `clearpolicy CLIENT_INDEX`
+
 
 --------------------------------------------------------------------------------------------------------------------
 
