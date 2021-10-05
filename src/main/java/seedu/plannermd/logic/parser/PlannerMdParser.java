@@ -16,6 +16,7 @@ import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 
 /**
@@ -65,6 +66,9 @@ public class PlannerMdParser {
 
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
+
+        case AddPatientTagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
