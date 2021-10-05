@@ -29,17 +29,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label studentName;
     @FXML
-    private Label address;
+    private Label studentPhone;
     @FXML
-    private Label email;
+    private Label parentName;
     @FXML
-    private FlowPane tags;
+    private Label parentPhone;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,13 +46,10 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        studentName.setText(person.getStudentName().fullName);
+        studentPhone.setText(person.getStudentPhone().value);
+        parentName.setText(person.getParentName().fullName);
+        parentPhone.setText(person.getParentPhone().value);
     }
 
     @Override
