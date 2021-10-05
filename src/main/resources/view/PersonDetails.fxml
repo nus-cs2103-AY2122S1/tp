@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+
+<VBox id="cardDetailPane" style="-fx-background-color: #313131#313131;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="cardPane" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox style="-fx-alignment: center_left;">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+               <children>
+                  <ImageView id="profileView" fx:id="profileView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="name" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 25px;" text="Full Name" textFill="#e8e8e8">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="PHONE NUMBER" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="phone" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Line endX="200.0" startX="-100.0" stroke="#434343" strokeWidth="2.0" />
+               </children>
+            </VBox>
+            <VBox>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="ADDRESS" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="address" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Line endX="200.0" startX="-100.0" stroke="#434343" strokeWidth="2.0" />
+               </children>
+            </VBox>
+            <VBox>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="EMAIL" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="email" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Line endX="150.0" startX="-150.0" stroke="#434343" strokeWidth="2.0" />
+               </children>
+            </VBox>
+            <VBox>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="TELEGRAM" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="telegram" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="\@tele_handle" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Line endX="150.0" startX="-150.0" stroke="#434343" strokeWidth="2.0" />
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
