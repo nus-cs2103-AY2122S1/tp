@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -42,4 +43,5 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
+    void exportJson(ReadOnlyAddressBook addressBook) throws IOException;
 }

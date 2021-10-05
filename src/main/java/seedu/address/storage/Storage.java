@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -29,4 +30,6 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
+    @Override
+    void exportJson(ReadOnlyAddressBook addressBook) throws IOException;
 }
