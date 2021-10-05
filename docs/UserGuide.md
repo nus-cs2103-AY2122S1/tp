@@ -28,7 +28,7 @@ can get your student management tasks done faster than traditional GUI apps.
 
    * **`list`** : Lists all contacts.
 
-   * **`add`** `-s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` : 
+   * **`add -s`** sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` : 
      Adds a student named `John Doe` to TutorAid, along with the student's contact number, parent's name and parent's 
      contact number.
 
@@ -72,7 +72,6 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a student: `add`
 Adds a new student to TutorAid.
 
@@ -85,9 +84,9 @@ Examples:
 The student's phone number, parent's name and parent's phone number are optional details for tutors to include.
 </div>
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in TutorAid in the order that they were added.
 
 Format: `list`
 
@@ -102,6 +101,20 @@ Format: `del -s STUDENT_INDEX`
 
 Example:
 * `del -s 2` deletes the 2nd student in TutorAid.
+
+### Viewing a student : `view`
+
+Displays the specified student’s name, phone number, progress and payment status, along with their parent’s name and phone number.
+
+Format: `view STUDENT_INDEX`
+
+* Display details of the student at the specified STUDENT_INDEX.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `view 2` shows the details associated with the 2nd student
+
 
 ### Clearing all entries : `clear`
 
@@ -157,6 +170,34 @@ Examples:
 
 _Details coming soon ..._
 
+### Set payment made: `paid`
+
+Sets the payment status of the specified student to `paid` for the current month. 
+
+Format: `paid STUDENT_INDEX`
+
+- Sets the payment status for the student at the specified `STUDENT_INDEX` as "paid" for the current month.
+- The index refers to the index number shown in the displayed student list.
+- The index must be a **positive integer** 1, 2, 3, ...
+
+Example:
+
+- `paid 3` updates the 3rd student's payment status to "paid".
+
+### Unset payment made: `unpaid`
+
+Sets the payment status of the specified student to ‘unpaid’ for the current month.
+
+Format: `unpaid STUDENT_INDEX`
+
+- Sets the payment status for the student at the specified `STUDENT_INDEX` as "unpaid" for the current month.
+- The index refers to the index number shown in the displayed student list.
+- The index must be a **positive integer** 1, 2, 3, …
+
+Examples:
+
+- `unpaid 3` updates the 3rd student's payment status to "unpaid".
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -170,12 +211,16 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3` 
+**Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
+**View** | `view STUDENT_INDEX`<br> e.g., `view 2`
+**Exit** | `exit`

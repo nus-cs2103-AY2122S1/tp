@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Cuong's Project Portfolio Page
+title: Ivan's Project Portfolio Page
 ---
 
 ### Project: TutorAid
@@ -10,8 +10,8 @@ TutorAid is a desktop application used for helping tech-savvy private tutors, wh
 Given below are my contributions to the project.
 
 * **Documentation**:
-  * User Guide:
-    * Added documentation for the features `add -p` and `del -p` [\#72]()
-  * Developer Guide:
+  * User Guide: 
+    * Added documentation for the features `paid` and `unpaid`
+  * Developer Guide: 
     * Target user profile, value proposition, user stories, use cases, non-functional requirements, glossary
 
