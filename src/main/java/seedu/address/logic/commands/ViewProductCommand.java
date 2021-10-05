@@ -15,15 +15,16 @@ public class ViewProductCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Views a current product identified by the index number used in the displayed "
                     + "product list.\n"
-                    + "If no such client exists, nothing will be shown\n"
+                    + "If no such product exists, nothing will be shown\n"
                     + "Parameters: INDEX (must be a positive integer)"
                     + "Example usage : "
                     + COMMAND_WORD
                     + " 20 ";
     private final ProductContainsIdPredicate predicate;
-    ViewProductCommand(ProductContainsIdPredicate predicate) {
+    public ViewProductCommand(ProductContainsIdPredicate predicate) {
         this.predicate = predicate;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

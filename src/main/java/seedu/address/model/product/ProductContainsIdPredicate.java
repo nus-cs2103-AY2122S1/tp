@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Client}'s {@code id} matches the id given.
+ * Tests that a {@code Product}'s {@code id} matches the id given.
  */
 public class ProductContainsIdPredicate implements Predicate<Product> {
     //use a list for easier searching via streams

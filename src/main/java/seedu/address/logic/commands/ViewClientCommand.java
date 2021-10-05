@@ -15,7 +15,7 @@ public class ViewClientCommand extends Command {
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Views a current client identified by the index number used in the displayed "
-                    + "product list.\n"
+                    + "client list.\n"
                     + "If no such client exists, nothing will be shown\n"
                     + "Parameters: INDEX (must be a positive integer)"
                     + "Example usage : "
@@ -24,7 +24,7 @@ public class ViewClientCommand extends Command {
 
     private final ClientContainsIdPredicate predicate;
 
-    ViewClientCommand(ClientContainsIdPredicate predicate) {
+    public ViewClientCommand(ClientContainsIdPredicate predicate) {
         this.predicate = predicate;
     }
 
