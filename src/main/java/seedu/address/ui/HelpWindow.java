@@ -21,13 +21,13 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FEATURE_LIST = "Here is the feature list of ProgrammerError:\n"
             + "1. Purge Sample Data (Delete all)\n"
             + "   -> purge\n"
-            + "2. Create records of individual students (ADD)\n"
+            + "2. Create records of individual students (Add)\n"
             + "   -> add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>\n"
-            + "3. View the records of individual students (READ)\n"
+            + "3. View the records of individual students (Read)\n"
             + "   -> view -sid <STUDENT_ID>\n"
-            + "4. Update a student's record (UPDATE)\n"
+            + "4. Update a student's record (Update)\n"
             + "   -> update -sid <STUDENT_ID>\n"
-            + "5. Delete a student's record (DELETE)\n"
+            + "5. Delete a student's record (Delete)\n"
             + "   -> delete -sid <STUDENT_ID>";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
