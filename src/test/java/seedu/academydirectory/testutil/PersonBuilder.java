@@ -90,8 +90,10 @@ public class PersonBuilder {
     /**
      * Sets the {@code Attendance} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAttendance(Integer numberOfSessions) {
-        this.attendance = new Attendance(numberOfSessions);
+    public PersonBuilder withAttendance(boolean[] boolArr) {
+        Attendance newAttendance = new Attendance(this.attendance.getSessionCount());
+        newAttendance.setAttendance(boolArr);
+        this.attendance = newAttendance;
         return this;
     }
 
@@ -103,8 +105,13 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a Person object with the appropriate fields.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        Person newPerson = new Person(name, phone, email, address, tags);
+        newPerson.setAttendance(this.attendance);
+        return newPerson;
     }
 
 }

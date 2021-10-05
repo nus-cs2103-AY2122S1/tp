@@ -27,7 +27,7 @@ public class AttendanceCommand extends Command {
             + "att/ ATTENDANCE_STATUS (0 or 1)\n"
             + "Example: " + COMMAND_WORD + " * s/ 7 a/ 1";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Attendance command not implemented yet";
+    public static final String MESSAGE_UPDATE_ATTENDANCE_SUCCESS = "Attendance updated!";
 
     private final ArrayList<Index> indexArrayList;
     private final boolean attendanceStatus;
@@ -66,7 +66,7 @@ public class AttendanceCommand extends Command {
             model.setPerson(personToEdit, editedPerson);
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult("Attendance updated!");
+        return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
 
 
     }

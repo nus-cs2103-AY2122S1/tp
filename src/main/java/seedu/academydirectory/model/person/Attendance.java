@@ -26,6 +26,14 @@ public class Attendance {
         return this;
     }
 
+    public void setAttendance(boolean[] boolArr) {
+        this.attendanceInBoolean = boolArr;
+    }
+
+    public Integer getSessionCount() {
+        return attendanceInBoolean.length;
+    }
+
     @Override
     public String toString() {
         String str = "";
