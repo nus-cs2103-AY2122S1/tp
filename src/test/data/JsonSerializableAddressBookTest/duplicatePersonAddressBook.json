@@ -3,10 +3,14 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "tagged": [ "friends" ]
+    "teleHandle": "",
+    "moduleCodes": [ "CS2030S", "CS2040" ],
+    "tagged": [ "local" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com"
+    "email": "pauline@example.com",
+    "moduleCodes": [ "CS2030S", "CS2040" ],
+    "teleHandle": ""
   } ]
 }
