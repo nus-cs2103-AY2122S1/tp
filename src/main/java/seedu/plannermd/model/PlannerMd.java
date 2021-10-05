@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.plannermd.model.person.Person;
-import seedu.plannermd.model.person.UniquePersonList;
+import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.patient.UniquePatientList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +14,7 @@ import seedu.plannermd.model.person.UniquePersonList;
  */
 public class PlannerMd implements ReadOnlyPlannerMd {
 
-    private final UniquePersonList persons;
+    private final UniquePatientList patients;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        patients = new UniquePatientList();
     }
 
     public PlannerMd() {}
@@ -40,11 +40,11 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the patients list with {@code patients}.
+     * {@code patients} must not contain duplicate patients.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setPatients(List<Patient> patients) {
+        this.patients.setPatients(patients);
     }
 
     /**
@@ -53,68 +53,68 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     public void resetData(ReadOnlyPlannerMd newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPatients(newData.getPatientList());
     }
 
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the PlannerMD.
+     * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPatient(Patient patient) {
+        requireNonNull(patient);
+        return patients.contains(patient);
     }
 
     /**
-     * Adds a person to the PlannerMD.
-     * The person must not already exist in the PlannerMD.
+     * Adds a patient to the PlannerMD.
+     * The patient must not already exist in the PlannerMD.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addPatient(Patient p) {
+        patients.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given person {@code target} in the list with {@code editedPatient}.
      * {@code target} must exist in the PlannerMD.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the PlannerMD.
+     * The person identity of {@code editedPatient} must not be the same as another existing patient in the PlannerMD.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPatient(Patient target, Patient editedPatient) {
+        requireNonNull(editedPatient);
 
-        persons.setPerson(target, editedPerson);
+        patients.setPatient(target, editedPatient);
     }
 
     /**
      * Removes {@code key} from this {@code PlannerMd}.
      * {@code key} must exist in the PlannerMD.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removePatient(Patient key) {
+        patients.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return patients.asUnmodifiableObservableList().size() + " patients";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Patient> getPatientList() {
+        return patients.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PlannerMd // instanceof handles nulls
-                && persons.equals(((PlannerMd) other).persons));
+                && patients.equals(((PlannerMd) other).patients));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return patients.hashCode();
     }
 }

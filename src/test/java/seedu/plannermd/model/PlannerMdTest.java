@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.testutil.Assert.assertThrows;
-import static seedu.plannermd.testutil.TypicalPersons.ALICE;
-import static seedu.plannermd.testutil.TypicalPersons.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
-import seedu.plannermd.testutil.PersonBuilder;
+import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class PlannerMdTest {
 
@@ -28,7 +28,7 @@ public class PlannerMdTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), plannerMd.getPersonList());
+        assertEquals(Collections.emptyList(), plannerMd.getPatientList());
     }
 
     @Test
@@ -44,58 +44,58 @@ public class PlannerMdTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePatients_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        PlannerMdStub newData = new PlannerMdStub(newPersons);
+        List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
+        PlannerMdStub newData = new PlannerMdStub(newPatients);
 
         assertThrows(DuplicatePersonException.class, () -> plannerMd.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> plannerMd.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> plannerMd.hasPatient(null));
     }
 
     @Test
     public void hasPerson_personNotInPlannerMd_returnsFalse() {
-        assertFalse(plannerMd.hasPerson(ALICE));
+        assertFalse(plannerMd.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personInPlannerMd_returnsTrue() {
-        plannerMd.addPerson(ALICE);
-        assertTrue(plannerMd.hasPerson(ALICE));
+        plannerMd.addPatient(ALICE);
+        assertTrue(plannerMd.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInPlannerMd_returnsTrue() {
-        plannerMd.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        plannerMd.addPatient(ALICE);
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(plannerMd.hasPerson(editedAlice));
+        assertTrue(plannerMd.hasPatient(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> plannerMd.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> plannerMd.getPatientList().remove(0));
     }
 
     /**
      * A stub ReadOnlyPlannerMd whose persons list can violate interface constraints.
      */
     private static class PlannerMdStub implements ReadOnlyPlannerMd {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Patient> patients = FXCollections.observableArrayList();
 
-        PlannerMdStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        PlannerMdStub(Collection<Patient> persons) {
+            this.patients.setAll(persons);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Patient> getPatientList() {
+            return patients;
         }
     }
 
