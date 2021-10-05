@@ -28,9 +28,8 @@ public class BirthDate {
             + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "3. Year must be 4 characters";
 
-    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("d/M/yyyy")
-            .optionalStart().appendPattern(" HHmm").optionalEnd().parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).toFormatter().withResolverStyle(ResolverStyle.SMART);
+    public static final DateTimeFormatter formatter =
+            DateTimeFormatter.ofPattern("d/M/yyyy").withResolverStyle(ResolverStyle.SMART);
 
     public final String stringValue;
     public final LocalDate value;
@@ -44,16 +43,8 @@ public class BirthDate {
         requireNonNull(birthDate);
         checkArgument(isValidBirthDate(birthDate), MESSAGE_CONSTRAINTS);
         stringValue = birthDate;
-        value = LocalDate.from(LocalDateTime.parse(birthDate, formatter));
+        value = LocalDate.from(LocalDate.parse(birthDate, formatter));
     }
-
-    // public BirthDate(LocalDate birthDate) {
-    // requireNonNull(birthDate);
-    // stringValue =
-    // birthDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-    // checkArgument(isValidBirthDate(stringValue), MESSAGE_CONSTRAINTS);
-    // value = birthDate;
-    // }
 
     /**
      * Returns if a given string is a valid birth date.
@@ -64,8 +55,8 @@ public class BirthDate {
             return false;
         }
         try {
-            LocalDateTime.parse(test, formatter);
-            LocalDate inputDate = LocalDate.from(LocalDateTime.parse(test, formatter));
+            LocalDate.parse(test, formatter);
+            LocalDate inputDate = LocalDate.from(LocalDate.parse(test, formatter));
             if (inputDate.isAfter(LocalDate.now())) {
                 return false;
             }

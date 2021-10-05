@@ -19,7 +19,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    *
+    * Updated all commands relating to Patient's personal details with the Birth Date field
   * Developer Guide:
     * Added target user profile
     * Added value propositions
