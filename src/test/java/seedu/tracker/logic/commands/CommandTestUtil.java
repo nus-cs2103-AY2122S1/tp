@@ -53,16 +53,16 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_GEQ1000 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_GEQ1000;
     public static final String MC_DESC_CS2103T = " " + PREFIX_MC + VALID_MC_CS2103T;
     public static final String MC_DESC_GEQ1000 = " " + PREFIX_MC + VALID_MC_GEQ1000;
+    public static final String MC_DESC_CP3108A = " " + PREFIX_MC + VALID_MC_CP3108A;
     public static final String TAG_DESC_CORE = " " + PREFIX_TAG + VALID_TAG_CORE;
     public static final String TAG_DESC_GE = " " + PREFIX_TAG + VALID_TAG_GE;
 
+    public static final String INVALID_CODE_DESC = " " + PREFIX_CODE + "&&CS2103T"; // '&' not allowed in names
+    public static final String INVALID_TITLE_DESC = " " + PREFIX_TITLE
+            + "$$This is a invalid title"; // first char should be alphanumeric
+    public static final String INVALID_MC_DESC = " " + PREFIX_MC + "Z"; // Z is not a valid integer
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "core*"; // '*' not allowed in tags
 
-    /*public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-*/
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
