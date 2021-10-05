@@ -27,14 +27,23 @@ import seedu.tracker.testutil.ModuleBuilder;
 public class CommandTestUtil {
     public static final String VALID_CODE_CS2103T = "CS2103T";
     public static final String VALID_CODE_GEQ1000 = "GEQ1000";
+    public static final String VALID_CODE_CS1101S = "CS1101S";
+    public static final String VALID_CODE_CS2100 = "CS2100";
+
     public static final String VALID_TITLE_CS2103T = "Software Engineering";
     public static final String VALID_TITLE_GEQ1000 = "Asking Questions";
+    public static final String VALID_TITLE_CS1101S = "Programming Methodology";
+    public static final String VALID_DESCRIPTION_CS1101S = "Introduces the concepts of programming and " +
+            "computational problem solving";
+    public static final String VALID_DESCRIPTION_CP3108A = "Independent work";
     public static final String VALID_DESCRIPTION_CS2103T = "Covers the main areas of software development";
     public static final String VALID_DESCRIPTION_GEQ1000 = "introduces six dominant modes of questioning";
     public static final Integer VALID_MC_CS2103T = 4;
     public static final Integer VALID_MC_GEQ1000 = 4;
+    public static final Integer VALID_MC_CP3108A = 2;
     public static final String VALID_TAG_CORE = "core";
     public static final String VALID_TAG_GE = "ge";
+    public static final String VALID_TAG_UE = "ue";
 
     public static final String CODE_DESC_CS2103T = " " + PREFIX_CODE + VALID_CODE_CS2103T;
     public static final String CODE_DESC_GEQ1000 = " " + PREFIX_CODE + VALID_CODE_GEQ1000;
