@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="placeHolder" styleClass="pane-without-border" xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1">
+    <TabPane fx:id="personTab" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="patientsTab" text="Patients">
+            <StackPane fx:id="patientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+        </Tab>
+        <Tab fx:id="doctorsTab" text="Doctors">
+            <StackPane fx:id="doctorListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+        </Tab>
+    </TabPane>
+</StackPane>

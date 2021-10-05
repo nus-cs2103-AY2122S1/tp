@@ -1,7 +1,5 @@
 package seedu.plannermd.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -9,29 +7,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.patient.Risk;
 
-/**
- * An UI component that displays information of a {@code Patient}.
- */
-public class PatientCard extends UiPart<Region> {
+import java.util.Comparator;
 
-    private static final String FXML = "PatientListCard.fxml";
+public class DoctorCard extends UiPart<Region> {
 
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on PlannerMd level 4</a>
-     */
+    private static final String FXML = "DoctorListCard.fxml";
 
     public final Patient patient;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private VBox personDetailsBox;
+    private VBox doctorDetailsBox;
     @FXML
     private Label name;
     @FXML
@@ -48,13 +36,8 @@ public class PatientCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private FlowPane tags;
-    @FXML
-    private FlowPane risk;
 
-    /**
-     * Creates a {@code PatientCode} with the given {@code Patient} and index to display.
-     */
-    public PatientCard(Patient patient, int displayedIndex) {
+    public DoctorCard(Patient patient, int displayedIndex) {
         super(FXML);
         this.patient = patient;
         id.setText(displayedIndex + ". ");
@@ -68,7 +51,6 @@ public class PatientCard extends UiPart<Region> {
         patient.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        setRisk(patient.getRisk());
     }
 
     /**
@@ -79,29 +61,10 @@ public class PatientCard extends UiPart<Region> {
      */
     private void setPatientRemark(String patientRemark) {
         if (patientRemark == null || patientRemark.equals("".trim())) {
-            personDetailsBox.getChildren().remove(remark);
+            doctorDetailsBox.getChildren().remove(remark);
         } else {
             remark.setText("Remarks: " + patientRemark);
         }
-    }
-
-    private void setRisk(Risk risk) {
-        Label riskLabel = new Label(risk.toString());
-        switch (risk.riskLevel) {
-        case HIGH:
-            riskLabel.setStyle("-fx-background-color: red");
-            break;
-        case MEDIUM:
-            riskLabel.setStyle("-fx-background-color: #fcba03");
-            break;
-        case LOW:
-            riskLabel.setStyle("-fx-background-color: green");
-            break;
-        default:
-            // unclassified risk
-            return;
-        }
-        this.risk.getChildren().add(riskLabel);
     }
 
     @Override
@@ -118,12 +81,7 @@ public class PatientCard extends UiPart<Region> {
 
         // state check
         PatientCard card = (PatientCard) other;
-        return id.getText().equals(card.id.getText())
+        return id.getText().equals(card.getId().getText())
                 && patient.equals(card.patient);
-    }
-
-    // To be deleted
-    public Label getId() {
-        return id;
     }
 }
