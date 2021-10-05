@@ -20,14 +20,17 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
+import seedu.address.model.facility.LocationContainsKeywordsPredicate;
 import seedu.address.model.facility.Time;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -95,6 +98,15 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_findFacility() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindFacilityCommand command = (FindFacilityCommand) parser.parseCommand(
+                FindFacilityCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindFacilityCommand(new LocationContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -104,6 +116,13 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listf() throws Exception {
+        assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD) instanceof ListFacilityCommand);
+        assertTrue(parser.parseCommand(
+                ListFacilityCommand.COMMAND_WORD + " 3") instanceof ListFacilityCommand);
     }
 
     @Test
