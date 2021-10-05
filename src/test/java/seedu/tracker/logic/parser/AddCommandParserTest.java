@@ -10,7 +10,6 @@ import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_MC_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_TITLE_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_CP3108A;
-
 import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_CS2103T;
 import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_GEQ1000;
 import static seedu.tracker.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
