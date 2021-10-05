@@ -23,7 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
-    public static final String DEFAULT_APPOINTMENT = "No Appointment Scheduled Yet";
+    public static final String DEFAULT_APPOINTMENT = "10 Oct 2021";
 
     private Name name;
     private Phone phone;
