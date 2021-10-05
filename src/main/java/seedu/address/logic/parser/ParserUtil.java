@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Assessment;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.ID;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Score;
@@ -131,7 +132,7 @@ public class ParserUtil {
       *
       * @throws ParseException if the given {@code ID} is invalid.
       */
-    public static ID parseEmail(String id) throws ParseException {
+    public static ID parseID(String id) throws ParseException {
         requireNonNull(id);
         String trimmedID= id.trim();
         if (!ID.isValidID(trimmedID)) {
@@ -140,6 +141,20 @@ public class ParserUtil {
         return new ID(trimmedID);
     }
 
+    /**
+     * Parses a {@code String Group} into an {@code Group}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Group} is invalid.
+     */
+    public static Group parseGroup(String group) throws ParseException {
+        requireNonNull(group);
+        String trimmedGroup= group.trim();
+        if (!Group.isValidGroup(trimmedGroup)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
+        return new Group(trimmedGroup);
+    }
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
