@@ -115,6 +115,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addFacility(Facility facility) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -142,6 +146,11 @@ public class AddCommandTest {
         @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Facility> getFilteredFacilityList() {
+            throw new AssertionError("This method should not be called");
         }
 
         @Override

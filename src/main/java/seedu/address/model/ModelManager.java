@@ -26,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Facility> filteredFacilities;
 
     //Stub
     private final FilteredList<Facility> filteredFacilities = new FilteredList<>(
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredFacilities = new FilteredList<>(this.addressBook.getFacilityList());
     }
 
     public ModelManager() {
@@ -114,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addFacility(Facility facility) {
+        addressBook.addFacility(facility);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -131,6 +138,10 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    @Override
+    public ObservableList<Facility> getFilteredFacilityList() {
+        return filteredFacilities;
+    }
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -25,6 +26,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -40,6 +46,18 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addFacility() throws ParseException {
+        FacilityName name = new FacilityName("Court 1");
+        Location location = new Location("University Sports Hall");
+        Time time = new Time("11:30");
+        Capacity capacity = new Capacity("5");
+        Facility facility = new Facility(name, location, time, capacity);
+        AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
+                + "n/Court 1 l/University Sports Hall t/11:30 c/5");
+        assertEquals(new AddFacilityCommand(facility), command);
     }
 
     @Test
