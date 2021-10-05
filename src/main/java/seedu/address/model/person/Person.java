@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +24,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final NoOverlapLessonList lessonsList;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  NoOverlapLessonList lessonsList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
     }
 
     public Name getName() {
@@ -58,6 +62,19 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public NoOverlapLessonList getLessonsList() {
+        return lessonsList;
+    }
+
+    /**
+     * Immutable way of updating the lessons list
+     * @param newLessonsList to change to
+     * @return new Person instance with the updated lessons list
+     */
+    public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
+        return new Person(name, phone, email, address, tags, newLessonsList);
     }
 
     /**
@@ -92,13 +109,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getLessonsList().equals(lessonsList);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, lessonsList);
     }
 
     @Override
@@ -110,7 +128,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Lessons: ")
+                .append(getLessonsList());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
