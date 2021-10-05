@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 /**
- * Adds a facility to the address book.
+ * Adds a facility to SportsPA.
  */
 public class AddFacilityCommand extends Command {
     public static final String COMMAND_WORD = "addf";
