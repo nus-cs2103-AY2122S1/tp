@@ -10,7 +10,7 @@ import seedu.plannermd.logic.commands.ClearCommand;
 import seedu.plannermd.logic.commands.Command;
 import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
-import seedu.plannermd.logic.commands.TagCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
@@ -63,7 +63,7 @@ public class PlannerMdParser {
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
 
-        case TagCommand.COMMAND_WORD:
+        case AddPatientTagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:

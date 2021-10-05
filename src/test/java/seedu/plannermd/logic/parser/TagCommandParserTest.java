@@ -11,14 +11,14 @@ import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.index.Index;
-import seedu.plannermd.logic.commands.DeleteTagCommand;
-import seedu.plannermd.logic.commands.TagCommand;
+import seedu.plannermd.logic.commands.tagcommand.DeletePatientTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.model.tag.Tag;
 
 class TagCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            TagCommand.MESSAGE_USAGE + "\n" + DeleteTagCommand.MESSAGE_USAGE);
+            AddPatientTagCommand.MESSAGE_USAGE + "\n" + DeletePatientTagCommand.MESSAGE_USAGE);
 
     private static final String VALID_TAG = "tag1";
     private static final String INVALID_TAG = "!@#";
@@ -29,9 +29,9 @@ class TagCommandParserTest {
     void parse_addIndexAndTagSpecified_success() {
         Index index = INDEX_FIRST_PERSON;
         String userInput = " " + PREFIX_ID + index.getOneBased() + " " + PREFIX_TAG + VALID_TAG;
-        TagCommand tagCommand = new TagCommand(index, new Tag(VALID_TAG));
+        AddPatientTagCommand addPatientTagCommand = new AddPatientTagCommand(index, new Tag(VALID_TAG));
 
-        assertParseSuccess(parser, userInput, tagCommand);
+        assertParseSuccess(parser, userInput, addPatientTagCommand);
     }
 
     @Test
@@ -41,7 +41,7 @@ class TagCommandParserTest {
 
         // missing tag
         assertParseFailure(parser, " " + PREFIX_ID + INDEX_FIRST_PERSON.getOneBased(),
-                TagCommand.MESSAGE_NOT_ADDED);
+                AddPatientTagCommand.MESSAGE_NOT_ADDED);
 
         // missing both index and tag
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -62,9 +62,9 @@ class TagCommandParserTest {
     void parse_deleteIndexAndTagSpecified_success() {
         Index index = INDEX_FIRST_PERSON;
         String userInput = FLAG_DELETE + " " + PREFIX_ID + index.getOneBased() + " " + PREFIX_TAG + VALID_TAG;
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(index, new Tag(VALID_TAG));
+        DeletePatientTagCommand deletePatientTagCommand = new DeletePatientTagCommand(index, new Tag(VALID_TAG));
 
-        assertParseSuccess(parser, userInput, deleteTagCommand);
+        assertParseSuccess(parser, userInput, deletePatientTagCommand);
     }
 
     @Test
@@ -75,7 +75,7 @@ class TagCommandParserTest {
 
         // missing tag
         assertParseFailure(parser, FLAG_DELETE + " " + PREFIX_ID + INDEX_FIRST_PERSON.getOneBased(),
-                TagCommand.MESSAGE_NOT_ADDED);
+                AddPatientTagCommand.MESSAGE_NOT_ADDED);
 
         // missing both index and tag
         assertParseFailure(parser, FLAG_DELETE.toString(), MESSAGE_INVALID_FORMAT);

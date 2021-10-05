@@ -1,9 +1,9 @@
-package seedu.plannermd.logic.commands;
+package seedu.plannermd.logic.commands.tagcommand;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,17 +11,16 @@ import java.util.Set;
 
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.tag.Tag;
 
 /**
- * Adds a tag to an existing person in the plannermd.
+ * Adds a tag to an existing patient in the plannermd.
  */
-public class TagCommand extends Command {
-
-    public static final String COMMAND_WORD = "tag";
+public class AddPatientTagCommand extends AddTagCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the person identified "
             + "by the index number used in the displayed person list.\n"
@@ -41,7 +40,7 @@ public class TagCommand extends Command {
      * @param index of the person in the filtered person list to be added a tag
      * @param tag   the tag to be added
      */
-    public TagCommand(Index index, Tag tag) {
+    public AddPatientTagCommand(Index index, Tag tag) {
         requireNonNull(index);
         requireNonNull(tag);
 
@@ -58,24 +57,24 @@ public class TagCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> newTags = new HashSet<>(personToEdit.getTags());
+        Patient patientToEdit = lastShownList.get(index.getZeroBased());
+        Set<Tag> newTags = new HashSet<>(patientToEdit.getTags());
         newTags.add(tag);
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), newTags
+        Patient editedPatient = new Patient(
+                patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
+                patientToEdit.getAddress(), newTags, patientToEdit.getRisk()
         );
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setPatient(patientToEdit, editedPatient);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
-        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, editedPatient));
     }
 
     @Override
@@ -86,12 +85,12 @@ public class TagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagCommand)) {
+        if (!(other instanceof AddPatientTagCommand)) {
             return false;
         }
 
         // state check
-        TagCommand c = (TagCommand) other;
+        AddPatientTagCommand c = (AddPatientTagCommand) other;
         return index.equals(c.index)
                 && tag.equals(c.tag);
     }

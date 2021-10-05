@@ -59,20 +59,7 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
-
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
+        final StringBuilder builder = new StringBuilder(super.toString());
 
         if (!risk.isUnclassified()) {
             builder.append("; Risk: ")
@@ -81,5 +68,4 @@ public class Patient extends Person {
 
         return builder.toString();
     }
-
 }

@@ -2,7 +2,7 @@ package seedu.plannermd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.plannermd.logic.commands.TagCommand.MESSAGE_NOT_ADDED;
+import static seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand.MESSAGE_NOT_ADDED;
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_DELETE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
@@ -10,8 +10,8 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.exceptions.IllegalValueException;
 import seedu.plannermd.logic.commands.Command;
-import seedu.plannermd.logic.commands.DeleteTagCommand;
-import seedu.plannermd.logic.commands.TagCommand;
+import seedu.plannermd.logic.commands.tagcommand.DeletePatientTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.tag.Tag;
 
@@ -33,7 +33,7 @@ public class TagCommandParser implements Parser {
             index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ID).orElse(""));
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_USAGE + "\n" + DeleteTagCommand.MESSAGE_USAGE), ive);
+                    AddPatientTagCommand.MESSAGE_USAGE + "\n" + DeletePatientTagCommand.MESSAGE_USAGE), ive);
         }
 
         if (argMultimap.getAllValues(PREFIX_TAG).size() > 1) {
@@ -48,12 +48,12 @@ public class TagCommandParser implements Parser {
 
         String preamble = argMultimap.getPreamble();
         if (preamble.equals("")) {
-            return new TagCommand(index, tag);
+            return new AddPatientTagCommand(index, tag);
         } else if (preamble.equals(FLAG_DELETE.toString())) {
-            return new DeleteTagCommand(index, tag);
+            return new DeletePatientTagCommand(index, tag);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_USAGE + "\n" + DeleteTagCommand.MESSAGE_USAGE));
+                    AddPatientTagCommand.MESSAGE_USAGE + "\n" + DeletePatientTagCommand.MESSAGE_USAGE));
         }
     }
 }
