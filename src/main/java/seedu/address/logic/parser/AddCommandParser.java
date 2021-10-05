@@ -42,10 +42,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
-        // TODO check if group exists in unique group list
-
-        //TODO zhihao :)
-        Student student = new Student(name, phone, email, new Group(new GroupName("CS2103T"), new Description("hi")));
+        // Actual description will be grabbed from group that should already exist in addressBook
+        Group group = new Group(groupName, new Description("placeholder"));
+        Student student = new Student(name, phone, email, group);
 
         return new AddCommand(student);
     }
