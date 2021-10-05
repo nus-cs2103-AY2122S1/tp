@@ -71,16 +71,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAniListFilePath(addressBookFilePath);
+    public void setAniListFilePath(Path aniListFilePath) {
+        requireNonNull(aniListFilePath);
+        userPrefs.setAniListFilePath(aniListFilePath);
     }
 
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAnimeList addressBook) {
-        this.animeList.resetData(addressBook);
+    public void setAniList(ReadOnlyAnimeList aniList) {
+        this.animeList.resetData(aniList);
     }
 
     @Override

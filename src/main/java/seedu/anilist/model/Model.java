@@ -42,12 +42,12 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAniListFilePath(Path aniListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code animeList}.
      */
-    void setAddressBook(ReadOnlyAnimeList addressBook);
+    void setAniList(ReadOnlyAnimeList aniList);
 
     /** Returns the AddressBook */
     ReadOnlyAnimeList getAniList();

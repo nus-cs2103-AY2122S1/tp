@@ -11,18 +11,19 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an anime identified using it's displayed index from the anime list.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the anime identified by the index number used in the displayed anime list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_ANIME_SUCCESS = "Deleted Anime: %1$s";
+
 
     private final Index targetIndex;
 
@@ -41,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Anime animeToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteAnime(animeToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, animeToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ANIME_SUCCESS, animeToDelete));
     }
 
     @Override

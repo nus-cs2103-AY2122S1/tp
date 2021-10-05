@@ -104,7 +104,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setAniListFilePath(Path aniListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,7 +114,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAnimeList newData) {
+        public void setAniList(ReadOnlyAnimeList aniList) {
             throw new AssertionError("This method should not be called.");
         }
 
