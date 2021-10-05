@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.sql.Time;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +120,54 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String grade} into {@code Grade}.
+     *
+     * @param grade Parsed grade.
+     * @return Grade corrosponding to grade
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
+    public static Grade parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        String prefix = trimmedGrade.substring(0, 1);
+        Integer index = Integer.parseInt(trimmedGrade.substring(1, 2));
+        if (!Grade.isValidGrade(prefix, index)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return new Grade(prefix, index);
+    }
+
+    public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        String prefix = trimmedDay.substring(0, 2);
+
+        if (prefix == "Mo") {
+            return DayOfWeek.MONDAY;
+        } else if (prefix == "Tu") {
+            return DayOfWeek.TUESDAY;
+        } else if (prefix == "We") {
+            return DayOfWeek.WEDNESDAY;
+        } else if (prefix == "Th") {
+            return DayOfWeek.THURSDAY;
+        } else if (prefix == "Fr") {
+            return DayOfWeek.FRIDAY;
+        } else if (prefix == "Sa") {
+            return DayOfWeek.SATURDAY;
+        } else if (prefix == "Su") {
+            return DayOfWeek.SUNDAY;
+        } else {
+            throw new ParseException("Something went wrong with your DAY");
+        }
+    }
+
+    public static LocalTime parseLocalTime(String time) {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        String newTime = trimmedTime.substring(0, 2) + ":" + trimmedTime.substring(2, 4);
+        return LocalTime.parse(time);
     }
 }

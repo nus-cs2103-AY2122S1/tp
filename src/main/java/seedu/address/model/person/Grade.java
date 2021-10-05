@@ -24,18 +24,19 @@ public class Grade {
      */
     public Grade(String prefix, int levelNumber) {
         requireAllNonNull(prefix, levelNumber);
-        checkArgument(isValidInput(prefix, levelNumber), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGrade(prefix, levelNumber), MESSAGE_CONSTRAINTS);
         this.prefix = prefix;
         this.levelNumber = levelNumber;
     }
 
     /**
      * Returns true if given prefix and levelNumber are valid
+     *
      * @param prefix The inputted grade prefix.
      * @param levelNumber The inputted grade level number.
      * @return Whether the prefix and levelNumber are valid inputs.
      */
-    private boolean isValidInput(String prefix, int levelNumber) {
+    public static boolean isValidGrade(String prefix, int levelNumber) {
         switch (prefix) {
         case "S":
             return levelNumber >= 1 && levelNumber <= 4;
