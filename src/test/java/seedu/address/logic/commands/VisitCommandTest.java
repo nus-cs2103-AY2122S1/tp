@@ -48,22 +48,6 @@ public class VisitCommandTest {
     }
 
     @Test
-    public void execute_deleteVisitUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withVisit("").build();
-
-        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON,
-                new Visit(editedPerson.getVisit().toString()));
-
-        String expectedMessage = String.format(VisitCommand.MESSAGE_DELETE_VISIT_SUCCESS, editedPerson);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
-
-        assertCommandSuccess(visitCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
