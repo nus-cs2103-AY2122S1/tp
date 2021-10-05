@@ -14,17 +14,23 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Assessment;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Score;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_SCORE = "11 .01";
+    private static final String INVALID_ASSESSMENT = "Path01";
 //    private static final String INVALID_PHONE = "+651234";
 //    private static final String INVALID_ADDRESS = " ";
 //    private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_SCORE = "11.01";
+    private static final String VALID_ASSESSMENT = "P01";
 //    private static final String VALID_PHONE = "123456";
 //    private static final String VALID_ADDRESS = "123 Main Street #0505";
 //    private static final String VALID_EMAIL = "rachel@example.com";
@@ -74,6 +80,52 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseScore((String) null));
+    }
+
+    @Test
+    public void parseScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseScore(INVALID_SCORE));
+    }
+
+    @Test
+    public void parseScore_validValueWithoutWhitespace_returnsScore() throws Exception {
+        Score expectedScore = new Score(VALID_SCORE);
+        assertEquals(expectedScore, ParserUtil.parseScore(VALID_SCORE));
+    }
+
+    @Test
+    public void parseScore_validValueWithWhitespace_returnsTrimmedScore() throws Exception {
+        String scoreWithWhitespace = WHITESPACE + VALID_SCORE + WHITESPACE;
+        Score expectedScore = new Score(VALID_SCORE);
+        assertEquals(expectedScore, ParserUtil.parseScore(scoreWithWhitespace));
+    }
+
+    @Test
+    public void parseAssessment_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAssessment((String) null));
+    }
+
+    @Test
+    public void parseAssessment_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAssessment(INVALID_ASSESSMENT));
+    }
+
+    @Test
+    public void parseAssessment_validValueWithoutWhitespace_returnsAssessment() throws Exception {
+        Assessment expectedAssessment = new Assessment(VALID_ASSESSMENT);
+        assertEquals(expectedAssessment, ParserUtil.parseAssessment(VALID_ASSESSMENT));
+    }
+
+    @Test
+    public void parseAssessment_validValueWithWhitespace_returnsTrimmedAssessment() throws Exception {
+        String assessmentWithWhitespace = WHITESPACE + VALID_ASSESSMENT + WHITESPACE;
+        Assessment expectedAssessment = new Assessment(VALID_ASSESSMENT);
+        assertEquals(expectedAssessment, ParserUtil.parseAssessment(assessmentWithWhitespace));
     }
 
 //    @Test
