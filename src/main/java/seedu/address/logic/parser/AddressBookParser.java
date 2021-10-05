@@ -66,10 +66,12 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD1:
+        case ExitCommand.COMMAND_WORD2:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD1:
+        case HelpCommand.COMMAND_WORD2:
             return new HelpCommand();
 
         default:
