@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
 /**
@@ -70,6 +71,13 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given facility.
+     *
+     * @param facility Facility to be added.
+     */
+    void addFacility(Facility facility);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -78,6 +86,13 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns a view of the filtered facility list.
+     *
+     * @return ObservableList with filtered facilities.
+     */
+    ObservableList<Facility> getFilteredFacilityList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
