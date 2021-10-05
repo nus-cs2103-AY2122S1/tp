@@ -1,10 +1,13 @@
 package seedu.fast.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.fast.testutil.Assert.assertThrows;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalPersons.BENSON;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +15,10 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.exceptions.IllegalValueException;
+import seedu.fast.logic.commands.AppointmentCommand;
+import seedu.fast.logic.parser.AppointmentCommandParser;
 import seedu.fast.model.person.Address;
+import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Phone;
