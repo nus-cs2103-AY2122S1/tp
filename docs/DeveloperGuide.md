@@ -427,8 +427,9 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 **MSS**
 1. CSO views a list of lessons.
-2. CSO adds the student to be unenrolled from a lesson.
-3. TuitiONE removes the student from the lesson.  
+2. CSO views list of students enrolled in selected lesson.
+3. CSO requests for student to be unenrolled from the lesson.
+4. TuitiONE removes the student from the lesson.
    Use case ends.
 
 **Extensions**
