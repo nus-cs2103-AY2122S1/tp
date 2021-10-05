@@ -47,8 +47,8 @@ public class AddMemberCommandTest {
         AddMemberCommand AddMemberCommand = new AddMemberCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddMemberCommand.MESSAGE_DUPLICATE_MEMBER,
-                () -> AddMemberCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> AddMemberCommand.execute(modelStub));
     }
 
     @Test
