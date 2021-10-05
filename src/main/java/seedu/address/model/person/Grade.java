@@ -14,7 +14,7 @@ public class Grade {
             + "Level number should be from 1 to 6 for primary and 1 to 4 for secondary.";
 
     public static final String[] VALID_GRADES = {"P1", "P2", "P3", "P4", "P5", "P6", "S1", "S2", "S3", "S4"};
-    private String grade;
+    public final String grade;
 
     /**
      * Constructs a student grade
@@ -23,7 +23,7 @@ public class Grade {
      */
     public Grade(String grade) {
         requireAllNonNull(grade);
-        checkArgument(isValidInput(grade), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGrade(grade), MESSAGE_CONSTRAINTS);
         this.grade = grade;
     }
 
@@ -32,17 +32,13 @@ public class Grade {
      * @param grade The grade of the student
      * @return Whether the grade is a valid input.
      */
-    private boolean isValidInput(String grade) {
+    public static boolean isValidGrade(String grade) {
         for (String validGrade : VALID_GRADES) {
             if (grade.equals(validGrade)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public String getGrade() {
-        return grade;
     }
 
     @Override

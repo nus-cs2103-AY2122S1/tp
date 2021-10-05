@@ -10,7 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.ParentContact;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -25,6 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String grade;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -33,11 +38,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("grade") String grade,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.grade = grade;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -48,9 +55,10 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Student source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        phone = source.getParentContact().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        grade = source.getGrade().grade;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -76,7 +84,8 @@ class JsonAdaptedPerson {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ParentContact.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ParentContact.class.getSimpleName()));
         }
         if (!ParentContact.isValidPhone(phone)) {
             throw new IllegalValueException(ParentContact.MESSAGE_CONSTRAINTS);
@@ -99,8 +108,16 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (grade == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
+        }
+        if (!Grade.isValidGrade(grade)) {
+            throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        final Grade modelGrade = new Grade(grade);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelTags);
+        return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelGrade, modelTags);
     }
 
 }
