@@ -28,7 +28,7 @@ Interface (GUI).
 
    * **`list`** : Lists all modules.
 
-   * `add c/CS2103T n/4 d/software engineering` : Adds a module named `CS2103T` to the Mod Tracker.
+   * `add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core` : Adds a module named `CS2103T` to the Mod Tracker.
 
    * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
@@ -45,6 +45,9 @@ Interface (GUI).
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add m/MODULE`, `MODULE` is a parameter which can be used as `add m/GEQ1000`.
+
+* Items in square brackets are optional.<br>
+  e.g. `c/CODE [tag/TAG]` can be used as `c/CS2103T tag/core` or as `c/CS2103T`.
   
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/GEQ1000 m/GEQ1000`, only `m/GEQ1000` will be taken.
@@ -72,13 +75,13 @@ Format: `list`
 
 Adds a module to the module tracker.
 
-Format: `FORMAT: add c/CODE n/MC d/DESCRIPTION`
+Format: `FORMAT: add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]`
 * Commands must follow the specified format, **no fields should be left blank**.
 * **MC** must be a **positive integer** (1,2,3...).
 * **CODE** must follow the NUSMods module code format.
 
 Examples:
-* `add c/CS2103T n/4 d/software engineering`
+* `add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core`
 
 
 ### Editing a module : `edit` [Coming soon]
@@ -114,7 +117,7 @@ Example:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add c/CODE n/MC d/DESCRIPTION` <br> e.g. `add c/ST2334 n/4 d/Probability and Statistics`
+**Add** | `add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]` <br> e.g. `add c/ST2334 t/Probability and Statistics d/Introduces students to basic probability theory and statistical inference n/4`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Edit** [Coming soon] | `edit`
 **List** | `list`
