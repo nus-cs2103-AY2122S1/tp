@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 
-public class AppointmentCommandParser {
+public class AppointmentCommandParser implements Parser {
 
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);

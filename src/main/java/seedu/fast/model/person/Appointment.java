@@ -2,6 +2,8 @@ package seedu.fast.model.person;
 
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents an appointment with the Person in the address book.
  * Guarantees: immutable; is always valid.
@@ -17,6 +19,7 @@ public class Appointment {
      * @param date A valid date.
      */
     public Appointment(String date) {
+        requireNonNull(date);
         this.date = date;
     }
 
@@ -28,6 +31,7 @@ public class Appointment {
     public String getDate() {
         return this.date;
     }
+
 
     @Override
     public boolean equals(Object other) {
