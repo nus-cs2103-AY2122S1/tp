@@ -25,16 +25,25 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Deleted Visit for Person: %1$s";
+    public static final String MESSAGE_NO_EXISTING_VISIT = "No Existing Visit for Person: %1$s";
+
     private static final Visit EMPTY_VISIT = new Visit("");
 
     private final Index targetIndex;
     private final boolean isVisit;
 
+    /**
+     * @param targetIndex of the person in the filtered person list to delete
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.isVisit = false;
     }
 
+    /**
+     * @param targetIndex of the person in the filtered person list to delete (the visit)
+     * @param isVisit indicates if the command is to delete the person or the visit
+     */
     public DeleteCommand(Index targetIndex, boolean isVisit) {
         this.targetIndex = targetIndex;
         this.isVisit = isVisit;
@@ -52,17 +61,29 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         if (isVisit) {
-            Person editedPerson =
-                    new Person(personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail(),
-                            personToDelete.getAddress(), EMPTY_VISIT, personToDelete.getTags());
-            model.setPerson(personToDelete, editedPerson);
-            return new CommandResult(String.format(MESSAGE_DELETE_VISIT_SUCCESS, personToDelete));
+            return deleteVisit(model, personToDelete);
         } else {
-            model.deletePerson(personToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+            return deletePerson(model, personToDelete);
         }
     }
 
+    private CommandResult deleteVisit(Model model, Person personToDelete) throws CommandException {
+        if (personToDelete.getVisit().equals(EMPTY_VISIT)) {
+            throw new CommandException(String.format(MESSAGE_NO_EXISTING_VISIT, personToDelete));
+        }
+
+        Person editedPerson =
+                new Person(personToDelete.getName(), personToDelete.getPhone(), personToDelete.getEmail(),
+                        personToDelete.getAddress(), EMPTY_VISIT, personToDelete.getTags());
+        model.setPerson(personToDelete, editedPerson);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_VISIT_SUCCESS, personToDelete));
+    }
+
+    private CommandResult deletePerson(Model model, Person personToDelete) {
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+    }
 
     @Override
     public boolean equals(Object other) {
