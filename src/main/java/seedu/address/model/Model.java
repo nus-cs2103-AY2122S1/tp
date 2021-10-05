@@ -103,9 +103,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of the filtered facility list */
-    ObservableList<Facility> getFilteredFacilityList();
-
     /**
      * Updates the filter of the filtered facility list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

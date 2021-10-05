@@ -4,18 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,10 +24,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Facility> filteredFacilities;
-
-    //Stub
-    private final FilteredList<Facility> filteredFacilities = new FilteredList<>(
-            FXCollections.observableArrayList(Arrays.asList(SampleDataUtil.getSampleFacilities())));
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -138,10 +131,6 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
-    @Override
-    public ObservableList<Facility> getFilteredFacilityList() {
-        return filteredFacilities;
-    }
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);

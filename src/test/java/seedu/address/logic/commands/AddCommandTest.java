@@ -159,11 +159,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Facility> getFilteredFacilityList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredFacilityList(Predicate<Facility> predicate) {
             throw new AssertionError("This method should not be called.");
         }

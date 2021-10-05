@@ -18,7 +18,7 @@ public class LocationContainsKeywordsPredicate implements Predicate<Facility> {
     @Override
     public boolean test(Facility facility) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(facility.getLocation(), keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(facility.getLocation().location, keyword));
     }
 
     @Override
