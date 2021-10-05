@@ -11,8 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.ParentName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentName;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -62,19 +64,19 @@ class JsonAdaptedPerson {
         if (!Name.isValidName(studentName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelStudentName = new Name(studentName);
+        final Name modelStudentName = new StudentName(studentName);
 
-        if (!Phone.isValidPhone(studentPhone)) {
+        if (!studentPhone.equals("") && !Phone.isValidPhone(studentPhone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelStudentPhone = new Phone(studentPhone);
 
-        if (!Name.isValidName(parentName)) {
+        if (!parentName.equals("") && !Name.isValidName(parentName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelParentName = new Name(parentName);
+        final Name modelParentName = new ParentName(parentName);
 
-        if (!Phone.isValidPhone(parentPhone)) {
+        if (!parentPhone.equals("") && !Phone.isValidPhone(parentPhone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelParentPhone = new Phone(parentPhone);
