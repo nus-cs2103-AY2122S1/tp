@@ -79,5 +79,4 @@ class AddFacilityCommandParserTest {
                 + VALID_CAPACITY_COURT, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
 
     }
-
 }

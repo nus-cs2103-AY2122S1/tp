@@ -21,7 +21,6 @@ public class AddFacilityCommandTest {
         ModelManager model = new ModelManager();
         Facility facility = new Facility(new FacilityName("Court"), new Location("Loc"), new Time("15:00"),
                 new Capacity("5"));
-        
         CommandResult commandResult = new AddFacilityCommand(facility).execute(model);
         assertEquals(String.format(AddFacilityCommand.MESSAGE_SUCCESS, facility), commandResult.getFeedbackToUser());
     }
