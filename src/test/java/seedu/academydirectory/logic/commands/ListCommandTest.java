@@ -1,9 +1,9 @@
 package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.academydirectory.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

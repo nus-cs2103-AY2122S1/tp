@@ -3,10 +3,10 @@ package seedu.academydirectory.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
-import static seedu.academydirectory.testutil.TypicalPersons.ALICE;
-import static seedu.academydirectory.testutil.TypicalPersons.HOON;
-import static seedu.academydirectory.testutil.TypicalPersons.IDA;
-import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
+import static seedu.academydirectory.testutil.TypicalStudents.ALICE;
+import static seedu.academydirectory.testutil.TypicalStudents.HOON;
+import static seedu.academydirectory.testutil.TypicalStudents.IDA;
+import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -52,14 +52,14 @@ public class JsonAcademyDirectoryStorageTest {
     }
 
     @Test
-    public void readAcademyDirectory_invalidPersonAAcademyDirectory_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAcademyDirectory("invalidPersonAcademyDirectory.json"));
+    public void readAcademyDirectory_invalidStudentAAcademyDirectory_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAcademyDirectory("invalidStudentAcademyDirectory.json"));
     }
 
     @Test
-    public void readAcademyDirectory_invalidAndValidPersonAcademyDirectory_throwDataConversionException() {
+    public void readAcademyDirectory_invalidAndValidStudentAcademyDirectory_throwDataConversionException() {
         assertThrows(DataConversionException.class, () ->
-                readAcademyDirectory("invalidAndValidPersonAcademyDirectory.json"));
+                readAcademyDirectory("invalidAndValidStudentAcademyDirectory.json"));
     }
 
     @Test
@@ -74,14 +74,14 @@ public class JsonAcademyDirectoryStorageTest {
         assertEquals(original, new AcademyDirectory(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addStudent(HOON);
+        original.removeStudent(ALICE);
         jsonAcademyDirectoryStorage.saveAcademyDirectory(original, filePath);
         readBack = jsonAcademyDirectoryStorage.readAcademyDirectory(filePath).get();
         assertEquals(original, new AcademyDirectory(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addStudent(IDA);
         jsonAcademyDirectoryStorage.saveAcademyDirectory(original); // file path not specified
         readBack = jsonAcademyDirectoryStorage.readAcademyDirectory().get(); // file path not specified
         assertEquals(original, new AcademyDirectory(readBack));

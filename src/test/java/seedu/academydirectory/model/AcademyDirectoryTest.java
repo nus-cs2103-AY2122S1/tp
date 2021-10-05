@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
-import static seedu.academydirectory.testutil.TypicalPersons.ALICE;
-import static seedu.academydirectory.testutil.TypicalPersons.getTypicalAcademyDirectory;
+import static seedu.academydirectory.testutil.TypicalStudents.ALICE;
+import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.academydirectory.model.person.Person;
-import seedu.academydirectory.model.person.exceptions.DuplicatePersonException;
-import seedu.academydirectory.testutil.PersonBuilder;
+import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.exceptions.DuplicateStudentException;
+import seedu.academydirectory.testutil.StudentBuilder;
 
 public class AcademyDirectoryTest {
 
@@ -28,7 +28,7 @@ public class AcademyDirectoryTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), academyDirectory.getPersonList());
+        assertEquals(Collections.emptyList(), academyDirectory.getStudentList());
     }
 
     @Test
@@ -44,58 +44,58 @@ public class AcademyDirectoryTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
+        // Two students with the same identity fields
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AcademyDirectoryStub newData = new AcademyDirectoryStub(newPersons);
+        List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
+        AcademyDirectoryStub newData = new AcademyDirectoryStub(newStudents);
 
-        assertThrows(DuplicatePersonException.class, () -> academyDirectory.resetData(newData));
+        assertThrows(DuplicateStudentException.class, () -> academyDirectory.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> academyDirectory.hasPerson(null));
+    public void hasStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> academyDirectory.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAcademyDirectory_returnsFalse() {
-        assertFalse(academyDirectory.hasPerson(ALICE));
+    public void hasStudent_studentNotInAcademyDirectory_returnsFalse() {
+        assertFalse(academyDirectory.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAcademyDirectory_returnsTrue() {
-        academyDirectory.addPerson(ALICE);
-        assertTrue(academyDirectory.hasPerson(ALICE));
+    public void hasStudent_studentInAcademyDirectory_returnsTrue() {
+        academyDirectory.addStudent(ALICE);
+        assertTrue(academyDirectory.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAcademyDirectory_returnsTrue() {
-        academyDirectory.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasStudent_studentWithSameIdentityFieldsInAcademyDirectory_returnsTrue() {
+        academyDirectory.addStudent(ALICE);
+        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(academyDirectory.hasPerson(editedAlice));
+        assertTrue(academyDirectory.hasStudent(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> academyDirectory.getPersonList().remove(0));
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> academyDirectory.getStudentList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAcademyDirectory whose persons list can violate interface constraints.
+     * A stub ReadOnlyAcademyDirectory whose students list can violate interface constraints.
      */
     private static class AcademyDirectoryStub implements ReadOnlyAcademyDirectory {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Student> students = FXCollections.observableArrayList();
 
-        AcademyDirectoryStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        AcademyDirectoryStub(Collection<Student> students) {
+            this.students.setAll(students);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Student> getStudentList() {
+            return students;
         }
     }
 

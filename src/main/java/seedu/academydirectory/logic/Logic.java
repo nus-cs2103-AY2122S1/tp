@@ -8,7 +8,7 @@ import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
-import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.student.Student;
 
 /**
  * API of the Logic component
@@ -30,8 +30,8 @@ public interface Logic {
      */
     ReadOnlyAcademyDirectory getAcademyDirectory();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of students */
+    ObservableList<Student> getFilteredStudentList();
 
     /**
      * Returns the user prefs' academy directory file path.
