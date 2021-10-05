@@ -56,14 +56,14 @@ public class AttendanceCommand extends Command {
         }
 
         for (Index index : indexArrayList) {
-            Student personToEdit = lastShownList.get(index.getZeroBased());
-            Attendance attendanceToEdit = personToEdit.getAttendance();
+            Student studentToEdit = lastShownList.get(index.getZeroBased());
+            Attendance attendanceToEdit = studentToEdit.getAttendance();
             attendanceToEdit = attendanceToEdit.update(studioSession, attendanceStatus);
             Student editedPerson = new Student(
-                    personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                    personToEdit.getAddress(), personToEdit.getTags());
+                    studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+                    studentToEdit.getAddress(), studentToEdit.getTags());
             editedPerson.setAttendance(attendanceToEdit);
-            model.setStudent(personToEdit, editedPerson);
+            model.setStudent(studentToEdit, editedPerson);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);

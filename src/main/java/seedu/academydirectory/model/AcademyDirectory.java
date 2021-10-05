@@ -82,7 +82,6 @@ public class AcademyDirectory implements ReadOnlyAcademyDirectory {
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
-
         students.setStudent(target, editedStudent);
     }
 

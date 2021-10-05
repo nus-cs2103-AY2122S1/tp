@@ -14,5 +14,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_STUDIO_SESSION = new Prefix("ses/");
     public static final Prefix PREFIX_STUDIO_ATTENDANCE = new Prefix("att/");
 
-
 }
