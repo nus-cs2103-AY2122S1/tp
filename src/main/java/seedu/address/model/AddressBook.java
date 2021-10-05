@@ -137,6 +137,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns list of lessons.
+     * @return the list of lessons.
+     */
+    public ArrayList<Lesson> getLessonList() {
+        return lessons;
+    }
+
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
