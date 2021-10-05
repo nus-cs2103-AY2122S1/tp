@@ -46,8 +46,13 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         }
         EventName eventName = new EventName(eventNameStr);
         EventDate eventDate = new EventDate(eventDateStr);
-        EventTime eventTime = new EventTime(eventTimeStr);
-        Event event = new Event(eventName, eventDate, eventTime);
+        Event event;
+        if (eventTimeStr != "") {
+            EventTime eventTime = new EventTime(eventTimeStr);
+            event = new Event(eventName, eventDate, eventTime);
+        } else {
+            event = new Event(eventName, eventDate);
+        }
         return new AddEventCommand(event);
     }
 

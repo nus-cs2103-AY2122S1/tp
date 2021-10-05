@@ -17,10 +17,10 @@ public class AddEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an event with the specified name "
             + "on the specified date (in YYYY-MM-DD format) and optionally includes time (in 24hr format)\n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME"
-            + PREFIX_DATE + "DATE"
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DATE + "DATE "
             + "[" + PREFIX_TIME + "TIME]\n"
-            + "Example: " + COMMAND_WORD + "n/CS2106 Finals d/2021-09-20\n";
+            + "Example: " + COMMAND_WORD + " n/CS2106 Finals d/2021-09-20 t/0900\n";
 
     public static final String MESSAGE_DONE_EVENT_SUCCESS = "Got it, I have added this event to the Event List!\n %1$s";
 
