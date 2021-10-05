@@ -2,7 +2,13 @@ package seedu.plannermd.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.plannermd.logic.parser.CliSyntax.*;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -10,9 +16,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
@@ -34,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_REMARK_BOB = "Company X coverage";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_RISK_AMY = "LOW";
+    public static final String VALID_RISK_BOB = "MEDIUM";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,6 +57,8 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String RISK_DESC_AMY = " " + PREFIX_RISK + VALID_RISK_AMY;
+    public static final String RISK_DESC_BOB = " " + PREFIX_RISK + VALID_RISK_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -57,8 +69,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPatientCommand.EditPatientDescriptor DESC_AMY;
+    public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -105,24 +117,24 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         PlannerMd expectedPlannerMd = new PlannerMd(actualModel.getPlannerMd());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPatientList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedPlannerMd, actualModel.getPlannerMd());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredPatientList());
     }
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the patient at the given {@code targetIndex} in the
      * {@code model}'s plannermd.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showPatientAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPatientList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Patient patient = model.getFilteredPatientList().get(targetIndex.getZeroBased());
+        final String[] splitName = patient.getName().fullName.split("\\s+");
+        model.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredPatientList().size());
     }
 
 }

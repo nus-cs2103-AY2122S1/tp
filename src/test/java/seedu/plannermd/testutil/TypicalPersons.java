@@ -1,13 +1,18 @@
 package seedu.plannermd.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import seedu.plannermd.model.PlannerMd;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import seedu.plannermd.model.person.Person;
-
-import static seedu.plannermd.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -51,19 +56,4 @@ public class TypicalPersons {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
-
-    /**
-     * Returns an {@code PlannerMd} with all the typical persons.
-     */
-    public static PlannerMd getTypicalPlannerMd() {
-        PlannerMd ab = new PlannerMd();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
-        }
-        return ab;
-    }
-
-    public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
 }

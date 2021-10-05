@@ -6,10 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
+import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
-import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
@@ -21,35 +22,35 @@ public class SampleDataUtil {
 
     private static final Remark EMPTY_REMARK = new Remark("");
 
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK,
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK,
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK,
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+    public static Patient[] getSamplePatients() {
+        return new Patient[] {
+            new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                new Address("Blk 30 Geylang Street 29, #06-40"), new Remark("Prefer Dr. Lau"),
+                getTagSet("friends"), new Risk("LOW")),
+            new Patient(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Remark("Monthly insulin prescription"),
+                getTagSet("colleagues", "friends"), new Risk("MEDIUM")),
+            new Patient(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Remark("Only understands Mandarin"),
+                getTagSet("neighbours"), new Risk("HIGH")),
+            new Patient(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK,
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                getTagSet("family"), new Risk("LOW")),
+            new Patient(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK,
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                getTagSet("classmates"), new Risk("LOW")),
+            new Patient(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,
-                getTagSet("colleagues"))
+                getTagSet("colleagues"), new Risk("MEDIUM"))
         };
     }
 
     public static ReadOnlyPlannerMd getSamplePlannerMd() {
-        PlannerMd sampleAb = new PlannerMd();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        PlannerMd samplePm = new PlannerMd();
+        for (Patient samplePatient : getSamplePatients()) {
+            samplePm.addPatient(samplePatient);
         }
-        return sampleAb;
+        return samplePm;
     }
 
     /**

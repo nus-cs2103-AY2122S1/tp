@@ -1,7 +1,7 @@
 package seedu.plannermd.logic.commands;
 
 import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Remark;
 
@@ -49,21 +50,21 @@ public class RemarkCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+        Patient patientToEdit = lastShownList.get(index.getZeroBased());
+        Patient editedPatient = new Patient(
+                patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
+                patientToEdit.getAddress(), remark, patientToEdit.getTags(), patientToEdit.getRisk());
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setPatient(patientToEdit, editedPatient);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedPatient));
     }
 
     /**
