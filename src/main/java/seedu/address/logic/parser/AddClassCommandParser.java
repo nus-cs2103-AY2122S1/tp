@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -45,10 +44,7 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
         ClassLimit limit = ParserUtil.parseLimit(argMultimap.getValue(PREFIX_LIMIT).get());
         Counter counter = ParserUtil.parseCounter(argMultimap.getValue(PREFIX_COUNTER).get());
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_TIMESLOT).get());
-        //Student student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
-
-        //TODO parseStudent
-        Student student = new Student(new ArrayList<>());
+        Student student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
 
         TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student);
 

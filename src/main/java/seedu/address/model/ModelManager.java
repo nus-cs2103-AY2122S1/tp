@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -36,9 +37,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(addressBook.getPersonList());
-        filterdTuition = new FilteredList<>(addressBook.getTuitionList());
-
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filterdTuition = new FilteredList<>(this.addressBook.getTuitionList());
 
     }
 
@@ -116,6 +116,23 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public Person getStudent(Index index) {
+        requireNonNull(index);
+        return addressBook.getPerson(index);
+    }
+
+    @Override
+    public Person getSameNamePerson(Person otherPerson) {
+        return this.addressBook.getSameNamePerson(otherPerson);
+    }
+
+    @Override
+    public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
+        addressBook.updateTuitionClassInPersonObject(tuitionClass);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -219,6 +236,19 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedTuition);
 
         addressBook.setTuition(target, editedTuition);
+    }
+
+    @Override
+    public TuitionClass getTuitionClass(Index index) {
+        requireNonNull(index);
+        return addressBook.getTuition(index);
+    }
+
+    @Override
+    public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
+        requireNonNull(tuitionClass);
+        requireNonNull(person);
+        return addressBook.addToClass(tuitionClass, person);
     }
 
 }

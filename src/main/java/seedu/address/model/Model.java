@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -117,5 +118,38 @@ public interface Model {
      */
     void setTuition(TuitionClass target, TuitionClass editedTuition);
 
+    /**
+     * Check whether the list of students contains the index from input.
+     * @param index the index of student to be checked.
+     * @return true if the index is present.
+     */
+    Person getStudent(Index index);
 
+    /**
+     * Check whether the list of tuition classes contains the index from input.
+     * @param index the index of class to be checked.
+     * @return true if the index is present.
+     */
+    TuitionClass getTuitionClass(Index index);
+
+    /**
+     * Add a new student to an existing class.
+     * @param tuitionClass an existing class.
+     * @param person an existing student.
+     * @return the tuition class after modification.
+     */
+    TuitionClass addToClass(TuitionClass tuitionClass, Person person);
+
+    /**
+     * Returns a person with the same name as the input person.
+     * @param otherPerson the person to be checked
+     * @return the person with the same name as input.
+     */
+    Person getSameNamePerson(Person otherPerson);
+
+    /**
+     * Update the tuition classes included in person object when tuition classes is updated.
+     * @param tuitionClass the tuition class that has been changed.
+     */
+    void updateTuitionClassInPersonObject(TuitionClass tuitionClass);
 }

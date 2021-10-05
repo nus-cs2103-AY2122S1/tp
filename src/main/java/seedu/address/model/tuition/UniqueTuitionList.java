@@ -138,5 +138,13 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         }
         return true;
     }
+
+    public TuitionClass getTuitionClass(int index) {
+        return this.internalList.get(index);
+    }
+
+    public int tuitionListSize() {
+        return this.internalList.size();
+    }
 }
 

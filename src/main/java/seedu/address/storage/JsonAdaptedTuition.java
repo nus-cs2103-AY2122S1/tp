@@ -27,7 +27,7 @@ class JsonAdaptedTuition {
     private final int limit;
     private final int counter;
     private final String timeslot;
-    private final ArrayList<Person> student = new ArrayList<>();
+    private final ArrayList<String> student = new ArrayList<>();
 
 
     /**
@@ -36,7 +36,7 @@ class JsonAdaptedTuition {
     @JsonCreator
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("limit") int limit,
                              @JsonProperty("counter") int counter, @JsonProperty("timeslot") String timeslot,
-                             @JsonProperty("student") ArrayList<Person> student) {
+                             @JsonProperty("student") ArrayList<String> student) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
@@ -85,7 +85,7 @@ class JsonAdaptedTuition {
 
         final Timeslot modelTimeslot = new Timeslot(timeslot);
 
-        final Student modelStudent = new Student(new ArrayList<Person>());
+        final Student modelStudent = new Student(student);
         return new TuitionClass(modelName, modelLimit, modelCounter, modelTimeslot, modelStudent);
 
     }
