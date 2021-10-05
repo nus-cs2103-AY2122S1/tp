@@ -16,6 +16,7 @@ import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.RemarkCommand;
+import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 
 /**
@@ -72,6 +73,8 @@ public class FastParser {
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
 
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

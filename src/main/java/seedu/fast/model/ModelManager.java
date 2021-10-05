@@ -112,6 +112,12 @@ public class ModelManager implements Model {
         fast.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void sortPerson() {
+        fast.sortPersons();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

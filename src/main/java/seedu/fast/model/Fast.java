@@ -93,6 +93,14 @@ public class Fast implements ReadOnlyFast {
         persons.remove(key);
     }
 
+    /**
+     * Sorts the list of persons
+     * Todo: sort by keyword
+     */
+    public void sortPersons() {
+        persons.sortPersons();
+    }
+
     //// util methods
 
     @Override
