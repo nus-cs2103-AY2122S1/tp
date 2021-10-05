@@ -19,22 +19,22 @@ import seedu.academydirectory.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AcademyDirectory addressBook;
+    private final AcademyDirectory academyDirectory;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAcademyDirectory addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAcademyDirectory academyDirectory, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(academyDirectory, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + academyDirectory + " and user prefs " + userPrefs);
 
-        this.addressBook = new AcademyDirectory(addressBook);
+        this.academyDirectory = new AcademyDirectory(academyDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.academyDirectory.getPersonList());
     }
 
     public ModelManager() {
@@ -80,28 +80,28 @@ public class ModelManager implements Model {
 
     @Override
     public void setAcademyDirectory(ReadOnlyAcademyDirectory addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.academyDirectory.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAcademyDirectory getAcademyDirectory() {
-        return addressBook;
+        return academyDirectory;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return academyDirectory.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        academyDirectory.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        academyDirectory.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        academyDirectory.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -143,7 +143,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return academyDirectory.equals(other.academyDirectory)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }

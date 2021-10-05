@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyAcademyDirectory_success() {
         Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
         expectedModel.setAcademyDirectory(new AcademyDirectory());
