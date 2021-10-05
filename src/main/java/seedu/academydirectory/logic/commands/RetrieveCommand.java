@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.academydirectory.model.Model;
-import seedu.academydirectory.model.person.Information;
-import seedu.academydirectory.model.person.Person;
+import seedu.academydirectory.model.student.Information;
+import seedu.academydirectory.model.student.Student;
 
 /**
  * Finds and lists all persons in academy directory whose name contains any of the argument keywords.
@@ -28,16 +28,16 @@ public class RetrieveCommand extends Command {
             + "Parameters: " + PREFIX_ADDRESS + " | " + PREFIX_EMAIL + " | " + PREFIX_PHONE + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE;
 
-    private final Function<? super Person, ? extends Information> filter;
+    private final Function<? super Student, ? extends Information> filter;
 
-    public RetrieveCommand(Function<? super Person, ? extends Information> filter) {
+    public RetrieveCommand(Function<? super Student, ? extends Information> filter) {
         this.filter = filter;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        ObservableList<Information> view = model.getFilteredPersonListView(filter);
+        ObservableList<Information> view = model.getFilteredStudentListView(filter);
         String result = view.stream().map(Object::toString).collect(Collectors.joining("\n"));
         return new CommandResult(result);
     }

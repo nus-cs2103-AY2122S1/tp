@@ -1,4 +1,4 @@
-package seedu.academydirectory.model.person;
+package seedu.academydirectory.model.student;
 
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 import seedu.academydirectory.logic.parser.Prefix;
 
-public class InformationWantedFunction implements Function<Person, Information> {
+public class InformationWantedFunction implements Function<Student, Information> {
     private final Prefix prefix;
 
     public InformationWantedFunction(Prefix prefix) {
@@ -16,13 +16,13 @@ public class InformationWantedFunction implements Function<Person, Information> 
     }
 
     @Override
-    public Information apply(Person person) {
+    public Information apply(Student student) {
         if (PREFIX_EMAIL.equals(prefix)) {
-            return person.getEmail();
+            return student.getEmail();
         } else if (PREFIX_ADDRESS.equals(prefix)) {
-            return person.getAddress();
+            return student.getAddress();
         } else if (PREFIX_PHONE.equals(prefix)) {
-            return person.getPhone();
+            return student.getPhone();
         }
         return null;
     }

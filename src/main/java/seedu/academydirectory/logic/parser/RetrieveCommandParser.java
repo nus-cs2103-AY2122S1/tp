@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import seedu.academydirectory.logic.commands.RetrieveCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.person.InformationWantedFunction;
+import seedu.academydirectory.model.student.InformationWantedFunction;
 
 /**
  * Parses input arguments and creates a new FindCommand object

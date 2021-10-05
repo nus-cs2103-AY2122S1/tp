@@ -91,5 +91,5 @@ public interface Model {
      * Returns an unmodifiable slice of the filtered person list according to the given {@code function}.
      * @throws NullPointerException if {@code function} is null.
      */
-    <T> ObservableList<T> getFilteredPersonListView(Function<? super Person, ? extends T> function);
+    <T> ObservableList<T> getFilteredStudentListView(Function<? super Student, ? extends T> function);
 }

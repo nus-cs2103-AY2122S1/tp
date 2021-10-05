@@ -6,7 +6,6 @@ import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNu
 import java.nio.file.Path;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -134,9 +133,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public <T> ObservableList<T> getFilteredPersonListView(Function<? super Person, ? extends T> function) {
+    public <T> ObservableList<T> getFilteredStudentListView(Function<? super Student, ? extends T> function) {
         requireNonNull(function);
-        return filteredPersons
+        return filteredStudents
                 .stream()
                 .map(function)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
