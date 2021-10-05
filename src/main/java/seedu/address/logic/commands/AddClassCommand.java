@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.Student;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -22,6 +23,7 @@ public class AddClassCommand extends Command {
             + ": Add tuition class given name, limit, sessions, timeslot, and student \n"
             + "Parameters: NAME LIMIT COUNTER TIMESLOT STUDENT\n"
             + "Example: " + COMMAND_WORD + " n/Physics l/10 c/4 ts/Mon 4pm, s/";
+    private static final String MESSAGE_CLASS_LIMIT_EXCEEDED = "The class limit has been exceeded.";
 
 
     private TuitionClass toAdd;
@@ -46,7 +48,11 @@ public class AddClassCommand extends Command {
         if (model.hasTuition(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLASS);
         }
+        int limit = toAdd.getLimit().getLimit();
         for (String s: nowStudents) {
+            if (newStudents.size() >= limit) {
+                throw new CommandException(MESSAGE_CLASS_LIMIT_EXCEEDED);
+            }
             Person person = new Person(new Name(s));
             if (model.hasPerson(person)) {
                 newStudents.add(s);
@@ -57,10 +63,14 @@ public class AddClassCommand extends Command {
         }
         toAdd.changeStudents(newStudents);
         model.addTuition(toAdd);
-        for (Person person: validStudentsAsPerson) {
-            person.addClass(toAdd);
-        }
+        addClassToStudent(toAdd, validStudentsAsPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd
                 + "\n" + MESSAGE_STUDENT_NOT_FOUND + invalidStudents));
+    }
+    private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Person> validStudentsAsPerson) {
+        for (Person person: validStudentsAsPerson) {
+            person.addClass(tuitionClass);
+            person.addTag(new Tag(tuitionClass.getName().getName()));
+        }
     }
 }

@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String remark;
-    private final ArrayList<TuitionClass> classes = new ArrayList<>();
+    private final List<JsonAdaptedTuition> classes = new ArrayList<>();
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -43,16 +43,17 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
              @JsonProperty("remark") String remark,
-            @JsonProperty("classes") ArrayList<TuitionClass> classes,
+            @JsonProperty("classes") List<JsonAdaptedTuition> classes,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
-
         if (classes != null) {
-            this.classes.addAll(classes);
+            for (JsonAdaptedTuition tc: classes) {
+                this.classes.add(tc);
+            }
         }
 
         if (tagged != null) {
@@ -73,7 +74,10 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        classes.addAll(source.getClasses().getClasses());
+        for (TuitionClass tc: source.getClasses().getClasses()) {
+            JsonAdaptedTuition jsonAdaptedTuition = new JsonAdaptedTuition(tc);
+            classes.add(jsonAdaptedTuition);
+        }
     }
 
     /**
@@ -125,8 +129,12 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
         final Classes modelClasses = new Classes(new ArrayList<TuitionClass>());
+        ArrayList<TuitionClass> tuitionClasses = new ArrayList<>();
+        for (JsonAdaptedTuition tuition: classes) {
+            tuitionClasses.add(tuition.toModelType());
+        }
+        modelClasses.updateClasses(tuitionClasses);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags, modelClasses);
-
     }
 
 }

@@ -99,6 +99,16 @@ public class Person {
     }
 
     /**
+     * Adds a new tag to the person.
+     * @param tag tag to be added
+     * @return the updated set of tag
+     */
+    public Set<Tag> addTag(Tag tag) {
+        this.tags.add(tag);
+        return this.tags;
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

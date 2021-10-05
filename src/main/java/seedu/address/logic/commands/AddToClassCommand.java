@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.TuitionClass;
 
 
@@ -24,6 +25,7 @@ public class AddToClassCommand extends Command {
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
     private static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found.";
     private static final String MESSAGE_CLASS_NOT_FOUND = "This tuition class is not found.";
+    private static final String MESSAGE_CLASS_IS_FULL = "Cannot add student as the class limit has been exceeded.";
     private Index studentIndex;
     private Index classIndex;
 
@@ -56,9 +58,14 @@ public class AddToClassCommand extends Command {
         if (tuitionClass == null) {
             throw new CommandException(MESSAGE_CLASS_NOT_FOUND);
         }
+        boolean isClassFull = tuitionClass.getLimit().limit == tuitionClass.getStudent().getStudents().size();
+        if (isClassFull) {
+            throw new CommandException(MESSAGE_CLASS_IS_FULL);
+        }
 
         TuitionClass modifiedClass = model.addToClass(tuitionClass, studentToAdd);
         studentToAdd.addClass(modifiedClass);
+        studentToAdd.addTag(new Tag(modifiedClass.getName().getName()));
         if (modifiedClass == null) {
             throw new CommandException(String.format(MESSAGE_STUDENT_EXISTS, studentToAdd));
         }

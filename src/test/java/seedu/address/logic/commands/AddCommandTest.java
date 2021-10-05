@@ -224,6 +224,11 @@ public class AddCommandTest {
         public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
             return null;
         }
+
+        @Override
+        public Person getSameNamePerson(Person otherPerson) {
+            return null;
+        }
     }
 
     /**
