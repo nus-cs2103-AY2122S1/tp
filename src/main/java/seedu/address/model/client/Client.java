@@ -19,16 +19,14 @@ public class Client implements Category {
     // Data fields
     private final Name name;
 
-    /**
-     * Constructs a {@code Client}.
-     * Every field must be present and not null.
-     *
-     * @param name Name of Client
-     */
     public Client(Name name) {
-        requireAllNonNull(name);
+        this(new ID(), name);
+    }
 
-        id = new ID();
+    private Client(ID id, Name name) {
+        requireAllNonNull(id, name);
+
+        this.id = id;
         this.name = name;
     }
 
@@ -38,6 +36,10 @@ public class Client implements Category {
 
     public Name getName() {
         return name;
+    }
+
+    public static Client updateClient(Client client, Name name) {
+        return new Client(client.getId(), name);
     }
 
     /**
