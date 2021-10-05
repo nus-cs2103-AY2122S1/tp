@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicateAssessmentException;
 import seedu.address.model.person.exceptions.AssessmentNotFoundException;
 
@@ -54,7 +53,7 @@ public class AssessmentList {
      * {@code target} must exist in the list.
      * The assessment identity of {@code editedAssessment} must not be the same as another existing assessment in the list.
      */
-    public void setAssessments(Assessment target, Assessment editedAssessment) {
+    public void setAssessment(Assessment target, Assessment editedAssessment) {
         requireAllNonNull(target, editedAssessment);
 
         int index = assessments.indexOf(target);
