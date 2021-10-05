@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should have at least some alphanumeric characters, and it should not be blank";
+            "Names should have at least one alphanumeric character, and it should not be blank";
 
     /*
      * The subject name should have at least one alphanumeric character
