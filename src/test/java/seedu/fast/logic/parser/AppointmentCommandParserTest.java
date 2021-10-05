@@ -20,6 +20,7 @@ public class AppointmentCommandParserTest {
     private final String invalidApptMonth = "2021-20-01";
     private final String invalidApptDay = "2021-10-45";
     private final String formattedAppt = "10 Oct 2021";
+    private final String noApptSceduled = "No Appointment Scheduled Yet";
 
     @Test
     public void parse_indexSpecified_success() {
@@ -40,11 +41,6 @@ public class AppointmentCommandParserTest {
 
         // no index
         assertParseFailure(parser, AppointmentCommand.COMMAND_WORD + " " + appt, expectedMessage);
-
-        // no date
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT;
-        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
@@ -72,5 +68,14 @@ public class AppointmentCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AppointmentCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
+    public void parse_appointmentNoDateDefaultDelete_success() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT;
+        AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
+                new Appointment(noApptSceduled));
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
