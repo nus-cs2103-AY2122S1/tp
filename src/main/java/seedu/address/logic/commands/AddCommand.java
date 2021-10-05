@@ -6,16 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Adds a student to the address book.
@@ -38,7 +37,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
-    public static final String MESSAGE_GROUP_NONEXISTENT = "The group indicated does not exist. Please create it first.";
+    public static final String MESSAGE_GROUP_NONEXISTENT =
+            "The group indicated does not exist. Please create it first.";
 
     private final Student toAdd;
 
