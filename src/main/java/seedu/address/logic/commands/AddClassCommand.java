@@ -63,14 +63,17 @@ public class AddClassCommand extends Command {
         }
         toAdd.changeStudents(newStudents);
         model.addTuition(toAdd);
-        addClassToStudent(toAdd, validStudentsAsPerson);
+        addClassToStudent(toAdd, validStudentsAsPerson, model);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd
                 + "\n" + MESSAGE_STUDENT_NOT_FOUND + invalidStudents));
     }
-    private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Person> validStudentsAsPerson) {
+    private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Person> validStudentsAsPerson, Model model) {
         for (Person person: validStudentsAsPerson) {
+            Person studentToChange = person;
             person.addClass(tuitionClass);
             person.addTag(new Tag(tuitionClass.getName().getName()));
+            model.setPerson(studentToChange, person);
         }
     }
 }
+
