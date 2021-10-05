@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUITIONS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,10 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.TuitionClass;
-
-
-
-
 
 public class AddToClassCommand extends Command {
     public static final String COMMAND_WORD = "addtoclass";
@@ -69,7 +67,9 @@ public class AddToClassCommand extends Command {
         }
         studentToAdd.addClass(modifiedClass);
         studentToAdd.addTag(new Tag(modifiedClass.getName().getName()));
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateTuitionClassInPersonObject(modifiedClass);
+        model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentToAdd.getName().fullName, modifiedClass));
     }
 }

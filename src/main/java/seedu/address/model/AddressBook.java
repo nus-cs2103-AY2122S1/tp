@@ -197,6 +197,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeTuition(TuitionClass key) {
+
         tuitons.remove(key);
     }
 
