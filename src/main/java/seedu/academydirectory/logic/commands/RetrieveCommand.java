@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.student.Information;
 import seedu.academydirectory.model.student.Student;
@@ -38,7 +39,9 @@ public class RetrieveCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         ObservableList<Information> view = model.getFilteredStudentListView(filter);
-        String result = view.stream().map(Object::toString).collect(Collectors.joining("\n"));
+        String result = view.size() == 0
+                ? String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, view.size())
+                : view.stream().map(Object::toString).collect(Collectors.joining("\n"));
         return new CommandResult(result);
     }
 
