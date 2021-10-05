@@ -1,6 +1,5 @@
 package seedu.plannermd.model.doctor;
 
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.plannermd.model.person.Address;
@@ -39,18 +38,6 @@ public class Doctor extends Person {
 
         Doctor otherDoctor = (Doctor) other;
         return super.equals(otherDoctor);
-    }
-
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(),
-                getAddress(), getTags());
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
 }
