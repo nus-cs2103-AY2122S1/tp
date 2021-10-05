@@ -93,17 +93,17 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getStudentName());
 
-        if (!studentPhone.isEmpty()) {
+        if (studentPhone != null) {
             builder.append("; Student's phone: ")
                     .append(getStudentPhone());
         }
 
-        if (!parentName.isEmpty()) {
+        if (parentName != null) {
             builder.append("; Parent's name: ")
                     .append(getParentName());
         }
 
-        if (!parentPhone.isEmpty()) {
+        if (parentPhone != null) {
             builder.append("; Parent's phone: ")
                     .append(getParentPhone());
         }
