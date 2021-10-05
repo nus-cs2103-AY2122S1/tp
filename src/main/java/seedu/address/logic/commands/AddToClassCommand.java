@@ -46,8 +46,8 @@ public class AddToClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person studentToAdd = model.getStudentIndex(studentIndex);
-        TuitionClass tuitionClass = model.getTuitionClassIndex(classIndex);
+        Person studentToAdd = model.getStudent(studentIndex);
+        TuitionClass tuitionClass = model.getTuitionClass(classIndex);
 
         if (studentToAdd == null) {
             throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
@@ -58,6 +58,7 @@ public class AddToClassCommand extends Command {
         }
 
         TuitionClass modifiedClass = model.addToClass(tuitionClass, studentToAdd);
+        studentToAdd.addClass(modifiedClass);
         if (modifiedClass == null) {
             throw new CommandException(String.format(MESSAGE_STUDENT_EXISTS, studentToAdd));
         }

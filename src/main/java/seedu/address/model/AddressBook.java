@@ -204,4 +204,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tuitionClass.addStudent(person);
     }
 
+    /**
+     * Returns a person with the same name as the input person.
+     * @param otherPerson the person to be checked
+     * @return the person with the same name as input.
+     */
+    public Person getSameNamePerson(Person otherPerson) {
+        return this.persons.getSameNamePerson(otherPerson);
+    }
+
 }

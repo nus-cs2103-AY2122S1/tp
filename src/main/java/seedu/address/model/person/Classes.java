@@ -84,4 +84,14 @@ public class Classes {
         }
         return true;
     }
+
+    /**
+     * Adds a class into the student's class list.
+     * @param tuitionClass the tuition class to be added.
+     * @return the updated Classes object.
+     */
+    public Classes addClass(TuitionClass tuitionClass) {
+        this.getClasses().add(tuitionClass);
+        return this;
+    }
 }

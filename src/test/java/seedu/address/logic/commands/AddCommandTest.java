@@ -211,12 +211,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person getStudentIndex(Index index) {
+        public Person getStudent(Index index) {
             return null;
         }
 
         @Override
-        public TuitionClass getTuitionClassIndex(Index index) {
+        public TuitionClass getTuitionClass(Index index) {
             return null;
         }
 

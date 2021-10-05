@@ -123,14 +123,14 @@ public interface Model {
      * @param index the index of student to be checked.
      * @return true if the index is present.
      */
-    Person getStudentIndex(Index index);
+    Person getStudent(Index index);
 
     /**
      * Check whether the list of tuition classes contains the index from input.
      * @param index the index of class to be checked.
      * @return true if the index is present.
      */
-    TuitionClass getTuitionClassIndex(Index index);
+    TuitionClass getTuitionClass(Index index);
 
     /**
      * Add a new student to an existing class.
@@ -140,4 +140,10 @@ public interface Model {
      */
     TuitionClass addToClass(TuitionClass tuitionClass, Person person);
 
+    /**
+     * Returns a person with the same name as the input person.
+     * @param otherPerson the person to be checked
+     * @return the person with the same name as input.
+     */
+    Person getSameNamePerson(Person otherPerson);
 }

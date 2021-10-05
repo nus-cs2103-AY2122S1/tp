@@ -118,6 +118,18 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Person getStudent(Index index) {
+        requireNonNull(index);
+        return addressBook.getPerson(index);
+    }
+
+    @Override
+    public Person getSameNamePerson(Person otherPerson) {
+        return this.addressBook.getSameNamePerson(otherPerson);
+    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -223,13 +235,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person getStudentIndex(Index index) {
-        requireNonNull(index);
-        return addressBook.getPerson(index);
-    }
-
-    @Override
-    public TuitionClass getTuitionClassIndex(Index index) {
+    public TuitionClass getTuitionClass(Index index) {
         requireNonNull(index);
         return addressBook.getTuition(index);
     }

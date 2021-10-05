@@ -38,23 +38,28 @@ public class AddClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Student student = toAdd.getStudent();
-        ArrayList<String> students = student.getStudents();
+        ArrayList<String> nowStudents = student.getStudents();
         ArrayList<String> newStudents = new ArrayList<>();
         ArrayList<String> invalidStudents = new ArrayList<>();
+        ArrayList<Person> validStudentsAsPerson = new ArrayList<>();
         requireNonNull(model);
         if (model.hasTuition(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLASS);
         }
-        for (String s: students) {
+        for (String s: nowStudents) {
             Person person = new Person(new Name(s));
             if (model.hasPerson(person)) {
                 newStudents.add(s);
+                validStudentsAsPerson.add(model.getSameNamePerson(person));
             } else {
                 invalidStudents.add(s);
             }
         }
         toAdd.changeStudents(newStudents);
         model.addTuition(toAdd);
+        for (Person person: validStudentsAsPerson) {
+            person.addClass(toAdd);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd
                 + "\n" + MESSAGE_STUDENT_NOT_FOUND + invalidStudents));
     }

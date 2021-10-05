@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * Represents a Person in the address book.
@@ -80,6 +81,16 @@ public class Person {
     }
 
     /**
+     * Adds a new tuition class to the student's class list.
+     * @param tuitionClass The tuition class to be added.
+     * @return the updated Classes object.
+     */
+    public Classes addClass(TuitionClass tuitionClass) {
+        Classes updatedClass = this.getClasses().addClass(tuitionClass);
+        return updatedClass;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -98,6 +109,18 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public Person getSameNamePerson(Person otherPerson) {
+        if (otherPerson == this) {
+            return this;
+        }
+        boolean sameName = otherPerson != null
+                && otherPerson.getName().equals(getName());
+        if (sameName) {
+            return this;
+        }
+        return null;
     }
 
     /**
