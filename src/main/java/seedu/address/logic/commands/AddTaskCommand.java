@@ -9,6 +9,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -91,7 +92,7 @@ public class AddTaskCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         int size = newTasks.size();
-        String taskOrTasks = size > 1 ? "tasks" : "task";
+        String taskOrTasks = StringUtil.singularOrPlural("task", size);
         return String.format(MESSAGE_SUCCESS, size, taskOrTasks, personToEdit.getName());
     }
 }

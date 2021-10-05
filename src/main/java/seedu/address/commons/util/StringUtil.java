@@ -65,4 +65,14 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Adds an "s" in front of the string if size is bigger than 1. Used for list
+     * @param string singular form
+     * @param size of list
+     * @return singular or plural form of the string given
+     */
+    public static String singularOrPlural(String string, int size) {
+        return size > 1 ? string : string + "s";
+    }
 }
