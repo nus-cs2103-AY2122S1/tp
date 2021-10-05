@@ -76,4 +76,9 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public void exportToJson(ReadOnlyAddressBook addressBook) throws IOException {
+        addressBookStorage.exportToJson(addressBook);
+    }
+
 }
