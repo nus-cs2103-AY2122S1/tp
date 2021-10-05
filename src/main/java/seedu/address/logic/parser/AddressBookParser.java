@@ -51,12 +51,12 @@ public class AddressBookParser {
         }
 
         final String commandWord =
-                matcher.group("commandWord")
+                matcher.group("commandWord").trim()
                         + (matcher.pattern() == ADVANCED_COMMAND_FORMAT
-                           ? matcher.group("flag")
+                           ? " " + matcher.group("flag").trim()
                            : "");
-
-        final String arguments = matcher.group("arguments");
+        
+        final String arguments = matcher.group("arguments").trim();
 
         switch (commandWord) {
         case EditClientCommand.COMMAND_WORD:
