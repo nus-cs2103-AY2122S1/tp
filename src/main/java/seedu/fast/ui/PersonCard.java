@@ -68,12 +68,15 @@ public class PersonCard extends UiPart<Region> {
      */
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
-        if (tagName.equals("friends")) {
+
+        switch (tagName) { //Todo: add more color tags & abstract out case names
+
+        case "friends":
             temp.setStyle(Colors.BLUE);
-        } else {
+            break;
+        default:
             temp.setStyle(Colors.GREY);
         }
-
         return temp;
     }
 
