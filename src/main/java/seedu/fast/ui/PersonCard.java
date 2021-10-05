@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.fast.commons.util.Colors;
 import seedu.fast.model.person.Person;
 
 /**
@@ -68,9 +69,9 @@ public class PersonCard extends UiPart<Region> {
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
         if (tagName.equals("friends")) {
-            temp.setStyle("-fx-background-color: #FF0000;");
+            temp.setStyle(Colors.BLUE);
         } else {
-            temp.setStyle("-fx-background-color: #3e7b91;");
+            temp.setStyle(Colors.GREY);
         }
 
         return temp;
