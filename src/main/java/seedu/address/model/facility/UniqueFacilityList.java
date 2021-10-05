@@ -41,4 +41,11 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public ObservableList<Facility> getObservableList() {
         return facilityList;
     }
+
+    /**
+     * Replaces the contents of this list with empty list.
+     */
+    public void resetFacilities() {
+        facilityList.setAll();
+    }
 }

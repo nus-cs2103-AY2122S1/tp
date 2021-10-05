@@ -52,6 +52,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Clears the contents of the facility list.
+     */
+    public void resetFacilityList() {
+        this.facilities.resetFacilities();
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {

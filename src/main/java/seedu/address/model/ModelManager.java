@@ -169,4 +169,9 @@ public class ModelManager implements Model {
         filteredFacilities.setPredicate(predicate);
     }
 
+    @Override
+    public void resetFacilityList() {
+        addressBook.resetFacilityList();
+    }
+
 }
