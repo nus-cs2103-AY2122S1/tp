@@ -63,7 +63,7 @@ public class AppointmentCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(personToEdit, editedPerson));
     }
 
     /**
@@ -71,10 +71,11 @@ public class AppointmentCommand extends Command {
      * the appointment is added or updated
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        String message = appointment.getDate().equals(Appointment.NO_APPOINTMENT) ? MESSAGE_ADD_APPOINTMENT_SUCCESS
+    private String generateSuccessMessage(Person personToEdit, Person editedPerson) {
+        String message = (personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT))
+                ? MESSAGE_ADD_APPOINTMENT_SUCCESS
                 : MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
-        return String.format(message, appointment.getDate());
+        return String.format(message, editedPerson.getAppointment().getDate());
     }
 
     @Override
