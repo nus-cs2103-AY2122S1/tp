@@ -69,6 +69,7 @@ public class AddToClassCommand extends Command {
         }
         studentToAdd.addClass(modifiedClass);
         studentToAdd.addTag(new Tag(modifiedClass.getName().getName()));
+        model.updateTuitionClassInPersonObject(modifiedClass);
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentToAdd.getName().fullName, modifiedClass));
     }
 }

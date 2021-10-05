@@ -146,4 +146,10 @@ public interface Model {
      * @return the person with the same name as input.
      */
     Person getSameNamePerson(Person otherPerson);
+
+    /**
+     * Update the tuition classes included in person object when tuition classes is updated.
+     * @param tuitionClass the tuition class that has been changed.
+     */
+    void updateTuitionClassInPersonObject(TuitionClass tuitionClass);
 }

@@ -213,4 +213,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return this.persons.getSameNamePerson(otherPerson);
     }
 
+    /**
+     * Updates the tuition class when a new student is added
+     * or information of the tuition class has been changed.
+     * @param tuitionClass the tuition class that has been changed.
+     */
+    public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
+        for (Person person: persons) {
+            person.updateTuitionClass(tuitionClass);
+        }
+    }
+
 }

@@ -129,6 +129,11 @@ public class ModelManager implements Model {
         return this.addressBook.getSameNamePerson(otherPerson);
     }
 
+    @Override
+    public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
+        addressBook.updateTuitionClassInPersonObject(tuitionClass);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -185,6 +186,22 @@ public class Person {
             classes.getClasses().forEach(builder::append);
         }
         return builder.toString();
+    }
+
+    /**
+     * Updates the tuition class when a new student is added
+     * or information of the tuition class has been changed.
+     * @param tuitionClass the tuition class that has been changed.
+     */
+    public void updateTuitionClass(TuitionClass tuitionClass) {
+        ArrayList<TuitionClass> tuitionClasses = classes.getClasses();
+        String tuitionName = tuitionClass.getName().getName();
+        for (TuitionClass tuition: tuitionClasses) {
+            if (tuition.getName().getName().equals(tuitionName)) {
+                int position = tuitionClasses.indexOf(tuition);
+                tuitionClasses.set(position, tuitionClass);
+            }
+        }
     }
 
 }
