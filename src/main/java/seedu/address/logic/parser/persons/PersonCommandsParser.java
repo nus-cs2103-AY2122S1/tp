@@ -13,6 +13,7 @@ import seedu.address.logic.commands.persons.AddPersonCommand;
 import seedu.address.logic.commands.persons.DeletePersonCommand;
 import seedu.address.logic.commands.persons.EditPersonCommand;
 import seedu.address.logic.commands.persons.FindPersonCommand;
+import seedu.address.logic.commands.persons.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class PersonCommandsParser {
@@ -56,6 +57,9 @@ public class PersonCommandsParser {
 
         case AddLessonToPersonCommand.COMMAND_WORD:
             return new AddLessonToPersonCommandParser().parse(arguments);
+
+        case ViewPersonCommand.COMMAND_WORD:
+            return new ViewPersonCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
