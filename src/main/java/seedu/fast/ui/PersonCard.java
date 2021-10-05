@@ -69,7 +69,7 @@ public class PersonCard extends UiPart<Region> {
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
 
-        switch (tagName) { //Todo: add more color tags & abstract out case names
+        switch (tagName.toLowerCase()) { //Todo: add more color tags & abstract out case names
 
         case "friends":
             temp.setStyle(Colors.BLUE);
