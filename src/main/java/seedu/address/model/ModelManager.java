@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,6 +23,11 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+
+    private final FilteredList<Client> filteredClients;
+    private final FilteredList<Product> filteredProducts;
+
+    // todo remove later
     private final FilteredList<Person> filteredPersons;
 
     /**
@@ -34,6 +41,11 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+
+        filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        filteredProducts = new FilteredList<>(this.addressBook.getProductList());
+
+        // todo remove later
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -89,6 +101,57 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasClient(Client client) {
+        requireNonNull(client);
+        return addressBook.hasClient(client);
+    }
+
+    @Override
+    public void deleteClient(Client target) {
+        addressBook.removeClient(target);
+    }
+
+    @Override
+    public void addClient(Client client) {
+        addressBook.addClient(client);
+        updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+    }
+
+    @Override
+    public void setClient(Client target, Client editedClient) {
+        requireAllNonNull(target, editedClient);
+
+        addressBook.setClient(target, editedClient);
+    }
+
+    @Override
+    public boolean hasProduct(Product product) {
+        requireNonNull(product);
+        return addressBook.hasProduct(product);
+    }
+
+    @Override
+    public void deleteProduct(Product target) {
+        addressBook.removeProduct(target);
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        addressBook.addProduct(product);
+        updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
+    }
+
+    @Override
+    public void setProduct(Product target, Product editedProduct) {
+        requireAllNonNull(target, editedProduct);
+
+        addressBook.setProduct(target, editedProduct);
+    }
+
+    //========================================================================================================
+    // todo remove later
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -112,7 +175,42 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== Filtered Client List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Client> getFilteredClientList() {
+        return filteredClients;
+    }
+
+    @Override
+    public void updateFilteredClientList(Predicate<Client> predicate) {
+        requireNonNull(predicate);
+        filteredClients.setPredicate(predicate);
+    }
+
+    //=========== Filtered Product List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Product} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Product> getFilteredProductList() {
+        return filteredProducts;
+    }
+
+    @Override
+    public void updateFilteredProductList(Predicate<Product> predicate) {
+        requireNonNull(predicate);
+        filteredProducts.setPredicate(predicate);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
+    // todo remove later
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -144,8 +242,8 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                       && userPrefs.equals(other.userPrefs)
+                       && filteredPersons.equals(other.filteredPersons);
     }
 
 }
