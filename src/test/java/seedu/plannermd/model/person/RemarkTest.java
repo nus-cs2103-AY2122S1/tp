@@ -1,13 +1,13 @@
 package seedu.plannermd.model.person;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class RemarkTest {
 
     @Test
-    void isEmpty_EMPTY_REMARK_trueReturned() {
+    void isEmpty_emptyRemark_trueReturned() {
         assertEquals(Remark.getEmptyRemark().isEmpty(), true);
     }
 
@@ -18,6 +18,6 @@ class RemarkTest {
 
     @Test
     void isEmpty_sampleRemark_trueReturned() {
-        assertEquals(new Remark("SampleRemark").isEmpty(), false);
+        assertEquals(new Remark("Sample Remark").isEmpty(), false);
     }
 }

@@ -1,24 +1,25 @@
 package seedu.plannermd.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.plannermd.commons.core.Messages;
-import seedu.plannermd.commons.core.index.Index;
-import seedu.plannermd.model.PlannerMd;
-import seedu.plannermd.model.Model;
-import seedu.plannermd.model.ModelManager;
-import seedu.plannermd.model.UserPrefs;
-import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.person.Remark;
-import seedu.plannermd.testutil.patient.PatientBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.logic.commands.CommandTestUtil.showPatientAtIndex;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.plannermd.commons.core.Messages;
+import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.model.Model;
+import seedu.plannermd.model.ModelManager;
+import seedu.plannermd.model.PlannerMd;
+import seedu.plannermd.model.UserPrefs;
+import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Remark;
+import seedu.plannermd.testutil.patient.PatientBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
@@ -67,8 +68,8 @@ class RemarkCommandTest {
     public void execute_filteredList_success() {
         showPatientAtIndex(model, INDEX_FIRST_PERSON);
 
-        Patient PatientInFilteredList = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Patient editedPatient = new PatientBuilder(PatientInFilteredList).withRemark(SAMPLE_REMARK).build();
+        Patient patientInFilteredList = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Patient editedPatient = new PatientBuilder(patientInFilteredList).withRemark(SAMPLE_REMARK).build();
 
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(SAMPLE_REMARK));
 

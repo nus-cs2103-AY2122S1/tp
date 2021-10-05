@@ -1,15 +1,16 @@
 package seedu.plannermd.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.plannermd.logic.commands.RemarkCommand;
-import seedu.plannermd.model.person.Remark;
-
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.plannermd.logic.commands.RemarkCommand;
+import seedu.plannermd.model.person.Remark;
 
 class RemarkCommandParserTest {
 
@@ -35,7 +36,7 @@ class RemarkCommandParserTest {
         assertParseFailure(parser, "1 " + VALID_REMARK_AMY, MESSAGE_INVALID_FORMAT);
 
         //remark prefiexed with invalid delimitter
-        assertParseFailure(parser, "1 i/"+ VALID_REMARK_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/" + VALID_REMARK_AMY, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
