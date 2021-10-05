@@ -12,7 +12,10 @@ import seedu.plannermd.model.Model;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Remark;
 
-
+/**
+ * Finds and lists all persons in PlannerMD whose name contains any of the argument keywords.
+ * Keyword matching is case insensitive.
+ */
 public class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
 

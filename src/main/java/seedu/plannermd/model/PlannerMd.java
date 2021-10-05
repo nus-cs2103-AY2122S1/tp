@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.UniquePersonList;
 

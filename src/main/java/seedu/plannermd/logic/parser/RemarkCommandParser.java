@@ -10,7 +10,10 @@ import seedu.plannermd.logic.commands.RemarkCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.person.Remark;
 
+import java.util.Optional;
+
 public class RemarkCommandParser implements Parser<RemarkCommand> {
+
     @Override
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -25,8 +28,14 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
                     RemarkCommand.MESSAGE_USAGE), ive);
         }
 
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
+        Optional<String> remark = argMultimap.getValue(PREFIX_REMARK);
 
-        return new RemarkCommand(index, new Remark(remark));
+        //guard clause for missing delimitter
+        if (remark.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RemarkCommand.MESSAGE_USAGE));
+        }
+
+        return new RemarkCommand(index, new Remark(remark.get()));
     }
 }

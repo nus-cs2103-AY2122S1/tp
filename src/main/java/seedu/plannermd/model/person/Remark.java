@@ -3,13 +3,14 @@ package seedu.plannermd.model.person;
 import static java.util.Objects.requireNonNull;
 
 public class Remark {
+    private static final Remark EMPTY_REMARK = new Remark("");
 
     public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, and it should not be blank";
 
     public final String value;
 
     /**
-     * Constructs an {@code Remark}.
+     * Constructs a {@code Remark}.
      *
      * @param remark A valid remark.
      */
@@ -18,6 +19,23 @@ public class Remark {
         value = remark;
     }
 
+    /**
+     * Checks if value of {@code Remark} is an empty String
+     *
+     * @return true if value is an empty String
+     */
+    public Boolean isEmpty() {
+        return this == EMPTY_REMARK || this.value.isEmpty();
+    }
+
+    /**
+     * Returns an empty {@code Remark}
+     *
+     * @return A {@code Remark} which value is an empty String
+     */
+    public static Remark getEmptyRemark() {
+        return EMPTY_REMARK;
+    }
 
     @Override
     public String toString() {
