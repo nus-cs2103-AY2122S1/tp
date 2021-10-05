@@ -27,6 +27,9 @@ public class TabMenu extends UiPart<Region> {
     private GridPane contactsContainerBox;
 
     @FXML
+    private GridPane tasksContainerBox;
+
+    @FXML
     private VBox leftBox;
 
     @FXML
@@ -42,12 +45,21 @@ public class TabMenu extends UiPart<Region> {
     }
 
     /**
-     * Returns the {@code containerBox} object.
+     * Returns the {@code containerBox} object in the contacts tab.
      *
      * @return the containerBox object.
      */
-    public GridPane getGridPane() {
+    public GridPane getContactsGridPane() {
         return contactsContainerBox;
+    }
+
+    /**
+     * Returns the {@code containerBox} object in the tasks tab.
+     *
+     * @return the containerBox object.
+     */
+    public GridPane getTasksGridPane() {
+        return tasksContainerBox;
     }
 
     /**

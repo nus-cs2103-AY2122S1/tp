@@ -118,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
         tabMenuPlaceholder.getChildren().add(tabMenu.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        tabMenu.getGridPane().add(personListPanel.getRoot(), 0, 1);
+        tabMenu.getContactsGridPane().add(personListPanel.getRoot(), 0, 1);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

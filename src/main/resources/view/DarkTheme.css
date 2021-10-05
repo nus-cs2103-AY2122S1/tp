@@ -148,6 +148,22 @@
     -fx-border-top-width: 1px;
 }
 
+.tabMenu-header-selected {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-text-fill: white;
+}
+
+.tabMenu-header-unselected {
+    -fx-background-color: #1d1d1d;
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+}
+
+
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
