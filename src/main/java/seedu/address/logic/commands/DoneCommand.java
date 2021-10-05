@@ -28,7 +28,8 @@ public class DoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_PERSON_SUCCESS = "Mark visit as done for Person: %1$s";
+    public static final String MESSAGE_DONE_PERSON_SUCCESS = "Mark visit as done for Person: %1$s,"
+            + " new last visited: %s";
 
     private final Index targetIndex;
 
@@ -55,15 +56,14 @@ public class DoneCommand extends Command {
         // TODO: update the person's last-visited, Yiyang 05/10/21
         String newLastVisited = personToDone.getVisit().toString();
         // TODO: replace the invocation of edit with delete command for better logic flow, Yiyang 05/10/21
-        String tmpMessage = MESSAGE_DONE_PERSON_SUCCESS + "\nThe new last visited would be: \n" + newLastVisited;
-
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getEmail(),
                 personToDone.getAddress(), new Visit(""), personToDone.getTags());
 
         model.setPerson(personToDone, donePerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(tmpMessage, personToDone)); // TODO: replace with MDPS, Yiyang 05/10/21
+        return new CommandResult(String.format(
+                MESSAGE_DONE_PERSON_SUCCESS, personToDone, newLastVisited)); // TODO: replace with MDPS, Yiyang 05/10/21
     }
 
     @Override
