@@ -1,6 +1,7 @@
 package seedu.academydirectory.model;
 
 import java.nio.file.Path;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -85,4 +86,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns an unmodifiable slice of the filtered person list according to the given {@code function}.
+     * @throws NullPointerException if {@code function} is null.
+     */
+    <T> ObservableList<T> getFilteredPersonListView(Function<? super Person, ? extends T> function);
 }
