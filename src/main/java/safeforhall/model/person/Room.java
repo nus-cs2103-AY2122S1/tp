@@ -1,15 +1,15 @@
-package safeforhall.model.resident;
+package safeforhall.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Resident's room in the address book.
+ * Represents a Person's room in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRoom(String)}
  */
 public class Room {
 
-    public static final String MESSAGE_CONSTRAINTS = "Rooms should not contain spaces and be of the format AXXX:"
+    public static final String MESSAGE_CONSTRAINTS = "Rooms should not contain spaces and be of the format AXXX: \n"
             + "Character 1: The block, A-E\n"
             + "Character 2: The level, 1-4\n"
             + "Character 3: The room, 0-2\n"
@@ -23,7 +23,7 @@ public class Room {
      * The fourth character of the room must be 0-9
      * This check assumes 5 blocks, 4 levels and 30 rooms a level
      */
-    public static final String VALIDATION_REGEX = "/^[a-eA-E][1-4][0-2][0-9]$";
+    public static final String VALIDATION_REGEX = "^[a-eA-E][1-4][0-2][0-9]$";
 
     public final String room;
 

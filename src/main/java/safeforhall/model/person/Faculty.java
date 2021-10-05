@@ -1,11 +1,11 @@
-package safeforhall.model.resident;
+package safeforhall.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Person's faculty in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidFaculty(String)} (String)}
  */
 public class Faculty {
 
@@ -26,14 +26,14 @@ public class Faculty {
      */
     public Faculty(String faculty) {
         requireNonNull(faculty);
-        checkArgument(isValidAddress(faculty), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidFaculty(faculty), MESSAGE_CONSTRAINTS);
         this.faculty = faculty;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid faculty.
      */
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidFaculty(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

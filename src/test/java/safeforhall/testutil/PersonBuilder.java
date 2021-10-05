@@ -1,15 +1,14 @@
 package safeforhall.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastCollectionDate;
+import safeforhall.model.person.LastFetDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
-import safeforhall.model.tag.Tag;
-import safeforhall.model.util.SampleDataUtil;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 
 /**
  * A utility class to help with building Person objects.
@@ -17,25 +16,36 @@ import safeforhall.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_ROOM = "A100";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_VACC = "True";
+    public static final String DEFAULT_FACULTY = "SoC";
+    // TODO
+    public static final String DEFAULT_FETDATE = "TODO";
+    public static final String DEFAULT_COLLECTDATE = "TODO";
 
     private Name name;
+    private Room room;
     private Phone phone;
     private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    private VaccStatus vaccStatus;
+    private Faculty faculty;
+    private LastFetDate lastFetDate;
+    private LastCollectionDate lastCollectionDate;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        room = new Room(DEFAULT_ROOM);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        vaccStatus = new VaccStatus(DEFAULT_VACC);
+        faculty = new Faculty(DEFAULT_FACULTY);
+        lastFetDate = new LastFetDate(DEFAULT_FETDATE);
+        lastCollectionDate = new LastCollectionDate(DEFAULT_COLLECTDATE);
     }
 
     /**
@@ -43,10 +53,13 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        room = personToCopy.getRoom();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        vaccStatus = personToCopy.getVaccStatus();
+        faculty = personToCopy.getFaculty();
+        lastFetDate = personToCopy.getLastFetDate();
+        lastCollectionDate = personToCopy.getLastCollectionDate();
     }
 
     /**
@@ -58,18 +71,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the {@code Room} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withRoom(String room) {
+        this.room = new Room(room);
         return this;
     }
 
@@ -89,8 +94,40 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code VaccStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withVaccStatus(String vaccStatus) {
+        this.vaccStatus = new VaccStatus(vaccStatus);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Faculty} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFaculty(String faculty) {
+        this.faculty = new Faculty(faculty);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastFetDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFet(String lastFetDate) {
+        this.lastFetDate = new LastFetDate(lastFetDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastCollectionDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCollection(String lastCollectionDate) {
+        this.lastCollectionDate = new LastCollectionDate(lastCollectionDate);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
     }
 
 }

@@ -6,11 +6,15 @@ import java.util.stream.Collectors;
 
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
-import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastCollectionDate;
+import safeforhall.model.person.LastFetDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 import safeforhall.model.tag.Tag;
 
 /**
@@ -18,25 +22,26 @@ import safeforhall.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
+        // TODO: Compete lastFetDate and lastCollectionDate
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+            new Person(new Name("Alex Yeoh"), new Room("E417"), new Phone("87438807"),
+                    new Email("alexyeoh@example.com"), new VaccStatus("1"),
+                    new Faculty("SoC"), new LastFetDate("TODO"), new LastCollectionDate("TODO")),
+            new Person(new Name("Bernice Yu"), new Room("A213"), new Phone("99272758"),
+                    new Email("berniceyu@example.com"), new VaccStatus("0"),
+                    new Faculty("FASS"), new LastFetDate("TODO"), new LastCollectionDate("TODO")),
+            new Person(new Name("Charlotte Oliveiro"), new Room("B423"), new Phone("93210283"),
+                    new Email("charlotte@example.com"), new VaccStatus("1"),
+                    new Faculty("SoC"), new LastFetDate("TODO"), new LastCollectionDate("TODO")),
+            new Person(new Name("David Li"), new Room("C112"), new Phone("91031282"),
+                    new Email("lidavid@example.com"), new VaccStatus("1"),
+                    new Faculty("SDE"), new LastFetDate("TODO"), new LastCollectionDate("TODO")),
+            new Person(new Name("Irfan Ibrahim"), new Room("D422"), new Phone("92492021"),
+                    new Email("irfan@example.com"), new VaccStatus("1"),
+                    new Faculty("FoE"), new LastFetDate("TODO"), new LastCollectionDate("TODO")),
+            new Person(new Name("Roy Balakrishnan"), new Room("A309"), new Phone("92624417"),
+                    new Email("royb@example.com"), new VaccStatus("1"),
+                    new Faculty("BIZ"), new LastFetDate("TODO"), new LastCollectionDate("TODO")),
         };
     }
 

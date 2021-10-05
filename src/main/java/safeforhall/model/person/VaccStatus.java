@@ -1,10 +1,10 @@
-package safeforhall.model.resident;
+package safeforhall.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Resident's vaccination status in the address book.
+ * Represents a Person's vaccination status in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidVaccStatus(String)}
  */
 public class VaccStatus {

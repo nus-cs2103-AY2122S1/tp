@@ -1,21 +1,18 @@
 package safeforhall.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import safeforhall.commons.exceptions.IllegalValueException;
-import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastCollectionDate;
+import safeforhall.model.person.LastFetDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
-import safeforhall.model.tag.Tag;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -25,25 +22,34 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
+    private final String room;
     private final String phone;
     private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String vaccStatus;
+    private final String faculty;
+    private final String lastFetDate;
+    private final String lastCollectionDate;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("room") String room,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("vaccStatus") String vaccStatus,
+                             @JsonProperty("faculty") String faculty,
+                             @JsonProperty("lastFetDate") String lastFetDate,
+                             @JsonProperty("lastCollectionDate") String lastCollectionDate) {
         this.name = name;
+        this.room = room;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+        this.vaccStatus = vaccStatus;
+        this.faculty = faculty;
+        this.lastFetDate = lastFetDate;
+        this.lastCollectionDate = lastCollectionDate;
     }
 
     /**
@@ -51,12 +57,13 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
+        room = source.getRoom().room;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        vaccStatus = source.getVaccStatus().vaccStatus;
+        faculty = source.getFaculty().faculty;
+        lastFetDate = source.getLastFetDate().date;
+        lastCollectionDate = source.getLastCollectionDate().date;
     }
 
     /**
@@ -65,11 +72,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
-        }
-
+        // Name
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -78,6 +81,16 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        // Room
+        if (room == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Room.class.getSimpleName()));
+        }
+        if (!Room.isValidRoom(room)) {
+            throw new IllegalValueException(Room.MESSAGE_CONSTRAINTS);
+        }
+        final Room modelRoom = new Room(room);
+
+        // Phone
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -86,6 +99,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        // Email
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -94,16 +108,36 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        // VaccStatus
+        if (vaccStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    VaccStatus.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!VaccStatus.isValidVaccStatus(vaccStatus)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final VaccStatus modelVaccStatus = new VaccStatus(vaccStatus);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        // Faculty
+        if (!Faculty.isValidFaculty(faculty)) {
+            throw new IllegalValueException(Faculty.MESSAGE_CONSTRAINTS);
+        }
+        final Faculty modelFaculty = new Faculty(faculty);
+
+        // LastFetDate
+        if (!LastFetDate.isValidFetDate(lastFetDate)) {
+            throw new IllegalValueException(LastCollectionDate.MESSAGE_CONSTRAINTS);
+        }
+        final LastFetDate modelFetDate = new LastFetDate(lastFetDate);
+
+        // LastCollectionDate
+        if (!LastCollectionDate.isValidCollectionDate(lastCollectionDate)) {
+            throw new IllegalValueException(LastCollectionDate.MESSAGE_CONSTRAINTS);
+        }
+        final LastCollectionDate modelCollectionDate = new LastCollectionDate(lastCollectionDate);
+
+        return new Person(modelName, modelRoom, modelPhone, modelEmail,
+                modelVaccStatus, modelFaculty, modelFetDate, modelCollectionDate);
     }
 
 }
