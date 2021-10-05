@@ -2,9 +2,9 @@ package seedu.tracker.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
-import static seedu.tracker.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_CODE;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.tracker.testutil.Assert.assertThrows;
@@ -15,11 +15,10 @@ import java.util.List;
 
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.logic.commands.exceptions.CommandException;
-import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.Model;
+import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.NameContainsKeywordsPredicate;
-import seedu.tracker.testutil.ModuleBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -33,8 +32,8 @@ public class CommandTestUtil {
     public static final String VALID_TITLE_CS2103T = "Software Engineering";
     public static final String VALID_TITLE_GEQ1000 = "Asking Questions";
     public static final String VALID_TITLE_CS1101S = "Programming Methodology";
-    public static final String VALID_DESCRIPTION_CS1101S = "Introduces the concepts of programming and " +
-            "computational problem solving";
+    public static final String VALID_DESCRIPTION_CS1101S = "Introduces the concepts of programming and "
+            + "computational problem solving";
     public static final String VALID_DESCRIPTION_CP3108A = "Independent work";
     public static final String VALID_DESCRIPTION_CS2103T = "Covers the main areas of software development";
     public static final String VALID_DESCRIPTION_GEQ1000 = "introduces six dominant modes of questioning";

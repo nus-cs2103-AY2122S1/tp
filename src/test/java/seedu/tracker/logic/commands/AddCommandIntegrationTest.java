@@ -2,7 +2,6 @@ package seedu.tracker.logic.commands;
 
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
 import org.junit.jupiter.api.BeforeEach;

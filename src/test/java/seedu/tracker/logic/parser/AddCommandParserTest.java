@@ -32,11 +32,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tracker.logic.commands.AddCommand;
 import seedu.tracker.model.module.Code;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.Title;
-import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.tag.Tag;
-
 import seedu.tracker.testutil.ModuleBuilder;
 
 public class AddCommandParserTest {
@@ -63,8 +62,8 @@ public class AddCommandParserTest {
                 + DESCRIPTION_DESC_CS2103T + MC_DESC_CS2103T + TAG_DESC_CORE, new AddCommand(expectedModule));
 
         // multiple mcs - last mc accepted
-        assertParseSuccess(parser, CODE_DESC_CS2103T + TITLE_DESC_CS2103T
-                + DESCRIPTION_DESC_CS2103T + MC_DESC_CP3108A + MC_DESC_CS2103T + TAG_DESC_CORE, new AddCommand(expectedModule));
+        assertParseSuccess(parser, CODE_DESC_CS2103T + TITLE_DESC_CS2103T + DESCRIPTION_DESC_CS2103T
+                + MC_DESC_CP3108A + MC_DESC_CS2103T + TAG_DESC_CORE, new AddCommand(expectedModule));
 
         // test for multiple tags deleted as a module will not have multiple tags
     }

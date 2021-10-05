@@ -7,10 +7,6 @@ import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.tracker.testutil.Assert.assertThrows;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.tracker.logic.commands.AddCommand;
@@ -69,7 +65,7 @@ public class ModuleTrackerParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+            -> parser.parseCommand(""));
     }
 
     @Test

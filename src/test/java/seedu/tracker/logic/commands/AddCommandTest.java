@@ -16,12 +16,12 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.logic.commands.exceptions.CommandException;
-import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.Model;
-import seedu.tracker.testutil.ModuleBuilder;
+import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.ReadOnlyUserPrefs;
 import seedu.tracker.model.module.Module;
+import seedu.tracker.testutil.ModuleBuilder;
 
 public class AddCommandTest {
 

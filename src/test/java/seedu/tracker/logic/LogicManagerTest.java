@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX;
 import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.tracker.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
-import static seedu.tracker.logic.commands.CommandTestUtil.TITLE_DESC_CS2103T;
-import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_CS2103T;
 import static seedu.tracker.logic.commands.CommandTestUtil.DESCRIPTION_DESC_CS2103T;
+import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_CS2103T;
+import static seedu.tracker.logic.commands.CommandTestUtil.TITLE_DESC_CS2103T;
 import static seedu.tracker.testutil.Assert.assertThrows;
 import static seedu.tracker.testutil.TypicalModules.CS2103T;
 
