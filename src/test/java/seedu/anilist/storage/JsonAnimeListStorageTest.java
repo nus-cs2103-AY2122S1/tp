@@ -3,10 +3,10 @@ package seedu.anilist.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalPersons.ALICE;
-import static seedu.anilist.testutil.TypicalPersons.HOON;
-import static seedu.anilist.testutil.TypicalPersons.IDA;
-import static seedu.anilist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.anilist.testutil.TypicalAnime.ALICE;
+import static seedu.anilist.testutil.TypicalAnime.HOON;
+import static seedu.anilist.testutil.TypicalAnime.IDA;
+import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -53,7 +53,7 @@ public class JsonAnimeListStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        AnimeList original = getTypicalAddressBook();
+        AnimeList original = getTypicalAnimeList();
         JsonAniListStorage jsonAddressBookStorage = new JsonAniListStorage(filePath);
 
         // Save in new file and read back

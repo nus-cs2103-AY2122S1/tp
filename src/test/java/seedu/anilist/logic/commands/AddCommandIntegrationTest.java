@@ -2,7 +2,7 @@ package seedu.anilist.logic.commands;
 
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.ModelManager;
 import seedu.anilist.model.UserPrefs;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.testutil.PersonBuilder;
+import seedu.anilist.testutil.AnimeBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -22,12 +22,12 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
-        Anime validAnime = new PersonBuilder().build();
+        Anime validAnime = new AnimeBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAniList(), new UserPrefs());
         expectedModel.addAnime(validAnime);

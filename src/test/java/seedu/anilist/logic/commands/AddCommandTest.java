@@ -21,7 +21,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.ReadOnlyUserPrefs;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.testutil.PersonBuilder;
+import seedu.anilist.testutil.AnimeBuilder;
 
 public class AddCommandTest {
 
@@ -33,7 +33,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Anime validAnime = new PersonBuilder().build();
+        Anime validAnime = new AnimeBuilder().build();
 
         CommandResult commandResult = new AddCommand(validAnime).execute(modelStub);
 
@@ -43,7 +43,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Anime validAnime = new PersonBuilder().build();
+        Anime validAnime = new AnimeBuilder().build();
         AddCommand addCommand = new AddCommand(validAnime);
         ModelStub modelStub = new ModelStubWithPerson(validAnime);
 
@@ -52,8 +52,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Anime alice = new PersonBuilder().withName("Alice").build();
-        Anime bob = new PersonBuilder().withName("Bob").build();
+        Anime alice = new AnimeBuilder().withName("Alice").build();
+        Anime bob = new AnimeBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

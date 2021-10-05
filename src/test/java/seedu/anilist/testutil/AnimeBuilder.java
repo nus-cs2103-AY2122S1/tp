@@ -9,9 +9,9 @@ import seedu.anilist.model.tag.Tag;
 import seedu.anilist.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Anime objects.
  */
-public class PersonBuilder {
+public class AnimeBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -20,17 +20,17 @@ public class PersonBuilder {
     private Set<Tag> tags;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code AnimeBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public AnimeBuilder() {
         name = new Name(DEFAULT_NAME);
         tags = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the AnimeBuilder with the data of {@code personToCopy}.
      */
-    public PersonBuilder(Anime animeToCopy) {
+    public AnimeBuilder(Anime animeToCopy) {
         name = animeToCopy.getName();
         tags = new HashSet<>(animeToCopy.getTags());
     }
@@ -38,7 +38,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public AnimeBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -46,7 +46,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public AnimeBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }

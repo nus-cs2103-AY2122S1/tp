@@ -2,7 +2,7 @@ package seedu.anilist.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.anilist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
 
 import java.nio.file.Path;
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AnimeList original = getTypicalAddressBook();
+        AnimeList original = getTypicalAnimeList();
         storageManager.saveAniList(original);
         ReadOnlyAnimeList retrieved = storageManager.readAniList().get();
         assertEquals(original, new AnimeList(retrieved));

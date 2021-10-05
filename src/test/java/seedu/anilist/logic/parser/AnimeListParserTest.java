@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,8 +24,8 @@ import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
+import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.EditPersonDescriptorBuilder;
-import seedu.anilist.testutil.PersonBuilder;
 import seedu.anilist.testutil.PersonUtil;
 
 public class AnimeListParserTest {
@@ -34,7 +34,7 @@ public class AnimeListParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Anime anime = new PersonBuilder().build();
+        Anime anime = new AnimeBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(anime));
         assertEquals(new AddCommand(anime), command);
     }
@@ -48,17 +48,17 @@ public class AnimeListParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_ANIME.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_ANIME), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Anime anime = new PersonBuilder().build();
+        Anime anime = new AnimeBuilder().build();
         EditCommand.EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder(anime).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_ANIME.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_ANIME, descriptor), command);
     }
 
     @Test

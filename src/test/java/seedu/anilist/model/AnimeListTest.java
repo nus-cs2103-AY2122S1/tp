@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalPersons.ALICE;
-import static seedu.anilist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.anilist.testutil.TypicalAnime.ALICE;
+import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.exceptions.DuplicateAnimeException;
-import seedu.anilist.testutil.PersonBuilder;
+import seedu.anilist.testutil.AnimeBuilder;
 
 public class AnimeListTest {
 
@@ -37,7 +37,7 @@ public class AnimeListTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AnimeList newData = getTypicalAddressBook();
+        AnimeList newData = getTypicalAnimeList();
         animeList.resetData(newData);
         assertEquals(newData, animeList);
     }
@@ -45,7 +45,7 @@ public class AnimeListTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Anime editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Anime> newAnimes = Arrays.asList(ALICE, editedAlice);
         AnimeListStub newData = new AnimeListStub(newAnimes);
@@ -72,7 +72,7 @@ public class AnimeListTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         animeList.addAnime(ALICE);
-        Anime editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(animeList.hasAnime(editedAlice));
     }

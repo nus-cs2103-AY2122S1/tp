@@ -14,8 +14,8 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.anilist.testutil.TypicalPersons.AMY;
-import static seedu.anilist.testutil.TypicalPersons.BOB;
+import static seedu.anilist.testutil.TypicalAnime.AMY;
+import static seedu.anilist.testutil.TypicalAnime.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,14 +23,14 @@ import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.tag.Tag;
-import seedu.anilist.testutil.PersonBuilder;
+import seedu.anilist.testutil.AnimeBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Anime expectedAnime = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Anime expectedAnime = new AnimeBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB
@@ -42,7 +42,7 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Anime expectedAnimeMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Anime expectedAnimeMultipleTags = new AnimeBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedAnimeMultipleTags));
@@ -51,7 +51,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Anime expectedAnime = new PersonBuilder(AMY).withTags().build();
+        Anime expectedAnime = new AnimeBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY,
                 new AddCommand(expectedAnime));
     }

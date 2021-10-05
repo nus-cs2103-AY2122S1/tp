@@ -9,9 +9,9 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.anilist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,21 +23,21 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.ModelManager;
 import seedu.anilist.model.UserPrefs;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.EditPersonDescriptorBuilder;
-import seedu.anilist.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Anime editedAnime = new PersonBuilder().build();
+        Anime editedAnime = new AnimeBuilder().build();
         EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder(editedAnime).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
 
@@ -52,7 +52,7 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredAnimeList().size());
         Anime lastAnime = model.getFilteredAnimeList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastAnime);
+        AnimeBuilder personInList = new AnimeBuilder(lastAnime);
         Anime editedAnime = personInList.withName(VALID_NAME_BOB).withTags(VALID_TAG_HUSBAND).build();
 
         EditCommand.EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -69,8 +69,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditAnimeDescriptor());
-        Anime editedAnime = model.getFilteredAnimeList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME, new EditAnimeDescriptor());
+        Anime editedAnime = model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
 
@@ -81,11 +81,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_ANIME);
 
-        Anime animeInFilteredList = model.getFilteredAnimeList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Anime editedAnime = new PersonBuilder(animeInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        Anime animeInFilteredList = model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased());
+        Anime editedAnime = new AnimeBuilder(animeInFilteredList).withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
@@ -98,20 +98,20 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Anime firstAnime = model.getFilteredAnimeList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Anime firstAnime = model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased());
         EditCommand.EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder(firstAnime).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_ANIME, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_ANIME);
 
         // edit person in filtered list into a duplicate in address book
-        Anime animeInList = model.getAniList().getAnimeList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        Anime animeInList = model.getAniList().getAnimeList().get(INDEX_SECOND_ANIME.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME,
                 new EditPersonDescriptorBuilder(animeInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
@@ -132,8 +132,8 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showPersonAtIndex(model, INDEX_FIRST_ANIME);
+        Index outOfBoundIndex = INDEX_SECOND_ANIME;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAniList().getAnimeList().size());
 
@@ -145,11 +145,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ANIME, DESC_AMY);
 
         // same values -> returns true
         EditCommand.EditAnimeDescriptor copyDescriptor = new EditCommand.EditAnimeDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_ANIME, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -162,10 +162,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ANIME, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ANIME, DESC_BOB)));
     }
 
 }

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalPersons.ALICE;
-import static seedu.anilist.testutil.TypicalPersons.BOB;
+import static seedu.anilist.testutil.TypicalAnime.ALICE;
+import static seedu.anilist.testutil.TypicalAnime.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.anilist.model.anime.exceptions.AnimeNotFoundException;
 import seedu.anilist.model.anime.exceptions.DuplicateAnimeException;
-import seedu.anilist.testutil.PersonBuilder;
+import seedu.anilist.testutil.AnimeBuilder;
 
 public class UniqueAnimeListTest {
 
@@ -41,7 +41,7 @@ public class UniqueAnimeListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueAnimeList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniqueAnimeListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueAnimeList.setAnime(ALICE, editedAlice);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();

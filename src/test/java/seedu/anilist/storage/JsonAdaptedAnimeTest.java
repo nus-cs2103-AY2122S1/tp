@@ -3,7 +3,7 @@ package seedu.anilist.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.anilist.storage.JsonAdaptedAnime.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalPersons.BENSON;
+import static seedu.anilist.testutil.TypicalAnime.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
