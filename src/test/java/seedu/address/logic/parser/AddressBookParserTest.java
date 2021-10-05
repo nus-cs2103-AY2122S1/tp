@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
@@ -115,6 +116,13 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listf() throws Exception {
+        assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD) instanceof ListFacilityCommand);
+        assertTrue(parser.parseCommand(
+                ListFacilityCommand.COMMAND_WORD + " 3") instanceof ListFacilityCommand);
     }
 
     @Test
