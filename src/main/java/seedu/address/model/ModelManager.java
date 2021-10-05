@@ -120,12 +120,25 @@ public class ModelManager implements Model {
 
     //=========== Task Management ==================================================================================
 
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.hasTask(task);
+    }
+
     public void addTask(Task toAdd) {
         tasks.add(toAdd);
     }
 
     public void deleteTask(Task toDelete) {
         tasks.remove(toDelete);
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        tasks.setTask(target, editedTask);
     }
 
     @Override
