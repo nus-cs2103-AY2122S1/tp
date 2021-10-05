@@ -16,48 +16,36 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
-
-    // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Name studentName;
+    private final Phone studentPhone;
+    private final Name parentName;
+    private final Phone parentPhone;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+    public Person(Name studentName, Phone studentPhone, Name parentName, Phone parentPhone) {
+        requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
+        this.studentName = studentName;
+        this.studentPhone = studentPhone;
+        this.parentName = parentName;
+        this.parentPhone = parentPhone;
     }
 
-    public Name getName() {
-        return name;
+    public Name getStudentName() {
+        return studentName;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Phone getStudentPhone() {
+        return studentPhone;
     }
 
-    public Email getEmail() {
-        return email;
+    public Name getParentName() {
+        return parentName;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Phone getParentPhone() {
+        return parentPhone;
     }
 
     /**
@@ -70,7 +58,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getStudentName().equals(getStudentName());
     }
 
     /**
@@ -88,35 +76,38 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        return otherPerson.getStudentName().equals(getStudentName())
+                && otherPerson.getStudentPhone().equals(getStudentPhone())
+                && otherPerson.getParentName().equals(getParentName())
+                && otherPerson.getParentPhone().equals(getParentPhone());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(studentName, studentPhone, parentName, parentPhone);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+        builder.append(getStudentName());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        if (!studentPhone.isEmpty()) {
+            builder.append("; Student's phone: ")
+                    .append(getStudentPhone());
         }
+
+        if (!parentName.isEmpty()) {
+            builder.append("; Parent's name: ")
+                    .append(getParentName());
+        }
+
+        if (!parentPhone.isEmpty()) {
+            builder.append("; Parent's phone: ")
+                    .append(getParentPhone());
+        }
+
         return builder.toString();
     }
 
