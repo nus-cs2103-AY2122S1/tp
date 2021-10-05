@@ -17,7 +17,7 @@ public class Assessment {
     public static final String VALIDATION_REGEX = "[A-Za-z]\\d{2}";
 
     // Assessment score list
-    public final Map<String, Score> scores = new HashMap<>();
+    public final Map<ID, Score> scores = new HashMap<>();
 
     // Assessment name
     public final String value;
@@ -53,7 +53,7 @@ public class Assessment {
         return value;
     }
 
-    public void setScores(String id, Score score) {
+    public void setScores(ID id, Score score) {
         scores.put(id, score);
     }
 
