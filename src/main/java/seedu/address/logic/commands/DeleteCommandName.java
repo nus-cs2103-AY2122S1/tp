@@ -4,14 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.FindCommandParser;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -37,9 +32,10 @@ public class DeleteCommandName extends DeleteCommand {
     /**
      * This method finds the person object for Delete Command to delete
      * @param model the current address book model
-     * @return
+     * @return Returns the person to be deleted (if any)
+     * @throws CommandException if the person does not exist
      */
-    public Person findPerson(Model model) throws CommandException {
+    private Person findPerson(Model model) throws CommandException {
         List<Person> personList = model.getFilteredPersonList();
 
         for (Person person: personList) {
