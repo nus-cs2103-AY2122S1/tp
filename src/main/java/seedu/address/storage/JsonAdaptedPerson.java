@@ -91,7 +91,8 @@ class JsonAdaptedPerson {
         final Phone modelPhone = new Phone(phone);
 
         if (language == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Language.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Language.class.getSimpleName()));
         }
         if (!Language.isValidLanguage(language)) {
             throw new IllegalValueException(Language.MESSAGE_CONSTRAINTS);
