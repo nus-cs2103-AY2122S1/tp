@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.plannermd.commons.core.LogsCenter;
-import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.doctor.Doctor;
 
 /**
  * Panel containing the list of doctors.
@@ -18,14 +18,14 @@ public class DoctorListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(DoctorListPanel.class);
 
     @FXML
-    private ListView<Patient> doctorListView;
+    private ListView<Doctor> doctorListView;
 
     /**
      * Creates a {@code DoctorListPanel} with the given {@code ObservableList}.
      */
-    public DoctorListPanel(ObservableList<Patient> patientList) {
+    public DoctorListPanel(ObservableList<Doctor> doctorList) {
         super(FXML);
-        doctorListView.setItems(patientList);
+        doctorListView.setItems(doctorList);
         doctorListView.setCellFactory(listView -> new DoctorListPanel.DoctorListViewCell());
     }
 
@@ -33,16 +33,16 @@ public class DoctorListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Doctor} using
      * a {@code DoctorCard}.
      */
-    class DoctorListViewCell extends ListCell<Patient> {
+    class DoctorListViewCell extends ListCell<Doctor> {
         @Override
-        protected void updateItem(Patient patient, boolean empty) {
-            super.updateItem(patient, empty);
+        protected void updateItem(Doctor doctor, boolean empty) {
+            super.updateItem(doctor, empty);
 
-            if (empty || patient == null) {
+            if (empty || doctor == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new DoctorCard(patient, getIndex() + 1).getRoot());
+                setGraphic(new DoctorCard(doctor, getIndex() + 1).getRoot());
             }
         }
     }
