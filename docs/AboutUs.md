@@ -48,7 +48,7 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 [[github](http://github.com/gnohchengyi)] [[portfolio](team/gnohchengyi.md)]
 
 * Role: Developer
-* Responsibilities: Code Quality + JavaFX Expert
+* Responsibilities: Code quality, JavaFX expert
 
 
 ### Tanishq Sharma
@@ -58,5 +58,5 @@ Here is our module coordinator's [homepage](https://www.comp.nus.edu.sg/~damithc
 [[github](https://github.com/Tanishq4331)]
 [[portfolio](team/tanishq.md)]
 
-* Role: Testing
-* Responsibilities: 
+* Role: Developer
+* Responsibilities: Testing
