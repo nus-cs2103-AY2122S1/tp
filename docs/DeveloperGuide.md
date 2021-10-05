@@ -372,6 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
 **Use case: Adding a tag to a patient**
 
 **MSS**
