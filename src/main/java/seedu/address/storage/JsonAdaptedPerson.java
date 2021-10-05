@@ -64,7 +64,7 @@ class JsonAdaptedPerson {
         if (!Name.isValidName(studentName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelStudentName = new StudentName(studentName);
+        final StudentName modelStudentName = new StudentName(studentName);
 
         if (!studentPhone.equals("") && !Phone.isValidPhone(studentPhone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
@@ -74,7 +74,7 @@ class JsonAdaptedPerson {
         if (!parentName.equals("") && !Name.isValidName(parentName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelParentName = new ParentName(parentName);
+        final ParentName modelParentName = new ParentName(parentName);
 
         if (!parentPhone.equals("") && !Phone.isValidPhone(parentPhone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);

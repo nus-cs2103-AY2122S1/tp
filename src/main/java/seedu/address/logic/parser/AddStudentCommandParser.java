@@ -12,8 +12,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.ParentName;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentName;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -36,9 +38,9 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
-        Name studentName = ParserUtil.parseStudentName(argMultimap.getValue(PREFIX_STUDENT_NAME).get());
+        StudentName studentName = ParserUtil.parseStudentName(argMultimap.getValue(PREFIX_STUDENT_NAME).get());
         Phone studentPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_STUDENT_PHONE).get());
-        Name parentName = ParserUtil.parseParentName(argMultimap.getValue(PREFIX_PARENT_NAME).get());
+        ParentName parentName = ParserUtil.parseParentName(argMultimap.getValue(PREFIX_PARENT_NAME).get());
         Phone parentPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PARENT_PHONE).get());
 
         Person person = new Person(studentName, studentPhone, parentName, parentPhone);

@@ -5,12 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 
-import java.util.Set;
-
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Person.
@@ -21,7 +17,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddStudentCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

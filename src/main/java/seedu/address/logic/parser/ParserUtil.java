@@ -39,12 +39,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String name} into a {@code StudentName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseStudentName(String name) throws ParseException {
+    public static StudentName parseStudentName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
@@ -54,19 +54,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String name} into a {@code ParentName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseParentName(String name) throws ParseException {
+    public static ParentName parseParentName(String name) throws ParseException {
         requireNonNull(name);
         if (!name.equals("")) {
             String trimmedName = name.trim();
             if (!Name.isValidName(trimmedName)) {
                 throw new ParseException(Name.MESSAGE_CONSTRAINTS);
             }
-            return new Name(trimmedName);
+            return new ParentName(trimmedName);
         }
         return new ParentName("");
     }

@@ -16,15 +16,15 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name studentName;
+    private final StudentName studentName;
     private final Phone studentPhone;
-    private final Name parentName;
+    private final ParentName parentName;
     private final Phone parentPhone;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name studentName, Phone studentPhone, Name parentName, Phone parentPhone) {
+    public Person(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone) {
         requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
@@ -32,7 +32,7 @@ public class Person {
         this.parentPhone = parentPhone;
     }
 
-    public Name getStudentName() {
+    public StudentName getStudentName() {
         return studentName;
     }
 
@@ -40,7 +40,7 @@ public class Person {
         return studentPhone;
     }
 
-    public Name getParentName() {
+    public ParentName getParentName() {
         return parentName;
     }
 
