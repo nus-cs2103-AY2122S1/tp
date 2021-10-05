@@ -208,7 +208,7 @@ public class EditCommand extends Command {
                 return true;
             }
 
-            // instanceof handles nulls
+            // instanceof handles null
             if (!(other instanceof EditPersonDescriptor)) {
                 return false;
             }
