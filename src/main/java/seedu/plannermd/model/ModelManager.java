@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.commons.core.LogsCenter;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 
 /**
@@ -21,7 +22,7 @@ public class ModelManager implements Model {
 
     private final PlannerMd plannerMd;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Patient> filteredPatients;
 
     /**
      * Initializes a ModelManager with the given plannerMd and userPrefs.
@@ -34,7 +35,7 @@ public class ModelManager implements Model {
 
         this.plannerMd = new PlannerMd(plannerMd);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.plannerMd.getPersonList());
+        filteredPatients = new FilteredList<>(this.plannerMd.getPatientList());
     }
 
     public ModelManager() {
@@ -89,27 +90,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return plannerMd.hasPerson(person);
+    public boolean hasPatient(Patient patient) {
+        requireNonNull(patient);
+        return plannerMd.hasPatient(patient);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        plannerMd.removePerson(target);
+    public void deletePatient(Patient target) {
+        plannerMd.removePatient(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        plannerMd.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addPatient(Patient patient) {
+        plannerMd.addPatient(patient);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setPatient(Patient target, Patient editedPatient) {
+        requireAllNonNull(target, editedPatient);
 
-        plannerMd.setPerson(target, editedPerson);
+        plannerMd.setPatient(target, editedPatient);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -119,14 +120,14 @@ public class ModelManager implements Model {
      * {@code versionedPlannerMd}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Patient> getFilteredPatientList() {
+        return filteredPatients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPatientList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPatients.setPredicate(predicate);
     }
 
     @Override
@@ -145,6 +146,6 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return plannerMd.equals(other.plannerMd)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPatients.equals(other.filteredPatients);
     }
 }

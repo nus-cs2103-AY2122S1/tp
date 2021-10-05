@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.util.StringUtil;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
@@ -136,5 +137,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String risk} into an {@code Risk}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code risk} is invalid.
+     */
+    public static Risk parseRisk(String risk) throws ParseException {
+        requireNonNull(risk);
+        String trimmedAndUpperCaseRisk = risk.trim().toUpperCase();
+        if (!Risk.isValidRisk(trimmedAndUpperCaseRisk)) {
+            throw new ParseException(Risk.MESSAGE_CONSTRAINTS);
+        }
+        return new Risk(trimmedAndUpperCaseRisk);
     }
 }

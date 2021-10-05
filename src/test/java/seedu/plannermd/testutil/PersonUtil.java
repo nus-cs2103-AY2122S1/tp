@@ -2,8 +2,8 @@ package seedu.plannermd.testutil;
 
 import java.util.Set;
 
-import seedu.plannermd.logic.commands.AddCommand;
-import seedu.plannermd.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.commands.editcommand.EditPatientCommand.EditPatientDescriptor;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.tag.Tag;
 
@@ -23,7 +23,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddPatientCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
@@ -43,9 +43,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditPatientDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditPersonDescriptorDetails(EditPatientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));

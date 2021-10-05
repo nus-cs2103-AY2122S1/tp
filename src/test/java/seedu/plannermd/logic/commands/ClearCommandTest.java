@@ -1,7 +1,7 @@
 package seedu.plannermd.logic.commands;
 
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.plannermd.testutil.TypicalPersons.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 
 import org.junit.jupiter.api.Test;
 

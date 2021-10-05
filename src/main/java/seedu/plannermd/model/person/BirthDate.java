@@ -16,8 +16,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's birth date in the plannermd.
- * Guarantees: immutable; is valid as declared in {@link #isValidBirthDate(String)}
+ * Represents a Person's birth date in the plannermd. Guarantees: immutable; is
+ * valid as declared in {@link #isValidBirthDate(String)}
  */
 public class BirthDate {
 
@@ -28,17 +28,13 @@ public class BirthDate {
             + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "3. Year must be 4 characters";
 
-    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
-            .appendPattern("d/M/yyyy")
-            .optionalStart()
-            .appendPattern(" HHmm")
-            .optionalEnd()
-            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-            .toFormatter().withResolverStyle(ResolverStyle.SMART);
+    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().appendPattern("d/M/yyyy")
+            .optionalStart().appendPattern(" HHmm").optionalEnd().parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).toFormatter().withResolverStyle(ResolverStyle.SMART);
 
     public final String stringValue;
     public final LocalDate value;
+
     /**
      * Constructs a {@code BirthDate}.
      *
@@ -51,19 +47,19 @@ public class BirthDate {
         value = LocalDate.from(LocalDateTime.parse(birthDate, formatter));
     }
 
-//    public BirthDate(LocalDate birthDate) {
-//        requireNonNull(birthDate);
-//        stringValue = birthDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
-//        checkArgument(isValidBirthDate(stringValue), MESSAGE_CONSTRAINTS);
-//        value = birthDate;
-//    }
-
+    // public BirthDate(LocalDate birthDate) {
+    // requireNonNull(birthDate);
+    // stringValue =
+    // birthDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
+    // checkArgument(isValidBirthDate(stringValue), MESSAGE_CONSTRAINTS);
+    // value = birthDate;
+    // }
 
     /**
      * Returns if a given string is a valid birth date.
      */
     public static boolean isValidBirthDate(String test) {
-        //Done to check if input isn't just the date
+        // Done to check if input isn't just the date
         if (test.split(" ", 2).length > 1) {
             return false;
         }
@@ -79,9 +75,9 @@ public class BirthDate {
         }
     }
 
-//    public static boolean isValidBirthDate(LocalDate date) {
-//        return date.isAfter(LocalDate.now());
-//    }
+    // public static boolean isValidBirthDate(LocalDate date) {
+    // return date.isAfter(LocalDate.now());
+    // }
 
     @Override
     public String toString() {
@@ -90,9 +86,10 @@ public class BirthDate {
 
     @Override
     public boolean equals(Object other) {
+        BirthDate o = (BirthDate) other;
         return other == this // short circuit if same object
                 || (other instanceof BirthDate // instanceof handles nulls
-                && value.equals(((BirthDate) other).value)); // state check
+                        && value.equals(((BirthDate) other).value)); // state check
     }
 
     @Override
@@ -105,4 +102,3 @@ public class BirthDate {
     }
 
 }
-
