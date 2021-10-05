@@ -16,6 +16,8 @@ public class ExportCommand extends Command {
             + "Parameters: FILENAME\n"
             + "Example: " + COMMAND_WORD + " friends";
 
+    public static final String MESSAGE_EXPORT_SUCCESS = "Exported to file: %s.json";
+
     private final String fileName;
 
     public ExportCommand(String fileName) {
@@ -25,7 +27,8 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(fileName);
+        model.exportToJson(fileName);
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, fileName));
     }
 
     @Override
