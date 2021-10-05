@@ -5,55 +5,40 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
-
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
 
 ### Lee Yat Bun
 
 <img src="images/yatbun.png" width="200px">
 
 [[github](http://github.com/yatbun)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Logic IC
 
 ### Myron Neo
 
 <img src="images/meerian.png" width="200px">
 
-[[github](http://github.com/meerian)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/meerian)] 
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Models IC
 
 ### Chan Zhuo Yang
 
 <img src="images/zhuoyang125.png" width="200px">
 
 [[github](http://github.com/zhuoyang125)]
-[[portfolio](team/johndoe.md)]
-
+![img.png](img.png)
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI IC
 
 ### Sherwin Poh Kai Xun
 
 <img src="images/sherrpass.png" width="200px">
 
 [[github](https://github.com/sherrpass)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Storage IC
