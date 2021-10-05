@@ -22,12 +22,10 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        if (phone.equals("")) {
-            value = null;
-        } else {
+        if (!phone.equals("")) {
             checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-            value = phone;
         }
+        value = phone;
     }
 
     /**
