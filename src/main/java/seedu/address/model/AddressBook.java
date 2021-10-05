@@ -11,6 +11,7 @@ import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.UniqueProductList;
 
 /**
  * Wraps all data at the address-book level
