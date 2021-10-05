@@ -146,8 +146,18 @@ Format: `delete INDEX`
 
 
 Examples:
-* `list` followed by delete 2 deletes the 2nd person in the address book.
-* `find` Mandarin Oriental followed by delete 1 deletes the 1st contact (accomodation, hotel) in the results of the find command.
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Mandarin Oriental` followed by `delete 1` deletes the 1st contact (accomodation, hotel) in the results of the find command.
+
+Format: `delete FULL_NAME`
+
+* Deletes the person specified by FULL_NAME
+* The name must refer to a person's full name in the displayed person list.
+* The name is case-sensitive and must match exactly
+
+Examples:
+* `list` followed by `delete Alice Yeoh` deletes the contact with name 'Alice Yeoh'
+* `find Alice Yeoh` followed by `delete Alice Yeoh` deletes the contact with name 'Alice Yeoh'
 
 ### Filter by category : `filter`
 
