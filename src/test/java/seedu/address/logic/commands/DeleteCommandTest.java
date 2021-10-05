@@ -9,13 +9,17 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -94,11 +98,13 @@ public class DeleteCommandTest {
         Person editedPerson = new PersonBuilder(personToDeleteVisit).withVisit("").build();
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, true);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDeleteVisit);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_VISIT_SUCCESS, personToDeleteVisit);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personToDeleteVisit, editedPerson);
-        showNoPerson(expectedModel);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        NameContainsKeywordsPredicate predicate = preparePredicate(editedPerson.getName().toString());
+        expectedModel.updateFilteredPersonList(predicate);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -172,5 +178,12 @@ public class DeleteCommandTest {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     */
+    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
