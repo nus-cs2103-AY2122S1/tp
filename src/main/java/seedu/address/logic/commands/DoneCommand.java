@@ -63,7 +63,7 @@ public class DoneCommand extends Command {
         model.setPerson(personToDone, donePerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(tmpMessage, personToDone));  // TODO: replace with MDPS, Yiyang 05/10/21
+        return new CommandResult(String.format(tmpMessage, personToDone)); // TODO: replace with MDPS, Yiyang 05/10/21
     }
 
     @Override
