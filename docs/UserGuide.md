@@ -28,7 +28,7 @@ The app helps the tour guides easily collate and access contacts of a variety of
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`.
+   * **`add`**`c/att n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -79,14 +79,15 @@ Format: `help`
 
 Adds a contact to the address book.
 
-Format: `add (Category code)/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​​`
+Format: `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​​`
 
 Category Code:
-* Attraction: `c/att`
-* F&B: `c/fnb`
-* Commerce: `c/com`
-* Accomodation: `c/acc`
-* Transport: `c/tpt`
+* Attraction: `att`
+* F&B: `fnb`
+* Commerce: `com`
+* Accomodation: `acc`
+* Transport: `tpt`
+* OTHERS: `oth`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
