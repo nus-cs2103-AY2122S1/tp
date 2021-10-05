@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.academydirectory.commons.exceptions.IllegalValueException;
 import seedu.academydirectory.model.student.Address;
+import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
@@ -28,24 +29,23 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final String address;
+    private final boolean[] attendance;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
-    /**
-     * Constructs a {@code JsonAdaptedStudent} with the given student details.
-     */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                              @JsonProperty("email") String email, @JsonProperty("address") String address,
+                              @JsonProperty("attendance") boolean[] attendance,
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.attendance = attendance;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
     }
-
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
@@ -54,6 +54,7 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        attendance = source.getAttendance().getAttendanceInBoolean();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +103,12 @@ class JsonAdaptedStudent {
         }
         final Address modelAddress = new Address(address);
 
+        Attendance tempAttendance = new Attendance(attendance.length);
+        tempAttendance.setAttendance(attendance);
+        final Attendance modelAttendance = tempAttendance;
+
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelAttendance, modelTags);
     }
 
 }

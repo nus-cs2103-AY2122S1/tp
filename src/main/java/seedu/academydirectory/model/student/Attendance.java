@@ -34,6 +34,10 @@ public class Attendance {
         return attendanceInBoolean.length;
     }
 
+    public boolean[] getAttendanceInBoolean() {
+        return this.attendanceInBoolean;
+    }
+
     @Override
     public String toString() {
         String str = "";

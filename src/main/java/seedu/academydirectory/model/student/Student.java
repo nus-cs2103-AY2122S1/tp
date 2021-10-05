@@ -38,6 +38,19 @@ public class Student {
         this.attendance = new Attendance(10); // for now, we just assume its 10.
     }
 
+    /**
+     * Constructor for Student with Attendance.
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Attendance attendance, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.attendance = attendance;
+    }
+
     public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
     }
