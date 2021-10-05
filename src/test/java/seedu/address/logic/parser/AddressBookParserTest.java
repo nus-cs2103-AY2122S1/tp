@@ -13,8 +13,16 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearMembersCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindMemberCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facility.*;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -48,8 +56,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD) instanceof ClearMembersCommand);
+        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3") instanceof ClearMembersCommand);
     }
 
     @Test
@@ -77,9 +85,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
+                FindMemberCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindMemberCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
