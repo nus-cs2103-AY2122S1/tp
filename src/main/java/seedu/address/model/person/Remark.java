@@ -7,11 +7,19 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Remarks should only contain ASCII characters, and it should not be blank";
+    /*
+     * The first character of the remark must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid remark.
+     */
+    public static final String VALIDATION_REGEX = "[\\p{ASCII}]*[^\\s]";
+
     public final String value;
 
-
     /**
-     * Constructor a Remark.
+     * Constructs a {@code Remark}.
      *
      * @param remark Remark to be added.
      */
@@ -19,6 +27,14 @@ public class Remark {
         requireNonNull(remark);
         value = remark;
     }
+
+    /**
+     * Returns true if a given string is a valid remark.
+     */
+    public static boolean isValidRemark(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
 
     @Override
     public String toString() {
