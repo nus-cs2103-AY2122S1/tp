@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -37,6 +42,19 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
+        };
+    }
+
+    public static Facility[] getSampleFacilities() {
+        return new Facility[] {
+            new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
+                    new Time("11:30"), new Capacity("5")),
+            new Facility(new FacilityName("NUS Field 2"), new Location("Opp University Hall"),
+                    new Time("13:30"), new Capacity("8")),
+            new Facility(new FacilityName("Court 2"), new Location("University Sports Hall"),
+                    new Time("20:30"), new Capacity("10")),
+            new Facility(new FacilityName("Court 3"), new Location("University Sports Hall"),
+                    new Time("12:30"), new Capacity("6"))
         };
     }
 
