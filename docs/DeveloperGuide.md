@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `SportsPA` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `SportsPA` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Get help**
 
@@ -341,8 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. SportsPA shows an error message.
     
-    Use case resumes at step 1.
-
+      Use case resumes from step 1.
 
 **Use case: UC03 - List all facilities**
 
@@ -368,13 +367,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. SportsPA shows an error message.
     
-    Use case resumes at step 1.
+      Use case resumes from step 1.
     
 * 1a. No facilities have locations matching the given keyword(s)
 
     * 1a1. SportsPA informs user
     
-    Use case ends.
+      Use case ends.
     
 **Use case: UC05 - Delete a facility**
 
@@ -397,7 +396,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3a1. SportsPA shows an error message
     
-    Use case resumes at step 3.
+      Use case resumes from step 3.
    
 **Use case: UC06 - Add a member**
 
@@ -414,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. SportsPA shows an error message.
     
-    Use case resumes at step 1.
+      Use case resumes from step 1.
     
 **Use case: UC07 - List all members**
 
