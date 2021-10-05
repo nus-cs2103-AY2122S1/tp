@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import seedu.academydirectory.logic.commands.RetrieveCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import seedu.academydirectory.model.person.InformationWantedFunction;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -39,16 +40,7 @@ public class RetrieveCommandParser implements Parser<RetrieveCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RetrieveCommand.MESSAGE_USAGE));
         }
 
-        return new RetrieveCommand((person) -> {
-            if (PREFIX_EMAIL.equals(infoPrefix)) {
-                return person.getEmail();
-            } else if (PREFIX_ADDRESS.equals(infoPrefix)) {
-                return person.getAddress();
-            } else if (PREFIX_PHONE.equals(infoPrefix)) {
-                return person.getPhone();
-            }
-            return null; // Will not happen since prefixes have been checked
-        });
+        return new RetrieveCommand(new InformationWantedFunction(infoPrefix));
     }
 
 }
