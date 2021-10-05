@@ -44,7 +44,8 @@ class DeletePatientTagCommandTest {
                         newTags.stream().map(t -> t.tagName).toArray(String[]::new))
                 .build();
 
-        DeletePatientTagCommand deletePatientTagCommand = new DeletePatientTagCommand(INDEX_FIRST_PERSON, modelFirstPersonTag);
+        DeletePatientTagCommand deletePatientTagCommand =
+                new DeletePatientTagCommand(INDEX_FIRST_PERSON, modelFirstPersonTag);
 
         String expectedMessage = String.format(DeletePatientTagCommand.MESSAGE_DELETE_TAG_SUCCESS, editedPatient);
 
@@ -65,7 +66,8 @@ class DeletePatientTagCommandTest {
                         newTags.stream().map(t -> t.tagName).toArray(String[]::new))
                 .build();
 
-        DeletePatientTagCommand deletePatientTagCommand = new DeletePatientTagCommand(INDEX_FIRST_PERSON, modelFirstPersonTag);
+        DeletePatientTagCommand deletePatientTagCommand =
+                new DeletePatientTagCommand(INDEX_FIRST_PERSON, modelFirstPersonTag);
 
         String expectedMessage = String.format(DeletePatientTagCommand.MESSAGE_DELETE_TAG_SUCCESS, editedPatient);
 
@@ -78,7 +80,8 @@ class DeletePatientTagCommandTest {
     @Test
     void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
-        DeletePatientTagCommand deletePatientTagCommand = new DeletePatientTagCommand(outOfBoundIndex, modelFirstPersonTag);
+        DeletePatientTagCommand deletePatientTagCommand =
+                new DeletePatientTagCommand(outOfBoundIndex, modelFirstPersonTag);
 
         assertCommandFailure(deletePatientTagCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }
@@ -91,7 +94,8 @@ class DeletePatientTagCommandTest {
         // ensures that outOfBoundIndex is still in bounds of plannermd list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPlannerMd().getPatientList().size());
 
-        DeletePatientTagCommand deletePatientTagCommand = new DeletePatientTagCommand(outOfBoundIndex, modelFirstPersonTag);
+        DeletePatientTagCommand deletePatientTagCommand =
+                new DeletePatientTagCommand(outOfBoundIndex, modelFirstPersonTag);
 
         assertCommandFailure(deletePatientTagCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }

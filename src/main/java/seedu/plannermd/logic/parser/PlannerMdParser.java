@@ -10,12 +10,12 @@ import seedu.plannermd.logic.commands.ClearCommand;
 import seedu.plannermd.logic.commands.Command;
 import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
-import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 
 /**

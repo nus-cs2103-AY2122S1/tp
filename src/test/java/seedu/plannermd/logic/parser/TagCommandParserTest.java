@@ -11,8 +11,8 @@ import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.index.Index;
-import seedu.plannermd.logic.commands.tagcommand.DeletePatientTagCommand;
 import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.DeletePatientTagCommand;
 import seedu.plannermd.model.tag.Tag;
 
 class TagCommandParserTest {

@@ -10,8 +10,8 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.exceptions.IllegalValueException;
 import seedu.plannermd.logic.commands.Command;
-import seedu.plannermd.logic.commands.tagcommand.DeletePatientTagCommand;
 import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.DeletePatientTagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.tag.Tag;
 
