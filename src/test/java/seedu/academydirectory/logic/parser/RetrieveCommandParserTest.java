@@ -6,7 +6,7 @@ import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertPa
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.logic.commands.RetrieveCommand;
-import seedu.academydirectory.model.person.InformationWantedFunction;
+import seedu.academydirectory.model.student.InformationWantedFunction;
 
 @SuppressWarnings("checkstyle:Regexp")
 public class RetrieveCommandParserTest {
