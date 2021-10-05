@@ -119,23 +119,20 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive, e.g.,  `hotel` will match `Hotel`
+* The order of the keywords does not matter. e.g. `81 `Hotel` will match `Hotel 81`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Contacts matching at least one keyword will be returned (i.e., OR search). e.g. `Hotel 81` will return `Hotel 81 Changi`, `Shangri-La Hotels and Resorts`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find hotel` returns `Hotel 81 Changi` and `Shangri-La Hotels and Resorts`
+* `find sands` returns `Marina Bay Sands` and `Sands Expo & Convention Centre`
 
 ### Deleting a person : `delete`
 
@@ -151,6 +148,24 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by delete 2 deletes the 2nd person in the address book.
 * `find` Mandarin Oriental followed by delete 1 deletes the 1st contact (accomodation, hotel) in the results of the find command.
+
+### Filter by category : `filter`
+
+Shows a list of all contacts in the specified category
+
+Category codes:
+* Attraction :`c/att`
+* F&B :`c/fnb`
+* Commerce :`c/com`
+* Accommodation :`c/acc`
+* Transport :`c/tpt`
+
+Format: `filter c/CATEGORY`
+
+Examples:
+* `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts).
+* `filter c/acc` returns Mandarin Oriental and Hotel81 (all accommodation contacts)
+
 
 ### Clearing all entries : `clear`
 
