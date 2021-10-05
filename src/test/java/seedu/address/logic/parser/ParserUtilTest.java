@@ -17,8 +17,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,14 +29,20 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_ROLE = "Softw@re Eng1n33r";
     private static final String INVALID_EMPLOYMENT_TYPE = "intern";
+    private static final String INVALID_EXPECTED_SALARY = "-1200";
+    private static final String INVALID_EXPERIENCE = "-1";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_EMPLOYMENT_TYPE = "Internship";
+    private static final String VALID_EXPECTED_SALARY = "1200";
+    private static final String VALID_EXPERIENCE = "1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -152,6 +161,29 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseRole_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole((String) null));
+    }
+
+    @Test
+    public void parseRole_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE));
+    }
+
+    @Test
+    public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE));
+    }
+
+    @Test
+    public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
+        String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
+        Role expectedRole = new Role(VALID_ROLE);
+        assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
+    }
+
+    @Test
     public void parseEmploymentType_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmploymentType((String) null));
     }
@@ -172,6 +204,52 @@ public class ParserUtilTest {
         String employmentTypeWithWhitespace = WHITESPACE + VALID_EMPLOYMENT_TYPE + WHITESPACE;
         EmploymentType expectedEmploymentType = new EmploymentType(VALID_EMPLOYMENT_TYPE);
         assertEquals(expectedEmploymentType, ParserUtil.parseEmploymentType(employmentTypeWithWhitespace));
+    }
+
+    @Test
+    public void parseExpectedSalary_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExpectedSalary((String) null));
+    }
+
+    @Test
+    public void parseExpectedSalary_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExpectedSalary(INVALID_EXPECTED_SALARY));
+    }
+
+    @Test
+    public void parseExpectedSalary_validValueWithoutWhitespace_returnsExpectedSalary() throws Exception {
+        ExpectedSalary expectedExpectedSalary = new ExpectedSalary(VALID_EXPECTED_SALARY);
+        assertEquals(expectedExpectedSalary, ParserUtil.parseExpectedSalary(VALID_EXPECTED_SALARY));
+    }
+
+    @Test
+    public void parseExpectedSalary_validValueWithWhitespace_returnsTrimmedExpectedSalary() throws Exception {
+        String expectedSalaryWithWhitespace = WHITESPACE + VALID_EXPECTED_SALARY + WHITESPACE;
+        ExpectedSalary expectedExpectedSalary = new ExpectedSalary(VALID_EXPECTED_SALARY);
+        assertEquals(expectedExpectedSalary, ParserUtil.parseExpectedSalary(expectedSalaryWithWhitespace));
+    }
+
+    @Test
+    public void parseExperience_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExperience((String) null));
+    }
+
+    @Test
+    public void parseExperience_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExperience(INVALID_EXPERIENCE));
+    }
+
+    @Test
+    public void parseExperience_validValueWithoutWhitespace_returnsExperience() throws Exception {
+        Experience expectedExperience = new Experience(VALID_EXPERIENCE);
+        assertEquals(expectedExperience, ParserUtil.parseExperience(VALID_EXPERIENCE));
+    }
+
+    @Test
+    public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
+        String experienceWithWhitespace = WHITESPACE + VALID_EXPERIENCE + WHITESPACE;
+        Experience expectedExperience = new Experience(VALID_EXPERIENCE);
+        assertEquals(expectedExperience, ParserUtil.parseExperience(experienceWithWhitespace));
     }
 
     @Test
@@ -219,4 +297,5 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
 }

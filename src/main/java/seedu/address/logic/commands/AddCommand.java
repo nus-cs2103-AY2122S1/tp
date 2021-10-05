@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,14 +28,20 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_ROLE + "ROLE "
             + PREFIX_EMPLOYMENT_TYPE + "EMPLOYMENT TYPE"
+            + PREFIX_EXPECTED_SALARY + "EXPECTED SALARY "
+            + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_ROLE + "Software Engineer"
             + PREFIX_EMPLOYMENT_TYPE + "Full time "
+            + PREFIX_EXPECTED_SALARY + "3500 "
+            + PREFIX_EXPERIENCE + "3 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

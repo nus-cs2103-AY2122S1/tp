@@ -13,9 +13,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +32,10 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String role;
     private final String employmentType;
+    private final String expectedSalary;
+    private final String experience;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,13 +47,19 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone,
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
+            @JsonProperty("role") String role,
             @JsonProperty("employmentType") String employmentType,
+            @JsonProperty("expectedSalary") String expectedSalary,
+            @JsonProperty("experience") String experience,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         this.employmentType = employmentType;
+        this.expectedSalary = expectedSalary;
+        this.experience = experience;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -61,7 +73,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        role = source.getRole().role;
         employmentType = source.getEmploymentType().employmentType;
+        expectedSalary = source.getExpectedSalary().value;
+        experience = source.getExperience().value.toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -110,6 +125,14 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        final Role modelRole = new Role(role);
+
         if (employmentType == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, EmploymentType.class.getSimpleName()));
@@ -119,8 +142,29 @@ class JsonAdaptedPerson {
         }
         final EmploymentType modelEmploymentType = new EmploymentType(employmentType);
 
+        if (expectedSalary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ExpectedSalary.class.getSimpleName()));
+        }
+        if (!ExpectedSalary.isValidExpectedSalary(expectedSalary)) {
+            throw new IllegalValueException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+        }
+        final ExpectedSalary modelExpectedSalary = new ExpectedSalary(expectedSalary);
+
+        if (experience == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Experience.class.getSimpleName()));
+        }
+
+        if (!Experience.isValidExperience(Integer.parseInt(experience))) {
+            throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
+        }
+        final Experience modelExperience = new Experience(Integer.parseInt(experience));
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEmploymentType, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole,
+                modelEmploymentType, modelExpectedSalary, modelExperience, modelTags);
     }
 
 }

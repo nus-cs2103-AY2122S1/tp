@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -23,9 +26,12 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +49,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_EMPLOYMENT_TYPE + "EMPLOYMENT TYPE] "
+            + "[" + PREFIX_EXPECTED_SALARY + "EXPECTED_SALARY]"
+            + "[" + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -100,11 +109,16 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         EmploymentType updatedEmploymentType = editPersonDescriptor
                 .getEmploymentType().orElse(personToEdit.getEmploymentType());
+        ExpectedSalary updatedExpectedSalary = editPersonDescriptor.getExpectedSalary()
+                .orElse(personToEdit.getExpectedSalary());
+        Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedEmploymentType, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedRole, updatedEmploymentType, updatedExpectedSalary, updatedExperience, updatedTags);
     }
 
     @Override
@@ -134,7 +148,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Role role;
         private EmploymentType employmentType;
+        private ExpectedSalary expectedSalary;
+        private Experience experience;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -148,7 +165,10 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRole(toCopy.role);
             setEmploymentType(toCopy.employmentType);
+            setExpectedSalary(toCopy.expectedSalary);
+            setExperience(toCopy.experience);
             setTags(toCopy.tags);
         }
 
@@ -156,7 +176,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, employmentType, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, employmentType, expectedSalary, experience, tags);
         }
 
         public void setName(Name name) {
@@ -191,12 +211,35 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setRole(Role role) {
+            this.role = role;
+        }
+
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
+        }
+
         public void setEmploymentType(EmploymentType employmentType) {
             this.employmentType = employmentType;
         }
 
         public Optional<EmploymentType> getEmploymentType() {
             return Optional.ofNullable(employmentType);
+
+        public void setExpectedSalary(ExpectedSalary expectedSalary) {
+            this.expectedSalary = expectedSalary;
+        }
+
+        public Optional<ExpectedSalary> getExpectedSalary() {
+            return Optional.ofNullable(expectedSalary);
+        }
+
+        public void setExperience(Experience experience) {
+            this.experience = experience;
+        }
+
+        public Optional<Experience> getExperience() {
+            return Optional.ofNullable(experience);
         }
 
         /**
@@ -235,7 +278,10 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getRole().equals(e.getRole())
                     && getEmploymentType().equals(e.getEmploymentType())
+                    && getExpectedSalary().equals(e.getExpectedSalary())
+                    && getExperience().equals(e.getExperience())
                     && getTags().equals(e.getTags());
         }
     }

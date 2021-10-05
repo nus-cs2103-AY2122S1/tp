@@ -5,8 +5,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -33,8 +36,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EMPLOYMENT_TYPE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                         PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE, PREFIX_EXPERIENCE, PREFIX_EXPECTED_SALARY, PREFIX_TAG);
 
         Index index;
 
@@ -57,12 +60,27 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            editPersonDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
+        }
+
         if (argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()) {
             editPersonDescriptor.setEmploymentType(
                     ParserUtil.parseEmploymentType(argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
+        if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
+            editPersonDescriptor.setExpectedSalary(ParserUtil.parseExpectedSalary(argMultimap
+                    .getValue(PREFIX_EXPECTED_SALARY).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
+            editPersonDescriptor.setExperience(
+                    ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get()));
+        }
+
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

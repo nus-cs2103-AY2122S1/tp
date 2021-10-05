@@ -8,9 +8,12 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +40,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setRole(person.getRole());
         descriptor.setEmploymentType(person.getEmploymentType());
+        descriptor.setExpectedSalary(person.getExpectedSalary());
+        descriptor.setExperience(person.getExperience());
         descriptor.setTags(person.getTags());
     }
 
@@ -74,10 +80,34 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Role} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRole(String role) {
+        descriptor.setRole(new Role(role));
+        return this;
+    }
+
+    /**
      * Sets the {@code EmploymentType} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmploymentType(String employmentType) {
         descriptor.setEmploymentType(new EmploymentType(employmentType));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ExpectedSalary} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExpectedSalary(String expectedSalary) {
+        descriptor.setExpectedSalary(new ExpectedSalary(expectedSalary));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Experience} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExperience(Integer experience) {
+        descriptor.setExperience(new Experience(experience));
         return this;
     }
 

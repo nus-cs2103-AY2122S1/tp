@@ -32,14 +32,14 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
+        ArrayList<Predicate<Person>> firstPredicateList = new ArrayList<>();
         NameContainsKeywordsPredicate firstPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        ArrayList<Predicate<Person>> firstPredicateList = new ArrayList<>();
         firstPredicateList.add(firstPredicate);
 
+        ArrayList<Predicate<Person>> secondPredicateList = new ArrayList<>();
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
-        ArrayList<Predicate<Person>> secondPredicateList = new ArrayList<>();
         secondPredicateList.add(secondPredicate);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicateList);
