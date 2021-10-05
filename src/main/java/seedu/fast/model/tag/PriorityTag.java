@@ -10,9 +10,9 @@ public class PriorityTag extends Tag {
 
     public static final String PRIORITY_TAG_PREFIX = "pr/";
 
-    public static final String PRIORITY_VALIDATION_REGEX = LowPriority.command + "|"
-            + MediumPriority.command + "|"
-            + HighPriority.command;
+    public static final String PRIORITY_VALIDATION_REGEX = LowPriority.COMMAND + "|"
+            + MediumPriority.COMMAND + "|"
+            + HighPriority.COMMAND;
 
     /**
      * Constructs a {@code PriorityTag}.
@@ -27,11 +27,12 @@ public class PriorityTag extends Tag {
      * Class containing relevant fields for a Low Priority Tag.
      */
     public class LowPriority {
-        public static final String name = "LowPriority";
 
-        public static final String term = "low";
+        public static final String NAME = "LowPriority";
 
-        public static final String command = PRIORITY_TAG_PREFIX + term;
+        public static final String TERM = "low";
+
+        public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
     }
 
@@ -39,11 +40,12 @@ public class PriorityTag extends Tag {
      * Class containing relevant fields for a Medium Priority Tag.
      */
     public class MediumPriority {
-        public static final String name = "MediumPriority";
 
-        public static final String term = "medium";
+        public static final String NAME = "MediumPriority";
 
-        public static final String command = PRIORITY_TAG_PREFIX + term;
+        public static final String TERM = "medium";
+
+        public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
     }
 
@@ -51,11 +53,12 @@ public class PriorityTag extends Tag {
      * Class containing relevant fields for a High Priority Tag.
      */
     public class HighPriority {
-        public static final String name = "HighPriority";
 
-        public static final String term = "high";
+        public static final String NAME = "HighPriority";
 
-        public static final String command = PRIORITY_TAG_PREFIX + term;
+        public static final String TERM = "high";
+
+        public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
     }
 

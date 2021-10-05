@@ -128,12 +128,12 @@ public class ParserUtil {
      */
     public static String parsePriorityTag(String tagName) {
         switch(tagName) {
-        case PriorityTag.LowPriority.command:
-            return PriorityTag.LowPriority.name;
-        case PriorityTag.MediumPriority.command:
-            return PriorityTag.MediumPriority.name;
+        case PriorityTag.LowPriority.COMMAND:
+            return PriorityTag.LowPriority.NAME;
+        case PriorityTag.MediumPriority.COMMAND:
+            return PriorityTag.MediumPriority.NAME;
         default:
-            return PriorityTag.HighPriority.name;
+            return PriorityTag.HighPriority.NAME;
         //It is guaranteed that the default case will always be a high priority tag instance.
         }
     }
