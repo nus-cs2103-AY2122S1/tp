@@ -22,9 +22,9 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
     private final String studentName;
-    private final String studentPhone = "";
-    private final String parentName = "";
-    private final String parentPhone = "";
+    private final String studentPhone;
+    private final String parentName;
+    private final String parentPhone;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -35,16 +35,9 @@ class JsonAdaptedPerson {
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone) {
 
         this.studentName = studentName;
-
-        if (studentPhone != null) {
-            this.studentPhone = studentPhone;
-        }
-        if (parentName != null) {
-            this.parentName = parentName;
-        }
-        if (parentPhone != null) {
-            this.parentPhone = parentPhone;
-        }
+        this.studentPhone = studentPhone;
+        this.parentName = parentName;
+        this.parentPhone = parentPhone;
     }
 
     /**
