@@ -30,7 +30,8 @@ public class PatientListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PatientCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Patient} using
+     * a {@code PatientCard}.
      */
     class PatientListViewCell extends ListCell<Patient> {
         @Override

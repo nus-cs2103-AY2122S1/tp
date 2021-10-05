@@ -8,10 +8,14 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.plannermd.logic.Logic;
 
-
+/**
+ * A UI that holds the two tabs for patient and doctor records in the plannermd.
+ */
 public class PersonTab extends UiPart<Region> {
+
     private static final String FXML = "PersonTab.fxml";
 
+    /** The order of the tabs in the tab pane. */
     private static final int PATIENT_TAB = 0;
     private static final int DOCTOR_TAB = 1;
 
@@ -31,7 +35,7 @@ public class PersonTab extends UiPart<Region> {
     @FXML
     private StackPane doctorListPanelPlaceholder;
 
-
+    /** Creates a new PersonTab Pane and initialises them. */
     public PersonTab(Logic logic) {
         super(FXML);
         this.logic = logic;
@@ -47,10 +51,16 @@ public class PersonTab extends UiPart<Region> {
         doctorListPanelPlaceholder.getChildren().add(doctorListPanel.getRoot());
     }
 
+    /**
+     * Switch the UI view to the tab containing the patient's records.
+     */
     public void switchToPatientTab() {
         selectionModel.select(PATIENT_TAB);
     }
 
+    /**
+     * Switch the UI view to the tab containing the doctor's records.
+     */
     public void switchToDoctorTab() {
         selectionModel.select(DOCTOR_TAB);
     }

@@ -1,5 +1,7 @@
 package seedu.plannermd.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -8,18 +10,18 @@ import javafx.scene.layout.Region;
 import seedu.plannermd.commons.core.LogsCenter;
 import seedu.plannermd.model.patient.Patient;
 
-import java.util.logging.Logger;
-
+/**
+ * Panel containing the list of doctors.
+ */
 public class DoctorListPanel extends UiPart<Region> {
-
     private static final String FXML = "DoctorListPanel.fxml";
-    //private final Logger logger = LogsCenter.getLogger(PatientListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(DoctorListPanel.class);
 
     @FXML
     private ListView<Patient> doctorListView;
 
     /**
-     * Creates a {@code PatientListPanel} with the given {@code ObservableList}.
+     * Creates a {@code DoctorListPanel} with the given {@code ObservableList}.
      */
     public DoctorListPanel(ObservableList<Patient> patientList) {
         super(FXML);
@@ -28,7 +30,8 @@ public class DoctorListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PatientCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Doctor} using
+     * a {@code DoctorCard}.
      */
     class DoctorListViewCell extends ListCell<Patient> {
         @Override
