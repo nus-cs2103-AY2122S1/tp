@@ -6,16 +6,16 @@ import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.plannermd.logic.commands.AddCommand;
 import seedu.plannermd.logic.commands.ClearCommand;
 import seedu.plannermd.logic.commands.Command;
-import seedu.plannermd.logic.commands.DeleteCommand;
-import seedu.plannermd.logic.commands.EditCommand;
 import seedu.plannermd.logic.commands.ExitCommand;
-import seedu.plannermd.logic.commands.FindCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
-import seedu.plannermd.logic.commands.ListCommand;
 import seedu.plannermd.logic.commands.TagCommand;
+import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
+import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
+import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
+import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 
 /**
@@ -45,23 +45,23 @@ public class PlannerMdParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddPatientCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditPatientCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeletePatientCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindPatientCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListPatientCommand.COMMAND_WORD:
+            return new ListPatientCommand();
 
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);

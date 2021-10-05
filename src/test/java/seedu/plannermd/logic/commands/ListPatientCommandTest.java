@@ -1,21 +1,22 @@
 package seedu.plannermd.logic.commands;
 
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.plannermd.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.plannermd.logic.commands.CommandTestUtil.showPatientAtIndex;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.plannermd.testutil.TypicalPersons.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListPatientCommand.
  */
-public class ListCommandTest {
+public class ListPatientCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,12 +29,12 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListPatientCommand(), model, ListPatientCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        showPatientAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(new ListPatientCommand(), model, ListPatientCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

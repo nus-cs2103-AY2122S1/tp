@@ -14,7 +14,7 @@ import seedu.plannermd.logic.parser.PlannerMdParser;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
-import seedu.plannermd.model.person.Person;
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.storage.Storage;
 
 /**
@@ -60,8 +60,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Patient> getFilteredPatientList() {
+        return model.getFilteredPatientList();
     }
 
     @Override
