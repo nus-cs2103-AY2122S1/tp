@@ -19,14 +19,17 @@ import seedu.fast.model.person.Person;
 public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "appointment";
+    public static final String DELETE_COMMAND = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
-            + " by the index number used in the last person listing. "
+            + " by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer), "
-            + "DATE (must be yyyy-mm-dd) "
-            + PREFIX_APPOINTMENT + "[DATE]\n"
+            + "DATE (must be yyyy-mm-dd) or DELETE_COMMAND\n"
+            + PREFIX_APPOINTMENT + "[DATE] or [DELETE_COMMAND]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-10";
+            + PREFIX_APPOINTMENT + "2021-10-10 or "
+            + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + DELETE_COMMAND;
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s";
     public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s";

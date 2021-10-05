@@ -21,6 +21,7 @@ public class AppointmentCommandParserTest {
     private final String invalidApptDay = "2021-10-45";
     private final String formattedAppt = "10 Oct 2021";
     private final String noApptSceduled = "No Appointment Scheduled Yet";
+    private final String deleteCommand = "delete";
 
     @Test
     public void parse_indexSpecified_success() {
@@ -71,9 +72,9 @@ public class AppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_appointmentNoDateDefaultDelete_success() {
+    public void parse_appointmentDelete_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + deleteCommand;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(noApptSceduled));
         assertParseSuccess(parser, userInput, expectedCommand);

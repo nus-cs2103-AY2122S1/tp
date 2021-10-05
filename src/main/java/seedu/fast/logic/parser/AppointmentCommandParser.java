@@ -34,7 +34,7 @@ public class AppointmentCommandParser implements Parser {
         }
 
         String date = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
-        if (!date.equals("")) {
+        if (!date.equals(AppointmentCommand.DELETE_COMMAND)) {
             try {
                 // converts the date to the specified format
                 date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
