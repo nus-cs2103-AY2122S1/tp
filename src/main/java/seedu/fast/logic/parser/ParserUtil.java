@@ -105,7 +105,7 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTagTerm(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return Tag.createTag(trimmedTag);
@@ -131,9 +131,9 @@ public class ParserUtil {
         case PriorityTag.LowPriority.command:
             return PriorityTag.LowPriority.name;
         case PriorityTag.MediumPriority.command:
-            return PriorityTag.MediumPriority.command;
+            return PriorityTag.MediumPriority.name;
         default:
-            return PriorityTag.HighPriority.command;
+            return PriorityTag.HighPriority.name;
         //It is guaranteed that the default case will always be a high priority tag instance.
         }
     }
