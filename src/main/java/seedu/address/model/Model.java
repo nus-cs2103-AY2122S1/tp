@@ -108,4 +108,6 @@ public interface Model {
      * Returns list of lessons.
      */
     ArrayList<Lesson> getLessonList();
+
+    public Lesson searchLessons(String arg);
 }

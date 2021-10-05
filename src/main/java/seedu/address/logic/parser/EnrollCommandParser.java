@@ -40,7 +40,7 @@ public class EnrollCommandParser implements Parser<EnrollCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
@@ -56,12 +56,9 @@ public class EnrollCommandParser implements Parser<EnrollCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
-            startTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_SUBJECT).get());
+            startTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_TIME).get());
         }
 
-        Lesson lesson = new Lesson(subject, grade, day, startTime, 0.0);
-        //BY RIGHT SHOULD ADD INTO AN EXISTING LESSON
-
-        return new EnrollCommand(lesson);
+        return new EnrollCommand(index, subject + "-" +  grade + "-" + day + "-" + startTime);
     }
 }

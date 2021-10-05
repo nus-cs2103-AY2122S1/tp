@@ -153,6 +153,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Lesson searchLessons(String arg) {
+        requireAllNonNull(arg);
+
+        ArrayList<Lesson> lessons = addressBook.getLessonList();
+        for (Lesson current : lessons) {
+            if (arg.equals(current.getLessonCode())) {
+                return current;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

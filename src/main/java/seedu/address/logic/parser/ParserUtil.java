@@ -149,9 +149,9 @@ public class ParserUtil {
             return DayOfWeek.MONDAY;
         } else if (prefix == "Tu") {
             return DayOfWeek.TUESDAY;
-        } else if (prefix == "We") {
+        } else if (prefix.equals("We")) {
             return DayOfWeek.WEDNESDAY;
-        } else if (prefix == "Th") {
+        } else if (prefix.equals("Th")) {
             return DayOfWeek.THURSDAY;
         } else if (prefix == "Fr") {
             return DayOfWeek.FRIDAY;
@@ -167,7 +167,8 @@ public class ParserUtil {
     public static LocalTime parseLocalTime(String time) {
         requireNonNull(time);
         String trimmedTime = time.trim();
-        String newTime = trimmedTime.substring(0, 2) + ":" + trimmedTime.substring(2, 4);
-        return LocalTime.parse(time);
+        int hour = Integer.parseInt(trimmedTime.substring(0, 2));
+        int minute = Integer.parseInt(trimmedTime.substring(2, 4));
+        return LocalTime.of(hour, minute);
     }
 }
