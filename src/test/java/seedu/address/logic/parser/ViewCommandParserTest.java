@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ViewCommandParserTest {
 

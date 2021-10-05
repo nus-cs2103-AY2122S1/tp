@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.ui.UiManager;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -58,8 +57,7 @@ public class ViewCommandTest {
         String expectedMessage = "Viewing requested student";
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToView);
-        showNoPerson(expectedModel);
+        expectedModel.viewPerson(personToView);
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
     }
@@ -97,14 +95,5 @@ public class ViewCommandTest {
 
         // different person -> returns false
         assertFalse(viewFirstCommand.equals(viewSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }

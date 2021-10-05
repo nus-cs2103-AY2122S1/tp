@@ -41,7 +41,6 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewPerson(personToView);
-        UiManager.showViewWindow();
         return new CommandResult(MESSAGE_VIEW_PERSON_SUCCESS);
     }
 

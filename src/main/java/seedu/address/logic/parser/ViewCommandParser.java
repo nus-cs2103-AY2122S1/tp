@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.UiManager;
 
 
 /**
@@ -20,6 +21,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
     public ViewCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
+            UiManager.showViewWindow();
             return new ViewCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
