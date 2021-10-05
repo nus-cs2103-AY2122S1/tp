@@ -300,12 +300,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-**Use case: Add a student**
+For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Officer (CSO)`, unless specified otherwise.
+
+**UC01: Add a student**
 
 **MSS**
 
-1.  User requests to add a student
-2.  TuitiONE adds a student to the list
+1. CSO requests to add a student.
+2. TuitiONE adds a student to the list.
+
+    Use case ends.
 
 **Extensions**
 
@@ -313,13 +317,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. TuitiONE shows an error message.
 
-      Use case ends.
+      Use case resumes from step 1.
 
 * 1b. Missing compulsory details in command.
 
     * 1b1. TuitiONE shows an error message.
 
-      Use case ends.
+      Use case resumes from step 1.
 
 * 1c. Student already exists.
 
@@ -327,145 +331,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Delete a student**
+**UC02: Look up student details**
 
 **MSS**
+1. CSO inputs command to find a specific student.
 
-1.  User requests to list students
-2.  TuitiONE shows a list of students
-3.  User requests to delete a specific student in the list
-4.  TuitiONE deletes the student
+2. TuitiONE shows a list of relevant students.
 
-    Use case ends.
+3. CSO looks through the given results of students.
 
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TuitiONE shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: Enroll a student in a lesson**
-
-**MSS**
-1. CSO adds the name of Student to be enrolled in Lesson.
-2. System adds the name of Student to the Lesson.  
-   Use case ends.
-
-**Extensions**
-* 1a. System cannot detect Lesson name
-
-    * 1a1. System returns error message, requesting CSO to input a valid Lesson name.
-
-      Use case resumes from step 1.
-
-
-* 1a. System cannot detect the Student's name.
-
-    * 1a1. System returns error message, requesting CSO to input a valid Student’s name.
-
-      Use case resumes from step 1.
-
-**Use case: Unenroll a student in a lesson**
-
-**MSS**
-1. CSO adds the name of Student to be unenrolled in Lesson.
-2. System removes the name of the Student from the Lesson.  
-   Use case ends.
-
-**Extensions**
-* 1a. System cannot detect Lesson name
-
-* 1b. System cannot detect the Student's name.
-
-    * 1b1. System returns error message, requesting CSO to input a valid Student’s name.  
-      Use case resumes from step 1.
-      
-**Use case: View details of a lesson**
-
-**MSS**
-
-1.  CSO requests to list lessons.
-2.  System shows a list of lessons, with their respective details.  
-    Use case ends.
-
-**Use case: Add a lesson**
-
-**MSS**
-
-1.  CSO requests to list lessons.
-2.  System shows a list of lessons.
-3.  CSO requests to add a lesson with specified subject, grade, start time and price.
-4.  System adds the lesson.  
-    Use case ends.
-
-**Extensions**
-* 3a. Subject specified is not alphanumeric.
-
-    * 3a1. System shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. Grade specified is invalid.
-
-    * 3b1. System shows an error message.
-
-      Use case resumes at step 2.
-
-* 3c. Start time is out of specified hours.
-
-    * 3c1. System shows an error message.
-
-      Use case resumes at step 2.
-
-* 3d. Price specified is 0 or negative.
-
-    * 3d1. System shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: Delete a lesson**
-
-**MSS**
-
-1.  CSO requests to list lessons.
-2.  System shows a list of lessons.
-3.  CSO requests to delete a specific lesson in the list by its lesson code.
-4.  System deletes the lesson.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-* 3a. The given lesson code is invalid.
-
-    * 3a1. System shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UCXX – Look up student details**
-
-**MSS**
-1. CSO inputs command to find a specific student by their name (either full name or not).
-
-2. CSO looks through the given results of students.
-
-3. CSO chooses the student of interest.
-
-4. CSO can see student’s details, such as:
+4. CSO views desired student’s details, such as:
     1. Their grade
     2. Their enrolled lessons
     3. Their parent’s contact number
     4. Their house address
     5. Their tuition fees
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -475,7 +357,8 @@ Use case ends.
 
     * 1a2. CSO inputs search keywords with correct formatting.
 
-      Steps 1a1-1a2 are repeated until the input is of the correct format.\
+      Steps 1a1-1a2 are repeated until the input is of the correct format.
+
       Use case resumes from step 2.
 
 * 2a. TuitiONE cannot find any results relevant to the search keyword.
@@ -492,17 +375,154 @@ Use case ends.
 
       Use case ends.
 
-* 3a. The given lesson code is invalid.
+**UC03: Delete a student**
 
-    * 3a1. System shows an error message.
+**MSS**
 
+1. CSO <ins>searches for student (UC02)</ins>.
+2. TuitiONE shows a list of relevant students.
+3. CSO requests to delete a specific student in the list.
+4. TuitiONE deletes the student.
 
-**Use case: Review commands**
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+  
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TuitiONE shows an error message.
+
+      Use case resumes at step 2.
+
+**UC04: Enroll a student in a lesson**
+
+**MSS**
+1. CSO views a list of lessons.
+2. CSO adds the student to be enrolled in lesson.
+3. TuitiONE adds the student to the lesson.  
+   Use case ends.
+
+**Extensions**
+* 2a. TuitiONE cannot find lesson.
+
+    * 2a1. TuitiONE returns error message, requesting CSO to input a valid lesson.
+
+      Use case resumes from step 1.
+    
+* 2b. TuitiONE cannot find the student.
+
+    * 2b1. TuitiONE returns error message, requesting CSO to input a valid student.
+
+      Use case resumes from step 1.
+
+* 2c. Student is already enrolled to lesson.
+
+    Use case ends.
+
+**UC05: Unenroll a student in a lesson**
+
+**MSS**
+1. CSO views a list of lessons.
+2. CSO adds the student to be unenrolled from a lesson.
+3. TuitiONE removes the student from the lesson.  
+   Use case ends.
+
+**Extensions**
+* 2a. TuitiONE cannot find lesson.
+
+    * 2a1. TuitiONE returns error message, requesting CSO to input a valid lesson.
+
+      Use case resumes from step 1.
+
+* 2b. TuitiONE cannot find the student.
+
+    * 2b1. TuitiONE returns error message, requesting CSO to input a valid student.  
+      Use case resumes from step 1.
+
+* 2c. Student is not enrolled to lesson.
+
+    Use case ends.
+      
+**UC06: View details of a lesson**
+
+**MSS**
+
+1. CSO views a list of lessons.
+2. TuitiONE shows a list of lessons, with their respective details:
+   1. Lesson subject
+   2. Grade
+   3. Start time 
+   4. Price
+   5. Students attending
+
+    Use case ends.
+
+**UC07: Add a lesson**
+
+**MSS**
+
+1.  CSO views a list of lessons.
+2.  TuitiONE shows a list of lessons.
+3.  CSO requests to add a lesson with relevant details.
+4.  TuitiONE adds the lesson.  
+    Use case ends.
+
+**Extensions**
+* 3a. Relevant details for lesson are invalid.
+
+    * 3a1. TuitiONE shows an error message.
+
+      Use case resumes at step 2.
+    
+**UC08: Delete a lesson**
+
+**MSS**
+
+1.  CSO views a list of lessons.
+2.  TuitiONE shows a list of lessons.
+3.  CSO requests to delete a specific lesson in the list.
+4.  TuitiONE deletes the lesson.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given lesson is invalid.
+
+    * 3a1. TuitiONE shows an error message.
+
+      Use case resumes at step 2.
+
+**UC09 - Update Specific Student’s Details**
+
+**MSS**
+
+1.  CSO <ins>looks for the student to update (UC02)</ins>.
+2.  CSO updates the details of the specific student.
+3.  TuitiONE reflects the updated details of the student.
+
+    Use case ends.
+
+**Extension**
+
+* 2a. Details entered are invalid.
+
+    * 2a1. TuitiONE shows an error message.
+
+      Use case resumes at step 2. 
+
+**UC10: Review commands**
 
 **MSS**
 
 1.  CSO selects help option.
-2.  System lists basic commands and descriptions, as well as the user guide link.  
+2.  TuitiONE lists basic commands and descriptions, as well as the user guide link.  
     Use case ends.
     
 ### Non-Functional Requirements
@@ -526,7 +546,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **CSO**: Customer Service Officer
-
+* **GUI**: Graphical User Interface
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
