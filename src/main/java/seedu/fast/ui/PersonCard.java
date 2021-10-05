@@ -57,7 +57,23 @@ public class PersonCard extends UiPart<Region> {
         remark.setText(person.getRemark().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
+    }
+
+    /**
+     * Creates a Label with the given tag name.
+     * @param tagName The given tag name.
+     * @return Label with the given tag name and custom color.
+     */
+    public Label colorSelector(String tagName) {
+        Label temp = new Label(tagName);
+        if (tagName.equals("friends")) {
+            temp.setStyle("-fx-background-color: #FF0000;");
+        } else {
+            temp.setStyle("-fx-background-color: #3e7b91;");
+        }
+
+        return temp;
     }
 
     @Override
