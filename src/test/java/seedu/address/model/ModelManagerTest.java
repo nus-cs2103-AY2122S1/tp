@@ -116,6 +116,7 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
+        //TODO: The only test that is failing
         // different filteredList -> returns false
         String[] keywords = ALICE.getStudentName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));

@@ -15,10 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NAME_DESC_AMY
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENT_PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -27,8 +24,6 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -66,52 +61,36 @@ public class AddStudentCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withParentName("").build();
-        assertParseSuccess(parser, STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY + PARENT_NAME_DESC_AMY
-                        + PARENT_PHONE_DESC_AMY, new AddStudentCommand(expectedPerson));
+        assertParseSuccess(parser, STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY + PARENT_PHONE_DESC_AMY,
+                new AddStudentCommand(expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE);
 
-        // missing name prefix
+        // missing student name prefix
         assertParseFailure(parser, VALID_STUDENT_NAME_BOB + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB
                         + PARENT_PHONE_DESC_BOB, expectedMessage);
-
-        // missing phone prefix
-        assertParseFailure(parser, STUDENT_NAME_DESC_BOB + VALID_STUDENT_PHONE_BOB + PARENT_NAME_DESC_BOB
-                        + PARENT_PHONE_DESC_BOB, expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + VALID_PARENT_NAME_BOB
-                        + PARENT_PHONE_DESC_BOB, expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB
-                        + VALID_PARENT_PHONE_BOB, expectedMessage);
-
-        // all prefixes missing
-        assertParseFailure(parser, VALID_STUDENT_NAME_BOB + VALID_STUDENT_PHONE_BOB + VALID_PARENT_NAME_BOB
-                        + VALID_PARENT_PHONE_BOB, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
+        // invalid student name
         assertParseFailure(parser, INVALID_STUDENT_NAME_DESC + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB
                 + PARENT_PHONE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
+        // invalid student phone
         assertParseFailure(parser, STUDENT_NAME_DESC_BOB + INVALID_STUDENT_PHONE_DESC + PARENT_NAME_DESC_BOB
                 + PARENT_PHONE_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
-        // invalid email
+        // invalid parent name
         assertParseFailure(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + INVALID_PARENT_NAME_DESC
-                + PARENT_PHONE_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
+                + PARENT_PHONE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid address
+        // invalid parent phone
         assertParseFailure(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB
-                + INVALID_PARENT_PHONE_DESC, Address.MESSAGE_CONSTRAINTS);
+                + INVALID_PARENT_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_STUDENT_NAME_DESC + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB
