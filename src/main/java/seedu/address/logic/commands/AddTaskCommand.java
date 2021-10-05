@@ -86,7 +86,7 @@ public class AddTaskCommand extends Command {
 
     /**
      * Generates a command execution success message based on the number
-     * of tasks given
+     * of tasks given and person name.
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {

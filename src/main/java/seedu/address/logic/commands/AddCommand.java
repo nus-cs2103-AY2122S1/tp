@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s with %2$d %3$s attached";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -55,7 +55,18 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(generateSuccessMessage(toAdd));
+    }
+
+    /**
+     * Generates a command execution success message based on person detail
+     * and the number of tasks given
+     * {@code personToEdit}.
+     */
+    private String generateSuccessMessage(Person personToAdd) {
+        int size = personToAdd.getTasks().size();
+        String taskOrTasks = size > 1 ? "tasks" : "task";
+        return String.format(MESSAGE_SUCCESS, personToAdd, size, taskOrTasks);
     }
 
     @Override
