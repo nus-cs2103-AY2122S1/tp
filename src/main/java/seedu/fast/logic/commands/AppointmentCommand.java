@@ -28,8 +28,8 @@ public class AppointmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-10";
 
-    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with Person: %1$s";
-    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with Person: %1$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s";
+    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s";
 
     private final Index index;
     private final Appointment appointment;
@@ -75,7 +75,7 @@ public class AppointmentCommand extends Command {
         String message = (personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT))
                 ? MESSAGE_ADD_APPOINTMENT_SUCCESS
                 : MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
-        return String.format(message, editedPerson.getAppointment().getDate());
+        return String.format(message, editedPerson.getName().fullName, editedPerson.getAppointment().getDate());
     }
 
     @Override
