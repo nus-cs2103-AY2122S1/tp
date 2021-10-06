@@ -13,6 +13,17 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.fast.commons.core.LogsCenter;
+import seedu.fast.logic.commands.AddCommand;
+import seedu.fast.logic.commands.AppointmentCommand;
+import seedu.fast.logic.commands.ClearCommand;
+import seedu.fast.logic.commands.DeleteCommand;
+import seedu.fast.logic.commands.EditCommand;
+import seedu.fast.logic.commands.ExitCommand;
+import seedu.fast.logic.commands.FindCommand;
+import seedu.fast.logic.commands.ListCommand;
+import seedu.fast.logic.commands.HelpCommand;
+import seedu.fast.logic.commands.RemarkCommand;
+import seedu.fast.logic.commands.SortCommand;
 
 /**
  * Controller for a help page
@@ -21,11 +32,24 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t09-4.github.io/tp/";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Clear", "Delete", "Edit",
-            "Find", "List", "Help", "Others"};
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete", "Edit",
+            "Find", "List", "Help", "Remark", "Sort", "Others"};
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private static final String ADD_COMMAND_USAGE = AddCommand.MESSAGE_USAGE;
+    private static final String APPOINTMENT_COMMAND_USAGE = AppointmentCommand.MESSAGE_USAGE;
+    private static final String CLEAR_COMMAND_USAGE = ClearCommand.MESSAGE_USAGE;
+    private static final String DELETE_COMMAND_USAGE = DeleteCommand.MESSAGE_USAGE;
+    private static final String EDIT_COMMAND_USAGE = EditCommand.MESSAGE_USAGE;
+    private static final String EXIT_COMMAND_USAGE = ExitCommand.MESSAGE_USAGE;
+    private static final String FIND_COMMAND_USAGE = FindCommand.MESSAGE_USAGE;
+    private static final String LIST_COMMAND_USAGE = ListCommand.MESSAGE_USAGE;
+    private static final String HELP_COMMAND_USAGE = HelpCommand.MESSAGE_USAGE;
+    private static final String REMARK_COMMAND_USAGE = RemarkCommand.MESSAGE_USAGE;
+    private static final String SORT_COMMAND_USAGE = SortCommand.MESSAGE_USAGE;
+
 
     @FXML
     private Button copyButton;
@@ -48,13 +72,12 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
-        //commandInstruction.setText(COMMAND_LIST);
+        commandInstruction.setText("default");
 
         EventHandler<ActionEvent> event =
                 new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent e)
-                    {
-                        commandInstruction.setText(commandList.getValue() + " selected");
+                    public void handle(ActionEvent e) {
+                        commandInstruction.setText(commandInstructionMessage(commandList.getValue()));
                     }
                 };
         commandList.setOnAction(event);
@@ -69,21 +92,21 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
-     * @throws IllegalStateException
-     * <ul>
-     *     <li>
-     *         if this method is called on a thread other than the JavaFX Application Thread.
-     *     </li>
-     *     <li>
-     *         if this method is called during animation or layout processing.
-     *     </li>
-     *     <li>
-     *         if this method is called on the primary stage.
-     *     </li>
-     *     <li>
-     *         if {@code dialogStage} is already showing.
-     *     </li>
-     * </ul>
+     *
+     * @throws IllegalStateException <ul>
+     *                               <li>
+     *                               if this method is called on a thread other than the JavaFX Application Thread.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called during animation or layout processing.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called on the primary stage.
+     *                               </li>
+     *                               <li>
+     *                               if {@code dialogStage} is already showing.
+     *                               </li>
+     *                               </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");
@@ -121,5 +144,37 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Displays the command usage
+     */
+    public String commandInstructionMessage(String commandName) {
+        switch (commandName) {
+        case "Add":
+            return ADD_COMMAND_USAGE;
+        case "Appointment":
+            return APPOINTMENT_COMMAND_USAGE;
+        case "Clear":
+            return CLEAR_COMMAND_USAGE;
+        case "Delete":
+            return DELETE_COMMAND_USAGE;
+        case "Edit":
+            return EDIT_COMMAND_USAGE;
+        case "Exit":
+            return EXIT_COMMAND_USAGE;
+        case "Find":
+            return FIND_COMMAND_USAGE;
+        case "Help":
+            return HELP_COMMAND_USAGE;
+        case "List":
+            return LIST_COMMAND_USAGE;
+        case "Remark":
+            return REMARK_COMMAND_USAGE;
+        case "Sort":
+            return SORT_COMMAND_USAGE;
+        default:
+            return "test";
+        }
     }
 }
