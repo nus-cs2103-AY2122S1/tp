@@ -3,12 +3,13 @@ package seedu.unify.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
-import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.task.Person;
+
+import seedu.unify.commons.core.GuiSettings;
 
 /**
  * API of the Logic component

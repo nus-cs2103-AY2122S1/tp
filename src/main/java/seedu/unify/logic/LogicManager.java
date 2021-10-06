@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import seedu.unify.commons.core.GuiSettings;
-import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.commands.Command;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
@@ -16,6 +14,9 @@ import seedu.unify.model.Model;
 import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.task.Person;
 import seedu.unify.storage.Storage;
+
+import seedu.unify.commons.core.GuiSettings;
+import seedu.unify.commons.core.LogsCenter;
 
 /**
  * The main LogicManager of the app.

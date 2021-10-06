@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
 import seedu.unify.model.task.NameContainsKeywordsPredicate;
 import seedu.unify.model.task.Person;
 import seedu.unify.testutil.EditPersonDescriptorBuilder;
+
+import seedu.unify.commons.core.index.Index;
 
 /**
  * Contains helper methods for testing commands.

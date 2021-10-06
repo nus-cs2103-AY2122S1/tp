@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.unify.commons.exceptions.DataConversionException;
 import seedu.unify.model.ReadOnlyUserPrefs;
 import seedu.unify.model.UserPrefs;
+
+import seedu.unify.commons.exceptions.DataConversionException;
 
 /**
  * Represents a storage for {@link seedu.unify.model.UserPrefs}.

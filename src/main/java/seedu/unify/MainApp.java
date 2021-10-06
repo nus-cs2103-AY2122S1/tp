@@ -7,12 +7,6 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import seedu.unify.commons.core.Config;
-import seedu.unify.commons.core.LogsCenter;
-import seedu.unify.commons.core.Version;
-import seedu.unify.commons.exceptions.DataConversionException;
-import seedu.unify.commons.util.ConfigUtil;
-import seedu.unify.commons.util.StringUtil;
 import seedu.unify.logic.Logic;
 import seedu.unify.logic.LogicManager;
 import seedu.unify.model.AddressBook;
@@ -30,6 +24,13 @@ import seedu.unify.storage.StorageManager;
 import seedu.unify.storage.UserPrefsStorage;
 import seedu.unify.ui.Ui;
 import seedu.unify.ui.UiManager;
+
+import seedu.unify.commons.core.Config;
+import seedu.unify.commons.core.LogsCenter;
+import seedu.unify.commons.core.Version;
+import seedu.unify.commons.exceptions.DataConversionException;
+import seedu.unify.commons.util.ConfigUtil;
+import seedu.unify.commons.util.StringUtil;
 
 /**
  * Runs the application.

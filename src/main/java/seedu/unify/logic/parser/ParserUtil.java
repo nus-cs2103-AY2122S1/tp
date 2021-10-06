@@ -6,14 +6,15 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.unify.commons.core.index.Index;
-import seedu.unify.commons.util.StringUtil;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Address;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Phone;
+
+import seedu.unify.commons.core.index.Index;
+import seedu.unify.commons.util.StringUtil;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
