@@ -55,7 +55,7 @@ public abstract class PersonCard extends UiPart<Region> {
         dateOfBirth.setText("28/02/1999 (Age: 22)");
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        setRemark("Some random remark");
+        setRemark(person.getRemark().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

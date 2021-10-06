@@ -112,6 +112,20 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
+### Adding a remark to a patient's information : `remark`
+
+Adds a remark to an existing patient in the patient records.
+
+Format: `remark INDEX r/REMARK`
+
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Existing remark will be updated to the input remark.
+
+Examples:
+*  `remark 1 r/` Edit the remark of the 1st patient to be blank.
+*  `remark 2 r/Chronic diabetic, monthly insulin pick up` Edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
+
 ### Locating patients by name: `find`
 
 Finds patients whose names contain any of the given keywords
@@ -157,31 +171,36 @@ Examples:
 
 ---
 
-### Managing Tags `tag` [coming soon]
+### Managing Tags `tag`
 
 ### Add tags to a patient:
 
-Adds a tag to a patient’s risk profile
+Adds a new tag to a patient’s record.
 
-Format: `tag id/INDEX t/TAG c/COLOR`
+Format: `tag id/INDEX t/TAG`
 
-* Adds a colour coded tag to a patient
-
-
-Examples:
-`tag id/1 t/Covid c/green` tags patient with id 1 with a green Covid tag
-
-### Delete a patient's tags : `-d`
-
-Deletes a tag to a patient’s risk profile.
-
-Format: `tag -d id/1`
-
-* Deletes the tags of the patient with the specified `ID`.
+* Adds a `TAG` to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
+* The index must be a **positive integer** 1, 2, 3, ...
+* Tags must be alphanumeric. Whitespace and special characters are not allowed (eg. `t/covid!`, `t/covid 19` are invalid tags).
+* Adding a tag will not overwrite existing tags.
 
 
 Examples:
-`tag -d id/42` delete all tags from patient with id 42
+`tag id/1 t/Covid` tags patient with id 1 with a *Covid* tag.
+
+### Delete a patient's tags : `tag -d`
+
+Deletes a tag from a patient's record.
+
+Format: `tag -d id/INDEX t/TAG`
+
+* Deletes the `TAG` from the patient at the specified `INDEX`.
+* The `TAG` must match one of the patient's existing tags.
+* Deleting non-existing tags would not be allowed.
+
+
+Examples:
+`tag -d id/1 t/Covid` deletes the *Covid* tag from patient with id 1.
 
 ---
 
@@ -230,8 +249,9 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Remark** | `remark INDEX r/REMARK`<br> e.g.,`remark 2 r/Chronic diabetic, monthly insulin pick up`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add a Tag** | `tag id/INDEX t/TAG_NAME c/TAG_COLOR`<br> e.g, `tag id/1 t/Unvaccinated c/red`
-**Delete a Tag** | `tag -d id/INDEX [n/TAG_NAME_TO_DELETE]`<br> e.g, `tag -d id/1 t/Unvaccinated`
+**Add a Tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
+**Delete a Tag** | `tag -d id/INDEX t/TAG`<br> e.g, `tag -d id/1 t/Unvaccinated`
 **List** | `list`
 **Help** | `help`
