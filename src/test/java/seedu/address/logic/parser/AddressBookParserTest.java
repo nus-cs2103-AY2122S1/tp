@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,24 +49,36 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        List<String> aliasForDelete = CommandWord.getAliasList(CommandWord.DELETE);
+        for (String alias : aliasForDelete) {
+            DeleteCommand command = (DeleteCommand) parser.parseCommand(
+                    alias + " " + INDEX_FIRST_PERSON.getOneBased());
+            assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        }
+
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
+        List<String> aliasForEdit = CommandWord.getAliasList(CommandWord.EDIT);
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        for (String alias : aliasForEdit) {
+            EditCommand command = (EditCommand) parser.parseCommand(alias + " "
+                    + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+            assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        }
+
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD1) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD1 + " 3") instanceof ExitCommand);
+        List<String> aliasForExit = CommandWord.getAliasList(CommandWord.EXIT);
+        for (String alias : aliasForExit) {
+            assertTrue(parser.parseCommand(alias) instanceof ExitCommand);
+            assertTrue(parser.parseCommand(alias + " 3") instanceof ExitCommand);
+        }
+
     }
 
     @Test
@@ -78,8 +91,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD1) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD1 + " 3") instanceof HelpCommand);
+        List<String> aliasForHelp = CommandWord.getAliasList(CommandWord.HELP);
+        for (String alias : aliasForHelp) {
+            assertTrue(parser.parseCommand(alias) instanceof HelpCommand);
+            assertTrue(parser.parseCommand(alias + " 3") instanceof HelpCommand);
+        }
+
     }
 
     @Test
