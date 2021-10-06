@@ -191,6 +191,8 @@ Examples:
 * `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
 * `delete b/CS2103T` deletes all the contacts from CS2103T.
 
+Command aliases: `del` `rm`
+
 ***
 
 ### Delete all contacts: `clear` <a name="clear"></a>
@@ -268,7 +270,7 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 | find              | `find {NAME}`/`find {TAG}`                                                                                | `find Ben`/`find CS2103T` |
 | sort              | `sort -m`/`sort -a`                                                                                       | `sort -m`/`sort -a`       |
 | edit / update     | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
-| delete            | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`/`delete b/{TAG}`                                           | `delete 2`/`delete 2, 5`/`delete b/CS2103T`|
+| delete / del / rm   | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`/`delete b/{TAG}`                                           | `delete 2`/`delete 2, 5`/`delete b/CS2103T`|
 | clear             | `clear`                                                                                                   | `clear`                    |
 | remark            | `remark {INDEX} {DESCRIPTION}`                                                                            | `remark 2 absent`          |
 | tag               | `tag {INDEX} {TAG}`                                                                                       | `tag 2 overseas`           |
