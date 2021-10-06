@@ -3,20 +3,42 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t10-1.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "For more Information, please refer to the user guide: " + USERGUIDE_URL;
+
+    private static final String ADD_NEW_CONTACT_FEATURE_NAME = "Add a New Contact";
+    private static final String ADD_NEW_CONTACT_FEATURE_COMMAND = "add n/ te/ [p/] [e/] [a/<ADDRESS>] [t/]";
+    private static final String DELETE_CONTACT_FEATURE_NAME = "Delete a Contact";
+    private static final String DELETE_CONTACT_FEATURE_COMMAND = "delete <INDEX>";
+    private static final String EDIT_CONTACT_FEATURE_NAME = "Edit a Contact";
+    private static final String EDIT_CONTACT_FEATURE_COMMAND = "edit [n/] [p/] [e/] [a/<ADDRESS>] [t/]";
+    private static final String FIND_CONTACT_FEATURE_NAME_V1 = "Find a Contact (by Name)";
+    private static final String FIND_CONTACT_FEATURE_COMMAND_V1 = "find <STRING>";
+    private static final String FIND_CONTACT_FEATURE_NAME_V2 = "Find a Contact (by Tag)";
+    private static final String FIND_CONTACT_FEATURE_COMMAND_V2 = "find t/<TAG>";
+    private static final String SHOW_CONTACT_FEATURE_NAME_V1 = "Show Contact Details (by Name)";
+    private static final String SHOW_CONTACT_FEATURE_COMMAND_V1 = "show <NAME>";
+    private static final String SHOW_CONTACT_FEATURE_NAME_V2 = "Show Contact Details (by Index)";
+    private static final String SHOW_CONTACT_FEATURE_COMMAND_V2 = "show <INDEX>";
+    private static final String IMPORT_CONTACT_FEATURE_NAME = "Import Contacts from JSON file";
+    private static final String IMPORT_CONTACT_FEATURE_COMMAND = "import filename.JSON";
+    private static final String EXPORT_CONTACT_FEATURE_NAME = "Export Contacts to JSON file";
+    private static final String EXPORT_CONTACT_FEATURE_COMMAND = "export filename.JSON";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -64,6 +86,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        Scene scene = new Scene(setUpCommandDetails());
+        getRoot().setScene(scene);
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -98,5 +122,38 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Sets up a table view to display the commands in the
+     * help section.
+     *
+     * @return A VBox object with the table.
+     */
+    public VBox setUpCommandDetails() {
+        TableView<CommandDetails> tableView = new TableView<>();
+
+        TableColumn<CommandDetails, String> featureColumn = new TableColumn<>("Feature");
+        featureColumn.setCellValueFactory(new PropertyValueFactory<>("featureName"));
+
+        TableColumn<CommandDetails, String> commandStructureColumn = new TableColumn<>("Command(s)");
+        commandStructureColumn.setCellValueFactory(new PropertyValueFactory<>("commandStructure"));
+
+        tableView.getColumns().add(featureColumn);
+        tableView.getColumns().add(commandStructureColumn);
+
+        tableView.getItems().add(new CommandDetails(ADD_NEW_CONTACT_FEATURE_NAME, ADD_NEW_CONTACT_FEATURE_COMMAND));
+        tableView.getItems().add(new CommandDetails(DELETE_CONTACT_FEATURE_NAME, DELETE_CONTACT_FEATURE_COMMAND));
+        tableView.getItems().add(new CommandDetails(EDIT_CONTACT_FEATURE_NAME, EXPORT_CONTACT_FEATURE_COMMAND));
+        tableView.getItems().add(new CommandDetails(FIND_CONTACT_FEATURE_NAME_V1, FIND_CONTACT_FEATURE_COMMAND_V1));
+        tableView.getItems().add(new CommandDetails(FIND_CONTACT_FEATURE_NAME_V2, FIND_CONTACT_FEATURE_COMMAND_V2));
+        tableView.getItems().add(new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V1, SHOW_CONTACT_FEATURE_COMMAND_V1));
+        tableView.getItems().add(new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V2, SHOW_CONTACT_FEATURE_COMMAND_V2));
+        tableView.getItems().add(new CommandDetails(IMPORT_CONTACT_FEATURE_NAME, IMPORT_CONTACT_FEATURE_COMMAND));
+        tableView.getItems().add(new CommandDetails(EXPORT_CONTACT_FEATURE_NAME, EXPORT_CONTACT_FEATURE_COMMAND));
+
+        VBox vbox = new VBox(tableView);
+
+        return vbox;
     }
 }
