@@ -437,7 +437,7 @@ Preconditions: The student's details have been previously added to TutorAid.
 
 * 1b. The list is empty. Use case ends.
 
-* 4a. Invalid add/delete progress syntax
+* 4a. Invalid progress commands syntax
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
 
@@ -518,7 +518,7 @@ Precondition: The student's details have been added to TutorAid.
 
 1. Tutor views his schedule
 2. TutorAid displays the schedule
-3. Tutor identifies the session to add a todo list
+3. Tutor identifies the session to add a todo list for
 4. Tutor adds a todo task to that session
 5. TutorAid registers the task to the session
 6. Tutor repeats from step 4 until he/she finishes adding all the tasks
@@ -586,8 +586,8 @@ Precondition: The student's details have been added to TutorAid.
 
 1. Tutor views his schedule
 2. TutorAid displays the schedule
-3. Tutor identifies the session to check for students
-4. Tutor views the list of students in that session
+3. Tutor identifies the session for which he/she wants to check the list of students for
+4. Tutor requests the list of students for that session
 5. TutorAid displays the list of students in the session
 
    Use case ends.
