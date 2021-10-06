@@ -7,8 +7,6 @@ import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s field matches any of the keywords given.
- *
- * @author zhenghanlee
  */
 public class ContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;

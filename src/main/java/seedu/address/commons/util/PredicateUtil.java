@@ -5,8 +5,6 @@ import java.util.stream.Stream;
 
 /**
  * Utility class for predicate related operations.
- *
- * @author zhenghanlee
  */
 public class PredicateUtil {
 
