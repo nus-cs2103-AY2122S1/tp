@@ -17,22 +17,18 @@ public class Student {
 
     // Identity fields
     private final Name name;
-//    private final Phone phone;
-//    private final Email email;
+    private final ID id;
 
     // Data fields
-//    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Student(Name name, ID id, Set<Tag> tags) {
+        requireAllNonNull(name, id, tags);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.id = id;
         this.tags.addAll(tags);
     }
 
@@ -40,17 +36,9 @@ public class Student {
         return name;
     }
 
-//    public Phone getPhone() {
-//        return phone;
-//    }
-//
-//    public Email getEmail() {
-//        return email;
-//    }
-//
-//    public Address getAddress() {
-//        return address;
-//    }
+    public ID getId() {
+        return id;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -70,7 +58,8 @@ public class Student {
         }
 
         return otherStudent != null
-                && otherStudent.getName().equals(getName());
+                && otherStudent.getName().equals(getName())
+                && otherStudent.getId().equals(getId());
     }
 
     /**
@@ -89,28 +78,22 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
-//                && otherStudent.getPhone().equals(getPhone())
-//                && otherStudent.getEmail().equals(getEmail())
-//                && otherStudent.getAddress().equals(getAddress())
+                && otherStudent.getId().equals(getId())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, id, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; NUSNET ID: ")
+                .append(getId());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
