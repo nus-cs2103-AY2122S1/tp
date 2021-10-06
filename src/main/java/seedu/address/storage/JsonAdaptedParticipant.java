@@ -61,7 +61,10 @@ public class JsonAdaptedParticipant {
         if (nextOfKins != null) {
             this.nextOfKins.addAll(nextOfKins);
         }
-        // TODO: Notes to be implemented
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**

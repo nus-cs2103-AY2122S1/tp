@@ -11,12 +11,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventName;
 import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Email;
 import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
+import seedu.address.model.participant.ParticipantId;
 import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -211,6 +213,30 @@ public class ParserUtil {
         default:
             throw new ParseException(MESSAGE_INVALID_IMPORTANCE + " " + importance);
         }
+    }
+
+    /**
+     *  Parses {@code String id} into a {@code ParticipantId object}.
+     */
+    public static ParticipantId parseParticipantId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!ParticipantId.isValidId(trimmedId)) {
+            throw new ParseException(ParticipantId.MESSAGE_CONSTRAINTS);
+        }
+        return new ParticipantId(id);
+    }
+
+    /**
+     *  Parses {@code String name} into a {@code EventName event name}.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(name)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(name);
     }
 
 
