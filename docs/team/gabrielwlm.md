@@ -11,6 +11,9 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/)
 
+* **Refactoring**:
+    * Refactored Person to Student [\#93]()
+
 * **Documentation**:
     * Edited various documents to repurpose AddressBook into ClassMATE [\#78]()
     * User Guide:
