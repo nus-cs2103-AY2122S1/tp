@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.person.Visit.MESSAGE_CONSTRAINTS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -137,11 +138,12 @@ public class ParserUtil {
     public static Visit parseVisit(String visit) throws ParseException {
         String formattedVisit;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         try {
-            LocalDate date = LocalDate.parse(visit, formatter);
+            LocalDate date = LocalDate.parse(visit.trim(), formatter);
             formattedVisit = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(date);
         } catch (DateTimeParseException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VisitCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_CONSTRAINTS, VisitCommand.MESSAGE_USAGE), ive);
         }
         return new Visit(formattedVisit);
     }
