@@ -42,3 +42,38 @@
     font-family: "Open Sans SemiBold Italic";
     src: url("/fonts/open-sans/OpenSans-SemiBoldItalic.ttf");
 }
+
+@font-face {
+    font-family: "RNS Sanz Black";
+    src: url("/fonts.rns-sanz/RNSSanz-Black.ttf");
+}
+
+@font-face {
+    font-family: "RNS Sanz Bold";
+    src: url("/fonts.rns-sanz/RNSSanz-Bold.ttf");
+}
+
+@font-face {
+    font-family: "RNS Sanz Extra Bold";
+    src: url("/fonts.rns-sanz/RNSSanz-ExtraBold.ttf");
+}
+
+@font-face {
+    font-family: "RNS Sanz Light";
+    src: url("/fonts.rns-sanz/RNSSanz-Light.ttf");
+}
+
+@font-face {
+    font-family: "RNS Sanz Medium";
+    src: url("/fonts.rns-sanz/RNSSanz-Medium.ttf");
+}
+
+@font-face {
+    font-family: "RNS Sanz Normal";
+    src: url("/fonts.rns-sanz/RNSSanz-Normal.ttf");
+}
+
+@font-face {
+    font-family: "RNS Sanz SemiBold";
+    src: url("/fonts.rns-sanz/RNSSanz-SemiBold.ttf");
+}
