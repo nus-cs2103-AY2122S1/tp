@@ -30,7 +30,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
-    // TODO: Add Lesson message usage once Eliana's part has been merged.
     private static final String QUICK_START_INSTRUCTIONS = "💡 Quick Tips:\n"
             + AddCommand.USER_TIP + "\n\n"
             + DeleteCommand.USER_TIP + "\n\n"
