@@ -10,14 +10,18 @@ import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteProductCommand;
 import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditProductCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListClientCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListProductCommand;
 import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -77,6 +81,18 @@ public class AddressBookParser {
         case AddClientCommand.COMMAND_WORD:
             return new AddClientCommandParser().parse(arguments);
 
+        case DeleteClientCommand.COMMAND_WORD:
+            return new DeleteClientCommandParser().parse(arguments);
+
+        case DeleteProductCommand.COMMAND_WORD:
+            return new DeleteProductCommandParser().parse(arguments);
+
+        case ListClientCommand.COMMAND_WORD:
+            return new ListClientCommand();
+
+        case ListProductCommand.COMMAND_WORD:
+            return new ListProductCommand();
+
         // todo remove later
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -106,5 +122,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
