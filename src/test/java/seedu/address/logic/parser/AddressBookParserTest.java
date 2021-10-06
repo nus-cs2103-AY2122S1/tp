@@ -13,16 +13,25 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddMemberCommand;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddFacilityCommand;
+import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindFacilityCommand;
+import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.LocationContainsKeywordsPredicate;
+import seedu.address.model.facility.Time;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -36,14 +45,26 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddMemberCommand command = (AddMemberCommand) parser.parseCommand(PersonUtil.getAddMemberCommand(person));
-        assertEquals(new AddMemberCommand(person), command);
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addFacility() throws ParseException {
+        FacilityName name = new FacilityName("Court 1");
+        Location location = new Location("University Sports Hall");
+        Time time = new Time("11:30");
+        Capacity capacity = new Capacity("5");
+        Facility facility = new Facility(name, location, time, capacity);
+        AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
+                + "n/Court 1 l/University Sports Hall t/11:30 c/5");
+        assertEquals(new AddFacilityCommand(facility), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD) instanceof ClearMembersCommand);
+        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3") instanceof ClearMembersCommand);
     }
 
     @Test
@@ -71,9 +92,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
+                FindMemberCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindMemberCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findFacility() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindFacilityCommand command = (FindFacilityCommand) parser.parseCommand(
+                FindFacilityCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindFacilityCommand(new LocationContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -86,6 +116,13 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_listf() throws Exception {
+        assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD) instanceof ListFacilityCommand);
+        assertTrue(parser.parseCommand(
+                ListFacilityCommand.COMMAND_WORD + " 3") instanceof ListFacilityCommand);
     }
 
     @Test
