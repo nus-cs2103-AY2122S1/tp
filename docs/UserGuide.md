@@ -16,7 +16,7 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
    * Sort contacts: [sort](#sort)
 
-   * Update contact: [update / edit](#edit)
+   * Edit contact: [edit / update](#edit)
 
    * Delete contact individually / in batches: [delete](#delete)
 
@@ -28,7 +28,7 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
    * Add contact to favourite: [fav](#fav)
 
-   * Exiting the app: [quit / exit](#exit)
+   * Exiting the app: [exit / quit](#exit)
 
 * [Saving the data](#saving-data)
 
@@ -60,7 +60,7 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
    * **`clear`** : Deletes all contacts.
 
-   * **`exit`/`quit`** : Exits the app.
+   * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -91,11 +91,13 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
 ***
 
-### Viewing help : `help` / `man` <a name="help"></a>
+### Viewing help : `help` <a name="help"></a>
 
 Shows a message explaning how to access the help page.
 
-Format: `help`/`man`
+Format: `help`
+
+Command aliases: `man`
 
 ***
 
@@ -111,11 +113,13 @@ Examples:
 
 ***
 
-### Listing all persons : `list`/`ls` <a name="list"></a>
+### Listing all persons : `list` <a name="list"></a>
 
 Shows a list of all persons in the address book.
 
-Format: `list`/`ls`
+Format: `list`
+
+Command aliases: `ls`
 
 ***
 
@@ -148,7 +152,7 @@ Examples:
 
 ***
 
-### Edit contact: `update` / `edit` <a name="edit"></a>
+### Edit contact: `edit` <a name="edit"></a>
 
 Updates the information of a contact.
 
@@ -160,12 +164,14 @@ Edits the person at the specified index.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
-Format: `update {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]` / <br> `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]`
+Format: `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]`
 
 Examples:
-* `update 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively.
+* `edit 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively.
 * `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe` and clears all existing tags.
-* `update 3 h/@BenWasHere t/Overseas` Edits the telegram handle of the 3rd person to be `@BenWasHere` and adds an `Overseas` tag.
+* `edit 3 h/@BenWasHere t/Overseas` Edits the telegram handle of the 3rd person to be `@BenWasHere` and adds an `Overseas` tag.
+
+Command aliases: `update`
 
 ***
 
@@ -184,6 +190,8 @@ Examples:
 * `delete 2` deletes the 2nd contact.
 * `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
 * `delete b/CS2103T` deletes all the contacts from CS2103T.
+
+Command aliases: `del` `rm`
 
 ***
 
@@ -229,11 +237,13 @@ Examples:
 
 ***
 
-### Exiting the program : `exit`/`quit` <a name="exit"></a>
+### Exiting the program : `exit` <a name="exit"></a>
 
 Exits the program.
 
-Format: `exit`/`quit`
+Format: `exit`
+
+Command aliases: `quit`
 
 ***
 
@@ -252,17 +262,17 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 
 ## Command Summary <a name="summary"></a>
 
-| Command       | Format                                                                                               | Example                                  |
-|---------------|------------------------------------------------------------------------------------------------------| -----------------------------------------|
-| help / man    | `help`/`man`                                                                                         | `help`/`man`                             |
-| add           | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                 | `add n/Ben Davies e/ben123@gmail.com                                                                                                                                 m/CS2103T`                              |
-| list / ls     | `list`/`ls`                                                                                          | `list`/`ls`                              |
-| find          | `find {NAME}`/`find {TAG}`                                                                           | `find Ben`/`find CS2103T`                |
-| sort          | `sort -m`/`sort -a`                                                                                  | `sort -m`/`sort -a`                      |
-| edit / update | `update {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`| `update 1 p/91234567 e/ben321@gmail.com` |
-| delete        | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`/`delete b/{TAG}`                                      | `delete 2`/`delete 2, 5`/`delete                                                                                                                                     b/CS2103T`                              |
-| clear         | `clear`                                                                                              | `clear`                                  |
-| remark        | `remark {INDEX} {DESCRIPTION}`                                                                       | `remark 2 absent`                        |
-| tag           | `tag {INDEX} {TAG}`                                                                                  | `tag 2 overseas`                         |
-| fav           | `fav {INDEX}`                                                                                        | `fav 2`                                  |
-| exit / quit   | `exit`/`quit`                                                                                        | `exit`/`quit`                            |
+| Command           | Format                                                                                                    | Example                   |
+|-------------------|-----------------------------------------------------------------------------------------------------------| --------------------------|
+| help / man        | `help`                                                                                                    | `help`                    |
+| add               | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                      | `add n/Ben Davies e/ben123@gmail.com m/cs2103t`|
+| list / ls         | `list`                                                                                                    | `list`                    |
+| find              | `find {NAME}`/`find {TAG}`                                                                                | `find Ben`/`find CS2103T` |
+| sort              | `sort -m`/`sort -a`                                                                                       | `sort -m`/`sort -a`       |
+| edit / update     | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
+| delete / del / rm   | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`/`delete b/{TAG}`                                           | `delete 2`/`delete 2, 5`/`delete b/CS2103T`|
+| clear             | `clear`                                                                                                   | `clear`                    |
+| remark            | `remark {INDEX} {DESCRIPTION}`                                                                            | `remark 2 absent`          |
+| tag               | `tag {INDEX} {TAG}`                                                                                       | `tag 2 overseas`           |
+| fav               | `fav {INDEX}`                                                                                             | `fav 2`                    |
+| exit / quit       | `exit`                                                                                                    | `exit`                     |
