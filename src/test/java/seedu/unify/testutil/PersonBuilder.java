@@ -3,11 +3,11 @@ package seedu.unify.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.unify.model.person.Address;
-import seedu.unify.model.person.Email;
-import seedu.unify.model.person.Name;
-import seedu.unify.model.person.Person;
-import seedu.unify.model.person.Phone;
+import seedu.unify.model.task.Address;
+import seedu.unify.model.task.Email;
+import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Person;
+import seedu.unify.model.task.Phone;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.util.SampleDataUtil;
 

@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 import seedu.unify.model.tag.Tag;
 
 /**
@@ -19,14 +19,14 @@ import seedu.unify.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code task}.
      */
     public static String getAddCommand(Person person) {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code task}'s details.
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();

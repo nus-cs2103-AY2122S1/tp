@@ -8,17 +8,17 @@ import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a task identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the task identified by the index number used in the displayed task list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

@@ -1,4 +1,4 @@
-package seedu.unify.model.person;
+package seedu.unify.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -65,7 +65,7 @@ public class PersonTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different task -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false

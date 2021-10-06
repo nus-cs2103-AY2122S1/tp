@@ -16,7 +16,7 @@ import seedu.unify.commons.core.index.Index;
 import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
 import seedu.unify.model.UserPrefs;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -94,7 +94,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different task -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 

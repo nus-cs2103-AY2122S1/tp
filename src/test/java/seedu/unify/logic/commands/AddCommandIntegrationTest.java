@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
 import seedu.unify.model.UserPrefs;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 import seedu.unify.testutil.PersonBuilder;
 
 /**

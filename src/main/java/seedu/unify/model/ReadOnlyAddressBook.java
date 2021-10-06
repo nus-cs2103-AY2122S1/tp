@@ -1,7 +1,7 @@
 package seedu.unify.model;
 
 import javafx.collections.ObservableList;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 
 /**
  * Unmodifiable view of an address book

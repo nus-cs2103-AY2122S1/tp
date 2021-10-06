@@ -8,7 +8,7 @@ import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.ReadOnlyAddressBook;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 
 /**
  * API of the Logic component

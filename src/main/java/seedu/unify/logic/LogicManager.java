@@ -14,7 +14,7 @@ import seedu.unify.logic.parser.AddressBookParser;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.Model;
 import seedu.unify.model.ReadOnlyAddressBook;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 import seedu.unify.storage.Storage;
 
 /**
