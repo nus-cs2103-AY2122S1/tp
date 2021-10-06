@@ -35,7 +35,7 @@ public class Lesson {
     private final DayOfWeek day;
     private final LocalTime startTime;
     private final double price;
-    private final Set<Person> students; // todo consider linking students to classes
+    private Set<Person> students = null; // todo consider linking students to classes
 
     /**
      * Constructs a {@code Lesson}.
@@ -87,6 +87,16 @@ public class Lesson {
      */
     public Set<Person> getStudents() {
         return Collections.unmodifiableSet(students);
+    }
+
+    public void addStudent(Person person) {
+        requireAllNonNull(person);
+        this.students.add(person);
+    }
+
+    public void removeStudent(Person person) {
+        requireAllNonNull(person);
+        this.students.remove(person);
     }
 
     /**
