@@ -108,4 +108,10 @@ public interface Model {
      * Returns list of lessons.
      */
     ArrayList<Lesson> getLessonList();
+
+    /**
+     * Returns lesson corrosponding to String lessoncode, else null if lesson does not exist.
+     */
+    Lesson searchLessons(String lessonCode);
 }
+
