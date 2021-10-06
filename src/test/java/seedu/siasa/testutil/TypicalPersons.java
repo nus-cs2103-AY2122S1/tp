@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.siasa.model.AddressBook;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.person.Person;
 
 /**
@@ -62,8 +62,8 @@ public class TypicalPersons {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Siasa getTypicalAddressBook() {
+        Siasa ab = new Siasa();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

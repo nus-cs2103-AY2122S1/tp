@@ -1,6 +1,6 @@
 package seedu.siasa.testutil;
 
-import seedu.siasa.model.AddressBook;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.person.Person;
 
 /**
@@ -10,25 +10,25 @@ import seedu.siasa.model.person.Person;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private Siasa siasa;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        siasa = new Siasa();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(Siasa siasa) {
+        this.siasa = siasa;
     }
 
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+        siasa.addPerson(person);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public Siasa build() {
+        return siasa;
     }
 }

@@ -6,7 +6,7 @@ import seedu.siasa.model.person.Person;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlySiasa {
 
     /**
      * Returns an unmodifiable view of the persons list.

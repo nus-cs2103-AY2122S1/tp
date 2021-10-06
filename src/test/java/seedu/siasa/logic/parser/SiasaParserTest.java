@@ -29,7 +29,7 @@ import seedu.siasa.testutil.EditPersonDescriptorBuilder;
 import seedu.siasa.testutil.PersonBuilder;
 import seedu.siasa.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class SiasaParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 

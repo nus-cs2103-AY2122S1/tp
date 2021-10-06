@@ -12,7 +12,7 @@ import seedu.siasa.commons.exceptions.DataConversionException;
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.commons.util.FileUtil;
 import seedu.siasa.commons.util.JsonUtil;
-import seedu.siasa.model.ReadOnlyAddressBook;
+import seedu.siasa.model.ReadOnlySiasa;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -32,7 +32,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException {
+    public Optional<ReadOnlySiasa> readAddressBook() throws DataConversionException {
         return readAddressBook(filePath);
     }
 
@@ -42,7 +42,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlySiasa> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
@@ -60,16 +60,16 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlySiasa addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveAddressBook(ReadOnlySiasa)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlySiasa addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 

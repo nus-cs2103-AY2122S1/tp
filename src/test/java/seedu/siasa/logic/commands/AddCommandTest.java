@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.logic.commands.exceptions.CommandException;
-import seedu.siasa.model.AddressBook;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.Model;
-import seedu.siasa.model.ReadOnlyAddressBook;
+import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.ReadOnlyUserPrefs;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.testutil.PersonBuilder;
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlySiasa newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlySiasa getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,8 +186,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlySiasa getAddressBook() {
+            return new Siasa();
         }
     }
 

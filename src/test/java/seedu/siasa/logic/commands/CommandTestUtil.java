@@ -15,7 +15,7 @@ import java.util.List;
 
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.exceptions.CommandException;
-import seedu.siasa.model.AddressBook;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.NameContainsKeywordsPredicate;
 import seedu.siasa.model.person.Person;
@@ -104,11 +104,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        Siasa expectedSiasa = new Siasa(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedSiasa, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**

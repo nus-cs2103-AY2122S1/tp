@@ -24,7 +24,7 @@ import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
-import seedu.siasa.model.ReadOnlyAddressBook;
+import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.storage.JsonAddressBookStorage;
@@ -155,7 +155,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveAddressBook(ReadOnlySiasa addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

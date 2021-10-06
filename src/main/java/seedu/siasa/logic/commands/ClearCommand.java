@@ -2,7 +2,7 @@ package seedu.siasa.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.siasa.model.AddressBook;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.Model;
 
 /**
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setAddressBook(new Siasa());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

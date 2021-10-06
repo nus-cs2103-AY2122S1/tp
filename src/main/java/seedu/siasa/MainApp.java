@@ -15,10 +15,10 @@ import seedu.siasa.commons.util.ConfigUtil;
 import seedu.siasa.commons.util.StringUtil;
 import seedu.siasa.logic.Logic;
 import seedu.siasa.logic.LogicManager;
-import seedu.siasa.model.AddressBook;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
-import seedu.siasa.model.ReadOnlyAddressBook;
+import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.ReadOnlyUserPrefs;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.util.SampleDataUtil;
@@ -74,8 +74,8 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlySiasa> addressBookOptional;
+        ReadOnlySiasa initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -84,10 +84,10 @@ public class MainApp extends Application {
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new Siasa();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialData = new Siasa();
         }
 
         return new ModelManager(initialData, userPrefs);

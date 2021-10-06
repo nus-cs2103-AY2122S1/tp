@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.siasa.commons.exceptions.DataConversionException;
-import seedu.siasa.model.ReadOnlyAddressBook;
+import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.ReadOnlyUserPrefs;
 import seedu.siasa.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Path getAddressBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlySiasa> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAddressBook(ReadOnlySiasa addressBook) throws IOException;
 
 }

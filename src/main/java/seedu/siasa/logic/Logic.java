@@ -7,7 +7,7 @@ import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
-import seedu.siasa.model.ReadOnlyAddressBook;
+import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.person.Person;
 
 /**
@@ -28,7 +28,7 @@ public interface Logic {
      *
      * @see seedu.siasa.model.Model#getAddressBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlySiasa getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

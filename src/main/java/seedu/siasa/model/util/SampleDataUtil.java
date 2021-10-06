@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.siasa.model.AddressBook;
-import seedu.siasa.model.ReadOnlyAddressBook;
+import seedu.siasa.model.Siasa;
+import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.person.Address;
 import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Name;
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlySiasa getSampleAddressBook() {
+        Siasa sampleAb = new Siasa();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
