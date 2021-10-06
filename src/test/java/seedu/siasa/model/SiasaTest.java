@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.siasa.testutil.Assert.assertThrows;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
-import static seedu.siasa.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
+import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,7 +24,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.exceptions.DuplicatePersonException;
+import seedu.siasa.model.policy.Policy;
+import seedu.siasa.model.policy.exceptions.DuplicatePolicyException;
 import seedu.siasa.testutil.PersonBuilder;
+import seedu.siasa.testutil.PolicyBuilder;
 
 public class SiasaTest {
 
@@ -37,8 +44,8 @@ public class SiasaTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        Siasa newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlySiasa_replacesData() {
+        Siasa newData = getTypicalSiasa();
         siasa.resetData(newData);
         assertEquals(newData, siasa);
     }
@@ -49,7 +56,7 @@ public class SiasaTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        SiasaStub newData = new SiasaStub(newPersons);
 
         assertThrows(DuplicatePersonException.class, () -> siasa.resetData(newData));
     }
@@ -60,18 +67,18 @@ public class SiasaTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInSiasa_returnsFalse() {
         assertFalse(siasa.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInSiasa_returnsTrue() {
         siasa.addPerson(ALICE);
         assertTrue(siasa.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInSiasa_returnsTrue() {
         siasa.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -83,19 +90,72 @@ public class SiasaTest {
         assertThrows(UnsupportedOperationException.class, () -> siasa.getPersonList().remove(0));
     }
 
-    /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
-     */
-    private static class AddressBookStub implements ReadOnlySiasa {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+    @Test
+    public void resetData_withDuplicatePolicy_throwsDuplicatePolicyException() {
+        // Two policies with the same identity fields (name and owner)
+        Policy editedLifePlan = new PolicyBuilder(FULL_LIFE)
+                .withPrice(VALID_POLICY_PRICE_CRITICAL)
+                .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
+                .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
+                .build();
+        List<Policy> policies = Arrays.asList(FULL_LIFE, editedLifePlan);
+        List<Person> persons = Arrays.asList(FULL_LIFE.getOwner());
+        SiasaStub newData = new SiasaStub(persons, policies);
 
-        AddressBookStub(Collection<Person> persons) {
+        assertThrows(DuplicatePolicyException.class, () -> siasa.resetData(newData));
+    }
+
+    @Test
+    public void hasPolicy_nullPolicy_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> siasa.hasPolicy(null));
+    }
+
+    @Test
+    public void hasPolicy_policyNotInSiasa_returnsFalse() {
+        assertFalse(siasa.hasPolicy(FULL_LIFE));
+    }
+
+    @Test
+    public void hasPolicy_policyInSiasa_returnsTrue() {
+        siasa.addPolicy(FULL_LIFE);
+        assertTrue(siasa.hasPolicy(FULL_LIFE));
+    }
+
+    @Test
+    public void hasPolicy_policyWithSameIdentityFieldsInSiasa_returnsTrue() {
+        siasa.addPolicy(FULL_LIFE);
+        Policy editedFullLife = new PolicyBuilder(FULL_LIFE)
+                .withPrice(VALID_POLICY_PRICE_CRITICAL)
+                .withCommission(VALID_POLICY_COMMISSION_CRITICAL)
+                .withExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL)
+                .build();
+        assertTrue(siasa.hasPolicy(editedFullLife));
+    }
+
+    /**
+     * A stub ReadOnlySiasa whose persons list can violate interface constraints.
+     */
+    private static class SiasaStub implements ReadOnlySiasa {
+        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Policy> policies = FXCollections.observableArrayList();
+
+        SiasaStub(Collection<Person> persons, Collection<Policy> policies) {
+            this.policies.setAll(policies);
+            this.persons.setAll(persons);
+        }
+
+        SiasaStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Policy> getPolicyList() {
+            return policies;
         }
     }
 

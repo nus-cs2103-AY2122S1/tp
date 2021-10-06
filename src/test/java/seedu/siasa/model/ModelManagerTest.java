@@ -3,10 +3,10 @@ package seedu.siasa.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.siasa.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.siasa.testutil.Assert.assertThrows;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
-import static seedu.siasa.testutil.TypicalPersons.BENSON;
+import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
+import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.model.person.NameContainsKeywordsPredicate;
-import seedu.siasa.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
@@ -26,7 +25,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new Siasa(), new Siasa(modelManager.getAddressBook()));
+        assertEquals(new Siasa(), new Siasa(modelManager.getSiasa()));
     }
 
     @Test
@@ -37,14 +36,16 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        //TODO: Change the path
+        userPrefs.setSiasaFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        //TODO: Change the path
+        userPrefs.setSiasaFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,15 +62,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setSiasaFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setSiasaFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setSiasaFilePath_validPath_setsSiasaFilePath() {
+        //TODO: Change the path
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setSiasaFilePath(path);
+        assertEquals(path, modelManager.getSiasaFilePath());
     }
 
     @Test
@@ -78,12 +80,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInSiasa_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInSiasa_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -94,8 +96,29 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasPolicy_nullPolicy_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasPolicy(null));
+    }
+
+    @Test
+    public void hasPolicy_policyNotInSiasa_returnsFalse() {
+        assertFalse(modelManager.hasPolicy(FULL_LIFE));
+    }
+
+    @Test
+    public void hasPolicy_policyInSiasa_returnsTrue() {
+        modelManager.addPolicy(FULL_LIFE);
+        assertTrue(modelManager.hasPolicy(FULL_LIFE));
+    }
+
+    @Test
+    public void getFilteredPolicyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPolicyList().remove(0));
+    }
+
+    @Test
     public void equals() {
-        Siasa siasa = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Siasa siasa = getTypicalSiasa();
         Siasa differentSiasa = new Siasa();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -113,20 +136,24 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different siasa -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentSiasa, userPrefs)));
 
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        // different filteredPersonList -> returns false
+        String[] personKeywords = ALICE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(personKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(siasa, userPrefs)));
+
+        // different filteredPolicyList -> returns false
+        modelManager.updateFilteredPolicyList(p -> p.equals(FULL_LIFE));
         assertFalse(modelManager.equals(new ModelManager(siasa, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.removeAllFilters();
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setSiasaFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(siasa, differentUserPrefs)));
     }
 }

@@ -2,7 +2,7 @@ package seedu.siasa.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.siasa.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.nio.file.Path;
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        Siasa original = getTypicalAddressBook();
+        Siasa original = getTypicalSiasa();
         storageManager.saveAddressBook(original);
         ReadOnlySiasa retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new Siasa(retrieved));

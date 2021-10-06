@@ -21,6 +21,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.ReadOnlyUserPrefs;
 import seedu.siasa.model.person.Person;
+import seedu.siasa.model.policy.Policy;
 import seedu.siasa.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -99,12 +100,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getSiasaFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setSiasaFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +115,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlySiasa newData) {
+        public void setSiasa(ReadOnlySiasa newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlySiasa getAddressBook() {
+        public ReadOnlySiasa getSiasa() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,6 +146,36 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPolicy(Policy policy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePolicy(Policy target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPolicy(Policy policy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPolicy(Policy target, Policy editedPolicy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Policy> getFilteredPolicyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPolicyList(Predicate<Policy> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -186,7 +217,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlySiasa getAddressBook() {
+        public ReadOnlySiasa getSiasa() {
             return new Siasa();
         }
     }

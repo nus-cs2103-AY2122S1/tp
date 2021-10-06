@@ -6,7 +6,7 @@ import static seedu.siasa.testutil.Assert.assertThrows;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
 import static seedu.siasa.testutil.TypicalPersons.HOON;
 import static seedu.siasa.testutil.TypicalPersons.IDA;
-import static seedu.siasa.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,7 +63,7 @@ public class JsonSiasaStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        Siasa original = getTypicalAddressBook();
+        Siasa original = getTypicalSiasa();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
@@ -73,7 +73,7 @@ public class JsonSiasaStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.removePersonAndAssociatedPolicies(ALICE);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new Siasa(readBack));

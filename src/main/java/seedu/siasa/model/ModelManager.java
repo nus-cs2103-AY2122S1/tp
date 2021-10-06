@@ -12,9 +12,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.commons.core.LogsCenter;
 import seedu.siasa.model.person.Person;
+import seedu.siasa.model.policy.Policy;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the SIASA data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -22,19 +23,21 @@ public class ModelManager implements Model {
     private final Siasa siasa;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Policy> filteredPolicies;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given SIASA and userPrefs.
      */
-    public ModelManager(ReadOnlySiasa addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlySiasa siasa, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(siasa, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with SIASA: " + siasa + " and user prefs " + userPrefs);
 
-        this.siasa = new Siasa(addressBook);
+        this.siasa = new Siasa(siasa);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.siasa.getPersonList());
+        filteredPolicies = new FilteredList<>(this.siasa.getPolicyList());
     }
 
     public ModelManager() {
@@ -66,27 +69,29 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getSiasaFilePath() {
+        return userPrefs.getSiasaFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setSiasaFilePath(Path siasaFilePathPath) {
+        requireNonNull(siasaFilePathPath);
+        userPrefs.setSiasaFilePath(siasaFilePathPath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Siasa ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlySiasa addressBook) {
-        this.siasa.resetData(addressBook);
+    public void setSiasa(ReadOnlySiasa siasa) {
+        this.siasa.resetData(siasa);
     }
 
     @Override
-    public ReadOnlySiasa getAddressBook() {
+    public ReadOnlySiasa getSiasa() {
         return siasa;
     }
+
+    //=========== Person CRUD ================================================================================
 
     @Override
     public boolean hasPerson(Person person) {
@@ -96,13 +101,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        siasa.removePerson(target);
+        siasa.removePersonAndAssociatedPolicies(target);
     }
 
     @Override
     public void addPerson(Person person) {
         siasa.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        removeAllFilters();
     }
 
     @Override
@@ -112,11 +117,37 @@ public class ModelManager implements Model {
         siasa.setPerson(target, editedPerson);
     }
 
+    //=========== Policy CRUD ================================================================================
+
+    @Override
+    public boolean hasPolicy(Policy person) {
+        requireNonNull(person);
+        return siasa.hasPolicy(person);
+    }
+
+    @Override
+    public void deletePolicy(Policy target) {
+        siasa.removePolicy(target);
+    }
+
+    @Override
+    public void addPolicy(Policy person) {
+        siasa.addPolicy(person);
+        removeAllFilters();
+    }
+
+    @Override
+    public void setPolicy(Policy target, Policy editedPolicy) {
+        requireAllNonNull(target, editedPolicy);
+
+        siasa.setPolicy(target, editedPolicy);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedSiasa}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -129,6 +160,27 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Policy List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Policy} backed by the internal list of
+     * {@code versionedSiasa}
+     */
+    @Override
+    public ObservableList<Policy> getFilteredPolicyList() {
+        return filteredPolicies;
+    }
+
+    @Override
+    public void updateFilteredPolicyList(Predicate<Policy> predicate) {
+        requireNonNull(predicate);
+        filteredPolicies.setPredicate(predicate);
+    }
+
+    public void removeAllFilters() {
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);
+    }
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -145,7 +197,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return siasa.equals(other.siasa)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredPolicies.equals(other.filteredPolicies);
     }
 
 }

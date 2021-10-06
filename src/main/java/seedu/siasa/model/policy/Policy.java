@@ -4,6 +4,8 @@ import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.siasa.model.person.Person;
+
 public class Policy {
 
     private final Title title;
@@ -11,12 +13,16 @@ public class Policy {
     private final ExpiryDate expiryDate;
     private final Commission commission;
 
-    public Policy(Title title, Price price, ExpiryDate expiryDate, Commission commission) {
-        requireAllNonNull(title, price, expiryDate, commission);
+    // Policy should always have an owner
+    private final Person owner;
+
+    public Policy(Title title, Price price, ExpiryDate expiryDate, Commission commission, Person owner) {
+        requireAllNonNull(title, price, expiryDate, commission, owner);
         this.title = title;
         this.price = price;
         this.expiryDate = expiryDate;
         this.commission = commission;
+        this.owner = owner;
     }
 
     public Title getTitle() {
@@ -35,14 +41,19 @@ public class Policy {
         return commission;
     }
 
+    public Person getOwner() {
+        return owner;
+    }
+
     public boolean isSamePolicy(Policy otherPolicy) {
         if (otherPolicy == this) {
             return true;
         }
 
-        // TODO: check for equal owner
+        // Note the use of isSamePerson instead of equals
         return otherPolicy != null
-                && otherPolicy.getTitle().equals(getTitle());
+                && otherPolicy.getTitle().equals(getTitle())
+                && otherPolicy.getOwner().isSamePerson(getOwner());
     }
 
     @Override
@@ -56,11 +67,12 @@ public class Policy {
         }
 
         Policy otherPolicy = (Policy) other;
-        // TODO: check for equal owner
+        // Note the use of isSamePerson instead of equals
         return otherPolicy.getTitle().equals(getTitle())
                 && otherPolicy.getPrice().equals(getPrice())
                 && otherPolicy.getCommission().equals(getCommission())
-                && otherPolicy.getExpiryDate().equals(getExpiryDate());
+                && otherPolicy.getExpiryDate().equals(getExpiryDate())
+                && otherPolicy.getOwner().isSamePerson(getOwner());
     }
 
     @Override

@@ -9,6 +9,7 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.siasa.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +37,20 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_POLICY_TITLE_CRITICAL = "Critical Illness Plan";
+    public static final int VALID_POLICY_PRICE_CRITICAL = 1000;
+    public static final LocalDate VALID_POLICY_EXPIRY_DATE_CRITICAL = LocalDate.now().plusYears(100);
+    public static final int VALID_POLICY_COMMISSION_CRITICAL = 20;
+
+    public static final String INVALID_POLICY_TITLE_ALPHANUMERIC = "Critical Illness Plan%&";
+    public static final int INVALID_PRICE_NEGATIVE = -10;
+    public static final LocalDate INVALID_POLICY_EXPIRY_DATE_PAST = LocalDate.now().minusDays(100);
+    public static final LocalDate INVALID_POLICY_EXPIRY_DATE_TODAY = LocalDate.now();
+    public static final int INVALID_POLICY_COMMISSION_OVER = 110;
+
+    public static final int INVALID_POLICY_COMMISSION_UNDER = 110;
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -104,11 +119,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        Siasa expectedSiasa = new Siasa(actualModel.getAddressBook());
+        Siasa expectedSiasa = new Siasa(actualModel.getSiasa());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedSiasa, actualModel.getAddressBook());
+        assertEquals(expectedSiasa, actualModel.getSiasa());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
     /**

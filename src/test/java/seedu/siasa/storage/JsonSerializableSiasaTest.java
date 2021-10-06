@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.commons.util.JsonUtil;
 import seedu.siasa.model.Siasa;
-import seedu.siasa.testutil.TypicalPersons;
+import seedu.siasa.testutil.TypicalSiasa;
 
 public class JsonSerializableSiasaTest {
 
@@ -25,7 +25,7 @@ public class JsonSerializableSiasaTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAddressBook.class).get();
         Siasa siasaFromFile = dataFromFile.toModelType();
-        Siasa typicalPersonsSiasa = TypicalPersons.getTypicalAddressBook();
+        Siasa typicalPersonsSiasa = TypicalSiasa.getTypicalSiasa();
         assertEquals(siasaFromFile, typicalPersonsSiasa);
     }
 

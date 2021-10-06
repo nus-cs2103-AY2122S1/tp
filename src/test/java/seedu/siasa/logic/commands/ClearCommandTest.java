@@ -1,7 +1,7 @@
 package seedu.siasa.logic.commands;
 
 import static seedu.siasa.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.siasa.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +22,9 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new Siasa());
+        Model model = new ModelManager(getTypicalSiasa(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalSiasa(), new UserPrefs());
+        expectedModel.setSiasa(new Siasa());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

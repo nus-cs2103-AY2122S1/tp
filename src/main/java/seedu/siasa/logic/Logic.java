@@ -26,7 +26,7 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see seedu.siasa.model.Model#getAddressBook()
+     * @see seedu.siasa.model.Model#getSiasa()
      */
     ReadOnlySiasa getAddressBook();
 
