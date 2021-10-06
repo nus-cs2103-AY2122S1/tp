@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.fast.logic.commands.AddCommand;
+import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.ClearCommand;
 import seedu.fast.logic.commands.Command;
 import seedu.fast.logic.commands.DeleteCommand;
@@ -75,6 +76,10 @@ public class FastParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
+
+        case AppointmentCommand.COMMAND_WORD:
+            return new AppointmentCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
