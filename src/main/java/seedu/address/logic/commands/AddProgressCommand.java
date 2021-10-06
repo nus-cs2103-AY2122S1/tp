@@ -1,18 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Progress;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import seedu.address.model.person.Progress;
 
 /**
  * Adds a progress to an exiting student in TutorAid. Updates the progress if one already exists.
@@ -35,6 +34,10 @@ public class AddProgressCommand extends Command {
     private final Index targetIndex;
     private final Progress progress;
 
+    /**
+     * @param targetIndex of the student in the filtered student list to add progress
+     * @param progress Progress object to be added to the student
+     */
     public AddProgressCommand(Index targetIndex, Progress progress) {
         this.targetIndex = targetIndex;
         this.progress = progress;

@@ -107,7 +107,8 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (progress == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Progress.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Progress.class.getSimpleName()));
         }
         if (!Progress.isValidProgress(progress)) {
             throw new IllegalValueException(Progress.MESSAGE_CONSTRAINTS);
