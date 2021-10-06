@@ -47,7 +47,8 @@ public class PAddCommandTest {
         PAddCommand PAddCommand = new PAddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, PAddCommand.MESSAGE_DUPLICATE_PERSON, () -> PAddCommand.execute(modelStub));
+        assertThrows(CommandException.class, PAddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                PAddCommand.execute(modelStub));
     }
 
     @Test
@@ -79,12 +80,12 @@ public class PAddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +115,12 @@ public class PAddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
