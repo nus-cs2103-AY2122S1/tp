@@ -1,4 +1,4 @@
-package seedu.unify.model.person;
+package seedu.unify.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.unify.model.person.exceptions.DuplicatePersonException;
-import seedu.unify.model.person.exceptions.PersonNotFoundException;
+import seedu.unify.model.task.exceptions.DuplicatePersonException;
+import seedu.unify.model.task.exceptions.PersonNotFoundException;
 import seedu.unify.testutil.PersonBuilder;
 
 public class UniquePersonListTest {

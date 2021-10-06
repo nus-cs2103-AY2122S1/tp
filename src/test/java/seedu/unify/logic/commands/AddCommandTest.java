@@ -20,7 +20,7 @@ import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
 import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.ReadOnlyUserPrefs;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 import seedu.unify.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -70,7 +70,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different task -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -150,7 +150,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single task.
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
@@ -168,7 +168,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the task being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();

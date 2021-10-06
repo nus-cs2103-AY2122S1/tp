@@ -1,7 +1,7 @@
 package seedu.unify.testutil;
 
 import seedu.unify.model.AddressBook;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 
 /**
  * A utility class to help with building Addressbook objects.

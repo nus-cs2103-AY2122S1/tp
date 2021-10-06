@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.unify.commons.core.LogsCenter;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 
 /**
  * Panel containing the list of persons.

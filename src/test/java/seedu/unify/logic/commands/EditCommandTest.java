@@ -23,7 +23,7 @@ import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
 import seedu.unify.model.UserPrefs;
-import seedu.unify.model.person.Person;
+import seedu.unify.model.task.Person;
 import seedu.unify.testutil.EditPersonDescriptorBuilder;
 import seedu.unify.testutil.PersonBuilder;
 
@@ -111,7 +111,7 @@ public class EditCommandTest {
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit task in filtered list into a duplicate in address book
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());

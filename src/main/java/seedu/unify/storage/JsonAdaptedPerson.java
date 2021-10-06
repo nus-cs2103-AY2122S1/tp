@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.unify.commons.exceptions.IllegalValueException;
-import seedu.unify.model.person.Address;
-import seedu.unify.model.person.Email;
-import seedu.unify.model.person.Name;
-import seedu.unify.model.person.Person;
-import seedu.unify.model.person.Phone;
 import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Address;
+import seedu.unify.model.task.Email;
+import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Person;
+import seedu.unify.model.task.Phone;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -31,7 +31,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -60,9 +60,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted task object into the model's {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();

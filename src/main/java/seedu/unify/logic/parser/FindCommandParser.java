@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.unify.logic.commands.FindCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
-import seedu.unify.model.person.NameContainsKeywordsPredicate;
+import seedu.unify.model.task.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
