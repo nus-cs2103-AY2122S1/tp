@@ -99,7 +99,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Language updatedLanguage = editPersonDescriptor.getLanguage().orElse(personToEdit.getLanguage());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        LastVisit updatedLastVisit = personToEdit.getLastVisit(); // edit command does not allow editing last visits
+        Optional<LastVisit> updatedLastVisit = personToEdit.getLastVisit(); // edit command does not allow editing last visits
         Visit updatedVisit = personToEdit.getVisit(); // edit command does not allow editing visits
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 

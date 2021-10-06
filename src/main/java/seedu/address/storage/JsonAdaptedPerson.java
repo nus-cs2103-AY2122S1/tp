@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -61,7 +62,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         language = source.getLanguage().value;
         address = source.getAddress().value;
-        lastVisit = source.getLastVisit().value;
+        lastVisit = source.getLastVisit().orElse(new LastVisit("")).value;
         visit = source.getVisit().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -112,7 +113,10 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final LastVisit modelLastVisit = new LastVisit(lastVisit);
+        if (lastVisit == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Visit.class.getSimpleName()));
+        }
+        final Optional<LastVisit> modelLastVisit = Optional.ofNullable(new LastVisit(lastVisit));
 
         if (visit == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Visit.class.getSimpleName()));

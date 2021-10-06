@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Person;
 
 /**
@@ -56,7 +57,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         language.setText(person.getLanguage().value);
-        lastVisit.setText(person.getLastVisit().value);
+        lastVisit.setText(person.getLastVisit().orElse(new LastVisit("")).value);
         visit.setText(person.getVisit().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

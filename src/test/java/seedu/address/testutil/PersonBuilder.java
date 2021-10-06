@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -23,13 +24,13 @@ public class PersonBuilder {
     public static final String DEFAULT_LANGUAGE = "English";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_LAST_VISIT = "2021-01-01";
-    public static final String DEFAULT_VISIT = "10 Oct 2021";
+    public static final String DEFAULT_VISIT = "";
 
     private Name name;
     private Phone phone;
     private Language language;
     private Address address;
-    private LastVisit lastVisit;
+    private Optional<LastVisit> lastVisit;
     private Visit visit;
     private Set<Tag> tags;
 
@@ -41,7 +42,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         language = new Language(DEFAULT_LANGUAGE);
         address = new Address(DEFAULT_ADDRESS);
-        lastVisit = new LastVisit(DEFAULT_LAST_VISIT);
+        lastVisit = Optional.ofNullable(new LastVisit(DEFAULT_LAST_VISIT));
         visit = new Visit(DEFAULT_VISIT);
         tags = new HashSet<>();
     }
@@ -87,7 +88,7 @@ public class PersonBuilder {
      * Sets the {@code LastVisit} of the {@code Person} that we are building.
      */
     public PersonBuilder withLastVisit(String lastVisit) {
-        this.lastVisit = new LastVisit(lastVisit);
+        this.lastVisit = Optional.ofNullable(new LastVisit(lastVisit));
         return this;
     }
 

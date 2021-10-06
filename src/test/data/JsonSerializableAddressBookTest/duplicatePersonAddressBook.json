@@ -4,6 +4,7 @@
     "phone": "94351253",
     "language": "English",
     "address": "123, Jurong West Ave 6, #08-111",
+    "lastVisit": "",
     "visit" : "",
     "tagged": [ "friends" ]
   }, {
@@ -11,6 +12,7 @@
     "phone": "94351253",
     "language": "English",
     "address": "4th street",
+    "lastVisit": "",
     "visit" : ""
   } ]
 }

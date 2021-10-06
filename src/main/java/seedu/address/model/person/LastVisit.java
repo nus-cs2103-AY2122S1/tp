@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Optional;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -42,7 +44,7 @@ public class LastVisit {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                    || (other instanceof LastVisit // instanceof handles nulls
-                           && value.equals(((LastVisit) other).value)); // state check
+                   && value.equals(((LastVisit) other).value)); // state check
     }
 
     @Override

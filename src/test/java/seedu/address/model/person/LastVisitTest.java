@@ -15,7 +15,7 @@ public class LastVisitTest {
         assertTrue(lastVisit.equals(lastVisit));
 
         // same values -> returns true
-        Visit visitCopy = new Visit(lastVisit.value);
+        LastVisit visitCopy = new LastVisit(lastVisit.value);
         assertTrue(lastVisit.equals(visitCopy));
 
         // different types -> returns false
@@ -25,7 +25,7 @@ public class LastVisitTest {
         assertFalse(lastVisit.equals(null));
 
         // different visit -> returns false
-        Visit differentVisit = new Visit("2021-10-01");
+        LastVisit differentVisit = new LastVisit("2021-10-01");
         assertFalse(lastVisit.equals(differentVisit));
     }
 }

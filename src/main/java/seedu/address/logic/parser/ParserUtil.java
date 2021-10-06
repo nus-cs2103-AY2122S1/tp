@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -102,13 +103,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code lastVisit} is invalid.
      */
-    public static LastVisit parseLastVisit(String lastVisit) throws ParseException {
+    public static Optional<LastVisit> parseLastVisit(String lastVisit) throws ParseException {
         requireNonNull(lastVisit);
         String trimmedLastVisit = lastVisit.trim();
-        if (!LastVisit.isValidLastVisit(trimmedLastVisit)) {
+        if (!lastVisit.isEmpty() && !LastVisit.isValidLastVisit(trimmedLastVisit)) {
             throw new ParseException(LastVisit.MESSAGE_CONSTRAINTS);
         }
-        return new LastVisit(trimmedLastVisit);
+        return Optional.ofNullable(new LastVisit(trimmedLastVisit));
     }
 
     /**

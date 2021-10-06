@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -22,7 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final LastVisit lastVisit;
+    private final Optional<LastVisit> lastVisit;
     private final Visit visit;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -30,7 +31,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Language language, Address address,
-                  LastVisit lastVisit, Visit visit, Set<Tag> tags) {
+                  Optional<LastVisit> lastVisit, Visit visit, Set<Tag> tags) {
         requireAllNonNull(name, phone, language, address, tags);
         this.name = name;
         this.phone = phone;
@@ -57,7 +58,7 @@ public class Person {
         return address;
     }
 
-    public LastVisit getLastVisit() {
+    public Optional<LastVisit> getLastVisit() {
         return lastVisit;
     }
 
