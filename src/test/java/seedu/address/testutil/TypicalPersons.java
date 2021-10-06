@@ -4,7 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LANGUAGE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LANGUAGE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LAST_VISIT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LAST_VISIT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;

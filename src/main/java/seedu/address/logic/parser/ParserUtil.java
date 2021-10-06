@@ -1,7 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -9,6 +14,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.VisitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
@@ -23,6 +29,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -106,9 +113,22 @@ public class ParserUtil {
     public static Optional<LastVisit> parseLastVisit(String lastVisit) throws ParseException {
         requireNonNull(lastVisit);
         String trimmedLastVisit = lastVisit.trim();
-        if (!lastVisit.isEmpty() && !LastVisit.isValidLastVisit(trimmedLastVisit)) {
+        if (lastVisit.isEmpty()) {
+            return Optional.ofNullable(new LastVisit(trimmedLastVisit));
+        }
+
+        if (!LastVisit.isValidLastVisit(trimmedLastVisit)) {
             throw new ParseException(LastVisit.MESSAGE_CONSTRAINTS);
         }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate.parse(trimmedLastVisit, formatter);
+//            trimmedLastVisit = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(date);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
         return Optional.ofNullable(new LastVisit(trimmedLastVisit));
     }
 

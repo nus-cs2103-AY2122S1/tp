@@ -16,6 +16,8 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String DISPLAY_LAST_VISIT = "Last visit: ";
+    private static final String DISPLAY_VISIT = "Visit: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -57,8 +59,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         language.setText(person.getLanguage().value);
-        lastVisit.setText(person.getLastVisit().orElse(new LastVisit("")).value);
-        visit.setText(person.getVisit().value);
+        lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).value);
+        visit.setText(DISPLAY_VISIT + person.getVisit().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

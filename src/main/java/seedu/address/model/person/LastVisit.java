@@ -1,6 +1,12 @@
 package seedu.address.model.person;
 
-import java.util.Optional;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 
 import static java.util.Objects.requireNonNull;
 
@@ -33,6 +39,25 @@ public class LastVisit {
      */
     public static boolean isValidLastVisit(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns formatted last visit date.
+     */
+    public String toFormatted() throws ParseException {
+        if (value.isEmpty()) {
+            return value;
+        }
+
+        String lastVisit;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate date = LocalDate.parse(value, formatter);
+            lastVisit = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(date);
+        } catch (DateTimeParseException ive) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_DATE);
+        }
+        return lastVisit;
     }
 
     @Override
