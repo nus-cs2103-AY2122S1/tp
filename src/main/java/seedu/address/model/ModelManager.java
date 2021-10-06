@@ -11,34 +11,34 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.friend.Friend;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the gitGud friends list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final FriendsList friendsList;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Friend> filteredFriends;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given friends list and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyFriendsList readOnlyFriendsList, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(readOnlyFriendsList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + readOnlyFriendsList + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.friendsList = new FriendsList(readOnlyFriendsList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredFriends = new FilteredList<>(this.friendsList.getFriendsList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new FriendsList(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -79,37 +79,37 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setFriendsList(ReadOnlyFriendsList readOnlyFriendsList) {
+        this.friendsList.resetData(readOnlyFriendsList);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyFriendsList getFriendsList() {
+        return friendsList;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasFriend(Friend friend) {
+        requireNonNull(friend);
+        return friendsList.hasFriend(friend);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteFriend(Friend target) {
+        friendsList.removeFriend(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addFriend(Friend friend) {
+        friendsList.addFriend(friend);
+        updateFilteredFriendsList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setFriend(Friend target, Friend editedFriend) {
+        requireAllNonNull(target, editedFriend);
 
-        addressBook.setPerson(target, editedPerson);
+        friendsList.setFriend(target, editedFriend);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -119,14 +119,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Friend> getFilteredFriendsList() {
+        return filteredFriends;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredFriendsList(Predicate<Friend> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredFriends.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +143,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return friendsList.equals(other.friendsList)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredFriends.equals(other.filteredFriends);
     }
 
 }
