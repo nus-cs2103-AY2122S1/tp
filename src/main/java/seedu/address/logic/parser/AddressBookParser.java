@@ -61,11 +61,11 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments").trim();
 
         switch (commandWord) {
-            case ViewClientCommand.COMMAND_WORD:
-                return new ViewClientCommandParser().parse(arguments);
+        case ViewClientCommand.COMMAND_WORD:
+            return new ViewClientCommandParser().parse(arguments);
 
-            case ViewProductCommand.COMMAND_WORD:
-                return new ViewProductCommandParser().parse(arguments);
+        case ViewProductCommand.COMMAND_WORD:
+            return new ViewProductCommandParser().parse(arguments);
 
         case EditClientCommand.COMMAND_WORD:
             return new EditClientCommandParser().parse(arguments);

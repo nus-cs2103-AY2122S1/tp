@@ -12,10 +12,10 @@ import seedu.address.model.client.ClientContainsIdPredicate;
  * Parses input arguments and creates a new ViewClientCommand object
  */
 public class ViewClientCommandParser implements Parser<ViewClientCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the
      * ViewClientCommand and returns a ViewClientCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewClientCommand parse(String args) throws ParseException {
@@ -24,6 +24,7 @@ public class ViewClientCommandParser implements Parser<ViewClientCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
         }
+
         String[] keywords = trimmedArgs.split("\\s+");
         return new ViewClientCommand(new ClientContainsIdPredicate(Arrays.asList(keywords)));
     }

@@ -12,6 +12,7 @@ import seedu.address.model.product.ProductContainsIdPredicate;
  */
 public class ViewProductCommand extends Command {
     public static final String COMMAND_WORD = "view -p";
+
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Views a current product identified by the index number used in the displayed "
                     + "product list.\n"
@@ -20,7 +21,9 @@ public class ViewProductCommand extends Command {
                     + "Example usage : "
                     + COMMAND_WORD
                     + " 20 ";
+
     private final ProductContainsIdPredicate predicate;
+
     public ViewProductCommand(ProductContainsIdPredicate predicate) {
         this.predicate = predicate;
     }
