@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddParticipantToEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -97,7 +98,8 @@ public class AddressBookParser {
         case ListEventCommand.COMMAND_WORD:
             return new ListEventCommand();
         // TODO: addParticipant (Use Parser):
-
+        case AddParticipantToEventCommand.COMMAND_WORD:
+            return new AddParticipantToEventParser().parse(arguments);
         // TODO: removeParticipant (Use Parser):
 
         // TODO: findParticipant (Use Parser):
