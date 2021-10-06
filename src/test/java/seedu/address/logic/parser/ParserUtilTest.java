@@ -178,7 +178,8 @@ public class ParserUtilTest {
 
     @Test
     public void parsePositions_collectionWithInvalidPositions_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePositions(Arrays.asList(VALID_POSITION_1, INVALID_POSITION)));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePositions(
+                Arrays.asList(VALID_POSITION_1, INVALID_POSITION)));
     }
 
     @Test
@@ -189,7 +190,8 @@ public class ParserUtilTest {
     @Test
     public void parsePositions_collectionWithValidPositions_returnsPositionSet() throws Exception {
         Set<Position> actualPositionSet = ParserUtil.parsePositions(Arrays.asList(VALID_POSITION_1, VALID_POSITION_2));
-        Set<Position> expectedPositionSet = new HashSet<Position>(Arrays.asList(new Position(VALID_POSITION_1), new Position(VALID_POSITION_2)));
+        Set<Position> expectedPositionSet = new HashSet<Position>(
+                Arrays.asList(new Position(VALID_POSITION_1), new Position(VALID_POSITION_2)));
 
         assertEquals(expectedPositionSet, actualPositionSet);
     }

@@ -22,7 +22,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_Position_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -96,9 +96,12 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_POSITION} alone will reset the positions of the {@code Person} being edited,
         // parsing it together with a valid position results in error
-        assertParseFailure(parser, "1" + POSITION_DESC_FRIEND + POSITION_DESC_HUSBAND + POSITION_EMPTY, Position.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + POSITION_DESC_FRIEND + POSITION_EMPTY + POSITION_DESC_HUSBAND, Position.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + POSITION_EMPTY + POSITION_DESC_FRIEND + POSITION_DESC_HUSBAND, Position.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + POSITION_DESC_FRIEND + POSITION_DESC_HUSBAND + POSITION_EMPTY, Position.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + POSITION_DESC_FRIEND + POSITION_EMPTY + POSITION_DESC_HUSBAND, Position.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + POSITION_EMPTY + POSITION_DESC_FRIEND + POSITION_DESC_HUSBAND, Position.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
@@ -113,7 +116,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withPositions(VALID_POSITION_HUSBAND, VALID_Position_FRIEND).build();
+                .withPositions(VALID_POSITION_HUSBAND, VALID_POSITION_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -160,7 +163,7 @@ public class EditCommandParserTest {
 
         // positions
         userInput = targetIndex.getOneBased() + POSITION_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withPositions(VALID_Position_FRIEND).build();
+        descriptor = new EditPersonDescriptorBuilder().withPositions(VALID_POSITION_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -173,7 +176,8 @@ public class EditCommandParserTest {
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + POSITION_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withPositions(VALID_Position_FRIEND, VALID_POSITION_HUSBAND)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withPositions(VALID_POSITION_FRIEND, VALID_POSITION_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
