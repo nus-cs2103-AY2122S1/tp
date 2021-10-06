@@ -26,23 +26,47 @@ public class Attendance {
         return this;
     }
 
+    /**
+     * Replace this Attendance's boolean array with the given boolean array
+     * @param boolArr The new boolean array
+     */
     public void setAttendance(boolean[] boolArr) {
         this.attendanceInBoolean = boolArr;
     }
 
+    /**
+     * Gets the number of sessions in total
+     */
     public Integer getSessionCount() {
         return attendanceInBoolean.length;
     }
 
+    /**
+     * Gets the boolean array representation of the Attendance object
+     */
     public boolean[] getAttendanceInBoolean() {
         return this.attendanceInBoolean;
+    }
+
+    /**
+     * Convert the boolean to the formatted String representation of a single session's attendance.
+     * @param attendanceStatus Boolean of attendance
+     * @param session The session index
+     */
+    public String attendanceStatusToString(boolean attendanceStatus, int session) {
+        if (attendanceStatus) {
+            return "[" + (session + 1) + "]"; // session index displayed if attended
+        } else {
+            return "[ ]"; // session index omitted if unattended
+        }
     }
 
     @Override
     public String toString() {
         String str = "";
         for (int i = 0; i < attendanceInBoolean.length; i++) {
-            str += attendanceInBoolean[i] ? "[" + (i + 1) + "]" : "[ ]";
+            boolean attendanceStatus = attendanceInBoolean[i];
+            str += attendanceStatusToString(attendanceStatus, i);
         }
         return str;
     }
