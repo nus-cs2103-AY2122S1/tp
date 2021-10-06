@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -64,6 +65,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same Student ID as {@code person} exists in the address book.
+     */
+    public boolean hasStudentId(Person personToCompare) {
+        requireNonNull(personToCompare);
+        for (Person persons : persons) {
+            if (persons.getStudentId().equals(personToCompare.getStudentId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
