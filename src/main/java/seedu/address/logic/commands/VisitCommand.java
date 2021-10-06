@@ -54,7 +54,7 @@ public class VisitCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getLanguage(),
                 personToEdit.getAddress(), personToEdit.getLastVisit(), visit, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
