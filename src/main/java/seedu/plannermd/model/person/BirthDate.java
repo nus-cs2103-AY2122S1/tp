@@ -24,7 +24,6 @@ public class BirthDate {
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
             .withResolverStyle(ResolverStyle.SMART);
 
-    public final String stringValue;
     public final LocalDate value;
 
     /**
@@ -35,18 +34,13 @@ public class BirthDate {
     public BirthDate(String birthDate) {
         requireNonNull(birthDate);
         checkArgument(isValidBirthDate(birthDate), MESSAGE_CONSTRAINTS);
-        stringValue = birthDate;
-        value = LocalDate.from(LocalDate.parse(birthDate, formatter));
+        value = LocalDate.parse(birthDate, formatter);
     }
 
     /**
      * Returns if a given string is a valid birth date.
      */
     public static boolean isValidBirthDate(String test) {
-        // Done to check if input isn't just the date
-        if (test.split(" ", 2).length > 1) {
-            return false;
-        }
         try {
             LocalDate.parse(test, formatter);
             LocalDate inputDate = LocalDate.from(LocalDate.parse(test, formatter));
@@ -59,13 +53,9 @@ public class BirthDate {
         }
     }
 
-    // public static boolean isValidBirthDate(LocalDate date) {
-    // return date.isAfter(LocalDate.now());
-    // }
-
     @Override
     public String toString() {
-        return stringValue;
+        return value.format(formatter);
     }
 
     @Override
