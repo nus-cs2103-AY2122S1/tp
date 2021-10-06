@@ -33,8 +33,6 @@ public class AddTagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "ExampleTag";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Added Tag to Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Tag must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -63,9 +61,7 @@ public class AddTagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        assert personToEdit.isSamePerson(editedPerson);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

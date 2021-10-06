@@ -29,30 +29,27 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
         Index index;
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
         }
+        parseTagsForAppend(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        assert editPersonDescriptor.isAnyFieldEdited();
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(AddTagCommand.MESSAGE_NOT_EDITED);
-        }
         return new AddTagCommand(index, editPersonDescriptor);
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Tag>> parseTagsForAppend(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {
-            return Optional.empty();
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
         }
         return Optional.of(ParserUtil.parseTags(tags));
     }
