@@ -10,11 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Email;
+import seedu.address.model.student.ID;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,22 +23,17 @@ class JsonAdaptedStudent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
     private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
+    private final String id;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("id") String id,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.id = id;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -51,9 +44,7 @@ class JsonAdaptedStudent {
      */
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        id = source.getId().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -77,6 +68,14 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (id == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ID.class.getSimpleName()));
+        }
+        if (!ID.isValidID(id)) {
+            throw new IllegalValueException(ID.MESSAGE_CONSTRAINTS);
+        }
+        final ID modelId = new ID(id);
 
         // TODO: add checks for our new fields (follow format)
 //        if (phone == null) {
@@ -104,7 +103,7 @@ class JsonAdaptedStudent {
 //        final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Student(modelName, modelId, modelTags);
     }
 
 }
