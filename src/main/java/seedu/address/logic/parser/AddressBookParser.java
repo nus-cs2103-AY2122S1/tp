@@ -16,6 +16,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFoldersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -55,6 +56,8 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
         } else if (userInput.startsWith(FindCommand.COMMAND_WORD)) {
             return new FindCommandParser().parse(arguments);
+        } else if (userInput.startsWith(ListFoldersCommand.COMMAND_WORD)) {
+            return new ListFoldersCommand();
         } else if (userInput.startsWith(ListCommand.COMMAND_WORD)) {
             return new ListCommand();
         } else if (userInput.startsWith(ExitCommand.COMMAND_WORD)) {
