@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.testutil.PlannerMdBuilder;
+import seedu.plannermd.ui.PersonTabSwitcher;
 
 public class ModelManagerTest {
 
@@ -133,5 +134,23 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setPlannerMdFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(plannerMd, differentUserPrefs)));
+    }
+
+    /**
+     * A stub that can be used as a placeholder for the PersonTabSwitcher during testing.
+     */
+    private static class PersonTabSwitcherStub implements PersonTabSwitcher {
+
+        protected boolean isPatientTab = true;
+
+        @Override
+        public void switchToPatientTab() {
+            isPatientTab = true;
+        }
+
+        @Override
+        public void switchToDoctorTab() {
+            isPatientTab = false;
+        }
     }
 }
