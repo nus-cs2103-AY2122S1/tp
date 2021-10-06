@@ -1,21 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORES_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -69,11 +61,11 @@ public class TypicalPersons {
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new PersonBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY)
             .withGroups(VALID_GROUP_AMY)
-            .withScores(Map.of(new Assessment(VALID_ASSESSMENT_AMY), new Score(VALID_SCORE_AMY)))
+            .withScores(VALID_SCORES_AMY)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Student BOB = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
             .withGroups(VALID_GROUP_BOB)
-            .withScores(Map.of(new Assessment(VALID_ASSESSMENT_BOB), new Score(VALID_SCORE_BOB)))
+            .withScores(VALID_SCORES_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
