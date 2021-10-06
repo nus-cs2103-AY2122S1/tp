@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.ReserveCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Phone;
-
-import java.time.LocalDateTime;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+
+import java.time.LocalDateTime;
+
+import seedu.address.logic.commands.ReserveCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Phone;
 
 public class ReserveCommandParser implements Parser<ReserveCommand> {
 

@@ -1,17 +1,23 @@
 package seedu.address.model.reservation;
 
-import seedu.address.model.person.Phone;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.person.Phone;
 
+/**
+ * Represents a reservation
+ */
 public class Reservation {
     private Phone phone;
     private int numberOfPeople;
     private LocalDateTime time;
 
+    /**
+     * Creates a reservation
+     */
     public Reservation(Phone phone, int numberOfPeople, LocalDateTime time) {
         requireAllNonNull(phone, numberOfPeople, time);
         this.phone = phone;
@@ -31,6 +37,9 @@ public class Reservation {
         return time;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -46,11 +55,17 @@ public class Reservation {
                 && time.equals(that.time);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(phone, numberOfPeople, time);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return String.format("Reservation{phone=%s, numberOfPeople=%s, time=%s}", phone, numberOfPeople, time);

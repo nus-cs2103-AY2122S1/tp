@@ -25,8 +25,10 @@ public class ParserUtil {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_NUMBER_OF_PEOPLE = "Number of people is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DATE_TIME_FORMAT = "Date time should be in the format of " + DATE_TIME_FORMATTER.toString();
+    public static final String MESSAGE_INVALID_NUMBER_OF_PEOPLE =
+            "Number of people is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE_TIME_FORMAT =
+            "Date time should be in the format of " + DATE_TIME_FORMATTER.toString();
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -150,13 +152,17 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code dateTime} into a {@code LocalDateTime object}
+     * @throws ParseException if {@code dateTime} is of invalid format
+     */
     public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
 
         LocalDateTime result;
         try {
-            result = LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
+            result = LocalDateTime.parse(trimmedDateTime, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException dtpe) {
             throw new ParseException(MESSAGE_INVALID_DATE_TIME_FORMAT);
         }

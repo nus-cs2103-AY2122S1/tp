@@ -1,16 +1,17 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ReserveCommand;
-import seedu.address.model.person.Phone;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.ReserveCommand;
+import seedu.address.model.person.Phone;
 
 class ReserveCommandParserTest {
-    ReserveCommandParser parser = new ReserveCommandParser();
+    private ReserveCommandParser parser = new ReserveCommandParser();
 
     @Test
     public void parse_allFieldPresent_success() {

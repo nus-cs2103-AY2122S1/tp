@@ -4,13 +4,16 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.time.LocalDateTime;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
 
-import java.time.LocalDateTime;
-
-public class ReserveCommand extends Command{
+/**
+ * Represents the command to add reservation
+ */
+public class ReserveCommand extends Command {
     public static final String COMMAND_WORD = "reserve";
     public static final String MESSAGE_USAGE = String.format(
             "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
@@ -20,10 +23,13 @@ public class ReserveCommand extends Command{
             PREFIX_PHONE, PREFIX_TIME
     );
 
-    Phone phone;
-    int numberOfPeople;
-    LocalDateTime time;
+    private Phone phone;
+    private int numberOfPeople;
+    private LocalDateTime time;
 
+    /**
+     * Creates a command to add a reservation
+     */
     public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime time) {
         requireAllNonNull(phone, time);
         this.phone = phone;
@@ -31,6 +37,9 @@ public class ReserveCommand extends Command{
         this.time = time;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         throw new CommandException(
@@ -38,6 +47,9 @@ public class ReserveCommand extends Command{
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {

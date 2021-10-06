@@ -67,18 +67,23 @@ public class ParserUtilTest {
 
     @Test
     public void parseNumberOfPeople_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class,
-                MESSAGE_INVALID_NUMBER_OF_PEOPLE,
-                () -> ParserUtil.parseNumberOfPeople(" a"));
-        assertThrows(ParseException.class,
-                MESSAGE_INVALID_NUMBER_OF_PEOPLE,
-                () -> ParserUtil.parseNumberOfPeople("-1 "));
+        assertThrows(ParseException.class, MESSAGE_INVALID_NUMBER_OF_PEOPLE, ()
+            -> ParserUtil.parseNumberOfPeople(" a"));
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_NUMBER_OF_PEOPLE, ()
+            -> ParserUtil.parseNumberOfPeople("-1 "));
     }
 
     @Test
     public void parseDateTime_validDateTime_success() throws Exception {
         LocalDateTime expected = LocalDateTime.parse("11/11/2021 2000", ParserUtil.DATE_TIME_FORMATTER);
-        assertEquals(expected, ParserUtil.parseDateTime("11/11/2021 2000"));
+        assertEquals(expected, ParserUtil.parseDateTime("  11/11/2021 2000   "));
+    }
+
+    @Test
+    public void parseDateTime_invalidDateTime_failure() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_DATE_TIME_FORMAT, ()
+            -> ParserUtil.parseDateTime("11-11-2021 2000"));
     }
 
     @Test
