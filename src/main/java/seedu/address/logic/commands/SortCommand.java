@@ -12,13 +12,13 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    private String MESSAGE_SUCCESS = "Sorted all persons";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of persons "
             + "by the alphabetical order of their name.\n"
             + "Parameters: [-r]\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_SORT;
+
+    private String message_success = "Sorted all persons";
 
     private final boolean reverseOrder;
 
@@ -29,11 +29,11 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         if (reverseOrder) {
-            MESSAGE_SUCCESS = MESSAGE_SUCCESS + " in reverse order";
+            message_success = message_success + " in reverse order";
         }
         requireNonNull(model);
         model.updateSortedPersonList(reverseOrder);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(message_success);
     }
 
 }
