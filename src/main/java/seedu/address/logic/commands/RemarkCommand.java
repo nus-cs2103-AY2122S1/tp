@@ -54,7 +54,8 @@ public class RemarkCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), remark, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
@@ -62,8 +63,7 @@ public class RemarkCommand extends Command {
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
-
-
+    
     /**
      * Generates a command execution success message based on whether the remark is added to or removed from
      * {@code personToEdit}.

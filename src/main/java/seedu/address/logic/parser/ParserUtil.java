@@ -132,7 +132,7 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedAddress = remark.trim();
-        if (!trimmedAddress.isEmpty()) {
+        if (trimmedAddress.isEmpty()) {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedAddress);
