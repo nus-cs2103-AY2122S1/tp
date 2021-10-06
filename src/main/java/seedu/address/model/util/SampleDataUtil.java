@@ -24,35 +24,29 @@ public class SampleDataUtil {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new ID("E0534794"),
                 getGroupList("T02A", "R03A"),
-                Map.ofEntries(
-                        Map.entry(new Assessment("P01"), new Score("89")),
-                        Map.entry(new Assessment("M01"), new Score("100"))),
+                Map.of(new Assessment("P01"), new Score("89"),
+                        new Assessment("M01"), new Score("100")),
                 getTagSet("friends")),
             new Student(new Name("Bernice Yu"), new ID("E0481923"),
                 getGroupList("T07A", "R10B"),
-                Map.ofEntries(
-                        Map.entry(new Assessment("M01"), new Score("100")),
-                        Map.entry(new Assessment("Q01"), new Score("100"))),
+                Map.of(new Assessment("M01"), new Score("100"),
+                        new Assessment("Q01"), new Score("100")),
                 getTagSet("colleagues", "friends")),
             new Student(new Name("Charlotte Oliveiro"), new ID("E0348902"),
                 getGroupList("T10H", "R03A"),
-                Map.ofEntries(
-                        Map.entry(new Assessment("P03"), new Score("66.6"))),
+                Map.of(new Assessment("P03"), new Score("66.6")),
                 getTagSet("neighbours")),
             new Student(new Name("David Li"), new ID("E0345242"),
                 getGroupList("T09B", "R04B"),
-                Map.ofEntries(
-                        Map.entry(new Assessment("M02"), new Score("100.0"))),
+                Map.of(new Assessment("M02"), new Score("100.0")),
                 getTagSet("family")),
             new Student(new Name("Irfan Ibrahim"), new ID("E0593933"),
                 getGroupList("T02J", "R09A"),
-                Map.ofEntries(
-                        Map.entry(new Assessment("M04"), new Score("74"))),
+                Map.of(new Assessment("M04"), new Score("74")),
                 getTagSet("classmates")),
             new Student(new Name("Roy Balakrishnan"), new ID("E0539221"),
                 getGroupList("T08C", "R01C"),
-                Map.ofEntries(
-                        Map.entry(new Assessment("P013"), new Score("83"))),
+                Map.of(new Assessment("P013"), new Score("83")),
                 getTagSet("colleagues"))
         };
     }
