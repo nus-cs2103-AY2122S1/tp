@@ -16,10 +16,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_ID = "123456Z";
+    private static final String INVALID_ID = "1234568Z";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -107,16 +108,16 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidStudentId_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_ID, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+                new JsonAdaptedPerson(VALID_NAME, INVALID_ID, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullStudentId_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null,
-                VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+                VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

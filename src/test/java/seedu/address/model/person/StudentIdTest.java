@@ -21,20 +21,20 @@ public class StudentIdTest {
 
     @Test
     public void isValidId() {
-        // null phone number
+        // null Student ID
         assertThrows(NullPointerException.class, () -> StudentId.isValidId(null));
 
-        // invalid phone numbers
+        // invalid Student IDs
         assertFalse(StudentId.isValidId("")); // empty string
         assertFalse(StudentId.isValidId(" ")); // spaces only
-        assertFalse(StudentId.isValidId("91")); // less than 3 numbers
-        assertFalse(StudentId.isValidId("phone")); // non-numeric
-        assertFalse(StudentId.isValidId("9011p041")); // alphabets within digits
-        assertFalse(StudentId.isValidId("9312 1534")); // spaces within digits
+        assertFalse(StudentId.isValidId("91")); // less than 9 characters
+        assertFalse(StudentId.isValidId("B1234567A")); // doesn't start with 'A'
+        assertFalse(StudentId.isValidId("A123456Z")); // doesn't have 7 digits
+        assertFalse(StudentId.isValidId("A1234567")); // doesn't end with a letter
+        assertFalse(StudentId.isValidId("A 1293998Z")); // contains a space
 
-        // valid phone numbers
-        assertTrue(StudentId.isValidId("911")); // exactly 3 numbers
-        assertTrue(StudentId.isValidId("93121534"));
-        assertTrue(StudentId.isValidId("124293842033123")); // long phone numbers
+        // valid Student IDs
+        assertTrue(StudentId.isValidId("A0123456Z")); // exactly 9 characters
+        assertTrue(StudentId.isValidId("A1234567A")); // can have different last letter
     }
 }

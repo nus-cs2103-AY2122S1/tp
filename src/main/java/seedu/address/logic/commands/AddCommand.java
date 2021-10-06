@@ -22,13 +22,14 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
+            + PREFIX_ID + "STUDENT ID "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_ID + "A0123456C"
+            + PREFIX_ID + "A1234567Z "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
@@ -57,6 +58,11 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        /** Problem with this if statement:
+            Since the model person already in the system has this student ID,
+            creating another model person fail make the "execute_personAcceptedByModel_addSuccessful" test
+            Don't know what to do about this rn
+         **/
         if (model.hasStudentId(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
         }
