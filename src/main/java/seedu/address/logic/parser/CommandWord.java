@@ -2,7 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -13,6 +17,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Adapted from stackoverflow
  * @see <a href=https://stackoverflow.com/questions/41494056/add-alias-to-an-enum-in-java>
  *     Add alias to an enum in java</a>
+ * @see <a href=https://stackoverflow.com/questions/443980/why-cant-enums-constructor-access-static-fields>
+ *     Why can't enum's constructor access static fields</a>
  */
 public enum CommandWord {
     ADD("add"),
@@ -24,15 +30,23 @@ public enum CommandWord {
     HELP("help", "man"),
     LIST("list", "ls");
 
-    private final HashMap<String, CommandWord> aliasMap = new HashMap<>();
+    private static Map<CommandWord, ArrayList<String>> ALIAS_MAP;
+
+    static {
+        Map<CommandWord, ArrayList<String>> aliasMap= new HashMap<>();
+        for (CommandWord cw : values()) {
+            aliasMap.put(cw, cw.aliasList);
+        }
+        ALIAS_MAP = Collections.unmodifiableMap(aliasMap);
+    }
+
+    private ArrayList<String> aliasList;
 
     /**
      * @param aliases The array of alias that will match to this CommandWord
      */
     CommandWord(String... aliases) {
-        for (String alias : aliases) {
-            aliasMap.put(alias, this);
-        }
+        aliasList = new ArrayList<>(Arrays.asList(aliases));
     }
 
     /**
@@ -44,10 +58,9 @@ public enum CommandWord {
      */
     public static CommandWord getCommandWord(String userInput) throws ParseException {
         String aliasToLowerCase = userInput.toLowerCase();
-        for (CommandWord cw : CommandWord.values()) {
-            CommandWord cwToReturn = cw.aliasMap.get(aliasToLowerCase);
-            if (cwToReturn != null) {
-                return cw.aliasMap.get(aliasToLowerCase);
+        for (CommandWord cw : ALIAS_MAP.keySet()) {
+            if (cw.aliasList.contains(aliasToLowerCase)) {
+                return cw;
             }
         }
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
