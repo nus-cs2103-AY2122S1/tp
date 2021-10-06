@@ -108,13 +108,14 @@ public class Person {
                 && otherPerson.getModuleCodes().equals(getModuleCodes())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getTeleHandle().equals(getTeleHandle())
+                && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, moduleCodes, phone, teleHandle, tags);
+        return Objects.hash(name, email, moduleCodes, phone, teleHandle, remark, tags);
     }
 
     @Override
@@ -145,7 +146,7 @@ public class Person {
         }
 
         if (!remark.toString().trim().isEmpty()) {
-            builder.append("; Remark :");
+            builder.append("; Remark: ");
             builder.append(getRemark());
         }
 
