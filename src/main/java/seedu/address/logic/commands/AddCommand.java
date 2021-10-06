@@ -25,7 +25,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_LANGUAGE + "LANGUAGE "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_LAST_VISIT + "LAST VISIT DATE "
+            + "[" + PREFIX_LAST_VISIT + "LAST_VISIT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
