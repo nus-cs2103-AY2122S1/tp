@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANT_ID;
 
 import java.util.List;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,12 +17,14 @@ public class RemoveParticipantFromEventCommand extends Command {
     public static final String COMMAND_WORD = "removeParticipant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": add Participant with matching ID to an Event.\n"
+        + ": remove Participant with matching ID from an Event.\n"
         + "Parameters: \n"
-        + "Example: " + COMMAND_WORD + " 1";
+        + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
+        + PREFIX_EVENT + "EVENT_NAME "
+        + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + "240Km Marathon ";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-        "Removed Participant: %1$s from event %1$s successfully";
+        "Removed Participant: %1$s from event %2$s successfully";
 
     private final ParticipantId participantId;
     private final EventName eventName;
@@ -66,8 +71,7 @@ public class RemoveParticipantFromEventCommand extends Command {
                 .findFirst().get();
 
         if (!selectedEvent.getParticipants().contains(participantToRemove)) {
-            throw new CommandException("Event " + eventName + " does not have participant "
-                    + participantToRemove.getFullName());
+            throw new CommandException("Participant " + participantToRemove.getFullName() + "doesn't exist in event!");
         }
 
         // add participant

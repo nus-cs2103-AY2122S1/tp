@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANT_ID;
 
 import java.util.stream.Stream;
-import seedu.address.logic.commands.AddParticipantToEventCommand;
 import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventName;
@@ -21,7 +20,7 @@ public class RemoveParticipantFromEventParser implements Parser<RemoveParticipan
         if (!arePrefixesPresent(argMultimap, PREFIX_PARTICIPANT_ID, PREFIX_EVENT)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddParticipantToEventCommand.MESSAGE_USAGE));
+                RemoveParticipantFromEventCommand.MESSAGE_USAGE));
         }
 
         // REQUIRED
