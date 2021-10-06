@@ -50,7 +50,7 @@ You can reach us at the email `e0588244.nus.edu.sg`
 
 ### Jonathan Kwok
 
-<img src="images/halphasx.jpg" width="200px">
+<img src="2103t/tp/docs/images/halphasx.png" width="200px">
 
 [[github](http://github.com/HalphasX)]
 [[portfolio](team/halphasx.md)]
