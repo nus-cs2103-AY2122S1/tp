@@ -1,15 +1,9 @@
 package seedu.plannermd.model.person;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.format.FormatStyle;
 import java.time.format.ResolverStyle;
-import java.time.temporal.ChronoField;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 
 import static java.util.Objects.requireNonNull;
@@ -21,15 +15,14 @@ import static seedu.plannermd.commons.util.AppUtil.checkArgument;
  */
 public class BirthDate {
 
-    private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Birth dates should be of the format DD/MM/YYYY "
             + "and adhere to the following constraints:\n"
             + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
             + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "3. Year must be 4 characters";
 
-    public static final DateTimeFormatter formatter =
-            DateTimeFormatter.ofPattern("d/M/yyyy").withResolverStyle(ResolverStyle.SMART);
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
+            .withResolverStyle(ResolverStyle.SMART);
 
     public final String stringValue;
     public final LocalDate value;
