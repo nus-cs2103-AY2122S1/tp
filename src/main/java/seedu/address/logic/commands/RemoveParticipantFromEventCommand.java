@@ -58,12 +58,17 @@ public class RemoveParticipantFromEventCommand extends Command {
 
 
         Participant participantToRemove = lastShownParticipantList.stream()
-            .filter(p -> p.getParticipantId().equals(participantId))
-            .findFirst().get();
+                .filter(p -> p.getParticipantId().equals(participantId))
+                .findFirst().get();
 
         Event selectedEvent = lastShownEventList.stream()
-            .filter(e -> e.getName().equals(eventName))
-            .findFirst().get();
+                .filter(e -> e.getName().equals(eventName))
+                .findFirst().get();
+
+        if (!selectedEvent.getParticipants().contains(participantToRemove)) {
+            throw new CommandException("Event " + eventName + " does not have participant "
+                    + participantToRemove.getFullName());
+        }
 
         // add participant
         selectedEvent.getParticipants().remove(participantToRemove);
