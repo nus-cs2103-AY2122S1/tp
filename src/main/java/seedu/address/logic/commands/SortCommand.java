@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 /**
  * Sorts the contacts in the address book.
  */
-public class SortCommand extends Command{
+public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
@@ -22,7 +22,12 @@ public class SortCommand extends Command{
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.sortsAddressBook();
+        model.sortAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof SortCommand);
     }
 }

@@ -87,7 +87,7 @@ public class ModelManager implements Model {
      * Sorts the address book data in alphabetical order.
      */
     @Override
-    public void sortsAddressBook() {
+    public void sortAddressBook() {
         addressBook.sortAddressBook();
     }
 

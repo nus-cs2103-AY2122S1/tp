@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -128,5 +129,22 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void sortAddressBook() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(BOB);
+        addressBook.addPerson(ALICE);
+        modelManager.setAddressBook(addressBook);
+
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.addPerson(ALICE);
+        expectedAddressBook.addPerson(BOB);
+        ModelManager expectedModelManager = new ModelManager();
+        expectedModelManager.setAddressBook(expectedAddressBook);
+
+        modelManager.sortAddressBook();
+        assertEquals(expectedModelManager, modelManager);
     }
 }

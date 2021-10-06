@@ -166,4 +166,17 @@ public class UniquePersonListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
+
+    @Test
+    public void sortList_success() {
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(ALICE);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(BOB);
+
+        uniquePersonList.sortList();
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
 }

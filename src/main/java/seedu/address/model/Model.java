@@ -52,7 +52,7 @@ public interface Model {
     /**
      * Sorts the address book data in alphabetical order.
      */
-    void sortsAddressBook();
+    void sortAddressBook();
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
