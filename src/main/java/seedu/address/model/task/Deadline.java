@@ -1,11 +1,11 @@
 package seedu.address.model.task;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Deadline {
 
@@ -13,7 +13,7 @@ public class Deadline {
             "Deadlines should be in the format yyyy-MM-dd";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * Constructs a {@code Deadline}.
@@ -27,6 +27,10 @@ public class Deadline {
         } catch (DateTimeParseException e) {
             checkArgument(false, MESSAGE_CONSTRAINTS);
         }
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
     }
 
     @Override

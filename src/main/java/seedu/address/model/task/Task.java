@@ -1,11 +1,11 @@
 package seedu.address.model.task;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 public class Task {
 
@@ -13,6 +13,13 @@ public class Task {
     private final Deadline deadline;
     private final Set<Tag> tags = new HashSet<>();
 
+    /**
+     * Constructs a {@code Task}.
+     *
+     * @param name A valid TaskName.
+     * @param deadline A valid Deadline.
+     * @param tags A valid Set of Tags.
+     */
     public Task(TaskName name, Deadline deadline, Set<Tag> tags) {
         this.name = name;
         this.deadline = deadline;
