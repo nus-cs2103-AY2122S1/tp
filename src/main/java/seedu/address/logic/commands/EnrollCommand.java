@@ -22,6 +22,7 @@ public class EnrollCommand extends Command {
             + "LESSONCODE\n"
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
 
+    public static final String MESSAGE_STUDENT_IN_LESSON = "%1$s is already enrolled in the existing %2$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "Lesson does not exist, please try again";
     public static final String MESSAGE_SUCCESS = "New %1$s enrolled into lesson: %2$s";
 
@@ -52,9 +53,15 @@ public class EnrollCommand extends Command {
         if (lesson == null) {
             throw new CommandException(MESSAGE_LESSON_NOT_FOUND);
         }
+
+        if (lesson.containsStudent(student)) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON,
+                    student.getName(),
+                    lesson));
+        }
         lesson.addStudent(student);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, student, lesson));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), lesson));
     }
 
     @Override

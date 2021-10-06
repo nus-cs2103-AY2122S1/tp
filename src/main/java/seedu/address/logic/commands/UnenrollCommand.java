@@ -24,6 +24,7 @@ public class UnenrollCommand extends Command {
             + "Example: " + "unenroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
 
     public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = "Unenrolled Student: %1$s from Lesson: %2$s";
+    public static final String MESSAGE_STUDENT_NOT_IN_LESSON = "%1$s is not currently enrolled in the existing %2$s";
 
     private final Index targetIndex;
 
@@ -52,8 +53,14 @@ public class UnenrollCommand extends Command {
         }
 
         Student studentToUnenroll = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!lesson.containsStudent(studentToUnenroll)) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_LESSON,
+                    studentToUnenroll.getName(),
+                    lesson));
+        }
         lesson.removeStudent(studentToUnenroll);
-        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll, lesson));
+        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll.getName(), lesson));
     }
 
     @Override
