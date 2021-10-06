@@ -61,7 +61,6 @@ public class JsonAdaptedParticipant {
         if (nextOfKins != null) {
             this.nextOfKins.addAll(nextOfKins);
         }
-        // TODO: Notes to be implemented
     }
 
     /**
@@ -81,6 +80,11 @@ public class JsonAdaptedParticipant {
         nextOfKins.addAll(source.getNextOfKins().stream().map(JsonAdaptedNextOfKin::new).collect(Collectors.toList()));
         // TODO: Notes to be implemented
     }
+
+    public String getId() {
+        return id;
+    }
+
 
     /**
      * Converts this Jackson-friendly adapted participant object into the model's {@code Participant} object.

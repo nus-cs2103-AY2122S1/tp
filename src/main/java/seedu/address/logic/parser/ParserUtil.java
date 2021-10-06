@@ -20,6 +20,7 @@ import seedu.address.model.participant.Email;
 import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
+import seedu.address.model.participant.ParticipantId;
 import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -240,6 +241,7 @@ public class ParserUtil {
     }
 
     /**
+
      * Parses {@code String eventTime} into a {@code EventTime}.
      */
     public static EventTime parseEventTime(String eventTime) throws ParseException {
@@ -252,6 +254,29 @@ public class ParserUtil {
             throw new ParseException(EventTime.MESSAGE_CONSTRAINTS);
         }
         return new EventTime(trimmedEventTime);
+    }
+
+     *  Parses {@code String id} into a {@code ParticipantId object}.
+     */
+    public static ParticipantId parseParticipantId(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!ParticipantId.isValidId(trimmedId)) {
+            throw new ParseException(ParticipantId.MESSAGE_CONSTRAINTS);
+        }
+        return new ParticipantId(id);
+    }
+
+    /**
+     *  Parses {@code String name} into a {@code EventName event name}.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(name)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(name);
     }
 
 }

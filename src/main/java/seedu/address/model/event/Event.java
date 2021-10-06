@@ -1,7 +1,6 @@
 package seedu.address.model.event;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,7 +73,7 @@ public class Event implements Comparable<Event> {
     }
 
     public List<Participant> getParticipants() {
-        return Collections.unmodifiableList(this.participants);
+        return this.participants;
     }
 
     /**
