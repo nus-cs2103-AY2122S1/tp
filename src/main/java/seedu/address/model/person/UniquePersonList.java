@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -137,13 +138,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the person in lexicographical order of their name.
+     * Sorts the person in alphabetical order of their name.
      */
     public void sortList() {
         internalList.sort(new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
-                return o1.getName().fullName.compareTo(o2.getName().fullName);
+                return o1.getName().fullName.toLowerCase().compareTo(o2.getName().fullName.toLowerCase());
             }
         });
     }
