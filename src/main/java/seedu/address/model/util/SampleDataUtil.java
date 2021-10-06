@@ -20,24 +20,24 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new CategoryCode("att"), new Name("Alex Yeoh"), new Phone("87438807"),
-                    new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new CategoryCode("com"), new Name("Bernice Yu"), new Phone("99272758"),
-                    new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new CategoryCode("tpt"), new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                    new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new CategoryCode("fnb"), new Name("David Li"), new Phone("91031282"),
-                    new Email("lidavid@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new CategoryCode("oth"), new Name("Irfan Ibrahim"), new Phone("92492021"),
-                    new Email("irfan@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new CategoryCode("att"), new Name("Roy Balakrishnan"), new Phone("92624417"),
-                    new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+            new Person(new CategoryCode("att"), new Name("Marina Bay Sands"), new Phone("66888868"),
+                new Email("marinabaysands@example.com"), new Address("10 Bayfront Ave, Singapore 018956"),
+                getTagSet("casino", "popular")),
+            new Person(new CategoryCode("com"), new Name("VivoCity"), new Phone("63776860"),
+                new Email("vivocity@example.com"), new Address("1 HarbourFront Walk, Singapore 098585"),
+                getTagSet("mall", "south")),
+            new Person(new CategoryCode("tpt"), new Name("Singapore DUCKtours"), new Phone("63386877"),
+                new Email("sgducktours@example.com"), new Address("3 Temasek Blvd, #01-330 Suntec City," +
+                " Singapore 038983"), getTagSet("tour")),
+            new Person(new CategoryCode("fnb"), new Name("Bread Street Kitchen by Gordon Ramsay"),
+                new Phone("66885665"), new Email("bskbygordon@example.com"),
+                new Address("10 Bayfront Ave, L1 - 81, Singapore 018956"), getTagSet("michelin")),
+            new Person(new CategoryCode("oth"), new Name("Esso Telok Blangah"), new Phone("62712705"),
+                new Email("essotelokblangah@example.com"), new Address("396 Telok Blangah Road, Singapore 98837."),
+                getTagSet("kiosk", "break")),
+            new Person(new CategoryCode("att"), new Name("Gardens By The Bay"), new Phone("64206848"),
+                new Email("gbtb@example.com"), new Address("18 Marina Gardens Dr, Singapore 018953"),
+                getTagSet("park", "outdoor"))
         };
     }
 
