@@ -35,17 +35,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' modTracker file path.
+     * Returns the user prefs' moduleTracker file path.
      */
-    Path getModTrackerFilePath();
+    Path getModuleTrackerFilePath();
 
     /**
-     * Sets the user prefs' modTracker file path.
+     * Sets the user prefs' moduleTracker file path.
      */
-    void setModTrackerFilePath(Path modTrackerFilePath);
+    void setModuleTrackerFilePath(Path moduleTrackerFilePath);
 
     /**
-     * Replaces modTracker data with the data in {@code modTracker}.
+     * Replaces moduleTracker data with the data in {@code moduleTracker}.
      */
     void setModuleTracker(ReadOnlyModuleTracker moduleTracker);
 
@@ -53,7 +53,7 @@ public interface Model {
     ReadOnlyModuleTracker getModuleTracker();
 
     /**
-     * Returns true if a module with the same identity as {@code module} exists in the modTracker.
+     * Returns true if a module with the same identity as {@code module} exists in the moduleTracker.
      */
     boolean hasModule(Module module);
 

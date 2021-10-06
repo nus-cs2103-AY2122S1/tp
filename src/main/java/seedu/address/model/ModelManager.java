@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.module.Module;
 
 /**
  * Represents the in-memory model of the mod tracker data.
@@ -20,7 +21,7 @@ public class ModelManager implements Model {
 
     private final ModuleTracker moduleTracker;
     private final UserPrefs userPrefs;
-    private final FilteredList<seedu.address.model.module.Module> filteredModules;
+    private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given moduleTracker and userPrefs.
@@ -65,14 +66,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getModTrackerFilePath() {
-        return userPrefs.getModTrackerFilePath();
+    public Path getModuleTrackerFilePath() {
+        return userPrefs.getModuleTrackerFilePath();
     }
 
     @Override
-    public void setModTrackerFilePath(Path modTrackerFilePath) {
+    public void setModuleTrackerFilePath(Path modTrackerFilePath) {
         requireNonNull(modTrackerFilePath);
-        userPrefs.setModTrackerFilePath(modTrackerFilePath);
+        userPrefs.setModuleTrackerFilePath(modTrackerFilePath);
     }
 
     //=========== ModuleTracker ================================================================================
@@ -105,7 +106,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setModule(seedu.address.model.module.Module target, seedu.address.model.module.Module editedModule) {
+    public void setModule(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
 
         moduleTracker.setModule(target, editedModule);
@@ -118,12 +119,12 @@ public class ModelManager implements Model {
      * {@code versionedModTracker}
      */
     @Override
-    public ObservableList<seedu.address.model.module.Module> getFilteredModuleList() {
+    public ObservableList<Module> getFilteredModuleList() {
         return filteredModules;
     }
 
     @Override
-    public void updateFilteredModuleList(Predicate<seedu.address.model.module.Module> predicate) {
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
         requireNonNull(predicate);
         filteredModules.setPredicate(predicate);
     }
