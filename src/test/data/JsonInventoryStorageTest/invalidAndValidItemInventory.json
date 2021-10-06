@@ -1,0 +1,9 @@
+{
+  "items": [ {
+    "name": "Valid Item",
+    "id": "#9482424"
+  }, {
+    "name": "Item With Invalid Tag",
+    "tagged": ["invalid tag!"]
+  } ]
+}

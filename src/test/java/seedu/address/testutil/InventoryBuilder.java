@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
-import seedu.address.newmodel.Inventory;
-import seedu.address.newmodel.item.Item;
+import seedu.address.model.Inventory;
+import seedu.address.model.item.Item;
 
 /**
  * A utility class to help with building Inventory objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code AddressBook ab = new InventoryBuilder().withItem("Pie", "Pudding").build();}
  */
 public class InventoryBuilder {
 
