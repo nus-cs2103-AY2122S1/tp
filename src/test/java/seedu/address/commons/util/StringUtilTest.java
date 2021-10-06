@@ -123,6 +123,49 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for containsWordIgnoreCase --------------------------------------
+
+    /*
+     * Invalid equivalence partitions for word: null, empty, multiple words
+     * Invalid equivalence partitions for sentence: null
+     * The four test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsIgnoreCase(null, "a"));
+    }
+
+    @Test
+    public void containIgnoreCase_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsIgnoreCase("a", null));
+    }
+
+    @Test
+    public void containIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.containsIgnoreCase("a", ""));
+    }
+
+    @Test
+    public void containsIgnoreCase_validInputs_correctResult() {
+        assertFalse(StringUtil.containsIgnoreCase("", "aaa"));
+        assertFalse(StringUtil.containsIgnoreCase("abd", "g"));
+        assertFalse(StringUtil.containsIgnoreCase("abd", " a"));
+
+        assertTrue(StringUtil.containsIgnoreCase("abc", "a"));
+        assertTrue(StringUtil.containsIgnoreCase("ab c", "c"));
+
+        //match uppercase and lowercase
+        assertTrue(StringUtil.containsIgnoreCase("abC", "C"));
+        assertTrue(StringUtil.containsIgnoreCase("abfCa", "fCa"));
+
+        // match for word with spaces in between
+        assertTrue(StringUtil.containsIgnoreCase("b a a d", "a a"));
+
+        // match multiple
+        assertTrue(StringUtil.containsIgnoreCase("acadffac", "ac"));
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*
