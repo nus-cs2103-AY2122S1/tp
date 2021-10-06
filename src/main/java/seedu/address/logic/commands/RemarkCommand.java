@@ -63,7 +63,7 @@ public class RemarkCommand extends Command {
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
-    
+
     /**
      * Generates a command execution success message based on whether the remark is added to or removed from
      * {@code personToEdit}.
