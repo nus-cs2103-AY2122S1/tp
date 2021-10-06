@@ -160,7 +160,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Add the event to the addressBook.
+     * Add the event to Managera.
      */
     @Override
     public void addEvent(Event event) {
@@ -169,7 +169,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Remove the event from the addressBook.
+     * Remove the event from Managera.
      */
     @Override
     public void removeEvent(Event target) {

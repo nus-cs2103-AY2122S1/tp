@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
 /**
- * Marks an Event identified using its displayed index as done.
+ * Removes an Event identified using its displayed index.
  */
 public class RemoveEventCommand extends Command {
 
@@ -22,7 +22,7 @@ public class RemoveEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_EVENT_SUCCESS = "Got it, I have removed the following event:\n %1$s";
+    public static final String MESSAGE_REMOVE_EVENT_SUCCESS = "Got it, I have removed the following event:\n %1$s";
 
     private final Index targetIndex;
 
@@ -46,7 +46,7 @@ public class RemoveEventCommand extends Command {
 
         Event eventToRemove = lastShownList.get(targetIndex.getZeroBased());
         model.removeEvent(eventToRemove);
-        return new CommandResult(String.format(MESSAGE_DONE_EVENT_SUCCESS, eventToRemove));
+        return new CommandResult(String.format(MESSAGE_REMOVE_EVENT_SUCCESS, eventToRemove));
     }
 
     @Override

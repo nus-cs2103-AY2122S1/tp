@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
-import java.util.ArrayList;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddEventCommand;
@@ -9,9 +13,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object
@@ -26,7 +27,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME);
-        if (!arePrefixesPresent(argMultiMap, PREFIX_NAME) || !arePrefixesPresent(argMultiMap, PREFIX_DATE) || !argMultiMap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultiMap, PREFIX_NAME, PREFIX_DATE) || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
         String eventNameStr = argMultiMap.getValue(PREFIX_NAME).get();
