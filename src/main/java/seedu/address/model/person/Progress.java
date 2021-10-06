@@ -7,6 +7,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class Progress {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Progress can be anything";
+
     public final String progress;
 
     /**

@@ -37,13 +37,26 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
+        final Matcher matcher;
+        final String commandWord;
+        final String arguments;
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        if (userInput.contains("-s")) {
+            String[] extracts = userInput.split("-s");
+            commandWord = extracts[0] + "-s";
+            arguments = extracts[1];
+        } else if (userInput.contains("-p")) {
+            String[] extracts = userInput.split("-p");
+            commandWord = extracts[0] + "-p";
+            arguments = extracts[1];
+        } else {
+            matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+            if (!matcher.matches()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            }
+            commandWord = matcher.group("commandWord");
+            arguments = matcher.group("arguments");
+        }
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
