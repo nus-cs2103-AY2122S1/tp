@@ -27,6 +27,7 @@ import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -99,10 +100,12 @@ public class EditPatientCommand extends EditCommand {
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        Remark updatedRemark = patientToEdit.getRemark();
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         Risk updatedRisk = editPatientDescriptor.getRisk().orElse(patientToEdit.getRisk());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRisk);
+        return new Patient(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedRemark, updatedTags, updatedRisk);
     }
 
     @Override
@@ -132,6 +135,7 @@ public class EditPatientCommand extends EditCommand {
         private Phone phone;
         private Email email;
         private Address address;
+        private Remark remark;
         private Set<Tag> tags;
         private Risk risk;
 
@@ -146,6 +150,7 @@ public class EditPatientCommand extends EditCommand {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
             setRisk(toCopy.risk);
         }
@@ -187,6 +192,14 @@ public class EditPatientCommand extends EditCommand {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         /**
@@ -233,6 +246,7 @@ public class EditPatientCommand extends EditCommand {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags())
                     && getRisk().equals(e.getRisk());
         }

@@ -16,8 +16,12 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Creates a new ResultDisplay Pane and sets a welcome message.
+     */
     public ResultDisplay() {
         super(FXML);
+        resultDisplay.setText("Welcome to PlannerMD");
     }
 
     public void setFeedbackToUser(String feedbackToUser) {

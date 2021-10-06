@@ -7,6 +7,7 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -18,8 +19,8 @@ public class Doctor extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Doctor(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
+    public Doctor(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        super(name, phone, email, address, remark, tags);
     }
 
     /**

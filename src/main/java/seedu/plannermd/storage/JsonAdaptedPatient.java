@@ -23,9 +23,10 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
+                              @JsonProperty("remark") String remark,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                               @JsonProperty("risk") String risk) {
-        super(name, phone, email, address, tagged);
+        super(name, phone, email, address, remark, tagged);
         this.risk = risk;
     }
 
@@ -55,7 +56,7 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
         final Risk modelRisk = Risk.getUnclassifiableRisk(risk);
 
         return new Patient(person.getName(), person.getPhone(),
-                person.getEmail(), person.getAddress(), person.getTags(), modelRisk);
+                person.getEmail(), person.getAddress(), person.getRemark(), person.getTags(), modelRisk);
     }
 
 }

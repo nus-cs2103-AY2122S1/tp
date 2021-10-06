@@ -23,22 +23,22 @@ import seedu.plannermd.model.patient.Patient;
  * A utility class containing a list of {@code Patient} objects to be used in tests.
  */
 public class TypicalPatients {
-
     public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
+            .withPhone("94351253").withRemark("Awaiting PCR test result")
             .withTags("friends")
             .withRisk("LOW").build();
     public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withPhone("98765432").withRemark("Hypochondriac")
             .withTags("owesMoney", "friends")
             .withRisk("LOW").build();
     public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street")
+            .withEmail("heinz@example.com").withAddress("wall street").withRemark("Prefers liquid medication")
             .withRisk("UNCLASSIFIED").build();
     public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withEmail("cornelia@example.com").withAddress("10th street")
+            .withTags("friends")
             .withRisk("MEDIUM").build();
     public static final Patient ELLE = new PatientBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
