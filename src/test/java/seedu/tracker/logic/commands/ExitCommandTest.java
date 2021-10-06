@@ -18,3 +18,5 @@ public class ExitCommandTest {
         assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
 }
+
+
