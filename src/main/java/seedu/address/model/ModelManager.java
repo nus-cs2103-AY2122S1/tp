@@ -160,6 +160,18 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns a boolean if Managera already contain this event.
+     *
+     * @param event An Event instance.
+     * @return A boolean indicating if the event already exists.
+     */
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    /**
      * Add the event to Managera.
      */
     @Override

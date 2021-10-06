@@ -172,9 +172,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd Participant on the current list.
 * `find Betsy` followed by `delete 1` deletes the 1st Participant in the results of the `find` command. 
  
-### Clearing all Participants : `clear`
+### Clearing all Data : `clear`
 
-Clears all Participants from Managera.
+Clears all Events and Participants from Managera.
 
 Format: `clear`
 
@@ -328,13 +328,13 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
-**Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
-**Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g., `doneEvent n/240km Marathon d/2022-08-20`
+**Remove Event** | `removeEvent INDEX`  <br> e.g., `removeEvent 1`
+**Mark an Event as done** | `doneEvent INDEX` <br> e.g., `doneEvent 1`
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
 **List Events** | `listEvents`
-**add Participant to Event** | `addParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant e/2103T Finals p/mikerowe1`
-**remove Participant from Event** | `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant e/CS2103T Finals p/mikerowe1`
+**add Participant to Event** | `addParticipant ev/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant ev/2103T Finals p/mikerowe1`
+**remove Participant from Event** | `removeParticipant ev/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant ev/CS2103T Finals p/mikerowe1`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
 **Find Participants** | `findParticipant KEYWORD` <br> e.g., `findParticipant Mike`

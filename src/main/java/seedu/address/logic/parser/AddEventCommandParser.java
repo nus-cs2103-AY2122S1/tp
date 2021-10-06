@@ -22,7 +22,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddEventCommand
      * and returns a AddEventCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultiMap =
@@ -30,30 +30,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         if (!arePrefixesPresent(argMultiMap, PREFIX_NAME, PREFIX_DATE) || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
-        String eventNameStr = argMultiMap.getValue(PREFIX_NAME).get();
-        String eventDateStr = argMultiMap.getValue(PREFIX_DATE).get();
-        String eventTimeStr = argMultiMap.getValue(PREFIX_TIME).orElse("");
-
-        if (eventNameStr == null || !EventName.isValidEventName(eventNameStr)) {
-            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
-        }
-
-        if (eventDateStr == null || !EventDate.isValidDate(eventDateStr)) {
-            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
-        }
-
-        if (eventTimeStr == null || (!eventTimeStr.equals("") && !EventTime.isValidTime(eventTimeStr))) {
-            throw new ParseException(EventTime.MESSAGE_CONSTRAINTS);
-        }
-        EventName eventName = new EventName(eventNameStr);
-        EventDate eventDate = new EventDate(eventDateStr);
-        Event event;
-        if (eventTimeStr != "") {
-            EventTime eventTime = new EventTime(eventTimeStr);
-            event = new Event(eventName, eventDate, eventTime);
-        } else {
-            event = new Event(eventName, eventDate);
-        }
+        EventName eventName = ParserUtil.parseEventName(argMultiMap.getValue(PREFIX_NAME).get());
+        EventDate eventDate = ParserUtil.parseEventDate(argMultiMap.getValue(PREFIX_DATE).get());
+        EventTime eventTime = ParserUtil.parseEventTime(argMultiMap.getValue(PREFIX_TIME).orElse(""));
+        Event event = new Event(eventName, eventDate, eventTime);
         return new AddEventCommand(event);
     }
 

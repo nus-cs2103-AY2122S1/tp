@@ -91,6 +91,11 @@ public interface Model {
     void updateFilteredParticipantList(Predicate<Participant> predicate);
 
     /**
+     * Returns true if an Event with the same identity as {@code event} exists in Managera.
+     */
+    boolean hasEvent(Event event);
+
+    /**
      * Adds the given Event {@code event}.
      */
     void addEvent(Event event);
