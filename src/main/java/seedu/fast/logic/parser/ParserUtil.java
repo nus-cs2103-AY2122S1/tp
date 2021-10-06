@@ -13,6 +13,7 @@ import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Phone;
+import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
 
 /**
@@ -104,10 +105,10 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        if (!Tag.isValidTagTerm(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return Tag.createTag(trimmedTag);
     }
 
     /**
@@ -121,4 +122,20 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses {@code String tagName} and returns the corresponding priority tag name.
+     */
+    public static String parsePriorityTag(String tagName) {
+        switch(tagName) {
+        case PriorityTag.LowPriority.COMMAND:
+            return PriorityTag.LowPriority.NAME;
+        case PriorityTag.MediumPriority.COMMAND:
+            return PriorityTag.MediumPriority.NAME;
+        default:
+            return PriorityTag.HighPriority.NAME;
+        //It is guaranteed that the default case will always be a high priority tag instance.
+        }
+    }
+
 }
