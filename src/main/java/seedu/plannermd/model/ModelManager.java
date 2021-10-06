@@ -15,6 +15,7 @@ import seedu.plannermd.model.PlannerMd.State;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
+import seedu.plannermd.ui.PersonTabSwitcher;
 
 /**
  * Represents the in-memory model of the plannermd data.
@@ -28,6 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Patient> filteredPatients;
     private final FilteredList<Doctor> filteredDoctors;
     private final State state;
+    private PersonTabSwitcher personTabSwitcher;
 
     /**
      * Initializes a ModelManager with the given plannerMd and userPrefs.
@@ -135,6 +137,14 @@ public class ModelManager implements Model {
     public void updateFilteredPatientList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
+    }
+
+    //=========== Tab state management ======================================================================
+
+    @Override
+    public void setPersonTabSwitcher(PersonTabSwitcher personTabSwitcher) {
+        requireNonNull(personTabSwitcher);
+        this.personTabSwitcher = personTabSwitcher;
     }
 
     @Override
