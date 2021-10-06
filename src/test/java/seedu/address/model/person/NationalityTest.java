@@ -14,24 +14,22 @@ public class NationalityTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
+    public void constructor_invalidNationality_throwsIllegalArgumentException() {
         String invalidNationality = "";
         assertThrows(IllegalArgumentException.class, () -> new Nationality(invalidNationality));
     }
 
     @Test
     public void isValidNationality() {
-        // null address
+        // null nationality
         assertThrows(NullPointerException.class, () -> Nationality.isValidNationality(null));
 
-        // invalid addresses
+        // invalid nationality
         assertFalse(Nationality.isValidNationality("")); // empty string
         assertFalse(Nationality.isValidNationality(" ")); // spaces only
 
-        // valid addresses
+        // valid nationality
         assertTrue(Nationality.isValidNationality("Blk 456, Den Road, #01-355"));
         assertTrue(Nationality.isValidNationality("-")); // one character
-        assertTrue(Nationality.isValidNationality(
-                "Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }
