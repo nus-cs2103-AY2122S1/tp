@@ -2,8 +2,12 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,15 +24,19 @@ public class Student {
     private final ID id;
 
     // Data fields
+    private final List<Group> groups = new ArrayList<>();
+    private final Map<Assessment, Score> scores = new HashMap<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, ID id, Set<Tag> tags) {
-        requireAllNonNull(name, id, tags);
+    public Student(Name name, ID id, List<Group> groups, Map<Assessment, Score> scores, Set<Tag> tags) {
+        requireAllNonNull(name, id, groups, scores, tags);
         this.name = name;
         this.id = id;
+        this.groups.addAll(groups);
+        this.scores.putAll(scores);
         this.tags.addAll(tags);
     }
 
@@ -38,6 +46,22 @@ public class Student {
 
     public ID getId() {
         return id;
+    }
+
+    /**
+     * Returns an immutable list of groups, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Group> getGroups() {
+        return Collections.unmodifiableList(groups);
+    }
+
+    /**
+     * Returns an immutable map of assessment scores, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Map<Assessment, Score> getScores() {
+        return Collections.unmodifiableMap(scores);
     }
 
     /**
@@ -79,13 +103,15 @@ public class Student {
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
                 && otherStudent.getId().equals(getId())
+                && otherStudent.getGroups().equals(getGroups())
+                && otherStudent.getScores().equals(getScores())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, id, tags);
+        return Objects.hash(name, id, groups, scores, tags);
     }
 
     @Override
@@ -94,6 +120,18 @@ public class Student {
         builder.append(getName())
                 .append("; NUSNET ID: ")
                 .append(getId());
+
+        List<Group> groups = getGroups();
+        if (!groups.isEmpty()) {
+            builder.append("; Groups: ");
+            groups.forEach(builder::append);
+        }
+
+        Map<Assessment, Score> scores = getScores();
+        if (!scores.isEmpty()) {
+            builder.append("; Assessment Scores: ")
+                    .append(scores);
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
