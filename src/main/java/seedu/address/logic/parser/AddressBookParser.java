@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.AddParticipantToEventCommand;
 import seedu.address.logic.commands.ClearCommand;

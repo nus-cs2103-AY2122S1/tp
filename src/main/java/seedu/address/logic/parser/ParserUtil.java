@@ -256,6 +256,7 @@ public class ParserUtil {
         return new EventTime(trimmedEventTime);
     }
 
+    /**
      *  Parses {@code String id} into a {@code ParticipantId object}.
      */
     public static ParticipantId parseParticipantId(String id) throws ParseException {
@@ -266,17 +267,4 @@ public class ParserUtil {
         }
         return new ParticipantId(id);
     }
-
-    /**
-     *  Parses {@code String name} into a {@code EventName event name}.
-     */
-    public static EventName parseEventName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!EventName.isValidEventName(name)) {
-            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
-        }
-        return new EventName(name);
-    }
-
 }
