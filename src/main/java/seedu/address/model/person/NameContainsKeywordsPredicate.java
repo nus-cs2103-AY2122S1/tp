@@ -10,6 +10,7 @@ import seedu.address.commons.util.StringUtil;
  *
  * @deprecated use {@link ContainsKeywordsPredicate} instead.
  */
+@Deprecated
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
