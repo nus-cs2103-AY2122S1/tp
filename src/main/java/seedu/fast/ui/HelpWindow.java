@@ -20,8 +20,8 @@ import seedu.fast.logic.commands.DeleteCommand;
 import seedu.fast.logic.commands.EditCommand;
 import seedu.fast.logic.commands.ExitCommand;
 import seedu.fast.logic.commands.FindCommand;
-import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.HelpCommand;
+import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
 
@@ -32,12 +32,18 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t09-4.github.io/tp/";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete", "Edit",
-            "Find", "List", "Help", "Remark", "Sort", "Others"};
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
+        "Edit", "Find", "List", "Help", "Remark", "Sort", "Misc"};
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
+    private static final String QUICK_START = "Please select a command in the dropdown to view "
+        + "the usage for each command! \n\n"
+        + "Financial Advisor Smart Tracker (FAST) is a desktop app for"
+        + "managing clients, optimized for use via a Command Line Interface (CLI) while still having the "
+        + "benefits of a Graphical User Interface (GUI). If you can type fast, FAST can get your contact "
+        + "management tasks done faster than traditional GUI apps.";
     private static final String ADD_COMMAND_USAGE = AddCommand.MESSAGE_USAGE;
     private static final String APPOINTMENT_COMMAND_USAGE = AppointmentCommand.MESSAGE_USAGE;
     private static final String CLEAR_COMMAND_USAGE = ClearCommand.MESSAGE_USAGE;
@@ -72,14 +78,10 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
-        commandInstruction.setText("default");
+        commandInstruction.setText(QUICK_START);
 
         EventHandler<ActionEvent> event =
-                new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent e) {
-                        commandInstruction.setText(commandInstructionMessage(commandList.getValue()));
-                    }
-                };
+            e -> commandInstruction.setText(commandInstructionMessage(commandList.getValue()));
         commandList.setOnAction(event);
     }
 
@@ -151,6 +153,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public String commandInstructionMessage(String commandName) {
         switch (commandName) {
+        case "Quick Start":
+            return QUICK_START;
         case "Add":
             return ADD_COMMAND_USAGE;
         case "Appointment":
@@ -173,8 +177,10 @@ public class HelpWindow extends UiPart<Stage> {
             return REMARK_COMMAND_USAGE;
         case "Sort":
             return SORT_COMMAND_USAGE;
+        case "Misc":
+            return "Coming soon!";
         default:
-            return "test";
+            return "Something's wrong, I can feel it";
         }
     }
 }

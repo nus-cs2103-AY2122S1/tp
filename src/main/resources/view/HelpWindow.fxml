@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -24,7 +24,6 @@
       </stylesheets>
          <BorderPane>
             <center>
-      
             <HBox alignment="CENTER">
               <children>
                 <Label fx:id="helpMessage" text="Label">
@@ -49,8 +48,11 @@
             <bottom>
                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                   <children>
-                     <ComboBox fx:id="commandList" prefWidth="150.0" promptText="Quick Start" />
-                     <Label fx:id="commandInstruction" text="Label" />
+                     <ComboBox fx:id="commandList" prefWidth="150.0" promptText="(Select a command)" />
+                     <Label fx:id="commandInstruction" text="Label" wrapText="true">
+                        <padding>
+                           <Insets left="5.0" right="5.0" />
+                        </padding></Label>
                   </children>
                </VBox>
             </bottom>
