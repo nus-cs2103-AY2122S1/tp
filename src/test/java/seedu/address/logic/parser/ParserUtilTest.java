@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -27,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE = "Softw@re Eng1n33r";
+    private static final String INVALID_LEVEL_OF_EDUCATION = "Kindergarten";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -34,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ROLE = "Software Engineer";
+    private static final String VALID_LEVEL_OF_EDUCATION = "PhD";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -172,6 +175,32 @@ public class ParserUtilTest {
         String roleWithWhitespace = WHITESPACE + VALID_ROLE + WHITESPACE;
         Role expectedRole = new Role(VALID_ROLE);
         assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
+    }
+
+    @Test
+    public void parseLevelOfEducation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLevelOfEducation((String) null));
+    }
+
+    @Test
+    public void parseLevelOfEducation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseLevelOfEducation(INVALID_LEVEL_OF_EDUCATION));
+    }
+
+    @Test
+    public void parseLevelOfEducation_validValueWithoutWhitespace_returnsLevelOfEducation()
+            throws Exception {
+        LevelOfEducation expectedLevelOfEducation = new LevelOfEducation(VALID_LEVEL_OF_EDUCATION);
+        assertEquals(expectedLevelOfEducation, ParserUtil.parseLevelOfEducation(VALID_LEVEL_OF_EDUCATION));
+    }
+
+    @Test
+    public void parseLevelOfEducation_validValueWithWhitespace_returnsTrimmedLevelOfEducation()
+            throws Exception {
+        String levelOfEducationWithWhitespace = WHITESPACE + VALID_LEVEL_OF_EDUCATION + WHITESPACE;
+        LevelOfEducation expectedLevelOfEducation = new LevelOfEducation(VALID_LEVEL_OF_EDUCATION);
+        assertEquals(expectedLevelOfEducation, ParserUtil.parseLevelOfEducation(levelOfEducationWithWhitespace));
     }
 
     @Test

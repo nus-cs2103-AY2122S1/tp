@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -111,6 +112,23 @@ public class ParserUtil {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
         }
         return new Role(trimmedRole);
+    }
+
+    /**
+     * Parses a {@code String levelOfEducation} into a {@code LevelOfEducation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param levelOfEducation String to be parsed into a LevelOfEducation object.
+     * @return LevelOfEducation object
+     * @throws ParseException if the given {@code LevelOfEducation} is invalid.
+     */
+    public static LevelOfEducation parseLevelOfEducation(String levelOfEducation) throws ParseException {
+        requireNonNull(levelOfEducation);
+        String trimmedLevelOfEducation = levelOfEducation.trim();
+        if (!LevelOfEducation.isValidLevelOfEducation(trimmedLevelOfEducation)) {
+            throw new ParseException(LevelOfEducation.MESSAGE_CONSTRAINTS);
+        }
+        return new LevelOfEducation(trimmedLevelOfEducation);
     }
 
     /**
