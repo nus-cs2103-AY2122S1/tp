@@ -87,10 +87,14 @@ public class UiManager implements Ui {
     }
 
     public static void showViewWindow() {
-        mainWindow.fillInnerParts(true);
+        if (mainWindow != null) {
+            mainWindow.fillInnerParts(true);
+        }
     }
 
     public static void hideViewWindow() {
-        mainWindow.fillInnerParts(false);
+        if (mainWindow != null) {
+            mainWindow.fillInnerParts(false);
+        }
     }
 }
