@@ -21,6 +21,7 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.person.BirthDate;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -49,12 +50,13 @@ public class AddCommandParser implements Parser<AddPatientCommand> {
                 Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
                 Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
                 BirthDate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTH_DATE).get());
+                Remark remark = Remark.getEmptyRemark();
                 Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
                 Risk risk = argMultimap.getValue(PREFIX_RISK).isPresent()
                                 ? ParserUtil.parseRisk(argMultimap.getValue(PREFIX_RISK).get())
                                 : Risk.getUnclassifiedRisk();
 
-                Patient patient = new Patient(name, phone, email, address, birthDate, tagList, risk);
+                Patient patient = new Patient(name, phone, email, address, birthDate, remark, tagList, risk);
 
                 return new AddPatientCommand(patient);
         }
@@ -66,5 +68,4 @@ public class AddCommandParser implements Parser<AddPatientCommand> {
         private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
                 return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
         }
-
 }

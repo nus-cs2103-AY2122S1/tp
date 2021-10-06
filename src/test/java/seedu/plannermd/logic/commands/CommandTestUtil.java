@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
@@ -40,6 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_BIRTH_DATE_AMY = "02/01/1965";
     public static final String VALID_BIRTH_DATE_BOB = "2/2/1955";
+    public static final String VALID_REMARK_AMY = "Orange CHAS card";
+    public static final String VALID_REMARK_BOB = "Company X coverage";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_RISK_AMY = "LOW";
@@ -55,6 +58,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String BIRTH_DATE_DESC_AMY = " " + PREFIX_BIRTH_DATE + VALID_BIRTH_DATE_AMY;
     public static final String BIRTH_DATE_DESC_BOB = " " + PREFIX_BIRTH_DATE + VALID_BIRTH_DATE_BOB;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String RISK_DESC_AMY = " " + PREFIX_RISK + VALID_RISK_AMY;

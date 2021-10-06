@@ -3,9 +3,10 @@
     {
       "name": "Alice Pauline",
       "phone": "94351253",
-      "email": "pauline@example.com",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
       "birthDate": "12/12/1922",
-      "address": "4th street",
+      "remark": "Awaiting PCR test result",
       "tagged": [
         "friends"
       ],
@@ -16,10 +17,11 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "4th street",
+      "birthDate": "12/12/1921",
+      "remark": "PCR done",
       "tagged": [
         "colleagues"
       ],
-      "birthDate": "12/12/1921",
       "risk": "LOW"
     }
   ]

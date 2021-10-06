@@ -28,28 +28,36 @@ import seedu.plannermd.model.patient.Patient;
 public class TypicalPatients {
         public static final Patient ALICE = new PatientBuilder().withName("Alice Pauline")
                         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                        .withBirthDate("20/07/1964").withPhone("94351253").withTags("friends").withRisk("LOW").build();
+                        .withPhone("94351253").withRemark("Awaiting PCR test result").withBirthDate("20/07/1964")
+                        .withTags("friends").withRisk("LOW").build();
         public static final Patient BENSON = new PatientBuilder().withName("Benson Meier")
                         .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
-                        .withBirthDate("20/07/1964").withTags("owesMoney", "friends").withRisk("LOW").build();
+                        .withRemark("Hypochondriac").withTags("owesMoney", "friends").withBirthDate("20/07/1964")
+                        .withRisk("LOW").build();
         public static final Patient CARL = new PatientBuilder().withName("Carl Kurz").withPhone("95352563")
-                        .withBirthDate("20/07/1965").withEmail("heinz@example.com").withAddress("wall street")
-                        .withRisk("UNCLASSIFIED").build();
+                        .withEmail("heinz@example.com").withAddress("wall street")
+                        .withRemark("Prefers liquid medication").withBirthDate("20/07/1965").withRisk("UNCLASSIFIED")
+                        .build();
         public static final Patient DANIEL = new PatientBuilder().withName("Daniel Meier").withPhone("87652533")
-                        .withEmail("cornelia@example.com").withAddress("10th street")
-                        .withBirthDate("20/07/1964").withTags("friends").withRisk("MEDIUM").build();
-        public static final Patient ELLE = new PatientBuilder().withName("Elle Meyer").withPhone("9482224").withBirthDate("19/05/1944")
-                        .withEmail("werner@example.com").withAddress("michegan ave").withRisk("LOW").build();
-        public static final Patient FIONA = new PatientBuilder().withName("Fiona Kunz").withPhone("9482427").withBirthDate("20/08/1948")
-                        .withEmail("lydia@example.com").withAddress("little tokyo").withRisk("UNCLASSIFIED").build();
-        public static final Patient GEORGE = new PatientBuilder().withName("George Best").withPhone("9482442").withBirthDate("9/1/1964")
-                        .withEmail("anna@example.com").withAddress("4th street").withRisk("HIGH").build();
+                        .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+                        .withBirthDate("20/07/1964").withRisk("MEDIUM").build();
+        public static final Patient ELLE = new PatientBuilder().withName("Elle Meyer").withPhone("9482224")
+                        .withEmail("werner@example.com").withAddress("michegan ave").withBirthDate("19/05/1944")
+                        .withRisk("LOW").build();
+        public static final Patient FIONA = new PatientBuilder().withName("Fiona Kunz").withPhone("9482427")
+                        .withEmail("lydia@example.com").withAddress("little tokyo").withBirthDate("20/08/1948")
+                        .withRisk("UNCLASSIFIED").build();
+        public static final Patient GEORGE = new PatientBuilder().withName("George Best").withPhone("9482442")
+                        .withEmail("anna@example.com").withAddress("4th street").withBirthDate("9/1/1964")
+                        .withRisk("HIGH").build();
 
         // Manually added
         public static final Patient HOON = new PatientBuilder().withName("Hoon Meier").withPhone("8482424")
-                        .withEmail("stefan@example.com").withAddress("little india").withBirthDate("22/06/1950").withRisk("LOW").build();
+                        .withEmail("stefan@example.com").withAddress("little india").withBirthDate("22/06/1950")
+                        .withRisk("LOW").build();
         public static final Patient IDA = new PatientBuilder().withName("Ida Mueller").withPhone("8482131")
-                        .withEmail("hans@example.com").withAddress("chicago ave").withBirthDate("22/06/1950").withRisk("LOW").build();
+                        .withEmail("hans@example.com").withAddress("chicago ave").withBirthDate("22/06/1950")
+                        .withRisk("LOW").build();
 
         // Manually added - Person's details found in {@code CommandTestUtil}
         public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

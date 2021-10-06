@@ -21,5 +21,8 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 
+#vscode config files
+/bin/
 .project
 .classpath
+.settings

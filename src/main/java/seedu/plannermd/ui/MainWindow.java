@@ -21,7 +21,7 @@ import seedu.plannermd.logic.parser.exceptions.ParseException;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> {
+public class MainWindow extends UiPart<Stage> implements PersonTabSwitcher {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PatientListPanel patientListPanel;
+    private PersonTab personTab;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane personTabPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +110,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
-        personListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
+        personTab = new PersonTab(logic);
+        personTabPlaceholder.getChildren().add(personTab.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,8 +163,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PatientListPanel getPersonListPanel() {
-        return patientListPanel;
+    public PersonTab getPersonTab() {
+        return personTab;
     }
 
     /**
@@ -192,5 +192,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    @Override
+    public void switchToPatientTab() {
+        personTab.setTabToPatient();
+    }
+
+    @Override
+    public void switchToDoctorTab() {
+        personTab.setTabToDoctor();
     }
 }

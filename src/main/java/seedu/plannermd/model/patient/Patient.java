@@ -9,6 +9,7 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -23,9 +24,9 @@ public class Patient extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Patient(Name name, Phone phone, Email email, Address address, BirthDate birthDate, Set<Tag> tags,
-            Risk risk) {
-        super(name, phone, email, address, tags, birthDate);
+    public Patient(Name name, Phone phone, Email email, Address address, BirthDate birthDate, Remark remark,
+            Set<Tag> tags, Risk risk) {
+        super(name, phone, email, address, birthDate, remark, tags);
         this.risk = risk;
     }
 
@@ -59,15 +60,7 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append("; Phone: ").append(getPhone()).append("; Email: ").append(getEmail())
-                .append("; Address: ").append(getAddress()).append("; Date of Birth: ").append(getBirthDate());
-
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
+        final StringBuilder builder = new StringBuilder(super.toString());
 
         if (!risk.isUnclassified()) {
             builder.append("; Risk: ").append(getRisk());
@@ -75,5 +68,4 @@ public class Patient extends Person {
 
         return builder.toString();
     }
-
 }

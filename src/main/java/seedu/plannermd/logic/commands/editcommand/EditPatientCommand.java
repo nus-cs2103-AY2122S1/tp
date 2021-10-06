@@ -28,6 +28,7 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.person.BirthDate;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -98,9 +99,10 @@ public class EditPatientCommand extends EditCommand {
         BirthDate updatedBirthDate = editPatientDescriptor.getBirthDate().orElse(patientToEdit.getBirthDate());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         Risk updatedRisk = editPatientDescriptor.getRisk().orElse(patientToEdit.getRisk());
+        Remark updatedRemark = patientToEdit.getRemark();
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthDate, updatedTags,
-                updatedRisk);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthDate, updatedRemark,
+                updatedTags, updatedRisk);
     }
 
     @Override
@@ -130,6 +132,7 @@ public class EditPatientCommand extends EditCommand {
         private Email email;
         private Address address;
         private BirthDate birthDate;
+        private Remark remark;
         private Set<Tag> tags;
         private Risk risk;
 
@@ -144,6 +147,7 @@ public class EditPatientCommand extends EditCommand {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
             setBirthDate(toCopy.birthDate);
             setRisk(toCopy.risk);
@@ -196,6 +200,14 @@ public class EditPatientCommand extends EditCommand {
             return Optional.ofNullable(birthDate);
         }
 
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}. A defensive copy of
          * {@code tags} is used internally.
@@ -238,7 +250,8 @@ public class EditPatientCommand extends EditCommand {
 
             return getName().equals(e.getName()) && getPhone().equals(e.getPhone()) && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress()) && getBirthDate().equals(e.getBirthDate())
-                    && getTags().equals(e.getTags()) && getRisk().equals(e.getRisk());
+                    && getRemark().equals(e.getRemark()) && getTags().equals(e.getTags())
+                    && getRisk().equals(e.getRisk());
         }
     }
 }

@@ -3,9 +3,9 @@ package seedu.plannermd.model.person;
 import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.plannermd.model.tag.Tag;
@@ -24,17 +24,20 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate) {
+    public Person(Name name, Phone phone, Email email, Address address, BirthDate birthDate, Remark remark,
+            Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags, birthDate);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.remark = remark;
         this.tags.addAll(tags);
         this.birthDate = birthDate;
     }
@@ -59,6 +62,10 @@ public class Person {
         return birthDate;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
     /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException} if modification is attempted.
@@ -68,15 +75,16 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name. This defines a weaker notion
-     * of equality between two persons.
+     * Returns true if both persons have the same name, phone and email. This
+     * defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone()) && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -96,7 +104,8 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail()) && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags()) && otherPerson.getBirthDate().equals(getBirthDate());
+                && otherPerson.getBirthDate().equals(getBirthDate()) && otherPerson.getRemark().equals(getRemark())
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
@@ -111,10 +120,15 @@ public class Person {
         builder.append(getName()).append("; Phone: ").append(getPhone()).append("; Email: ").append(getEmail())
                 .append("; Address: ").append(getAddress()).append("; Date of Birth: ").append(getBirthDate());
 
+        if (!remark.isEmpty()) {
+            builder.append("; Remark: ").append(getRemark());
+        }
+
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            // print tags in lexicographical order
+            tags.stream().sorted(Comparator.comparing(tag -> tag.tagName)).forEach(builder::append);
         }
         return builder.toString();
     }
