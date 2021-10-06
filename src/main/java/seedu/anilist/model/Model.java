@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' anime list file path.
      */
     Path getAniListFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' anime list file path.
      */
     void setAniListFilePath(Path aniListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code animeList}.
+     * Replaces anime list data with the data in {@code animeList}.
      */
     void setAniList(ReadOnlyAnimeList aniList);
 
-    /** Returns the AddressBook */
+    /** Returns the AnimeList */
     ReadOnlyAnimeList getAniList();
 
     /**
-     * Returns true if a Anime with the same identity as {@code Anime} exists in the address book.
+     * Returns true if an Anime with the same identity as {@code Anime} exists in the anime list.
      */
     boolean hasAnime(Anime anime);
 
     /**
      * Deletes the given Anime.
-     * The Anime must exist in the address book.
+     * The Anime must exist in the anime list.
      */
     void deleteAnime(Anime target);
 
     /**
      * Adds the given Anime.
-     * {@code Anime} must not already exist in the address book.
+     * {@code Anime} must not already exist in the anime list.
      */
     void addAnime(Anime anime);
 
     /**
      * Replaces the given Anime {@code target} with {@code editedAnime}.
-     * {@code target} must exist in the address book.
-     * The Anime identity of {@code editedAnime} must not be the same as another existing Anime in the address book.
+     * {@code target} must exist in the anime list.
+     * The Anime identity of {@code editedAnime} must not be the same as another existing Anime in the anime list.
      */
     void setAnime(Anime target, Anime editedAnime);
 
@@ -80,7 +80,7 @@ public interface Model {
     ObservableList<Anime> getFilteredAnimeList();
 
     /**
-     * Updates the filter of the filtered Anime list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered anime list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAnimeList(Predicate<Anime> predicate);

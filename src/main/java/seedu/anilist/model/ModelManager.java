@@ -14,7 +14,7 @@ import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.anime.Anime;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the anime list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -24,15 +24,15 @@ public class ModelManager implements Model {
     private final FilteredList<Anime> filteredAnime;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given animeList and userPrefs.
      */
-    public ModelManager(ReadOnlyAnimeList addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAnimeList animeList, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(animeList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with anime list: " + animeList + " and user prefs " + userPrefs);
 
-        this.animeList = new AnimeList(addressBook);
+        this.animeList = new AnimeList(animeList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredAnime = new FilteredList<>(this.animeList.getAnimeList());
     }
@@ -76,7 +76,7 @@ public class ModelManager implements Model {
         userPrefs.setAniListFilePath(aniListFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== AnimeList ================================================================================
 
     @Override
     public void setAniList(ReadOnlyAnimeList aniList) {
@@ -116,7 +116,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Anime} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAnimeList}
      */
     @Override
     public ObservableList<Anime> getFilteredAnimeList() {

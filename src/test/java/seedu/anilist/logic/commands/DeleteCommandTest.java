@@ -68,7 +68,7 @@ public class DeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_ANIME);
 
         Index outOfBoundIndex = INDEX_SECOND_ANIME;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of anime list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAniList().getAnimeList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
