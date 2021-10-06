@@ -86,12 +86,18 @@ public class UiManager implements Ui {
         System.exit(1);
     }
 
+    /**
+     * Shows full view of student's details
+     */
     public static void showViewWindow() {
         if (mainWindow != null) {
             mainWindow.fillInnerParts(true);
         }
     }
 
+    /**
+     * Hides full view of student's details
+     */
     public static void hideViewWindow() {
         if (mainWindow != null) {
             mainWindow.fillInnerParts(false);
