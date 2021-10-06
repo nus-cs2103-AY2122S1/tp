@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.Collections;
@@ -34,9 +32,10 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ID + "ID] "
+            + "[" + PREFIX_COUNT + "COUNT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ID + "#N3W_1D ";
+            + PREFIX_ID + "#192028 ";
 
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -87,9 +86,10 @@ public class EditCommand extends Command {
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
         String updatedId = editItemDescriptor.getId().orElse(itemToEdit.getId());
+        Integer updatedCount = editItemDescriptor.getCount().orElse(itemToEdit.getCount());
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
 
-        return new Item(updatedName, updatedId, updatedTags);
+        return new Item(updatedName, updatedId, updatedCount, updatedTags);
     }
 
     @Override
@@ -118,6 +118,7 @@ public class EditCommand extends Command {
         private Name name;
         private String id;
         private Set<Tag> tags;
+        private Integer count;
 
         public EditItemDescriptor() {}
 
@@ -128,6 +129,7 @@ public class EditCommand extends Command {
         public EditItemDescriptor(EditItemDescriptor toCopy) {
             setName(toCopy.name);
             setId(toCopy.id);
+            setCount(toCopy.count);
             setTags(toCopy.tags);
         }
 
@@ -152,6 +154,14 @@ public class EditCommand extends Command {
 
         public Optional<String> getId() {
             return Optional.ofNullable(id);
+        }
+
+        public void setCount(Integer count) {
+            this.count = count;
+        }
+
+        public Optional<Integer> getCount() {
+            return Optional.ofNullable(count);
         }
 
         /**

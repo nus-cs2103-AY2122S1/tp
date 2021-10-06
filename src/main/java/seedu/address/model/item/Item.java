@@ -20,13 +20,15 @@ public class Item {
     private final String id;
 
     // Data fields
+    private final Integer count;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Item(Name name, String id, Set<Tag> tags) {
-        requireAllNonNull(name, id, tags);
+    public Item(Name name, String id, Integer count, Set<Tag> tags) {
+        requireAllNonNull(name, id, count, tags);
+        this.count = count;
         this.name = name;
         this.id = id;
         this.tags.addAll(tags);
@@ -38,6 +40,10 @@ public class Item {
 
     public String getId() {
         return id;
+    }
+
+    public Integer getCount() {
+        return count;
     }
 
     /**
@@ -101,5 +107,4 @@ public class Item {
         }
         return builder.toString();
     }
-
 }

@@ -23,6 +23,7 @@ class JsonAdaptedItem {
 
     private final String name;
     private final String id;
+    private final Integer count;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -31,9 +32,11 @@ class JsonAdaptedItem {
     @JsonCreator
     public JsonAdaptedItem(@JsonProperty("name") String name,
                            @JsonProperty("phone") String id,
+                           @JsonProperty("count") Integer count,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.id = id;
+        this.count = count;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -45,6 +48,7 @@ class JsonAdaptedItem {
     public JsonAdaptedItem(Item source) {
         name = source.getName().fullName;
         id = source.getId();
+        count = source.getCount();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,7 +74,7 @@ class JsonAdaptedItem {
         final Name modelName = new Name(name);
 
         final Set<Tag> modelTags = new HashSet<>(itemTags);
-        return new Item(modelName, id, modelTags);
+        return new Item(modelName, id, count, modelTags);
     }
 
 }
