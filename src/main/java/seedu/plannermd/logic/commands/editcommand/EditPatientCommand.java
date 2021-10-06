@@ -41,9 +41,9 @@ public class EditPatientCommand extends EditCommand {
             + "by the index number used in the displayed patient list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE
-            + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_BIRTH_DATE + "BIRTH_DATE] "
-            +"[" + PREFIX_TAG + "TAG]..." + "[" + PREFIX_RISK + "RISK]\n" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PHONE
-            + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
+            + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_BIRTH_DATE
+            + "BIRTH_DATE] " + "[" + PREFIX_TAG + "TAG]..." + "[" + PREFIX_RISK + "RISK]\n" + "Example: "
+            + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
