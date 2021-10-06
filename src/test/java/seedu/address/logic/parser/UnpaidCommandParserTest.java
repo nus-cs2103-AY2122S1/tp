@@ -7,20 +7,20 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.PaidCommand;
+import seedu.address.logic.commands.UnpaidCommand;
 
-public class PaidCommandParserTest {
+public class UnpaidCommandParserTest {
 
-    private PaidCommandParser parser = new PaidCommandParser();
+    private UnpaidCommandParser parser = new UnpaidCommandParser();
 
     @Test
-    public void parse_validArgs_returnsPaidCommand() {
-        assertParseSuccess(parser, "1", new PaidCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgs_returnsUnpaidCommand() {
+        assertParseSuccess(parser, "1", new UnpaidCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PaidCommand.MESSAGE_USAGE));
+                UnpaidCommand.MESSAGE_USAGE));
     }
 }
