@@ -5,7 +5,7 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_ANIME_DISPLAYE
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalPersons.AMY;
+import static seedu.anilist.testutil.TypicalAnime.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,7 +27,7 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.storage.JsonAniListStorage;
 import seedu.anilist.storage.JsonUserPrefsStorage;
 import seedu.anilist.storage.StorageManager;
-import seedu.anilist.testutil.PersonBuilder;
+import seedu.anilist.testutil.AnimeBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -77,7 +77,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY;
-        Anime expectedAnime = new PersonBuilder(AMY).withTags().build();
+        Anime expectedAnime = new AnimeBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addAnime(expectedAnime);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

@@ -5,18 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalPersons.ALICE;
-import static seedu.anilist.testutil.TypicalPersons.BOB;
+import static seedu.anilist.testutil.TypicalAnime.ALICE;
+import static seedu.anilist.testutil.TypicalAnime.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.anilist.testutil.PersonBuilder;
+import seedu.anilist.testutil.AnimeBuilder;
 
 public class AnimeTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Anime anime = new PersonBuilder().build();
+        Anime anime = new AnimeBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> anime.getTags().remove(0));
     }
 
@@ -29,28 +29,28 @@ public class AnimeTest {
         assertFalse(ALICE.isSameAnime(null));
 
         // same name, all other attributes different -> returns true
-        Anime editedAlice = new PersonBuilder(ALICE)
+        Anime editedAlice = new AnimeBuilder(ALICE)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameAnime(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new AnimeBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameAnime(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Anime editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Anime editedBob = new AnimeBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSameAnime(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        editedBob = new AnimeBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameAnime(editedBob));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Anime aliceCopy = new PersonBuilder(ALICE).build();
+        Anime aliceCopy = new AnimeBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -66,11 +66,11 @@ public class AnimeTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Anime editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Anime editedAlice = new AnimeBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

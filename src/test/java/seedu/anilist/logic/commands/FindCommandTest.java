@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.testutil.TypicalPersons.CARL;
-import static seedu.anilist.testutil.TypicalPersons.ELLE;
-import static seedu.anilist.testutil.TypicalPersons.FIONA;
-import static seedu.anilist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.anilist.testutil.TypicalAnime.CARL;
+import static seedu.anilist.testutil.TypicalAnime.ELLE;
+import static seedu.anilist.testutil.TypicalAnime.FIONA;
+import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 
     @Test
     public void equals() {

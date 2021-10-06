@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalPersons.ALICE;
-import static seedu.anilist.testutil.TypicalPersons.BENSON;
+import static seedu.anilist.testutil.TypicalAnime.ALICE;
+import static seedu.anilist.testutil.TypicalAnime.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.anilist.commons.core.GuiSettings;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
-import seedu.anilist.testutil.AddressBookBuilder;
+import seedu.anilist.testutil.AnimeListBuilder;
 
 public class ModelManagerTest {
 
@@ -62,13 +62,13 @@ public class ModelManagerTest {
 
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setAniListFilePath(null));
     }
 
     @Test
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
+        modelManager.setAniListFilePath(path);
         assertEquals(path, modelManager.getAniListFilePath());
     }
 
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AnimeList animeList = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AnimeList animeList = new AnimeListBuilder().withAnime(ALICE).withAnime(BENSON).build();
         AnimeList differentAnimeList = new AnimeList();
         UserPrefs userPrefs = new UserPrefs();
 

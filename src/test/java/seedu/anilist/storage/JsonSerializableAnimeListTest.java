@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.anilist.commons.exceptions.IllegalValueException;
 import seedu.anilist.commons.util.JsonUtil;
 import seedu.anilist.model.AnimeList;
-import seedu.anilist.testutil.TypicalPersons;
+import seedu.anilist.testutil.TypicalAnime;
 
 public class JsonSerializableAnimeListTest {
 
@@ -24,7 +24,7 @@ public class JsonSerializableAnimeListTest {
         JsonSerializableAniList dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAniList.class).get();
         AnimeList animeListFromFile = dataFromFile.toModelType();
-        AnimeList typicalPersonsAnimeList = TypicalPersons.getTypicalAddressBook();
+        AnimeList typicalPersonsAnimeList = TypicalAnime.getTypicalAnimeList();
         assertEquals(animeListFromFile, typicalPersonsAnimeList);
     }
 

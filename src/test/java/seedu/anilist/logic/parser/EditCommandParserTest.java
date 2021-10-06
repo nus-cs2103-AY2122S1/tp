@@ -12,9 +12,9 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_THIRD_ANIME;
 
 import org.junit.jupiter.api.Test;
 
@@ -78,7 +78,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_ANIME;
         String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND
                 + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
@@ -92,7 +92,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_ANIME;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditCommand.EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -107,7 +107,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST_ANIME;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
 
         EditCommand.EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder()
@@ -121,7 +121,7 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD_ANIME;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditCommand.EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
