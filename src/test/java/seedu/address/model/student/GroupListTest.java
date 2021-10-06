@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,8 +11,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicateGroupException;
-import seedu.address.model.person.exceptions.GroupNotFoundException;
+import seedu.address.model.student.exceptions.DuplicateGroupException;
+import seedu.address.model.student.exceptions.GroupNotFoundException;
 
 public class GroupListTest {
 

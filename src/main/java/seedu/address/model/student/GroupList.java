@@ -1,7 +1,7 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
-import seedu.address.model.person.exceptions.DuplicateGroupException;
-import seedu.address.model.person.exceptions.GroupNotFoundException;
+import seedu.address.model.student.exceptions.DuplicateGroupException;
+import seedu.address.model.student.exceptions.GroupNotFoundException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;

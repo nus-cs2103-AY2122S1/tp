@@ -1,4 +1,4 @@
-package seedu.address.model.person.exceptions;
+package seedu.address.model.student.exceptions;
 
 public class GroupNotFoundException extends RuntimeException {
     public GroupNotFoundException() {

@@ -1,7 +1,7 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
-import seedu.address.model.person.exceptions.DuplicateAssessmentException;
-import seedu.address.model.person.exceptions.AssessmentNotFoundException;
+import seedu.address.model.student.exceptions.DuplicateAssessmentException;
+import seedu.address.model.student.exceptions.AssessmentNotFoundException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
