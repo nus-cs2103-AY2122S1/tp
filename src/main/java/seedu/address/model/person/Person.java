@@ -22,6 +22,7 @@ public class Person {
 
     // Category fields
     private final Role role;
+    private final LevelOfEducation levelOfEducation;
 
     // Data fields
     private final Address address;
@@ -30,13 +31,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, role, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Role role,
+                  LevelOfEducation levelOfEducation, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, levelOfEducation, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
+        this.levelOfEducation = levelOfEducation;
         this.tags.addAll(tags);
     }
 
@@ -58,6 +61,10 @@ public class Person {
 
     public Role getRole() {
         return role;
+    }
+
+    public LevelOfEducation getLevelOfEducation() {
+        return levelOfEducation;
     }
 
     /**
@@ -101,13 +108,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRole().equals(getRole())
+                && otherPerson.getLevelOfEducation().equals(getLevelOfEducation())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, tags);
+        return Objects.hash(name, phone, email, address, role, levelOfEducation, tags);
     }
 
     @Override
@@ -121,7 +129,9 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Applied Role: ")
-                .append(getRole());
+                .append(getRole())
+                .append("; Level of Education: ")
+                .append(getLevelOfEducation());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
