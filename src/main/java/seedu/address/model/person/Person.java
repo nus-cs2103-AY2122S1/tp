@@ -37,7 +37,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
     }
-    
+
     public CategoryCode getCategoryCode() {
         return categoryCode;
     }
