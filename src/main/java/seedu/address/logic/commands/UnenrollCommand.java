@@ -5,7 +5,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class UnenrollCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
         Lesson lesson = model.searchLessons(lessonCode);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -46,8 +46,7 @@ public class UnenrollCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE);
         }
 
-
-        Person studentToUnenroll = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToUnenroll = lastShownList.get(targetIndex.getZeroBased());
         lesson.removeStudent(studentToUnenroll);
         return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll, lesson));
     }
