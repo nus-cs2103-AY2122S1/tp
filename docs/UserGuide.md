@@ -102,10 +102,10 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISITED] [v/VIS
 * `VISIT_DATE` is the next scheduled date for the elderly’s visit. **This is optional to include.**
 
 Examples:
-* `add n/John /p12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED` and `VISIT_DATE`.
-* `add n/Johnny /p87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31` adds an elderly and details without the `VISIT_DATE`.
-* `add n/Janet /p54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31` adds an elderly and details without the `LAST_VISITED`.
-* `add n/Jane /p54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 v/2021-10-31` adds an elderly and details with `LAST_VISITED` and `VISIT_DATE`.
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED` and `VISIT_DATE`.
+* `add n/Johnny p/87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31` adds an elderly and details without the `VISIT_DATE`.
+* `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31` adds an elderly and details without the `LAST_VISITED`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 v/2021-10-31` adds an elderly and details with `LAST_VISITED` and `VISIT_DATE`.
 
 
 ### Delete an elderly or corresponding visit : `delete`
