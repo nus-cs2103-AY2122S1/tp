@@ -28,8 +28,8 @@ public class ModuleUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_CODE + module.getCode().value + " ");
         sb.append(PREFIX_TITLE + module.getTitle().value + " ");
-        sb.append(PREFIX_MC + module.getMc().toString() + " ");
         sb.append(PREFIX_DESCRIPTION + module.getDescription().value + " ");
+        sb.append(PREFIX_MC + String.format("%s", module.getMc().value) + " ");
         module.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
