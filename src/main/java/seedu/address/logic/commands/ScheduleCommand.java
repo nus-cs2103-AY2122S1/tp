@@ -68,7 +68,7 @@ public class ScheduleCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Person scheduleAppointment(Person personToMeet, Appointment desiredAppointment) {
-        assert personToMeet != null;
+        requireNonNull(personToMeet);
 
         Name originalName = personToMeet.getName();
         Phone originalPhone = personToMeet.getPhone();
