@@ -64,7 +64,6 @@ public class PersonCard extends UiPart<Region> {
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
         appointment.setText("Appointment: " + person.getAppointment().getDate());
-                
     }
 
     /**
