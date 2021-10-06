@@ -15,9 +15,11 @@ public class ItemBuilder {
 
     public static final String DEFAULT_NAME = "Cream Puff";
     public static final String DEFAULT_ID = "#654321";
+    public static final String DEFAULT_COUNT = "5";
 
     private Name name;
     private String id;
+    private String count;
     private Set<Tag> tags;
 
     /**
@@ -26,6 +28,7 @@ public class ItemBuilder {
     public ItemBuilder() {
         name = new Name(DEFAULT_NAME);
         id = DEFAULT_ID;
+        count = DEFAULT_COUNT;
         tags = new HashSet<>();
     }
 
@@ -35,6 +38,7 @@ public class ItemBuilder {
     public ItemBuilder(Item itemToCopy) {
         name = itemToCopy.getName();
         id = itemToCopy.getId();
+        count = Integer.toString(itemToCopy.getCount());
         tags = new HashSet<>(itemToCopy.getTags());
     }
 
@@ -55,6 +59,14 @@ public class ItemBuilder {
     }
 
     /**
+     * Sets the {@code count} of the {@code Item} that we are building.
+     */
+    public ItemBuilder withCount(String count) {
+        this.count = count;
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Item} that we are building.
      */
     public ItemBuilder withTags(String ... tags) {
@@ -63,7 +75,7 @@ public class ItemBuilder {
     }
 
     public Item build() {
-        return new Item(name, id, tags);
+        return new Item(name, id, Integer.parseInt(count), tags);
     }
 
 }

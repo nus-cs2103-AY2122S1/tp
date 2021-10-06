@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -28,6 +26,8 @@ public class CommandTestUtil {
     public static final String VALID_NAME_DONUT = "Donut";
     public static final String VALID_ID_BAGEL = "#123456";
     public static final String VALID_ID_DONUT = "#789012";
+    public static final String VALID_COUNT_BAGEL = "5";
+    public static final String VALID_COUNT_DONUT = "$5";
     public static final String VALID_TAG_BAKED = "baked";
     public static final String VALID_TAG_POPULAR = "popular";
 
@@ -35,6 +35,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_DONUT = " " + PREFIX_NAME + VALID_NAME_DONUT;
     public static final String ID_DESC_BAGEL = " " + PREFIX_ID + VALID_ID_BAGEL;
     public static final String ID_DESC_DONUT = " " + PREFIX_ID + VALID_ID_DONUT;
+    public static final String COUNT_DESC_BAGEL = " " + PREFIX_COUNT + VALID_COUNT_BAGEL;
+    public static final String COUNT_DESC_DONUT = " " + PREFIX_COUNT + VALID_COUNT_DONUT;
     public static final String TAG_DESC_BAKED = " " + PREFIX_TAG + VALID_TAG_BAKED;
     public static final String TAG_DESC_POPULAR = " " + PREFIX_TAG + VALID_TAG_POPULAR;
 
@@ -49,9 +51,9 @@ public class CommandTestUtil {
 
     static {
         DESC_BAGEL = new EditItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
-                .withId(VALID_ID_BAGEL).withTags(VALID_TAG_BAKED).build();
+                .withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED).build();
         DESC_DONUT = new EditItemDescriptorBuilder().withName(VALID_NAME_DONUT)
-                .withId(VALID_ID_DONUT).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
+                .withId(VALID_ID_DONUT).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
     }
 
     /**

@@ -32,11 +32,11 @@ class JsonAdaptedItem {
     @JsonCreator
     public JsonAdaptedItem(@JsonProperty("name") String name,
                            @JsonProperty("phone") String id,
-                           @JsonProperty("count") Integer count,
+                           @JsonProperty("count") String count,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.id = id;
-        this.count = count;
+        this.count = Integer.parseInt(count);
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
