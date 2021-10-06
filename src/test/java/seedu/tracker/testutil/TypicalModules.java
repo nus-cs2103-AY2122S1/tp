@@ -18,10 +18,10 @@ public class TypicalModules {
             .withTags("core").build();
     public static final Module CS2101 = new ModuleBuilder().withCode("CS2101")
             .withTitle("Effective Communication for Computing Professionals")
-            .withDescription("equip students with the skills needed to communicate technical information")
+            .withDescription("Equip students with the skills needed to communicate technical information")
             .withTags("core").build();
     public static final Module GEQ1000 = new ModuleBuilder().withCode("GEQ1000").withTitle("Asking Questions")
-            .withDescription("introduces six dominant modes of questioning").withTags("GE").build();
+            .withDescription("Introduces six dominant modes of questioning").withTags("GE").build();
 
 
     private TypicalModules() {} // prevents instantiation
