@@ -16,6 +16,12 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
         NAME, PHONE, EMAIL, ADDRESS
     }
 
+    /**
+     * Constructs a {@link ContainsKeywordsPredicate}.
+     *
+     * @param keywords for any-type matching
+     * @param field field to test
+     */
     public ContainsKeywordsPredicate(List<String> keywords, PersonField field) {
         this.keywords = keywords;
         this.field = field;

@@ -13,8 +13,8 @@ import seedu.address.commons.util.PredicateUtil;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.ContainsKeywordsPredicate.PersonField;
+import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new FindCommand object
