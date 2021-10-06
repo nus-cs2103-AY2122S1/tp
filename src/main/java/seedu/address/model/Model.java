@@ -91,7 +91,18 @@ public interface Model {
     void updateFilteredParticipantList(Predicate<Participant> predicate);
 
     /**
-     * MArks the given Event {@code target} as done.
+     * Adds the given Event {@code event}.
+     */
+    void addEvent(Event event);
+
+    /**
+     * Removes the given Event {@code target}.
+     * {@code target} must exist in Managera.
+     */
+    void removeEvent(Event target);
+
+    /**
+     * Marks the given Event {@code target} as done.
      * {@code target} must exist in Managera.
      */
     void markEventAsDone(Event target);

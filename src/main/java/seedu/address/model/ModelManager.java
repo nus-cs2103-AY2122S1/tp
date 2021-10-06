@@ -154,8 +154,27 @@ public class ModelManager implements Model {
     /**
      * Sorts the events in the addressBook.
      */
+    @Override
     public void sortEvents() {
         addressBook.sortEvents();
+    }
+
+    /**
+     * Add the event to Managera.
+     */
+    @Override
+    public void addEvent(Event event) {
+        requireNonNull(event);
+        addressBook.addEvent(event);
+    }
+
+    /**
+     * Remove the event from Managera.
+     */
+    @Override
+    public void removeEvent(Event target) {
+        requireNonNull(target);
+        addressBook.removeEvent(target);
     }
 
     @Override

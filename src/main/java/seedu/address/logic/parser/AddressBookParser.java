@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
+import seedu.address.logic.commands.RemoveEventCommand;
 import seedu.address.logic.commands.ShowEventDetailsCommand;
 import seedu.address.logic.commands.SortEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -78,19 +80,18 @@ public class AddressBookParser {
 
         //Add new Commands and cases here:
 
-        // TODO: addEvent (Use Parser):
+        case AddEventCommand.COMMAND_WORD:
+            return new AddEventCommandParser().parse(arguments);
 
-        // TODO: removeEvent (Use Parser):
+        case RemoveEventCommand.COMMAND_WORD:
+            return new RemoveEventCommandParser().parse(arguments);
 
-        // TODO: doneEvent (Use Parser):
         case DoneEventCommand.COMMAND_WORD:
             return new DoneEventCommandParser().parse(arguments);
 
-        // TODO: sortEvents:
         case SortEventCommand.COMMAND_WORD:
             return new SortEventCommand();
 
-        // TODO: filterEvents (Use Parser):
         case FilterEventCommand.COMMAND_WORD:
             return new FilterEventCommandParser().parse(arguments);
 
