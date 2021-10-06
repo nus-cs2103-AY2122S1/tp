@@ -9,13 +9,13 @@
   }, {
     "code": "CS2101",
     "title": "Effective Communication for Computing Professionals",
-    "description": "Equip students with the skills needed to communicate technical information",
+    "description": "equip students with the skills needed to communicate technical information",
     "mc": 4,
     "tagged": ["core"]
   }, {
     "code": "GEQ1000",
     "title": "Asking Questions",
-    "description": "Introduces six dominant modes of questioning",
+    "description": "introduces six dominant modes of questioning",
     "mc": 4,
     "tagged": ["GE"]
   } ]
