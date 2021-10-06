@@ -68,7 +68,7 @@ class JsonSerializableAddressBook {
         }
         //Add on for Managera
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
-            Event event = jsonAdaptedEvent.toModelType();
+            Event event = jsonAdaptedEvent.toModelType(participants);
             if (addressBook.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }

@@ -1,8 +1,17 @@
 package seedu.address.model.participant;
 
+import java.util.Objects;
+
 public class ParticipantId {
 
+    public static final String MESSAGE_CONSTRAINTS =
+        "Participant ID should be of length 1 - 6";
+
     private String id;
+
+    public ParticipantId(String id) {
+        this.id = id;
+    }
 
     private ParticipantId(Participant p) {
         this.id = encode(p);
@@ -37,6 +46,27 @@ public class ParticipantId {
             String lastPart = last.length() < 3 ? last : last.substring(0, 3);
             return firstPart.toLowerCase() + lastPart.toLowerCase();
         }
+    }
+
+    public static boolean isValidId(String id) {
+        return id.length() > 0 && id.length() <= 6;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof ParticipantId)) {
+            return false;
+        }
+        ParticipantId otherParticipantId = (ParticipantId) other;
+        return otherParticipantId.id.equals(id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

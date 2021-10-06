@@ -74,7 +74,7 @@ public class Event implements Comparable<Event> {
     }
 
     public List<Participant> getParticipants() {
-        return Collections.unmodifiableList(this.participants);
+        return this.participants;
     }
 
     /**
