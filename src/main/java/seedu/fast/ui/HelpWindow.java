@@ -2,8 +2,12 @@ package seedu.fast.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -17,7 +21,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t09-4.github.io/tp/";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String COMMAND_LIST = "Help!";
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Clear", "Delete", "Edit",
+            "Find", "List", "Help", "Others"};
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -29,7 +34,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     @FXML
-    private Label commandList;
+    private Label commandInstruction;
+
+    @FXML
+    private ComboBox<String> commandList;
 
     /**
      * Creates a new HelpWindow.
@@ -39,7 +47,17 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
-        commandList.setText(COMMAND_LIST);
+        commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
+        //commandInstruction.setText(COMMAND_LIST);
+
+        EventHandler<ActionEvent> event =
+                new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent e)
+                    {
+                        commandInstruction.setText(commandList.getValue() + " selected");
+                    }
+                };
+        commandList.setOnAction(event);
     }
 
     /**
