@@ -76,7 +76,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a student: `add`
 
 Adds a student to the TuitiONE.
 
@@ -91,13 +91,13 @@ Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/P2`
 * `add n/Betsy Crowe a/Newgate Prison p/1234567 g/S4`
 
-### Listing all persons: `list`
+### Listing all students: `list`
 
 Shows a list of all students in the TuitiONE.
 
 Format: `list`
 
-### Locating persons by name: `find`
+### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
 
@@ -115,19 +115,19 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
 Deletes a student from the TuitiONE.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the student indexed 2 in the TuitiONE.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Enrolling a student from lesson: `enroll`
 
