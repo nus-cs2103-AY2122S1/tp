@@ -60,6 +60,9 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case EnrollCommand.COMMAND_WORD:
+            return new EnrollCommandParser().parse(arguments);
+
         case UnenrollCommand.COMMAND_WORD:
             return new UnenrollCommandParser().parse(arguments);
 
