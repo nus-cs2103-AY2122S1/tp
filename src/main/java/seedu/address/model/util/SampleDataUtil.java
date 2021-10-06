@@ -52,7 +52,7 @@ public class SampleDataUtil {
 
     public static Lesson[] getSampleLessons() {
         return new Lesson[] {
-            new Lesson("Science", new Grade("P5"), DayOfWeek.MONDAY, LocalTime.parse("09:00"), 10.5),
+            new Lesson("Science", new Grade("P5"), DayOfWeek.WEDNESDAY, LocalTime.parse("12:30"), 10.5),
             new Lesson("Math", new Grade("S4"), DayOfWeek.WEDNESDAY, LocalTime.parse("18:00"), 15.9)
         };
     }

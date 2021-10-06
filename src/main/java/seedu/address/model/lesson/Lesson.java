@@ -227,6 +227,13 @@ public class Lesson {
                 && (price == otherLesson.price);
     }
 
+    /**
+     * Checks if Student is enrolled in this Lesson
+     */
+    public boolean containsStudent(Student student) {
+        return students.contains(student);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(subject, grade, day, startTime, price);
