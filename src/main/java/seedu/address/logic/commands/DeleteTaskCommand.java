@@ -19,7 +19,7 @@ public class DeleteTaskCommand extends Command {
     public static final String MESSAGE_INVALID_TASK = "The size of %1$s's task list is not that big";
     public static final String COMMAND_WORD = "deletetask";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the a task, specified by the TASKINDEX, from person the person"
+            + ": Deletes the task, specified by the TASKINDEX, from person"
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
