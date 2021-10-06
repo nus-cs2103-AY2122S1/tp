@@ -34,9 +34,9 @@ public class AppointmentCommandParser implements Parser {
         }
 
         String date = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
-        date = parseDateString(date);
+        String parsedDate = parseDateString(date);
 
-        return new AppointmentCommand(index, new Appointment(date));
+        return new AppointmentCommand(index, new Appointment(parsedDate));
     }
 
     /**
