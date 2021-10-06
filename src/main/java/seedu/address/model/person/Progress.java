@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a student's progress in TutorAid.
  */
@@ -13,6 +15,7 @@ public class Progress {
      * @param progress Progress of the student;
      */
     public Progress(String progress) {
+        requireNonNull(progress);
         this.progress = progress;
     }
 
