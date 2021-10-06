@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label role;
     @FXML
+    private Label employmentType;
+    @FXML
     private Label expectedSalary;
     @FXML
     private Label experience;
@@ -55,10 +57,11 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Phone Number: " + person.getPhone().value);
-        address.setText("Address: " + person.getAddress().value);
-        email.setText("Email: " + person.getEmail().value);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
         role.setText("Applied Role: " + person.getRole().role);
+        email.setText(person.getEmail().value);
+        employmentType.setText(person.getEmploymentType().employmentType);
         expectedSalary.setText("Expected Salary: $" + person.getExpectedSalary().value);
         experience.setText("Years of Experience: " + person.getExperience().value);
 

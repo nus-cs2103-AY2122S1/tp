@@ -5,6 +5,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "role": "Preschool Teacher",
+    "employmentType": "Full time",
     "expectedSalary" : "7500",
     "experience" : 0,
     "tagged": [ "friends" ]
@@ -12,9 +13,10 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "address": "4th street",
     "role": "Preschool Teacher",
+    "employmentType": "Part time",
     "expectedSalary" : "7500",
-    "experience" : 1,
-    "address": "4th street"
+    "experience" : 1
   } ]
 }

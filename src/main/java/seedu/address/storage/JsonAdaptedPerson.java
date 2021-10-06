@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String role;
+    private final String employmentType;
     private final String expectedSalary;
     private final String experience;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -40,18 +42,24 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("role") String role, @JsonProperty("expectedSalary") String expectedSalary,
-            @JsonProperty("experience") String experience, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(
+            @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("role") String role,
+            @JsonProperty("employmentType") String employmentType,
+            @JsonProperty("expectedSalary") String expectedSalary,
+            @JsonProperty("experience") String experience,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.experience = experience;
         this.role = role;
+        this.employmentType = employmentType;
         this.expectedSalary = expectedSalary;
-
+        this.experience = experience;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -66,6 +74,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         role = source.getRole().role;
+        employmentType = source.getEmploymentType().employmentType;
         expectedSalary = source.getExpectedSalary().value;
         experience = source.getExperience().value.toString();
         tagged.addAll(source.getTags().stream()
@@ -116,7 +125,6 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-
         if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
@@ -124,6 +132,15 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
         final Role modelRole = new Role(role);
+
+        if (employmentType == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EmploymentType.class.getSimpleName()));
+        }
+        if (!EmploymentType.isValidEmploymentType(employmentType)) {
+            throw new IllegalValueException(EmploymentType.MESSAGE_CONSTRAINTS);
+        }
+        final EmploymentType modelEmploymentType = new EmploymentType(employmentType);
 
         if (expectedSalary == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -147,7 +164,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole,
-                modelExpectedSalary, modelExperience, modelTags);
+                modelEmploymentType, modelExpectedSalary, modelExperience, modelTags);
     }
 
 }

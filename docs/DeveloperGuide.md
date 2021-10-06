@@ -335,13 +335,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The input format is invalid.
     * 1a1. RecruitIn shows an error message.
-<<<<<<< HEAD
 
       Use case resumes at step 1.
-=======
-      
-      Use case resumes at step 1. 
->>>>>>> 26e8c0b2f9001dac08b1c998db15dc722e6b8c9c
 
 **Use case: UC04 - Delete an applicant**
 
@@ -363,17 +358,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list of applicants is empty.
 
   Use case ends.
-<<<<<<< HEAD
 
 * 3a. The delete command is invalid.
-
-=======
-    
-* 3a. The delete command is invalid.
-
->>>>>>> 26e8c0b2f9001dac08b1c998db15dc722e6b8c9c
     * 3a1. RecruitIn shows an error message.
-
+    
       Use case resumes at step 2.
 
 **Use case: UC05 - Finding an applicant**
