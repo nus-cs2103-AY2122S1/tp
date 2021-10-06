@@ -34,6 +34,22 @@ public class AppointmentCommandParser implements Parser {
         }
 
         String date = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
+        date = parseDateString(date);
+
+        return new AppointmentCommand(index, new Appointment(date));
+    }
+
+    /**
+     * Checks if the retrieved date from user input is valid or if it is a delete appointment command.
+     * If date is valid, returns the formatted date in the specified format (dd MMM yyyy).
+     * If it is a delete appointment command, returns 'No Appointment Scheduled Yet'.
+     *
+     * @param date Date String retrieved from user input
+     * @return A String representing the date in the specified format if it is valid (for add/update),
+     * or 'No Appointment Scheduled Yet' (for delete)
+     * @throws ParseException Thrown when the date retrieved is invalid (i.e. invalid month or day)
+     */
+    private String parseDateString(String date) throws ParseException {
         if (!date.equals(AppointmentCommand.DELETE_COMMAND)) {
             try {
                 // converts the date to the specified format
@@ -45,7 +61,6 @@ public class AppointmentCommandParser implements Parser {
         } else {
             date = Appointment.NO_APPOINTMENT;
         }
-
-        return new AppointmentCommand(index, new Appointment(date));
+        return date;
     }
 }

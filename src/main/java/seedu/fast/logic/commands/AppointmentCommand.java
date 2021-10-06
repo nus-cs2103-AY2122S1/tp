@@ -72,7 +72,7 @@ public class AppointmentCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the appointment is added or updated
+     * the appointment is added, deleted or updated
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit, Person editedPerson) {
