@@ -41,13 +41,8 @@ public class AppointmentCommandParser implements Parser {
 
     /**
      * Checks if the retrieved date from user input is valid or if it is a delete appointment command.
-     *
-     * A valid date is of the format yyyy-mm-dd, where mm is in the range 01 to 12
-     * and dd is in the range 01 to 31, based on the number of days in the calendar month.
-     *
-     * If it is a valid date (yyyy-mm-dd), returns a formatted date (dd MMM yyyy).
+     * If date is valid, returns the formatted date in the specified format (dd MMM yyyy).
      * If it is a delete appointment command, returns 'No Appointment Scheduled Yet'.
-     * Otherwise, a ParseException will be thrown.
      *
      * @param date Date String retrieved from user input
      * @return A String representing the date in the specified format if it is valid (for add/update),
@@ -55,7 +50,7 @@ public class AppointmentCommandParser implements Parser {
      * @throws ParseException Thrown when the date retrieved is invalid (i.e. invalid month or day)
      */
     private String parseDateString(String date) throws ParseException {
-        if (!date.equals(AppointmentCommand.APPOINTMENT_DELETE_COMMAND)) {
+        if (!date.equals(AppointmentCommand.DELETE_COMMAND)) {
             try {
                 // converts the date to the specified format
                 date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
