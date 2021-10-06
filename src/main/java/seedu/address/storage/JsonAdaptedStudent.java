@@ -29,6 +29,9 @@ class JsonAdaptedStudent {
 
     private final String name;
     private final String id;
+    // TODO: Add Jackson-friendly versions of Group, Assessment and Score. a.k.a. JsonAdaptedGroup etc.
+    private final List<Group> groups = new ArrayList<>();
+    private final Map<Assessment, Score> scores = new HashMap<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,9 +39,17 @@ class JsonAdaptedStudent {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("id") String id,
+                              @JsonProperty("groups") List<Group> groups,
+                              @JsonProperty("scores") Map<Assessment, Score> scores,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.id = id;
+        if (groups != null) {
+            this.groups.addAll(groups);
+        }
+        if (scores != null) {
+            this.scores.putAll(scores);
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -66,7 +77,8 @@ class JsonAdaptedStudent {
             studentTags.add(tag.toModelType());
         }
 
-        // TODO: Deserialise groups and scores. Initialising dummy collections here to fit constructor signature.
+        // TODO: Deserialise groups and scores from their Jackson-friendly versions (once available), and add to these
+        //  collections.
         final List<Group> groups = new ArrayList<>();
         final Map<Assessment, Score> scores = new HashMap<>();
 
