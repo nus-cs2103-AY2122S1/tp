@@ -93,7 +93,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `ModuLinkParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -110,7 +110,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `ModuLinkParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ModuLinkParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -126,7 +126,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `ModuLink`, which `Person` references. This allows `ModuLink` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -141,7 +141,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `ModuLinkStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -158,37 +158,37 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedModuLink`. It extends `ModuLink` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedModuLink#commit()` — Saves the current address book state in its history.
+* `VersionedModuLink#undo()` — Restores the previous address book state from its history.
+* `VersionedModuLink#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitModuLink()`, `Model#undoModuLink()` and `Model#redoModuLink()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedModuLink` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitModuLink()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitModuLink()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitModuLink()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoModuLink()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModuLink state, then there are no previous ModuLink states to restore. The `undo` command uses `Model#canUndoModuLink()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -201,17 +201,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoModuLink()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone ModuLink states to restore. The `redo` command uses `Model#canRedoModuLink()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitModuLink()`, `Model#undoModuLink()` or `Model#redoModuLink()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitModuLink()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -279,12 +279,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *  `  | potential user exploring the app           | view those taking similar mods | easily find potential groupmates                                       |
 | `* * *`  | user                                       | list the modules I am taking   | allow other users to view me as a potential groupmate                  |
 | `* *`    | user who formed a group                    | update group status for my modules | let other users know I have a group for a module                   |
-| `* *`    | proficient user                            | filter profiles using tags     | save time browsing profiles                                            |
+| `* *`    | proficient user                            | filter profiles by tags        | save time browsing profiles                                            |
 | `* *`    | proficient user                            | filter profiles by module      | save time browsing profiles                                            |
 | `* *`    | long time user                             | update the modules I am taking | find new favourites and groupmates for new modules that I am taking    |
 | `*`    | user searching for groupmates              | view potential groupmates' github| browse their work to decide if we would work well together           |
 | `*`    | user searching for groupmates              | view other profiles in more detail | find out more about the other user and potential groupmates          |
-| `*`    | user looking for a specific person         | search a user by student ID      | quickly view their profile                                             |
+| `*`    | user looking for a specific profile         | find a profile by student ID      | quickly view their profile                                             |
 
 
 
@@ -292,72 +292,166 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `Modulink` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ModuLink` and the **Actor** is the `user`, unless specified otherwise.<br>
+**Preconditions:** User is logged in.)
 
-**Use case: Create user profile**
+
+**Use case: UC1 - Create user profile**
 
 **MSS**
 
-1.  User boots up Modulink for the first time.
+1.  User boots up ModuLink for the first time.
 2.  User enters their details.
-3.  Modulink creates a new account
+3.  ModuLink creates a new account
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given details are invalid.
+* 2a. The given details are invalid.
 
-    * 3a1. Modulink shows an error message.
+    * 2a1. ModuLink shows an error message.
+    * 2a2. ModuLink requests for the correct details.
+    
+    Steps 2a1 - 2a2 are repeated until the correct details are entered.
 
       Use case resumes at step 2.
 
 
-**Use case: Add a person to Favourites list**
+**Use case: UC2 - Add a profile to Favourites list**
 
 **MSS**
 
-1.  User requests to add a specific person to their favourites list.
-2.  AddressBook adds the person.
+1.  User requests to add a specific profile to their favourites list.
+2.  ModuLink adds the profile.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given ID is invalid.
+* 1a. The requested profile ID is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 1a1. ModuLink shows an error message.
+    * 1a2. ModuLink requests for the correct ID. 
+      
+    Steps 1a1 - 1a2 are repeated until the correct details are entered.
 
       Use case resumes at step 1.
     
 
-**Use case: Remove a person from Favourites list**
+**Use case: UC3 - Remove a profile from Favourites list**
 
 **MSS**
 
-1.  User requests to delete a specific person from their favourites list.
-2.  Modulink deletes the person.
+1.  User requests to delete a specific profile from their favourites list.
+2.  ModuLink deletes the profile.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given ID is invalid.
+* 2a. The requested profile ID is invalid.
 
-    * 2a1. Modulink shows an error message.
+    * 2a1. ModuLink shows an error message.
+    * 2a2. ModuLink requests for the correct ID.
+      
+    Steps 2a1 - 2a2 are repeated until the correct details are entered.
 
       Use case resumes at step 1.
 
-**Use case: View Favourites list**
+**Use case: UC4 - View Favourites list**
 
 **MSS**
 
-1.  User requests to display all persons in their favourites list.
-2.  Modulink shows a list of all persons that the user has added to their favourites list.
+1.  User requests to display all profiles in their favourites list.
+2.  ModuLink shows a list of all profiles that the user has added to their favourites list.
+
+    Use case ends.
+    
+
+**Use case: UC5 - Remove a module from the user's profile**
+
+**MSS**
+
+1.  User requests to remove a module from their profile.
+2.  ModuLink deletes the module from the profile.
 
     Use case ends.
 
-*{More to be added}*
+**Use case: UC6 - Add a module to the user's profile**
+
+**MSS**
+
+1.  User requests to add a module from their profile.
+2.  ModuLink adds the module from the profile.
+
+    Use case ends.
+
+**Use case: UC7 - Update group status for modules**
+
+**MSS**
+
+1.  User requests to change a tag for a specific module with their updated group status.
+2.  ModuLink deletes the existing tag for the module in the user's profile.
+3.  ModuLink adds the new tag for the module in the user's profile.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The requested module does not exist in the user's profile.
+
+    * 1a1. ModuLink shows an error message.
+    * 1a2. ModuLink asks the user if they would like to <u> add the module to their profile (UC6) </u>.
+
+      Use case resumes at step 1.
+
+**Use case: UC8 - Filter profiles by tags**
+
+**MSS**
+
+1.  User requests to find all profiles with a particular tag.
+2.  ModuLink shows the list of profiles with the requested tag.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The requested tag does not exist.
+
+    * 1a1. ModuLink shows an error message.
+    * 1a2. ModuLink requests for the correct tag.
+
+  Steps 1a1 - 1a2 are repeated until the correct tag is entered.
+
+      Use case resumes at step 1.
+
+**Use case: UC9 - Filter profiles by module**
+
+**MSS**
+
+1.  User requests to find all profiles which have a particular module(s).
+2.  ModuLink shows the list of profiles with the requested module(s).
+
+    Use case ends.
+
+**Use case: UC10 - Find a profile by student ID**
+
+**MSS**
+
+1.  User requests to find a profile with the specified student ID.
+2.  ModuLink shows the profile with the requested student ID.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The requested student ID does not exist as a profile.
+
+    * 1a1. ModuLink shows an error message.
+    
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -374,6 +468,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Module**: A NUS CS module listed on [NUSmods](https://nusmods.com/modules?sem[0]=1&sem[1]=2&sem[2]=3&sem[3]=4)
 * **Student**: A NUS CS student
+  **Profile**: A student registered in ModuLink.
 * **Group status**: The group status of a student for a group project in a module
 * **Command**: A command for the program. A full list of command can be seen in the [UserGuide](https://ay2122s1-cs2103t-w12-4.github.io/tp/UserGuide.html).
 * **Contact detail**: Contact details consist of the user names, email, telegram handle.
