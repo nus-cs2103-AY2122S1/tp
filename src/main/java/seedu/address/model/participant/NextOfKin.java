@@ -1,11 +1,9 @@
-package seedu.address.model.nextofkin;
+package seedu.address.model.participant;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class NextOfKin {

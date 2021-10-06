@@ -9,12 +9,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.nextofkin.NextOfKin;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,7 +16,16 @@ import seedu.address.model.tag.Tag;
  * Guarantees: name, phone, email, address, tags, birthDate, notes, nextOfKins are present and not null, field values
  * are validated, immutable.
  */
-public class Participant extends Person {
+public class Participant {
+
+    // Identity fields
+    private final Name name;
+    private final Phone phone;
+    private final Email email;
+
+    // Data fields
+    private final Address address;
+    private final Set<Tag> tags = new HashSet<>();
 
     private final ParticipantId id;
     private final BirthDate birthDate;
@@ -44,14 +47,57 @@ public class Participant extends Person {
      */
     public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
                        Set<Note> notes, Collection<NextOfKin> nextOfKin) {
-        super(name, phone, email, address, tags);
-        requireAllNonNull(birthDate, notes);
+        requireAllNonNull(name, phone, email, address, tags, birthDate, notes);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
         this.birthDate = birthDate;
         this.notes.addAll(notes);
         this.nextOfKins.addAll(nextOfKin);
         this.id = ParticipantId.of(this);
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public String getFullName() {
+        return name.toString();
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public String getPhoneValue() {
+        return phone.toString();
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public String getEmailValue() {
+        return email.toString();
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getAddressValue() {
+        return address.toString();
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
 
     /**
      * @return this object's birthDate.
