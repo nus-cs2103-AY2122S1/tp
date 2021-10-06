@@ -15,12 +15,12 @@ public class NationalityTest {
 
     @Test
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidAddress = "";
-        assertThrows(IllegalArgumentException.class, () -> new Nationality(invalidAddress));
+        String invalidNationality = "";
+        assertThrows(IllegalArgumentException.class, () -> new Nationality(invalidNationality));
     }
 
     @Test
-    public void isValidAddress() {
+    public void isValidNationality() {
         // null address
         assertThrows(NullPointerException.class, () -> Nationality.isValidNationality(null));
 
