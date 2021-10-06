@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +28,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_TIME = "Time formatting is invalid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -144,12 +146,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     */
+    public static LocalTime parseLocalTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (trimmedTime.length() != 4) {
+            throw new ParseException(MESSAGE_INVALID_TIME);
+        }
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        return LocalTime.parse(trimmedTime, timeFormatter);
+    }
+
+    /**
      * Parses a {@code String day} into {@code DayOfWeek}.
      */
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
-        String trimmedDay = day.trim();
-        String prefix = trimmedDay.substring(0, 3);
+        String prefix = day.trim();
 
         switch (prefix) {
         case "Mon":
@@ -169,17 +183,6 @@ public class ParserUtil {
         default:
             throw new ParseException("Something went wrong with your DAY");
         }
-    }
-
-    /**
-     * Parses a {@code String time} into a {@code LocalTime}.
-     */
-    public static LocalTime parseLocalTime(String time) {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        int hour = Integer.parseInt(trimmedTime.substring(0, 2));
-        int minute = Integer.parseInt(trimmedTime.substring(2, 4));
-        return LocalTime.of(hour, minute);
     }
 
     /**

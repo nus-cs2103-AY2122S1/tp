@@ -1,17 +1,21 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Grade;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Student;
 
 /**
@@ -29,15 +33,15 @@ public class Lesson {
     public static final String PRICE_MESSAGE_CONSTRAINT = "Price cannot be 0 or negative";
     public static final String CODE_MESSAGE_CONSTRAINT = "Lesson code should be of correct format";
 
-    public static final LocalTime BOUNDED_START_TIME = LocalTime.parse("09:00");
-    public static final LocalTime BOUNDED_END_TIME = LocalTime.parse("20:00");
+    public static final LocalTime BOUNDED_START_TIME = LocalTime.of(9, 0);
+    public static final LocalTime BOUNDED_END_TIME = LocalTime.of(20, 0);
 
     private final String subject;
     private final Grade grade;
     private final DayOfWeek day;
     private final LocalTime startTime;
     private final double price;
-    private final Set<Student> students;
+    private final List<Student> students;
 
     /**
      * Constructs a {@code Lesson}.
@@ -60,53 +64,146 @@ public class Lesson {
         this.day = day;
         this.startTime = startTime;
         this.price = price;
-        this.students = new HashSet<>();
+        this.students = new ArrayList<>();
     }
 
+    /**
+     * Constructs a {@code Lesson} using a lesson code.
+     * Acts as an overloaded constructor for easy loading from Storage.
+     *
+     * @param lessonCode A valid lesson code.
+     * @param price Price of lesson.
+     */
+    public static Lesson createFromCodeAndPrice(String lessonCode, double price) {
+        requireAllNonNull(lessonCode, price);
+
+        checkArgument(isValidLessonCode(lessonCode), CODE_MESSAGE_CONSTRAINT);
+
+        String[] parameters = lessonCode.split("-");
+        String subject = parameters[0];
+        Grade grade = new Grade(parameters[1]);
+        DayOfWeek day = parseDayOfWeek(parameters[2]);
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        LocalTime startTime = LocalTime.parse(parameters[3], timeFormatter);
+
+        return new Lesson(subject, grade, day, startTime, price);
+    }
+
+    /**
+     * Returns the subject of lesson.
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     * Returns the grade of lesson.
+     */
     public Grade getGrade() {
         return grade;
     }
 
+    /**
+     * Returns the day of lesson.
+     */
     public DayOfWeek getDayOfWeek() {
         return day;
     }
 
+    /**
+     * Returns the start time of lesson.
+     */
     public LocalTime getStartTime() {
         return startTime;
     }
 
+    /**
+     * Returns the price of lesson.
+     */
     public double getPrice() {
         return price;
+    }
+
+    /**
+     * Returns formatted lesson code string, e.g. Science-P5-Wed-1430.
+     */
+    public String getLessonCode() {
+        return String.format(
+                "%s-%s-%s-%s",
+                subject,
+                grade.value,
+                parseDayToString(day),
+                startTime.toString().replace(":", ""));
+    }
+
+    /**
+     * Returns true if both lessons have the same lesson code.
+     * This defines a weaker notion of equality between two lessons.
+     */
+    public boolean isSameLesson(Lesson otherLesson) {
+        if (otherLesson == this) {
+            return true;
+        }
+        return otherLesson != null
+                && otherLesson.getLessonCode().equals(getLessonCode());
     }
 
     /**
      * Returns an immutable student set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Student> getStudents() {
-        return Collections.unmodifiableSet(students);
+    public List<Student> getStudents() {
+        return Collections.unmodifiableList(students);
+    }
+
+    /**
+     * Returns an unmodifiable set of student names for equality checks.
+     */
+    public List<Name> getStudentNames() {
+        return students.stream().map(Student::getName).collect(Collectors.toUnmodifiableList());
+    }
+
+    /**
+     * Checks if Student is enrolled in this Lesson
+     */
+    public boolean containsStudent(Student student) {
+        return getStudentNames().contains(student.getName());
+    }
+
+    /**
+     * Returns the number of students attending the lesson.
+     */
+    public int getLessonSize() {
+        return students.size();
     }
 
     /**
      * Add student to the lesson instance.
      */
     public void addStudent(Student student) {
-        requireAllNonNull(student);
-        // todo check if student is already enrolled
-        this.students.add(student);
+        requireNonNull(student);
+        students.add(student);
+        student.enrollForLesson(this);
     }
 
     /**
      * Removes student from the lesson instance.
      */
     public void removeStudent(Student student) {
-        requireAllNonNull(student);
-        // todo check if student is already enrolled
-        this.students.remove(student);
+        requireNonNull(student);
+        student.unenrollFromLesson(this);
+
+        // this step is needed to break out of the equality checks before deletion
+        Student toRemove = null;
+        for (Student s : students) {
+            if (s.isSamePerson(student)) {
+                toRemove = s;
+                break;
+            }
+        }
+        if (toRemove != null) {
+            students.remove(toRemove);
+        }
     }
 
     /**
@@ -136,114 +233,50 @@ public class Lesson {
      * Returns true if a given lesson code is follows the correct format.
      */
     public static boolean isValidLessonCode(String testCode) {
-        if (testCode == null) {
-            return false;
-        }
         // check number of parameters in lesson code
         String[] testLessonParams = testCode.split("-");
-        if (testLessonParams.length != 4 || testLessonParams[1].length() != 2) {
+        if (testLessonParams.length != 4) {
             return false;
         }
-
+        if (!isValidSubject(testLessonParams[0])
+                || !Grade.isValidGrade(testLessonParams[1])) {
+            return false;
+        }
         try {
             // attempt to parse
-            new Grade(testLessonParams[1]);
-            DayOfWeek.valueOf(testLessonParams[2]);
-            LocalTime.parse(testLessonParams[3]);
-
+            parseDayOfWeek(testLessonParams[2]);
+            LocalTime.parse(testLessonParams[3], DateTimeFormatter.ofPattern("HHmm"));
         } catch (IllegalArgumentException | DateTimeParseException e) {
             return false;
         }
-        return isValidSubject(testLessonParams[0]); // check subject
+        return true; // check subject
     }
 
     /**
-     * Returns formatted lesson code string.
-     * e.g: Science-P5-Wed-1430.
+     * Parses a {@code String day} into {@code DayOfWeek}.
      */
-    public String getLessonCode() {
-        return String.format(
-                "%s-%s-%s-%s",
-                subject,
-                grade.value,
-                parseDayToString(day),
-                startTime.toString().replace(":", ""));
-    }
+    public static DayOfWeek parseDayOfWeek(String day) {
+        requireNonNull(day);
+        String prefix = day.trim();
 
-    /**
-     * Returns true if both lessons have the same lesson code.
-     * This defines a weaker notion of equality between two lessons.
-     */
-    public boolean isSameLesson(Lesson otherLesson) {
-        if (otherLesson == this) {
-            return true;
+        switch (prefix) {
+        case "Mon":
+            return DayOfWeek.MONDAY;
+        case "Tue":
+            return DayOfWeek.TUESDAY;
+        case "Wed":
+            return DayOfWeek.WEDNESDAY;
+        case "Thu":
+            return DayOfWeek.THURSDAY;
+        case "Fri":
+            return DayOfWeek.FRIDAY;
+        case "Sat":
+            return DayOfWeek.SATURDAY;
+        case "Sun":
+            return DayOfWeek.SUNDAY;
+        default:
+            throw new IllegalArgumentException("Something went wrong with your DAY");
         }
-        return otherLesson != null
-                && otherLesson.getLessonCode().equals(getLessonCode());
-    }
-
-    /**
-     * Returns true if instance lesson code and requested lesson code are the same.
-     */
-    public boolean isSameLessonUsingCode(String otherLessonCode) {
-        checkArgument(isValidLessonCode(otherLessonCode), CODE_MESSAGE_CONSTRAINT);
-        return getLessonCode().equals(otherLessonCode);
-    }
-
-    /**
-     * Returns a weak form of lesson from a given lesson code
-     * for weak equality check @link #isSameLesson(Lesson).
-     */
-    public static Lesson getWeakLessonFromCode(String code) {
-        checkArgument(isValidLessonCode(code), CODE_MESSAGE_CONSTRAINT);
-        String[] lessonParams = code.split("-");
-
-        // extract and parse relevant fields for a lesson instance
-        String subject = lessonParams[0];
-        Grade grade = new Grade(lessonParams[1]);
-        DayOfWeek day = DayOfWeek.valueOf(lessonParams[2]);
-        LocalTime startTime = LocalTime.parse(lessonParams[3]);
-        double price = 0.0; // mock value
-
-        return new Lesson(subject, grade, day, startTime, price);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-        // instanceof handles nulls
-        if (!(other instanceof Lesson)) {
-            return false;
-        }
-        // state check
-        Lesson otherLesson = (Lesson) other;
-        return subject.equals(otherLesson.subject)
-                && grade.equals(otherLesson.grade)
-                && day.equals(otherLesson.day)
-                && startTime.equals(otherLesson.startTime)
-                && (price == otherLesson.price);
-    }
-
-    /**
-     * Checks if Student is enrolled in this Lesson
-     */
-    public boolean containsStudent(Student student) {
-        return students.contains(student);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(subject, grade, day, startTime, price);
-    }
-
-    /**
-     * Format state as text for viewing.
-     */
-    public String toString() {
-        return '[' + getLessonCode() + ']';
     }
 
     /**
@@ -270,4 +303,33 @@ public class Lesson {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof Lesson)) {
+            return false;
+        }
+        // state check
+        Lesson otherLesson = (Lesson) other;
+        return subject.equals(otherLesson.subject)
+                && grade.equals(otherLesson.grade)
+                && day.equals(otherLesson.day)
+                && startTime.equals(otherLesson.startTime)
+                && (price == otherLesson.price)
+                && getStudentNames().equals(otherLesson.getStudentNames());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subject, grade, day, startTime, price, getStudentNames());
+    }
+
+    @Override
+    public String toString() {
+        return '[' + getLessonCode() + ']';
+    }
 }
