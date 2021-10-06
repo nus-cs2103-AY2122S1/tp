@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddClientCommand;
@@ -20,10 +21,29 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(startOfCommand).get());
+        Name name = ParserUtil.parseName(listToString(argMultimap.getAllValues(startOfCommand)));
 
         AddClientCommand.AddClientDescriptor descriptor = new AddClientCommand.AddClientDescriptor(name);
         return new AddClientCommand(descriptor);
+    }
+
+    /**
+     * Converts a list of string into a string by inserting white spaces in between.
+     *
+     * @param list A list of string.
+     * @return Combined string.
+     */
+    private static String listToString(List<String> list) {
+        int len = list.size();
+        String result = "";
+        for (int i = 0; i < len; i++) {
+            if (i == len - 1) {
+                result += list.get(i);
+            } else {
+                result += String.format("%s ", list.get(i));
+            }
+        }
+        return result;
     }
 
     /**
