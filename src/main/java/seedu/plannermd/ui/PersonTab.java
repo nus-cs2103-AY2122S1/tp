@@ -55,14 +55,14 @@ public class PersonTab extends UiPart<Region> {
     /**
      * Switch the UI view to the tab containing the patient's records.
      */
-    public void switchToPatientTab() {
+    public void setTabToPatient() {
         selectionModel.select(PATIENT_TAB);
     }
 
     /**
      * Switch the UI view to the tab containing the doctor's records.
      */
-    public void switchToDoctorTab() {
+    public void setTabToDoctor() {
         selectionModel.select(DOCTOR_TAB);
     }
 }

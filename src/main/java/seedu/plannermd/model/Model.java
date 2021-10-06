@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
+import seedu.plannermd.ui.PersonTabSwitcher;
 
 /**
  * The API of the Model component.
@@ -87,4 +88,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPatientList(Predicate<Person> predicate);
+
+    /**
+     * Sets the PersonTabSwitcher responsible for switching between the Doctor and Patient tab in the UI.
+     */
+    void setPersonTabSwitcher(PersonTabSwitcher personTabSwitcher);
 }

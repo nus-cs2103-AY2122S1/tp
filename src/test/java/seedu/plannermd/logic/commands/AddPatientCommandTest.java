@@ -24,6 +24,7 @@ import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.patient.PatientBuilder;
+import seedu.plannermd.ui.PersonTabSwitcher;
 
 public class AddPatientCommandTest {
 
@@ -148,6 +149,11 @@ public class AddPatientCommandTest {
 
         @Override
         public void updateFilteredPatientList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPersonTabSwitcher(PersonTabSwitcher personTabSwitcher) {
             throw new AssertionError("This method should not be called.");
         }
     }
