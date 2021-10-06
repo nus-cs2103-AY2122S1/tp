@@ -14,9 +14,6 @@ import seedu.plannermd.model.person.UniquePersonList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class PlannerMd implements ReadOnlyPlannerMd {
-    public enum State {
-        PATIENT, DOCTOR
-    }
 
     private final UniquePersonList<Patient> patients;
     private final UniquePersonList<Doctor> doctors;
@@ -72,6 +69,8 @@ public class PlannerMd implements ReadOnlyPlannerMd {
 
     //// person-level operations
 
+    //Patients
+
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
      */
@@ -107,8 +106,10 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         patients.remove(key);
     }
 
+    //Doctors
+
     /**
-     * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
+     * Returns true if a doctor with the same identity as {@code patient} exists in the PlannerMD.
      */
     public boolean hasDoctor(Doctor doctor) {
         requireNonNull(doctor);
@@ -117,16 +118,16 @@ public class PlannerMd implements ReadOnlyPlannerMd {
 
     /**
      * Adds a doctor to the PlannerMD.
-     * The patient must not already exist in the PlannerMD.
+     * The doctor must not already exist in the PlannerMD.
      */
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPatient}.
+     * Replaces the given doctor {@code target} in the list with {@code editedDoctor}.
      * {@code target} must exist in the PlannerMD.
-     * The person identity of {@code editedPatient} must not be the same as another existing patient in the PlannerMD.
+     * The doctor identity of {@code editedDoctor} must not be the same as another existing doctor in the PlannerMD.
      */
     public void setDoctor(Doctor target, Doctor editedDoctor) {
         requireNonNull(editedDoctor);

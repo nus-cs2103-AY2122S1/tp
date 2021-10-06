@@ -1,7 +1,7 @@
 package seedu.plannermd.logic.commands.listcommand;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.model.Model;
@@ -16,7 +16,7 @@ public class ListPatientCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

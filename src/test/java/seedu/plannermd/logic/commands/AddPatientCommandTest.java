@@ -21,6 +21,7 @@ import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.ReadOnlyUserPrefs;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.patient.PatientBuilder;
@@ -83,6 +84,22 @@ public class AddPatientCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void setState(State state) {
+            //TODO
+        }
+
+        @Override
+        public State getState() {
+            return null;
+            //TODO
+        }
+
+        @Override
+        public void toggleState() {
+            //TODO
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -143,6 +160,27 @@ public class AddPatientCommandTest {
         }
 
         @Override
+        public boolean hasDoctor(Doctor doctor) {
+            return false;
+            //TODO
+        }
+
+        @Override
+        public void deleteDoctor(Doctor target) {
+            //TODO
+        }
+
+        @Override
+        public void addDoctor(Doctor doctor) {
+            //TODO
+        }
+
+        @Override
+        public void setDoctor(Doctor target, Doctor editedDoctor) {
+            //TODO
+        }
+
+        @Override
         public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -150,6 +188,16 @@ public class AddPatientCommandTest {
         @Override
         public void updateFilteredPatientList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Doctor> getFilteredDoctorList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredDoctorList(Predicate<Person> predicate) {
+
         }
 
         @Override

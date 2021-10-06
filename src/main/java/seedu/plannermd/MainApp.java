@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new PlannerMd();
         }
 
-        return new ModelManager(initialData, userPrefs, PlannerMd.State.PATIENT);
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

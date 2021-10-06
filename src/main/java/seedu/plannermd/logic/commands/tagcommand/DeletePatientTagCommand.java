@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -77,7 +77,7 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
         );
 
         model.setPatient(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPatient));
     }

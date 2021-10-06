@@ -15,13 +15,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
 import seedu.plannermd.model.person.exceptions.PersonNotFoundException;
 import seedu.plannermd.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
 
-    private final UniquePersonList uniquePersonList = new UniquePersonList();
+    private final UniquePersonList<Person> uniquePersonList = new UniquePersonList();
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {

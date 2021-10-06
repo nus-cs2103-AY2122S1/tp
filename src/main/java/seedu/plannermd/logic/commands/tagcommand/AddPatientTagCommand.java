@@ -3,7 +3,7 @@ package seedu.plannermd.logic.commands.tagcommand;
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -72,7 +72,7 @@ public class AddPatientTagCommand extends AddTagCommand {
         );
 
         model.setPatient(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, editedPatient));
     }

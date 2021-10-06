@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
 import seedu.plannermd.testutil.patient.PatientBuilder;
@@ -96,6 +97,12 @@ public class PlannerMdTest {
         @Override
         public ObservableList<Patient> getPatientList() {
             return patients;
+        }
+
+        @Override
+        public ObservableList<Doctor> getDoctorList() {
+            return null;
+            //TODO
         }
     }
 
