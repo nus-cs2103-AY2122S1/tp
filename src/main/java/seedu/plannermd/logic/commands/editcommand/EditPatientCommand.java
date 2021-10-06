@@ -24,10 +24,10 @@ import seedu.plannermd.model.Model;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
-import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 

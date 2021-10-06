@@ -27,12 +27,13 @@ import seedu.plannermd.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddPatientCommand object
  */
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 public class AddCommandParser implements Parser<AddPatientCommand> {
 
         /**
          * Parses the given {@code String} of arguments in the context of the
          * AddPatientCommand and returns an AddCommand object for execution.
-         *
+         * @param args arguments to be parsed
          * @throws ParseException if the user input does not conform the expected format
          */
         public AddPatientCommand parse(String args) throws ParseException {
@@ -64,6 +65,7 @@ public class AddCommandParser implements Parser<AddPatientCommand> {
         /**
          * Returns true if none of the prefixes contains empty {@code Optional} values
          * in the given {@code ArgumentMultimap}.
+         * @return boolean
          */
         private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
                 return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
