@@ -7,6 +7,13 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class LastVisit {
+
+    public static final String MESSAGE_CONSTRAINTS = "Last visit date should be of the format yyyy-MM-dd";
+    public static final String YEAR_REGEX = "\\d{4}";
+    public static final String MONTH_REGEX = "(0[1-9]|1[0-2])";
+    public static final String DAY_REGEX = "(0[1-9]|[12][0-9]|3[01])";
+    public static final String VALIDATION_REGEX = "^" + YEAR_REGEX + "-" + MONTH_REGEX + "-" + DAY_REGEX+ "$";
+
     public final String value;
 
     /**
@@ -17,6 +24,13 @@ public class LastVisit {
     public LastVisit(String lastVisit) {
         requireNonNull(lastVisit);
         value = lastVisit;
+    }
+
+    /**
+     * Returns true if a given string is a valid last visit.
+     */
+    public static boolean isValidLastVisit(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
