@@ -18,8 +18,9 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
     public static Person[] getSamplePersons() {
-        return new Person[] {
+        return new Person[]{
             new Person(new CategoryCode("att"), new Name("Marina Bay Sands"), new Phone("66888868"),
                 new Email("marinabaysands@example.com"), new Address("10 Bayfront Ave, Singapore 018956"),
                 getTagSet("casino", "popular")),
@@ -27,8 +28,8 @@ public class SampleDataUtil {
                 new Email("vivocity@example.com"), new Address("1 HarbourFront Walk, Singapore 098585"),
                 getTagSet("mall", "south")),
             new Person(new CategoryCode("tpt"), new Name("Singapore DUCKtours"), new Phone("63386877"),
-                new Email("sgducktours@example.com"), new Address("3 Temasek Blvd, #01-330 Suntec City," +
-                " Singapore 038983"), getTagSet("tour")),
+                new Email("sgducktours@example.com"), new Address("3 Temasek Blvd, #01-330 Suntec City,"
+                + " Singapore 038983"), getTagSet("tour")),
             new Person(new CategoryCode("fnb"), new Name("Bread Street Kitchen by Gordon Ramsay"),
                 new Phone("66885665"), new Email("bskbygordon@example.com"),
                 new Address("10 Bayfront Ave, L1 - 81, Singapore 018956"), getTagSet("michelin")),
@@ -54,8 +55,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
 }
