@@ -60,32 +60,37 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_BIRTHDAY_BOB,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + VALID_BIRTHDAY_BOB,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + VALID_BIRTHDAY_BOB,
                 expectedMessage);
 
         // missing address prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_BIRTHDAY_BOB,
+                expectedMessage);
+
+        // missing birthday prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, "",
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
+        System.out.println("here");
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_BIRTHDAY_BOB, Name.MESSAGE_CONSTRAINTS);
-
+        System.out.println("here1");
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_BIRTHDAY_BOB, Phone.MESSAGE_CONSTRAINTS);
@@ -93,23 +98,25 @@ public class AddCommandParserTest {
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_BIRTHDAY_BOB, Email.MESSAGE_CONSTRAINTS);
-
+        System.out.println("here3");
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_BIRTHDAY_BOB, Address.MESSAGE_CONSTRAINTS);
+        System.out.println("here4");
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND + VALID_BIRTHDAY_BOB, Tag.MESSAGE_CONSTRAINTS);
+        System.out.println("here5");
 
         // invalid birthday
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND + INVALID_BIRTHDAY_DESC, Birthday.MESSAGE_CONSTRAINTS);
-
+        System.out.println("here6");
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
                 Name.MESSAGE_CONSTRAINTS);
-
+        System.out.println("here7");
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + VALID_BIRTHDAY_BOB,
