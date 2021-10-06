@@ -7,6 +7,7 @@ import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.unify.logic.commands.FindCommand;
 import seedu.unify.model.task.NameContainsKeywordsPredicate;
 
