@@ -16,7 +16,15 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        boolean reverseOrder = trimmedArgs.isEmpty() ? false : true;
+        boolean reverseOrder = false;
+
+        if (!trimmedArgs.isEmpty()) {
+            if (trimmedArgs.equals("-r")) {
+                reverseOrder = true;
+            }
+        } else {
+            reverseOrder = false;
+        }
 
         return new SortCommand(reverseOrder);
     }
