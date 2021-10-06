@@ -263,7 +263,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * has a need to be reminded about his/her meeting timings with clients
 * has a need to manage revenue and costs for his clients
 
-**Value proposition**: manage the contacts of clients faster than a typical mouse/GUI driven app and to also be able
+**Value proposition**: manage clients faster than a typical mouse/GUI driven app and to also be able
 to collate details of clients in one application.
 
 
