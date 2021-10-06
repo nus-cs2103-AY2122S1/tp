@@ -25,9 +25,9 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for AddTagCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for TagCommand.
  */
-class AddTagCommandTest {
+class TagCommandTest {
 
     private EditPersonDescriptor descriptorAddFriend = new EditPersonDescriptorBuilder()
             .withTags(VALID_TAG_FRIEND).build();
@@ -59,14 +59,14 @@ class AddTagCommandTest {
         Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(defaultFirst).withTags(VALID_TAG_FRIEND).build();
 
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
-        String expectedMessage = String.format(AddTagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
 
-        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -75,14 +75,14 @@ class AddTagCommandTest {
         Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(defaultFirst).withTags("DEFAULT", VALID_TAG_FRIEND).build();
 
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
-        String expectedMessage = String.format(AddTagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = generateDefaultTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
 
-        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -92,14 +92,14 @@ class AddTagCommandTest {
         Person editedPerson = new PersonBuilder(defaultFirst).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
 
 
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
 
-        String expectedMessage = String.format(AddTagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
 
-        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -109,14 +109,14 @@ class AddTagCommandTest {
         Person editedPerson = new PersonBuilder(defaultFirst)
                 .withTags("DEFAULT", VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
 
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
 
-        String expectedMessage = String.format(AddTagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = generateDefaultTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
 
-        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -128,24 +128,24 @@ class AddTagCommandTest {
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withTags(VALID_TAG_FRIEND).build();
 
-        AddTagCommand addTagCommand = new AddTagCommand(INDEX_FIRST_PERSON,
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build());
 
-        String expectedMessage = String.format(addTagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(tagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
 
-        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(tagCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Model model = generateNoTagModel();
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        AddTagCommand addTagCommand = new AddTagCommand(outOfBoundIndex, descriptorAddFriend);
+        TagCommand tagCommand = new TagCommand(outOfBoundIndex, descriptorAddFriend);
 
-        assertCommandFailure(addTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
@@ -160,18 +160,18 @@ class AddTagCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        AddTagCommand addTagCommand = new AddTagCommand(outOfBoundIndex, descriptorAddFriend);
+        TagCommand tagCommand = new TagCommand(outOfBoundIndex, descriptorAddFriend);
 
-        assertCommandFailure(addTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final AddTagCommand standardCommand = new AddTagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
+        final TagCommand standardCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(descriptorAddFriend);
-        AddTagCommand commandWithSameValues = new AddTagCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        TagCommand commandWithSameValues = new TagCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -184,7 +184,7 @@ class AddTagCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new AddTagCommand(INDEX_SECOND_PERSON, descriptorAddFriend)));
+        assertFalse(standardCommand.equals(new TagCommand(INDEX_SECOND_PERSON, descriptorAddFriend)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, descriptorAddHusband)));

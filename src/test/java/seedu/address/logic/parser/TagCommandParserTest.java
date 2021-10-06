@@ -16,18 +16,18 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddTagCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
-class AddTagCommandParserTest {
+class TagCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE);
 
-    private AddTagCommandParser parser = new AddTagCommandParser();
+    private TagCommandParser parser = new TagCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -80,7 +80,7 @@ class AddTagCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        AddTagCommand expectedCommand = new AddTagCommand(targetIndex, descriptor);
+        TagCommand expectedCommand = new TagCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -92,7 +92,7 @@ class AddTagCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
-        AddTagCommand expectedCommand = new AddTagCommand(targetIndex, descriptor);
+        TagCommand expectedCommand = new TagCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -105,7 +105,7 @@ class AddTagCommandParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        AddTagCommand expectedCommand = new AddTagCommand(targetIndex, descriptor);
+        TagCommand expectedCommand = new TagCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

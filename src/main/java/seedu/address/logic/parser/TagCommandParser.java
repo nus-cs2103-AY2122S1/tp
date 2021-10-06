@@ -10,20 +10,20 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddTagCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddTagCommand object
+ * Parses input arguments and creates a new TagCommand object
  */
-public class AddTagCommandParser implements Parser<AddTagCommand> {
+public class TagCommandParser implements Parser<TagCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddTagCommand
-     * and returns an AddTagCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the TagCommand
+     * and returns an TagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddTagCommand parse(String args) throws ParseException {
+    public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TAG);
@@ -34,12 +34,12 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
         parseTagsForAppend(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         assert editPersonDescriptor.isAnyFieldEdited();
 
-        return new AddTagCommand(index, editPersonDescriptor);
+        return new TagCommand(index, editPersonDescriptor);
     }
 
     /**
@@ -49,7 +49,7 @@ public class AddTagCommandParser implements Parser<AddTagCommand> {
         assert tags != null;
 
         if (tags.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
         }
         return Optional.of(ParserUtil.parseTags(tags));
     }

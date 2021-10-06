@@ -23,8 +23,8 @@ import seedu.address.model.tag.Tag;
 /**
  * Adds a new tag to the details of an existing person in the address book.
  */
-public class AddTagCommand extends Command {
-    public static final String COMMAND_WORD = "addTag";
+public class TagCommand extends Command {
+    public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Tag to the details of the person identified "
             + "by the index number used in the displayed person list.\n"
@@ -41,7 +41,7 @@ public class AddTagCommand extends Command {
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public AddTagCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public TagCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -94,12 +94,12 @@ public class AddTagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddTagCommand)) {
+        if (!(other instanceof TagCommand)) {
             return false;
         }
 
         // state check
-        AddTagCommand e = (AddTagCommand) other;
+        TagCommand e = (TagCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
