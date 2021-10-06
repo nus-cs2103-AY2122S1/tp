@@ -24,7 +24,7 @@ public class AddParticipantToEventCommand extends Command {
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-        "Added Participant: %1$s to event %1$s successfully";
+        "Added Participant: %1$s to event %2$s successfully";
 
     private final ParticipantId participantId;
     private final EventName eventName;
@@ -70,11 +70,15 @@ public class AddParticipantToEventCommand extends Command {
                 .filter(e -> e.getName().equals(eventName))
                 .findFirst().get();
 
+        if (selectedEvent.getParticipants().contains(participantToAdd)) {
+            throw new CommandException("Participant " + participantToAdd.getFullName() + " already exists!");
+        }
+
         // add participant
         selectedEvent.getParticipants().add(participantToAdd);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
-                participantToAdd.getFullName()));
+                participantToAdd.getFullName(), eventName));
     }
 
     @Override
