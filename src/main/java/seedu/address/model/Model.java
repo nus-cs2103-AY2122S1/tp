@@ -91,7 +91,23 @@ public interface Model {
     void updateFilteredParticipantList(Predicate<Participant> predicate);
 
     /**
-     * MArks the given Event {@code target} as done.
+     * Returns true if an Event with the same identity as {@code event} exists in Managera.
+     */
+    boolean hasEvent(Event event);
+
+    /**
+     * Adds the given Event {@code event}.
+     */
+    void addEvent(Event event);
+
+    /**
+     * Removes the given Event {@code target}.
+     * {@code target} must exist in Managera.
+     */
+    void removeEvent(Event target);
+
+    /**
+     * Marks the given Event {@code target} as done.
      * {@code target} must exist in Managera.
      */
     void markEventAsDone(Event target);

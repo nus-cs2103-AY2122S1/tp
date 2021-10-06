@@ -154,8 +154,39 @@ public class ModelManager implements Model {
     /**
      * Sorts the events in the addressBook.
      */
+    @Override
     public void sortEvents() {
         addressBook.sortEvents();
+    }
+
+    /**
+     * Returns a boolean if Managera already contain this event.
+     *
+     * @param event An Event instance.
+     * @return A boolean indicating if the event already exists.
+     */
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    /**
+     * Add the event to Managera.
+     */
+    @Override
+    public void addEvent(Event event) {
+        requireNonNull(event);
+        addressBook.addEvent(event);
+    }
+
+    /**
+     * Remove the event from Managera.
+     */
+    @Override
+    public void removeEvent(Event target) {
+        requireNonNull(target);
+        addressBook.removeEvent(target);
     }
 
     @Override
