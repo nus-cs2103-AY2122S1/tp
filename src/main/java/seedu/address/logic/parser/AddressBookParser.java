@@ -71,7 +71,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case AddProgressCommand.COMMAND_WORD:
-            return new AddProgressCommand();
+            return new AddProgressCommandParser().parse(arguments);
 
         case DeleteProgressCommand.COMMAND_WORD:
             return new DeleteProgressCommand();

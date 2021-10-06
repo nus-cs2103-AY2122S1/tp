@@ -19,6 +19,13 @@ public class Progress {
         this.progress = progress;
     }
 
+    /**
+     * Returns true if a given string is a valid progress.
+     */
+    public static boolean isValidProgress(String test) {
+        return true;
+    }
+
     @Override
     public String toString() {
         return progress;
