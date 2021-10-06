@@ -144,7 +144,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Folder List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Folder} backed by the internal list of
