@@ -105,15 +105,19 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append(" Remark: ")
-                .append(getRemark());
+                .append(getEmail());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        if (!remark.toString().trim().isEmpty()) {
+            builder.append("; Remark :");
+            builder.append(getRemark());
+        }
+
         return builder.toString();
     }
 
