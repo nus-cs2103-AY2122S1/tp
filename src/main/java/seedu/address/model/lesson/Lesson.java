@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Grade;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Represents a Lesson in the tuitiONE book.
@@ -37,7 +37,7 @@ public class Lesson {
     private final DayOfWeek day;
     private final LocalTime startTime;
     private final double price;
-    private final Set<Person> students; // todo consider linking students to classes
+    private final Set<Student> students;
 
     /**
      * Constructs a {@code Lesson}.
@@ -87,8 +87,26 @@ public class Lesson {
      * Returns an immutable student set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getStudents() {
+    public Set<Student> getStudents() {
         return Collections.unmodifiableSet(students);
+    }
+
+    /**
+     * Add student to the lesson instance.
+     */
+    public void addStudent(Student student) {
+        requireAllNonNull(student);
+        // todo check if student is already enrolled
+        this.students.add(student);
+    }
+
+    /**
+     * Removes student from the lesson instance.
+     */
+    public void removeStudent(Student student) {
+        requireAllNonNull(student);
+        // todo check if student is already enrolled
+        this.students.remove(student);
     }
 
     /**
@@ -129,7 +147,7 @@ public class Lesson {
 
         try {
             // attempt to parse
-            new Grade("" + testLessonParams[1].charAt(0), Integer.parseInt("" + testLessonParams[1].charAt(1)));
+            new Grade(testLessonParams[1]);
             DayOfWeek.valueOf(testLessonParams[2]);
             LocalTime.parse(testLessonParams[3]);
 
@@ -143,7 +161,7 @@ public class Lesson {
      * Returns formatted lesson code string.
      */
     public String getLessonCode() {
-        return String.format("%s-%s-%s-%s", subject, grade.getValue(), day, startTime);
+        return String.format("%s-%s-%s-%s", subject, grade.value, day, startTime);
     }
 
     /**
@@ -176,7 +194,7 @@ public class Lesson {
 
         // extract and parse relevant fields for a lesson instance
         String subject = lessonParams[0];
-        Grade grade = new Grade("" + lessonParams[1].charAt(0), Integer.parseInt("" + lessonParams[1].charAt(1)));
+        Grade grade = new Grade(lessonParams[1]);
         DayOfWeek day = DayOfWeek.valueOf(lessonParams[2]);
         LocalTime startTime = LocalTime.parse(lessonParams[3]);
         double price = 0.0; // mock value
@@ -201,12 +219,10 @@ public class Lesson {
                 && day.equals(otherLesson.day)
                 && startTime.equals(otherLesson.startTime)
                 && (price == otherLesson.price);
-        // todo consider if students list should be in this
     }
 
     @Override
     public int hashCode() {
-        // todo consider if students list should be in this
         return Objects.hash(subject, grade, day, startTime, price);
     }
 
