@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
 import seedu.unify.model.UserPrefs;
-import seedu.unify.model.person.NameContainsKeywordsPredicate;
+import seedu.unify.model.task.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -50,7 +50,7 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different task -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 

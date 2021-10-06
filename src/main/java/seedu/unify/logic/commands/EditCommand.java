@@ -19,22 +19,22 @@ import seedu.unify.commons.core.index.Index;
 import seedu.unify.commons.util.CollectionUtil;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
-import seedu.unify.model.person.Address;
-import seedu.unify.model.person.Email;
-import seedu.unify.model.person.Name;
-import seedu.unify.model.person.Person;
-import seedu.unify.model.person.Phone;
 import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Address;
+import seedu.unify.model.task.Email;
+import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Person;
+import seedu.unify.model.task.Phone;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing task in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task identified "
+            + "by the index number used in the displayed task list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -48,14 +48,14 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the task in the filtered task list to edit
+     * @param editPersonDescriptor details to edit the task with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -121,8 +121,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * corresponding field value of the task.
      */
     public static class EditPersonDescriptor {
         private Name name;

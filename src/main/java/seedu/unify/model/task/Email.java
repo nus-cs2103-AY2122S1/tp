@@ -1,4 +1,4 @@
-package seedu.unify.model.person;
+package seedu.unify.model.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.commons.util.AppUtil.checkArgument;

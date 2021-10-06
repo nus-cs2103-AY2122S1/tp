@@ -1,4 +1,4 @@
-package seedu.unify.model.person;
+package seedu.unify.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

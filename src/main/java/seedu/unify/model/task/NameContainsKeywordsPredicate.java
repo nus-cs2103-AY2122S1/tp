@@ -1,4 +1,4 @@
-package seedu.unify.model.person;
+package seedu.unify.model.task;
 
 import java.util.List;
 import java.util.function.Predicate;
