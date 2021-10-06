@@ -3,9 +3,9 @@ layout: page
 title: Vishnu Sundaresan's Project Portfolio Page
 ---
 
-### Project: classMATE
+### Project: ClassMATE
 
-classMATE is a desktop address book application designed for instructors of the CS2101 Module in NUS to easily store class and student details. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+ClassMATE is a desktop application designed for instructors of the CS2101 Module in NUS to easily store class and student details. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 

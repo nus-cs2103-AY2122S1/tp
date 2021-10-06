@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Ngu Yi Yang's Project Portfolio Page
+title: Rushil Ramesh's Project Portfolio Page
 ---
 
 ### Project: ClassMATE
@@ -11,11 +11,12 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/)
 
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `list` and `clear`
-  * Developer Guide:
-    * Added documentation for Target Users, user 
+* **Project management**:
+    * Managing testing for upcoming releases `v1.1` - `v1.2` (2 releases) on GitHub
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#57](), [\#59]()
+* **Documentation**:
+    * User Guide:
+        * Added documentation for the features `addstu`, `viewstu` and `deletestu` [\#72]()
+    * Developer Guide:
+        * Create Command Formats for 'save' and 'find' features
+
