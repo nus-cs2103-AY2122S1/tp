@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.AddProgressCommand;
+import seedu.address.logic.commands.DeleteProgressCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Progress;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
 /**
  * Parses input arguments and creates a new PaidCommand object
  */
-public class AddProgressCommandParser {
+public class AddProgressCommandParser implements Parser<AddProgressCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of PaidCommand

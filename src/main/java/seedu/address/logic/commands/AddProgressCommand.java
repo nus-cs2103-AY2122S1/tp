@@ -57,6 +57,6 @@ public class AddProgressCommand extends Command {
         model.setPerson(studentToEdit, editedStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentToEdit, progress));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit));
     }
 }
