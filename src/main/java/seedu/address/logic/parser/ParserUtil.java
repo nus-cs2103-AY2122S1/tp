@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.sql.Time;
 import java.time.DayOfWeek;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.UnenrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
@@ -140,6 +142,9 @@ public class ParserUtil {
         return new Grade(prefix, index);
     }
 
+    /**
+     * Parses a {@code String day} into {@code DayOfWeek}.
+     */
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
         String trimmedDay = day.trim();
@@ -164,11 +169,35 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     */
     public static LocalTime parseLocalTime(String time) {
         requireNonNull(time);
         String trimmedTime = time.trim();
         int hour = Integer.parseInt(trimmedTime.substring(0, 2));
         int minute = Integer.parseInt(trimmedTime.substring(2, 4));
         return LocalTime.of(hour, minute);
+    
+    /**
+     * Parses a {@code String lesson Code} into a {@.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static UnenrollCommand parseUnenrollArgs(String args) throws ParseException {
+        requireNonNull(args);
+        Index index;
+        String lessonCode = null;
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, UnenrollCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
+            lessonCode = argMultimap.getValue(PREFIX_LESSON).get();
+        }
+        return new UnenrollCommand(index, lessonCode);
     }
 }

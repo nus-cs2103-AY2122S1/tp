@@ -109,5 +109,9 @@ public interface Model {
      */
     ArrayList<Lesson> getLessonList();
 
-    public Lesson searchLessons(String arg);
+    /**
+     * Returns lesson corrosponding to String lessoncode, else null if lesson does not exist.
+     */
+    Lesson searchLessons(String lessonCode);
 }
+

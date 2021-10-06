@@ -63,6 +63,9 @@ public class AddressBookParser {
         case EnrollCommand.COMMAND_WORD:
             return new EnrollCommandParser().parse(arguments);
 
+        case UnenrollCommand.COMMAND_WORD:
+            return new UnenrollCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
