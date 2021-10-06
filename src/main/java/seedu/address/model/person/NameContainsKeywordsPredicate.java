@@ -7,6 +7,8 @@ import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ *
+ * @deprecated use {@link ContainsKeywordsPredicate} instead.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -25,7 +27,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
+                        && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }
