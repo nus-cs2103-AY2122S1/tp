@@ -36,14 +36,8 @@ public class VisitCommandParser implements Parser<VisitCommand> {
         }
 
         String visit = argMultimap.getValue(PREFIX_DATE).orElse("");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        try {
-            LocalDate date = LocalDate.parse(visit, formatter);
-            visit = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(date);
-        } catch (DateTimeParseException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VisitCommand.MESSAGE_USAGE), ive);
-        }
+        Visit convertedVisit = ParserUtil.parseVisit(visit);
 
-        return new VisitCommand(index, new Visit(visit));
+        return new VisitCommand(index, convertedVisit);
     }
 }
