@@ -83,6 +83,14 @@ public class ModelManager implements Model {
         this.addressBook.resetData(addressBook);
     }
 
+    /**
+     * Sorts the address book data in alphabetical order.
+     */
+    @Override
+    public void sortsAddressBook() {
+        addressBook.sortAddressBook();
+    }
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;

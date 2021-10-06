@@ -49,6 +49,11 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Sorts the address book data in alphabetical order.
+     */
+    void sortsAddressBook();
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 

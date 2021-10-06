@@ -56,6 +56,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    /**
+     * Sorts the contacts in the address book in lexicographical order.
+     */
+    public void sortAddressBook() {
+        persons.sortList();
+    }
+
     //// person-level operations
 
     /**
