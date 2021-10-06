@@ -1,20 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BAKED;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_POPULAR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalItems.BAGEL;
@@ -35,21 +22,21 @@ public class AddCommandParserTest {
         Item expectedItem = new ItemBuilder(BAGEL).withTags(VALID_TAG_BAKED).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BAGEL + ID_DESC_BAGEL
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_BAKED, new AddCommand(expectedItem));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_DONUT + NAME_DESC_BAGEL + ID_DESC_BAGEL
+        assertParseSuccess(parser, NAME_DESC_DONUT + NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_BAKED, new AddCommand(expectedItem));
 
         // multiple phones - last id accepted
-        assertParseSuccess(parser, NAME_DESC_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL
+        assertParseSuccess(parser, NAME_DESC_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_BAKED, new AddCommand(expectedItem));
 
         // multiple tags - all accepted
         Item expectedItemMultipleTags = new ItemBuilder(BAGEL).withTags(VALID_TAG_POPULAR, VALID_TAG_BAKED)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL
+        assertParseSuccess(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_POPULAR + TAG_DESC_BAKED, new AddCommand(expectedItemMultipleTags));
     }
 
@@ -57,7 +44,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Item expectedItem = new ItemBuilder(BAGEL).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL,
+        assertParseSuccess(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
                 new AddCommand(expectedItem));
     }
 
@@ -78,19 +65,19 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BAGEL
+        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_POPULAR + TAG_DESC_BAKED, Name.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL
+        assertParseFailure(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + INVALID_TAG_DESC + VALID_TAG_BAKED, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BAGEL
+        assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + INVALID_TAG_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BAGEL + ID_DESC_BAGEL
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_BAKED + TAG_DESC_POPULAR,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }

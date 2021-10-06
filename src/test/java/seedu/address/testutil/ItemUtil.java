@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class ItemUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + item.getName().fullName + " ");
         sb.append(PREFIX_ID + item.getId() + " ");
+        sb.append(PREFIX_COUNT + Integer.toString(item.getCount()) + " ");
         item.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

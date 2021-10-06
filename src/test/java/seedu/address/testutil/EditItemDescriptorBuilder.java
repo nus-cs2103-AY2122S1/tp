@@ -43,6 +43,15 @@ public class EditItemDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Name} of the {@code EditItemDescriptor} that we are building.
+     */
+    public EditItemDescriptorBuilder withCount(String count) {
+        descriptor.setCount(Integer.parseInt(count));
+        return this;
+    }
+
+
+    /**
      * Sets the id of the {@code EditItemDescriptor} that we are building.
      */
     public EditItemDescriptorBuilder withId(String id) {
