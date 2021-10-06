@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TutorAid is a **desktop app for private tutors to match their students' contacts, optimized for use via a Command Line 
-Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TutorAid 
+TutorAid is a **desktop app for private tutors to match their students' contacts, optimized for use via a Command Line
+Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TutorAid
 can get your student management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -28,9 +28,8 @@ can get your student management tasks done faster than traditional GUI apps.
 
    * **`list`** : Lists all contacts.
 
-   * **`add -s`** sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` : 
-     Adds a student named `John Doe` to TutorAid, along with the student's contact number, parent's name and parent's 
-     contact number.
+   * **`add -s`** sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` :
+     Adds a student named `John Doe` to TutorAid, along with the student's contact number, parent's name and parent's contact number.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -172,7 +171,7 @@ _Details coming soon ..._
 
 ### Set payment made: `paid`
 
-Sets the payment status of the specified student to `paid` for the current month. 
+Sets the payment status of the specified student to `paid` for the current month.
 
 Format: `paid STUDENT_INDEX`
 
@@ -218,7 +217,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
-**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3` 
+**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
 **Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
