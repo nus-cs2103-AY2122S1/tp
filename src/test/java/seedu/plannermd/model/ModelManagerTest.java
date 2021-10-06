@@ -94,6 +94,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setPersonTabSwitcher_nullSwitcher_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPersonTabSwitcher(null));
+    }
+
+    @Test
     public void equals() {
         PlannerMd plannerMd = new PlannerMdBuilder().withPatient(ALICE).withPatient(BENSON).build();
         PlannerMd differentPlannerMd = new PlannerMd();
