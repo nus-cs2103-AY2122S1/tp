@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.unify.commons.exceptions.IllegalValueException;
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Address;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Person;
 import seedu.unify.model.task.Phone;
-import seedu.unify.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.

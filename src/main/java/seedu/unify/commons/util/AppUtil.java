@@ -3,6 +3,7 @@ package seedu.unify.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import javafx.scene.image.Image;
+
 import seedu.unify.MainApp;
 
 /**

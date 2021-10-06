@@ -12,12 +12,12 @@ import java.util.stream.Stream;
 
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Address;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Person;
 import seedu.unify.model.task.Phone;
-import seedu.unify.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object

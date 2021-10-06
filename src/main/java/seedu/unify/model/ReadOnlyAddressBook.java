@@ -1,6 +1,7 @@
 package seedu.unify.model;
 
 import javafx.collections.ObservableList;
+
 import seedu.unify.model.task.Person;
 
 /**

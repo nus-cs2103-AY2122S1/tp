@@ -14,10 +14,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Test;
+
 import seedu.unify.model.task.Person;
 import seedu.unify.model.task.exceptions.DuplicatePersonException;
 import seedu.unify.testutil.PersonBuilder;

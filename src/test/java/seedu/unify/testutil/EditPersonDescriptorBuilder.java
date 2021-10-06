@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.unify.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Address;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Person;
 import seedu.unify.model.task.Phone;
-import seedu.unify.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

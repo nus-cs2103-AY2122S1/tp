@@ -10,8 +10,8 @@ import java.util.Set;
 
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.unify.model.task.Person;
 import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Person;
 
 /**
  * A utility class for Person.
