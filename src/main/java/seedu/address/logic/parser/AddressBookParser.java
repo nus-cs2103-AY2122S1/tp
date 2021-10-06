@@ -65,7 +65,7 @@ public class AddressBookParser {
         case HELP:
             return new HelpCommand();
 
-        case SortCommand.COMMAND_WORD:
+        case SORT:
             return new SortCommandParser().parse(arguments);
 
         default:

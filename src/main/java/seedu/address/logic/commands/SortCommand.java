@@ -10,14 +10,9 @@ import seedu.address.model.Model;
  */
 public class SortCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort";
-
     public static final String MESSAGE_SUCCESS = "Address book sorted.";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the contact in the address book in alphabetical order.\n"
-            + "Example: " + COMMAND_WORD + " -a";
-
+    public static final String MESSAGE_USAGE = "sort: Sorts the contact in the address book in alphabetical order.\n"
+            + "Example: sort -a";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

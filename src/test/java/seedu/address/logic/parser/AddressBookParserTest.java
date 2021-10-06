@@ -110,7 +110,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " -a") instanceof SortCommand);
+        assertTrue(parser.parseCommand("sort -a") instanceof SortCommand);
     }
 
     @Test
