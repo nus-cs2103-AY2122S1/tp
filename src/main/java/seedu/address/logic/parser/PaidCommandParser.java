@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new PaidCommand object
  */
-public class PaidCommandParser {
+public class PaidCommandParser implements Parser<PaidCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of PaidCommand
