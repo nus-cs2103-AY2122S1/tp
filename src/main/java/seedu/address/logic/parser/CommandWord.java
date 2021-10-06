@@ -29,8 +29,7 @@ public enum CommandWord {
     EXIT("exit", "quit"),
     FIND("find"),
     HELP("help", "man"),
-    LIST("list", "ls"),
-    REMARK("remark");
+    LIST("list", "ls");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
 
