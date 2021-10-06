@@ -18,16 +18,15 @@ import seedu.address.model.person.Remark;
  */
 public class RemarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "remark";
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = "remark : add description to a contact"
             + ": Edits the remark of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing remark will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a postive integer) "
+            + "Parameters: INDEX (must be a positive integer) "
             + "r/ [REMARK]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: remark + 1 "
             + "r/ Likes to swim.";
 
     private final Index index;
