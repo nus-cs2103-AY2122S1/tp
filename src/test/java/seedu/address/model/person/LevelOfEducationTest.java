@@ -28,7 +28,6 @@ public class LevelOfEducationTest {
         assertFalse(LevelOfEducation.isValidLevelOfEducation("")); // empty string
         assertFalse(LevelOfEducation.isValidLevelOfEducation(" ")); // spaces only
         assertFalse(LevelOfEducation.isValidLevelOfEducation("Kindergarten")); // unsupported level of education
-        assertFalse(LevelOfEducation.isValidLevelOfEducation("high school")); // incorrect capitalisation
 
         // valid addresses
         assertTrue(LevelOfEducation.isValidLevelOfEducation("Elementary"));
