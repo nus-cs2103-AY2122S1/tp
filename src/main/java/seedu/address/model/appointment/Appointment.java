@@ -1,5 +1,7 @@
 package seedu.address.model.appointment;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,7 +17,7 @@ public class Appointment {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd-MMM-yyyy HH:mm"); // Specific format as described in argument.
 
-    public final LocalDateTime appointment;
+    private final LocalDateTime appointmentTime;
 
     /**
      * Creates an appointment that describes
@@ -24,25 +26,25 @@ public class Appointment {
      */
     public Appointment(String dateTimeString) {
         if (dateTimeString == null || dateTimeString.equals("")) {
-            this.appointment = null;
+            this.appointmentTime = null;
         } else {
-            this.appointment = Appointment.parseString(dateTimeString);
+            this.appointmentTime = Appointment.parseString(dateTimeString);
         }
     }
 
     @Override
     public String toString() {
-        if (appointment == null) {
+        if (appointmentTime == null) {
             return "";
         }
-        return appointment.toString();
+        return appointmentTime.toString();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Appointment // instanceof handles nulls
-                    && appointment.equals(((Appointment) other).appointment)); // state check
+                    && appointmentTime.equals(((Appointment) other).appointmentTime)); // state check
     }
 
     /**
@@ -71,15 +73,15 @@ public class Appointment {
      * @return DateTime object representing the date and time of the appointment.
      */
     private static LocalDateTime parseString(String dateTimeString) {
-        assert(dateTimeString != null);
+        requireNonNull(dateTimeString);
         return LocalDateTime.parse(dateTimeString, FORMATTER);
     }
 
     public String getValue() {
-        if (this.appointment == null) {
+        if (this.appointmentTime == null) {
             return "";
         }
-        return this.appointment.format(FORMATTER);
+        return this.appointmentTime.format(FORMATTER);
     }
 
 }
