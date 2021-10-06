@@ -3,6 +3,12 @@
 /build/
 src/main/resources/docs/
 
+# misc files
+.classpath
+.project
+.settings/
+bin/
+
 # IDEA files
 /.idea/
 /out/

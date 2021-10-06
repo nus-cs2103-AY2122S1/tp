@@ -14,6 +14,8 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 Given below are my contributions to the project.
 
 * **New Features**
+  1. Project-wide refactoring of codebase to support gitGud. 
+     1. Refactored Persons and Tags to Friends and Games classes. 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevin9foong&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
@@ -23,19 +25,19 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added the documentation for the features `add friend`, `add game`, `delete game` and `link game and friend`.
+    1. Added the documentation for the features `add friend`, `add game`, `delete game` and `link game and friend`.
   * Developer Guide:
-    * Added the value proposition for gitGud.
-    * Added use case for `add friend`.
+    1. Added the value proposition for gitGud.
+    2. Added use case for `add friend`.
   * README:
-    * Updated Github Actions build status badge to reflect status of gitGud team repository.
-    * Updated description and organised layout of README.
+    1. Updated Github Actions build status badge to reflect status of gitGud team repository.
+    2. Updated description and organised layout of README.
 
 * **Community**:
 
 * **Tools**:
-  * Integrated the Github plugin (codecov) to the team repo.
+  1. Integrated the Github plugin (codecov) to the team repo.
 
 * **Miscellaneous**
-  * Set up initial project website.
-  * Initial set up for team repo & organization.
+  1. Set up initial project website.
+  2. Initial set up for team repo & organization.

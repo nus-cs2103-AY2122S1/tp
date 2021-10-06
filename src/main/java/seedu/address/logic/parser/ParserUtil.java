@@ -9,11 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.FriendName;
+import seedu.address.model.game.Game;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +19,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    /**
+     * Private constructor to hide implicit public constructor since
+     * {@code ParserUtil} is a utility class.
+     */
+    private ParserUtil() {}
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -36,89 +40,59 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String friendId} into a {@code FriendId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code friendId} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static FriendId parseFriendId(String friendId) throws ParseException {
+        requireNonNull(friendId);
+        String trimmedName = friendId.trim();
+        if (!FriendId.isValidFriendId(trimmedName)) {
+            throw new ParseException(FriendId.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new FriendId(trimmedName);
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String friendName} into a {@code FriendName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code friendName} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static FriendName parseFriendName(String friendName) throws ParseException {
+        requireNonNull(friendName);
+        String trimmedName = friendName.trim();
+        if (!FriendName.isValidName(trimmedName)) {
+            throw new ParseException(FriendName.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new FriendName(trimmedName);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String gameName} into a {@code Game}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code gameName} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Game parseGame(String gameName) throws ParseException {
+        requireNonNull(gameName);
+        String trimmedGameName = gameName.trim();
+        if (!Game.isValidGameName(trimmedGameName)) {
+            throw new ParseException(Game.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Game(trimmedGameName);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
+     * Parses {@code Collection<String> games} into a {@code Set<Game>}.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Set<Game> parseGames(Collection<String> games) throws ParseException {
+        requireNonNull(games);
+        final Set<Game> gameSet = new HashSet<>();
+        for (String gameName : games) {
+            gameSet.add(parseGame(gameName));
         }
-        return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
+        return gameSet;
     }
 }
