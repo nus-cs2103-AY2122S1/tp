@@ -159,9 +159,15 @@ public class Lesson {
 
     /**
      * Returns formatted lesson code string.
+     * e.g: Science-P5-Wed-1430.
      */
     public String getLessonCode() {
-        return String.format("%s-%s-%s-%s", subject, grade.value, day, startTime);
+        return String.format(
+                "%s-%s-%s-%s",
+                subject,
+                grade.value,
+                parseDayToString(day),
+                startTime.toString().replace(":", ""));
     }
 
     /**
@@ -231,6 +237,30 @@ public class Lesson {
      */
     public String toString() {
         return '[' + getLessonCode() + ']';
+    }
+
+    /**
+     * Returns String with corresponding to DayOfWeek.
+     */
+    public static String parseDayToString(DayOfWeek dayOfWeek) {
+        switch (dayOfWeek) {
+        case MONDAY:
+            return "Mon";
+        case TUESDAY:
+            return "Tue";
+        case WEDNESDAY:
+            return "Wed";
+        case THURSDAY:
+            return "Thu";
+        case FRIDAY:
+            return "Fri";
+        case SATURDAY:
+            return "Sat";
+        case SUNDAY:
+            return "Sun";
+        default:
+            throw new NullPointerException("DayOfWeek is null in Lesson");
+        }
     }
 
 }

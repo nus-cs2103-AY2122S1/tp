@@ -1,10 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.util.List;
 
@@ -22,18 +19,14 @@ public class EnrollCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a specified student "
             + "from a given TuitiONE lesson\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_SUBJECT + "SUBJECT "
-            + PREFIX_GRADE + "GRADE "
-            + PREFIX_DAY + "DAY "
-            + PREFIX_TIME + "START_TIME\n"
-            + "Example: " + "enroll 1 s/Science g/P5 d/Wed t/1230";
+            + "LESSONCODE\n"
+            + "Example: " + "enroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
 
     public static final String MESSAGE_LESSON_NOT_FOUND = "Lesson does not exist, please try again";
     public static final String MESSAGE_SUCCESS = "New %1$s enrolled into lesson: %2$s";
 
-    private Lesson lesson;
-    private Index index;
-    private String lessonCode;
+    private final Index index;
+    private final String lessonCode;
 
     /**
      * Creates an EnrollCommand for a Student with a given index to a specified {@code Lesson}.
@@ -62,5 +55,13 @@ public class EnrollCommand extends Command {
         lesson.addStudent(student);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, student, lesson));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof EnrollCommand
+                && index.equals(((EnrollCommand) other).index))
+                && lessonCode.equals(((EnrollCommand) other).lessonCode);
     }
 }
