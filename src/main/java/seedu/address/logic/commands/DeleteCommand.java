@@ -76,7 +76,7 @@ public class DeleteCommand extends Command {
 
         Person editedPerson =
                 new Person(personToDelete.getName(), personToDelete.getPhone(), personToDelete.getLanguage(),
-                        personToDelete.getAddress(), personToDelete.getLastVisit(), EMPTY_VISIT, personToDelete.getTags());
+                personToDelete.getAddress(), personToDelete.getLastVisit(), EMPTY_VISIT, personToDelete.getTags());
         model.setPerson(personToDelete, editedPerson);
 
         return new CommandResult(String.format(MESSAGE_DELETE_VISIT_SUCCESS, personToDelete));

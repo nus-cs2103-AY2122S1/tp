@@ -1,14 +1,14 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Person's last visit in the address book.
@@ -20,7 +20,7 @@ public class LastVisit {
     public static final String YEAR_REGEX = "\\d{4}";
     public static final String MONTH_REGEX = "(0[1-9]|1[0-2])";
     public static final String DAY_REGEX = "(0[1-9]|[12][0-9]|3[01])";
-    public static final String VALIDATION_REGEX = "^" + YEAR_REGEX + "-" + MONTH_REGEX + "-" + DAY_REGEX+ "$";
+    public static final String VALIDATION_REGEX = "^" + YEAR_REGEX + "-" + MONTH_REGEX + "-" + DAY_REGEX + "$";
 
     public final String value;
 

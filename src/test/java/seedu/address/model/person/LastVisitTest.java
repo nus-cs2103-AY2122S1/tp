@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class LastVisitTest {
-    
     @Test
     public void equals() {
         LastVisit lastVisit = new LastVisit("2021-11-11");
