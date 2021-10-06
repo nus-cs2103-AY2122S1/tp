@@ -13,7 +13,8 @@ import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 
 /**
- * Sets the payment status of the student identified using the displayed index in TutorAid, to unpaid.
+ * Sets the payment status of the student identified using the displayed index in TutorAid, to
+ * 'Has not paid for the current month'.
  */
 public class UnpaidCommand extends Command {
 

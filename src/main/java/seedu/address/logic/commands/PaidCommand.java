@@ -13,7 +13,8 @@ import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 
 /**
- * Sets the payment status of the student identified using the displayed index in TutorAid, to paid.
+ * Sets the payment status of the student identified using the displayed index in TutorAid, to
+ * 'Paid for the current month'.
  */
 public class PaidCommand extends Command {
 
