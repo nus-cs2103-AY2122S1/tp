@@ -10,9 +10,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.TeleHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,6 +53,48 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Email parseEmail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException If the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(trimmedModuleCode);
+    }
+
+    /**
+     * Parses {@code Collection<String> moduleCodes} into a {@code Set<ModuleCode>}.
+     */
+    public static Set<ModuleCode> parseModuleCodes(Collection<String> moduleCodes) throws ParseException {
+        requireNonNull(moduleCodes);
+        final Set<ModuleCode> moduleCodeSet = new HashSet<>();
+        for (String moduleCodeName: moduleCodes) {
+            moduleCodeSet.add(parseModuleCode(moduleCodeName));
+        }
+        return moduleCodeSet;
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -66,18 +110,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String teleHandle} into a {@code TeleHandle}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException If the given {@code teleHandle} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static TeleHandle parseTeleHandle(String teleHandle) throws ParseException {
+        requireNonNull(teleHandle);
+        String trimmedTeleHandle = teleHandle.trim();
+        if (!TeleHandle.isValidTeleHandle(trimmedTeleHandle)) {
+            throw new ParseException(TeleHandle.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new TeleHandle(trimmedTeleHandle);
     }
 
     /**
