@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LANGUAGE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LANGUAGE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LAST_VISIT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -25,11 +26,11 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLanguage("English")
-            .withPhone("94351253").withVisit("11 Nov 2020")
+            .withPhone("94351253").withVisit("2021-10-10").withLastVisit("2021-07-07")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withLanguage("French").withPhone("98765432")
+            .withLanguage("French").withPhone("98765432").withLastVisit("2021-08-08")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withLanguage("English").withAddress("wall street").build();
@@ -50,9 +51,10 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withLanguage(VALID_LANGUAGE_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withLanguage(VALID_LANGUAGE_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withLanguage(VALID_LANGUAGE_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withLanguage(VALID_LANGUAGE_BOB).withAddress(VALID_ADDRESS_BOB).withLastVisit(VALID_LAST_VISIT_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

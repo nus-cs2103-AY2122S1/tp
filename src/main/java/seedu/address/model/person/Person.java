@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -22,18 +23,21 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Optional<LastVisit> lastVisit;
     private final Visit visit;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Language language, Address address, Visit visit, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Language language, Address address,
+                  Optional<LastVisit> lastVisit, Visit visit, Set<Tag> tags) {
         requireAllNonNull(name, phone, language, address, tags);
         this.name = name;
         this.phone = phone;
         this.language = language;
         this.address = address;
+        this.lastVisit = lastVisit;
         this.visit = visit;
         this.tags.addAll(tags);
     }
@@ -52,6 +56,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Optional<LastVisit> getLastVisit() {
+        return lastVisit;
     }
 
     public Visit getVisit() {
@@ -98,13 +106,15 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getLanguage().equals(getLanguage())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getLastVisit().equals(getLastVisit())
+                && otherPerson.getVisit().equals(getVisit())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, language, address, tags);
+        return Objects.hash(name, phone, language, address, visit, lastVisit, tags);
     }
 
     @Override
@@ -117,6 +127,8 @@ public class Person {
                 .append(getLanguage())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Last Visit: ")
+                .append(getLastVisit())
                 .append("; Visit: ")
                 .append(getVisit());
 

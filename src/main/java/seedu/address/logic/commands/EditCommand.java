@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -98,10 +99,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Language updatedLanguage = editPersonDescriptor.getLanguage().orElse(personToEdit.getLanguage());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Visit updatedVisit = personToEdit.getVisit(); // edit command does not allow editing visits
+        // edit command does not allow editing last visits
+        Optional<LastVisit> updatedLastVisit = personToEdit.getLastVisit();
+        // edit command does not allow editing visits
+        Visit updatedVisit = personToEdit.getVisit();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedLanguage, updatedAddress, updatedVisit, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedLanguage, updatedAddress,
+                updatedLastVisit, updatedVisit, updatedTags);
     }
 
     @Override

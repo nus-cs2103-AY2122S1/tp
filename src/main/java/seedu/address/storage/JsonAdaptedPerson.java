@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -29,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String language;
     private final String address;
+    private final String lastVisit;
     private final String visit;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -38,11 +41,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("language") String language, @JsonProperty("address") String address,
-            @JsonProperty("visit") String visit, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("lastVisit") String lastVisit, @JsonProperty("visit") String visit,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.language = language;
         this.address = address;
+        this.lastVisit = lastVisit;
         this.visit = visit;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -57,6 +62,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         language = source.getLanguage().value;
         address = source.getAddress().value;
+        lastVisit = source.getLastVisit().orElse(new LastVisit("")).value;
         visit = source.getVisit().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -107,13 +113,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (lastVisit == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Visit.class.getSimpleName()));
+        }
+        final Optional<LastVisit> modelLastVisit = Optional.ofNullable(new LastVisit(lastVisit));
+
         if (visit == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Visit.class.getSimpleName()));
         }
         final Visit modelVisit = new Visit(visit);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelLanguage, modelAddress, modelVisit, modelTags);
+        return new Person(modelName, modelPhone, modelLanguage, modelAddress, modelLastVisit, modelVisit, modelTags);
     }
 
 }

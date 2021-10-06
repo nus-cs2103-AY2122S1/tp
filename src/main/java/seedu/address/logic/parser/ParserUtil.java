@@ -2,8 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,6 +15,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -21,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -93,6 +99,33 @@ public class ParserUtil {
             throw new ParseException(Language.MESSAGE_CONSTRAINTS);
         }
         return new Language(trimmedLanguage);
+    }
+
+    /**
+     * Parses a {@code String lastVisit} into an {@code LastVisit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lastVisit} is invalid.
+     */
+    public static Optional<LastVisit> parseLastVisit(String lastVisit) throws ParseException {
+        requireNonNull(lastVisit);
+        String trimmedLastVisit = lastVisit.trim();
+        if (lastVisit.isEmpty()) {
+            return Optional.ofNullable(new LastVisit(trimmedLastVisit));
+        }
+
+        if (!LastVisit.isValidLastVisit(trimmedLastVisit)) {
+            throw new ParseException(LastVisit.MESSAGE_CONSTRAINTS);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate.parse(trimmedLastVisit, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        return Optional.ofNullable(new LastVisit(trimmedLastVisit));
     }
 
     /**
