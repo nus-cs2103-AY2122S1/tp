@@ -1,15 +1,17 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Student;
 import seedu.address.model.lesson.Lesson;
-
+import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.DuplicateLessonException;
 
 /**
  * Wraps all data at the address-book level
@@ -60,6 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setLessons(newData.getLessonList());
     }
 
     //// person-level operations
@@ -106,7 +109,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return lessons.contains(lesson);
+        for (Lesson l : lessons) {
+            // weak equality check
+            if (l.isSameLesson(lesson)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -125,12 +134,39 @@ public class AddressBook implements ReadOnlyAddressBook {
         lessons.remove(key);
     }
 
+    /**
+     * Replaces the contents of the lesson list with {@code lesson}.
+     * {@code lesson} must not contain duplicate lessons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        if (!lessonsAreUnique(lessons)) {
+            throw new DuplicateLessonException();
+        }
+        this.lessons.addAll(lessons);
+    }
+
+    /**
+     * Returns true if {@code lessons} contains only unique lessons.
+     */
+    public boolean lessonsAreUnique(List<Lesson> lessons) {
+        for (int i = 0; i < lessons.size() - 1; i++) {
+            for (int j = i + 1; j < lessons.size(); j++) {
+                if (lessons.get(i).isSameLesson(lessons.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        return "AddressBook["
+                + persons.asUnmodifiableObservableList().size() + " persons, "
+                + FXCollections.observableList(lessons).size() + " lessons]";
     }
 
     @Override
@@ -138,14 +174,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    /**
-     * Returns list of lessons.
-     * @return the list of lessons.
-     */
-    public ArrayList<Lesson> getLessonList() {
-        return lessons;
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return FXCollections.observableList(lessons);
     }
-
 
     @Override
     public boolean equals(Object other) {

@@ -15,12 +15,12 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Student;
 
-
-public class EnrollCommand extends Command{
+public class EnrollCommand extends Command {
 
     public static final String COMMAND_WORD = "enroll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a specified student from a given TuitiONE lesson\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a specified student "
+            + "from a given TuitiONE lesson\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_GRADE + "GRADE "
@@ -35,6 +35,9 @@ public class EnrollCommand extends Command{
     private Index index;
     private String lessonCode;
 
+    /**
+     * Creates an EnrollCommand for a Student with a given index to a specified {@code Lesson}.
+     */
     public EnrollCommand(Index index, String lessonCode) {
         requireNonNull(index, lessonCode);
 

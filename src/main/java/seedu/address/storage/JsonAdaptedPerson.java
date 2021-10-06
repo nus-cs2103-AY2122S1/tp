@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
         phone = source.getParentContact().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        grade = source.getGrade().grade;
+        grade = source.getGrade().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

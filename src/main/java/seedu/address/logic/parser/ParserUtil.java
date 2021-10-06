@@ -18,7 +18,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ParentContact;
-
 import seedu.address.model.tag.Tag;
 
 /**
@@ -180,9 +179,9 @@ public class ParserUtil {
         int minute = Integer.parseInt(trimmedTime.substring(2, 4));
         return LocalTime.of(hour, minute);
     }
-    
+
     /**
-     * Parses a {@code String lesson Code} into a {@.
+     * Parses a {@code String lesson Code} into a {@code UnenrollCommand}.
      * Leading and trailing whitespaces will be trimmed.
      */
     public static UnenrollCommand parseUnenrollArgs(String args) throws ParseException {

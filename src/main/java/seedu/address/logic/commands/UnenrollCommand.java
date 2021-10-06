@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,9 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Student;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class UnenrollCommand extends Command {
 
@@ -27,6 +28,9 @@ public class UnenrollCommand extends Command {
 
     private final String lessonCode;
 
+    /**
+     * Creates an UnenrollCommand for a Student with a given index and a specified {@code Lesson}.
+     */
     public UnenrollCommand(Index targetIndex, String lessonCode) {
         this.targetIndex = targetIndex;
         this.lessonCode = lessonCode;
