@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANT_ID;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Set;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
-import seedu.address.model.participant.*;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.ParticipantId;
 
 
 public class AddParticipantToEventCommand extends Command {
@@ -21,7 +21,9 @@ public class AddParticipantToEventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": add Participant with matching ID to an Event.\n"
         + "Parameters: \n"
-        + "Example: " + COMMAND_WORD + " 1";
+        + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
+        + PREFIX_EVENT + " EVENT_NAME "
+        + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + " 240Km Marathon";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
         "Added Participant: %1$s to event %2$s successfully";
