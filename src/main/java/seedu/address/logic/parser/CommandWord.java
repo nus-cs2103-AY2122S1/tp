@@ -17,7 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public enum CommandWord {
     ADD("add"),
     CLEAR("clear"),
-    DELETE("delete"),
+    DELETE("delete", "del", "rm"),
     EDIT("edit", "update"),
     EXIT("exit", "quit"),
     FIND("find"),
