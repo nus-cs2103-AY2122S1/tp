@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.position.Position;
 
 /**
  * Represents a Person in the address book.
@@ -22,18 +22,18 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Position> positions = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Position> positions) {
+        requireAllNonNull(name, phone, email, address, positions);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.positions.addAll(positions);
     }
 
     public Name getName() {
@@ -56,8 +56,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Position> getPositions() {
+        return Collections.unmodifiableSet(positions);
     }
 
     /**
@@ -92,13 +92,13 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getPositions().equals(getPositions());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, positions);
     }
 
     @Override
@@ -112,10 +112,10 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
+        Set<Position> positions = getPositions();
+        if (!positions.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            positions.forEach(builder::append);
         }
         return builder.toString();
     }

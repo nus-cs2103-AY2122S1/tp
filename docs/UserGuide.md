@@ -110,8 +110,8 @@ Adds a participant to Ailurus.
 Format: `padd /n NAME /p PHONE_NUMBER /e EMAIL [/a ADDRESS] [/t TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A participant can have any number of tags (including 0). A person MUST have a name,
-phone number and email address, but mailing address and tags are optional.
+A participant can have any number of positions (including 0). A person MUST have a name,
+phone number and email address, but mailing address and positions are optional.
 </div>
 
 Examples:
@@ -189,12 +189,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* When editing positions, the existing positions of the person will be removed i.e adding of positions is not cumulative.
+* You can remove all the person’s positions by typing `t/` without specifying any positions after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing positions.
 
 ### Locating persons by name: `find`
 
