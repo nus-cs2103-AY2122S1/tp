@@ -53,8 +53,10 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String ROLE_DESC_AMY = " " + PREFIX_ROLE + VALID_ROLE_AMY;
     public static final String ROLE_DESC_BOB = " " + PREFIX_ROLE + VALID_ROLE_BOB;
-    public static final String LEVEL_OF_EDUCATION_AMY = " " + PREFIX_LEVEL_OF_EDUCATION + VALID_LEVEL_OF_EDUCATION_AMY;
-    public static final String LEVEL_OF_EDUCATION_BOB = " " + PREFIX_LEVEL_OF_EDUCATION + VALID_LEVEL_OF_EDUCATION_BOB;
+    public static final String LEVEL_OF_EDUCATION_DESC_AMY = " " +
+            PREFIX_LEVEL_OF_EDUCATION + VALID_LEVEL_OF_EDUCATION_AMY;
+    public static final String LEVEL_OF_EDUCATION_DESC_BOB = " " +
+            PREFIX_LEVEL_OF_EDUCATION + VALID_LEVEL_OF_EDUCATION_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -63,7 +65,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "Softw@re Eng1n33r"; // '@' not allowed in roles
-    public static final String INVALID_LEVEL_OF_EDUCATION =
+    public static final String INVALID_LEVEL_OF_EDUCATION_DESC =
             " " + PREFIX_LEVEL_OF_EDUCATION + "Kindergarten"; // "Kindergarten" not allowed as level of education
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
