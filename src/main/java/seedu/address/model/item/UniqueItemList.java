@@ -90,10 +90,10 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public void setItems(List<Item> items) {
         requireAllNonNull(items);
+//        System.out.println(items);
         if (!itemsAreUnique(items)) {
             throw new DuplicateItemException();
         }
-
         internalList.setAll(items);
     }
 

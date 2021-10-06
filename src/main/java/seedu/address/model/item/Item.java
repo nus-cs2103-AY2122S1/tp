@@ -20,7 +20,7 @@ public class Item {
     private final String id;
 
     // Data fields
-    private final Integer count;
+    private Integer count;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -44,6 +44,10 @@ public class Item {
 
     public Integer getCount() {
         return count;
+    }
+
+    public void replenishItem(int n) {
+        this.count += n;
     }
 
     /**
@@ -98,7 +102,9 @@ public class Item {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; id: ")
-                .append(getId());
+                .append(getId())
+                .append("; count: ")
+                .append(getCount());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

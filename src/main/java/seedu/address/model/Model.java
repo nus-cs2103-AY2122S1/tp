@@ -84,4 +84,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredItemList(Predicate<Item> predicate);
+
+    /**
+     * Gets Item with the same name.
+     * @param name The name of the item that wants to be searched
+     * @return the Item with the same name.
+     */
+    Item getItemWithName(String name);
 }
