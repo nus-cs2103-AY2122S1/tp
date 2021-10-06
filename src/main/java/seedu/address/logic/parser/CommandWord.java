@@ -30,10 +30,10 @@ public enum CommandWord {
     HELP("help", "man"),
     LIST("list", "ls");
 
-    private static Map<CommandWord, ArrayList<String>> ALIAS_MAP;
+    private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
 
     static {
-        Map<CommandWord, ArrayList<String>> aliasMap= new HashMap<>();
+        Map<CommandWord, ArrayList<String>> aliasMap = new HashMap<>();
         for (CommandWord cw : values()) {
             aliasMap.put(cw, cw.aliasList);
         }
@@ -56,7 +56,7 @@ public enum CommandWord {
      * @param userInput The user input to parse into a command word
      * @return The matching command word if exists, else null.
      */
-    public static CommandWord getCommandWord(String userInput) throws ParseException {
+    public static CommandWord getCommandType(String userInput) throws ParseException {
         String aliasToLowerCase = userInput.toLowerCase();
         for (CommandWord cw : ALIAS_MAP.keySet()) {
             if (cw.aliasList.contains(aliasToLowerCase)) {
