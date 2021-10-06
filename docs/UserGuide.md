@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-ProfAddressBook Level 3 (*P*AB3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PAB3 can get your contact management tasks done faster than traditional GUI apps. PAB3 helps CS2103 Instructors manage both students and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
+ProfBook Level 3 (*P*B3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface 
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PB3 can get your 
+contact management tasks done faster than traditional GUI apps. PB3 helps CS2103 Instructors manage both students 
+and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
 {:toc}
@@ -151,7 +154,7 @@ Examples:
 
 ### Import existing contacts from JSON: `import`
 
-Merges all contacts in a JSON file with the existing contacts in PAB3.
+Merges all contacts in a JSON file with the existing contacts in PB3.
 
 Format: `import FILENAME`
 
@@ -165,17 +168,20 @@ Format: `exit`
 
 ### Saving the data
 
-PAB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save 
+PB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save 
 manually.
 
 ### Editing the data file
 
-PAB3 data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update 
+PB3 data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update 
 data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
+
+### Coming Soon
+Export feature...
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -184,7 +190,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
-contains the data of your previous PAB3 home folder.
+contains the data of your previous PB3 home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
