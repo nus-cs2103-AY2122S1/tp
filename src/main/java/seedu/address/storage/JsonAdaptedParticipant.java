@@ -63,10 +63,6 @@ public class JsonAdaptedParticipant {
         }
     }
 
-    public String getId() {
-        return id;
-    }
-
     /**
      * Converts a given {@code Participant} into this class for Json use.
      */
@@ -84,6 +80,11 @@ public class JsonAdaptedParticipant {
         nextOfKins.addAll(source.getNextOfKins().stream().map(JsonAdaptedNextOfKin::new).collect(Collectors.toList()));
         // TODO: Notes to be implemented
     }
+
+    public String getId() {
+        return id;
+    }
+
 
     /**
      * Converts this Jackson-friendly adapted participant object into the model's {@code Participant} object.
