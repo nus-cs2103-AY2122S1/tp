@@ -14,7 +14,7 @@ public class Reservation {
 
     public Reservation(Phone phone, int numberOfPeople, LocalDateTime time) {
         requireAllNonNull(phone, numberOfPeople, time);
-
+        this.phone = phone;
         this.numberOfPeople = numberOfPeople;
         this.time = time;
     }
@@ -33,8 +33,13 @@ public class Reservation {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof Reservation)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof Reservation)) {
+            return false;
+        }
+
         Reservation that = (Reservation) o;
         return numberOfPeople == that.numberOfPeople
                 && phone.equals(that.phone)

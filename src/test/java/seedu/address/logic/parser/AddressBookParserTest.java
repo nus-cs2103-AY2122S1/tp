@@ -91,7 +91,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_reserve() throws Exception {
-        assertTrue(parser.parseCommand(ReserveCommand.COMMAND_WORD) instanceof ReserveCommand);
+        assertTrue(parser.parseCommand("reserve 2 p/98765432 at/11/11/2021 2030") instanceof ReserveCommand);
     }
 
     @Test
