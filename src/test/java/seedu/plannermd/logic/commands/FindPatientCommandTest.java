@@ -9,9 +9,9 @@ import static seedu.plannermd.testutil.patient.TypicalPatients.CARL;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ELLE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
-import static seedu.plannermd.testutil.patient.TypicalPatients.CARL;
-import static seedu.plannermd.testutil.patient.TypicalPatients.ELLE;
-import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
+//import static seedu.plannermd.testutil.patient.TypicalPatients.CARL;
+//import static seedu.plannermd.testutil.patient.TypicalPatients.ELLE;
+//import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;

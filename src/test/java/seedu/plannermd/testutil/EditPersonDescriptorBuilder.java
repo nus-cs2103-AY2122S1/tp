@@ -80,7 +80,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * <<<<<<< HEAD Sets the {@code BirthDate} of the {@code EditPersonDescriptor}
+     * Sets the {@code BirthDate} of the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withBirthDate(String birthDate) {
@@ -91,8 +91,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
      * {@code EditPersonDescriptor} ======= Parses the {@code tags} into a
-     * {@code Set<Tag>} and set it to the {@code EditPatientDescriptor} >>>>>>>
-     * 5d71faa8dbb25ff74c1ccc03d1f1e39a94e9edcd that we are building.
+     * {@code Set<Tag>} and set it to the {@code EditPatientDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());

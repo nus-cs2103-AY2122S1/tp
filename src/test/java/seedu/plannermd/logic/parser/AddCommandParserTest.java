@@ -50,7 +50,7 @@ import seedu.plannermd.testutil.patient.PatientBuilder;
 public class AddCommandParserTest {
         private AddCommandParser parser = new AddCommandParser();
 
-        @Test
+    @Test
         public void parse_allFieldsPresent_success() {
                 Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND)
                                 .withRisk(Risk.getUnclassifiedRisk().toString()).build();

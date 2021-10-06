@@ -51,29 +51,29 @@ public class TypicalPatients {
                         .withEmail("anna@example.com").withAddress("4th street").withBirthDate("9/1/1964")
                         .withRisk("HIGH").build();
 
-        // Manually added
-        public static final Patient HOON = new PatientBuilder().withName("Hoon Meier").withPhone("8482424")
-                        .withEmail("stefan@example.com").withAddress("little india").withBirthDate("22/06/1950")
-                        .withRisk("LOW").build();
-        public static final Patient IDA = new PatientBuilder().withName("Ida Mueller").withPhone("8482131")
-                        .withEmail("hans@example.com").withAddress("chicago ave").withBirthDate("22/06/1950")
-                        .withRisk("LOW").build();
+    // Manually added
+    public static final Patient HOON = new PatientBuilder().withName("Hoon Meier").withPhone("8482424")
+                .withEmail("stefan@example.com").withAddress("little india").withBirthDate("22/06/1950")
+                .withRisk("LOW").build();
+    public static final Patient IDA = new PatientBuilder().withName("Ida Mueller").withPhone("8482131")
+                .withEmail("hans@example.com").withAddress("chicago ave").withBirthDate("22/06/1950")
+                .withRisk("LOW").build();
 
-        // Manually added - Person's details found in {@code CommandTestUtil}
-        public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-                        .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
-                        .withTags(VALID_TAG_FRIEND).withRisk(VALID_RISK_AMY).build();
-        public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
-                        .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRisk(VALID_RISK_BOB).build();
+    // Manually added - Person's details found in {@code CommandTestUtil}
+    public static final Patient AMY = new PatientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
+                .withTags(VALID_TAG_FRIEND).withRisk(VALID_RISK_AMY).build();
+    public static final Patient BOB = new PatientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
+        .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withRisk(VALID_RISK_BOB).build();
 
-        public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-        private TypicalPatients() {
-        } // prevents instantiation
+    private TypicalPatients() {
+    } // prevents instantiation
 
-        public static List<Patient> getTypicalPatients() {
-                return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-        }
+    public static List<Patient> getTypicalPatients() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
 
 }

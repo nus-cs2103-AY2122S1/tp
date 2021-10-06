@@ -1,13 +1,14 @@
 package seedu.plannermd.model.person;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.ResolverStyle;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+
 
 /**
  * Represents a Person's birth date in the plannermd. Guarantees: immutable; is
@@ -21,7 +22,7 @@ public class BirthDate {
             + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
             + "3. Year must be 4 characters";
 
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy")
             .withResolverStyle(ResolverStyle.SMART);
 
     public final LocalDate value;
@@ -34,7 +35,7 @@ public class BirthDate {
     public BirthDate(String birthDate) {
         requireNonNull(birthDate);
         checkArgument(isValidBirthDate(birthDate), MESSAGE_CONSTRAINTS);
-        value = LocalDate.parse(birthDate, formatter);
+        value = LocalDate.parse(birthDate, FORMATTER);
     }
 
     /**
@@ -42,8 +43,8 @@ public class BirthDate {
      */
     public static boolean isValidBirthDate(String test) {
         try {
-            LocalDate.parse(test, formatter);
-            LocalDate inputDate = LocalDate.from(LocalDate.parse(test, formatter));
+            LocalDate.parse(test, FORMATTER);
+            LocalDate inputDate = LocalDate.from(LocalDate.parse(test, FORMATTER));
             if (inputDate.isAfter(LocalDate.now())) {
                 return false;
             }
@@ -55,12 +56,11 @@ public class BirthDate {
 
     @Override
     public String toString() {
-        return value.format(formatter);
+        return value.format(FORMATTER);
     }
 
     @Override
     public boolean equals(Object other) {
-        BirthDate o = (BirthDate) other;
         return other == this // short circuit if same object
                 || (other instanceof BirthDate // instanceof handles nulls
                         && value.equals(((BirthDate) other).value)); // state check

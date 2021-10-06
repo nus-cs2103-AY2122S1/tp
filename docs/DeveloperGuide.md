@@ -371,11 +371,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
-<<<<<<< HEAD
-    
-**Use case: Editing personal details of a patient**
-=======
-
 
 **Use case: Adding a tag to a patient**
 
@@ -436,7 +431,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 **Use case: Editing personal details of a patient (Coming soon)**
->>>>>>> f845d9d979bdb622e0dc28aad245bcb8b055c55f
 
 **MSS**
 

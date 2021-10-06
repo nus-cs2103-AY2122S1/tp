@@ -114,8 +114,7 @@ public class PatientBuilder {
     }
 
     /**
-     * <<<<<<< HEAD Sets the {@code Risk} of the {@code Patient} that we are
-     * building. Accepts UNCLASSIFIED risk. ======= Sets the {@code Remark} of the
+     * Sets the {@code Remark} of the
      * {@code Patient} that we are building.
      */
     public PatientBuilder withRemark(String remark) {
@@ -125,7 +124,7 @@ public class PatientBuilder {
 
     /**
      * Sets the {@code Risk} of the {@code Patient} that we are building. Accepts
-     * UNCLASSIFIED risk. >>>>>>> f845d9d979bdb622e0dc28aad245bcb8b055c55f
+     * UNCLASSIFIED risk.
      */
     public PatientBuilder withRisk(String risk) {
         this.risk = Risk.getUnclassifiableRisk(risk);

@@ -2,6 +2,7 @@ package seedu.plannermd.logic.commands.editcommand;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -40,8 +41,8 @@ public class EditPatientCommand extends EditCommand {
             + "by the index number used in the displayed patient list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE
-            + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_TAG
-            + "TAG]..." + "[" + PREFIX_RISK + "RISK]\n" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PHONE
+            + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_BIRTH_DATE + "BIRTH_DATE] "
+            +"[" + PREFIX_TAG + "TAG]..." + "[" + PREFIX_RISK + "RISK]\n" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PHONE
             + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
@@ -52,7 +53,7 @@ public class EditPatientCommand extends EditCommand {
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index                 of the person in the filtered person list to
+     * @param index of the person in the filtered person list to
      *                              edit
      * @param editPatientDescriptor details to edit the person with
      */

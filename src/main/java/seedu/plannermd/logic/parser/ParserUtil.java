@@ -11,10 +11,10 @@ import seedu.plannermd.commons.util.StringUtil;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
-import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.tag.Tag;
 
 /**
