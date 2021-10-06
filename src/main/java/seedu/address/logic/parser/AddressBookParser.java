@@ -74,7 +74,7 @@ public class AddressBookParser {
             return new AddProgressCommandParser().parse(arguments);
 
         case DeleteProgressCommand.COMMAND_WORD:
-            return new DeleteProgressCommand();
+            return new DeleteProgressCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
