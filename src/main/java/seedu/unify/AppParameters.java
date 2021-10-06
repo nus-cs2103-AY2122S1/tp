@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.commons.util.FileUtil;
 

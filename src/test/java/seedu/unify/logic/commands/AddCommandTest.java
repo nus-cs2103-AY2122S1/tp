@@ -13,7 +13,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.AddressBook;

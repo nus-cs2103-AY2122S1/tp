@@ -3,7 +3,6 @@ package seedu.unify.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
-
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;

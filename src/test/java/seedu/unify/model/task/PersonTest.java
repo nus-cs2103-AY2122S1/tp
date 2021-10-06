@@ -12,7 +12,6 @@ import static seedu.unify.testutil.TypicalPersons.ALICE;
 import static seedu.unify.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.testutil.PersonBuilder;
 
 public class PersonTest {

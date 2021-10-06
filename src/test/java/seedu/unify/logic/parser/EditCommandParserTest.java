@@ -32,7 +32,6 @@ import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.EditCommand.EditPersonDescriptor;

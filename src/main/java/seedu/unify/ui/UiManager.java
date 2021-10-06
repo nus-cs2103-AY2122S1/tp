@@ -7,7 +7,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import seedu.unify.MainApp;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.commons.util.StringUtil;

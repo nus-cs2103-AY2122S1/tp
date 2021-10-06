@@ -30,7 +30,6 @@ import static seedu.unify.testutil.TypicalPersons.AMY;
 import static seedu.unify.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Address;

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.commons.exceptions.IllegalValueException;
 import seedu.unify.model.task.Address;
 import seedu.unify.model.task.Email;

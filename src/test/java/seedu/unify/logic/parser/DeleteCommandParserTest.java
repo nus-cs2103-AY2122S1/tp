@@ -6,7 +6,6 @@ import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.logic.commands.DeleteCommand;
 
 /**

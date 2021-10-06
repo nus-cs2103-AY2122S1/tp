@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.model.task.NameContainsKeywordsPredicate;
 import seedu.unify.testutil.AddressBookBuilder;

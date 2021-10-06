@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.model.task.exceptions.DuplicatePersonException;
 import seedu.unify.model.task.exceptions.PersonNotFoundException;
 import seedu.unify.testutil.PersonBuilder;

@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.model.task.Person;
 

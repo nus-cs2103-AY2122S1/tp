@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.task.Person;

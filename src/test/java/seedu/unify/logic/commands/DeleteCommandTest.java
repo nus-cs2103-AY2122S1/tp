@@ -10,7 +10,6 @@ import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.unify.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.model.Model;

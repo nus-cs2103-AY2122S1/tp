@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.commands.Command;

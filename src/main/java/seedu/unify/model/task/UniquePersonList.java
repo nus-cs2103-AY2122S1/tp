@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.unify.model.task.exceptions.DuplicatePersonException;
 import seedu.unify.model.task.exceptions.PersonNotFoundException;
 
