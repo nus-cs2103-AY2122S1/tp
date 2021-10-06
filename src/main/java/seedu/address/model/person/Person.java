@@ -117,15 +117,19 @@ public class Person {
         builder.append(getName())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Telegram: ")
-                .append(getTeleHandle());
+                .append("; Module : ");
 
-        Set<ModuleCode> modulesCodes = getModuleCodes();
-        if (!modulesCodes.isEmpty()) {
-            builder.append("; Modules: ");
-            modulesCodes.forEach(builder::append);
+        Set<ModuleCode> moduleCodes = getModuleCodes();
+        moduleCodes.forEach(builder::append);
+
+        if (!getPhone().value.isEmpty()) {
+            builder.append("; Phone: ");
+            builder.append(getPhone());
+        }
+
+        if (!getTeleHandle().value.isEmpty()) {
+            builder.append("; Telegram: ");
+            builder.append(getTeleHandle());
         }
 
         Set<Tag> tags = getTags();
@@ -135,5 +139,6 @@ public class Person {
         }
         return builder.toString();
     }
+
 
 }
