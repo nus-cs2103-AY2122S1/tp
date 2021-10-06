@@ -33,24 +33,30 @@ public class AppointmentCommandParser implements Parser {
                     AppointmentCommand.MESSAGE_USAGE), ive);
         }
 
-        String date = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
-        String parsedDate = parseDateString(date);
+        String retrievedDate = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
+        String parsedDate = parseDateString(retrievedDate);
 
         return new AppointmentCommand(index, new Appointment(parsedDate));
     }
 
     /**
      * Checks if the retrieved date from user input is valid or if it is a delete appointment command.
-     * If date is valid, returns the formatted date in the specified format (dd MMM yyyy).
-     * If it is a delete appointment command, returns 'No Appointment Scheduled Yet'.
+     *
+     * A valid date input is of the format yyyy-mm-dd.
+     * `mm` is a 2-digit number in the range 01-12, which represents a calendar month.
+     * `dd` is a 2-digit number in the range of 01-31, depending on the number of days in the calendar month.
+     *
+     * If the retrieved date is valid, returns the date in `dd MMM yyyy` format.
+     * If the retrieved date is a delete appointment command, returns `No Appointment Scheduled Yet`.
+     * Otherwise, it means that the user did not enter the correct input. A ParseException will be thrown.
      *
      * @param date Date String retrieved from user input
      * @return A String representing the date in the specified format if it is valid (for add/update),
      * or 'No Appointment Scheduled Yet' (for delete)
-     * @throws ParseException Thrown when the date retrieved is invalid (i.e. invalid month or day)
+     * @throws ParseException Thrown when the date retrieved is invalid
      */
     private String parseDateString(String date) throws ParseException {
-        if (!date.equals(AppointmentCommand.DELETE_COMMAND)) {
+        if (!date.equals(AppointmentCommand.APPOINTMENT_DELETE_COMMAND)) {
             try {
                 // converts the date to the specified format
                 date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
