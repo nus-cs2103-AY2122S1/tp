@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * Clears the facility list.
+ * Clears the facility list of SportsPA.
  */
 public class ClearFacilitiesCommand extends Command {
 
