@@ -23,7 +23,7 @@ public class RemoveParticipantFromEventCommand extends Command {
         + PREFIX_EVENT + "EVENT_NAME "
         + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + "240Km Marathon ";
 
-    public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
+    public static final String MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS =
         "Removed Participant: %1$s from event %2$s successfully";
 
     private final ParticipantId participantId;
@@ -74,10 +74,10 @@ public class RemoveParticipantFromEventCommand extends Command {
             throw new CommandException("Participant " + participantToRemove.getFullName() + " doesn't exist in event!");
         }
 
-        // add participant
+        // remove participant
         selectedEvent.getParticipants().remove(participantToRemove);
 
-        return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
+        return new CommandResult(String.format(MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS,
             participantToRemove.getFullName(), eventName));
     }
 
