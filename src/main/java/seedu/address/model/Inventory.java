@@ -67,6 +67,20 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
+     * Returns the item with the same name as {@code item} that exists in the inventory.
+     */
+    public Item getItemWithName(String name) {
+        requireNonNull(name);
+        ObservableList<Item> ls = items.asUnmodifiableObservableList();
+        for (Item item: ls) {
+            if (item.getName().toString().equals(name)) {
+                return item;
+            }
+        }
+        throw new AssertionError("unreachable code (if implemented correctly)");
+    }
+
+    /**
      * Adds an item to the inventory.
      * If the item already exists in the inventory, increment its count.
      */
