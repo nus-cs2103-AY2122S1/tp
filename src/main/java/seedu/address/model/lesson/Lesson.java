@@ -37,6 +37,7 @@ public class Lesson {
     private final double price;
     private final Set<Student> students; // todo consider linking students to classes
 
+
     /**
      * Constructs a {@code Lesson}.
      *
@@ -87,6 +88,16 @@ public class Lesson {
      */
     public Set<Student> getStudents() {
         return Collections.unmodifiableSet(students);
+    }
+
+    public void addStudent(Student student) {
+        requireAllNonNull(student);
+        this.students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        requireAllNonNull(student);
+        this.students.remove(student);
     }
 
     /**

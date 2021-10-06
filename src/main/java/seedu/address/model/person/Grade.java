@@ -43,7 +43,6 @@ public class Grade {
 
     @Override
     public boolean equals(Object other) {
-
         return other == this // short circuit if same object
                 || (other instanceof Grade // instanceof handles nulls
                 && grade.equals(((Grade) other).grade)); // state check

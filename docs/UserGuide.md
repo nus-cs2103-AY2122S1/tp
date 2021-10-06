@@ -129,7 +129,7 @@ Examples:
 * `list` followed by `delete 2` deletes the student indexed 2 in the TuitiONE.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Unenrolling a student from lesson: `enroll`
+### Enrolling a student from lesson: `enroll`
 
 Enroll a student from a given TuitiONE lesson.
 

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Student;
+import seedu.address.model.lesson.Lesson;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -112,6 +115,22 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedStudent);
     }
 
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLesson(lesson);
+    }
+
+    @Override
+    public void deleteLesson(Lesson target) {
+        addressBook.removeLesson(target);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        addressBook.addLesson(lesson);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -127,6 +146,24 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public ArrayList<Lesson> getLessonList() {
+        return addressBook.getLessonList();
+    }
+
+    @Override
+    public Lesson searchLessons(String arg) {
+        requireAllNonNull(arg);
+
+        ArrayList<Lesson> lessons = addressBook.getLessonList();
+        for (Lesson current : lessons) {
+            if (arg.equals(current.getLessonCode())) {
+                return current;
+            }
+        }
+        return null;
     }
 
     @Override

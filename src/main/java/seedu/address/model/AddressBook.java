@@ -2,10 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Student;
+import seedu.address.model.lesson.Lesson;
+
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -16,6 +19,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
+    private final ArrayList<Lesson> lessons;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        lessons = new ArrayList<>();
     }
 
     public AddressBook() {}
@@ -93,6 +99,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// lesson-level operations
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in TuitiONE.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessons.contains(lesson);
+    }
+
+    /**
+     * Adds a lesson to TuitiONE.
+     * The person must not already exist in the address book.
+     */
+    public void addLesson(Lesson l) {
+        lessons.add(l);
+    }
+
+    /**
+     * Removes a lesson from this {@code TuitiONE}.
+     * lesson must exist in TuitiONE.
+     */
+    public void removeLesson(Lesson key) {
+        lessons.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -106,6 +138,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns list of lessons.
+     * @return the list of lessons.
+     */
+    public ArrayList<Lesson> getLessonList() {
+        return lessons;
+    }
+
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -117,4 +158,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }
