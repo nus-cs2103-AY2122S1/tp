@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -16,7 +17,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.VisitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
@@ -28,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -88,18 +91,45 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String language} into an {@code Language}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code language} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Language parseLanguage(String language) throws ParseException {
+        requireNonNull(language);
+        String trimmedLanguage = language.trim();
+        if (!Language.isValidLanguage(trimmedLanguage)) {
+            throw new ParseException(Language.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Language(trimmedLanguage);
+    }
+
+    /**
+     * Parses a {@code String lastVisit} into an {@code LastVisit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lastVisit} is invalid.
+     */
+    public static Optional<LastVisit> parseLastVisit(String lastVisit) throws ParseException {
+        requireNonNull(lastVisit);
+        String trimmedLastVisit = lastVisit.trim();
+        if (lastVisit.isEmpty()) {
+            return Optional.ofNullable(new LastVisit(trimmedLastVisit));
+        }
+
+        if (!LastVisit.isValidLastVisit(trimmedLastVisit)) {
+            throw new ParseException(LastVisit.MESSAGE_CONSTRAINTS);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate.parse(trimmedLastVisit, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        return Optional.ofNullable(new LastVisit(trimmedLastVisit));
     }
 
     /**
