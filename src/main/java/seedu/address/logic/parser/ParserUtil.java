@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.EnrollCommand;
 import seedu.address.logic.commands.UnenrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -148,23 +149,24 @@ public class ParserUtil {
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
         String trimmedDay = day.trim();
-        String prefix = trimmedDay.substring(0, 2);
+        String prefix = trimmedDay.substring(0, 3);
 
-        if (prefix.equals("Mo")) {
+        switch (prefix) {
+        case "Mon":
             return DayOfWeek.MONDAY;
-        } else if (prefix.equals("Tu")) {
+        case "Tue":
             return DayOfWeek.TUESDAY;
-        } else if (prefix.equals("We")) {
+        case "Wed":
             return DayOfWeek.WEDNESDAY;
-        } else if (prefix.equals("Th")) {
+        case "Thu":
             return DayOfWeek.THURSDAY;
-        } else if (prefix.equals("Fr")) {
+        case "Fri":
             return DayOfWeek.FRIDAY;
-        } else if (prefix.equals("Sa")) {
+        case "Sat":
             return DayOfWeek.SATURDAY;
-        } else if (prefix.equals("Su")) {
+        case "Sun":
             return DayOfWeek.SUNDAY;
-        } else {
+        default:
             throw new ParseException("Something went wrong with your DAY");
         }
     }
@@ -193,12 +195,34 @@ public class ParserUtil {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, UnenrollCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(UnenrollCommand.MESSAGE_USAGE, pe);
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
-            lessonCode = argMultimap.getValue(PREFIX_LESSON).get();
+            lessonCode = argMultimap.getValue(PREFIX_LESSON).get().trim();
         }
         return new UnenrollCommand(index, lessonCode);
+    }
+
+    /**
+     * Parses a {@code String lesson Code} into a {@code EnrollCommand}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static EnrollCommand parseEnrollArgs(String args) throws ParseException {
+        requireNonNull(args);
+        Index index;
+        String lessonCode = null;
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(EnrollCommand.MESSAGE_USAGE, pe);
+        }
+
+        if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
+            lessonCode = argMultimap.getValue(PREFIX_LESSON).get().trim();
+        }
+        return new EnrollCommand(index, lessonCode);
     }
 }
