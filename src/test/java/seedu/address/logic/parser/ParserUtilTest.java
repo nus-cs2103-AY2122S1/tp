@@ -14,12 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Assessment;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.ID;
-import seedu.address.model.person.Assessment;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Score;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
+import seedu.address.model.student.ID;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Score;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
