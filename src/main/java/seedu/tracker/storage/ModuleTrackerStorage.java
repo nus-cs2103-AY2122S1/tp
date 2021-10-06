@@ -33,14 +33,14 @@ public interface ModuleTrackerStorage {
 
     /**
      * Saves the given {@link ReadOnlyModuleTracker} to the storage.
-     * @param moduletracker cannot be null.
+     * @param moduleTracker cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveModuleTracker(ReadOnlyModuleTracker moduletracker) throws IOException;
+    void saveModuleTracker(ReadOnlyModuleTracker moduleTracker) throws IOException;
 
     /**
      * @see #saveModuleTracker(ReadOnlyModuleTracker)
      */
-    void saveModuleTracker(ReadOnlyModuleTracker moduletracker, Path filePath) throws IOException;
+    void saveModuleTracker(ReadOnlyModuleTracker moduleTracker, Path filePath) throws IOException;
 
 }

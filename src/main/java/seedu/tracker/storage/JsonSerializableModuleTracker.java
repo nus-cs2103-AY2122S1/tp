@@ -16,7 +16,7 @@ import seedu.tracker.model.module.Module;
 /**
  * An Immutable ModuleTracker that is serializable to JSON format.
  */
-@JsonRootName(value = "moduletracker")
+@JsonRootName(value = "moduleTracker")
 class JsonSerializableModuleTracker {
 
     public static final String MESSAGE_DUPLICATE_MODULE = "Modules list contains duplicate module(s).";
