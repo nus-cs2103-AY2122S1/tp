@@ -30,10 +30,6 @@ class AddTagCommandParserTest {
     private AddTagCommandParser parser = new AddTagCommandParser();
 
     @Test
-    void parse_() {
-    }
-
-    @Test
     public void parse_missingParts_failure() {
         // no index specified
         assertParseFailure(parser, TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);

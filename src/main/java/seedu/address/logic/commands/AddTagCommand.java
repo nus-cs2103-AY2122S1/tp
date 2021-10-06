@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +30,7 @@ public class AddTagCommand extends Command {
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG" + " [" + PREFIX_TAG + "EXTRA_TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG +"ExampleTag";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "ExampleTag";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Added Tag to Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "Tag must be provided.";
