@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.commons.core.LogsCenter;
+import seedu.plannermd.model.PlannerMd.State;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 
@@ -18,16 +20,19 @@ import seedu.plannermd.model.person.Person;
  * Represents the in-memory model of the plannermd data.
  */
 public class ModelManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final PlannerMd plannerMd;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
+    private final FilteredList<Doctor> filteredDoctors;
+    private final State state;
 
     /**
      * Initializes a ModelManager with the given plannerMd and userPrefs.
      */
-    public ModelManager(ReadOnlyPlannerMd plannerMd, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyPlannerMd plannerMd, ReadOnlyUserPrefs userPrefs, State state) {
         super();
         requireAllNonNull(plannerMd, userPrefs);
 
@@ -35,11 +40,13 @@ public class ModelManager implements Model {
 
         this.plannerMd = new PlannerMd(plannerMd);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.state = state;
         filteredPatients = new FilteredList<>(this.plannerMd.getPatientList());
+        filteredDoctors = new FilteredList<>(this.plannerMd.getDoctorList());
     }
 
     public ModelManager() {
-        this(new PlannerMd(), new UserPrefs());
+        this(new PlannerMd(), new UserPrefs(), State.PATIENT);
     }
 
     //=========== UserPrefs ==================================================================================

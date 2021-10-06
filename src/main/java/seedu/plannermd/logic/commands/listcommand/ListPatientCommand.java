@@ -13,7 +13,6 @@ public class ListPatientCommand extends ListCommand {
 
     public static final String MESSAGE_SUCCESS = "Listed all patients";
 
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
