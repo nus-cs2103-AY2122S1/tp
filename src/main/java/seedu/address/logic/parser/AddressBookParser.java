@@ -6,21 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddParticipantToEventCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DoneEventCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterEventCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.ShowEventDetailsCommand;
-import seedu.address.logic.commands.SortEventCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -97,10 +83,15 @@ public class AddressBookParser {
 
         case ListEventCommand.COMMAND_WORD:
             return new ListEventCommand();
+
         // TODO: addParticipant (Use Parser):
+
         case AddParticipantToEventCommand.COMMAND_WORD:
             return new AddParticipantToEventParser().parse(arguments);
+
         // TODO: removeParticipant (Use Parser):
+        case RemoveParticipantFromEventCommand.COMMAND_WORD:
+            return new RemoveParticipantFromEventParser().parse(arguments);
 
         // TODO: findParticipant (Use Parser):
 
