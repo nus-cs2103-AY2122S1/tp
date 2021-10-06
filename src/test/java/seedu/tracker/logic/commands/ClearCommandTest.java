@@ -5,9 +5,9 @@ import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.UserPrefs;
 
 public class ClearCommandTest {
