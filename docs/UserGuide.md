@@ -109,7 +109,7 @@ Format: `list`
 
 Edits an existing person in ContactSH.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [task/TASK]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -117,15 +117,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [task
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* When editing tasks, the existing tasks of the person will be removed i.e adding of tasks is not cumulative.
-* You can remove all the person’s tasks by typing `task/` without
-  specifying any tags after it.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-* `edit 3 e/jackdaniel@example.com task/Project Meeting task/Interview` Edits the email of the 3rd person to be `jackdaniel@example.com`.
-and changes the tasks of the person to be `Project Meeting` and `Interview`, deleting all other tasks as well.
 
 ### Locating persons by name: `find`
 
@@ -181,6 +176,20 @@ Format: `deltask INDEX ti/TASK_INDEX`
 
 Examples:
 * `deltask 2 ti/2` Deletes the 2nd task attached to the 2nd person.
+
+### Edit task:
+
+Edit an existing task in ContactSH.
+
+Format: `edittask INDEX ti/TASK_INDEX [task/TASKNAME]`
+
+* Edits a task attached to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* The task edited  is specified by the TASK_INDEX. The task_index refers to the index number displayed in the tasklist of said person. The index must be a positive integer 1, 2, 3, …​
+* Existing values will be updated to the input value.
+* At least one of the optional fields must be provided.
+
+Examples:
+* `edittask 3 ti/2 task/Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
 
 ### Clearing all entries : `clear`
 
