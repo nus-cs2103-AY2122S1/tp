@@ -2,8 +2,30 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+4. [Architecture](#architecture)
+   - [UI component](#ui-component)
+   - [Logic component](#logic-component)
+   - [Model component](#model-component)
+   - [Storage component](#storage-component)
+   - [Common classes](#common-classes)
+5. [Implementation](#implementation)
+   - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+   - [[Proposed] Data archiving](#proposed-data-archiving)
+6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+7. [Appendix: Requirements](#appendix-requirements)
+   - [Product Scope](#product-scope)
+   - [User stories](#user-stories)
+   - [Use cases](#use-cases)
+   - [Non-Functional Requirements](#non-functional-requirements)
+   - [Glossary](#glossary)
+8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+   - [Launch and shutdown](#launch-and-shutdown)
+   - [Deleting a person](#deleting-a-person)
+   - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
