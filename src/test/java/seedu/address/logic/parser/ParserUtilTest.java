@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseVisit;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -18,6 +19,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Visit;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_LANGUAGE = " ";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_VISIT = "2020-111-11";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_LANGUAGE = "English";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_VISIT = "2020-11-11";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +196,28 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseVisit_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVisit((String) null));
+    }
+
+    @Test
+    public void parseVisit_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisit(INVALID_VISIT));
+    }
+
+    @Test
+    public void parseVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
+        Visit expectedVisit = parseVisit(VALID_VISIT);
+        assertEquals(expectedVisit, ParserUtil.parseVisit(VALID_VISIT));
+    }
+
+    @Test
+    public void parseVisit_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
+        String visitWithWhitespace = WHITESPACE + VALID_VISIT + WHITESPACE;
+        Visit expectedVisit = ParserUtil.parseVisit(VALID_VISIT);
+        assertEquals(expectedVisit, ParserUtil.parseVisit(visitWithWhitespace));
     }
 }
