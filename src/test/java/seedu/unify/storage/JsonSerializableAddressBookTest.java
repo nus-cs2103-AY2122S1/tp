@@ -7,11 +7,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
-import seedu.unify.model.AddressBook;
-import seedu.unify.testutil.TypicalPersons;
-
 import seedu.unify.commons.exceptions.IllegalValueException;
 import seedu.unify.commons.util.JsonUtil;
+import seedu.unify.model.AddressBook;
+import seedu.unify.testutil.TypicalPersons;
 
 public class JsonSerializableAddressBookTest {
 

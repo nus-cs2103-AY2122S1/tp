@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.unify.model.ReadOnlyUserPrefs;
-import seedu.unify.model.UserPrefs;
-
 import seedu.unify.commons.exceptions.DataConversionException;
 import seedu.unify.commons.util.JsonUtil;
+import seedu.unify.model.ReadOnlyUserPrefs;
+import seedu.unify.model.UserPrefs;
 
 /**
  * A class to access UserPrefs stored in the hard disk as a json file

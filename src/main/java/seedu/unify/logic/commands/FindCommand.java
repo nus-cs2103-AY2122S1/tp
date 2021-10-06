@@ -2,10 +2,9 @@ package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.unify.commons.core.Messages;
 import seedu.unify.model.Model;
 import seedu.unify.model.task.NameContainsKeywordsPredicate;
-
-import seedu.unify.commons.core.Messages;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

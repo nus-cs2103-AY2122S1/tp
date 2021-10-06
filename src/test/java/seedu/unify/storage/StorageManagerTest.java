@@ -9,11 +9,10 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.model.AddressBook;
 import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.UserPrefs;
-
-import seedu.unify.commons.core.GuiSettings;
 
 public class StorageManagerTest {
 

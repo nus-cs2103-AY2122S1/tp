@@ -10,13 +10,12 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.unify.commons.core.GuiSettings;
+import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.Logic;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.exceptions.ParseException;
-
-import seedu.unify.commons.core.GuiSettings;
-import seedu.unify.commons.core.LogsCenter;
 
 /**
  * The Main Window. Provides the basic application layout containing

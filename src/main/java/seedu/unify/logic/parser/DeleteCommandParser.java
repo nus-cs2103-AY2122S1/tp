@@ -2,10 +2,9 @@ package seedu.unify.logic.parser;
 
 import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.DeleteCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
-
-import seedu.unify.commons.core.index.Index;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

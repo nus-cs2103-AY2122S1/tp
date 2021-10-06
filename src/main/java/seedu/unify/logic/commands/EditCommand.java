@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.unify.commons.core.Messages;
+import seedu.unify.commons.core.index.Index;
+import seedu.unify.commons.util.CollectionUtil;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
 import seedu.unify.model.tag.Tag;
@@ -22,10 +25,6 @@ import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Person;
 import seedu.unify.model.task.Phone;
-
-import seedu.unify.commons.core.Messages;
-import seedu.unify.commons.core.index.Index;
-import seedu.unify.commons.util.CollectionUtil;
 
 /**
  * Edits the details of an existing task in the address book.

@@ -5,10 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import seedu.unify.commons.core.index.Index;
 import seedu.unify.model.Model;
 import seedu.unify.model.task.Person;
-
-import seedu.unify.commons.core.index.Index;
 
 /**
  * A utility class for test cases.

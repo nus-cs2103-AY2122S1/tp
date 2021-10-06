@@ -8,10 +8,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import seedu.unify.MainApp;
-import seedu.unify.logic.Logic;
-
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.commons.util.StringUtil;
+import seedu.unify.logic.Logic;
 
 /**
  * The manager of the UI component.

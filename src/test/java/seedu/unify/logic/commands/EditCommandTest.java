@@ -15,6 +15,8 @@ import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.unify.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+import seedu.unify.commons.core.Messages;
+import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
@@ -23,9 +25,6 @@ import seedu.unify.model.UserPrefs;
 import seedu.unify.model.task.Person;
 import seedu.unify.testutil.EditPersonDescriptorBuilder;
 import seedu.unify.testutil.PersonBuilder;
-
-import seedu.unify.commons.core.Messages;
-import seedu.unify.commons.core.index.Index;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.

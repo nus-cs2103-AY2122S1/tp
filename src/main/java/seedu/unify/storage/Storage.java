@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import seedu.unify.commons.exceptions.DataConversionException;
 import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.ReadOnlyUserPrefs;
 import seedu.unify.model.UserPrefs;
-
-import seedu.unify.commons.exceptions.DataConversionException;
 
 /**
  * API of the Storage component

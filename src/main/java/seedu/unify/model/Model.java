@@ -4,9 +4,8 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.unify.model.task.Person;
-
 import seedu.unify.commons.core.GuiSettings;
+import seedu.unify.model.task.Person;
 
 /**
  * The API of the Model component.

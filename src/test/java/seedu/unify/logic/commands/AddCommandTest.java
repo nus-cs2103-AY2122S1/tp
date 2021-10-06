@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
+import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
@@ -20,8 +21,6 @@ import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.ReadOnlyUserPrefs;
 import seedu.unify.model.task.Person;
 import seedu.unify.testutil.PersonBuilder;
-
-import seedu.unify.commons.core.GuiSettings;
 
 public class AddCommandTest {
 

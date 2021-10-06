@@ -13,12 +13,11 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
-
-import seedu.unify.commons.core.index.Index;
 
 /**
  * Parses input arguments and creates a new EditCommand object
