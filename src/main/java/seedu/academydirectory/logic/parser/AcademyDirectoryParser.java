@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.academydirectory.logic.commands.AddCommand;
+import seedu.academydirectory.logic.commands.AttendanceCommand;
 import seedu.academydirectory.logic.commands.ClearCommand;
 import seedu.academydirectory.logic.commands.Command;
 import seedu.academydirectory.logic.commands.DeleteCommand;
@@ -65,6 +66,9 @@ public class AcademyDirectoryParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case AttendanceCommand.COMMAND_WORD:
+            return new AttendanceCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -1,0 +1,36 @@
+package seedu.academydirectory.model.student;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.academydirectory.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+public class AttendanceTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Attendance(null));
+    }
+
+    @Test
+    public void constructor_invalidAttendance_throwsNegativeArraySizeException() {
+        Integer invalidAttendance = -1;
+        assertThrows(NegativeArraySizeException.class, () -> new Attendance(invalidAttendance));
+    }
+
+    @Test
+    public void equals() {
+
+        Attendance attendance = new Attendance(4);
+
+        assertTrue(attendance.equals(attendance));
+
+        Attendance attendanceCopy = new Attendance(4);
+        Attendance attendanceDiff = new Attendance(5);
+
+        assertTrue(attendance.equals(attendanceCopy));
+        assertFalse(attendance.equals(attendanceDiff));
+
+    }
+}

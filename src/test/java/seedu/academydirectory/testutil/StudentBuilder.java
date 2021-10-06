@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.academydirectory.model.student.Address;
+import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
@@ -20,12 +21,14 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final int DEFAULT_NUMBER_OF_STUDIO_SESSIONS = 10;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Attendance attendance;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +39,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        attendance = new Attendance(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
     }
 
     /**
@@ -47,6 +51,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        attendance = studentToCopy.getAttendance();
     }
 
     /**
@@ -82,6 +87,16 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Attendance} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAttendance(boolean[] boolArr) {
+        Attendance newAttendance = new Attendance(this.attendance.getSessionCount());
+        newAttendance.setAttendance(boolArr);
+        this.attendance = newAttendance;
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Student} that we are building.
      */
     public StudentBuilder withEmail(String email) {
@@ -89,8 +104,13 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Builds the Student object for testing.
+     */
     public Student build() {
-        return new Student(name, phone, email, address, tags);
+        Student newStudent = new Student(name, phone, email, address, tags);
+        newStudent.setAttendance(this.attendance);
+        return newStudent;
     }
 
 }

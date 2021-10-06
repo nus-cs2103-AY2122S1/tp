@@ -23,6 +23,7 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private Attendance attendance;
 
     /**
      * Every field must be present and not null.
@@ -34,6 +35,24 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.attendance = new Attendance(10); // for now, we just assume its 10.
+    }
+
+    /**
+     * Constructor for Student with Attendance.
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Attendance attendance, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.attendance = attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
     }
 
     public Name getName() {
@@ -50,6 +69,10 @@ public class Student {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Attendance getAttendance() {
+        return attendance;
     }
 
     /**
@@ -82,23 +105,22 @@ public class Student {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Student)) {
             return false;
         }
-
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getAddress().equals(getAddress())
-                && otherStudent.getTags().equals(getTags());
+                && otherStudent.getTags().equals(getTags())
+                && otherStudent.getAttendance().equals(getAttendance());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, attendance);
     }
 
     @Override
@@ -110,7 +132,9 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Attendance: ")
+                .append(getAttendance());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
