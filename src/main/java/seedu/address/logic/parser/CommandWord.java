@@ -23,7 +23,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public enum CommandWord {
     ADD("add"),
-    CLEAR("clear"),
+    CLEAR("clear", "clr"),
     DELETE("delete", "del", "rm"),
     EDIT("edit", "update"),
     EXIT("exit", "quit"),

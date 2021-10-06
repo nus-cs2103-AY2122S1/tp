@@ -7,7 +7,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,8 +42,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand("clear") instanceof ClearCommand);
-        assertTrue(parser.parseCommand("clear 3") instanceof ClearCommand);
+        List<String> aliasForClear = CommandWord.getAliasList(CommandWord.CLEAR);
+        for (String alias : aliasForClear) {
+            assertTrue(parser.parseCommand(alias) instanceof ClearCommand);
+            assertTrue(parser.parseCommand(alias + " 3") instanceof ClearCommand);
+        }
+
     }
 
     @Test
