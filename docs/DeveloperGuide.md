@@ -290,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | create tasks for my participants or myself | |
+| `* * *`  | user                                       | create tasks for my members or myself | |
 | `* *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
 | `*`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
 | `* *`  | user                                       | add a deadline to task | keep track of what is due |
@@ -300,13 +300,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Storage Functions
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | load participants from other files | access and manage different sets of data |
+| `* * *`  | user                                       | load members from other files | access and manage different sets of data |
 | `* * *`  | user                                       | write my data to a file as save data | access them and resume at a later date |
 
 #### Event Functions
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add all participants of a particular event to one group | send notifications to only those involved |
+| `* * *`  | user                                       | add all members of a particular event to one group | send notifications to only those involved |
 
 
 #### Other miscellaneous Functions

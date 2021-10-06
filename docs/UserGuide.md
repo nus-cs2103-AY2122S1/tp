@@ -103,14 +103,14 @@ Format: `help`
 
 ### Add
 
-#### Adding a participant: `padd`
+#### Adding a member: `padd`
 
-Adds a participant to Ailurus.
+Adds a member to Ailurus.
 
 Format: `padd /n NAME /p PHONE_NUMBER /e EMAIL [/a ADDRESS] [/t TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A participant can have any number of tags (including 0). A member MUST have a name,
+A member can have any number of tags (including 0). A member MUST have a name,
 phone number and email address, but mailing address and tags are optional.
 </div>
 
@@ -120,16 +120,16 @@ Examples:
 
 #### Adding a task: `tadd`
 
-Adds a task to a participant in Ailurus.
+Adds a task to a member in Ailurus.
 
 Format: `tadd /n TASKNAME /p MEMBER_ID`
 
 <div markdown="span" class="alert alert-primary">:bulb: Note:
-A task must be assigned to a participant.
+A task must be assigned to a member.
 </div>
 
 Examples:
-* `tadd /n Collect payment from participants /p 3`
+* `tadd /n Collect payment from members /p 3`
 
 #### Adding an event: `eadd`
 
@@ -138,7 +138,7 @@ Adds an event to the Ailurus.
 Format: `eadd /n EVENTNAME [/p MEMBER_ID]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: Note:
-You can add multiple participants to an event e.g. /p 2 /p 3 /p 4...
+You can add multiple members to an event e.g. /p 2 /p 3 /p 4...
 </div>
 
 Examples:
@@ -146,9 +146,9 @@ Examples:
 
 ### List
 
-#### Listing all participants : `plist`
+#### Listing all members : `plist`
 
-Shows a list of all participants (of an event optionally).
+Shows a list of all members (of an event optionally).
 
 Format: `plist [/e EVENT_ID]`
 * List everyone recorded in Ailurus.
@@ -158,15 +158,15 @@ Format: `plist [/e EVENT_ID]`
 
 Example:
 * `plist` lists everyone in Ailurus.
-* `plist /e 3` lists all participants of the event with index number 3.
+* `plist /e 3` lists all members of the event with index number 3.
 
-#### Listing all tasks of a participant : `tlist`
+#### Listing all tasks of a member : `tlist`
 
-Shows a list of tasks of a participant with the specified id. Only can be used when the user is on participant lists (accessible via `plist [/e EVENT_ID]`).
+Shows a list of tasks of a member with the specified id. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
 
 Format: `tlist /p MEMBER_ID`
 * Can only be used in `plist [/e EVENT_ID]`.
-* `MEMBER_ID` refers to the index number of the participant of concern in the displayed participant list.
+* `MEMBER_ID` refers to the index number of the member of concern in the displayed member list.
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 
 Example:
@@ -180,12 +180,12 @@ Format: `elist`
 
 ### Editing a member : `edit`
 
-Edits an existing participant in Ailurus. Only can be used when the user is on participant lists (accessible via `plist [/e EVENT_ID]`).
+Edits an existing member in Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Can only be used in `plist [/e EVENT_ID]`.
-* Edits the participant at the specified `INDEX`. The index refers to the index number shown in the displayed participant list. 
+* Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. 
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -218,11 +218,11 @@ Examples:
 
 #### Deleting a member : `pdel`
 
-Deletes the specified participant from Ailurus. Only can be used when the user is on participant lists (accessible via `plist [/e EVENT_ID]`).
+Deletes the specified member from Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
 
 Format: `pdel /p MEMBER_ID`
 
-* Can **only be used in participant list**.
+* Can **only be used in member list**.
 * Deletes the member at the specified `MEMBER_ID`.
 * `MEMBER_ID` refers to the index number shown in the displayed member list.
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
@@ -232,11 +232,11 @@ Examples:
 
 #### Deleting a task belonging to a member : `tdel`
 
-Deletes the specified task of a specified participant from Ailurus. Only can be used when the user is on participant lists (accessible via `plist [/e EVENT_ID]`).
+Deletes the specified task of a specified member from Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
 
 Format: `tdel /t TASK_ID /for MEMBER_ID`
 
-* Can **only be used in participant list**.
+* Can **only be used in member list**.
 * Deletes the task at the specified `TASK_ID` belonging to the member at the specified `MEMBER_ID`.
 * `MEMBER_ID` refers to the index number shown in the displayed member list.
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
@@ -260,18 +260,18 @@ Examples:
 * `edel /e 10` deletes the 10th event in the address book.
 
 ### Mark a task as done : `tdone`
-Marks the specified task of the specified member as done. Only can be used when the user is on participant lists (accessible via `plist [/e EVENT_ID]`).
+Marks the specified task of the specified member as done. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
 
 Format: `tdone /p MEMBER_ID /t TASK_ID`
 
-* Can **only be used in participant list**.
+* Can **only be used in member list**.
 * Marks the task specified by `TASK_ID` of the member specified by `MEMBER_ID`.
-* `MEMBER_ID` refers to the index number shown in the displayed participant list.
-* `TASK_ID` refers to the index number shown in the displayed task list of the specified participant.
+* `MEMBER_ID` refers to the index number shown in the displayed member list.
+* `TASK_ID` refers to the index number shown in the displayed task list of the specified member.
 * `MEMBER_ID` and `TASK_ID` **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `tdone /p 2 /t 3` deletes the 3rd task of the 2nd participants.
+* `tdone /p 2 /t 3` deletes the 3rd task of the 2nd members.
 
 ### Clearing all entries : `clear`
 
@@ -320,7 +320,7 @@ Action | Format, Examples
 --------|------------------
 **help** | `help`
 **padd** | `padd /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS [/t TAG]…​` <br> e.g., `padd /n James Ho /p 22224444 /e jamesho@example.com /a 123, Clementi Rd, 1234665 /t friend /t colleague`
-**tadd** | `tadd /n TASKNAME /p MEMBER_ID` <br> e.g., `tadd /n Collect payment from participants /p 3`
+**tadd** | `tadd /n TASKNAME /p MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /p 3`
 **eadd** | `eadd /n EVENTNAME [/p MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
 **plist** | `plist [/e EVENT_ID]` <br> e.g., `plist /e 3`
 **tlist** | `tlist /p MEMBER_ID` <br> e.g., `tlist /p 2`
