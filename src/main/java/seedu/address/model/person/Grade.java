@@ -35,7 +35,7 @@ public class Grade {
      * @param levelNumber The inputted grade level number.
      * @return Whether the prefix and levelNumber are valid inputs.
      */
-    private boolean isValidInput(String prefix, int levelNumber) {
+    public static boolean isValidInput(String prefix, int levelNumber) {
         switch (prefix) {
         case "S":
             return levelNumber >= 1 && levelNumber <= 4;
@@ -52,6 +52,10 @@ public class Grade {
 
     public int getLevelNumber() {
         return levelNumber;
+    }
+
+    public String getValue() {
+        return String.format("%s%d", prefix, levelNumber);
     }
 
     @Override
@@ -74,6 +78,6 @@ public class Grade {
 
     @Override
     public String toString() {
-        return "[" + prefix + levelNumber + "]";
+        return "[" + getValue() + "]";
     }
 }

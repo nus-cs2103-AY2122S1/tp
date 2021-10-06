@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 /**
  * Represents a Lesson in the tuitiONE book.
  * A lesson spans for an hour.
- * Guarantees: immutable; subject is valid as declared in {@link #isValidLessonName(String)},
+ * Guarantees: immutable; subject is valid as declared in {@link #isValidSubject(String)},
  * start and end times are valid as declared in {@link #isValidTime(LocalTime)}
  * and {@link #isValidPrice(double)}
  */
@@ -51,7 +51,7 @@ public class Lesson {
     public Lesson(String subject, Grade grade, DayOfWeek day, LocalTime startTime, double price) {
         requireAllNonNull(subject, grade, day, startTime, price);
 
-        checkArgument(isValidLessonName(subject), SUBJECT_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSubject(subject), SUBJECT_MESSAGE_CONSTRAINTS);
         checkArgument(isValidTime(startTime), TIME_MESSAGE_CONSTRAINTS);
         checkArgument(isValidPrice(price), PRICE_MESSAGE_CONSTRAINT);
 
@@ -71,7 +71,7 @@ public class Lesson {
         return grade;
     }
 
-    public DayOfWeek getDay() {
+    public DayOfWeek getDayOfWeek() {
         return day;
     }
 
@@ -92,9 +92,9 @@ public class Lesson {
     }
 
     /**
-     * Returns true if a given string is a valid lesson name.
+     * Returns true if a given string is a valid subject name for a lesson.
      */
-    public static boolean isValidLessonName(String test) {
+    public static boolean isValidSubject(String test) {
         return test.matches(SUBJECT_VALIDATION_REGEX);
     }
 
@@ -123,26 +123,27 @@ public class Lesson {
         }
         // check number of parameters in lesson code
         String[] testLessonParams = testCode.split("-");
-        if (testLessonParams.length == 4 || testLessonParams[1].length() == 2) {
+        if (testLessonParams.length != 4 || testLessonParams[1].length() != 2) {
             return false;
         }
 
         try {
             // attempt to parse
-            Integer.parseInt("" + testLessonParams[1].charAt(1));
+            new Grade("" + testLessonParams[1].charAt(0), Integer.parseInt("" + testLessonParams[1].charAt(1)));
             DayOfWeek.valueOf(testLessonParams[2]);
             LocalTime.parse(testLessonParams[3]);
+
         } catch (IllegalArgumentException | DateTimeParseException e) {
             return false;
         }
-        return true;
+        return isValidSubject(testLessonParams[0]); // check subject
     }
 
     /**
      * Returns formatted lesson code string.
      */
     public String getLessonCode() {
-        return String.format("%s-%s-%s-%s", subject, grade, day, startTime);
+        return String.format("%s-%s-%s-%s", subject, grade.getValue(), day, startTime);
     }
 
     /**

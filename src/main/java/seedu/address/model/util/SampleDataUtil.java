@@ -1,13 +1,17 @@
 package seedu.address.model.util;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -40,10 +44,20 @@ public class SampleDataUtil {
         };
     }
 
+    public static Lesson[] getSampleLessons() {
+        return new Lesson[] {
+            new Lesson("Science", new Grade("P", 5), DayOfWeek.MONDAY, LocalTime.parse("09:00"), 10.5),
+            new Lesson("Math", new Grade("S", 3), DayOfWeek.WEDNESDAY, LocalTime.parse("18:00"), 15.9)
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Lesson sampleLesson : getSampleLessons()) {
+            sampleAb.addLesson(sampleLesson);
         }
         return sampleAb;
     }
