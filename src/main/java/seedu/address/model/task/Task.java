@@ -80,7 +80,7 @@ public class Task {
         builder.append(getName())
                 .append("; Deadline: ")
                 .append(getDeadline());
-        
+
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
