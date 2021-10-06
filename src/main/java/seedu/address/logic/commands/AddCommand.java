@@ -58,11 +58,10 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        /** Problem with this if statement:
-            Since the model person already in the system has this student ID,
-            creating another model person fail make the "execute_personAcceptedByModel_addSuccessful" test
-            Don't know what to do about this rn
-         **/
+        // Problem with this if statement:
+        // Since the model person already in the system has this student ID,
+        // creating another model person fail make the "execute_personAcceptedByModel_addSuccessful" test
+        // Don't know what to do about this rn
         if (model.hasStudentId(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
         }

@@ -40,9 +40,9 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different student IDs -> returns false
+        // same student IDs -> returns true
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudentId(VALID_ID_AMY).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertTrue(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();

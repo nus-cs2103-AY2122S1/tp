@@ -11,6 +11,11 @@ public class StudentId {
     public final String value;
 
 
+    /**
+     * Constructs an {@code Student ID}.
+     *
+     * @param studentId A valid student ID.
+     */
     public StudentId(String studentId) {
         requireNonNull(studentId);
         checkArgument(isValidId(studentId), MESSAGE_CONSTRAINTS);
