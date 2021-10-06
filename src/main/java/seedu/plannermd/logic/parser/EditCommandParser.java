@@ -28,7 +28,7 @@ public class EditCommandParser implements Parser<EditPatientCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the
      * EditPatientCommand and returns an EditPatientCommand object for execution.
-     * 
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditPatientCommand parse(String args) throws ParseException {

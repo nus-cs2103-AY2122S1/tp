@@ -32,7 +32,7 @@ public class AddCommandParser implements Parser<AddPatientCommand> {
         /**
          * Parses the given {@code String} of arguments in the context of the
          * AddPatientCommand and returns an AddCommand object for execution.
-         * 
+         *
          * @throws ParseException if the user input does not conform the expected format
          */
         public AddPatientCommand parse(String args) throws ParseException {
