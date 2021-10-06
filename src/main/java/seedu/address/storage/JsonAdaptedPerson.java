@@ -11,9 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TeleHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,20 +26,27 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String phone;
     private final String email;
+    private final List<JsonAdaptedModuleCode> moduleCodes = new ArrayList<>();
+    private final String phone;
+    private final String teleHandle;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
+                             @JsonProperty("moduleCodes") List<JsonAdaptedModuleCode> moduleCodes,
+                             @JsonProperty("phone") String phone, @JsonProperty("teleHandle") String teleHandle,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
         this.email = email;
+        if (moduleCodes != null) {
+            this.moduleCodes.addAll(moduleCodes);
+        }
+        this.phone = phone;
+        this.teleHandle = teleHandle;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -48,8 +57,12 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
         email = source.getEmail().value;
+        moduleCodes.addAll(source.getModuleCodes().stream()
+                .map(JsonAdaptedModuleCode::new)
+                .collect(Collectors.toList()));
+        phone = source.getPhone().value;
+        teleHandle = source.getTeleHandle().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -64,6 +77,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<ModuleCode> personModuleCodes = new ArrayList<>();
+        for (JsonAdaptedModuleCode moduleCode : moduleCodes) {
+            personModuleCodes.add(moduleCode.toModelType());
         }
 
         if (name == null) {
@@ -90,8 +108,18 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (teleHandle == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TeleHandle.class.getSimpleName()));
+        }
+        if (!TeleHandle.isValidTeleHandle(teleHandle)) {
+            throw new IllegalValueException(TeleHandle.MESSAGE_CONSTRAINTS);
+        }
+        final TeleHandle modelTeleHandle = new TeleHandle(teleHandle);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTags);
+        final Set<ModuleCode> modelModuleCodes = new HashSet<>(personModuleCodes);
+        return new Person(modelName, modelEmail, modelModuleCodes, modelPhone, modelTeleHandle, modelTags);
     }
 
 }

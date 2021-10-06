@@ -17,19 +17,23 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
-
+    private final Set<ModuleCode> moduleCodes = new HashSet<>();
+    private final TeleHandle teleHandle;
+    private final Phone phone;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Person(Name name, Email email, Set<ModuleCode> moduleCodes,
+                  Phone phone, TeleHandle teleHandle, Set<Tag> tags) {
+        requireAllNonNull(name, email, moduleCodes, phone, teleHandle, tags);
         this.name = name;
-        this.phone = phone;
         this.email = email;
+        this.moduleCodes.addAll(moduleCodes);
+        this.phone = phone;
+        this.teleHandle = teleHandle;
         this.tags.addAll(tags);
     }
 
@@ -37,12 +41,24 @@ public class Person {
         return name;
     }
 
+    public Email getEmail() {
+        return email;
+    }
+
+    /**
+     * Returns an immutable module codes set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<ModuleCode> getModuleCodes() {
+        return Collections.unmodifiableSet(moduleCodes);
+    }
+
     public Phone getPhone() {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public TeleHandle getTeleHandle() {
+        return teleHandle;
     }
 
     /**
@@ -82,25 +98,39 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getModuleCodes().equals(getModuleCodes())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getTeleHandle().equals(getTeleHandle())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, email, moduleCodes, phone, teleHandle, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail());
+                .append(getEmail())
+                .append("; Module : ");
+
+        Set<ModuleCode> moduleCodes = getModuleCodes();
+        moduleCodes.forEach(builder::append);
+
+        if (!getPhone().value.isEmpty()) {
+            builder.append("; Phone: ");
+            builder.append(getPhone());
+        }
+
+        if (!getTeleHandle().value.isEmpty()) {
+            builder.append("; Telegram: ");
+            builder.append(getTeleHandle());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -109,5 +139,6 @@ public class Person {
         }
         return builder.toString();
     }
+
 
 }

@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -19,9 +21,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TeleHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,8 +40,10 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]... "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: edit 1 "
             + PREFIX_PHONE + "91234567 "
@@ -91,11 +97,14 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Set<ModuleCode> updatedModuleCodes = editPersonDescriptor.getModuleCodes()
+                .orElse(personToEdit.getModuleCodes());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        TeleHandle updatedTeleHandle = editPersonDescriptor.getTeleHandle().orElse(personToEdit.getTeleHandle());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Person(updatedName, updatedEmail, updatedModuleCodes, updatedPhone, updatedTeleHandle, updatedTags);
     }
 
     @Override
@@ -122,8 +131,10 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
         private Email email;
+        private Set<ModuleCode> moduleCodes;
+        private Phone phone;
+        private TeleHandle teleHandle;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -134,8 +145,10 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setModuleCodes(toCopy.moduleCodes);
+            setPhone(toCopy.phone);
+            setTeleHandle(toCopy.teleHandle);
             setTags(toCopy.tags);
         }
 
@@ -143,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, email, moduleCodes, phone, teleHandle, tags);
         }
 
         public void setName(Name name) {
@@ -154,6 +167,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
+        }
+
+        public void setModuleCodes(Set<ModuleCode> moduleCodes) {
+            this.moduleCodes = (moduleCodes != null) ? new HashSet<>(moduleCodes) : null;
+        }
+
+        public Optional<Set<ModuleCode>> getModuleCodes() {
+            return (moduleCodes != null) ? Optional.of(Collections.unmodifiableSet(moduleCodes)) : Optional.empty();
+        }
+
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
@@ -162,12 +191,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setTeleHandle(TeleHandle teleHandle) {
+            this.teleHandle = teleHandle;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<TeleHandle> getTeleHandle() {
+            return Optional.ofNullable(teleHandle);
         }
 
         /**
