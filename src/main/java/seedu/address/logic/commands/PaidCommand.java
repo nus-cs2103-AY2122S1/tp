@@ -28,6 +28,7 @@ public class PaidCommand extends Command {
 
     public static final String MESSAGE_SET_TO_PAID_SUCCESS =
             "Set payment status to 'Paid for the current month': %1$s";
+    public static final String MESSAGE_ALREADY_PAID = "This student has already paid for the current month.";
 
     private final Index targetIndex;
 
@@ -45,6 +46,11 @@ public class PaidCommand extends Command {
         }
 
         Person studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+
+        if (studentToEdit.getPaymentStatus().hasPaid) {
+            throw new CommandException(MESSAGE_ALREADY_PAID);
+        }
+
         Person editedStudent = new Person(
                 studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
                 studentToEdit.getAddress(), new PaymentStatus(true), studentToEdit.getTags());

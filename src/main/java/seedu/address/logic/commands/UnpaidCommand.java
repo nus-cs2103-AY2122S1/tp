@@ -28,6 +28,8 @@ public class UnpaidCommand extends Command {
 
     public static final String MESSAGE_SET_TO_UNPAID_SUCCESS =
             "Set payment status to 'Has not paid for the current month': %1$s";
+    public static final String MESSAGE_ALREADY_UNPAID =
+            "This student has still not paid for the current month.";
 
     private final Index targetIndex;
 
@@ -45,6 +47,11 @@ public class UnpaidCommand extends Command {
         }
 
         Person studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!studentToEdit.getPaymentStatus().hasPaid) {
+            throw new CommandException(MESSAGE_ALREADY_UNPAID);
+        }
+
         Person editedStudent = new Person(
                 studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
                 studentToEdit.getAddress(), new PaymentStatus(false), studentToEdit.getTags());

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -30,10 +31,10 @@ public class UnpaidCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person studentToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person studentToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(false).build();
 
-        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON);
+        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_SECOND_PERSON);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_SET_TO_UNPAID_SUCCESS, editedStudent);
 
@@ -52,23 +53,6 @@ public class UnpaidCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person studentToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(false).build();
-
-        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(UnpaidCommand.MESSAGE_SET_TO_UNPAID_SUCCESS, editedStudent);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedStudent);
-
-        assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -84,7 +68,7 @@ public class UnpaidCommandTest {
     @Test
     public void equals() {
         UnpaidCommand unpaidFirstCommand = new UnpaidCommand(INDEX_FIRST_PERSON);
-        UnpaidCommand unpaidSecondCommand = new UnpaidCommand(INDEX_SECOND_PERSON);
+        UnpaidCommand unpaidSecondCommand = new UnpaidCommand(INDEX_THIRD_PERSON);
 
         // same object -> returns true
         assertTrue(unpaidFirstCommand.equals(unpaidFirstCommand));
