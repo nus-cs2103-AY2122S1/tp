@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +90,34 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String current plan} into an {@code CurrentPlan}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code currentPlan} is invalid.
+     */
+    public static CurrentPlan parseCurrentPlan(String currentPlan) throws ParseException {
+        requireNonNull(currentPlan);
+        String trimmedCurrentPlan = currentPlan.trim();
+
+        return new CurrentPlan(trimmedCurrentPlan);
+    }
+
+    /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static LastMet parseLastMet(String lastMet) throws ParseException {
+        requireNonNull(lastMet);
+        String trimmedLastMet = lastMet.trim();
+        if (!LastMet.isValidLastMet(trimmedLastMet)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new LastMet(trimmedLastMet);
     }
 
     /**

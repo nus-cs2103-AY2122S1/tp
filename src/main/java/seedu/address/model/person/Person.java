@@ -23,17 +23,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final CurrentPlan currentPlan;
+    private final LastMet lastMet;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.currentPlan = currentPlan;
+        this.lastMet = lastMet;
         this.tags.addAll(tags);
+
     }
 
     public Name getName() {
@@ -50,6 +55,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public LastMet getLastMet() {
+        return lastMet;
+    }
+
+    public CurrentPlan getCurrentPlan() {
+        return currentPlan;
     }
 
     /**
@@ -89,6 +102,8 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
+                && otherPerson.getCurrentPlan().equals(getCurrentPlan())
+                && otherPerson.getLastMet().equals(getLastMet())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
@@ -98,13 +113,18 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, lastMet, currentPlan, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Client ID: ")
+                .append("; Last Met: ")
+                .append(getLastMet())
+                .append("; current plans: ")
+                .append(getCurrentPlan())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
