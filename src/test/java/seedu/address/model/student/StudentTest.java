@@ -2,7 +2,7 @@ package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORES_BOB;
@@ -32,7 +32,7 @@ public class StudentTest {
         assertFalse(ALICE.isSameStudent(null));
 
         // same name and ID, all other attributes different -> returns true
-        Student editedAlice = new PersonBuilder(ALICE).withGroups(VALID_GROUP_BOB).withScores(VALID_SCORES_BOB)
+        Student editedAlice = new PersonBuilder(ALICE).withGroups(VALID_GROUP_RECITATION).withScores(VALID_SCORES_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
@@ -85,7 +85,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different groups -> returns false
-        editedAlice = new PersonBuilder(ALICE).withGroups(VALID_GROUP_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withGroups(VALID_GROUP_RECITATION).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different scores -> returns false

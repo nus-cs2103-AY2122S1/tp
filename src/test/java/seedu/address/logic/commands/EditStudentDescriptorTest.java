@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORES_BOB;
@@ -44,7 +44,7 @@ public class EditStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different groups -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withGroups(VALID_GROUP_BOB).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withGroups(VALID_GROUP_RECITATION).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different scores -> returns false

@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -60,11 +60,11 @@ public class TypicalPersons {
 
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new PersonBuilder().withName(VALID_NAME_AMY).withId(VALID_ID_AMY)
-            .withGroups(VALID_GROUP_AMY)
+            .withGroups(VALID_GROUP_TUTORIAL)
             .withScores(VALID_SCORES_AMY)
             .withTags(VALID_TAG_FRIEND).build();
     public static final Student BOB = new PersonBuilder().withName(VALID_NAME_BOB).withId(VALID_ID_BOB)
-            .withGroups(VALID_GROUP_BOB)
+            .withGroups(VALID_GROUP_RECITATION)
             .withScores(VALID_SCORES_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
