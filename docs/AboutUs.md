@@ -13,7 +13,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 [[homepage](https://huizhuansam.github.io)]
 [[github](https://github.com/huizhuansam)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/huizhuansam.md)]
 
 - Role: Scheduling and tracking, Deliverables and Deadlines
 - Responsibilities: User assistance
