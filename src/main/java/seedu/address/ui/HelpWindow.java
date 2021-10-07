@@ -251,8 +251,8 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void handleAdd() {
-        additionalInfo.setText("Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\n" +
-                "A person can have any number of tags (including 0)");
+        additionalInfo.setText("Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\n"
+                + "A person can have any number of tags (including 0)");
     }
 
     private void handleClear() {
