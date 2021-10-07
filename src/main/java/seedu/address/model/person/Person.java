@@ -21,16 +21,19 @@ public class Person {
     private final Set<ModuleCode> moduleCodes = new HashSet<>();
     private final TeleHandle teleHandle;
     private final Phone phone;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Email email, Set<ModuleCode> moduleCodes,
-                  Phone phone, TeleHandle teleHandle, Set<Tag> tags) {
-        requireAllNonNull(name, email, moduleCodes, phone, teleHandle, tags);
+                  Phone phone, TeleHandle teleHandle, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, email, moduleCodes, phone, teleHandle, remark, tags);
         this.name = name;
         this.email = email;
+        this.remark = remark;
         this.moduleCodes.addAll(moduleCodes);
         this.phone = phone;
         this.teleHandle = teleHandle;
@@ -59,6 +62,9 @@ public class Person {
 
     public TeleHandle getTeleHandle() {
         return teleHandle;
+    }
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -102,13 +108,14 @@ public class Person {
                 && otherPerson.getModuleCodes().equals(getModuleCodes())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getTeleHandle().equals(getTeleHandle())
+                && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, moduleCodes, phone, teleHandle, tags);
+        return Objects.hash(name, email, moduleCodes, phone, teleHandle, remark, tags);
     }
 
     @Override
@@ -137,8 +144,13 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        if (!remark.toString().trim().isEmpty()) {
+            builder.append("; Remark: ");
+            builder.append(getRemark());
+        }
+
         return builder.toString();
     }
-
 
 }

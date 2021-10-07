@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -25,6 +26,7 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
 import seedu.address.model.tag.Tag;
 
@@ -32,8 +34,6 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
-
-    public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = "edit: Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -44,6 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]... "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: edit 1 "
             + PREFIX_PHONE + "91234567 "
@@ -98,13 +99,15 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<ModuleCode> updatedModuleCodes = editPersonDescriptor.getModuleCodes()
                 .orElse(personToEdit.getModuleCodes());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         TeleHandle updatedTeleHandle = editPersonDescriptor.getTeleHandle().orElse(personToEdit.getTeleHandle());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
-        return new Person(updatedName, updatedEmail, updatedModuleCodes, updatedPhone, updatedTeleHandle, updatedTags);
+        return new Person(updatedName, updatedEmail, updatedModuleCodes, updatedPhone, updatedTeleHandle,
+                updatedRemark, updatedTags);
     }
 
     @Override
@@ -135,6 +138,7 @@ public class EditCommand extends Command {
         private Set<ModuleCode> moduleCodes;
         private Phone phone;
         private TeleHandle teleHandle;
+        private Remark remark;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,6 +153,7 @@ public class EditCommand extends Command {
             setModuleCodes(toCopy.moduleCodes);
             setPhone(toCopy.phone);
             setTeleHandle(toCopy.teleHandle);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -156,7 +161,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, moduleCodes, phone, teleHandle, tags);
+            return CollectionUtil.isAnyNonNull(name, email, moduleCodes, phone, teleHandle, remark, tags);
         }
 
         public void setName(Name name) {
@@ -197,6 +202,14 @@ public class EditCommand extends Command {
 
         public Optional<TeleHandle> getTeleHandle() {
             return Optional.ofNullable(teleHandle);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         /**
