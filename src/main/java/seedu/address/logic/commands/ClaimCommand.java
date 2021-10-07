@@ -46,6 +46,7 @@ public class ClaimCommand extends Command {
         Person personToAddClaim = lastShownList.get(index.getZeroBased());
         HashSet<Claim> claims = new HashSet<>(personToAddClaim.getClaims());
 
+        claims.remove(this.claim);
         claims.add(this.claim);
 
         Person newPerson = new Person(personToAddClaim, claims);

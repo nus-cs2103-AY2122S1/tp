@@ -52,6 +52,6 @@ public class Claim {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title);
+        return Objects.hash(title.toString());
     }
 }
