@@ -75,7 +75,6 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
 ### Adding a student: `add`
 
 Adds a student to the TuitiONE.
@@ -100,16 +99,17 @@ Format: `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-* Adds the lesson of the specified prefixes.
-* The first letter of SUBJECT, GRADE, and DAY_OF_WEEK is in caps.
-*  Time is in 24:00 hours format
-*  Lessons can start between 09:00 to 20:00
-*  The cost must be a non-negative double 0.0, 2.0, 3.3, …
+* Adds the lesson with the specified prefixes.
+* GRADE here follows the similar requirements when adding a student.
+* SUBJECT is limited to 20 characters, and its first letter will be capitalized.
+* DAY_OF_WEEK can only be these form (with the first letter capitalized): Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+* START_TIME is in 2400 hours format and can only be between 0900 and 1900 (as lessons can only be conducted between 9am to 9pm).
+* Lessons are fixed at two hour periods.
+* The cost must be a non-negative number 0.0, 2.0, 3.3, …
 
 Examples:
-* `add -l s/Science g/P5 d/Wed t/12:30 c/12.0`
-* `add -l s/Mathematics g/S4 d/Fri t/15:00 c/10.3`
-
+* `add -l s/Science g/P5 d/Wed t/1230 c/12.0`
+* `add -l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
 ### Listing all students: `list`
 
@@ -153,10 +153,10 @@ Examples:
 
 Deletes a lesson from the TuitiONE.
 
-Format: `delete -l LESSONCODE`
+Format: `delete -l LESSON_CODE`
 
-* Deletes the lesson of the specified LESSONCODE
-* LESSONCODE should have the corresponding format
+* Deletes the lesson of the specified LESSON_CODE
+* LESSON_CODE should have the corresponding format
     * SUBJECT-GRADE-DAY-TIME
     * The first letter of SUBJECT, GRADE, and DAY is in caps.
     * Time is in 24:00 hours format.
@@ -164,24 +164,23 @@ Format: `delete -l LESSONCODE`
 Examples:
 * `delete -l Science-P5-Wed-1230` deletes the lesson with corresponding lesson code.
 
-
 ### Enrolling a student from lesson: `enroll`
 
 Enroll a specified student from a given TuitiONE lesson.
 
-Format: `enroll INDEX l/LESSONCODE`
+Format: `enroll INDEX l/LESSON_CODE`
 
 * Enroll the student identified by `INDEX` from the specific `lesson`.
+* Enrolling a student is only possible if  the student (1) has the same `grade` as the lesson, (2) is not enrolled to the lesson and (3) has no other lessons with conflicting timing.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …
-* LESSONCODE should have the corresponding format as seen in the program.
+* LESSON_CODE should have the corresponding format as seen in the program.
     * SUBJECT-GRADE-DAY-TIME
     * The first letter of SUBJECT, GRADE, and DAY is in caps.
-    * Time is in 24:00 hours format.
-
+    * Time is in 2400 hours format.
 
 Examples:
-* `enroll 1 l/Science-P5-Wed-1230` will enroll the student indexed `1` for a `P5` `Science` lesson on `Wed 12:30 pm`.
+* `enroll 1 l/Science-P5-Wed-1230` will enroll the student indexed `1` for a `P5` `Science` lesson on `Wed 1230 pm`.
 
 ### Unenrolling a student from lesson: `unenroll`
 
@@ -192,14 +191,13 @@ Format: `unenroll INDEX l/LESSON_CODE`
 * Unenroll the student identified by `INDEX` from the specific `lesson` using its `lesson code`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …
-* LESSONCODE should have the corresponding format as seen in the program.
+* LESSON_CODE should have the corresponding format as seen in the program.
     * SUBJECT-GRADE-DAY-TIME
     * The first letter of SUBJECT, GRADE, and DAY is in caps.
-    * Time is in 24:00 hours format.
-
+    * Time is in 2400 hours format.
 
 Examples:
-* `unenroll 1 l/Science-P5-Wed-1230` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 12:30 pm`.
+* `unenroll 1 l/Science-P5-Wed-1230` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 1230 pm`.
 
 ### Clearing all entries : `clear`
 
@@ -235,8 +233,8 @@ Action | Format, Examples
 **Add lesson** | `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add -l s/Science g/P5 d/Wed t/12:30 c/12.0`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
-**Delete lesson** | `delete -l LESSONCODE`<br> e.g. `delete -l Science-P5-Wed-1230`
-**Enroll** | `enroll INDEX l/LESSONCODE`<br> e.g. `enroll 1 l/Science-P5-Wed-1230`
+**Delete lesson** | `delete -l LESSON_CODE`<br> e.g. `delete -l Science-P5-Wed-1230`
+**Enroll** | `enroll INDEX l/LESSON_CODE`<br> e.g. `enroll 1 l/Science-P5-Wed-1230`
 **Unenroll** | `unenroll INDEX l/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
