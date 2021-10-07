@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Counter;
-import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -57,7 +57,7 @@ class JsonAdaptedTuition {
         limit = source.getLimit().getLimit();
         counter = source.getCounter().getCounter();
         timeslot = source.getTimeslot().getTime();
-        student.addAll(source.getStudent().getStudents());
+        student.addAll(source.getStudentList().getStudents());
     }
 
     /**
@@ -85,7 +85,7 @@ class JsonAdaptedTuition {
 
         final Timeslot modelTimeslot = new Timeslot(timeslot);
 
-        final Student modelStudent = new Student(student);
+        final StudentList modelStudent = new StudentList(student);
         return new TuitionClass(modelName, modelLimit, modelCounter, modelTimeslot, modelStudent);
 
     }

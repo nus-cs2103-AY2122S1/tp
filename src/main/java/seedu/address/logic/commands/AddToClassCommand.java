@@ -55,7 +55,7 @@ public class AddToClassCommand extends Command {
         if (tuitionClass == null) {
             throw new CommandException(MESSAGE_CLASS_NOT_FOUND);
         }
-        boolean isClassFull = tuitionClass.getLimit().limit == tuitionClass.getStudent().getStudents().size();
+        boolean isClassFull = tuitionClass.isFull();
         if (isClassFull) {
             throw new CommandException(MESSAGE_CLASS_IS_FULL);
         }

@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -27,10 +26,8 @@
                 </Label>
                 <Label fx:id="name" text="\$name" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="limit" styleClass="cell_small_label" text="\$limit" />
-            <Label fx:id="counter" styleClass="cell_small_label" text="\$counter" />
+            <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
             <Label fx:id="timeSlot" styleClass="cell_small_label" text="\$timeslot" />
-            <Label fx:id="student" styleClass="cell_small_label" text="\$student" />
 
         </VBox>
     </GridPane>

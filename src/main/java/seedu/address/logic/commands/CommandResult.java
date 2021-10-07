@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javafx.scene.layout.Region;
+import seedu.address.ui.UiPart;
+
 /**
  * Represents the result of a command execution.
  */
@@ -11,19 +14,23 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    public enum UiAction {
+        SHOW_HELP,
+        SHOW_TUITION_PAGE,
+        SHOW_STUDENT_PAGE,
+        EXIT,
+        NONE
+    }
 
-    /** The application should exit. */
-    private final boolean exit;
+    /** Action to be taken by UI component*/
+    private final UiAction uiAction;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, UiAction uiAction) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.uiAction = requireNonNull(uiAction);
     }
 
     /**
@@ -31,19 +38,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, UiAction.NONE);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
-    }
-
-    public boolean isExit() {
-        return exit;
+    public UiAction getUiAction() {
+        return this.uiAction;
     }
 
     @Override
@@ -59,13 +62,12 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && this.uiAction == otherCommandResult.uiAction;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, uiAction);
     }
 
 }
