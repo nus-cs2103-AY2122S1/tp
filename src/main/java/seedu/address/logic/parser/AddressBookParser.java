@@ -66,7 +66,7 @@ public class AddressBookParser {
 
         case SORT:
             return new SortCommandParser().parse(arguments);
-            
+
         case REMARK:
             return new RemarkCommandParser().parse(arguments);
 
