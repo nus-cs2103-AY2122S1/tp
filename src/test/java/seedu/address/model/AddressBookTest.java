@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
@@ -46,8 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateMembers_throwsDuplicateMemberException() {
         // Two members with the same identity fields
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Member editedAlice =
+                new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND)
+                        .build();
         List<Member> newMembers = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newMembers);
 
@@ -73,8 +74,9 @@ public class AddressBookTest {
     @Test
     public void hasMember_memberWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addMember(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Member editedAlice =
+                new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND)
+                        .build();
         assertTrue(addressBook.hasMember(editedAlice));
     }
 

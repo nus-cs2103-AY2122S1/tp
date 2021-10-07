@@ -10,7 +10,7 @@ import seedu.address.model.member.Email;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.position.Position;
 
 /**
  * A utility class to help with building EditMemberDescriptor objects.
@@ -36,7 +36,7 @@ public class EditMemberDescriptorBuilder {
         descriptor.setPhone(member.getPhone());
         descriptor.setEmail(member.getEmail());
         descriptor.setAddress(member.getAddress());
-        descriptor.setTags(member.getTags());
+        descriptor.setPositions(member.getPositions());
     }
 
     /**
@@ -72,12 +72,12 @@ public class EditMemberDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditMemberDescriptor}
+     * Parses the {@code positions} into a {@code Set<Position>} and set it to the {@code EditMemberDescriptor}
      * that we are building.
      */
-    public EditMemberDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditMemberDescriptorBuilder withPositions(String... positions) {
+        Set<Position> positionSet = Stream.of(positions).map(Position::new).collect(Collectors.toSet());
+        descriptor.setPositions(positionSet);
         return this;
     }
 

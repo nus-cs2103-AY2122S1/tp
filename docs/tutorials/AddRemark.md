@@ -346,7 +346,7 @@ save it with `Model#setMember()`.
         Member personToEdit = lastShownList.get(index.getZeroBased());
         Member editedMember = new Member(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+                personToEdit.getAddress(), remark, personToEdit.getPositions());
 
         model.setMember(personToEdit, editedMember);
         model.updateFilteredMemberList(PREDICATE_SHOW_ALL_PERSONS);

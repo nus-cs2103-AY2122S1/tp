@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BOB;
@@ -20,7 +20,7 @@ public class MemberTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Member member = new MemberBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> member.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> member.getPositions().remove(0));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class MemberTest {
 
         // same name, all other attributes different -> returns true
         Member editedAlice = new MemberBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND).build();
         assertTrue(ALICE.isSameMember(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -85,7 +85,7 @@ public class MemberTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new MemberBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new MemberBuilder(ALICE).withPositions(VALID_POSITION_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

@@ -8,7 +8,7 @@ import seedu.address.model.member.Email;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.position.Position;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -25,7 +25,7 @@ public class MemberBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Set<Position> positions;
 
     /**
      * Creates a {@code MemberBuilder} with the default details.
@@ -35,7 +35,7 @@ public class MemberBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        positions = new HashSet<>();
     }
 
     /**
@@ -46,7 +46,7 @@ public class MemberBuilder {
         phone = memberToCopy.getPhone();
         email = memberToCopy.getEmail();
         address = memberToCopy.getAddress();
-        tags = new HashSet<>(memberToCopy.getTags());
+        positions = new HashSet<>(memberToCopy.getPositions());
     }
 
     /**
@@ -58,10 +58,10 @@ public class MemberBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Member} that we are building.
+     * Parses the {@code positions} into a {@code Set<Position>} and set it to the {@code Member} that we are building.
      */
-    public MemberBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public MemberBuilder withPositions(String ... positions) {
+        this.positions = SampleDataUtil.getPositionSet(positions);
         return this;
     }
 
@@ -90,7 +90,7 @@ public class MemberBuilder {
     }
 
     public Member build() {
-        return new Member(name, phone, email, address, tags);
+        return new Member(name, phone, email, address, positions);
     }
 
 }

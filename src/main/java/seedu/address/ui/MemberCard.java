@@ -39,7 +39,7 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane positions;
 
     /**
      * Creates a {@code MemberCode} with the given {@code Member} and index to display.
@@ -52,9 +52,9 @@ public class MemberCard extends UiPart<Region> {
         phone.setText(member.getPhone().value);
         address.setText(member.getAddress().value);
         email.setText(member.getEmail().value);
-        member.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        member.getPositions().stream()
+                .sorted(Comparator.comparing(position -> position.positionName))
+                .forEach(position -> positions.getChildren().add(new Label(position.positionName)));
     }
 
     @Override

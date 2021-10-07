@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BOB;
@@ -42,8 +42,9 @@ public class UniqueMemberListTest {
     @Test
     public void contains_memberWithSameIdentityFieldsInList_returnsTrue() {
         uniqueMemberList.add(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Member editedAlice =
+                new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND)
+                        .build();
         assertTrue(uniqueMemberList.contains(editedAlice));
     }
 
@@ -85,8 +86,10 @@ public class UniqueMemberListTest {
     @Test
     public void setMember_editedMemberHasSameIdentity_success() {
         uniqueMemberList.add(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Member editedAlice =
+                new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+                        .withPositions(VALID_POSITION_HUSBAND)
+                        .build();
         uniqueMemberList.setMember(ALICE, editedAlice);
         UniqueMemberList expectedUniqueMemberList = new UniqueMemberList();
         expectedUniqueMemberList.add(editedAlice);
