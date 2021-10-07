@@ -93,6 +93,18 @@ public interface Model {
      */
     void addTask(Task task);
 
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the task list.
+     */
+    boolean hasTask(Task task);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the task list.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
+     */
+    void setTask(Task target, Task editedTask);
+
     /** Returns and unmodifiable view of the filtered task list */
     //added prior to the ui functionality actually being implemented.
     ObservableList<Task> getFilteredTaskList();
