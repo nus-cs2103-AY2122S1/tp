@@ -154,6 +154,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Person} with the given information.
+     */
     public Person build() {
         return new Person(name, phone, email, address, role,
                 employmentType, expectedSalary, levelOfEducation, experience, tags);

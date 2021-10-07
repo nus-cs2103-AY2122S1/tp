@@ -149,7 +149,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidEmploymentType_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_ROLE, INVALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION,VALID_EXPERIENCE, VALID_TAGS);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS);
         String expectedMessage = EmploymentType.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

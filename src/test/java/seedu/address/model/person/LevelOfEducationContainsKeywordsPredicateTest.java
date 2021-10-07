@@ -42,7 +42,7 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_LevelOfEducationContainsKeywords_returnsTrue() {
+    public void test_levelOfEducationContainsKeywords_returnsTrue() {
         // One keyword
         LevelOfEducationContainsKeywordsPredicate predicate =
                 new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("Masters"));
@@ -50,7 +50,7 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_LevelOfEducationDoesNotContainKeywords_returnsFalse() {
+    public void test_levelOfEducationDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         LevelOfEducationContainsKeywordsPredicate predicate =
                 new LevelOfEducationContainsKeywordsPredicate(Collections.emptyList());

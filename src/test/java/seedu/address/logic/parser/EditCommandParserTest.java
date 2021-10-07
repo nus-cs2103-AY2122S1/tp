@@ -279,8 +279,8 @@ public class EditCommandParserTest {
         userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
                 + PHONE_DESC_BOB + ROLE_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB).
-                withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB)
+                .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

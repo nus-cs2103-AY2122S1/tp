@@ -108,10 +108,10 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Level of Education} of the {@code EditPersonDescriptor} that we are building.
      */
-     public EditPersonDescriptorBuilder withLevelOfEducation(String levelOfEducation){
-         descriptor.setLevelOfEducation(new LevelOfEducation(levelOfEducation));
-         return this;
-     }
+    public EditPersonDescriptorBuilder withLevelOfEducation(String levelOfEducation) {
+        descriptor.setLevelOfEducation(new LevelOfEducation(levelOfEducation));
+        return this;
+    }
 
     /**
      * Sets the {@code Experience} of the {@code EditPersonDescriptor} that we are building.
