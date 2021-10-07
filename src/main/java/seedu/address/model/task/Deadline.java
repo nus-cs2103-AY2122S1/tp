@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Task's deadline.
  * Guarantees: immutable; is valid as declared in {@link #isValidDeadline(String)}
  */
 public class Deadline {
-
 
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -16,9 +15,9 @@ public class Deadline {
     public final String deadline;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Deadline}.
      *
-     * @param deadline A valid phone number.
+     * @param deadline A valid deadline description.
      */
     public Deadline(String deadline) {
         requireNonNull(deadline);
@@ -27,7 +26,9 @@ public class Deadline {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid deadline description.
+     *
+     * @param test The description to be tested.
      */
     public static boolean isValidDeadline(String test) {
         return test.matches(VALIDATION_REGEX);

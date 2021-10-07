@@ -33,7 +33,7 @@ public class Task {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both tasks have the same name.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameTask(Task otherTask) {
@@ -46,7 +46,7 @@ public class Task {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both tasks have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
