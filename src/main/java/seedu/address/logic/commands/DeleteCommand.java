@@ -26,11 +26,11 @@ public class DeleteCommand extends Command {
 
     private Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand() {
     }
 
-    public DeleteCommand() {
+    public DeleteCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     /**

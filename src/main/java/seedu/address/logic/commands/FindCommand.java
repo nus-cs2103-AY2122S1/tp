@@ -21,11 +21,11 @@ public class FindCommand extends Command {
 
     private NameContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    public FindCommand() {
     }
 
-    public FindCommand() {
+    public FindCommand(NameContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
     }
 
     /**
@@ -43,7 +43,7 @@ public class FindCommand extends Command {
      * @return The format of the valid command.
      */
     public String getFormat() {
-        return COMMAND_WORD +  " KEYWORD [MORE_KEYWORDS]...";
+        return COMMAND_WORD + " KEYWORD [MORE_KEYWORDS]...";
     }
 
     /**

@@ -65,6 +65,9 @@ public class LessonAddCommand extends Command {
     private Index index;
     private Lesson toAdd;
 
+    public LessonAddCommand() {
+    }
+
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
      */
@@ -96,9 +99,6 @@ public class LessonAddCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
                 updatedParentEmail, updatedAddress, updatedOutstandingFee, updatedRemark,
             updatedTags, lessons);
-    }
-
-    public LessonAddCommand() {
     }
 
     /**

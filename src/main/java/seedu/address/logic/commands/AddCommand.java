@@ -51,15 +51,15 @@ public class AddCommand extends Command {
 
     private Person toAdd;
 
+    public AddCommand() {
+    }
+
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
-    }
-
-    public AddCommand() {
     }
 
     /**

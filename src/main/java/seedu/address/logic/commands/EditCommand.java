@@ -66,6 +66,9 @@ public class EditCommand extends Command {
     private Index index;
     private EditPersonDescriptor editPersonDescriptor;
 
+    public EditCommand() {
+    }
+
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
@@ -76,9 +79,6 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
-    }
-
-    public EditCommand() {
     }
 
     /**
