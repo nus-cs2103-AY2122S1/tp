@@ -127,6 +127,10 @@ Note:
 - Multiple tags should be seperated via **single whitespace**
 - When converting frome excel make sure to save as **CSV** and not **CSV UTF-8**
 - A template `importTemplate.csv` can be found in the default directory of the file browser
+
+Sneak peek:
+
+![csv template](images/csvTemplate.png)
   
 
   
