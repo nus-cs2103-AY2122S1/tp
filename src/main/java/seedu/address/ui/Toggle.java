@@ -20,4 +20,12 @@ public class Toggle extends UiPart<Region> {
     public Toggle() {
         super(FXML);
     }
+
+    /**
+     * Handles the Clients button pressed event.
+     */
+    @FXML
+    private void handleClientsPressed() {
+        
+    }
 }
