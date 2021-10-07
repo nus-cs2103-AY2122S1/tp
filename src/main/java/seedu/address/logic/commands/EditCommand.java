@@ -97,9 +97,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editMemberDescriptor.getPhone().orElse(memberToEdit.getPhone());
         Email updatedEmail = editMemberDescriptor.getEmail().orElse(memberToEdit.getEmail());
         Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
-        Set<Position> updatedTags = editMemberDescriptor.getPositions().orElse(memberToEdit.getPositions());
+        Set<Position> updatedPositions = editMemberDescriptor.getPositions().orElse(memberToEdit.getPositions());
 
-        return new Member(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Member(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPositions);
     }
 
     @Override
