@@ -79,16 +79,6 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isRecurring();
 
     /**
-     * Update the lesson date to the same day on the following week.
-     *
-     * @return newDate The date of the same day on the following week.
-     */
-    public Date updateDateWithWeek() {
-        Date newDate = new Date(getDate().getLocalDate().plusDays(7).format(Date.FORMATTER));
-        return newDate;
-    }
-
-    /**
      * Returns true both lessons clash.
      *
      * @param otherLesson The other lesson to be compared with.
