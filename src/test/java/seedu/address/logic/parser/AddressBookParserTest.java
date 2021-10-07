@@ -24,7 +24,6 @@ import seedu.address.logic.commands.personcommand.FindPersonCommand;
 import seedu.address.logic.commands.personcommand.FindPersonCommand.FindPersonDescriptor;
 import seedu.address.logic.commands.personcommand.ListPeopleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;

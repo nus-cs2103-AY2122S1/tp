@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.personcommand.FindPersonCommand;
 import seedu.address.logic.commands.personcommand.FindPersonCommand.FindPersonDescriptor;
 import seedu.address.logic.parser.personcommand.FindPersonCommandParser;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindPersonCommandParserTest {
 
