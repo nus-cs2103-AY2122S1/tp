@@ -1,16 +1,21 @@
 package seedu.academydirectory.ui;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 import com.sandec.mdfx.MarkdownView;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.LogsCenter;
 
@@ -19,22 +24,20 @@ import seedu.academydirectory.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t15-3.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "### User guide\n#### " + USERGUIDE_URL + "\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     private final File userGuide = new File("docs/UserGuide.md");
 
+    private static final String COMMON = "## Command summary";
+
     @FXML
     private Button copyButton;
 
-    @FXML
-    private Label helpMessage;
 
-    @FXML
-    private Button closeButton;
 
     /**
      * Creates a new HelpWindow.
@@ -43,13 +46,33 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
-        MarkdownView markdownView = new MarkdownView() {
-            @Override
-            public void setLink(Node node, String link, String description) {
-                super.setLink(node, link, description);
+        StringBuilder builder = new StringBuilder(HELP_MESSAGE);
+        MarkdownView markdownView = new MarkdownView();
+        try {
+            FileReader fileReader = new FileReader(userGuide);
+            Scanner sc = new Scanner(fileReader);
+            boolean isSummary = false;
+            while (sc.hasNextLine()) {
+                String nextLine = sc.nextLine().trim();
+                if (nextLine.contains(COMMON)) {
+                    isSummary = true;
+                }
+                if (isSummary) {
+                    builder.append(nextLine).append("\n");
+                }
             }
-        };
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            Label label = new Label(builder.toString());
+            label.setVisible(false);
+            markdownView.mdStringProperty().bind(label.textProperty());
+            markdownView.getStylesheets().add("/view/markdown.css");
+            ScrollPane content = new ScrollPane(markdownView);
+            content.setFitToWidth(true);
+            HBox temp = new HBox(label, content);
+            root.setScene(new Scene(temp, 700, 400));
+        }
     }
 
     /**
@@ -113,10 +136,5 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
-    }
-
-    @FXML
-    private void close() {
-        getRoot().close();
     }
 }

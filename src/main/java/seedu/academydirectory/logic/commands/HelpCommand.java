@@ -16,11 +16,6 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Showing help.";
 
-    public HelpCommand() {
-        this.syntax = null;
-    }
-
-
     public static final String MESSAGE_HELP_SUCCESS = "Show help for command: %1$s";
 
     public static final String MESSAGE_ARGUMENTS = "Syntax: %2$s";
@@ -29,6 +24,10 @@ public class HelpCommand extends Command {
             "add", "attendance", "clear", "delete", "edit",
             "exit", "find", "list", "retrieve"
     };
+
+    public HelpCommand() {
+        this.syntax = null;
+    }
 
     public HelpCommand(String syntax) {
         requireAllNonNull(syntax);
@@ -55,5 +54,4 @@ public class HelpCommand extends Command {
         HelpCommand curr = (HelpCommand) obj;
         return curr.syntax.equals(this.syntax);
     }
-
 }
