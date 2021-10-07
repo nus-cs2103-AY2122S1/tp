@@ -67,31 +67,7 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Showing tasks : `show` (coming soon)
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `add n/CS2103 test d/2021-12-01 t/16:30` adds the `CS2103 test` task on `2021-12-01`, scheduled to end at `16:30`
 
 ### Locating a task by name: `find` (coming soon)
 
@@ -112,6 +88,55 @@ Examples:
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
 * `find Quiz GEQ1000` returns GEQ1000 Quiz 1,  GEQ1000 Quiz 2
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
+
+
+### Showing Tasks: `show` (coming soon)
+
+Show all tasks that have been added to the app in a specific week.
+
+Format:
+- <code> show <i>week_number</i> </code>
+- <code> show <i>d/date</i> </code>
+
+Interpretation
+* If <code><i>week_number</i></code> field is provided:
+  * Searches for the task with the given date and show it on the GUI
+  * Useful in cases where user wants to show all tasks in the given week
+* If <code><i>d/date</i></code> field is provided:
+  * Show tasks matching the given the date
+
+Examples:
+* `show 1` displays tasks in week `1`
+* `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
+
+
+### Setting Priority Level for Tasks: `tag` (coming soon)
+
+Set a task's priority.
+
+Format:
+- <code> tag n/task_name (d/date) tg/level </i> </code>
+- <code> tag task_id (d/date) tg/level </i> </code>
+
+Interpretation
+* If <code><i>n/task_name</i></code> field is provided:
+  * Depending on the <code><i>tg/level </i></code> provided it sets priority of the task with the name exactly matching the <code><i>n/task_name </i></code> or <code><i>task_id</i></code> to
+    * Urgent
+    * Important
+    * Medium
+    * Low
+  * The <code><i>tg/level</i></code> field is case-insensitive
+  * If <code><i>date</i></code> field is provided, it sets priority for the task in the given date
+    * Useful in cases when there are multiple copies of the same task , recurring tasks, etc.
+  * If <code><i>d/date</i></code> field is not provided, it sets priority for every occurrence of tasks matching the given name
+
+* If <code><i>task_id</i></code> is provided:
+
+
+Examples:
+* `tag 5 tg/Urgent` sets the priority of task 5 in the task list to `Urgent`
+* `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
+
 
 ### Deleting tasks : `delete` (coming soon)
 
@@ -180,7 +205,6 @@ Action | Format, Examples
 **Delete** | <code>delete <i>task_id</i></code> <br> <code>delete <i>n/task_name (d/date)</i> </code> <br> e.g. <code>delete n/quiz d/2021-10-10 </code>
 **Show** | `show`
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
-**Tag** | `TODO`
+**Tag** | <code> tag n/task_name (d/date) tg/level </i> </code> <br>e.g.  `tag n/quiz d/2021-10-10 tg/Important`
 **Help** | `help`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Clear** | `clear`

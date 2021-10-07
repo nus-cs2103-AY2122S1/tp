@@ -29,14 +29,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Find feature + Javadocs
 
-### Johnny Doe
+### Hardik Narang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/naranghardik16.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/naranghardik16.md)]
+[[github](http://github.com/naranghardik16)]
+[[portfolio](team/naranghardik16.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Priority Feature + UI/UX
 
 ### Sourabh Jaiswal
 
@@ -46,14 +47,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/srj31.md)]
 
 * Role: Developer
-* Responsibilities: Add Feature + Algorithms
+* Responsibilities: Add Feature + Algorithm
 
-### James Doe
+### Loo Wee Sing Caspian Michael
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dr-octavius.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/dr-octavius)]
 [[portfolio](team/Dr-Octavius.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Show Feature + Code Logic
