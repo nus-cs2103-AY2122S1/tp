@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String role;
+    private final String levelOfEducation;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -38,13 +40,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("role") String role,
+            @JsonProperty("role") String role, @JsonProperty("levelOfEducation") String levelOfEducation,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
+        this.levelOfEducation = levelOfEducation;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -59,6 +62,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         role = source.getRole().role;
+        levelOfEducation = source.getLevelOfEducation().levelOfEducation;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,8 +119,18 @@ class JsonAdaptedPerson {
         }
         final Role modelRole = new Role(role);
 
+        if (levelOfEducation == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, LevelOfEducation.class.getSimpleName()));
+        }
+        if (!LevelOfEducation.isValidLevelOfEducation(levelOfEducation)) {
+            throw new IllegalValueException(LevelOfEducation.MESSAGE_CONSTRAINTS);
+        }
+        final LevelOfEducation modelLevelOfEducation = new LevelOfEducation(levelOfEducation);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+        return new Person(modelName, modelPhone, modelEmail,
+                modelAddress, modelRole, modelLevelOfEducation, modelTags);
     }
 
 }
