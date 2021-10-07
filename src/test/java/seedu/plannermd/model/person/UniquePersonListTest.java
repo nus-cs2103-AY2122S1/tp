@@ -142,13 +142,11 @@ public abstract class UniquePersonListTest<T extends Person> {
     public void remove_existingPerson_removesPerson() {
         personList.add(alice);
         personList.remove(alice);
-        UniquePersonList<T> expectedUniquePersonList = new UniquePersonList();
+        UniquePersonList<T> expectedUniquePersonList = new UniquePersonList<>();
         assertEquals(expectedUniquePersonList, personList);
     }
 
     @Test
-    //Safe to cast null as List of generic type as null simply represents absence of UniquePersonList<T>
-    @SuppressWarnings("unchecked")
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> personList.setPersons((UniquePersonList<T>) null));
     }
@@ -163,8 +161,6 @@ public abstract class UniquePersonListTest<T extends Person> {
     }
 
     @Test
-    //Safe to cast null as List of generic type as null simply represents absence of List
-    @SuppressWarnings("unchecked")
     public void setPersons_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> personList.setPersons((List<T>) null));
     }
