@@ -73,8 +73,8 @@ public class JsonAdaptedParticipant {
         email = source.getEmailValue();
         address = source.getAddressValue();
         tagged.addAll(source.getTags().stream()
-            .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList()));
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
         birthDate = source.getBirthDateString();
         notes.addAll(source.getNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
         nextOfKins.addAll(source.getNextOfKins().stream().map(JsonAdaptedNextOfKin::new).collect(Collectors.toList()));
@@ -153,6 +153,6 @@ public class JsonAdaptedParticipant {
         }
 
         return new Participant(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelBirthDate, notes, modelNextOfKins);
+                modelBirthDate, notes, modelNextOfKins);
     }
 }
