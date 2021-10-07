@@ -86,7 +86,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different level of education -> returns false
-        editedAlice = new PersonBuilder(ALICE).withLevelOfEducation(VALID_ADDRESS_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
