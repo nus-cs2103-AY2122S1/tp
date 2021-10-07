@@ -38,7 +38,7 @@ public class LessonTest {
         Lesson lesson = new RecurringLesson(new Date(DATE),
             new TimeRange(new Time(START_TIME), new Time(END_TIME)),
             new Subject(SUBJECT), HOMEWORK);
-        assertEquals(new Date(validOneWeekLaterDateString), lesson.updateDateWithWeek());
+        assertEquals(new Date(validOneWeekLaterDateString), lesson.getDate().updateDateWithWeek());
     }
 
     /**

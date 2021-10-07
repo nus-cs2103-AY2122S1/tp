@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 /**
@@ -69,6 +70,32 @@ public class Date implements Comparable<Date> {
      */
     public LocalDate getLocalDate() {
         return LocalDate.parse(this.value, FORMATTER);
+    }
+
+    /**
+     * Update the lesson date to the same day on the following week.
+     *
+     * @return newDate The date of the same day on the following week.
+     */
+    public Date updateDateWithWeek() {
+        Date newDate = new Date(getLocalDate().plusWeeks(1).format(FORMATTER));
+        return newDate;
+    }
+
+    /**
+     * Update the lesson date to the same day on the most recent date
+     * that has yet to be passed.
+     *
+     * @return newDate The date of the same day that has yet to be passed.
+     */
+    public Date updateDate() {
+        long days = ChronoUnit.DAYS.between(getLocalDate(), LocalDate.now());
+        long weeks = days / 7 + (days % 7 > 0 ? 1 : 0);
+        if (weeks <= 0) { // No need update if date has not passed
+            return this;
+        }
+        Date newDate = new Date(getLocalDate().plusWeeks(weeks).format(FORMATTER));
+        return newDate;
     }
 
     /**

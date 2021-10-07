@@ -1,6 +1,5 @@
 package seedu.address.model.lesson;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 /**
@@ -8,10 +7,6 @@ import java.util.Set;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class RecurringLesson extends Lesson {
-    /**
-     * Count of the number of lessons taken this month for this recurring lesson.
-     */
-    private static int recurringLessonsCount = 0;
 
     /**
      * Every field must be present and not null.
@@ -24,16 +19,6 @@ public class RecurringLesson extends Lesson {
     public RecurringLesson(Date date, TimeRange timeRange,
                            Subject subject, Set<Homework> homework) {
         super(date, timeRange, subject, homework);
-        updateRecurringLessonCount();
-    }
-
-    /**
-     * Returns the number of lessons attended.
-     *
-     * @return The number of lessons attended for this recurring lesson.
-     */
-    public static int getRecurringLessonsCount() {
-        return recurringLessonsCount;
     }
 
     /**
@@ -47,39 +32,20 @@ public class RecurringLesson extends Lesson {
     }
 
     /**
-     * Edit the date of the recurring lesson.
+     * Updates the date of the recurring lesson to the latest
+     * date on the same day of the week that has yet to be passed.
      *
-     * @param newDateString The date to be updated with.
      * @return {@code RecurringLesson} with the updated date.
      */
     @Override
-    public Lesson updateDate(String newDateString) {
-        Date newDate = new Date(newDateString);
+    public Lesson updateDate() {
+        Date newDate = getDate().updateDate();
 
-        return newDate.compareTo(getDate()) > 0
-            ? new RecurringLesson(new Date(newDateString), getTimeRange(),
-            getSubject(), getHomework())
-            : this;
-    }
-
-    /**
-     * Checks if the date has passed and update the recurring lesson count accordingly.
-     *
-     * @return {@code RecurringLesson} with the updated date.
-     */
-    private RecurringLesson updateRecurringLessonCount() {
-        // Compare lesson date to current date
-        // Increment count if date has passed
-        LocalDate lessonDate = getDate().getLocalDate();
-        boolean isLessonEarlierThanCurrentDate = lessonDate.compareTo(LocalDate.now()) > 0;
-        if (isLessonEarlierThanCurrentDate) {
+        if (newDate.compareTo(getDate()) <= 0) {
             return this;
         }
-        recurringLessonsCount++;
-        // Update the date
-        Date newDate = super.updateDateWithWeek();
         return new RecurringLesson(newDate, getTimeRange(),
-                getSubject(), getHomework());
+            getSubject(), getHomework());
     }
 
 }
