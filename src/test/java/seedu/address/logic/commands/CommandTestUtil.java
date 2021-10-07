@@ -137,4 +137,18 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    public static void showPersonAtMultipleIndex(Model model, Index targetIndex1, Index targetIndex2) {
+        assertTrue(targetIndex1.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex2.getZeroBased() < model.getFilteredPersonList().size());
+
+        Person person1 = model.getFilteredPersonList().get(targetIndex1.getZeroBased());
+        Person person2 = model.getFilteredPersonList().get(targetIndex2.getZeroBased());
+        final String[] splitName1 = person1.getName().fullName.split("\\s+");
+        final String[] splitName2 = person2.getName().fullName.split("\\s+");
+
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName1[0], splitName2[0])));
+
+        assertEquals(2, model.getFilteredPersonList().size());
+    }
+
 }
