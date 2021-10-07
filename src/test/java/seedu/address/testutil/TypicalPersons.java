@@ -21,11 +21,9 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withStudentName("Alice Pauline")
-            .withStudentPhone("94351234").withParentName("Ms Tan")
-            .withParentPhone("94351253").build();
-    public static final Person BENSON = new PersonBuilder().withStudentName("Benson Meier")
-            .withStudentPhone("98765423")
+    public static final Person ALICE = new PersonBuilder().withStudentName("Alice Pauline").withStudentPhone("94351234")
+            .withParentName("Mrs Tan").withParentPhone("94351253").build();
+    public static final Person BENSON = new PersonBuilder().withStudentName("Benson Meier").withStudentPhone("98765423")
             .withParentName("Mrs Meier").withParentPhone("98765432").build();
     public static final Person CARL = new PersonBuilder().withStudentName("Carl Kurz").withStudentPhone("95352563")
             .withParentName("Mr Kurz").withParentPhone("95352567").build();

@@ -1,13 +1,13 @@
 {
   "persons": [ {
-    "name": "Valid Person",
-    "phone": "9482424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "studentName": "Valid Person",
+    "studentPhone": "9482424",
+    "parentName": "Person",
+    "parentPhone": "97485627"
   }, {
-    "name": "Person With Invalid Phone Field",
-    "phone": "948asdf2424",
-    "email": "hans@example.com",
-    "address": "4th street"
+    "studentName": "Person With Invalid Phone Field",
+    "studentPhone": "948asdf2424",
+    "parentName": "Person1",
+    "parentPhone": "97485647"
   } ]
 }

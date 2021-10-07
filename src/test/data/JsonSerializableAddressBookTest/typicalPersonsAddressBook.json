@@ -2,38 +2,38 @@
   "_comment": "TutorAid save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "studentName" : "Alice Pauline",
-    "studentPhone" : "94351253",
-    "parentName" : "Mrs Koh",
-    "parentPhone" : "94822323"
+    "studentPhone" : "94351234",
+    "parentName" : "Mrs Tan",
+    "parentPhone" : "94351253"
   }, {
     "studentName" : "Benson Meier",
-    "studentPhone" : "98765432",
-    "parentName" : "Mr Meier",
-    "parentPhone" : "9482412"
+    "studentPhone" : "98765423",
+    "parentName" : "Mrs Meier",
+    "parentPhone" : "98765432"
   }, {
     "studentName" : "Carl Kurz",
     "studentPhone" : "95352563",
-    "parentName" : "Mrs Kurz",
-    "parentPhone" : "9482423"
+    "parentName" : "Mr Kurz",
+    "parentPhone" : "95352567"
   }, {
     "studentName" : "Daniel Meier",
     "studentPhone" : "87652533",
-    "parentName" : "Mr Meier",
-    "parentPhone" : "94890909"
+    "parentName" : "Mrs Meier",
+    "parentPhone" : "98765432"
   }, {
     "studentName" : "Elle Meyer",
     "studentPhone" : "9482224",
     "parentName" : "Mrs Meyer",
-    "parentPhone" : "9482344"
+    "parentPhone" : "9482290"
   }, {
     "studentName" : "Fiona Kunz",
     "studentPhone" : "9482427",
-    "parentName" : "Mr Kunz",
-    "parentPhone" : "9482492"
+    "parentName" : "Mr Daniel",
+    "parentPhone" : "9482423"
   }, {
     "studentName" : "George Best",
     "studentPhone" : "9482442",
-    "parentName" : "Mrs Best",
-    "parentPhone" : "9482478"
+    "parentName" : "Mrs Kayla",
+    "parentPhone" : "94824432"
   } ]
 }

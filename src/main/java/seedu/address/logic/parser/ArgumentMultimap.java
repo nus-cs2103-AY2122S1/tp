@@ -37,6 +37,7 @@ public class ArgumentMultimap {
     public Optional<String> getValue(Prefix prefix) {
         if (!argMultimap.containsKey(prefix)) {
             return Optional.of("");
+            //return Optional.empty();
         }
         List<String> values = getAllValues(prefix);
         return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
