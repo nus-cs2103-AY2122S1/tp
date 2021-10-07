@@ -30,7 +30,7 @@ public class Person {
      */
     public Person(Name name, Email email, Set<ModuleCode> moduleCodes,
                   Phone phone, TeleHandle teleHandle, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, email, moduleCodes, phone, teleHandle, tags);
+        requireAllNonNull(name, email, moduleCodes, phone, teleHandle, remark, tags);
         this.name = name;
         this.email = email;
         this.remark = remark;

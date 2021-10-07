@@ -14,7 +14,7 @@ public class Remark {
      * The first character of the remark must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid remark.
      */
-    public static final String VALIDATION_REGEX = "[\\p{ASCII}]*[^\\s]";
+    public static final String VALIDATION_REGEX = "[\\p{ASCII}]+[^\\s]";
 
     public final String value;
 
@@ -32,7 +32,7 @@ public class Remark {
      * Returns true if a given string is a valid remark.
      */
     public static boolean isValidRemark(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
 
