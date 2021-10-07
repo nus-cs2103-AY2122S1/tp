@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST;
+import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANT_ID;
 
@@ -17,14 +19,15 @@ public class RemoveParticipantFromEventCommand extends Command {
     public static final String COMMAND_WORD = "removeParticipant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": remove Participant with matching ID from an Event.\n"
-        + "Parameters: \n"
-        + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
-        + PREFIX_EVENT + "EVENT_NAME "
-        + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + "240Km Marathon ";
+            + ": remove Participant with matching ID from an Event.\n"
+            + "Parameters: \n"
+            + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
+            + PREFIX_EVENT + "EVENT_NAME "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + "240Km Marathon ";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-        "Removed Participant: %1$s from event %2$s successfully";
+            "Removed Participant: %1$s from event %2$s successfully";
+    public static final String MESSAGE_PARTICIPANT_NOT_IN_EVENT = "Participant %1$s doesn't exist in this event!";
 
     private final ParticipantId participantId;
     private final EventName eventName;
@@ -45,20 +48,18 @@ public class RemoveParticipantFromEventCommand extends Command {
         List<Event> lastShownEventList = model.getFilteredEventList();
 
         boolean hasParticipant =
-            lastShownParticipantList.stream().anyMatch(p -> p.getParticipantId().equals(participantId));
-
+                lastShownParticipantList.stream().anyMatch(p -> p.getParticipantId().equals(participantId));
 
         if (!hasParticipant) {
-            throw new CommandException("Participant of id: " + participantId + " not found, consider relisting the "
-                + "participants using 'list'");
+            throw new CommandException(
+                    String.format(MESSAGE_PARTICIPANT_NOT_FOUND, participantId, ListCommand.COMMAND_WORD));
         }
 
-        boolean hasEvent =
-            lastShownEventList.stream().anyMatch(e -> e.getName().equals(eventName));
+        boolean hasEvent = lastShownEventList.stream().anyMatch(e -> e.getName().equals(eventName));
 
         if (!hasEvent) {
-            throw new CommandException("Event " + eventName + "Not Found, consider relisting the events "
-                + "using 'listEvents'");
+            throw new CommandException(
+                    String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName, ListEventCommand.COMMAND_WORD));
         }
 
 
@@ -71,22 +72,23 @@ public class RemoveParticipantFromEventCommand extends Command {
                 .findFirst().get();
 
         if (!selectedEvent.getParticipants().contains(participantToRemove)) {
-            throw new CommandException("Participant " + participantToRemove.getFullName() + " doesn't exist in event!");
+            throw new CommandException(
+                    String.format(MESSAGE_PARTICIPANT_NOT_IN_EVENT, participantToRemove.getFullName()));
         }
 
         // add participant
         selectedEvent.getParticipants().remove(participantToRemove);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
-            participantToRemove.getFullName(), eventName));
+                participantToRemove.getFullName(), eventName));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof RemoveParticipantFromEventCommand // instanceof handles nulls
-            && participantId.equals(((RemoveParticipantFromEventCommand) other).participantId))
-            && eventName.equals(((RemoveParticipantFromEventCommand) other).eventName); //state check
+                || (other instanceof RemoveParticipantFromEventCommand // instanceof handles nulls
+                && participantId.equals(((RemoveParticipantFromEventCommand) other).participantId))
+                && eventName.equals(((RemoveParticipantFromEventCommand) other).eventName); //state check
     }
 }
 

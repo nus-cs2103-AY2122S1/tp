@@ -27,7 +27,6 @@ public class JsonAdaptedEvent {
     private String date;
     private String time;
     private final List<String> participantIds = new ArrayList<>();
-    //Change to JsonAdaptedParticipants
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given Event details.
@@ -69,7 +68,7 @@ public class JsonAdaptedEvent {
         // TODO: Optimise querying by using different data structures and algorithm in future updates
         for (String participantId : participantIds) {
             JsonAdaptedParticipant toAddParticipantJson =
-                allParticipants.stream().filter(p -> p.getId().equals(participantId)).findFirst().get();
+                    allParticipants.stream().filter(p -> p.getId().equals(participantId)).findFirst().get();
             participants.add(toAddParticipantJson.toModelType());
         }
 

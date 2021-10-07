@@ -100,18 +100,13 @@ public class AddressBookParser {
         case ListEventCommand.COMMAND_WORD:
             return new ListEventCommand();
 
-        // TODO: addParticipant (Use Parser):
-
         case AddParticipantToEventCommand.COMMAND_WORD:
             return new AddParticipantToEventParser().parse(arguments);
 
-        // TODO: removeParticipant (Use Parser):
         case RemoveParticipantFromEventCommand.COMMAND_WORD:
             return new RemoveParticipantFromEventParser().parse(arguments);
 
         // TODO: findParticipant (Use Parser):
-
-        // TODO: showDetails (Use Parser):
 
         // TODO: showParticipants (Use Parser):
 
