@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
 import java.util.Optional;
 import java.util.Set;
