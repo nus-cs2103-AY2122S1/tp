@@ -16,6 +16,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.group.Description;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -52,6 +55,9 @@ public class TypicalStudents {
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withGroup(VALID_GROUP_NAME_BOB, VALID_DESC_BOB).build();
 
+    //TODO GroupBuilder in the future?
+    public static final Group GROUPCS2103T = new Group(new GroupName("CS2103T"), new Description("hi"));
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalStudents() {} // prevents instantiation
@@ -64,10 +70,19 @@ public class TypicalStudents {
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }
+
+        for (Group group : getTypicalGroups()) {
+            ab.addGroup(group);
+        }
+
         return ab;
     }
 
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Group> getTypicalGroups() {
+        return new ArrayList<>(List.of(GROUPCS2103T));
     }
 }

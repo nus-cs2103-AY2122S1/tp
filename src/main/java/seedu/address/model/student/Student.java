@@ -4,9 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 
 /**
  * Represents a Student in the address book.
@@ -97,7 +95,7 @@ public class Student {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Group")
+                .append("; Group: ")
                 .append(getGroup());
 
         return builder.toString();

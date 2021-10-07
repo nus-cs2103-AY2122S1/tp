@@ -49,6 +49,17 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
+     * Removes the equivalent group from the list.
+     * The group must exist in the list.
+     */
+    public void remove(Group toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new GroupNotFoundException();
+        }
+    }
+
+    /**
      * Replaces the group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the list.
      * The group identity of {@code editedGroup} must not be the same as another existing group in the list.
@@ -68,18 +79,7 @@ public class UniqueGroupList implements Iterable<Group> {
         internalList.set(index, editedGroup);
     }
 
-    /**
-     * Removes the equivalent group from the list.
-     * The group must exist in the list.
-     */
-    public void remove(Group toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new GroupNotFoundException();
-        }
-    }
-
-    public void setGroups(UniqueGroupList replacement) {
+    public void setGroup(UniqueGroupList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -88,7 +88,7 @@ public class UniqueGroupList implements Iterable<Group> {
      * Replaces the contents of this list with {@code groups}.
      * {@code groups} must not contain duplicate groups.
      */
-    public void setGroups(List<Group> groups) {
+    public void setGroup(List<Group> groups) {
         requireAllNonNull(groups);
         if (!groupsAreUnique(groups)) {
             throw new DuplicateGroupException();
