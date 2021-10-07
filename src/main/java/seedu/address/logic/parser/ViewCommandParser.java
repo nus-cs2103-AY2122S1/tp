@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,6 +11,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -20,7 +20,6 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Class representing the parser for the view command.
- * todo: Index not implemented
  *
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
@@ -29,16 +28,19 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
     /**
      * Parser for the view command.
-     * todo: Index not implemented
      *
      * @param args The input search fields
      */
     @Override
-    public ViewCommand parse(String args) {
+    public ViewCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_INDEX);
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        //when no argument is given to the argMultiMap
+        if (argMultimap.isEmpty()) {
+            throw new ParseException(ViewCommand.HELP_MESSAGE);
+        }
         return new ViewCommand(person -> {
             Optional<Boolean> isNameEqual = argMultimap.getValue(PREFIX_NAME).map(Name::new)
                     .map(nameArg -> person.getName().equals(nameArg));
