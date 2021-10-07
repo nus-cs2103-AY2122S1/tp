@@ -60,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getClaims().stream()
                 .sorted(Comparator.comparing(claim -> claim.getTitle()))
-                .forEach(claim -> claims.getChildren().add(new Label(claim.getTitle().toString())));
+                .forEach(claim -> claims.getChildren().add(new Label(claim.toString()+"\n")));
     }
 
     @Override

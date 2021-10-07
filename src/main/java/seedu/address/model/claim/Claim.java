@@ -28,7 +28,7 @@ public class Claim {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Title: ")
+        builder.append("Claim: ")
                .append(getTitle())
                .append("; Description: ")
                .append(getDescription())
