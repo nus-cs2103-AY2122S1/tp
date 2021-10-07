@@ -258,12 +258,20 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of contacts
+* sociable and has multiple different friend groups that can partially overlap
+* regularly organises birthday parties for these contacts
+* regularly invites other contacts to these parties
+* needs to keep track of different groups who are invited to different parties
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
+* receive reminders about birthdays or lookup upcoming birthdays
+* retrieve contact details of all members of a group quickly and easily
+* partition contacts by group
+* keep track of upcoming birthdays and invite lists of these parties
 
 
 ### User stories
@@ -272,18 +280,23 @@ Chosen user stories v1.2
 
 | As a... | I want to... | So that I can... |
 |---|---|---|
-| Forgetful user                | Track contacts                        | Retrieve Contact details whenever I need to contact somebody
-| Beginner user                 | View feedback on wrong commands       | Format commands better
-| Sociable person               | To be able to save up to 100 contacts | I can keep all my friends contacts
-| Fast typer                    | Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
-| User with many contacts       | Search timings to be reasonable       | Do not have to wait too long for search results
-| User                          | App need to be bug free               | So that I can rely on the app to give me accurate contact details
 | Person who loves Birthdays    | Track birthdays                       | Easy way of checking the birthday of friends
+| Sociable person               | Partition frequent contacts           | Easy to access people within each group
+| Party Organiser               | Add people to a party list            | Easily extend a party invite list
+| Party Organiser               | Remove people to a party list         | Easily Remove people from only one party
+| Party Organiser               | Search contacts by invited party      | Generate invite list
+|  |  |  |
+| User                          | App need to be bug free               | So that I can rely on the app to give me accurate contact details
+| Fast typer                    | Use sentences to interact with the app| Can utilise the functions of the app quicker without using a mouse
+| Sociable person               | To be able to save up to 100 contacts | I can keep all my friends contacts
+| User with many contacts       | Search timings to be reasonable       | Do not have to wait too long for search results
+| Forgetful user                | Track contacts                        | Retrieve Contact details whenever I need to contact somebody
 
 Nice to have user stories v1.2
 
 | As a... | I want to... | So that I can... |
 |---|---|---|
+| Beginner user                 | View feedback on wrong commands       | Format commands better
 | User                          | Can modify contact details            | So that I can update my contact details
 | Beginner user                 | View feedback on wrong commands       | To format commands better
 | Advanced user                 | Add nicknames to my contacts          | Find my close friends using their nicknames
@@ -298,7 +311,7 @@ Future versions user stories
 | New user              | Immediately add my first contact                  | Use the product without reading a manual
 |  |  |  |
 | Advanced user         | Disable suggestions                               | Avoid accidentally pressing on them
-| Experienced user      | Qickly add contact without my mouse               | Just type
+| Experienced user      | Quickly add contact without my mouse              | Just type
 | Experienced user      | Get suggestions on commonly run commands          | don't have to keep typing the commands they use frequently.
 |  |  |  |
 | Forgetful person      | Use the help button                               | Remind myself how to use the app
@@ -310,7 +323,6 @@ Future versions user stories
 | Party Organiser       | Generate a mail to link for my selection          | Send emails to a group
 |  |  |  |
 | Loves Birthdays       | Birthday reminders                                | Won’t miss any of his/her friends’ birthdays
-| Sociable person       | Partition frequent contacts                       | Easy to access people within each group
 | Sociable person       | Pin frequent contacts                             | Access these contacts easily
 |  |  |  |
 | Fast typer            | Use the app with little lag                       | Can utilise functions of the app quickly
@@ -319,8 +331,8 @@ Future versions user stories
 | Youth                 | Use Emojis                                        | Add <3 to people i like and poop to people I don’t
 | University student    | User experience to be smooth                      | Find who they want to contact easily
 |  |  |  |
-| User with many contacts| Show search suggestions| Easily find contacts
-| User with many contacts| Search timings to be reasonable| Do not have to wait too long for search results
+| User with many contacts   | Show search suggestions                       | Easily find contacts
+| User with many contacts   | Search timings to be reasonable               | Do not have to wait too long for search results
 
 ### Use cases
 
