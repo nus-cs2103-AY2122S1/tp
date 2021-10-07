@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 
@@ -17,6 +18,11 @@ public class DeleteClassCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructor for DeleteClassCommand
+     *
+     * @param targetIndex Index to be deleted.
+     */
     public DeleteClassCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;

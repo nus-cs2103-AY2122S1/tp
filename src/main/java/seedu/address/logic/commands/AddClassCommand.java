@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-import seedu.address.model.student.Student;
-import seedu.address.model.tutorialclass.TutorialClass;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.address.model.Model;
+import seedu.address.model.tutorialclass.TutorialClass;
 
 public class AddClassCommand extends Command {
 

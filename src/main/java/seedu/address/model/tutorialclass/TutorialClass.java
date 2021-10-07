@@ -1,11 +1,10 @@
 package seedu.address.model.tutorialclass;
 
-
-import seedu.address.model.tag.Tag;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a tutorial class in the Classmate.
@@ -19,6 +18,11 @@ public class TutorialClass {
     private final Schedule schedule;
     private final Set<Tag> tags = new HashSet<>();
 
+    /**
+     * @param classCode ClassCode of Tutorial Class.
+     * @param schedule Class Schedule.
+     * @param tags Optional tags.
+     */
     public TutorialClass(String classCode, Schedule schedule, Set<Tag> tags) {
         this.classCode = classCode;
         this.schedule = schedule;
