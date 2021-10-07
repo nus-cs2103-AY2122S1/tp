@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private final Module module;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given module and userPrefs.
@@ -34,7 +34,7 @@ public class ModelManager implements Model {
         //The string name is hardcoded for now. Ability to change module name will come later
         this.module = new Module(module);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.module.getPersonList());
+        filteredStudents = new FilteredList<>(this.module.getStudentList());
     }
 
     public ModelManager() {
@@ -88,28 +88,30 @@ public class ModelManager implements Model {
         return module;
     }
 
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return module.hasPerson(person);
+    /**
+     * @param student
+     * @return true if current module has specified student
+     */
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return module.hasStudent(student);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        module.removePerson(target);
+    public void deleteStudent(Student target) {
+        module.removeStudent(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        module.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addStudent(Student student) {
+        module.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        module.setPerson(target, editedPerson);
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        module.setStudent(target, editedStudent);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -119,14 +121,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredStudents.setPredicate(predicate);
     }
 
     @Override
@@ -145,7 +147,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return module.equals(other.module)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredStudents.equals(other.filteredStudents);
     }
 
 }

@@ -257,64 +257,165 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* is a tutor overseeing students for an academic module or subject
+* has a need to manage a moderate to large number of students 
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage students' academic progress faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a …​                                 | I want to …​                | So that I can…​                                                     |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | new user                                   | create a new student           |                                                                        |
+| `* * *`  | new user                                   | add a student's information    |                                                                        |
+| `* * *`  | new user                                   | delete a student from a module |                                                                        |
+| `* * *`  | new user                                   | get a student's information    |                                                                        |
+| `* * *`  | new user                                   | create a new module            |                                                                        |
+| `* * *`  | new user                                   | delete a module                | remove data that I no longer need                                      |
+| `* * *`  | new user                                   | add task to a module           |                                                                        |
+| `* * *`  | new user                                   | mark a task as done            | track my students' progress                                            |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Teaching Assistant’s Buddy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Create a new student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to create a new student by listing down the student's information
+2. System creates the student
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Student's ID is already in system.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Delete a student**
+
+**MSS**
+
+1. User requests to delete a specific student using the student's ID in system
+2. System deletes the student
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. Student's ID is not found.
+    * 1a1. System shows an error message.
+  
+      Use case ends.
+    
+**Use case: Delete a student from a module**
 
-  Use case ends.
+**MSS**
 
-* 3a. The given index is invalid.
+1. User requests to delete a specific student from a module in system
+2. System deletes the student from the module
 
-    * 3a1. AddressBook shows an error message.
+   Use case ends.
 
-      Use case resumes at step 2.
+**Extensions**
+
+* 1a. Student's ID is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+* 1b. Module is not found.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Create a new module**
+
+**MSS**
+
+1. User requests to create a new module in System
+2. System creates the module
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is already in System.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Delete a module**
+
+**MSS**
+
+1. User requests to delete a module in System
+2. System deletes the module
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Module is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+
+**Use case: Add task to a module**
+
+**MSS**
+
+1. User requests to add a task to a module in System
+2. System deletes the task from the module
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Task is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
+* 1b. Module is not found.
+    * 1b1. System shows an error message.
+
+      Use case ends.
+    
+**Use case: Mark task as done**
+
+**MSS**
+
+1. User requests to mark a task as done
+2. System marks the task as done
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Task is not found.
+    * 1a1. System shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to respond to a user command within 2 seconds.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be able to handle up to 100 students without significant lag in response time.
 
 *{More to be added}*
 
@@ -322,6 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module**: An academic module or subject that is frequently found in universities and institutes of higher learning
 
 --------------------------------------------------------------------------------------------------------------------
 

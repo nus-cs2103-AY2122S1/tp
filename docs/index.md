@@ -7,10 +7,10 @@ title: TAB3
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103-F09-1/tp/branch/master/graph/badge.svg?token=MM1HAG6H5T)](https://codecov.io/gh/AY2122S1-CS2103-F09-1/tp)
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+Teaching Assistant’s Buddy (TAB) is a **desktop app for managing tutees**, optimized for use via a Command Line Interface.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using TAB, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing TAB, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
