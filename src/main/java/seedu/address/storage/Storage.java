@@ -27,6 +27,11 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
+    default Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+        return Optional.empty();
+    }
+
+    @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
 }

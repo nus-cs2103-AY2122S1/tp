@@ -116,7 +116,7 @@ public class ModelManager implements Model {
     //=========== Task Management ==================================================================================
 
     /**
-     * adding a task to tasklist.
+     * check if tasklist has this task.
      */
     @Override
     public boolean hasTask(Task task) {
@@ -124,6 +124,9 @@ public class ModelManager implements Model {
         return addressBook.hasTask(task);
     }
 
+    /**
+     * adding a task to tasklist.
+     */
     public void addTask(Task toAdd) {
         addressBook.addTask(toAdd);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
