@@ -467,10 +467,6 @@ Preconditions: The student's details have been previously added to TutorAid.
 
       Steps 3a1 - 3a2 are repeated until a valid syntax is given. Use case resumes from step 5
 
-* 5a. Incorrectly updating the progress of another student
-
-    * 5a1. Tutor uses add/delete progress commands to revert the incorrect changes. Use case resume from step 3
-
 **Use case 5: Updating payment for student**
 
 Preconditions: There is at least one student added to TutorAid.
@@ -651,7 +647,7 @@ Preconditions: There is at least one student added to TutorAid.
 2. TutorAid shows the list of students, including each student's index number
 3. Tutor identifies that all students have made payment for the month, and the month has ended
 4. Tutor keys in the reset payment command to set all student payments as unpaid
-5. Tutor successfully resets payment for all students
+5. TutorAid successfully resets payment for all students, and displays a message to indicate this
 
     Use case ends.
 
