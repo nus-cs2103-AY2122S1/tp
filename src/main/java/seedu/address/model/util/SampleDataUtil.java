@@ -35,7 +35,7 @@ public class SampleDataUtil {
             new Person(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), getModuleCodeSet("CS2040"),
                     new Phone("92492021"), new TeleHandle("@irfan"), EMPTY_REMARK, getTagSet("local")),
             new Person(new Name("Roy Balakrishnan"), new Email("royb@example.com"), getModuleCodeSet("CS2103T"),
-                    new Phone("92624417"), new TeleHandle("@royB"), EMPTY_REMARK, getTagSet("local"))
+                    new Phone("92624417"), new TeleHandle("@royBala"), EMPTY_REMARK, getTagSet("local"))
         };
     }
 
