@@ -17,7 +17,6 @@ public class Student {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
 
     // Data fields
@@ -28,10 +27,9 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Student(Name name, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, email, tags);
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
         this.attendance = new Attendance();
@@ -40,10 +38,6 @@ public class Student {
 
     public Name getName() {
         return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
     }
 
     public Email getEmail() {
@@ -96,7 +90,6 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
-                && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getTags().equals(getTags())
                 && otherStudent.getAttendance().equals(getAttendance());
@@ -105,15 +98,13 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags, attendance);
+        return Objects.hash(name, email, tags, attendance);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Attendance: ")

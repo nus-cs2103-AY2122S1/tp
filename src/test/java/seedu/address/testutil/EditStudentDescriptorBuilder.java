@@ -8,7 +8,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -33,7 +32,6 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptorBuilder(Student student) {
         descriptor = new EditCommand.EditStudentDescriptor();
         descriptor.setName(student.getName());
-        descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
         descriptor.setTags(student.getTags());
     }
@@ -46,13 +44,6 @@ public class EditStudentDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Phone} of the {@code EditStudentDescriptor} that we are building.
-     */
-    public EditStudentDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
-        return this;
-    }
 
     /**
      * Sets the {@code Email} of the {@code EditStudentDescriptor} that we are building.

@@ -33,10 +33,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
@@ -53,7 +49,6 @@ public class StudentCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         attendance.setText(student.getAttendance().value.toString());
         participation.setText(student.getParticipation().value.toString());
