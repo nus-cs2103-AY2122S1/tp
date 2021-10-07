@@ -105,13 +105,4 @@ class ViewStudentCommandTest {
         // different student -> returns false
         assertFalse(viewFirstCommand.equals(viewSecondCommand));
     }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoStudent(Model model) {
-        model.updateFilteredStudentList(p -> false);
-
-        assertTrue(model.getFilteredStudentList().isEmpty());
-    }
 }
