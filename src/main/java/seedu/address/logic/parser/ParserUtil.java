@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -74,7 +75,21 @@ public class ParserUtil {
         return tagSet;
     }
 
-    public static Integer parseCount(String s) {
-        return Integer.parseInt(s);
+    /**
+     * Parses {@code String count} into a {@code Integer}.
+     */
+    public static Integer parseCount(String count) throws ParseException {
+        try {
+            Integer.parseInt(count);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
+        }
+
+        if (Integer.parseInt(count) >= 0) {
+            return Integer.parseInt(count);
+        } else {
+            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_INTEGER);
+        }
+
     }
 }
