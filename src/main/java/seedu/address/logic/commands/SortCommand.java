@@ -17,6 +17,8 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD
             + " -r";
 
+    public static final String DESCRIPTION = "Sorts the list of persons";
+
     private String message_success = "Sorted all persons";
 
     private final boolean isReverseOrder;
@@ -35,4 +37,11 @@ public class SortCommand extends Command {
         return new CommandResult(message_success);
     }
 
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
+    }
 }

@@ -99,7 +99,7 @@ public class HelpWindow extends AnchorPane {
 
         Person samplePerson = new Person(
                 new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>()
+                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>()
         );
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(samplePerson.getName());
@@ -109,13 +109,11 @@ public class HelpWindow extends AnchorPane {
         descriptor.setTags(samplePerson.getTags());
 
         ObservableList<Command> data = FXCollections.observableArrayList(
-                new AddCommand(samplePerson),
-                new ClearCommand(),
-                new DeleteCommand(null),
-                new EditCommand(Index.fromZeroBased(0), descriptor),
-                new FindCommand(null),
-                new ListCommand(),
-                new ExitCommand()
+                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(null),
+                new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
+                new ListCommand(), new ExitCommand(), new SortCommand(false),
+                new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
+                new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0))
         );
 
         tableView.setItems(data);
@@ -188,10 +186,10 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
         commandTable.put(ListCommand.COMMAND_WORD, this::handleList);
         commandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
-        commandTable.put("sort", this::handleSort);
-        commandTable.put("addtask", this::handleAddTask);
-        commandTable.put("deltask", this::handleDelTask);
-        commandTable.put("viewtask", this::handleViewTask);
+        commandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
+        commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
+        commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
+        commandTable.put("viewtask", this::handleViewTask);        // placeholder
         commandTable.put("close", this::handleCloseWindow);
     }
 

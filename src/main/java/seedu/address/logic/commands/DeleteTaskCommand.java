@@ -23,6 +23,8 @@ public class DeleteTaskCommand extends Command {
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
+    public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, " +
+            "from person specified by the INDEX";
 
     private final Index targetPersonIndex;
     private final Index targetTaskIndex;
@@ -68,6 +70,14 @@ public class DeleteTaskCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson, taskToRemove));
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 
     /**
