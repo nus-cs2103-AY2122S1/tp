@@ -40,6 +40,25 @@ public class Task {
         return deadline;
     }
 
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    /**
+     * Compares two tasks and returns true when they share the same name and module.
+     * @param otherTask The Task to compare with.
+     * @return Whether these two Tasks are the same.
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getName().equals(otherTask.getName())
+                && otherTask.getModule().equals(otherTask.getModule());
+    }
+
     /**
      * Set a Task as completed.
      */
