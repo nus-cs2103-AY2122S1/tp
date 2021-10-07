@@ -12,8 +12,10 @@ import seedu.address.model.student.UniqueStudentList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class Module implements ReadOnlyModule {
+    private static final String MODULE_NAME = "CS2103";
 
+    private final String name;
     private final UniqueStudentList students;
 
     /*
@@ -27,12 +29,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         students = new UniqueStudentList();
     }
 
-    public AddressBook() {}
+    public Module() {
+        this.name = MODULE_NAME;
+    }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an Module using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Module(ReadOnlyModule toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -47,10 +51,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.students.setStudents(students);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Module} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyModule newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -87,7 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code Module}.
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
@@ -110,8 +118,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students));
+                || (other instanceof Module // instanceof handles nulls
+                && students.equals(((Module) other).students));
     }
 
     @Override

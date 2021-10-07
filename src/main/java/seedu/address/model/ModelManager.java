@@ -19,26 +19,26 @@ import seedu.address.model.student.Student;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Module module;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given module and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyModule module, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(module, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
+        logger.fine("Initializing with address book: " + module + " and user prefs " + userPrefs);
+        //The string name is hardcoded for now. Ability to change module name will come later
+        this.module = new Module(module);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredStudents = new FilteredList<>(this.module.getStudentList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Module(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -76,40 +76,42 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Module ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setModule(ReadOnlyModule module) {
+        this.module.resetData(module);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyModule getModule() {
+        return module;
     }
 
-    @Override
+    /**
+     * @param student
+     * @return true if current module has specified student
+     */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasStudent(student);
+        return module.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+        module.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
-        addressBook.addStudent(student);
+        module.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
-        addressBook.setStudent(target, editedStudent);
+        module.setStudent(target, editedStudent);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -143,7 +145,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return module.equals(other.module)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents);
     }
