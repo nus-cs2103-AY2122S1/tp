@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
@@ -28,8 +30,7 @@ public class DoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_PERSON_SUCCESS = "Mark visit as done for Person: %1$s,"
-            + " new last visited: %s";
+    public static final String MESSAGE_DONE_PERSON_SUCCESS = "Mark visit as done for Person: %1$s";
 
     private final Index targetIndex;
 
@@ -52,18 +53,16 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NO_SCHEDULED_VISIT);
         }
 
-
-        // TODO: update the person's last-visited, Yiyang 05/10/21
-        String newLastVisited = personToDone.getVisit().toString();
-        // TODO: replace the invocation of edit with delete command for better logic flow, Yiyang 05/10/21
-        Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getEmail(),
-                personToDone.getAddress(), new Visit(""), personToDone.getTags());
+        String newLastVisitedDate = personToDone.getVisit().toString();
+        Optional<LastVisit> newLastVisited = Optional.of(new LastVisit(newLastVisitedDate));
+        Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
+                personToDone.getAddress(), newLastVisited, new Visit(""), personToDone.getTags());
 
         model.setPerson(personToDone, donePerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(
-                MESSAGE_DONE_PERSON_SUCCESS, personToDone, newLastVisited)); // TODO: replace with MDPS, Yiyang 05/10/21
+                MESSAGE_DONE_PERSON_SUCCESS, personToDone));
     }
 
     @Override

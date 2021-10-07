@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -16,8 +18,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
+
+
+
 
 public class DoneCommandTest {
     private static final String VISIT_STUB = "2021-11-11";
@@ -28,14 +34,15 @@ public class DoneCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String personNewLastVisited = personToDone.getVisit().toString();
-        Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getEmail(),
-                personToDone.getAddress(), new Visit(""), personToDone.getTags());
+        String personNewLastVisitedDate = personToDone.getVisit().toString();
+        Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
+        Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
+                personToDone.getAddress(), personNewLastVisited, new Visit(""), personToDone.getTags());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(
-                DoneCommand.MESSAGE_DONE_PERSON_SUCCESS, personToDone, personNewLastVisited);
+                DoneCommand.MESSAGE_DONE_PERSON_SUCCESS, personToDone);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToDone, donePerson);
@@ -47,7 +54,8 @@ public class DoneCommandTest {
     public void execute_noScheduledVisit_throwsCommandException() {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personToDoneNoVisit = new Person(personToDone.getName(), personToDone.getPhone(),
-                personToDone.getEmail(), personToDone.getAddress(), new Visit(""), personToDone.getTags());
+                personToDone.getLanguage(), personToDone.getAddress(),
+                personToDone.getLastVisit(), new Visit(""), personToDone.getTags());
         ModelManager newModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         newModel.setPerson(personToDone, personToDoneNoVisit);
 
@@ -69,14 +77,15 @@ public class DoneCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String personNewLastVisited = personToDone.getVisit().toString();
-        Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getEmail(),
-                personToDone.getAddress(), new Visit(""), personToDone.getTags());
+        String personNewLastVisitedDate = personToDone.getVisit().toString();
+        Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
+        Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
+                personToDone.getAddress(), personNewLastVisited, new Visit(""), personToDone.getTags());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(
-                DoneCommand.MESSAGE_DONE_PERSON_SUCCESS, personToDone, personNewLastVisited);
+                DoneCommand.MESSAGE_DONE_PERSON_SUCCESS, personToDone);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToDone, donePerson);
