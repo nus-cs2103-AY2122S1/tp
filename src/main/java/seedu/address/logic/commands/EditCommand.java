@@ -39,7 +39,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_GROUP_NAME + "GROUP NAME] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TELEGRAM_HANDLE + "91234567 "
+            + PREFIX_TELEGRAM_HANDLE + "@john_doe "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";

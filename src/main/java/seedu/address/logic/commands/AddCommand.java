@@ -25,7 +25,7 @@ public class AddCommand extends Command {
             + PREFIX_GROUP_NAME + "GROUPNAME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_TELEGRAM_HANDLE + "98765432 "
+            + PREFIX_TELEGRAM_HANDLE + "@john_doe "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_GROUP_NAME + "CS2103T ";
 
