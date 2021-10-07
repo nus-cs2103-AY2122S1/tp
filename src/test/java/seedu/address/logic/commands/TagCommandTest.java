@@ -4,19 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WIFE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.address.testutil.TypicalPersons.getTaggedTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getNoTagTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,22 +36,12 @@ class TagCommandTest {
             .withTags(VALID_TAG_HUSBAND).build();
     private EditPersonDescriptor descriptorAddBoth = new EditPersonDescriptorBuilder()
             .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
-    private Model generateNoTagModel() {
-        AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            person = new PersonBuilder(person).withTags().build();
-            ab.addPerson(person);
-        }
-        return new ModelManager(ab, new UserPrefs());
-    }
 
+    private Model generateNoTagModel() {
+        return new ModelManager(getNoTagTypicalAddressBook(), new UserPrefs());
+    }
     private Model generateDefaultTagModel() {
-        AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            person = new PersonBuilder(person).withTags("DEFAULT").build();
-            ab.addPerson(person);
-        }
-        return new ModelManager(ab, new UserPrefs());
+        return new ModelManager(getTaggedTypicalAddressBook(VALID_TAG_WIFE), new UserPrefs());
     }
 
     @Test
@@ -73,7 +64,7 @@ class TagCommandTest {
     public void execute_singleTagPreExistingTagUnfilteredList_success() {
         Model model = generateDefaultTagModel();
         Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(defaultFirst).withTags("DEFAULT", VALID_TAG_FRIEND).build();
+        Person editedPerson = new PersonBuilder(defaultFirst).withTags(VALID_TAG_WIFE, VALID_TAG_FRIEND).build();
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
@@ -107,7 +98,7 @@ class TagCommandTest {
         Model model = generateDefaultTagModel();
         Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(defaultFirst)
-                .withTags("DEFAULT", VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_WIFE, VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
 
