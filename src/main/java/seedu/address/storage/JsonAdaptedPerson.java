@@ -15,6 +15,7 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
 import seedu.address.model.tag.Tag;
 
@@ -27,6 +28,7 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String email;
+    private final String remark;
     private final List<JsonAdaptedModuleCode> moduleCodes = new ArrayList<>();
     private final String phone;
     private final String teleHandle;
@@ -38,10 +40,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
                              @JsonProperty("moduleCodes") List<JsonAdaptedModuleCode> moduleCodes,
-                             @JsonProperty("phone") String phone, @JsonProperty("teleHandle") String teleHandle,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("teleHandle") String teleHandle,
+                             @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.email = email;
+        this.remark = remark;
         if (moduleCodes != null) {
             this.moduleCodes.addAll(moduleCodes);
         }
@@ -58,6 +63,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         email = source.getEmail().value;
+        remark = source.getRemark().value;
         moduleCodes.addAll(source.getModuleCodes().stream()
                 .map(JsonAdaptedModuleCode::new)
                 .collect(Collectors.toList()));
@@ -108,6 +114,11 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
         if (teleHandle == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     TeleHandle.class.getSimpleName()));
@@ -119,7 +130,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<ModuleCode> modelModuleCodes = new HashSet<>(personModuleCodes);
-        return new Person(modelName, modelEmail, modelModuleCodes, modelPhone, modelTeleHandle, modelTags);
+        return new Person(modelName, modelEmail, modelModuleCodes, modelPhone, modelTeleHandle, modelRemark, modelTags);
     }
 
 }

@@ -64,6 +64,9 @@ public class AddressBookParser {
         case HELP:
             return new HelpCommand();
 
+        case REMARK:
+            return new RemarkCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
