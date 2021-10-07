@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTaggedTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getNoTagTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTaggedTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +52,8 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -68,7 +69,8 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
 
         Model expectedModel = generateDefaultTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -85,7 +87,8 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -102,7 +105,8 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
 
         Model expectedModel = generateDefaultTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -122,7 +126,8 @@ class TagCommandTest {
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build());
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags());
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);

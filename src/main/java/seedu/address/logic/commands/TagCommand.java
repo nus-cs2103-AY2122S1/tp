@@ -32,7 +32,7 @@ public class TagCommand extends Command {
             + PREFIX_TAG + "TAG" + " [" + PREFIX_TAG + "EXTRA_TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "ExampleTag";
 
-    public static final String MESSAGE_TAG_ADD_SUCCESS = "Added Tag to Person: %1$s";
+    public static final String MESSAGE_TAG_ADD_SUCCESS = "Person %1$s now has tags: %2$s";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -65,7 +65,8 @@ public class TagCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_TAG_ADD_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_TAG_ADD_SUCCESS,
+                editedPerson.getName(), editedPerson.getTags()));
     }
 
     /**
