@@ -13,7 +13,8 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Address book sorted.";
     public static final String MESSAGE_USAGE = "sort: Sorts the contact in the address book in alphabetical order.\n"
-            + "Example: sort -a";
+            + "To sort by name, type: sort -a\n"
+            + "To sort by module codes, type: sort -m";
 
     private SortCommandParser.SortableField field;
 
@@ -30,6 +31,6 @@ public class SortCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this || (other instanceof SortCommand);
+        return other == this || (other instanceof SortCommand && this.field == ((SortCommand) other).field);
     }
 }
