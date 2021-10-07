@@ -30,14 +30,11 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    private final File userGuide = new File("docs/UserGuide.md");
-
+    private static final File USER_GUIDE = new File("docs/UserGuide.md");
     private static final String COMMON = "## Command summary";
 
     @FXML
     private Button copyButton;
-
-
 
     /**
      * Creates a new HelpWindow.
@@ -49,7 +46,7 @@ public class HelpWindow extends UiPart<Stage> {
         StringBuilder builder = new StringBuilder(HELP_MESSAGE);
         MarkdownView markdownView = new MarkdownView();
         try {
-            FileReader fileReader = new FileReader(userGuide);
+            FileReader fileReader = new FileReader(USER_GUIDE);
             Scanner sc = new Scanner(fileReader);
             boolean isSummary = false;
             while (sc.hasNextLine()) {
@@ -71,7 +68,8 @@ public class HelpWindow extends UiPart<Stage> {
             ScrollPane content = new ScrollPane(markdownView);
             content.setFitToWidth(true);
             HBox temp = new HBox(label, content);
-            root.setScene(new Scene(temp, 700, 400));
+            temp.getChildren().add(copyButton);
+            root.setScene(new Scene(temp, 750, 400));
         }
     }
 

@@ -24,12 +24,14 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER">
+      <VBox alignment="CENTER">
         <stylesheets>
           <URL value="@markdown.css"/>
         </stylesheets>
         <children>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+
+          <Button fx:id="copyButton" mnemonicParsing="false" minWidth="100"
+                  onAction="#copyUrl" text="Get UG link">
             <HBox.margin>
               <Insets left="5.0" />
             </HBox.margin>
@@ -44,7 +46,7 @@
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
 
-      </HBox>
+      </VBox>
     </Scene>
   </scene>
 </fx:root>
