@@ -41,8 +41,6 @@ public abstract class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label birthDate;
-    @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
@@ -56,11 +54,10 @@ public abstract class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        // To be updated when the DOB field in the Person class has been implemented.
-        dateOfBirth.setText("28/02/1999 (Age: 22)");
+        dateOfBirth.setText(person.getBirthDate().value
+                + " (Age: " + person.getBirthDate().calculateAge() + ")");
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        birthDate.setText(person.getBirthDate().value + " (Age: " + person.getBirthDate().calculateAge() + ")");
         setRemark(person.getRemark().value);
         person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
