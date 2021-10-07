@@ -29,19 +29,27 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
+    @FXML
+    private Label name;
     @FXML
     private Label phone;
     @FXML
+    private Label email;
+    @FXML
+    private Label parentPhone;
+    @FXML
+    private Label parentEmail;
+    @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label outstandingFee;
     @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane lessons;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -51,13 +59,19 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        remark.setText(person.getRemark().value);
+        phone.setText("Phone: " + person.getPhone().value);
+        email.setText("Email: " + person.getEmail().value);
+        parentPhone.setText("Parent Phone: " + person.getParentPhone().value);
+        parentEmail.setText("Parent Email: " + person.getParentEmail().value);
+        address.setText("Address: " + person.getAddress().value);
+        outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
+        remark.setText("Remarks: " + person.getRemark().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getLessons().stream().sorted()
+            .forEach(lesson -> lessons.getChildren()
+                .add(new Label("\n" + lesson.toString())));
     }
 
     @Override
