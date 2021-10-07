@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.IDA;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
@@ -27,6 +28,7 @@ public class SortCommandTest {
         expectedModel.addPerson(DANIEL);
         expectedModel.addPerson(IDA);
 
-        assertCommandSuccess(new SortCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new SortCommand(SortCommandParser.SortableField.NAME),
+                model, expectedCommandResult, expectedModel);
     }
 }

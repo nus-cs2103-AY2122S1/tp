@@ -198,6 +198,10 @@ public class UniquePersonList implements Iterable<Person> {
                 }
             });
             break;
+
+        default:
+            // Left empty because SortCommandParser already helped
+            // to ensure that the arguments will be correct
         }
     }
 }

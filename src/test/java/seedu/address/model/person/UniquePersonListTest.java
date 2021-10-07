@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -176,7 +177,7 @@ public class UniquePersonListTest {
         expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.add(BOB);
 
-        uniquePersonList.sortList();
+        uniquePersonList.sortList(SortCommandParser.SortableField.NAME);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 }

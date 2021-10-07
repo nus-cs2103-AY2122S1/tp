@@ -11,11 +11,13 @@ import seedu.address.model.Model;
  */
 public class SortCommand extends Command {
 
-    private SortCommandParser.SortableField field;
+
 
     public static final String MESSAGE_SUCCESS = "Address book sorted.";
     public static final String MESSAGE_USAGE = "sort: Sorts the contact in the address book in alphabetical order.\n"
             + "Example: sort -a";
+
+    private SortCommandParser.SortableField field;
 
     public SortCommand(SortCommandParser.SortableField field) {
         this.field = field;

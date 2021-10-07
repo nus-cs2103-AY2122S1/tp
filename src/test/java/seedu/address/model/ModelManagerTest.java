@@ -16,6 +16,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -144,7 +145,7 @@ public class ModelManagerTest {
         ModelManager expectedModelManager = new ModelManager();
         expectedModelManager.setAddressBook(expectedAddressBook);
 
-        modelManager.sortAddressBook(field);
+        modelManager.sortAddressBook(SortCommandParser.SortableField.NAME);
         assertEquals(expectedModelManager, modelManager);
     }
 }

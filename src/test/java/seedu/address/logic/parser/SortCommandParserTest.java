@@ -24,6 +24,6 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSortCommand() {
-        assertParseSuccess(parser, "-a", new SortCommand());
+        assertParseSuccess(parser, "-a", new SortCommand(SortCommandParser.SortableField.NAME));
     }
 }
