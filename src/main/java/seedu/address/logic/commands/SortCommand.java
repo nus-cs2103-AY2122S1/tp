@@ -11,8 +11,6 @@ import seedu.address.model.Model;
  */
 public class SortCommand extends Command {
 
-
-
     public static final String MESSAGE_SUCCESS = "Address book sorted.";
     public static final String MESSAGE_USAGE = "sort: Sorts the contact in the address book in alphabetical order.\n"
             + "Example: sort -a";
