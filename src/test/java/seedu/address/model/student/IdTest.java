@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class IDTest {
+public class IdTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -38,5 +38,4 @@ public class IDTest {
         assertTrue(ID.isValidID("E1234567")); // upper case
         assertTrue(ID.isValidID("e7654321")); // lower case
     }
-    
 }

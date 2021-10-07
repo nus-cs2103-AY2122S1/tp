@@ -27,18 +27,18 @@ public class GroupListTest {
     }
 
     @Test
-    public void contains_GroupNotInList_returnsFalse() {
+    public void contains_groupNotInList_returnsFalse() {
         assertFalse(groups.contains(TUTORIAL));
     }
 
     @Test
-    public void contains_GroupInList_returnsTrue() {
+    public void contains_groupInList_returnsTrue() {
         groups.add(TUTORIAL);
         assertTrue(groups.contains(TUTORIAL));
     }
 
     @Test
-    public void contains_GroupWithSameNameInList_returnsTrue() {
+    public void contains_groupWithSameNameInList_returnsTrue() {
         groups.add(TUTORIAL);
         assertTrue(groups.contains(new Group(TUTORIAL.value)));
     }
@@ -151,8 +151,6 @@ public class GroupListTest {
     @Test
     public void setGroups_listWithDuplicateGroups_throwsDuplicateGroupException() {
         List<Group> listWithDuplicateGroups = Arrays.asList(TUTORIAL, TUTORIAL);
-        assertThrows(DuplicateGroupException.class,
-                () -> groups.setGroups(listWithDuplicateGroups));
+        assertThrows(DuplicateGroupException.class, () -> groups.setGroups(listWithDuplicateGroups));
     }
-    
 }

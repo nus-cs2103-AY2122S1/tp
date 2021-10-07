@@ -11,8 +11,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.student.exceptions.DuplicateAssessmentException;
 import seedu.address.model.student.exceptions.AssessmentNotFoundException;
+import seedu.address.model.student.exceptions.DuplicateAssessmentException;
 
 public class AssessmentListTest {
 
@@ -155,7 +155,7 @@ public class AssessmentListTest {
     @Test
     public void setAssessments_listWithDuplicateAssessments_throwsDuplicateAssessmentException() {
         List<Assessment> listWithDuplicateAssessments = Arrays.asList(PATH_01, PATH_01);
-        assertThrows(DuplicateAssessmentException.class,
-                () -> assessments.setAssessments(listWithDuplicateAssessments));
+        assertThrows(DuplicateAssessmentException.class, () ->
+                assessments.setAssessments(listWithDuplicateAssessments));
     }
 }
