@@ -6,10 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.function.Predicate;
-
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonContainsFieldsPredicate;
 
 /**
  * Represents a command to view.
@@ -22,8 +20,8 @@ public class ViewCommand extends Command {
             + "e.g. " + COMMAND_WORD + " " + "[" + PREFIX_TAG + "]" + " [" + PREFIX_NAME + "]\n"
             + "OR " + COMMAND_WORD + " " + "[" + PREFIX_EMAIL + "]" + " [" + PREFIX_ADDRESS + "]";
 
-    private static final String DEFAULT_COMMAND = "Staff(s) displayed: %1$s";
-    private Predicate<Person> testCondition;
+    public static final String DEFAULT_COMMAND = "Staff(s) displayed: %1$s";
+    private PersonContainsFieldsPredicate testCondition;
 
 
 
@@ -32,7 +30,7 @@ public class ViewCommand extends Command {
      *
      * @param testCondition the test condition to go by
      */
-    public ViewCommand(Predicate<Person> testCondition) {
+    public ViewCommand(PersonContainsFieldsPredicate testCondition) {
         this.testCondition = testCondition;
     }
 
@@ -51,5 +49,10 @@ public class ViewCommand extends Command {
         return defaultResult(model);
     }
 
-
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommand
+                && testCondition.equals(((ViewCommand) other).testCondition));
+    }
 }
