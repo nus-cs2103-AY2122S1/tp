@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -8,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 
 /**
  * Controller for a student display page
