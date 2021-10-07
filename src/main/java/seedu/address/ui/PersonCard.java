@@ -47,9 +47,10 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        studentId.setText(person.getStudentId().studentId);
-        classId.setText(person.getClassId().classId);
-        grade.setText(person.getGrade().grade);
+        studentId.setText("Student_ID: " + person.getStudentId().studentId);
+        classId.setText("Class_ID: " + person.getClassId().classId);
+        grade.setText("Grade: " + person.getGrade().grade);
+        System.out.println(grade);
     }
 
     @Override
