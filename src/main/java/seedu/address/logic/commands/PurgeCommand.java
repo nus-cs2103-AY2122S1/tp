@@ -11,14 +11,14 @@ import seedu.address.model.Model;
 public class PurgeCommand extends Command {
 
     public static final String COMMAND_WORD = "purge";
-    public static final String MESSAGE_SUCCESS = "Programmer Error has been purged of sample data!";
+    public static final String MESSAGE_SUCCESS = "ProgrammerError has been purged of sample data!";
     public static final String MESSAGE_FAIL = "There is no sample data to purge!";
-    private static Boolean sampleStatus = true;
+    private static Boolean samplesPresent = true;
 
 
     @Override
     public CommandResult execute(Model model) {
-        if (getStatus()) {
+        if (hasSamples()) {
             requireNonNull(model);
             model.setAddressBook(new AddressBook());
             setStatus(false);
@@ -28,11 +28,11 @@ public class PurgeCommand extends Command {
         }
     }
 
-    private boolean getStatus () {
-        return sampleStatus;
+    private boolean hasSamples() {
+        return samplesPresent;
     }
 
-    private void setStatus (boolean val) {
-        sampleStatus = val;
+    private void setStatus(boolean val) {
+        samplesPresent = val;
     }
 }
