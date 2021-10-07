@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_RECITATION;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -160,7 +160,8 @@ public class EditCommandParserTest {
                 + ID_DESC_BOB + GROUP_DESC_RECITATION + TAG_DESC_HUSBAND;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withId(VALID_ID_BOB)
-                .withGroups(VALID_GROUP_RECITATION, VALID_GROUP_RECITATION).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withGroups(VALID_GROUP_RECITATION, VALID_GROUP_RECITATION)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 

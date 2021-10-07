@@ -83,51 +83,6 @@ public class ParserUtil {
         return new Assessment(trimmedAssessment);
     }
 
-//    /**
-//     * Parses a {@code String phone} into a {@code Phone}.
-//     * Leading and trailing whitespaces will be trimmed.
-//     *
-//     * @throws ParseException if the given {@code phone} is invalid.
-//     */
-//    public static Phone parsePhone(String phone) throws ParseException {
-//        requireNonNull(phone);
-//        String trimmedPhone = phone.trim();
-//        if (!Phone.isValidPhone(trimmedPhone)) {
-//            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Phone(trimmedPhone);
-//    }
-
-//    /**
-//     * Parses a {@code String address} into an {@code Address}.
-//     * Leading and trailing whitespaces will be trimmed.
-//     *
-//     * @throws ParseException if the given {@code address} is invalid.
-//     */
-//    public static Address parseAddress(String address) throws ParseException {
-//        requireNonNull(address);
-//        String trimmedAddress = address.trim();
-//        if (!Address.isValidAddress(trimmedAddress)) {
-//            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Address(trimmedAddress);
-//    }
-
-//    /**
-//     * Parses a {@code String email} into an {@code Email}.
-//     * Leading and trailing whitespaces will be trimmed.
-//     *
-//     * @throws ParseException if the given {@code email} is invalid.
-//     */
-//    public static Email parseEmail(String email) throws ParseException {
-//        requireNonNull(email);
-//        String trimmedEmail = email.trim();
-//        if (!Email.isValidEmail(trimmedEmail)) {
-//            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Email(trimmedEmail);
-//    }
-
     /**
       * Parses a {@code String ID} into an {@code ID}.
       * Leading and trailing whitespaces will be trimmed.
@@ -136,7 +91,7 @@ public class ParserUtil {
       */
     public static ID parseID(String id) throws ParseException {
         requireNonNull(id);
-        String trimmedID= id.trim();
+        String trimmedID = id.trim();
         if (!ID.isValidID(trimmedID)) {
             throw new ParseException(ID.MESSAGE_CONSTRAINTS);
         }
@@ -151,7 +106,7 @@ public class ParserUtil {
      */
     public static Group parseGroup(String group) throws ParseException {
         requireNonNull(group);
-        String trimmedGroup= group.trim();
+        String trimmedGroup = group.trim();
         if (!Group.isValidGroup(trimmedGroup)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }

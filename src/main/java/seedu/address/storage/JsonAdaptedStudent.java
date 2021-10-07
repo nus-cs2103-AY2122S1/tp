@@ -78,7 +78,7 @@ class JsonAdaptedStudent {
         }
 
         // TODO: Deserialise groups and scores from their Jackson-friendly versions (once available), and add to these
-        //  collections.
+        //  collections. See above for how tags does it.
         final List<Group> groups = new ArrayList<>();
         final Map<Assessment, Score> scores = new HashMap<>();
 
@@ -97,31 +97,6 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(ID.MESSAGE_CONSTRAINTS);
         }
         final ID modelId = new ID(id);
-
-        // TODO: add checks for our new fields (follow format)
-//        if (phone == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-//        }
-//        if (!Phone.isValidPhone(phone)) {
-//            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-//        }
-//        final Phone modelPhone = new Phone(phone);
-//
-//        if (email == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-//        }
-//        if (!Email.isValidEmail(email)) {
-//            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-//        }
-//        final Email modelEmail = new Email(email);
-//
-//        if (address == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-//        }
-//        if (!Address.isValidAddress(address)) {
-//            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-//        }
-//        final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
         return new Student(modelName, modelId, groups, scores, modelTags);

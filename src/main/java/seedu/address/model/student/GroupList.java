@@ -1,8 +1,5 @@
 package seedu.address.model.student;
 
-import seedu.address.model.student.exceptions.DuplicateGroupException;
-import seedu.address.model.student.exceptions.GroupNotFoundException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,12 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import seedu.address.model.student.exceptions.DuplicateGroupException;
+import seedu.address.model.student.exceptions.GroupNotFoundException;
+
 public class GroupList {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Number of Groups should be a positive integer";
     public static final String VALIDATION_REGEX = "\\d+";
-    public final List<Group> Groups = new ArrayList<>();
+    public final List<Group> groups = new ArrayList<>();
 
     /**
      * Returns true if a given string is a valid number of Groups.
@@ -29,7 +29,7 @@ public class GroupList {
      */
     public boolean contains(Group group) {
         requireNonNull(group);
-        return Groups.stream().anyMatch(group::equals);
+        return groups.stream().anyMatch(group::equals);
     }
 
     /**
@@ -40,7 +40,7 @@ public class GroupList {
         if (contains(group)) {
             return;
         }
-        Groups.add(group);
+        groups.add(group);
     }
 
     /**
@@ -51,7 +51,7 @@ public class GroupList {
     public void setGroup(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);
 
-        int index = Groups.indexOf(target);
+        int index = groups.indexOf(target);
         if (index == -1) {
             throw new GroupNotFoundException();
         }
@@ -60,7 +60,7 @@ public class GroupList {
             throw new DuplicateGroupException();
         }
 
-        Groups.set(index, editedGroup);
+        groups.set(index, editedGroup);
     }
 
     /**
@@ -69,7 +69,7 @@ public class GroupList {
      */
     public void remove(Group group) {
         requireNonNull(group);
-        if (!Groups.remove(group)) {
+        if (!groups.remove(group)) {
             throw new GroupNotFoundException();
         }
     }
@@ -79,41 +79,41 @@ public class GroupList {
      */
     public void setGroups(GroupList group) {
         requireNonNull(group);
-        Collections.copy(Groups, group.Groups);
+        Collections.copy(groups, group.groups);
     }
 
     /**
-     * Replaces the contents of this list with {@code Groups}.
-     * {@code Groups} must not contain duplicate Groups.
+     * Replaces the contents of this list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
      */
-    public void setGroups(List<Group> Groups) {
-        requireAllNonNull(Groups);
-        if (!GroupsAreUnique(Groups)) {
+    public void setGroups(List<Group> groups) {
+        requireAllNonNull(groups);
+        if (!groupsAreUnique(groups)) {
             throw new DuplicateGroupException();
         }
 
-        Collections.copy(this.Groups, Groups);
+        Collections.copy(this.groups, groups);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GroupList // instanceof handles nulls
-                && Groups.equals(((GroupList) other).Groups));
+                && groups.equals(((GroupList) other).groups));
     }
 
     @Override
     public int hashCode() {
-        return Groups.hashCode();
+        return groups.hashCode();
     }
 
     /**
-     * Returns true if {@code Groups} contains only unique Groups.
+     * Returns true if {@code groups} contains only unique groups.
      */
-    private boolean GroupsAreUnique(List<Group> Groups) {
-        for (int i = 0; i < Groups.size() - 1; i++) {
-            for (int j = i + 1; j < Groups.size(); j++) {
-                if (Groups.get(i).equals(Groups.get(j))) {
+    private boolean groupsAreUnique(List<Group> groups) {
+        for (int i = 0; i < groups.size() - 1; i++) {
+            for (int j = i + 1; j < groups.size(); j++) {
+                if (groups.get(i).equals(groups.get(j))) {
                     return false;
                 }
             }

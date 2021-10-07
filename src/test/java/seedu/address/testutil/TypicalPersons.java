@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;

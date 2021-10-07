@@ -1,14 +1,14 @@
 package seedu.address.model.student;
 
-import seedu.address.model.student.exceptions.DuplicateAssessmentException;
-import seedu.address.model.student.exceptions.AssessmentNotFoundException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import seedu.address.model.student.exceptions.AssessmentNotFoundException;
+import seedu.address.model.student.exceptions.DuplicateAssessmentException;
 
 /**
  * Represents a list of assessments.
@@ -51,7 +51,8 @@ public class AssessmentList {
     /**
      * Replaces the assessment {@code target} in the list with {@code editedAssessment}.
      * {@code target} must exist in the list.
-     * The assessment identity of {@code editedAssessment} must not be the same as another existing assessment in the list.
+     * The assessment identity of {@code editedAssessment} must not be the same as another existing assessment
+     * in the list.
      */
     public void setAssessment(Assessment target, Assessment editedAssessment) {
         requireAllNonNull(target, editedAssessment);

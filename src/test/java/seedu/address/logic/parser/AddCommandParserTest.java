@@ -53,20 +53,20 @@ public class AddCommandParserTest {
                 + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL +
-                TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL
+                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple IDs - last ID accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_AMY + ID_DESC_BOB + GROUP_DESC_TUTORIAL +
-                TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_AMY + ID_DESC_BOB + GROUP_DESC_TUTORIAL
+                + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple groups - all accepted
         Student expectedStudentMultipleGroups = new PersonBuilder(BOB)
                 .withScores(new HashMap<>())
                 .withGroups(VALID_GROUP_TUTORIAL, VALID_GROUP_RECITATION)
                 .withTags(VALID_TAG_FRIEND).build();
-        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL + GROUP_DESC_RECITATION +
-                TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleGroups));
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + GROUP_DESC_TUTORIAL + GROUP_DESC_RECITATION
+                + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleGroups));
 
         // multiple tags - all accepted
         Student expectedStudentMultipleTags = new PersonBuilder(BOB)
