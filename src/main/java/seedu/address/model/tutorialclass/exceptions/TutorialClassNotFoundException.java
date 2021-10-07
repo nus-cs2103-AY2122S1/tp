@@ -1,2 +1,4 @@
-package seedu.address.model.tutorialclass.exceptions;public class TutorialClassNotFoundException {
+package seedu.address.model.tutorialclass.exceptions;
+
+public class TutorialClassNotFoundException extends RuntimeException{
 }

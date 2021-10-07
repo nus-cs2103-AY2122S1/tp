@@ -10,14 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.student.Address;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
-import seedu.address.model.student.Student;
 
-//TODO: import this model when ready
-//import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialclass.Schedule;
+import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tag.Tag;
 
 //TODO: Implement this skeleton class properly.
@@ -65,7 +60,7 @@ class JsonAdaptedTutorialClass {
     public TutorialClass toModelType() throws IllegalValueException {
         final List<Tag> tutorialClassTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            tutorialClassTagsTags.add(tag.toModelType());
+            tutorialClassTags.add(tag.toModelType());
         }
 
         if (classCode == null) {
