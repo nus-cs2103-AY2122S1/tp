@@ -72,7 +72,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code positions} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code positions} into a {@code Set<Position>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withPositions(String... positions) {

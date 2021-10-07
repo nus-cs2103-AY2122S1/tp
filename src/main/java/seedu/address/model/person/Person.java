@@ -53,7 +53,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable position set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Position> getPositions() {
@@ -114,7 +114,7 @@ public class Person {
 
         Set<Position> positions = getPositions();
         if (!positions.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; Positions: ");
             positions.forEach(builder::append);
         }
         return builder.toString();

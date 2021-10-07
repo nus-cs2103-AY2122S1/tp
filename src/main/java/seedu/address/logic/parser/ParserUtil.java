@@ -96,28 +96,28 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String position} into a {@code Position}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code position} is invalid.
      */
-    public static Position parsePosition(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Position.isValidPositionName(trimmedTag)) {
+    public static Position parsePosition(String position) throws ParseException {
+        requireNonNull(position);
+        String trimmedPosition = position.trim();
+        if (!Position.isValidPositionName(trimmedPosition)) {
             throw new ParseException(Position.MESSAGE_CONSTRAINTS);
         }
-        return new Position(trimmedTag);
+        return new Position(trimmedPosition);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> positions} into a {@code Set<Position>}.
      */
-    public static Set<Position> parsePositions(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static Set<Position> parsePositions(Collection<String> positions) throws ParseException {
+        requireNonNull(positions);
         final Set<Position> positionSet = new HashSet<>();
-        for (String tagName : tags) {
-            positionSet.add(parsePosition(tagName));
+        for (String positionName : positions) {
+            positionSet.add(parsePosition(positionName));
         }
         return positionSet;
     }

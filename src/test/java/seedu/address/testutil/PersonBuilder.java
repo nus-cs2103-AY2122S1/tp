@@ -58,7 +58,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code positions} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code positions} into a {@code Set<Position>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withPositions(String ... positions) {
         this.positions = SampleDataUtil.getPositionSet(positions);

@@ -67,17 +67,17 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new AddCommand(expectedPerson));
 
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB)
+        // multiple positions - all accepted
+        Person expectedPersonMultiplePositions = new PersonBuilder(BOB)
                 .withPositions(VALID_POSITION_FRIEND, VALID_POSITION_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+                + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, new AddCommand(expectedPersonMultiplePositions));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero positions
         Person expectedPerson = new PersonBuilder(AMY).withPositions().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
@@ -126,7 +126,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid position
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_POSITION_DESC + VALID_POSITION_FRIEND, Position.MESSAGE_CONSTRAINTS);
 

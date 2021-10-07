@@ -51,7 +51,7 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
+        // different positions -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPositions(VALID_POSITION_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }

@@ -84,7 +84,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
+        // different positions -> returns false
         editedAlice = new PersonBuilder(ALICE).withPositions(VALID_POSITION_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }

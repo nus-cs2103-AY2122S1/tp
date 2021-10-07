@@ -49,7 +49,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a position set containing the list of strings given.
      */
     public static Set<Position> getPositionSet(String... strings) {
         return Arrays.stream(strings)

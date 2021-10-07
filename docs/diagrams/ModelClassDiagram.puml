@@ -22,7 +22,7 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Position
 
 }
 
@@ -44,7 +44,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> "*" Position
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
