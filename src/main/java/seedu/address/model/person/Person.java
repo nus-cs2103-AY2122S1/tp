@@ -120,7 +120,6 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Client ID: ")
                 .append("; Last Met: ")
                 .append(getLastMet())
                 .append("; current plans: ")

@@ -31,13 +31,13 @@ public class LastMetTest {
         assertFalse(LastMet.isValidLastMet("20-30")); // missing local part
 
         // invalid parts
-        assertFalse(Email.isValidEmail("20-50-5050")); // invalid domain name
-        assertFalse(Email.isValidEmail("60-08-2010"));
-        assertFalse(Email.isValidEmail("5654-08-12"));
+        assertFalse(LastMet.isValidLastMet("20-50-5050")); // invalid domain name
+        assertFalse(LastMet.isValidLastMet("60-08-2010"));
+        assertFalse(LastMet.isValidLastMet("5654-08-12"));
 
         // valid email
-        assertTrue(Email.isValidEmail("01-01-2021"));
-        assertTrue(Email.isValidEmail("20-09-2021"));
-        assertTrue(Email.isValidEmail("30-12-2021"));
+        assertTrue(LastMet.isValidLastMet("20-12-2021"));
+        assertTrue(LastMet.isValidLastMet("20-09-2021"));
+        assertTrue(LastMet.isValidLastMet("30-12-2021"));
     }
 }

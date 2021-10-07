@@ -56,7 +56,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        lastMet = source.getLastMet().dateInString;
+        lastMet = source.getLastMet().value.toString();
         currentPlan = source.getCurrentPlan().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)

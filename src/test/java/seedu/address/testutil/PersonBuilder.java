@@ -35,6 +35,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        lastMet = new LastMet(DEFAULT_LASTMET);
+        currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
         tags = new HashSet<>();
     }
 
@@ -46,6 +48,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        currentPlan = personToCopy.getCurrentPlan();
+        lastMet = personToCopy.getLastMet();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
