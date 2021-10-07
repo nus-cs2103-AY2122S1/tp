@@ -147,6 +147,8 @@ public abstract class UniquePersonListTest<T extends Person> {
     }
 
     @Test
+    //Safe to cast null as List of generic type as null simply represents absence of UniquePersonList<T>
+    @SuppressWarnings("unchecked")
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> personList.setPersons((UniquePersonList<T>) null));
     }
@@ -161,6 +163,8 @@ public abstract class UniquePersonListTest<T extends Person> {
     }
 
     @Test
+    //Safe to cast null as List of generic type as null simply represents absence of List
+    @SuppressWarnings("unchecked")
     public void setPersons_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> personList.setPersons((List<T>) null));
     }
@@ -168,8 +172,8 @@ public abstract class UniquePersonListTest<T extends Person> {
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         personList.add(alice);
-        List<T> newPatientList = Collections.singletonList(bob);
-        personList.setPersons(newPatientList);
+        List<T> newPersonList = Collections.singletonList(bob);
+        personList.setPersons(newPersonList);
         UniquePersonList<T> expectedUniquePersonList = new UniquePersonList<>();
         expectedUniquePersonList.add(bob);
         assertEquals(expectedUniquePersonList, personList);
