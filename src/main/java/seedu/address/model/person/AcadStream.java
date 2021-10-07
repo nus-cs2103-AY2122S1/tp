@@ -9,14 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class AcadStream {
     public static final String MESSAGE_CONSTRAINTS = "Academic stream should only contain alphanumeric characters, "
-            + "hyphens, parentheses, single quotation and spaces.";
+            + "and spaces.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      * Academic stream can be any alphabetic character with or without space.
      */
-    public static final String VALIDATION_REGEX = "[-'()\\p{Alnum}][-'()\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 
