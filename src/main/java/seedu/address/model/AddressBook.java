@@ -5,6 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.AssessmentList;
+import seedu.address.model.student.Group;
+import seedu.address.model.student.GroupList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -15,6 +19,8 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
+    private final GroupList groups;
+    private final AssessmentList assessments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +31,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
+        groups = new GroupList();
+        assessments = new AssessmentList();
     }
 
     public AddressBook() {}
@@ -70,8 +78,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addStudent(Student s) {
+        students.add(s);
     }
 
     /**
@@ -94,6 +102,42 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    //// group-level operations
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     */
+    public void addGroup(Group g) {
+        groups.add(g);
+    }
+
+    //// assessment-level operations
+
+    /**
+     * Returns true if an assessment with the same identity as {@code assessment} exists in the address book.
+     */
+    public boolean hasAssessment(Assessment assessment) {
+        requireNonNull(assessment);
+        return assessments.contains(assessment);
+    }
+
+    /**
+     * Adds an assessment to the address book.
+     * The assessment must not already exist in the address book.
+     */
+    public void addAssessment(Assessment a) {
+        assessments.add(a);
+    }
+
     //// util methods
 
     @Override
@@ -108,14 +152,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public List<Group> getGroupList() {
+        return groups.groups;
+    }
+
+    @Override
+    public List<Assessment> getAssessmentList() {
+        return assessments.assessments;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students));
+                && students.equals(((AddressBook) other).students)
+                && groups.equals(((AddressBook) other).groups)
+                && assessments.equals(((AddressBook) other).assessments));
     }
 
     @Override
     public int hashCode() {
-        return students.hashCode();
+        return (groups.hashCode() << 24)
+                + (assessments.hashCode() << 16)
+                + students.hashCode();
     }
 }

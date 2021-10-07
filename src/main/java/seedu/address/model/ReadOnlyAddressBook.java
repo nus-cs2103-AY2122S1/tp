@@ -1,6 +1,10 @@
 package seedu.address.model;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
 /**
@@ -14,4 +18,13 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Student> getStudentList();
 
+    /**
+     * Returns a list of groups.
+     */
+    List<Group> getGroupList();
+
+    /**
+     * Returns a list of assessments.
+     */
+    List<Assessment> getAssessmentList();
 }

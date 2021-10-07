@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -95,6 +98,16 @@ public class AddressBookTest {
         @Override
         public ObservableList<Student> getStudentList() {
             return students;
+        }
+
+        @Override
+        public List<Group> getGroupList() {
+            return new ArrayList<>();
+        }
+
+        @Override
+        public List<Assessment> getAssessmentList() {
+            return new ArrayList<>();
         }
     }
 
