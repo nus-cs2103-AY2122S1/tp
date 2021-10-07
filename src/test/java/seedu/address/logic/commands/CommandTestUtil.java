@@ -88,7 +88,8 @@ public class CommandTestUtil {
     public static final String INVALID_PARENT_EMAIL_DESC =
             " " + PREFIX_PARENT_EMAIL + "bobparent.yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_SCHOOL_DESC = " " + PREFIX_SCHOOL + "sch123"; // numbers not allowed for schools
+    public static final String INVALID_SCHOOL_DESC = " " + PREFIX_SCHOOL
+            + "sch[]"; // square brackets not allowed for schools
     public static final String INVALID_ACAD_STREAM_DESC = " " + PREFIX_ACAD_STREAM
             + "a' stream"; // ''' not allowed for acad streams;
     public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
