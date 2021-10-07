@@ -49,15 +49,15 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredAnimeList().size());
-        Anime lastAnime = model.getFilteredAnimeList().get(indexLastPerson.getZeroBased());
+        Index indexLastAnime = Index.fromOneBased(model.getFilteredAnimeList().size());
+        Anime lastAnime = model.getFilteredAnimeList().get(indexLastAnime.getZeroBased());
 
-        AnimeBuilder personInList = new AnimeBuilder(lastAnime);
-        Anime editedAnime = personInList.withName(VALID_NAME_BNHA).withTags(VALID_TAG_SHOUNEN).build();
+        AnimeBuilder animeInList = new AnimeBuilder(lastAnime);
+        Anime editedAnime = animeInList.withName(VALID_NAME_BNHA).withTags(VALID_TAG_SHOUNEN).build();
 
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA)
                 .withTags(VALID_TAG_SHOUNEN).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastAnime, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
 
@@ -97,7 +97,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateAnimeUnfilteredList_failure() {
         Anime firstAnime = model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased());
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder(firstAnime).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_ANIME, descriptor);
@@ -106,10 +106,10 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateAnimeFilteredList_failure() {
         showAnimeAtIndex(model, INDEX_FIRST_ANIME);
 
-        // edit person in filtered list into a duplicate in anime list
+        // edit anime in filtered list into a duplicate in anime list
         Anime animeInList = model.getAniList().getAnimeList().get(INDEX_SECOND_ANIME.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME,
                 new EditAnimeDescriptorBuilder(animeInList).build());
@@ -118,7 +118,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidAnimeIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAnimeList().size() + 1);
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -131,7 +131,7 @@ public class EditCommandTest {
      * but smaller than size of anime list
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidAnimeIndexFilteredList_failure() {
         showAnimeAtIndex(model, INDEX_FIRST_ANIME);
         Index outOfBoundIndex = INDEX_SECOND_ANIME;
         // ensures that outOfBoundIndex is still in bounds of anime list

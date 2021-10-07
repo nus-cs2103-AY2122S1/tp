@@ -62,7 +62,7 @@ public class AnimeTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
+        // different anime -> returns false
         assertFalse(ALICE.equals(BNHA));
 
         // different name -> returns false

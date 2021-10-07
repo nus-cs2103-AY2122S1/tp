@@ -43,8 +43,8 @@ public class AnimeListTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
+    public void resetData_withDuplicateAnimes_throwsDuplicateAnimeException() {
+        // Two animes with the same identity fields
         Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
         List<Anime> newAnimes = Arrays.asList(ALICE, editedAlice);
@@ -54,23 +54,23 @@ public class AnimeListTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasAnime_nullAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> animeList.hasAnime(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasAnime_animeNotInAddressBook_returnsFalse() {
         assertFalse(animeList.hasAnime(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasAnime_animeInAddressBook_returnsTrue() {
         animeList.addAnime(ALICE);
         assertTrue(animeList.hasAnime(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasAnime_animeWithSameIdentityFieldsInAddressBook_returnsTrue() {
         animeList.addAnime(ALICE);
         Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
@@ -78,12 +78,12 @@ public class AnimeListTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getAnimeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> animeList.getAnimeList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose animes list can violate interface constraints.
      */
     private static class AnimeListStub implements ReadOnlyAnimeList {
         private final ObservableList<Anime> anime = FXCollections.observableArrayList();
