@@ -113,26 +113,24 @@ Example:
 
 ![import window](images/importWindow.png)
 
-- Select `importTemplate.csv` file
-- Click open to import contacts
+- Select `importTemplate.csv` file.
+- Click open to import contacts.
 
 Note:  
-- _csv_ file must have corresponding **headers**
+- `.csv` file must have corresponding **headers**:
   - name
   - phone
   - email
   - address
   - tags(optional)
-- Addresses containing **commas** should be wrapped in **doublequotes**
-- Multiple tags should be seperated via **single whitespace**
-- When converting frome excel make sure to save as **CSV** and not **CSV UTF-8**
-- A template `importTemplate.csv` can be found in the default directory of the file browser
+- Addresses containing **commas (,)** should be wrapped in **"double quotes"**.
+- Multiple tags should be seperated via **single whitespace**.
+- Make sure to save the spreadsheet data as **`.csv`** and not **`.csv UTF-8`**.
+- A template `importTemplate.csv` can be found in the default directory of the file browser.
 
 Sneak peek:
 
 ![csv template](images/csvTemplate.png)
-  
-
   
 ### Listing all persons: `list`
 
