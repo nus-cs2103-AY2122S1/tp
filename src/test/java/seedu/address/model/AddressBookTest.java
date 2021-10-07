@@ -44,17 +44,11 @@ public class AddressBookTest {
     }
 
     @Test
-<<<<<<< HEAD
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withPositions(VALID_POSITION_HUSBAND)
-=======
     public void resetData_withDuplicateMembers_throwsDuplicateMemberException() {
         // Two members with the same identity fields
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
->>>>>>> master
-                .build();
+        Member editedAlice =
+                new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND)
+                        .build();
         List<Member> newMembers = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newMembers);
 
@@ -78,17 +72,11 @@ public class AddressBookTest {
     }
 
     @Test
-<<<<<<< HEAD
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withPositions(VALID_POSITION_HUSBAND)
-=======
     public void hasMember_memberWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addMember(ALICE);
-        Member editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
->>>>>>> master
-                .build();
+        Member editedAlice =
+                new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND)
+                        .build();
         assertTrue(addressBook.hasMember(editedAlice));
     }
 

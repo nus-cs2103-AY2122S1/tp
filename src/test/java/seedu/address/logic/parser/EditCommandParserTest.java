@@ -35,7 +35,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
@@ -95,7 +94,7 @@ public class EditCommandParserTest {
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_POSITION} alone will reset the positions of the {@code Person} being edited,
+        // while parsing {@code PREFIX_POSITION} alone will reset the positions of the {@code Member} being edited,
         // parsing it together with a valid position results in error
         assertParseFailure(parser,
                 "1" + POSITION_DESC_FRIEND + POSITION_DESC_HUSBAND + POSITION_EMPTY, Position.MESSAGE_CONSTRAINTS);

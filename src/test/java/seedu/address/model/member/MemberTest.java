@@ -19,13 +19,8 @@ public class MemberTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-<<<<<<< HEAD:src/test/java/seedu/address/model/person/PersonTest.java
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getPositions().remove(0));
-=======
         Member member = new MemberBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> member.getTags().remove(0));
->>>>>>> master:src/test/java/seedu/address/model/member/MemberTest.java
+        assertThrows(UnsupportedOperationException.class, () -> member.getPositions().remove(0));
     }
 
     @Test
@@ -37,15 +32,9 @@ public class MemberTest {
         assertFalse(ALICE.isSameMember(null));
 
         // same name, all other attributes different -> returns true
-<<<<<<< HEAD:src/test/java/seedu/address/model/person/PersonTest.java
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
-=======
         Member editedAlice = new MemberBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withPositions(VALID_POSITION_HUSBAND).build();
         assertTrue(ALICE.isSameMember(editedAlice));
->>>>>>> master:src/test/java/seedu/address/model/member/MemberTest.java
 
         // different name, all other attributes same -> returns false
         editedAlice = new MemberBuilder(ALICE).withName(VALID_NAME_BOB).build();
@@ -95,13 +84,8 @@ public class MemberTest {
         editedAlice = new MemberBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-<<<<<<< HEAD:src/test/java/seedu/address/model/person/PersonTest.java
-        // different positions -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPositions(VALID_POSITION_HUSBAND).build();
-=======
         // different tags -> returns false
-        editedAlice = new MemberBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
->>>>>>> master:src/test/java/seedu/address/model/member/MemberTest.java
+        editedAlice = new MemberBuilder(ALICE).withPositions(VALID_POSITION_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
