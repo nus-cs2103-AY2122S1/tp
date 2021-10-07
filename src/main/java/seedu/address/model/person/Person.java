@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Mod;
 
 /**
  * Represents a Person in the address book.
@@ -23,19 +23,19 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Mod> mods = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId id, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, id, phone, email, address, tags);
+    public Person(Name name, StudentId id, Phone phone, Email email, Address address, Set<Mod> mods) {
+        requireAllNonNull(name, id, phone, email, address, mods);
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.mods.addAll(mods);
     }
 
     public Name getName() {
@@ -62,8 +62,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Mod> getMods() {
+        return Collections.unmodifiableSet(mods);
     }
 
     /**
@@ -98,13 +98,13 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getMods().equals(getMods());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, mods);
     }
 
     @Override
@@ -120,10 +120,10 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
+        Set<Mod> mods = getMods();
+        if (!mods.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            mods.forEach(builder::append);
         }
         return builder.toString();
     }
