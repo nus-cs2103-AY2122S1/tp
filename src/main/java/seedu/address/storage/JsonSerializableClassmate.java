@@ -22,7 +22,8 @@ class JsonSerializableClassmate {
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
-    private final List<JsonAdaptedTutorialClass> tutorialClasses = new ArrayList<>();
+    //TODO: Use class list
+//    private final List<JsonAdaptedTutorialClass> tutorialClasses = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableClassmate} with the given students.
@@ -38,7 +39,7 @@ class JsonSerializableClassmate {
      * @param source future changes to this will not affect the created {@code JsonSerializableClassmate}.
      */
     public JsonSerializableClassmate(ReadOnlyAddressBook source) {
-        //TODO: use this line instead of students.addAll(source.getClassList().stream().map(JsonAdaptedTutorialClass::new).collect(Collectors.toList()));
+        //TODO: use this line instead of students.addAll(source.getTutorialClassList().stream().map(JsonAdaptedTutorialClass::new).collect(Collectors.toList()));
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
