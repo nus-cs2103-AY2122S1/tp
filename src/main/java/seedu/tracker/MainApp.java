@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        ModuleTrackerStorage moduleBookStorage = new JsonModuleTrackerStorage(userPrefs.getModTrackerFilePath());
-        storage = new StorageManager(moduleBookStorage, userPrefsStorage);
+        ModuleTrackerStorage moduleTrackerStorage = new JsonModuleTrackerStorage(userPrefs.getModuleTrackerFilePath());
+        storage = new StorageManager(moduleTrackerStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty mod tracker will be used instead if errors occur when reading {@code storage}'s mod tracker.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyModuleTracker> modTrackerOptional;
+        Optional<ReadOnlyModuleTracker> moduleTrackerOptional;
         ReadOnlyModuleTracker initialData;
         try {
-            modTrackerOptional = storage.readModuleTracker();
-            if (!modTrackerOptional.isPresent()) {
+            moduleTrackerOptional = storage.readModuleTracker();
+            if (!moduleTrackerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample ModuleTracker");
             }
-            initialData = modTrackerOptional.orElseGet(SampleDataUtil::getSampleModTracker);
+            initialData = moduleTrackerOptional.orElseGet(SampleDataUtil::getSampleModuleTracker);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty ModuleTracker");
             initialData = new ModuleTracker();

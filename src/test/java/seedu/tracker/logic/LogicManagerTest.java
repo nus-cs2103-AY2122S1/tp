@@ -155,7 +155,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveModuleTracker(ReadOnlyModuleTracker addressBook, Path filePath) throws IOException {
+        public void saveModuleTracker(ReadOnlyModuleTracker moduleTracker, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

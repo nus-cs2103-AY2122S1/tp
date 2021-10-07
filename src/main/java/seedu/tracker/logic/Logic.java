@@ -37,7 +37,7 @@ public interface Logic {
     /**
      * Returns the user prefs' module tracker file path.
      */
-    Path getModTrackerFilePath();
+    Path getModuleTrackerFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

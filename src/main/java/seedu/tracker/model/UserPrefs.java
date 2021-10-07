@@ -14,7 +14,7 @@ import seedu.tracker.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path modTrackerFilePath = Paths.get("data" , "modtracker.json");
+    private Path moduleTrackerFilePath = Paths.get("data" , "moduletracker.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +35,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setModTrackerFilePath(newUserPrefs.getModTrackerFilePath());
+        setModuleTrackerFilePath(newUserPrefs.getModuleTrackerFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +47,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getModTrackerFilePath() {
-        return modTrackerFilePath;
+    public Path getModuleTrackerFilePath() {
+        return moduleTrackerFilePath;
     }
 
-    public void setModTrackerFilePath(Path modTrackerFilePath) {
-        requireNonNull(modTrackerFilePath);
-        this.modTrackerFilePath = modTrackerFilePath;
+    public void setModuleTrackerFilePath(Path moduleTrackerFilePath) {
+        requireNonNull(moduleTrackerFilePath);
+        this.moduleTrackerFilePath = moduleTrackerFilePath;
     }
 
     @Override
@@ -68,19 +68,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && modTrackerFilePath.equals(o.modTrackerFilePath);
+                && moduleTrackerFilePath.equals(o.moduleTrackerFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, modTrackerFilePath);
+        return Objects.hash(guiSettings, moduleTrackerFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + modTrackerFilePath);
+        sb.append("\nLocal data file location : " + moduleTrackerFilePath);
         return sb.toString();
     }
 

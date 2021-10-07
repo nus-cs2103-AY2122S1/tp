@@ -60,8 +60,8 @@ public class JsonModuleTrackerStorage implements ModuleTrackerStorage {
     }
 
     @Override
-    public void saveModuleTracker(ReadOnlyModuleTracker moduletracker) throws IOException {
-        saveModuleTracker(moduletracker, filePath);
+    public void saveModuleTracker(ReadOnlyModuleTracker moduleTracker) throws IOException {
+        saveModuleTracker(moduleTracker, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonModuleTrackerStorage implements ModuleTrackerStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveModuleTracker(ReadOnlyModuleTracker moduletracker, Path filePath) throws IOException {
-        requireNonNull(moduletracker);
+    public void saveModuleTracker(ReadOnlyModuleTracker moduleTracker, Path filePath) throws IOException {
+        requireNonNull(moduleTracker);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableModuleTracker(moduletracker), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableModuleTracker(moduleTracker), filePath);
     }
 
 }

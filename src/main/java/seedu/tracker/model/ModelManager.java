@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.commons.core.LogsCenter;
+import seedu.tracker.model.module.Module;
 
 /**
  * Represents the in-memory model of the mod tracker data.
@@ -20,7 +21,7 @@ public class ModelManager implements Model {
 
     private final ModuleTracker moduleTracker;
     private final UserPrefs userPrefs;
-    private final FilteredList<seedu.tracker.model.module.Module> filteredModules;
+    private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given moduleTracker and userPrefs.
@@ -65,14 +66,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getModTrackerFilePath() {
-        return userPrefs.getModTrackerFilePath();
+    public Path getModuleTrackerFilePath() {
+        return userPrefs.getModuleTrackerFilePath();
     }
 
     @Override
-    public void setModTrackerFilePath(Path modTrackerFilePath) {
-        requireNonNull(modTrackerFilePath);
-        userPrefs.setModTrackerFilePath(modTrackerFilePath);
+    public void setModuleTrackerFilePath(Path moduleTrackerFilePath) {
+        requireNonNull(moduleTrackerFilePath);
+        userPrefs.setModuleTrackerFilePath(moduleTrackerFilePath);
     }
 
     //=========== ModuleTracker ================================================================================
@@ -88,24 +89,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasModule(seedu.tracker.model.module.Module module) {
+    public boolean hasModule(Module module) {
         requireNonNull(module);
         return moduleTracker.hasModule(module);
     }
 
     @Override
-    public void deleteModule(seedu.tracker.model.module.Module target) {
+    public void deleteModule(Module target) {
         moduleTracker.removeModule(target);
     }
 
     @Override
-    public void addModule(seedu.tracker.model.module.Module module) {
+    public void addModule(Module module) {
         moduleTracker.addModule(module);
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 
     @Override
-    public void setModule(seedu.tracker.model.module.Module target, seedu.tracker.model.module.Module editedModule) {
+    public void setModule(Module target, Module editedModule) {
         requireAllNonNull(target, editedModule);
 
         moduleTracker.setModule(target, editedModule);
@@ -115,15 +116,15 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Module} backed by the internal list of
-     * {@code versionedModTracker}
+     * {@code versionedModuleTracker}
      */
     @Override
-    public ObservableList<seedu.tracker.model.module.Module> getFilteredModuleList() {
+    public ObservableList<Module> getFilteredModuleList() {
         return filteredModules;
     }
 
     @Override
-    public void updateFilteredModuleList(Predicate<seedu.tracker.model.module.Module> predicate) {
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
         requireNonNull(predicate);
         filteredModules.setPredicate(predicate);
     }

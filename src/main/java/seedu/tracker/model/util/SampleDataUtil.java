@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyModuleTracker getSampleModTracker() {
+    public static ReadOnlyModuleTracker getSampleModuleTracker() {
         ModuleTracker sampleMt = new ModuleTracker();
         for (Module sampleModule : getSampleModules()) {
             sampleMt.addModule(sampleModule);
