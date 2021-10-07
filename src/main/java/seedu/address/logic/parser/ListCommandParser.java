@@ -22,7 +22,8 @@ public class ListCommandParser implements Parser<ListCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_FRIEND_LIST);
 
         if (argMultimap.getValue(PREFIX_FRIEND_LIST).isPresent()) {
-            return new ListCommand(new FriendIdContainsKeywordPredicate(argMultimap.getValue(PREFIX_FRIEND_LIST).get()));
+            return new ListCommand(
+                    new FriendIdContainsKeywordPredicate(argMultimap.getValue(PREFIX_FRIEND_LIST).get()));
         }
         // no tags present, default to friend search
         return new ListCommand(new FriendIdContainsKeywordPredicate(args));

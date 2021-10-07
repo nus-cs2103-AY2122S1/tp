@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.FriendBuilder;
 
-public class FriendFriendNameContainsKeywordsPredicateTest {
+public class FriendNameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendIdContainsKeywordPredicate;
 
 /**
@@ -13,11 +14,11 @@ import seedu.address.model.friend.FriendIdContainsKeywordPredicate;
  */
 public class ListCommand extends Command {
 
-    private final Predicate predicate;
-
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all";
+    public static final String MESSAGE_SUCCESS_PREPEND = "Listed all %s";
+
+    public static final String FRIEND_LIST = "friends";
 
     public static final String MESSAGE_UNKNOWN_PREDICATE = "Unknown search filter entered";
 
@@ -26,7 +27,9 @@ public class ListCommand extends Command {
             + "Parameters: --friend/--game KEYWORD \n"
             + "Example: " + COMMAND_WORD + "--friend alice";
 
-    public ListCommand(Predicate predicate) {
+    private final Predicate<Friend> predicate;
+
+    public ListCommand(Predicate<Friend> predicate) {
         this.predicate = predicate;
     }
 
@@ -34,15 +37,37 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        model.updateFilteredFriendsList(predicate);
         if (predicate instanceof FriendIdContainsKeywordPredicate) {
-            String keyword = ((FriendIdContainsKeywordPredicate) predicate).getKeyword();
-            String messageEnd = keyword.isEmpty()
-                    ? " friends"
-                    : " friends whose id contains the keyword: " + keyword;
-            return new CommandResult(MESSAGE_SUCCESS +  messageEnd);
+            FriendIdContainsKeywordPredicate friendIdContainsKeywordPredicate =
+                    (FriendIdContainsKeywordPredicate) predicate;
+            model.updateFilteredFriendsList(friendIdContainsKeywordPredicate);
+            return new CommandResult(getMessageSuccess());
         }
         // ListCommand initialized with unknown predicate
         throw new CommandException(MESSAGE_UNKNOWN_PREDICATE);
+    }
+
+    /**
+     * Returns success message to display after running list
+     * @return String containing success message
+     */
+    public String getMessageSuccess() {
+        if (predicate instanceof FriendIdContainsKeywordPredicate) {
+            FriendIdContainsKeywordPredicate friendIdContainsKeywordPredicate =
+                    (FriendIdContainsKeywordPredicate) predicate;
+            String keyword = friendIdContainsKeywordPredicate.getKeyword();
+            String messageEnd = keyword.isEmpty()
+                    ? ""
+                    : " whose id contains the keyword: " + keyword;
+            return String.format(MESSAGE_SUCCESS_PREPEND, FRIEND_LIST) + messageEnd;
+        }
+        return String.format(MESSAGE_SUCCESS_PREPEND, FRIEND_LIST);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListCommand // instanceof handles nulls
+                && predicate.equals(((ListCommand) other).predicate)); // state check
     }
 }
