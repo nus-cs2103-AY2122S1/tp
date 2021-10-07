@@ -182,7 +182,7 @@ Format: `elist`
 
 Edits an existing member in Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/POSITION]…​`
+Format: `edit INDEX [/n NAME] [/p PHONE] [/e EMAIL] [/a ADDRESS] [/t POSITION]…​`
 
 * Can only be used in `plist [/e EVENT_ID]`.
 * Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. 
@@ -193,8 +193,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/POSITION]…​`
 * You can remove all the member’s positions by typing `t/` without specifying any positions after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
+*  `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 /n Betsy Crower /t` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
 
 ### Locating members by name: `find`
 
