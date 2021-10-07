@@ -15,8 +15,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -44,6 +44,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
+    public static final String MESSAGE_GROUP_NONEXISTENT =
+            "The group indicated does not exist. Please create it first.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -70,7 +72,8 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+
+        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor, model);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -85,18 +88,26 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit,
+                                               EditStudentDescriptor editStudentDescriptor,
+                                               Model model) throws CommandException {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
-        GroupName updatedGroupName = editStudentDescriptor.getGroupName().orElse(studentToEdit.getGroupName());
+        Group updatedGroup = editStudentDescriptor.getGroup().orElse(studentToEdit.getGroup());
 
-        // TODO zhi hao?
+        if (!model.hasGroup(updatedGroup)) {
+            throw new CommandException(MESSAGE_GROUP_NONEXISTENT);
+        }
 
-        return new Student(updatedName, updatedPhone, updatedEmail,
-                new Group(new GroupName("hi"), new Description("bye"))); // TODO zhi hao :)
+        // Retrieve existing group in model
+        GroupName groupName = updatedGroup.getGroupName();
+        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
+        Group retrievedUpdatedGroup = model.getFilteredGroupList().get(0);
+
+        return new Student(updatedName, updatedPhone, updatedEmail, retrievedUpdatedGroup);
     }
 
     @Override
@@ -125,7 +136,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private GroupName groupName;
+        private Group group;
 
         public EditStudentDescriptor() {}
 
@@ -136,7 +147,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setGroupName(toCopy.groupName);
+            setGroup(toCopy.group);
         }
 
         /**
@@ -170,12 +181,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setGroupName(GroupName groupName) {
-            this.groupName = groupName;
+        public void setGroup(Group group) {
+            this.group = group;
         }
 
-        public Optional<GroupName> getGroupName() {
-            return Optional.ofNullable(groupName);
+        public Optional<Group> getGroup() {
+            return Optional.ofNullable(group);
         }
 
 
@@ -197,7 +208,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getGroupName().equals(e.getGroupName());
+                    && getGroup().equals(e.getGroup());
         }
     }
 }

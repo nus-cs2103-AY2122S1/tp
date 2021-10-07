@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        groupName = source.getGroupName().toString();
+        groupName = source.getGroup().getGroupName().toString();
     }
 
     /**
@@ -80,10 +80,10 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 GroupName.class.getSimpleName()));
         }
-        // TODO: check if groupName is valid zhi hao :)
+
         final GroupName modelGroupName = new GroupName(groupName);
 
-        // TODO ZHI HAO :)
+        // TODO Cannot retrieve groups from model until group saving/loading is implemented
         return new Student(modelName, modelPhone, modelEmail, new Group(modelGroupName, new Description("peepee")));
     }
 }
