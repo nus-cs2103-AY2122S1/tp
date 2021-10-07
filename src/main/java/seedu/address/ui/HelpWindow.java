@@ -51,11 +51,11 @@ public class HelpWindow extends AnchorPane {
             + "To close this window, type \"close\"";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final Hashtable<String, commandDetail> commandTable = new Hashtable<>();
+    private static final Hashtable<String, commandDetails> commandTable = new Hashtable<>();
 
     private static Stage stage;
 
-    private interface commandDetail {
+    private interface commandDetails {
         void execute();
     }
 
@@ -106,44 +106,9 @@ public class HelpWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        textField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                handleUserInput(textField.getText());
-                textField.setText("");
-            }
-        });
-
-        command.setCellValueFactory(
-                new PropertyValueFactory<>("command")
-        );
-
-        description.setCellValueFactory(
-                new PropertyValueFactory<>("description")
-        );
-
-        Person samplePerson = new Person(
-                new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>()
-        );
-        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
-        descriptor.setName(samplePerson.getName());
-        descriptor.setPhone(samplePerson.getPhone());
-        descriptor.setEmail(samplePerson.getEmail());
-        descriptor.setAddress(samplePerson.getAddress());
-        descriptor.setTags(samplePerson.getTags());
-
-        ObservableList<Command> data = FXCollections.observableArrayList(
-                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(null),
-                new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
-                new ListCommand(), new ExitCommand(), new SortCommand(false),
-                new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
-                new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0))
-        );
-
-        tableView.setItems(data);
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-        copyButton.setOnMousePressed(event -> copyUrl());
+        setupTextField();
+        setupTable();
+        setupButton();
     }
 
     /**
@@ -189,6 +154,58 @@ public class HelpWindow extends AnchorPane {
      */
     public void focus() {
         stage.requestFocus();
+    }
+
+    private void setupButton() {
+        copyButton.setOnMousePressed(event -> copyUrl());
+    }
+
+    private void setupColumns() {
+        command.setCellValueFactory(
+                new PropertyValueFactory<>("command")
+        );
+
+        description.setCellValueFactory(
+                new PropertyValueFactory<>("description")
+        );
+    }
+
+    private void setupTextField() {
+        textField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleUserInput(textField.getText());
+                textField.setText("");
+            }
+        });
+    }
+
+    private void setupTable() {
+        setupColumns();
+        setupTableData();
+    }
+
+    private void setupTableData() {
+        Person samplePerson = new Person(
+                new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
+                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>()
+        );
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setName(samplePerson.getName());
+        descriptor.setPhone(samplePerson.getPhone());
+        descriptor.setEmail(samplePerson.getEmail());
+        descriptor.setAddress(samplePerson.getAddress());
+        descriptor.setTags(samplePerson.getTags());
+
+        ObservableList<Command> data = FXCollections.observableArrayList(
+                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(null),
+                new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
+                new ListCommand(), new ExitCommand(), new SortCommand(false),
+                new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
+                new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0))
+        );
+
+        tableView.setItems(data);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     /**
