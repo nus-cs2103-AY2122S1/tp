@@ -7,6 +7,7 @@
     "role": "Preschool Teacher",
     "employmentType": "Full time",
     "expectedSalary" : "7500",
+    "levelOfEducation": "PhD",
     "experience" : 0,
     "tagged": [ "friends" ]
   }, {
@@ -17,6 +18,7 @@
     "role": "Preschool Teacher",
     "employmentType": "Part time",
     "expectedSalary" : "7500",
+    "levelOfEducation": "PhD",
     "experience" : 1
   } ]
 }

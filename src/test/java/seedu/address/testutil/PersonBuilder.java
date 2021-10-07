@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -27,6 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ROLE = "Software Engineer";
     public static final String DEFAULT_EMPLOYMENT_TYPE = "Full time";
     public static final String DEFAULT_EXPECTED_SALARY = "3200";
+    public static final String DEFAULT_LEVEL_OF_EDUCATION = "PhD";
     public static final Integer DEFAULT_EXPERIENCE = 0;
 
     private Name name;
@@ -36,6 +38,7 @@ public class PersonBuilder {
     private Role role;
     private EmploymentType employmentType;
     private ExpectedSalary expectedSalary;
+    private LevelOfEducation levelOfEducation;
     private Experience experience;
     private Set<Tag> tags;
 
@@ -50,6 +53,7 @@ public class PersonBuilder {
         role = new Role(DEFAULT_ROLE);
         employmentType = new EmploymentType(DEFAULT_EMPLOYMENT_TYPE);
         expectedSalary = new ExpectedSalary(DEFAULT_EXPECTED_SALARY);
+        levelOfEducation = new LevelOfEducation(DEFAULT_LEVEL_OF_EDUCATION);
         experience = new Experience(DEFAULT_EXPERIENCE);
         tags = new HashSet<>();
     }
@@ -65,6 +69,7 @@ public class PersonBuilder {
         role = personToCopy.getRole();
         employmentType = personToCopy.getEmploymentType();
         expectedSalary = personToCopy.getExpectedSalary();
+        levelOfEducation = personToCopy.getLevelOfEducation();
         experience = personToCopy.getExperience();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -126,10 +131,18 @@ public class PersonBuilder {
     }
 
     /**
-     *  * Sets the {@code ExpectedSalary} of the {@code Person} that we are building.
+     * Sets the {@code ExpectedSalary} of the {@code Person} that we are building.
      */
     public PersonBuilder withExpectedSalary(String expectedSalary) {
         this.expectedSalary = new ExpectedSalary(expectedSalary);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Level of Education} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLevelOfEducation(String levelOfEducation) {
+        this.levelOfEducation = new LevelOfEducation(levelOfEducation);
         return this;
     }
 
@@ -141,8 +154,12 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Person} with the given information.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, role, employmentType, expectedSalary, experience, tags);
+        return new Person(name, phone, email, address, role,
+                employmentType, expectedSalary, levelOfEducation, experience, tags);
     }
 
 }

@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -136,6 +137,8 @@ public class ParserUtil {
      * Parses a {@code String expectedSalary} into an {@code ExpectedSalary}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param expectedSalary String to be parsed into an ExpectedSalary object.
+     * @return ExpectedSalary object
      * @throws ParseException if the given {@code expectedSalary} is invalid.
      */
     public static ExpectedSalary parseExpectedSalary(String expectedSalary) throws ParseException {
@@ -148,8 +151,27 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String levelOfEducation} into a {@code LevelOfEducation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param levelOfEducation String to be parsed into a LevelOfEducation object.
+     * @return LevelOfEducation object
+     * @throws ParseException if the given {@code LevelOfEducation} is invalid.
+     */
+    public static LevelOfEducation parseLevelOfEducation(String levelOfEducation) throws ParseException {
+        requireNonNull(levelOfEducation);
+        String trimmedLevelOfEducation = levelOfEducation.trim();
+        if (!LevelOfEducation.isValidLevelOfEducation(trimmedLevelOfEducation)) {
+            throw new ParseException(LevelOfEducation.MESSAGE_CONSTRAINTS);
+        }
+        return new LevelOfEducation(trimmedLevelOfEducation);
+    }
+
+    /**
      * Parses a {@code Integer experience} into an {@code Experience}.
      *
+     * @param experience String to be parsed into an Experience object.
+     * @return Experience object
      * @throws ParseException if the given {@code experience} is invalid.
      */
     public static Experience parseExperience(String experience) throws ParseException {

@@ -10,6 +10,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -43,6 +44,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRole(person.getRole());
         descriptor.setEmploymentType(person.getEmploymentType());
         descriptor.setExpectedSalary(person.getExpectedSalary());
+        descriptor.setLevelOfEducation(person.getLevelOfEducation());
         descriptor.setExperience(person.getExperience());
         descriptor.setTags(person.getTags());
     }
@@ -100,6 +102,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withExpectedSalary(String expectedSalary) {
         descriptor.setExpectedSalary(new ExpectedSalary(expectedSalary));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Level of Education} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLevelOfEducation(String levelOfEducation) {
+        descriptor.setLevelOfEducation(new LevelOfEducation(levelOfEducation));
         return this;
     }
 

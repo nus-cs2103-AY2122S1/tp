@@ -16,10 +16,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMPLOYMENT_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPECTED_SALARY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPERIENCE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEVEL_OF_EDUCATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LEVEL_OF_EDUCATION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.LEVEL_OF_EDUCATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
@@ -37,6 +40,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -61,6 +66,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -112,9 +118,12 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
         assertParseFailure(parser, "1" + INVALID_EMPLOYMENT_TYPE_DESC,
                 EmploymentType.MESSAGE_CONSTRAINTS); // invalid employment type
-        assertParseFailure(parser,
-                "1" + INVALID_EXPECTED_SALARY_DESC, ExpectedSalary.MESSAGE_CONSTRAINTS); // invalid expected salary
-        assertParseFailure(parser, "1" + INVALID_EXPERIENCE_DESC, Experience.MESSAGE_CONSTRAINTS); // invalid experience
+        assertParseFailure(parser, "1" + INVALID_EXPECTED_SALARY_DESC,
+                ExpectedSalary.MESSAGE_CONSTRAINTS); // invalid expected salary
+        assertParseFailure(parser, "1" + INVALID_LEVEL_OF_EDUCATION_DESC,
+                LevelOfEducation.MESSAGE_CONSTRAINTS); // invalid level of education
+        assertParseFailure(parser, "1" + INVALID_EXPERIENCE_DESC,
+                Experience.MESSAGE_CONSTRAINTS); // invalid experience
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -139,14 +148,16 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ROLE_DESC_AMY
-                + EMPLOYMENT_TYPE_DESC_AMY + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY + TAG_DESC_FRIEND;
+                + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ROLE_DESC_AMY
+                + EMPLOYMENT_TYPE_DESC_AMY + EXPECTED_SALARY_DESC_AMY
+                + LEVEL_OF_EDUCATION_DESC_AMY + EXPERIENCE_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withRole(VALID_ROLE_AMY)
                 .withEmploymentType(VALID_EMPLOYMENT_TYPE_AMY)
                 .withExpectedSalary(VALID_EXPECTED_SALARY_AMY)
+                .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
                 .withExperience(VALID_EXPERIENCE_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
@@ -212,6 +223,12 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // level of education
+        userInput = targetIndex.getOneBased() + LEVEL_OF_EDUCATION_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // experience
         userInput = targetIndex.getOneBased() + EXPERIENCE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withExperience(VALID_EXPERIENCE_AMY).build();
@@ -232,13 +249,15 @@ public class EditCommandParserTest {
                 + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB
                 + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
-                + EXPECTED_SALARY_DESC_BOB + EXPERIENCE_DESC_BOB + TAG_DESC_HUSBAND;
+                + EXPECTED_SALARY_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB
+                + EXPERIENCE_DESC_BOB + TAG_DESC_HUSBAND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withRole(VALID_ROLE_BOB)
                 .withEmploymentType(VALID_EMPLOYMENT_TYPE_BOB)
                 .withExpectedSalary(VALID_EXPECTED_SALARY_BOB)
+                .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
                 .withExperience(VALID_EXPERIENCE_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
@@ -258,9 +277,10 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
-                + PHONE_DESC_BOB;
+                + PHONE_DESC_BOB + ROLE_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).build();
+                .withAddress(VALID_ADDRESS_BOB).withRole(VALID_ROLE_BOB)
+                .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

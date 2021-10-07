@@ -7,7 +7,8 @@
     "role": "Software Engineer",
     "employmentType": "Full time",
     "expectedSalary" : "3500",
-    "experience": "1",
+    "levelOfEducation": "PhD",
+    "experience": "1"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
@@ -16,6 +17,7 @@
     "role": "Software Engineer",
     "employmentType": "Full time",
     "expectedSalary" : "3500",
-    "experience": "1",
+    "levelOfEducation": "PhD",
+    "experience": "1"
   } ]
 }

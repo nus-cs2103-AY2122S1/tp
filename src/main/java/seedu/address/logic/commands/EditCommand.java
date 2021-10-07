@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -28,6 +29,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -52,6 +54,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_EMPLOYMENT_TYPE + "EMPLOYMENT TYPE] "
             + "[" + PREFIX_EXPECTED_SALARY + "EXPECTED_SALARY]"
+            + "[" + PREFIX_LEVEL_OF_EDUCATION + "LEVEL OF EDUCATION] "
             + "[" + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -114,11 +117,14 @@ public class EditCommand extends Command {
                 .getEmploymentType().orElse(personToEdit.getEmploymentType());
         ExpectedSalary updatedExpectedSalary = editPersonDescriptor.getExpectedSalary()
                 .orElse(personToEdit.getExpectedSalary());
+        LevelOfEducation updatedLevelOfEducation = editPersonDescriptor
+                .getLevelOfEducation().orElse(personToEdit.getLevelOfEducation());
         Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRole, updatedEmploymentType, updatedExpectedSalary, updatedExperience, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedRole, updatedEmploymentType, updatedExpectedSalary,
+                updatedLevelOfEducation, updatedExperience, updatedTags);
     }
 
     @Override
@@ -151,6 +157,7 @@ public class EditCommand extends Command {
         private Role role;
         private EmploymentType employmentType;
         private ExpectedSalary expectedSalary;
+        private LevelOfEducation levelOfEducation;
         private Experience experience;
         private Set<Tag> tags;
 
@@ -168,6 +175,7 @@ public class EditCommand extends Command {
             setRole(toCopy.role);
             setEmploymentType(toCopy.employmentType);
             setExpectedSalary(toCopy.expectedSalary);
+            setLevelOfEducation(toCopy.levelOfEducation);
             setExperience(toCopy.experience);
             setTags(toCopy.tags);
         }
@@ -177,7 +185,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address,
-                    role, employmentType, expectedSalary, experience, tags);
+                    role, employmentType, expectedSalary, levelOfEducation, experience, tags);
         }
 
         public void setName(Name name) {
@@ -236,6 +244,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(expectedSalary);
         }
 
+        public void setLevelOfEducation(LevelOfEducation levelOfEducation) {
+            this.levelOfEducation = levelOfEducation;
+        }
+
+        public Optional<LevelOfEducation> getLevelOfEducation() {
+            return Optional.ofNullable(levelOfEducation);
+        }
+
         public void setExperience(Experience experience) {
             this.experience = experience;
         }
@@ -283,6 +299,7 @@ public class EditCommand extends Command {
                     && getRole().equals(e.getRole())
                     && getEmploymentType().equals(e.getEmploymentType())
                     && getExpectedSalary().equals(e.getExpectedSalary())
+                    && getLevelOfEducation().equals(e.getLevelOfEducation())
                     && getExperience().equals(e.getExperience())
                     && getTags().equals(e.getTags());
         }

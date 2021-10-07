@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -22,6 +23,7 @@ import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
+import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -44,9 +46,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = " " + args.trim();
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                        PREFIX_EXPECTED_SALARY, PREFIX_EXPERIENCE, PREFIX_TAG);
+                ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
+                        PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
+                        PREFIX_EXPERIENCE, PREFIX_TAG);
 
         // If find command has no prefix, it is invalid
         if (argMultimap.isEmpty()) {
@@ -104,7 +107,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }
             }
 
-
             if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_ROLE).get();
                 String trimmedArg = arg.trim();
@@ -132,6 +134,15 @@ public class FindCommandParser implements Parser<FindCommand> {
                 }
             }
 
+            if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
+                String arg = argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get();
+                String trimmedArg = arg.trim();
+                if (!trimmedArg.isEmpty()) {
+                    String[] keywords = splitByWhiteSpace(trimmedArg);
+                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(Arrays.asList(keywords)));
+                }
+            }
+
             if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_EXPERIENCE).get();
                 String trimmedArg = arg.trim();
@@ -140,7 +151,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                     predicateList.add(new ExperienceContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
-
 
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_TAG).get();

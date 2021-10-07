@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -37,7 +38,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                         PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE, PREFIX_EXPERIENCE, PREFIX_EXPECTED_SALARY, PREFIX_TAG);
+                        PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE, PREFIX_EXPECTED_SALARY,
+                        PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG);
 
         Index index;
 
@@ -73,6 +75,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
             editPersonDescriptor.setExpectedSalary(ParserUtil.parseExpectedSalary(argMultimap
                     .getValue(PREFIX_EXPECTED_SALARY).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
+            editPersonDescriptor.setLevelOfEducation(
+                    ParserUtil.parseLevelOfEducation(argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get()));
         }
 
         if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {

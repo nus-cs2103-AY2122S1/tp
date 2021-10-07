@@ -8,6 +8,7 @@
     "role" : "Preschool Teacher",
     "employmentType": "Full time",
     "expectedSalary" : "2500",
+    "levelOfEducation" : "PhD",
     "experience" : 0,
     "tagged" : [ "friends" ]
   }, {
@@ -18,6 +19,7 @@
     "role" : "Doctor",
     "employmentType": "Part time",
     "expectedSalary" : "2700",
+    "levelOfEducation" : "Masters",
     "experience" : 1,
     "tagged" : [ "owesMoney", "friends" ]
   }, {
@@ -28,6 +30,7 @@
     "role" : "Electrical Engineer",
     "employmentType": "Temporary",
     "expectedSalary" : "5500",
+    "levelOfEducation" : "Elementary",
     "experience" : 2,
     "tagged" : [ ]
   }, {
@@ -38,6 +41,7 @@
     "role" : "Sales Assistant",
     "employmentType": "Internship",
     "expectedSalary" : "3500",
+    "levelOfEducation" : "Middle School",
     "experience" : 3,
     "tagged" : [ "friends" ]
   }, {
@@ -48,6 +52,7 @@
     "role" : "Toilet Cleaner",
     "employmentType": "Full time",
     "expectedSalary" : "5700",
+    "levelOfEducation" : "Bachelors",
     "experience" : 4,
     "tagged" : [ ]
   }, {
@@ -58,6 +63,7 @@
     "role" : "NTUC Cashier",
     "employmentType": "Part time",
     "expectedSalary" : "1900",
+    "levelOfEducation" : "High School",
     "experience" : 5,
     "tagged" : [ ]
   }, {
@@ -68,6 +74,7 @@
     "role" : "Waiter",
     "employmentType": "Internship",
     "expectedSalary" : "900",
+    "levelOfEducation" : "University",
     "experience" : 6,
     "tagged" : [ ]
   } ]
