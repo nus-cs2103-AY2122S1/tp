@@ -8,14 +8,14 @@ import seedu.address.model.client.Client;
 import seedu.address.model.commons.Name;
 
 public class AddClientCommand extends Command {
-
     public static final String COMMAND_WORD = "add -c";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + "NAME \n"
-            + "Example: " + COMMAND_WORD + " "
-            + "John Doe ";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Adds a client to the address book. "
+                    + "Parameters: "
+                    + "NAME \n"
+                    + "Example: " + COMMAND_WORD + " "
+                    + "John Doe ";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in Sellah";
