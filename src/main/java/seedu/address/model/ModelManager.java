@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.Person;
 
 /**
@@ -87,8 +88,8 @@ public class ModelManager implements Model {
      * Sorts the address book data in alphabetical order.
      */
     @Override
-    public void sortAddressBook() {
-        addressBook.sortAddressBook();
+    public void sortAddressBook(SortCommandParser.SortableField sf) {
+        addressBook.sortAddressBook(sf);
     }
 
     @Override

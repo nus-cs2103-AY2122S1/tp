@@ -3,12 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -139,12 +142,62 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Sorts the person in alphabetical order of their name.
      */
-    public void sortList() {
-        internalList.sort(new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                return o1.getName().fullName.toLowerCase().compareTo(o2.getName().fullName.toLowerCase());
-            }
-        });
+    public void sortList(SortCommandParser.SortableField sf) {
+        switch (sf) {
+        case NAME:
+            internalList.sort(new Comparator<Person>() {
+                @Override
+                public int compare(Person o1, Person o2) {
+                    return o1.getName().compareTo(o2.getName());
+                }
+            });
+            break;
+
+        case MODULE_CODES:
+            internalList.sort(new Comparator<Person>() {
+                @Override
+                public int compare(Person o1, Person o2) {
+                    List<ModuleCode> o1List = new ArrayList<>(o1.getModuleCodes());
+                    List<ModuleCode> o2List = new ArrayList<>(o2.getModuleCodes());
+
+                    Comparator<ModuleCode> comparator = new Comparator<ModuleCode>() {
+                        @Override
+                        public int compare(ModuleCode code1, ModuleCode code2) {
+                            return code1.compareTo(code2);
+                        }
+                    };
+                    Collections.sort(o1List, comparator);
+                    Collections.sort(o2List, comparator);
+
+                    for (int i = 0; i < o1List.size(); i++) {
+                        for (int j = i; j < o2List.size(); j++) {
+                            ModuleCode c1 = o1List.get(i);
+                            ModuleCode c2 = o2List.get(j);
+
+                            if (c1.compareTo(c2) < 0) {
+                                return -1;
+                            } else if (c1.compareTo(c2) > 0) {
+                                return 1;
+                            } else if (i == o1List.size() - 1) {
+                                // Will only reach here if c1.compareTo(c2) == 0
+                                // Last item in o1List
+                                if (o1List.size() == o2List.size()) {
+                                    // Both list is same
+                                    return o1.getName().compareTo(o2.getName());
+                                } else {
+                                    // o2List is longer than o1List
+                                    // if o2List is shorter than o1List, won't enter the second loop
+                                    return -1;
+                                }
+                            }
+                        }
+                    }
+                    // Will only reach here if o2List is shorter than o1List
+                    // and o1List contains all modules inside o2List
+                    return 1;
+                }
+            });
+            break;
+        }
     }
 }

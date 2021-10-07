@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -119,7 +120,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortAddressBook() {
+        public void sortAddressBook(SortCommandParser.SortableField field) {
             throw new AssertionError("This method should not be called.");
         }
 

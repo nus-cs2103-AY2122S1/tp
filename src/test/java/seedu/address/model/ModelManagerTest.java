@@ -144,7 +144,7 @@ public class ModelManagerTest {
         ModelManager expectedModelManager = new ModelManager();
         expectedModelManager.setAddressBook(expectedAddressBook);
 
-        modelManager.sortAddressBook();
+        modelManager.sortAddressBook(field);
         assertEquals(expectedModelManager, modelManager);
     }
 }
