@@ -6,8 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTERNATIONAL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICIA;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.JOHN;
+import static seedu.address.testutil.TypicalPersons.NOAH;
+import static seedu.address.testutil.TypicalPersons.OLIVIA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -80,6 +87,44 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void sortAddressBookByName_success() {
+        List<Person> persons = new ArrayList<>();
+        persons.add(BOB);
+        persons.add(ALICE);
+        addressBook.setPersons(persons);
+
+        AddressBook expectedAddressBook = new AddressBook();
+        List<Person> expectedPersons = new ArrayList<>();
+        expectedPersons.add(ALICE);
+        expectedPersons.add(BOB);
+        expectedAddressBook.setPersons(expectedPersons);
+
+        addressBook.sortAddressBook(SortCommandParser.SortableField.NAME);
+        assertEquals(expectedAddressBook, addressBook);
+    }
+
+    @Test
+    public void sortAddressBookByModule_success() {
+        List<Person> persons = new ArrayList<>();
+        persons.add(JOHN);
+        persons.add(OLIVIA);
+        persons.add(ALICIA);
+        persons.add(NOAH);
+        addressBook.setPersons(persons);
+
+        AddressBook expectedAddressBook = new AddressBook();
+        List<Person> expectedPersons = new ArrayList<>();
+        expectedPersons.add(NOAH);
+        expectedPersons.add(ALICIA);
+        expectedPersons.add(OLIVIA);
+        expectedPersons.add(JOHN);
+        expectedAddressBook.setPersons(expectedPersons);
+
+        addressBook.sortAddressBook(SortCommandParser.SortableField.MODULE_CODES);
+        assertEquals(expectedAddressBook, addressBook);
     }
 
     /**

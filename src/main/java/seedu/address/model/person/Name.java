@@ -56,4 +56,7 @@ public class Name {
         return fullName.hashCode();
     }
 
+    public int compareTo(Name n) {
+        return this.fullName.toLowerCase().compareTo(n.fullName.toLowerCase());
+    }
 }

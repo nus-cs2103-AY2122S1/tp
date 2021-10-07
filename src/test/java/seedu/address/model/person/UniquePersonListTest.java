@@ -6,7 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTERNATIONAL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICIA;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.JOHN;
+import static seedu.address.testutil.TypicalPersons.NOAH;
+import static seedu.address.testutil.TypicalPersons.OLIVIA;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +18,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -165,5 +170,35 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void sortListByName_success() {
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(ALICE);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(BOB);
+
+        uniquePersonList.sortList(SortCommandParser.SortableField.NAME);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void sortListByModule_success() {
+        uniquePersonList.add(JOHN);
+        uniquePersonList.add(OLIVIA);
+        uniquePersonList.add(ALICIA);
+        uniquePersonList.add(NOAH);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(NOAH);
+        expectedUniquePersonList.add(ALICIA);
+        expectedUniquePersonList.add(OLIVIA);
+        expectedUniquePersonList.add(JOHN);
+
+        uniquePersonList.sortList(SortCommandParser.SortableField.MODULE_CODES);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 }
