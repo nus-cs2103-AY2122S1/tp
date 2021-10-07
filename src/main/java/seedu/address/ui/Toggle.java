@@ -20,5 +20,4 @@ public class Toggle extends UiPart<Region> {
     public Toggle() {
         super(FXML);
     }
-    
 }
