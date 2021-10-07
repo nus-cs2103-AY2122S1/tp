@@ -113,7 +113,7 @@ Example:
 
 ![import window](images/importWindow.png)
 
-- Select Contacts.csv file
+- Select `importTemplate.csv` file
 - Click open to import contacts
 
 Note:  
