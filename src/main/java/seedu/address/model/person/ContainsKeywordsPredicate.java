@@ -13,7 +13,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
     private final PersonField field;
 
     public enum PersonField {
-        NAME, PHONE, EMAIL, ADDRESS
+        NAME, PHONE, EMAIL, ADDRESS, TAG
     }
 
     /**
@@ -50,6 +50,8 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
             return person.getEmail().value;
         case ADDRESS:
             return person.getAddress().value;
+        case TAG:
+            return person.getTags().stream().map(t -> t.tagName).reduce("", (x, y) -> x + " " + y);
         default:
             return null;
         }

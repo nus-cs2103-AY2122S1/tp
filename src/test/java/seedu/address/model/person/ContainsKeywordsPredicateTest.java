@@ -63,6 +63,21 @@ public class ContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void test_tagContainsKeywords_returnsTrue() {
+        // Only one matching tag
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(Arrays.asList("Friend"), PersonField.TAG);
+        assertTrue(predicate.test(new PersonBuilder().withTags("Friend").build()));
+
+        // Only match one of the tags of person
+        predicate = new ContainsKeywordsPredicate(Arrays.asList("Friend"), PersonField.TAG);
+        assertTrue(predicate.test(new PersonBuilder().withTags("Friend", "Work").build()));
+
+        // Only match one of the given tags
+        predicate = new ContainsKeywordsPredicate(Arrays.asList("Friend", "Work"), PersonField.TAG);
+        assertTrue(predicate.test(new PersonBuilder().withTags("Friend").build()));
+    }
+
+    @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(Collections.emptyList(), PersonField.NAME);
@@ -77,5 +92,18 @@ public class ContainsKeywordsPredicateTest {
                 PersonField.NAME);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345").withEmail("alice@email.com")
                 .withAddress("Main Street").build()));
+
+        // Keywords match do not match tag
+        predicate = new ContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street", "friend"),
+                PersonField.NAME);
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345").withEmail("alice@email.com")
+                .withAddress("Main Street").withTags("a", "b").build()));
+    }
+
+    @Test
+    public void test_tagContainsKeywords_returnsFalse() {
+        // Do not match
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(Arrays.asList("Friend"), PersonField.TAG);
+        assertFalse(predicate.test(new PersonBuilder().withTags("Friends").build()));
     }
 }
