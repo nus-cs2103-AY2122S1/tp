@@ -60,9 +60,6 @@ public class TuitionClass {
         if (otherTuition == this) {
             return true;
         }
-        System.out.println(otherTuition.getName() + ": " + otherTuition.getTimeslot() + "  " + getName() + ": " + getTimeslot());
-        System.out.println(otherTuition.getTimeslot().equals(timeslot));
-//        return otherTuition.getTimeslot().toString().equals(getTimeslot().toString());
         return otherTuition.getTimeslot().equals(getTimeslot());
     }
 

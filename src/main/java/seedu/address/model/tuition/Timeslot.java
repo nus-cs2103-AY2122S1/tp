@@ -27,8 +27,9 @@ public class Timeslot {
         String[] splitTime = this.time.split(" ");
         String weekDay = splitTime[0];
         String timeRange = splitTime[1];
-        if (weekDay.equals("Mon") || weekDay.equals("Tue") || weekDay.equals("Wed") || weekDay.equals("Thu") ||
-                weekDay.equals("Fri") || weekDay.equals("Sat") || weekDay.equals("Sun")) {
+        if (weekDay.equals("Mon") || weekDay.equals("Tue") || weekDay.equals("Wed")
+                || weekDay.equals("Thu") || weekDay.equals("Fri")
+                || weekDay.equals("Sat") || weekDay.equals("Sun")) {
 
             return isTimeFormatCorrect(timeRange);
         }
@@ -66,6 +67,12 @@ public class Timeslot {
         return time;
     }
 
+
+    /**
+     * compare two time slot to detect any conflict
+     * @param otherTime
+     * @return
+     */
     public boolean compareTime(String otherTime) {
         //exactly the same
         if (time.equals(otherTime)) {
