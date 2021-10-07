@@ -15,23 +15,23 @@ public class SortCommand extends Command {
             + "by the alphabetical order of their name.\n"
             + "Parameters: [-r]\n"
             + "Example: " + COMMAND_WORD
-            + "-r";
+            + " -r";
 
     private String message_success = "Sorted all persons";
 
-    private final boolean reverseOrder;
+    private final boolean isReverseOrder;
 
-    public SortCommand(boolean reverseOrder) {
-        this.reverseOrder = reverseOrder;
+    public SortCommand(boolean isReverseOrder) {
+        this.isReverseOrder = isReverseOrder;
     }
 
     @Override
     public CommandResult execute(Model model) {
-        if (reverseOrder) {
+        if (isReverseOrder) {
             message_success = message_success + " in reverse order";
         }
         requireNonNull(model);
-        model.updateSortedPersonList(reverseOrder);
+        model.updateSortedPersonList(isReverseOrder);
         return new CommandResult(message_success);
     }
 
