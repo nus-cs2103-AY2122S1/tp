@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StudentWindow studentWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        studentWindow = new StudentWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -152,6 +155,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the help window or focuses on it if it's already opened.
+     *
+     * @param student The student to display information about.
+     */
+    @FXML
+    public void handleViewStudent(Student student) {
+        if (!studentWindow.isShowing()) {
+            studentWindow.show(student);
+        } else {
+            studentWindow.focus();
+        }
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -180,6 +197,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowStudent()) {
+                handleViewStudent(commandResult.getStudent());
             }
 
             if (commandResult.isExit()) {
