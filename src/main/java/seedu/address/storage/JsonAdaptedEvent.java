@@ -105,12 +105,8 @@ public class JsonAdaptedEvent {
             throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);
         }
 
-        Event event = new Event(eventName, eventDate, eventTime);
-        event.getParticipants().addAll(participants);
-        if (this.isDone.equals("Completed")) {
-            event.markAsDone();
-        }
+        boolean isDone = this.isDone.equals("Completed");
 
-        return event;
+        return new Event(eventName, eventDate, eventTime, isDone, participants);
     }
 }

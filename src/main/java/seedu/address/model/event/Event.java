@@ -46,6 +46,30 @@ public class Event implements Comparable<Event> {
         this.isDone = isDone;
     }
 
+
+    /**
+     * This is an overloaded constructor of an Event.
+     *
+     * @param name of the Event.
+     * @param date at which the Event occurs.
+     * @param time of the Event.
+     * @param isDone A boolean to indicate is the event is done.
+     * @param participants participants to be added if not found
+     */
+    public Event(EventName name, EventDate date, EventTime time, boolean isDone, List<Participant> participants) {
+        this.eventName = name;
+        this.eventDate = date;
+        this.eventTime = time;
+        this.isDone = isDone;
+        if (participants != null) {
+            participants.forEach(p -> {
+                if (!this.participants.contains(p)) {
+                    this.participants.add(p);
+                }
+            });
+        }
+    }
+
     /**
      * This is an overloaded constructor of Event.
      *
@@ -82,7 +106,7 @@ public class Event implements Comparable<Event> {
      * @return An Event that is marked done.
      */
     public Event markAsDone() {
-        return new Event(this.eventName, this.eventDate, this.eventTime, true);
+        return new Event(this.eventName, this.eventDate, this.eventTime, true, this.participants);
     }
 
     /**
