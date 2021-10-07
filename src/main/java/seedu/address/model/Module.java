@@ -8,15 +8,17 @@ import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
-
-    private List<Task> tasks;
+public class Module implements ReadOnlyModule {
+    private static final String MODULE_NAME = "CS2103";
+    private final String name;
     private final UniqueStudentList students;
+    private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,15 +29,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
-        tasks = new List<Task>();
+        tasks = new UniqueTaskList();
     }
 
-    public AddressBook() {}
+    public Module() {
+        this.name = MODULE_NAME;
+    }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates a Module using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Module(ReadOnlyModule toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,21 +54,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.students.setStudents(students);
     }
 
-    /**
-     * Replaces the contents of the student list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public String getName() {
+        return this.name;
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code persons} must not contain duplicate tasks.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
-        requireNonNull(newData);
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
+    }
 
+    /**
+     * Resets the existing data of this {@code Module} with {@code newData}.
+     */
+    public void resetData(ReadOnlyModule newData) {
+        requireNonNull(newData);
         setStudents(newData.getStudentList());
+        setTasks(newData.getTaskList());
     }
 
     //// student-level operations
@@ -127,7 +135,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code Module}.
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
@@ -162,9 +170,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students)
-                && tasks.equals(((AddressBook) other).tasks));
+                || (other instanceof Module // instanceof handles nulls
+                && students.equals(((Module) other).students)
+                && tasks.equals(((Module) other).tasks));
     }
 
     @Override
