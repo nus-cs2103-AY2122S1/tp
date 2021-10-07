@@ -51,6 +51,16 @@ public class PersonTest {
     }
 
     @Test
+    public void hasVisit() {
+        // Alice has a non-empty visit -> returns true
+        assertTrue(ALICE.hasVisit());
+
+        // new person has an empty visit -> returns false
+        Person noVisitAlice = new PersonBuilder(ALICE).withVisit("").build();
+        assertFalse(noVisitAlice.hasVisit());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();

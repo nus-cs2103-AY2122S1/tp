@@ -27,5 +27,12 @@ public class VisitTest {
         // different visit -> returns false
         Visit differentVisit = new Visit("2021-10-01");
         assertFalse(visit.equals(differentVisit));
+
+        // non-empty visit -> returns true
+        assertTrue(visit.hasVisit());
+
+        // empty visit -> returns false
+        Visit emptyVisit = new Visit("");
+        assertFalse(emptyVisit.hasVisit());
     }
 }

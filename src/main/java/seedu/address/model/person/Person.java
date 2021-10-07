@@ -88,6 +88,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the person has a scheduled visit.
+     */
+    public boolean hasVisit() {
+        return (this.visit.hasVisit());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
