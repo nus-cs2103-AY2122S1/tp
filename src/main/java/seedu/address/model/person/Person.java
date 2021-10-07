@@ -24,18 +24,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Mod> mods = new HashSet<>();
+    private final boolean isMyProfile;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId id, Phone phone, Email email, Address address, Set<Mod> mods) {
-        requireAllNonNull(name, id, phone, email, address, mods);
+    public Person(Name name, StudentId id, Phone phone, Email email,
+                  Address address, Set<Mod> mods, boolean isMyProfile) {
+        requireAllNonNull(name, id, phone, email, address, mods, isMyProfile);
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.mods.addAll(mods);
+        this.isMyProfile = isMyProfile;
     }
 
     public Name getName() {
@@ -64,6 +67,10 @@ public class Person {
      */
     public Set<Mod> getMods() {
         return Collections.unmodifiableSet(mods);
+    }
+
+    public boolean getIsMyProfile() {
+        return isMyProfile;
     }
 
     /**

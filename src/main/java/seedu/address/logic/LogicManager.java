@@ -9,6 +9,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CreateCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,11 +19,16 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
+
 /**
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+    public static final String PROFILE_NOT_CREATED_ERROR_MESSAGE =
+            "Please create your profile using the create command first!";
+    public static final String PROFILE_CREATED_ERROR_MESSAGE =
+            "Profile already created! Use the edit command to edit it!";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -41,8 +48,15 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        if (!hasCreatedProfile() && !commandText.toLowerCase().startsWith("create")) {
+            throw new CommandException(PROFILE_NOT_CREATED_ERROR_MESSAGE + "\n" + CreateCommand.MESSAGE_USAGE);
+        } else if (hasCreatedProfile() && commandText.toLowerCase().startsWith("create")) {
+            throw new CommandException(PROFILE_CREATED_ERROR_MESSAGE + "\n" + EditCommand.MESSAGE_USAGE);
+        }
+
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+
         commandResult = command.execute(model);
 
         try {
@@ -77,5 +91,9 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    public boolean hasCreatedProfile() {
+        return !getFilteredPersonList().filtered(Person::getIsMyProfile).isEmpty();
     }
 }
