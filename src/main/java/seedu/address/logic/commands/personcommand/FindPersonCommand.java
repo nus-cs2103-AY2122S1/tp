@@ -70,7 +70,7 @@ public class FindPersonCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindPersonCommand // instanceof handles nulls
-                && predicate.equals(((FindPersonCommand) other).predicate)); // state check
+                && findPersonDescriptor.equals(((FindPersonCommand) other).findPersonDescriptor)); // state check
     }
 
     /**
@@ -143,23 +143,18 @@ public class FindPersonCommand extends Command {
         public Predicate<Person> combinePredicates() {
             Predicate<Person> result = x -> true;
             if (namePredicate != null) {
-                System.out.println("Add name predicate");
                 result = result.and(namePredicate);
             }
             if (phonePredicate != null) {
-                System.out.println("Add phone predicate");
                 result = result.and(phonePredicate);
             }
             if (addressPredicate != null) {
-                System.out.println("Add addr predicate");
                 result = result.and(addressPredicate);
             }
             if (emailPredicate != null) {
-                System.out.println("Add email predicate");
                 result = result.and(emailPredicate);
             }
             if (tagPredicate != null) {
-                System.out.println("Add tag predicate");
                 result = result.and(tagPredicate);
             }
             return result;
