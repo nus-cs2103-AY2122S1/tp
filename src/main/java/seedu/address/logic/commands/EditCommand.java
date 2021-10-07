@@ -133,7 +133,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private java.util.Set<seedu.address.model.tag.Tag> tags;
+        private Set<Tag> tags;
         private Birthday birthday;
 
         public EditPersonDescriptor() {}
