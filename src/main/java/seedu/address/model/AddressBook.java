@@ -56,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code tutorialClasses} must not contain duplicate students.
      */
     public void setTutorialClasses(List<TutorialClass> tutorialClasses) {
-        this.tutorialClasses.setTutorialClass(tutorialClasses);
+        this.tutorialClasses.setTutorialClasses(tutorialClasses);
     }
 
     /**
