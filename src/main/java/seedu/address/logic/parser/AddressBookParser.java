@@ -6,8 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
+import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.Command;
@@ -17,8 +17,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
+import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -43,49 +43,47 @@ public class AddressBookParser {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+        case AddMemberCommand.COMMAND_WORD:
+            return new AddMemberCommandParser().parse(arguments);
 
-            case AddMemberCommand.COMMAND_WORD:
-                return new AddMemberCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+        case ClearMembersCommand.COMMAND_WORD:
+            return new ClearMembersCommand();
 
-            case ClearMembersCommand.COMMAND_WORD:
-                return new ClearMembersCommand();
+        case ClearFacilitiesCommand.COMMAND_WORD:
+            return new ClearFacilitiesCommand();
 
-            case ClearFacilitiesCommand.COMMAND_WORD:
-                return new ClearFacilitiesCommand();
+        case FindMemberCommand.COMMAND_WORD:
+            return new FindMemberCommandParser().parse(arguments);
 
-            case FindMemberCommand.COMMAND_WORD:
-                return new FindMemberCommandParser().parse(arguments);
+        case ListMemberCommand.COMMAND_WORD:
+            return new ListMemberCommand();
 
-            case ListMemberCommand.COMMAND_WORD:
-                return new ListMemberCommand();
+        case ListFacilityCommand.COMMAND_WORD:
+            return new ListFacilityCommand();
 
-            case ListFacilityCommand.COMMAND_WORD:
-                return new ListFacilityCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case FindFacilityCommand.COMMAND_WORD:
+            return new FindFacilityCommandParser().parse(arguments);
 
-            case FindFacilityCommand.COMMAND_WORD:
-                return new FindFacilityCommandParser().parse(arguments);
+        case AddFacilityCommand.COMMAND_WORD:
+            return new AddFacilityCommandParser().parse(arguments);
 
-            case AddFacilityCommand.COMMAND_WORD:
-                return new AddFacilityCommandParser().parse(arguments);
-
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 }
