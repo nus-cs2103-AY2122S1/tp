@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.commons.util.StringUtil;
 import seedu.anilist.logic.parser.exceptions.ParseException;
+import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.tag.Tag;
 
@@ -72,5 +73,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String episodeNumber} into a {@code Episode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code episodeNumber} is invalid.
+     */
+    public static Episode parseEpisode(String episodeNumber) throws ParseException {
+        requireNonNull(episodeNumber);
+        String trimmedEpisode = episodeNumber.trim();
+        if (!Episode.isValidEpisode(trimmedEpisode)) {
+            throw new ParseException(Episode.MESSAGE_CONSTRAINTS);
+        }
+        return new Episode(trimmedEpisode);
     }
 }

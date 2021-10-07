@@ -32,6 +32,9 @@ public class Anime {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Anime(Name name, Episode episode, Set<Tag> tags) {
         requireAllNonNull(name, tags, episode);
         this.name = name;
@@ -39,13 +42,13 @@ public class Anime {
         this.tags.addAll(tags);
     }
 
-
-
     public Name getName() {
         return name;
     }
 
-    public Episode getEpisode() { return episode; }
+    public Episode getEpisode() {
+        return episode;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
