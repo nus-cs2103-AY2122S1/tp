@@ -17,7 +17,7 @@ public class Schedule {
     private static final String VALIDATION_REGEX = "[\\p{Alnum} ]" + TIME_REGEX
             + "[ \\p{Alnum} ]" + TIME_REGEX;
 
-    private final String schedule;
+    public final String schedule;
 
     /**
      * Constructor for Schedule class.
