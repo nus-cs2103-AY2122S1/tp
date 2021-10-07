@@ -31,8 +31,8 @@ public class UntagCommand extends EditCommand {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Removed tag from Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed tag from Person: %1$s";
+    public static final String MESSAGE_NOT_REMOVED = "At least tag to remove must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     /**
@@ -61,7 +61,7 @@ public class UntagCommand extends EditCommand {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, editedPerson));
     }
 
     /**
