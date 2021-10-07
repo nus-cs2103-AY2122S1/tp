@@ -53,8 +53,8 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -75,21 +75,41 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
 ### Adding a student: `add`
 
 Adds a student to the TuitiONE.
 
-Format: `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS g/GRADE [t/TAG]…​`
+Format: `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]…`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S5 (secondary school levels).
-A student can have any number of tags (including 0).
+
+* GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
+* A student can have any number of tags (including 0).
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/P2`
-* `add n/Betsy Crowe a/Newgate Prison p/1234567 g/S4`
+* `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
+* `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 t/foreign student`
+
+### Adding a lesson: `add -l`
+
+Adds a lesson to the TuitiONE.
+
+Format: `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+* Adds the lesson with the specified prefixes.
+* GRADE here follows the similar requirements when adding a student.
+* SUBJECT is limited to 20 characters, and its first letter will be capitalized.
+* DAY_OF_WEEK can only be these form (with the first letter capitalized): Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+* START_TIME is in 2400 hours format and can only be between 0900 and 1900 (as lessons can only be conducted between 9am to 9pm).
+* Lessons are fixed at two hour periods.
+* The cost must be a non-negative number 0.0, 2.0, 3.3, …
+
+Examples:
+* `add -l s/Science g/P5 d/Wed t/1230 c/12.0`
+* `add -l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
 ### Listing all students: `list`
 
@@ -123,39 +143,61 @@ Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete 2` deletes the student indexed 2 in the TuitiONE.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+### Deleting a lesson: `delete -l`
+
+Deletes a lesson from the TuitiONE.
+
+Format: `delete -l LESSON_CODE`
+
+* Deletes the lesson of the specified LESSON_CODE
+* LESSON_CODE should have the corresponding format
+    * SUBJECT-GRADE-DAY-TIME
+    * The first letter of SUBJECT, GRADE, and DAY is in caps.
+    * Time is in 24:00 hours format.
+    
+Examples:
+* `delete -l Science-P5-Wed-1230` deletes the lesson with corresponding lesson code.
+
 ### Enrolling a student from lesson: `enroll`
 
-Enroll a student from a given TuitiONE lesson.
+Enroll a specified student from a given TuitiONE lesson.
 
-Format: `enroll INDEX s/SUBJECT g/GRADE d/DAY t/START_TIME`
+Format: `enroll INDEX l/LESSON_CODE`
 
 * Enroll the student identified by `INDEX` from the specific `lesson`.
+* Enrolling a student is only possible if  the student (1) has the same `grade` as the lesson, (2) is not enrolled to the lesson and (3) has no other lessons with conflicting timing.
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Lessons are only held between 9 am to 9 pm. Hence, `START_TIME` can only be between 9 am to 8 pm (as each lesson spans an hour).
-* `START_TIME` can only be in 24 hour formatting, e.g. `1230` represents `1230 pm`.
+* The index **must be a positive integer** 1, 2, 3, …
+* LESSON_CODE should have the corresponding format as seen in the program.
+    * SUBJECT-GRADE-DAY-TIME
+    * The first letter of SUBJECT, GRADE, and DAY is in caps.
+    * Time is in 2400 hours format.
 
 Examples:
-* `enroll 1 s/Science g/P5 d/Wed t/1230` will enroll the student indexed `1` for a `P5` `Science` lesson at `12:30 pm` on `Wed`.
+* `enroll 1 l/Science-P5-Wed-1230` will enroll the student indexed `1` for a `P5` `Science` lesson on `Wed 1230 pm`.
 
 ### Unenrolling a student from lesson: `unenroll`
 
 Unenroll a student from a given TuitiONE lesson.
 
-Format: `unenroll INDEX c/LESSON_CODE`
+Format: `unenroll INDEX l/LESSON_CODE`
 
 * Unenroll the student identified by `INDEX` from the specific `lesson` using its `lesson code`.
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …
+* LESSON_CODE should have the corresponding format as seen in the program.
+    * SUBJECT-GRADE-DAY-TIME
+    * The first letter of SUBJECT, GRADE, and DAY is in caps.
+    * Time is in 2400 hours format.
 
 Examples:
-* `unenroll 1 l/Science-P5-Wed-1230` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 12:30 pm`.
+* `unenroll 1 l/Science-P5-Wed-1230` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 1230 pm`.
 
 ### Clearing all entries : `clear`
 
@@ -187,11 +229,13 @@ If your changes to the data file makes its format invalid, TuitiONE will discard
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS g/GRADE [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/P2`
+**Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]…` <br> e.g. `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 t/foreign student`
+**Add lesson** | `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add -l s/Science g/P5 d/Wed t/12:30 c/12.0`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Enroll** | `enroll INDEX s/SUBJECT g/GRADE d/DAY t/START_TIME`<br> e.g. `enroll 1 s/Science g/P5 d/Wed t/1230`
-**Unenroll** | `unenroll INDEX c/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Delete lesson** | `delete -l LESSON_CODE`<br> e.g. `delete -l Science-P5-Wed-1230`
+**Enroll** | `enroll INDEX l/LESSON_CODE`<br> e.g. `enroll 1 l/Science-P5-Wed-1230`
+**Unenroll** | `unenroll INDEX l/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
 **Help** | `help`

@@ -21,6 +21,10 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    /**
+     * Returns an array of sample students.
+     */
     public static Student[] getSamplePersons() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new ParentContact("87438807"),
@@ -29,7 +33,7 @@ public class SampleDataUtil {
                 getTagSet("friends")),
             new Student(new Name("Bernice Yu"), new ParentContact("99272758"),
                     new Email("berniceyu@example.com"),
-                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Grade("S2"),
+                    new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Grade("P4"),
                 getTagSet("colleagues", "friends")),
             new Student(new Name("Charlotte Oliveiro"), new ParentContact("93210283"),
                     new Email("charlotte@example.com"),
@@ -37,11 +41,11 @@ public class SampleDataUtil {
                 getTagSet("neighbours")),
             new Student(new Name("David Li"), new ParentContact("91031282"),
                     new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Grade("P1"),
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Grade("P2"),
                 getTagSet("family")),
             new Student(new Name("Irfan Ibrahim"), new ParentContact("92492021"),
                     new Email("irfan@example.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"), new Grade("P2"),
+                    new Address("Blk 47 Tampines Street 20, #17-35"), new Grade("S2"),
                 getTagSet("classmates")),
             new Student(new Name("Roy Balakrishnan"), new ParentContact("92624417"),
                     new Email("royb@example.com"),
@@ -50,19 +54,37 @@ public class SampleDataUtil {
         };
     }
 
+    /**
+     * Returns an array of sample lessons.
+     */
     public static Lesson[] getSampleLessons() {
         return new Lesson[] {
-            new Lesson("Science", new Grade("P5"), DayOfWeek.MONDAY, LocalTime.parse("09:00"), 10.5),
-            new Lesson("Math", new Grade("S4"), DayOfWeek.WEDNESDAY, LocalTime.parse("18:00"), 15.9)
+            new Lesson("Science", new Grade("S1"), DayOfWeek.FRIDAY, LocalTime.of(13, 30), 10.5),
+            new Lesson("Math", new Grade("P4"), DayOfWeek.WEDNESDAY, LocalTime.of(18, 0), 15.9),
+            new Lesson("English", new Grade("P2"), DayOfWeek.MONDAY, LocalTime.of(9, 0), 8.5),
+            new Lesson("Biology", new Grade("S4"), DayOfWeek.SATURDAY, LocalTime.of(9, 0), 12.9)
         };
     }
 
+    /**
+     * Returns a sample addressbook.
+     */
     public static ReadOnlyAddressBook getSampleAddressBook() {
+        Student[] students = getSamplePersons();
+        Lesson[] lessons = getSampleLessons();
+
+        Student alex = students[0];
+        Student bernice = students[1];
+        Lesson science = lessons[0];
+        Lesson math = lessons[1];
+        science.addStudent(alex);
+        math.addStudent(bernice);
+
         AddressBook sampleAb = new AddressBook();
-        for (Student sampleStudent : getSamplePersons()) {
+        for (Student sampleStudent : students) {
             sampleAb.addPerson(sampleStudent);
         }
-        for (Lesson sampleLesson : getSampleLessons()) {
+        for (Lesson sampleLesson : lessons) {
             sampleAb.addLesson(sampleLesson);
         }
         return sampleAb;
@@ -76,5 +98,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }
