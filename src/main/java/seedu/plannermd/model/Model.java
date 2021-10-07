@@ -8,12 +8,14 @@ import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
-import seedu.plannermd.ui.PersonTabSwitcher;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
+    /**
+     * Type of Person and corresponding List thats currently displayed and interacted with.
+     */
     enum State {
         PATIENT, DOCTOR
     }
@@ -27,7 +29,7 @@ public interface Model {
     void setState(State state);
 
     /**
-     * Returns current state.
+     * Returns current state of Model.
      */
     State getState();
 
@@ -148,9 +150,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDoctorList(Predicate<? super Doctor> predicate);
-
-    /**
-     * Sets the PersonTabSwitcher responsible for switching between the Doctor and Patient tab in the UI.
-     */
-    void setPersonTabSwitcher(PersonTabSwitcher personTabSwitcher);
 }

@@ -85,8 +85,4 @@ public class UiManager implements Ui {
         Platform.exit();
         System.exit(1);
     }
-
-    public PersonTabSwitcher getPersonTabSwitcher() {
-        return mainWindow;
-    }
 }

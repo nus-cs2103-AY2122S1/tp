@@ -169,7 +169,6 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting PlannerMd " + MainApp.VERSION);
         ui.start(primaryStage);
-        model.setPersonTabSwitcher(ui.getPersonTabSwitcher());
     }
 
     @Override

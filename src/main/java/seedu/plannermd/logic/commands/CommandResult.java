@@ -14,15 +14,19 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    /** The application should toggle the state. */
+    private final boolean toggle;
+
     /** The application should exit. */
     private final boolean exit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean toggle, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
+        this.toggle = toggle;
         this.exit = exit;
     }
 
@@ -31,7 +35,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -40,6 +44,10 @@ public class CommandResult {
 
     public boolean isShowHelp() {
         return showHelp;
+    }
+
+    public boolean isToggle() {
+        return toggle;
     }
 
     public boolean isExit() {
@@ -60,6 +68,7 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
+                && toggle == otherCommandResult.toggle
                 && exit == otherCommandResult.exit;
     }
 

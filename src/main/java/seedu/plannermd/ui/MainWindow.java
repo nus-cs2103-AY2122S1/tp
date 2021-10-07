@@ -16,12 +16,14 @@ import seedu.plannermd.logic.Logic;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.Model;
+import seedu.plannermd.model.Model.State;
 
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Stage> implements PersonTabSwitcher {
+public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -163,6 +165,14 @@ public class MainWindow extends UiPart<Stage> implements PersonTabSwitcher {
         primaryStage.hide();
     }
 
+    private void handleToggle() {
+        if (logic.getState() == State.PATIENT) {
+            personTab.setTabToPatient();
+        } else {
+            personTab.setTabToDoctor();
+        }
+    }
+
     public PersonTab getPersonTab() {
         return personTab;
     }
@@ -182,6 +192,10 @@ public class MainWindow extends UiPart<Stage> implements PersonTabSwitcher {
                 handleHelp();
             }
 
+            if (commandResult.isToggle()) {
+                handleToggle();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -192,15 +206,5 @@ public class MainWindow extends UiPart<Stage> implements PersonTabSwitcher {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    @Override
-    public void switchToPatientTab() {
-        personTab.setTabToPatient();
-    }
-
-    @Override
-    public void switchToDoctorTab() {
-        personTab.setTabToDoctor();
     }
 }

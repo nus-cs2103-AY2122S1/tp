@@ -18,12 +18,12 @@ class ToggleCommandTest {
     @Test
     public void execute_toggleTwice_success() {
         CommandResult expectedCommandResult =
-                new CommandResult(MESSAGE_TOGGLE_SUCCESS_DOCTOR);
+                new CommandResult(MESSAGE_TOGGLE_SUCCESS_DOCTOR, false, true, false);
         expectedModel.toggleState();
         assertCommandSuccess(new ToggleCommand(), model, expectedCommandResult, expectedModel);
 
         expectedCommandResult =
-                new CommandResult(MESSAGE_TOGGLE_SUCCESS_PATIENTS);
+                new CommandResult(MESSAGE_TOGGLE_SUCCESS_PATIENTS, false, true, false);
         expectedModel.toggleState();
         assertCommandSuccess(new ToggleCommand(), model, expectedCommandResult, expectedModel);
     }
