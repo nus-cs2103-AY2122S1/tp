@@ -27,6 +27,15 @@ public class Task {
                 || (other instanceof Task && taskName.equals(((Task) other).getTaskName()));
     }
 
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getTaskName().equals(getTaskName());
+    }
+
     /**
      * Returns true if a given string is a valid tag name.
      */
