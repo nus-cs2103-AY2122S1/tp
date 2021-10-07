@@ -7,14 +7,19 @@ import javafx.util.converter.DefaultStringConverter;
 
 /**
  * Wrapper class for a wrap text editable table cell.
- * From: https://stackoverflow.com/questions/43440067/wrapping-text-in-a-javafx-tableview-editable-textfieldtablecell
- * @@author Pavlo Viazovskyy
- * @param <S> Any subclass of Object
+ * @@author Pavlo Viazovskyy - reused
+ * Reused from:
+ * https://stackoverflow.com/questions/43440067/wrapping-text-in-a-javafx-tableview-editable-textfieldtablecell
+ * @param <S> Any subclass of Object.
  */
-public class WrapTextEditableTableCell<S>  extends TextFieldTableCell<S, String> {
+public class WrapTextEditableTableCell<S> extends TextFieldTableCell<S, String> {
 
+    /** Content of the cell. */
     private final Text cellText;
 
+    /**
+     * Constructs a WrapTextEditableTableCell object that allows wrap text for overflow content and is editable.
+     */
     public WrapTextEditableTableCell() {
         super(new DefaultStringConverter());
         this.cellText = createText();
@@ -35,6 +40,11 @@ public class WrapTextEditableTableCell<S>  extends TextFieldTableCell<S, String>
         }
     }
 
+    /**
+     * Creates a Text object that wraps text.
+     *
+     * @return Text object with text-wrapping.
+     */
     private Text createText() {
         Text text = new Text();
         text.wrappingWidthProperty().bind(widthProperty());

@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
@@ -21,9 +18,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.HelpCommand;
 
 /**
@@ -37,6 +32,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
+    // TODO: Replace the constructor arguments with static variable after quick start branch has been merged.
     private final ObservableList<CommandSummary> list = FXCollections.observableArrayList(
             new CommandSummary("Help", HelpCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD),
             new CommandSummary("Add Student",
@@ -98,7 +94,10 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        action.setCellValueFactory(new PropertyValueFactory<>("Action"));
+        action.setCellValueFactory(new PropertyValueFactory<>("action"));
+
+        // @@author: James_D - reused
+        // Lines 102 - 110 reused from: https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping
         format.setCellFactory(tc -> {
             TableCell<CommandSummary, String> cell = new WrapTextEditableTableCell<>();
             Text text = new Text();
@@ -106,12 +105,12 @@ public class HelpWindow extends UiPart<Stage> {
             cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
             text.wrappingWidthProperty().bind(format.widthProperty());
             text.textProperty().bind(cell.itemProperty());
-            return cell ;
+            return cell;
         });
 
-        format.setCellValueFactory(new PropertyValueFactory<>("Format"));
+        format.setCellValueFactory(new PropertyValueFactory<>("format"));
         example.setCellFactory(TextFieldTableCell.forTableColumn());
-        example.setCellValueFactory(new PropertyValueFactory<>("Example"));
+        example.setCellValueFactory(new PropertyValueFactory<>("example"));
         table.setEditable(true);
         table.setItems(list);
         table.setColumnResizePolicy(p -> true);
@@ -183,15 +182,4 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
-
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        action.setCellValueFactory(new PropertyValueFactory<>("Action"));
-//        format.setCellFactory(TextFieldTableCell.forTableColumn());
-//        format.setCellValueFactory(new PropertyValueFactory<>("Format"));
-//        example.setCellValueFactory(new PropertyValueFactory<>("Example"));
-//        table.setEditable(true);
-//        table.setItems(list);
-//        format.setOnEditCommit(t -> t.getTableView().refresh());
-//    }
 }
