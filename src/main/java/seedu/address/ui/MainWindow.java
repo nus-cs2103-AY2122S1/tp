@@ -36,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
             + LessonAddCommand.USER_TIP + "\n\n"
             + ClearCommand.USER_TIP + "\n\n"
             + HelpCommand.USER_TIP + "\n\n"
-            + "Have fun exploring TAB! ʕ•́ᴥ•̀ʔっ♡";
+            + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
