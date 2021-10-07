@@ -10,13 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-<<<<<<< HEAD:src/main/java/seedu/address/storage/JsonAdaptedPerson.java
-import seedu.address.model.person.*;
-=======
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
->>>>>>> 5d2e16017f6223caf7ddd4bfd545206c2ddb3b24:src/main/java/seedu/address/storage/JsonAdaptedStudent.java
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,28 +26,15 @@ class JsonAdaptedStudent {
     private final String email;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
-    //Attendance and participation added
-    private Attendance attendance;
-    private Participation participation;
-
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-<<<<<<< HEAD:src/main/java/seedu/address/storage/JsonAdaptedPerson.java
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("attendance") String attendance,
-                             @JsonProperty("participation") String participation) {
-=======
     public JsonAdaptedStudent(@JsonProperty("name") String name,
                               @JsonProperty("email") String email,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
->>>>>>> 5d2e16017f6223caf7ddd4bfd545206c2ddb3b24:src/main/java/seedu/address/storage/JsonAdaptedStudent.java
         this.name = name;
         this.email = email;
-        this.attendance = new Attendance();
-        this.participation = new Participation();
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -63,8 +46,6 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
         email = source.getEmail().value;
-        attendance = source.getAttendance();
-        participation = source.getParticipation();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
