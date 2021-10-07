@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Setting up and getting started
 ---
 

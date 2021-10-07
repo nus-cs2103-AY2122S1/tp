@@ -1,6 +1,6 @@
 ---
-layout: page 
-title: AddressBook Level-3
+layout: page
+title: Notor
 ---
 
 [![CI Status](https://github.com/AY2122S1-CS2103T-W08-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-W08-1/tp/actions)

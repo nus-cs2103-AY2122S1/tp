@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: About Us
 ---
 
@@ -33,7 +33,7 @@ You can reach us at the email `e0588244.nus.edu.sg`
 
 <img src="images/eltongohjh.png" width="200px">
 
-[[github](http://github.com/eltongohjh)] 
+[[github](http://github.com/eltongohjh)]
 [[portfolio](team/eltongohjh.md)]
 
 * Role: Developer
