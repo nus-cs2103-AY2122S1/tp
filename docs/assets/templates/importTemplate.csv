@@ -1,4 +1,4 @@
-﻿name,phone,email,address (please doublequote adress if it contains a comma),tags (Optional. Please leave whitespace between tags)
-Adam,81234567,adam@test.com,"ABC, Street",
-Beth,620400,beth123@eg.edu,123 Drive,friend
-Charlie,90005000,Ch4rle5@test.org,Oak Lane,mentor colleague
+name,phone,tags,address,email
+Adam,81234567,,"ABC, Street",adam@test.com
+Beth,620400,friend,123 Drive,beth123@eg.edu
+Charlie,90005000,mentor colleague,Oak Lane,Ch4rle5@test.org
