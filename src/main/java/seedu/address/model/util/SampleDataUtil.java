@@ -41,7 +41,7 @@ public class SampleDataUtil {
                 getTagSet("neighbours")),
             new Student(new Name("David Li"), new ParentContact("91031282"),
                     new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Grade("P1"),
+                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Grade("P2"),
                 getTagSet("family")),
             new Student(new Name("Irfan Ibrahim"), new ParentContact("92492021"),
                     new Email("irfan@example.com"),
@@ -59,8 +59,10 @@ public class SampleDataUtil {
      */
     public static Lesson[] getSampleLessons() {
         return new Lesson[] {
-            new Lesson("Science", new Grade("S1"), DayOfWeek.WEDNESDAY, LocalTime.parse("12:30"), 10.5),
-            new Lesson("Math", new Grade("P4"), DayOfWeek.WEDNESDAY, LocalTime.parse("18:00"), 15.9)
+            new Lesson("Science", new Grade("S1"), DayOfWeek.FRIDAY, LocalTime.of(13, 30), 10.5),
+            new Lesson("Math", new Grade("P4"), DayOfWeek.WEDNESDAY, LocalTime.of(18, 0), 15.9),
+            new Lesson("English", new Grade("P2"), DayOfWeek.MONDAY, LocalTime.of(9, 0), 8.5),
+            new Lesson("Biology", new Grade("S4"), DayOfWeek.SATURDAY, LocalTime.of(9, 0), 12.9)
         };
     }
 

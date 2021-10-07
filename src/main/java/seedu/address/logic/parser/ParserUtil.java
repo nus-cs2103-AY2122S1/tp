@@ -2,10 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
+import static seedu.address.model.lesson.Lesson.parseStringToDayOfWeek;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +31,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_TIME = "Time formatting is invalid.";
+    public static final String MESSAGE_INVALID_DAY = "Day formatting is invalid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -151,11 +154,11 @@ public class ParserUtil {
     public static LocalTime parseLocalTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
-        if (trimmedTime.length() != 4) {
+        try {
+            return LocalTime.parse(trimmedTime, TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_TIME);
         }
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        return LocalTime.parse(trimmedTime, timeFormatter);
     }
 
     /**
@@ -163,25 +166,11 @@ public class ParserUtil {
      */
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
-        String prefix = day.trim();
-
-        switch (prefix) {
-        case "Mon":
-            return DayOfWeek.MONDAY;
-        case "Tue":
-            return DayOfWeek.TUESDAY;
-        case "Wed":
-            return DayOfWeek.WEDNESDAY;
-        case "Thu":
-            return DayOfWeek.THURSDAY;
-        case "Fri":
-            return DayOfWeek.FRIDAY;
-        case "Sat":
-            return DayOfWeek.SATURDAY;
-        case "Sun":
-            return DayOfWeek.SUNDAY;
-        default:
-            throw new ParseException("Something went wrong with your DAY");
+        String cleanedDay = StringUtil.capitalize(day.trim());
+        try {
+            return parseStringToDayOfWeek(cleanedDay);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MESSAGE_INVALID_DAY);
         }
     }
 

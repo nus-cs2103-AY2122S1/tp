@@ -8,12 +8,15 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Student;
@@ -28,18 +31,26 @@ import seedu.address.model.person.Student;
 public class Lesson {
 
     public static final String SUBJECT_VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String SUBJECT_MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric";
+
     public static final String TIME_MESSAGE_CONSTRAINTS = "Lesson can only start be between 9 am to 8 pm";
     public static final String PRICE_MESSAGE_CONSTRAINT = "Price cannot be 0 or negative";
     public static final String CODE_MESSAGE_CONSTRAINT = "Lesson code should be of correct format";
+    public static final String DAY_MESSAGE_CONSTRAINT = "Day specified is not legitimate";
+    public static final String ENROLLMENT_MESSAGE_CONSTRAINT = "Student is unable to enroll for this lesson";
+    public static final String SUBJECT_MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric and"
+            + "within %1$d characters";
 
+    public static final long LESSON_PERIOD_IN_HOURS = 2;
     public static final LocalTime BOUNDED_START_TIME = LocalTime.of(9, 0);
-    public static final LocalTime BOUNDED_END_TIME = LocalTime.of(20, 0);
+    public static final LocalTime BOUNDED_END_TIME = LocalTime.of(21, 0).minusHours(LESSON_PERIOD_IN_HOURS);
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
+    public static final int MAXIMUM_SUBJECT_LENGTH = 20;
 
     private final String subject;
     private final Grade grade;
-    private final DayOfWeek day;
+    private final DayOfWeek dayOfWeek;
     private final LocalTime startTime;
+    private final LocalTime endTime;
     private final double price;
     private final List<Student> students;
 
@@ -48,21 +59,22 @@ public class Lesson {
      *
      * @param subject A valid lesson name.
      * @param grade Grade of lesson.
-     * @param day A day of the week.
+     * @param dayOfWeek A day of the week.
      * @param startTime A valid start time.
      * @param price Price of lesson.
      */
-    public Lesson(String subject, Grade grade, DayOfWeek day, LocalTime startTime, double price) {
-        requireAllNonNull(subject, grade, day, startTime, price);
+    public Lesson(String subject, Grade grade, DayOfWeek dayOfWeek, LocalTime startTime, double price) {
+        requireAllNonNull(subject, grade, dayOfWeek, startTime, price);
 
-        checkArgument(isValidSubject(subject), SUBJECT_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSubject(subject), String.format(SUBJECT_MESSAGE_CONSTRAINTS, MAXIMUM_SUBJECT_LENGTH));
         checkArgument(isValidTime(startTime), TIME_MESSAGE_CONSTRAINTS);
         checkArgument(isValidPrice(price), PRICE_MESSAGE_CONSTRAINT);
 
         this.subject = subject;
         this.grade = grade;
-        this.day = day;
+        this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
+        this.endTime = startTime.plusHours(LESSON_PERIOD_IN_HOURS);
         this.price = price;
         this.students = new ArrayList<>();
     }
@@ -80,11 +92,10 @@ public class Lesson {
         checkArgument(isValidLessonCode(lessonCode), CODE_MESSAGE_CONSTRAINT);
 
         String[] parameters = lessonCode.split("-");
-        String subject = parameters[0];
+        String subject = StringUtil.capitalize(parameters[0]);
         Grade grade = new Grade(parameters[1]);
-        DayOfWeek day = parseDayOfWeek(parameters[2]);
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        LocalTime startTime = LocalTime.parse(parameters[3], timeFormatter);
+        DayOfWeek day = parseStringToDayOfWeek(parameters[2]);
+        LocalTime startTime = LocalTime.parse(parameters[3], TIME_FORMATTER);
 
         return new Lesson(subject, grade, day, startTime, price);
     }
@@ -107,7 +118,7 @@ public class Lesson {
      * Returns the day of lesson.
      */
     public DayOfWeek getDayOfWeek() {
-        return day;
+        return dayOfWeek;
     }
 
     /**
@@ -115,6 +126,13 @@ public class Lesson {
      */
     public LocalTime getStartTime() {
         return startTime;
+    }
+
+    /**
+     * Returns the end time of lesson.
+     */
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
     /**
@@ -129,11 +147,11 @@ public class Lesson {
      */
     public String getLessonCode() {
         return String.format(
-                "%s-%s-%s-%s",
+                "%1$s-%2$s-%3$s-%4$s",
                 subject,
                 grade.value,
-                parseDayToString(day),
-                startTime.toString().replace(":", ""));
+                parseDayToString(dayOfWeek),
+                startTime.format(TIME_FORMATTER));
     }
 
     /**
@@ -144,8 +162,8 @@ public class Lesson {
         if (otherLesson == this) {
             return true;
         }
-        return otherLesson != null
-                && otherLesson.getLessonCode().equals(getLessonCode());
+        return (otherLesson != null)
+                && (otherLesson.getLessonCode().equals(getLessonCode()));
     }
 
     /**
@@ -161,6 +179,37 @@ public class Lesson {
      */
     public List<Name> getStudentNames() {
         return students.stream().map(Student::getName).collect(Collectors.toUnmodifiableList());
+    }
+
+    /**
+     * Returns true if a student is eligible to enroll for the lesson.
+     * A student must be of the same grade, must be available for the time slot,
+     * and must not be already enrolled to the lesson.
+     */
+    public boolean isAbleToEnroll(Student student) {
+        requireNonNull(student);
+        if (containsStudent(student)) {
+            return false;
+        }
+        if (!student.getGrade().equals(grade)) {
+            return false;
+        }
+        for (Lesson otherLesson : student.getLessons()) {
+            if (hasOverlappedTiming(otherLesson)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the lessons overlap in timing.
+     */
+    public boolean hasOverlappedTiming(Lesson otherLesson) {
+        LocalTime otherStartTime = otherLesson.getStartTime();
+        LocalTime otherEndTime = otherLesson.getEndTime();
+        return (otherStartTime.isAfter(startTime) && otherStartTime.isBefore(endTime))
+                || (otherEndTime.isAfter(startTime) && otherEndTime.isBefore(endTime));
     }
 
     /**
@@ -182,6 +231,7 @@ public class Lesson {
      */
     public void addStudent(Student student) {
         requireNonNull(student);
+        checkArgument(isAbleToEnroll(student), ENROLLMENT_MESSAGE_CONSTRAINT);
         students.add(student);
         student.enrollForLesson(this);
     }
@@ -192,17 +242,12 @@ public class Lesson {
     public void removeStudent(Student student) {
         requireNonNull(student);
         student.unenrollFromLesson(this);
-
         // this step is needed to break out of the equality checks before deletion
-        Student toRemove = null;
         for (Student s : students) {
             if (s.isSamePerson(student)) {
-                toRemove = s;
-                break;
+                students.remove(s);
+                return;
             }
-        }
-        if (toRemove != null) {
-            students.remove(toRemove);
         }
     }
 
@@ -210,13 +255,16 @@ public class Lesson {
      * Returns true if a given string is a valid subject name for a lesson.
      */
     public static boolean isValidSubject(String test) {
-        return test.matches(SUBJECT_VALIDATION_REGEX);
+        requireNonNull(test);
+        return test.matches(SUBJECT_VALIDATION_REGEX)
+                && (test.length() <= MAXIMUM_SUBJECT_LENGTH);
     }
 
     /**
      * Returns true if a given timings are within bounded limits.
      */
     public static boolean isValidTime(LocalTime testStart) {
+        requireNonNull(testStart);
         return testStart.equals(BOUNDED_START_TIME)
                 || testStart.equals(BOUNDED_END_TIME)
                 || (testStart.isAfter(BOUNDED_START_TIME) && testStart.isBefore(BOUNDED_END_TIME));
@@ -233,33 +281,30 @@ public class Lesson {
      * Returns true if a given lesson code is follows the correct format.
      */
     public static boolean isValidLessonCode(String testCode) {
+        requireNonNull(testCode);
         // check number of parameters in lesson code
         String[] testLessonParams = testCode.split("-");
         if (testLessonParams.length != 4) {
             return false;
         }
-        if (!isValidSubject(testLessonParams[0])
-                || !Grade.isValidGrade(testLessonParams[1])) {
+        if (!isValidSubject(testLessonParams[0]) || !Grade.isValidGrade(testLessonParams[1])) {
             return false;
         }
         try {
-            // attempt to parse
-            parseDayOfWeek(testLessonParams[2]);
-            LocalTime.parse(testLessonParams[3], DateTimeFormatter.ofPattern("HHmm"));
+            parseStringToDayOfWeek(testLessonParams[2]);
+            LocalTime.parse(testLessonParams[3], TIME_FORMATTER);
         } catch (IllegalArgumentException | DateTimeParseException e) {
             return false;
         }
-        return true; // check subject
+        return true;
     }
 
     /**
      * Parses a {@code String day} into {@code DayOfWeek}.
      */
-    public static DayOfWeek parseDayOfWeek(String day) {
+    public static DayOfWeek parseStringToDayOfWeek(String day) {
         requireNonNull(day);
-        String prefix = day.trim();
-
-        switch (prefix) {
+        switch (day) {
         case "Mon":
             return DayOfWeek.MONDAY;
         case "Tue":
@@ -275,7 +320,7 @@ public class Lesson {
         case "Sun":
             return DayOfWeek.SUNDAY;
         default:
-            throw new IllegalArgumentException("Something went wrong with your DAY");
+            throw new IllegalArgumentException(DAY_MESSAGE_CONSTRAINT);
         }
     }
 
@@ -283,24 +328,8 @@ public class Lesson {
      * Returns String with corresponding to DayOfWeek.
      */
     public static String parseDayToString(DayOfWeek dayOfWeek) {
-        switch (dayOfWeek) {
-        case MONDAY:
-            return "Mon";
-        case TUESDAY:
-            return "Tue";
-        case WEDNESDAY:
-            return "Wed";
-        case THURSDAY:
-            return "Thu";
-        case FRIDAY:
-            return "Fri";
-        case SATURDAY:
-            return "Sat";
-        case SUNDAY:
-            return "Sun";
-        default:
-            throw new NullPointerException("DayOfWeek is null in Lesson");
-        }
+        requireNonNull(dayOfWeek);
+        return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault());
     }
 
     @Override
@@ -317,7 +346,7 @@ public class Lesson {
         Lesson otherLesson = (Lesson) other;
         return subject.equals(otherLesson.subject)
                 && grade.equals(otherLesson.grade)
-                && day.equals(otherLesson.day)
+                && dayOfWeek.equals(otherLesson.dayOfWeek)
                 && startTime.equals(otherLesson.startTime)
                 && (price == otherLesson.price)
                 && getStudentNames().equals(otherLesson.getStudentNames());
@@ -325,7 +354,7 @@ public class Lesson {
 
     @Override
     public int hashCode() {
-        return Objects.hash(subject, grade, day, startTime, price, getStudentNames());
+        return Objects.hash(subject, grade, dayOfWeek, startTime, price, getStudentNames());
     }
 
     @Override

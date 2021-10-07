@@ -54,18 +54,23 @@ class JsonSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
-        List<Lesson> lessonList = new ArrayList<>();
-        List<Student> studentList = new ArrayList<>();
-        prepareAssociations(lessonList, studentList);
+        List<Lesson> lessonList = prepareLessonList();
+        List<Student> studentList = prepareStudentList(lessonList);
+        return prepareAddressBook(lessonList, studentList);
+    }
 
+    /**
+     * Prepares the model's {@code AddressBook} object with the lesson and student lists.
+     */
+    public AddressBook prepareAddressBook(List<Lesson> lessons, List<Student> students) throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (Lesson lesson : lessonList) {
+        for (Lesson lesson : lessons) {
             if (addressBook.hasLesson(lesson)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
             }
             addressBook.addLesson(lesson);
         }
-        for (Student student : studentList) {
+        for (Student student : students) {
             if (addressBook.hasPerson(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
@@ -75,33 +80,49 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Prepares relevant Lessons and Students with their association.
-     *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * Prepares the list of Lessons for model.
      */
-    private void prepareAssociations(List<Lesson> lessonList, List<Student> studentList) throws IllegalValueException {
+    public List<Lesson> prepareLessonList() throws IllegalValueException {
+        List<Lesson> lessonList = new ArrayList<>();
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
             Lesson lesson = jsonAdaptedLesson.toModelType();
             lessonList.add(lesson);
         }
+        return lessonList;
+    }
 
+    /**
+     * Prepares the list of Students for model.
+     */
+    public List<Student> prepareStudentList(List<Lesson> lessonList) throws IllegalValueException {
+        List<Student> studentList = new ArrayList<>();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Student student = jsonAdaptedPerson.toModelType();
             List<String> jsonLessonCodes = jsonAdaptedPerson.getLessonCodes();
-            for (String jsonLessonCode : jsonLessonCodes) {
-                boolean hasFoundLesson = false;
-                for (Lesson lesson : lessonList) {
-                    if (lesson.getLessonCode().equals(jsonLessonCode)) {
-                        lesson.addStudent(student);
-                        hasFoundLesson = true;
-                        break;
-                    }
-                }
-                if (!hasFoundLesson) {
-                    throw new IllegalValueException(MESSAGE_INVALID_LESSON_CODE);
+            establishStudentLessonLinkages(student, jsonLessonCodes, lessonList);
+            studentList.add(student);
+        }
+        return studentList;
+    }
+
+    /**
+     * Prepare linkages between a student and lessons.
+     */
+    public void establishStudentLessonLinkages(Student student, List<String> jsonLessonCodes,
+            List<Lesson> lessonList) throws IllegalValueException {
+
+        for (String jsonLessonCode : jsonLessonCodes) {
+            boolean hasFoundLesson = false;
+            for (Lesson lesson : lessonList) {
+                if (lesson.getLessonCode().equals(jsonLessonCode)) {
+                    lesson.addStudent(student);
+                    hasFoundLesson = true;
+                    break;
                 }
             }
-            studentList.add(student);
+            if (!hasFoundLesson) {
+                throw new IllegalValueException(MESSAGE_INVALID_LESSON_CODE);
+            }
         }
     }
 }
