@@ -1,18 +1,20 @@
 package seedu.address.ui;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
 
 /**
  * Controller for a help page
@@ -154,5 +156,16 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(showContactByIndexCommandDetails);
         helpSectionCommandDetails.add(importContactCommandDetails);
         helpSectionCommandDetails.add(exportContactCommandDetails);
+    }
+
+    @FXML
+    public void openUserGuide() {
+        try {
+            Desktop.getDesktop().browse(new URL(USERGUIDE_URL).toURI());
+        } catch (IOException e) {
+            logger.severe("Could not open browser to show userguide.");
+        } catch (URISyntaxException e) {
+            logger.severe("URL to userguide not formatted well.");
+        }
     }
 }
