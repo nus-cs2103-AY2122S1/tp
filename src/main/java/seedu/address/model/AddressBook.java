@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniquePersonList;
+import seedu.address.model.task.Task;
+
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +17,7 @@ import seedu.address.model.student.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private List<Task> tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        tasks = new List<Task>() {
+        };
     }
 
     public AddressBook() {}
@@ -48,6 +53,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the student list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -67,12 +80,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+
+    /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
     public void addPerson(Student p) {
         persons.add(p);
     }
+
+    /**
+     * Adds a student to the address book.
+     * The student must not already exist in the address book.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedPerson}.
@@ -87,11 +118,31 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The task identity of {@code editedTask} must not be the same
+     * as another existing task in the module.
+     */
+    public void setTask(Task target, Task editedTask) {
+        requireNonNull(editedTask);
+
+        tasks.setTask(target, editedTask);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Student key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Module}.
+     * {@code key} must exist in the module.
+     */
+    public void removeTask(Task key) {
+        tasks.remove(key);
     }
 
     //// util methods
@@ -107,11 +158,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Task> getTaskList() {
+        return tasks.asUnmodifiableObservableList();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && tasks.equals(((AddressBook) other).tasks));
     }
 
     @Override
