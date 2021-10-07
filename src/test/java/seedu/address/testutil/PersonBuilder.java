@@ -39,7 +39,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
-        remark = new Remark(DEFAULT_REMARK);
+        remark = new Remark("");
         moduleCodes = DEFAULT_MODULE_CODES.stream().map(ModuleCode::new).collect(Collectors.toSet());
         phone = new Phone("");
         teleHandle = new TeleHandle("");

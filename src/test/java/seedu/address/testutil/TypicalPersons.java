@@ -29,8 +29,8 @@ public class TypicalPersons {
             .withRemark("She likes aardvarks.")
             .withTags("local").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withRemark("He can't take beer!")
             .withEmail("johnd@example.com").withPhone("98765432")
+            .withRemark("He can't take beer!")
             .withTags("overseas", "international").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").build();
@@ -51,7 +51,7 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_LOCAL).withRemark(VALID_REMARK_AMY).build();
+            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_LOCAL).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTeleHandle(VALID_TELE_HANDLE_BOB)
             .withRemark(VALID_REMARK_BOB)
