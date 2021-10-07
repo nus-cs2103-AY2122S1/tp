@@ -14,11 +14,9 @@ public class LessonDeleteCommandParser implements Parser<LessonDeleteCommand> {
      */
     public LessonDeleteCommand parse(String args) throws ParseException {
         try {
-            // There will be 2 index arguments
-            // 1st is person, 2nd is lesson
-            String[] indices = args.trim().split(" ", 2);
-            Index index = ParserUtil.parseIndex(indices[0]);
-            Index lessonIndex = ParserUtil.parseIndex(indices[1]);
+            Index[] studentLessonIndices = ParserUtil.parseIndices(args);
+            Index index = studentLessonIndices[0];
+            Index lessonIndex = studentLessonIndices[1];
             return new LessonDeleteCommand(index, lessonIndex);
         } catch (ParseException pe) {
             throw new ParseException(
