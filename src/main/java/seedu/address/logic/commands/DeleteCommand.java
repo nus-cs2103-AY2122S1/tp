@@ -20,26 +20,46 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: delete 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_NUMBER_DELETED_PERSON = "%d Deleted Persons: \n";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "%1$s \n";
 
     private final Index targetIndex;
+    private final Index endIndex;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        endIndex = targetIndex;
+    }
+
+    public DeleteCommand(Index targetIndex, Index endIndex) {
+        this.targetIndex = targetIndex;
+        this.endIndex = endIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        int first = targetIndex.getZeroBased();
+        int last = endIndex.getZeroBased();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (first >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+        if (first > last || last >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
+        }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        StringBuilder deletedPersons = new StringBuilder();
+        while (last >= first) {
+            Person personToDelete = lastShownList.get(last);
+            model.deletePerson(personToDelete);
+            deletedPersons.insert(0, String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+            last--;
+        }
+        String successMessage = String.format(MESSAGE_NUMBER_DELETED_PERSON, endIndex.getZeroBased() - first + 1)
+                + deletedPersons;
+        return new CommandResult(successMessage);
     }
 
     @Override
