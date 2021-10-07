@@ -489,6 +489,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should run on user computer with double-click - no installer or additional libraries required.
 5.  The system should respond within two seconds.
+6.  The system should work on both 32-bit and 64-bit environments.
+7.  The system should be usable by a novice who has never used a CLI app before.
+8.  The project is expected to adhere to a schedule that delivers features of a milestone for every two weeks.    
+9.  Should be able to hold up to 1000 event managers and participants without a noticeable delay (less than 2 seconds) in performance for typical usage.
+10. The product should be for a single user i.e. (not a multi-user product), and should not depend on a remote server and does not require an installer. 
+11. The software should work on the Windows, Linux, and OS-X platforms.
+12. The GUI should work well with standard screen resolutions 1920x1080 and higher, and
+    for screen scales 100% and 125%. It should be usable for resolutions 1280x720 and higher, and
+    for screen scales 150%.    
     *{More to be added}*
 
 ### Glossary
