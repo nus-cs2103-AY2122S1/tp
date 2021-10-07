@@ -13,6 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.collections.FXCollections?>
+<?import seedu.address.ui.CommandDetails?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -25,16 +28,25 @@
         <URL value="@TableView.css" />
       </stylesheets>
 
-      <AnchorPane prefHeight="350"  prefWidth="200">
+      <AnchorPane prefHeight="200" prefWidth="180">
         <children>
           <VBox>
             <TableView fx:id="helpTable" AnchorPane.topAnchor="1.0">
               <columns>
-                <TableColumn text="Feature">
+                <TableColumn text="Feature" prefWidth="220">
+                  <cellValueFactory><PropertyValueFactory property="featureName" />
+                  </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Command">
+                <TableColumn text="Command" prefWidth="290">
+                  <cellValueFactory><PropertyValueFactory property="commandStructure" />
+                  </cellValueFactory>
                 </TableColumn>
               </columns>
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <!-- You can add command details here as well. -->
+                </FXCollections>
+              </items>
             </TableView>
           </VBox>
           <HBox alignment="CENTER" AnchorPane.bottomAnchor="1.0">
@@ -46,7 +58,7 @@
               </Label>
               <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
                 <HBox.margin>
-                  <Insets left="5.0" />
+                  <Insets left="32.0" />
                 </HBox.margin>
               </Button>
             </children>

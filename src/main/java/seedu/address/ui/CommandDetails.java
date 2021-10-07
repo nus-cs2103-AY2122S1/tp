@@ -1,19 +1,33 @@
 package seedu.address.ui;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class CommandDetails {
-    private String featureName;
-    private String commandStructure;
+    private final SimpleStringProperty featureName = new SimpleStringProperty("");
+    private final SimpleStringProperty commandStructure = new SimpleStringProperty("");
 
     public CommandDetails(String featureName, String commandStructure) {
-        this.featureName = featureName;
-        this.commandStructure = commandStructure;
+        setFeatureName(featureName);
+        setCommandStructure(commandStructure);
+    }
+
+    public CommandDetails() {
+        this("", "");
     }
 
     public String getFeatureName() {
-        return featureName;
+        return featureName.get();
     }
 
     public String getCommandStructure() {
-        return commandStructure;
+        return commandStructure.get();
+    }
+
+    public void setFeatureName(String featureName) {
+        this.featureName.set(featureName);
+    }
+
+    public void setCommandStructure(String commandStructure) {
+        this.commandStructure.set(commandStructure);
     }
 }

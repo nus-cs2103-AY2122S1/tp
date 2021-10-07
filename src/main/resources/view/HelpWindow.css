@@ -1,6 +1,10 @@
 #copyButton, #helpMessage {
     -fx-font-family: "Open Sans";
-    -fx-text-color: white;
+    -fx-text-fill: white;
+}
+
+#copyButton {
+    -fx-text-fill: #121212;
 }
 
 .table-row-cell:empty {
