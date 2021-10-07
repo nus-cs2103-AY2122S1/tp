@@ -15,8 +15,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.tag.Mod;
+
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -31,14 +32,16 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> modules = new ArrayList<>();
+    private final boolean isMyProfile;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("modules") List<JsonAdaptedTag> modules) {
+            @JsonProperty("modules") List<JsonAdaptedTag> modules, @JsonProperty("isMyProfile") boolean isMyProfile) {
         this.name = name;
         this.id = id;
         this.phone = phone;
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
         if (modules != null) {
             this.modules.addAll(modules);
         }
+        this.isMyProfile = isMyProfile;
     }
 
     /**
@@ -61,6 +65,7 @@ class JsonAdaptedPerson {
         modules.addAll(source.getMods().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isMyProfile = source.getIsMyProfile();
     }
 
     /**
@@ -116,7 +121,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Mod> modelMods = new HashSet<>(personMods);
-        return new Person(modelName, modelId, modelPhone, modelEmail, modelAddress, modelMods);
+        return new Person(modelName, modelId, modelPhone, modelEmail, modelAddress, modelMods, this.isMyProfile);
     }
 
 }

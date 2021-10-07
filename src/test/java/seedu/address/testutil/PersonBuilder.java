@@ -8,8 +8,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Mod;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.tag.Mod;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -22,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final boolean DEFAULT_IS_MY_PROFILE = false;
 
     private Name name;
     private StudentId id;
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Mod> mods;
+    private boolean isMyProfile;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         mods = new HashSet<>();
+        isMyProfile = DEFAULT_IS_MY_PROFILE;
     }
 
     /**
@@ -52,6 +55,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         mods = new HashSet<>(personToCopy.getMods());
+        isMyProfile = personToCopy.getIsMyProfile();
     }
 
     /**
@@ -103,8 +107,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, id, phone, email, address, mods);
-        return new Person(name, id, phone, email, address, tags);
+        return new Person(name, id, phone, email, address, mods, isMyProfile);
     }
 
 }
