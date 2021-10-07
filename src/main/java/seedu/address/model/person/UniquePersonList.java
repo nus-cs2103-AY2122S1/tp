@@ -140,72 +140,86 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the person in alphabetical order of their name.
+     * Sorts the contacts according to the field specified by user.
      */
     public void sortList(SortCommandParser.SortableField sf) {
         switch (sf) {
         case NAME:
-            internalList.sort(new Comparator<Person>() {
-                @Override
-                public int compare(Person o1, Person o2) {
-                    return o1.getName().compareTo(o2.getName());
-                }
-            });
+            sortListByName();
             break;
 
         case MODULE_CODES:
-            internalList.sort(new Comparator<Person>() {
-                @Override
-                public int compare(Person o1, Person o2) {
-                    List<ModuleCode> o1List = new ArrayList<>(o1.getModuleCodes());
-                    List<ModuleCode> o2List = new ArrayList<>(o2.getModuleCodes());
-
-                    Comparator<ModuleCode> comparator = new Comparator<ModuleCode>() {
-                        @Override
-                        public int compare(ModuleCode code1, ModuleCode code2) {
-                            return code1.compareTo(code2);
-                        }
-                    };
-
-                    Collections.sort(o1List, comparator);
-                    Collections.sort(o2List, comparator);
-
-                    for (int i = 0; i < o1List.size(); i++) {
-                        for (int j = i; j < o2List.size(); j++) {
-                            ModuleCode c1 = o1List.get(i);
-                            ModuleCode c2 = o2List.get(j);
-
-                            if (c1.compareTo(c2) < 0) {
-                                return -1;
-                            } else if (c1.compareTo(c2) > 0) {
-                                return 1;
-                            } else {
-                                if (i == o1List.size() - 1) {
-                                    // Will only reach here if c1.compareTo(c2) == 0
-                                    // Last item in o1Lis
-                                    if (o1List.size() == o2List.size()) {
-                                        // Both list is same
-                                        return o1.getName().compareTo(o2.getName());
-                                    } else {
-                                        // o2List is longer than o1List
-                                        // if o2List is shorter than o1List, won't enter the second loop
-                                        return -1;
-                                    }
-                                }
-                                break;
-                            }
-                        }
-                    }
-                    // Will only reach here if o2List is shorter than o1List
-                    // and o1List contains all modules inside o2List
-                    return 1;
-                }
-            });
+            sortListByModule();
             break;
 
         default:
             // Left empty because SortCommandParser already helped
             // to ensure that the arguments will be correct
         }
+    }
+
+    private void sortListByName() {
+        internalList.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+    }
+
+    private void sortListByModule() {
+        internalList.sort(new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                List<ModuleCode> o1List = new ArrayList<>(o1.getModuleCodes());
+                List<ModuleCode> o2List = new ArrayList<>(o2.getModuleCodes());
+
+                sortModuleList(o1List);
+                sortModuleList(o2List);
+
+                int comparisonResult = compareModuleList(o1List, o2List);
+                if (comparisonResult == 0) {
+                    // Both person have the same modules
+                    // Proceed to compare by name
+                    return o1.getName().compareTo(o2.getName());
+                }
+                return comparisonResult;
+            }
+        });
+    }
+
+    private void sortModuleList(List<ModuleCode> l) {
+        Collections.sort(l, new Comparator<ModuleCode>() {
+            @Override
+            public int compare(ModuleCode code1, ModuleCode code2) {
+                return code1.compareTo(code2);
+            }
+        });
+    }
+
+    private int compareModuleList(List<ModuleCode> l1, List<ModuleCode> l2) {
+        for (int i = 0; i < l1.size(); i++) {
+            for (int j = i; j < l2.size(); j++) {
+                ModuleCode c1 = l1.get(i);
+                ModuleCode c2 = l2.get(j);
+
+                if (c1.compareTo(c2) < 0) {
+                    return -1;
+                } else if (c1.compareTo(c2) > 0) {
+                    return 1;
+                } else {
+                    if (i == l1.size() - 1) {
+                        // Will only reach here if c1.compareTo(c2) == 0
+                        // and o2List.size() >= o1List.size()
+                        return l1.size() - l2.size();
+                    }
+                    // To compare next module in the list, need to go back to first loop
+                    break;
+                }
+            }
+        }
+        // Will only reach here if o2List is shorter than o1List
+        // and o1List contains all modules inside o2List
+        return 1;
     }
 }
