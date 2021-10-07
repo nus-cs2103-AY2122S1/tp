@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "role" : "Preschool Teacher",
+    "levelOfEducation" : "PhD",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "role" : "Doctor",
+    "levelOfEducation" : "Masters",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +22,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "role" : "Electrical Engineer",
+    "levelOfEducation" : "Elementary",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +30,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "role" : "Sales Assistant",
+    "levelOfEducation" : "Middle School",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +38,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "role" : "Toilet Cleaner",
+    "levelOfEducation" : "Bachelors",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +46,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "role" : "NTUC Cashier",
+    "levelOfEducation" : "High School",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +54,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "role" : "Waiter",
+    "levelOfEducation" : "University",
     "tagged" : [ ]
   } ]
 }
