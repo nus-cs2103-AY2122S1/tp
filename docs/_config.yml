@@ -5,6 +5,7 @@ header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
+  - Search.html
 
 markdown: kramdown
 
@@ -13,3 +14,7 @@ github_icon: "images/github-icon.png"
 
 plugins:
   - jemoji
+
+tipue_search:
+  include:
+    pages: true
