@@ -10,11 +10,12 @@ import seedu.address.model.product.Product;
 public class AddProductCommand extends Command {
     public static final String COMMAND_WORD = "add -p";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to the address book. "
-            + "Parameters: "
-            + "NAME \n"
-            + "Example: " + COMMAND_WORD + " "
-            + "pen ";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Adds a product to the address book. "
+                    + "Parameters: "
+                    + "NAME \n"
+                    + "Example: " + COMMAND_WORD + " "
+                    + "pen ";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in Sellah";
@@ -64,7 +65,7 @@ public class AddProductCommand extends Command {
     }
 
     /**
-     * Stores the details of the new client.
+     * Stores the details of the new product.
      */
     public static class AddProductDescriptor {
         private Name name;
