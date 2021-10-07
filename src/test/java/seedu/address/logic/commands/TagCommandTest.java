@@ -52,7 +52,7 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -68,7 +68,7 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddFriend);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
 
         Model expectedModel = generateDefaultTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -85,7 +85,7 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -102,7 +102,7 @@ class TagCommandTest {
 
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON, descriptorAddBoth);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
 
         Model expectedModel = generateDefaultTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
@@ -122,7 +122,7 @@ class TagCommandTest {
         TagCommand tagCommand = new TagCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build());
 
-        String expectedMessage = String.format(tagCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS, editedPerson);
 
         Model expectedModel = generateNoTagModel();
         expectedModel.setPerson(defaultFirst, editedPerson);
