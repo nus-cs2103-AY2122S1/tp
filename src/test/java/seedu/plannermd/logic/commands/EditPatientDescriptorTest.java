@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_BIRTH_DATE_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_BIRTH_DATE_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -56,5 +58,13 @@ public class EditPatientDescriptorTest {
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different birth date -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        //same birth date -> returns true
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_AMY).build();
+        assertTrue(DESC_AMY.equals(editedAmy));
     }
 }

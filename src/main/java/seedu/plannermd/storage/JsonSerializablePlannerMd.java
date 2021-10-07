@@ -56,5 +56,5 @@ class JsonSerializablePlannerMd {
         }
         return plannerMd;
     }
-
 }
+

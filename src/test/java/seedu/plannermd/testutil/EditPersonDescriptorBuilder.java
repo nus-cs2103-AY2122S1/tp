@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand.EditPatientDescriptor;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
@@ -29,7 +30,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPatientDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPatientDescriptor} with fields containing
+     * {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPatientCommand.EditPatientDescriptor();
@@ -37,11 +39,13 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setBirthDate(person.getBirthDate());
         descriptor.setTags(person.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditPatientDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -49,7 +53,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditPatientDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -57,7 +62,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditPatientDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -65,7 +71,8 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPatientDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditPatientDescriptor} that we are
+     * building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -73,8 +80,18 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPatientDescriptor}
+     * Sets the {@code BirthDate} of the {@code EditPersonDescriptor}
      * that we are building.
+     */
+    public EditPersonDescriptorBuilder withBirthDate(String birthDate) {
+        descriptor.setBirthDate(new BirthDate(birthDate));
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code EditPersonDescriptor} ======= Parses the {@code tags} into a
+     * {@code Set<Tag>} and set it to the {@code EditPatientDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());

@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
@@ -22,6 +23,7 @@ public class PatientBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_BIRTH_DATE = "20/07/1964";
     public static final String DEFAULT_REMARK = "";
     public static final String DEFAULT_RISK = "LOW";
 
@@ -29,6 +31,7 @@ public class PatientBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private BirthDate birthDate;
     private Remark remark;
     private Set<Tag> tags;
     private Risk risk;
@@ -41,6 +44,7 @@ public class PatientBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        birthDate = new BirthDate(DEFAULT_BIRTH_DATE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
         risk = new Risk(DEFAULT_RISK);
@@ -54,6 +58,7 @@ public class PatientBuilder {
         phone = patientToCopy.getPhone();
         email = patientToCopy.getEmail();
         address = patientToCopy.getAddress();
+        birthDate = patientToCopy.getBirthDate();
         remark = patientToCopy.getRemark();
         tags = new HashSet<>(patientToCopy.getTags());
         risk = patientToCopy.getRisk();
@@ -68,9 +73,10 @@ public class PatientBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Patient} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code Patient} that we are building.
      */
-    public PatientBuilder withTags(String ... tags) {
+    public PatientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -92,6 +98,14 @@ public class PatientBuilder {
     }
 
     /**
+     * Sets the {@code Email} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withBirthDate(String birthDate) {
+        this.birthDate = new BirthDate(birthDate);
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code Patient} that we are building.
      */
     public PatientBuilder withAddress(String address) {
@@ -100,7 +114,8 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Patient} that we are building.
+     * Sets the {@code Remark} of the
+     * {@code Patient} that we are building.
      */
     public PatientBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
@@ -108,8 +123,8 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Risk} of the {@code Patient} that we are building.
-     * Accepts UNCLASSIFIED risk.
+     * Sets the {@code Risk} of the {@code Patient} that we are building. Accepts
+     * UNCLASSIFIED risk.
      */
     public PatientBuilder withRisk(String risk) {
         this.risk = Risk.getUnclassifiableRisk(risk);
@@ -117,7 +132,7 @@ public class PatientBuilder {
     }
 
     public Patient build() {
-        return new Patient(name, phone, email, address, remark, tags, risk);
+        return new Patient(name, phone, email, address, birthDate, remark, tags, risk);
     }
 
 }

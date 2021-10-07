@@ -23,12 +23,9 @@ import seedu.plannermd.model.tag.Tag;
 public class DeletePatientTagCommand extends DeleteTagCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tag from the person identified "
-            + "by the index number used in the displayed person list.\n"
-            + "Parameters: "
-            + PREFIX_ID + "ID (must be a positive integer) "
-            + PREFIX_TAG + "TAG\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "1 "
-            + PREFIX_TAG + "healthy";
+            + "by the index number used in the displayed person list.\n" + "Parameters: " + PREFIX_ID
+            + "ID (must be a positive integer) " + PREFIX_TAG + "TAG\n" + "Example: " + COMMAND_WORD + " " + PREFIX_ID
+            + "1 " + PREFIX_TAG + "healthy";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag from Patient: %1$s";
     public static final String MESSAGE_INVALID_TAG = "The tag does not exist.";
@@ -52,7 +49,8 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
      * Executes the command to delete a tag from a patient.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return {@code CommandResult} which represents the result after executing this command.
+     * @return {@code CommandResult} which represents the result after executing
+     *         this command.
      * @throws CommandException if index or tag is invalid.
      */
     @Override
@@ -71,10 +69,9 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
         }
 
         existingTags.remove(tag);
-        Patient editedPatient = new Patient(
-                patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), patientToEdit.getRemark(), existingTags, patientToEdit.getRisk()
-        );
+        Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
+                patientToEdit.getAddress(), patientToEdit.getBirthDate(), patientToEdit.getRemark(), existingTags,
+                patientToEdit.getRisk());
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
@@ -96,7 +93,6 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
 
         // state check
         DeletePatientTagCommand c = (DeletePatientTagCommand) other;
-        return index.equals(c.index)
-                && tag.equals(c.tag);
+        return index.equals(c.index) && tag.equals(c.tag);
     }
 }
