@@ -35,14 +35,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setModTrackerFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setModuleTrackerFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setModTrackerFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setModuleTrackerFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -60,14 +60,14 @@ public class ModelManagerTest {
 
     @Test
     public void setModuleTrackerFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setModTrackerFilePath(null));
+        assertThrows(NullPointerException.class, () -> modelManager.setModuleTrackerFilePath(null));
     }
 
     @Test
     public void setModuleTrackerFilePath_validPath_setsModuleTrackerFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setModTrackerFilePath(path);
-        assertEquals(path, modelManager.getModTrackerFilePath());
+        modelManager.setModuleTrackerFilePath(path);
+        assertEquals(path, modelManager.getModuleTrackerFilePath());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setModTrackerFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setModuleTrackerFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(moduleTracker, differentUserPrefs)));
     }
 }

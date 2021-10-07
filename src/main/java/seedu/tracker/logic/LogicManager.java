@@ -65,8 +65,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getModTrackerFilePath() {
-        return model.getModTrackerFilePath();
+    public Path getModuleTrackerFilePath() {
+        return model.getModuleTrackerFilePath();
     }
 
     @Override

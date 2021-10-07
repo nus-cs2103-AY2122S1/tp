@@ -30,8 +30,8 @@ public class AddCommand extends Command {
             + PREFIX_TITLE + "Software Engineering "
             + PREFIX_DESCRIPTION + "Covers the main areas of software development "
             + PREFIX_MC + "4 "
-            + PREFIX_TAG + "Core Mod " //temp placeholder
-            + PREFIX_TAG + "Important"; //temp placeholder
+            + PREFIX_TAG + "Core " //temp placeholder
+            + PREFIX_TAG + "UE"; //temp placeholder
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the module tracker";

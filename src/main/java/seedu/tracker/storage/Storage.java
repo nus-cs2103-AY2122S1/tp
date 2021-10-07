@@ -27,6 +27,6 @@ public interface Storage extends ModuleTrackerStorage, UserPrefsStorage {
     Optional<ReadOnlyModuleTracker> readModuleTracker() throws DataConversionException, IOException;
 
     @Override
-    void saveModuleTracker(ReadOnlyModuleTracker moduletracker) throws IOException;
+    void saveModuleTracker(ReadOnlyModuleTracker moduleTracker) throws IOException;
 
 }
