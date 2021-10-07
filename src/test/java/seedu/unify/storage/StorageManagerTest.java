@@ -2,7 +2,7 @@ package seedu.unify.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.unify.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
 
 import java.nio.file.Path;
 

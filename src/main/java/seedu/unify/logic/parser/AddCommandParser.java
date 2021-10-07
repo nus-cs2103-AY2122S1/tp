@@ -16,7 +16,7 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Address;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Person;
+import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Phone;
 
 /**
@@ -44,9 +44,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Task task = new Task(name, phone, email, address, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(task);
     }
 
     /**
