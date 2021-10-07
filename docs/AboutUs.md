@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/wz27.png" width="200px">
 
 [[github](http://github.com/wz27)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/wz27.md)]
 
 * Role: Integration, Scheduling and Tracking
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of
