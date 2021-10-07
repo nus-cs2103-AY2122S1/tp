@@ -139,6 +139,13 @@ public class ModelManager implements Model {
         addressBook.setTask(target, editedTask);
     }
 
+    @Override
+    public void completeTask(Task target) {
+        requireAllNonNull(target, target);
+        target.markTaskComplete();
+
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**

@@ -105,6 +105,12 @@ public interface Model {
     void deleteTask(Task target);
 
     /**
+     * Marks the given task as completed.
+     * The task must exist in the address book.
+     */
+    void completeTask(Task target);
+
+    /**
      * Adds the given task.
      * {@code task} must not already exist in the address book.
      */

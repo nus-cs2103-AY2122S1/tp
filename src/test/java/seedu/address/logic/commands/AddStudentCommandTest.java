@@ -161,6 +161,11 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public void completeTask(Task target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
