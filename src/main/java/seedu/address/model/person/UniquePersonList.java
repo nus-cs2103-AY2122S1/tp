@@ -166,6 +166,7 @@ public class UniquePersonList implements Iterable<Person> {
                             return code1.compareTo(code2);
                         }
                     };
+
                     Collections.sort(o1List, comparator);
                     Collections.sort(o2List, comparator);
 
@@ -178,17 +179,20 @@ public class UniquePersonList implements Iterable<Person> {
                                 return -1;
                             } else if (c1.compareTo(c2) > 0) {
                                 return 1;
-                            } else if (i == o1List.size() - 1) {
-                                // Will only reach here if c1.compareTo(c2) == 0
-                                // Last item in o1List
-                                if (o1List.size() == o2List.size()) {
-                                    // Both list is same
-                                    return o1.getName().compareTo(o2.getName());
-                                } else {
-                                    // o2List is longer than o1List
-                                    // if o2List is shorter than o1List, won't enter the second loop
-                                    return -1;
+                            } else {
+                                if (i == o1List.size() - 1) {
+                                    // Will only reach here if c1.compareTo(c2) == 0
+                                    // Last item in o1Lis
+                                    if (o1List.size() == o2List.size()) {
+                                        // Both list is same
+                                        return o1.getName().compareTo(o2.getName());
+                                    } else {
+                                        // o2List is longer than o1List
+                                        // if o2List is shorter than o1List, won't enter the second loop
+                                        return -1;
+                                    }
                                 }
+                                break;
                             }
                         }
                     }

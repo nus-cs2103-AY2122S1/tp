@@ -6,8 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICIA;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.JOHN;
+import static seedu.address.testutil.TypicalPersons.NOAH;
+import static seedu.address.testutil.TypicalPersons.OLIVIA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -133,7 +137,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void sortAddressBook() {
+    public void sortAddressBookByName_success() {
         AddressBook addressBook = new AddressBook();
         addressBook.addPerson(BOB);
         addressBook.addPerson(ALICE);
@@ -146,6 +150,27 @@ public class ModelManagerTest {
         expectedModelManager.setAddressBook(expectedAddressBook);
 
         modelManager.sortAddressBook(SortCommandParser.SortableField.NAME);
+        assertEquals(expectedModelManager, modelManager);
+    }
+
+    @Test
+    public void sortAddressBookByModule_success() {
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(JOHN);
+        addressBook.addPerson(OLIVIA);
+        addressBook.addPerson(ALICIA);
+        addressBook.addPerson(NOAH);
+        modelManager.setAddressBook(addressBook);
+
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.addPerson(NOAH);
+        expectedAddressBook.addPerson(ALICIA);
+        expectedAddressBook.addPerson(OLIVIA);
+        expectedAddressBook.addPerson(JOHN);
+        ModelManager expectedModelManager = new ModelManager();
+        expectedModelManager.setAddressBook(expectedAddressBook);
+
+        modelManager.sortAddressBook(SortCommandParser.SortableField.MODULE_CODES);
         assertEquals(expectedModelManager, modelManager);
     }
 }
