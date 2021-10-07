@@ -12,13 +12,24 @@ public class Toggle extends UiPart<Region> {
 
     private static final String FXML = "Toggle.fxml";
 
+    private final Runnable personsToggler;
+    private final Runnable tasksToggler;
+
     @FXML
     private ToggleButton clients;
     @FXML
     private ToggleButton tasks;
 
-    public Toggle() {
+    /**
+     * Creates a {@code Toggle} with the given {@code Runnable}s.
+     *
+     * @param personsToggler toggle that makes the UI lists persons
+     * @param tasksToggler toggle that makes the UI lists tasks
+     */
+    public Toggle(Runnable personsToggler, Runnable tasksToggler) {
         super(FXML);
+        this.personsToggler = personsToggler;
+        this.tasksToggler = tasksToggler;
     }
 
     /**
@@ -26,6 +37,14 @@ public class Toggle extends UiPart<Region> {
      */
     @FXML
     private void handleClientsPressed() {
-        
+        personsToggler.run();
+    }
+
+    /**
+     * Handles the Tasks button pressed event.
+     */
+    @FXML
+    private void handleTasksPressed() {
+        tasksToggler.run();
     }
 }
