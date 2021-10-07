@@ -60,10 +60,14 @@ public class TuitionClass {
         if (otherTuition == this) {
             return true;
         }
-
-        return otherTuition != null
-                && otherTuition.getTimeslot().equals(getTimeslot());
+        System.out.println(otherTuition.getName() + ": " + otherTuition.getTimeslot() + "  " + getName() + ": " + getTimeslot());
+        System.out.println(otherTuition.getTimeslot().equals(timeslot));
+//        return otherTuition.getTimeslot().toString().equals(getTimeslot().toString());
+        return otherTuition.getTimeslot().equals(getTimeslot());
     }
+
+    //addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123
+    //addclass n/cs2100 l/10 c/4 ts/Mon 13:00-14:00 s/John Doe
 
     @Override
     public boolean equals(Object other) {
@@ -76,11 +80,7 @@ public class TuitionClass {
         }
 
         TuitionClass otherClass = (TuitionClass) other;
-        return otherClass.getName().equals(getName())
-                && otherClass.getLimit().equals(getLimit())
-                && otherClass.getCounter().equals(getCounter())
-                && otherClass.getTimeslot().equals(getTimeslot())
-                && otherClass.getStudent().equals(getStudent());
+        return otherClass.getTimeslot().equals(getTimeslot());
     }
 
     @Override

@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
 public class AddClassCommand extends Command {
@@ -25,7 +26,8 @@ public class AddClassCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/Physics l/10 c/4 ts/Mon 4pm, s/";
     private static final String MESSAGE_CLASS_LIMIT_EXCEEDED = "The class limit has been exceeded.";
 
-
+    private static final String MESSAGE_TIMESLOT_FORMAT = "The format for time slot should be WWW HH:MM-HH:MM \n"
+            + "Example: Mon 11:00-14:00";
     private TuitionClass toAdd;
 
     /**
@@ -45,6 +47,10 @@ public class AddClassCommand extends Command {
         ArrayList<String> invalidStudents = new ArrayList<>();
         ArrayList<Person> validStudentsAsPerson = new ArrayList<>();
         requireNonNull(model);
+        Timeslot timeslot = toAdd.getTimeslot();
+        if (!timeslot.isFormatCorrect()) {
+            throw new CommandException(MESSAGE_TIMESLOT_FORMAT);
+        }
         if (model.hasTuition(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CLASS);
         }
