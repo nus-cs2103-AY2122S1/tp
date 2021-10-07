@@ -60,17 +60,16 @@ public class HelpWindow extends UiPart<Stage> {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            Label label = new Label(builder.toString());
-            label.setVisible(false);
-            markdownView.mdStringProperty().bind(label.textProperty());
-            markdownView.getStylesheets().add("/view/markdown.css");
-            ScrollPane content = new ScrollPane(markdownView);
-            content.setFitToWidth(true);
-            HBox temp = new HBox(label, content);
-            temp.getChildren().add(copyButton);
-            root.setScene(new Scene(temp, 750, 400));
         }
+        Label label = new Label(builder.toString());
+        label.setVisible(false);
+        markdownView.mdStringProperty().bind(label.textProperty());
+        markdownView.getStylesheets().add("/view/markdown.css");
+        ScrollPane content = new ScrollPane(markdownView);
+        content.setFitToWidth(true);
+        HBox temp = new HBox(label, content);
+        temp.getChildren().add(copyButton);
+        root.setScene(new Scene(temp, 750, 400));
     }
 
     /**

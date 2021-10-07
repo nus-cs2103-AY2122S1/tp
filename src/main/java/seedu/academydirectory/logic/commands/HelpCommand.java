@@ -10,25 +10,27 @@ import seedu.academydirectory.model.Model;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions for the command in query\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Shows program usage instructions for the command in query\n"
             + "Example: " + COMMAND_WORD + "add";
-
     public static final String SHOWING_HELP_MESSAGE = "Showing help.";
-
     public static final String MESSAGE_HELP_SUCCESS = "Show help for command: %1$s";
-
     public static final String MESSAGE_ARGUMENTS = "Syntax: %2$s";
-    private final String syntax;
     private static final String[] APPROVED_COMMAND = {
-            "add", "attendance", "clear", "delete", "edit",
-            "exit", "find", "list", "retrieve"
+        "add", "attendance", "clear", "delete", "edit",
+        "exit", "find", "list", "retrieve"
     };
+
+    private final String syntax;
 
     public HelpCommand() {
         this.syntax = null;
     }
 
+    /**
+     * Constructor for the Help command
+     * @param syntax of the command needed to be clarified by the users
+     */
     public HelpCommand(String syntax) {
         requireAllNonNull(syntax);
         this.syntax = syntax;
