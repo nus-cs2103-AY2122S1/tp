@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -20,7 +20,6 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TeleHandle;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing student in the studentId book.
@@ -181,23 +180,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentId);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        //  public void setTags(Set<Tag> tags) {
-        //      this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        //  }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        //        public Optional<Set<Tag>> getTags() {
-        //            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        //        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -217,7 +199,6 @@ public class EditCommand extends Command {
                     && getStudentId().equals(e.getStudentId())
                     && getEmail().equals(e.getEmail())
                     && getTeleHandle().equals(e.getTeleHandle());
-                    // && getTags().equals(e.getTags());
         }
     }
 }
