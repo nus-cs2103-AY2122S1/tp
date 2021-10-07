@@ -26,12 +26,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_FRIEND
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalMembers.AMY;
+import static seedu.address.testutil.TypicalMembers.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+<<<<<<< HEAD
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -39,12 +40,22 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.position.Position;
 import seedu.address.testutil.PersonBuilder;
+=======
+import seedu.address.model.member.Address;
+import seedu.address.model.member.Email;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.MemberBuilder;
+>>>>>>> master
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
+<<<<<<< HEAD
         Person expectedPerson = new PersonBuilder(BOB).withPositions(VALID_POSITION_FRIEND).build();
 
         // whitespace only preamble
@@ -73,14 +84,48 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, new AddCommand(expectedPersonMultiplePositions));
+=======
+        Member expectedMember = new MemberBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedMember));
+
+        // multiple names - last name accepted
+        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedMember));
+
+        // multiple phones - last phone accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedMember));
+
+        // multiple emails - last email accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedMember));
+
+        // multiple addresses - last address accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
+                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedMember));
+
+        // multiple tags - all accepted
+        Member expectedMemberMultipleTags = new MemberBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedMemberMultipleTags));
+>>>>>>> master
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
+<<<<<<< HEAD
         // zero positions
         Person expectedPerson = new PersonBuilder(AMY).withPositions().build();
+=======
+        // zero tags
+        Member expectedMember = new MemberBuilder(AMY).withTags().build();
+>>>>>>> master
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedMember));
     }
 
     @Test
