@@ -9,6 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -21,7 +22,15 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validIdArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new IdContainsNumberPredicate(Arrays.asList("#140262")));
+        assertParseSuccess(parser, "#140262", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validNameArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
