@@ -49,9 +49,9 @@ public class PersonCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
-        address.setText(student.getAddress().value);
-        email.setText(student.getEmail().value);
+        phone.setText("### Phone field deprecated ###");
+        address.setText("### Address field deprecated ###");
+        email.setText("### Email field deprecated ###");
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
