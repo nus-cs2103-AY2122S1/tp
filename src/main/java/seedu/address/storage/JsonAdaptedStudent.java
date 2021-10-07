@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,8 +12,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -24,6 +29,9 @@ class JsonAdaptedStudent {
 
     private final String name;
     private final String id;
+    // TODO: Add Jackson-friendly versions of Group, Assessment and Score. a.k.a. JsonAdaptedGroup etc.
+    private final List<Group> groups = new ArrayList<>();
+    private final Map<Assessment, Score> scores = new HashMap<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -31,9 +39,17 @@ class JsonAdaptedStudent {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("id") String id,
+                              @JsonProperty("groups") List<Group> groups,
+                              @JsonProperty("scores") Map<Assessment, Score> scores,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.id = id;
+        if (groups != null) {
+            this.groups.addAll(groups);
+        }
+        if (scores != null) {
+            this.scores.putAll(scores);
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -56,10 +72,15 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> studentTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            studentTags.add(tag.toModelType());
         }
+
+        // TODO: Deserialise groups and scores from their Jackson-friendly versions (once available), and add to these
+        //  collections.
+        final List<Group> groups = new ArrayList<>();
+        final Map<Assessment, Score> scores = new HashMap<>();
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -102,8 +123,8 @@ class JsonAdaptedStudent {
 //        }
 //        final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Student(modelName, modelId, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(studentTags);
+        return new Student(modelName, modelId, groups, scores, modelTags);
     }
 
 }
