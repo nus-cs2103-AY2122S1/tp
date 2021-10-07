@@ -106,6 +106,7 @@ Format: `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
 * START_TIME is in 2400 hours format and can only be between 0900 and 1900 (as lessons can only be conducted between 9am to 9pm).
 * Lessons are fixed at two hour periods.
 * The cost must be a non-negative number 0.0, 2.0, 3.3, …
+</div>
 
 Examples:
 * `add -l s/Science g/P5 d/Wed t/1230 c/12.0`
