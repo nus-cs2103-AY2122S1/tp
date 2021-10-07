@@ -24,6 +24,7 @@ public class Student {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private Attendance attendance;
+    private Assessment assessment;
 
     /**
      * Every field must be present and not null.
@@ -36,12 +37,14 @@ public class Student {
         this.address = address;
         this.tags.addAll(tags);
         this.attendance = new Attendance(10); // for now, we just assume its 10.
+        this.assessment = new Assessment();
     }
 
     /**
-     * Constructor for Student with Attendance.
+     * Constructor for Student with Attendance and Assessment.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Attendance attendance, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Address address, Attendance attendance, Assessment assessment,
+                   Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -49,6 +52,7 @@ public class Student {
         this.address = address;
         this.tags.addAll(tags);
         this.attendance = attendance;
+        this.assessment = assessment;
     }
 
     public void setAttendance(Attendance attendance) {
@@ -73,6 +77,10 @@ public class Student {
 
     public Attendance getAttendance() {
         return attendance;
+    }
+
+    public Assessment getAssessment() {
+        return assessment;
     }
 
     /**

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.academydirectory.model.student.Address;
+import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
@@ -29,6 +30,7 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private Attendance attendance;
+    private Assessment assessment;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -40,6 +42,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         attendance = new Attendance(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
+        assessment = new Assessment();
     }
 
     /**
@@ -52,6 +55,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         attendance = studentToCopy.getAttendance();
+        assessment = studentToCopy.getAssessment();
     }
 
     /**
@@ -101,6 +105,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Assessment} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssessment() {
+        this.assessment = new Assessment();
         return this;
     }
 

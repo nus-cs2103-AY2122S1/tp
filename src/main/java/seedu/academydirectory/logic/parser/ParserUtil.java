@@ -10,7 +10,9 @@ import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.Address;
+import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Email;
+import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.tag.Tag;
@@ -134,5 +136,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String assessment} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String} is invalid.
+     */
+    public static String parseAssessment(String assessment) throws ParseException {
+        requireNonNull(assessment);
+        String trimmedAssessment = assessment.trim();
+        if (!Assessment.isValidAssessment(trimmedAssessment)) {
+            throw new ParseException(Assessment.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedAssessment;
+    }
+
+    /**
+     * Parses a {@code String grade} into a {@code Integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Integer} is invalid.
+     */
+    public static Integer parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        if (!Grade.isValidGrade(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return Integer.parseInt(trimmedGrade);
     }
 }
