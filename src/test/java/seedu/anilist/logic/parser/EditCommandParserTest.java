@@ -4,11 +4,11 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -94,7 +94,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_ANIME;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AKIRA;
-        EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA).build();
+        EditCommand.EditAnimeDescriptor descriptor =
+                new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

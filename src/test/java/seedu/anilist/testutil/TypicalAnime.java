@@ -2,8 +2,8 @@ package seedu.anilist.testutil;
 
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
