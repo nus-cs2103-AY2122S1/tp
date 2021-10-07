@@ -6,7 +6,7 @@
     "address": "4th street",
     "role": "Detective",
     "employmentType": "Full time",
-    "experience" : 0,
+    "experience" : "0",
     "levelOfEducation": "PhD",
     "expectedSalary" : "6300"
   } ]
