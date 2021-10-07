@@ -1,12 +1,21 @@
 package seedu.academydirectory.ui;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
+import com.sandec.mdfx.MarkdownView;
+
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.LogsCenter;
 
@@ -15,17 +24,20 @@ import seedu.academydirectory.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t15-3.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "### User guide\n#### " + USERGUIDE_URL + "\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final File USER_GUIDE = new File("docs/UserGuide.md");
     private static final String FXML = "HelpWindow.fxml";
+    private static final String MARKDOWN_CSS = "/view/markdown.css";
+    private static final String SUMMARY_HEADER = "## Command summary";
+
+    private static final int DEFAULT_WIDTH = 750;
+    private static final int DEFAULT_HEIGHT = 400;
 
     @FXML
     private Button copyButton;
-
-    @FXML
-    private Label helpMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -34,7 +46,22 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+
+        StringBuilder builder = new StringBuilder(HELP_MESSAGE);
+        addHelpContent(builder);
+        Label label = new Label(builder.toString());
+        label.setVisible(false);
+
+        MarkdownView markdownView = new MarkdownView();
+        markdownView.mdStringProperty().bind(label.textProperty());
+        markdownView.getStylesheets().add(MARKDOWN_CSS);
+
+        ScrollPane content = new ScrollPane(markdownView);
+        content.setFitToWidth(true);
+        HBox container = new HBox(label, content);
+        container.getChildren().add(copyButton);
+
+        root.setScene(new Scene(container, DEFAULT_WIDTH, DEFAULT_HEIGHT));
     }
 
     /**
@@ -42,6 +69,29 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    /**
+     * Get markdown content of UG for conversion to help window
+     * @param builder string builder to append
+     */
+    private void addHelpContent(StringBuilder builder) {
+        try {
+            FileReader fileReader = new FileReader(USER_GUIDE);
+            Scanner sc = new Scanner(fileReader);
+            boolean isSummary = false;
+            while (sc.hasNextLine()) {
+                String nextLine = sc.nextLine().trim();
+                if (nextLine.contains(SUMMARY_HEADER)) {
+                    isSummary = true;
+                }
+                if (isSummary) {
+                    builder.append(nextLine).append("\n");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
