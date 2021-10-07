@@ -2,14 +2,19 @@ package seedu.address.ui;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * A data model for the table in the help window.
+ */
 public class CommandDetails {
     private final SimpleStringProperty featureName = new SimpleStringProperty("");
     private final SimpleStringProperty commandStructure = new SimpleStringProperty("");
 
     /**
+     * Initializes a {@code CommandDetails} object with the respective
+     * name and structure of the command.
      *
-     * @param featureName
-     * @param commandStructure
+     * @param featureName The name of the feature.
+     * @param commandStructure The command structure of the feature.
      */
     public CommandDetails(String featureName, String commandStructure) {
         setFeatureName(featureName);
