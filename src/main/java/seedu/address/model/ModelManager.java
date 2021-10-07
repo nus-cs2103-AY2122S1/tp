@@ -95,6 +95,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasStudentId(Person person) {
+        requireNonNull(person);
+        return addressBook.hasStudentId(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

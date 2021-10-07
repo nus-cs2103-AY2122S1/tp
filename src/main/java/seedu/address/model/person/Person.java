@@ -17,6 +17,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final StudentId id;
     private final Phone phone;
     private final Email email;
 
@@ -27,9 +28,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Mod> mods) {
-        requireAllNonNull(name, phone, email, address, mods);
+    public Person(Name name, StudentId id, Phone phone, Email email, Address address, Set<Mod> mods) {
+        requireAllNonNull(name, id, phone, email, address, mods);
         this.name = name;
+        this.id = id;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -38,6 +40,10 @@ public class Person {
 
     public Name getName() {
         return name;
+    }
+
+    public StudentId getStudentId() {
+        return id;
     }
 
     public Phone getPhone() {
@@ -105,6 +111,8 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Student ID: ")
+                .append(getStudentId())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
