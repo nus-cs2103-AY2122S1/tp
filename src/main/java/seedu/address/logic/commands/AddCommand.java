@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to the ProgrammerError.
  */
 public class AddCommand extends Command {
 

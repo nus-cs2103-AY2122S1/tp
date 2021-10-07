@@ -1,10 +1,9 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -42,7 +41,8 @@ public class PersonUtil {
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_STUDENTID).append(studentId.studentId).append(" "));
+        descriptor.getStudentId().ifPresent(studentId ->
+                sb.append(PREFIX_STUDENTID).append(studentId.studentId).append(" "));
         descriptor.getClassId().ifPresent(classId -> sb.append(PREFIX_CLASSID).append(classId.classId).append(" "));
         descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade.grade).append(" "));
 

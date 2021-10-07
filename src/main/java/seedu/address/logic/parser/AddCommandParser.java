@@ -1,13 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.ClassId;
+import seedu.address.model.person.Grade;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
+
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -30,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
-        ClassId classId= ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).get());
+        ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASSID).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
 
         Person person = new Person(name, studentId, classId, grade);
