@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
-public class DeleteTaskCommand extends Command{
+public class DeleteTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteTask";
 
@@ -22,7 +22,7 @@ public class DeleteTaskCommand extends Command{
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
-    
+
     public DeleteTaskCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -47,5 +47,5 @@ public class DeleteTaskCommand extends Command{
                 || (other instanceof DeleteTaskCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteTaskCommand) other).targetIndex)); // state check
     }
-    
+
 }
