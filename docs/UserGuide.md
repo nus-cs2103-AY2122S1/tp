@@ -56,22 +56,15 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a task: `add` (coming soon)
+### Adding a person: `add` (coming soon)
 
-Add a task to the task list.
+Adds a person to the address book.
 
-Format: 
-- <code> add <i>n/task_name d/date (t/time) </i> </code>
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-Interpretation
-* Adds task with the name <code><i>n/task_name</i></code>
-* The task is added for that date only at the given time
-  * Useful if it is an event or for marking dates for exams
-* If <code><i>t/time</i></code> is provided:
-  * The task will be scheduled to <strong>end</strong> at that specified time
-* If <code><i>t/time</i></code> is not provided:
-  * The task will be schedule to <strong>end</strong> at 23:59 of the date provided
-
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of tags (including 0)
+</div>
 
 Examples:
 * `add n/CS2103 test d/2021-12-01 t/16:30` adds the `CS2103 test` task on `2021-12-01`, scheduled to end at `16:30`
@@ -208,7 +201,7 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | <code> add <i>n/task_name d/date (t/time) </i> </code> <br>e.g.  `add n/CS2103 test d/2021-12-01 t/16:30`
+**Add** | `TODO`
 **Delete** | <code>delete <i>task_id</i></code> <br> <code>delete <i>n/task_name (d/date)</i> </code> <br> e.g. <code>delete n/quiz d/2021-10-10 </code>
 **Show** | `show`
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
