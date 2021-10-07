@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalItems.CHOCOCHIP;
 import static seedu.address.testutil.TypicalItems.DALGONA_COFFEE;
 import static seedu.address.testutil.TypicalItems.EGGNOG;
 import static seedu.address.testutil.TypicalItems.FOREST_CAKE;
-
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import java.util.Arrays;
