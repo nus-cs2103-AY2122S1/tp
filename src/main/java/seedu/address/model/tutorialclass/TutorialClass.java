@@ -1,6 +1,6 @@
 package seedu.address.model.tutorialclass;
 
-import seedu.address.model.person.Person;
+
 import seedu.address.model.tag.Tag;
 
 import java.util.HashSet;
