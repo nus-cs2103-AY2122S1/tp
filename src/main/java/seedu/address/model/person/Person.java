@@ -24,6 +24,7 @@ public class Person {
     private final Role role;
     private final EmploymentType employmentType;
     private final ExpectedSalary expectedSalary;
+    private final LevelOfEducation levelOfEducation;
     private final Experience experience;
 
     // Data fields
@@ -33,9 +34,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role,
-                EmploymentType employmentType, ExpectedSalary expectedSalary, Experience experience, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, role, expectedSalary, experience, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
+                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, expectedSalary, levelOfEducation, experience, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +45,7 @@ public class Person {
         this.role = role;
         this.employmentType = employmentType;
         this.expectedSalary = expectedSalary;
+        this.levelOfEducation = levelOfEducation;
         this.experience = experience;
         this.tags.addAll(tags);
     }
@@ -73,6 +76,10 @@ public class Person {
 
     public ExpectedSalary getExpectedSalary() {
         return expectedSalary;
+    }
+
+    public LevelOfEducation getLevelOfEducation() {
+        return levelOfEducation;
     }
 
     public Experience getExperience() {
@@ -122,6 +129,7 @@ public class Person {
                 && otherPerson.getRole().equals(getRole())
                 && otherPerson.getEmploymentType().equals(getEmploymentType())
                 && otherPerson.getExpectedSalary().equals(getExpectedSalary())
+                && otherPerson.getLevelOfEducation().equals(getLevelOfEducation())
                 && otherPerson.getExperience().equals(getExperience())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -129,7 +137,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, employmentType, expectedSalary, experience, tags);
+        return Objects.hash(name, phone, email, address, role, employmentType,
+                expectedSalary, levelOfEducation, experience, tags);
     }
 
     @Override
@@ -148,6 +157,8 @@ public class Person {
                 .append(getEmploymentType())
                 .append("; Expected Salary: ")
                 .append(getExpectedSalary())
+                .append("; Level of Education: ")
+                .append(getLevelOfEducation())
                 .append("; Years of Experience: ")
                 .append(getExperience());
 

@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPECTED_SALARY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPERIENCE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEVEL_OF_EDUCATION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -37,6 +39,7 @@ public class TypicalPersons {
             .withRole("Preschool Teacher")
             .withEmploymentType("Full time")
             .withExpectedSalary("2500")
+            .withLevelOfEducation("PhD")
             .withExperience(0)
             .withTags("friends").build();
 
@@ -47,6 +50,7 @@ public class TypicalPersons {
             .withRole("Doctor")
             .withEmploymentType("Part time")
             .withExpectedSalary("2700")
+            .withLevelOfEducation("Masters")
             .withExperience(1)
             .withTags("owesMoney", "friends").build();
 
@@ -57,6 +61,7 @@ public class TypicalPersons {
             .withRole("Electrical Engineer")
             .withEmploymentType("Temporary")
             .withExpectedSalary("5500")
+            .withLevelOfEducation("Elementary")
             .withExperience(2).build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
@@ -66,6 +71,7 @@ public class TypicalPersons {
             .withRole("Sales Assistant")
             .withEmploymentType("Internship")
             .withExpectedSalary("3500")
+            .withLevelOfEducation("Middle School")
             .withExperience(3)
             .withTags("friends").build();
 
@@ -76,6 +82,7 @@ public class TypicalPersons {
             .withRole("Toilet Cleaner")
             .withEmploymentType("Full time")
             .withExpectedSalary("5700")
+            .withLevelOfEducation("Bachelors")
             .withExperience(4).build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
@@ -85,6 +92,7 @@ public class TypicalPersons {
             .withRole("NTUC Cashier")
             .withEmploymentType("Part time")
             .withExpectedSalary("1900")
+            .withLevelOfEducation("High School")
             .withExperience(5).build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
@@ -94,6 +102,7 @@ public class TypicalPersons {
             .withRole("Waiter")
             .withEmploymentType("Internship")
             .withExpectedSalary("900")
+            .withLevelOfEducation("University")
             .withExperience(6).build();
 
     // Manually added
@@ -104,6 +113,7 @@ public class TypicalPersons {
             .withRole("Software Engineer")
             .withEmploymentType("Part time")
             .withExpectedSalary("3300")
+            .withLevelOfEducation("PhD")
             .withExperience(3).build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
@@ -113,6 +123,7 @@ public class TypicalPersons {
             .withRole("Software Tester")
             .withEmploymentType("Full time")
             .withExpectedSalary("7100")
+            .withLevelOfEducation("Masters")
             .withExperience(7).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -123,6 +134,7 @@ public class TypicalPersons {
             .withRole(VALID_ROLE_AMY)
             .withEmploymentType(VALID_EMPLOYMENT_TYPE_AMY)
             .withExpectedSalary(VALID_EXPECTED_SALARY_AMY)
+            .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
             .withExperience(VALID_EXPERIENCE_AMY)
             .withTags(VALID_TAG_FRIEND)
             .build();
@@ -134,6 +146,7 @@ public class TypicalPersons {
             .withRole(VALID_ROLE_BOB)
             .withEmploymentType(VALID_EMPLOYMENT_TYPE_BOB)
             .withExpectedSalary(VALID_EXPECTED_SALARY_BOB)
+            .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
             .withExperience(VALID_EXPERIENCE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();

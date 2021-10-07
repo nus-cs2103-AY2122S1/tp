@@ -18,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -31,6 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ROLE = "Softw@re Eng1n33r";
     private static final String INVALID_EMPLOYMENT_TYPE = "intern";
     private static final String INVALID_EXPECTED_SALARY = "-1200";
+    private static final String INVALID_LEVEL_OF_EDUCATION = "Kindergarten";
     private static final String INVALID_EXPERIENCE = "-1";
     private static final String INVALID_TAG = "#friend";
 
@@ -41,6 +43,7 @@ public class ParserUtilTest {
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_EMPLOYMENT_TYPE = "Internship";
     private static final String VALID_EXPECTED_SALARY = "1200";
+    private static final String VALID_LEVEL_OF_EDUCATION = "PhD";
     private static final String VALID_EXPERIENCE = "1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -226,6 +229,29 @@ public class ParserUtilTest {
         String expectedSalaryWithWhitespace = WHITESPACE + VALID_EXPECTED_SALARY + WHITESPACE;
         ExpectedSalary expectedExpectedSalary = new ExpectedSalary(VALID_EXPECTED_SALARY);
         assertEquals(expectedExpectedSalary, ParserUtil.parseExpectedSalary(expectedSalaryWithWhitespace));
+    }
+
+    @Test
+    public void parseLevelOfEducation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLevelOfEducation((String) null));
+    }
+
+    @Test
+    public void parseLevelOfEducation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLevelOfEducation(INVALID_LEVEL_OF_EDUCATION));
+    }
+
+    @Test
+    public void parseLevelOfEducation_validValueWithoutWhitespace_returnsLevelOfEducation() throws Exception {
+        LevelOfEducation expectedLevelOfEducation = new LevelOfEducation(VALID_LEVEL_OF_EDUCATION);
+        assertEquals(expectedLevelOfEducation, ParserUtil.parseLevelOfEducation(VALID_LEVEL_OF_EDUCATION));
+    }
+
+    @Test
+    public void parseLevelOfEducation_validValueWithWhitespace_returnsTrimmedLevelOfEducation() throws Exception {
+        String levelOfEducationWithWhitespace = WHITESPACE + VALID_LEVEL_OF_EDUCATION + WHITESPACE;
+        LevelOfEducation expectedLevelOfEducation = new LevelOfEducation(VALID_LEVEL_OF_EDUCATION);
+        assertEquals(expectedLevelOfEducation, ParserUtil.parseLevelOfEducation(levelOfEducationWithWhitespace));
     }
 
     @Test

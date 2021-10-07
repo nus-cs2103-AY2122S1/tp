@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String role;
     private final String employmentType;
     private final String expectedSalary;
+    private final String levelOfEducation;
     private final String experience;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -50,6 +52,7 @@ class JsonAdaptedPerson {
             @JsonProperty("role") String role,
             @JsonProperty("employmentType") String employmentType,
             @JsonProperty("expectedSalary") String expectedSalary,
+            @JsonProperty("levelOfEducation") String levelOfEducation,
             @JsonProperty("experience") String experience,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
@@ -59,6 +62,7 @@ class JsonAdaptedPerson {
         this.role = role;
         this.employmentType = employmentType;
         this.expectedSalary = expectedSalary;
+        this.levelOfEducation = levelOfEducation;
         this.experience = experience;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -76,6 +80,7 @@ class JsonAdaptedPerson {
         role = source.getRole().role;
         employmentType = source.getEmploymentType().employmentType;
         expectedSalary = source.getExpectedSalary().value;
+        levelOfEducation = source.getLevelOfEducation().levelOfEducation;
         experience = source.getExperience().value.toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -151,6 +156,15 @@ class JsonAdaptedPerson {
         }
         final ExpectedSalary modelExpectedSalary = new ExpectedSalary(expectedSalary);
 
+        if (levelOfEducation == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, LevelOfEducation.class.getSimpleName()));
+        }
+        if (!LevelOfEducation.isValidLevelOfEducation(levelOfEducation)) {
+            throw new IllegalValueException(LevelOfEducation.MESSAGE_CONSTRAINTS);
+        }
+        final LevelOfEducation modelLevelOfEducation = new LevelOfEducation(levelOfEducation);
+
         if (experience == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Experience.class.getSimpleName()));
@@ -164,7 +178,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole,
-                modelEmploymentType, modelExpectedSalary, modelExperience, modelTags);
+                modelEmploymentType, modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags);
     }
 
 }
