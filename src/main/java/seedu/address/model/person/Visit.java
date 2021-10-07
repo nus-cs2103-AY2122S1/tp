@@ -7,6 +7,8 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Visit {
+    public static final String MESSAGE_CONSTRAINTS = "Visit date should be of the format yyyy-MM-dd";
+
     public final String value;
 
     /**

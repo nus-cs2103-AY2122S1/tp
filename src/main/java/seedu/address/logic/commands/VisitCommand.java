@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -24,9 +24,9 @@ public class VisitCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing visit will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_VISIT + " [VISIT_DATE]\n"
+            + PREFIX_DATE + " [VISIT_DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_VISIT + " 2020-11-12";
+            + PREFIX_DATE + " 2020-11-12";
 
     public static final String MESSAGE_ADD_VISIT_SUCCESS = "Added visit to Person: %1$s";
     public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Removed visit from Person: %1$s";
@@ -54,8 +54,8 @@ public class VisitCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), visit, personToEdit.getTags());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getLanguage(),
+                personToEdit.getAddress(), personToEdit.getLastVisit(), visit, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

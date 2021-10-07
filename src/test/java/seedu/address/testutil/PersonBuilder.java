@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -19,14 +21,16 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_LANGUAGE = "English";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_VISIT = "11 Nov 2020";
+    public static final String DEFAULT_LAST_VISIT = "2021-01-01";
+    public static final String DEFAULT_VISIT = "";
 
     private Name name;
     private Phone phone;
-    private Email email;
+    private Language language;
     private Address address;
+    private Optional<LastVisit> lastVisit;
     private Visit visit;
     private Set<Tag> tags;
 
@@ -36,8 +40,9 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
+        language = new Language(DEFAULT_LANGUAGE);
         address = new Address(DEFAULT_ADDRESS);
+        lastVisit = Optional.ofNullable(new LastVisit(DEFAULT_LAST_VISIT));
         visit = new Visit(DEFAULT_VISIT);
         tags = new HashSet<>();
     }
@@ -48,8 +53,9 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
+        language = personToCopy.getLanguage();
         address = personToCopy.getAddress();
+        lastVisit = personToCopy.getLastVisit();
         visit = personToCopy.getVisit();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -79,6 +85,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code LastVisit} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastVisit(String lastVisit) {
+        this.lastVisit = Optional.ofNullable(new LastVisit(lastVisit));
+        return this;
+    }
+
+    /**
      * Sets the {@code Visit} of the {@code Person} that we are building.
      */
     public PersonBuilder withVisit(String visit) {
@@ -95,15 +109,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code Language} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public PersonBuilder withLanguage(String language) {
+        this.language = new Language(language);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, visit, tags);
+        return new Person(name, phone, language, address, lastVisit, visit, tags);
     }
 
 }

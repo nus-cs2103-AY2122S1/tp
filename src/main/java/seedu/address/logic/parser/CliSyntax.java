@@ -8,9 +8,11 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
+    public static final Prefix PREFIX_LANGUAGE = new Prefix("l/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_VISIT = new Prefix("at/");
+    public static final Prefix PREFIX_LAST_VISIT = new Prefix("lv/");
+    public static final Prefix PREFIX_VISIT = new Prefix("v/");
+    public static final Prefix PREFIX_DATE = new Prefix("at/");
 
 }

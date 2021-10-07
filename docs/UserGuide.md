@@ -91,21 +91,21 @@ title: User Guide
 
 Adds an elderly and all relevant details into SeniorLove.
 
-Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISITED] [v/VISIT_DATE]`
+Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT]`
 
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`, `LAST_VISITED` and `VISIT` may be optionally included.
 * `NAME` is the elderly’s name. **This must be included.**
 * `PHONE_NUMBER` is the elderly’s phone number. **This must be included.**
 * `LANGUAGE` is the elderly’s preferred language for communication. **This must be included.**
 * `ADDRESS` is the elderly’s address to be visited. **This must be included.**
-* `LAST_VISITED` is the last date that the user has visited the elderly. **This is optional to include.**
-* `VISIT_DATE` is the next scheduled date for the elderly’s visit. **This is optional to include.**
+* `LAST_VISIT` is the last date that the user has visited the elderly. **This is optional to include.**
+* `VISIT` is the next scheduled date for the elderly’s visit. **This is optional to include.**
 
 Examples:
-* `add n/John /p12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED` and `VISIT_DATE`.
-* `add n/Johnny /p87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31` adds an elderly and details without the `VISIT_DATE`.
-* `add n/Janet /p54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31` adds an elderly and details without the `LAST_VISITED`.
-* `add n/Jane /p54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 v/2021-10-31` adds an elderly and details with `LAST_VISITED` and `VISIT_DATE`.
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED` and `VISIT_DATE`.
+* `add n/Johnny p/87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31` adds an elderly and details without the `VISIT_DATE`.
+* `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31` adds an elderly and details without the `LAST_VISITED`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 v/2021-10-31` adds an elderly and details with `LAST_VISITED` and `VISIT_DATE`.
 
 
 ### Delete an elderly or corresponding visit : `delete`
@@ -246,10 +246,11 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISITED] [v/VISIT_DATE]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 1800 v/2021-11-08`
-**delete** | `delete [/v] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
-**edit** | `visit INDEX at/ VISIT_DATE`<br> e.g.,`visit 3 at/ 1900-11-08 1800`
-**find** | `find n/NAME`<br> e.g., `find n/yida`
+**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 1800 v/2021-11-08`
+**delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
+**visit** | `visit INDEX at/VISIT_DATE`<br> e.g.,`visit 3 at/1900-11-08`
+**edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 3 n/James`
+**find** | `find n/NAME` (Currently it is `find NAME`)<br> e.g., `find n/yida`
 **list** | `list`
 **clear** | `clear`
 **exit** | `exit`
