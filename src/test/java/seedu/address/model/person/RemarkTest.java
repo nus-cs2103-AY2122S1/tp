@@ -19,7 +19,6 @@ public class RemarkTest {
         assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
         // invalid remark
-        assertFalse(Remark.isValidRemark("")); // empty string
         assertFalse(Remark.isValidRemark(" ")); // spaces only
         assertFalse(Remark.isValidRemark("Ãgent")); // non-ASCII character
 
