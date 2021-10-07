@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -22,7 +22,8 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t10-1.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "For more Information, please refer to the user guide: \n" + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "For more Information, please refer to the user guide:\n"
+            + USERGUIDE_URL;
 
     private static final String ADD_NEW_CONTACT_FEATURE_NAME = "Add a New Contact";
     private static final String ADD_NEW_CONTACT_FEATURE_COMMAND = "add n/ te/ [p/] [e/] [a/<ADDRESS>] [t/]";
@@ -134,18 +135,27 @@ public class HelpWindow extends UiPart<Stage> {
      * help section table.
      */
     public void setUpCommandDetails() {
-        ObservableList<CommandDetails> helpSectionCommandDetails= helpTable.getItems();
+        ObservableList<CommandDetails> helpSectionCommandDetails = helpTable.getItems();
         helpSectionCommandDetails.clear();
 
-        CommandDetails addNewContactCommandDetails = new CommandDetails(ADD_NEW_CONTACT_FEATURE_NAME, ADD_NEW_CONTACT_FEATURE_COMMAND);
-        CommandDetails deleteContactCommandDetails = new CommandDetails(DELETE_CONTACT_FEATURE_NAME, DELETE_CONTACT_FEATURE_COMMAND);
-        CommandDetails editContactCommandDetails = new CommandDetails(EDIT_CONTACT_FEATURE_NAME, EDIT_CONTACT_FEATURE_COMMAND);
-        CommandDetails findContactByNameCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V1, FIND_CONTACT_FEATURE_COMMAND_V1);
-        CommandDetails findContactByTagCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V2, FIND_CONTACT_FEATURE_COMMAND_V2);
-        CommandDetails showContactByNameCommandDetails = new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V1, SHOW_CONTACT_FEATURE_COMMAND_V1);
-        CommandDetails showContactByIndexCommandDetails = new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V2, SHOW_CONTACT_FEATURE_COMMAND_V2);
-        CommandDetails importContactCommandDetails = new CommandDetails(IMPORT_CONTACT_FEATURE_NAME, IMPORT_CONTACT_FEATURE_COMMAND);
-        CommandDetails exportContactCommandDetails = new CommandDetails(EXPORT_CONTACT_FEATURE_NAME, EXPORT_CONTACT_FEATURE_COMMAND);
+        CommandDetails addNewContactCommandDetails = new CommandDetails(ADD_NEW_CONTACT_FEATURE_NAME,
+                ADD_NEW_CONTACT_FEATURE_COMMAND);
+        CommandDetails deleteContactCommandDetails = new CommandDetails(DELETE_CONTACT_FEATURE_NAME,
+                DELETE_CONTACT_FEATURE_COMMAND);
+        CommandDetails editContactCommandDetails = new CommandDetails(EDIT_CONTACT_FEATURE_NAME,
+                EDIT_CONTACT_FEATURE_COMMAND);
+        CommandDetails findContactByNameCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V1,
+                FIND_CONTACT_FEATURE_COMMAND_V1);
+        CommandDetails findContactByTagCommandDetails = new CommandDetails(FIND_CONTACT_FEATURE_NAME_V2,
+                FIND_CONTACT_FEATURE_COMMAND_V2);
+        CommandDetails showContactByNameCommandDetails = new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V1,
+                SHOW_CONTACT_FEATURE_COMMAND_V1);
+        CommandDetails showContactByIndexCommandDetails = new CommandDetails(SHOW_CONTACT_FEATURE_NAME_V2,
+                SHOW_CONTACT_FEATURE_COMMAND_V2);
+        CommandDetails importContactCommandDetails = new CommandDetails(IMPORT_CONTACT_FEATURE_NAME,
+                IMPORT_CONTACT_FEATURE_COMMAND);
+        CommandDetails exportContactCommandDetails = new CommandDetails(EXPORT_CONTACT_FEATURE_NAME,
+                EXPORT_CONTACT_FEATURE_COMMAND);
 
         helpSectionCommandDetails.add(addNewContactCommandDetails);
         helpSectionCommandDetails.add(deleteContactCommandDetails);
@@ -158,14 +168,18 @@ public class HelpWindow extends UiPart<Stage> {
         helpSectionCommandDetails.add(exportContactCommandDetails);
     }
 
+    /**
+     * Opens the user guide in the default web browser on
+     * the system.
+     */
     @FXML
     public void openUserGuide() {
         try {
             Desktop.getDesktop().browse(new URL(USERGUIDE_URL).toURI());
         } catch (IOException e) {
-            logger.severe("Could not open browser to show userguide.");
+            logger.severe("Could not open browser to show user guide.");
         } catch (URISyntaxException e) {
-            logger.severe("URL to userguide not formatted well.");
+            logger.severe("URL to user guide not formatted well.");
         }
     }
 }

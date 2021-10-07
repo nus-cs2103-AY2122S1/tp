@@ -6,6 +6,11 @@ public class CommandDetails {
     private final SimpleStringProperty featureName = new SimpleStringProperty("");
     private final SimpleStringProperty commandStructure = new SimpleStringProperty("");
 
+    /**
+     *
+     * @param featureName
+     * @param commandStructure
+     */
     public CommandDetails(String featureName, String commandStructure) {
         setFeatureName(featureName);
         setCommandStructure(commandStructure);
