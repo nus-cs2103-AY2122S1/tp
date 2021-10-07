@@ -8,17 +8,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidAcadStream(String)}
  */
 public class AcadStream {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Academic stream should only contain alphabetic characters and spaces.";
+    public static final String MESSAGE_CONSTRAINTS = "Academic stream should only contain alphanumeric characters, "
+            + "hyphens, parentheses, single quotation and spaces.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      * Academic stream can be any alphabetic character with or without space.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alpha}][\\p{Alpha} ]*";
+    public static final String VALIDATION_REGEX = "[-'()\\p{Alnum}][-'()\\p{Alnum} ]*";
 
-    public final String acadStream;
+    public final String value;
 
     /**
      * Constructs a {@code Stream}.
@@ -30,14 +30,14 @@ public class AcadStream {
         if (!acadStream.isEmpty()) {
             checkArgument(isValidAcadStream(acadStream), MESSAGE_CONSTRAINTS);
         }
-        this.acadStream = acadStream;
+        value = acadStream;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidAcadStream(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -46,24 +46,24 @@ public class AcadStream {
      * @return True if academic stream is empty.
      */
     public boolean isEmpty() {
-        return acadStream.isEmpty();
+        return value.isEmpty();
     }
 
     @Override
     public String toString() {
-        return acadStream;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AcadStream // instanceof handles nulls
-                && acadStream.equals(((AcadStream) other).acadStream)); // state check
+                && value.equals(((AcadStream) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return acadStream.hashCode();
+        return value.hashCode();
     }
 
 }

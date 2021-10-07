@@ -33,7 +33,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * stripped.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -46,7 +46,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -61,7 +61,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -76,7 +76,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
@@ -91,7 +91,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -106,14 +106,14 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String school} into a {@code School}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code school} is invalid.
      */
     public static School parseSchool(String school) throws ParseException {
         requireNonNull(school);
         String strippedSchName = school.strip();
-        if (!strippedSchName.isEmpty() && !School.isValidSchName(strippedSchName)) {
+        if (!School.isValidSchName(strippedSchName)) {
             throw new ParseException(School.MESSAGE_CONSTRAINTS);
         }
         return new School(strippedSchName);
@@ -121,14 +121,14 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String acadStream} into an {@code AcadStream}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code acadStream} is invalid.
      */
     public static AcadStream parseAcadStream(String acadStream) throws ParseException {
         requireNonNull(acadStream);
         String strippedAcadStream = acadStream.strip();
-        if (!strippedAcadStream.isEmpty() && !AcadStream.isValidAcadStream(strippedAcadStream)) {
+        if (!AcadStream.isValidAcadStream(strippedAcadStream)) {
             throw new ParseException(AcadStream.MESSAGE_CONSTRAINTS);
         }
         return new AcadStream(strippedAcadStream);
@@ -136,7 +136,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String fee} into an {@code Fee}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code fee} is invalid.
      */
@@ -151,7 +151,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String remark} into an {@code Remark}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      */
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
@@ -161,7 +161,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String date} into a {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
@@ -176,7 +176,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String Time} into a {@code Time}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code Time} is invalid.
      */
@@ -191,7 +191,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code String Time} and {@code String Time} into a {@code TimeRange}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code Time} pr {@code TimeRange} is invalid.
      */
@@ -209,7 +209,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String subject} into a {@code Subject}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code Subject} is invalid.
      */
@@ -224,7 +224,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
@@ -251,7 +251,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String individualHomework} into a {@code Homework}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code Homework} is invalid.
      */

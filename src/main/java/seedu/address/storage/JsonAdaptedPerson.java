@@ -83,8 +83,8 @@ class JsonAdaptedPerson {
         parentPhone = source.getParentPhone().value;
         parentEmail = source.getParentEmail().value;
         address = source.getAddress().value;
-        school = source.getSchool().schName;
-        acadStream = source.getAcadStream().acadStream;
+        school = source.getSchool().value;
+        acadStream = source.getAcadStream().value;
         outstandingFee = source.getFee().value;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()

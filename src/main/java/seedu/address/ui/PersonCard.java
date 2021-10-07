@@ -92,13 +92,13 @@ public class PersonCard extends UiPart<Region> {
         if (person.getSchool().isEmpty()) {
             school.setManaged(false);
         } else {
-            school.setText("School: " + person.getSchool().schName);
+            school.setText("School: " + person.getSchool().value);
         }
 
         if (person.getAcadStream().isEmpty()) {
             acadStream.setManaged(false);
         } else {
-            acadStream.setText("Academic Stream: " + person.getAcadStream().acadStream);
+            acadStream.setText("Academic Stream: " + person.getAcadStream().value);
         }
 
         if (person.getRemark().isEmpty()) {

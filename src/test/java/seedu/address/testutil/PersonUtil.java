@@ -42,8 +42,8 @@ public class PersonUtil {
         sb.append(PREFIX_PARENT_PHONE + person.getParentPhone().value + " ");
         sb.append(PREFIX_PARENT_EMAIL + person.getParentEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_SCHOOL + person.getSchool().schName + " ");
-        sb.append(PREFIX_ACAD_STREAM + person.getAcadStream().acadStream + " ");
+        sb.append(PREFIX_SCHOOL + person.getSchool().value + " ");
+        sb.append(PREFIX_ACAD_STREAM + person.getAcadStream().value + " ");
         sb.append(PREFIX_FEE + person.getFee().value + " ");
         sb.append(PREFIX_REMARK + person.getRemark().value + " ");
         person.getTags().stream().forEach(
@@ -63,9 +63,9 @@ public class PersonUtil {
         descriptor.getParentPhone().ifPresent(phone -> sb.append(PREFIX_PARENT_PHONE).append(phone.value).append(" "));
         descriptor.getParentEmail().ifPresent(email -> sb.append(PREFIX_PARENT_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getSchool().ifPresent(school -> sb.append(PREFIX_SCHOOL).append(school.schName).append(" "));
+        descriptor.getSchool().ifPresent(school -> sb.append(PREFIX_SCHOOL).append(school.value).append(" "));
         descriptor.getAcadStream().ifPresent(acadStream ->
-                sb.append(PREFIX_ACAD_STREAM).append(acadStream.acadStream).append(" "));
+                sb.append(PREFIX_ACAD_STREAM).append(acadStream.value).append(" "));
         descriptor.getFee().ifPresent(fee -> sb.append(PREFIX_FEE).append(fee.value).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
