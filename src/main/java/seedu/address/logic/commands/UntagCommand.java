@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -34,6 +35,7 @@ public class UntagCommand extends EditCommand {
     public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed tag from Person: %1$s";
     public static final String MESSAGE_NOT_REMOVED = "At least tag to remove must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_TAG_NOT_IN_PERSON = "This person does not have the following tags: %s";
 
     /**
      * @param index                of the person in the filtered person list to edit
@@ -68,7 +70,8 @@ public class UntagCommand extends EditCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -78,9 +81,18 @@ public class UntagCommand extends EditCommand {
 
         Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        if (!updatedTags.containsAll(removedTags)) {
+            throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON,
+                    getNotFoundTags(updatedTags, removedTags)));
+        }
         updatedTags.removeAll(removedTags);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    }
+
+    public static String getNotFoundTags(Set<Tag> originalTags, Set<Tag> removedTags) {
+        return removedTags.stream().map(x -> originalTags.contains(x) ? "" : x.tagName).filter(x -> x != "")
+                .collect(Collectors.joining(", "));
     }
 
     @Override

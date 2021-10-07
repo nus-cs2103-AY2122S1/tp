@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -55,6 +54,9 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
         if (tags.isEmpty()) {
             return Optional.empty();
+        }
+        if (tags.contains("")) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
