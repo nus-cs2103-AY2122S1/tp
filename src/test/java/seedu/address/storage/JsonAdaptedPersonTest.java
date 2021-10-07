@@ -26,7 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_SCHOOL = "[SK]";
-    private static final String INVALID_ACAD_STREAM = "abc'";
+    private static final String INVALID_ACAD_STREAM = "abc'*";
     private static final String INVALID_FEE = "$50.005";
     private static final String INVALID_TAG = "#friend";
 

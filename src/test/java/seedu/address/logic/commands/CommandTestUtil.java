@@ -91,7 +91,7 @@ public class CommandTestUtil {
     public static final String INVALID_SCHOOL_DESC = " " + PREFIX_SCHOOL
             + "sch[]"; // square brackets not allowed for schools
     public static final String INVALID_ACAD_STREAM_DESC = " " + PREFIX_ACAD_STREAM
-            + "a' stream"; // ''' not allowed for acad streams;
+            + "a* stream"; // '*' not allowed for acad streams;
     public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 

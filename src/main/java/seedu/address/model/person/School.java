@@ -9,14 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class School {
     public static final String MESSAGE_CONSTRAINTS = "School names should only contain alphanumeric characters, "
-            + "hyphens, parentheses, single quotation marks and spaces.";
+            + "hyphens, parentheses, period, single quotation marks and spaces.";
 
     /*
      * The first character of the school name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      * School name can be any alphabetic combination with space and/or single quotation mark.
      */
-    public static final String VALIDATION_REGEX = "[-a-zA-Z0-9()'][-a-zA-Z0-9()' ]*";
+    public static final String VALIDATION_REGEX = "[-a-zA-Z0-9()'.][-a-zA-Z0-9()'. ]*";
 
     public final String value;
 
