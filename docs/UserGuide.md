@@ -53,8 +53,8 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a student to the TuitiONE.
 
-Format: `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]`
+Format: `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]…`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -90,13 +90,13 @@ Format: `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]`
 
 Examples:
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
-* `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5`
+* `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 t/foreign student`
 
 ### Adding a lesson: `add -l`
 
 Adds a lesson to the TuitiONE.
 
-Format: `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START p/PRICE`
+Format: `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -104,11 +104,11 @@ Format: `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START p/PRICE`
 * The first letter of SUBJECT, GRADE, and DAY_OF_WEEK is in caps.
 *  Time is in 24:00 hours format
 *  Lessons can start between 09:00 to 20:00
-*  The price must be a non-negative double 0.0, 2.0, 3.3, …
+*  The cost must be a non-negative double 0.0, 2.0, 3.3, …
 
 Examples:
-* `add -l s/Science g/P5 d/Wed t/12:30 p/12.0`
-* `add -l s/Mathematics g/S4 d/Fri t/15:00 p/10.3`
+* `add -l s/Science g/P5 d/Wed t/12:30 c/12.0`
+* `add -l s/Mathematics g/S4 d/Fri t/15:00 c/10.3`
 
 
 ### Listing all students: `list`
@@ -231,11 +231,13 @@ If your changes to the data file makes its format invalid, TuitiONE will discard
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PARENT_PHONE_NUMBER a/ADDRESS g/GRADE [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 a/John street, block 123, #01-01 g/P2`
+**Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]…` <br> e.g. `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 t/foreign student`
+**Add lesson** | `add -l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add -l s/Science g/P5 d/Wed t/12:30 c/12.0`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Enroll** | `enroll INDEX s/SUBJECT g/GRADE d/DAY t/START_TIME`<br> e.g. `enroll 1 s/Science g/P5 d/Wed t/1230`
-**Unenroll** | `unenroll INDEX c/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Delete lesson** | `delete -l LESSONCODE`<br> e.g. `delete -l Science-P5-Wed-1230`
+**Enroll** | `enroll INDEX l/LESSONCODE`<br> e.g. `enroll 1 l/Science-P5-Wed-1230`
+**Unenroll** | `unenroll INDEX l/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
 **Help** | `help`
