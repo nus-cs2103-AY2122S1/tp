@@ -164,22 +164,22 @@ public class ParserUtil {
      */
     public static Optional<Visit> parseVisit(String visit) throws ParseException {
         requireNonNull(visit);
-        String trimmedLastVisit = visit.trim();
+        String trimmedVisit = visit.trim();
         if (visit.isEmpty()) {
-            return Optional.ofNullable(new Visit(trimmedLastVisit));
+            return Optional.ofNullable(new Visit(trimmedVisit));
         }
 
-        if (!LastVisit.isValidLastVisit(trimmedLastVisit)) {
+        if (!Visit.isValidVisit(trimmedVisit)) {
             throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            LocalDate.parse(trimmedLastVisit, formatter);
+            LocalDate.parse(trimmedVisit, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
 
-        return Optional.ofNullable(new Visit(trimmedLastVisit));
+        return Optional.ofNullable(new Visit(trimmedVisit));
     }
 }
