@@ -3,10 +3,10 @@ package seedu.anilist.model.anime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnime.ALICE;
-import static seedu.anilist.testutil.TypicalAnime.BOB;
+import static seedu.anilist.testutil.TypicalAnime.BNHA;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +41,7 @@ public class UniqueAnimeListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_ACTION)
                 .build();
         assertTrue(uniqueAnimeList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniqueAnimeListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_ACTION)
                 .build();
         uniqueAnimeList.setAnime(ALICE, editedAlice);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
@@ -95,17 +95,17 @@ public class UniqueAnimeListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueAnimeList.add(ALICE);
-        uniqueAnimeList.setAnime(ALICE, BOB);
+        uniqueAnimeList.setAnime(ALICE, BNHA);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(BOB);
+        expectedUniqueAnimeList.add(BNHA);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
 
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueAnimeList.add(ALICE);
-        uniqueAnimeList.add(BOB);
-        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setAnime(ALICE, BOB));
+        uniqueAnimeList.add(BNHA);
+        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setAnime(ALICE, BNHA));
     }
 
     @Test
@@ -135,7 +135,7 @@ public class UniqueAnimeListTest {
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
         uniqueAnimeList.add(ALICE);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(BOB);
+        expectedUniqueAnimeList.add(BNHA);
         uniqueAnimeList.setMultipleAnime(expectedUniqueAnimeList);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
@@ -148,10 +148,10 @@ public class UniqueAnimeListTest {
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueAnimeList.add(ALICE);
-        List<Anime> animeList = Collections.singletonList(BOB);
+        List<Anime> animeList = Collections.singletonList(BNHA);
         uniqueAnimeList.setMultipleAnime(animeList);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(BOB);
+        expectedUniqueAnimeList.add(BNHA);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
 

@@ -10,42 +10,42 @@ import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditAnimeDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditAnimeDescriptorBuilder {
 
     private EditAnimeDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
+    public EditAnimeDescriptorBuilder() {
         descriptor = new EditAnimeDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditAnimeDescriptor descriptor) {
+    public EditAnimeDescriptorBuilder(EditAnimeDescriptor descriptor) {
         this.descriptor = new EditAnimeDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditAnimeDescriptor} with fields containing {@code anime}'s details
      */
-    public EditPersonDescriptorBuilder(Anime anime) {
+    public EditAnimeDescriptorBuilder(Anime anime) {
         descriptor = new EditAnimeDescriptor();
         descriptor.setName(anime.getName());
         descriptor.setTags(anime.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditAnimeDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditAnimeDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditAnimeDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditAnimeDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
