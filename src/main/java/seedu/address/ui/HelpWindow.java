@@ -1,11 +1,22 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -15,18 +26,29 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.*;
-import seedu.address.model.person.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.logging.Logger;
 
 public class HelpWindow extends AnchorPane {
     public static final String USER_GUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
     public static final String USER_GUIDE_MESSAGE = "For full details, refer to the user guide: " + USER_GUIDE_URL;
-    public static final String HELP_MESSAGE = "For more detailed commands, type \"help [command]\"\n" +
-            "To close this window, type \"close\"";
+    public static final String HELP_MESSAGE = "For more detailed commands, type \"help [command]\"\n"
+            + "To close this window, type \"close\"";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final Hashtable<String, commandDetail> commandTable = new Hashtable<>();
@@ -36,7 +58,6 @@ public class HelpWindow extends AnchorPane {
     private interface commandDetail {
         void execute();
     }
-
 
     @FXML
     private Label helpMessage;
@@ -80,6 +101,9 @@ public class HelpWindow extends AnchorPane {
         copyButton.setText("Copy URL");
     }
 
+    /**
+     * Sets up the respective children of the AnchorPane.
+     */
     @FXML
     public void initialize() {
         textField.setOnKeyPressed(event -> {
@@ -189,7 +213,7 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
         commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
         commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
-        commandTable.put("viewtask", this::handleViewTask);        // placeholder
+        commandTable.put("viewtask", this::handleViewTask); // placeholder
         commandTable.put("close", this::handleCloseWindow);
     }
 
@@ -204,8 +228,8 @@ public class HelpWindow extends AnchorPane {
         if (words[0].equals("help") && words.length == 1) {
             additionalInfo.setText("Enter the command that you wish to query after \"help\"!");
             return false;
-        } else if (words[0].equals("close") && words.length == 1 ||
-                words.length == 2 && words[0].equals("help") && isValidCommand(words[1])){
+        } else if (words[0].equals("close") && words.length == 1
+                || words.length == 2 && words[0].equals("help") && isValidCommand(words[1])) {
             return true;
         } else {
             System.out.println(Arrays.toString(words));
@@ -240,15 +264,15 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void handleEdit() {
-        additionalInfo.setText("Format: edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n" +
-                "Edits the person at the specified index IF it is valid\n" +
-                "You can remove all the person’s tags by typing t/ without specifying any tags after it.");
+        additionalInfo.setText("Format: edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n"
+                + "Edits the person at the specified index IF it is valid\n"
+                + "You can remove all the person’s tags by typing t/ without specifying any tags after it.");
     }
 
     private void handleFind() {
         additionalInfo.setText(
-                "Format: find KEYWORD [MORE_KEYWORDS]\n" +
-                        "Only full words will be matched and persons matching at least one keyword will be returned"
+                "Format: find KEYWORD [MORE_KEYWORDS]\n"
+                        + "Only full words will be matched and persons matching at least one keyword will be returned"
         );
     }
 
@@ -261,27 +285,27 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void handleSort() {
-        additionalInfo.setText("Format: sort [-r]\n" +
-                "Sort persons by the alphabetical order of their name.\n" +
-                "If the optional -r flag is provided, a list of persons sorted in reverse order is displayed");
+        additionalInfo.setText("Format: sort [-r]\n"
+                + "Sort persons by the alphabetical order of their name.\n"
+                + "If the optional -r flag is provided, a list of persons sorted in reverse order is displayed");
     }
 
     private void handleAddTask() {
-        additionalInfo.setText("Format: addtask INDEX task/TASKNAME\n" +
-                "Adds a task to the person at the specified INDEX");
+        additionalInfo.setText("Format: addtask INDEX task/TASKNAME\n"
+                + "Adds a task to the person at the specified INDEX");
     }
 
     private void handleDelTask() {
-        additionalInfo.setText("Format: deltask INDEX ti/TASK_INDEX\n" +
-                "Deletes a task attached to the person at the specified INDEX");
+        additionalInfo.setText("Format: deltask INDEX ti/TASK_INDEX\n"
+                + "Deletes a task attached to the person at the specified INDEX");
     }
 
     private void handleViewTask() {
-        additionalInfo.setText("Format: viewtask INDEX\n" +
-                "Displays the list of tasks attached to the person at the specifiedINDEX");
+        additionalInfo.setText("Format: viewtask INDEX\n"
+                + "Displays the list of tasks attached to the person at the specifiedINDEX");
     }
 
     private void handleCloseWindow() {
-        stage.close();      // May update to have a timer if possible
+        stage.close(); // May update to have a timer if possible
     }
 }

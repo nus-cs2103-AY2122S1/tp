@@ -19,7 +19,7 @@ public class SortCommand extends Command {
 
     public static final String DESCRIPTION = "Sorts the list of persons";
 
-    private String message_success = "Sorted all persons";
+    private String messageSuccess = "Sorted all persons";
 
     private final boolean isReverseOrder;
 
@@ -30,11 +30,11 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         if (isReverseOrder) {
-            message_success = message_success + " in reverse order";
+            messageSuccess = messageSuccess + " in reverse order";
         }
         requireNonNull(model);
         model.updateSortedPersonList(isReverseOrder);
-        return new CommandResult(message_success);
+        return new CommandResult(messageSuccess);
     }
 
     public String getCommand() {

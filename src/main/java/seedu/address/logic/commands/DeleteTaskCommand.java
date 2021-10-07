@@ -23,16 +23,16 @@ public class DeleteTaskCommand extends Command {
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, " +
-            "from person specified by the INDEX";
+    public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, "
+            + "from person specified by the INDEX";
 
     private final Index targetPersonIndex;
     private final Index targetTaskIndex;
 
     /**
      * Constructor for a DeleteTaskCommand to delete a task from a person.
-     * @param targetPersonIndex
-     * @param targetTaskIndex
+     * @param targetPersonIndex The Index of the target person.
+     * @param targetTaskIndex The Index of the target Task that belongs to target person.
      */
     public DeleteTaskCommand(Index targetPersonIndex, Index targetTaskIndex) {
         this.targetPersonIndex = targetPersonIndex;
