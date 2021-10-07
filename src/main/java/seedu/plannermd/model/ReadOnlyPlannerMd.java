@@ -1,6 +1,7 @@
 package seedu.plannermd.model;
 
 import javafx.collections.ObservableList;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 
 /**
@@ -13,5 +14,11 @@ public interface ReadOnlyPlannerMd {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Patient> getPatientList();
+
+    /**
+     * Returns an unmodifiable view of the doctor list.
+     * This list will not contain any duplicate persons.
+     */
+    ObservableList<Doctor> getDoctorList();
 
 }

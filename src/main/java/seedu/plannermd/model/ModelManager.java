@@ -11,9 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.commons.core.LogsCenter;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.person.Person;
-import seedu.plannermd.ui.PersonTabSwitcher;
 
 /**
  * Represents the in-memory model of the plannermd data.
@@ -24,10 +23,12 @@ public class ModelManager implements Model {
     private final PlannerMd plannerMd;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
-    private PersonTabSwitcher personTabSwitcher;
+    private final FilteredList<Doctor> filteredDoctors;
+    private State state;
 
     /**
      * Initializes a ModelManager with the given plannerMd and userPrefs.
+     * Default state is Patients
      */
     public ModelManager(ReadOnlyPlannerMd plannerMd, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -35,13 +36,32 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with plannermd: " + plannerMd + " and user prefs " + userPrefs);
 
+        this.state = State.PATIENT;
         this.plannerMd = new PlannerMd(plannerMd);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPatients = new FilteredList<>(this.plannerMd.getPatientList());
+        filteredDoctors = new FilteredList<>(this.plannerMd.getDoctorList());
     }
 
     public ModelManager() {
         this(new PlannerMd(), new UserPrefs());
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public State getState() {
+        return this.state;
+    }
+
+    @Override
+    public void toggleState() {
+        if (this.state == State.PATIENT) {
+            setState(State.DOCTOR);
+        } else {
+            setState(State.PATIENT);
+        }
     }
 
     //=========== UserPrefs ==================================================================================
@@ -91,6 +111,8 @@ public class ModelManager implements Model {
         return plannerMd;
     }
 
+    //// patient methods
+
     @Override
     public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
@@ -105,7 +127,7 @@ public class ModelManager implements Model {
     @Override
     public void addPatient(Patient patient) {
         plannerMd.addPatient(patient);
-        updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -115,19 +137,36 @@ public class ModelManager implements Model {
         plannerMd.setPatient(target, editedPatient);
     }
 
-    //=========== Tab state management ======================================================================
+    //// doctor methods
 
     @Override
-    public void setPersonTabSwitcher(PersonTabSwitcher personTabSwitcher) {
-        requireNonNull(personTabSwitcher);
-        this.personTabSwitcher = personTabSwitcher;
+    public boolean hasDoctor(Doctor doctor) {
+        requireNonNull(doctor);
+        return plannerMd.hasDoctor(doctor);
     }
 
+    @Override
+    public void deleteDoctor(Doctor target) {
+        plannerMd.removeDoctor(target);
+    }
+
+    @Override
+    public void addDoctor(Doctor doctor) {
+        plannerMd.addDoctor(doctor);
+        updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setDoctor(Doctor target, Doctor editedDoctor) {
+        requireAllNonNull(target, editedDoctor);
+
+        plannerMd.setDoctor(target, editedDoctor);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
      * {@code versionedPlannerMd}
      */
     @Override
@@ -136,9 +175,24 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPatientList(Predicate<Person> predicate) {
+    public void updateFilteredPatientList(Predicate<? super Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Doctor} backed by the internal list of
+     * {@code versionedPlannerMd}
+     */
+    @Override
+    public ObservableList<Doctor> getFilteredDoctorList() {
+        return filteredDoctors;
+    }
+
+    @Override
+    public void updateFilteredDoctorList(Predicate<? super Doctor> predicate) {
+        requireNonNull(predicate);
+        filteredDoctors.setPredicate(predicate);
     }
 
     @Override
@@ -157,6 +211,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return plannerMd.equals(other.plannerMd)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPatients.equals(other.filteredPatients);
+                && state.equals(other.state)
+                && filteredPatients.equals(other.filteredPatients)
+                && filteredDoctors.equals(other.filteredDoctors);
     }
 }

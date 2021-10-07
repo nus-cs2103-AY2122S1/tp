@@ -15,6 +15,7 @@ public class TypicalPlannerMd {
         for (Patient patient : getTypicalPatients()) {
             pm.addPatient(patient);
         }
+        //TODO: Add typical doctors
         return pm;
     }
 

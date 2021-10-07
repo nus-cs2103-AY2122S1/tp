@@ -13,7 +13,9 @@ import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.logic.parser.PlannerMdParser;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model;
+import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.storage.Storage;
 
@@ -42,7 +44,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = plannerMdParser.parseCommand(commandText);
+        Command command = plannerMdParser.parseCommand(commandText, model.getState());
         commandResult = command.execute(model);
 
         try {
@@ -55,6 +57,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public State getState() {
+        return model.getState();
+    }
+
+    @Override
     public ReadOnlyPlannerMd getPlannerMd() {
         return model.getPlannerMd();
     }
@@ -62,6 +69,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
         return model.getFilteredPatientList();
+    }
+
+    @Override
+    public ObservableList<Doctor> getFilteredDoctorList() {
+        return model.getFilteredDoctorList();
     }
 
     @Override
