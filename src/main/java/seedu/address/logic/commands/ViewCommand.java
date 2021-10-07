@@ -10,8 +10,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Lists all persons in the address book to the user.
  */
