@@ -22,7 +22,6 @@ import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.Model;
 import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
@@ -93,7 +92,8 @@ public class PlannerMdParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD, patientState) instanceof ListPatientCommand);
-        assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD + " 3", patientState) instanceof ListPatientCommand);
+        assertTrue(parser.parseCommand(
+                ListPatientCommand.COMMAND_WORD + " 3", patientState) instanceof ListPatientCommand);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class PlannerMdParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND,
-                () -> parser.parseCommand("unknownCommand", patientState));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", patientState));
     }
 }

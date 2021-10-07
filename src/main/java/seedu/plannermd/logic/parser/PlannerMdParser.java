@@ -6,7 +6,12 @@ import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.plannermd.logic.commands.*;
+import seedu.plannermd.logic.commands.ClearCommand;
+import seedu.plannermd.logic.commands.Command;
+import seedu.plannermd.logic.commands.ExitCommand;
+import seedu.plannermd.logic.commands.HelpCommand;
+import seedu.plannermd.logic.commands.RemarkCommand;
+import seedu.plannermd.logic.commands.ToggleCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
@@ -14,7 +19,6 @@ import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.Model;
 import seedu.plannermd.model.Model.State;
 
 /**

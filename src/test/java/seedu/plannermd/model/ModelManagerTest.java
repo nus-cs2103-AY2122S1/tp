@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.GuiSettings;
+import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.testutil.PlannerMdBuilder;
 
@@ -26,6 +27,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
+        assertEquals(State.PATIENT, modelManager.getState());
         assertEquals(new PlannerMd(), new PlannerMd(modelManager.getPlannerMd()));
     }
 
@@ -75,17 +77,21 @@ public class ModelManagerTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPatient(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasDoctor(null));
     }
 
     @Test
     public void hasPerson_personNotInPlannerMd_returnsFalse() {
         assertFalse(modelManager.hasPatient(ALICE));
+        //TODO: Doctor
     }
 
     @Test
     public void hasPerson_personInPlannerMd_returnsTrue() {
         modelManager.addPatient(ALICE);
         assertTrue(modelManager.hasPatient(ALICE));
+
+        //TODO: Doctor
     }
 
     @Test
@@ -117,13 +123,19 @@ public class ModelManagerTest {
         // different plannerMd -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentPlannerMd, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredPatientList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(plannerMd, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different filteredDoctorList -> returns false
+        //TODO
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

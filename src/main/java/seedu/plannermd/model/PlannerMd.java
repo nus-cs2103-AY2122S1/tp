@@ -3,6 +3,7 @@ package seedu.plannermd.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.model.doctor.Doctor;
@@ -49,6 +50,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         requireNonNull(newData);
 
         setPatients(newData.getPatientList());
+        setDoctors(newData.getDoctorList());
     }
 
     /**
@@ -147,8 +149,8 @@ public class PlannerMd implements ReadOnlyPlannerMd {
 
     @Override
     public String toString() {
-        return patients.asUnmodifiableObservableList().size() + " patients";
-        // TODO: refine later
+        return patients.asUnmodifiableObservableList().size() + " patients\n"
+                + doctors.asUnmodifiableObservableList().size() + " doctors";
     }
 
     @Override
@@ -171,7 +173,6 @@ public class PlannerMd implements ReadOnlyPlannerMd {
 
     @Override
     public int hashCode() {
-        return patients.hashCode();
-        //TODO: refine later
+        return Objects.hash(patients, doctors);
     }
 }

@@ -16,7 +16,6 @@ import seedu.plannermd.logic.Logic;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.Model;
 import seedu.plannermd.model.Model.State;
 
 /**

@@ -1,5 +1,5 @@
 {
-  "_comment": "PlannerMd save file which contains the same Person values as in TypicalPersons#getTypicalPlannerMd()",
+  "_comment": "PlannerMd save file which contains the same Person values as in TypicalPatients#getTypicalPlannerMd()",
   "patients" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",

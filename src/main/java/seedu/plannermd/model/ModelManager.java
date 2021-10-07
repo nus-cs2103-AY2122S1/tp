@@ -11,10 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.commons.core.LogsCenter;
-import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.person.Person;
 
 /**
  * Represents the in-memory model of the plannermd data.
@@ -217,5 +215,4 @@ public class ModelManager implements Model {
                 && filteredPatients.equals(other.filteredPatients)
                 && filteredDoctors.equals(other.filteredDoctors);
     }
-
 }
