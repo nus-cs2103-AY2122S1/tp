@@ -53,6 +53,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         return timeRange;
     }
 
+    public String getTypeOfLesson() {
+        return isRecurring() ? RECURRING : MAKEUP;
+    }
+
     /**
      * Returns an immutable homework set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
