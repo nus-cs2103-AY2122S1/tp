@@ -1,4 +1,4 @@
-package seedu.plannermd.logic.parser;
+package seedu.plannermd.logic.parser.addcommandparser;
 
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -13,9 +13,14 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
+import seedu.plannermd.logic.parser.ArgumentMultimap;
+import seedu.plannermd.logic.parser.ArgumentTokenizer;
+import seedu.plannermd.logic.parser.Parser;
+import seedu.plannermd.logic.parser.ParserUtil;
+import seedu.plannermd.logic.parser.Prefix;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.patient.Risk;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
@@ -27,19 +32,19 @@ import seedu.plannermd.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddPatientCommand object
  */
-public class AddCommandParser implements Parser<AddPatientCommand> {
+public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
-     * AddPatientCommand and returns an AddCommand object for execution.
+     * AddDoctorCommand and returns an AddDoctorCommand object for execution.
      * @param args arguments to be parsed
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddPatientCommand parse(String args) throws ParseException {
+    public AddDoctorCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-            PREFIX_ADDRESS, PREFIX_BIRTH_DATE, PREFIX_TAG, PREFIX_RISK);
+                PREFIX_ADDRESS, PREFIX_BIRTH_DATE, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-            PREFIX_BIRTH_DATE) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_BIRTH_DATE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
         }
@@ -51,13 +56,10 @@ public class AddCommandParser implements Parser<AddPatientCommand> {
         BirthDate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTH_DATE).get());
         Remark remark = Remark.getEmptyRemark();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Risk risk = argMultimap.getValue(PREFIX_RISK).isPresent()
-                        ? ParserUtil.parseRisk(argMultimap.getValue(PREFIX_RISK).get())
-                        : Risk.getUnclassifiedRisk();
 
-        Patient patient = new Patient(name, phone, email, address, birthDate, remark, tagList, risk);
+        Doctor doctor = new Doctor(name, phone, email, address, birthDate, remark, tagList);
 
-        return new AddPatientCommand(patient);
+        return new AddDoctorCommand(doctor);
     }
 
     /**

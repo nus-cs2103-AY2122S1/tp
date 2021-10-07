@@ -11,12 +11,15 @@ import seedu.plannermd.logic.commands.Command;
 import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.RemarkCommand;
+import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
+import seedu.plannermd.logic.parser.addcommandparser.AddDoctorCommandParser;
+import seedu.plannermd.logic.parser.addcommandparser.AddPatientCommandParser;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 
 /**
@@ -45,9 +48,13 @@ public class PlannerMdParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-
         case AddPatientCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+//            if (state.PATIENT) { //TODO get state!!!
+                return new AddPatientCommandParser().parse(arguments);
+//            } else {
+//                return new AddDoctorCommandParser().parse(arguments);
+//            }
+
 
         case EditPatientCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
