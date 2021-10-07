@@ -95,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -173,11 +173,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th member in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `padd /n David …​` to add a new person. The `padd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `padd /n David …​` to add a new member. The `padd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -185,7 +185,7 @@ Step 3. The user executes `padd /n David …​` to add a new person. The `padd`
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -230,7 +230,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the member being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -282,16 +282,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add a new person               | update the increase or change in members |
-| `* * *`  | user                                       | have address fields for persons | |
-| `* * *`  | user                                       | kick a person                | remove members or troublemakers from the club |
-| `* * *`  | user                                       | have email address field for persons | |
+| `* * *`  | user                                       | add a new member               | update the increase or change in members |
+| `* * *`  | user                                       | have address fields for members | |
+| `* * *`  | user                                       | kick a member                | remove members or troublemakers from the club |
+| `* * *`  | user                                       | have email address field for members | |
 
 #### Task Functions
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | create tasks for my participants or myself | |
+| `* * *`  | user                                       | create tasks for my members or myself | |
 | `* *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
 | `*`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
 | `* *`  | user                                       | add a deadline to task | keep track of what is due |
@@ -301,22 +301,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Storage Functions
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | load participants from other files | access and manage different sets of data |
+| `* * *`  | user                                       | load members from other files | access and manage different sets of data |
 | `* * *`  | user                                       | write my data to a file as save data | access them and resume at a later date |
 
 #### Event Functions
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | add all participants of a particular event to one group | send notifications to only those involved |
+| `* * *`  | user                                       | add all members of a particular event to one group | send notifications to only those involved |
 
 
 #### Other miscellaneous Functions
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | find a member by name          | locate details of members without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `*`      | user with many members in the address book | sort members by name           | locate a member easily                                                 |
 
 *{More to be added}*
 
@@ -324,12 +324,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `Ailurus` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - Add a person**
+**Use case: UC1 - Add a member**
 
 **MSS**
 
-1.  User requests to add a person, providing necessary details.
-2.  Ailurus adds the person.
+1.  User requests to add a member, providing necessary details.
+2.  Ailurus adds the member.
 
     Use case ends.
 
@@ -341,14 +341,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC2 - Delete a person**
+**Use case: UC2 - Delete a member**
 
 **MSS**
 
-1.  User requests to list persons
-2.  Ailurus shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  Ailurus deletes the person
+1.  User requests to list members
+2.  Ailurus shows a list of members
+3.  User requests to delete a specific member in the list
+4.  Ailurus deletes the member
 
     Use case ends.
 
@@ -364,12 +364,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC3 - Add a task to a person**
+**Use case: UC3 - Add a task to a member**
 
 **MSS**
 
-1.  User requests to add a task to a specific person, providing details if necessary.
-2.  Ailurus adds the task to the person.
+1.  User requests to add a task to a specific member, providing details if necessary.
+2.  Ailurus adds the task to the member.
 
     Use case ends.
 
@@ -387,11 +387,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC4 - Delete a task from a person**
+**Use case: UC4 - Delete a task from a member**
 
 **MSS**
 
-1.  User requests to list tasks of a specific person
+1.  User requests to list tasks of a specific member
 2.  Ailurus shows a list of tasks
 3.  User requests to delete a specific task in the list
 4.  Ailurus deletes the task
@@ -400,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given index of person is invalid
+* 1a. The given index of member is invalid
 
     * 1a1. Ailurus shows an error message.
 
@@ -420,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list tasks of a specific person
+1.  User requests to list tasks of a specific member
 2.  Ailurus shows a list of tasks
 3.  User requests to mark a specific task as done
 4.  Ailurus marks task as done
@@ -429,7 +429,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given index of person is invalid
+* 1a. The given index of member is invalid
 
     * 1a1. Ailurus shows an error message.
 
@@ -486,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 members without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should run on user computer with double-click - no installer or additional libraries required.
 5.  The system should respond within two seconds.
@@ -536,17 +536,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a member
 
-1. Deleting a person while all persons are being shown
+1. Deleting a member while all members are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all members using the `list` command. Multiple members in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

@@ -23,45 +23,45 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.member.Member;
 import seedu.address.testutil.MemberBuilder;
 
-public class AddCommandTest {
+public class PAddCommandTest {
 
     @Test
     public void constructor_nullMember_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new PAddCommand(null));
     }
 
     @Test
     public void execute_memberAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingMemberAdded modelStub = new ModelStubAcceptingMemberAdded();
         Member validMember = new MemberBuilder().build();
+        CommandResult commandResult = new PAddCommand(validMember).execute(modelStub);
 
-        CommandResult commandResult = new AddCommand(validMember).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
+        assertEquals(String.format(PAddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
     }
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member validMember = new MemberBuilder().build();
-        AddCommand addCommand = new AddCommand(validMember);
+        PAddCommand PAddCommand = new PAddCommand(validMember);
         ModelStub modelStub = new ModelStubWithMember(validMember);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_MEMBER, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, PAddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
+                PAddCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Member alice = new MemberBuilder().withName("Alice").build();
         Member bob = new MemberBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        PAddCommand addAliceCommand = new PAddCommand(alice);
+        PAddCommand addBobCommand = new PAddCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        PAddCommand addAliceCommandCopy = new PAddCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -79,12 +79,12 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
