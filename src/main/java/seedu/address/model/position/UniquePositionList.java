@@ -3,23 +3,22 @@ package seedu.address.model.position;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.position.exceptions.DuplicatePositionException;
-import seedu.address.model.position.exceptions.PositionNotFoundException;
-
 import java.util.Iterator;
 import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.position.exceptions.DuplicatePositionException;
+import seedu.address.model.position.exceptions.PositionNotFoundException;
 
 
 /**
  * A list of positions that enforces uniqueness between its elements and does not allow nulls.
- * A position is considered unique by comparing using {@code Position#isSamePosition(Position)}. As such, adding and updating of
- * positions uses Position#isSamePosition(Position) for equality so as to ensure that the position being added or updated is
- * unique in terms of identity in the UniquePositionList. However, the removal of a position uses Position#equals(Object) so
+ * A position is considered unique by comparing using {@code Position#isSamePosition(Position)}.
+ * As such, adding and updating of positions uses Position#isSamePosition(Position) for equality
+ * so as to ensure that the position being added or updated is
+ * unique in terms of identity in the UniquePositionList.
+ * However, the removal of a position uses Position#equals(Object) so
  * as to ensure that the position with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -46,7 +45,7 @@ public class UniquePositionList implements Iterable<Position> {
     public void add(Position toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePositionException();
         }
         internalList.add(toAdd);
     }
@@ -94,7 +93,7 @@ public class UniquePositionList implements Iterable<Position> {
     public void setPositions(List<Position> positions) {
         requireAllNonNull(positions);
         if (!positionsAreUnique(positions)) {
-            throw new DuplicatePersonException();
+            throw new DuplicatePositionException();
         }
 
         internalList.setAll(positions);

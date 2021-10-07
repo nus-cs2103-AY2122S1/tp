@@ -35,7 +35,7 @@ public class Title {
      * Returns true if a given string is a valid title.
      */
     public static boolean isValidTitle(String test) {
-        return test.matches(VALIDATION_REGEX) ;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
