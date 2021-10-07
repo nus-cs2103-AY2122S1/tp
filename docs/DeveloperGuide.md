@@ -398,42 +398,25 @@ Preconditions: The student's details have been previously added to TutorAid.
 
 **MSS**
 
-1. Tutor views the list of his/her students
-2. Tutor identifies the index of the student, and requests to delete the specified student in the list
-3. TutorAid deletes the student from the list
-4. Tutor requests to add the student in the list, and provides the updated details of the student
-5. TutorAid adds the student to the list
-6. TutorAid displays a message indicating the student has been successfully added
+1. Tutor <u>deletes the student (UC02)</u> whose details are to be updated.
+
+2. Tutor requests to add the student back into the list, and provides the updated details of the student
+
+3. TutorAid adds the updated student to the list
+
+4. TutorAid displays a message indicating the student has been successfully added
+
+    Use case ends.
 
 **Extensions**
 
-* 1a. TutorAid detects an error in the list command.
-
-    * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. User re-enters the command.
-
-      Steps 1a1-1a2 are repeated until the command entered is correct.
-      Use case resumes from step 2.
-
-* 2a. The given index is invalid.
+* 2a. The given syntax is invalid.
 
     * 2a1. TutorAid shows an error message.
-    * 2a2. Tutor re-enters a new index.
+    * 2a2. Tutor re-enters the student details.
 
-      Steps 2a1 - 2a2 are repeated until a valid index is given.
+      Steps 2a1 - 2a2 are repeated until a valid syntax is given.
       Use case resumes from step 3.
-
-* 4a. The given syntax is invalid.
-
-    * 4a1. TutorAid shows an error message.
-    * 4a2. Tutor re-enters the student details.
-
-      Steps 4a1 - 4a2 are repeated until a valid syntax is given.
-      Use case resumes from step 5.
-
-* 4b. Tutor mistypes the student's updated details.
-
-  Use case starts over from step 1.
 
 **Use case 4: Update a student's progress**
 
