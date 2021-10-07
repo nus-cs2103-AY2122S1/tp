@@ -1,10 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.claim.Claim;
+import seedu.address.model.person.Person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import java.util.HashSet;
+import java.util.List;
+
 
 public class ClaimCommand extends Command {
 
@@ -14,25 +23,37 @@ public class ClaimCommand extends Command {
     public static final String MESSAGE_USAGE = "This should be a message usage";
 
     public static final String MESSAGE_ARGUMENTS = "Index %1$d, Title: %2$s, Description: %2$s, Status: %2$s";
+    private static final String MESSAGE_CLAIM_ADDED_SUCCESS = "Claim added: %1$s";
 
     private final Index index;
-    private final String title;
-    private final String description;
-    private final String status;
+    private final Claim claim;
 
-    public ClaimCommand(Index index, String title, String description, String status) {
-        requireAllNonNull(index, title, description, status);
+    public ClaimCommand(Index index, Claim claim) {
+        requireAllNonNull(index, claim);
         this.index = index;
-        this.title = title;
-        this.description  = description;
-        this.status = status;
+        this.claim = claim;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-//        return new CommandResult("Hello from Claim Command");
-        // TODO add a handler
-        throw new CommandException(this.title + this.description + this.status);
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToAddClaim = lastShownList.get(index.getZeroBased());
+        HashSet<Claim> claims = new HashSet<>(personToAddClaim.getClaims());
+
+        claims.add(this.claim);
+
+        Person newPerson = new Person(personToAddClaim, claims);
+
+        model.setPerson(personToAddClaim, newPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(MESSAGE_CLAIM_ADDED_SUCCESS, claim));
     }
 
     @Override
@@ -46,7 +67,6 @@ public class ClaimCommand extends Command {
         }
 
         ClaimCommand e = (ClaimCommand) other;
-        return index.equals(e.index) && title.equals(e.title)
-                && description.equals(e.description) && status.equals(e.status);
+        return index.equals(e.index) && claim.equals(other);
     }
 }

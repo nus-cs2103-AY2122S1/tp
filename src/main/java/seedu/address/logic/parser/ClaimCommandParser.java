@@ -1,14 +1,18 @@
 package seedu.address.logic.parser;
 
-import com.sun.javafx.scene.input.ClipboardHelper;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.*;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ClaimCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.Description;
+import seedu.address.model.claim.Status;
+import seedu.address.model.claim.Title;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 public class ClaimCommandParser implements Parser<ClaimCommand> {
 
@@ -17,6 +21,12 @@ public class ClaimCommandParser implements Parser<ClaimCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_STATUS);
+
+        if (!argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_STATUS)
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClaimCommand.MESSAGE_USAGE));
+        }
+
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -24,10 +34,11 @@ public class ClaimCommandParser implements Parser<ClaimCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClaimCommand.MESSAGE_USAGE), e);
         }
 
-        String name = argMultimap.getValue(PREFIX_NAME).orElse("");
-        String description = argMultimap.getValue(PREFIX_DESCRIPTION).orElse("");
-        String status = argMultimap.getValue(PREFIX_STATUS).orElse("");
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_NAME).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+        Claim claim = new Claim(title, description, status);
 
-        return new ClaimCommand(index, name, description, status);
+        return new ClaimCommand(index, claim);
     }
 }
