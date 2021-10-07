@@ -105,10 +105,9 @@ public class ImportCommand extends Command {
     }
 
     private void csvParse() throws IOException, CommandException {
-        int rowCounter = 0;
-
-        BufferedReader br = new BufferedReader(new FileReader(csvFile));
         String line;
+        int rowCounter = 0;
+        BufferedReader br = new BufferedReader(new FileReader(csvFile));
 
         //Skip header row
         br.readLine();
@@ -152,7 +151,6 @@ public class ImportCommand extends Command {
                 //Row has tags
                 if (values.length == NUMBER_OF_FIELDS) {
                     String[] strTags = values[4].split(" ");
-                    System.out.println("tags: " + Arrays.toString(strTags));
                     tags = ParserUtil.parseTags(Arrays.asList(strTags));
                 }
 
