@@ -15,14 +15,15 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](https://github.com/huizhuansam)]
 [[portfolio](team/huizhuansam.md)]
 
-- Role: Scheduling and tracking, Deliverables and Deadlines
-- Responsibilities: User assistance
+- Role: Scheduling and Tracking, Deliverables and Deadlines
+- Responsibilities: User assistance, command syntax
 
 ### Kishendran Vendar Kon
 
 <img src="images/kishendranvendarkon.png" width="200px">
 
 [[github](https://github.com/KishendranVendarKon)]
+[[portfolio](team/kishendranvendarkon.md)]
 
 - Role: Testing
 - Responsibilities: In charge of `Storage` component
@@ -32,6 +33,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/zhenghanlee.png" width="200px">
 
 [[github](https://github.com/zhenghanlee)]
+[[portfolio](team/zhenghanlee.md)]
 
 - Role: Documentation, VSCode Expert
 - Responsibility: Search by categories
@@ -41,8 +43,9 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/anonymxtrix.png" width="200px">
 
 [[github](https://github.com/anonymxtrix)]
+[[portfolio](team/anonymxtrix.md)]
 
-- Role: Code quality, Git expert
+- Role: Code Quality, Git Expert
 - Responsibility: Logic
 
 ### Zhou Jiahao
@@ -50,6 +53,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/zhou-jiahao-1998.png" width="200px">
 
 [[github](https://github.com/Zhou-Jiahao-1998)]
+[[portfolio](team/zhou-jiahao-1998.md)]
 
 - Role: Integration
 - Responsibility: Search by categories
