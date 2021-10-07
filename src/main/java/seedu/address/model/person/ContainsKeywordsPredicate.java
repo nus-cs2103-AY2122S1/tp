@@ -51,7 +51,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
         case ADDRESS:
             return person.getAddress().value;
         case TAG:
-            return person.combineTags();
+            return person.getTags().stream().map(t -> t.tagName).reduce("", (x, y) -> x + " " + y);
         default:
             return null;
         }
