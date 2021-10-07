@@ -77,10 +77,10 @@ It is optimized for use via a Command Line Interface (CLI) while still having th
   e.g. in `padd /n NAME`, `NAME` is a parameter which can be used as `padd /n John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `/n NAME [/t TAG]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
+  e.g. `/n NAME [/t POSITION]` can be used as `/n John Doe /t friend` or as `/n John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[/t TAG]…​` can be used as ` ` (i.e. 0 times), `/t friend`, `/t friend /t family` etc.
+  e.g. `[/t POSITION]…​` can be used as ` ` (i.e. 0 times), `/t friend`, `/t friend /t family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `/n NAME /p PHONE_NUMBER`, `/p PHONE_NUMBER /n NAME` is also acceptable.
@@ -107,11 +107,11 @@ Format: `help`
 
 Adds a member to Ailurus.
 
-Format: `padd /n NAME /p PHONE_NUMBER /e EMAIL [/a ADDRESS] [/t TAG]…​`
+Format: `padd /n NAME /p PHONE_NUMBER /e EMAIL [/a ADDRESS] [/t POSITION]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A member can have any number of tags (including 0). A member MUST have a name,
-phone number and email address, but mailing address and tags are optional.
+A member can have any number of positions (including 0). A member MUST have a name,
+phone number and email address, but mailing address and positions are optional.
 </div>
 
 Examples:
@@ -182,19 +182,19 @@ Format: `elist`
 
 Edits an existing member in Ailurus. Only can be used when the user is on member lists (accessible via `plist [/e EVENT_ID]`).
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/POSITION]…​`
 
 * Can only be used in `plist [/e EVENT_ID]`.
 * Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list. 
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the member will be removed i.e adding of tags is not cumulative.
-* You can remove all the member’s tags by typing `t/` without specifying any tags after it.
+* When editing positions, the existing positions of the member will be removed i.e adding of positions is not cumulative.
+* You can remove all the member’s positions by typing `t/` without specifying any positions after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
 
 ### Locating members by name: `find`
 
@@ -319,13 +319,13 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **help** | `help`
-**padd** | `padd /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS [/t TAG]…​` <br> e.g., `padd /n James Ho /p 22224444 /e jamesho@example.com /a 123, Clementi Rd, 1234665 /t friend /t colleague`
+**padd** | `padd /n NAME /p PHONE_NUMBER /e EMAIL /a ADDRESS [/t POSITION]…​` <br> e.g., `padd /n James Ho /p 22224444 /e jamesho@example.com /a 123, Clementi Rd, 1234665 /t friend /t colleague`
 **tadd** | `tadd /n TASKNAME /p MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /p 3`
 **eadd** | `eadd /n EVENTNAME [/p MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /p 4 /p 5 /p 6`
 **plist** | `plist [/e EVENT_ID]` <br> e.g., `plist /e 3`
 **tlist** | `tlist /p MEMBER_ID` <br> e.g., `tlist /p 2`
 **elist** | `elist`
-**edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/POSITION]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **pdel** | `pdel /p MEMBER_ID` <br> e.g., `pdel /p 6`
 **tdel** | `tdel /t TASK_ID /for MEMBER_ID` <br> e.g., `tdel /t 4 for/ 3`

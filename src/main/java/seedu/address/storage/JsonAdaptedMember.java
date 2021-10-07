@@ -15,7 +15,7 @@ import seedu.address.model.member.Email;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.position.Position;
 
 /**
  * Jackson-friendly version of {@link Member}.
@@ -28,7 +28,7 @@ class JsonAdaptedMember {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedPosition> attachedPositions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMember} with the given member details.
@@ -36,13 +36,13 @@ class JsonAdaptedMember {
     @JsonCreator
     public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("attachedPosition") List<JsonAdaptedPosition> attachedPositions) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (attachedPositions != null) {
+            this.attachedPositions.addAll(attachedPositions);
         }
     }
 
@@ -54,8 +54,8 @@ class JsonAdaptedMember {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        attachedPositions.addAll(source.getPositions().stream()
+                .map(JsonAdaptedPosition::new)
                 .collect(Collectors.toList()));
     }
 
@@ -64,10 +64,11 @@ class JsonAdaptedMember {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted member.
      */
+
     public Member toModelType() throws IllegalValueException {
-        final List<Tag> memberTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            memberTags.add(tag.toModelType());
+        final List<Position> memberPositions = new ArrayList<>();
+        for (JsonAdaptedPosition tag : attachedPositions) {
+            memberPositions.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +103,8 @@ class JsonAdaptedMember {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(memberTags);
-        return new Member(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Position> modelPositions = new HashSet<>(memberPositions);
+        return new Member(modelName, modelPhone, modelEmail, modelAddress, modelPositions);
     }
 
 }

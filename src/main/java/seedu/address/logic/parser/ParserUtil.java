@@ -13,7 +13,7 @@ import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.position.Position;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -96,29 +96,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String position} into a {@code Position}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code position} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Position parsePosition(String position) throws ParseException {
+        requireNonNull(position);
+        String trimmedPosition = position.trim();
+        if (!Position.isValidPositionName(trimmedPosition)) {
+            throw new ParseException(Position.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Position(trimmedPosition);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> positions} into a {@code Set<Position>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Position> parsePositions(Collection<String> positions) throws ParseException {
+        requireNonNull(positions);
+        final Set<Position> positionSet = new HashSet<>();
+        for (String positionName : positions) {
+            positionSet.add(parsePosition(positionName));
         }
-        return tagSet;
+        return positionSet;
     }
 }

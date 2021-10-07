@@ -4,14 +4,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.PAddCommand;
 import seedu.address.model.member.Member;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.position.Position;
 
 /**
  * A utility class for Member.
@@ -34,8 +34,8 @@ public class MemberUtil {
         sb.append(PREFIX_PHONE + member.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + member.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + member.getAddress().value + " ");
-        member.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        member.getPositions().stream().forEach(
+            s -> sb.append(PREFIX_POSITION + s.positionName + " ")
         );
         return sb.toString();
     }
@@ -49,12 +49,12 @@ public class MemberUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+        if (descriptor.getPositions().isPresent()) {
+            Set<Position> positions = descriptor.getPositions().get();
+            if (positions.isEmpty()) {
+                sb.append(PREFIX_POSITION);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                positions.forEach(s -> sb.append(PREFIX_POSITION).append(s.positionName).append(" "));
             }
         }
         return sb.toString();

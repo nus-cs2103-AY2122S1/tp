@@ -5,14 +5,14 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniqueMemberList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueMemberList
-UniqueTagList -[hidden]down- UniqueMemberList
+AddressBook *-right-> "1" UniquePositionList
+UniquePositionList -[hidden]down- UniqueMemberList
+UniquePositionList -[hidden]down- UniqueMemberList
 
-UniqueTagList *-right-> "*" Tag
+UniquePositionList *-right-> "*" Position
 UniqueMemberList -right-> Member
 
-Member -up-> "*" Tag
+Member -up-> "*" Position
 
 Member *--> Name
 Member *--> Phone
