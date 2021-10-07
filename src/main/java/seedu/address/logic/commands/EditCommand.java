@@ -249,7 +249,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<LevelOfEducation> getLevelOfEducation() {
-                return Optional.ofNullable(levelOfEducation);
+            return Optional.ofNullable(levelOfEducation);
         }
 
         public void setExperience(Experience experience) {

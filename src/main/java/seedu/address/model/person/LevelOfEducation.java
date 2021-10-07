@@ -34,8 +34,8 @@ public class LevelOfEducation {
     }
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Level of Education should only be one of the following: Elementary, Middle School," +
-                    " High School, University, Bachelors, Masters or PhD";
+            "Level of Education should only be one of the following: Elementary, Middle School,"
+                    + " High School, University, Bachelors, Masters or PhD";
 
     public final String levelOfEducation;
 
