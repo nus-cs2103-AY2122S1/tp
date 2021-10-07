@@ -45,10 +45,13 @@ public class AddressBookParser {
         String arguments = matcher.group("arguments");
         if ((arguments.length() != 0) && (!arguments.startsWith(" -"))) {
             isTwoWordCommand = true;
+            if (Character.isDigit(arguments.charAt(1))) {
+                isTwoWordCommand = false;
+            }
         }
         if (isTwoWordCommand) {
             commandWord = convertFormat(commandWord, arguments);
-            arguments = convertFormatArguments(commandWord, arguments);
+            arguments = convertFormatArguments(arguments);
         }
         switch (commandWord) {
 
@@ -81,7 +84,13 @@ public class AddressBookParser {
         }
     }
 
-    private String convertFormatArguments(String commandWord, String arguments) {
+    /**
+     * Removes second word of command from arguments.
+     *
+     * @param arguments arguments to format.
+     * @return formatted arguments.
+     */
+    private String convertFormatArguments(String arguments) {
         int index = 0;
         if (arguments.contains("-")) {
             index = arguments.indexOf("-");
@@ -94,6 +103,13 @@ public class AddressBookParser {
         }
     }
 
+    /**
+     * Converts commandWord to the two word format and retrieves second word from arguments.
+     *
+     * @param commandWord commandWord to format.
+     * @param arguments arguments to retrieve second half of commandWord from.
+     * @return formatted commandWord.
+     */
     private String convertFormat(String commandWord, String arguments) {
         int index = 0;
         if (arguments.contains("-")) {
