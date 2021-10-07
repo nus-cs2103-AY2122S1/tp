@@ -38,23 +38,13 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-<<<<<<< HEAD
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Position
-=======
 AddressBook *--> "1" UniqueMemberList
 UniqueMemberList --> "~* all" Member
 Member *--> Name
 Member *--> Phone
 Member *--> Email
 Member *--> Address
-Member *--> "*" Tag
->>>>>>> master
+Member *--> "*" Position
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
