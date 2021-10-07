@@ -63,8 +63,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_CONTACT_REQUIRED = "This person must have at least one contact field.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private Index index;
+    private EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -76,6 +76,47 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    public EditCommand() {
+    }
+
+    /**
+     * Returns the description of what the command does.
+     *
+     * @return Description of what the command does.
+     */
+    public String getAction() {
+        return "Edit Student";
+    }
+
+    /**
+     * Returns the format of the valid command with command word and parameters.
+     *
+     * @return The format of the valid command.
+     */
+    public String getFormat() {
+        return COMMAND_WORD + " INDEX (must be a positive integer) "
+                + "[" + PREFIX_NAME + "NAME] "
+                + "[" + PREFIX_PHONE + "PHONE] "
+                + "[" + PREFIX_EMAIL + "EMAIL] "
+                + "[" + PREFIX_PARENT_PHONE + "PHONE] "
+                + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
+                + "[" + PREFIX_ADDRESS + "ADDRESS] "
+                + "[" + PREFIX_FEE + "FEE] "
+                + "[" + PREFIX_REMARK + "REMARK] "
+                + "[" + PREFIX_TAG + "TAG]...";
+    }
+
+    /**
+     * Returns an example usage of the command.
+     *
+     * @return Example usage of the command.
+     */
+    public String getExample() {
+        return COMMAND_WORD + " 1 "
+                + PREFIX_PHONE + "91234567 "
+                + PREFIX_EMAIL + "johndoe@example.com";
     }
 
     @Override

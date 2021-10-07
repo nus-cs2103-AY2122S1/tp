@@ -49,7 +49,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private Person toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -57,6 +57,54 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+    }
+
+    public AddCommand() {
+    }
+
+    /**
+     * Returns the description of what the command does.
+     *
+     * @return Description of what the command does.
+     */
+    public String getAction() {
+        return "Add Student";
+    }
+
+    /**
+     * Returns the format of the valid command with command word and parameters.
+     *
+     * @return The format of the valid command.
+     */
+    public String getFormat() {
+        return COMMAND_WORD + " " + PREFIX_NAME + "NAME "
+                + PREFIX_ADDRESS + "ADDRESS "
+                + "[" + PREFIX_PHONE + "PHONE] "
+                + "[" + PREFIX_EMAIL + "EMAIL] "
+                + "[" + PREFIX_PARENT_PHONE + "PARENT PHONE] "
+                + "[" + PREFIX_PARENT_EMAIL + "PARENT EMAIL] "
+                + "[" + PREFIX_FEE + "FEE] "
+                + "[" + PREFIX_REMARK + "REMARK] "
+                + "[" + PREFIX_TAG + "TAG]...";
+    }
+
+    /**
+     * Returns an example usage of the command.
+     *
+     * @return Example usage of the command.
+     */
+    public String getExample() {
+        return COMMAND_WORD + " "
+                + PREFIX_NAME + "John Doe "
+                + PREFIX_PHONE + "98765432 "
+                + PREFIX_EMAIL + "johnd@example.com "
+                + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+                + PREFIX_PARENT_PHONE + "91234567 "
+                + PREFIX_PARENT_EMAIL + "jackd@example.com "
+                + PREFIX_FEE + "50 "
+                + PREFIX_REMARK + "He owes me a dinner! "
+                + PREFIX_TAG + "friends "
+                + PREFIX_TAG + "neighbour";
     }
 
     @Override

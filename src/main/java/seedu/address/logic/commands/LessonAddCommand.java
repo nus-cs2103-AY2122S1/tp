@@ -62,8 +62,8 @@ public class LessonAddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists for this person.";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
-    private final Index index;
-    private final Lesson toAdd;
+    private Index index;
+    private Lesson toAdd;
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
@@ -96,6 +96,48 @@ public class LessonAddCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
                 updatedParentEmail, updatedAddress, updatedOutstandingFee, updatedRemark,
             updatedTags, lessons);
+    }
+
+    public LessonAddCommand() {
+    }
+
+    /**
+     * Returns the description of what the command does.
+     *
+     * @return Description of what the command does.
+     */
+    public String getAction() {
+        return "Add Lesson";
+    }
+
+    /**
+     * Returns the format of the valid command with command word and parameters.
+     *
+     * @return The format of the valid command.
+     */
+    public String getFormat() {
+        return COMMAND_WORD + " INDEX (must be a positive integer) "
+                + "[" + PREFIX_RECURRING + "] "
+                + PREFIX_DATE + "dd MMM yyyy "
+                + PREFIX_START_TIME + "HH:mm "
+                + PREFIX_END_TIME + "HH:mm "
+                + PREFIX_SUBJECT + "SUBJECT "
+                + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
+    }
+
+    /**
+     * Returns an example usage of the command.
+     *
+     * @return Example usage of the command.
+     */
+    public String getExample() {
+        return COMMAND_WORD + " 1 "
+                + PREFIX_RECURRING + " "
+                + PREFIX_DATE + "09 Dec 2021 "
+                + PREFIX_START_TIME + "10:30 "
+                + PREFIX_END_TIME + "12:30 "
+                + PREFIX_SUBJECT + "Math "
+                + PREFIX_HOMEWORK + "TYS Page 2 ";
     }
 
     @Override

@@ -24,10 +24,40 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+    }
+
+    public DeleteCommand() {
+    }
+
+    /**
+     * Returns the description of what the command does.
+     *
+     * @return Description of what the command does.
+     */
+    public String getAction() {
+        return "Delete Student";
+    }
+
+    /**
+     * Returns the format of the valid command with command word and parameters.
+     *
+     * @return The format of the valid command.
+     */
+    public String getFormat() {
+        return COMMAND_WORD + " INDEX (must be a positive integer)";
+    }
+
+    /**
+     * Returns an example usage of the command.
+     *
+     * @return Example usage of the command.
+     */
+    public String getExample() {
+        return COMMAND_WORD + " 1";
     }
 
     @Override
