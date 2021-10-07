@@ -63,7 +63,9 @@ public class ParticipantId {
     }
 
     public static boolean isValidId(String id) {
-        return id.length() > 0 && id.length() <= 6;
+        String idName = id.replaceAll("[0-9]", "");
+        String idNumber = id.replaceAll("[^\\d.]", "");
+        return idName.length() > 0 && idName.length() <= 6 && Integer.parseInt(idNumber) > 0;
     }
 
     @Override
