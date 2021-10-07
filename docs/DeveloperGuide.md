@@ -593,7 +593,7 @@ Precondition: The student's details have been added to TutorAid.
 
       Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
       Use case resumes from step 2.
-      
+
 * 1b. TutorAid detects an error in the view schedule command.
 
     * 1b1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -671,9 +671,9 @@ Preconditions: There is at least one student added to TutorAid.
 2.  TutorAid shows the upcoming milestones in a chronological order
 
     Use case ends.
-    
+
 **Extensions**
-    
+
 * 1a. TutorAid detects an error in the view milestones command.
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -1024,7 +1024,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 ### Non-Functional Requirements
 1.  The system should be able to run on any machine that has Java 11 or higher installed.
 2.  The user should be able to access the list of available commands within 2 inputs/clicks.
-3.  The length of the user commands should not be more than 20 characters (excluding the arguments).    
+3.  The length of the user commands should not be more than 20 characters (excluding the arguments).
 4.  No user input should corrupt the data file. (The data file should still be able to be parsed by TutorAid at all times)
 5.  The system should respond within 5 seconds for any action.
 6.  The system should not crash even when hundreds of student data are stored.
