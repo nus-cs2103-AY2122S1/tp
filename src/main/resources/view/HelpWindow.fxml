@@ -35,7 +35,6 @@
                      <Insets />
                   </opaqueInsets>
                </TableView>
-      
             <HBox alignment="CENTER" layoutY="525.0" prefHeight="64.0" prefWidth="551.0" style="-fx-background-color: D3DAFB50;">
               <children>
                 <Label fx:id="helpMessage" text="Label" textFill="#424874" wrapText="true" HBox.hgrow="ALWAYS">
