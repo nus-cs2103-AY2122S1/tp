@@ -3,9 +3,11 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "role" : "Detective",
     "address": "4th street",
+    "role": "Detective",
+    "employmentType": "Full time",
     "experience" : 0,
+    "levelOfEducation": "PhD",
     "expectedSalary" : "6300"
   } ]
 }

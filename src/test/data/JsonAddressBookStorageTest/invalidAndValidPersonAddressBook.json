@@ -4,12 +4,20 @@
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street",
-    "expectedSalary" : "3500"
+    "role": "Software Engineer",
+    "employmentType": "Full time",
+    "expectedSalary" : "3500",
+    "levelOfEducation": "PhD",
+    "experience": "1"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "address": "4th street",
-    "expectedSalary" : "-3500.50"
+    "role": "Software Engineer",
+    "employmentType": "Full time",
+    "expectedSalary" : "3500",
+    "levelOfEducation": "PhD",
+    "experience": "1"
   } ]
 }

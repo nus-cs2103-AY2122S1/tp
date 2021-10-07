@@ -279,16 +279,21 @@ they have in mind. Recruiters can manage contacts faster than a typical mouse/GU
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | save applicant data            | refer to it in the future without having to type in their data again   |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                           |
-| `* * *`  | user                                       | list all applicants            | keep track of all my applicants                                        |
-| `* * *`  | user                                       | find applicants by their applied roles | so I can filter out applicants applying for a specific role   |
-| `* * *`  | user                                       | find applicants by their expected salary | so I can filter out applicants that match the salary range of the hiring company.   |
-| `* * *`  | user                                       | Find applicants by highest level of education | So I can filter out applicants that match the desired highest level of education  |
-| `* * *`  | user                                       | Find applicants by years of experience  | So that I can filter out applicants with desired years of experience    |
+| Priority | As a …​                                    | I want to …​                            | So that I can…​                                                        |
+| -------- | ------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                        | refer to instructions when I forget how to use the App                    |
+| `* * *`  | user                                       | list all applicants                           | keep track of all my applicants                                           |
+| `* * *`  | user                                       | add an applicant                              | update my list of applicants with new people                              |
+| `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need                                        |
+| `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
+| `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
+| `* * *`  | user                                       | find applicants by their email                | locate details of applicants without having to go through the entire list |
+| `* * *`  | user                                       | find applicants by their applied roles        | filter out applicants applying for a specific role                        |
+| `* * *`  | user                                       | find applicants by their employment type      | filter out applicants that match the desired employment type              |
+| `* * *`  | user                                       | find applicants by their expected salary      | filter out applicants that match the salary range of the hiring company   |
+| `* * *`  | user                                       | find applicants by their level of education   | filter out applicants that match the desired highest level of education   |
+| `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants with desired years of experience                    |
+| `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
 
 
 *{More to be added}*
@@ -335,13 +340,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The input format is invalid.
     * 1a1. RecruitIn shows an error message.
-<<<<<<< HEAD
 
       Use case resumes at step 1.
-=======
-      
-      Use case resumes at step 1. 
->>>>>>> 26e8c0b2f9001dac08b1c998db15dc722e6b8c9c
 
 **Use case: UC04 - Delete an applicant**
 
@@ -363,17 +363,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list of applicants is empty.
 
   Use case ends.
-<<<<<<< HEAD
 
 * 3a. The delete command is invalid.
-
-=======
-    
-* 3a. The delete command is invalid.
-
->>>>>>> 26e8c0b2f9001dac08b1c998db15dc722e6b8c9c
     * 3a1. RecruitIn shows an error message.
-
+    
       Use case resumes at step 2.
 
 **Use case: UC05 - Finding an applicant**
@@ -408,6 +401,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Applicant**: Represents a person that is searching for a job
+* **Applied Role**: Represents the job a person is applying for
+* **Employment Type**: Represents how the applicant will be paid, e.g. Full time, Part time
+* **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
+* **Level of Education**: Represents the highest level of education the applicant has
+* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -22,7 +22,9 @@ public class Person {
 
     // Category fields
     private final Role role;
+    private final EmploymentType employmentType;
     private final ExpectedSalary expectedSalary;
+    private final LevelOfEducation levelOfEducation;
     private final Experience experience;
 
     // Data fields
@@ -32,16 +34,18 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-
     public Person(Name name, Phone phone, Email email, Address address,
-                  Role role, ExpectedSalary expectedSalary, Experience experience, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, role, expectedSalary, experience, tags);
+                  Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
+                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, expectedSalary, levelOfEducation, experience, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
+        this.employmentType = employmentType;
         this.expectedSalary = expectedSalary;
+        this.levelOfEducation = levelOfEducation;
         this.experience = experience;
         this.tags.addAll(tags);
     }
@@ -62,13 +66,20 @@ public class Person {
         return address;
     }
 
-
     public Role getRole() {
         return role;
     }
 
+    public EmploymentType getEmploymentType() {
+        return employmentType;
+    }
+
     public ExpectedSalary getExpectedSalary() {
         return expectedSalary;
+    }
+
+    public LevelOfEducation getLevelOfEducation() {
+        return levelOfEducation;
     }
 
     public Experience getExperience() {
@@ -82,7 +93,6 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
 
     /**
      * Returns true if both persons have the same name.
@@ -117,7 +127,9 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRole().equals(getRole())
+                && otherPerson.getEmploymentType().equals(getEmploymentType())
                 && otherPerson.getExpectedSalary().equals(getExpectedSalary())
+                && otherPerson.getLevelOfEducation().equals(getLevelOfEducation())
                 && otherPerson.getExperience().equals(getExperience())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -125,7 +137,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, expectedSalary, experience, tags);
+        return Objects.hash(name, phone, email, address, role, employmentType,
+                expectedSalary, levelOfEducation, experience, tags);
     }
 
     @Override
@@ -140,8 +153,12 @@ public class Person {
                 .append(getAddress())
                 .append("; Applied Role: ")
                 .append(getRole())
+                .append("; Employment Type: ")
+                .append(getEmploymentType())
                 .append("; Expected Salary: ")
                 .append(getExpectedSalary())
+                .append("; Level of Education: ")
+                .append(getLevelOfEducation())
                 .append("; Years of Experience: ")
                 .append(getExperience());
 
@@ -152,5 +169,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }
