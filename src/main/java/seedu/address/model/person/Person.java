@@ -61,6 +61,14 @@ public class Person {
     }
 
     /**
+     * Returns a String that combines all the tags of the person for tag search.
+     *
+     */
+    public String combineTags() {
+        return getTags().stream().map(t -> t.tagName).reduce("", (x, y) -> x + " " + y);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
