@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "moduleTrackerFilePath" : "moduletracker.json"
+  "moduleTrackerFilePath" : "data\\moduletracker.json"
 }
