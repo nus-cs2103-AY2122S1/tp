@@ -1,8 +1,12 @@
 package seedu.academydirectory.ui;
 
+import java.io.File;
 import java.util.logging.Logger;
 
+import com.sandec.mdfx.MarkdownView;
+
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
@@ -21,11 +25,16 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
+    private final File userGuide = new File("docs/UserGuide.md");
+
     @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private Button closeButton;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +44,12 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        MarkdownView markdownView = new MarkdownView() {
+            @Override
+            public void setLink(Node node, String link, String description) {
+                super.setLink(node, link, description);
+            }
+        };
     }
 
     /**
@@ -98,5 +113,10 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    @FXML
+    private void close() {
+        getRoot().close();
     }
 }
