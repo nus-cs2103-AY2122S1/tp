@@ -134,7 +134,7 @@ public abstract class UniquePersonListTest<T extends Person> {
     }
 
     @Test
-    public void remove_patientDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
         assertThrows(PersonNotFoundException.class, () -> personList.remove(alice));
     }
 
@@ -168,8 +168,8 @@ public abstract class UniquePersonListTest<T extends Person> {
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         personList.add(alice);
-        List<T> patientList = Collections.singletonList(bob);
-        personList.setPersons(patientList);
+        List<T> newPatientList = Collections.singletonList(bob);
+        personList.setPersons(newPatientList);
         UniquePersonList<T> expectedUniquePersonList = new UniquePersonList<>();
         expectedUniquePersonList.add(bob);
         assertEquals(expectedUniquePersonList, personList);
