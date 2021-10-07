@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -154,6 +156,18 @@ public class ParserUtil {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
         return new Group(trimmedGroup);
+    }
+
+    /**
+     * Parses {@code Collection<String> groups} into a {@code List<Group>}.
+     */
+    public static List<Group> parseGroups(Collection<String> groups) throws ParseException {
+        requireNonNull(groups);
+        final List<Group> groupList = new ArrayList<>();
+        for (String groupName : groups) {
+            groupList.add(parseGroup(groupName));
+        }
+        return groupList;
     }
 
     /**
