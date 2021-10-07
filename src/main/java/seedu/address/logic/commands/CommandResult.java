@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents the result of a command execution.
  */
@@ -14,16 +16,24 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    /** Student information should be shown to the user. */
+    private final boolean showStudent;
+
+    /** Student to be shown to the user. */
+    private final Person student;
+
     /** The application should exit. */
     private final boolean exit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showStudent, Person student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showStudent = showStudent;
+        this.student = student;
     }
 
     /**
@@ -31,7 +41,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, null);
     }
 
     public String getFeedbackToUser() {
@@ -40,6 +50,14 @@ public class CommandResult {
 
     public boolean isShowHelp() {
         return showHelp;
+    }
+
+    public boolean isShowStudent() {
+        return showStudent;
+    }
+
+    public Person getStudent() {
+        return student;
     }
 
     public boolean isExit() {
@@ -58,9 +76,12 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
+
+        // no need to check for student field, since feedbackToUser contain student details in a string representation
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showStudent == otherCommandResult.showStudent;
     }
 
     @Override
