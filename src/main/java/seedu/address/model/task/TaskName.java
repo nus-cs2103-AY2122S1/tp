@@ -20,7 +20,7 @@ public class TaskName {
     public final String taskName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code TaskName}.
      *
      * @param name A valid name.
      */

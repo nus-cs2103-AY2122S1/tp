@@ -68,7 +68,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
-    public void setPersons(UniqueTaskList replacement) {
+    public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
