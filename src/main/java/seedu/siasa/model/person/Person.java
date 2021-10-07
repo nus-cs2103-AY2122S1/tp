@@ -2,19 +2,15 @@ package seedu.siasa.model.person;
 
 import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
-import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in SIASA.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {

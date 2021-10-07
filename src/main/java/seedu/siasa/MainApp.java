@@ -15,11 +15,11 @@ import seedu.siasa.commons.util.ConfigUtil;
 import seedu.siasa.commons.util.StringUtil;
 import seedu.siasa.logic.Logic;
 import seedu.siasa.logic.LogicManager;
-import seedu.siasa.model.Siasa;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.ReadOnlyUserPrefs;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.util.SampleDataUtil;
 import seedu.siasa.storage.AddressBookStorage;
@@ -81,7 +81,7 @@ public class MainApp extends Application {
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleSiasa);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new Siasa();

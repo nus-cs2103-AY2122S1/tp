@@ -2,8 +2,8 @@ package seedu.siasa.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.siasa.model.Siasa;
 import seedu.siasa.model.Model;
+import seedu.siasa.model.Siasa;
 
 /**
  * Clears the address book.

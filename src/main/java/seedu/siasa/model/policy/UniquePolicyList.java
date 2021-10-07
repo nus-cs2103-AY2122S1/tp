@@ -26,6 +26,10 @@ public class UniquePolicyList implements Iterable<Policy> {
         return internalList.stream().anyMatch(toCheck::isSamePolicy);
     }
 
+    /**
+     * Adds a policy to the list.
+     * The policy must not already exist in the list.
+     */
     public void add(Policy toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -34,6 +38,11 @@ public class UniquePolicyList implements Iterable<Policy> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Replaces the policy {@code target} in the list with {@code editedPolicy}.
+     * {@code target} must exist in the list.
+     * The policy identity of {@code editedPolicy} must not be the same as another existing policy in the list.
+     */
     public void setPolicy(Policy target, Policy editedPolicy) {
         requireAllNonNull(target, editedPolicy);
 
@@ -49,7 +58,10 @@ public class UniquePolicyList implements Iterable<Policy> {
         internalList.set(index, editedPolicy);
     }
 
-
+    /**
+     * Removes the equivalent policy from the list.
+     * The policy must exist in the list.
+     */
     public void remove(Policy toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -57,6 +69,9 @@ public class UniquePolicyList implements Iterable<Policy> {
         }
     }
 
+    /**
+     * Removes the policies belonging to the {@code owner} from the list.
+     */
     public void removeBelongingTo(Person owner) {
         requireNonNull(owner);
         for (Policy policy: internalList) {
@@ -66,6 +81,10 @@ public class UniquePolicyList implements Iterable<Policy> {
         }
     }
 
+    /**
+     * Replaces the contents of this list with {@code policies}.
+     * {@code policies} must not contain duplicate policies.
+     */
     public void setPolicies(UniquePolicyList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

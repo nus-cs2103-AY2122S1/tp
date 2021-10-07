@@ -1,19 +1,16 @@
 package seedu.siasa.testutil;
 
-import seedu.siasa.model.person.Person;
-import seedu.siasa.model.policy.Policy;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
-
-
-
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.siasa.model.policy.Policy;
 
 public class TypicalPolicies {
     public static final Policy FULL_LIFE = new PolicyBuilder(ALICE).build();

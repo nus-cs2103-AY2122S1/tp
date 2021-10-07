@@ -6,6 +6,10 @@ import java.util.Objects;
 
 import seedu.siasa.model.person.Person;
 
+/**
+ * Represents a Policy in SIASA.
+ * Guarantees: details and owner are present and not null, field values are validated, immutable.
+ */
 public class Policy {
 
     private final Title title;
@@ -16,6 +20,9 @@ public class Policy {
     // Policy should always have an owner
     private final Person owner;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Policy(Title title, Price price, ExpiryDate expiryDate, Commission commission, Person owner) {
         requireAllNonNull(title, price, expiryDate, commission, owner);
         this.title = title;
@@ -45,6 +52,10 @@ public class Policy {
         return owner;
     }
 
+    /**
+     *  Returns true if both policies have the same title and owner (by identity).
+     *  this defines a weaker notion of equality between two policies.
+     */
     public boolean isSamePolicy(Policy otherPolicy) {
         if (otherPolicy == this) {
             return true;

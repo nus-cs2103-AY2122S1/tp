@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.siasa.commons.exceptions.IllegalValueException;
-import seedu.siasa.model.Siasa;
 import seedu.siasa.model.ReadOnlySiasa;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.person.Person;
 
 /**

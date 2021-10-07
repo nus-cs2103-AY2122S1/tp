@@ -101,6 +101,9 @@ public class Siasa implements ReadOnlySiasa {
         policies.removeBelongingTo(key);
     }
 
+    /**
+     * Returns true if a policy with the same identity as {@code policy} exists in SIASA.
+     */
     public boolean hasPolicy(Policy policy) {
         requireNonNull(policy);
         return policies.contains(policy);
@@ -139,8 +142,8 @@ public class Siasa implements ReadOnlySiasa {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons; " +
-                policies.asUnmodifiableObservableList().size() + " policies;";
+        return persons.asUnmodifiableObservableList().size() + " persons; "
+                + policies.asUnmodifiableObservableList().size() + " policies;";
     }
 
     @Override

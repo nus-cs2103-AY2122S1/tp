@@ -1,6 +1,7 @@
 package seedu.siasa.model.policy;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.logic.commands.CommandTestUtil.INVALID_PRICE_NEGATIVE;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
 import static seedu.siasa.testutil.Assert.assertThrows;

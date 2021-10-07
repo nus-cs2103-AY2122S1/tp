@@ -177,6 +177,9 @@ public class ModelManager implements Model {
         filteredPolicies.setPredicate(predicate);
     }
 
+    /**
+     * Removes all filters on the filtered person list.
+     */
     public void removeAllFilters() {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         updateFilteredPolicyList(PREDICATE_SHOW_ALL_POLICIES);

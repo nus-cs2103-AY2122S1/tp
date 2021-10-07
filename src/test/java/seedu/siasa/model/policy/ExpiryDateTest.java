@@ -1,6 +1,7 @@
 package seedu.siasa.model.policy;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.logic.commands.CommandTestUtil.INVALID_POLICY_EXPIRY_DATE_PAST;
 import static seedu.siasa.logic.commands.CommandTestUtil.INVALID_POLICY_EXPIRY_DATE_TODAY;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
@@ -32,5 +33,4 @@ class ExpiryDateTest {
         // valid addresses
         assertTrue(ExpiryDate.isValidExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL));
     }
-
 }

@@ -25,7 +25,7 @@ public class PolicyBuilder {
     private Person owner;
 
     /**
-     * Creates a {@code PolicyBuilder} with the default details and set to owner.
+     * Creates a {@code PolicyBuilder} with the default details and  owner.
      */
     public PolicyBuilder(Person owner) {
         requireNonNull(owner);
@@ -48,26 +48,41 @@ public class PolicyBuilder {
         this.owner = policyToCopy.getOwner();
     }
 
+    /**
+     * Sets the {@code Title} of the {@code Policy} that we are building.
+     */
     public PolicyBuilder withTitle(String title) {
         this.title = new Title(title);
         return this;
     }
 
+    /**
+     * Sets the {@code Price} of the {@code Policy} that we are building.
+     */
     public PolicyBuilder withPrice(int price) {
         this.price = new Price(price);
         return this;
     }
 
+    /**
+     * Sets the {@code Commission} of the {@code Policy} that we are building.
+     */
     public PolicyBuilder withCommission(int commission) {
         this.commission = new Commission(commission);
         return this;
     }
 
+    /**
+     * Sets the {@code ExpiryDate} of the {@code Policy} that we are building.
+     */
     public PolicyBuilder withExpiryDate(LocalDate date) {
         this.expiryDate = new ExpiryDate(date);
         return this;
     }
 
+    /**
+     * Sets the {@code Owner} of the {@code Policy} that we are building.
+     */
     public PolicyBuilder withOwner(Person owner) {
         this.owner = owner;
         return this;

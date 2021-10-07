@@ -3,9 +3,6 @@ package seedu.siasa.model.policy;
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
 
-/*
- * Represents the price of a policy in Singaporean dollars.
- */
 public class Price {
     public static final String MESSAGE_CONSTRAINTS =
             "Price in cents should be a non-negative integer.";
@@ -13,13 +10,20 @@ public class Price {
 
     public final int priceInCents;
 
+    /**
+     * Constructs an {@code Price}.
+     *
+     * @param priceInCents A valid price in cents.
+     */
     public Price(int priceInCents) {
         requireNonNull(priceInCents);
         checkArgument(isValidPrice(priceInCents), MESSAGE_CONSTRAINTS);
         this.priceInCents = priceInCents;
     }
 
-    public static boolean isValidPrice(int price) { return price >= 0; }
+    public static boolean isValidPrice(int price) {
+        return price >= 0;
+    }
 
     @Override
     public String toString() {

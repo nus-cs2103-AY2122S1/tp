@@ -4,9 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import seedu.siasa.model.person.Address;
 
 public class ExpiryDate {
 
@@ -15,7 +12,7 @@ public class ExpiryDate {
     public final LocalDate value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code ExpiryDate}.
      *
      * @param expiryDate A valid expiry date.
      */

@@ -5,9 +5,9 @@ import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.siasa.model.Siasa;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
 
 public class ClearCommandTest {

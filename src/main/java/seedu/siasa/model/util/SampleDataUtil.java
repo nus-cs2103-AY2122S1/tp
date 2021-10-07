@@ -4,17 +4,18 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.siasa.model.Siasa;
 import seedu.siasa.model.ReadOnlySiasa;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.person.Address;
 import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Name;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.Phone;
+import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Siasa} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -40,12 +41,20 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlySiasa getSampleAddressBook() {
-        Siasa sampleAb = new Siasa();
+    public static Policy[] getSamplePolicies() {
+        return new Policy[] {};
+    }
+
+    public static ReadOnlySiasa getSampleSiasa() {
+        Siasa sampleSiasa = new Siasa();
         for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+            sampleSiasa.addPerson(samplePerson);
         }
-        return sampleAb;
+        for (Policy policy : getSamplePolicies()) {
+            assert sampleSiasa.hasPerson(policy.getOwner());
+            sampleSiasa.addPolicy(policy);
+        }
+        return sampleSiasa;
     }
 
     /**

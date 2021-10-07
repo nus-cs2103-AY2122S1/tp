@@ -1,15 +1,15 @@
 package seedu.siasa.model.policy;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_COMMISSION_CRITICAL;
+import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_EXPIRY_DATE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_PRICE_CRITICAL;
 import static seedu.siasa.logic.commands.CommandTestUtil.VALID_POLICY_TITLE_CRITICAL;
-import static seedu.siasa.testutil.Assert.assertThrows;
 import static seedu.siasa.testutil.TypicalPersons.ALICE;
 import static seedu.siasa.testutil.TypicalPersons.BOB;
-import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
 import static seedu.siasa.testutil.TypicalPolicies.CRITICAL_ILLNESS;
+import static seedu.siasa.testutil.TypicalPolicies.FULL_LIFE;
 
 import org.junit.jupiter.api.Test;
 
