@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -53,7 +56,8 @@ public class CommandTestUtil {
         DESC_BAGEL = new EditItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
                 .withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED).build();
         DESC_DONUT = new EditItemDescriptorBuilder().withName(VALID_NAME_DONUT)
-                .withId(VALID_ID_DONUT).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
+                .withId(VALID_ID_DONUT).withCount(VALID_COUNT_BAGEL)
+                .withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
     }
 
     /**
