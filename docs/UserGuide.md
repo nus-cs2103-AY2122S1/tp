@@ -231,7 +231,9 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Add a new Contact | add n/<NAME> te/<TELEGRAM> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>] |
 | Delete a Contact | delete <INDEX> |
 | Edit a Contact | edit <INDEX> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>] |
-| Find a Contact | find <STRING> |
-| Show a Contact | show <NAME> |
+| Find a Contact (by Name) | find \<STRING> |
+| Find a Contact (by Tag) | find t/\<TAG> |
+| Show a Contact (by Name)| show \<NAME> |
+| Show a Contact (by Index) | show \<INDEX> |
 | Import Contacts | import filename.JSON |
 | Exporting Contacts | export filename.JSON |
