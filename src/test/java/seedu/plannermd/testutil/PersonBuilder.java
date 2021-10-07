@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
-import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.model.util.SampleDataUtil;
