@@ -13,6 +13,7 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.ParticipantId;
 
 /**
  * Json friendly {@link Event}
@@ -25,8 +26,7 @@ public class JsonAdaptedEvent {
     private String isDone;
     private String date;
     private String time;
-    private final List<JsonAdaptedParticipant> participants = new ArrayList<>();
-    //Change to JsonAdaptedParticipants
+    private final List<String> participantIds = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given Event details.
@@ -34,13 +34,13 @@ public class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("isDone") String isDone,
                              @JsonProperty("date") String date, @JsonProperty("time") String time,
-                             @JsonProperty("participants") List<JsonAdaptedParticipant> participants) {
+                             @JsonProperty("participants") List<String> participantIds) {
         this.name = name;
         this.isDone = isDone;
         this.date = date;
         this.time = time;
-        if (participants != null) {
-            this.participants.addAll(participants);
+        if (participantIds != null) {
+            this.participantIds.addAll(participantIds);
         }
     }
 
@@ -51,9 +51,9 @@ public class JsonAdaptedEvent {
         name = source.getName().eventName;
         date = source.getDate().toString();
         time = source.getTime().toString();
-        isDone = source.getIsDone() ? "Completed" : "Uncompleted";
-        participants.addAll(source.getParticipants().stream()
-                .map(JsonAdaptedParticipant::new)
+        isDone = source.getIsDone() ? Event.COMPLETED : Event.UNCOMPLETED;
+        participantIds.addAll(source.getParticipants().stream()
+                .map(Participant::getParticipantId).map(ParticipantId::toString)
                 .collect(Collectors.toList()));
     }
 
@@ -63,10 +63,13 @@ public class JsonAdaptedEvent {
      * @return an Event instance representing the JsonAdaptedEvent.
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
-    public Event toModelType() throws IllegalValueException {
+    public Event toModelType(List<JsonAdaptedParticipant> allParticipants) throws IllegalValueException {
         final List<Participant> participants = new ArrayList<>();
-        for (JsonAdaptedParticipant p : this.participants) {
-            participants.add(p.toModelType());
+        // TODO: Optimise querying by using different data structures and algorithm in future updates
+        for (String participantId : participantIds) {
+            JsonAdaptedParticipant toAddParticipantJson =
+                    allParticipants.stream().filter(p -> p.getId().equals(participantId)).findFirst().get();
+            participants.add(toAddParticipantJson.toModelType());
         }
 
         if (this.name == null) {
@@ -102,9 +105,11 @@ public class JsonAdaptedEvent {
         }
 
         Event event = new Event(eventName, eventDate, eventTime);
-        if (this.isDone.equals("Completed")) {
+        event.getParticipants().addAll(participants);
+        if (this.isDone.equals(Event.COMPLETED)) {
             event.markAsDone();
         }
+
         return event;
     }
 }

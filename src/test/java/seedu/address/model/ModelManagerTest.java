@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void getEventList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getEventList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
     }
 
     // TODO: Implement hasEvent tests after adding addEvent and removeEvent features.
@@ -124,7 +124,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALEX.getName().fullName.split("\\s+");
+        String[] keywords = ALEX.getFullName().split("\\s+");
         modelManager.updateFilteredParticipantList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

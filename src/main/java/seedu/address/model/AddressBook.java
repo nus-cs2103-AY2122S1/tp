@@ -135,6 +135,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.remove(key);
     }
 
+    /**
+     * Marks {@code key} from this {@code AddressBook} as done.
+     * {@code key} must exist in Managera.
+     */
+    public void markEventAsDone(Event key) {
+        events.setEvent(key, key.markAsDone());
+    }
+
     @Override
     public void sortEvents() {
         events.sort();

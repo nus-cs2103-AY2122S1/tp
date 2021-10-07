@@ -7,18 +7,16 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
+    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+
     Predicate<Participant> PREDICATE_SHOW_ALL_PARTICIPANTS = unused -> true;
-
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -92,8 +90,36 @@ public interface Model {
      */
     void updateFilteredParticipantList(Predicate<Participant> predicate);
 
-    /** Returns an unmodifiable view of list of Events */
-    ObservableList<Event> getEventList();
+    /**
+     * Returns true if an Event with the same identity as {@code event} exists in Managera.
+     */
+    boolean hasEvent(Event event);
+
+    /**
+     * Adds the given Event {@code event}.
+     */
+    void addEvent(Event event);
+
+    /**
+     * Removes the given Event {@code target}.
+     * {@code target} must exist in Managera.
+     */
+    void removeEvent(Event target);
+
+    /**
+     * Marks the given Event {@code target} as done.
+     * {@code target} must exist in Managera.
+     */
+    void markEventAsDone(Event target);
+
+    /** Returns an unmodifiable view of list of Events *///getFilteredEventList
+    ObservableList<Event> getFilteredEventList();
+
+    /**
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEventList(Predicate<Event> predicate);
 
     /** Sorts the event lists chronologically */
     void sortEvents();

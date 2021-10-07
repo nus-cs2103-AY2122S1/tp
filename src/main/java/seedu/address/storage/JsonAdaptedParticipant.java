@@ -11,14 +11,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.nextofkin.NextOfKin;
+import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
+import seedu.address.model.participant.Email;
+import seedu.address.model.participant.Name;
+import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedParticipant {
@@ -61,26 +61,30 @@ public class JsonAdaptedParticipant {
         if (nextOfKins != null) {
             this.nextOfKins.addAll(nextOfKins);
         }
-        // TODO: Notes to be implemented
     }
 
     /**
      * Converts a given {@code Participant} into this class for Json use.
      */
     public JsonAdaptedParticipant(Participant source) {
-        id = source.getParticipantId().toString();
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        id = source.getParticipantIdValue();
+        name = source.getFullName();
+        phone = source.getPhoneValue();
+        email = source.getEmailValue();
+        address = source.getAddressValue();
         tagged.addAll(source.getTags().stream()
-            .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList()));
-        birthDate = source.getBirthDate().toString();
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        birthDate = source.getBirthDateString();
         notes.addAll(source.getNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
         nextOfKins.addAll(source.getNextOfKins().stream().map(JsonAdaptedNextOfKin::new).collect(Collectors.toList()));
         // TODO: Notes to be implemented
     }
+
+    public String getId() {
+        return id;
+    }
+
 
     /**
      * Converts this Jackson-friendly adapted participant object into the model's {@code Participant} object.
@@ -149,6 +153,6 @@ public class JsonAdaptedParticipant {
         }
 
         return new Participant(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelBirthDate, notes, modelNextOfKins);
+                modelBirthDate, notes, modelNextOfKins);
     }
 }

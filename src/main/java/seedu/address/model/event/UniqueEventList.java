@@ -66,6 +66,26 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Replaces the event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the list.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        if (!target.isSameEvent(editedEvent) && contains(editedEvent)) {
+            throw new DuplicateEventException();
+        }
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new EventNotFoundException();
+        }
+
+        internalList.set(index, editedEvent);
+    }
+
+    /**
      * Sets the list of Events.
      *
      * @param replacement A UniqueEventList that replaces the current list of events.

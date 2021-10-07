@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalParticipants.ALEX;
+import static seedu.address.testutil.TypicalParticipants.BERNICE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,85 +13,83 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
 import seedu.address.testutil.ParticipantBuilder;
 
 public class ParticipantTest {
 
     @Test
     public void isSamePersonTest() {
-        Participant aliceP = new ParticipantBuilder(ALICE).build();
-        Participant bobP = new ParticipantBuilder(BOB).build();
-        assertTrue(aliceP.isSamePerson(ALICE));
-        assertFalse(aliceP.isSamePerson(bobP));
-        assertFalse(aliceP.isSamePerson(BOB));
+        assertTrue(ALEX.isSameParticipant(ALEX));
+        assertTrue(BERNICE.isSameParticipant(BERNICE));
+        assertFalse(ALEX.isSameParticipant(BERNICE));
+        assertFalse(BERNICE.isSameParticipant(ALEX));
     }
 
     @Test
     public void withBirthDateTest() {
-        Participant aliceP = new ParticipantBuilder(ALICE).withBirthDate(2000, 8, 4).build();
-        Participant bobP = new ParticipantBuilder(BOB).build();
-        assertEquals("2000-08-04", aliceP.getBirthDate().toString());
-        assertEquals("N/A", bobP.getBirthDate().toString());
+        Participant alexP = new ParticipantBuilder().withBirthDate(2000, 8, 4).build();
+        Participant bobP = new ParticipantBuilder().build();
+        assertEquals("2000-08-04", alexP.getBirthDateString());
+        assertEquals("N/A", bobP.getBirthDateString());
     }
 
     @Test
     public void addNoteTest() {
-        Participant aliceP = new ParticipantBuilder(ALICE).withBirthDate(2000, 8, 4).build();
-        assertTrue(aliceP.getNotes().isEmpty());
-        aliceP.addNote(new Note("Alice has allergy to pollen", Note.Importance.HIGH));
-        aliceP.addNote(new Note("Alice is vegetarian", Note.Importance.VERY_HIGH));
-        assertFalse(aliceP.getNotes().isEmpty());
-        ArrayList<String> expectedNotes = new ArrayList<>(List.of("Importance[HIGH] Alice has allergy to pollen",
-                "Importance[VERY_HIGH] Alice is vegetarian"));
-        assertTrue(aliceP.getNotes().stream().map(Object::toString).allMatch(expectedNotes::contains));
+        Participant alexP = new ParticipantBuilder().build();
+        assertTrue(alexP.getNotes().isEmpty());
+        alexP.addNote(new Note("Alex has allergy to pollen", Note.Importance.HIGH));
+        alexP.addNote(new Note("Alex is vegetarian", Note.Importance.VERY_HIGH));
+        assertFalse(alexP.getNotes().isEmpty());
+        ArrayList<String> expectedNotes = new ArrayList<>(List.of("Importance[HIGH] Alex has allergy to pollen",
+                "Importance[VERY_HIGH] Alex is vegetarian"));
+        assertTrue(alexP.getNotes().stream().map(Object::toString).allMatch(expectedNotes::contains));
     }
 
     @Test
     public void removeNoteTest() {
-        Participant aliceP = new ParticipantBuilder(ALICE).withBirthDate(2000, 8, 4).build();
-        assertTrue(aliceP.getNotes().isEmpty());
-        aliceP.addNote(new Note("Alice has allergy to pollen", Note.Importance.HIGH));
-        aliceP.addNote(new Note("Alice is vegetarian", Note.Importance.VERY_HIGH));
-        aliceP.removeNote(new Note("Alice has allergy to pollen", Note.Importance.HIGH));
-        assertEquals("[Importance[VERY_HIGH] Alice is vegetarian]",
-                aliceP.getNotes().toString());
+        Participant alexP = new ParticipantBuilder().withBirthDate(2000, 8, 4).build();
+        assertTrue(alexP.getNotes().isEmpty());
+        alexP.addNote(new Note("Alex has allergy to pollen", Note.Importance.HIGH));
+        alexP.addNote(new Note("Alex is vegetarian", Note.Importance.VERY_HIGH));
+        alexP.removeNote(new Note("Alex has allergy to pollen", Note.Importance.HIGH));
+        assertEquals("[Importance[VERY_HIGH] Alex is vegetarian]",
+                alexP.getNotes().toString());
     }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Participant aliceP = new ParticipantBuilder(ALICE).withBirthDate(2000, 8, 4).build();
-        assertThrows(UnsupportedOperationException.class, () -> aliceP.getTags().remove(0));
-        assertThrows(UnsupportedOperationException.class, () -> aliceP.getNotes().remove(0));
+        Participant alexP = new ParticipantBuilder().withBirthDate(2000, 8, 4).build();
+        assertThrows(UnsupportedOperationException.class, () -> alexP.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> alexP.getNotes().remove(0));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Participant aliceP = new ParticipantBuilder(ALICE).withBirthDate(2000, 8, 4).build();
+        Participant alexP = new ParticipantBuilder().withBirthDate(2000, 8, 4).build();
 
-        Participant alicePCopy = new ParticipantBuilder(ALICE).withBirthDate(2000, 8, 4).build();
+        Participant alexPCopy = new ParticipantBuilder().withBirthDate(2000, 8, 4).build();
 
-        Participant bobP = new ParticipantBuilder(BOB).build();
+        Participant bobP = new ParticipantBuilder(BERNICE).build();
 
-        assertTrue(aliceP.equals(alicePCopy));
+        assertTrue(alexP.equals(alexPCopy));
 
         // same object -> returns true
-        assertTrue(aliceP.equals(aliceP));
+        assertTrue(alexP.equals(alexP));
 
         // null -> returns false
-        assertFalse(aliceP.equals(null));
+        assertFalse(alexP.equals(null));
 
         // different type -> returns false
-        assertFalse(aliceP.equals(5));
+        assertFalse(alexP.equals(5));
 
         // different person -> returns false
-        assertFalse(aliceP.equals(bobP));
+        assertFalse(alexP.equals(bobP));
 
         // different note -> returns false
-        Person editedAlice = new ParticipantBuilder(aliceP).withNotes(Set.of(new Note("She is vegan",
+        Participant editedAlex = new ParticipantBuilder(alexP).withNotes(Set.of(new Note("She is vegan",
                 Note.Importance.VERY_HIGH))).build();
-        assertFalse(aliceP.equals(editedAlice));
+        assertFalse(alexP.equals(editedAlex));
 
     }
 }

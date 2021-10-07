@@ -20,14 +20,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.nextofkin.NextOfKin;
+import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
+import seedu.address.model.participant.Email;
+import seedu.address.model.participant.Name;
+import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
 /**

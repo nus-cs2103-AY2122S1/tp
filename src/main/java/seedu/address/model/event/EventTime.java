@@ -18,6 +18,7 @@ public class EventTime {
     public static final String TIME_FORMAT = "HHmm";
 
     public final LocalTime time;
+    private boolean hasTime;
 
     /**
      * Constructors an {@code EventTime}
@@ -28,10 +29,15 @@ public class EventTime {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern(TIME_FORMAT));
+        this.hasTime = true;
     }
 
+    /**
+     * This is an overloaded Constructor for Event Time with no time.
+     */
     public EventTime() {
         this.time = LocalTime.MIN;
+        this.hasTime = false;
     }
 
     /**
@@ -41,6 +47,9 @@ public class EventTime {
      * @return A boolean indicating if the string is a valid time.
      */
     public static boolean isValidTime(String test) {
+        if (test.length() != 4) {
+            return false;
+        }
         DateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
         sdf.setLenient(false);
         try {
@@ -53,14 +62,14 @@ public class EventTime {
 
     @Override
     public String toString() {
-        return this.time.equals(LocalTime.MIN) ? "" : this.time.format(DateTimeFormatter.ofPattern("HHmm"));
+        return this.hasTime ? this.time.format(DateTimeFormatter.ofPattern(TIME_FORMAT)) : "";
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof EventTime
-                && time.equals(((EventTime) other).time));
+                && time.equals(((EventTime) other).time) && hasTime == ((EventTime) other).hasTime);
     }
 
     @Override

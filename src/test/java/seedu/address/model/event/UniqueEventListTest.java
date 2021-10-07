@@ -66,8 +66,34 @@ class UniqueEventListTest {
     }
 
     @Test
-    public void setEvents_nullUniqueEventList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueEventList.setEvents((UniqueEventList) null));
+    public void setEvent_nullTargetEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueEventList.setEvent(null, SAMPLE_EVENT));
+    }
+
+    @Test
+    public void setEvent_nullEditedEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueEventList.setEvent(SAMPLE_EVENT, null));
+    }
+
+    @Test
+    public void setEvent_targetEventNotInList_throwsEventNotFoundException() {
+        assertThrows(EventNotFoundException.class, () -> uniqueEventList.setEvent(SAMPLE_EVENT, ANOTHER_EVENT));
+    }
+
+    @Test
+    public void setEvent_listContainsEditedEvent_throwsDuplicateEventException() {
+        uniqueEventList.add(SAMPLE_EVENT);
+        uniqueEventList.add(ANOTHER_EVENT);
+        assertThrows(DuplicateEventException.class, () -> uniqueEventList.setEvent(ANOTHER_EVENT, SAMPLE_EVENT));
+    }
+
+    @Test
+    public void setEvent_existingEvent_replacesEvent() {
+        uniqueEventList.add(SAMPLE_EVENT);
+        uniqueEventList.setEvent(SAMPLE_EVENT, ANOTHER_EVENT);
+        UniqueEventList expectedUniqueEventList = new UniqueEventList();
+        expectedUniqueEventList.add(ANOTHER_EVENT);
+        assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
     @Test

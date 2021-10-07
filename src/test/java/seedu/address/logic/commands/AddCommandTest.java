@@ -22,7 +22,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.ParticipantBuilder;
 
 public class AddCommandTest {
@@ -47,7 +46,7 @@ public class AddCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Participant validParticipant = new ParticipantBuilder().build();
         AddCommand addCommand = new AddCommand(validParticipant);
-        ModelStub modelStub = new ModelStubWithPerson(validParticipant);
+        ModelStub modelStub = new ModelStubWithParticipant(validParticipant);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PARTICIPANT, () ->
                 addCommand.execute(modelStub));
@@ -152,7 +151,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Event> getEventList() {
+        public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeEvent(Event target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markEventAsDone(Event target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -163,20 +187,20 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single participant.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithParticipant extends ModelStub {
+        private final Participant participant;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithParticipant(Participant participant) {
+            requireNonNull(participant);
+            this.participant = participant;
         }
 
         @Override
         public boolean hasParticipant(Participant participant) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+            requireNonNull(participant);
+            return this.participant.isSameParticipant(participant);
         }
     }
 

@@ -20,6 +20,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Mark an Event as done: `doneEvent`](#mark-an-event-as-done-doneevent)
     * [Sort Events: `sortEvents`](#sort-events-sortevents)
     * [Filter Events: `filterEvents`](#filter-events-filterevents)
+    * [Listing all Events: `listEvents`](#list-events-listevent)
     * [Add Participant to Event: `addParticipant`](#add-participant-to-event-addparticipant)
     * [Remove Participant from Event: `removeParticipant`](#remove-participant-from-event-removeparticipant)
     * [Show Event details: `showDetails`](#show-event-details-showdetails)
@@ -131,7 +132,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the Participant will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the Participant will be removed i.e. adding of tags is not cumulative.
 * You can remove all the Participant’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -145,7 +146,7 @@ Finds Participant whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -171,15 +172,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd Participant on the current list.
 * `find Betsy` followed by `delete 1` deletes the 1st Participant in the results of the `find` command. 
  
-### Clearing all Participants : `clear`
+### Clearing all Data : `clear`
 
-Clears all Participants from Managera.
+Clears all Events and Participants from Managera.
 
 Format: `clear`
 
 ### Adding an event: `addEvent`
 
-Creates an Event at the specified date and time.
+Creates an Event at the specified date and time and adds it to Managera.
 
 Format: `addEvent n/NAME d/DATE [t/TIME]` 
 
@@ -187,77 +188,99 @@ Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
 * `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240 km Marathon" on 20th August 2022.
 
-### Removing an event : `removeEvent`
+### Deleting an event : `removeEvent`
 
-Removes an Event. If there are multiple events with the same name, specify the DATE (in YYYY-MM-DD format) and TIME (24h format) to remove that event.
+Deletes the specified Event from Managera.
 
-Format: `removeEvent n/NAME [d/DATE] [t/TIME]` 
+Format: `removeEvent INDEX`
+
+* Deletes the Event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Events list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `removeEvent n/CS2100 Finals d/2021-11-20  t/0900` - Removes the Event “CS2100 Finals” on 20th November 2021 9:00am.
-* `removeEvent n/240km Marathon d/2022-08-20` - Removes the Event “240 km Marathon” on 20th August 2022.
+* `listEvents` followed by `removeEvent 2` deletes the 2nd Event on the current list.
+* `filterEvents d/2021-09-18` followed by `delete 1` deletes the 1st Event in the results of the `filterEvents` command.
 
 ### Mark an Event as done: `doneEvent`
 
-Format:
-`doneEvent n/NAME [d/DATE] [t/TIME]` - Marks an Event as done, if there are multiple events with the same name, specify the DATE (in YYYY-MM-DD format) and TIME (24h format) to select that event.
+Marks the specified Event in Managera as done.
+
+Format: `doneEvent INDEX`
+
+* Marks the Event at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed Events list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Example Usage:
-* `doneEvent n/CS2100 Finals d/2021-11-20  t/0900` - Marks the Event “CS2100 Finals” on 20th November 2021 9:00am as done.
-* `doneEvent n/240km Marathon d/2022-08-20` - Marks the Event “240 km Marathon” on 20th August 2022 as done.
+* `listEvents` followed by `doneEvent 2` marks the 2nd Event on the current list as done.
+* `filterEvents d/2021-09-18` followed by `done 1` marks the 1st Event in the results of the `filterEvents` command as done.
 
 
 ### Sort Events: `sortEvents`
-Sorts the current list of Events in chronological order with the earlier events at the top and later events at the bottom.
 
-Format:
-`sortEvents`
+Sorts the current list of events in chronological order with the earlier events at the top and later events at the bottom.
+
+Format: `sortEvents`
 
 ### Filter Events: `filterEvents`
-Filters the list of events for events occurring on a specific date.
 
-Format:
-`filterEvents DATE`
+Filters the list of events for events occurring on a specific date and optionally by time too.
+
+Format: `filterEvents d/DATE [t/TIME]`
 
 Example Usage:
-* `filterEvents 2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
+* `filterEvents d/2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
+* `filterEvents d/2021-09-18 t/0900` - Filters the list of events to show only events occurring on 18th September 2021 9am.
+
+### List Events: `listEvent`
+
+Show a list of all events in Managera.
+
+Format: `listEvent`
 
 ### Add Participant to Event: `addParticipant`
 
+Adds a Participant with matching participantID to Event.
+
 Format: 
-`addParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Adds Participant with matching participantID to Event.
+`addParticipant e/EVENT_NAME p/PARTICIPANT_ID`
 
 Example Usage:
 * `addParticipant e/CS2103T Finals p/mikerowe1` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
 
 ### Remove Participant from Event: `removeParticipant`
 
-Format:
-`removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` - Removes Participant with matching participantID from event.
+Removes a Participant with matching participantID from an Event.
+
+Format: `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` 
 
 Example Usage:
-* `removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participant ID is mikerowe1 from event CS2103T Finals.
+* `removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participantID is mikerowe1 from Event CS2103T Finals.
 
 ### Show Event details: `showDetails`
 
-Format:
-`showDetails EVENT_NAME` - Displays the details of the Event matching the given name.
+Displays the details of the Event matching the given name.
+
+Format: `showDetails EVENT_NAME`
 
 Example Usage:
 * `showDetails CS2103T Finals` - Displays the date and time of the ‘CS2103T Finals’ Event.
 
 ### Show Event Participants: `showParticipants`
 
-Format:
-`showParticipants EVENT_NAME` - Displays the list of participants of the Event matching the given name.
+Displays the list of participants of the Event matching the given name.
+
+Format: `showParticipants EVENT_NAME`
 
 Example Usage:
 * `showParticipants CS2103T Finals` - Displays the list of participants of the ‘CS2103T Finals’ Event.
 
 ### Find Participant and access details: `findParticipant`
 
-Format:
-`findParticipant KEYWORD` - Finds any participants whose name contains the given KEYWORD and returns the details about each participant.
+Finds the Participant whose name contains the given KEYWORD and returns the details about the Participant.
+
+Format: `findParticipant KEYWORD`
 
 Example Usage:
 * `findParticipant Mike` - Filters the list of Participants for Participants who have names containing “Mike”.
@@ -305,13 +328,14 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
-**Remove Event** | `removeEvent n/NAME [d/DATE] [t/TIME]`  <br> e.g., `removeEvent n/CS2100 Finals d/2021-11-20  t/0900`
-**Mark an Event as done** | `doneEvent n/NAME [d/DATE] [t/TIME]` <br> e.g. `doneEvent n/240km Marathon d/2022-08-20`
+**Remove Event** | `removeEvent INDEX`  <br> e.g., `removeEvent 1`
+**Mark an Event as done** | `doneEvent INDEX` <br> e.g., `doneEvent 1`
 **Sort Events** | `sortEvents`
-**Filter Events** | `filterEvents DATE` <br> e.g. `filterEvents 2021-09-18`
-**add Participant to Event** | `addParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant e/2103T Finals p/mikerowe1`
-**remove Participant from Event** | `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant e/CS2103T Finals p/mikerowe1`
+**Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
+**List Events** | `listEvents`
+**add Participant to Event** | `addParticipant ev/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant ev/2103T Finals p/mikerowe1`
+**remove Participant from Event** | `removeParticipant ev/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant ev/CS2103T Finals p/mikerowe1`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
-**Find Participants** | `findParticipant KEYWORD` <br> e.g. `findParticipant Mike`
+**Find Participants** | `findParticipant KEYWORD` <br> e.g., `findParticipant Mike`
 **exit** | `exit`

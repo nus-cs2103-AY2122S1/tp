@@ -44,9 +44,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane participantListPanelPlaceholder;
 
-    //Add on for Mangera
+    //Add on for Managera
     @FXML
     private StackPane eventListPanelPlaceholder;
 
@@ -117,10 +117,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         participantListPanel = new ParticipantListPanel(logic.getFilteredParticipantList());
-        personListPanelPlaceholder.getChildren().add(participantListPanel.getRoot());
+        participantListPanelPlaceholder.getChildren().add(participantListPanel.getRoot());
 
         //Add-on for Managera
-        eventListPanel = new EventListPanel(logic.getEventList());
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

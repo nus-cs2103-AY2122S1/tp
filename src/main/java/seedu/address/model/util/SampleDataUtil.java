@@ -11,14 +11,14 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventTime;
-import seedu.address.model.nextofkin.NextOfKin;
+import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
+import seedu.address.model.participant.Email;
+import seedu.address.model.participant.Name;
+import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -69,6 +69,7 @@ public class SampleDataUtil {
     public static Event[] getSampleEvents() {
         return new Event[]{
             new Event(new EventName("240Km Marathon"), new EventDate("2022-08-20")),
+            new Event(new EventName("Marathon Commencement"), new EventDate("2022-08-20"), new EventTime("0000")),
             new Event(new EventName("CS2100 Finals"), new EventDate("2021-11-20"), new EventTime("0900")),
             new Event(new EventName("CS2103T Submission"), new EventDate("2021-09-30")),
             new Event(new EventName("End of Recess Week"), new EventDate("2021-09-26"), new EventTime("2359")),

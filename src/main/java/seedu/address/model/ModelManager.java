@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Participant> filteredParticipants;
     //Add-ons for Managera
-    private final FilteredList<Event> events;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredParticipants = new FilteredList<>(this.addressBook.getParticipantList());
         //Add-ons for Managera
-        events = new FilteredList<>(this.addressBook.getEventList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -141,15 +141,58 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Event> getEventList() {
-        return events;
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
     }
 
     /**
      * Sorts the events in the addressBook.
      */
+    @Override
     public void sortEvents() {
         addressBook.sortEvents();
+    }
+
+    /**
+     * Returns a boolean if Managera already contain this event.
+     *
+     * @param event An Event instance.
+     * @return A boolean indicating if the event already exists.
+     */
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    /**
+     * Add the event to Managera.
+     */
+    @Override
+    public void addEvent(Event event) {
+        requireNonNull(event);
+        addressBook.addEvent(event);
+    }
+
+    /**
+     * Remove the event from Managera.
+     */
+    @Override
+    public void removeEvent(Event target) {
+        requireNonNull(target);
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void markEventAsDone(Event target) {
+        requireNonNull(target);
+        addressBook.markEventAsDone(target);
     }
 
     @Override

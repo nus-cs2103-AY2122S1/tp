@@ -28,7 +28,7 @@ public class EventTimeTest {
         assertFalse(EventTime.isValidTime("")); // empty string
         assertFalse(EventTime.isValidTime("9")); // wrong format
         assertFalse(EventTime.isValidTime("90")); // wrong format
-        assertFalse(EventTime.isValidTime("900")); // wrong format
+        assertFalse(EventTime.isValidTime("123")); // wrong format
         assertFalse(EventTime.isValidTime("8pm")); // wrong format
         assertFalse(EventTime.isValidTime("00:00")); // wrong format
         assertFalse(EventTime.isValidTime("2500")); // no such time

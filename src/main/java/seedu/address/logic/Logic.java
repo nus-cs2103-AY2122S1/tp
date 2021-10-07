@@ -35,7 +35,7 @@ public interface Logic {
     ObservableList<Participant> getFilteredParticipantList();
 
     /** Returns an unmodifiable view of list of Events */
-    ObservableList<Event> getEventList();
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Returns the user prefs' address book file path.

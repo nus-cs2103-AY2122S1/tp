@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.nextofkin.NextOfKin;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.participant.Name;
+import seedu.address.model.participant.NextOfKin;
+import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedNextOfKin {
@@ -32,8 +32,8 @@ public class JsonAdaptedNextOfKin {
      * Converts a given {@code NextOfKin} into this class for Jackson use.
      */
     public JsonAdaptedNextOfKin(NextOfKin source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
+        name = source.getFullName();
+        phone = source.getPhoneValue();
         tag = new JsonAdaptedTag(source.getTag());
     }
 
