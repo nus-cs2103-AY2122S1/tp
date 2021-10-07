@@ -1,47 +1,127 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.*;
+import seedu.address.model.person.*;
 
-/**
- * Controller for a help page
- */
-public class HelpWindow extends UiPart<Stage> {
+import java.io.IOException;
+import java.util.*;
+import java.util.logging.Logger;
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+public class HelpWindow extends AnchorPane {
+    public static final String USER_GUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USER_GUIDE_MESSAGE = "For full details, refer to the user guide: " + USER_GUIDE_URL;
+    public static final String HELP_MESSAGE = "For more detailed commands, type \"help [command]\"\n" +
+            "To close this window, type \"close\"";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final String FXML = "HelpWindow.fxml";
+    private static final Hashtable<String, commandDetail> commandTable = new Hashtable<>();
 
-    @FXML
-    private Button copyButton;
+    private static Stage stage;
+
+    private interface commandDetail {
+        void execute();
+    }
+
 
     @FXML
     private Label helpMessage;
-
-    /**
-     * Creates a new HelpWindow.
-     *
-     * @param root Stage to use as the root of the HelpWindow.
-     */
-    public HelpWindow(Stage root) {
-        super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
-    }
+    @FXML
+    private TextField textField;
+    @FXML
+    private Label additionalInfo;
+    @FXML
+    private TableView<Command> tableView;
+    @FXML
+    private TableColumn<Command, String> command;
+    @FXML
+    private TableColumn<Command, String> description;
+    @FXML
+    private Label userGuideMessage;
+    @FXML
+    private Button copyButton;
 
     /**
      * Creates a new HelpWindow.
      */
     public HelpWindow() {
-        this(new Stage());
+        stage = new Stage();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/view/HelpWindow.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            AnchorPane ap = fxmlLoader.load();
+            assert ap != null;
+
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.setTitle("Help");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fillCommandTable();
+        helpMessage.setText(HELP_MESSAGE);
+        additionalInfo.setText("");
+        userGuideMessage.setText(USER_GUIDE_MESSAGE);
+        copyButton.setText("Copy URL");
+    }
+
+    @FXML
+    public void initialize() {
+        textField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleUserInput(textField.getText());
+                textField.setText("");
+            }
+        });
+
+        command.setCellValueFactory(
+                new PropertyValueFactory<>("command")
+        );
+
+        description.setCellValueFactory(
+                new PropertyValueFactory<>("description")
+        );
+
+        Person samplePerson = new Person(
+                new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
+                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>()
+        );
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setName(samplePerson.getName());
+        descriptor.setPhone(samplePerson.getPhone());
+        descriptor.setEmail(samplePerson.getEmail());
+        descriptor.setAddress(samplePerson.getAddress());
+        descriptor.setTags(samplePerson.getTags());
+
+        ObservableList<Command> data = FXCollections.observableArrayList(
+                new AddCommand(samplePerson),
+                new ClearCommand(),
+                new DeleteCommand(null),
+                new EditCommand(Index.fromZeroBased(0), descriptor),
+                new FindCommand(null),
+                new ListCommand(),
+                new ExitCommand()
+        );
+
+        tableView.setItems(data);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        copyButton.setOnMousePressed(event -> copyUrl());
     }
 
     /**
@@ -64,29 +144,29 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        getRoot().show();
-        getRoot().centerOnScreen();
+        stage.show();
+        stage.centerOnScreen();
     }
 
     /**
      * Returns true if the help window is currently being shown.
      */
     public boolean isShowing() {
-        return getRoot().isShowing();
+        return stage.isShowing();
     }
 
     /**
      * Hides the help window.
      */
     public void hide() {
-        getRoot().hide();
+        stage.hide();
     }
 
     /**
      * Focuses on the help window.
      */
     public void focus() {
-        getRoot().requestFocus();
+        stage.requestFocus();
     }
 
     /**
@@ -96,7 +176,114 @@ public class HelpWindow extends UiPart<Stage> {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
+        url.putString(USER_GUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    private void fillCommandTable() {
+        commandTable.put(AddCommand.COMMAND_WORD, this::handleAdd);
+        commandTable.put(ClearCommand.COMMAND_WORD, this::handleClear);
+        commandTable.put(DeleteCommand.COMMAND_WORD, this::handleDelete);
+        commandTable.put(EditCommand.COMMAND_WORD, this::handleEdit);
+        commandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
+        commandTable.put(ListCommand.COMMAND_WORD, this::handleList);
+        commandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
+        commandTable.put("sort", this::handleSort);
+        commandTable.put("addtask", this::handleAddTask);
+        commandTable.put("deltask", this::handleDelTask);
+        commandTable.put("viewtask", this::handleViewTask);
+        commandTable.put("close", this::handleCloseWindow);
+    }
+
+    private void handleUserInput(String userInput) {
+        String[] words = userInput.trim().split(" ");
+        if (areValidWords(words)) {
+            performCommand(words, userInput.startsWith("close"));
+        }
+    }
+
+    private boolean areValidWords(String[] words) {
+        if (words[0].equals("help") && words.length == 1) {
+            additionalInfo.setText("Enter the command that you wish to query after \"help\"!");
+            return false;
+        } else if (words[0].equals("close") && words.length == 1 ||
+                words.length == 2 && words[0].equals("help") && isValidCommand(words[1])){
+            return true;
+        } else {
+            System.out.println(Arrays.toString(words));
+            additionalInfo.setText("That is not a valid command");
+            return false;
+        }
+    }
+
+    private boolean isValidCommand(String userInput) {
+        return commandTable.containsKey(userInput);
+    }
+
+    private void performCommand(String[] userInput, boolean isClose) {
+        if (isClose) {
+            commandTable.get(userInput[0]).execute();
+        } else {
+            commandTable.get(userInput[1]).execute();
+        }
+    }
+
+    private void handleAdd() {
+        additionalInfo.setText("Format: add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\n" +
+                "A person can have any number of tags (including 0)");
+    }
+
+    private void handleClear() {
+        additionalInfo.setText("Format: clear\nClears and resets the data in ContactSh");
+    }
+
+    private void handleDelete() {
+        additionalInfo.setText("Format: delete INDEX\nDeletes the person at the specified index IF it is valid");
+    }
+
+    private void handleEdit() {
+        additionalInfo.setText("Format: edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…\n" +
+                "Edits the person at the specified index IF it is valid\n" +
+                "You can remove all the person’s tags by typing t/ without specifying any tags after it.");
+    }
+
+    private void handleFind() {
+        additionalInfo.setText(
+                "Format: find KEYWORD [MORE_KEYWORDS]\n" +
+                        "Only full words will be matched and persons matching at least one keyword will be returned"
+        );
+    }
+
+    private void handleList() {
+        additionalInfo.setText("Format: list\n" + "Shows a list of all persons in ContactSh");
+    }
+
+    private void handleExit() {
+        additionalInfo.setText("Format: exit\n" + "Exits the program entirely");
+    }
+
+    private void handleSort() {
+        additionalInfo.setText("Format: sort [-r]\n" +
+                "Sort persons by the alphabetical order of their name.\n" +
+                "If the optional -r flag is provided, a list of persons sorted in reverse order is displayed");
+    }
+
+    private void handleAddTask() {
+        additionalInfo.setText("Format: addtask INDEX task/TASKNAME\n" +
+                "Adds a task to the person at the specified INDEX");
+    }
+
+    private void handleDelTask() {
+        additionalInfo.setText("Format: deltask INDEX ti/TASK_INDEX\n" +
+                "Deletes a task attached to the person at the specified INDEX");
+    }
+
+    private void handleViewTask() {
+        additionalInfo.setText("Format: viewtask INDEX\n" +
+                "Displays the list of tasks attached to the person at the specifiedINDEX");
+    }
+
+    private void handleCloseWindow() {
+        stage.close();      // May update to have a timer if possible
     }
 }
