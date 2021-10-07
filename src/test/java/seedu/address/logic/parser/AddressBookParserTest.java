@@ -16,18 +16,18 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.NameContainsKeywordsPredicate;
+import seedu.address.testutil.EditMemberDescriptorBuilder;
+import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.MemberUtil;
 
 public class AddressBookParserTest {
 
@@ -35,9 +35,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        PAddCommand command = (PAddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new PAddCommand(person), command);
+        Member member = new MemberBuilder().build();
+        PAddCommand command = (PAddCommand) parser.parseCommand(MemberUtil.getPAddCommand(member));
+        assertEquals(new PAddCommand(member), command);
     }
 
     @Test
@@ -55,10 +55,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Member member = new MemberBuilder().build();
+        EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

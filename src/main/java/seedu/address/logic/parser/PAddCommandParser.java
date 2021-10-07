@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.PAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.member.Address;
+import seedu.address.model.member.Email;
+import seedu.address.model.member.Member;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,9 +44,9 @@ public class PAddCommandParser implements Parser<PAddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Member member = new Member(name, phone, email, address, tagList);
 
-        return new PAddCommand(person);
+        return new PAddCommand(member);
     }
 
     /**
