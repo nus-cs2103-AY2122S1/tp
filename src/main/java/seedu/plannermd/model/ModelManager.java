@@ -181,7 +181,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPatientList(Predicate<Person> predicate) {
+    public void updateFilteredPatientList(Predicate<? super Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
     }
@@ -196,7 +196,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredDoctorList(Predicate<Person> predicate) {
+    public void updateFilteredDoctorList(Predicate<? super Doctor> predicate) {
         requireNonNull(predicate);
         filteredDoctors.setPredicate(predicate);
     }

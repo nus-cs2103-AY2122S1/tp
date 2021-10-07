@@ -136,7 +136,7 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPatientList(Predicate<Person> predicate);
+    void updateFilteredPatientList(Predicate<? super Patient> predicate);
 
     /**
      * Returns an unmodifiable view of the filtered doctor list
@@ -147,7 +147,7 @@ public interface Model {
      * Updates the filter of the filtered doctor list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredDoctorList(Predicate<Person> predicate);
+    void updateFilteredDoctorList(Predicate<? super Doctor> predicate);
 
     /**
      * Sets the PersonTabSwitcher responsible for switching between the Doctor and Patient tab in the UI.

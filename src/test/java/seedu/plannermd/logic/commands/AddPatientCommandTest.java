@@ -186,7 +186,7 @@ public class AddPatientCommandTest {
         }
 
         @Override
-        public void updateFilteredPatientList(Predicate<Person> predicate) {
+        public void updateFilteredPatientList(Predicate<? super Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddPatientCommandTest {
         }
 
         @Override
-        public void updateFilteredDoctorList(Predicate<Person> predicate) {
+        public void updateFilteredDoctorList(Predicate<? super Doctor> predicate) {
 
         }
 

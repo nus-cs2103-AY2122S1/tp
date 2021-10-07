@@ -11,7 +11,7 @@ public class ToggleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         model.toggleState();
-        return new CommandResult(String.format(MESSAGE_TOGGLE_SUCCESS, model.getState().toString().toLowerCase() + "s"),
-                false, false);
+        return new CommandResult(String.format(MESSAGE_TOGGLE_SUCCESS,
+                model.getState().toString().toLowerCase() + "s"));
     }
 }
