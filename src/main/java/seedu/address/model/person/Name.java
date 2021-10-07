@@ -25,8 +25,8 @@ public class Name {
      * @param name A valid name.
      */
     public Name(String name) {
-      requireNonNull(name);
-      fullName = name;
+        requireNonNull(name);
+        fullName = name;
     }
 
     /**
