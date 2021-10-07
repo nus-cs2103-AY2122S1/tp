@@ -6,10 +6,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalParticipants.getTypicalAddressBook;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -24,9 +26,6 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventNamePredicate;
 import seedu.address.model.event.EventTime;
 import seedu.address.model.participant.Participant;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ShowEventDetailsCommand}.
@@ -50,14 +49,14 @@ public class ShowEventDetailsCommandTest {
 
     /**
      * Checks that the UI is unaffected by the use of a ShowEventDetailsCommand.
-     * 
+     *
      * @throws CommandException if model provided to ShowEventDetailsCommand execute method is invalid.
      */
     @Test
     public void execute_noUiChange_showDetailsSuccessful() throws CommandException {
         Event sampleEvent = new Event(
-                new EventName("Cooking class"), 
-                new EventDate("2020-11-11"), 
+                new EventName("Cooking class"),
+                new EventDate("2020-11-11"),
                 new EventTime("1900"));
         model.addEvent(sampleEvent);
         expectedModel.addEvent(sampleEvent);
@@ -80,9 +79,9 @@ public class ShowEventDetailsCommandTest {
         model.addEvent(sampleEvent);
         EventNamePredicate predicate = preparePredicate("Cooking class");
         CommandResult commandResult = new ShowEventDetailsCommand(predicate).execute(model);
-        String expectedOutput = "Event Name: Cooking class\n" 
-                + "Event Date: 2020-11-11\n" 
-                + "Event Time: 1900\n" 
+        String expectedOutput = "Event Name: Cooking class\n"
+                + "Event Date: 2020-11-11\n"
+                + "Event Time: 1900\n"
                 + "Completion Status: Uncompleted";
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
@@ -125,7 +124,7 @@ public class ShowEventDetailsCommandTest {
         @Override
         public void addParticipant(Participant participant) {
             requireNonNull(participant);
-           event.getParticipants().add(participant);
+            event.getParticipants().add(participant);
         }
 
         @Override
