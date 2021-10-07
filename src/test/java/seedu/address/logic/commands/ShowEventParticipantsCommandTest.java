@@ -12,9 +12,9 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -25,6 +25,7 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventNamePredicate;
 import seedu.address.model.event.EventTime;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.participant.Participant;
 import seedu.address.testutil.ParticipantBuilder;
 
@@ -72,7 +73,7 @@ public class ShowEventParticipantsCommandTest {
      * @throws CommandException if model provided to ShowEventParticipantsCommand execute method is invalid.
      */
     @Test
-    public void execute_eventInList_singleParticipant_showDetailsSuccessful() throws CommandException {
+    public void execute_eventWithSingleParticipantInList_showDetailsSuccessful() throws CommandException {
         Event sampleEvent = new Event(
                 new EventName("Cooking class"),
                 new EventDate("2020-11-11"),
@@ -88,49 +89,44 @@ public class ShowEventParticipantsCommandTest {
     }
 
     /**
-     * A Model stub that contains a single Event.
+     * Tests CommandResult output of ShowEventDetailsCommand using a ModelStub.
+     *
+     * @throws CommandException if model provided to ShowEventDetailsCommand execute method is invalid.
      */
-    private class ModelStubWithEvent extends ModelStub {
-        private final Event event;
-
-        ModelStubWithEvent(Event event) {
-            requireNonNull(event);
-            this.event = event;
-        }
-
-        @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return this.event.isSameEvent(event);
-        }
+    @Test
+    public void execute_eventWithSingleParticipantInListUsingModelStub_showDetailsSuccessful() throws CommandException {
+        Event sampleEvent = new Event(
+                new EventName("Cooking class"),
+                new EventDate("2020-11-11"),
+                new EventTime("1900"));
+        Participant sampleParticipant = new ParticipantBuilder().build();
+        ModelStubWithEventWithParticipant modelStub = new ModelStubWithEventWithParticipant(sampleEvent,
+                sampleParticipant);
+        EventNamePredicate predicate = preparePredicate("Cooking class");
+        CommandResult commandResult = new ShowEventParticipantsCommand(predicate).execute(modelStub);
+        String expectedOutput = "Event Name: Cooking class\n"
+                + "Participants:\n"
+                + String.format("1. %s", ParticipantBuilder.DEFAULT_NAME) + "\n";
+        assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
 
     /**
-     * A Model stub with an Event that always accepts participants.
+     * A Model stub that contains a single Event.
      */
-    private class ModelStubWithEventAcceptingParticipants extends ModelStub {
+    private class ModelStubWithEventWithParticipant extends ModelStub {
         private final Event event;
 
-        ModelStubWithEventAcceptingParticipants(Event event) {
+        ModelStubWithEventWithParticipant(Event event, Participant participant) {
             requireNonNull(event);
             this.event = event;
-        }
-
-        @Override
-        public boolean hasParticipant(Participant participant) {
-            requireNonNull(participant);
-            return event.getParticipants().stream().anyMatch(participant::isSameParticipant);
-        }
-
-        @Override
-        public void addParticipant(Participant participant) {
-            requireNonNull(participant);
             event.getParticipants().add(participant);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ObservableList<Event> getFilteredEventList() {
+            UniqueEventList eventList = new UniqueEventList();
+            eventList.add(event);
+            return new FilteredList<>(eventList.asUnmodifiableObservableList());
         }
     }
 

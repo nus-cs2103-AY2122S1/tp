@@ -12,9 +12,9 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -25,6 +25,7 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventNamePredicate;
 import seedu.address.model.event.EventTime;
+import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.participant.Participant;
 
 /**
@@ -87,6 +88,27 @@ public class ShowEventDetailsCommandTest {
     }
 
     /**
+     * Tests CommandResult output of ShowEventDetailsCommand using a ModelStub.
+     *
+     * @throws CommandException if model provided to ShowEventDetailsCommand execute method is invalid.
+     */
+    @Test
+    public void execute_eventInListUsingModelStub_showDetailsSuccessful() throws CommandException {
+        Event sampleEvent = new Event(
+                new EventName("Cooking class"),
+                new EventDate("2020-11-11"),
+                new EventTime("1900"));
+        ModelStubWithEvent modelStub = new ModelStubWithEvent(sampleEvent);
+        EventNamePredicate predicate = preparePredicate("Cooking class");
+        CommandResult commandResult = new ShowEventDetailsCommand(predicate).execute(modelStub);
+        String expectedOutput = "Event Name: Cooking class\n"
+                + "Event Date: 2020-11-11\n"
+                + "Event Time: 1900\n"
+                + "Completion Status: Uncompleted";
+        assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
+    }
+
+    /**
      * A Model stub that contains a single Event.
      */
     private class ModelStubWithEvent extends ModelStub {
@@ -98,38 +120,10 @@ public class ShowEventDetailsCommandTest {
         }
 
         @Override
-        public boolean hasEvent(Event event) {
-            requireNonNull(event);
-            return this.event.isSameEvent(event);
-        }
-    }
-
-    /**
-     * A Model stub with an Event that always accepts participants.
-     */
-    private class ModelStubWithEventAcceptingParticipants extends ModelStub {
-        private final Event event;
-
-        ModelStubWithEventAcceptingParticipants(Event event) {
-            requireNonNull(event);
-            this.event = event;
-        }
-
-        @Override
-        public boolean hasParticipant(Participant participant) {
-            requireNonNull(participant);
-            return event.getParticipants().stream().anyMatch(participant::isSameParticipant);
-        }
-
-        @Override
-        public void addParticipant(Participant participant) {
-            requireNonNull(participant);
-            event.getParticipants().add(participant);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ObservableList<Event> getFilteredEventList() {
+            UniqueEventList eventList = new UniqueEventList();
+            eventList.add(event);
+            return new FilteredList<>(eventList.asUnmodifiableObservableList());
         }
     }
 
