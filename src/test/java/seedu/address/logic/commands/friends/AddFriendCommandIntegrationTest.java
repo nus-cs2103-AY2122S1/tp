@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.friends.*;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -15,7 +14,8 @@ import seedu.address.model.friend.Friend;
 import seedu.address.testutil.FriendBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code seedu.address.logic.commands.friends.AddFriendCommand}.
+ * Contains integration tests (interaction with the Model) for
+ * {@code seedu.address.logic.commands.friends.AddFriendCommand}.
  */
 public class AddFriendCommandIntegrationTest {
 

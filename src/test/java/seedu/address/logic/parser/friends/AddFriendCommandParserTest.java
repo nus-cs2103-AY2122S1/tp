@@ -1,13 +1,19 @@
 package seedu.address.logic.parser.friends;
 
-import org.junit.jupiter.api.*;
-import seedu.address.logic.commands.friends.*;
-import seedu.address.model.friend.*;
-import seedu.address.testutil.*;
+import static seedu.address.logic.commands.CommandTestUtil.FRIEND_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.FRIEND_ID_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalFriends.AMY;
+import static seedu.address.testutil.TypicalFriends.BOB;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CommandParserTestUtil.*;
-import static seedu.address.testutil.TypicalFriends.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.model.friend.Friend;
+import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandParserTest {
     private final AddFriendCommandParser parser = new AddFriendCommandParser();
@@ -17,8 +23,8 @@ public class AddFriendCommandParserTest {
         Friend expectedFriend = new FriendBuilder(BOB).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + FRIEND_ID_DESC_BOB
-                , new AddFriendCommand(expectedFriend));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + FRIEND_ID_DESC_BOB,
+                new AddFriendCommand(expectedFriend));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + FRIEND_ID_DESC_BOB,
@@ -32,8 +38,8 @@ public class AddFriendCommandParserTest {
         // multiple tags - all accepted
         Friend expectedFriendMultipleTags = new FriendBuilder(BOB)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + FRIEND_ID_DESC_BOB
-                , new AddFriendCommand(expectedFriendMultipleTags));
+        assertParseSuccess(parser, NAME_DESC_BOB + FRIEND_ID_DESC_BOB,
+                new AddFriendCommand(expectedFriendMultipleTags));
     }
 
     @Test

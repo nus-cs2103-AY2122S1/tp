@@ -1,24 +1,35 @@
 package seedu.address.logic;
 
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.io.*;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.commands.exceptions.*;
-import seedu.address.logic.commands.friends.*;
-import seedu.address.logic.parser.exceptions.*;
-import seedu.address.model.*;
-import seedu.address.model.friend.*;
-import seedu.address.storage.*;
-import seedu.address.testutil.*;
-
-import java.io.*;
-import java.nio.file.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.commons.core.Messages.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_FRIEND_ID;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.FRIEND_ID_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalFriends.*;
+import static seedu.address.testutil.TypicalFriends.AMY;
+
+import java.io.IOException;
+import java.nio.file.Path;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.logic.commands.friends.DeleteFriendCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.friend.Friend;
+import seedu.address.storage.JsonFriendsListStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.StorageManager;
+import seedu.address.testutil.FriendBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");

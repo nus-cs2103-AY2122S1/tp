@@ -1,15 +1,13 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.friends;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalFriends.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalFriends.AMY;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.friends.*;
-import seedu.address.logic.parser.friends.*;
+import seedu.address.logic.commands.friends.DeleteFriendCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

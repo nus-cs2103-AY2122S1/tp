@@ -1,14 +1,15 @@
 package seedu.address.logic.parser.friends;
 
-import seedu.address.commons.core.index.*;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.commands.friends.*;
-import seedu.address.logic.parser.*;
-import seedu.address.logic.parser.exceptions.*;
-import seedu.address.model.friend.*;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_DELETE;
 
-import static seedu.address.commons.core.Messages.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.friends.DeleteFriendCommand;
+import seedu.address.logic.commands.friends.FriendCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.friend.FriendId;
 
 public class DeleteFriendCommandParser extends FriendCommandParser {
     private FriendId friendId;

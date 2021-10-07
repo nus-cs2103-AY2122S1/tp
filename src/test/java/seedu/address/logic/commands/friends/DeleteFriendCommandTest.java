@@ -1,20 +1,25 @@
 package seedu.address.logic.commands.friends;
 
-import org.junit.jupiter.api.*;
-import seedu.address.commons.core.*;
-import seedu.address.commons.core.index.*;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.commands.exceptions.*;
-import seedu.address.model.*;
-import seedu.address.model.friend.*;
-import seedu.address.testutil.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalFriends.AMY;
+import static seedu.address.testutil.TypicalFriends.BOB;
+import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import java.util.*;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalFriends.*;
-import static seedu.address.testutil.TypicalIndexes.*;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.friend.Friend;
+import seedu.address.testutil.FriendBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

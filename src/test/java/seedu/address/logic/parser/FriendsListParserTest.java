@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalFriends.*;
+import static seedu.address.testutil.TypicalFriends.AMY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -21,7 +21,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.friends.*;
+import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.logic.commands.friends.DeleteFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;

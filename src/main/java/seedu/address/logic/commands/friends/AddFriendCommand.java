@@ -1,12 +1,12 @@
 package seedu.address.logic.commands.friends;
 
-import seedu.address.logic.commands.*;
-import seedu.address.logic.commands.exceptions.*;
-import seedu.address.model.*;
-import seedu.address.model.friend.*;
+import static java.util.Objects.requireNonNull;
 
-import static java.util.Objects.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendName;
 
 public class AddFriendCommand extends FriendCommand {
     public static final String COMMAND_WORD = "friend --id";
@@ -16,6 +16,10 @@ public class AddFriendCommand extends FriendCommand {
 
     private final Friend toAdd;
 
+    /**
+     * Constructor for AddFriendCommand that takes in the friend to add as the argument.
+     * @param friend The friend to be added.
+     */
     public AddFriendCommand(Friend friend) {
         requireNonNull(friend);
         this.toAdd = friend;

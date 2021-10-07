@@ -33,12 +33,21 @@ public class Friend {
         this.games.addAll(games);
     }
 
+    /**
+     * Constructor using only friendId and friendName.
+     * @param friendId Unique id of friend.
+     * @param friendName Name of friend.
+     */
     public Friend(FriendId friendId, FriendName friendName) {
         requireAllNonNull(friendId, friendName);
         this.friendId = friendId;
         this.friendName = friendName;
     }
 
+    /**
+     * Constructor using only friendId.
+     * @param friendId Unique id of friend.
+     */
     public Friend(FriendId friendId) {
         requireAllNonNull(friendId);
         this.friendId = friendId;

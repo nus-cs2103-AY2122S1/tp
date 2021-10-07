@@ -11,7 +11,7 @@ public class FriendId {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Friend IDs should be unique for each friend in the friend's list.";
-        public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$" ;
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$";
     public final String value;
 
     /**

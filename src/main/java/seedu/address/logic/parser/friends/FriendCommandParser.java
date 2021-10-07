@@ -1,7 +1,7 @@
 package seedu.address.logic.parser.friends;
-import seedu.address.logic.commands.friends.*;
-import seedu.address.logic.parser.*;
-import seedu.address.logic.parser.exceptions.*;
+import seedu.address.logic.commands.friends.FriendCommand;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class FriendCommandParser implements Parser<FriendCommand> {
     private static final String DELETE_FLAG = "--delete";

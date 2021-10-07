@@ -2,8 +2,6 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_APEX_LEGENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_CSGO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 
