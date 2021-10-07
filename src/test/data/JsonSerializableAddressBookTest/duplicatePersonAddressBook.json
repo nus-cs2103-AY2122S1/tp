@@ -5,7 +5,10 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "role": "Preschool Teacher",
+    "employmentType": "Full time",
+    "expectedSalary" : "7500",
     "levelOfEducation": "PhD",
+    "experience" : 0,
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -13,6 +16,9 @@
     "email": "pauline@example.com",
     "address": "4th street",
     "role": "Preschool Teacher",
-    "levelOfEducation": "PhD"
+    "employmentType": "Part time",
+    "expectedSalary" : "7500",
+    "levelOfEducation": "PhD",
+    "experience" : 1
   } ]
 }

@@ -5,6 +5,9 @@
     "email": "invalid@email!3e",
     "address": "4th street",
     "role": "Detective",
-    "levelOfEducation": "PhD"
+    "employmentType": "Full time",
+    "experience" : 0,
+    "levelOfEducation": "PhD",
+    "expectedSalary" : "6300"
   } ]
 }
