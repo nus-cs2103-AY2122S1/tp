@@ -10,10 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
 import seedu.address.model.tutorialclass.Schedule;
-import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialclass.TutorialClass;
 
 //TODO: Implement this skeleton class properly.
 /**
@@ -31,8 +30,9 @@ class JsonAdaptedTutorialClass {
      * Constructs a {@code JsonAdaptedTutorialClass} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedTutorialClass(@JsonProperty("classCode") String classCode, @JsonProperty("schedule") String schedule,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedTutorialClass(@JsonProperty("classCode") String classCode,
+                                    @JsonProperty("schedule") String schedule,
+                                    @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.classCode = classCode;
         this.schedule = schedule;
 
@@ -72,7 +72,9 @@ class JsonAdaptedTutorialClass {
         final String modelClassCode = classCode;
 
         if (schedule == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName())
+            );
         }
         if (!Schedule.isValidSchedule(schedule)) {
             throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);

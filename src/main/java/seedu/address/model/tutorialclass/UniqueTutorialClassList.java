@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialclass.exceptions.DuplicateTutorialClassException;
 import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundException;
 
@@ -92,7 +91,7 @@ public class UniqueTutorialClassList implements Iterable<TutorialClass> {
      * Replaces the contents of this list with {@code tutorialClasses}.
      * {@code tutorialClasses} must not contain duplicate tutorial classes.
      */
-    public void setTutorialClass(List<TutorialClass> tutorialClasses) {
+    public void setTutorialClasses(List<TutorialClass> tutorialClasses) {
         requireAllNonNull(tutorialClasses);
         if (!tutorialClassesAreUnique(tutorialClasses)) {
             throw new DuplicateTutorialClassException();
