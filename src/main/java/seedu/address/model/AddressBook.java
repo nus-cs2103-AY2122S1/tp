@@ -1,11 +1,14 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.folder.UniqueFolderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -121,6 +124,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addFolder(Folder f) {
         folders.add(f);
+    }
+
+    /**
+     * Adds a Contact to the Folder.
+     * The contact must not already exist in the Folder.
+     */
+    public void addContactToFolder(Person target, FolderName folderName) {
+        requireAllNonNull(target,folderName);
+        folders.addContact(target,folderName);
     }
 
 

@@ -49,6 +49,10 @@ public class Folder {
         return this.contacts;
     }
 
+    public void addContacts(Person contact) {
+        this.contacts.add(contact);
+    }
+
     /**
      * Returns true if both folders have the same name.
      * This defines a weaker notion of equality between two folders.

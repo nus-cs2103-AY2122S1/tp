@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
 /**
@@ -101,6 +102,12 @@ public interface Model {
      * {@code folder} must not already exist in the address book.
      */
     void addFolder(Folder folder);
+
+    /**
+     * Adds a Contact to the Folder.
+     * The contact must not already exist in the Folder.
+     */
+    public void addContactToFolder(Person target, FolderName name);
 
     /**
      * Returns true if a folder with the same identity as {@code folder} exists in the address book.

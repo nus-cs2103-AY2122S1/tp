@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
 /**
@@ -127,6 +129,11 @@ public class ModelManager implements Model {
         return addressBook.hasFolder(folder);
     }
 
+    @Override
+    public void addContactToFolder(Person target, FolderName folderName) {
+        requireAllNonNull(target,folderName);
+        addressBook.addContactToFolder(target,folderName);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
