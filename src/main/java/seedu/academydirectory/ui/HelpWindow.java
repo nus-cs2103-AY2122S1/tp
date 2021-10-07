@@ -28,10 +28,13 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_MESSAGE = "### User guide\n#### " + USERGUIDE_URL + "\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final String FXML = "HelpWindow.fxml";
-
     private static final File USER_GUIDE = new File("docs/UserGuide.md");
-    private static final String COMMON = "## Command summary";
+    private static final String FXML = "HelpWindow.fxml";
+    private static final String MARKDOWN_CSS = "/view/markdown.css";
+    private static final String SUMMARY_HEADER = "## Command summary";
+
+    private static final int DEFAULT_WIDTH = 750;
+    private static final int DEFAULT_HEIGHT = 400;
 
     @FXML
     private Button copyButton;
@@ -43,15 +46,43 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+
         StringBuilder builder = new StringBuilder(HELP_MESSAGE);
+        addHelpContent(builder);
+        Label label = new Label(builder.toString());
+        label.setVisible(false);
+
         MarkdownView markdownView = new MarkdownView();
+        markdownView.mdStringProperty().bind(label.textProperty());
+        markdownView.getStylesheets().add(MARKDOWN_CSS);
+
+        ScrollPane content = new ScrollPane(markdownView);
+        content.setFitToWidth(true);
+        HBox container = new HBox(label, content);
+        container.getChildren().add(copyButton);
+
+        root.setScene(new Scene(container, DEFAULT_WIDTH, DEFAULT_HEIGHT));
+    }
+
+    /**
+     * Creates a new HelpWindow.
+     */
+    public HelpWindow() {
+        this(new Stage());
+    }
+
+    /**
+     * Get markdown content of UG for conversion to help window
+     * @param builder string builder to append
+     */
+    private void addHelpContent(StringBuilder builder) {
         try {
             FileReader fileReader = new FileReader(USER_GUIDE);
             Scanner sc = new Scanner(fileReader);
             boolean isSummary = false;
             while (sc.hasNextLine()) {
                 String nextLine = sc.nextLine().trim();
-                if (nextLine.contains(COMMON)) {
+                if (nextLine.contains(SUMMARY_HEADER)) {
                     isSummary = true;
                 }
                 if (isSummary) {
@@ -61,22 +92,6 @@ public class HelpWindow extends UiPart<Stage> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Label label = new Label(builder.toString());
-        label.setVisible(false);
-        markdownView.mdStringProperty().bind(label.textProperty());
-        markdownView.getStylesheets().add("/view/markdown.css");
-        ScrollPane content = new ScrollPane(markdownView);
-        content.setFitToWidth(true);
-        HBox temp = new HBox(label, content);
-        temp.getChildren().add(copyButton);
-        root.setScene(new Scene(temp, 750, 400));
-    }
-
-    /**
-     * Creates a new HelpWindow.
-     */
-    public HelpWindow() {
-        this(new Stage());
     }
 
     /**
