@@ -4,13 +4,6 @@
 }
 
 #copyButton {
-    -fx-text-fill: #121212;
-}
-
-.table-row-cell:empty {
-    -fx-background-color: white;
-}
-
-.table-row-cell:empty .table-cell {
-    -fx-border-width: 0px;
+    -fx-text-fill: white;
+    -fx-background-color: #414141
 }

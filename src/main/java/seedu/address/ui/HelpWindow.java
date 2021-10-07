@@ -51,7 +51,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     @FXML
-    private TableView helpTable;
+    private TableView<CommandDetails> helpTable;
 
     /**
      * Creates a new HelpWindow.
@@ -90,11 +90,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        //Scene scene = new Scene(setUpCommandDetails(), 500, 300);
-        //scene.getStylesheets().add("file:////Users/jailulla/Documents/AY_2021_2022/CS2103T/teamProject/src/main/resources/view/TableView.css");
-        //String cssFileLocation = this.getClass().getResource("/view/TableView.css").toExternalForm();
-        //scene.getStylesheets().add(cssFileLocation);
-        //getRoot().setScene(scene);
         setUpCommandDetails();
         getRoot().show();
         getRoot().centerOnScreen();
@@ -133,10 +128,8 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets up a table view to display the commands in the
-     * help section.
-     *
-     * @return A VBox object with the table.
+     * Sets up the items (commands) to be showed in the
+     * help section table.
      */
     public void setUpCommandDetails() {
         ObservableList<CommandDetails> helpSectionCommandDetails= helpTable.getItems();
