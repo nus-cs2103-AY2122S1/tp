@@ -29,7 +29,7 @@ public class NationalityTest {
         assertFalse(Nationality.isValidNationality(" ")); // spaces only
 
         // valid nationality
-        assertTrue(Nationality.isValidNationality("Blk 456, Den Road, #01-355"));
+        assertTrue(Nationality.isValidNationality("Singapore"));
         assertTrue(Nationality.isValidNationality("-")); // one character
     }
 }

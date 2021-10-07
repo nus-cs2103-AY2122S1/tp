@@ -23,13 +23,13 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_NATIONALITY = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_NATIONALITY = "Vietnam";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -103,25 +103,25 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
+    public void parseNationality_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseNationality((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseNationality(INVALID_ADDRESS));
+    public void parseNationality_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNationality(INVALID_NATIONALITY));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Nationality expectedNationality = new Nationality(VALID_ADDRESS);
-        assertEquals(expectedNationality, ParserUtil.parseNationality(VALID_ADDRESS));
+    public void parseNationality_validValueWithoutWhitespace_returnsNationality() throws Exception {
+        Nationality expectedNationality = new Nationality(VALID_NATIONALITY);
+        assertEquals(expectedNationality, ParserUtil.parseNationality(VALID_NATIONALITY));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Nationality expectedNationality = new Nationality(VALID_ADDRESS);
+    public void parseNationality_validValueWithWhitespace_returnsTrimmedNationality() throws Exception {
+        String addressWithWhitespace = WHITESPACE + VALID_NATIONALITY + WHITESPACE;
+        Nationality expectedNationality = new Nationality(VALID_NATIONALITY);
         assertEquals(expectedNationality, ParserUtil.parseNationality(addressWithWhitespace));
     }
 
