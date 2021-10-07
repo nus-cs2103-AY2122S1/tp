@@ -1,6 +1,6 @@
 .background {
     -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    background-color: #121212; /* Used in the default.html file */
 }
 
 .label {
@@ -26,7 +26,7 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Open Sans Semibold";
+    -fx-font-family: "Lato";
 }
 
 .tab-pane {
@@ -39,6 +39,7 @@
     -fx-max-height: 0;
 }
 
+/* Not used: no table
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;
@@ -76,6 +77,8 @@
     -fx-background-color: -fx-focus-color;
 }
 
+*/
+
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-border-color: transparent transparent transparent #4d4d4d;
@@ -93,6 +96,7 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/* PersonListPanel consists of all the cells */
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
@@ -100,15 +104,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #334E68;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #243B53;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #627D98;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -116,19 +120,22 @@
     -fx-border-width: 1;
 }
 
+/* font colour of cells */
 .list-cell .label {
     -fx-text-fill: white;
 }
 
+/* name */
 .cell_big_label {
-    -fx-font-family: "Open Sans Semibold";
+    -fx-font-family: "Lato";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
+/* module, tags, email, remarks... */
 .cell_small_label {
-    -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
+    -fx-font-family: "Lato";
+    -fx-font-size: 14px;
     -fx-text-fill: #010504;
 }
 
@@ -148,7 +155,7 @@
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Lato";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
@@ -157,8 +164,9 @@
     -fx-text-fill: black !important;
 }
 
+/* status bar at the bottom */
 .status-bar .label {
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Lato";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
@@ -192,13 +200,14 @@
     -fx-text-fill: white;
 }
 
+/* Menu bar at the top: File/Help */
 .menu-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Lato";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -211,14 +220,16 @@
  * Metro style Push Button
  * Author: Pedro Duque Vieira
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
+ * not used: no button
+
+
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-    -fx-font-family: "Open Sans Regular";
+    -fx-font-family: "Lato";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -256,6 +267,9 @@
     -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
+*/
+
+/* Not used: no DialogPane
 .dialog-pane {
     -fx-background-color: #1d1d1d;
 }
@@ -280,7 +294,9 @@
     -fx-fill: white;
     -fx-text-fill: white;
 }
+*/
 
+/* scroll bar */
 .scroll-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -317,13 +333,14 @@
     -fx-text-fill: #F70D1A;
 }
 
+/* user input text field */
 #commandTextField {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-background-insets: 0;
     -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Lato";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
@@ -332,30 +349,36 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+/* message display */
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
 
+/* spacing between tags */
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
+/* tag labels */
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-font-size: 12;
+    -fx-border-color: white;
+    -fx-font-size: 11;
 }
 
+/* spacing between module code labels */
 #moduleCodes {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
+/* module labels */
 #moduleCodes .label {
     -fx-text-fill: purple;
     -fx-background-color: #ffffff;
