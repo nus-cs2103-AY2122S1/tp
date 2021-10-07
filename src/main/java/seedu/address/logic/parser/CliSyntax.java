@@ -9,4 +9,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_FRIEND_NAME = new Prefix("n/");
     public static final Prefix PREFIX_FRIEND_ID = new Prefix("id/");
     public static final Prefix PREFIX_GAME = new Prefix("g/");
+    public static final Prefix FLAG_FRIEND = new Prefix("--friend ");
+    public static final Prefix FLAG_GAME = new Prefix("--game ");
 }
