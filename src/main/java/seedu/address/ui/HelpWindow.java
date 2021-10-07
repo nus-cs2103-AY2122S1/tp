@@ -49,6 +49,9 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private TableView helpTable;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -86,8 +89,11 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        Scene scene = new Scene(setUpCommandDetails());
-        getRoot().setScene(scene);
+        //Scene scene = new Scene(setUpCommandDetails(), 500, 300);
+        //scene.getStylesheets().add("file:////Users/jailulla/Documents/AY_2021_2022/CS2103T/teamProject/src/main/resources/view/TableView.css");
+        //String cssFileLocation = this.getClass().getResource("/view/TableView.css").toExternalForm();
+        //scene.getStylesheets().add(cssFileLocation);
+        //getRoot().setScene(scene);
         getRoot().show();
         getRoot().centerOnScreen();
     }
