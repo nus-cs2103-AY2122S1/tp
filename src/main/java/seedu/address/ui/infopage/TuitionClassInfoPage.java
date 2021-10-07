@@ -37,7 +37,10 @@ public class TuitionClassInfoPage extends InfoPage {
     @FXML
     private Label students;
 
-
+    /**
+     * Constructor for a TuitionClassInfoPage
+     * @param tuitionClass Tuition Class to display information of.
+     */
     public TuitionClassInfoPage(TuitionClass tuitionClass) {
         super(FXML);
         logger.info("TuitionClassInfoPage " + tuitionClass);

@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 

@@ -44,6 +44,10 @@ public class StudentInfoPage extends InfoPage {
     @FXML
     private Label remark;
 
+    /**
+     * Constructor for a StudentInfoPage
+     * @param student Student to display information of.
+     */
     public StudentInfoPage(Person student) {
         super(FXML);
         logger.info("StudentInfoPage " + student);

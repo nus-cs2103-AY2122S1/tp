@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * TODO
+ * Command to display full information of a student to user.
  */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "student";
@@ -34,12 +34,6 @@ public class ViewCommand extends Command {
         this.index = index;
     }
 
-    /**
-     * TODO
-     * @param model {@code Model} which the command should operate on.
-     * @return
-     * @throws CommandException
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

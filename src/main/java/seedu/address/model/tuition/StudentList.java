@@ -9,7 +9,7 @@ import seedu.address.model.person.Classes;
 /**
  * Represents students who are in this tuition class
  */
-public class StudentList{
+public class StudentList {
     private final ArrayList<String> students;
 
     /**

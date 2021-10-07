@@ -4,9 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import javafx.scene.layout.Region;
-import seedu.address.ui.UiPart;
-
 /**
  * Represents the result of a command execution.
  */

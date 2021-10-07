@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
-import seedu.address.ui.Ui;
 
 /**
  * Format full help instructions for every command for display.

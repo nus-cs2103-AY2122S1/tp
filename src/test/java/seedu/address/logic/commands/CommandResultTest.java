@@ -41,9 +41,11 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", CommandResult.UiAction.NONE).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                CommandResult.UiAction.NONE).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", CommandResult.UiAction.SHOW_STUDENT_PAGE).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                CommandResult.UiAction.SHOW_STUDENT_PAGE).hashCode());
     }
 }
