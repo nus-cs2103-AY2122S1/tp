@@ -1,35 +1,24 @@
 package seedu.address.logic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.FRIEND_ID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.GAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.io.*;
+import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.exceptions.*;
+import seedu.address.logic.commands.friends.*;
+import seedu.address.logic.parser.exceptions.*;
+import seedu.address.model.*;
+import seedu.address.model.friend.*;
+import seedu.address.storage.*;
+import seedu.address.testutil.*;
+
+import java.io.*;
+import java.nio.file.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.commons.core.Messages.*;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalFriends.AMY;
-
-import java.io.IOException;
-import java.nio.file.Path;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyFriendsList;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.friend.Friend;
-import seedu.address.storage.JsonFriendsListStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.StorageManager;
-import seedu.address.testutil.FriendBuilder;
+import static seedu.address.testutil.TypicalFriends.*;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -57,8 +46,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = DeleteFriendCommand.COMMAND_WORD + " daksjhdkjashdjkashkdjashjkaskjdjkasdhkas";
+        assertCommandException(deleteCommand, MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test
@@ -78,12 +67,12 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + FRIEND_ID_DESC_AMY + GAME_DESC_AMY;
+        String addFriendCommand = AddFriendCommand.COMMAND_WORD + NAME_DESC_AMY + FRIEND_ID_DESC_AMY;
         Friend expectedFriend = new FriendBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFriend(expectedFriend);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        assertCommandFailure(addFriendCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test

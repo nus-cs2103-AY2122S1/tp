@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +28,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FRIEND_ID, PREFIX_FRIEND_NAME, PREFIX_GAME);
+                ArgumentTokenizer.tokenize(args, FLAG_FRIEND_ID, FLAG_FRIEND_NAME, PREFIX_GAME);
 
         Index index;
 
@@ -41,12 +39,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditCommand.EditFriendDescriptor editFriendDescriptor = new EditCommand.EditFriendDescriptor();
-        if (argMultimap.getValue(PREFIX_FRIEND_ID).isPresent()) {
-            editFriendDescriptor.setFriendId(ParserUtil.parseFriendId(argMultimap.getValue(PREFIX_FRIEND_ID).get()));
+        if (argMultimap.getValue(FLAG_FRIEND_ID).isPresent()) {
+            editFriendDescriptor.setFriendId(ParserUtil.parseFriendId(argMultimap.getValue(FLAG_FRIEND_ID).get()));
         }
 
-        if (argMultimap.getValue(PREFIX_FRIEND_NAME).isPresent()) {
-            editFriendDescriptor.setFriendName(ParserUtil.parseFriendName(argMultimap.getValue(PREFIX_FRIEND_NAME)
+        if (argMultimap.getValue(FLAG_FRIEND_NAME).isPresent()) {
+            editFriendDescriptor.setFriendName(ParserUtil.parseFriendName(argMultimap.getValue(FLAG_FRIEND_NAME)
                     .get()));
         }
 

@@ -17,8 +17,8 @@ public class Friend {
 
     // Identity fields
     // used to uniquely identify each Friend.
-    private final FriendId friendId;
-    private final FriendName friendName;
+    private FriendId friendId;
+    private FriendName friendName;
 
     // Data fields
     private final Set<Game> games = new HashSet<>();
@@ -31,6 +31,17 @@ public class Friend {
         this.friendId = friendId;
         this.friendName = friendName;
         this.games.addAll(games);
+    }
+
+    public Friend(FriendId friendId, FriendName friendName) {
+        requireAllNonNull(friendId, friendName);
+        this.friendId = friendId;
+        this.friendName = friendName;
+    }
+
+    public Friend(FriendId friendId) {
+        requireAllNonNull(friendId);
+        this.friendId = friendId;
     }
 
     public FriendId getFriendId() {

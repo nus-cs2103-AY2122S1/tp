@@ -11,7 +11,7 @@ public class FriendId {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Friend IDs should be unique for each friend in the friend's list.";
-    //    public static final String VALIDATION_REGEX = "\\d{3,}";
+        public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$" ;
     public final String value;
 
     /**
@@ -29,8 +29,7 @@ public class FriendId {
      * Returns true if a given string is a valid friendId.
      */
     public static boolean isValidFriendId(String friendId) {
-        //  return test.matches(VALIDATION_REGEX);
-        return true;
+        return friendId.matches(VALIDATION_REGEX);
     }
 
     @Override
