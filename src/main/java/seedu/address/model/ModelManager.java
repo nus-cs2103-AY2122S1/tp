@@ -118,6 +118,12 @@ public class ModelManager implements Model {
     /**
      * adding a task to tasklist.
      */
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
+    }
+
     public void addTask(Task toAdd) {
         addressBook.addTask(toAdd);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -129,6 +135,13 @@ public class ModelManager implements Model {
     public void deleteTask(Task toDelete) {
         addressBook.deleteTask(toDelete);
 
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        addressBook.setTask(target, editedTask);
     }
 
     @Override

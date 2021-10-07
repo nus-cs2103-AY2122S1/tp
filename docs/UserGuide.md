@@ -168,6 +168,19 @@ Format: `deletetask INDEX`
 Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
 
+### Editing a task : `edittask`
+
+Edits an existing task in the application.
+
+Format: `edittask INDEX l/LABEL d/DATE`
+
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edittask 1 l/order cloth d/19th September 2021` Edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
+
 ### Mark a task as done: `markdone`
 
 Marks a specified task from the application as complete.
@@ -204,5 +217,6 @@ Action | Format, Examples
 **ListTask** | `listtask`
 **AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20th August 2021`
 **DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
+**EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19th September 2021`
 **MarkDone** | `markdone INDEX` e.g. `markdone 2`
 

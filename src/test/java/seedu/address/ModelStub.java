@@ -76,6 +76,16 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasTask(Task task) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTask(Task target, Task editedTask) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         throw new AssertionError("This method should not be called.");
     }
