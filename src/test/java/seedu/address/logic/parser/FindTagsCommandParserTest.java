@@ -24,7 +24,26 @@ public class FindTagsCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindTagCommand() {
+    public void parse_oneTags_returnsFindTagCommand() {
+        // no leading and trailing whitespaces
+        List<Tag> tagList = new ArrayList<>();
+        tagList.add(new Tag("friends"));
+        PersonTagsContainsTagsPredicate predicate = new PersonTagsContainsTagsPredicate(tagList);
+        FindTagsCommand expectedFindCommand =
+                new FindTagsCommand(predicate);
+        assertParseSuccess(parser, "friends", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "\n friends \n  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_invalidTags_throwsParseException() {
+        assertParseFailure(parser, "a!", Tag.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_multipleTags_returnsFindTagCommand() {
         // no leading and trailing whitespaces
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("friends"));

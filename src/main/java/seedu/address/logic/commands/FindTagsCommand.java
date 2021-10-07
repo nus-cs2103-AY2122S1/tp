@@ -36,8 +36,14 @@ public class FindTagsCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FindTagsCommand // instanceof handles nulls
-                && predicate.equals(((FindTagsCommand) other).predicate)); // state check
+        if (other == this) {
+            return true;
+        }
+        if (other instanceof FindTagsCommand) {
+            FindTagsCommand otherFindTagsCommand = (FindTagsCommand) other;
+            return predicate.equals(otherFindTagsCommand.predicate);
+        } else {
+            return false;
+        }
     }
 }

@@ -8,7 +8,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches all of the tags given.
+ * Tests that a {@code Person}'s {@code Tag} matches all of the tags given.
  */
 public class PersonTagsContainsTagsPredicate implements Predicate<Person> {
     private final List<Tag> tagList;
@@ -19,8 +19,10 @@ public class PersonTagsContainsTagsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        Tag[] arrayTags = new Tag[person.getTags().toArray().length];
         return tagList.stream()
-                .allMatch(tag -> Arrays.stream(person.getTags().toArray()).anyMatch(personTag->personTag.equals(tag)));
+                .allMatch(tag -> Arrays.stream(person.getTags().toArray(arrayTags))
+                        .anyMatch(personTag-> personTag.compareTag(tag, false)));
     }
 
     @Override

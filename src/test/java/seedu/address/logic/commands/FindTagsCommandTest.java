@@ -26,7 +26,7 @@ import seedu.address.model.person.PersonTagsContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindTagsCommand}.
  */
 public class FindTagsCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -64,7 +64,7 @@ public class FindTagsCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_oneTags_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonTagsContainsTagsPredicate predicate = preparePredicate("sdfiojoij");
         FindTagsCommand command = new FindTagsCommand(predicate);
@@ -74,13 +74,23 @@ public class FindTagsCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_oneTag_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PersonTagsContainsTagsPredicate predicate = preparePredicate("friends");
         FindTagsCommand command = new FindTagsCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleTag_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonTagsContainsTagsPredicate predicate = preparePredicate("friends owesMoney");
+        FindTagsCommand command = new FindTagsCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
 
     /**
