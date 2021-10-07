@@ -6,8 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalItems.CHOCOCHIP;
+import static seedu.address.testutil.TypicalItems.DALGONA_COFFEE;
 import static seedu.address.testutil.TypicalItems.EGGNOG;
 import static seedu.address.testutil.TypicalItems.FOREST_CAKE;
+
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.item.IdContainsNumberPredicate;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 
 /**
@@ -29,35 +32,59 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
+        NameContainsKeywordsPredicate firstNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
+        NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        IdContainsNumberPredicate firstIdPredicate =
+                new IdContainsNumberPredicate(Collections.singletonList("#140272"));
+        IdContainsNumberPredicate secondIdPredicate =
+                new IdContainsNumberPredicate(Collections.singletonList("#475272"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
 
-        // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        FindCommand findNameFirstCommand = new FindCommand(firstNamePredicate);
+        FindCommand findNameSecondCommand = new FindCommand(secondNamePredicate);
+        FindCommand findIdFirstCommand = new FindCommand(firstIdPredicate);
+        FindCommand findIdSecondCommand = new FindCommand(secondIdPredicate);
 
-        // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
-        // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        // same Name type-> returns true
+        assertTrue(findNameFirstCommand.equals(findNameFirstCommand));
+
+        // same Id type-> returns true
+        assertTrue(findIdFirstCommand.equals(findIdFirstCommand));
+
+        // same Name values -> returns true
+        FindCommand findNameFirstCommandCopy = new FindCommand(firstNamePredicate);
+        assertTrue(findNameFirstCommand.equals(findNameFirstCommandCopy));
+
+        // same Id values -> returns true
+        FindCommand findIdFirstCommandCopy = new FindCommand(firstIdPredicate);
+        assertTrue(findIdFirstCommand.equals(findIdFirstCommandCopy));
+
+        // different Name types -> returns false
+        assertFalse(findNameFirstCommand.equals(1));
+
+        // different Id types -> returns false
+        assertFalse(findIdFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(findNameFirstCommand.equals(null));
 
-        // different item -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        // null -> returns false
+        assertFalse(findIdFirstCommand.equals(null));
+
+        // different Name -> returns false
+        assertFalse(findNameFirstCommand.equals(findNameSecondCommand));
+
+        // different Id -> returns false
+        assertFalse(findIdFirstCommand.equals(findIdSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noItemFound() {
+    public void execute_zeroNameKeywords_noItemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        NameContainsKeywordsPredicate predicate = preparePredicateName(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredItemList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -65,19 +92,48 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multipleItemsFound() {
+    public void execute_zeroIdKeywords_noItemFound() {
+        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);
+        IdContainsNumberPredicate predicate = preparePredicateId(" ");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredItemList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredItemList());
+    }
+
+    @Test
+    public void execute_multipleNameKeywords_multipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Chocolate Egg Forest");
+        NameContainsKeywordsPredicate predicate = preparePredicateName("Chocolate Egg Forest");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredItemList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CHOCOCHIP, EGGNOG, FOREST_CAKE), model.getFilteredItemList());
     }
 
+    @Test
+    public void execute_multipleIdKeywords_multipleItemsFound() {
+        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
+        IdContainsNumberPredicate predicate = preparePredicateId("#444444 #555555");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredItemList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CHOCOCHIP, DALGONA_COFFEE), model.getFilteredItemList());
+    }
+
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+    private NameContainsKeywordsPredicate preparePredicateName(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
+
+    /**
+     * Parses {@code userInput} into a {@code IdContainsKeywordsPredicate}.
+     */
+    private IdContainsNumberPredicate preparePredicateId(String userInput) {
+        return new IdContainsNumberPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+
 }
