@@ -64,7 +64,7 @@ public class ArgumentMultimap {
      * Returns true if the argMultiMap is empty.
      */
     public boolean isEmpty() {
-        return argMultimap.size() == 0;
+        return argMultimap.size() == 1;
     }
 
 }
