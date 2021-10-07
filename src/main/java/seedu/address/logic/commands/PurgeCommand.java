@@ -13,18 +13,26 @@ public class PurgeCommand extends Command {
     public static final String COMMAND_WORD = "purge";
     public static final String MESSAGE_SUCCESS = "Programmer Error has been purged of sample data!";
     public static final String MESSAGE_FAIL = "There is no sample data to purge!";
-    public static Boolean SAMPLE_STATUS = true;
+    private static Boolean sampleStatus = true;
 
 
     @Override
     public CommandResult execute(Model model) {
-        if (SAMPLE_STATUS) {
+        if (getStatus()) {
             requireNonNull(model);
             model.setAddressBook(new AddressBook());
-            SAMPLE_STATUS = false;
+            setStatus(false);
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
             return new CommandResult(MESSAGE_FAIL);
         }
+    }
+
+    private boolean getStatus () {
+        return sampleStatus;
+    }
+
+    private void setStatus (boolean val) {
+        sampleStatus = val;
     }
 }
