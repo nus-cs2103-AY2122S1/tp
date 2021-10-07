@@ -66,7 +66,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Nationality} of the {@code Person} that we are building.
      */
     public PersonBuilder withNationality(String nationality) {
         this.nationality = new Nationality(nationality);

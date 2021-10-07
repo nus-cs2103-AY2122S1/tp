@@ -64,10 +64,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Nationality} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withNationality(String address) {
-        descriptor.setNationality(new Nationality(address));
+    public EditPersonDescriptorBuilder withNationality(String nationality) {
+        descriptor.setNationality(new Nationality(nationality));
         return this;
     }
 

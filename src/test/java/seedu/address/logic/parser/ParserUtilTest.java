@@ -120,9 +120,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseNationality_validValueWithWhitespace_returnsTrimmedNationality() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_NATIONALITY + WHITESPACE;
+        String nationalityWithWhitespace = WHITESPACE + VALID_NATIONALITY + WHITESPACE;
         Nationality expectedNationality = new Nationality(VALID_NATIONALITY);
-        assertEquals(expectedNationality, ParserUtil.parseNationality(addressWithWhitespace));
+        assertEquals(expectedNationality, ParserUtil.parseNationality(nationalityWithWhitespace));
     }
 
     @Test
