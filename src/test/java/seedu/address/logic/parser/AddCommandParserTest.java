@@ -27,6 +27,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
@@ -44,7 +45,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
                 + GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
 
-        // multiple phones - last phone accepted
+        // multiple telegram handles - last telegram handle accepted
         assertParseSuccess(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_AMY + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB
                 + GROUP_NAME_DESC_BOB, new AddCommand(expectedStudent));
 
@@ -78,7 +79,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + TELEGRAM_HANDLE_DESC_BOB + EMAIL_DESC_BOB + GROUP_NAME_DESC_BOB,
                 expectedMessage);
 
-        // missing phone prefix
+        // missing telegram handle prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_TELEGRAM_HANDLE_BOB + EMAIL_DESC_BOB + GROUP_NAME_DESC_BOB,
                 expectedMessage);
 
@@ -99,7 +100,7 @@ public class AddCommandParserTest {
 
         // invalid telegram handle
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_TELEGRAM_HANDLE_DESC + EMAIL_DESC_BOB + GROUP_NAME_DESC_BOB,
-                Phone.MESSAGE_CONSTRAINTS);
+                TelegramHandle.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB + INVALID_EMAIL_DESC + GROUP_NAME_DESC_BOB,

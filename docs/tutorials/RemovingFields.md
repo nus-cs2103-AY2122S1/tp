@@ -100,17 +100,10 @@ In `src/test/data/`, data meant for testing purposes are stored. While keeping t
 
 ```json
 {
-<<<<<<< HEAD
-  "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "telegramHandle": "9482424",
-=======
   "students": [ {
     "name": "Student with invalid name field: Ha!ns Mu@ster",
-    "phone": "9482424",
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
+    "telegramHandle": "@hans_muster",
     "email": "hans@example.com",
-    "address": "4th street"
   } ]
 }
 ```

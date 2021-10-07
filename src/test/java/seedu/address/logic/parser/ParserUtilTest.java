@@ -8,35 +8,16 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-<<<<<<< HEAD
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.TelegramHandle;
-import seedu.address.model.tag.Tag;
-
-public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_TELEGRAM_HANDLE = "@RACHEL";
-    private static final String INVALID_ADDRESS = " ";
-=======
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
+import seedu.address.model.student.TelegramHandle;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
+    private static final String INVALID_TELEGRAM_HANDLE = "@rac";
     private static final String INVALID_EMAIL = "example.com";
-
     private static final String VALID_NAME = "Rachel Walker";
-<<<<<<< HEAD
     private static final String VALID_TELEGRAM_HANDLE = "@rachel_walker";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
-=======
-    private static final String VALID_PHONE = "123456";
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
     private static final String VALID_EMAIL = "rachel@example.com";
 
     private static final String WHITESPACE = " \t\r\n";

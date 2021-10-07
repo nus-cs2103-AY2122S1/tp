@@ -351,7 +351,7 @@ save it with `Model#setStudent()`.
 =======
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = new Student(
-                studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+                studentToEdit.getName(), studentToEdit.getTelegramHandle(), studentToEdit.getEmail(),
                 studentToEdit.getAddress(), remark, studentToEdit.getTags());
 >>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 

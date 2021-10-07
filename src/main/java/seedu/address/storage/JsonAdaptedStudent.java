@@ -28,7 +28,7 @@ class JsonAdaptedStudent {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String telegramHandle,
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("telegramHandle") String telegramHandle,
                               @JsonProperty("email") String email, @JsonProperty("groupName") String groupName) {
         this.name = name;
         this.telegramHandle = telegramHandle;

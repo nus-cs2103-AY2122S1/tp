@@ -3,17 +3,10 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-<<<<<<< HEAD
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
-=======
 // import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 // import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_AMY;
 // import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-// import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
+// import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 // import static seedu.address.testutil.TypicalStudents.AMY;
 
@@ -75,27 +68,6 @@ public class LogicManagerTest {
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
 
-<<<<<<< HEAD
-    @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
-
-        // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_HANDLE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
-    }
-=======
     //    @Test
     //    public void execute_storageThrowsIoException_throwsCommandException() {
     //        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
@@ -108,7 +80,7 @@ public class LogicManagerTest {
     //        logic = new LogicManager(model, storage);
     //
     //        // Execute add command
-    //        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+    //        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_HANDLE_DESC_AMY + EMAIL_DESC_AMY
     //                + GROUP_NAME_DESC_AMY;
     //        Student expectedStudent = new StudentBuilder(AMY).build();
     //        ModelManager expectedModel = new ModelManager();
@@ -117,7 +89,6 @@ public class LogicManagerTest {
     //assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     //}
     //TODO look above at this shit
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
