@@ -156,9 +156,11 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Opens the help window or focuses on it if it's already opened.
+     *
+     * @param student The student to display information about.
      */
     @FXML
-    public void handleStudent(Student student) {
+    public void handleViewStudent(Student student) {
         if (!studentWindow.isShowing()) {
             studentWindow.show(student);
         } else {
@@ -198,7 +200,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowStudent()) {
-                handleStudent(commandResult.getStudent());
+                handleViewStudent(commandResult.getStudent());
             }
 
             if (commandResult.isExit()) {

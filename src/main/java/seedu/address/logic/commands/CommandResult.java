@@ -83,7 +83,6 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && showStudent == otherCommandResult.showStudent
                 && exit == otherCommandResult.exit;
-
     }
 
     @Override

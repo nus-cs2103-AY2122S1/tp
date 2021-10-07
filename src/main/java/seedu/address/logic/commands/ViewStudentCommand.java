@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
+/**
+ * Views a student identified using it's displayed index from the address book.
+ */
 public class ViewStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "viewstu";
@@ -36,9 +39,9 @@ public class ViewStudentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student personToView = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, personToView), false, true,
-                false, personToView);
+        Student studentToView = lastShownList.get(targetIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, studentToView), false, true,
+                false, studentToView);
     }
 
     @Override
