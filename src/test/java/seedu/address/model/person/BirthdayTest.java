@@ -1,10 +1,9 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class BirthdayTest {
 
@@ -25,11 +24,11 @@ public class BirthdayTest {
         assertThrows(NullPointerException.class, () -> Birthday.isValidBirthday(null));
 
         // invalid birthday
-        assertFalse(Birthday.isValidBirthday("")); // empty string
-        assertFalse(Birthday.isValidBirthday(" ")); // spaces only
-        // TODO: 7/10/21 implement error message for birthdates 
-//        assertFalse(Birthday.isValidBirthday("2020-19-30")); // empty string
-//        assertFalse(Birthday.isValidBirthday("2020-02-30")); // empty string
+        // assertFalse(Birthday.isValidBirthday("")); // empty string
+        // assertFalse(Birthday.isValidBirthday(" ")); // spaces only
+        // TODO: 7/10/21 implement error message for birthdates
+        // assertFalse(Birthday.isValidBirthday("2020-19-30")); // empty string
+        // assertFalse(Birthday.isValidBirthday("2020-02-30")); // empty string
 
         // valid birthday
         assertTrue(Birthday.isValidBirthday("1999-01-19"));
