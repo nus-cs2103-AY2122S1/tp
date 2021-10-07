@@ -52,7 +52,7 @@ public class PlannerMdTest {
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
 
-        PlannerMdStub newData = new PlannerMdStub(newPatients);
+        PlannerMdStub newData = new PlannerMdStub().setPatients(newPatients);
 
         assertThrows(DuplicatePersonException.class, () -> plannerMd.resetData(newData));
 
@@ -103,15 +103,19 @@ public class PlannerMdTest {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
         private final ObservableList<Doctor> doctors = FXCollections.observableArrayList();
 
-        PlannerMdStub(Collection<Patient> patients, Collection<Doctor> doctors) {
+        PlannerMdStub() {
             this.patients.setAll(patients);
             this.doctors.setAll(doctors);
         }
 
-        //Due to type erasure, PlannerMdStub(Collection<Patient> doctors) cannot be implemented, we might have to
-        //consider factory methods instead
-        PlannerMdStub(Collection<Patient> patients) {
+        public PlannerMdStub setPatients(Collection<Patient> patients) {
             this.patients.setAll(patients);
+            return this;
+        }
+
+        public PlannerMdStub setDoctors(Collection<Patient> doctors) {
+            this.patients.setAll(doctors);
+            return this;
         }
 
         @Override
