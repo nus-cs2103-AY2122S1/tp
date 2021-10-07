@@ -67,6 +67,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same Student ID as {@code person} exists in the address book.
+     */
+    public boolean hasStudentId(Person personToCompare) {
+        requireNonNull(personToCompare);
+        for (Person persons : persons) {
+            if (persons.getStudentId().equals(personToCompare.getStudentId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

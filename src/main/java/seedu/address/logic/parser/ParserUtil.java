@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +121,17 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedID = studentId.trim();
+        if (!StudentId.isValidId(studentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedID);
     }
 }
