@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Student;
 
 /**
@@ -42,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private Label grade;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane lessons;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,6 +61,9 @@ public class PersonCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getLessons().stream()
+                .sorted(Comparator.comparing(Lesson::getLessonCode))
+                .forEach(lesson -> lessons.getChildren().add(new Label(lesson.getLessonCode())));
     }
 
     @Override
