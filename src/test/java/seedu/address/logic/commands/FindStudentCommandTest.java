@@ -58,13 +58,9 @@ public class FindStudentCommandTest {
     public void execute_zeroKeywords_noStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/FindStudentCommandTest.java
+
         FindStudentCommand command = new FindStudentCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-=======
-        FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
->>>>>>> upstream/master:src/test/java/seedu/address/logic/commands/FindCommandTest.java
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
     }
@@ -73,13 +69,8 @@ public class FindStudentCommandTest {
     public void execute_multipleKeywords_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/FindStudentCommandTest.java
         FindStudentCommand command = new FindStudentCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-=======
-        FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
->>>>>>> upstream/master:src/test/java/seedu/address/logic/commands/FindCommandTest.java
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
     }
