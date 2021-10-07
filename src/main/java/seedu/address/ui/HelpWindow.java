@@ -61,6 +61,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        setUpCommandDetails();
     }
 
     /**
@@ -90,7 +91,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        setUpCommandDetails();
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -133,6 +133,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void setUpCommandDetails() {
         ObservableList<CommandDetails> helpSectionCommandDetails= helpTable.getItems();
+        helpSectionCommandDetails.clear();
 
         CommandDetails addNewContactCommandDetails = new CommandDetails(ADD_NEW_CONTACT_FEATURE_NAME, ADD_NEW_CONTACT_FEATURE_COMMAND);
         CommandDetails deleteContactCommandDetails = new CommandDetails(DELETE_CONTACT_FEATURE_NAME, DELETE_CONTACT_FEATURE_COMMAND);
