@@ -51,7 +51,7 @@ public class JsonAdaptedEvent {
         name = source.getName().eventName;
         date = source.getDate().toString();
         time = source.getTime().toString();
-        isDone = source.getIsDone() ? "Completed" : "Uncompleted";
+        isDone = source.getIsDone() ? Event.COMPLETED : Event.UNCOMPLETED;
         participantIds.addAll(source.getParticipants().stream()
                 .map(Participant::getParticipantId).map(ParticipantId::toString)
                 .collect(Collectors.toList()));
@@ -106,7 +106,7 @@ public class JsonAdaptedEvent {
 
         Event event = new Event(eventName, eventDate, eventTime);
         event.getParticipants().addAll(participants);
-        if (this.isDone.equals("Completed")) {
+        if (this.isDone.equals(Event.COMPLETED)) {
             event.markAsDone();
         }
 
