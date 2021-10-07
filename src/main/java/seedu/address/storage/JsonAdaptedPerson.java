@@ -101,8 +101,8 @@ class JsonAdaptedPerson {
         if (lastMet == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LastMet.class.getSimpleName()));
         }
-        if (!LastMet.isValidLastMet(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!LastMet.isValidLastMet(lastMet)) {
+            throw new IllegalValueException(LastMet.MESSAGE_CONSTRAINTS);
         }
         final LastMet modelLastMet = new LastMet(lastMet);
 

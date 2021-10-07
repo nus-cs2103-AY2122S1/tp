@@ -72,6 +72,8 @@ public class AddCommandTest {
 
         // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+
+
     }
 
     /**

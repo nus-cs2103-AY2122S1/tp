@@ -106,17 +106,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String LastMet} into an {@code LastMet}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code LastMet} is invalid.
      */
     public static LastMet parseLastMet(String lastMet) throws ParseException {
         requireNonNull(lastMet);
         String trimmedLastMet = lastMet.trim();
-        if (!LastMet.isValidLastMet(trimmedLastMet)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-        }
         return new LastMet(trimmedLastMet);
     }
 

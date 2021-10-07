@@ -53,10 +53,7 @@ public class ViewCommand extends Command{
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, personToView.getName()));
     }
-
-
-
-
+    
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
