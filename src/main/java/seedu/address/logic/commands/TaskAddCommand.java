@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.model.Model;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Adds a new task to the module.
  */
 public class TaskAddCommand extends Command {
 
