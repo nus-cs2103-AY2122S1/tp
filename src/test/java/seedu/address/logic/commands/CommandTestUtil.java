@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -40,10 +40,14 @@ public class CommandTestUtil {
     public static final String PARENT_PHONE_DESC_AMY = " " + PREFIX_PARENT_PHONE + VALID_PARENT_PHONE_AMY;
     public static final String PARENT_PHONE_DESC_BOB = " " + PREFIX_PARENT_PHONE + VALID_PARENT_PHONE_BOB;
 
-    public static final String INVALID_STUDENT_NAME_DESC = " " + PREFIX_STUDENT_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_STUDENT_PHONE_DESC = " " + PREFIX_STUDENT_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_PARENT_NAME_DESC = " " + PREFIX_PARENT_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PARENT_PHONE_DESC = " " + PREFIX_PARENT_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_STUDENT_NAME_DESC =
+            " " + PREFIX_STUDENT_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_STUDENT_PHONE_DESC =
+            " " + PREFIX_STUDENT_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_PARENT_NAME_DESC =
+            " " + PREFIX_PARENT_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_PARENT_PHONE_DESC =
+            " " + PREFIX_PARENT_PHONE + "911a"; // 'a' not allowed in phones
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -95,7 +99,7 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        /**
+        /*
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
@@ -103,7 +107,7 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
-         **/
+         */
     }
 
 }
