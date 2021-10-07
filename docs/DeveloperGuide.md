@@ -294,8 +294,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | create tasks for my members or myself | |
 | `* *`  | user                                       | see the completion status and description of tasks for members | know the requirements and status of the task |
 | `*`  | user                                       | mark a task as completed, overdue or uncompleted | keep track of my tasks that are on-hand |
-| `* *`  | user                                       | add a deadline to task | keep track of what is due |
-| `* * *`  | user                                       | delete already obscure tasks that I do not need to keep track of | have a cleaner task list |
+| `* *`  | user                                       | add a deadline to task | keep track of who has overdue tasks |
+| `* * *`  | user                                       | delete already obscure and unnecessary tasks | have a cleaner task list |
 
 
 #### Storage Functions
