@@ -14,10 +14,12 @@ import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundExcepti
 
 /**
  * A list of tutorial classes that enforces uniqueness between its elements and does not allow nulls.
- * A tutorial class is considered unique by comparing using {@code TutorialClass#isSameTutorialClass(TutorialClass)}. As such, adding and
- * updating of students uses TutorialClass#isSameTutorialClass(TutorialClass) for equality to ensure that the tutorial class being added or
- * updated is unique in terms of identity in the UniqueTutorialClassList. However, the removal of a tutorial class uses
- * TutorialClass#equals(Object) to ensure that the TutorialClass with exactly the same fields will be removed.
+ * A tutorial class is considered unique by comparing using {@code TutorialClass#isSameTutorialClass(TutorialClass)}.
+ *
+ * As such, adding and updating of students uses TutorialClass#isSameTutorialClass(TutorialClass) for equality
+ * to ensure that the tutorial class being added or updated is unique in terms of identity
+ * in the UniqueTutorialClassList. However, the removal of a tutorial class uses TutorialClass#equals(Object) to
+ * ensure that the TutorialClass with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
