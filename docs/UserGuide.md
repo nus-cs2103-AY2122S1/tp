@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Source Control is a **desktop app for CS1101S professors to manage the performance of their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Source Control can give you a quick overview or a closer look of how your students are doing.
+Source Control is a **desktop app for CS1101S professors to manage the performance of their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Source Control can give you both a quick overview and a closer look of how your students are doing.
 
 * Table of Contents 
 {:toc}
@@ -14,9 +14,9 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases).
+1. Download the latest `sourcecontrol.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for Source Control.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,16 +24,18 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`add student`**`-n John Doe -i E0123456` : Adds a student named `John Doe` with NUSNET ID `E0123456` to the Address Book.
+    * **`add student`**`-n John Doe -i E0123456` : Adds a student named `John Doe` with NUSNET ID `E0123456` into the database.
 
-    * **`add group`**`-g T01A -n John Doe` : Adds a group called `T01A` and adds a student name `John Doe` into the group.
+    * **`add group`**`-g T01A -n John Doe` : Adds a group called `T01A` into the database and student `John Doe` into the group.
 
-    * **`search`**`-n John Doe` : Searches for a student called `John Doe`.
+    * **`add alloc`**`-g T01A -n John Doe` : Adds student `John Doe` into group `T01`.
 
-    * **`clear`** : Deletes all contacts.
+    * **`add score`**`-a P01 -n John Doe -s 12`: Adds score for assessment `P01` as `12` for student `John Doe`.
 
-    * **`exit`** : Exits the app.
+    * **`search`**`-n John Doe` : Searches for student `John Doe`.
 
+    * **`clear`** : Clears all existing data.
+    
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -55,8 +57,8 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 * Parameters in `[square brackets]` are optional. <br>
   e.g. `-n <student_name> [-g <group_name>]` can be used as `-n John Doe -g T01A`, or as `-n John Doe`.
 
-* Items with `…​`  after them can be used multiple times including zero times.<br>
-  e.g. `[-g <group_name>]…​` can be used as ` ` (i.e. 0 times), or `-g T01A -g R01A`.
+* Items with `...​`  after them can be used multiple times including zero times.<br>
+  e.g. `[-g <group_name>]...` can be used as ` ` (i.e. 0 times), or `-g T01A -g R01A`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n <student_name> -g <group_name>`, then `-g <group_name> -n <student_name>` is also acceptable.
@@ -68,21 +70,6 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
   e.g. if the command specifies `clear 123`, it will be interpreted as `clear`.
 
 </div>
-
-### Creating a new group: `add group`
-
-Creates a new group and adds students into the group.
-
-Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]…`
-
-* Creates a new group with the given group name.
-* Students can be identified by their name or NUSNET ID.
-
-Examples:
-* `add group -g FG1 -n John Doe -n Jane Doe`
-* `add group -g FG1`
-* `add group -g FG1 -n John Doe -i E0123456`
-* `add group -g FG1 -i E0123123 -i E0123456`
 
 ### Adding a student : `add student`
 
@@ -97,6 +84,44 @@ Examples:
 * `add student -n John Doe -i E0123456`
 * `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
 
+### Creating a new group: `add group`
+
+Creates a new group and adds students into the group.
+
+Format: `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...`
+
+* Creates a new group with the given group name.
+* Students can be identified by their name or NUSNET ID.
+
+Examples:
+* `add group -g FG1 -n John Doe -n Jane Doe`
+* `add group -g FG1`
+* `add group -g FG1 -n John Doe -i E0123456`
+* `add group -g FG1 -i E0123123 -i E0123456`
+
+### Adding a student into a group: `add alloc`
+
+Allocates an existing student into an existing group.
+
+Format: `add alloc -g <group_name> (-n <student_name> | -i <student_id>)`
+* Adds the student into an existing group specified by the group name.
+* Students can be identified by their name or NUSNET ID.
+
+Examples:
+* `add alloc -g T01A -n John Doe`
+* `add alloc -g T02A -i E0123456`
+
+### Adding an assessment: `add score`
+
+Adds score of an existing assessment into the database.
+
+Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>`
+* Adds student’s score for an existing assessment into the database.
+* Students can be identified by their name or NUSNET ID.
+
+Examples:
+* `add score -a P01 -n John Doe -s 12`
+* `add score -a P02 -i E0123456 -s 12.5`
 
 ### Searching for students: `search`
 
@@ -171,8 +196,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Group** |
 **Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
+**Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
+**Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
+**Add Assessment** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
 **Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
 **Clear** | `clear data`
