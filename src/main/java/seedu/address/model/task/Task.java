@@ -35,8 +35,8 @@ public class Task {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
