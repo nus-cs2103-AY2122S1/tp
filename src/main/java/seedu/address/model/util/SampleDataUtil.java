@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyModule getSampleAddressBook() {
+    public static ReadOnlyModule getSampleModule() {
         Module sampleAb = new Module();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

@@ -31,7 +31,7 @@ public class ModelManager implements Model {
         requireAllNonNull(module, userPrefs);
 
         logger.fine("Initializing with address book: " + module + " and user prefs " + userPrefs);
-
+        //The string name is hardcoded for now. Ability to change module name will come later
         this.module = new Module(module);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.module.getPersonList());

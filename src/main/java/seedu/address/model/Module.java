@@ -13,8 +13,10 @@ import seedu.address.model.person.UniquePersonList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class Module implements ReadOnlyModule {
+    private static final String MODULE_NAME = "CS2103";
 
     private final UniquePersonList persons;
+    private final String name;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,7 +29,9 @@ public class Module implements ReadOnlyModule {
         persons = new UniquePersonList();
     }
 
-    public Module() {}
+    public Module() {
+        this.name = MODULE_NAME;
+    }
 
     /**
      * Creates an Module using the Persons in the {@code toBeCopied}
@@ -45,6 +49,10 @@ public class Module implements ReadOnlyModule {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     /**

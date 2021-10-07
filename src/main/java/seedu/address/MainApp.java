@@ -70,18 +70,18 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * The data from the sample module will be used instead if {@code storage}'s address book is not found,
+     * or an empty module will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyModule> addressBookOptional;
+        Optional<ReadOnlyModule> moduleOptional;
         ReadOnlyModule initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            moduleOptional = storage.readAddressBook();
+            if (!moduleOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample Module");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = moduleOptional.orElseGet(SampleDataUtil::getSampleModule);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Module");
             initialData = new Module();
