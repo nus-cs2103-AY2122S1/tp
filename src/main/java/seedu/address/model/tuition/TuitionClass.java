@@ -72,10 +72,11 @@ public class TuitionClass {
         if (otherTuition == this) {
             return true;
         }
-
-        return otherTuition != null
-                && otherTuition.getTimeslot().equals(getTimeslot());
+        return otherTuition.getTimeslot().equals(getTimeslot());
     }
+
+    //addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123
+    //addclass n/cs2100 l/10 c/4 ts/Mon 13:00-14:00 s/John Doe
 
     @Override
     public boolean equals(Object other) {
