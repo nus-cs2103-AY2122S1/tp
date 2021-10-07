@@ -43,7 +43,7 @@ public class AddressBookParser {
 
         String commandWord = matcher.group("commandWord");
         String arguments = matcher.group("arguments");
-        if (!arguments.startsWith("-")) {
+        if ((arguments.length() != 0) && (!arguments.startsWith(" -"))) {
             isTwoWordCommand = true;
         }
         if (isTwoWordCommand) {
@@ -89,7 +89,7 @@ public class AddressBookParser {
         if (index == 0) {
             return null;
         } else {
-            String argumentsFormatted = arguments.substring(index);
+            String argumentsFormatted = arguments.substring(index - 1);
             return argumentsFormatted;
         }
     }
