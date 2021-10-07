@@ -9,16 +9,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.member.Member;
 
 /**
- * Adds a person to the address book.
+ * Adds a member to the address book.
  */
 public class PAddCommand extends Command {
 
     public static final String COMMAND_WORD = "padd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -33,28 +33,28 @@ public class PAddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New member added: %1$s";
+    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book";
 
-    private final Person toAdd;
+    private final Member toAdd;
 
     /**
      * Creates an PAddCommand to add the specified {@code Person}
      */
-    public PAddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public PAddCommand(Member member) {
+        requireNonNull(member);
+        toAdd = member;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasMember(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
-        model.addPerson(toAdd);
+        model.addMember(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

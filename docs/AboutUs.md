@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/leeroy999.png" width="200px">
 
 [[github](https://github.com/leeroy999)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/leeroy999.md)]
 
 * Role: Team Lead
 * Responsibilities:
@@ -26,7 +26,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/gwphua.png" width="200px">
 
 [[github](http://github.com/gwphua)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/gwphua.md)]
 
 * Role: Developer
 * Responsibilities:
@@ -39,7 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/samuel-bit-prog.png" width="200px">
 
 [[github](http://github.com/samuel-bit-prog)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/samuel-bit-prog.md)]
 
 * Role: Developer
 * Responsibilities:
@@ -52,7 +52,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/tsiyuk.png" width="200px">
 
 [[github](http://github.com/tsiyuk)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tsiyuk.md)]
 
 * Role: Developer
 * Responsibilities:
@@ -63,7 +63,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/liuzhi1an.png" width="200px">
 
-[[github](http://github.com/liuzhi1an)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/liuzhi1an)]
+[[portfolio](team/liuzhi1an.md)]
 
 * Role: Developer
 * Responsibilities: testing
