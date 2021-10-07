@@ -27,9 +27,7 @@ public class AcadStream {
      */
     public AcadStream(String acadStream) {
         requireNonNull(acadStream);
-        if (!acadStream.isEmpty()) {
-            checkArgument(isValidAcadStream(acadStream), MESSAGE_CONSTRAINTS);
-        }
+        checkArgument(isValidAcadStream(acadStream), MESSAGE_CONSTRAINTS);
         value = acadStream;
     }
 
