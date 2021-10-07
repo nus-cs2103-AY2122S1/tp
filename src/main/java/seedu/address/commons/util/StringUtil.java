@@ -65,4 +65,14 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Concatenate "s" at the back of the string if size is bigger than 1.
+     * @param string singular form
+     * @param size of list
+     * @return singular or plural form of the string given
+     */
+    public static String singularOrPlural(String string, int size) {
+        return size > 1 ? string + "s" : string;
+    }
 }
