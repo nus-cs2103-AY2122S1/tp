@@ -1,7 +1,15 @@
 package seedu.address.logic.commands.personcommand;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -14,10 +22,6 @@ import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
-
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.Optional;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -39,11 +43,14 @@ public class FindPersonCommand extends Command {
             + "Example 1: " + COMMAND_WORD + " alice bob charlie\n"
             + "Example 2: " + COMMAND_WORD + " [" + PREFIX_PHONE + "91234567] " + "[" + PREFIX_EMAIL
             + "johndoe@example.com]\n"
-            + "Example 3: " + COMMAND_WORD + " Bob " +"[" + PREFIX_PHONE + "91234567]\n";
+            + "Example 3: " + COMMAND_WORD + " Bob " + "[" + PREFIX_PHONE + "91234567]\n";
 
     private final FindPersonDescriptor findPersonDescriptor;
     private final Predicate<Person> predicate;
 
+    /**
+     * Constructor for the FindPersonCommand that takes in a FindPersonDescriptor.
+     */
     public FindPersonCommand(FindPersonDescriptor findPersonDescriptor) {
         requireNonNull(findPersonDescriptor);
 
@@ -128,6 +135,11 @@ public class FindPersonCommand extends Command {
             return Optional.ofNullable(tagPredicate);
         }
 
+        /**
+         * This method takes all the conditions to check and combines them into one predicate.
+         *
+         * @return A combined predicate object to use on a filteredlist.
+         */
         public Predicate<Person> combinePredicates() {
             Predicate<Person> result = x -> true;
             if (namePredicate != null) {
