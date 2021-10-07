@@ -1,46 +1,67 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "SafeFor(H)all save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
+    "room" : "A100",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "vaccStatus" : "True",
+    "faculty" : "SoC",
+    "lastFetDate" : "TODO",
+    "lastCollectionDate" : "TODO"
   }, {
     "name" : "Benson Meier",
+    "room" : "A101",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "vaccStatus" : "True",
+    "faculty" : "FASS",
+    "lastFetDate" : "TODO",
+    "lastCollectionDate" : "TODO"
   }, {
     "name" : "Carl Kurz",
+    "room" : "A102",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tagged" : [ ]
+    "vaccStatus" : "True",
+    "faculty" : "FASS",
+    "lastFetDate" : "TODO",
+    "lastCollectionDate" : "TODO"
   }, {
     "name" : "Daniel Meier",
+    "room" : "A103",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "vaccStatus" : "True",
+    "faculty" : "FASS",
+    "lastFetDate" : "TODO",
+    "lastCollectionDate" : "TODO"
   }, {
     "name" : "Elle Meyer",
+    "room" : "A104",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tagged" : [ ]
+    "vaccStatus" : "True",
+    "faculty" : "FASS",
+    "lastFetDate" : "TODO",
+    "lastCollectionDate" : "TODO"
   }, {
     "name" : "Fiona Kunz",
+    "room" : "A105",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tagged" : [ ]
+    "vaccStatus" : "True",
+    "faculty" : "FASS",
+    "lastFetDate" : "TODO",
+    "lastCollectionDate" : "TODO"
   }, {
     "name" : "George Best",
+    "room" : "A106",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "address" : "4th street",
-    "tagged" : [ ]
+    "vaccStatus" : "True",
+    "faculty" : "FASS",
+    "lastFetDate" : "TODO",
+    "lastCollectionDate" : "TODO"
   } ]
 }
