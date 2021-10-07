@@ -1,0 +1,7 @@
+{
+  "students": [ {
+    "name": "Hans Muster",
+    "email": "invalid@email!3e"
+  } ],
+  "tasks" : [ ]
+}
