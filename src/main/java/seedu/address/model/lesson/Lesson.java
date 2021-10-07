@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,7 +17,7 @@ import seedu.address.model.person.Student;
 /**
  * Represents a Lesson in the tuitiONE book.
  * A lesson spans for an hour.
- * Guarantees: immutable; subject is valid as declared in {@link #isValidLessonName(String)},
+ * Guarantees: immutable; subject is valid as declared in {@link #isValidSubject(String)},
  * start and end times are valid as declared in {@link #isValidTime(LocalTime)}
  * and {@link #isValidPrice(double)}
  */
@@ -26,17 +27,17 @@ public class Lesson {
     public static final String SUBJECT_MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric";
     public static final String TIME_MESSAGE_CONSTRAINTS = "Lesson can only start be between 9 am to 8 pm";
     public static final String PRICE_MESSAGE_CONSTRAINT = "Price cannot be 0 or negative";
+    public static final String CODE_MESSAGE_CONSTRAINT = "Lesson code should be of correct format";
 
-    public static final LocalTime BOUNDED_START_TIME = LocalTime.of(9, 0); // 9 am
-    public static final LocalTime BOUNDED_END_TIME = LocalTime.of(8 + 12, 0); // 8 pm
+    public static final LocalTime BOUNDED_START_TIME = LocalTime.parse("09:00");
+    public static final LocalTime BOUNDED_END_TIME = LocalTime.parse("20:00");
 
     private final String subject;
     private final Grade grade;
     private final DayOfWeek day;
     private final LocalTime startTime;
     private final double price;
-    private final Set<Student> students; // todo consider linking students to classes
-
+    private final Set<Student> students;
 
     /**
      * Constructs a {@code Lesson}.
@@ -50,7 +51,7 @@ public class Lesson {
     public Lesson(String subject, Grade grade, DayOfWeek day, LocalTime startTime, double price) {
         requireAllNonNull(subject, grade, day, startTime, price);
 
-        checkArgument(isValidLessonName(subject), SUBJECT_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSubject(subject), SUBJECT_MESSAGE_CONSTRAINTS);
         checkArgument(isValidTime(startTime), TIME_MESSAGE_CONSTRAINTS);
         checkArgument(isValidPrice(price), PRICE_MESSAGE_CONSTRAINT);
 
@@ -70,7 +71,7 @@ public class Lesson {
         return grade;
     }
 
-    public DayOfWeek getDay() {
+    public DayOfWeek getDayOfWeek() {
         return day;
     }
 
@@ -90,20 +91,28 @@ public class Lesson {
         return Collections.unmodifiableSet(students);
     }
 
+    /**
+     * Add student to the lesson instance.
+     */
     public void addStudent(Student student) {
         requireAllNonNull(student);
+        // todo check if student is already enrolled
         this.students.add(student);
     }
 
+    /**
+     * Removes student from the lesson instance.
+     */
     public void removeStudent(Student student) {
         requireAllNonNull(student);
+        // todo check if student is already enrolled
         this.students.remove(student);
     }
 
     /**
-     * Returns true if a given string is a valid lesson name.
+     * Returns true if a given string is a valid subject name for a lesson.
      */
-    public static boolean isValidLessonName(String test) {
+    public static boolean isValidSubject(String test) {
         return test.matches(SUBJECT_VALIDATION_REGEX);
     }
 
@@ -117,17 +126,86 @@ public class Lesson {
     }
 
     /**
-     * Returns true if a given price is more than 0.
+     * Returns true if a given price is at least 0.
      */
     public static boolean isValidPrice(double testPrice) {
-        return (testPrice > 0.0);
+        return (testPrice >= 0.0);
+    }
+
+    /**
+     * Returns true if a given lesson code is follows the correct format.
+     */
+    public static boolean isValidLessonCode(String testCode) {
+        if (testCode == null) {
+            return false;
+        }
+        // check number of parameters in lesson code
+        String[] testLessonParams = testCode.split("-");
+        if (testLessonParams.length != 4 || testLessonParams[1].length() != 2) {
+            return false;
+        }
+
+        try {
+            // attempt to parse
+            new Grade(testLessonParams[1]);
+            DayOfWeek.valueOf(testLessonParams[2]);
+            LocalTime.parse(testLessonParams[3]);
+
+        } catch (IllegalArgumentException | DateTimeParseException e) {
+            return false;
+        }
+        return isValidSubject(testLessonParams[0]); // check subject
     }
 
     /**
      * Returns formatted lesson code string.
+     * e.g: Science-P5-Wed-1430.
      */
     public String getLessonCode() {
-        return String.format("%s-%s-%s-%s", subject, grade, day, startTime);
+        return String.format(
+                "%s-%s-%s-%s",
+                subject,
+                grade.value,
+                parseDayToString(day),
+                startTime.toString().replace(":", ""));
+    }
+
+    /**
+     * Returns true if both lessons have the same lesson code.
+     * This defines a weaker notion of equality between two lessons.
+     */
+    public boolean isSameLesson(Lesson otherLesson) {
+        if (otherLesson == this) {
+            return true;
+        }
+        return otherLesson != null
+                && otherLesson.getLessonCode().equals(getLessonCode());
+    }
+
+    /**
+     * Returns true if instance lesson code and requested lesson code are the same.
+     */
+    public boolean isSameLessonUsingCode(String otherLessonCode) {
+        checkArgument(isValidLessonCode(otherLessonCode), CODE_MESSAGE_CONSTRAINT);
+        return getLessonCode().equals(otherLessonCode);
+    }
+
+    /**
+     * Returns a weak form of lesson from a given lesson code
+     * for weak equality check @link #isSameLesson(Lesson).
+     */
+    public static Lesson getWeakLessonFromCode(String code) {
+        checkArgument(isValidLessonCode(code), CODE_MESSAGE_CONSTRAINT);
+        String[] lessonParams = code.split("-");
+
+        // extract and parse relevant fields for a lesson instance
+        String subject = lessonParams[0];
+        Grade grade = new Grade(lessonParams[1]);
+        DayOfWeek day = DayOfWeek.valueOf(lessonParams[2]);
+        LocalTime startTime = LocalTime.parse(lessonParams[3]);
+        double price = 0.0; // mock value
+
+        return new Lesson(subject, grade, day, startTime, price);
     }
 
     @Override
@@ -147,12 +225,17 @@ public class Lesson {
                 && day.equals(otherLesson.day)
                 && startTime.equals(otherLesson.startTime)
                 && (price == otherLesson.price);
-        // todo consider if students list should be in this
+    }
+
+    /**
+     * Checks if Student is enrolled in this Lesson
+     */
+    public boolean containsStudent(Student student) {
+        return students.contains(student);
     }
 
     @Override
     public int hashCode() {
-        // todo consider if students list should be in this
         return Objects.hash(subject, grade, day, startTime, price);
     }
 
@@ -161,6 +244,30 @@ public class Lesson {
      */
     public String toString() {
         return '[' + getLessonCode() + ']';
+    }
+
+    /**
+     * Returns String with corresponding to DayOfWeek.
+     */
+    public static String parseDayToString(DayOfWeek dayOfWeek) {
+        switch (dayOfWeek) {
+        case MONDAY:
+            return "Mon";
+        case TUESDAY:
+            return "Tue";
+        case WEDNESDAY:
+            return "Wed";
+        case THURSDAY:
+            return "Thu";
+        case FRIDAY:
+            return "Fri";
+        case SATURDAY:
+            return "Sat";
+        case SUNDAY:
+            return "Sun";
+        default:
+            throw new NullPointerException("DayOfWeek is null in Lesson");
+        }
     }
 
 }

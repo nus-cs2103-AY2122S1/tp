@@ -1,14 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Student;
 import seedu.address.model.lesson.Lesson;
-
+import seedu.address.model.person.Student;
 
 /**
  * The API of the Model component.
@@ -89,7 +87,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Student> predicate);
 
     /**
-     * Returns true if a lesson with the same values as {@code lesson} exists in TuitiONE
+     * Returns true if a lesson with the same values as {@code lesson} exists in TuitiONE.
      */
     boolean hasLesson(Lesson lesson);
 
@@ -106,13 +104,12 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
-     * Returns list of lessons.
+     * Returns an unmodifiable list of lessons.
      */
-    ArrayList<Lesson> getLessonList();
+    ObservableList<Lesson> getLessonList();
 
     /**
-     * Returns lesson corrosponding to String lessoncode, else null if lesson does not exist.
+     * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
      */
     Lesson searchLessons(String lessonCode);
 }
-

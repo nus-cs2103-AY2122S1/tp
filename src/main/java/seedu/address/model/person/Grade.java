@@ -14,23 +14,21 @@ public class Grade {
             + "Level number should be from 1 to 6 for primary and 1 to 4 for secondary.";
 
     public static final String[] VALID_GRADES = {"P1", "P2", "P3", "P4", "P5", "P6", "S1", "S2", "S3", "S4"};
-    public final String grade;
+    public final String value;
 
     /**
      * Constructs a student grade
      *
-     * @param grade The grade of the student
+     * @param value The grade of the student
      */
-    public Grade(String grade) {
-        requireAllNonNull(grade);
-        checkArgument(isValidGrade(grade), MESSAGE_CONSTRAINTS);
-        this.grade = grade;
+    public Grade(String value) {
+        requireAllNonNull(value);
+        checkArgument(isValidGrade(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
-     * Returns true if given grade is valid
-     * @param grade The grade of the student
-     * @return Whether the grade is a valid input.
+     * Returns true if given grade is valid.
      */
     public static boolean isValidGrade(String grade) {
         for (String validGrade : VALID_GRADES) {
@@ -45,16 +43,16 @@ public class Grade {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Grade // instanceof handles nulls
-                && grade.equals(((Grade) other).grade)); // state check
+                && value.equals(((Grade) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(grade);
+        return Objects.hash(value);
     }
 
     @Override
     public String toString() {
-        return "[" + grade + "]";
+        return "[" + value + "]";
     }
 }
