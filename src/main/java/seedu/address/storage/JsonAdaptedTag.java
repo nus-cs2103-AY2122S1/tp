@@ -44,4 +44,5 @@ class JsonAdaptedTag {
         }
         return new Tag(tagName);
     }
+
 }

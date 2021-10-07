@@ -1,15 +1,18 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.student.Student;
+import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class StudentCard extends UiPart<Region> {
+public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -21,7 +24,7 @@ public class StudentCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Student student;
+    public final Person person;
 
     @FXML
     private HBox cardPane;
@@ -30,23 +33,28 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label teleHandle;
+    private Label phone;
     @FXML
-    private Label studentId;
+    private Label address;
     @FXML
     private Label email;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
-        this.student = student;
+        this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
-        teleHandle.setText(student.getTeleHandle().value);
-        studentId.setText(student.getStudentId().value);
-        email.setText(student.getEmail().value);
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -57,13 +65,13 @@ public class StudentCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StudentCard)) {
+        if (!(other instanceof PersonCard)) {
             return false;
         }
 
         // state check
-        StudentCard card = (StudentCard) other;
+        PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
-                && student.equals(card.student);
+                && person.equals(card.person);
     }
 }
