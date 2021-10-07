@@ -3,13 +3,10 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Controller for a help page
@@ -20,9 +17,6 @@ public class StudentWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(StudentWindow.class);
     private static final String FXML = "StudentWindow.fxml";
-
-    @FXML
-    private Button copyButton;
 
     @FXML
     private Label showMessage;
@@ -74,7 +68,7 @@ public class StudentWindow extends UiPart<Stage> {
      *     </li>
      * </ul>
      */
-    public void show(Person student) {
+    public void show(Student student) {
         logger.fine("Showing student information.");
         studentName.setText(student.getName().toString());
         studentAddress.setText(student.getAddress().toString());
