@@ -29,7 +29,7 @@ public class StudentUtil {
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_TELEGRAM_HANDLE + student.getTelegramHandle().value + " ");
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
-        sb.append(PREFIX_GROUP_NAME + student.getGroupName().toString() + " ");
+        sb.append(PREFIX_GROUP_NAME + student.getGroup().getGroupName().toString() + " ");
 
         return sb.toString();
     }
@@ -44,7 +44,7 @@ public class StudentUtil {
                 .ifPresent(telegramHandle -> sb.append(PREFIX_TELEGRAM_HANDLE).append(telegramHandle.value)
                 .append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getGroupName().ifPresent(groupName -> sb.append(PREFIX_GROUP_NAME).append(groupName.toString())
+        descriptor.getGroup().ifPresent(group -> sb.append(PREFIX_GROUP_NAME).append(group.getGroupName().toString())
                 .append(" "));
 
         return sb.toString();

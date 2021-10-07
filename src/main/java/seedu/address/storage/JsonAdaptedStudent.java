@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         telegramHandle = source.getTelegramHandle().value;
         email = source.getEmail().value;
-        groupName = source.getGroupName().toString();
+        groupName = source.getGroup().getGroupName().toString();
     }
 
     /**
@@ -67,7 +67,7 @@ class JsonAdaptedStudent {
         if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
             throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final TelegramHandle telegramHandle = new TelegramHandle(this.telegramHandle);
+        final TelegramHandle modelTelegramHandle = new TelegramHandle(this.telegramHandle);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -81,10 +81,11 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 GroupName.class.getSimpleName()));
         }
-        // TODO: check if groupName is valid zhi hao :)
+
         final GroupName modelGroupName = new GroupName(groupName);
 
-        // TODO ZHI HAO :)
-        return new Student(modelName, telegramHandle, modelEmail, new Group(modelGroupName, new Description("peepee")));
+        // TODO Cannot retrieve groups from model until group saving/loading is implemented
+        return new Student(modelName, modelTelegramHandle, modelEmail, new Group(modelGroupName,
+                new Description("peepee")));
     }
 }

@@ -4,9 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 
 /**
  * Represents a Student in the address book.
@@ -49,15 +47,6 @@ public class Student {
         return group;
     }
 
-    // TODO zhi hao pls check if can remove thx :)
-    public GroupName getGroupName() {
-        return group.getGroupName();
-    }
-
-    public Description getGroupDescription() {
-        return group.getDescription();
-    }
-
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
@@ -89,7 +78,7 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getTelegramHandle().equals(getTelegramHandle())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getGroupName().equals(getGroupName());
+                && otherStudent.getGroup().equals(getGroup());
     }
 
     @Override
@@ -106,8 +95,8 @@ public class Student {
                 .append(getTelegramHandle())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; GroupName")
-                .append(getGroupName());
+                .append("; Group: ")
+                .append(getGroup());
 
         return builder.toString();
     }

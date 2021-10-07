@@ -18,7 +18,6 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
     public static final String DEFAULT_DESCRIPTION = "software eng mod";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private TelegramHandle telegramHandle;
@@ -82,7 +81,7 @@ public class StudentBuilder {
      * @return built student
      */
     public Student build() {
-        // TODO zhi hao
+        // TODO Double confirm, do we need to load a group from the model for this testUtil method/class?
         return new Student(name, telegramHandle, email, group);
     }
 

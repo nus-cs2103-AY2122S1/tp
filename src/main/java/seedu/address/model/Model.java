@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 
 /**
@@ -85,4 +86,39 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    boolean hasGroup(Group group);
+
+    ///**
+    // * Deletes the given group.
+    // * The group must exist in the address book.
+    // */
+    // void deleteGroup(Group target); //TODO to implement in 1.2b
+
+    ///**
+    // * Adds the given group.
+    // * {@code group} must not already exist in the address book.
+    // */
+    // void addGroup(Group group); //TODO to implement in 1.2b
+
+    ///**
+    // * Replaces the given group {@code target} with {@code editedGroup}.
+    // * {@code target} must exist in the address book.
+    // * The group identity of {@code editedGroup} must not be the same as another existing group in the address
+    // * book.
+    // */
+    // void setGroup(Group target, Group editedGroup); //TODO to implement in 1.2b
+
+    /** Returns an unmodifiable view of the filtered group list */
+    ObservableList<Group> getFilteredGroupList(); //TODO to implement in 1.2b
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate); //TODO to implement in 1.2b
 }
