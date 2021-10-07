@@ -460,38 +460,47 @@ Preconditions: There is at least one student added to TutorAid.
 
 **MSS**
 
-1.  User views list of students
-2.  User identifies the student index to update payment record
-3.  User updates payment for student
-4.  TutorAid successfully updates the payment for a student corresponding to the given index number.
+1. Tutor requests to view the list of his/her students
+2. TutorAid shows the list of students, including each student's index number
+3. Tutor identifies the student index to update his/her payment status
+4. Tutor requests to update payment status for the student
+5. TutorAid successfully updates the payment status for the student corresponding to the given index number, and
+   displays a message to indicate this
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Invalid list command syntax
+* 1a. TutorAid detects an error in the list command
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. User re-enters the command.
 
-      Steps 1a1-1a2 are repeated until the syntax entered is correct.
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+      
       Use case resumes from step 2.
 
-* 3a. Invalid paid/unpaid command syntax
+* 4a. TutorAid detects a wrongly formatted command to update payment status of a student
 
-    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 3a2. User re-enters the command
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
 
-      Steps 3a1 - 3a2 are repeated until a valid syntax is given
-      Use case resumes from step 4
+    * 4a2. Tutor re-enters the command with a revised format.
 
-* 3b. The given student index is invalid
+      Steps 4a1-4a2 are repeated until the command entered is correct.
 
-    * 3b1. TutorAid shows an error message
-    * 3b2. User enters a new index with paid/unpaid command
+      Use case resumes from step 5.
 
-      Steps 3a1 - 3a2 are repeated until a valid index is given
-      Use case resumes from step 4
+* 4b. TutorAid detects an invalid student index number
+      (e.g. a negative index number, a non-integer index number, a non-existent index number)
+
+    * 4b1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
+    * 4b2. User re-enters the command with another student index number.
+
+      Steps 4b1-4b2 are repeated until the command entered is correct.
+
+      Use case resumes from step 5.
 
 **Use case 6: View a student's details**
 
@@ -621,10 +630,11 @@ Preconditions: There is at least one student added to TutorAid.
 
 **MSS**
 
-1.  Tutor views the list of his/her students
-2.  Tutor identifies that all students have made payment for the month
-3.  Tutor keys in the reset payment command to set all student payments as unpaid
-4.  Tutor successfully resets payment for all students
+1. Tutor requests to view the list of his/her students
+2. TutorAid shows the list of students, including each student's index number
+3. Tutor identifies that all students have made payment for the month, and the month has ended
+4. Tutor keys in the reset payment command to set all student payments as unpaid
+5. Tutor successfully resets payment for all students
 
     Use case ends.
 
@@ -633,17 +643,21 @@ Preconditions: There is at least one student added to TutorAid.
 * 1a. TutorAid detects an error in the list command
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 1a2. User re-enters the command.
 
-      Steps 1a1-1a2 are repeated until the data entered are correct.
+    * 1a2. Tutor re-enters the command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
       Use case resumes from step 2.
 
-* 3a. TutorAid detects an error in the reset payment command
+* 4a. TutorAid detects an error in the reset payment command
 
-    * 3a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-    * 3a2. User re-enters the command.
+    * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+  
+    * 4a2. Tutor re-enters the command.
 
-      Steps 3a1-3a2 are repeated until the data entered are correct.
+      Steps 4a1-4a2 are repeated until the data entered are correct.
+      
       Use case resumes from step 4.
 
 **Use Case 11: View upcoming milestones for all students**
@@ -681,9 +695,11 @@ Preconditions: There is at least one student added to TutorAid.
 * 1a. TutorAid detects an error in the view income command
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
+
     * 1a2. User re-enters the command.
 
       Steps 1a1-1a2 are repeated until the data entered are correct.
+      
       Use case resumes from step 2.
 
 **Use case 13: Set up a recurring class**
