@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -7,9 +8,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
+import seedu.address.model.tag.Tag;
 
 /**
- * Controller for a help page
+ * Controller for a student display page
  */
 public class StudentWindow extends UiPart<Stage> {
 
@@ -33,10 +35,13 @@ public class StudentWindow extends UiPart<Stage> {
     @FXML
     private Label studentPhone;
 
+    @FXML
+    private Label studentTags;
+
     /**
-     * Creates a new HelpWindow.
+     * Creates a new StudentWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the StudentWindow.
      */
     public StudentWindow(Stage root) {
         super(FXML, root);
@@ -51,7 +56,7 @@ public class StudentWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the student window.
      * @throws IllegalStateException
      * <ul>
      *     <li>
@@ -74,26 +79,32 @@ public class StudentWindow extends UiPart<Stage> {
         studentAddress.setText(student.getAddress().toString());
         studentEmail.setText(student.getEmail().toString());
         studentPhone.setText(student.getPhone().toString());
+        Object[] tags = student.getTags().toArray();
+        String tagList = "";
+        for (int i = 0; i < tags.length; i++) {
+            tagList += tags[i];
+        }
+        studentTags.setText(tagList);
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the student window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the student window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the student window.
      */
     public void focus() {
         getRoot().requestFocus();
