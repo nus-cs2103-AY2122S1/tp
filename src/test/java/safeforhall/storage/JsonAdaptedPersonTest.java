@@ -12,6 +12,7 @@ import safeforhall.model.person.Email;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;
 
+// TODO: Add all test cases for new fields
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";

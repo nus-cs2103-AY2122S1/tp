@@ -123,7 +123,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Vaccinated: ")
-                .append(getVaccStatus());
+                .append(getVaccStatus())
+                .append("; Faculty: ")
+                .append(getFaculty());
 
         return builder.toString();
     }

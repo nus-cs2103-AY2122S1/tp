@@ -41,6 +41,7 @@ public class AddressBookTest {
         assertEquals(newData, addressBook);
     }
 
+    // TODO: Fix testcase
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
