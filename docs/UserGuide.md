@@ -106,7 +106,7 @@ Examples:
 ### Batch importing contacts: `import`
 
 Imports all contacts from a selected _csv_ file. Calling the command will open a file browser to help select the file.
-
+  
 Format: `import`
 
 Example:
@@ -114,8 +114,22 @@ Example:
 ![import window](images/importWindow.png)
 
 - Select Contacts.csv file
-- click open to import contacts
+- Click open to import contacts
 
+Note:  
+- _csv_ file must have corresponding **headers**
+  - name
+  - phone
+  - email
+  - address
+  - tags(optional)
+- Addresses containing **commas** should be wrapped in **doublequotes**
+- Multiple tags should be seperated via **single whitespace**
+- When converting frome excel make sure to save as **CSV** and not **CSV UTF-8**
+- A template `importTemplate.csv` can be found in the default directory of the file browser
+  
+
+  
 ### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
