@@ -7,7 +7,7 @@ public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Student ID should start with A, have 7 numbers and end with a letter";
-    public static final String VALIDATION_REGEX = "^[A]\\d{7}[a-zA-z]$";
+    public static final String VALIDATION_REGEX = "^[aA]\\d{7}[a-zA-z]$";
     public final String value;
 
 
@@ -19,7 +19,7 @@ public class StudentId {
     public StudentId(String studentId) {
         requireNonNull(studentId);
         checkArgument(isValidId(studentId), MESSAGE_CONSTRAINTS);
-        value = studentId;
+        value = studentId.toUpperCase();
     }
 
     /**

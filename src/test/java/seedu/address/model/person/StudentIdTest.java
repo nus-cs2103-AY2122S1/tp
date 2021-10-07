@@ -35,5 +35,9 @@ public class StudentIdTest {
         // valid Student IDs
         assertTrue(StudentId.isValidId("A0123456Z")); // exactly 9 characters
         assertTrue(StudentId.isValidId("A1234567A")); // can have different last letter
+        assertTrue(StudentId.isValidId("a1234567A")); // first letter is not capitalised
+        assertTrue(StudentId.isValidId("a1234567b")); // neither first nor last letter are capitalised
+        assertTrue(StudentId.isValidId("A1234567b")); // last letter is not capitalised
+
     }
 }
