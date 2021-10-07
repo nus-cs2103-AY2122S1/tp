@@ -14,7 +14,7 @@ import seedu.unify.logic.parser.AddressBookParser;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.Model;
 import seedu.unify.model.ReadOnlyAddressBook;
-import seedu.unify.model.task.Person;
+import seedu.unify.model.task.Task;
 import seedu.unify.storage.Storage;
 
 /**
@@ -60,8 +60,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 
     @Override

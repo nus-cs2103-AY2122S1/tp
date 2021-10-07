@@ -9,7 +9,7 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
-import seedu.unify.model.task.Person;
+import seedu.unify.model.task.Task;
 
 /**
  * Adds a task to the address book.
@@ -34,27 +34,27 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
-    private final Person toAdd;
+    private final Task toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Task}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Task task) {
+        requireNonNull(task);
+        toAdd = task;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasTask(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        model.addPerson(toAdd);
+        model.addTask(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
