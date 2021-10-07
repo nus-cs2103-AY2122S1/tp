@@ -3,30 +3,37 @@
   "items" : [ {
     "name" : "Apple Pie",
     "id" : "#222222",
+    "count": 5,
     "tagged" : [ "baked" ]
   }, {
     "name" : "Banana Muffin",
     "id" : "#333333",
+    "count": 5,
     "tagged" : [ "baked", "bestseller" ]
   }, {
     "name" : "Chocolate Chip Cookie",
     "id" : "#444444",
+    "count": 5,
     "tagged" : [ "baked" ]
   }, {
     "name" : "Dalgona Coffee",
     "id" : "#555555",
+    "count": 5,
     "tagged" : [ ]
   }, {
     "name" : "Egg Nog",
     "id" : "#666666",
+    "count": 5,
     "tagged" : [ ]
   }, {
     "name" : "Forest Cake",
     "id" : "#777777",
+    "count": 5,
     "tagged" : [ ]
   }, {
     "name" : "Granola Bar",
     "phone" : "#888888",
+    "count": 5,
     "tagged" : [ ]
   } ]
 }

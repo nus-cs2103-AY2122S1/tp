@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,14 +21,17 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ID + "ID "
+            + PREFIX_COUNT + "COUNT "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Banana Bread "
             + PREFIX_ID + "#019381 "
+            + PREFIX_COUNT + "10 "
             + PREFIX_TAG + "baked "
             + PREFIX_TAG + "popular";
 
     public static final String MESSAGE_SUCCESS = "New item added: %1$s";
+    public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %1$s";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory";
 
     private final Item toAdd;
@@ -45,9 +49,14 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasItem(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
-        }
+            // throw new CommandException(MESSAGE_DUPLICATE_ITEM);
+            Item inInventory = model.getItemWithName(toAdd.getName().toString());
+            toAdd.replenishItem(inInventory.getCount());
+            // TODO: HASN'T ACCOUNTED IF ID IS DIFF
+            model.setItem(inInventory, toAdd);
 
+            return new CommandResult(String.format(MESSAGE_SUCCESS_REPLENISH, toAdd));
+        }
         model.addItem(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

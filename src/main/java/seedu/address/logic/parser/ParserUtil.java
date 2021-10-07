@@ -73,4 +73,8 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static Integer parseCount(String s) {
+        return Integer.parseInt(s);
+    }
 }

@@ -148,4 +148,10 @@ public class ModelManager implements Model {
                 && filteredItems.equals(other.filteredItems);
     }
 
+    @Override
+    public Item getItemWithName(String name) {
+        requireNonNull(name);
+        return inventory.getItemWithName(name);
+    }
+
 }
