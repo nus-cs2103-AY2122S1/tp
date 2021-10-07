@@ -9,6 +9,9 @@ import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 import static seedu.plannermd.testutil.patient.TypicalPatients.CARL;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ELLE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
+//import static seedu.plannermd.testutil.patient.TypicalPatients.CARL;
+//import static seedu.plannermd.testutil.patient.TypicalPatients.ELLE;
+//import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,7 +25,8 @@ import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindPatientCommand}.
+ * Contains integration tests (interaction with the Model) for
+ * {@code FindPatientCommand}.
  */
 public class FindPatientCommandTest {
     private Model model = new ModelManager(getTypicalPlannerMd(), new UserPrefs());
@@ -30,10 +34,10 @@ public class FindPatientCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(
+                Collections.singletonList("first"));
+        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(
+                Collections.singletonList("second"));
 
         FindPatientCommand findFirstCommand = new FindPatientCommand(firstPredicate);
         FindPatientCommand findSecondCommand = new FindPatientCommand(secondPredicate);

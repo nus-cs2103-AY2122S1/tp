@@ -199,5 +199,4 @@ public class AddPatientCommandTest {
             return new PlannerMd();
         }
     }
-
 }

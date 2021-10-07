@@ -2,6 +2,7 @@ package seedu.plannermd.logic.commands.editcommand;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,6 +25,7 @@ import seedu.plannermd.model.Model;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
@@ -38,16 +40,10 @@ public class EditPatientCommand extends EditCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
             + "by the index number used in the displayed patient list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]..."
-            + "[" + PREFIX_RISK + "RISK]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE
+            + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_BIRTH_DATE
+            + "BIRTH_DATE] " + "[" + PREFIX_TAG + "TAG]..." + "[" + PREFIX_RISK + "RISK]\n" + "Example: "
+            + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -57,7 +53,8 @@ public class EditPatientCommand extends EditCommand {
     private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to
+     *                              edit
      * @param editPatientDescriptor details to edit the person with
      */
     public EditPatientCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
@@ -90,8 +87,8 @@ public class EditPatientCommand extends EditCommand {
     }
 
     /**
-     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
-     * edited with {@code editPatientDescriptor}.
+     * Creates and returns a {@code Patient} with the details of
+     * {@code patientToEdit} edited with {@code editPatientDescriptor}.
      */
     private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
         assert patientToEdit != null;
@@ -100,12 +97,13 @@ public class EditPatientCommand extends EditCommand {
         Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
         Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        Remark updatedRemark = patientToEdit.getRemark();
+        BirthDate updatedBirthDate = editPatientDescriptor.getBirthDate().orElse(patientToEdit.getBirthDate());
         Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
         Risk updatedRisk = editPatientDescriptor.getRisk().orElse(patientToEdit.getRisk());
+        Remark updatedRemark = patientToEdit.getRemark();
 
-        return new Patient(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedRemark, updatedTags, updatedRisk);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthDate, updatedRemark,
+                updatedTags, updatedRisk);
     }
 
     @Override
@@ -122,28 +120,28 @@ public class EditPatientCommand extends EditCommand {
 
         // state check
         EditPatientCommand e = (EditPatientCommand) other;
-        return index.equals(e.index)
-                && editPatientDescriptor.equals(e.editPatientDescriptor);
+        return index.equals(e.index) && editPatientDescriptor.equals(e.editPatientDescriptor);
     }
 
     /**
-     * Stores the details to edit the patient with. Each non-empty field value will replace the
-     * corresponding field value of the patient.
+     * Stores the details to edit the patient with. Each non-empty field value will
+     * replace the corresponding field value of the patient.
      */
     public static class EditPatientDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
+        private BirthDate birthDate;
         private Remark remark;
         private Set<Tag> tags;
         private Risk risk;
 
-        public EditPatientDescriptor() {}
+        public EditPatientDescriptor() {
+        }
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copy constructor. A defensive copy of {@code tags} is used internally.
          */
         public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setName(toCopy.name);
@@ -152,6 +150,7 @@ public class EditPatientCommand extends EditCommand {
             setAddress(toCopy.address);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
+            setBirthDate(toCopy.birthDate);
             setRisk(toCopy.risk);
         }
 
@@ -194,6 +193,14 @@ public class EditPatientCommand extends EditCommand {
             return Optional.ofNullable(address);
         }
 
+        public void setBirthDate(BirthDate birthDate) {
+            this.birthDate = birthDate;
+        }
+
+        public Optional<BirthDate> getBirthDate() {
+            return Optional.ofNullable(birthDate);
+        }
+
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
@@ -203,17 +210,17 @@ public class EditPatientCommand extends EditCommand {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tags} to this object's {@code tags}. A defensive copy of
+         * {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException} if modification is attempted. Returns
+         * {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
@@ -242,12 +249,9 @@ public class EditPatientCommand extends EditCommand {
             // state check
             EditPatientDescriptor e = (EditPatientDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getRemark().equals(e.getRemark())
-                    && getTags().equals(e.getTags())
+            return getName().equals(e.getName()) && getPhone().equals(e.getPhone()) && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress()) && getBirthDate().equals(e.getBirthDate())
+                    && getRemark().equals(e.getRemark()) && getTags().equals(e.getTags())
                     && getRisk().equals(e.getRisk());
         }
     }

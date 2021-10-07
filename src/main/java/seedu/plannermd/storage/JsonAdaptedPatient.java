@@ -22,11 +22,10 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("remark") String remark,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                              @JsonProperty("risk") String risk) {
-        super(name, phone, email, address, remark, tagged);
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("birthDate") String birthDate, @JsonProperty("remark") String remark,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("risk") String risk) {
+        super(name, phone, email, address, birthDate, remark, tagged);
         this.risk = risk;
     }
 
@@ -39,9 +38,11 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted patient object into the model's {@code Patient} object.
+     * Converts this Jackson-friendly adapted patient object into the model's
+     * {@code Patient} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted patient.
      */
     @Override
     public Patient toModelType() throws IllegalValueException {
@@ -55,8 +56,8 @@ class JsonAdaptedPatient extends JsonAdaptedPerson {
         }
         final Risk modelRisk = Risk.getUnclassifiableRisk(risk);
 
-        return new Patient(person.getName(), person.getPhone(),
-                person.getEmail(), person.getAddress(), person.getRemark(), person.getTags(), modelRisk);
+        return new Patient(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
+                person.getBirthDate(), person.getRemark(), person.getTags(), modelRisk);
     }
 
 }

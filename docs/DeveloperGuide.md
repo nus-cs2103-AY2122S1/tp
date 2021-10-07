@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
   Use case ends.
 
-**Use case: Adding a risk profile tag to a patient (Coming soon)**
+**Use case: Adding a risk profile to a patient (Coming soon)**
 
 **MSS**
 
@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Editing the risk profile tag of a patient (Coming soon)**
+**Use case: Editing the risk profile of a patient (Coming soon)**
 
 **MSS**
 
@@ -371,7 +371,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
-
 
 **Use case: Adding a tag to a patient**
 
@@ -506,6 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI**: Graphical User Interface
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Patient**: The individual that visits the clinic
+* **Personal details** personal information including a name, contact number, email, address, date of birth, whatever tags the receptionist gives
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Risk profile**: The health status and severity of the condition of a patient
 * **Tag**: A label attached to a patient for easy identification or providing additional information
