@@ -66,9 +66,9 @@ class JsonAdaptedMember {
      */
 
     public Member toModelType() throws IllegalValueException {
-        final List<Position> personPositions = new ArrayList<>();
+        final List<Position> memberPositions = new ArrayList<>();
         for (JsonAdaptedPosition tag : attachedPositions) {
-            personPositions.add(tag.toModelType());
+            memberPositions.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -103,7 +103,7 @@ class JsonAdaptedMember {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Position> modelPositions = new HashSet<>(personPositions);
+        final Set<Position> modelPositions = new HashSet<>(memberPositions);
         return new Member(modelName, modelPhone, modelEmail, modelAddress, modelPositions);
     }
 

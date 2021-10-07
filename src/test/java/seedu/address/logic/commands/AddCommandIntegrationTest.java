@@ -39,7 +39,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member memberInList = model.getAddressBook().getMemberList().get(0);
-        assertCommandFailure(new AddCommand(memberInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddCommand(memberInList), model, AddCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
 }
