@@ -70,6 +70,35 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} based on {@code getTypicalPersons()} but which has no tags.
+     *
+     * @return Model containing tag-free contacts
+     */
+    public static AddressBook getNoTagTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            person = new PersonBuilder(person).withTags().build();
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} based on {@code getTypicalPersons()} but with the specified tags.
+     *
+     * @param tags tags to give every contact in the model
+     * @return Model containing all contacts with the specified tags
+     */
+    public static AddressBook getTaggedTypicalAddressBook(String ... tags) {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            person = new PersonBuilder(person).withTags(tags).build();
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
