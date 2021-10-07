@@ -19,11 +19,11 @@ import seedu.address.logic.commands.FilterEventCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ShowParticipantsCommand;
 import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.RemoveEventCommand;
 import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
 import seedu.address.logic.commands.ShowEventDetailsCommand;
+import seedu.address.logic.commands.ShowEventParticipantsCommand;
 import seedu.address.logic.commands.SortEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -107,8 +107,8 @@ public class AddressBookParser {
         case ShowEventDetailsCommand.COMMAND_WORD:
             return new ShowEventDetailsCommandParser().parse(arguments);
 
-        case ShowParticipantsCommand.COMMAND_WORD:
-            return new ShowParticipantsCommandParser().parse(arguments);
+        case ShowEventParticipantsCommand.COMMAND_WORD:
+            return new ShowEventParticipantsCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

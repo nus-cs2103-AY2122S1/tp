@@ -17,7 +17,7 @@ import seedu.address.model.participant.Participant;
 /**
  * Shows a list of participants of an existing Event in the Managera Event list.
  */
-public class ShowParticipantsCommand extends Command {
+public class ShowEventParticipantsCommand extends Command {
 
     public static final String COMMAND_WORD = "showParticipants";
 
@@ -31,7 +31,7 @@ public class ShowParticipantsCommand extends Command {
     /**
      * Creates an ShowParticipantsCommand to find Event with the specified {@code eventName}
      */
-    public ShowParticipantsCommand(Predicate<Event> eventName) {
+    public ShowEventParticipantsCommand(Predicate<Event> eventName) {
         requireNonNull(eventName);
         this.eventName = eventName;
     }
@@ -39,7 +39,7 @@ public class ShowParticipantsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Event> filteredEventList = model.getEventList().filtered(eventName);
+        FilteredList<Event> filteredEventList = model.getFilteredEventList().filtered(eventName);
 
         if (filteredEventList.size() == 0) {
             throw new CommandException(Messages.MESSAGE_EVENT_NOT_FOUND);
@@ -61,8 +61,8 @@ public class ShowParticipantsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ShowParticipantsCommand // instanceof handles nulls
-                && eventName.equals(((ShowParticipantsCommand) other).eventName)); // state check
+                || (other instanceof ShowEventParticipantsCommand // instanceof handles nulls
+                && eventName.equals(((ShowEventParticipantsCommand) other).eventName)); // state check
     }
 }
 
