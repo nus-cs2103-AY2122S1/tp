@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the 
+(For all use cases below, the **System** is the `ProgrammerError` and the **Actor** is the
 `CS2100 Teaching Assistant (CS2100 TA in short)`, unless specified otherwise)
 
 **Use case: UC1 Purge/Delete all sample student records**
@@ -328,9 +328,9 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 2.  ProgrammerError shows a list of sample student records
 3.  CS2100 TA requests to purge sample student records
 4.  ProgrammerError deletes all sample student records
-    
+
     Use case ends.
-    
+
 
 **Use case: UC2 Create a student record**
 
@@ -347,9 +347,13 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 
 **Extensions**
 
-* 2a. The student details given are incomplete
+* 2a. The list is empty.
 
-    * 2a1. ProgrammerError shows an error message.
+  Use case ends.
+
+* 5a. The student details given are incomplete.
+
+    * 5a1. ProgrammerError shows an error message.
 
       Use case resumes at step 2.
 
@@ -360,7 +364,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 1.  CS2100 TA requests to list student records
 2.  ProgrammerError shows a list of student records
 3.  CS2100 TA requests to view a specific student record
-4.  ProgrammerError shows the student record's details 
+4.  ProgrammerError shows the student record's details
 
     Use case ends.
 
@@ -371,8 +375,9 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
   Use case ends.
 
 * 3a. The given index is invalid.
+
     * 3a1. ProgrammerError shows an error message.
-    
+
       Use case resumes at step 2.
 
 **Use case: UC4 Delete a student record**
@@ -438,7 +443,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 1.  CS2100 TA creates (UC2) / views (UC3) / delete (UC4) / update (UC5) a student record
 2.  ProgrammerError automatically save the changed student records to hard disk
 3.  CS2100 TA restarts the application
-4.  ProgrammerError shows the saved data 
+4.  ProgrammerError shows the saved data
 
     Use case ends.
 
@@ -453,15 +458,8 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 5.  No DBMS should be used to store data.
 6.  The software should follow the Object-oriented paradigm primarily. (with the possibility of allowing a mix of other styles when justifiable).
 7.  The final product should be a result of evolving the given code base. (i.e. allowed to replace all existing code with new code, as long as it is done incrementally)
-8.  The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for:
-
-- standard screen resolutions 1920x1080 and higher
-- screen scales 100% and 125%
-
-9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for:
-
-- resolutions 1280x720 and higher
-- screen scales 150%
+8.  The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
+9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher, and screen scales 150%.
 
 ### Glossary
 
