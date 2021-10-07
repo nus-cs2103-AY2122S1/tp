@@ -6,6 +6,10 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "role" : "Preschool Teacher",
+    "employmentType": "Full time",
+    "expectedSalary" : "2500",
+    "levelOfEducation" : "PhD",
+    "experience" : 0,
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,13 +17,21 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "role" : "Doctor",
+    "employmentType": "Part time",
+    "expectedSalary" : "2700",
+    "levelOfEducation" : "Masters",
+    "experience" : 1,
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
+    "address": "wall street",
     "role" : "Electrical Engineer",
+    "employmentType": "Temporary",
+    "expectedSalary" : "5500",
+    "levelOfEducation" : "Elementary",
+    "experience" : 2,
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +39,10 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "role" : "Sales Assistant",
+    "employmentType": "Internship",
+    "expectedSalary" : "3500",
+    "levelOfEducation" : "Middle School",
+    "experience" : 3,
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +50,10 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "role" : "Toilet Cleaner",
+    "employmentType": "Full time",
+    "expectedSalary" : "5700",
+    "levelOfEducation" : "Bachelors",
+    "experience" : 4,
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +61,10 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "role" : "NTUC Cashier",
+    "employmentType": "Part time",
+    "expectedSalary" : "1900",
+    "levelOfEducation" : "High School",
+    "experience" : 5,
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +72,10 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "role" : "Waiter",
+    "employmentType": "Internship",
+    "expectedSalary" : "900",
+    "levelOfEducation" : "University",
+    "experience" : 6,
     "tagged" : [ ]
   } ]
 }

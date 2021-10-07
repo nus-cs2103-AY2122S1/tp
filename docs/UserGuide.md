@@ -8,7 +8,7 @@ title: User Guide
 RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimized for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -25,16 +25,16 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
+    
+    * **`list`** : Lists all applicants.
+    
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to RecruitIn.
+   
+    * **`find`**`n/John Mary` : Finds all applicants with either `John` or `Mary` as values for name prefix.
 
-   * **`list`** : Lists all applicants.
+    * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to RecruitIn.
-
-   * **`find`**`n/John Mary` : Finds all applicants with either `John` or `Mary` as values for name prefix.
-
-   * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
-
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -79,10 +79,10 @@ Format: `help`
 
 Adds an applicant to RecruitIn.
 
-Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE et/EMPLOYMENT_TYPE [t/TAG]​`
+Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG]​`
 
 Examples:
-* `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering s/4000 l/High School y/2 et/Full time`
+* `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering et/Full time s/4000 l/High School y/2`
 
 ### Listing all applicants : `list`
 
@@ -94,7 +94,7 @@ Format: `list`
 
 Finds applicants by specific prefixes.
 
-Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [et/EMPLOYMENT_TYPE] [t/TAG]`
+Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]`
 
 * Find command must take at least 1 prefix input.
 * Find command can only take 1 input for each prefix.
@@ -104,7 +104,7 @@ Examples:
 * `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
 * `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
-* `find n/Bob p/87654321 e/bob@gmail.com  a/Chinatown r/Software Engineering s/4000 l/High School y/2 et/Full time`
+* `find n/Bob p/87654321 e/bob@gmail.com  a/Chinatown r/Software Engineering et/Full time s/4000 l/High School y/2`
 
 ### Deleting an applicant : `delete`
 
@@ -131,9 +131,7 @@ Format: `exit`
 ### Saving the data
 
 RecruitIn data is saved to the hard disk whenever there is a command that edits, updates or adds data.
-There is no need to save data manually with a command. Data also automatically loads when the 
-application runs.
-
+There is no need to save data manually with a command. Data also automatically loads when the application runs.
 
 ### Editing the data file
 
@@ -147,7 +145,11 @@ Example of format of data for one applicant in applicants:
  "name" : "Alice Yeoh",
  "phone" : "87438807",
  "email" : "alexyeoh@example.com",
- "preferred sector" : "Software Engineering",
+ "role" : "Software Engineering",
+ "employmentType" : "Full time",  
+ "expectedSalary" : "3600",
+ "education" : "High School",
+ "experience" : "2",
  "tagged" : [ ]
 }]
 ```
@@ -168,8 +170,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE et/EMPLOYMENT_TYPE [t/TAG]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering s/4000 l/High School y/2 et/Full time t/friend`
+**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend`
 **List** | `list`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [et/EMPLOYMENT_TYPE] [t/TAG]`<br> e.g., `find n/John Mary`
+**Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG]`<br> e.g., `find n/John Mary`
 **Help** | `help`

@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmploymentType;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.Experience;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -38,6 +42,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setRole(person.getRole());
+        descriptor.setEmploymentType(person.getEmploymentType());
+        descriptor.setExpectedSalary(person.getExpectedSalary());
+        descriptor.setLevelOfEducation(person.getLevelOfEducation());
+        descriptor.setExperience(person.getExperience());
         descriptor.setTags(person.getTags());
     }
 
@@ -78,6 +86,38 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withRole(String role) {
         descriptor.setRole(new Role(role));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmploymentType} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEmploymentType(String employmentType) {
+        descriptor.setEmploymentType(new EmploymentType(employmentType));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ExpectedSalary} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExpectedSalary(String expectedSalary) {
+        descriptor.setExpectedSalary(new ExpectedSalary(expectedSalary));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Level of Education} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLevelOfEducation(String levelOfEducation) {
+        descriptor.setLevelOfEducation(new LevelOfEducation(levelOfEducation));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Experience} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withExperience(Integer experience) {
+        descriptor.setExperience(new Experience(experience));
         return this;
     }
 

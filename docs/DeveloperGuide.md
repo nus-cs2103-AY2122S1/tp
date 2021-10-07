@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -262,13 +262,13 @@ A recruiter that
 * prefer desktop apps over other types
 * is reasonably comfortable using CLI apps
 * has a need to manage a significant number of applications
-* works for a company that gets applications for variety of roles 
+* works for a company that gets applications for variety of roles
 * has a need to filter and categorise applicants by different fields
 
 
-**Value proposition**: 
+**Value proposition**:
 
-It can be hard for recruiters to keep track of the plethora of clients with different skill sets, availability 
+It can be hard for recruiters to keep track of the plethora of clients with different skill sets, availability
 and experience.
 
 This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates
@@ -279,16 +279,21 @@ they have in mind. Recruiters can manage contacts faster than a typical mouse/GU
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | user                                       | save applicant data            | refer to it in the future without having to type in their data again   |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add an applicant               | update my list of applicants with new people                           |
-| `* * *`  | user                                       | list all applicants            | keep track of all my applicants                                        |
-| `* * *`  | user                                       | find applicants by their applied roles | so I can filter out applicants applying for a specific role   |
-| `* * *`  | user                                       | find applicants by their expected salary | so I can filter out applicants that match the salary range of the hiring company.   |
-| `* * *`  | user                                       | Find applicants by highest level of education | So I can filter out applicants that match the desired highest level of education  |
-| `* * *`  | user                                       | Find applicants by years of experience  | So that I can filter out applicants with desired years of experience    |
+| Priority | As a …​                                    | I want to …​                            | So that I can…​                                                        |
+| -------- | ------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                        | refer to instructions when I forget how to use the App                    |
+| `* * *`  | user                                       | list all applicants                           | keep track of all my applicants                                           |
+| `* * *`  | user                                       | add an applicant                              | update my list of applicants with new people                              |
+| `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need                                        |
+| `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
+| `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
+| `* * *`  | user                                       | find applicants by their email                | locate details of applicants without having to go through the entire list |
+| `* * *`  | user                                       | find applicants by their applied roles        | filter out applicants applying for a specific role                        |
+| `* * *`  | user                                       | find applicants by their employment type      | filter out applicants that match the desired employment type              |
+| `* * *`  | user                                       | find applicants by their expected salary      | filter out applicants that match the salary range of the hiring company   |
+| `* * *`  | user                                       | find applicants by their level of education   | filter out applicants that match the desired highest level of education   |
+| `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants with desired years of experience                    |
+| `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
 
 
 *{More to be added}*
@@ -312,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User cancels request for help.
 
   Use case ends.
-  
+
 **Use case: UC02 - List all applicants**
 
 **MSS**
@@ -335,8 +340,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The input format is invalid.
     * 1a1. RecruitIn shows an error message.
-      
-      Use case resumes at step 1. 
+
+      Use case resumes at step 1.
 
 **Use case: UC04 - Delete an applicant**
 
@@ -348,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  RecruitIn deletes the applicant.
 
     Use case ends.
-    
+
 **Extensions**
 
 * 1a. User requests to <u>find applicant (UC05)</u>
@@ -358,11 +363,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list of applicants is empty.
 
   Use case ends.
-    
+
 * 3a. The delete command is invalid.
-
     * 3a1. RecruitIn shows an error message.
-
+    
       Use case resumes at step 2.
 
 **Use case: UC05 - Finding an applicant**
@@ -397,6 +401,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Applicant**: Represents a person that is searching for a job
+* **Applied Role**: Represents the job a person is applying for
+* **Employment Type**: Represents how the applicant will be paid, e.g. Full time, Part time
+* **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
+* **Level of Education**: Represents the highest level of education the applicant has
+* **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -413,15 +422,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -430,16 +439,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -447,6 +456,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_

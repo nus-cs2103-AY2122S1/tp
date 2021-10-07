@@ -17,10 +17,11 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
+            + "the specified keywords (case-insensitive) under their respected prefixes, "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: PREFIX/KEYWORDS [MORE_PREFIXES/MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " n/alice bob charlie a/serangoon";
 
     private final ArrayList<Predicate<Person>> predicates;
 
@@ -31,10 +32,10 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        Predicate<Person> combinedPredicate = predicates.get(0);
-        for (int i = 1; i < predicates.size(); i++) {
-            combinedPredicate = combinedPredicate.and(predicates.get(i));
-        }
+
+        // Accumulate the predicates via stream
+        Predicate<Person> combinedPredicate = predicates.stream().reduce(person -> true, Predicate::and);
+
         model.updateFilteredPersonList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
