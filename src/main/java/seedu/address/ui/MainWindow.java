@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+    private SideBar sideBar;
     private HelpWindow helpWindow;
 
     @FXML
@@ -46,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane sideBarPlaceHolder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -121,6 +125,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        sideBar = new SideBar();
+        sideBarPlaceHolder.getChildren().add(sideBar.getRoot());
     }
 
     /**

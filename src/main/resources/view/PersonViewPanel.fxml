@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="280.0" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="clientInfoContainer" prefHeight="240.0" prefWidth="393.0">
+         <children>
+            <Label styleClass="label-view-header" text="Client Info">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="4.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="21.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Name:" />
+                  <Label fx:id="clientName" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Client ID:" />
+                  <Label fx:id="clientId" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="363.0">
+               <children>
+                  <Label fx:id="clientCreationDate" styleClass="label-view" text="Created At:" />
+                  <Label fx:id="clientLastMet1" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Last Met:" />
+                  <Label fx:id="clientLastMet" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="363.0" styleClass="label-view">
+               <children>
+                  <Label styleClass="label-view" text="Risk Appetite:" />
+                  <Label fx:id="clientRiskAppetite" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Current Financial Plans:" />
+                  <Label fx:id="clientCurrentPlans" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Disposable Income:" />
+                  <Label fx:id="clientDisposableIncome" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Next Meeting:" />
+                  <Label fx:id="nextMeeting" styleClass="label-view" >
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="contactInfoContainer" prefHeight="244.0" prefWidth="517.0">
+         <children>
+            <Label styleClass="label-view-header" text="Contact Info">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="4.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="21.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Email Address:" />
+                  <Label fx:id="clientEmail" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="21.0" prefWidth="363.0">
+               <children>
+                  <Label styleClass="label-view" text="Contact Number:" />
+                  <Label fx:id="clientPhoneNumber" styleClass="label-view">
+                     <HBox.margin>
+                        <Insets left="4.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="8.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>
