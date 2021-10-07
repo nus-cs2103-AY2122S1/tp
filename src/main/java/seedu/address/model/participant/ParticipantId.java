@@ -62,6 +62,12 @@ public class ParticipantId {
         return idString.toString();
     }
 
+    /**
+     * Checks whether the provided ID is valid.
+     *
+     * @param id to be checked for validity.
+     * @return true if the ID is valid.
+     */
     public static boolean isValidId(String id) {
         String idName = id.replaceAll("[0-9]", "");
         String idNumber = id.replaceAll("[^\\d.]", "");
