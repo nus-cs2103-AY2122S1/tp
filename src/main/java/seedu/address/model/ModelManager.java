@@ -134,8 +134,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateSortedPersonList(boolean reverseOrder) {
-        if (reverseOrder) {
+    public void updateSortedPersonList(boolean isReverseOrder) {
+        if (isReverseOrder) {
             filteredPersons.setComparator(Comparator.reverseOrder());
         } else {
             filteredPersons.setComparator(Comparator.naturalOrder());

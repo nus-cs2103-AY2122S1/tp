@@ -85,5 +85,5 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void updateSortedPersonList(boolean reverseOrder);
+    void updateSortedPersonList(boolean isReverseOrder);
 }

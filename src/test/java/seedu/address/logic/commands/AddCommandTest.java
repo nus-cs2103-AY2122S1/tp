@@ -149,7 +149,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateSortedPersonList(boolean reverseOrder) {
+        public void updateSortedPersonList(boolean isReverseOrder) {
             throw new AssertionError("This method should not be called.");
         }
     }
