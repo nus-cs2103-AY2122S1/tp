@@ -7,10 +7,10 @@ import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -42,10 +42,10 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Anime expectedAnimeMultipleTags = new AnimeBuilder(BNHA).withTags(VALID_TAG_SUPERHERO, VALID_TAG_ACTION)
+        Anime expectedAnimeMultipleTags = new AnimeBuilder(BNHA).withTags(VALID_TAG_SUPERHERO, VALID_TAG_SHOUNEN)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BNHA
-                + TAG_DESC_ACTION + TAG_DESC_SUPERHERO, new AddCommand(expectedAnimeMultipleTags));
+                + TAG_DESC_SHOUNEN + TAG_DESC_SUPERHERO, new AddCommand(expectedAnimeMultipleTags));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC
-                + TAG_DESC_ACTION + TAG_DESC_SUPERHERO, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_SHOUNEN + TAG_DESC_SUPERHERO, Name.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BNHA
@@ -81,7 +81,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BNHA
-                + TAG_DESC_ACTION + TAG_DESC_SUPERHERO,
+                + TAG_DESC_SHOUNEN + TAG_DESC_SUPERHERO,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

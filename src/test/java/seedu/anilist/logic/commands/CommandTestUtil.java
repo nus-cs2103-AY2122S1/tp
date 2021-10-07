@@ -25,16 +25,16 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AKIRA = "Akira";
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
-    public static final String VALID_TAG_ACTION = "action";
+    public static final String VALID_TAG_SHOUNEN = "shounen";
     public static final String VALID_TAG_SUPERHERO = "superhero";
 
     public static final String NAME_DESC_AKIRA = " " + PREFIX_NAME + VALID_NAME_AKIRA;
     public static final String NAME_DESC_BNHA = " " + PREFIX_NAME + VALID_NAME_BNHA;
-    public static final String TAG_DESC_ACTION = " " + PREFIX_TAG + VALID_TAG_ACTION;
+    public static final String TAG_DESC_SHOUNEN = " " + PREFIX_TAG + VALID_TAG_SHOUNEN;
     public static final String TAG_DESC_SUPERHERO = " " + PREFIX_TAG + VALID_TAG_SUPERHERO;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Akira&"; // '&' not allowed in names
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "action*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "shounen*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -44,9 +44,9 @@ public class CommandTestUtil {
 
     static {
         DESC_AKIRA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA)
-                .withTags(VALID_TAG_ACTION).build();
+                .withTags(VALID_TAG_SHOUNEN).build();
         DESC_BNHA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA)
-                .withTags(VALID_TAG_ACTION, VALID_TAG_SUPERHERO).build();
+                .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
     }
 
     /**

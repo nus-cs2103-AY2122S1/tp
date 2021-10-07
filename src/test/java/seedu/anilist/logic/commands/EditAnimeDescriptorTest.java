@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +37,7 @@ public class EditAnimeDescriptorTest {
         assertFalse(DESC_AKIRA.equals(editedAkira));
 
         // different tags -> returns false
-        editedAkira = new EditAnimeDescriptorBuilder(DESC_AKIRA).withTags(VALID_TAG_ACTION).build();
+        editedAkira = new EditAnimeDescriptorBuilder(DESC_AKIRA).withTags(VALID_TAG_SHOUNEN).build();
         assertFalse(DESC_AKIRA.equals(editedAkira));
     }
 }

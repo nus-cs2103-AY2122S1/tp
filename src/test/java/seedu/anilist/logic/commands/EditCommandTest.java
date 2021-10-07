@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
@@ -53,10 +53,10 @@ public class EditCommandTest {
         Anime lastAnime = model.getFilteredAnimeList().get(indexLastPerson.getZeroBased());
 
         AnimeBuilder personInList = new AnimeBuilder(lastAnime);
-        Anime editedAnime = personInList.withName(VALID_NAME_BNHA).withTags(VALID_TAG_ACTION).build();
+        Anime editedAnime = personInList.withName(VALID_NAME_BNHA).withTags(VALID_TAG_SHOUNEN).build();
 
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA)
-                .withTags(VALID_TAG_ACTION).build();
+                .withTags(VALID_TAG_SHOUNEN).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);

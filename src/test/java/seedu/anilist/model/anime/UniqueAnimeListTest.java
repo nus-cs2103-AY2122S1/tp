@@ -3,7 +3,7 @@ package seedu.anilist.model.anime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnime.ALICE;
 import static seedu.anilist.testutil.TypicalAnime.BNHA;
@@ -41,7 +41,7 @@ public class UniqueAnimeListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_ACTION)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
         assertTrue(uniqueAnimeList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniqueAnimeListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_ACTION)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
         uniqueAnimeList.setAnime(ALICE, editedAlice);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();

@@ -3,7 +3,7 @@ package seedu.anilist.model.anime;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnime.ALICE;
 import static seedu.anilist.testutil.TypicalAnime.BNHA;
@@ -30,7 +30,7 @@ public class AnimeTest {
 
         // same name, all other attributes different -> returns true
         Anime editedAlice = new AnimeBuilder(ALICE)
-                .withTags(VALID_TAG_ACTION).build();
+                .withTags(VALID_TAG_SHOUNEN).build();
         assertTrue(ALICE.isSameAnime(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -70,7 +70,7 @@ public class AnimeTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_ACTION).build();
+        editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

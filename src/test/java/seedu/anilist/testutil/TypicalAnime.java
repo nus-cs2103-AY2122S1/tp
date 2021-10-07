@@ -2,7 +2,7 @@ package seedu.anilist.testutil;
 
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class TypicalAnime {
     public static final Anime AKIRA = new AnimeBuilder().withName(VALID_NAME_AKIRA)
             .withTags(VALID_TAG_SUPERHERO).build();
     public static final Anime BNHA = new AnimeBuilder().withName(VALID_NAME_BNHA)
-            .withTags(VALID_TAG_ACTION, VALID_TAG_SUPERHERO).build();
+            .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

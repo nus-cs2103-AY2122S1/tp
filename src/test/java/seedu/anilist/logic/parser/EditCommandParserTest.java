@@ -4,10 +4,10 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -67,9 +67,9 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_SUPERHERO + TAG_DESC_ACTION + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_SUPERHERO + TAG_EMPTY + TAG_DESC_ACTION, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_SUPERHERO + TAG_DESC_ACTION, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_SUPERHERO + TAG_DESC_SHOUNEN + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_SUPERHERO + TAG_EMPTY + TAG_DESC_SHOUNEN, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_SUPERHERO + TAG_DESC_SHOUNEN, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC,
@@ -79,11 +79,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_ANIME;
-        String userInput = targetIndex.getOneBased() + TAG_DESC_ACTION
+        String userInput = targetIndex.getOneBased() + TAG_DESC_SHOUNEN
                 + NAME_DESC_AKIRA + TAG_DESC_SUPERHERO;
 
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA)
-                .withTags(VALID_TAG_ACTION, VALID_TAG_SUPERHERO).build();
+                .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -109,10 +109,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_ANIME;
-        String userInput = targetIndex.getOneBased() + TAG_DESC_SUPERHERO + TAG_DESC_SUPERHERO + TAG_DESC_ACTION;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_SUPERHERO + TAG_DESC_SUPERHERO + TAG_DESC_SHOUNEN;
 
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder()
-                .withTags(VALID_TAG_SUPERHERO, VALID_TAG_ACTION)
+                .withTags(VALID_TAG_SUPERHERO, VALID_TAG_SHOUNEN)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
