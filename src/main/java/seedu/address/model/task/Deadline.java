@@ -30,6 +30,12 @@ public class Deadline {
         }
     }
 
+    /**
+     * Returns true if a given string is a valid deadline.
+     *
+     * @param test The given string.
+     * @return The validity of the string as a deadline.
+     */
     public static boolean isValidDeadline(String test) {
         try {
             LocalDate.parse(test, DATE_TIME_FORMATTER);
