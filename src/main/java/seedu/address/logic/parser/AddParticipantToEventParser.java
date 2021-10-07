@@ -16,10 +16,9 @@ public class AddParticipantToEventParser implements Parser<AddParticipantToEvent
     @Override
     public AddParticipantToEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_PARTICIPANT_ID, PREFIX_EVENT);
-
+                ArgumentTokenizer.tokenize(args, PREFIX_PARTICIPANT_ID, PREFIX_EVENT);
         if (!arePrefixesPresent(argMultimap, PREFIX_PARTICIPANT_ID, PREFIX_EVENT)
-            || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddParticipantToEventCommand.MESSAGE_USAGE));
         }

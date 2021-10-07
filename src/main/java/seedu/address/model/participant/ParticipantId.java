@@ -4,8 +4,7 @@ import java.util.Objects;
 
 public class ParticipantId {
 
-    public static final String MESSAGE_CONSTRAINTS =
-        "Participant ID should be of length 1 - 6";
+    public static final String MESSAGE_CONSTRAINTS = "Participant ID should be of length 1 - 6";
 
     private String id;
 

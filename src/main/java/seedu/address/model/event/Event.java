@@ -11,6 +11,8 @@ import seedu.address.model.participant.Participant;
  */
 public class Event implements Comparable<Event> {
 
+    public static final String COMPLETED = "Completed";
+    public static final String UNCOMPLETED = "Uncompleted";
     private boolean isDone = false;
     private ArrayList<Participant> participants = new ArrayList<>();
     private EventName eventName;
