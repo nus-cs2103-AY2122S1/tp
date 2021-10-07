@@ -1,10 +1,9 @@
 package seedu.address.model.person;
 
-
-import java.time.LocalDate;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
 
 /**
  * Represents a Person's birthday in the address book.

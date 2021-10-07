@@ -1,16 +1,20 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -119,6 +123,9 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code String birthday} into a {@code Set<Tag>}.
+     */
     public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
         String trimmedBirthday = birthday.trim();
