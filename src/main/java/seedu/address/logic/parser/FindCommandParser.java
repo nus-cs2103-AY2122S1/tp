@@ -47,6 +47,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .map(q -> getPredicate(q, PersonField.ADDRESS)).orElse(x -> true);
         Predicate<Person> tagQuery = argMultimap.getAllValues(PREFIX_TAG).stream()
                 .map(t -> getPredicate(t, PersonField.TAG)).reduce(x -> true, Predicate::and);
+
         return new FindCommand(PredicateUtil.intersection(nameQuery, phoneQuery, emailQuery, addressQuery, tagQuery));
     }
 
