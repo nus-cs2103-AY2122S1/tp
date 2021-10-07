@@ -294,12 +294,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                                          | I want to …​                                                               | So that I can…​                                                                                       |
 | -------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `* * *`  | tutor                                                               | my students’ parents' contacts                                                | update them on their children’s progress                                                                 |
+| `* * *`  | tutor                                                               | add student contacts with ease                                                | keep up with a changing list of students                                                                 |
+| `* * *`  | tutor                                                               | delete student contacts with ease                                             | keep up with a changing list of students                                                                 |
+| `* * *`  | tutor                                                               | view my students’ parents' contacts                                           | update them on their children’s progress                                                                 |
 | `* * *`  | tutor who teaches students with differing academic strengths        | update the progress of my students                                            | ensure that each student is being appropriately challenged                                               |
 | `* * *`  | caring tutor                                                        | track my students' submissions and grades                                     | study how they have doing                                                                                |
 | `* * *`  | tutor                                                               | check which student has not paid                                              | remind the student to make the payment soon                                                              |
-| `* * *`  | tutor                                                               | able to use TutorAid offline                                                  | refer to my students' details even when there is no internet connection                                  |
-| `* * *`  | tutor                                                               | add or delete student contacts and any of their related information with ease | keep up with a changing list of students                                                                 |
 | `* * *`  | tutor with many students to keep track of                           | record feedback of each student in the app after each class                   | recall any important details or information when giving feedback to parents on their child's performance |
 | `* *`    | tutor                                                               | set up a to-do list for every session                                         | record what I need to cover for every session                                                            |
 | `* *`    | tutor with many classes to keep track of                            | check my tasks for the day                                                    | refresh my memory of what needs to be done for each class                                                |
@@ -437,7 +437,7 @@ Preconditions: The student's details have been previously added to TutorAid.
 
 * 1b. The list is empty. Use case ends.
 
-* 4a. Invalid add/delete progress syntax
+* 4a. Invalid progress commands syntax
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
 
@@ -527,7 +527,7 @@ Precondition: The student's details have been added to TutorAid.
 
 1. Tutor views his schedule
 2. TutorAid displays the schedule
-3. Tutor identifies the session to add a todo list
+3. Tutor identifies the session to add a todo list for
 4. Tutor adds a todo task to that session
 5. TutorAid registers the task to the session
 6. Tutor repeats from step 4 until he/she finishes adding all the tasks
@@ -595,8 +595,8 @@ Precondition: The student's details have been added to TutorAid.
 
 1. Tutor views his schedule
 2. TutorAid displays the schedule
-3. Tutor identifies the session to check for students
-4. Tutor views the list of students in that session
+3. Tutor identifies the session for which he/she wants to check the list of students for
+4. Tutor requests the list of students for that session
 5. TutorAid displays the list of students in the session
 
    Use case ends.
