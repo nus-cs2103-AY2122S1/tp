@@ -2,8 +2,30 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
+## Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+4. [Architecture](#architecture)
+   - [UI component](#ui-component)
+   - [Logic component](#logic-component)
+   - [Model component](#model-component)
+   - [Storage component](#storage-component)
+   - [Common classes](#common-classes)
+5. [Implementation](#implementation)
+   - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+   - [[Proposed] Data archiving](#proposed-data-archiving)
+6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+7. [Appendix: Requirements](#appendix-requirements)
+   - [Product Scope](#product-scope)
+   - [User stories](#user-stories)
+   - [Use cases](#use-cases)
+   - [Non-Functional Requirements](#non-functional-requirements)
+   - [Glossary](#glossary)
+8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+   - [Launch and shutdown](#launch-and-shutdown)
+   - [Deleting a person](#deleting-a-person)
+   - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -324,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 3.
 
-* 2a. Tutor realises that they added the details wrongly
+* 2a. Tutor realises that they added the student's details wrongly
 
   * 2a1. Tutor <u>deletes the student (UC02)</u> who was just added
 
@@ -571,7 +593,7 @@ Precondition: The student's details have been added to TutorAid.
 
       Steps 1a1 - 1a2 are repeated until a valid format for the date is given.
       Use case resumes from step 2.
-      
+
 * 1b. TutorAid detects an error in the view schedule command.
 
     * 1b1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -649,9 +671,9 @@ Preconditions: There is at least one student added to TutorAid.
 2.  TutorAid shows the upcoming milestones in a chronological order
 
     Use case ends.
-    
+
 **Extensions**
-    
+
 * 1a. TutorAid detects an error in the view milestones command.
 
     * 1a1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -689,7 +711,7 @@ Preconditions: The students of the class have been added to TutorAid.
 
 1. Tutor requests to add a class
 
-2. TutorAid requests for details of the class including day of the week, time and price
+2. TutorAid requests for details of the class including the day of the week, time and price
 
 3. Tutor enters the details of the class
 
@@ -703,27 +725,27 @@ Preconditions: The students of the class have been added to TutorAid.
 
 **Extensions**
 
-* 3a. The class appears to overlap with another class as intended by the Tutor
+* 3a. Class appears to overlap with another class as intended by the Tutor
 
-    * 3a1. TutorAid displays a warning
+    * 3a1. TutorAid shows a warning message
 
-    * 3a2. The tutor dismisses the warning
+    * 3a2. Tutor dismisses the warning message
 
       Use case resumes at step 4
 
-* 3b. The class appears to overlap with another class due to a mistake by the Tutor
+* 3b. Class appears to overlap with another class due to a mistake of the Tutor
 
-    * 3b1. TutorAid displays a warning
+    * 3b1. TutorAid shows a warning message
 
-    * 3b2. The tutor acknowledges the warning and cancels the creation of the class
+    * 3b2. Tutor acknowledges the warning message and cancels the creation of the class
 
       Use case resumes at step 1
 
 * 3c. TutorAid detects invalid input
 
-    * 3c1. TutorAid displays a warning
+    * 3c1. TutorAid shows a warning message
 
-    * 3c2. The tutor acknowledges the warning
+    * 3c2. Tutor acknowledges the warning message
 
       Use case resumes at step 3
 
@@ -753,7 +775,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 
 **Extensions**
 
-* 6a. Tutor declines the confirmation.
+* 6a. Tutor declines the confirmation message.
 
     * 6a1. TutorAid stops the action.
 
@@ -1002,7 +1024,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
 ### Non-Functional Requirements
 1.  The system should be able to run on any machine that has Java 11 or higher installed.
 2.  The user should be able to access the list of available commands within 2 inputs/clicks.
-3.  The length of the user commands should not be more than 20 characters (excluding the arguments).    
+3.  The length of the user commands should not be more than 20 characters (excluding the arguments).
 4.  No user input should corrupt the data file. (The data file should still be able to be parsed by TutorAid at all times)
 5.  The system should respond within 5 seconds for any action.
 6.  The system should not crash even when hundreds of student data are stored.
