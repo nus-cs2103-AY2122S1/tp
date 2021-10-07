@@ -24,14 +24,14 @@ public class Person {
     // Data fields
     private final Address address;
     private final Optional<LastVisit> lastVisit;
-    private final Visit visit;
+    private final Optional<Visit> visit;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Language language, Address address,
-                  Optional<LastVisit> lastVisit, Visit visit, Set<Tag> tags) {
+                  Optional<LastVisit> lastVisit, Optional<Visit> visit, Set<Tag> tags) {
         requireAllNonNull(name, phone, language, address, tags);
         this.name = name;
         this.phone = phone;
@@ -62,7 +62,7 @@ public class Person {
         return lastVisit;
     }
 
-    public Visit getVisit() {
+    public Optional<Visit> getVisit() {
         return visit;
     }
 
@@ -91,7 +91,7 @@ public class Person {
      * Returns true if the person has a scheduled visit.
      */
     public boolean hasVisit() {
-        return (this.visit.hasVisit());
+        return (this.visit.get().hasVisit());
     }
 
     /**

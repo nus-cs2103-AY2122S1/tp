@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -32,13 +33,13 @@ public class VisitCommand extends Command {
     public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Removed visit from Person: %1$s";
 
     private final Index index;
-    private final Visit visit;
+    private final Optional<Visit> visit;
 
     /**
      * @param index of the person in the filtered person list to edit the visit
      * @param visit of the person to be updated to
      */
-    public VisitCommand(Index index, Visit visit) {
+    public VisitCommand(Index index, Optional<Visit> visit) {
         requireAllNonNull(index, visit);
 
         this.index = index;
@@ -68,7 +69,7 @@ public class VisitCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !visit.value.isEmpty() ? MESSAGE_ADD_VISIT_SUCCESS : MESSAGE_DELETE_VISIT_SUCCESS;
+        String message = !visit.get().value.isEmpty() ? MESSAGE_ADD_VISIT_SUCCESS : MESSAGE_DELETE_VISIT_SUCCESS;
         return String.format(message, personToEdit);
     }
 

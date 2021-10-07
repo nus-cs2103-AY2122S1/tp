@@ -63,7 +63,7 @@ class JsonAdaptedPerson {
         language = source.getLanguage().value;
         address = source.getAddress().value;
         lastVisit = source.getLastVisit().orElse(new LastVisit("")).value;
-        visit = source.getVisit().value;
+        visit = source.getVisit().orElse(new Visit("")).value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -121,7 +121,7 @@ class JsonAdaptedPerson {
         if (visit == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Visit.class.getSimpleName()));
         }
-        final Visit modelVisit = new Visit(visit);
+        final Optional<Visit> modelVisit = Optional.ofNullable(new Visit(visit));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelLanguage, modelAddress, modelLastVisit, modelVisit, modelTags);

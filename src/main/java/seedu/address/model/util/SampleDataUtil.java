@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Visit EXAMPLE_VISIT = new Visit("2021-10-01");
+    public static final Optional<Visit> EXAMPLE_VISIT = Optional.ofNullable(new Visit("2021-10-01"));
 
     public static Person[] getSamplePersons() {
         return new Person[] {

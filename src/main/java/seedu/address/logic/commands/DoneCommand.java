@@ -56,7 +56,7 @@ public class DoneCommand extends Command {
         String newLastVisitedDate = personToDone.getVisit().toString();
         Optional<LastVisit> newLastVisited = Optional.of(new LastVisit(newLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
-                personToDone.getAddress(), newLastVisited, new Visit(""), personToDone.getTags());
+                personToDone.getAddress(), newLastVisited, Optional.ofNullable(new Visit("")), personToDone.getTags());
 
         model.setPerson(personToDone, donePerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

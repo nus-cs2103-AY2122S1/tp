@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -37,7 +38,7 @@ public class VisitCommandParser implements Parser<VisitCommand> {
         }
 
         String visit = argMultimap.getValue(PREFIX_DATE).orElse("");
-        Visit convertedVisit = ParserUtil.parseVisit(visit);
+        Optional<Visit> convertedVisit = ParserUtil.parseVisit(visit);
 
         return new VisitCommand(index, convertedVisit);
     }
