@@ -11,26 +11,26 @@ import seedu.unify.model.tag.Tag;
  */
 class JsonAdaptedTag {
 
-    private final String tagName;
+    private final String tagTaskName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code tagTaskName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedTag(String tagTaskName) {
+        this.tagTaskName = tagTaskName;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+        tagTaskName = source.tagTaskName;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getTagTaskName() {
+        return tagTaskName;
     }
 
     /**
@@ -39,10 +39,10 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
+        if (!Tag.isValidTagTaskName(tagTaskName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Tag(tagTaskName);
     }
 
 }
