@@ -43,8 +43,10 @@ public class TypicalItems {
             .withId("#888888").build();
 
     // Manually added
-    public static final Item HONEY_CAKE = new ItemBuilder().withName("Honey Cake").withCount("5").withId("#999999").build();
-    public static final Item ICE_CREAM = new ItemBuilder().withName("Ice Cream").withCount("5").withId("#000000").build();
+    public static final Item HONEY_CAKE = new ItemBuilder().withName("Honey Cake")
+            .withCount("5").withId("#999999").build();
+    public static final Item ICE_CREAM = new ItemBuilder().withName("Ice Cream")
+            .withCount("5").withId("#000000").build();
 
     // Manually added - Item's details found in {@code CommandTestUtil}
     public static final Item BAGEL = new ItemBuilder()

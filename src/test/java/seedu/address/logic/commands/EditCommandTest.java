@@ -33,19 +33,19 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
 
-//    @Test
-//    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-//        Item editedItem = new ItemBuilder().build();
-//        EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
-//        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
-//
-//        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
-//
-//        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
-//        expectedModel.setItem(model.getFilteredItemList().get(0), editedItem);
-//
-//        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-//    }
+    //    @Test
+    //    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    //        Item editedItem = new ItemBuilder().build();
+    //        EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
+    //        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
+    //
+    //        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
+    //
+    //        Model expectedModel = new ModelManager(new Inventory(model.getInventory()), new UserPrefs());
+    //        expectedModel.setItem(model.getFilteredItemList().get(0), editedItem);
+    //
+    //        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    //    }
     // TODO: FIX THIS TEST
 
     @Test

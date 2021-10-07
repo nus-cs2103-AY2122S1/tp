@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyInventory;
@@ -41,14 +40,15 @@ public class AddCommandTest {
         assertEquals(Arrays.asList(validItem), modelStub.itemsAdded);
     }
 
-//    @Test
-//    public void execute_duplicateItem_throwsCommandException() {
-//        Item validItem = new ItemBuilder().build();
-//        AddCommand addCommand = new AddCommand(validItem);
-//        ModelStub modelStub = new ModelStubWithItem(validItem);
-//
-//        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_ITEM, () -> addCommand.execute(modelStub));
-//    }
+    //    @Test
+    //    public void execute_duplicateItem_throwsCommandException() {
+    //        Item validItem = new ItemBuilder().build();
+    //        AddCommand addCommand = new AddCommand(validItem);
+    //        ModelStub modelStub = new ModelStubWithItem(validItem);
+    //
+    //        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_ITEM,
+    //        () -> addCommand.execute(modelStub));
+    //    }
     // TODO: TEST FOR DUPLICATE ITEMS
 
     @Test
