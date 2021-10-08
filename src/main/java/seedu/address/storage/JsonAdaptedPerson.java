@@ -112,8 +112,11 @@ class JsonAdaptedPerson {
             throw new IllegalValueException((String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Birthday.class.getSimpleName())));
         }
-        if (!Birthday.isValidBirthday(birthday)) {
+        if (!Birthday.isValidFormat(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        if(!Birthday.isValidDate(birthday)) {
+            throw new IllegalValueException(Birthday.MESSAGE_INVALID_DATE);
         }
         final Birthday modelBirthday = new Birthday(birthday);
 

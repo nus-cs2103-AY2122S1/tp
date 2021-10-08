@@ -4,15 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's birthday in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidFormat(String)}
  */
 public class Birthday {
 
-    public static final String MESSAGE_CONSTRAINTS = "Birthdays should come in the form of yyyy-MM-dd";
-    public static final String VALIDATION_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+    private static final DateTimeFormatter ddMMyyyy = DateTimeFormatter.ofPattern("ddMMyyyy");
+    public static final String MESSAGE_CONSTRAINTS = "Birthdays should come in the form of ddMMyyyy";
+    public static final String MESSAGE_INVALID_DATE = "Birthday is not a valid date";
+    public static final String VALIDATION_REGEX = "\\d{8}";
     public final LocalDate birthday;
 
     /**
@@ -22,15 +26,28 @@ public class Birthday {
      */
     public Birthday(String birthday) {
         requireNonNull(birthday);
-        checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
-        this.birthday = LocalDate.parse(birthday);
+        checkArgument(isValidFormat(birthday), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(birthday), MESSAGE_INVALID_DATE);
+        this.birthday = LocalDate.parse(birthday, ddMMyyyy);
     }
 
     /**
-     * Returns if a given string is a valid birthday.
+     * Returns if a given string is in valid format.
      */
-    public static boolean isValidBirthday(String birthday) {
+    public static boolean isValidFormat(String birthday) {
         return birthday.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns if a given string is in valid format.
+     */
+    public static boolean isValidDate(String birthday) {
+        try {
+            LocalDate.parse(birthday, ddMMyyyy);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override

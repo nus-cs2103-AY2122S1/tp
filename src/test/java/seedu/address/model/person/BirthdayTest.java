@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -21,16 +22,26 @@ public class BirthdayTest {
     @Test
     public void isValidBirthday() {
         // null address
-        assertThrows(NullPointerException.class, () -> Birthday.isValidBirthday(null));
+        assertThrows(NullPointerException.class, () -> Birthday.isValidFormat(null));
 
-        // invalid birthday
-        // assertFalse(Birthday.isValidBirthday("")); // empty string
-        // assertFalse(Birthday.isValidBirthday(" ")); // spaces only
-        // TODO: 7/10/21 implement error message for birthdates
-        // assertFalse(Birthday.isValidBirthday("2020-19-30")); // empty string
-        // assertFalse(Birthday.isValidBirthday("2020-02-30")); // empty string
+        // blank birthday
+        assertFalse(Email.isValidEmail("")); // empty string
+        assertFalse(Email.isValidEmail(" ")); // spaces only
+
+        // invalid format
+        assertFalse(Birthday.isValidFormat("31-12-2011")); // invalid format
+        assertFalse(Birthday.isValidFormat("2021-11-12")); // invalid format
+        assertFalse(Birthday.isValidDate("12122012 ")); // white space at end
+        assertFalse(Birthday.isValidDate("12122012 ")); // white space at the start
+
+        // invalid dates
+         assertFalse(Birthday.isValidDate("32022011")); // invalid date
+         assertFalse(Birthday.isValidDate("12345678")); // invalid date
+        assertFalse(Birthday.isValidDate("00000000")); // invalid date
 
         // valid birthday
-        assertTrue(Birthday.isValidBirthday("1999-01-19"));
+        assertTrue(Birthday.isValidFormat("19011999")); // valid date
+        assertTrue(Birthday.isValidFormat("31121999")); // 31st December 1999
+        assertTrue(Birthday.isValidFormat("29022012")); // 29th Febuary leap year
     }
 }
