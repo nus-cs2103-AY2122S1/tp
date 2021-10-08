@@ -112,13 +112,13 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have at least one clashing {@code Lesson}.
+     * Returns true if {@code Lesson} to check clashes with existing lessons.
      *
-     * @param otherPerson The other person to be compared with.
+     * @param toCheck The lesson to be compared with.
      * @return True if and only if there is at least one clash.
      */
-    public boolean hasClashingLessons(Person otherPerson) {
-        if (otherPerson == null) {
+    public boolean hasClashingLessons(Lesson toCheck) {
+        if (toCheck == null) {
             return false;
         }
         boolean isClash = false;
@@ -126,7 +126,7 @@ public class Person {
             if (isClash) {
                 break;
             }
-            isClash = otherPerson.getLessons().stream().anyMatch(lesson::isClashing);
+            isClash = lesson.isClashing(toCheck);
         }
         return isClash;
     }

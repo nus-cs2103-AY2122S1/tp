@@ -28,7 +28,7 @@ import seedu.address.model.lesson.TimeRange;
 /**
  * Parses input arguments and creates a new LessonAddCommand object.
  */
-public class LessonAddCommandParser {
+public class LessonAddCommandParser implements Parser<LessonAddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the LessonAddCommand
      * and returns a LessonAddCommand object for execution.

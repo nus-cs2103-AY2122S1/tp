@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -68,9 +69,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
      */
-    public boolean hasClashingLesson(Person person) {
-        requireNonNull(person);
-        return persons.hasClashes(person);
+    public boolean hasClashingLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return persons.hasClashes(lesson);
     }
     /**
      * Adds a person to the address book.

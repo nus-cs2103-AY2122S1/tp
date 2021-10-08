@@ -64,7 +64,7 @@ public interface Model {
     /**
      * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
      */
-    boolean hasClashingLesson(Person person);
+    boolean hasClashingLesson(Lesson lesson);
 
     /**
      * Adds the given lesson to the calendar.

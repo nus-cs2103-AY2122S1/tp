@@ -37,7 +37,7 @@ public class LessonTest {
         Lesson lesson = new RecurringLesson(new Date(DATE),
             new TimeRange(TIME_RANGE),
             new Subject(SUBJECT), HOMEWORK);
-        assertEquals(new Date(validOneWeekLaterDateString), lesson.updateDateWithWeek());
+        assertEquals(new Date(validOneWeekLaterDateString), (new Date(DATE)).updateDateWithWeek());
     }
 
     /**
@@ -95,7 +95,7 @@ public class LessonTest {
         }
 
         @Override
-        public boolean hasClashingLesson(Person person) {
+        public boolean hasClashingLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 
