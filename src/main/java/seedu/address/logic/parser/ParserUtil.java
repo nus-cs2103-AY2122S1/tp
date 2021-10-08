@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.friends.FriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
@@ -52,6 +55,8 @@ public class ParserUtil {
         String trimmedName = friendId.trim();
         if (!FriendId.isValidFriendId(trimmedName)) {
             throw new ParseException(FriendId.MESSAGE_CONSTRAINTS);
+        } else if (friendId.contains(FLAG_FRIEND_NAME.toString().trim())) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendCommand.MESSAGE_USAGE));
         }
         return new FriendId(trimmedName);
     }

@@ -1,95 +1,87 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.friends;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalFriends.AMY;
+import static seedu.address.testutil.TypicalFriends.BOB;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
+import seedu.address.testutil.FriendBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code DeleteFriendCommand}.
  */
-public class DeleteCommandTest {
+public class DeleteFriendCommandTest {
 
     private final Model model = new ModelManager(getTypicalFriendsList(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIdUnfilteredList_success() {
+        // command can delete friend by friend id
         Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, friendToDelete);
+        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                friendToDelete.getFriendId());
 
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
-        expectedModel.deleteFriend(friendToDelete);
-
+        expectedModel.deleteFriend(friendToDelete.getFriendId());
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFriendsList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    public void execute_nonExistentIdUnfilteredList_throwsCommandException() {
+        // command fails if friend id does not exist in unfiltered list
+        DeleteFriendCommand deleteFriendCommand = new DeleteFriendCommand(AMY.getFriendId());
+        assertCommandFailure(deleteFriendCommand, model, Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validIdFilteredList_success() {
+        // can delete friend by friendid even if not in the currently filtered list
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
         Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, friendToDelete);
-
+        DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
+        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                friendToDelete.getFriendId());
         Model expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
-        expectedModel.deleteFriend(friendToDelete);
+
+        // show no one
         showNoPerson(expectedModel);
 
+        // should still be able to delete
+        expectedModel.deleteFriend(friendToDelete.getFriendId());
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getFriendsList().getFriendsList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        Friend friendAmy = new FriendBuilder(AMY).build();
+        Friend friendBob = new FriendBuilder(BOB).build();
+        DeleteFriendCommand deleteFirstCommand = new DeleteFriendCommand(friendAmy.getFriendId());
+        DeleteFriendCommand deleteSecondCommand = new DeleteFriendCommand(friendBob.getFriendId());
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteFriendCommand deleteFirstCommandCopy = new DeleteFriendCommand(friendAmy.getFriendId());
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(deleteFirstCommand.equals("123"));
 
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));

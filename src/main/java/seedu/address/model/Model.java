@@ -65,7 +65,7 @@ public interface Model {
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deleteFriend(Friend target);
+    void deleteFriend(FriendId targetId);
 
     /**
      * Adds the given person.
@@ -95,4 +95,7 @@ public interface Model {
      * the {@code IN_GAME_USERNAME} for that game.
      */
     void linkFriend(Friend toLink, HashMap<String, String> games);
+
+    boolean hasFriendId(FriendId idToFind);
+
 }

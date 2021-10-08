@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalFriends.AMY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -13,15 +14,15 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFriendDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.logic.commands.friends.DeleteFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
@@ -34,10 +35,10 @@ public class FriendsListParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addFriend() throws Exception {
         Friend friend = new FriendBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(FriendUtil.getAddCommand(friend));
-        assertEquals(new AddCommand(friend), command);
+        AddFriendCommand command = (AddFriendCommand) parser.parseCommand(FriendUtil.getAddFriendCommand(friend));
+        assertEquals(new AddFriendCommand(friend), command);
     }
 
     @Test
@@ -48,9 +49,9 @@ public class FriendsListParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteFriendCommand command = (DeleteFriendCommand) parser.parseCommand(
+                DeleteFriendCommand.COMMAND_WORD + " " + AMY.getFriendId().toString());
+        assertEquals(new DeleteFriendCommand(AMY.getFriendId()), command);
     }
 
     @Test

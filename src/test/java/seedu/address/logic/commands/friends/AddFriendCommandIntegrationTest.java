@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.friends;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -14,9 +14,10 @@ import seedu.address.model.friend.Friend;
 import seedu.address.testutil.FriendBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for
+ * {@code seedu.address.logic.commands.friends.AddFriendCommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddFriendCommandIntegrationTest {
 
     private Model model;
 
@@ -32,14 +33,14 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
         expectedModel.addFriend(validFriend);
 
-        assertCommandSuccess(new AddCommand(validFriend), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validFriend), expectedModel);
+        assertCommandSuccess(new AddFriendCommand(validFriend), model,
+                String.format(AddFriendCommand.MESSAGE_SUCCESS, validFriend), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Friend friendInList = model.getFriendsList().getFriendsList().get(0);
-        assertCommandFailure(new AddCommand(friendInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddFriendCommand(friendInList), model, AddFriendCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

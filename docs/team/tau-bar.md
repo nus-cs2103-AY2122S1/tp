@@ -11,11 +11,20 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to delete friends.
-    * What it does: allows the user to delete a friend from gitGud using the friend's unique `FRIEND_ID`
-    * Justification: This feature improves the product significantly because a user can easily delete a friend from
-      gitGud in the event that they made a mistake in the details or simply wishes to remove a friend.
-
+* **New Feature**:
+  1. Added the ability to add friends.
+      1. What it does: allows the user to add a friend to gitGud by adding the friend's unique `FRIEND_ID` and
+         optionally, `FRIEND_NAME`.
+      2. Justification: This feature improves the product significantly, as it is a core feature, which allows the
+         user to add the friend to gitGud to start planning their gaming schedule with that friend.
+  2. Added the ability to delete friends.
+     1. What it does: allows the user to delete a friend from gitGud using the friend's unique `FRIEND_ID`.
+     2. Justification: This feature improves the product significantly because a user can easily delete a friend from
+           gitGud in the event that they made a mistake in the details or simply wishes to remove a friend.
+  
+* **Testing**
+  1. Adapted the previous tests for our implementation of AddFriendCommand and DeleteFriendCommand.
+  
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=tau-bar&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=MarcusTXK&tabRepo=AY2122S1-CS2103T-W13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false)
 
 * **Documentation**:
