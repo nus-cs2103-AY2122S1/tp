@@ -23,8 +23,8 @@ public class LinkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Links game(s) and the associated in-game username(s) "
             + "for each game to a friend. \n"
-            + "Parameters: FRIEND_ID \"GAME_NAME\":\"IN_GAME_USERNAME\"..."
-            + "Example: " + COMMAND_WORD + "Draco Valorant:SmurfLord";
+            + "Parameters: FRIEND_ID --g GAME_NAME:IN_GAME_USERNAME...\n"
+            + "Example: " + COMMAND_WORD + " Draco --g Valorant:SmurfLord";
 
     private final FriendId friendId;
     private final HashMap<String, String> games;
