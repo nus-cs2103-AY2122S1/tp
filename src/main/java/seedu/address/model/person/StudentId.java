@@ -13,10 +13,9 @@ public class StudentId {
             "Student ID should only contain 9 alphanumeric characters, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * A student ID must start and end with an alphabet, and has exactly 7 numbers between the two letters
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[A-Z][0-9]{7}[A-Z]";
 
     public final String studentId;
 
