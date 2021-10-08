@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 /**
- * Represents a Task of a Module in the TAB.
+ * Represents a Task of a TeachingAssistantBuddy in the TAB.
  */
 public class Task {
 
@@ -16,7 +16,7 @@ public class Task {
 
     /**
      * Constructs a Task.
-     * @param module The Module this Task is under.
+     * @param module The TeachingAssistantBuddy this Task is under.
      * @param name The Name of this Task.
      * @param deadline The Deadline of this Task.
      */
@@ -77,7 +77,7 @@ public class Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Module: ")
+                .append("; TeachingAssistantBuddy: ")
                 .append(getModule())
                 .append("; Deadline: ")
                 .append(getDeadline())
