@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -40,12 +42,15 @@ public class Event implements Comparable<Event> {
      * @param date at which the Event occurs.
      * @param time of the Event.
      * @param isDone A boolean to indicate is the event is done.
+     * @param participants participants to be added
      */
-    public Event(EventName name, EventDate date, EventTime time, boolean isDone) {
+    public Event(EventName name, EventDate date, EventTime time, boolean isDone, List<Participant> participants) {
+        requireNonNull(participants);
         this.eventName = name;
         this.eventDate = date;
         this.eventTime = time;
         this.isDone = isDone;
+        this.participants.addAll(participants);
     }
 
     /**
@@ -84,7 +89,7 @@ public class Event implements Comparable<Event> {
      * @return An Event that is marked done.
      */
     public Event markAsDone() {
-        return new Event(this.eventName, this.eventDate, this.eventTime, true);
+        return new Event(this.eventName, this.eventDate, this.eventTime, true, this.participants);
     }
 
     /**
