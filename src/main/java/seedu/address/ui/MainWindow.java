@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private final HelpWindow helpWindow;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -64,8 +66,8 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -146,6 +148,20 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
         }
     }
+    /**
+     * Opens the note window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleNote(Person person, Logic logic) {
+        NoteWindow noteWindow = new NoteWindow(person, logic);
+        if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
+            NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
+            noteWindow.show();
+        } else {
+            int indexOfNoteWindow = NoteWindow.OPENED_NOTE_WINDOWS.indexOf(noteWindow);
+            NoteWindow.OPENED_NOTE_WINDOWS.get(indexOfNoteWindow).focus();
+        }
+    }
 
     void show() {
         primaryStage.show();
@@ -160,6 +176,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        NoteWindow.OPENED_NOTE_WINDOWS.forEach(NoteWindow::hide);
         primaryStage.hide();
     }
 
@@ -177,11 +194,12 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
+            if (commandResult.isShowNote()) {
+                handleNote(commandResult.person(), logic);
+            }
             if (commandResult.isExit()) {
                 handleExit();
             }

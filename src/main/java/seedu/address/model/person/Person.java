@@ -22,17 +22,19 @@ public class Person {
 
     // Data fields
     private final Note note;
+    private final NoteDate noteDate;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Note note, NoteDate noteDate, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.note = note;
+        this.noteDate = noteDate;
         this.tags.addAll(tags);
     }
 
@@ -50,6 +52,10 @@ public class Person {
 
     public Note getNote() {
         return note;
+    }
+
+    public NoteDate getNoteDate() {
+        return noteDate;
     }
 
     /**
@@ -108,8 +114,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Note: ")
-                .append(getNote());
+                .append("; NoteDate: ")
+                .append(getNoteDate());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

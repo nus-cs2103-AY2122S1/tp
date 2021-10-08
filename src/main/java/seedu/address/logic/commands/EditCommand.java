@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
+import seedu.address.model.person.NoteDate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -96,8 +97,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
+        NoteDate updatedNoteDate = editPersonDescriptor.getNoteDate().orElse(personToEdit.getNoteDate());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote, updatedNoteDate, updatedTags);
     }
 
     @Override
@@ -128,6 +130,7 @@ public class EditCommand extends Command {
         private Email email;
         private Set<Tag> tags;
         private Note note;
+        private NoteDate noteDate;
 
         public EditPersonDescriptor() {}
 
@@ -141,6 +144,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setNote(toCopy.note);
+            setNoteDate(toCopy.noteDate);
         }
 
         /**
@@ -177,9 +181,16 @@ public class EditCommand extends Command {
         public void setNote(Note note) {
             this.note = note;
         }
-
         public Optional<Note> getNote() {
             return Optional.ofNullable(note);
+        }
+
+        public void setNoteDate(NoteDate noteDate) {
+            this.noteDate = noteDate;
+        }
+
+        public Optional<NoteDate> getNoteDate() {
+            return Optional.ofNullable(noteDate);
         }
 
         /**

@@ -2,8 +2,14 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a Person's note that is opened upon note command.
+ */
 public class Note {
+
+    /** content of note **/
     public final String value;
+
 
     /**
      * Constructor for a Note instance.
@@ -36,4 +42,6 @@ public class Note {
     public String toString() {
         return value;
     }
+
+
 }
