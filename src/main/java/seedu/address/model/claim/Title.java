@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Title implements Comparable<Title>{
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Space}]*";
     public static final String MESSAGE_CONSTRAINTS = "Title should only contain alphanumeric letters";
 
     private final String title;

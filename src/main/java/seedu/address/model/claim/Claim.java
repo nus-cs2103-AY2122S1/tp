@@ -2,12 +2,15 @@ package seedu.address.model.claim;
 
 import java.util.Objects;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 public class Claim {
     private final Title title;
     private final Description description;
     private final Status status;
 
     public Claim(Title title, Description description, Status status) {
+        requireAllNonNull(title, description, status);
         this.title = title;
         this.description = description;
         this.status = status;

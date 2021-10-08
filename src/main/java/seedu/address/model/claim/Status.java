@@ -35,7 +35,7 @@ public class Status {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Status // instanceof handles nulls
-                && this.status.equals(((Status) other).status)); // state check
+                && this.status.equalsIgnoreCase(((Status) other).status)); // state check
     }
 
 }
