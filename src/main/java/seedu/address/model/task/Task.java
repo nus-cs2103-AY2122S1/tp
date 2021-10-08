@@ -4,22 +4,28 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.id.UniqueId;
+
 /**
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
-    // Identity fields
+    // The task name
     private final Name name;
 
-    // Data fields
+    // The deadline of the task
     private final Deadline deadline;
+
+    // The id of the task
+    private final UniqueId id;
 
     /**
      * Every field must be present and not null.
      */
     public Task(Name name, Deadline deadline) {
-        requireAllNonNull(name, deadline);
+        this.id = UniqueId.generateTaskId();
+        requireAllNonNull(name, deadline, id);
         this.name = name;
         this.deadline = deadline;
     }
@@ -32,8 +38,12 @@ public class Task {
         return deadline;
     }
 
+    public UniqueId getId() {
+        return id;
+    }
+
     /**
-     * Returns true if both tasks have the same name.
+     * Returns true if both tasks have the same name and deadline.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameTask(Task otherTask) {
@@ -42,11 +52,12 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName());
+                && otherTask.getName().equals(getName())
+                && otherTask.getDeadline().equals(getDeadline());
     }
 
     /**
-     * Returns true if both tasks have the same identity and data fields.
+     * Returns true if both tasks have the same id, name and deadline.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -60,8 +71,7 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
-        return otherTask.getName().equals(getName())
-                && otherTask.getDeadline().equals(getDeadline());
+        return otherTask.getId().equals(getId()) && isSameTask(otherTask);
     }
 
     @Override
@@ -72,12 +82,8 @@ public class Task {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Deadline: ")
-                .append(getDeadline())
-                .append("; Completion Status: ");
-
-        return builder.toString();
+        return getName()
+                + "; Deadline: "
+                + getDeadline();
     }
 }
