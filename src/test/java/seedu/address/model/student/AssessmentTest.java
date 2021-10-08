@@ -28,20 +28,12 @@ public class AssessmentTest {
         // invalid assessments
         assertFalse(Assessment.isValidAssessment("")); // empty string
         assertFalse(Assessment.isValidAssessment(" ")); // spaces only
-        assertFalse(Assessment.isValidAssessment("assessment")); // words only
-        assertFalse(Assessment.isValidAssessment("01")); // missing type
-        assertFalse(Assessment.isValidAssessment("PP01")); // invalid type
-        assertFalse(Assessment.isValidAssessment("P")); // missing numbering
-        assertFalse(Assessment.isValidAssessment("P1")); // invalid numbering
-        assertFalse(Assessment.isValidAssessment("P110")); // exceeding length
 
         // valid assessments
         assertTrue(Assessment.isValidAssessment("P01")); // uppercase type
         assertTrue(Assessment.isValidAssessment("p01")); // lowercase type
-    }
-
-    @Test
-    public void reformatAssessment() {
-        assertEquals("P01", Assessment.reformatAssessment("p01"));
+        assertTrue(Assessment.isValidAssessment("p 01")); // with spaces
+        assertTrue(Assessment.isValidAssessment("p")); // words only
+        assertTrue(Assessment.isValidAssessment("01")); // numbers only
     }
 }
