@@ -209,10 +209,6 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-
-        System.out.println(this.filteredPatients);
-        System.out.println(other.filteredPatients);
-
         return plannerMd.equals(other.plannerMd)
                 && userPrefs.equals(other.userPrefs)
                 && state.equals(other.state)
