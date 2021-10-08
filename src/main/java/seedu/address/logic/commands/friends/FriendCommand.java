@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.friends;
 
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 
@@ -16,10 +15,10 @@ public class FriendCommand extends Command {
                     + " --id FRIEND_ID [--name \"NAME\"]" + ": Adds a friend to "
                     + "the " + "gitGud friends " + "list. "
                     + "Parameters: "
-                    + FLAG_FRIEND_ID + " FRIEND_ID "
+                    + " FRIEND_ID "
                     + PREFIX_FRIEND_NAME + " NAME"
                     + "Example: " + COMMAND_WORD + " "
-                    + FLAG_FRIEND_ID + "myfeely923 "
+                    + "myfeely923 "
                     + FLAG_FRIEND_NAME + "Yu Zher " + "\n"
                     + "To delete a friend: \n"
                     + COMMAND_WORD

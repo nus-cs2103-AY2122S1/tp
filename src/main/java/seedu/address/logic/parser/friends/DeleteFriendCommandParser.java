@@ -11,6 +11,8 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 
+import java.util.*;
+
 public class DeleteFriendCommandParser extends FriendCommandParser {
     private FriendId friendId;
     private ArgumentMultimap argMultimap;
@@ -21,9 +23,9 @@ public class DeleteFriendCommandParser extends FriendCommandParser {
             argMultimap = ArgumentTokenizer.tokenize(args, FLAG_DELETE);
             friendId = ParserUtil.parseFriendId(argMultimap.getValue(FLAG_DELETE).get());
             return new DeleteFriendCommand(friendId);
-        } catch (ParseException pe) {
+        } catch (ParseException | NoSuchElementException e) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteFriendCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteFriendCommand.MESSAGE_USAGE), e);
         }
     }
 }

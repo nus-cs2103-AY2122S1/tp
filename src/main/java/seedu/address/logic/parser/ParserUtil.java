@@ -53,7 +53,7 @@ public class ParserUtil {
         String trimmedName = friendId.trim();
         if (!FriendId.isValidFriendId(trimmedName)) {
             throw new ParseException(FriendId.MESSAGE_CONSTRAINTS);
-        } else if (friendId.contains(FLAG_FRIEND_NAME.toString())) {
+        } else if (friendId.contains(FLAG_FRIEND_NAME.toString().trim())) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendCommand.MESSAGE_USAGE));
         }
         return new FriendId(trimmedName);
