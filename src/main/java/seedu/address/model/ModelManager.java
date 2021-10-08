@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final Inventory inventory;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
+    private Optional<Order> optionalOrder;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredItems = new FilteredList<>(this.inventory.getItemList());
+        optionalOrder = Optional.empty();
     }
 
     public ModelManager() {
@@ -154,4 +157,55 @@ public class ModelManager implements Model {
         return inventory.getItemWithName(name);
     }
 
+    /**
+     * Sets the current order of the model.
+     *
+     * @param order
+     */
+    @Override
+    public void setOrder(Order order) {
+        requireNonNull(order);
+
+        optionalOrder = Optional.of(order);
+    }
+
+    /**
+     * Returns a boolean that the model has an unclosed order or not.
+     */
+    @Override
+    public boolean hasUnclosedOrder() {
+        return optionalOrder.isPresent();
+    }
+
+    /**
+     * Adds item to the current order list.
+     *
+     * @param item
+     */
+    @Override
+    public void addToOrder(Item item) {
+        assert hasUnclosedOrder();
+
+        optionalOrder.get().addItem(item);
+    }
+
+    /**
+     * Removes the item from the current order list.
+     *
+     * @param item
+     */
+    @Override
+    public void removeFromOrder(Item item) {
+        assert  hasUnclosedOrder();
+
+        optionalOrder.get().removeItem(item);
+    }
+
+    /**
+     * Destroys the current order when ordering finish.
+     */
+    @Override
+    public void clearOrder() {
+        optionalOrder = Optional.empty();
+    }
 }
