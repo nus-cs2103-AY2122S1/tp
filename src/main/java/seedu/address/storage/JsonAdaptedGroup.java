@@ -1,32 +1,27 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Group;
 
 public class JsonAdaptedGroup {
-    private final String groupName;
+    private final String name;
 
     /**
      * Constructs a {@code JsonAdaptedGroup} with the given {@code groupName}.
      */
     @JsonCreator
-    public JsonAdaptedGroup(String groupName) {
-        this.groupName = groupName;
+    public JsonAdaptedGroup(@JsonProperty("name") String name) {
+        this.name = name;
     }
 
     /**
      * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
-        groupName = source.value;
-    }
-
-    @JsonValue
-    public String getGroupName() {
-        return groupName;
+        name = source.value;
     }
 
     /**
@@ -35,9 +30,9 @@ public class JsonAdaptedGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
     public Group toModelType() throws IllegalValueException {
-        if (!Group.isValidGroup(groupName)) {
+        if (!Group.isValidGroup(name)) {
             throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
         }
-        return new Group(groupName);
+        return new Group(name);
     }
 }

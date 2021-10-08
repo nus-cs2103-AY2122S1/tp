@@ -13,8 +13,8 @@ import java.util.Map;
 public class Assessment {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Assessment name should be in AXX format, where A abbreviates the type and XX denotes the numbering";
-    public static final String VALIDATION_REGEX = "[A-Za-z]\\d{2}";
+            "Assessment names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     // Assessment score list
     public final Map<ID, Score> scores = new HashMap<>();
@@ -30,7 +30,7 @@ public class Assessment {
     public Assessment(String name) {
         requireNonNull(name);
         checkArgument(isValidAssessment(name), MESSAGE_CONSTRAINTS);
-        value = reformatAssessment(name);
+        value = name;
     }
 
     /**
@@ -38,15 +38,6 @@ public class Assessment {
      */
     public static boolean isValidAssessment(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    /**
-     * Reformats valid assessment name to uppercase.
-     */
-    public static String reformatAssessment(String name) {
-        assert name.length() == 3; // assessment name should already be validated
-        char type = Character.toUpperCase(name.charAt(0));
-        return type + name.substring(1);
     }
 
     public String getName() {

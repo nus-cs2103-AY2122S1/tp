@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -57,7 +58,8 @@ public class StorageManagerTest {
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertTrue(original.isSameAddressBook(new AddressBook(retrieved)));
+        // assertEquals(original, new AddressBook(retrieved));
     }
 
     @Test

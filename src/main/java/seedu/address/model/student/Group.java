@@ -6,8 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Group {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Group name should be in AXXA format, where A can be any alphabet and X can be any numerical number";
-    public static final String VALIDATION_REGEX = "[A-Za-z]\\d{2}[A-Za-z]";
+            "Group names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     // Group name
     public final String value;
@@ -20,7 +20,7 @@ public class Group {
     public Group(String name) {
         requireNonNull(name);
         checkArgument(isValidGroup(name), MESSAGE_CONSTRAINTS);
-        value = reformatGroup(name);
+        value = name;
     }
 
     /**
@@ -28,15 +28,6 @@ public class Group {
      */
     public static boolean isValidGroup(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    /**
-     * Reformats valid Group name to uppercase.
-     */
-    public static String reformatGroup(String name) {
-        assert name.length() == 4; // Group name should already be validated
-        char type = Character.toUpperCase(name.charAt(0));
-        return type + name.substring(1, 3) + Character.toUpperCase(name.charAt(3));
     }
 
     @Override

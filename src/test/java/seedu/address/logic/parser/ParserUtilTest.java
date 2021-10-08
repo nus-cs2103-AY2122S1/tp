@@ -24,9 +24,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_SCORE = "11 .01";
-    private static final String INVALID_ASSESSMENT = "Path01";
+    private static final String INVALID_ASSESSMENT = " ";
     private static final String INVALID_ID = "E12345";
-    private static final String INVALID_GROUP = "R3A";
+    private static final String INVALID_GROUP = " ";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
