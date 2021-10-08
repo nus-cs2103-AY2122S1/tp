@@ -13,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.CalendarUtil;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final Calendar calendar;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        calendar = new Calendar();
     }
 
     public ModelManager() {
@@ -97,12 +101,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasClashingLesson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasClashingLesson(person);
-    }
-
-    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -118,6 +116,22 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public boolean hasClashingLesson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasClashingLesson(person);
+    }
+
+//    @Override
+//    public void deleteLesson(Lesson target) {
+//        calendar.removeEntry(target);
+//    }
+
+    @Override
+    public void addCalendarEntry(Lesson lesson) {
+        calendar.addEntry(CalendarUtil.convertToEntry(lesson));
     }
 
     @Override

@@ -2,11 +2,13 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.Name;
 
 /**
  * Represents a Lesson in the address book.
@@ -25,6 +27,8 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
 
+    private final Name name = new Name("Placeholder");
+
     /**
      * Every field must be present and not null.
      *
@@ -41,6 +45,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         this.homework.addAll(homework);
     }
 
+    public Name getName() {
+        return name;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -51,6 +59,14 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public TimeRange getTimeRange() {
         return timeRange;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return timeRange.getStart().atDate(date.getLocalDate());
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return timeRange.getEnd().atDate(date.getLocalDate());
     }
 
     /**
