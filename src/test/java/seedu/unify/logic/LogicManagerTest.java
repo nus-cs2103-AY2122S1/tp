@@ -1,14 +1,14 @@
 package seedu.unify.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.unify.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.unify.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.unify.testutil.Assert.assertThrows;
-import static seedu.unify.testutil.TypicalPersons.AMY;
+import static seedu.unify.testutil.TypicalTasks.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,11 +26,11 @@ import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
 import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.UserPrefs;
-import seedu.unify.model.task.Person;
+import seedu.unify.model.task.Task;
 import seedu.unify.storage.JsonAddressBookStorage;
 import seedu.unify.storage.JsonUserPrefsStorage;
 import seedu.unify.storage.StorageManager;
-import seedu.unify.testutil.PersonBuilder;
+import seedu.unify.testutil.TaskBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -59,7 +59,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
 
     @Test
@@ -81,16 +81,16 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + DATE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Task expectedTask = new TaskBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addTask(expectedTask);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredTaskList().remove(0));
     }
 
     /**

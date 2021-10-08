@@ -1,7 +1,7 @@
 package seedu.unify.logic.commands;
 
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unify.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
