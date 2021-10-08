@@ -25,7 +25,7 @@ public class TaskCard extends UiPart<Region> {
     private Label taskName;
 
     /**
-     * Creates a {@code TaskCode} with the given {@code Task} and index to display.
+     * Creates a {@code TaskCard} with the given {@code Task} and index to display.
      */
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
@@ -34,7 +34,7 @@ public class TaskCard extends UiPart<Region> {
     }
 
     /**
-     * Initialises properties of FXML nodes of this TaskCard using {@code lc}.
+     * Initialises properties of FXML nodes of this TaskCard using {@code lc}'s properties.
      */
     public void initialise(ListCell<Task> lc) {
 

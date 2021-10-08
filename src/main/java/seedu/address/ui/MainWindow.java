@@ -121,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Event handler when user clicks on a particular ListCell in the {@code tmp}.
      * Updates the task list panel to show the task list of the Person represented by
-     * the ListCell of {@code tmp}.
+     * the selected ListCell.
      */
     @FXML
     public void handleMouseClicked(ListView<Person> tmp) {
@@ -149,7 +149,6 @@ public class MainWindow extends UiPart<Stage> {
 
         personListSplitPanel.getChildren().add(personListPanel.getRoot());
         setAnchorProperties(personListSplitPanel);
-
 
         taskListPanel = new TaskListPanel(logic.getDisplayTaskList());
         taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
