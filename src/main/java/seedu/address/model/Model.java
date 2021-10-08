@@ -76,6 +76,32 @@ public interface Model {
      */
     void setItem(Item target, Item editedItem);
 
+    /**
+     * Sets the current order of the model.
+     */
+    void setOrder(Order order);
+
+    /**
+     * Returns a boolean that the model has an unclosed order or not.
+     */
+    boolean hasUnclosedOrder();
+
+    /**
+     * Adds item to the current order list.
+     */
+    void addToOrder(Item item);
+
+    /**
+     * Removes the item from the current order list.
+     * @param item
+     */
+    void removeFromOrder(Item item);
+
+    /**
+     * Destroys the current order when ordering finish.
+     */
+    void clearOrder();
+
     /** Returns an unmodifiable view of the filtered item list */
     ObservableList<Item> getFilteredItemList();
 
