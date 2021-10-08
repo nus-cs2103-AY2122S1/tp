@@ -99,6 +99,13 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
+     * Add items in the order to inventory.
+     */
+    public void addOrder(Order orderToAdd) {
+        addItems(orderToAdd.getOrderItems());
+    }
+
+    /**
      * Replaces the given item {@code target} in the list with {@code editedItem}.
      * {@code target} must exist in the inventory.
      * The item identity of {@code editedItem} must not be the same as another existing item in the inventory.
