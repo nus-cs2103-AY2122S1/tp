@@ -20,5 +20,5 @@ public interface Order {
     /**
      * Get a list of items in the order.
      */
-    ObservableList getOrderItems();
+    ObservableList<Item> getOrderItems();
 }

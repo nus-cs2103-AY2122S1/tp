@@ -5,7 +5,7 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
 
 public class OrderManager implements Order {
-    private UniqueItemList items;
+    private final UniqueItemList items;
 
     public OrderManager() {
         items = new UniqueItemList();
@@ -29,7 +29,7 @@ public class OrderManager implements Order {
     }
 
     @Override
-    public ObservableList getOrderItems() {
+    public ObservableList<Item> getOrderItems() {
         return items.asUnmodifiableObservableList();
     }
 }
