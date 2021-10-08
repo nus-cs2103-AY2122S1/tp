@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.AddressBook;
+import seedu.address.model.task.Task;
 
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
