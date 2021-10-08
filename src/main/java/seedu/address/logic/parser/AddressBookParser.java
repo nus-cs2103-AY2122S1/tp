@@ -6,8 +6,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
+import seedu.address.logic.commands.AddMemberCommand;
+import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -16,8 +17,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
+import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -42,13 +43,11 @@ public class AddressBookParser {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddMemberCommand.COMMAND_WORD:
+            return new AddMemberCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -59,11 +58,14 @@ public class AddressBookParser {
         case ClearMembersCommand.COMMAND_WORD:
             return new ClearMembersCommand();
 
+        case ClearFacilitiesCommand.COMMAND_WORD:
+            return new ClearFacilitiesCommand();
+
         case FindMemberCommand.COMMAND_WORD:
             return new FindMemberCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListMemberCommand.COMMAND_WORD:
+            return new ListMemberCommand();
 
         case ListFacilityCommand.COMMAND_WORD:
             return new ListFacilityCommand();
@@ -84,5 +86,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
