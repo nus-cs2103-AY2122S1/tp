@@ -1,10 +1,7 @@
 package seedu.siasa.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.siasa.model.policy.Policy;
@@ -30,6 +27,9 @@ public class PolicyCard extends UiPart<Region> {
     @FXML
     private Label commission;
 
+    /**
+     * Creates a {@code PolicyCode} with the given {@code Policy} and index to display.
+     */
     public PolicyCard(Policy policy, int displayedIndex) {
         super(FXML);
         this.policy = policy;
