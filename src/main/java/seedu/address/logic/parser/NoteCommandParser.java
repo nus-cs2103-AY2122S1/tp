@@ -18,7 +18,8 @@ public class NoteCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the NoteCommand
      * and returns a NoteCommand for execution.
-     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input does not conform the expected format
+     * @throws seedu.address.logic.parser.exceptions.ParseException if the user input
+     * does not conform the expected format
      */
     public NoteCommand parse(String args) throws ParseException {
         requireNonNull(args);

@@ -17,8 +17,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Note;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 //@author xianlinc-reused
@@ -35,14 +35,14 @@ class NoteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNote(Note_STUB).build();
 
-        NoteCommand NoteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().value));
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(NoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -50,7 +50,7 @@ class NoteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNote("").build();
 
-        NoteCommand NoteCommand = new NoteCommand(INDEX_FIRST_PERSON,
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON,
                 new Note(editedPerson.getNote().toString()));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson);
@@ -58,7 +58,7 @@ class NoteCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(NoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -69,22 +69,22 @@ class NoteCommandTest {
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withNote(Note_STUB).build();
 
-        NoteCommand NoteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().value));
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(NoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        NoteCommand NoteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_BOB));
+        NoteCommand noteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_BOB));
 
-        assertCommandFailure(NoteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(noteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
@@ -98,9 +98,8 @@ class NoteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of InsurancePal list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        NoteCommand NoteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_BOB));
+        NoteCommand noteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_BOB));
 
-        assertCommandFailure(NoteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(noteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-
 }
