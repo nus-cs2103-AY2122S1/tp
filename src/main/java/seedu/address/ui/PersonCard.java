@@ -57,7 +57,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        birthday.setText(person.getBirthday().toString());
+        birthday.setText(person.getBirthday().display());
     }
 
     @Override

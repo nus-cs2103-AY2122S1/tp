@@ -62,4 +62,11 @@ public class Birthday {
                 && birthdate.equals(((Birthday) other).birthdate)); // state check
     }
 
+    /**
+     *
+     * @return format for UI display as dd MMM yyyy
+     */
+    public String display() {
+        return DateTimeFormatter.ofPattern("dd MMM yyyy").format(this.birthdate);
+    }
 }
