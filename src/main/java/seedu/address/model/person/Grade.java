@@ -16,7 +16,7 @@ public class Grade {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "([AB]((\\+)|-)*)|([CD](\\+)*)|(F)";
 
     public final String grade;
 
