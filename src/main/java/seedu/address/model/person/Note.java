@@ -13,7 +13,6 @@ public class Note {
     public static final String MESSAGE_CONSTRAINTS = "Notes can take any values, and it should not be blank";
 
     public final String value;
-    public static final Note EMPTY_NOTE = new Note("");
 
     /**
      * Constructs an {@code Note}.
