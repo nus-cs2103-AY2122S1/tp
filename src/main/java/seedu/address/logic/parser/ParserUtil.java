@@ -31,6 +31,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            System.out.println(trimmedIndex);
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -61,6 +62,7 @@ public class ParserUtil {
         requireNonNull(folderName);
         String trimmedName = folderName.trim();
         if (!FolderName.isValidName(trimmedName)) {
+            System.out.println(trimmedName + "FOLDERNAME ISSUE");
             throw new ParseException(FolderName.MESSAGE_CONSTRAINTS);
         }
         return new FolderName(trimmedName);

@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -161,6 +162,11 @@ public class AddCommandTest {
 
         @Override
         public void addFolder(Folder folder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addContactToFolder(Person target, FolderName name) {
             throw new AssertionError("This method should not be called.");
         }
 

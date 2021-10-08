@@ -21,11 +21,12 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
     public AddToFolderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, new Prefix(""));
         List<String> allValues = argMultimap.getAllValues(new Prefix(""));
+        System.out.println(allValues);
         if (allValues.size() <= 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateFolderCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToFolderCommand.MESSAGE_USAGE));
         }
+        Index index = extractContactIndex(allValues);
         FolderName folderName = extractFolderName(allValues);
-        Index index;
         return new AddToFolderCommand(index,folderName);
     }
 
@@ -39,12 +40,33 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
     private FolderName extractFolderName(List<String> allValues) throws ParseException {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 1; i < allValues.size(); i++) {
-            if (i > 1) {
-                stringBuilder.append(" ").append(allValues.get(i));
-                continue;
+            String curr = allValues.get(i).trim();
+            if (!curr.equals(">>")) {
+                stringBuilder.append(curr);
             }
-            stringBuilder.append(allValues.get(i));
         }
         return ParserUtil.parseFolderName(stringBuilder.toString());
+    }
+
+    /**
+     * Extracts the elements relevant to the index from {@code List} of inputs
+     * and returns an Index {@code Index}
+     * @param allValues {@code List} of inputs
+     * @return folder name {@code Index}
+     * @throws ParseException if the given {@code folderName} is invalid.
+     */
+    private Index extractContactIndex(List<String> allValues) throws ParseException {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 1; i < allValues.size(); i++) {
+            try {
+                int intValue = Integer.parseInt(allValues.get(i));
+                stringBuilder.append(allValues.get(i));
+                allValues.remove(i);
+            } catch (NumberFormatException e) {
+//                System.out.println("Input String cannot be parsed to Integer.");
+                continue;
+            }
+        }
+        return ParserUtil.parseIndex(stringBuilder.toString());
     }
 }
