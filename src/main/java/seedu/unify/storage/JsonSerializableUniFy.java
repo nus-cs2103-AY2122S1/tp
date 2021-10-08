@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.unify.commons.exceptions.IllegalValueException;
-import seedu.unify.model.UniFy;
 import seedu.unify.model.ReadOnlyUniFy;
+import seedu.unify.model.UniFy;
 import seedu.unify.model.task.Task;
 
 /**

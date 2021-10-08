@@ -16,10 +16,10 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.logic.commands.exceptions.CommandException;
-import seedu.unify.model.ReadOnlyUniFy;
-import seedu.unify.model.UniFy;
 import seedu.unify.model.Model;
+import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.ReadOnlyUserPrefs;
+import seedu.unify.model.UniFy;
 import seedu.unify.model.task.Task;
 import seedu.unify.testutil.TaskBuilder;
 
