@@ -18,7 +18,7 @@
 //import seedu.address.logic.commands.EditCommand;
 //import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 //import seedu.address.logic.commands.ExitCommand;
-//import seedu.address.logic.commands.FindCommand;
+//import seedu.address.logic.commands.ViewCommand;
 //import seedu.address.logic.commands.HelpCommand;
 //import seedu.address.logic.commands.ListCommand;
 //import seedu.address.logic.commands.PurgeCommand;
@@ -69,11 +69,11 @@
 //    }
 //
 //    @Test
-//    public void parseCommand_find() throws Exception {
+//    public void parseCommand_view() throws Exception {
 //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-//        FindCommand command = (FindCommand) parser.parseCommand(
-//                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-//        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+//        ViewCommand command = (ViewCommand) parser.parseCommand(
+//                ViewCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+//        assertEquals(new ViewCommand(new NameContainsKeywordsPredicate(keywords)), command);
 //    }
 //
 //    @Test
@@ -100,3 +100,4 @@
 //        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
 //    }
 //}
+//
