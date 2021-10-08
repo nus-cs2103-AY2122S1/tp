@@ -44,5 +44,22 @@ public class MakeUpLesson extends Lesson {
         return false;
     }
 
+    /**
+     * Returns true if this {@code MakeUpLesson} clashes with the given {@code Lesson}.
+     *
+     * @param otherLesson The other lesson to be compared with.
+     * @return True if and only if lessons clash.
+     */
+    @Override
+    public boolean isClashing(Lesson otherLesson) {
+        if (otherLesson.isRecurring()) {
+            return getLocalDate().compareTo(otherLesson.getLocalDate()) >= 0 // same date or after
+                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+                    && getTimeRange().isClashing(otherLesson.getTimeRange());
+        } else {
+            return getLocalDate().equals(otherLesson.getLocalDate())
+                    && getTimeRange().isClashing(otherLesson.getTimeRange());
+        }
+    }
 }
 

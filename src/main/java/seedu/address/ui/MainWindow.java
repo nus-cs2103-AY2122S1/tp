@@ -48,6 +48,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+
     @FXML
     private StackPane commandBoxPlaceholder;
 

@@ -16,7 +16,6 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
 import seedu.address.model.lesson.TimeRange;
 
 /**
@@ -27,8 +26,7 @@ class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
 
     private final String date;
-    private final String startTime;
-    private final String endTime;
+    private final String timeRange;
     private final String subject;
     private final boolean isRecurring;
     private final List<JsonAdaptedHomework> homework = new ArrayList<>();
@@ -38,13 +36,11 @@ class JsonAdaptedLesson {
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("date") String date,
-                             @JsonProperty("startTime") String startTime,
-                             @JsonProperty("endTime") String endTime,
+                             @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework) {
         this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeRange = timeRange;
         this.subject = subject;
         if (homework != null) {
             this.homework.addAll(homework);
@@ -57,8 +53,7 @@ class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         date = source.getDate().value;
-        startTime = source.getTimeRange().getStart().value;
-        endTime = source.getTimeRange().getEnd().value;
+        timeRange = source.getTimeRange().value;
         subject = source.getSubject().subject;
         homework.addAll(source.getHomework().stream()
                 .map(JsonAdaptedHomework::new)
@@ -86,26 +81,14 @@ class JsonAdaptedLesson {
         }
         final Date modelDate = new Date(date);
 
-        if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
+        if (timeRange == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TimeRange.class.getSimpleName()));
         }
-        if (!Time.isValidTime(startTime)) {
-            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
-        }
-        final Time modelStartTime = new Time(startTime);
-
-        if (endTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
-        }
-        if (!Time.isValidTime(endTime)) {
-            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
-        }
-        final Time modelEndTime = new Time(endTime);
-
-        if (!TimeRange.isValidTimeRange(modelStartTime, modelEndTime)) {
+        if (!TimeRange.isValidTimeRange(timeRange)) {
             throw new IllegalValueException(TimeRange.MESSAGE_CONSTRAINTS);
         }
-        final TimeRange modelTimeRange = new TimeRange(modelStartTime, modelEndTime);
+        final TimeRange modelTimeRange = new TimeRange(timeRange);
 
         if (subject == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
