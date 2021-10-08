@@ -2,14 +2,6 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
-
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 /**
  * Represents a Person's visit in the address book.
  * Guarantees: immutable; is always valid
@@ -38,25 +30,6 @@ public class Visit {
      */
     public static boolean isValidVisit(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-    /**
-     * Returns formatted visit date.
-     */
-    public String toFormatted() throws ParseException {
-        if (value.isEmpty()) {
-            return value;
-        }
-
-        String visit;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        try {
-            LocalDate date = LocalDate.parse(value, formatter);
-            visit = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(date);
-        } catch (DateTimeParseException ive) {
-            throw new ParseException(ParserUtil.MESSAGE_INVALID_DATE);
-        }
-        return visit;
     }
 
     /**
