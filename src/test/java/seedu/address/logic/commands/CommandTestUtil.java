@@ -36,10 +36,13 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
+    public static final String VALID_TAG_WIFE = "wife";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_STUDENT = "student";
+    public static final String VALID_TAG_TEACHING_ASSISTANT = "teachingassistant";
+    public static final String VALID_TAG_TEACHING_ASSISTANT_CAMEL = "TeachingAssistant";
     public static final String VALID_BIRTHDAY_AMY = "1999-06-05";
     public static final String VALID_BIRTHDAY_BOB = "1988-01-02";
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -50,6 +53,11 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_WIFE = " " + PREFIX_TAG + VALID_TAG_WIFE;
+    public static final String TAG_DESC_STUDENT = " " + PREFIX_TAG + VALID_TAG_STUDENT;
+    public static final String TAG_DESC_TEACHING_ASSISTANT = " " + PREFIX_TAG + VALID_TAG_TEACHING_ASSISTANT;
+    public static final String TAG_DESC_TEACHING_ASSISTANT_CAMEL = " " + PREFIX_TAG
+            + VALID_TAG_TEACHING_ASSISTANT_CAMEL;
     public static final String BIRTHDAY_DESC_AMY = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_AMY;
     public static final String BIRTHDAY_DESC_BOB = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_BOB;
 
