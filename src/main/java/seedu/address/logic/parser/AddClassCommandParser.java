@@ -19,7 +19,7 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLASSCODE, PREFIX_SCHEDULE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSCODE, PREFIX_SCHEDULE, PREFIX_TAG)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSCODE, PREFIX_SCHEDULE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE));
         }

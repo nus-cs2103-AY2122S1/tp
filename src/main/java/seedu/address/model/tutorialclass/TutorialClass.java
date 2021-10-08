@@ -42,14 +42,17 @@ public class TutorialClass {
     }
 
     /**
-     * Checks if the classcode of a tutorialclass is equal to another's.
-     * @param otherClass Class to compare.
-     * @return Whether the other class has the same classcode.
+     * Returns true if both tutorial classes have the same name.
+     * This defines a weaker notion of equality between two tutorial classes.
      */
-    public boolean isSameClass(TutorialClass otherClass) {
-        return otherClass == this
-                || (otherClass != null
-                    && otherClass.getClassCode().equals(getClassCode()));
+    public boolean isSameTutorialClass(TutorialClass otherClass) {
+        if (otherClass == this) {
+            return true;
+        }
+
+        return otherClass != null
+                && otherClass.getClassCode().equals(getClassCode());
+
     }
 
     @Override
