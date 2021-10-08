@@ -34,6 +34,17 @@ public class Item {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Item(Item other, Integer count) {
+        requireAllNonNull(other, count);
+        this.count = count;
+        this.name = other.name;
+        this.id = other.id;
+        this.tags.addAll(other.tags);
+    }
+
     public Name getName() {
         return name;
     }
@@ -56,6 +67,18 @@ public class Item {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+
+    /**
+     * Returns a new Item with only count updated.
+     * @param newCount
+     * @return
+     */
+    public Item updateCount(int newCount) {
+        assert(newCount > 0);
+
+        return new Item(name, id, newCount, tags);
     }
 
     /**
