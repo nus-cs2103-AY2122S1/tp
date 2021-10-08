@@ -232,6 +232,8 @@ public class EditCommandParserTest {
         // experience
         userInput = targetIndex.getOneBased() + EXPERIENCE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withExperience(VALID_EXPERIENCE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;

@@ -29,7 +29,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMPLOYMENT_TYPE = "Full time";
     public static final String DEFAULT_EXPECTED_SALARY = "3200";
     public static final String DEFAULT_LEVEL_OF_EDUCATION = "PhD";
-    public static final Integer DEFAULT_EXPERIENCE = 0;
+    public static final String DEFAULT_EXPERIENCE = "0";
 
     private Name name;
     private Phone phone;
@@ -149,7 +149,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Experience} of the {@code Person} that we are building.
      */
-    public PersonBuilder withExperience(Integer experience) {
+    public PersonBuilder withExperience(String experience) {
         this.experience = new Experience(experience);
         return this;
     }
