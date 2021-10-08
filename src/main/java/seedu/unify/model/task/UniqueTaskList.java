@@ -53,7 +53,7 @@ public class UniqueTaskList implements Iterable<Person> {
      * {@code target} must exist in the list.
      * The task identity of {@code editedPerson} must not be the same as another existing task in the list.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setTask(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         int index = internalList.indexOf(target);
@@ -79,7 +79,7 @@ public class UniqueTaskList implements Iterable<Person> {
         }
     }
 
-    public void setPersons(UniqueTaskList replacement) {
+    public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -88,9 +88,9 @@ public class UniqueTaskList implements Iterable<Person> {
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
+    public void setTasks(List<Person> persons) {
         requireAllNonNull(persons);
-        if (!personsAreUnique(persons)) {
+        if (!tasksAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
 
@@ -124,7 +124,7 @@ public class UniqueTaskList implements Iterable<Person> {
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean personsAreUnique(List<Person> persons) {
+    private boolean tasksAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
                 if (persons.get(i).isSamePerson(persons.get(j))) {
