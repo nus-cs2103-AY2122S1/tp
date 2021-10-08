@@ -11,8 +11,26 @@ public class ParticipantId {
 
     private String id;
 
+    /**
+     * Creates a ParticipantId with the provided String.
+     * Called when converting existing Participants in memory (JSONAdaptedParticipant) to Participant.
+     * Sets up the idMap with latest ID values for each ID name.
+     *
+     * @param id of the Participant.
+     */
     public ParticipantId(String id) {
         this.id = id;
+
+        String idName = id.replaceAll("[0-9]", "");
+        int idNumber = Integer.parseInt(id.replaceAll("[^\\d.]", ""));
+        if (idMap.containsKey(idName)) {
+            int currentIdValue = idMap.get(idName);
+            if (idNumber > currentIdValue) {
+                idMap.replace(idName, idNumber);
+            }
+        } else {
+            idMap.put(idName, idNumber);
+        }
     }
 
     private ParticipantId(Participant p) {
@@ -21,6 +39,7 @@ public class ParticipantId {
 
     /**
      * Factory method for id.
+     * Called upon creation of new Participant.
      *
      * @param p participant to encode the id.
      * @return the ParticipantId for given participant.
