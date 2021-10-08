@@ -191,8 +191,9 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getStudentId().equals(e.getStudentId())
-                    && getClass().equals(e.getClassId())
+                    && getClassId().equals(e.getClassId())
                     && getGrade().equals(e.getGrade());
         }
+
     }
 }
