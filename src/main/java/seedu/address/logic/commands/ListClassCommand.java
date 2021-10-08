@@ -5,6 +5,9 @@ import seedu.address.model.Model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+/**
+ * Lists all classes in ClassMate to the user.
+ */
 public class ListClassCommand extends Command {
     public static final String COMMAND_WORD = "listc";
 

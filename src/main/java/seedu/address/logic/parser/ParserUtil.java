@@ -14,6 +14,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorialclass.Schedule;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -93,6 +94,29 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Temporary implementation.
+     */
+    public static String parseClassCode(String classCode) throws ParseException {
+        requireNonNull(classCode);
+        String trimmedClassCode = classCode.trim();
+        return trimmedClassCode;
+    }
+
+    /**
+     * Parses a {@code String schedule} into an {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code schedule} is invalid.
+     */
+    public static Schedule parseSchedule(String schedule) throws ParseException {
+        requireNonNull(schedule);
+        String trimmedSchedule = schedule.trim();
+        if (!Schedule.isValidSchedule(trimmedSchedule)) {
+            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+        }
+        return new Schedule(trimmedSchedule);
     }
 
     /**
