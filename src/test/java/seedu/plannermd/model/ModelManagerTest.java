@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.plannermd.testutil.Assert.assertThrows;
+import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_ALICE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.BENSON;
 
@@ -92,6 +93,24 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasPatient(ALICE));
 
         //TODO: Doctor
+    }
+
+    @Test
+    public void deleteDoctor_doesNotDeletePatientWithSameName_returnsTrue() {
+        modelManager.addPatient(ALICE);
+        modelManager.addDoctor(DR_ALICE);
+        modelManager.deleteDoctor(DR_ALICE);
+        assertFalse(modelManager.hasDoctor(DR_ALICE));
+        assertTrue(modelManager.hasPatient(ALICE));
+    }
+
+    @Test
+    public void deletePatient_doesNotDeleteDoctorWithSameName_returnsTrue() {
+        modelManager.addPatient(ALICE);
+        modelManager.addDoctor(DR_ALICE);
+        modelManager.deletePatient(ALICE);
+        assertFalse(modelManager.hasPatient(ALICE));
+        assertTrue(modelManager.hasDoctor(DR_ALICE));
     }
 
     @Test

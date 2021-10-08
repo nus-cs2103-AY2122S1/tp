@@ -46,6 +46,32 @@ public class PlannerMdParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        switch (commandWord) {
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        case ToggleCommand.COMMAND_WORD:
+            return new ToggleCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        default:
+        }
+
+        if (state.equals(State.PATIENT)) {
+            return parsePatientCommand(commandWord, arguments);
+        } else {
+            return parseDoctorCommand(commandWord, arguments);
+        }
+    }
+
+    private Command parsePatientCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
         case AddPatientCommand.COMMAND_WORD:
@@ -55,20 +81,10 @@ public class PlannerMdParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            if (state == State.PATIENT) {
-                return new DeletePatientCommandParser().parse(arguments);
-            } else {
-                return new DeleteDoctorCommandParser().parse(arguments);
-            }
+            return new DeletePatientCommandParser().parse(arguments);
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case ToggleCommand.COMMAND_WORD:
-            return new ToggleCommand();
 
         case FindPatientCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -79,15 +95,19 @@ public class PlannerMdParser {
         case AddPatientTagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
+    private Command parseDoctorCommand(String commandWord, String arguments) throws ParseException {
+        switch (commandWord) {
+
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteDoctorCommandParser().parse(arguments);
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
 }
