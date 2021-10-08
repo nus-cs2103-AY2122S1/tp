@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -25,7 +26,8 @@ public class RetrieveCommand extends Command {
     // TODO: Support for individual names
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieve personal details of students "
             + "and displays them as a list\n"
-            + "Parameters: " + PREFIX_ADDRESS + " | " + PREFIX_EMAIL + " | " + PREFIX_PHONE + "\n"
+            + "Parameters: " + PREFIX_ADDRESS + " | " + PREFIX_EMAIL + " | "
+            + PREFIX_TELEGRAM + " | " + PREFIX_PHONE + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE;
 
     private final Function<? super Student, ? extends Information> filter;
