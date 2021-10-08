@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: derive(#DDDDDD, 100%);
+    background-color: #DDDDDD ; /* Used in the default.html file */
 }
 
 .label {
@@ -57,10 +57,10 @@
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
     -fx-border-color:
-        transparent
-        transparent
-        derive(-fx-base, 80%)
-        transparent;
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
@@ -100,15 +100,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #6a6a6a;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #444444;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #AAAAAA;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -133,14 +133,36 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+    -fx-background-color: #FF6347;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
 }
+
+.pane-with-border-2 {
+    -fx-background-color: #DDDDDD;
+    -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-border-top-width: 1px;
+}
+
+.tabMenu-header-selected {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-text-fill: white;
+}
+
+.tabMenu-header-unselected {
+    -fx-background-color: #1d1d1d;
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+}
+
 
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
@@ -229,8 +251,8 @@
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
 }
 
 .button:focused {
@@ -350,3 +372,24 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: #FF6347;
+}
+
+.tab-pane {
+    -fx-tab-max-height: 0 ;
+}
+
+.tab-pane .tab-header-area {
+    visibility: hidden ;
+}
+
