@@ -14,7 +14,6 @@ import seedu.address.model.person.Person;
  * which views the schedule by Person.
  */
 public class ViewScheduleCommand extends Command {
-    
     public static final String DEFAULT_MESSAGE = "Schedule viewed of staff: %1$s\n";
     public static final String COMMAND_WORD = "viewSchedule";
     public static final String HELP_MESSAGE = ": view the schedule of a staff\n"
