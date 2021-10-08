@@ -33,8 +33,8 @@ public class AttendanceCommandParser implements Parser<AttendanceCommand> {
                 String strippedStr = str.trim();
                 indexArrayList.add(ParserUtil.parseIndex(strippedStr));
             }
-            attendanceStatus = ParserUtil.parseOneOrZero(argMultimap.getValue(PREFIX_STUDIO_ATTENDANCE).get());
-            studioSession = ParserUtil.parseStudioRecord(argMultimap.getValue(PREFIX_STUDIO_SESSION).get());
+            attendanceStatus = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_STUDIO_ATTENDANCE).get());
+            studioSession = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDIO_SESSION).get()).getOneBased();
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE),

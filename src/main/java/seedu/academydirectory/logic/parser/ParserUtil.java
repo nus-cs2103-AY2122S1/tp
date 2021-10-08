@@ -12,6 +12,7 @@ import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.Address;
 import seedu.academydirectory.model.student.Assessment;
+import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
@@ -45,12 +46,14 @@ public class ParserUtil {
      * Parses {@code oneOrZero} into an {@code boolean} and returns it.
      * @throws ParseException if the specified input is invalid (not one or zero).
      */
-    public static boolean parseOneOrZero(String oneOrZero) throws ParseException {
-        String trimmedIndex = oneOrZero.trim();
-        if (!trimmedIndex.equals("0") && !trimmedIndex.equals("1")) {
+    public static boolean parseAttendance(String attendance) throws ParseException {
+        requireNonNull(attendance);
+        String trimmedIndex = attendance.trim();
+        if (Attendance.isValidAttendance(trimmedIndex)) {
+            return trimmedIndex.equals("1");
+        } else {
             throw new ParseException(MESSAGE_INVALID_ATTENDANCE_STATUS);
         }
-        return trimmedIndex.equals("1");
     }
 
     /**
