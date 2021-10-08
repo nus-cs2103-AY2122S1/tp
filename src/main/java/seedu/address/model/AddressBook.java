@@ -34,7 +34,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}.
+     * Creates an AddressBook using the Persons and Facilities in the {@code toBeCopied}.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -52,6 +52,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the facility list with {@code facilities}.
+     */
+    public void setFacilities(List<Facility> facilities) {
+        this.facilities.setFacilities(facilities);
+    }
+
+    /**
      * Clears the contents of the facility list.
      */
     public void resetFacilityList() {
@@ -63,7 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
+        setFacilities(newData.getFacilityList());
         setPersons(newData.getPersonList());
     }
 
