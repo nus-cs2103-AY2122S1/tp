@@ -24,9 +24,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+    public static final String COMMAND_PARAMETERS = PREFIX_NAME + "NAME "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -36,9 +34,9 @@ public class AddCommand extends Command {
             + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
             + "[" + PREFIX_FEE + "FEE] "
             + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Note: at least one contact field must be present. \n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_TAG + "TAG]...";
+
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -51,6 +49,15 @@ public class AddCommand extends Command {
             + PREFIX_REMARK + "He owes me a dinner! "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "neighbour";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Note: at least one contact field must be present. \n"
+            + "Example: " + COMMAND_EXAMPLE;
+
+    public static final String USER_TIP = "Try adding a student using: \n"
+            + COMMAND_WORD + " " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
