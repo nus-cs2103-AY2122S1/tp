@@ -5,12 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -24,7 +26,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> onlyfilteredPersons;
+    private final SortedList<Person> filteredPersons;
 
     private final ObservableList<Task> displayTaskList;
     private final ObservableList<Task> unmodifiableDisplayTaskList;
@@ -42,6 +45,9 @@ public class ModelManager implements Model {
 
         displayTaskList = FXCollections.observableArrayList();
         unmodifiableDisplayTaskList = FXCollections.unmodifiableObservableList(displayTaskList);
+
+        onlyfilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new SortedList<>(onlyfilteredPersons);
     }
 
     public ModelManager() {
@@ -133,7 +139,16 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        onlyfilteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedPersonList(boolean isReverseOrder) {
+        if (isReverseOrder) {
+            filteredPersons.setComparator(Comparator.reverseOrder());
+        } else {
+            filteredPersons.setComparator(Comparator.naturalOrder());
+        }
     }
 
     @Override
