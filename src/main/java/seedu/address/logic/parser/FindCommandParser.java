@@ -31,7 +31,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (trimmedArgs.indexOf(PREFIX_TAG.getPrefix()) == 0) {
-            String[] tagKeywords = trimmedArgs.substring(2).split("\\s+");
+            String findTags = trimmedArgs.substring(2);
+            if (findTags.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+            String[] tagKeywords = findTags.split("\\s+");
             return new FindCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
         } else {
             String[] nameKeywords = trimmedArgs.split("\\s+");
