@@ -9,10 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,6 +54,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
+        if (phone.isEmpty()) {
+            return new Phone("");
+        }
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
@@ -93,6 +93,36 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code RiskAppetite} is invalid.
+     */
+    public static RiskAppetite parseRiskAppetite(String riskAppetite) throws ParseException {
+        requireNonNull(riskAppetite);
+        String trimmedRiskAppetite = riskAppetite.trim();
+        if (!RiskAppetite.isValidRiskAppetite(trimmedRiskAppetite)) {
+            throw new ParseException(RiskAppetite.MESSAGE_CONSTRAINTS);
+        }
+        return new RiskAppetite(trimmedRiskAppetite);
+    }
+
+    /**
+     * Parses a {@code String disposableIncome} into an {@code disposableIncome}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DisposableIncome} is invalid.
+     */
+    public static DisposableIncome parseDisposableIncome(String disposableIncome) throws ParseException {
+        requireNonNull(disposableIncome);
+        String trimmedDisposableIncome = disposableIncome.trim();
+        if (!DisposableIncome.isValidDisposableIncome(trimmedDisposableIncome)) {
+            throw new ParseException(DisposableIncome.MESSAGE_CONSTRAINTS);
+        }
+        return new DisposableIncome(trimmedDisposableIncome);
     }
 
     /**

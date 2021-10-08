@@ -15,26 +15,36 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
-    // Identity fields
+    // Compulsory Identity fields
+    private final ClientId clientId;
     private final Name name;
-    private final Phone phone;
     private final Email email;
 
     // Data fields
+    private final Phone phone;
     private final Address address;
+    private final RiskAppetite riskAppetite;
+    private final DisposableIncome disposableIncome;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
+        DisposableIncome disposableIncome ,Set<Tag> tags) {
+
+        requireAllNonNull(name, phone, email, address, riskAppetite, disposableIncome, tags);
+        this.clientId = clientId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.riskAppetite = riskAppetite;
+        this.disposableIncome = disposableIncome;
         this.tags.addAll(tags);
     }
+
+    public ClientId getClientId() { return clientId; }
 
     public Name getName() {
         return name;
@@ -52,6 +62,12 @@ public class Person {
         return address;
     }
 
+    public RiskAppetite getRiskAppetite() {
+        return riskAppetite;
+    }
+
+    public DisposableIncome getDisposableIncome() { return disposableIncome; }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -61,7 +77,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -70,7 +86,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -88,10 +104,13 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return otherPerson.getClientId().equals(getClientId())
+                && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getRiskAppetite().equals(getRiskAppetite())
+                && otherPerson.getDisposableIncome().equals(getDisposableIncome())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -104,13 +123,20 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append("Client ID: ")
+                .append(getClientId())
+                .append("; Name: ")
+                .append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
+                .append(getPhone().value)
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Risk Appetite: ")
+                .append(getRiskAppetite())
+                .append("; Disposable Income: ")
+                .append(getDisposableIncome());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
