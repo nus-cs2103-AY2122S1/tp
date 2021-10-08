@@ -5,18 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's academic stream in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAcadStream(String)}
+ * Guarantees: immutable; no constraints for academic stream description.
  */
 public class AcadStream {
-    public static final String MESSAGE_CONSTRAINTS = "Academic stream should only contain alphanumeric characters, "
-            + "hyphens, parentheses, single quotation marks and spaces.";
-
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     * Academic stream can be any alphabetic character with or without space.
-     */
-    public static final String VALIDATION_REGEX = "[-'()\\p{Alnum}][-'()\\p{Alnum} ]*";
 
     public final String value;
 
@@ -27,15 +18,7 @@ public class AcadStream {
      */
     public AcadStream(String acadStream) {
         requireNonNull(acadStream);
-        checkArgument(isValidAcadStream(acadStream), MESSAGE_CONSTRAINTS);
         value = acadStream;
-    }
-
-    /**
-     * Returns true if a given string is a valid name.
-     */
-    public static boolean isValidAcadStream(String test) {
-        return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
     /**

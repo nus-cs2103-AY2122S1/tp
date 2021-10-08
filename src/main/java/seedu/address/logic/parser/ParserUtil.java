@@ -136,9 +136,6 @@ public class ParserUtil {
     public static School parseSchool(String school) throws ParseException {
         requireNonNull(school);
         String strippedSchName = school.strip();
-        if (!School.isValidSchName(strippedSchName)) {
-            throw new ParseException(School.MESSAGE_CONSTRAINTS);
-        }
         return new School(strippedSchName);
     }
 
@@ -151,9 +148,6 @@ public class ParserUtil {
     public static AcadStream parseAcadStream(String acadStream) throws ParseException {
         requireNonNull(acadStream);
         String strippedAcadStream = acadStream.strip();
-        if (!AcadStream.isValidAcadStream(strippedAcadStream)) {
-            throw new ParseException(AcadStream.MESSAGE_CONSTRAINTS);
-        }
         return new AcadStream(strippedAcadStream);
     }
 

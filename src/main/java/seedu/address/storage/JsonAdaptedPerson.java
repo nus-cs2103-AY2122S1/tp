@@ -162,17 +162,11 @@ class JsonAdaptedPerson {
         if (school == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
         }
-        if (!School.isValidSchName(school)) {
-            throw new IllegalValueException(School.MESSAGE_CONSTRAINTS);
-        }
         final School modelSchool = new School(school);
 
         if (acadStream == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadStream.class.getSimpleName()));
-        }
-        if (!AcadStream.isValidAcadStream(acadStream)) {
-            throw new IllegalValueException(AcadStream.MESSAGE_CONSTRAINTS);
         }
         final AcadStream modelAcadStream = new AcadStream(acadStream);
 

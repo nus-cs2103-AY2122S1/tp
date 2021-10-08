@@ -25,8 +25,6 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_SCHOOL = "[SK]";
-    private static final String INVALID_ACAD_STREAM = "abc'*";
     private static final String INVALID_FEE = "$50.005";
     private static final String INVALID_TAG = "#friend";
 
@@ -171,32 +169,12 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidSchool_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_PHONE, VALID_EMAIL,
-                        VALID_ADDRESS, INVALID_SCHOOL, VALID_ACAD_STREAM,
-                        VALID_FEE, VALID_REMARK, VALID_TAGS, EMPTY_LESSONS);
-        String expectedMessage = School.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
     public void toModelType_nullSchool_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, null, VALID_ACAD_STREAM,
                         VALID_FEE, VALID_REMARK, VALID_TAGS, EMPTY_LESSONS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidAcadStream_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_PHONE, VALID_EMAIL,
-                        VALID_ADDRESS, VALID_SCHOOL, INVALID_ACAD_STREAM,
-                        VALID_FEE, VALID_REMARK, VALID_TAGS, EMPTY_LESSONS);
-        String expectedMessage = AcadStream.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
