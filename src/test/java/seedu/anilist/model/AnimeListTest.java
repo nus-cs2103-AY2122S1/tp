@@ -36,7 +36,7 @@ public class AnimeListTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyAnimeList_replacesData() {
         AnimeList newData = getTypicalAnimeList();
         animeList.resetData(newData);
         assertEquals(newData, animeList);
@@ -59,12 +59,12 @@ public class AnimeListTest {
     }
 
     @Test
-    public void hasAnime_animeNotInAddressBook_returnsFalse() {
+    public void hasAnime_animeNotInAnimeList_returnsFalse() {
         assertFalse(animeList.hasAnime(ALICE));
     }
 
     @Test
-    public void hasAnime_animeInAddressBook_returnsTrue() {
+    public void hasAnime_animeInAnimeList_returnsTrue() {
         animeList.addAnime(ALICE);
         assertTrue(animeList.hasAnime(ALICE));
     }
@@ -83,7 +83,7 @@ public class AnimeListTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose animes list can violate interface constraints.
+     * A stub ReadOnlyAnimeList whose animes list can violate interface constraints.
      */
     private static class AnimeListStub implements ReadOnlyAnimeList {
         private final ObservableList<Anime> anime = FXCollections.observableArrayList();

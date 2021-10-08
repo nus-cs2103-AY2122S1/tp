@@ -39,7 +39,7 @@ public class EditCommandTest {
         EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder(editedAnime).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), editedAnime);
@@ -59,7 +59,7 @@ public class EditCommandTest {
                 .withTags(VALID_TAG_SHOUNEN).build();
         EditCommand editCommand = new EditCommand(indexLastAnime, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
         expectedModel.setAnime(lastAnime, editedAnime);
@@ -72,7 +72,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME, new EditAnimeDescriptor());
         Anime editedAnime = model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
 
@@ -88,7 +88,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME,
                 new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedAnime);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
         Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), editedAnime);
@@ -102,7 +102,7 @@ public class EditCommandTest {
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder(firstAnime).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_ANIME, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_ANIME);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME,
                 new EditAnimeDescriptorBuilder(animeInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_ANIME);
     }
 
     @Test
