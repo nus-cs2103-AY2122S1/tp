@@ -32,6 +32,8 @@ public class EditTaskCommand extends Command {
             + PREFIX_TASK_INDEX + "2 "
             + PREFIX_TASK + "Assignment Discussion";
 
+    public static final String DESCRIPTION = "Edits the details of the task identified";
+
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s ";
     public static final String MESSAGE_TASK_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "Task already exists.";
@@ -104,5 +106,13 @@ public class EditTaskCommand extends Command {
         return targetPersonIndex.equals(e.targetPersonIndex)
                 && targetTaskIndex.equals(e.targetTaskIndex)
                 && editedTask.equals(e.editedTask);
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 }

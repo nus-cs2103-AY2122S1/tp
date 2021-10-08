@@ -31,6 +31,8 @@ public class AddTaskCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK + "Likes to swim.";
 
+    public static final String DESCRIPTION = "Add to the task list of the person specified by INDEX";
+
     private final Index index;
     private final List<Task> newTasks;
 
@@ -83,6 +85,14 @@ public class AddTaskCommand extends Command {
         AddTaskCommand e = (AddTaskCommand) other;
         return index.equals(e.index)
                 && newTasks.equals(e.newTasks);
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 
     /**

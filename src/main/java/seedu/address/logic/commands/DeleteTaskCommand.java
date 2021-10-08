@@ -26,13 +26,16 @@ public class DeleteTaskCommand extends Command {
             + PREFIX_TASK_INDEX + "TaskIndex\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + "2";
 
+    public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, "
+            + "from person specified by the INDEX";
+
     private final Index targetPersonIndex;
     private final Index targetTaskIndex;
 
     /**
      * Constructor for a DeleteTaskCommand to delete a task from a person.
-     * @param targetPersonIndex
-     * @param targetTaskIndex
+     * @param targetPersonIndex The Index of the target person.
+     * @param targetTaskIndex The Index of the target Task that belongs to target person.
      */
     public DeleteTaskCommand(Index targetPersonIndex, Index targetTaskIndex) {
         this.targetPersonIndex = targetPersonIndex;
@@ -70,6 +73,14 @@ public class DeleteTaskCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson, taskToRemove));
+    }
+
+    public String getCommand() {
+        return COMMAND_WORD;
+    }
+
+    public String getDescription() {
+        return DESCRIPTION;
     }
 
     /**
