@@ -104,6 +104,8 @@
     -fx-background-radius: 15;
     -fx-border-radius: 15;
     -fx-border-color: white;
+    -fx-border-insets: 3;
+    -fx-background-insets: 3;
 }
 
 .list-cell:filled:even {
