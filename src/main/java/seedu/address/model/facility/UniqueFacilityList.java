@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 import seedu.address.model.util.SampleDataUtil;
 
 
@@ -26,6 +27,18 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void add(Facility facility) {
         requireNonNull(facility);
         facilityList.add(facility);
+    }
+
+    /**
+     * Removes the specified facility from the facilityList.
+     *
+     * @param toRemove Facility to be removed.
+     */
+    public void remove(Facility toRemove) {
+        requireNonNull(toRemove);
+        if (!facilityList.remove(toRemove)) {
+            throw new FacilityNotFoundException();
+        }
     }
 
     @Override
