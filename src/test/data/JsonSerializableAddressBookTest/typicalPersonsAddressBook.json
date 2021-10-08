@@ -5,42 +5,57 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "note": "",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "note": "",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "note": "",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "note": "",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "note": "",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "note": "",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "note": "",
-    "tagged" : [ ]
-  } ]
+    "tagged" : [ ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
+  } ],
+  "superGroupList" : [ ]
 }

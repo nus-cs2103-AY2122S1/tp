@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -93,6 +95,22 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String group} into a {@code SuperGroup}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code SuperGroup} is invalid.
+     */
+    public static SuperGroup parseSuperGroup(String sg) throws ParseException {
+        requireNonNull(sg);
+        // TODO: Check if that edge cases is covered. Such as no colon etc
+        String trimmedGroup = sg.trim();
+        if (!SuperGroup.isValidGroupName(trimmedGroup)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
+        return new SuperGroup(trimmedGroup);
     }
 
     /**

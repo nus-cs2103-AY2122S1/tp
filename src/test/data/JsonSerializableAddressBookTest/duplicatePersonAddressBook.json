@@ -4,11 +4,17 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "note" : "",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "note" : ""
-  } ]
+    "note" : "",
+    "tagged": [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
+  } ],
+  "superGroupList" : [ ]
 }

@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
 /**
@@ -68,6 +70,24 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Finds the given person.
+     */
+    Person findPerson(String name);
+
+    /**
+     * Returns true if the SuperGroup exist.
+     */
+    boolean hasSuperGroup(SuperGroup superGroup);
+
+    void addSuperGroup(SuperGroup superGroup);
+
+    void deleteSuperGroup(SuperGroup superGroup);
+
+    SuperGroup findSuperGroup(String name);
+
+    SubGroup findSubGroup(String name);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

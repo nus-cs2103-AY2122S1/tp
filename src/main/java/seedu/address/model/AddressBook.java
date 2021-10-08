@@ -2,9 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +19,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
+    private HashMap<String, SuperGroup> superGroups;
+
+    private HashMap<String, SubGroup> subGroups;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +32,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        superGroups = new HashMap<>();
+        subGroups = new HashMap<>();
     }
 
     public AddressBook() {}
@@ -48,12 +57,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code SuperGroups}.
+     * {@code SuperGroups} must not contain duplicate SuperGroups.
+     */
+    public void setSuperGroups(HashMap<String, SuperGroup> superGroups) {
+        this.superGroups = superGroups;
+    }
+
+    /**
+     * Replaces the contents of the person list with {@code SuperGroups}.
+     * {@code SuperGroups} must not contain duplicate SuperGroups.
+     */
+    public void setSubGroups(HashMap<String, SubGroup> subGroups) {
+        this.subGroups = subGroups;
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setSuperGroups(newData.getSuperGroups());
+        setSubGroups(newData.getSubGroups());
     }
 
     //// person-level operations
@@ -75,6 +102,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Gets Person based on name.
+     */
+    public Person findPerson(String name) {
+        for (Person person: persons) {
+            if (person.getName().fullName.equals(name)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -93,6 +132,66 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// Group-level operations
+
+    /**
+     * Adds superGroup into the AddressBook.
+     * @param sg the SuperGroup to be added into AddressBook.
+     */
+    public void addSuperGroup(SuperGroup sg) {
+        if (!superGroups.containsKey(sg.getName())) {
+            superGroups.put(sg.getName(), sg);
+        }
+    }
+
+    public void deleteSuperGroup(SuperGroup sg) {
+        superGroups.remove(sg.getName());
+    }
+
+    /**
+     * Gets SuperGroup based on group name.
+     */
+    public SuperGroup findSuperGroup(String name) {
+        return superGroups.get(name);
+    }
+
+    /**
+     * Returns true if SuperGroup exists.
+     */
+    public boolean hasSubGroup(SubGroup subGroup) {
+        requireNonNull(subGroup);
+        return subGroups.containsKey(subGroup.toString());
+    }
+
+    /**
+     * Adds SubGroup into the AddressBook.
+     * @param subGroup the SuperGroup to be added into AddressBook.
+     */
+    public void addSubGroup(SubGroup subGroup) {
+        requireNonNull(subGroup);
+        subGroups.put(subGroup.toString(), subGroup);
+    }
+
+    public void deleteSubGroup(SubGroup subGroup) {
+        subGroups.remove(subGroup.toString());
+    }
+
+    /**
+     * Gets SuperGroup based on group name.
+     */
+    public SubGroup findSubGroup(String name) {
+        return subGroups.get(name);
+    }
+
+    /**
+     * Returns true if SuperGroup exists.
+     */
+    public boolean hasSuperGroup(SuperGroup superGroup) {
+        requireNonNull(superGroup);
+        return superGroups.containsKey(superGroup.getName());
+    }
+
+
     //// util methods
 
     @Override
@@ -104,6 +203,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public HashMap<String, SuperGroup> getSuperGroups() {
+        return superGroups;
+    }
+
+    @Override
+    public HashMap<String, SubGroup> getSubGroups() {
+        return subGroups;
     }
 
     @Override

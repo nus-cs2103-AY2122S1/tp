@@ -20,6 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -111,6 +113,36 @@ public class AddCommandTest {
         @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person findPerson(String name) {
+            return null;
+        }
+
+        @Override
+        public boolean hasSuperGroup(SuperGroup superGroup) {
+            return false;
+        }
+
+        @Override
+        public void addSuperGroup(SuperGroup superGroup) {
+
+        }
+
+        @Override
+        public void deleteSuperGroup(SuperGroup superGroup) {
+
+        }
+
+        @Override
+        public SuperGroup findSuperGroup(String name) {
+            return null;
+        }
+
+        @Override
+        public SubGroup findSubGroup(String name) {
+            return null;
         }
 
         @Override

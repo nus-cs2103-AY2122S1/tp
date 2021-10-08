@@ -1,5 +1,4 @@
 package seedu.address.storage;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,14 +28,17 @@ class JsonAdaptedPerson {
     private final String email;
     private final String note;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<String> superGroups = new ArrayList<>();
+    private final List<String> subGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("note") String note,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+        @JsonProperty("email") String email,
+        @JsonProperty("note") String note, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+        @JsonProperty("superGroups") List<String> superGroups, @JsonProperty("subGroups") List<String> subGroups) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +46,8 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.superGroups.addAll(superGroups);
+        this.subGroups.addAll(subGroups);
     }
 
     /**
@@ -57,6 +61,8 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        superGroups.addAll(source.getSuperGroups());
+        subGroups.addAll(source.getSubGroups());
     }
 
     /**
@@ -100,7 +106,7 @@ class JsonAdaptedPerson {
         final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelNote, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelNote, modelTags,
+            new HashSet<>(superGroups), new HashSet<>(subGroups));
     }
-
 }
