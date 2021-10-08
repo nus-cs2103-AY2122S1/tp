@@ -165,9 +165,6 @@ public class ParserUtil {
     public static Optional<Visit> parseVisit(String visit) throws ParseException {
         requireNonNull(visit);
         String trimmedVisit = visit.trim();
-        if (visit.isEmpty()) {
-            return Optional.ofNullable(new Visit(trimmedVisit));
-        }
 
         if (!Visit.isValidVisit(trimmedVisit)) {
             throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
