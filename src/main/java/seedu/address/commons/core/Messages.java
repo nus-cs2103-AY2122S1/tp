@@ -12,6 +12,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_COUNT_INTEGER = "The count provided cannot be negative!";
     public static final String MESSAGE_INVALID_COUNT_FORMAT = "The count provided must be integer!";
     public static final String MESSAGE_INVALID_ID_FORMAT = "The id provided must be integer!";
-    public static final String MESSAGE_INVALID_ID_LENGTH_AND_SIGN = "The id provided must be positive and of six digits!";
-
+    public static final String MESSAGE_INVALID_ID_LENGTH_AND_SIGN = "The id provided must be positive and of 6 digits!";
 }
