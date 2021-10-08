@@ -17,9 +17,9 @@ public class Telegram implements Information {
             + "characters.";
     // alphanumeric and special characters
     private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
-    private static final String HANDLE_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
+    private static final String HANDLE_REGEX = ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
             + ALPHANUMERIC_NO_UNDERSCORE + ")*";
-    public static final String VALIDATION_REGEX = "@" + HANDLE_REGEX;
+    public static final String VALIDATION_REGEX = "^" + "@" + HANDLE_REGEX;
 
     public final String value;
 

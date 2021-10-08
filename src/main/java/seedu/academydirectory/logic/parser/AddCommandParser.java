@@ -3,6 +3,7 @@ package seedu.academydirectory.logic.parser;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
@@ -14,6 +15,7 @@ import seedu.academydirectory.logic.commands.AddCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.Address;
 import seedu.academydirectory.model.student.Email;
+import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
@@ -41,10 +43,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Telegram telegram = ParserUtil.parseTelegram(argMultimap.getValue(PREFIX_TELEGRAM).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Student student = new Student(name, phone, email, address, tagList);
+        Student student = new Student(name, phone, email, telegram, address, tagList);
 
         return new AddCommand(student);
     }

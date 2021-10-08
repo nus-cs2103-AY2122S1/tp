@@ -6,6 +6,7 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -24,6 +25,7 @@ import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
 /**
@@ -40,11 +42,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_TELEGRAM + "@johnD";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -96,10 +100,11 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        Telegram updatedTelegram = editStudentDescriptor.getTelegram().orElse(studentToEdit.getTelegram());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Student(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedAddress, updatedTags);
     }
 
     @Override
@@ -128,6 +133,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Telegram telegram;
         private Address address;
         private Set<Tag> tags;
 
@@ -141,6 +147,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setTelegram(toCopy.telegram);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -149,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegram, address, tags);
         }
 
         public void setName(Name name) {
@@ -174,6 +181,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setTelegram(Telegram telegram) {
+            this.telegram = telegram;
+        }
+
+        public Optional<Telegram> getTelegram() {
+            return Optional.ofNullable(telegram);
         }
 
         public void setAddress(Address address) {
@@ -219,6 +234,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getTelegram().equals(e.getTelegram())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
