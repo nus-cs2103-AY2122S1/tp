@@ -42,7 +42,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMPLOYMENT_TYPE + person.getEmploymentType().employmentType + " ");
         sb.append(PREFIX_EXPECTED_SALARY + person.getExpectedSalary().value + " ");
         sb.append(PREFIX_LEVEL_OF_EDUCATION + person.getLevelOfEducation().levelOfEducation + " ");
-        sb.append(PREFIX_EXPERIENCE + person.getExperience().value.toString() + " ");
+        sb.append(PREFIX_EXPERIENCE + person.getExperience().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

@@ -40,7 +40,7 @@ public class TypicalPersons {
             .withEmploymentType("Full time")
             .withExpectedSalary("2500")
             .withLevelOfEducation("PhD")
-            .withExperience(0)
+            .withExperience("0")
             .withTags("friends").build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
@@ -51,7 +51,7 @@ public class TypicalPersons {
             .withEmploymentType("Part time")
             .withExpectedSalary("2700")
             .withLevelOfEducation("Masters")
-            .withExperience(1)
+            .withExperience("1")
             .withTags("owesMoney", "friends").build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
@@ -62,7 +62,7 @@ public class TypicalPersons {
             .withEmploymentType("Temporary")
             .withExpectedSalary("5500")
             .withLevelOfEducation("Elementary")
-            .withExperience(2).build();
+            .withExperience("2").build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533")
@@ -72,7 +72,7 @@ public class TypicalPersons {
             .withEmploymentType("Internship")
             .withExpectedSalary("3500")
             .withLevelOfEducation("Middle School")
-            .withExperience(3)
+            .withExperience("3")
             .withTags("friends").build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
@@ -83,7 +83,7 @@ public class TypicalPersons {
             .withEmploymentType("Full time")
             .withExpectedSalary("5700")
             .withLevelOfEducation("Bachelors")
-            .withExperience(4).build();
+            .withExperience("4").build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withPhone("9482427")
@@ -93,7 +93,7 @@ public class TypicalPersons {
             .withEmploymentType("Part time")
             .withExpectedSalary("1900")
             .withLevelOfEducation("High School")
-            .withExperience(5).build();
+            .withExperience("5").build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withPhone("9482442")
@@ -103,7 +103,7 @@ public class TypicalPersons {
             .withEmploymentType("Internship")
             .withExpectedSalary("900")
             .withLevelOfEducation("University")
-            .withExperience(6).build();
+            .withExperience("6").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
@@ -114,7 +114,7 @@ public class TypicalPersons {
             .withEmploymentType("Part time")
             .withExpectedSalary("3300")
             .withLevelOfEducation("PhD")
-            .withExperience(3).build();
+            .withExperience("3").build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withPhone("8482131")
@@ -124,7 +124,7 @@ public class TypicalPersons {
             .withEmploymentType("Full time")
             .withExpectedSalary("7100")
             .withLevelOfEducation("Masters")
-            .withExperience(7).build();
+            .withExperience("7").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)

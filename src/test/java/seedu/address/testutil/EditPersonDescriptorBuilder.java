@@ -116,7 +116,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Experience} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withExperience(Integer experience) {
+    public EditPersonDescriptorBuilder withExperience(String experience) {
         descriptor.setExperience(new Experience(experience));
         return this;
     }
