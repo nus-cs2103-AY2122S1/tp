@@ -18,8 +18,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            if (args.contains("-")) {
+                Index start = ParserUtil.parseIndex(args.substring(1, args.indexOf("-")));
+                Index end = ParserUtil.parseIndex(args.substring(args.indexOf("-") + 1));
+                return new DeleteCommand(start, end);
+            } else {
+                Index index = ParserUtil.parseIndex(args);
+                return new DeleteCommand(index);
+            }
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
