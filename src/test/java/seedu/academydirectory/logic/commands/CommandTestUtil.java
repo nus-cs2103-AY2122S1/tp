@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
