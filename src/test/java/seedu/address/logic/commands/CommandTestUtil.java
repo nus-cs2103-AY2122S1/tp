@@ -27,10 +27,9 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_BAGEL = "Bagel";
     public static final String VALID_NAME_DONUT = "Donut";
-    public static final String VALID_ID_BAGEL = "#123456";
-    public static final String VALID_ID_DONUT = "#789012";
+    public static final String VALID_ID_BAGEL = "123456";
+    public static final String VALID_ID_DONUT = "789012";
     public static final String VALID_COUNT_BAGEL = "5";
-    public static final String VALID_COUNT_DONUT = "$5";
     public static final String VALID_TAG_BAKED = "baked";
     public static final String VALID_TAG_POPULAR = "popular";
 
@@ -39,12 +38,13 @@ public class CommandTestUtil {
     public static final String ID_DESC_BAGEL = " " + PREFIX_ID + VALID_ID_BAGEL;
     public static final String ID_DESC_DONUT = " " + PREFIX_ID + VALID_ID_DONUT;
     public static final String COUNT_DESC_BAGEL = " " + PREFIX_COUNT + VALID_COUNT_BAGEL;
-    public static final String COUNT_DESC_DONUT = " " + PREFIX_COUNT + VALID_COUNT_DONUT;
     public static final String TAG_DESC_BAKED = " " + PREFIX_TAG + VALID_TAG_BAKED;
     public static final String TAG_DESC_POPULAR = " " + PREFIX_TAG + VALID_TAG_POPULAR;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Cake&"; // '&' not allowed in names
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_ID_BAGEL = " " + PREFIX_ID + "231";
+    public static final String INVALID_ID_BAGEL_2 = " " + PREFIX_ID + "-123232";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

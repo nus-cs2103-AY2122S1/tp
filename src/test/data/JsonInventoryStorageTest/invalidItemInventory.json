@@ -2,6 +2,6 @@
   "items": [ {
     "name": "Item with invalid name field: T@sty Chicken!",
     "count": 1,
-    "id": "#9482424"
+    "id": "9482424"
   } ]
 }

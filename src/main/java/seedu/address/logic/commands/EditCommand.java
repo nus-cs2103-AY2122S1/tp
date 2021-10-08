@@ -38,7 +38,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_COUNT + "COUNT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ID + "#192028 ";
+            + PREFIX_ID + "192028 ";
 
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

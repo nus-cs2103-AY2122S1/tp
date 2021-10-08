@@ -113,7 +113,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleIdKeywords_multipleItemsFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
-        IdContainsNumberPredicate predicate = preparePredicateId("#444444 #555555");
+        IdContainsNumberPredicate predicate = preparePredicateId("444444 555555");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredItemList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
