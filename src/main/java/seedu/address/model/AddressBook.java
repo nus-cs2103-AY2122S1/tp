@@ -161,6 +161,31 @@ public class AddressBook implements ReadOnlyAddressBook {
         return assessments.assessments;
     }
 
+    /**
+     * Provides a weaker notion of equality for address books
+     */
+    public boolean isSameAddressBook(AddressBook other) {
+        if (other == null) {
+            return false;
+        }
+
+        boolean equal = true;
+
+        equal = equal && other.getStudentList().size() == getStudentList().size();
+        // all students are the same
+        equal = equal && other.getStudentList().stream().allMatch(otherStudent -> {
+            for (Student student : getStudentList()) {
+                if (otherStudent.isSameStudent(student)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+        System.out.println(equal);
+        // TODO: check that all groups, assessments, and scores are also the same
+        return equal;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

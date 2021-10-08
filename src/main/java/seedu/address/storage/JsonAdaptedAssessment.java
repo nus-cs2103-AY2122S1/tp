@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -12,15 +13,16 @@ import seedu.address.model.student.ID;
 import seedu.address.model.student.Score;
 
 public class JsonAdaptedAssessment {
-    private final String assessmentName;
+    private final String name;
     private final Map<String, String> scores;
 
     /**
      * Constructs a {@code JsonAdaptedAssessment} with the given {@code assessmentName}.
      */
     @JsonCreator
-    public JsonAdaptedAssessment(String assessmentName, Map<String, String> scores) {
-        this.assessmentName = assessmentName;
+    public JsonAdaptedAssessment(@JsonProperty("name") String name,
+                                 @JsonProperty("scores") Map<String, String> scores) {
+        this.name = name;
         this.scores = scores;
     }
 
@@ -28,21 +30,11 @@ public class JsonAdaptedAssessment {
      * Converts a given {@code Assessment} into this class for Jackson use.
      */
     public JsonAdaptedAssessment(Assessment source) {
-        assessmentName = source.value;
+        name = source.value;
         scores = new HashMap<>();
         for (ID id : source.scores.keySet()) {
             scores.put(id.value, source.scores.get(id).value);
         }
-    }
-
-    @JsonValue
-    public String getAssessmentName() {
-        return assessmentName;
-    }
-
-    @JsonValue
-    public Map<String, String> getScores() {
-        return scores;
     }
 
     /**
@@ -51,12 +43,18 @@ public class JsonAdaptedAssessment {
      * @throws IllegalValueException if there were any data constraints violated in the adapted assessment.
      */
     public Assessment toModelType() throws IllegalValueException {
-        if (!Assessment.isValidAssessment(assessmentName)) {
+        if (!Assessment.isValidAssessment(name)) {
             throw new IllegalValueException(Assessment.MESSAGE_CONSTRAINTS);
         }
 
-        Assessment assessment = new Assessment(assessmentName);
+        Assessment assessment = new Assessment(name);
         for (String id : scores.keySet()) {
+            if (!ID.isValidID(id)) {
+                throw new IllegalValueException(ID.MESSAGE_CONSTRAINTS);
+            }
+            if (!Score.isValidScore(scores.get(id))) {
+                throw new IllegalValueException(Score.MESSAGE_CONSTRAINTS);
+            }
             assessment.scores.put(new ID(id), new Score(scores.get(id)));
         }
         return assessment;
