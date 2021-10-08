@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String grade;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<String> lessonCodes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,8 +40,9 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("grade") String grade,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("grade") String grade, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("lessons") List<String> lessonCodes) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +50,9 @@ class JsonAdaptedPerson {
         this.grade = grade;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (lessonCodes != null) {
+            this.lessonCodes.addAll(lessonCodes);
         }
     }
 
@@ -62,6 +68,14 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        lessonCodes.addAll(source.getEnrolledLessonCodes());
+    }
+
+    /**
+     * Returns the list of lesson codes the encoded Student is enrolled to.
+     */
+    public List<String> getLessonCodes() {
+        return Collections.unmodifiableList(lessonCodes);
     }
 
     /**
@@ -119,5 +133,4 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelGrade, modelTags);
     }
-
 }
