@@ -98,7 +98,7 @@ public class StudentBuilder {
         Integer sessionCount = studioRecord.getAttendance().getSessionCount();
         Attendance newAttendance = new Attendance(sessionCount);
         newAttendance.setAttendance(boolArr);
-        this.studioRecord.setAttendance(newAttendance);
+        this.studioRecord = new StudioRecord(newAttendance, studioRecord.getParticipation());
         return this;
     }
 

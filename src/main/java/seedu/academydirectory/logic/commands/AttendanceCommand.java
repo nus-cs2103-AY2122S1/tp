@@ -12,6 +12,7 @@ import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.StudioRecord;
 
 public class AttendanceCommand extends Command {
 
@@ -59,11 +60,11 @@ public class AttendanceCommand extends Command {
             Student studentToEdit = lastShownList.get(index.getZeroBased());
             Attendance attendanceToEdit = studentToEdit.getAttendance();
             attendanceToEdit = attendanceToEdit.update(studioSession, attendanceStatus);
+            StudioRecord newStudioRecord = new StudioRecord(attendanceToEdit, studentToEdit.getParticipation());
             Student editedPerson = new Student(
                     studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                    studentToEdit.getAddress(), studentToEdit.getStudioRecord(), studentToEdit.getAssessment(),
+                    studentToEdit.getAddress(), newStudioRecord, studentToEdit.getAssessment(),
                     studentToEdit.getTags());
-            editedPerson.setAttendance(attendanceToEdit);
             model.setStudent(studentToEdit, editedPerson);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

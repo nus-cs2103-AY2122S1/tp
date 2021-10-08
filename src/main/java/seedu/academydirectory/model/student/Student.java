@@ -56,11 +56,11 @@ public class Student {
     }
 
     public void setAttendance(Attendance attendance) {
-        this.studioRecord.setAttendance(attendance);
+        this.studioRecord = new StudioRecord(attendance, studioRecord.getParticipation());
     }
 
     public void setParticipation(Participation participation) {
-        this.studioRecord.setParticipation(participation);
+        this.studioRecord = new StudioRecord(studioRecord.getAttendance(), participation);
     }
 
     public Name getName() {

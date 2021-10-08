@@ -55,9 +55,15 @@ public class Attendance implements Information {
      */
     private String attendanceStatusToString(boolean attendanceStatus, int session) {
         if (attendanceStatus) {
-            return "[" + (session + 1) + "]"; // session index displayed if attended
+            String sessionToPrint = "";
+            if (session + 1 < 10) {
+                sessionToPrint = "  " + (session + 1) + "  ";
+            } else {
+                sessionToPrint += "  " + (session + 1) + " ";
+            }
+            return "[" + sessionToPrint+ "]"; // session index displayed if attended
         } else {
-            return "[ ]"; // session index omitted if unattended
+            return "[       ]"; // session index omitted if unattended
         }
     }
 

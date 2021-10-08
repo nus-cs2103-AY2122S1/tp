@@ -6,7 +6,7 @@ public class Participation implements Information {
 
     private int[] participationArray;
 
-    private static final String VALIDATION_REGEX = "/[0-9]+/";
+    private static final String VALIDATION_REGEX = "^-?[1-9]\\d*$";
 
     /**
      * The constructor for an Participation object.
@@ -57,7 +57,15 @@ public class Participation implements Information {
      * @param participationCount
      */
     public String participationCountToString(int participationCount) {
-        return "[" + participationCount + "]"; // participation score of a student
+        String participationCountString = "";
+        if (participationCount < 10) {
+            participationCountString += "  " + participationCount + "  ";
+        } else if (participationCount < 100) {
+            participationCountString += "  " + participationCount + " ";
+        } else {
+            participationCountString += " " + participationCount + " ";
+        }
+        return "[" + participationCountString + "]"; // participation score of a student
     }
 
     public static boolean isValidParticipation(String test) {

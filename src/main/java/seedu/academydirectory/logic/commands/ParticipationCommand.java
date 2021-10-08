@@ -27,7 +27,7 @@ public class ParticipationCommand extends Command {
             + "add/ PARTICIPATION_TO_ADD"
             + "Example: " + COMMAND_WORD + " 1 ses/ 7 add/ 1";
 
-    public static final String MESSAGE_UPDATE_ATTENDANCE_SUCCESS = "Attendance updated!";
+    public static final String MESSAGE_UPDATE_PARTICIPATION_SUCCESS = "Participation updated!";
 
     private final ArrayList<Index> indexArrayList;
     private final Integer studioSession;
@@ -36,7 +36,7 @@ public class ParticipationCommand extends Command {
     /**
      * @param participationUpdate The new updated participation count
      * @param studioSession The studio session number
-     * @param indexArrayList The ArrayList of students that are involved in the AttendanceCommand
+     * @param indexArrayList The ArrayList of students that are involved in the ParticipationCommand
      */
     public ParticipationCommand(Integer participationUpdate, Integer studioSession,
                                 ArrayList<Index> indexArrayList) {
@@ -69,7 +69,7 @@ public class ParticipationCommand extends Command {
             model.setStudent(studentToEdit, editedPerson);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
+        return new CommandResult(MESSAGE_UPDATE_PARTICIPATION_SUCCESS);
 
     }
 

@@ -16,6 +16,7 @@ import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
+import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.student.StudioRecord;
@@ -33,6 +34,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final boolean[] attendance;
+    private final int[] participation;
     private final HashMap<String, Integer> assessment;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -40,6 +42,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("attendance") boolean[] attendance,
+                              @JsonProperty("participation") int[] participation,
                               @JsonProperty("assessment") HashMap<String, Integer> assessment,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
@@ -47,6 +50,7 @@ class JsonAdaptedStudent {
         this.email = email;
         this.address = address;
         this.attendance = attendance;
+        this.participation = participation;
         this.assessment = assessment;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -61,6 +65,7 @@ class JsonAdaptedStudent {
         email = source.getEmail().value;
         address = source.getAddress().value;
         attendance = source.getAttendance().getAttendanceArray();
+        participation = source.getParticipation().getParticipationArray();
         assessment = source.getAssessment().getAssessment();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -112,8 +117,12 @@ class JsonAdaptedStudent {
 
         Attendance tempAttendance = new Attendance(attendance.length);
         tempAttendance.setAttendance(attendance);
-        StudioRecord tempStudioRecord = new StudioRecord(attendance.length);
-        tempStudioRecord.setAttendance(tempAttendance);
+
+        Participation tempParticipation = new Participation(participation.length); // should be same length as attend
+        tempParticipation.setParticipation(participation);
+
+        StudioRecord tempStudioRecord = new StudioRecord(tempAttendance, tempParticipation);
+
         final StudioRecord modelStudioRecord = tempStudioRecord;
 
         final Assessment modelAssessment = new Assessment();

@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ibm.icu.impl.number.Parse;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
@@ -16,6 +15,7 @@ import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
+import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.tag.Tag;
@@ -26,8 +26,8 @@ import seedu.academydirectory.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status is not 0 or 1.";
+    public static final String MESSAGE_INVALID_PARTICIPATION_STATUS = "Change in Participation must be between -100 and 100.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -48,11 +48,21 @@ public class ParserUtil {
      */
     public static boolean parseAttendance(String attendance) throws ParseException {
         requireNonNull(attendance);
-        String trimmedIndex = attendance.trim();
-        if (Attendance.isValidAttendance(trimmedIndex)) {
-            return trimmedIndex.equals("1");
+        String trimmedAttendance = attendance.trim();
+        if (Attendance.isValidAttendance(trimmedAttendance)) {
+            return trimmedAttendance.equals("1");
         } else {
             throw new ParseException(MESSAGE_INVALID_ATTENDANCE_STATUS);
+        }
+    }
+
+    public static Integer parseParticipation(String participation) throws ParseException {
+        requireNonNull(participation);
+        String trimmedParticipation = participation.trim();
+        if (Participation.isValidParticipation(trimmedParticipation)) {
+            return Integer.parseInt(trimmedParticipation);
+        } else {
+            throw new ParseException(MESSAGE_INVALID_PARTICIPATION_STATUS);
         }
     }
 
