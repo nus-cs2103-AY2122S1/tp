@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_LIST;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,11 +19,11 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_FRIEND_LIST);
+                ArgumentTokenizer.tokenize(args, FLAG_FRIEND);
 
-        if (argMultimap.getValue(PREFIX_FRIEND_LIST).isPresent()) {
+        if (argMultimap.getValue(FLAG_FRIEND).isPresent()) {
             return new ListCommand(
-                    new FriendIdContainsKeywordPredicate(argMultimap.getValue(PREFIX_FRIEND_LIST).get()));
+                    new FriendIdContainsKeywordPredicate(argMultimap.getValue(FLAG_FRIEND).get()));
         }
         // no tags present, default to friend search
         return new ListCommand(new FriendIdContainsKeywordPredicate(args));
