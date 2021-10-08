@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.PlannerMd;

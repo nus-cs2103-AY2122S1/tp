@@ -9,7 +9,7 @@ import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.RemarkCommand;
+import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
 import seedu.plannermd.model.person.Remark;
 
 class RemarkCommandParserTest {

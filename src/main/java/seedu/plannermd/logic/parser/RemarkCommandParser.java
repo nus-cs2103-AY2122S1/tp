@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.exceptions.IllegalValueException;
-import seedu.plannermd.logic.commands.RemarkCommand;
+import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.person.Remark;
 
