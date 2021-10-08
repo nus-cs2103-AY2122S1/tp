@@ -26,6 +26,7 @@ public class Student {
 
     /**
      * Every field must be present and not null.
+     * Constructor for a new Person object
      */
     public Student(Name name, Email email, Set<Tag> tags) {
         requireAllNonNull(name, email, tags);
@@ -36,6 +37,18 @@ public class Student {
         this.participation = new Participation();
     }
 
+    /**
+     * Constructor for a re-stored Person object
+     */
+    public Student(Name name, Email email, Set<Tag> tags, Attendance attendance) {
+        requireAllNonNull(name, email, tags, attendance);
+        this.name = name;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.attendance = attendance;
+        this.participation = new Participation();
+    }
+
     public Name getName() {
         return name;
     }
@@ -43,7 +56,6 @@ public class Student {
     public Email getEmail() {
         return email;
     }
-
 
     public Attendance getAttendance() {
         return attendance;

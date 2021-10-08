@@ -116,9 +116,29 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasTask(Task student) {
-        requireNonNull(student);
-        return addressBook.hasTask(student);
+    public void markStudentAttendance(Student target, int week) {
+        requireAllNonNull(target);
+        Student newPerson = target;
+
+        newPerson.getAttendance().toggleAttendance(week);
+        addressBook.setStudent(target, newPerson);
+    }
+
+    @Override
+    public String getStudentAttendance(Student target, int week) {
+        requireAllNonNull(target);
+        return target.getAttendance().checkPresent(week) == 1 ? "present" : "absent";
+    }
+
+    /**
+     * Checks if a task exists
+     *
+     * @param task task to check
+     * @return true if task exists, false otherwise
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return addressBook.hasTask(task);
     }
 
     @Override

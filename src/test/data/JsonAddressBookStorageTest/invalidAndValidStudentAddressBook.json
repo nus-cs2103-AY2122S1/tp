@@ -1,10 +1,14 @@
 {
   "students": [ {
     "name": "Valid Student",
-    "email": "hans@example.com"
+    "email": "hans@example.com",
+    "tagged" : [ ],
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
   }, {
     "name": "Student With Invalid Email Field",
-    "email": "hansexample.com"
+    "email": "hansexample.com",
+    "tagged" : [ ],
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
   } ],
   "tasks" : [ ]
 }

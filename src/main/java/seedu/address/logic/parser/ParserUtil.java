@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.tag.Tag;
@@ -36,6 +37,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static int parseWeek(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!Attendance.isValidWeek(Integer.parseInt(oneBasedIndex))) {
+            throw new ParseException(String.format(Attendance.MESSAGE_CONSTRAINTS, Attendance.NUMBER_OF_WEEKS));
+        }
+        return Integer.parseInt(trimmedIndex) - 1;
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -59,7 +73,7 @@ public class ParserUtil {
     public static TaskName parseTaskName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (!TaskName.isValidName(trimmedName)) {
             throw new ParseException(TaskName.MESSAGE_CONSTRAINTS);
         }
         return new TaskName(trimmedName);

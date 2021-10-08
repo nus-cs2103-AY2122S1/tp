@@ -27,9 +27,7 @@ class JsonAdaptedStudent {
     private final String name;
     private final String email;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-
-    //Attendance and participation added
-    private Attendance attendance;
+    private final ArrayList<Integer> attendance = new ArrayList<>();
     private Participation participation;
 
     /**
@@ -39,15 +37,13 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name,
                               @JsonProperty("email") String email,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                              @JsonProperty("attendance") String attendance,
-                              @JsonProperty("participation") String participation) {
+                              @JsonProperty("attendance") ArrayList<Integer> attendance) {
         this.name = name;
         this.email = email;
-        this.attendance = new Attendance();
-        this.participation = new Participation();
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.attendance.addAll(attendance);
     }
 
     /**
@@ -56,11 +52,11 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
         email = source.getEmail().value;
-        attendance = source.getAttendance();
         participation = source.getParticipation();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        attendance.addAll(source.getAttendance().attendanceList);
     }
 
     /**
@@ -70,9 +66,12 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         final List<Tag> studentTags = new ArrayList<>();
+        final ArrayList<Integer> studentAttendance = new ArrayList<>();
+
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
         }
+        studentAttendance.addAll(attendance);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -90,9 +89,9 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
-
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelEmail, modelTags);
-    }
+        final Attendance modelAttendance = new Attendance(studentAttendance);
 
+        return new Student(modelName, modelEmail, modelTags, modelAttendance);
+    }
 }

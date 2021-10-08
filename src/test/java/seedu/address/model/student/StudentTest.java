@@ -29,7 +29,6 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSameStudent(null));
 
-        // same name, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 

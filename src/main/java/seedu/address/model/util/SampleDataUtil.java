@@ -1,11 +1,13 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -18,17 +20,23 @@ public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"),
-                getTagSet("friends")),
+                    getTagSet("friends"),
+                    getAttendanceList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
             new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"),
-                getTagSet("colleagues", "friends")),
+                    getTagSet("colleagues", "friends"),
+                    getAttendanceList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
             new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
-                getTagSet("neighbours")),
+                    getTagSet("neighbours"),
+                    getAttendanceList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
             new Student(new Name("David Li"), new Email("lidavid@example.com"),
-                getTagSet("family")),
+                    getTagSet("family"),
+                    getAttendanceList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
             new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"),
-                getTagSet("classmates")),
+                    getTagSet("classmates"),
+                    getAttendanceList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
             new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"),
-                getTagSet("colleagues"))
+                    getTagSet("colleagues"),
+                    getAttendanceList(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)),
         };
     }
 
@@ -47,6 +55,14 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+
+    /**
+     * Returns a attendance list containing the list of integers given.
+     */
+    public static Attendance getAttendanceList(Integer... integers) {
+        return new Attendance(new ArrayList<>(Arrays.asList(integers)));
     }
 
 }

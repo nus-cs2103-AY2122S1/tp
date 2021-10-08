@@ -50,7 +50,7 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         email.setText(student.getEmail().value);
-        attendance.setText(student.getAttendance().value.toString());
+        attendance.setText(student.getAttendance().attendanceList.toString());
         participation.setText(student.getParticipation().value.toString());
 
         student.getTags().stream()
