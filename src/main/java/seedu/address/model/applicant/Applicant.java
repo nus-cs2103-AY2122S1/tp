@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.position.Position;
+
 /**
  * Represents an Applicant in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -48,7 +50,7 @@ public class Applicant {
     }
 
     public Position getPosition() {
-        return address;
+        return position;
     }
 
     /**
