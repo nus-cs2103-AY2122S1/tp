@@ -69,8 +69,6 @@ public class JsonPlannerMdStorageTest {
         // Save in new file and read back
         jsonPlannerMdStorage.savePlannerMd(original, filePath);
         ReadOnlyPlannerMd readBack = jsonPlannerMdStorage.readPlannerMd(filePath).get();
-        System.out.println(original);
-        System.out.println(readBack);
         assertEquals(original, new PlannerMd(readBack));
 
         // Modify data, overwrite exiting file, and read back
