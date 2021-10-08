@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLASSES;
 import static seedu.address.model.Model.PREDICATE_SHOW_NO_STUDENTS;
+
+import seedu.address.model.Model;
+
 
 /**
  * Lists all classes in ClassMate to the user.

@@ -1,14 +1,13 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.tutorialclass.TutorialClass;
-
-import java.awt.*;
-import java.net.URL;
-import java.util.Comparator;
 
 public class ClassCard extends UiPart<Region> {
     private static final String FXML = "ClassListCard.fxml";
@@ -27,6 +26,9 @@ public class ClassCard extends UiPart<Region> {
     private FlowPane tags;
 
 
+    /**
+     * Creates a {@code ClassCard} with the given {@code TutorialClass} and index to display.
+     */
     public ClassCard(TutorialClass tutorialClass, int displayedIndex) {
         super(FXML);
         this.tutorialClass = tutorialClass;

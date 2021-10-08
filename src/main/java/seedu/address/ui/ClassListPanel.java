@@ -15,7 +15,7 @@ import seedu.address.model.tutorialclass.TutorialClass;
 /**
  * Panel containting the list of classes
  */
-public class ClassListPanel extends UiPart<Region>{
+public class ClassListPanel extends UiPart<Region> {
     private static final String FXML = "ClassListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ClassListPanel.class);
 

@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteTutorialClass(TutorialClass target){
+    public void deleteTutorialClass(TutorialClass target) {
         addressBook.removeTutorialClass(target);
     }
 
