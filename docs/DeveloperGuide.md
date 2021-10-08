@@ -304,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | | **experienced user** | **update large number of contacts at once** | **exclude manually adding them myself** |
 | `**` | experienced user | import a list of contacts | add a large number of contacts at once |
 | `**` | experienced user | export a list of contacts | send them to other people |
-| | **general user** | | |		
+| | **general user** | | |
 | `**` | general CLI user| use commands from cli | exclude the need to learn new commands |
 | `***` | user | update contact details | keep track of their details |
 | `***` | user | delete contacts | get rid of contacts who are no longer relevant |
@@ -356,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Update Contact** 
+**Use case: Update Contact**
 
 **MSS**
 
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests for contacts satisfying a criterion. 
+1. User requests for contacts satisfying a criterion.
 2. ContactSH searches for contacts that satisfy the criterion.
 3. ContactSH displays the list of contacts that satisfy the criterion.
 
