@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -243,5 +246,14 @@ public class ParserUtil {
             homeworkSet.add(parseIndividualPieceOfHomework(description));
         }
         return homeworkSet;
+    }
+    
+    public static List<String> parseKeywords(String keywords) throws ParseException {
+        requireNonNull(keywords);
+        String strippedKeywords = keywords.strip();
+//        if (trimmedKeywords.isEmpty()) {
+//            throw new ParseException(Keyword.MESSAGE_CONSTRAINTS);
+//        }
+        return strippedKeywords.isEmpty() ? Collections.emptyList() : List.of(strippedKeywords.split("\\s+"));
     }
 }
