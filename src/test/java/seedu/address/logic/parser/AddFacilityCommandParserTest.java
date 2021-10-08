@@ -1,13 +1,30 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddFacilityCommand;
-import seedu.address.model.facility.*;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.CAPACITY_DESC_COURT;
+import static seedu.address.logic.commands.CommandTestUtil.CAPACITY_DESC_FIELD;
+import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_COURT;
+import static seedu.address.logic.commands.CommandTestUtil.LOCATION_DESC_FIELD;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_COURT;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_FIELD;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_COURT;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_FIELD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CAPACITY_COURT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FACILITY_NAME_COURT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LOCATION_COURT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_COURT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.AddFacilityCommand;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
 
 class AddFacilityCommandParserTest {
     private AddFacilityCommandParser parser = new AddFacilityCommandParser();
@@ -44,7 +61,7 @@ class AddFacilityCommandParserTest {
                 new Time("11:30"), new Capacity("5"));
 
         //missing name
-        assertParseFailure(parser,  LOCATION_DESC_COURT + TIME_DESC_COURT + CAPACITY_DESC_COURT,
+        assertParseFailure(parser, LOCATION_DESC_COURT + TIME_DESC_COURT + CAPACITY_DESC_COURT,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
 
         //missing location
@@ -60,24 +77,24 @@ class AddFacilityCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
 
         //missing name prefix
-        assertParseFailure(parser,  VALID_FACILITY_NAME_COURT + LOCATION_DESC_COURT + TIME_DESC_COURT
+        assertParseFailure(parser, VALID_FACILITY_NAME_COURT + LOCATION_DESC_COURT + TIME_DESC_COURT
                 + CAPACITY_DESC_COURT, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
 
         //missing location prefix
-        assertParseFailure(parser,  NAME_DESC_COURT + VALID_LOCATION_COURT + TIME_DESC_COURT
+        assertParseFailure(parser, NAME_DESC_COURT + VALID_LOCATION_COURT + TIME_DESC_COURT
                 + CAPACITY_DESC_COURT, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
 
         //missing time prefix
-        assertParseFailure(parser,  NAME_DESC_COURT + LOCATION_DESC_COURT + VALID_TIME_COURT
+        assertParseFailure(parser, NAME_DESC_COURT + LOCATION_DESC_COURT + VALID_TIME_COURT
                 + CAPACITY_DESC_COURT, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
 
         //missing capacity prefix
-        assertParseFailure(parser,  NAME_DESC_COURT + LOCATION_DESC_COURT + TIME_DESC_COURT
-                + VALID_CAPACITY_COURT, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, NAME_DESC_COURT + LOCATION_DESC_COURT + TIME_DESC_COURT + VALID_CAPACITY_COURT,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
         //missing all prefixes
-        assertParseFailure(parser,  VALID_FACILITY_NAME_COURT + VALID_LOCATION_COURT + VALID_TIME_COURT
-                + VALID_CAPACITY_COURT, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFacilityCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_FACILITY_NAME_COURT + VALID_LOCATION_COURT + VALID_TIME_COURT
+                + VALID_CAPACITY_COURT, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddFacilityCommand.MESSAGE_USAGE));
 
     }
-
 }

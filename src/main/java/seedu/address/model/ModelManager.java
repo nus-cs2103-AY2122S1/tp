@@ -132,10 +132,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Facility> getFilteredFacilityList() {
-        return filteredFacilities;
-    }
-    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
@@ -158,6 +154,24 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    //=========== Filtered Facility List Accessors =============================================================
+
+    @Override
+    public ObservableList<Facility> getFilteredFacilityList() {
+        return filteredFacilities;
+    }
+
+    @Override
+    public void updateFilteredFacilityList(Predicate<Facility> predicate) {
+        requireNonNull(predicate);
+        filteredFacilities.setPredicate(predicate);
+    }
+
+    @Override
+    public void resetFacilityList() {
+        addressBook.resetFacilityList();
     }
 
 }

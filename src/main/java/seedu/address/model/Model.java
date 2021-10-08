@@ -15,6 +15,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluates to true */
+    Predicate<Facility> PREDICATE_SHOW_ALL_FACILITIES = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -95,8 +98,19 @@ public interface Model {
     ObservableList<Facility> getFilteredFacilityList();
 
     /**
+     * Clears the contents of the facility list.
+     */
+    void resetFacilityList();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered facility list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredFacilityList(Predicate<Facility> predicate);
 }

@@ -1,8 +1,8 @@
 package seedu.address.model.facility;
 
-import org.junit.jupiter.api.Test;
-
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class UniqueFacilityListTest {
     public final UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();

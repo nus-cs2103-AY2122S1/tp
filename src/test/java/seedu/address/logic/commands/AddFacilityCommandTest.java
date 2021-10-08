@@ -1,13 +1,19 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.ModelManager;
-import seedu.address.model.facility.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.ModelManager;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
+
 
 public class AddFacilityCommandTest {
 
@@ -21,7 +27,6 @@ public class AddFacilityCommandTest {
         ModelManager model = new ModelManager();
         Facility facility = new Facility(new FacilityName("Court"), new Location("Loc"), new Time("15:00"),
                 new Capacity("5"));
-        
         CommandResult commandResult = new AddFacilityCommand(facility).execute(model);
         assertEquals(String.format(AddFacilityCommand.MESSAGE_SUCCESS, facility), commandResult.getFeedbackToUser());
     }

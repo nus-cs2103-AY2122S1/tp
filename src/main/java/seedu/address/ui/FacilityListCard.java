@@ -6,6 +6,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.facility.Facility;
 
+/**
+ * An Ui component that displays information of a Facility
+ */
 public class FacilityListCard extends UiPart<Region> {
 
     private static final String FXML = "FacilityListCard.fxml";
@@ -30,6 +33,12 @@ public class FacilityListCard extends UiPart<Region> {
     @FXML
     private Label listIndex;
 
+    /**
+     * Creates a FacilityListCard with the specified facility and index.
+     *
+     * @param facility Facility to be listed.
+     * @param index Index of facility in list.
+     */
     public FacilityListCard(Facility facility, int index) {
         super(FXML);
         this.facility = facility;

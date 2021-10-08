@@ -1,17 +1,22 @@
 package seedu.address.model.facility;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.util.SampleDataUtil;
+
 
 /**
  * Represents a list of facilities.
  */
 public class UniqueFacilityList implements Iterable<Facility> {
-    private final ObservableList<Facility> facilityList = FXCollections.observableArrayList();
+    /** Remove when storage is implemented.*/
+    private final ObservableList<Facility> facilityList = FXCollections.observableArrayList(
+            Arrays.asList(SampleDataUtil.getSampleFacilities()));
 
     /**
      * Adds the specified facility to the facilityList.
@@ -35,5 +40,12 @@ public class UniqueFacilityList implements Iterable<Facility> {
      */
     public ObservableList<Facility> getObservableList() {
         return facilityList;
+    }
+
+    /**
+     * Replaces the contents of this list with empty list.
+     */
+    public void resetFacilities() {
+        facilityList.setAll();
     }
 }
