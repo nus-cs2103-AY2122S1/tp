@@ -32,7 +32,7 @@ public class CommandResultTest {
 
     @Test
     public void hashcode() {
-        CommandResult commandResult = new CommandResult("feedback");
+        CommandResult commandResult = new CommandResult("feedback", CommandResult.UiAction.NONE);
 
         // same values -> returns same hashcode
         assertEquals(commandResult.hashCode(), new CommandResult("feedback").hashCode());
@@ -40,12 +40,8 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
-        // different showHelp value -> returns different hashcode
+        // different UiAction value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                CommandResult.UiAction.NONE).hashCode());
-
-        // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                CommandResult.UiAction.SHOW_STUDENT_PAGE).hashCode());
+                CommandResult.UiAction.EXIT).hashCode());
     }
 }
