@@ -1,29 +1,46 @@
- package seedu.address.logic.commands;
+ package seedu.tracker.logic.commands;
 
  import static org.junit.jupiter.api.Assertions.assertFalse;
  import static org.junit.jupiter.api.Assertions.assertTrue;
- import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
- import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
- import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
- import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
- import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
- import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
- import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
- import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
- import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
- import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
- import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+ import static seedu.tracker.logic.commands.CommandTestUtil.DESC_CS2103T;
+ import static seedu.tracker.logic.commands.CommandTestUtil.DESC_GEQ1000;
+ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CS1101S;
+ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_GEQ1000;
+ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CP3108A;
+ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TITLE_CP3108A;
+ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TAG_CORE;
+ import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandFailure;
+ import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
+ import static seedu.tracker.logic.commands.CommandTestUtil.showPersonAtIndex;
+ import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
+ import static seedu.tracker.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
+ import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
  import org.junit.jupiter.api.Test;
+
+ import seedu.tracker.commons.core.Messages;
+ import seedu.tracker.commons.core.index.Index;
+ import seedu.tracker.logic.commands.EditCommand.EditModuleDescriptor;
+ import seedu.tracker.model.ModuleTracker;
+ import seedu.tracker.model.Model;
+ import seedu.tracker.model.ModelManager;
+ import seedu.tracker.model.UserPrefs;
+ import seedu.tracker.model.module.Module;
+ import seedu.tracker.testutil.EditModuleDescriptorBuilder;
+ import seedu.tracker.testutil.ModuleBuilder;
 
 /**
 *Contains integration tests (interaction with the Model) and unit tests for EditCommand.
 */
 public class EditCommandTest {
- public void execute_allFieldsSpecifiedUnfilteredList_success() {
- Module editedModule = new ModuleBuilder().build();
- EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
- EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE, descriptor);
+
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Module editedModule = new ModuleBuilder().build();
+        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
 
@@ -38,12 +55,12 @@ public class EditCommandTest {
         Index indexLastModule = Index.fromOneBased(model.getFilteredModuleList().size());
         Module lastModule = model.getFilteredModuleList().get(indexLastModule.getZeroBased());
 
-        ModuleBuilder personInList = new ModuleBuilder(lastModule);
-        Module editedModule = personInList.withCode(VALID_CODE_CS2103T).withTitle(VALID_TITLE_CS2103T)
+        ModuleBuilder moduleInList = new ModuleBuilder(lastModule);
+        Module editedModule = moduleInList.withCode(VALID_CODE_CP3108A).withTitle(VALID_TITLE_CP3108A)
                 .withTags(VALID_TAG_CORE).build();
 
-        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withCode(VALID_CODE_GEQ1000)
-                .withTitle(VALID_TITLE_GEQ1000).withTags(VALID_TAG_GE).build();
+        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withCode(VALID_CODE_CP3108A)
+                    .withTitle(VALID_TITLE_CP3108A).withTags(VALID_TAG_CORE).build();
         EditCommand editCommand = new EditCommand(indexLastModule, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
@@ -71,9 +88,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_MODULE);
 
         Module moduleInFilteredList = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Module editedPerson = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_GEQ1000).build();
+        Module editedPerson = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_CS1101S).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE,
-                new EditModuleDescriptorBuilder().withCode(VALID_CODE_GEQ1000).build());
+                new EditModuleDescriptorBuilder().withCode(VALID_CODE_CS1101S).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedPerson);
 

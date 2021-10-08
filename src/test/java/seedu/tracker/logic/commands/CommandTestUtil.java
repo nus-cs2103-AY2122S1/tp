@@ -29,10 +29,12 @@ public class CommandTestUtil {
     public static final String VALID_CODE_GEQ1000 = "GEQ1000";
     public static final String VALID_CODE_CS1101S = "CS1101S";
     public static final String VALID_CODE_CS2100 = "CS2100";
+    public static final String VALID_CODE_CP3108A = "CP3108A";
 
     public static final String VALID_TITLE_CS2103T = "Software Engineering";
     public static final String VALID_TITLE_GEQ1000 = "Asking Questions";
     public static final String VALID_TITLE_CS1101S = "Programming Methodology";
+    public static final String VALID_TITLE_CP3108A = "Independent work";
     public static final String VALID_DESCRIPTION_CS1101S = "Introduces the concepts of programming and "
             + "computational problem solving";
     public static final String VALID_DESCRIPTION_CP3108A = "Independent work";
@@ -47,6 +49,8 @@ public class CommandTestUtil {
 
     public static final String CODE_DESC_CS2103T = " " + PREFIX_CODE + VALID_CODE_CS2103T;
     public static final String CODE_DESC_GEQ1000 = " " + PREFIX_CODE + VALID_CODE_GEQ1000;
+    public static final String CODE_DESC_CP3108A = " " + PREFIX_CODE + VALID_CODE_CP3108A;
+    public static final String TITLE_DESC_CP3108A = " " + PREFIX_TITLE + VALID_TITLE_CP3108A;
     public static final String TITLE_DESC_CS2103T = " " + PREFIX_TITLE + VALID_TITLE_CS2103T;
     public static final String TITLE_DESC_GEQ1000 = " " + PREFIX_TITLE + VALID_TITLE_GEQ1000;
     public static final String DESCRIPTION_DESC_CS2103T = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS2103T;
