@@ -11,4 +11,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_GAME = new Prefix("g/");
     public static final Prefix FLAG_DELETE = new Prefix("--delete ");
     public static final Prefix FLAG_FRIEND_NAME = new Prefix("--name ");
+    public static final Prefix FLAG_FRIEND_SPACE = new Prefix("--friend ");
+    public static final Prefix FLAG_FRIEND = new Prefix("--friend");
+    public static final Prefix FLAG_GAME_SPACE = new Prefix("--game ");
+    public static final Prefix FLAG_GAME = new Prefix("--game");
 }
