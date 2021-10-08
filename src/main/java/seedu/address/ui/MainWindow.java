@@ -124,8 +124,8 @@ public class MainWindow extends UiPart<Stage> {
      * the selected ListCell.
      */
     @FXML
-    public void handleMouseClicked(ListView<Person> tmp) {
-        List<Task> selectedTaskList = tmp.getSelectionModel().getSelectedItem().getTasks();
+    public void handleMouseClicked(ListView<Person> personListView) {
+        List<Task> selectedTaskList = personListView.getSelectionModel().getSelectedItem().getTasks();
         logic.updateDisplayTaskList(selectedTaskList);
     }
 
@@ -144,8 +144,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
         // Initialising mouse click properties for ListView<Person>.
-        ListView<Person> tmp = personListPanel.getPersonListView();
-        tmp.setOnMouseClicked(event -> handleMouseClicked(tmp));
+        ListView<Person> personListView = personListPanel.getPersonListView();
+        personListView.setOnMouseClicked(event -> handleMouseClicked(tmp));
 
         personListSplitPanel.getChildren().add(personListPanel.getRoot());
         setAnchorProperties(personListSplitPanel);

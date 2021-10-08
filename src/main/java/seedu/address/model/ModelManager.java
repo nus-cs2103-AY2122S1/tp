@@ -174,7 +174,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateDisplayTaskList(List<Task> taskList) {
-        requireAllNonNull(taskList);
+        requireNonNull(taskList);
         displayTaskList.setAll(taskList);
     }
 
