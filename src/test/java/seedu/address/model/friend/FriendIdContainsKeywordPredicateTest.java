@@ -42,22 +42,22 @@ public class FriendIdContainsKeywordPredicateTest {
         // No keyword (list all)
         FriendIdContainsKeywordPredicate predicate =
                 new FriendIdContainsKeywordPredicate("");
-        assertTrue(predicate.test(new FriendBuilder().withFriendId("Alice Bob").build()));
+        assertTrue(predicate.test(new FriendBuilder().withFriendId(FriendBuilder.DEFAULT_FRIEND_ID).build()));
 
         // Matching partial keyword
-        predicate = new FriendIdContainsKeywordPredicate("lice");
-        assertTrue(predicate.test(new FriendBuilder().withFriendId("Alice Carol").build()));
+        predicate = new FriendIdContainsKeywordPredicate("A");
+        assertTrue(predicate.test(new FriendBuilder().withFriendId(FriendBuilder.DEFAULT_FRIEND_ID).build()));
 
         // Mixed-case keywords
-        predicate = new FriendIdContainsKeywordPredicate("aLIce");
-        assertTrue(predicate.test(new FriendBuilder().withFriendId("Alice").build()));
+        predicate = new FriendIdContainsKeywordPredicate("a");
+        assertTrue(predicate.test(new FriendBuilder().withFriendId(FriendBuilder.DEFAULT_FRIEND_ID).build()));
     }
 
     @Test
     public void test_idDoesNotContainKeywords_returnsFalse() {
         // Non-matching keyword
         FriendIdContainsKeywordPredicate predicate = new FriendIdContainsKeywordPredicate("Carol");
-        assertFalse(predicate.test(new FriendBuilder().withFriendId("Alice Bob").build()));
+        assertFalse(predicate.test(new FriendBuilder().withFriendId(FriendBuilder.DEFAULT_FRIEND_ID).build()));
 
         // Keywords match name, but does not match id
         predicate =
@@ -66,3 +66,4 @@ public class FriendIdContainsKeywordPredicateTest {
                 .build()));
     }
 }
+
