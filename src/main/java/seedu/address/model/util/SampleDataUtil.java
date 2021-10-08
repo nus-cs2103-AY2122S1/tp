@@ -14,7 +14,6 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -68,13 +67,13 @@ public class SampleDataUtil {
     public static Set<Lesson> getSampleLessons() {
         Set<Lesson> sampleLessons = new HashSet<>();
         sampleLessons.add(new RecurringLesson(new Date("14 Jan 2022"),
-            new TimeRange(new Time("14:30"), new Time("15:30")),
+            new TimeRange("1430-1530"),
                 new Subject("Math"), getSampleHomeworkSet()));
         sampleLessons.add(new MakeUpLesson(new Date("24 Mar 2022"),
-            new TimeRange(new Time("12:30"), new Time("14:00")),
+            new TimeRange("1230-1400"),
                 new Subject("Science"), getSampleHomeworkSet()));
         sampleLessons.add(new RecurringLesson(new Date("09 Feb 2022"),
-            new TimeRange(new Time("17:30"), new Time("19:30")),
+            new TimeRange("1730-1930"),
                 new Subject("GP"), getSampleHomeworkSet()));
 
         return sampleLessons;
@@ -82,7 +81,7 @@ public class SampleDataUtil {
 
     public static Lesson getSampleLesson() {
         return new RecurringLesson(new Date("14 Jan 2022"),
-            new TimeRange(new Time("14:30"), new Time("15:30")),
+            new TimeRange("1430-1530"),
                 new Subject("Math"), getSampleHomeworkSet());
     }
 

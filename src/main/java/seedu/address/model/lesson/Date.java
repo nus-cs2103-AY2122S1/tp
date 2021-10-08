@@ -3,6 +3,7 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -36,6 +37,7 @@ public class Date implements Comparable<Date> {
 
     public final String value;
 
+    private final LocalDate localDate;
     /**
      * Constructs an {@code Date}.
      *
@@ -45,6 +47,7 @@ public class Date implements Comparable<Date> {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date.toUpperCase();
+        localDate = LocalDate.parse(value, FORMATTER);
     }
 
     /**
@@ -69,7 +72,21 @@ public class Date implements Comparable<Date> {
      * @return LocalDate representation of date.
      */
     public LocalDate getLocalDate() {
-        return LocalDate.parse(this.value, FORMATTER);
+        return localDate;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return localDate.getDayOfWeek();
+    }
+
+    /**
+     * Update the date to the same day on the following week.
+     *
+     * @return newDate The date of the same day on the following week.
+     */
+    public Date updateDateWithWeek() {
+        Date newDate = new Date(getLocalDate().plusDays(7).format(FORMATTER));
+        return newDate;
     }
 
     /**
