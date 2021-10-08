@@ -63,10 +63,10 @@ public class LessonAddCommand extends Command {
         + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
         + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
 
-    public static final String USER_TIP = "Try adding a lesson to a student using: "
+    public static final String USER_TIP = "Try adding a lesson to a student using: \n"
             + COMMAND_WORD + " "
             + COMMAND_PARAMETERS + "\n"
-            + "Example of adding a recurring lesson: " + "\n"
+            + "Example (recurring lesson): "
             + COMMAND_EXAMPLE_RECURRING_LESSON;
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor Person: %2$s";
