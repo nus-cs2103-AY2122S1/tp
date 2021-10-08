@@ -9,7 +9,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +23,6 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.StudentBuilder;
-
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Collection;
-import java.util.Collections;
-
 
 public class AddressBookTest {
 
