@@ -3,10 +3,12 @@ package seedu.plannermd.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.patient.UniquePatientList;
+import seedu.plannermd.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +16,8 @@ import seedu.plannermd.model.patient.UniquePatientList;
  */
 public class PlannerMd implements ReadOnlyPlannerMd {
 
-    private final UniquePatientList patients;
+    private final UniquePersonList<Patient> patients;
+    private final UniquePersonList<Doctor> doctors;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +27,8 @@ public class PlannerMd implements ReadOnlyPlannerMd {
      *   among constructors.
      */
     {
-        patients = new UniquePatientList();
+        patients = new UniquePersonList<>();
+        doctors = new UniquePersonList<>();
     }
 
     public PlannerMd() {}
@@ -40,23 +44,34 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the patients list with {@code patients}.
-     * {@code patients} must not contain duplicate patients.
-     */
-    public void setPatients(List<Patient> patients) {
-        this.patients.setPatients(patients);
-    }
-
-    /**
      * Resets the existing data of this {@code PlannerMd} with {@code newData}.
      */
     public void resetData(ReadOnlyPlannerMd newData) {
         requireNonNull(newData);
 
         setPatients(newData.getPatientList());
+        setDoctors(newData.getDoctorList());
+    }
+
+    /**
+     * Replaces the contents of the patients list with {@code patients}.
+     * {@code patients} must not contain duplicate patients.
+     */
+    public void setPatients(List<Patient> patients) {
+        this.patients.setPersons(patients);
+    }
+
+    /**
+     * Replaces the contents of the doctors list with {@code doctors}.
+     * {@code doctors} must not contain duplicate doctors.
+     */
+    public void setDoctors(List<Doctor> doctors) {
+        this.doctors.setPersons(doctors);
     }
 
     //// person-level operations
+
+    //Patients
 
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
@@ -82,7 +97,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
 
-        patients.setPatient(target, editedPatient);
+        patients.setPerson(target, editedPatient);
     }
 
     /**
@@ -93,12 +108,49 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         patients.remove(key);
     }
 
+    //Doctors
+
+    /**
+     * Returns true if a doctor with the same identity as {@code patient} exists in the PlannerMD.
+     */
+    public boolean hasDoctor(Doctor doctor) {
+        requireNonNull(doctor);
+        return doctors.contains(doctor);
+    }
+
+    /**
+     * Adds a doctor to the PlannerMD.
+     * The doctor must not already exist in the PlannerMD.
+     */
+    public void addDoctor(Doctor doctor) {
+        doctors.add(doctor);
+    }
+
+    /**
+     * Replaces the given doctor {@code target} in the list with {@code editedDoctor}.
+     * {@code target} must exist in the PlannerMD.
+     * The doctor identity of {@code editedDoctor} must not be the same as another existing doctor in the PlannerMD.
+     */
+    public void setDoctor(Doctor target, Doctor editedDoctor) {
+        requireNonNull(editedDoctor);
+
+        doctors.setPerson(target, editedDoctor);
+    }
+
+    /**
+     * Removes {@code key} from this {@code PlannerMd}.
+     * {@code key} must exist in the PlannerMD.
+     */
+    public void removeDoctor(Doctor key) {
+        doctors.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return patients.asUnmodifiableObservableList().size() + " patients";
-        // TODO: refine later
+        return patients.asUnmodifiableObservableList().size() + " patients\n"
+                + doctors.asUnmodifiableObservableList().size() + " doctors";
     }
 
     @Override
@@ -107,14 +159,20 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     }
 
     @Override
+    public ObservableList<Doctor> getDoctorList() {
+        return doctors.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PlannerMd // instanceof handles nulls
+                && doctors.equals(((PlannerMd) other).doctors)
                 && patients.equals(((PlannerMd) other).patients));
     }
 
     @Override
     public int hashCode() {
-        return patients.hashCode();
+        return Objects.hash(patients, doctors);
     }
 }

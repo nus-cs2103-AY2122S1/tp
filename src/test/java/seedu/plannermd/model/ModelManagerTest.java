@@ -3,7 +3,7 @@ package seedu.plannermd.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.BENSON;
@@ -15,9 +15,9 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.GuiSettings;
+import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.testutil.PlannerMdBuilder;
-import seedu.plannermd.ui.PersonTabSwitcher;
 
 public class ModelManagerTest {
 
@@ -27,6 +27,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
+        assertEquals(State.PATIENT, modelManager.getState());
         assertEquals(new PlannerMd(), new PlannerMd(modelManager.getPlannerMd()));
     }
 
@@ -76,27 +77,27 @@ public class ModelManagerTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPatient(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasDoctor(null));
     }
 
     @Test
     public void hasPerson_personNotInPlannerMd_returnsFalse() {
         assertFalse(modelManager.hasPatient(ALICE));
+        //TODO: Doctor
     }
 
     @Test
     public void hasPerson_personInPlannerMd_returnsTrue() {
         modelManager.addPatient(ALICE);
         assertTrue(modelManager.hasPatient(ALICE));
+
+        //TODO: Doctor
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPatientList().remove(0));
-    }
-
-    @Test
-    public void setPersonTabSwitcher_nullSwitcher_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setPersonTabSwitcher(null));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDoctorList().remove(0));
     }
 
     @Test
@@ -122,35 +123,23 @@ public class ModelManagerTest {
         // different plannerMd -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentPlannerMd, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredPatientList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(plannerMd, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        modelManager.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different filteredDoctorList -> returns false
+        //TODO
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setPlannerMdFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(plannerMd, differentUserPrefs)));
-    }
-
-    /**
-     * A stub that can be used as a placeholder for the PersonTabSwitcher during testing.
-     */
-    private static class PersonTabSwitcherStub implements PersonTabSwitcher {
-
-        protected boolean isPatientTab = true;
-
-        @Override
-        public void switchToPatientTab() {
-            isPatientTab = true;
-        }
-
-        @Override
-        public void switchToDoctorTab() {
-            isPatientTab = false;
-        }
     }
 }

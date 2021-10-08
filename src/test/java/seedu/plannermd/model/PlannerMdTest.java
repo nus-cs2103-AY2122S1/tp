@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
 import seedu.plannermd.testutil.patient.PatientBuilder;
@@ -29,6 +30,7 @@ public class PlannerMdTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), plannerMd.getPatientList());
+        assertEquals(Collections.emptyList(), plannerMd.getDoctorList());
     }
 
     @Test
@@ -44,30 +46,38 @@ public class PlannerMdTest {
     }
 
     @Test
-    public void resetData_withDuplicatePatients_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePerson_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
-        PlannerMdStub newData = new PlannerMdStub(newPatients);
+
+        PlannerMdStub newData = new PlannerMdStub().setPatients(newPatients);
 
         assertThrows(DuplicatePersonException.class, () -> plannerMd.resetData(newData));
+
+        //TODO: Doctor
     }
+
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> plannerMd.hasPatient(null));
+        assertThrows(NullPointerException.class, () -> plannerMd.hasDoctor(null));
     }
 
     @Test
     public void hasPerson_personNotInPlannerMd_returnsFalse() {
         assertFalse(plannerMd.hasPatient(ALICE));
+        //TODO: Doctor
     }
 
     @Test
     public void hasPerson_personInPlannerMd_returnsTrue() {
         plannerMd.addPatient(ALICE);
         assertTrue(plannerMd.hasPatient(ALICE));
+
+        //TODO: Doctor
     }
 
     @Test
@@ -76,11 +86,14 @@ public class PlannerMdTest {
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(plannerMd.hasPatient(editedAlice));
+
+        //TODO: Doctor
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> plannerMd.getPatientList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> plannerMd.getDoctorList().remove(0));
     }
 
     /**
@@ -88,14 +101,31 @@ public class PlannerMdTest {
      */
     private static class PlannerMdStub implements ReadOnlyPlannerMd {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
+        private final ObservableList<Doctor> doctors = FXCollections.observableArrayList();
 
-        PlannerMdStub(Collection<Patient> persons) {
-            this.patients.setAll(persons);
+        PlannerMdStub() {
+            this.patients.setAll(patients);
+            this.doctors.setAll(doctors);
+        }
+
+        public PlannerMdStub setPatients(Collection<Patient> patients) {
+            this.patients.setAll(patients);
+            return this;
+        }
+
+        public PlannerMdStub setDoctors(Collection<Patient> doctors) {
+            this.patients.setAll(doctors);
+            return this;
         }
 
         @Override
         public ObservableList<Patient> getPatientList() {
             return patients;
+        }
+
+        @Override
+        public ObservableList<Doctor> getDoctorList() {
+            return doctors;
         }
     }
 

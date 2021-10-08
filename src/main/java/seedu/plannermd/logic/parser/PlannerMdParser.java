@@ -12,6 +12,7 @@ import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.RemarkCommand;
 import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
+import seedu.plannermd.logic.commands.ToggleCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
@@ -21,6 +22,7 @@ import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.parser.addcommandparser.AddDoctorCommandParser;
 import seedu.plannermd.logic.parser.addcommandparser.AddPatientCommandParser;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.Model.State;
 
 /**
  * Parses user input.
@@ -39,7 +41,7 @@ public class PlannerMdParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, State state) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -48,43 +50,44 @@ public class PlannerMdParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case AddPatientCommand.COMMAND_WORD:
-//            if (state.PATIENT) { //TODO get state!!!
-                return new AddPatientCommandParser().parse(arguments);
-//            } else {
-//                return new AddDoctorCommandParser().parse(arguments);
-//            }
+            case AddPatientCommand.COMMAND_WORD:
+                 if (state.equals(state.PATIENT)) {
+                    return new AddPatientCommandParser().parse(arguments);
+                 } else {
+                 return new AddDoctorCommandParser().parse(arguments);
+                 }
+            case EditPatientCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
+            case DeletePatientCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case EditPatientCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            case RemarkCommand.COMMAND_WORD:
+                return new RemarkCommandParser().parse(arguments);
 
-        case DeletePatientCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkCommandParser().parse(arguments);
+            case ToggleCommand.COMMAND_WORD:
+                return new ToggleCommand();
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case FindPatientCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
 
-        case FindPatientCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            case ListPatientCommand.COMMAND_WORD:
+                return new ListPatientCommand();
 
-        case ListPatientCommand.COMMAND_WORD:
-            return new ListPatientCommand();
+            case AddPatientTagCommand.COMMAND_WORD:
+                return new TagCommandParser().parse(arguments);
 
-        case AddPatientTagCommand.COMMAND_WORD:
-            return new TagCommandParser().parse(arguments);
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

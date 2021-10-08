@@ -37,16 +37,16 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the
      * AddDoctorCommand and returns an AddDoctorCommand object for execution.
+     * 
      * @param args arguments to be parsed
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddDoctorCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_BIRTH_DATE, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_BIRTH_DATE) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_BIRTH_DATE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -65,6 +65,7 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values
      * in the given {@code ArgumentMultimap}.
+     * 
      * @return boolean
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

@@ -5,16 +5,40 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
-import seedu.plannermd.ui.PersonTabSwitcher;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
+    /**
+     * Type of Person and corresponding List thats currently displayed and interacted with.
+     */
+    enum State {
+        PATIENT, DOCTOR
+    }
+
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /**
+     * Changes current state to  {@code state}.
+     */
+    void setState(State state);
+
+    /**
+     * Returns current state of Model.
+     */
+    State getState();
+
+    /**
+     * Toggle to the other state.
+     * If current state is patients, toggle to doctors. Vice Versa
+     */
+    void toggleState();
+
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -54,6 +78,7 @@ public interface Model {
     /** Returns the PlannerMd */
     ReadOnlyPlannerMd getPlannerMd();
 
+    //// patient methods
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
      */
@@ -78,6 +103,32 @@ public interface Model {
      */
     void setPatient(Patient target, Patient editedPatient);
 
+    //// doctor methods
+
+    /**
+     * Returns true if a doctor with the same identity as {@code doctor} exists in the PlannerMD.
+     */
+    boolean hasDoctor(Doctor doctor);
+
+    /**
+     * Deletes the given doctor.
+     * The doctor must exist in the PlannerMD.
+     */
+    void deleteDoctor(Doctor target);
+
+    /**
+     * Adds the given doctor.
+     * {@code doctor} must not already exist in the PlannerMD.
+     */
+    void addDoctor(Doctor doctor);
+
+    /**
+     * Replaces the given doctor {@code target} with {@code editedDoctor}.
+     * {@code target} must exist in the PlannerMD.
+     * The person identity of {@code editedDoctor} must not be the same as another existing doctor in the PlannerMD.
+     */
+    void setDoctor(Doctor target, Doctor editedDoctor);
+
     /**
      * Returns an unmodifiable view of the filtered patient list
      */
@@ -87,10 +138,16 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPatientList(Predicate<Person> predicate);
+    void updateFilteredPatientList(Predicate<? super Patient> predicate);
 
     /**
-     * Sets the PersonTabSwitcher responsible for switching between the Doctor and Patient tab in the UI.
+     * Returns an unmodifiable view of the filtered doctor list
      */
-    void setPersonTabSwitcher(PersonTabSwitcher personTabSwitcher);
+    ObservableList<Doctor> getFilteredDoctorList();
+
+    /**
+     * Updates the filter of the filtered doctor list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredDoctorList(Predicate<? super Doctor> predicate);
 }

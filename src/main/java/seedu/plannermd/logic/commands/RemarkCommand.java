@@ -1,7 +1,7 @@
 package seedu.plannermd.logic.commands;
 
 import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class RemarkCommand extends Command {
                 patientToEdit.getRisk());
 
         model.setPatient(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPatient));
     }
