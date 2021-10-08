@@ -25,7 +25,7 @@ public class Deadline {
     public Deadline(String deadline) {
         requireNonNull(deadline);
         checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
-        this.deadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        this.deadline = LocalDate.parse(deadline);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Deadline {
 
     @Override
     public String toString() {
-        return deadline.toString();
+        return deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     @Override
@@ -58,5 +58,4 @@ public class Deadline {
     public int hashCode() {
         return deadline.hashCode();
     }
-
 }

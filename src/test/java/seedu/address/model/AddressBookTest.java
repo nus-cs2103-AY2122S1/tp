@@ -52,7 +52,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<Task> sampleTaskList = Arrays.asList(new TaskBuilder(REPORT_1).build());
+        List<Task> sampleTaskList = List.of(new TaskBuilder(REPORT_1).build());
         AddressBookStub newData = new AddressBookStub(newPersons, sampleTaskList);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
