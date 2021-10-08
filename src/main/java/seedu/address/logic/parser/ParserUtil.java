@@ -90,6 +90,5 @@ public class ParserUtil {
         } else {
             throw new ParseException(Messages.MESSAGE_INVALID_COUNT_INTEGER);
         }
-
     }
 }
