@@ -42,22 +42,6 @@ public class Event implements Comparable<Event> {
      * @param date at which the Event occurs.
      * @param time of the Event.
      * @param isDone A boolean to indicate is the event is done.
-     */
-    public Event(EventName name, EventDate date, EventTime time, boolean isDone) {
-        this.eventName = name;
-        this.eventDate = date;
-        this.eventTime = time;
-        this.isDone = isDone;
-    }
-
-
-    /**
-     * This is an overloaded constructor of an Event.
-     *
-     * @param name of the Event.
-     * @param date at which the Event occurs.
-     * @param time of the Event.
-     * @param isDone A boolean to indicate is the event is done.
      * @param participants participants to be added
      */
     public Event(EventName name, EventDate date, EventTime time, boolean isDone, List<Participant> participants) {
