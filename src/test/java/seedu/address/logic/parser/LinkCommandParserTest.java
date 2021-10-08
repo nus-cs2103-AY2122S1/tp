@@ -14,7 +14,7 @@ class LinkCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsLinkCommand() {
-        String userInput = " Draco CSGO:Silver1";
+        String userInput = " Draco --g CSGO:Silver1";
         HashMap<String, String> games = new HashMap<>();
         games.put("CSGO", "Silver1");
         assertParseSuccess(parser, userInput, new LinkCommand(new FriendId("Draco"), games));
