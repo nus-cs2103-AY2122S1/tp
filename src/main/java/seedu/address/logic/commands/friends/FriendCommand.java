@@ -12,11 +12,11 @@ public class FriendCommand extends Command {
     private static final String COMMAND_WORD = "friend";
     public static final String MESSAGE_USAGE =
             "To add a friend: \n" + COMMAND_WORD
-                    + " --id FRIEND_ID [--name \"NAME\"]" + ": Adds a friend to "
-                    + "the " + "gitGud friends " + "list. "
+                    + " FRIEND_ID [--name \"NAME\"]" + ": Adds a friend to "
+                    + "the " + "gitGud friends " + "list. \n"
                     + "Parameters: "
                     + " FRIEND_ID "
-                    + PREFIX_FRIEND_NAME + " NAME"
+                    + PREFIX_FRIEND_NAME + " NAME\n"
                     + "Example: " + COMMAND_WORD + " "
                     + "myfeely923 "
                     + FLAG_FRIEND_NAME + "Yu Zher " + "\n"
