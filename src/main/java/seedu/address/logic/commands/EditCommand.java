@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in ProgrammerError.
  */
 public class EditCommand extends Command {
 
@@ -32,12 +32,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_STUDENTID + "STUDENTID] "
-            + "[" + PREFIX_CLASSID + "CLASSID] "
+            + "[" + PREFIX_STUDENT_ID + "STUDENTID] "
+            + "[" + PREFIX_CLASS_ID + "CLASSID] "
             + "[" + PREFIX_GRADE + "GRADE] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STUDENTID + "A0121234H "
-            + PREFIX_CLASSID + "B01";
+            + PREFIX_STUDENT_ID + "A0121234H "
+            + PREFIX_CLASS_ID + "B01";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

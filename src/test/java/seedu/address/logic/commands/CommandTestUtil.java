@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -36,17 +36,17 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String STUDENTID_DESC_AMY = " " + PREFIX_STUDENTID + VALID_STUDENTID_AMY;
-    public static final String STUDENTID_DESC_BOB = " " + PREFIX_STUDENTID + VALID_STUDENTID_BOB;
-    public static final String CLASSID_DESC_AMY = " " + PREFIX_CLASSID + VALID_CLASSID_AMY;
-    public static final String CLASSID_DESC_BOB = " " + PREFIX_CLASSID + VALID_CLASSID_BOB;
+    public static final String STUDENTID_DESC_AMY = " " + PREFIX_STUDENT_ID + VALID_STUDENTID_AMY;
+    public static final String STUDENTID_DESC_BOB = " " + PREFIX_STUDENT_ID + VALID_STUDENTID_BOB;
+    public static final String CLASSID_DESC_AMY = " " + PREFIX_CLASS_ID + VALID_CLASSID_AMY;
+    public static final String CLASSID_DESC_BOB = " " + PREFIX_CLASS_ID + VALID_CLASSID_BOB;
     public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_AMY;
     public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_BOB;
 
     //todo
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_STUDENTID_DESC = " " + PREFIX_STUDENTID + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_CLASSID_DESC = " " + PREFIX_CLASSID + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_STUDENTID_DESC = " " + PREFIX_STUDENT_ID + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_CLASSID_DESC = " " + PREFIX_CLASS_ID + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE; // empty string not allowed for addresses
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
