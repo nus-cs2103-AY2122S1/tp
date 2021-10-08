@@ -45,8 +45,8 @@ public class JsonClassmateStorage implements ClassmateStorage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableClassmate> jsonClassmate = JsonUtil.readJsonFile(
-                filePath, JsonSerializableClassmate.class);
+        Optional<JsonSerializableStudent> jsonClassmate = JsonUtil.readJsonFile(
+                filePath, JsonSerializableStudent.class);
         if (!jsonClassmate.isPresent()) {
             return Optional.empty();
         }
@@ -74,7 +74,7 @@ public class JsonClassmateStorage implements ClassmateStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableClassmate(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableStudent(addressBook), filePath);
     }
 
 }
