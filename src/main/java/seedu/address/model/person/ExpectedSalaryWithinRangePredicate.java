@@ -10,8 +10,9 @@ import seedu.address.commons.util.StringUtil;
  */
 public class ExpectedSalaryWithinRangePredicate implements Predicate<Person> {
 
+    public static final int RANGE = 500;
+
     private final List<String> keywords;
-    private final int range = 500;
 
     public ExpectedSalaryWithinRangePredicate(List<String> keywords) {
         this.keywords = keywords;
@@ -21,7 +22,7 @@ public class ExpectedSalaryWithinRangePredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.areUnsignedIntegersWithinRange(
-                        person.getExpectedSalary().value, keyword, range));
+                        person.getExpectedSalary().value, keyword, RANGE));
     }
 
     @Override
@@ -30,6 +31,5 @@ public class ExpectedSalaryWithinRangePredicate implements Predicate<Person> {
                 || (other instanceof ExpectedSalaryWithinRangePredicate // instanceof handles nulls
                 && keywords.equals(((ExpectedSalaryWithinRangePredicate) other).keywords)); // state check
     }
-
 
 }
