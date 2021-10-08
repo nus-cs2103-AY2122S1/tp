@@ -12,7 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -167,25 +166,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Time} into a {@code Time}.
+     * Parses {@code String TimeRange} into a {@code TimeRange}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code Time} is invalid.
-     */
-    public static Time parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        if (!Time.isValidTime(trimmedTime)) {
-            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
-        }
-        return new Time(trimmedTime);
-    }
-
-    /**
-     * Parses {@code String Time} and {@code String Time} into a {@code TimeRange}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code Time} pr {@code TimeRange} is invalid.
+     * @throws ParseException if the given {@code TimeRange} is invalid.
      */
     public static TimeRange parseTimeRange(String timeRange) throws ParseException {
         requireNonNull(timeRange);
