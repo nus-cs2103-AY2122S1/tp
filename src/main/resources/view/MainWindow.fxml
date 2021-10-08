@@ -25,6 +25,7 @@
         <URL value="@Extensions.css" />
         <URL value="@TaskListPanel.css" />
         <URL value="@TaskListCard.css" />
+        <URL value="@PersonListCard.css" />
       </stylesheets>
 
       <VBox>
