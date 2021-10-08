@@ -8,10 +8,12 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.persons.AddLessonToPersonCommand;
 import seedu.address.logic.commands.persons.AddPersonCommand;
 import seedu.address.logic.commands.persons.DeletePersonCommand;
 import seedu.address.logic.commands.persons.EditPersonCommand;
 import seedu.address.logic.commands.persons.FindPersonCommand;
+import seedu.address.logic.commands.persons.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class PersonCommandsParser {
@@ -52,6 +54,12 @@ public class PersonCommandsParser {
 
         case FindPersonCommand.COMMAND_WORD:
             return new FindPersonCommandParser().parse(arguments);
+
+        case AddLessonToPersonCommand.COMMAND_WORD:
+            return new AddLessonToPersonCommandParser().parse(arguments);
+
+        case ViewPersonCommand.COMMAND_WORD:
+            return new ViewPersonCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

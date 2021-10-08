@@ -106,21 +106,33 @@ Examples:
 
 Edits the detail of a specific student.
 
-Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]`
+Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL]`
 
 * Edits the detail of the student specified by the `INDEX`. `INDEX` should be a 
   positive number and refers to the index number of a student in the list of students.
 * `-e` refers to the edit command
 * It is a requirement that **at least one of the optional fields should be provided**.
-* `DAY` takes in the following inputs: `MON TUE WED THU FRI SAT SUN`
-* `START_TIME` and `END_TIME` takes in the time in 24-hour format, for example `0800` 
-  for 8am.
 
 Example:
 
 * `student -e 3 c/88888888 e/johnny@mail.com` Edits the contact number and email
   address of the third student in the student list to 88888888 and johnny@mail.com
   respectively.
+  
+### Adding a lesson to a student: `student -al` `[coming in v1.2]`
+
+Adds a lesson to the specific student
+
+Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
+
+* `SUBJECT` takes in any input with at least one alphanumeric character.
+* `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
+* `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
+  for 8am.
+* Overlapping tasks cannot be added.
+
+* `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
+  starting at 8am and ending at 9am on Mondays.
 
 ### Deleting a student: `student -d` `[coming in v1.2]`
 
