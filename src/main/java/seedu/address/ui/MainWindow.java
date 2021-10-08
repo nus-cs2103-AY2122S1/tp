@@ -21,6 +21,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
             + AddCommand.USER_TIP + "\n\n"
             + DeleteCommand.USER_TIP + "\n\n"
             + LessonAddCommand.USER_TIP + "\n\n"
+            + ScheduleCommand.USER_TIP + "\n\n"
             + ClearCommand.USER_TIP + "\n\n"
             + HelpCommand.USER_TIP + "\n\n"
             + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
@@ -128,7 +130,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        // TODO: Make calendar part of logic.
         centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
@@ -183,6 +184,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleSchedule() {
+        centerPanel.displaySchedulePanel();
+    }
+
+    private void handlePersonList() {
+        centerPanel.displayPersonListPanel();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return centerPanel.getPersonListPanel();
     }
@@ -204,6 +213,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowSchedule()) {
+                handleSchedule();
+            } else {
+                handlePersonList();
             }
 
             if (commandResult.isExit()) {

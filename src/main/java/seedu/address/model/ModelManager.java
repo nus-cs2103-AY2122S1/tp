@@ -122,6 +122,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLesson(Person target, Person editedPerson, Lesson toAdd) {
+        requireAllNonNull(target, editedPerson, toAdd);
+
+        addressBook.deleteLesson(target, editedPerson, toAdd);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -130,8 +137,7 @@ public class ModelManager implements Model {
 
     @Override
     public Calendar getCalendar() {
-        // TODO: Calendar model
-        return new Calendar();
+        return addressBook.getCalendar();
     }
     //=========== Filtered Person List Accessors =============================================================
 

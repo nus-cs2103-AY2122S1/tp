@@ -47,11 +47,12 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.getCalendarSources().addAll(calendarSource);
         calendarView.setStartTime(TimeRange.DAY_START);
         calendarView.setEndTime(TimeRange.DAY_END);
-        calendarView.setVisibleHours(14);
+        calendarView.setVisibleHours(15);
         calendarView.setShowScrollBar(false);
         calendarView.setHoursLayoutStrategy(DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT);
         calendarView.setEarlyLateHoursStrategy(DayViewBase.EarlyLateHoursStrategy.HIDE);
         scheduleView.getChildren().setAll(calendarView);
+        scheduleView.setDisable(true);
     }
 
     /**

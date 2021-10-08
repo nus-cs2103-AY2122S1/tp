@@ -26,7 +26,7 @@ public class CalendarUtil {
         Interval entryInterval = new Interval(lesson.getStartDateTime(), lesson.getEndDateTime());
         entry.setInterval(entryInterval);
         StringBuilder entryTitle = new StringBuilder(lesson.getName().toString());
-        entryTitle.append("(" + lesson.getSubject().toString() + ")");
+        entryTitle.append(" (" + lesson.getSubject().toString() + ")");
         if (lesson.isRecurring()) {
             entry.setRecurrenceRule("RRULE:FREQ=WEEKLY");
             entryTitle.append("(Recurring)");
@@ -34,17 +34,4 @@ public class CalendarUtil {
         entry.setTitle(entryTitle.toString());
         return entry;
     }
-
-    /**
-     * Converts given list of lessons to a list of CalendarFX {@code Entry}.
-     */
-//    public static List<Entry<?>> convertEntireListToEntries(ObservableList<CalendarEntry> calendarEntries) {
-//        List<Entry<?>> convertedEntries = new ArrayList<>();
-//
-//        for (CalendarEntry ce: calendarEntries) {
-//            convertedEntries.add(CalendarEntryConversionUtil.convertToEntry(ce));
-//        }
-//
-//        return convertedEntries;
-//    }
 }

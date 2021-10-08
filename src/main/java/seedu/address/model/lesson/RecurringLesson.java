@@ -16,6 +16,7 @@ public class RecurringLesson extends Lesson {
     /**
      * Every field must be present and not null.
      *
+     * @param person The person that this lesson belongs to.
      * @param date Date of lesson.
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.

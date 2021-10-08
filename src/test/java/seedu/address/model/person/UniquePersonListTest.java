@@ -111,7 +111,7 @@ public class UniquePersonListTest {
 
     @Test
     public void remove_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.remove(null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.remove((Person) null));
     }
 
     @Test

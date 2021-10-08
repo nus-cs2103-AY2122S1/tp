@@ -10,6 +10,7 @@ import com.calendarfx.model.Calendar;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -85,6 +86,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new ClashingLessonException();
         }
         setPerson(target, editedPerson);
+        calendar.addEntry(toAdd.asCalendarEntry());
     }
 
     /**
@@ -116,11 +118,26 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        for (Lesson lesson: toRemove.getLessons()) {
+            calendar.removeEntry(lesson.asCalendarEntry());
+        }
+    }
+
+    /**
+     * Removes the equivalent Lesson from the Calendar.
+     * The lesson must exist in the calendar.
+     */
+    public void removeLesson(Person target, Person editedPerson, Lesson toRemove) {
+        requireAllNonNull(target, editedPerson, toRemove);
+
+        setPerson(target, editedPerson);
+        calendar.removeEntry(toRemove.asCalendarEntry());
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        setLessons(replacement);
     }
 
     /**
@@ -132,8 +149,28 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-
         internalList.setAll(persons);
+        setLessons(persons);
+    }
+
+    public void setLessons(UniquePersonList replacement) {
+        requireNonNull(replacement);
+        calendar.clear();
+        for (Person person: replacement.internalList) {
+            for (Lesson lesson: person.getLessons()) {
+                calendar.addEntry(lesson.asCalendarEntry());
+            }
+        }
+    }
+
+    public void setLessons(List<Person> persons) {
+        requireAllNonNull(persons);
+        calendar.clear();
+        for (Person person : persons) {
+            for (Lesson lesson : person.getLessons()) {
+                calendar.addEntry(lesson.asCalendarEntry());
+            }
+        }
     }
 
     /**
@@ -141,6 +178,10 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
     }
 
     @Override

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
@@ -90,6 +92,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.addLesson(target, editedPerson, toAdd);
     }
 
+
+    /**
+     * Removes {@code toRemove} from the {@code target} in the {@code AddressBook}.
+     * {@code target} and {@code toRemove} must exist in the address book.
+     */
+    public void deleteLesson(Person target, Person editedPerson, Lesson toRemove) {
+        persons.removeLesson(target, editedPerson, toRemove);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -128,6 +139,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public Calendar getCalendar() {
+        return persons.getCalendar();
     }
 
     @Override

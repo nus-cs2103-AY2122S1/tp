@@ -10,7 +10,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.calendarfx.model.Entry;
+
+import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Lesson in the address book.
@@ -30,12 +34,14 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
 
-    // TODO: Lesson name
-    private final Name name = new Name("Placeholder");
+    // Hidden fields
+//    private final Person person; // reference to the owner of this lesson
+    private final Entry<Lesson> calendarEntry; // the corresponding calendar entry of this lesson
 
     /**
      * Every field must be present and not null.
      *
+     * @param person The person that this lesson belongs to.
      * @param date Date of lesson.
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
@@ -43,14 +49,17 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
         requireAllNonNull(date, timeRange, subject, homework);
+//        this.person = person;
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
+        calendarEntry = CalendarUtil.convertToEntry(this);
     }
 
     public Name getName() {
-        return name;
+        return new Name("Placeholder");
+//        return person.getName();
     }
 
     public Date getDate() {
@@ -93,6 +102,9 @@ public abstract class Lesson implements Comparable<Lesson> {
         return Collections.unmodifiableSet(homework);
     }
 
+    public Entry<Lesson> asCalendarEntry() {
+        return calendarEntry;
+    }
     /**
      * Check if the Lesson object is recurring.
      *
