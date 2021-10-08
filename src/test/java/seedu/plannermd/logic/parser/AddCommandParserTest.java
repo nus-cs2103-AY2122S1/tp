@@ -48,6 +48,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND)
+                .withRemark("")
                 .withRisk(Risk.getUnclassifiedRisk().toString()).build();
 
         // whitespace only preamble
@@ -73,6 +74,7 @@ public class AddCommandParserTest {
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withRemark("")
                 .withRisk(Risk.getUnclassifiedRisk().toString())
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -82,14 +84,16 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Patient expectedPatient = new PatientBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + RISK_DESC_AMY,
-                new AddPatientCommand(expectedPatient));
+        Patient expectedPatient = new PatientBuilder(AMY).withTags().withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + RISK_DESC_AMY, new AddPatientCommand(expectedPatient));
 
         // no risk
-        expectedPatient = new PatientBuilder(AMY).withRisk(Risk.getUnclassifiedRisk().toString()).build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+        expectedPatient = new PatientBuilder(AMY).withRisk(Risk.getUnclassifiedRisk().toString())
+                .withRemark("")
+                .build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND, new AddPatientCommand(expectedPatient));
     }
 
     @Test
