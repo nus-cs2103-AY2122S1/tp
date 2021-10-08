@@ -3,6 +3,8 @@ package seedu.plannermd.logic.commands.remarkcommand;
 import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.CommandResult;
@@ -12,8 +14,9 @@ import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Remark;
 
-import java.util.List;
-
+/**
+ * Adds a remark to a Doctor.
+ */
 public class RemarkDoctorCommand extends RemarkCommand {
 
     public static final String MESSAGE_ADD_DOCTOR_REMARK_SUCCESS = "Added remark to Doctor: %1$s";
@@ -27,6 +30,11 @@ public class RemarkDoctorCommand extends RemarkCommand {
     private final Index index;
     private final Remark remark;
 
+    /**
+     * Creates a RemarkDoctorCommand.
+     * @param index Index of the doctor in the filtered doctor list to add the remark to.
+     * @param remark The remark to add.
+     */
     public RemarkDoctorCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 

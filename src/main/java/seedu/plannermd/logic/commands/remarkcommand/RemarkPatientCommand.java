@@ -1,19 +1,18 @@
 package seedu.plannermd.logic.commands.remarkcommand;
 
+import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
-import seedu.plannermd.logic.commands.Command;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Remark;
-
-import java.util.List;
-
-import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class RemarkPatientCommand extends RemarkCommand {
 
@@ -28,6 +27,11 @@ public class RemarkPatientCommand extends RemarkCommand {
     private final Index index;
     private final Remark remark;
 
+    /**
+     * Creates a RemarkPatientCommand.
+     * @param index Index of the patient in the filtered patient list to add the remark to.
+     * @param remark The remark to add.
+     */
     public RemarkPatientCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 

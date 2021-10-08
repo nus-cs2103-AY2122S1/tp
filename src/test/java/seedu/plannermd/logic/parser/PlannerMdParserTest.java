@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.plannermd.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -21,10 +23,14 @@ import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
+import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
+import seedu.plannermd.logic.commands.remarkcommand.RemarkDoctorCommand;
+import seedu.plannermd.logic.commands.remarkcommand.RemarkPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
 import seedu.plannermd.testutil.PersonUtil;
 import seedu.plannermd.testutil.patient.PatientBuilder;
@@ -65,6 +71,22 @@ public class PlannerMdParserTest {
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
                 patientState);
         assertEquals(new EditPatientCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_remarkPatient() throws Exception {
+        RemarkPatientCommand command = (RemarkPatientCommand) parser.parseCommand(
+                RemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + REMARK_DESC_AMY,
+                patientState);
+        assertEquals(new RemarkPatientCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY)), command);
+    }
+
+    @Test
+    public void parseCommand_remarkDoctor() throws Exception {
+        RemarkDoctorCommand command = (RemarkDoctorCommand) parser.parseCommand(
+                RemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + REMARK_DESC_AMY,
+                State.DOCTOR);
+        assertEquals(new RemarkDoctorCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY)), command);
     }
 
     @Test
