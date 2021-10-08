@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalFriends.*;
+import static seedu.address.testutil.TypicalFriends.ALICE;
+import static seedu.address.testutil.TypicalFriends.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -99,7 +100,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasFriendId_FriendIdInAddressBook_returnsTrue() {
+    public void hasFriendId_friendIdInAddressBook_returnsTrue() {
         modelManager.addFriend(ALICE);
         assertTrue(modelManager.hasFriend(ALICE));
     }

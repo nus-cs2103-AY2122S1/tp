@@ -21,7 +21,8 @@ import seedu.address.model.FriendsList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFriendsList;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.friend.*;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandTest {
