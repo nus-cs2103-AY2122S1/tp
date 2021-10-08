@@ -257,7 +257,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* is a tutor overseeing students for an academic teachingAssistantBuddy or subject
+* is a tutor overseeing students for an academic module or subject
 * has a need to manage a moderate to large number of students 
 * prefer desktop apps over other types
 * can type fast
@@ -275,11 +275,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | create a new student           |                                                                        |
 | `* * *`  | new user                                   | add a student's information    |                                                                        |
-| `* * *`  | new user                                   | delete a student from a teachingAssistantBuddy |                                                                        |
+| `* * *`  | new user                                   | delete a student from a module |                                                                        |
 | `* * *`  | new user                                   | get a student's information    |                                                                        |
-| `* * *`  | new user                                   | create a new teachingAssistantBuddy            |                                                                        |
-| `* * *`  | new user                                   | delete a teachingAssistantBuddy                | remove data that I no longer need                                      |
-| `* * *`  | new user                                   | add task to a teachingAssistantBuddy           |                                                                        |
+| `* * *`  | new user                                   | create a new module            |                                                                        |
+| `* * *`  | new user                                   | delete a module                | remove data that I no longer need                                      |
+| `* * *`  | new user                                   | add task to a module           |                                                                        |
 | `* * *`  | new user                                   | mark a task as done            | track my students' progress                                            |
 
 *{More to be added}*
@@ -320,12 +320,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
     
-**Use case: Delete a student from a teachingAssistantBuddy**
+**Use case: Delete a student from a module**
 
 **MSS**
 
-1. User requests to delete a specific student from a teachingAssistantBuddy in system
-2. System deletes the student from the teachingAssistantBuddy
+1. User requests to delete a specific student from a module in system
+2. System deletes the student from the module
 
    Use case ends.
 
@@ -340,12 +340,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Create a new teachingAssistantBuddy**
+**Use case: Create a new module**
 
 **MSS**
 
-1. User requests to create a new teachingAssistantBuddy in System
-2. System creates the teachingAssistantBuddy
+1. User requests to create a new module in System
+2. System creates the module
 
    Use case ends.
 
@@ -356,12 +356,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Delete a teachingAssistantBuddy**
+**Use case: Delete a module**
 
 **MSS**
 
-1. User requests to delete a teachingAssistantBuddy in System
-2. System deletes the teachingAssistantBuddy
+1. User requests to delete a module in System
+2. System deletes the module
 
    Use case ends.
 
@@ -372,12 +372,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Add task to a teachingAssistantBuddy**
+**Use case: Add task to a module**
 
 **MSS**
 
-1. User requests to add a task to a teachingAssistantBuddy in System
-2. System deletes the task from the teachingAssistantBuddy
+1. User requests to add a task to a module in System
+2. System deletes the task from the module
 
    Use case ends.
 
@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Module**: An academic teachingAssistantBuddy or subject that is frequently found in universities and institutes of higher learning
+* **Module**: An academic module or subject that is frequently found in universities and institutes of higher learning
 
 --------------------------------------------------------------------------------------------------------------------
 
