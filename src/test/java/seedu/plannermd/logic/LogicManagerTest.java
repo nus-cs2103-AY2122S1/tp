@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.plannermd.logic.commands.CommandTestUtil.BIRTH_DATE_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -44,8 +45,7 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonPlannerMdStorage plannerMdStorage =
-                new JsonPlannerMdStorage(temporaryFolder.resolve("plannerMd.json"));
+        JsonPlannerMdStorage plannerMdStorage = new JsonPlannerMdStorage(temporaryFolder.resolve("plannerMd.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(plannerMdStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -72,16 +72,16 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonPlannerMdIoExceptionThrowingStub
-        JsonPlannerMdStorage plannerMdStorage =
-                new JsonPlannerMdIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionPlannerMd.json"));
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+        JsonPlannerMdStorage plannerMdStorage = new JsonPlannerMdIoExceptionThrowingStub(
+                temporaryFolder.resolve("ioExceptionPlannerMd.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
+                temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(plannerMdStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
         String addCommand = AddPatientCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + RISK_DESC_AMY;
+                + ADDRESS_DESC_AMY + BIRTH_DATE_DESC_AMY + RISK_DESC_AMY;
         Patient expectedPatient = new PatientBuilder(AMY).withTags().withRemark("").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPatient(expectedPatient);
@@ -95,21 +95,24 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command and confirms that
-     * - no exceptions are thrown <br>
+     * Executes the command and confirms that - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     * - the internal model manager state is the same as that in
+     * {@code expectedModel} <br>
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+    private void assertCommandSuccess(String inputCommand, String expectedMessage, Model expectedModel)
+            throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
 
     /**
-     * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
+     * Executes the command, confirms that a ParseException is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
@@ -117,7 +120,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
+     * Executes the command, confirms that a CommandException is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
@@ -125,7 +130,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that the exception is thrown and that the result message is correct.
+     * Executes the command, confirms that the exception is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
@@ -135,10 +142,12 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command and confirms that
-     * - the {@code expectedException} is thrown <br>
+     * Executes the command and confirms that - the {@code expectedException} is
+     * thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     * - the internal model manager state is the same as that in
+     * {@code expectedModel} <br>
+     *
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,

@@ -1,6 +1,7 @@
 package seedu.plannermd.testutil.patient;
 
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_ADDRESS;
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_BIRTH_DATE;
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_EMAIL;
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_NAME;
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_PHONE;
@@ -12,6 +13,7 @@ import java.util.Set;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
@@ -31,6 +33,7 @@ public class PatientBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private BirthDate birthDate;
     private Remark remark;
     private Set<Tag> tags;
     private Risk risk;
@@ -43,6 +46,7 @@ public class PatientBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        birthDate = new BirthDate(DEFAULT_BIRTH_DATE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
         risk = new Risk(DEFAULT_RISK);
@@ -56,6 +60,7 @@ public class PatientBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        birthDate = personToCopy.getBirthDate();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
         risk = new Risk(DEFAULT_RISK);
@@ -69,6 +74,7 @@ public class PatientBuilder {
         phone = patientToCopy.getPhone();
         email = patientToCopy.getEmail();
         address = patientToCopy.getAddress();
+        birthDate = patientToCopy.getBirthDate();
         remark = patientToCopy.getRemark();
         tags = new HashSet<>(patientToCopy.getTags());
         risk = patientToCopy.getRisk();
@@ -83,9 +89,10 @@ public class PatientBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Patient} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the
+     * {@code Patient} that we are building.
      */
-    public PatientBuilder withTags(String ... tags) {
+    public PatientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -107,6 +114,14 @@ public class PatientBuilder {
     }
 
     /**
+     * Sets the {@code Email} of the {@code Patient} that we are building.
+     */
+    public PatientBuilder withBirthDate(String birthDate) {
+        this.birthDate = new BirthDate(birthDate);
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code Patient} that we are building.
      */
     public PatientBuilder withAddress(String address) {
@@ -115,7 +130,8 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Patient} that we are building.
+     * Sets the {@code Remark} of the
+     * {@code Patient} that we are building.
      */
     public PatientBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
@@ -123,8 +139,8 @@ public class PatientBuilder {
     }
 
     /**
-     * Sets the {@code Risk} of the {@code Patient} that we are building.
-     * Accepts UNCLASSIFIED risk.
+     * Sets the {@code Risk} of the {@code Patient} that we are building. Accepts
+     * UNCLASSIFIED risk.
      */
     public PatientBuilder withRisk(String risk) {
         this.risk = Risk.getUnclassifiableRisk(risk);
@@ -132,7 +148,7 @@ public class PatientBuilder {
     }
 
     public Patient build() {
-        return new Patient(name, phone, email, address, remark, tags, risk);
+        return new Patient(name, phone, email, address, birthDate, remark, tags, risk);
     }
 
 }

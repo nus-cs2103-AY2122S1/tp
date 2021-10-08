@@ -1,6 +1,7 @@
 package seedu.plannermd.testutil.doctor;
 
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_ADDRESS;
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_BIRTH_DATE;
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_EMAIL;
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_NAME;
 import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_PHONE;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Person;
@@ -18,6 +20,9 @@ import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.model.util.SampleDataUtil;
+import seedu.plannermd.testutil.patient.PatientBuilder;
+
+import javax.print.Doc;
 
 /**
  * A utility class to help with building Doctor objects.
@@ -28,6 +33,7 @@ public class DoctorBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private BirthDate birthDate;
     private Remark remark;
     private Set<Tag> tags;
 
@@ -39,6 +45,7 @@ public class DoctorBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        birthDate = new BirthDate(DEFAULT_BIRTH_DATE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
@@ -51,6 +58,7 @@ public class DoctorBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        birthDate = personToCopy.getBirthDate();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -63,6 +71,7 @@ public class DoctorBuilder {
         phone = doctorToCopy.getPhone();
         email = doctorToCopy.getEmail();
         address = doctorToCopy.getAddress();
+        birthDate = doctorToCopy.getBirthDate();
         remark = doctorToCopy.getRemark();
         tags = new HashSet<>(doctorToCopy.getTags());
     }
@@ -80,6 +89,14 @@ public class DoctorBuilder {
      */
     public DoctorBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Patient} that we are building.
+     */
+    public DoctorBuilder withBirthDate(String birthDate) {
+        this.birthDate = new BirthDate(birthDate);
         return this;
     }
 
@@ -116,7 +133,7 @@ public class DoctorBuilder {
     }
 
     public Doctor build() {
-        return new Doctor(name, phone, email, address, remark, tags);
+        return new Doctor(name, phone, email, address, birthDate, remark, tags);
     }
 
 }

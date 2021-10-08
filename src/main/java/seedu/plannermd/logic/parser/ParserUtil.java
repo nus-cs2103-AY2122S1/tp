@@ -11,6 +11,7 @@ import seedu.plannermd.commons.util.StringUtil;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
+import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
@@ -79,6 +80,21 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String birthDate} into an {@code BirthDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthDate} is invalid.
+     */
+    public static BirthDate parseBirthDate(String birthDate) throws ParseException {
+        requireNonNull(birthDate);
+        String trimmedBirthDate = birthDate.trim();
+        if (!BirthDate.isValidBirthDate(trimmedBirthDate)) {
+            throw new ParseException(BirthDate.MESSAGE_CONSTRAINTS);
+        }
+        return new BirthDate(trimmedBirthDate);
     }
 
     /**

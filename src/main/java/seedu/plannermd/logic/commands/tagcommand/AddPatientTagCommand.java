@@ -3,7 +3,7 @@ package seedu.plannermd.logic.commands.tagcommand;
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,12 +23,9 @@ import seedu.plannermd.model.tag.Tag;
 public class AddPatientTagCommand extends AddTagCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the person identified "
-            + "by the index number used in the displayed person list.\n"
-            + "Parameters: "
-            + PREFIX_ID + "ID (must be a positive integer) "
-            + PREFIX_TAG + "TAG\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "1 "
-            + PREFIX_TAG + "healthy";
+            + "by the index number used in the displayed person list.\n" + "Parameters: " + PREFIX_ID
+            + "ID (must be a positive integer) " + PREFIX_TAG + "TAG\n" + "Example: " + COMMAND_WORD + " " + PREFIX_ID
+            + "1 " + PREFIX_TAG + "healthy";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Patient: %1$s";
     public static final String MESSAGE_NOT_ADDED = "A tag must be provided.";
@@ -52,7 +49,8 @@ public class AddPatientTagCommand extends AddTagCommand {
      * Executes the command to add a tag to a patient.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return {@code CommandResult} which represents the result after executing this command.
+     * @return {@code CommandResult} which represents the result after executing
+     *         this command.
      * @throws CommandException if index is invalid.
      */
     @Override
@@ -66,13 +64,12 @@ public class AddPatientTagCommand extends AddTagCommand {
         Patient patientToEdit = lastShownList.get(index.getZeroBased());
         Set<Tag> newTags = new HashSet<>(patientToEdit.getTags());
         newTags.add(tag);
-        Patient editedPatient = new Patient(
-                patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
-                patientToEdit.getAddress(), patientToEdit.getRemark(), newTags, patientToEdit.getRisk()
-        );
+        Patient editedPatient = new Patient(patientToEdit.getName(), patientToEdit.getPhone(), patientToEdit.getEmail(),
+                patientToEdit.getAddress(), patientToEdit.getBirthDate(), patientToEdit.getRemark(), newTags,
+                patientToEdit.getRisk());
 
         model.setPatient(patientToEdit, editedPatient);
-        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_ADD_TAG_SUCCESS, editedPatient));
     }
@@ -91,7 +88,6 @@ public class AddPatientTagCommand extends AddTagCommand {
 
         // state check
         AddPatientTagCommand c = (AddPatientTagCommand) other;
-        return index.equals(c.index)
-                && tag.equals(c.tag);
+        return index.equals(c.index) && tag.equals(c.tag);
     }
 }

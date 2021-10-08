@@ -21,10 +21,10 @@ import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.ReadOnlyUserPrefs;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.patient.PatientBuilder;
-import seedu.plannermd.ui.PersonTabSwitcher;
 
 public class AddPatientCommandTest {
 
@@ -82,6 +82,22 @@ public class AddPatientCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        @Override
+        public void setState(State state) {
+            //TODO
+        }
+
+        @Override
+        public State getState() {
+            return null;
+            //TODO
+        }
+
+        @Override
+        public void toggleState() {
+            //TODO
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -143,18 +159,44 @@ public class AddPatientCommandTest {
         }
 
         @Override
+        public boolean hasDoctor(Doctor doctor) {
+            return false;
+            //TODO
+        }
+
+        @Override
+        public void deleteDoctor(Doctor target) {
+            //TODO
+        }
+
+        @Override
+        public void addDoctor(Doctor doctor) {
+            //TODO
+        }
+
+        @Override
+        public void setDoctor(Doctor target, Doctor editedDoctor) {
+            //TODO
+        }
+
+        @Override
         public ObservableList<Patient> getFilteredPatientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPatientList(Predicate<Person> predicate) {
+        public void updateFilteredPatientList(Predicate<? super Patient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPersonTabSwitcher(PersonTabSwitcher personTabSwitcher) {
-            throw new AssertionError("This method should not be called.");
+        public ObservableList<Doctor> getFilteredDoctorList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredDoctorList(Predicate<? super Doctor> predicate) {
+
         }
     }
 
@@ -199,5 +241,4 @@ public class AddPatientCommandTest {
             return new PlannerMd();
         }
     }
-
 }

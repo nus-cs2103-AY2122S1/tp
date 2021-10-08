@@ -11,7 +11,8 @@ import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.testutil.TypicalPersons;
 
 /**
- * A utility class containing a list of {@code Patient} objects to be used in tests.
+ * A utility class containing a list of {@code Patient} objects to be used in
+ * tests.
  */
 public class TypicalPatients {
     public static final Patient ALICE = new PatientBuilder(TypicalPersons.ALICE)
@@ -43,7 +44,8 @@ public class TypicalPatients {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPatients() {} // prevents instantiation
+    private TypicalPatients() {
+    } // prevents instantiation
 
     public static List<Patient> getTypicalPatients() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
