@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="280.0" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="280.0" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox fx:id="clientInfoContainer" prefHeight="240.0" prefWidth="393.0">
+      <VBox fx:id="clientInfoContainer" prefHeight="240.0" prefWidth="393.0" VBox.vgrow="ALWAYS">
          <children>
             <Label styleClass="label-view-header" text="Client Info">
                <font>
@@ -47,7 +47,7 @@
             <HBox prefHeight="20.0" prefWidth="363.0">
                <children>
                   <Label fx:id="clientCreationDate" styleClass="label-view" text="Created At:" />
-                  <Label fx:id="clientLastMet1" styleClass="label-view">
+                  <Label fx:id="clientCreatedAt" styleClass="label-view">
                      <HBox.margin>
                         <Insets left="4.0" />
                      </HBox.margin>
@@ -83,10 +83,10 @@
                   <Insets left="8.0" />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="20.0" prefWidth="363.0">
+            <HBox prefHeight="20.0" prefWidth="363.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label styleClass="label-view" text="Current Financial Plans:" />
-                  <Label fx:id="clientCurrentPlans" styleClass="label-view">
+                  <Label minHeight="-Infinity" minWidth="-Infinity" styleClass="label-view" text="Current Financial Plans:" />
+                  <Label fx:id="clientCurrentPlans" minHeight="-Infinity" styleClass="label-view" wrapText="true">
                      <HBox.margin>
                         <Insets left="4.0" />
                      </HBox.margin>
@@ -112,7 +112,7 @@
             <HBox prefHeight="20.0" prefWidth="363.0">
                <children>
                   <Label styleClass="label-view" text="Next Meeting:" />
-                  <Label fx:id="nextMeeting" styleClass="label-view" >
+                  <Label fx:id="nextMeeting" styleClass="label-view">
                      <HBox.margin>
                         <Insets left="4.0" />
                      </HBox.margin>
@@ -124,7 +124,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="contactInfoContainer" prefHeight="244.0" prefWidth="517.0">
+      <VBox fx:id="contactInfoContainer" prefHeight="244.0" prefWidth="517.0" VBox.vgrow="ALWAYS">
          <children>
             <Label styleClass="label-view-header" text="Contact Info">
                <font>

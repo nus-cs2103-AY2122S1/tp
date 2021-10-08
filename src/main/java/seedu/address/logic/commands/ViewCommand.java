@@ -45,7 +45,10 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, personToView.getName()));
+        CommandResult commandResult =  new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, personToView.getName()));
+        commandResult.setPersonToView(personToView);
+
+        return commandResult;
     }
 
     @Override

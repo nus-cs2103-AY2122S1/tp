@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.person.Person;
 
 /**
  * Panel that displays the full information of a {@code Person}.
@@ -25,7 +26,7 @@ public class PersonViewPanel extends UiPart<Region> {
     private Label clientCreationDate;
 
     @FXML
-    private Label clientLastMet1;
+    private Label clientCreatedAt;
 
     @FXML
     private Label clientLastMet;
@@ -53,6 +54,19 @@ public class PersonViewPanel extends UiPart<Region> {
 
     public PersonViewPanel() {
         super(FXML);
+    }
+
+    public void setClientInfo(Person personToView) {
+        clientName.setText(personToView.getName().toString());
+        clientId.setText("-");
+        clientCurrentPlans.setText("-");
+        clientLastMet.setText(personToView.getLastMet().toString());
+        clientRiskAppetite.setText("-");
+        clientCurrentPlans.setText(personToView.getCurrentPlan().toString());
+        clientDisposableIncome.setText("-");
+        nextMeeting.setText("-");
+        clientEmail.setText(personToView.getEmail().toString());
+        clientPhoneNumber.setText(personToView.getPhone().toString());
     }
 }
 
