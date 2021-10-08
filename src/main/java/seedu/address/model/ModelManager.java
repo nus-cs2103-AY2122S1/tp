@@ -102,6 +102,7 @@ public class ModelManager implements Model {
         return friendsList.hasFriendWithId(friendId);
     }
 
+    @Override
     public void deleteFriend(FriendId targetId) {
         Friend friendToDelete =
                 this.getFriendsList().getFriendsList()
