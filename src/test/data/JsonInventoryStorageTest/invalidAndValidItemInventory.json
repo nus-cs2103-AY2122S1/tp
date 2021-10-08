@@ -2,11 +2,11 @@
   "items": [ {
     "name": "Valid Item",
     "count": 1,
-    "id": "#9482424"
+    "id": "9482424"
   }, {
     "name": "Item With Invalid Tag",
     "count": 1,
-    "id": "#9482424",
+    "id": "9482424",
     "tagged": ["invalid tag!"]
   } ]
 }
