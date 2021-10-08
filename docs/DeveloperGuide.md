@@ -577,7 +577,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 **MSS**
 
 1. User requests for help
-2. TAB displays command guides.
+2. TAB displays usage guide.
 
    Use case ends.
 
