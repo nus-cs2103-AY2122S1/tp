@@ -328,18 +328,39 @@ groups with them.
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: 🔴 High: Must have | 🟡 Medium: Good to have | 🟢 Low: Unlikely to have
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+|🔴 High|student|I can scroll through each user’s entry to access information about my classmates|I can have a basic understanding of my classmates background|
+|🔴 High|student|add new contacts|I can add new contacts into the address book|
+|🔴 High|student|delete existing contacts|I can delete redundant contacts from the address book|
+|🔴 High|student|edit existing contacts|Update any outdated contacts and customise my address book.|
+|🔴 High|introvert student|use the bot to obtain the information of all classmates|without having to chat with all of them personally|
+|🔴 High|first time user|see all the features / command lines of the bot|I know how to use the bot|
+|🔴 High|student|use the bot to get contact information of my classmates|I can connect with other students and make friends|
+|🟡 Medium|visual student|see graphics|I will not forget my commitments.|
+|🟡 Medium|unorganized student|help me organise my modules/schedule|keeps things on schedule, so i wont lack behind|
+|🟡 Medium|impatient student|have a responsive interface|I can have a good user experience|
+|🟡 Medium|tutor|use the bot to track students with varying ability|better spread out students with similar ability so that the weakest wont be in the same group|
+|🟡 Medium|tutor|use the bot to track students with varying background|better spread out students with similar background into different groups|
+|🟡 Medium|student|find the address of my classmates to identify where they are staying|I can see who stays on campus and who does not|
+|🟡 Medium|student|use the bot to find people with different skillsets|learn from others|
+|🟡 Medium|student|use the bot to check teammates availability|I can make sure my teammates have same vacant timeslots as me|
+|🟡 Medium|student|use the bot to differentiate classmates with different personalities|It is easy to identify like minded people / people of certain qualities you hope to work with in the group project|
+|🟡 Medium|student|use the bot to differentiate classmates from different countries|It will be easier to form groups with the correct international / local ratio|
+|🟡 Medium|student|use the bot to find classmates who stay near me|I can form groups with people who stay near me|
+|🟡 Medium|student|use the bot to find good off-campus study spots|We can find convenient meeting places|
+|🟡 Medium|student|use the bot to find where classmates stay|We can find convenient meeting places|
+|🟡 Medium|student|use the bot to identify classmates with experience|ensure the spread of people with background in different groups|
+|🟡 Medium|student|use the bot to start finding teammates early|I can make a sound decision on who I wish to be in the same group with|
+|🟡 Medium|student|use the bot to find classmates of the opposite gender|It will be easier to form groups with the correct gender ratio|
+|🟡 Medium|student|use the bot to remind tutorial/lecture/meeting time|students can be aware of the deadlines|
+|🟡 Medium|international student|use the bot to connect with other international students, possibly from the same country as you|You feel more relatable with these people, and uni life can be more vibrant and wont be as daunting.|
+|🟡 Medium|high CAP student|find competent team|to mantain my 5/5 cap|
+|🟡 Medium|low cap student|find people to carry|I can learn from them|
+|🟢 Low|international student|use the bot in different language|It helps with my understanding and I am able to navigate the bot comfortably|
+|🟢 Low|fast-typer student|pipe my command|achive greater efficiency|
 
 ### Use cases
 
