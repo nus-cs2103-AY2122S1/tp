@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.person.Person;
+import seedu.address.model.position.Position;
 
 /**
  * The API of the Model component.
@@ -68,6 +70,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given applicant to the given position.
+     * {@code applicant} must not already exist in the applicant book.
+     */
+    void addApplicantToPosition(Applicant applicant, Position position);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
