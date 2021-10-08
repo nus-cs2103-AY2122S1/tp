@@ -1,6 +1,7 @@
-layout | title
--------|-----
-page | User Guide
+---
+layout: page
+title: User Guide
+---
 
 ## Quick start
 
