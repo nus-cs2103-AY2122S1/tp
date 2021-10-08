@@ -1,0 +1,63 @@
+.table-view {
+    -fx-background-color: #121212;
+    -fx-text-background-color: white;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #121212;
+    -fx-background-radius: 0px 0px 0px 0px;
+    -fx-background-insets: 0 0px 0 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 3 0 3 10px;
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 13px;
+}
+
+.table-row-cell: hover {
+    -fx-background-color: #808080;
+    -fx-text-background-color: red;
+}
+
+.table-row-cell: odd{
+    -fx-background-color: #121212;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell: even{
+    -fx-background-color: #121212;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
