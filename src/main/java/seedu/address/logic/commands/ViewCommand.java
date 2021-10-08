@@ -27,7 +27,7 @@ public class ViewCommand extends Command {
     private final Index index;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to view
      */
     public ViewCommand(Index index) {
         requireNonNull(index);
