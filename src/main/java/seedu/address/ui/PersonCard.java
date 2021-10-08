@@ -55,7 +55,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        attendance.setText(person.getAttendance().value.toString());
+        attendance.setText(person.getAttendance().attendanceList.toString());
         participation.setText(person.getParticipation().value.toString());
 
         person.getTags().stream()

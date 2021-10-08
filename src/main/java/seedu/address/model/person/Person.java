@@ -27,6 +27,7 @@ public class Person {
 
     /**
      * Every field must be present and not null.
+     * Constructor for a new Person object
      */
     public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
@@ -35,6 +36,19 @@ public class Person {
         this.email = email;
         this.tags.addAll(tags);
         this.attendance = new Attendance();
+        this.participation = new Participation();
+    }
+
+    /**
+     * Constructor for a re-stored Person object
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Attendance attendance) {
+        requireAllNonNull(name, phone, email, tags, attendance);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.attendance = attendance;
         this.participation = new Participation();
     }
 
@@ -49,7 +63,6 @@ public class Person {
     public Email getEmail() {
         return email;
     }
-
 
     public Attendance getAttendance() {
         return attendance;

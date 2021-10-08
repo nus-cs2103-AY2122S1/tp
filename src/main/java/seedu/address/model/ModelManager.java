@@ -116,6 +116,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void markStudentAttendance(Person target, int week) {
+        requireAllNonNull(target);
+        Person newPerson = target;
+
+        newPerson.getAttendance().toggleAttendance(week);
+        addressBook.setPerson(target, newPerson);
+    }
+
+    @Override
+    public String getStudentAttendance(Person target, int week) {
+        requireAllNonNull(target);
+        return target.getAttendance().checkPresent(week) == 1 ? "present" : "absent";
+    }
+
+    @Override
     public boolean hasTask(Task person) {
         requireNonNull(person);
         return addressBook.hasTask(person);

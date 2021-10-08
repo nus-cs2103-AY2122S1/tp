@@ -80,6 +80,18 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Retrieve the attendance of the given person {@code target} for {@code week}.
+     * {@code target} must exist in the student list.
+     */
+    String getStudentAttendance(Person target, int week);
+
+    /**
+     * Marks the attendance of the given person {@code target} for {@code week}.
+     * {@code target} must exist in the student list.
+     */
+    void markStudentAttendance(Person target, int week);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -88,9 +100,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
-
-
 
     /**
      * Returns true if a task with the same identity as {@code task} exists in the address book.
