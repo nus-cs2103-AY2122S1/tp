@@ -7,16 +7,24 @@ import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.tracker.testutil.Assert.assertThrows;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.tracker.logic.commands.AddCommand;
 import seedu.tracker.logic.commands.ClearCommand;
 import seedu.tracker.logic.commands.DeleteCommand;
+import seedu.tracker.logic.commands.EditCommand;
+import seedu.tracker.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.tracker.logic.commands.ExitCommand;
 import seedu.tracker.logic.commands.HelpCommand;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.module.Module;
+import seedu.tracker.model.module.NameContainsKeywordsPredicate;
+import seedu.tracker.testutil.EditModuleDescriptorBuilder;
 import seedu.tracker.testutil.ModuleBuilder;
 import seedu.tracker.testutil.ModuleUtil;
 
