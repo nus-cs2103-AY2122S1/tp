@@ -32,12 +32,10 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="language" styleClass="cell_small_label" text="\$language" />
-         <HBox alignment="CENTER_LEFT" spacing="5">
-            <children>
-            <Label fx:id="lastVisit" styleClass="cell_small_label" text="\$lastVisit" />
-            <Label fx:id="visit" styleClass="cell_small_label" text="\$visit" />
-            </children>
-         </HBox>
+      <Label fx:id="visit" styleClass="cell_small_label" text="\$visit" />
+      <Label fx:id="lastVisit" styleClass="cell_small_label" text="\$lastVisit" />
+
+
     </VBox>
       <rowConstraints>
          <RowConstraints />
