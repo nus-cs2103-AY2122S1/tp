@@ -2,7 +2,7 @@ package seedu.academydirectory.model.student;
 
 import static java.util.Objects.requireNonNull;
 
-public class Attendance {
+public class Attendance implements Information {
 
     private boolean[] attendanceInBoolean;
 
@@ -59,6 +59,10 @@ public class Attendance {
         } else {
             return "[ ]"; // session index omitted if unattended
         }
+    }
+
+    public static boolean isValidAttendance(String test) {
+        return test.equals("1") || test.equals("0");
     }
 
     @Override
