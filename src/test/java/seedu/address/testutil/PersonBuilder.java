@@ -12,9 +12,9 @@ import seedu.address.model.person.StudentId;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_STUDENTID = "A0213256H";
-    public static final String DEFAULT_CLASSID = "B01";
-    public static final String DEFAULT_GRADE = "A+";
+    public static final String DEFAULT_STUDENT_ID = "A0213256H";
+    public static final String DEFAULT_CLASS_ID = "B01";
+    public static final String DEFAULT_GRADE = "A";
 
     private Name name;
     private StudentId studentId;
@@ -26,8 +26,8 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        studentId = new StudentId(DEFAULT_STUDENTID);
-        classId = new ClassId(DEFAULT_CLASSID);
+        studentId = new StudentId(DEFAULT_STUDENT_ID);
+        classId = new ClassId(DEFAULT_CLASS_ID);
         grade = new Grade(DEFAULT_GRADE);
     }
 
