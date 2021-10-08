@@ -15,7 +15,6 @@ public class UniquePersonListOfPatientTest extends UniquePersonListTest<Patient>
 
     @Override
     protected Patient typicalPersonAlice() {
-        System.out.println("Patient");
         return ALICE;
     }
 
