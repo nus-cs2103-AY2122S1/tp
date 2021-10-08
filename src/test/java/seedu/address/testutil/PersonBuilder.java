@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Progress;
@@ -22,12 +23,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_PROGRESS = "No Progress";
+    public static final boolean DEFAULT_PAYMENT_STATUS = false;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Progress progress;
+    private PaymentStatus paymentStatus;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         progress = new Progress(DEFAULT_PROGRESS);
+        paymentStatus = new PaymentStatus(DEFAULT_PAYMENT_STATUS);
         tags = new HashSet<>();
     }
 
@@ -51,6 +55,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         progress = personToCopy.getProgress();
+        paymentStatus = personToCopy.getPaymentStatus();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -102,8 +107,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Payment Statis} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPaymentStatus(boolean hasPaid) {
+        this.paymentStatus = new PaymentStatus(hasPaid);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, progress, tags);
+        return new Person(name, phone, email, address, progress, paymentStatus, tags);
     }
 
 }

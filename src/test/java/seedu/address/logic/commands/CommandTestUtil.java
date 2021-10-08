@@ -36,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_PROGRESS_BOB = "No Progress";
     public static final String VALID_PROGRESS_AMY = "No Progress";
+    public static final boolean VALID_PAYMENT_STATUS_AMY = false;
+    public static final boolean VALID_PAYMENT_STATUS_BOB = false;
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

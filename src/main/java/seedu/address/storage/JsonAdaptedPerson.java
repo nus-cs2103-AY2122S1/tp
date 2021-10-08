@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Progress;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String progress;
+    private final boolean hasPaid;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -38,12 +40,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("progress") String progress, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("progress") String progress, @JsonProperty("paymentStatus") boolean hasPaid,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.progress = progress;
+        this.hasPaid = hasPaid;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -58,6 +62,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         progress = source.getProgress().progress;
+        hasPaid = source.getPaymentStatus().hasPaid;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,8 +120,11 @@ class JsonAdaptedPerson {
         }
         final Progress modelProgress = new Progress(progress);
 
+        final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelProgress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelProgress, modelPaymentStatus,
+                modelTags);
     }
 
 }
