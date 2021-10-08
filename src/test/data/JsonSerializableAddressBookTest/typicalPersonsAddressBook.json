@@ -6,48 +6,48 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
-    "birthday": "1999-02-05"
+    "birthday": "05021999"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ],
-    "birthday": "2000-04-16"
+    "birthday": "16042000"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tagged" : [ ],
-    "birthday": "1997-01-25"
+    "birthday": "25011997"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tagged" : [ "friends" ],
-    "birthday": "1990-09-08"
+    "birthday": "08091990"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tagged" : [ ],
-    "birthday": "1990-10-12"
+    "birthday": "12101990"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tagged" : [ ],
-    "birthday": "1990-11-07"
+    "birthday": "07111990"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tagged" : [ ],
-    "birthday": "1990-04-12"
+    "birthday": "12041990"
   } ]
 }

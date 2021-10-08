@@ -35,8 +35,8 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidDate("12122012 ")); // white space at the start
 
         // invalid dates
-         assertFalse(Birthday.isValidDate("32022011")); // invalid date
-         assertFalse(Birthday.isValidDate("12345678")); // invalid date
+        assertFalse(Birthday.isValidDate("32022011")); // invalid date
+        assertFalse(Birthday.isValidDate("12345678")); // invalid date
         assertFalse(Birthday.isValidDate("00000000")); // invalid date
 
         // valid birthday

@@ -60,7 +60,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        birthday = source.getBirthday().birthday.toString();
+        birthday = source.getBirthday().toString();
     }
 
     /**
@@ -115,7 +115,7 @@ class JsonAdaptedPerson {
         if (!Birthday.isValidFormat(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
         }
-        if(!Birthday.isValidDate(birthday)) {
+        if (!Birthday.isValidDate(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_INVALID_DATE);
         }
         final Birthday modelBirthday = new Birthday(birthday);

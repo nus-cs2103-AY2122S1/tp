@@ -13,22 +13,22 @@ import java.time.format.DateTimeParseException;
  */
 public class Birthday {
 
-    private static final DateTimeFormatter ddMMyyyy = DateTimeFormatter.ofPattern("ddMMyyyy");
     public static final String MESSAGE_CONSTRAINTS = "Birthdays should come in the form of ddMMyyyy";
     public static final String MESSAGE_INVALID_DATE = "Birthday is not a valid date";
     public static final String VALIDATION_REGEX = "\\d{8}";
-    public final LocalDate birthday;
+    private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("ddMMyyyy");
+    public final LocalDate birthdate;
 
     /**
      * Constructs an {@code Birthday}.
      *
-     * @param birthday A valid email address.
+     * @param birthdate A valid date value.
      */
-    public Birthday(String birthday) {
-        requireNonNull(birthday);
-        checkArgument(isValidFormat(birthday), MESSAGE_CONSTRAINTS);
-        checkArgument(isValidDate(birthday), MESSAGE_INVALID_DATE);
-        this.birthday = LocalDate.parse(birthday, ddMMyyyy);
+    public Birthday(String birthdate) {
+        requireNonNull(birthdate);
+        checkArgument(isValidFormat(birthdate), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(birthdate), MESSAGE_INVALID_DATE);
+        this.birthdate = LocalDate.parse(birthdate, BIRTHDATE_FORMATTER);
     }
 
     /**
@@ -39,11 +39,11 @@ public class Birthday {
     }
 
     /**
-     * Returns if a given string is in valid format.
+     * Returns if a given string is a valid date.
      */
     public static boolean isValidDate(String birthday) {
         try {
-            LocalDate.parse(birthday, ddMMyyyy);
+            LocalDate.parse(birthday, BIRTHDATE_FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -52,14 +52,14 @@ public class Birthday {
 
     @Override
     public String toString() {
-        return this.birthday.toString();
+        return BIRTHDATE_FORMATTER.format(this.birthdate);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Birthday // instanceof handles nulls
-                && birthday.equals(((Birthday) other).birthday)); // state check
+                && birthdate.equals(((Birthday) other).birthdate)); // state check
     }
 
 }
