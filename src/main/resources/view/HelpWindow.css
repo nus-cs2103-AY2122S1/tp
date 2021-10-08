@@ -1,3 +1,11 @@
+.root {
+    -fx-background-color: #3B3B3B;
+}
+
+.root .label {
+    -fx-text-fill: white;
+}
+
 #openButton {
     -fx-font-family: "Lato";
     -fx-background-color: #61c1ed;
