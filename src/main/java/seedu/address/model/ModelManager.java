@@ -5,15 +5,18 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +29,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> onlyfilteredPersons;
     private final SortedList<Person> filteredPersons;
 
+    private final ObservableList<Task> displayTaskList;
+    private final ObservableList<Task> unmodifiableDisplayTaskList;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -37,6 +42,10 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+
+        displayTaskList = FXCollections.observableArrayList();
+        unmodifiableDisplayTaskList = FXCollections.unmodifiableObservableList(displayTaskList);
+
         onlyfilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new SortedList<>(onlyfilteredPersons);
     }
@@ -161,4 +170,16 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== display task List Accessors =============================================================
+
+    @Override
+    public void updateDisplayTaskList(List<Task> taskList) {
+        requireNonNull(taskList);
+        displayTaskList.setAll(taskList);
+    }
+
+    @Override
+    public ObservableList<Task> getDisplayTaskList() {
+        return unmodifiableDisplayTaskList;
+    }
 }

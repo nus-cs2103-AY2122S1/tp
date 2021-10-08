@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -84,6 +86,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the currently displayed person's taskList to the given {@code taskList}.
+     * @throws NullPointerException if {@code taskList} is null.
+     */
+    void updateDisplayTaskList(List<Task> taskList);
+
+    /** Returns an unmodifiable view of the display task list. */
+    ObservableList<Task> getDisplayTaskList();
 
     void updateSortedPersonList(boolean isReverseOrder);
 }

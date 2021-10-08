@@ -1,13 +1,16 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -16,6 +19,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -49,6 +55,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private AnchorPane personListSplitPanel;
+
+    @FXML
+    private AnchorPane taskListSplitPanel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -107,11 +119,40 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Event handler when user clicks on a particular ListCell in the {@code tmp}.
+     * Updates the task list panel to show the task list of the Person represented by
+     * the selected ListCell.
+     */
+    @FXML
+    public void handleMouseClicked(ListView<Person> personListView) {
+        List<Task> selectedTaskList = personListView.getSelectionModel().getSelectedItem().getTasks();
+        logic.updateDisplayTaskList(selectedTaskList);
+    }
+
+    /** Makes child node of anchor resize together with its parent. */
+    private void setAnchorProperties(AnchorPane ap) {
+        AnchorPane.setBottomAnchor(ap.getChildren().get(0), 0.0);
+        AnchorPane.setLeftAnchor(ap.getChildren().get(0), 0.0);
+        AnchorPane.setRightAnchor(ap.getChildren().get(0), 0.0);
+        AnchorPane.setTopAnchor(ap.getChildren().get(0), 0.0);
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        // Initialising mouse click properties for ListView<Person>.
+        ListView<Person> personListView = personListPanel.getPersonListView();
+        personListView.setOnMouseClicked(event -> handleMouseClicked(personListView));
+
+        personListSplitPanel.getChildren().add(personListPanel.getRoot());
+        setAnchorProperties(personListSplitPanel);
+
+        taskListPanel = new TaskListPanel(logic.getDisplayTaskList());
+        taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
