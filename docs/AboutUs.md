@@ -23,7 +23,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/eugenecsa.png" width="200px">
 
-[[github](http://github.com/eugenecsa)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/eugenecsa)] [[portfolio](team/eugenecsa.md)]
 
 * Role: Code Quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
