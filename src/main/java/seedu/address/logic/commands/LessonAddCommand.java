@@ -30,7 +30,7 @@ public class LessonAddCommand extends Command {
 
     public static final String COMMAND_WORD = "ladd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student identified "
         + "by the index number\n"
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_RECURRING + "] "
@@ -52,8 +52,8 @@ public class LessonAddCommand extends Command {
         + PREFIX_SUBJECT + "Math "
         + PREFIX_HOMEWORK + "TYS Page 2 ";
 
-    public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor Person: %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor student: %2$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
     private final Index index;
