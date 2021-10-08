@@ -14,8 +14,7 @@ import seedu.address.model.person.Person;
  * which views the schedule by Person.
  */
 public class ViewScheduleCommand extends Command {
-
-    //is there a better command word for this?
+    
     public static final String DEFAULT_MESSAGE = "Schedule viewed of staff: %1$s\n";
     public static final String COMMAND_WORD = "viewSchedule";
     public static final String HELP_MESSAGE = ": view the schedule of a staff\n"
@@ -48,6 +47,7 @@ public class ViewScheduleCommand extends Command {
 
         String result = "";
         for (int i = 0; i < staffs.size(); i++) {
+            result += String.format(DEFAULT_MESSAGE, staffs.get(i).getName());
             result += staffs.get(i).getSchedule();
         }
         return new CommandResult(result);
