@@ -12,10 +12,9 @@ public class ClassId {
             "Class ID should only contain 3 alphanumeric characters, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * A class ID must start with an alphabet followed by two numbers.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[A-Z][0-9]{2}";
 
     public final String classId;
 

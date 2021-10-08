@@ -13,10 +13,13 @@ public class Grade {
             "Grade should only an alphabet or with a sign, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * A valid expression can be either a single alphabet (eg. A) or an alphabet followed by a sign (eg. A+)
+     * Grade A and B can be followed by either a plus, minus or no sign.
+     * Grade C and D can be followed by either a plus or no sign.
+     * Grade F cannot be followed by any sign.
+     * "*" indicates that sign is optional.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "([AB]((\\+)|-)*)|([CD](\\+)*)|(F)";
 
     public final String grade;
 

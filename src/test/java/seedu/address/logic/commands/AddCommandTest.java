@@ -51,27 +51,27 @@ public class AddCommandTest {
             addCommand.execute(modelStub));
     }
 
-//    @Test
-//    public void equals() {
-//        Person alice = new PersonBuilder().withName("Alice").build();
-//        Person bob = new PersonBuilder().withName("Bob").build();
-//        AddCommand addAliceCommand = new AddCommand(alice);
-//        AddCommand addBobCommand = new AddCommand(bob);
-//
-//
-//        // same values -> returns true
-//        AddCommand addAliceCommandCopy = new AddCommand(alice);
-//        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-//
-//        // different types -> returns false
-//        assertFalse(addAliceCommand.equals(1));
-//
-//        // null -> returns false
-//        assertFalse(addAliceCommand.equals(null));
-//
-//        // different person -> returns false
-//        assertFalse(addAliceCommand.equals(addBobCommand));
-//    }
+    @Test
+    public void equals() {
+        Person alice = new PersonBuilder().withName("Alice").build();
+        Person bob = new PersonBuilder().withName("Bob").build();
+        AddCommand addAliceCommand = new AddCommand(alice);
+        AddCommand addBobCommand = new AddCommand(bob);
+
+
+        // same values -> returns true
+        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+
+        // different types -> returns false
+        assertFalse(addAliceCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addAliceCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(addAliceCommand.equals(addBobCommand));
+    }
 
     /**
      * A default model stub that have all of the methods failing.
