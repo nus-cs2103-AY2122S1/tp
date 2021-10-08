@@ -7,8 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.siasa.model.person.Person;
-// import seedu.address.model.policy.Policy; to be completed
+import seedu.siasa.model.policy.Policy;
 
 /**
  * An UI component that displays information of a {@code Policy}.
@@ -16,34 +15,29 @@ import seedu.siasa.model.person.Person;
 public class PolicyCard extends UiPart<Region> {
     private static final String FXML = "PolicyListCard.fxml";
 
-    public final Person person;
+    public final Policy policy;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label title;
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label price;
     @FXML
-    private Label address;
+    private Label expiryDate;
     @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+    private Label commission;
 
-    public PolicyCard(Person person, int displayedIndex) {
+    public PolicyCard(Policy policy, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.policy = policy;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        title.setText(policy.getTitle().value);
+        price.setText(String.valueOf(policy.getPrice()));
+        expiryDate.setText(String.valueOf(policy.getExpiryDate()));
+        commission.setText(String.valueOf(policy.getCommission()));
     }
 
     @Override
@@ -61,6 +55,6 @@ public class PolicyCard extends UiPart<Region> {
         // state check
         PolicyCard card = (PolicyCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && policy.equals(card.policy);
     }
 }

@@ -8,8 +8,7 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.UniquePersonList;
-import seedu.siasa.model.policy.Policy;
-import seedu.siasa.model.policy.UniquePolicyList;
+import seedu.siasa.model.policy.*;
 
 /**
  * Wraps all data at the address-book level

@@ -2,6 +2,7 @@ package seedu.siasa.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,7 @@ import seedu.siasa.logic.Logic;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
+import seedu.siasa.model.policy.Policy;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -117,7 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        policyListPanel = new PolicyListPanel(logic.getFilteredPersonList());
+        policyListPanel = new PolicyListPanel(logic.getFilteredPolicyList());
         policyListPanelPlaceholder.getChildren().add(policyListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
