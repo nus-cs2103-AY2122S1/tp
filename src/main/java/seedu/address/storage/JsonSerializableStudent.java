@@ -21,7 +21,8 @@ import seedu.address.model.tutorialclass.TutorialClass;
 class JsonSerializableStudent {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-    public static final String MESSAGE_DUPLICATE_TUTORIAL_CLASS = "Tutorial Classes list contains duplicate tutorial class(es).";
+    public static final String MESSAGE_DUPLICATE_TUTORIAL_CLASS =
+            "Tutorial Classes list contains duplicate tutorial class(es).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedTutorialClass> tutorialClasses = new ArrayList<>();
