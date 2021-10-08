@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new DeleteFacilityCommand object.
  */
-public class DeleteFacilityParser implements Parser<DeleteFacilityCommand> {
+public class DeleteFacilityCommandParser implements Parser<DeleteFacilityCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteFacilityCommand

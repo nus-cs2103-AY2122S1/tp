@@ -57,7 +57,7 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteFacilityCommand.COMMAND_WORD:
-            return new DeleteFacilityParser().parse(arguments);
+            return new DeleteFacilityCommandParser().parse(arguments);
 
         case ClearMembersCommand.COMMAND_WORD:
             return new ClearMembersCommand();

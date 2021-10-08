@@ -61,4 +61,11 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void resetFacilities() {
         facilityList.setAll();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UniqueFacilityList // instanceof handles nulls
+                && facilityList.equals(((UniqueFacilityList) other).facilityList));
+    }
 }
