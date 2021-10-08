@@ -35,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String id = argMultimap.getValue(PREFIX_ID).get();
+        String id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
         Integer count = ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 

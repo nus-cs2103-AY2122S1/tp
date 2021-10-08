@@ -91,4 +91,20 @@ public class ParserUtil {
             throw new ParseException(Messages.MESSAGE_INVALID_COUNT_INTEGER);
         }
     }
+
+    /**
+     * Parses {@code String count} into a {@code id}.
+     */
+    public static String parseId(String id) throws ParseException {
+        try {
+            Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_ID_FORMAT);
+        }
+        if (id.length() == 6 && id.charAt(0) != 45) {
+            return id;
+        } else {
+            throw new ParseException(Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
+        }
+    }
 }
