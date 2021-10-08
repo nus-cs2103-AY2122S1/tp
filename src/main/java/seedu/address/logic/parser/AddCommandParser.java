@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
 import java.util.Optional;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_LANGUAGE, PREFIX_ADDRESS,
-                        PREFIX_LAST_VISIT, PREFIX_TAG);
+                        PREFIX_VISIT, PREFIX_LAST_VISIT, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_LANGUAGE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -48,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Language language = ParserUtil.parseLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Optional<LastVisit> lastVisit = ParserUtil.parseLastVisit(argMultimap.getValue(PREFIX_LAST_VISIT).orElse(""));
-        Optional<Visit> visit = Optional.ofNullable(new Visit(""));
+        Optional<Visit> visit = ParserUtil.parseVisitForAdd(argMultimap.getValue(PREFIX_VISIT).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, language, address, lastVisit, visit, tagList);
