@@ -26,7 +26,7 @@ public class Progress {
      * Returns true if a given string is a valid progress.
      */
     public static boolean isValidProgress(String test) {
-        return true;
+        return !test.trim().equals("");
     }
 
     @Override

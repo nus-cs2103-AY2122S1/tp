@@ -106,7 +106,7 @@ public class ParserUtil {
         requireNonNull(progress);
         String trimmedProgress = progress.trim();
         if (!Progress.isValidProgress(trimmedProgress)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Progress.MESSAGE_CONSTRAINTS);
         }
         return new Progress(trimmedProgress);
     }

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PROGRESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -24,7 +23,6 @@ public class AddProgressCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing progress will be overwritten by the input.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
-            + PREFIX_PROGRESS
             + "PROGRESS\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "Finishes Prelims.";
