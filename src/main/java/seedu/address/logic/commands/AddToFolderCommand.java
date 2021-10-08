@@ -60,7 +60,7 @@ public class AddToFolderCommand extends Command {
             return false;
         }
         AddToFolderCommand that = (AddToFolderCommand) other;
-        return this.index.equals(((AddToFolderCommand) other).index) &&
-                this.folderName.equals(((AddToFolderCommand) other).folderName);
+        return this.index.equals(that.index) &&
+                this.folderName.equals(that.folderName);
     }
 }

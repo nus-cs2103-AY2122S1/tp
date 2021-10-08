@@ -19,7 +19,6 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
     public AddToFolderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, new Prefix(""));
         List<String> allValues = argMultimap.getAllValues(new Prefix(""));
-        System.out.println(allValues);
         if (allValues.size() <= 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToFolderCommand.MESSAGE_USAGE));
         }
@@ -30,17 +29,17 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
 
     /**
      * Extracts the elements relevant to the folder name from {@code List} of inputs
-     * and returns a folder name {@code String}
+     * and returns a folder name {@code FolderName}
      * @param allValues {@code List} of inputs
-     * @return folder name {@code String}
-     * @throws ParseException if the given {@code folderName} is invalid.
+     * @return folder name {@code FolderName}
+     * @throws ParseException if the given {@code List} is invalid.
      */
     private FolderName extractFolderName(List<String> allValues) throws ParseException {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 1; i < allValues.size(); i++) {
             String curr = allValues.get(i).trim();
             if (!curr.equals(">>")) {
-                stringBuilder.append(curr);
+                stringBuilder.append(" ").append(curr);
             }
         }
         return ParserUtil.parseFolderName(stringBuilder.toString());
@@ -50,8 +49,8 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
      * Extracts the elements relevant to the index from {@code List} of inputs
      * and returns an Index {@code Index}
      * @param allValues {@code List} of inputs
-     * @return folder name {@code Index}
-     * @throws ParseException if the given {@code folderName} is invalid.
+     * @return Index index {@code Index}
+     * @throws ParseException if the given {@code List} is invalid.
      */
     private Index extractContactIndex(List<String> allValues) throws ParseException {
         StringBuilder stringBuilder = new StringBuilder();
