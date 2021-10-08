@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -58,6 +59,8 @@ public interface Model {
      */
     boolean hasFriend(Friend friend);
 
+    boolean hasFriendWithId(FriendId friendId);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -86,5 +89,13 @@ public interface Model {
      */
     void updateFilteredFriendsList(Predicate<Friend> predicate);
 
+    /**
+     * Links the friend {@code toLink} with the games in the HashMap.
+     * The key in the HashMap represents a {@code GAME_NAME}, while the value represents
+     * the {@code IN_GAME_USERNAME} for that game.
+     */
+    void linkFriend(Friend toLink, HashMap<String, String> games);
+
     boolean hasFriendId(FriendId idToFind);
+
 }

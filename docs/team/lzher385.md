@@ -9,9 +9,10 @@ gitGud is a desktop application for managing friends' gaming information. gitGud
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to link a friend with a game he/she plays.
-  * What it does: allows the user to associate a friend in his contact list with a game that was previously recorded.
-  * Justification: This feature improves the product significantly because a user is able to note down what games his/her friends play.
+* **New Feature**:
+  1. Added the ability to link a friend with a game he/she plays.
+     1. What it does: allows the user to associate a friend in his contact list with a game that was previously recorded.
+     2. Justification: This feature improves the product significantly because a user is able to note down what games his/her friends play.
 
 * **Code contributed**: [RepoSense link]()
 

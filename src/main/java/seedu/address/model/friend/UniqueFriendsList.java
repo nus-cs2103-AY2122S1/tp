@@ -3,22 +3,26 @@ package seedu.address.model.friend;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
+import seedu.address.model.game.Game;
 
 /**
  * A list of friends that enforces uniqueness between its elements and does not allow nulls.
- *
+ * <p>
  * A friends is considered unique by comparing using {@code Friend#equals(Object)}. As such, adding and updating
  * of friends uses Friend#equals(Object) for equality so as to ensure that the friend being added or updated
  * is unique in terms of identity in the UniqueFriendsList. The removal of a friend also uses
  * Friend#equals(Object) so as to ensure that the friend with exactly the same friendId will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Friend#equals(Object)
@@ -35,6 +39,14 @@ public class UniqueFriendsList implements Iterable<Friend> {
     public boolean contains(Friend toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
+     * Returns true if the list contains a friend with idToCheck.
+     */
+    public boolean containsId(FriendId idToCheck) {
+        requireNonNull(idToCheck);
+        return internalList.stream().anyMatch(friend -> friend.getFriendId().equals(idToCheck));
     }
 
     /**
@@ -81,6 +93,19 @@ public class UniqueFriendsList implements Iterable<Friend> {
         }
     }
 
+    /**
+     * Links a friend with the games he plays.
+     */
+    public void link(Friend toLink, HashMap<String, String> games) {
+        requireNonNull(games);
+        Set<Game> newGameList = new HashSet<>(toLink.getGames());
+        for (String key : games.keySet()) { // temporary solution till we implement the actual Game class
+            newGameList.add(new Game(key));
+        }
+        Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getName(), newGameList);
+        this.setFriend(toLink, editedFriend);
+    }
+
     public void setFriends(UniqueFriendsList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -115,7 +140,7 @@ public class UniqueFriendsList implements Iterable<Friend> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueFriendsList // instanceof handles nulls
-                        && internalList.equals(((UniqueFriendsList) other).internalList));
+                && internalList.equals(((UniqueFriendsList) other).internalList));
     }
 
     @Override

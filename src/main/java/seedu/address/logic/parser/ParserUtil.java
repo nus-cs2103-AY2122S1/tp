@@ -5,8 +5,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -99,5 +101,29 @@ public class ParserUtil {
             gameSet.add(parseGame(gameName));
         }
         return gameSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> games} into a {@code Hashmap<String, String>}.
+     * The key of the Hashmap is the game name, while the value is the username for that key.
+     */
+    public static HashMap<String, String> parseGamesAndUsernames(Collection<String> games) throws ParseException {
+        requireNonNull(games);
+        final HashMap<String, String> gamesHashMap = new HashMap<>();
+        games.stream().forEach(segment -> {
+            String[] gameAndUsername = segment.split(":");
+            String gameName = gameAndUsername[0];
+            String inGameUsername = gameAndUsername[1];
+            gamesHashMap.put(gameName, inGameUsername);
+        });
+        return gamesHashMap;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
