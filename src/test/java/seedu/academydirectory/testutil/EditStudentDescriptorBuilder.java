@@ -10,6 +10,7 @@ import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
 /**
@@ -35,6 +36,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
+        descriptor.setTelegram(student.getTelegram());
         descriptor.setAddress(student.getAddress());
         descriptor.setTags(student.getTags());
     }
@@ -60,6 +62,14 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Telegram} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withTelegram(String telegram) {
+        descriptor.setTelegram(new Telegram(telegram));
         return this;
     }
 
