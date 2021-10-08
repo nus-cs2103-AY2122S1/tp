@@ -56,9 +56,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        TeachingAssistantBuddyStorage TeachingAssistantBuddyStorage =
+        TeachingAssistantBuddyStorage teachingAssistantBuddyStorage =
                 new JsonTeachingAssistantBuddyStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(TeachingAssistantBuddyStorage, userPrefsStorage);
+        storage = new StorageManager(teachingAssistantBuddyStorage, userPrefsStorage);
 
         initLogging(config);
 

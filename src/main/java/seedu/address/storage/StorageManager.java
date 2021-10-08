@@ -17,17 +17,17 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private TeachingAssistantBuddyStorage TeachingAssistantBuddyStorage;
+    private TeachingAssistantBuddyStorage teachingAssistantBuddyStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code TeachingAssistantBuddyStorage}
      * and {@code UserPrefStorage}.
      */
-    public StorageManager(TeachingAssistantBuddyStorage TeachingAssistantBuddyStorage,
+    public StorageManager(TeachingAssistantBuddyStorage teachingAssistantBuddyStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
-        this.TeachingAssistantBuddyStorage = TeachingAssistantBuddyStorage;
+        this.teachingAssistantBuddyStorage = teachingAssistantBuddyStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -53,32 +53,32 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getTeachingAssistantBuddyFilePath() {
-        return TeachingAssistantBuddyStorage.getTeachingAssistantBuddyFilePath();
+        return teachingAssistantBuddyStorage.getTeachingAssistantBuddyFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTeachingAssistantBuddy> readTeachingAssistantBuddy()
             throws DataConversionException, IOException {
-        return readTeachingAssistantBuddy(TeachingAssistantBuddyStorage.getTeachingAssistantBuddyFilePath());
+        return readTeachingAssistantBuddy(teachingAssistantBuddyStorage.getTeachingAssistantBuddyFilePath());
     }
 
     @Override
     public Optional<ReadOnlyTeachingAssistantBuddy> readTeachingAssistantBuddy(Path filePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return TeachingAssistantBuddyStorage.readTeachingAssistantBuddy(filePath);
+        return teachingAssistantBuddyStorage.readTeachingAssistantBuddy(filePath);
     }
 
     @Override
     public void saveTeachingAssistantBuddy(ReadOnlyTeachingAssistantBuddy assistantBuddy) throws IOException {
-        saveTeachingAssistantBuddy(assistantBuddy, TeachingAssistantBuddyStorage.getTeachingAssistantBuddyFilePath());
+        saveTeachingAssistantBuddy(assistantBuddy, teachingAssistantBuddyStorage.getTeachingAssistantBuddyFilePath());
     }
 
     @Override
     public void saveTeachingAssistantBuddy(ReadOnlyTeachingAssistantBuddy assistantBuddy, Path filePath)
             throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        TeachingAssistantBuddyStorage.saveTeachingAssistantBuddy(assistantBuddy, filePath);
+        teachingAssistantBuddyStorage.saveTeachingAssistantBuddy(assistantBuddy, filePath);
     }
 
 }
