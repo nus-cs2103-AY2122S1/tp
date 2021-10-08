@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.logging.Logger;
@@ -43,6 +42,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.task.Task;
 
 
 public class HelpWindow extends AnchorPane {
@@ -52,7 +52,7 @@ public class HelpWindow extends AnchorPane {
             + "To close this window, type \"close\"";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final Hashtable<String, commandDetails> commandTable = new Hashtable<>();
+    private static final Hashtable<String, commandDetails> CommandTable = new Hashtable<>();
 
     private static Stage stage;
 
@@ -202,7 +202,8 @@ public class HelpWindow extends AnchorPane {
                 new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
                 new ListCommand(), new ExitCommand(), new SortCommand(false),
                 new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
-                new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0))
+                new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0)),
+                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), new Task("sample"))
         );
 
         tableView.setItems(data);
@@ -221,19 +222,19 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void fillCommandTable() {
-        commandTable.put(AddCommand.COMMAND_WORD, this::handleAdd);
-        commandTable.put(ClearCommand.COMMAND_WORD, this::handleClear);
-        commandTable.put(DeleteCommand.COMMAND_WORD, this::handleDelete);
-        commandTable.put(EditCommand.COMMAND_WORD, this::handleEdit);
-        commandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
-        commandTable.put(ListCommand.COMMAND_WORD, this::handleList);
-        commandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
-        commandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
-        commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
-        commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
-        commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
-        commandTable.put("viewtask", this::handleViewTask); // placeholder
-        commandTable.put("close", this::handleCloseWindow);
+        CommandTable.put(AddCommand.COMMAND_WORD, this::handleAdd);
+        CommandTable.put(ClearCommand.COMMAND_WORD, this::handleClear);
+        CommandTable.put(DeleteCommand.COMMAND_WORD, this::handleDelete);
+        CommandTable.put(EditCommand.COMMAND_WORD, this::handleEdit);
+        CommandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
+        CommandTable.put(ListCommand.COMMAND_WORD, this::handleList);
+        CommandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
+        CommandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
+        CommandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
+        CommandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
+        CommandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
+        CommandTable.put("viewtask", this::handleViewTask); // placeholder
+        CommandTable.put("close", this::handleCloseWindow);
     }
 
     private void handleUserInput(String userInput) {
@@ -251,21 +252,20 @@ public class HelpWindow extends AnchorPane {
                 || words.length == 2 && words[0].equals("help") && isValidCommand(words[1])) {
             return true;
         } else {
-            System.out.println(Arrays.toString(words));
             additionalInfo.setText("That is not a valid command");
             return false;
         }
     }
 
     private boolean isValidCommand(String userInput) {
-        return commandTable.containsKey(userInput);
+        return CommandTable.containsKey(userInput);
     }
 
     private void performCommand(String[] userInput, boolean isClose) {
         if (isClose) {
-            commandTable.get(userInput[0]).execute();
+            CommandTable.get(userInput[0]).execute();
         } else {
-            commandTable.get(userInput[1]).execute();
+            CommandTable.get(userInput[1]).execute();
         }
     }
 
