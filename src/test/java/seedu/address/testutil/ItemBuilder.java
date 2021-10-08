@@ -14,7 +14,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class ItemBuilder {
 
     public static final String DEFAULT_NAME = "Cream Puff";
-    public static final String DEFAULT_ID = "#654321";
+    public static final String DEFAULT_ID = "654321";
     public static final String DEFAULT_COUNT = "5";
 
     private Name name;
