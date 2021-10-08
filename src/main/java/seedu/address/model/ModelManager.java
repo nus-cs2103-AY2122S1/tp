@@ -96,8 +96,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteFriend(Friend target) {
-        friendsList.removeFriend(target);
+    public void deleteFriend(FriendId targetId) {
+        Friend friendToDelete =
+                this.getFriendsList().getFriendsList()
+                        .stream()
+                        .filter(friend -> friend.getFriendId().equals(targetId))
+                        .findFirst()
+                        .get();
+        friendsList.removeFriend(friendToDelete);
     }
 
     @Override

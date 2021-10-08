@@ -22,17 +22,24 @@ public class DeleteFriendCommand extends FriendCommand {
     private FriendId friendToDeleteId;
     private Friend friendToDelete;
 
+    /**
+     * Command to delete a friend using the unique FRIEND_ID.
+     * @param friendId The friend id to identify the friend to be deleted.
+     */
     public DeleteFriendCommand(FriendId friendId) {
+        requireNonNull(friendId);
         friendToDeleteId = friendId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Friend> lastShownList = model.getFilteredFriendsList();
-        friendToDelete = findFriendInList(lastShownList, friendToDeleteId);
-        model.deleteFriend(friendToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, friendToDelete));
+        if (model.hasFriendId(friendToDeleteId)) {
+            model.deleteFriend(friendToDeleteId);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, friendToDeleteId));
+        } else {
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
+        }
     }
 
     @Override

@@ -62,7 +62,7 @@ public interface Model {
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deleteFriend(Friend target);
+    void deleteFriend(FriendId targetId);
 
     /**
      * Adds the given person.

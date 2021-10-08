@@ -9,12 +9,10 @@ import static seedu.address.testutil.TypicalFriends.AMY;
 import static seedu.address.testutil.TypicalFriends.BOB;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,51 +29,41 @@ public class DeleteFriendCommandTest {
 
     @Test
     public void execute_validIdUnfilteredList_success() {
+        // command can delete friend by friend id
         Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
 
-        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS, friendToDelete);
+        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                friendToDelete.getFriendId());
 
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
-        expectedModel.deleteFriend(friendToDelete);
+        expectedModel.deleteFriend(friendToDelete.getFriendId());
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_nonExistentIdUnfilteredList_throwsCommandException() {
+        // command fails if friend id does not exist in unfiltered list
         DeleteFriendCommand deleteFriendCommand = new DeleteFriendCommand(AMY.getFriendId());
-
         assertCommandFailure(deleteFriendCommand, model, Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test
     public void execute_validIdFilteredList_success() {
+        // can delete friend by friendid even if not in the currently filtered list
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
         Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
-
-        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS, friendToDelete);
-
+        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                friendToDelete.getFriendId());
         Model expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
-        expectedModel.deleteFriend(friendToDelete);
+
+        // show no one
         showNoPerson(expectedModel);
 
+        // should still be able to delete
+        expectedModel.deleteFriend(friendToDelete.getFriendId());
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIdFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getFriendsList().getFriendsList().size());
-
-        Friend friendToDelete = model.getFriendsList().getFriendsList().get(outOfBoundIndex.getZeroBased());
-        DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test

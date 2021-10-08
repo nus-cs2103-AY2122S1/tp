@@ -127,7 +127,7 @@ public class AddFriendCommandTest {
         }
 
         @Override
-        public void deleteFriend(Friend target) {
+        public void deleteFriend(FriendId targetId) {
             throw new AssertionError("This method should not be called.");
         }
 

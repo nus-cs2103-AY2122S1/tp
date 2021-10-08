@@ -15,7 +15,6 @@ public class DeleteFriendCommandParser extends FriendCommandParser {
     private FriendId friendId;
     private ArgumentMultimap argMultimap;
 
-
     @Override
     public FriendCommand parse(String args) throws ParseException {
         try {
