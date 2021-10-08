@@ -97,22 +97,22 @@ public class AddCommandParserTest {
                 .withRemark("")
                 .withRisk(Risk.getUnclassifiedRisk().toString())
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB 
-                + BIRTH_DATE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddPatientCommand(expectedPatientMultipleTags));
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BIRTH_DATE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                new AddPatientCommand(expectedPatientMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Patient expectedPatient = new PatientBuilder(AMY).withTags().withRemark("").build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY 
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + BIRTH_DATE_DESC_AMY + RISK_DESC_AMY, new AddPatientCommand(expectedPatient));
 
         // no risk
         expectedPatient = new PatientBuilder(AMY).withRisk(Risk.getUnclassifiedRisk().toString())
-                .withRemark("")
-                .build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY 
+                .withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + BIRTH_DATE_DESC_AMY + TAG_DESC_FRIEND, new AddPatientCommand(expectedPatient));
     }
 

@@ -20,9 +20,6 @@ import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.model.util.SampleDataUtil;
-import seedu.plannermd.testutil.patient.PatientBuilder;
-
-import javax.print.Doc;
 
 /**
  * A utility class to help with building Doctor objects.
