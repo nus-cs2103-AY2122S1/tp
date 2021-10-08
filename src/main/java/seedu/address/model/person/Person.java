@@ -16,6 +16,8 @@ import seedu.address.model.tuition.TuitionClass;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    /** Most recently view person */
+    private static Person MOST_RECENT;
 
     // Identity fields
     private final Name name;
@@ -42,6 +44,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.classes = classes;
+        MOST_RECENT = this;
     }
 
     /**
@@ -211,6 +214,22 @@ public class Person {
                 tuitionClasses.set(position, tuitionClass);
             }
         }
+    }
+
+    /**
+     * Sets most recently viewed student to a given Person.
+     * @param student Student to set as most recently looked at.
+     */
+    public static void setMostRecentTo(Person student) {
+        MOST_RECENT = student;
+    }
+
+    /**
+     * Returns the most recently viewed student
+     * @return most recently viewed student.
+     */
+    public static Person getMostRecent() {
+        return MOST_RECENT;
     }
 
 }

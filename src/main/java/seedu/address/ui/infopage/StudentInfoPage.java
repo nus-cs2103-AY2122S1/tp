@@ -1,20 +1,23 @@
-package seedu.address.ui;
+package seedu.address.ui.infopage;
 
 import java.util.Comparator;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * TODO
  */
-public class PersonCard extends UiPart<Region> {
+public class StudentInfoPage extends InfoPage {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "StudentInfoPage.fxml";
+
+    private static final Logger logger = LogsCenter.getLogger(StudentInfoPage.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,14 +27,12 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    private final Person student;
 
     @FXML
-    private HBox cardPane;
+    private VBox studentPagePane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
     @FXML
     private Label phone;
     @FXML
@@ -40,22 +41,27 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label remark;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Constructor for a StudentInfoPage
+     * @param student Student to display information of.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public StudentInfoPage(Person student) {
         super(FXML);
-        this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
+        logger.info("StudentInfoPage " + student);
 
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
+        this.student = student;
+        this.name.setText(student.getName().fullName);
+        this.phone.setText(student.getPhone().value);
+        this.remark.setText("Remarks:\n" + student.getRemark().value);
+        this.address.setText(student.getAddress().value);
+        this.email.setText(student.getEmail().value);
+        student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
     }
 
     @Override
@@ -66,13 +72,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof TuitionClassInfoPage)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+        StudentInfoPage otherInfoPage = (StudentInfoPage) other;
+        return this.student.equals(otherInfoPage.student);
     }
+
 }

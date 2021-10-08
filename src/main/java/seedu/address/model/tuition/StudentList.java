@@ -9,15 +9,15 @@ import seedu.address.model.person.Classes;
 /**
  * Represents students who are in this tuition class
  */
-public class Student {
-    public final ArrayList<String> students;
+public class StudentList {
+    private final ArrayList<String> students;
 
     /**
      * Constructor for student class.
      *
      * @param students
      */
-    public Student(ArrayList<String> students) {
+    public StudentList(ArrayList<String> students) {
         requireNonNull(students);
         this.students = students;
     }
@@ -36,7 +36,7 @@ public class Student {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Classes // instanceof handles nulls
-                && equalClasses(((Student) other).students)); // state check
+                && equalClasses(((StudentList) other).students)); // state check
     }
 
     /**
@@ -58,5 +58,13 @@ public class Student {
 
     public ArrayList<String> getStudents() {
         return students;
+    }
+
+    /**
+     * Returns whether or not Student List is empty.
+     * @returns true if there are no students in the list, false otherwise
+     */
+    public boolean isEmpty() {
+        return students.isEmpty();
     }
 }

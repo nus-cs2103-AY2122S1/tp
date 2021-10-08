@@ -16,6 +16,11 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+import seedu.address.model.tuition.TuitionClass;
+import seedu.address.ui.infopage.InfoPage;
+import seedu.address.ui.infopage.StudentInfoPage;
+import seedu.address.ui.infopage.TuitionClassInfoPage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -53,6 +58,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane infoPagePlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -185,13 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
+            executeUiAction(commandResult.getUiAction());
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -199,5 +201,41 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void executeUiAction(CommandResult.UiAction action) {
+        switch (action) {
+        case EXIT:
+            handleExit();
+            break;
+        case SHOW_HELP:
+            handleHelp();
+            break;
+        case SHOW_TUITION_PAGE:
+            showTuitionPage();
+            break;
+        case SHOW_STUDENT_PAGE:
+            showStudentPage();
+            break;
+        default:
+            break;
+        }
+    }
+
+    private void showStudentPage() {
+        updateInfoPage(new StudentInfoPage(Person.getMostRecent()));
+    }
+
+    private void showTuitionPage() {
+        updateInfoPage(new TuitionClassInfoPage(TuitionClass.getMostRecent()));
+    }
+
+    /**
+     * Updates the Info Page section of the UI with a given info card.
+     * @param infoPage InfoPage to be placed in the Info Page section.
+     */
+    private void updateInfoPage(InfoPage infoPage) {
+        infoPagePlaceholder.getChildren().clear();
+        infoPagePlaceholder.getChildren().add(infoPage.getRoot());
     }
 }

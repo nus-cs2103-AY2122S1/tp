@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tuition.Student;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -41,8 +40,7 @@ public class AddClassCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Student student = toAdd.getStudent();
-        ArrayList<String> nowStudents = student.getStudents();
+        ArrayList<String> nowStudents = toAdd.getStudentList().getStudents();
         ArrayList<String> newStudents = new ArrayList<>();
         ArrayList<String> invalidStudents = new ArrayList<>();
         ArrayList<Person> validStudentsAsPerson = new ArrayList<>();

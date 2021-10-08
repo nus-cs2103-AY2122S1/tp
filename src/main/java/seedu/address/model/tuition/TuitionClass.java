@@ -9,11 +9,14 @@ import seedu.address.model.person.Person;
  * Represents a tuition class in the book
  */
 public class TuitionClass {
+    /** Most recently viewed tuition class */
+    private static TuitionClass MOST_RECENT;
+
     private final ClassName name;
     private final ClassLimit limit;
     private final Counter counter;
     private final Timeslot timeslot;
-    private Student student;
+    private StudentList studentList;
 
     /**
      * Constructor for Tuition Class.
@@ -22,14 +25,15 @@ public class TuitionClass {
      * @param limit
      * @param counter
      * @param timeslot
-     * @param student
+     * @param studentList
      */
-    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, Student student) {
+    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
         this.timeslot = timeslot;
-        this.student = student;
+        this.studentList = studentList;
+        MOST_RECENT = this;
     }
 
     public ClassName getName() {
@@ -48,8 +52,16 @@ public class TuitionClass {
         return timeslot;
     }
 
-    public Student getStudent() {
-        return student;
+    public StudentList getStudentList() {
+        return studentList;
+    }
+
+    public int getStudentCount() {
+        return studentList.getStudents().size();
+    }
+
+    public boolean isFull() {
+        return this.getStudentCount() == this.limit.getLimit();
     }
 
     /**
@@ -77,13 +89,17 @@ public class TuitionClass {
         }
 
         TuitionClass otherClass = (TuitionClass) other;
-        return otherClass.getTimeslot().equals(getTimeslot());
+        return otherClass.getName().equals(getName())
+                && otherClass.limit.equals(this.limit)
+                && otherClass.counter.equals(this.counter)
+                && otherClass.timeslot.equals(this.timeslot)
+                && otherClass.studentList.equals(this.studentList);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, limit, counter, timeslot, student);
+        return Objects.hash(name, limit, counter, timeslot, studentList);
     }
 
     @Override
@@ -98,7 +114,7 @@ public class TuitionClass {
                 .append(" Timeslot: ")
                 .append(getTimeslot())
                 .append("; Students: ")
-                .append(getStudent());
+                .append(getStudentList());
         return builder.toString();
     }
 
@@ -108,7 +124,7 @@ public class TuitionClass {
      * @return this TuitionClass
      */
     public TuitionClass changeStudents(ArrayList<String> students) {
-        this.student = new Student(students);
+        this.studentList = new StudentList(students);
         return this;
     }
 
@@ -118,7 +134,7 @@ public class TuitionClass {
      * @return the tuition class after modification
      */
     public TuitionClass addStudent(Person person) {
-        ArrayList<String> nowStudents = this.student.students;
+        ArrayList<String> nowStudents = this.studentList.getStudents();
         String name = person.getName().fullName;
         for (String s: nowStudents) {
             if (s.equals(name)) {
@@ -127,5 +143,41 @@ public class TuitionClass {
         }
         nowStudents.add(person.getName().fullName);
         return this;
+    }
+
+    /**
+     * Convert students from an arraylist to a string to be displayed in UI
+     * @return a string of all the student names combined into a list.
+     */
+    public String listStudents() {
+        String studentString = "";
+        if (this.studentList.isEmpty()) {
+            studentString = "No student yet.";
+            return studentString;
+        }
+        String lastStudent = studentList.getStudents().get(studentList.getStudents().size() - 1);
+        for (String name: studentList.getStudents()) {
+            studentString += name;
+            if (!name.equals(lastStudent)) {
+                studentString += ", ";
+            }
+        }
+        return studentString;
+    }
+
+    /**
+     * Sets most recently viewed tuition class to a given TuitionClass.
+     * @param tuitionClass Tuition Class to set as most recently looked at.
+     */
+    public static void setMostRecentTo(TuitionClass tuitionClass) {
+        MOST_RECENT = tuitionClass;
+    }
+
+    /**
+     * Returns the most recently viewed tuition class
+     * @return most recently viewed tuition class.
+     */
+    public static TuitionClass getMostRecent() {
+        return MOST_RECENT;
     }
 }

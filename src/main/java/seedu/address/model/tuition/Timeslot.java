@@ -50,7 +50,7 @@ public class Timeslot {
         if (first.length() != 5 || second.length() != 5) {
             return false;
         }
-        if (first.charAt(2) != ':' || second.charAt(2) != ':' ) {
+        if (first.charAt(2) != ':' || second.charAt(2) != ':') {
             return false;
         }
         if (Integer.valueOf(first.substring(0, 2)) > Integer.valueOf(second.substring(0, 2))) {

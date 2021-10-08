@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Counter;
-import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -44,7 +44,7 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
         ClassLimit limit = ParserUtil.parseLimit(argMultimap.getValue(PREFIX_LIMIT).get());
         Counter counter = ParserUtil.parseCounter(argMultimap.getValue(PREFIX_COUNTER).get());
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_TIMESLOT).get());
-        Student student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
+        StudentList student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
 
         TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student);
 
