@@ -145,7 +145,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Initialising mouse click properties for ListView<Person>.
         ListView<Person> personListView = personListPanel.getPersonListView();
-        personListView.setOnMouseClicked(event -> handleMouseClicked(tmp));
+        personListView.setOnMouseClicked(event -> handleMouseClicked(personListView));
 
         personListSplitPanel.getChildren().add(personListPanel.getRoot());
         setAnchorProperties(personListSplitPanel);
