@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
@@ -20,8 +20,9 @@ import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
+
 /**
  * Edits the details of an existing student in the address book.
  */
@@ -34,11 +35,11 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_GROUP_NAME + "GROUP NAME] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_TELEGRAM_HANDLE + "@john_doe "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
@@ -94,7 +95,8 @@ public class EditCommand extends Command {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
-        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
+        TelegramHandle updatedTelegramHandle = editStudentDescriptor.getTelegramHandle()
+                .orElse(studentToEdit.getTelegramHandle());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Group updatedGroup = editStudentDescriptor.getGroup().orElse(studentToEdit.getGroup());
 
@@ -107,7 +109,7 @@ public class EditCommand extends Command {
         model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
         Group retrievedUpdatedGroup = model.getFilteredGroupList().get(0);
 
-        return new Student(updatedName, updatedPhone, updatedEmail, retrievedUpdatedGroup);
+        return new Student(updatedName, updatedTelegramHandle, updatedEmail, retrievedUpdatedGroup);
     }
 
     @Override
@@ -134,7 +136,7 @@ public class EditCommand extends Command {
      */
     public static class EditStudentDescriptor {
         private Name name;
-        private Phone phone;
+        private TelegramHandle telegramHandle;
         private Email email;
         private Group group;
 
@@ -145,7 +147,7 @@ public class EditCommand extends Command {
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setTelegramHandle(toCopy.telegramHandle);
             setEmail(toCopy.email);
             setGroup(toCopy.group);
         }
@@ -154,7 +156,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email);
+            return CollectionUtil.isAnyNonNull(name, telegramHandle, email);
         }
 
         public void setName(Name name) {
@@ -165,12 +167,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
         }
 
         public void setEmail(Email email) {
@@ -206,7 +208,7 @@ public class EditCommand extends Command {
             EditStudentDescriptor e = (EditStudentDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
+                    && getTelegramHandle().equals(e.getTelegramHandle())
                     && getEmail().equals(e.getEmail())
                     && getGroup().equals(e.getGroup());
         }

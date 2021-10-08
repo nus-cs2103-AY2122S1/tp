@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.List;
 
@@ -26,12 +26,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+            + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_GROUP_NAME + "GROUPNAME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
+            + PREFIX_TELEGRAM_HANDLE + "@john_doe "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_GROUP_NAME + "CS2103T ";
 
@@ -68,7 +68,7 @@ public class AddCommand extends Command {
         Group retrievedGroup = model.getFilteredGroupList().get(0);
 
         // Add student with the group fetched from the data in the model
-        model.addStudent(new Student(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(), retrievedGroup));
+        model.addStudent(new Student(toAdd.getName(), toAdd.getTelegramHandle(), toAdd.getEmail(), retrievedGroup));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,34 +26,35 @@ import seedu.address.model.student.Student;
  */
 public class TypicalStudents {
 
-    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withGroup("CS2103T", "hi").withPhone("94351253").build();
-    public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
-            .withGroup("CS2103T", "hi").withPhone("98765432").build();
-    public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withGroup("CS2103T", "hi").withAddress("wall street").build();
-    public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withGroup("CS2103T", "hi").withAddress("10th street").build();
-    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withGroup("CS2103T", "hi").withAddress("michegan ave").build();
-    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withGroup("CS2103T", "hi").withAddress("little tokyo").build();
-    public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withGroup("CS2103T", "hi").withAddress("4th street").build();
+    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline").withEmail("alice@example.com")
+            .withGroup("CS2103T", "hi").withTelegramHandle("@alice_pauline").build();
+    public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withEmail("johnd@example.com")
+            .withGroup("CS2103T", "hi").withTelegramHandle("@benson_meier").build();
+    public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withTelegramHandle("@carl_kurz")
+            .withEmail("heinz@example.com").withGroup("CS2103T", "hi").build();
+    public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier")
+            .withTelegramHandle("@daniel_meier").withEmail("cornelia@example.com")
+            .withGroup("CS2103T", "hi").build();
+    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withTelegramHandle("@elle_meyer")
+            .withEmail("werner@example.com").withGroup("CS2103T", "hi").build();
+    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withTelegramHandle("@fiona_kunz")
+            .withEmail("lydia@example.com").withGroup("CS2103T", "hi").build();
+    public static final Student GEORGE = new StudentBuilder().withName("George Best").withTelegramHandle("@george_best")
+            .withEmail("anna@example.com").withGroup("CS2103T", "hi").build();
 
     // Manually added
-    public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withGroup("CS2103T", "hi").withAddress("little india").build();
-    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withGroup("CS2103T", "hi").withAddress("chicago ave").build();
+    public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withTelegramHandle("@hoon_meier")
+            .withEmail("stefan@example.com").withGroup("CS2103T", "hi").build();
+    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withTelegramHandle("@ida_mueller")
+            .withEmail("hans@example.com").withGroup("CS2103T", "hi").build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}
-    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withGroup(VALID_GROUP_NAME_AMY, VALID_DESC_AMY).build();
-    public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withGroup(VALID_GROUP_NAME_BOB, VALID_DESC_BOB).build();
+    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withEmail(VALID_EMAIL_AMY)
+            .withGroup(VALID_GROUP_NAME_AMY, VALID_DESC_AMY).build();
+    public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withEmail(VALID_EMAIL_BOB)
+            .withGroup(VALID_GROUP_NAME_BOB, VALID_DESC_BOB).build();
 
     //TODO GroupBuilder in the future?
     public static final Group GROUPCS2103T = new Group(new GroupName("CS2103T"), new Description("hi"));

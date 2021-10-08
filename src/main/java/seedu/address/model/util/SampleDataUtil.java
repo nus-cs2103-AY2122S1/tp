@@ -7,8 +7,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -16,18 +16,18 @@ import seedu.address.model.student.Student;
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[]{
-            new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Student(new Name("Alex Yeoh"), new TelegramHandle("@alex_yeoh"), new Email("alexyeoh@example.com"),
                 new Group(new GroupName("CS2103T"), new Description("test"))),
-            new Student(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Student(new Name("Bernice Yu"), new TelegramHandle("@bernice_yu"), new Email("berniceyu@example.com"),
                 new Group(new GroupName("CS2103T"), new Description("test"))),
-            new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+            new Student(new Name("Charlotte Oliveiro"), new TelegramHandle("@charlotte"),
+                    new Email("charlotte@example.com"), new Group(new GroupName("CS2103T"), new Description("test"))),
+            new Student(new Name("David Li"), new TelegramHandle("@david_li"), new Email("lidavid@example.com"),
                 new Group(new GroupName("CS2103T"), new Description("test"))),
-            new Student(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+            new Student(new Name("Irfan Ibrahim"), new TelegramHandle("@irfan_ibrahim"), new Email("irfan@example.com"),
                 new Group(new GroupName("CS2103T"), new Description("test"))),
-            new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Group(new GroupName("CS2103T"), new Description("test"))),
-            new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Group(new GroupName("CS2103T"), new Description("test")))
+            new Student(new Name("Roy Balakrishnan"), new TelegramHandle("@roy_balakrishnan"),
+                    new Email("royb@example.com"), new Group(new GroupName("CS2103T"), new Description("test")))
         };
     }
 

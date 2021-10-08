@@ -14,7 +14,7 @@ public class Student {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final TelegramHandle telegramHandle;
     private final Email email;
 
     // Data fields
@@ -23,10 +23,10 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Group group) {
-        requireAllNonNull(name, phone, email, group);
+    public Student(Name name, TelegramHandle telegramHandle, Email email, Group group) {
+        requireAllNonNull(name, telegramHandle, email, group);
         this.name = name;
-        this.phone = phone;
+        this.telegramHandle = telegramHandle;
         this.email = email;
         this.group = group;
     }
@@ -35,8 +35,8 @@ public class Student {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     public Email getEmail() {
@@ -76,7 +76,7 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
-                && otherStudent.getPhone().equals(getPhone())
+                && otherStudent.getTelegramHandle().equals(getTelegramHandle())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getGroup().equals(getGroup());
     }
@@ -84,15 +84,15 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, group);
+        return Objects.hash(name, telegramHandle, email, group);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
+                .append("; Telegram Handle: ")
+                .append(getTelegramHandle())
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Group: ")

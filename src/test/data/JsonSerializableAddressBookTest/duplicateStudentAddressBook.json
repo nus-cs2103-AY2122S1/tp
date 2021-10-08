@@ -1,12 +1,12 @@
 {
   "students": [ {
     "name": "Alice Pauline",
-    "phone": "94351253",
+    "telegramHandle": "@alice_pauline",
     "email": "alice@example.com",
     "groupName": "CS2103T"
   }, {
     "name": "Alice Pauline",
-    "phone": "94351253",
+    "telegramHandle": "@alice_pauline",
     "email": "pauline@example.com",
     "groupName": "CS2103T"
   } ]

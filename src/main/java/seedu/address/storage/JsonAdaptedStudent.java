@@ -9,8 +9,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -20,7 +20,7 @@ class JsonAdaptedStudent {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final String telegramHandle;
     private final String email;
     private final String groupName;
 
@@ -28,10 +28,10 @@ class JsonAdaptedStudent {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("telegramHandle") String telegramHandle,
                               @JsonProperty("email") String email, @JsonProperty("groupName") String groupName) {
         this.name = name;
-        this.phone = phone;
+        this.telegramHandle = telegramHandle;
         this.email = email;
         this.groupName = groupName;
     }
@@ -41,7 +41,7 @@ class JsonAdaptedStudent {
      */
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        telegramHandle = source.getTelegramHandle().value;
         email = source.getEmail().value;
         groupName = source.getGroup().getGroupName().toString();
     }
@@ -60,13 +60,14 @@ class JsonAdaptedStudent {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (telegramHandle == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TelegramHandle.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final TelegramHandle modelTelegramHandle = new TelegramHandle(this.telegramHandle);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -84,6 +85,7 @@ class JsonAdaptedStudent {
         final GroupName modelGroupName = new GroupName(groupName);
 
         // TODO Cannot retrieve groups from model until group saving/loading is implemented
-        return new Student(modelName, modelPhone, modelEmail, new Group(modelGroupName, new Description("peepee")));
+        return new Student(modelName, modelTelegramHandle, modelEmail, new Group(modelGroupName,
+                new Description("peepee")));
     }
 }

@@ -343,10 +343,17 @@ save it with `Model#setStudent()`.
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+<<<<<<< HEAD
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getTelegramHandle(), personToEdit.getEmail(),
+                personToEdit.getAddress(), remark, personToEdit.getTags());
+=======
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = new Student(
-                studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+                studentToEdit.getName(), studentToEdit.getTelegramHandle(), studentToEdit.getEmail(),
                 studentToEdit.getAddress(), remark, studentToEdit.getTags());
+>>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);

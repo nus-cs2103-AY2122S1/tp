@@ -3,11 +3,10 @@ package seedu.address.testutil;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
 
 /**
  * A utility class to help with building Student objects.
@@ -15,27 +14,24 @@ import seedu.address.model.student.Student;
 public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_TELEGRAM_HANDLE = "@amy_bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
     public static final String DEFAULT_DESCRIPTION = "software eng mod";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private Phone phone;
+    private TelegramHandle telegramHandle;
     private Email email;
     private Group group;
-    private Address address;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         email = new Email(DEFAULT_EMAIL);
         group = new Group(new GroupName(DEFAULT_GROUP_NAME), new Description(DEFAULT_DESCRIPTION));
-        address = new Address(DEFAULT_ADDRESS);
     }
 
     /**
@@ -43,7 +39,7 @@ public class StudentBuilder {
      */
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
-        phone = studentToCopy.getPhone();
+        telegramHandle = studentToCopy.getTelegramHandle();
         email = studentToCopy.getEmail();
         group = studentToCopy.getGroup();
     }
@@ -57,18 +53,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Student} that we are building.
+     * Sets the {@code TelegramHandle} of the {@code Student} that we are building.
      */
-    public StudentBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Phone} of the {@code Student} that we are building.
-     */
-    public StudentBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public StudentBuilder withTelegramHandle(String telegramHandle) {
+        this.telegramHandle = new TelegramHandle(telegramHandle);
         return this;
     }
 
@@ -94,7 +82,7 @@ public class StudentBuilder {
      */
     public Student build() {
         // TODO Double confirm, do we need to load a group from the model for this testUtil method/class?
-        return new Student(name, phone, email, group);
+        return new Student(name, telegramHandle, email, group);
     }
 
 }

@@ -14,8 +14,15 @@ UniqueStudentList -right-> Student
 
 Student -up-> "*" Tag
 
+<<<<<<< HEAD
+Person *--> Name
+Person *--> TelegramHandle
+Person *--> Email
+Person *--> Address
+=======
 Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> Address
+>>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 @enduml

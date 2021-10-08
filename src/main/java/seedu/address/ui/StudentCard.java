@@ -30,7 +30,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label telegramHandle;
     @FXML
     private Label email;
     @FXML
@@ -45,7 +45,7 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         groupName.setText(student.getGroup().getGroupName().toString());
-        phone.setText(student.getPhone().value);
+        telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
     }
 
