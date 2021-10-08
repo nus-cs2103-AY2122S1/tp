@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -9,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -47,4 +49,12 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Updates the currently displayed person's taskList to the given {@code taskList}.
+     */
+    void updateDisplayTaskList(List<Task> taskList);
+
+    /** Returns an unmodifiable view of the display task list. */
+    ObservableList<Task> getDisplayTaskList();
 }
