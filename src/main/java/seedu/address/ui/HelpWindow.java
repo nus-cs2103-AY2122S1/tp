@@ -26,17 +26,7 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddTaskCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeleteTaskCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -230,6 +220,7 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
         commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
         commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
+        commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
         commandTable.put("viewtask", this::handleViewTask); // placeholder
         commandTable.put("close", this::handleCloseWindow);
     }
@@ -320,6 +311,12 @@ public class HelpWindow extends AnchorPane {
     private void handleViewTask() {
         additionalInfo.setText("Format: viewtask INDEX\n"
                 + "Displays the list of tasks attached to the person at the specifiedINDEX");
+    }
+
+    private void handleEditTask() {
+        additionalInfo.setText("Format: edittask INDEX ti/TASK_INDEX [task/TASKNAME]\n"
+                + "Edits a task attached to the person (at the specified INDEX) according to the TASK_INDEX\n"
+                + "At least one of the optional fields must be provided.");
     }
 
     private void handleCloseWindow() {
