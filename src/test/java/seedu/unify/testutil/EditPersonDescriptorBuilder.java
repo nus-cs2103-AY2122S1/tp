@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.unify.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.unify.model.tag.Tag;
-import seedu.unify.model.task.Address;
+import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Person;
@@ -35,7 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setDate(person.getDate());
         descriptor.setTags(person.getTags());
     }
 
@@ -64,10 +64,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Date} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withDate(String date) {
+        descriptor.setDate(new Date(date));
         return this;
     }
 

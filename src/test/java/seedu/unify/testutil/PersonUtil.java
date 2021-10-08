@@ -1,6 +1,6 @@
 package seedu.unify.testutil;
 
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -33,7 +33,7 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().taskName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        sb.append(PREFIX_DATE + person.getDate().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagTaskName + " ")
         );
@@ -48,7 +48,7 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.taskName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
