@@ -13,31 +13,21 @@ public class Module {
     // Identity fields
     private final ModuleName moduleName;
 
-    // Data fields
-    private final ModuleId moduleId;
-    //private final Set<Tag> tags = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
-    public Module(ModuleId moduleId, ModuleName moduleName) {
-        requireAllNonNull(moduleName, moduleId);
+    public Module(ModuleName moduleName) {
+        requireAllNonNull(moduleName);
         this.moduleName = moduleName;
-        this.moduleId = moduleId;
-        //this.tags.addAll(tags);
     }
 
     public ModuleName getName() {
         return moduleName;
     }
 
-    public ModuleId getModuleId() {
-        return moduleId;
-    }
-
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both modules have the same name.
+     * This defines a weaker notion of equality between two modules.
      */
     public boolean isSameModule(Module otherModule) {
         if (otherModule == this) {
@@ -45,11 +35,11 @@ public class Module {
         }
 
         return otherModule != null
-                && otherModule.getModuleId().equals(getModuleId());
+                && otherModule.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both modules have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -63,21 +53,19 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
-        return otherModule.getName().equals(getName()) && otherModule.getModuleId().equals(getModuleId());
+        return otherModule.getName().equals(getName());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleName, moduleId);
+        return Objects.hash(moduleName);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; ModuleId: ")
-                .append(getModuleId());
+        builder.append(getName());
 
         return builder.toString();
     }
