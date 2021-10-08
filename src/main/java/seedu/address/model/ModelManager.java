@@ -131,6 +131,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasFriendId(FriendId idToFind) {
+        requireNonNull(idToFind);
         return this.getFriendsList().getFriendsList().stream().anyMatch(friend -> friend.getFriendId().equals(idToFind));
     }
 
