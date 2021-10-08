@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
@@ -50,13 +52,14 @@ public class HelpWindow extends AnchorPane {
     public static final String USER_GUIDE_MESSAGE = "For full details, refer to the user guide: " + USER_GUIDE_URL;
     public static final String HELP_MESSAGE = "For more detailed commands, type \"help [command]\"\n"
             + "To close this window, type \"close\"";
+    private static final String APPLICATION_ICON = "/images/address_book_32.png";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final Hashtable<String, commandDetails> CommandTable = new Hashtable<>();
+    private static final Hashtable<String, CommandDetail> commandTable = new Hashtable<>();
 
     private static Stage stage;
 
-    private interface commandDetails {
+    private interface CommandDetail {
         void execute();
     }
 
@@ -92,6 +95,10 @@ public class HelpWindow extends AnchorPane {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Help");
+            stage.setResizable(false);
+            stage.getIcons().add(
+                    new Image(Objects.requireNonNull(MainApp.class.getResourceAsStream(APPLICATION_ICON)))
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -208,6 +215,7 @@ public class HelpWindow extends AnchorPane {
 
         tableView.setItems(data);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setSelectionModel(null);
     }
 
     /**
@@ -222,19 +230,19 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void fillCommandTable() {
-        CommandTable.put(AddCommand.COMMAND_WORD, this::handleAdd);
-        CommandTable.put(ClearCommand.COMMAND_WORD, this::handleClear);
-        CommandTable.put(DeleteCommand.COMMAND_WORD, this::handleDelete);
-        CommandTable.put(EditCommand.COMMAND_WORD, this::handleEdit);
-        CommandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
-        CommandTable.put(ListCommand.COMMAND_WORD, this::handleList);
-        CommandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
-        CommandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
-        CommandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
-        CommandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
-        CommandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
-        CommandTable.put("viewtask", this::handleViewTask); // placeholder
-        CommandTable.put("close", this::handleCloseWindow);
+        commandTable.put(AddCommand.COMMAND_WORD, this::handleAdd);
+        commandTable.put(ClearCommand.COMMAND_WORD, this::handleClear);
+        commandTable.put(DeleteCommand.COMMAND_WORD, this::handleDelete);
+        commandTable.put(EditCommand.COMMAND_WORD, this::handleEdit);
+        commandTable.put(FindCommand.COMMAND_WORD, this::handleFind);
+        commandTable.put(ListCommand.COMMAND_WORD, this::handleList);
+        commandTable.put(ExitCommand.COMMAND_WORD, this::handleExit);
+        commandTable.put(SortCommand.COMMAND_WORD, this::handleSort);
+        commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
+        commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
+        commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
+        commandTable.put("viewtask", this::handleViewTask); // placeholder
+        commandTable.put("close", this::handleCloseWindow);
     }
 
     private void handleUserInput(String userInput) {
@@ -258,14 +266,14 @@ public class HelpWindow extends AnchorPane {
     }
 
     private boolean isValidCommand(String userInput) {
-        return CommandTable.containsKey(userInput);
+        return commandTable.containsKey(userInput);
     }
 
     private void performCommand(String[] userInput, boolean isClose) {
         if (isClose) {
-            CommandTable.get(userInput[0]).execute();
+            commandTable.get(userInput[0]).execute();
         } else {
-            CommandTable.get(userInput[1]).execute();
+            commandTable.get(userInput[1]).execute();
         }
     }
 
