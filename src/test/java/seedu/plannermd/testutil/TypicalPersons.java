@@ -2,6 +2,7 @@ package seedu.plannermd.testutil;
 
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_BIRTH_DATE_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_BIRTH_DATE_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -30,7 +31,8 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432").withRemark("Hypochondriac")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").withBirthDate("20/07/1965").build();
+            .withEmail("heinz@example.com").withAddress("wall street").withRemark("Prefers liquid medication")
+            .withBirthDate("20/07/1965").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withBirthDate("20/07/1964")
             .withTags("friends").build();
@@ -50,8 +52,9 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRemark(VALID_REMARK_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withBirthDate(VALID_BIRTH_DATE_AMY)
+            .withRemark(VALID_REMARK_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
             .withRemark(VALID_REMARK_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();

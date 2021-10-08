@@ -1,5 +1,12 @@
 package seedu.plannermd.testutil.patient;
 
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_ADDRESS;
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_BIRTH_DATE;
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_EMAIL;
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_NAME;
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_PHONE;
+import static seedu.plannermd.testutil.PersonBuilder.DEFAULT_REMARK;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +16,7 @@ import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
+import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
@@ -19,12 +27,6 @@ import seedu.plannermd.model.util.SampleDataUtil;
  */
 public class PatientBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_BIRTH_DATE = "20/07/1964";
-    public static final String DEFAULT_REMARK = "";
     public static final String DEFAULT_RISK = "LOW";
 
     private Name name;
@@ -47,6 +49,20 @@ public class PatientBuilder {
         birthDate = new BirthDate(DEFAULT_BIRTH_DATE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
+        risk = new Risk(DEFAULT_RISK);
+    }
+
+    /**
+     * Initializes the PatientBuilder with the data of {@code personToCopy}.
+     */
+    public PatientBuilder(Person personToCopy) {
+        name = personToCopy.getName();
+        phone = personToCopy.getPhone();
+        email = personToCopy.getEmail();
+        address = personToCopy.getAddress();
+        birthDate = personToCopy.getBirthDate();
+        remark = personToCopy.getRemark();
+        tags = new HashSet<>(personToCopy.getTags());
         risk = new Risk(DEFAULT_RISK);
     }
 
