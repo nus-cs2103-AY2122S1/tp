@@ -1,10 +1,9 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_FRIEND_ID;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.FRIEND_ID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.GAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.AMY;
@@ -16,10 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.logic.commands.friends.DeleteFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -57,8 +57,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = DeleteFriendCommand.COMMAND_WORD + " daksjhdkjashdjkashkdjashjkaskjdjkasdhkas";
+        assertCommandException(deleteCommand, MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test
@@ -80,12 +80,12 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + FRIEND_ID_DESC_AMY + GAME_DESC_AMY;
+        String addFriendCommand = AddFriendCommand.COMMAND_WORD + FRIEND_ID_DESC_AMY + NAME_DESC_AMY;
         Friend expectedFriend = new FriendBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFriend(expectedFriend);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        assertCommandFailure(addFriendCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test

@@ -2,8 +2,6 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_APEX_LEGENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_CSGO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 
@@ -42,9 +40,9 @@ public class TypicalFriends {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Friend AMY = new FriendBuilder().withFriendName(VALID_NAME_AMY)
-            .withFriendId(VALID_FRIEND_ID_AMY).withGames(VALID_GAME_APEX_LEGENDS).build();
+            .withFriendId(VALID_FRIEND_ID_AMY).build();
     public static final Friend BOB = new FriendBuilder().withFriendName(VALID_NAME_BOB)
-            .withFriendId(VALID_FRIEND_ID_BOB).withGames(VALID_GAME_CSGO).build();
+            .withFriendId(VALID_FRIEND_ID_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

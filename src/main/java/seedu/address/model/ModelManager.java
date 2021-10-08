@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 
 /**
  * Represents the in-memory model of the gitGud friends list data.
@@ -95,8 +96,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteFriend(Friend target) {
-        friendsList.removeFriend(target);
+    public void deleteFriend(FriendId targetId) {
+        Friend friendToDelete =
+                this.getFriendsList().getFriendsList()
+                        .stream()
+                        .filter(friend -> friend.getFriendId().equals(targetId))
+                        .findFirst()
+                        .get();
+        friendsList.removeFriend(friendToDelete);
     }
 
     @Override
@@ -127,6 +134,13 @@ public class ModelManager implements Model {
     public void updateFilteredFriendsList(Predicate<Friend> predicate) {
         requireNonNull(predicate);
         filteredFriends.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasFriendId(FriendId idToFind) {
+        requireNonNull(idToFind);
+        return this.getFriendsList().getFriendsList().stream()
+                .anyMatch(friend -> friend.getFriendId().equals(idToFind));
     }
 
     @Override

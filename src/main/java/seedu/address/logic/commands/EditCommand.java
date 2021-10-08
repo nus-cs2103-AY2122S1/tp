@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_ID;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -33,7 +33,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed friends list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_FRIEND_ID + "FRIEND_ID] "
+            + "[" + FLAG_FRIEND_ID + "FRIEND_ID] "
             + "[" + PREFIX_FRIEND_NAME + "NAME] "
             + "[" + PREFIX_GAME + "GAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
