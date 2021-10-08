@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.time.DayOfWeek;
+import java.util.Objects;
 
 /**
  * Represents a piece of work for a staff.
@@ -12,6 +13,7 @@ public class Shift {
 
     /**
      * Constructor of Shift given its weekday, time, and name.
+     *
      * @param dayOfWeek Weekday of the shift.
      * @param slot The slot when the task located.
      * @param shiftName Name of the task.
@@ -24,6 +26,7 @@ public class Shift {
 
     /**
      * Constructor of Task given its weekday, time, and name.
+     *
      * @param dayOfWeek Weekday of the shift.
      * @param slot The slot when the shift located.
      */
@@ -43,6 +46,7 @@ public class Shift {
 
     /**
      * Returns whether the shift is happening in the morning.
+     *
      * @return whether the shift is happening in the morning.
      */
     public boolean isInMorning() {
@@ -51,6 +55,7 @@ public class Shift {
 
     /**
      * Returns whether the shift is happening in the afternoon.
+     *
      * @return whether the shift is happening in the afternoon.
      */
     public boolean isInAfternoon() {
@@ -61,6 +66,38 @@ public class Shift {
     @Override
     public String toString() {
         return shiftName + ": in " + dayOfWeek.toString() + " " + slot.getValue();
+    }
+
+    public String toSaveString() {
+        String add = shiftName;
+        if (Objects.isNull(shiftName)) {
+            add = "";
+        }
+        return dayOfWeek.toString() + "-" + slot.getValue() + "-" + add;
+    }
+
+    public static boolean isValidDayOfWeek(String test) {
+        for (DayOfWeek d :DayOfWeek.values()) {
+            if (d.toString().equalsIgnoreCase(test)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean isValidShift(String test) {
+        boolean resultBoolean = false;
+        if (test.equals("")) {
+            return false;
+        } else {
+            String[] stringSplit = test.split("-");
+            if (2 == stringSplit.length || stringSplit.length == 3) {
+                String dayString = stringSplit[0];
+                String slotString = stringSplit[1];
+                resultBoolean = isValidDayOfWeek(dayString);
+                resultBoolean &= Slot.isValidSlot(slotString);
+            }
+        }
+        return resultBoolean;
     }
 
     @Override
