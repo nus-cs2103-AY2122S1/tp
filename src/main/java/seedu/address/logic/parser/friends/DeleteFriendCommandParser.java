@@ -3,6 +3,8 @@ package seedu.address.logic.parser.friends;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_DELETE;
 
+import java.util.NoSuchElementException;
+
 import seedu.address.logic.commands.friends.DeleteFriendCommand;
 import seedu.address.logic.commands.friends.FriendCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -10,8 +12,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
-
-import java.util.*;
 
 public class DeleteFriendCommandParser extends FriendCommandParser {
     private FriendId friendId;
