@@ -24,7 +24,7 @@ public class DeleteTaskCommand extends Command {
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + PREFIX_TASK_INDEX + "TaskIndex\n"
-            + "Example: " + COMMAND_WORD + " 1" + PREFIX_TASK_INDEX + "2";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + "2";
 
     private final Index targetPersonIndex;
     private final Index targetTaskIndex;
