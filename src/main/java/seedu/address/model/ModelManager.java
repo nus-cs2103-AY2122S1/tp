@@ -4,14 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,6 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private final ObservableList<Task> displayTaskList;
+    private final ObservableList<Task> unmodifiableDisplayTaskList;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -35,6 +40,9 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
+        displayTaskList = FXCollections.observableArrayList();
+        unmodifiableDisplayTaskList = FXCollections.unmodifiableObservableList(displayTaskList);
     }
 
     public ModelManager() {
@@ -148,4 +156,16 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== display task List Accessors =============================================================
+
+    @Override
+    public void updateDisplayTaskList(List<Task> taskList) {
+        requireAllNonNull(taskList);
+        displayTaskList.setAll(taskList);
+    }
+
+    @Override
+    public ObservableList<Task> getDisplayTaskList() {
+        return unmodifiableDisplayTaskList;
+    }
 }

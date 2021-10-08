@@ -1,0 +1,8 @@
+#id {
+    -fx-wrap-text: true;
+    -fx-min-width: 80.0;
+}
+
+#taskName {
+    -fx-wrap-text: true;
+}
