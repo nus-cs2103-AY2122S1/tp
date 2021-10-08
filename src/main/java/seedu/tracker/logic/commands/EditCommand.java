@@ -19,11 +19,11 @@ import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.commons.util.CollectionUtil;
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
-import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.Code;
-import seedu.tracker.model.module.Title;
-import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Description;
+import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.Module;
+import seedu.tracker.model.module.Title;
 import seedu.tracker.model.tag.Tag;
 
 /**
