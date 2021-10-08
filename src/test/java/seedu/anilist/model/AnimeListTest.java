@@ -70,7 +70,7 @@ public class AnimeListTest {
     }
 
     @Test
-    public void hasAnime_animeWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasAnime_animeWithSameIdentityFieldsInAnimeList_returnsTrue() {
         animeList.addAnime(ALICE);
         Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
