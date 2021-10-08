@@ -34,24 +34,24 @@ public class ViewCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        ViewCommand findFirstCommand = new ViewCommand(firstPredicate);
-        ViewCommand findSecondCommand = new ViewCommand(secondPredicate);
+        ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
+        ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewCommand findFirstCommandCopy = new ViewCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        ViewCommand viewFirstCommandCopy = new ViewCommand(firstPredicate);
+        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(viewFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(viewFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(viewFirstCommand.equals(viewSecondCommand));
     }
 
     @Test

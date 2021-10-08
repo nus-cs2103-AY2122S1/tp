@@ -69,7 +69,7 @@
 //    }
 //
 //    @Test
-//    public void parseCommand_find() throws Exception {
+//    public void parseCommand_view() throws Exception {
 //        List<String> keywords = Arrays.asList("foo", "bar", "baz");
 //        ViewCommand command = (ViewCommand) parser.parseCommand(
 //                ViewCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
