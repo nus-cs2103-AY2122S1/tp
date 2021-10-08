@@ -91,7 +91,7 @@ public class UiManager implements Ui {
      */
     public static void showViewWindow() {
         if (mainWindow != null) {
-            mainWindow.fillInnerParts(true);
+            mainWindow.fillPersonCard(true);
         }
     }
 
@@ -100,7 +100,7 @@ public class UiManager implements Ui {
      */
     public static void hideViewWindow() {
         if (mainWindow != null) {
-            mainWindow.fillInnerParts(false);
+            mainWindow.fillPersonCard(false);
         }
     }
 }
