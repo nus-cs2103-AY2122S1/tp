@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.util.List;
 
@@ -16,13 +17,14 @@ public class UnenrollCommand extends Command {
 
     public static final String COMMAND_WORD = "unenroll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unenrolls the student identified by the index number used in the displayed person list"
-            + " from the specified lesson.\n"
-            + "Parameters: INDEX (must be a positive integer), LESSONCODE (must represent a valid lesson)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unenroll a specified student "
+            + "from a given TuitiONE lesson\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "LESSONCODE\n"
+            + "Example: " + "unenroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
 
     public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = "Unenrolled Student: %1$s from Lesson: %2$s";
+    public static final String MESSAGE_STUDENT_NOT_IN_LESSON = "%1$s is not currently enrolled in the existing %2$s";
 
     private final Index targetIndex;
 
@@ -51,8 +53,14 @@ public class UnenrollCommand extends Command {
         }
 
         Student studentToUnenroll = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!lesson.containsStudent(studentToUnenroll)) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_LESSON,
+                    studentToUnenroll.getName(),
+                    lesson));
+        }
         lesson.removeStudent(studentToUnenroll);
-        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll, lesson));
+        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll.getName(), lesson));
     }
 
     @Override

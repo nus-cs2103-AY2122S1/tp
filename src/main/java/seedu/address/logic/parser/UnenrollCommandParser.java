@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.UnenrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -13,7 +15,9 @@ public class UnenrollCommandParser implements Parser<UnenrollCommand> {
      * and returns a UnenrollCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public UnenrollCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         return ParserUtil.parseUnenrollArgs(args);
     }
 }

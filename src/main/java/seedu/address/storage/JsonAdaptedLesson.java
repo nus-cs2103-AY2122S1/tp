@@ -1,14 +1,10 @@
 package seedu.address.storage;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Grade;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -49,20 +45,12 @@ public class JsonAdaptedLesson {
         if (!Lesson.isValidLessonCode(lessonCode)) {
             throw new IllegalValueException(Lesson.CODE_MESSAGE_CONSTRAINT);
         }
-
-        final Lesson weakLesson = Lesson.getWeakLessonFromCode(lessonCode);
-        final String subject = weakLesson.getSubject();
-        final Grade grade = weakLesson.getGrade();
-        final DayOfWeek dayOfWeek = weakLesson.getDayOfWeek();
-        final LocalTime startTime = weakLesson.getStartTime();
-
         if (price == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "price"));
         }
         if (!Lesson.isValidPrice(price)) {
             throw new IllegalValueException(Lesson.PRICE_MESSAGE_CONSTRAINT);
         }
-
-        return new Lesson(subject, grade, dayOfWeek, startTime, price);
+        return Lesson.createFromCodeAndPrice(lessonCode, price);
     }
 }
