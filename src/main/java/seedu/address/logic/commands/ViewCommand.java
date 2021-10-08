@@ -1,21 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
 
-import javax.swing.text.View;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-public class ViewCommand extends Command{
+public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows information of the client "
@@ -27,7 +22,7 @@ public class ViewCommand extends Command{
 
     public static final String MESSAGE_VIEW_SUCCESS = "Viewing person: %1$s";
     public static final String MESSAGE_NON_EXISTENT_USER = "There's no user with user ID %d";
-//    private final PersonDoesExistsPredicate predicate;
+    // private final PersonDoesExistsPredicate predicate;
 
     private final Index index;
 
@@ -38,7 +33,6 @@ public class ViewCommand extends Command{
         requireNonNull(index);
         this.index = index;
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -53,7 +47,7 @@ public class ViewCommand extends Command{
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, personToView.getName()));
     }
-    
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
