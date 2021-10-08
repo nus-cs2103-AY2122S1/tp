@@ -1,7 +1,6 @@
----
-layout: page
-title: User Guide
---------------------------------------------------------------------------------------------------------------------
+layout | title
+-------|-----
+page | User Guide
 
 ## Quick start
 
@@ -19,7 +18,7 @@ title: User Guide
 
 * **`contacts`** : Switches to the contacts tab.
 
-* **`contacts`** : Switches to the tasks tab.
+* **`tasks`** : Switches to the tasks tab.
 
 * **`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`**`3` : Adds a contact with specified details.
 
