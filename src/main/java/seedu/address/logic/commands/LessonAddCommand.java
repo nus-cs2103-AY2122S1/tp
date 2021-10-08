@@ -30,30 +30,41 @@ public class LessonAddCommand extends Command {
 
     public static final String COMMAND_WORD = "ladd";
 
+    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
+            + "[" + PREFIX_RECURRING + "] "
+            + PREFIX_DATE + "dd MMM yyyy "
+            + PREFIX_TIME + "HHmm-HHmm "
+            + PREFIX_SUBJECT + "SUBJECT "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
+
+    public static final String COMMAND_EXAMPLE_RECURRING_LESSON = COMMAND_WORD + " 1 "
+            + PREFIX_RECURRING + " "
+            + PREFIX_DATE + "09 Dec 2021 "
+            + PREFIX_TIME + "1030-1230 "
+            + PREFIX_SUBJECT + "Math "
+            + PREFIX_HOMEWORK + "TYS Page 2";
+
+    public static final String COMMAND_EXAMPLE_MAKEUP_LESSON = COMMAND_WORD + " 1 "
+            + PREFIX_DATE + "10 Oct 2021 "
+            + PREFIX_TIME + "1430-1600 "
+            + PREFIX_SUBJECT + "Science "
+            + PREFIX_HOMEWORK + "TYS Page 2 "
+            + PREFIX_HOMEWORK + "Textbook Page 52";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student identified "
         + "by the index number\n"
-        + "Parameters: INDEX (must be a positive integer) "
-        + "[" + PREFIX_RECURRING + "] "
-        + PREFIX_DATE + "dd MMM yyyy "
-        + PREFIX_TIME + "HHmm-HHmm "
-        + PREFIX_SUBJECT + "SUBJECT "
-        + "[" + PREFIX_HOMEWORK + "HOMEWORK]...\n"
+        + "Parameters: " + COMMAND_PARAMETERS + "\n"
         + "Examples:\n"
-        + "Makeup lesson: " + COMMAND_WORD + " 1 "
-        + PREFIX_DATE + "10 Oct 2021 "
-        + PREFIX_TIME + "1430-1600 "
-        + PREFIX_SUBJECT + "Science "
-        + PREFIX_HOMEWORK + "TYS Page 2 "
-        + PREFIX_HOMEWORK + "Textbook Page 52\n"
-        + "Recurring lesson: " + COMMAND_WORD + " 1 "
-        + PREFIX_RECURRING + " "
-        + PREFIX_DATE + "09 Dec 2021 "
-        + PREFIX_TIME + "1030-1230 "
-        + PREFIX_SUBJECT + "Math "
-        + PREFIX_HOMEWORK + "TYS Page 2 ";
+        + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
+        + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
+
+    public static final String USER_TIP = "Try adding a lesson to a student using: \n"
+            + COMMAND_WORD + " "
+            + COMMAND_PARAMETERS + "\n"
+            + "Example (recurring lesson): "
+            + COMMAND_EXAMPLE_RECURRING_LESSON;
 
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor student: %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
     private final Index index;
