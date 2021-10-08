@@ -60,7 +60,7 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        attendance = source.getAttendance().getAttendanceInBoolean();
+        attendance = source.getAttendance().getAttendanceArray();
         assessment = source.getAssessment().getAssessment();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)

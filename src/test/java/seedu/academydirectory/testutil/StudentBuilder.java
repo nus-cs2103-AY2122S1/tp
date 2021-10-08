@@ -10,6 +10,7 @@ import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.tag.Tag;
 import seedu.academydirectory.model.util.SampleDataUtil;
 
@@ -29,7 +30,7 @@ public class StudentBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Attendance attendance;
+    private StudioRecord studioRecord;
     private Assessment assessment;
 
     /**
@@ -41,7 +42,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        attendance = new Attendance(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
+        studioRecord = new StudioRecord(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
         assessment = new Assessment();
     }
 
@@ -54,7 +55,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
-        attendance = studentToCopy.getAttendance();
+        studioRecord = studentToCopy.getStudioRecord();
         assessment = studentToCopy.getAssessment();
     }
 
@@ -94,9 +95,10 @@ public class StudentBuilder {
      * Sets the {@code Attendance} of the {@code Student} that we are building.
      */
     public StudentBuilder withAttendance(boolean[] boolArr) {
-        Attendance newAttendance = new Attendance(this.attendance.getSessionCount());
+        Integer sessionCount = studioRecord.getAttendance().getSessionCount();
+        Attendance newAttendance = new Attendance(sessionCount);
         newAttendance.setAttendance(boolArr);
-        this.attendance = newAttendance;
+        this.studioRecord.setAttendance(newAttendance);
         return this;
     }
 
@@ -121,7 +123,7 @@ public class StudentBuilder {
      */
     public Student build() {
         Student newStudent = new Student(name, phone, email, address, tags);
-        newStudent.setAttendance(this.attendance);
+        newStudent.setAttendance(studioRecord.getAttendance());
         return newStudent;
     }
 

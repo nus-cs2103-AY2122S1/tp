@@ -61,13 +61,13 @@ public class AttendanceCommand extends Command {
             attendanceToEdit = attendanceToEdit.update(studioSession, attendanceStatus);
             Student editedPerson = new Student(
                     studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                    studentToEdit.getAddress(), studentToEdit.getTags());
+                    studentToEdit.getAddress(), studentToEdit.getStudioRecord(), studentToEdit.getAssessment(),
+                    studentToEdit.getTags());
             editedPerson.setAttendance(attendanceToEdit);
             model.setStudent(studentToEdit, editedPerson);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
-
 
     }
 
