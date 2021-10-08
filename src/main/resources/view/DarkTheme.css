@@ -153,8 +153,9 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
+/* result-display text label */
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #383838;
     -fx-font-family: "Lato";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
@@ -323,6 +324,7 @@
     -fx-padding: 8 1 8 1;
 }
 
+/* not used
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -332,12 +334,15 @@
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
 }
+*/
 
 /* user input text field */
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #334E68 transparent #334E68;
+    -fx-background-radius: 12;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-radius: 12;
+    -fx-border-color: #ffffff;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Lato";
@@ -349,7 +354,7 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-/* message display */
+/* result display */
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
