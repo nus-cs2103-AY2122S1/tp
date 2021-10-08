@@ -124,7 +124,7 @@ public class UniquePositionList implements Iterable<Position> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code positions} contains only unique positions.
      */
     private boolean positionsAreUnique(List<Position> positions) {
         for (int i = 0; i < positions.size() - 1; i++) {
