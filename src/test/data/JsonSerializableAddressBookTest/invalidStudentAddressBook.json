@@ -1,7 +1,9 @@
 {
   "students": [ {
     "name": "Hans Muster",
-    "email": "invalid@email!3e"
+    "email": "invalid@email!3e",
+    "tagged" : [ ],
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
   } ],
   "tasks" : [ ]
 }
