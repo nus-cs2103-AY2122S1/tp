@@ -18,9 +18,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            if (args.contains(",")) {
-                Index start = ParserUtil.parseIndex(args.substring(1, args.indexOf(",")));
-                Index end = ParserUtil.parseIndex(args.substring(args.indexOf(",") + 1));
+            if (args.contains("-")) {
+                Index start = ParserUtil.parseIndex(args.substring(1, args.indexOf("-")));
+                Index end = ParserUtil.parseIndex(args.substring(args.indexOf("-") + 1));
                 return new DeleteCommand(start, end);
             } else {
                 Index index = ParserUtil.parseIndex(args);
