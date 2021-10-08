@@ -82,4 +82,21 @@ public class RecurringLesson extends Lesson {
                 getSubject(), getHomework());
     }
 
+    /**
+     * Returns true if this {@code RecurringLesson} clashes with the given {@code Lesson}.
+     *
+     * @param otherLesson The other lesson to be compared with.
+     * @return True if and only if lessons clash.
+     */
+    @Override
+    public boolean isClashing(Lesson otherLesson) {
+        if (otherLesson.isRecurring()) {
+            return getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+                    && getTimeRange().isClashing(otherLesson.getTimeRange());
+        } else {
+            return getLocalDate().compareTo(otherLesson.getLocalDate()) <= 0 // same date or before
+                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+                    && getTimeRange().isClashing(otherLesson.getTimeRange());
+        }
+    }
 }
