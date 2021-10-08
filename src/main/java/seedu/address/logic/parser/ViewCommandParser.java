@@ -20,7 +20,6 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Class representing the parser for the view command.
- *
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
 
@@ -30,6 +29,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      * Parser for the view command.
      *
      * @param args The input search fields
+     * @throws ParseException If the use input does not conform to the expected format.
      */
     @Override
     public ViewCommand parse(String args) throws ParseException {

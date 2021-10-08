@@ -11,7 +11,6 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
 
 /**
  * Represents a command to view.
- *
  */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
@@ -36,17 +35,17 @@ public class ViewCommand extends Command {
 
 
 
-    private CommandResult defaultResult(Model model) {
+    private CommandResult getDefaultResult(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(testCondition);
         //places the person on the list view
+        model.updateFilteredPersonList(testCondition);
         return new CommandResult(String.format(DEFAULT_COMMAND,
                 model.getFilteredPersonList().toString()));
     }
 
     @Override
     public CommandResult execute(Model model) {
-        return defaultResult(model);
+        return getDefaultResult(model);
     }
 
     @Override
