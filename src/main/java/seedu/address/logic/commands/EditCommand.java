@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
@@ -24,7 +23,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -50,7 +48,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_EMPLOYMENT_TYPE + "EMPLOYMENT TYPE] "
             + "[" + PREFIX_EXPECTED_SALARY + "EXPECTED_SALARY]"
@@ -111,7 +108,6 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         EmploymentType updatedEmploymentType = editPersonDescriptor
                 .getEmploymentType().orElse(personToEdit.getEmploymentType());
@@ -122,9 +118,9 @@ public class EditCommand extends Command {
         Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedRole, updatedEmploymentType, updatedExpectedSalary,
-                updatedLevelOfEducation, updatedExperience, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedRole,
+                updatedEmploymentType, updatedExpectedSalary, updatedLevelOfEducation,
+                updatedExperience, updatedTags);
     }
 
     @Override
@@ -153,7 +149,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private Role role;
         private EmploymentType employmentType;
         private ExpectedSalary expectedSalary;
@@ -171,7 +166,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setRole(toCopy.role);
             setEmploymentType(toCopy.employmentType);
             setExpectedSalary(toCopy.expectedSalary);
@@ -184,8 +178,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address,
-                    role, employmentType, expectedSalary, levelOfEducation, experience, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, role,
+                    employmentType, expectedSalary, levelOfEducation, experience, tags);
         }
 
         public void setName(Name name) {
@@ -210,14 +204,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         public void setRole(Role role) {
@@ -295,7 +281,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getRole().equals(e.getRole())
                     && getEmploymentType().equals(e.getEmploymentType())
                     && getExpectedSalary().equals(e.getExpectedSalary())
