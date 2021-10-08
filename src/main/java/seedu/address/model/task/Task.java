@@ -1,10 +1,10 @@
 package seedu.address.model.task;
 
-import seedu.address.commons.core.id.UniqueId;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.commons.core.id.UniqueId;
 
 /**
  * Represents a Task in the address book.
@@ -82,9 +82,9 @@ public class Task {
 
     @Override
     public String toString() {
-        return getName() +
-                "; Deadline: " +
-                getDeadline() +
-                "; Completion Status: ";
+        return getName()
+                + "; Deadline: "
+                + getDeadline()
+                + "; Completion Status: ";
     }
 }
