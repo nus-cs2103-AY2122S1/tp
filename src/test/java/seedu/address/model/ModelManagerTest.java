@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalFriends.ALICE;
-import static seedu.address.testutil.TypicalFriends.BENSON;
+import static seedu.address.testutil.TypicalFriends.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.FriendBuilder;
 
 public class ModelManagerTest {
 
@@ -73,8 +73,13 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasFriend_nullFriend_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasFriend(null));
+    }
+
+    @Test
+    public void hasFriendId_nullFriendId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasFriendId(null));
     }
 
     @Test
@@ -83,9 +88,28 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasFriendId_friendIdNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasFriendId(ALICE.getFriendId()));
+    }
+
+    @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addFriend(ALICE);
         assertTrue(modelManager.hasFriend(ALICE));
+    }
+
+    @Test
+    public void hasFriendId_FriendIdInAddressBook_returnsTrue() {
+        modelManager.addFriend(ALICE);
+        assertTrue(modelManager.hasFriend(ALICE));
+    }
+
+    @Test
+    public void hasFriendId_sameIdDifferentName_returnsTrue() {
+        FriendBuilder amyFriendBuilder = new FriendBuilder();
+        modelManager.addFriend(amyFriendBuilder.build());
+        FriendBuilder amyNewNameFriendBuilder = new FriendBuilder().withFriendName("Bob");
+        assertTrue(modelManager.hasFriendId(amyNewNameFriendBuilder.build().getFriendId()));
     }
 
     @Test

@@ -21,7 +21,7 @@ import seedu.address.model.FriendsList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFriendsList;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.*;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandTest {
@@ -39,6 +39,8 @@ public class AddFriendCommandTest {
         assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS, validFriend), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validFriend), modelStub.personsAdded);
     }
+
+
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
@@ -147,6 +149,11 @@ public class AddFriendCommandTest {
         public void updateFilteredFriendsList(Predicate<Friend> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasFriendId(FriendId idToFind) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -165,6 +172,12 @@ public class AddFriendCommandTest {
             requireNonNull(friend);
             return this.friend.equals(friend);
         }
+
+        @Override
+        public boolean hasFriendId(FriendId idToFind) {
+            return this.friend.getFriendId().equals(friend.getFriendId());
+        }
+
     }
 
     /**
@@ -177,6 +190,11 @@ public class AddFriendCommandTest {
         public boolean hasFriend(Friend friend) {
             requireNonNull(friend);
             return personsAdded.stream().anyMatch(friend::equals);
+        }
+
+        @Override
+        public boolean hasFriendId(FriendId idToFind) {
+            return personsAdded.stream().anyMatch(friend -> friend.getFriendId().equals(idToFind));
         }
 
         @Override

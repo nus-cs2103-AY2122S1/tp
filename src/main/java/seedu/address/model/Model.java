@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFriendsList(Predicate<Friend> predicate);
+
+    boolean hasFriendId(FriendId idToFind);
 }

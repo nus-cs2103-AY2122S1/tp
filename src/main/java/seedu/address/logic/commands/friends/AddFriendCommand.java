@@ -29,7 +29,7 @@ public class AddFriendCommand extends FriendCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasFriend(toAdd)) {
+        if (model.hasFriendId(toAdd.getFriendId())) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
