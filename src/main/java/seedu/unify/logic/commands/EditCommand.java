@@ -1,7 +1,7 @@
 package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,14 +20,14 @@ import seedu.unify.commons.util.CollectionUtil;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
 import seedu.unify.model.tag.Tag;
-import seedu.unify.model.task.Address;
+import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Person;
 import seedu.unify.model.task.Phone;
 
 /**
- * Edits the details of an existing task in the address book.
+ * Edits the details of an existing task in the Uni-Fy app.
  */
 public class EditCommand extends Command {
 
@@ -40,7 +40,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This task already exists in the Uni-Fy app.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -96,10 +96,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Date updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedDate, updatedTags);
     }
 
     @Override
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Date date;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setDate(toCopy.date);
             setTags(toCopy.tags);
         }
 
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, date, tags);
         }
 
         public void setName(Name name) {
@@ -176,12 +176,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setDate(Date date) {
+            this.date = date;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Date> getDate() {
+            return Optional.ofNullable(date);
         }
 
         /**
@@ -219,7 +219,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getDate().equals(e.getDate())
                     && getTags().equals(e.getTags());
         }
     }

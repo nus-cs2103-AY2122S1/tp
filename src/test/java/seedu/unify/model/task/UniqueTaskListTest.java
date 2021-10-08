@@ -3,7 +3,7 @@ package seedu.unify.model.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalPersons.ALICE;
@@ -42,7 +42,7 @@ public class UniqueTaskListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTaskList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueTaskList.contains(editedAlice));
     }
@@ -85,7 +85,7 @@ public class UniqueTaskListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueTaskList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueTaskList.setTask(ALICE, editedAlice);
         UniqueTaskList expectedUniqueTaskList = new UniqueTaskList();

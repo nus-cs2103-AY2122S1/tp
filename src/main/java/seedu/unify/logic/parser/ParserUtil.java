@@ -10,7 +10,7 @@ import seedu.unify.commons.core.index.Index;
 import seedu.unify.commons.util.StringUtil;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.tag.Tag;
-import seedu.unify.model.task.Address;
+import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Phone;
@@ -66,18 +66,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String date} into an {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Date(trimmedDate);
     }
 
     /**
