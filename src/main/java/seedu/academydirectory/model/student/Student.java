@@ -59,6 +59,10 @@ public class Student {
         this.studioRecord.setAttendance(attendance);
     }
 
+    public void setParticipation(Participation participation) {
+        this.studioRecord.setParticipation(participation);
+    }
+
     public Name getName() {
         return name;
     }
@@ -77,6 +81,10 @@ public class Student {
 
     public Attendance getAttendance() {
         return studioRecord.getAttendance();
+    }
+
+    public Participation getParticipation() {
+        return studioRecord.getParticipation();
     }
 
     public StudioRecord getStudioRecord() {

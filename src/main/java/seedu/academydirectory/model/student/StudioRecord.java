@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 public class StudioRecord implements Information {
 
     private Attendance attendance;
+    private Participation participation;
 
     public static final String MESSAGE_CONSTRAINTS =
             "Studio Session should only contain numbers, and it should range from 1 to 10.";
@@ -13,6 +14,7 @@ public class StudioRecord implements Information {
 
     public StudioRecord(Integer numberOfSessions) {
         this.attendance = new Attendance(numberOfSessions);
+        this.participation = new Participation(numberOfSessions);
     }
 
     public String toString() {
@@ -32,8 +34,16 @@ public class StudioRecord implements Information {
         return this.attendance;
     }
 
+    public Participation getParticipation() {
+        return this.participation;
+    }
+
     public void setAttendance(Attendance attendance) {
         this.attendance = attendance;
+    }
+
+    public void setParticipation(Participation participation) {
+        this.participation = participation;
     }
 
     @Override

@@ -18,13 +18,15 @@ public class Participation implements Information {
         participationArray = new int[numberOfSessions];
     }
 
-    /**
-     * Replaces the participation of a student in the specified Studio session with a new value.
-     * @param index The session number
-     * @param participationCount
-     */
-    public Participation update(Integer index, int participationCount) {
-        participationArray[index - 1] = participationCount;
+    public Participation add(Integer index, int participationAdd) {
+        int participationResult = participationArray[index - 1] + participationAdd;
+        if (participationResult < 0) {
+            participationArray[index - 1] = 0;
+        } else if (participationResult > 100) { // TODO: Work out a proper max
+            participationArray[index - 1] = 100;
+        } else {
+            participationArray[index - 1] += participationAdd;
+        }
         return this;
     }
 
@@ -64,7 +66,7 @@ public class Participation implements Information {
             return false;
         } else {
             Integer testInt = Integer.parseInt(test);
-            return 0 < testInt && testInt < 100; // arbitrary max number first TODO: work out a proper max
+            return -100 <= testInt && testInt <= 100; // arbitrary max number first TODO: work out a proper max
         }
     }
 
