@@ -18,7 +18,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
     private static final String DISPLAY_LAST_VISIT = "Last visit: ";
-    private static final String DISPLAY_VISIT = "Visit: ";
+    private static final String DISPLAY_NEXT_VISIT = "Next visit: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -61,7 +61,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         language.setText(person.getLanguage().value);
         lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).value);
-        visit.setText(DISPLAY_VISIT + person.getVisit().orElse(new Visit("")).value);
+        visit.setText(DISPLAY_NEXT_VISIT + person.getVisit().orElse(new Visit("")).value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
