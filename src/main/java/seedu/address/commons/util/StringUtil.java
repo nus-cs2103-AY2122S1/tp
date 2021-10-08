@@ -65,4 +65,9 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static String trimLeadingZeroes(String s) {
+        String regex = "^0+(?!$)";
+        return s.replaceAll(regex, "");
+    }
 }
