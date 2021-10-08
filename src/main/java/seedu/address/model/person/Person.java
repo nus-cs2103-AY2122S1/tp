@@ -112,6 +112,26 @@ public class Person {
     }
 
     /**
+     * Returns true if {@code Lesson} to check clashes with existing lessons.
+     *
+     * @param toCheck The lesson to be compared with.
+     * @return True if and only if there is at least one clash.
+     */
+    public boolean hasClashingLessons(Lesson toCheck) {
+        if (toCheck == null) {
+            return false;
+        }
+        boolean isClash = false;
+        for (Lesson lesson : lessons) {
+            if (isClash) {
+                break;
+            }
+            isClash = lesson.isClashing(toCheck);
+        }
+        return isClash;
+    }
+
+    /**
      * Returns true if this person has at least one contact field not empty.
      */
     public boolean hasContactField() {

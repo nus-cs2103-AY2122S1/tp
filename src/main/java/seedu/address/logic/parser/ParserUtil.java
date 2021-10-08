@@ -187,15 +187,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code Time} pr {@code TimeRange} is invalid.
      */
-    public static TimeRange parseTimeRange(String start, String end) throws ParseException {
-        requireNonNull(start);
-        requireNonNull(end);
-        Time startTime = parseTime(start);
-        Time endTime = parseTime(end);
-        if (!TimeRange.isValidTimeRange(startTime, endTime)) {
+    public static TimeRange parseTimeRange(String timeRange) throws ParseException {
+        requireNonNull(timeRange);
+        String strippedTimeRange = timeRange.strip();
+        if (!TimeRange.isValidTimeRange(strippedTimeRange)) {
             throw new ParseException(TimeRange.MESSAGE_CONSTRAINTS);
         }
-        return new TimeRange(startTime, endTime);
+        return new TimeRange(strippedTimeRange);
     }
 
 
