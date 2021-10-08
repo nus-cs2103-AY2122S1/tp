@@ -19,6 +19,7 @@ import seedu.tracker.model.Model;
 import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.NameContainsKeywordsPredicate;
+import seedu.tracker.testutil.EditModuleDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -64,6 +65,18 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final EditCommand.EditModuleDescriptor DESC_CS2103T;
+    public static final EditCommand.EditModuleDescriptor DESC_GEQ1000;
+
+    static {
+        DESC_CS2103T = new EditModuleDescriptorBuilder().withCode(VALID_CODE_CS2103T)
+                .withTitle(VALID_TITLE_CS2103T).withDescription(VALID_DESCRIPTION_CS2103T).withMc(VALID_MC_CS2103T)
+                .withTags(VALID_TAG_CORE).build();
+        DESC_GEQ1000 = new EditModuleDescriptorBuilder().withCode(VALID_CODE_GEQ1000)
+                .withTitle(VALID_TITLE_GEQ1000).withDescription(VALID_DESCRIPTION_GEQ1000).withMc(VALID_MC_GEQ1000)
+                .withTags(VALID_TAG_GE).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
