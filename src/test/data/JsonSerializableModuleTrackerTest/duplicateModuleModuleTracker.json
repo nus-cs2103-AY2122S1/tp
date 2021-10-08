@@ -1,0 +1,15 @@
+{
+  "modules": [ {
+    "code": "CS2103T",
+    "title": "Software Engineering",
+    "description": "Covers the main areas of software development",
+    "mc": 4,
+    "tagged": ["core"]
+  }, {
+    "code": "CS2103T",
+    "title": "Software Engineering",
+    "description": "Covers the main areas of software development",
+    "mc": 4,
+    "tagged": ["core"]
+  } ]
+}

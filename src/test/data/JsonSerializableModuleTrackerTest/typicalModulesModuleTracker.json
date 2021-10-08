@@ -1,0 +1,22 @@
+{
+  "_comment": "ModuleTracker save file which contains the same Module values as in TypicalModules#getTypicalModuleTracker()",
+  "modules" : [ {
+    "code": "CS2103T",
+    "title": "Software Engineering",
+    "description": "Covers the main areas of software development",
+    "mc": 4,
+    "tagged": ["core"]
+  }, {
+    "code": "CS2101",
+    "title": "Effective Communication for Computing Professionals",
+    "description": "equip students with the skills needed to communicate technical information",
+    "mc": 4,
+    "tagged": ["core"]
+  }, {
+    "code": "GEQ1000",
+    "title": "Asking Questions",
+    "description": "introduces six dominant modes of questioning",
+    "mc": 4,
+    "tagged": ["GE"]
+  } ]
+}
