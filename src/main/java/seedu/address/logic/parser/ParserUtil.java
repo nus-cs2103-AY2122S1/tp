@@ -12,7 +12,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -28,6 +27,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INSUFFICIENT_INDICES = "Specify a valid index for both the student and lesson.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -40,6 +40,29 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index[]} and returns it. Leading and trailing whitespaces will be
+     * stripped.
+     * @throws ParseException if the specified indices are invalid (not non-zero unsigned integer).
+     */
+    public static Index[] parseIndices(String args) throws ParseException {
+        // There will be 2 index arguments
+        // 1st is person, 2nd is lesson
+        String[] indices = args.trim().split(" ", 2);
+        if (indices.length < 2) {
+            throw new ParseException(MESSAGE_INSUFFICIENT_INDICES);
+        }
+        Index studentIndex = parseIndex(indices[0]);
+        /*
+        indices[1] would not be a valid index if more than 1 index is given
+        or if anything other than a single valid integer is given.
+        e.g. case "ldelete 1 2 3": indices[1] returns "2 3".
+        */
+        Index lessonIndex = parseIndex(indices[1]);
+        Index[] studentLessonIndices = {studentIndex, lessonIndex};
+        return studentLessonIndices;
     }
 
     /**
@@ -143,35 +166,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String Time} into a {@code Time}.
+     * Parses {@code String TimeRange} into a {@code TimeRange}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code Time} is invalid.
+     * @throws ParseException if the given {@code TimeRange} is invalid.
      */
-    public static Time parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        if (!Time.isValidTime(trimmedTime)) {
-            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
-        }
-        return new Time(trimmedTime);
-    }
-
-    /**
-     * Parses {@code String Time} and {@code String Time} into a {@code TimeRange}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code Time} pr {@code TimeRange} is invalid.
-     */
-    public static TimeRange parseTimeRange(String start, String end) throws ParseException {
-        requireNonNull(start);
-        requireNonNull(end);
-        Time startTime = parseTime(start);
-        Time endTime = parseTime(end);
-        if (!TimeRange.isValidTimeRange(startTime, endTime)) {
+    public static TimeRange parseTimeRange(String timeRange) throws ParseException {
+        requireNonNull(timeRange);
+        String strippedTimeRange = timeRange.strip();
+        if (!TimeRange.isValidTimeRange(strippedTimeRange)) {
             throw new ParseException(TimeRange.MESSAGE_CONSTRAINTS);
         }
-        return new TimeRange(startTime, endTime);
+        return new TimeRange(strippedTimeRange);
     }
 
 
