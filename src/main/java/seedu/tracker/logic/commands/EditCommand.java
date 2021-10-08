@@ -2,10 +2,10 @@ package seedu.tracker.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TITLE;
-import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.tracker.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import java.util.Collections;

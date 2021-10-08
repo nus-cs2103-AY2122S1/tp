@@ -3,10 +3,10 @@ package seedu.tracker.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TITLE;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -50,7 +50,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            editPersonDescriptor.setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+            editPersonDescriptor.setDescription(ParserUtil.
+                    parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
         if (argMultimap.getValue(PREFIX_MC).isPresent()) {
             editPersonDescriptor.setMc(ParserUtil.parseMc(argMultimap.getValue(PREFIX_MC).get()));
