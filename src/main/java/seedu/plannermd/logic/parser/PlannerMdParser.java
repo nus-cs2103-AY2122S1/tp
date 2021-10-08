@@ -57,7 +57,7 @@ public class PlannerMdParser {
         case DeleteCommand.COMMAND_WORD:
             if (state == State.PATIENT) {
                 return new DeletePatientCommandParser().parse(arguments);
-            } else if (state == State.DOCTOR) {
+            } else {
                 return new DeleteDoctorCommandParser().parse(arguments);
             }
 

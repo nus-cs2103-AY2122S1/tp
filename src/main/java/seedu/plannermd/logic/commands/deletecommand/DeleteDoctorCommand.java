@@ -1,5 +1,9 @@
 package seedu.plannermd.logic.commands.deletecommand;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.CommandResult;
@@ -7,10 +11,10 @@ import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.doctor.Doctor;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Deletes a doctor from the doctor records as identified using it's displayed index
+ * from plannermd.
+ */
 public class DeleteDoctorCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

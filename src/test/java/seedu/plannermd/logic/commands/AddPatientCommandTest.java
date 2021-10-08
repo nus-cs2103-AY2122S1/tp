@@ -166,7 +166,7 @@ public class AddPatientCommandTest {
 
         @Override
         public void deleteDoctor(Doctor target) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
