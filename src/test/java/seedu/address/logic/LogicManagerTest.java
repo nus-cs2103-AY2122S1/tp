@@ -63,8 +63,10 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
+        // no flag will default to listing all friends
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand,
+                String.format(ListCommand.MESSAGE_SUCCESS_PREPEND, ListCommand.FRIEND_LIST), model);
     }
 
     @Test
