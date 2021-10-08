@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -29,7 +30,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Deleted Visit for Person: %1$s";
     public static final String MESSAGE_NO_EXISTING_VISIT = "No Existing Visit for Person: %1$s";
 
-    private static final Visit EMPTY_VISIT = new Visit("");
+    private static final Optional<Visit> EMPTY_VISIT = Optional.ofNullable(new Visit(""));
 
     private final Index targetIndex;
     private final boolean isVisit;

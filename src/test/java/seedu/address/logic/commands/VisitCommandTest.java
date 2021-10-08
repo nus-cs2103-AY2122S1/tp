@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -36,8 +38,9 @@ public class VisitCommandTest {
     public void execute_addVisitUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withVisit(VISIT_STUB).build();
+        Optional<Visit> visit = Optional.ofNullable(new Visit(editedPerson.getVisit().get().value));
 
-        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit(editedPerson.getVisit().value));
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, visit);
 
         String expectedMessage = String.format(VisitCommand.MESSAGE_ADD_VISIT_SUCCESS, editedPerson);
 
@@ -54,8 +57,9 @@ public class VisitCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withVisit(VISIT_STUB).build();
+        Optional<Visit> visit = Optional.ofNullable(new Visit(editedPerson.getVisit().get().value));
 
-        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, new Visit(editedPerson.getVisit().value));
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, visit);
 
         String expectedMessage = String.format(VisitCommand.MESSAGE_ADD_VISIT_SUCCESS, editedPerson);
 
@@ -68,7 +72,8 @@ public class VisitCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        VisitCommand visitCommand = new VisitCommand(outOfBoundIndex, new Visit(VALID_VISIT_BOB));
+        Optional<Visit> visit = Optional.ofNullable(new Visit(VALID_VISIT_BOB));
+        VisitCommand visitCommand = new VisitCommand(outOfBoundIndex, visit);
 
         assertCommandFailure(visitCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -81,22 +86,23 @@ public class VisitCommandTest {
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Optional<Visit> visit = Optional.ofNullable(new Visit(VALID_VISIT_BOB));
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        VisitCommand visitCommand = new VisitCommand(outOfBoundIndex, new Visit(VALID_VISIT_BOB));
+        VisitCommand visitCommand = new VisitCommand(outOfBoundIndex, visit);
 
         assertCommandFailure(visitCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final VisitCommand standardCommand = new VisitCommand(INDEX_FIRST_PERSON,
-                new Visit(VALID_VISIT_AMY));
+        Optional<Visit> visit = Optional.ofNullable(new Visit(VALID_VISIT_AMY));
+        Optional<Visit> differentVisit = Optional.ofNullable(new Visit(VALID_VISIT_BOB));
+        final VisitCommand standardCommand = new VisitCommand(INDEX_FIRST_PERSON, visit);
 
         // same values -> returns true
-        VisitCommand commandWithSameValues = new VisitCommand(INDEX_FIRST_PERSON,
-                new Visit(VALID_VISIT_AMY));
+        VisitCommand commandWithSameValues = new VisitCommand(INDEX_FIRST_PERSON, visit);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -109,11 +115,9 @@ public class VisitCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new VisitCommand(INDEX_SECOND_PERSON,
-                new Visit(VALID_VISIT_AMY))));
+        assertFalse(standardCommand.equals(new VisitCommand(INDEX_SECOND_PERSON, visit)));
 
         // different visit -> returns false
-        assertFalse(standardCommand.equals(new VisitCommand(INDEX_FIRST_PERSON,
-                new Visit(VALID_VISIT_BOB))));
+        assertFalse(standardCommand.equals(new VisitCommand(INDEX_FIRST_PERSON, differentVisit)));
     }
 }

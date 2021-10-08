@@ -48,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Language language = ParserUtil.parseLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Optional<LastVisit> lastVisit = ParserUtil.parseLastVisit(argMultimap.getValue(PREFIX_LAST_VISIT).orElse(""));
-        Visit visit = new Visit(""); // add command does not allow adding visits straight away
+        Optional<Visit> visit = Optional.ofNullable(new Visit(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, language, address, lastVisit, visit, tagList);

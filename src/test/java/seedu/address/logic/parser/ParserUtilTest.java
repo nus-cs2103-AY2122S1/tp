@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -210,14 +211,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
-        Visit expectedVisit = parseVisit(VALID_VISIT);
+        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT);
         assertEquals(expectedVisit, ParserUtil.parseVisit(VALID_VISIT));
     }
 
     @Test
     public void parseVisit_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
         String visitWithWhitespace = WHITESPACE + VALID_VISIT + WHITESPACE;
-        Visit expectedVisit = ParserUtil.parseVisit(VALID_VISIT);
+        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT);
         assertEquals(expectedVisit, ParserUtil.parseVisit(visitWithWhitespace));
     }
 }

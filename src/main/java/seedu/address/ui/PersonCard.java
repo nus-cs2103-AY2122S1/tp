@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -60,7 +61,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         language.setText(person.getLanguage().value);
         lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).value);
-        visit.setText(DISPLAY_NEXT_VISIT + person.getVisit().value);
+        visit.setText(DISPLAY_NEXT_VISIT + person.getVisit().orElse(new Visit("")).value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

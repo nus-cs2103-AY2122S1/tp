@@ -31,7 +31,7 @@ public class PersonBuilder {
     private Language language;
     private Address address;
     private Optional<LastVisit> lastVisit;
-    private Visit visit;
+    private Optional<Visit> visit;
     private Set<Tag> tags;
 
     /**
@@ -43,7 +43,7 @@ public class PersonBuilder {
         language = new Language(DEFAULT_LANGUAGE);
         address = new Address(DEFAULT_ADDRESS);
         lastVisit = Optional.ofNullable(new LastVisit(DEFAULT_LAST_VISIT));
-        visit = new Visit(DEFAULT_VISIT);
+        visit = Optional.ofNullable(new Visit(DEFAULT_VISIT));
         tags = new HashSet<>();
     }
 
@@ -96,7 +96,7 @@ public class PersonBuilder {
      * Sets the {@code Visit} of the {@code Person} that we are building.
      */
     public PersonBuilder withVisit(String visit) {
-        this.visit = new Visit(visit);
+        this.visit = Optional.ofNullable(new Visit(visit));
         return this;
     }
 

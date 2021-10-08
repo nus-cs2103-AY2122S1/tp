@@ -27,6 +27,7 @@ import seedu.address.model.person.Visit;
 
 public class DoneCommandTest {
     private static final String VISIT_STUB = "2021-11-11";
+    private static final Optional<Visit> EMPTY_VISIT = Optional.ofNullable(new Visit(""));
 
     // TODO: add in integration testing with delete command and last visited field
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -37,7 +38,7 @@ public class DoneCommandTest {
         String personNewLastVisitedDate = personToDone.getVisit().toString();
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
-                personToDone.getAddress(), personNewLastVisited, new Visit(""), personToDone.getTags());
+                personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT, personToDone.getTags());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
@@ -55,7 +56,7 @@ public class DoneCommandTest {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personToDoneNoVisit = new Person(personToDone.getName(), personToDone.getPhone(),
                 personToDone.getLanguage(), personToDone.getAddress(),
-                personToDone.getLastVisit(), new Visit(""), personToDone.getTags());
+                personToDone.getLastVisit(), EMPTY_VISIT, personToDone.getTags());
         ModelManager newModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         newModel.setPerson(personToDone, personToDoneNoVisit);
 
@@ -80,7 +81,7 @@ public class DoneCommandTest {
         String personNewLastVisitedDate = personToDone.getVisit().toString();
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
-                personToDone.getAddress(), personNewLastVisited, new Visit(""), personToDone.getTags());
+                personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT, personToDone.getTags());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 

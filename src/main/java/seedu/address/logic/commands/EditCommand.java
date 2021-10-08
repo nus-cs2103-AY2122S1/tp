@@ -102,7 +102,7 @@ public class EditCommand extends Command {
         // edit command does not allow editing last visits
         Optional<LastVisit> updatedLastVisit = personToEdit.getLastVisit();
         // edit command does not allow editing visits
-        Visit updatedVisit = personToEdit.getVisit();
+        Optional<Visit> updatedVisit = personToEdit.getVisit();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedLanguage, updatedAddress,

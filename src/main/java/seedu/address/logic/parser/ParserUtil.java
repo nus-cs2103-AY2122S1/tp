@@ -1,12 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.person.Visit.MESSAGE_CONSTRAINTS;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -14,7 +12,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.VisitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
@@ -160,20 +157,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String visit} into a {@code Visit}.
+     * Parses a {@code String Visit} into an {@code Visit}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code visit} is invalid.
+     * @throws ParseException if the given {@code Visit} is invalid.
      */
-    public static Visit parseVisit(String visit) throws ParseException {
-        String formattedVisit;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static Optional<Visit> parseVisit(String visit) throws ParseException {
+        requireNonNull(visit);
+        String trimmedVisit = visit.trim();
 
-        try {
-            LocalDate date = LocalDate.parse(visit.trim(), formatter);
-            formattedVisit = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(date);
-        } catch (DateTimeParseException ive) {
-            throw new ParseException(String.format(MESSAGE_CONSTRAINTS, VisitCommand.MESSAGE_USAGE), ive);
+        if (!Visit.isValidVisit(trimmedVisit)) {
+            throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
         }
-        return new Visit(formattedVisit);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate.parse(trimmedVisit, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        return Optional.ofNullable(new Visit(trimmedVisit));
     }
 }
