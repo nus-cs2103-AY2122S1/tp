@@ -12,10 +12,8 @@ import seedu.address.model.student.UniqueStudentList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class Module implements ReadOnlyModule {
-    private static final String MODULE_NAME = "CS2103";
+public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
-    private final String name;
     private final UniqueStudentList students;
 
     /*
@@ -29,14 +27,12 @@ public class Module implements ReadOnlyModule {
         students = new UniqueStudentList();
     }
 
-    public Module() {
-        this.name = MODULE_NAME;
-    }
+    public TeachingAssistantBuddy() {}
 
     /**
-     * Creates an Module using the Persons in the {@code toBeCopied}
+     * Creates an TeachingAssistantBuddy using the Persons in the {@code toBeCopied}
      */
-    public Module(ReadOnlyModule toBeCopied) {
+    public TeachingAssistantBuddy(ReadOnlyTeachingAssistantBuddy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -51,14 +47,10 @@ public class Module implements ReadOnlyModule {
         this.students.setStudents(students);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     /**
-     * Resets the existing data of this {@code Module} with {@code newData}.
+     * Resets the existing data of this {@code TeachingAssistantBuddy} with {@code newData}.
      */
-    public void resetData(ReadOnlyModule newData) {
+    public void resetData(ReadOnlyTeachingAssistantBuddy newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -95,7 +87,7 @@ public class Module implements ReadOnlyModule {
     }
 
     /**
-     * Removes {@code key} from this {@code Module}.
+     * Removes {@code key} from this {@code TeachingAssistantBuddy}.
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
@@ -118,8 +110,8 @@ public class Module implements ReadOnlyModule {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Module // instanceof handles nulls
-                && students.equals(((Module) other).students));
+                || (other instanceof TeachingAssistantBuddy // instanceof handles nulls
+                && students.equals(((TeachingAssistantBuddy) other).students));
     }
 
     @Override

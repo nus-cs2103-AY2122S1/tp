@@ -31,7 +31,7 @@
 //
 //public class AddressBookParserTest {
 //
-//    private final AddressBookParser parser = new AddressBookParser();
+//    private final TeachingAssistantBuddyParser parser = new TeachingAssistantBuddyParser();
 //
 //    @Test
 //    public void parseCommand_add() throws Exception {

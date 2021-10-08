@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.Module;
-import seedu.address.model.ReadOnlyModule;
+import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
+import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Contains utility methods for populating {@code Module} with sample data.
+ * Contains utility methods for populating {@code TeachingAssistantBuddy} with sample data.
  */
 public class SampleDataUtil {
     public static Student[] getSamplePersons() {
@@ -38,8 +38,8 @@ public class SampleDataUtil {
                         new TeleHandle("92624417"), new Email("royb@example.com"))
         };
     }
-    public static ReadOnlyModule getSampleModule() {
-        Module sampleAb = new Module();
+    public static ReadOnlyTeachingAssistantBuddy getSampleModule() {
+        TeachingAssistantBuddy sampleAb = new TeachingAssistantBuddy();
         for (Student sampleStudent : getSamplePersons()) {
             sampleAb.addStudent(sampleStudent);
         }
