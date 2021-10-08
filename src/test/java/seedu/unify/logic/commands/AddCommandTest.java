@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.logic.commands.exceptions.CommandException;
-import seedu.unify.model.AddressBook;
+import seedu.unify.model.ReadOnlyUniFy;
+import seedu.unify.model.UniFy;
 import seedu.unify.model.Model;
-import seedu.unify.model.ReadOnlyAddressBook;
 import seedu.unify.model.ReadOnlyUserPrefs;
 import seedu.unify.model.task.Task;
 import seedu.unify.testutil.TaskBuilder;
@@ -99,12 +99,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getUniFyFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setUniFyFilePath(Path uniFyFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setUniFy(ReadOnlyUniFy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyUniFy getUniFy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,8 +186,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyUniFy getUniFy() {
+            return new UniFy();
         }
     }
 

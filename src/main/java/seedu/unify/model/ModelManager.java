@@ -14,31 +14,31 @@ import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.task.Task;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the unify data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final UniFy uniFy;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given uniFy and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyUniFy uniFy, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(uniFy, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with unify: " + uniFy + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.uniFy = new UniFy(uniFy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredTasks = new FilteredList<>(this.uniFy.getTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new UniFy(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,42 +66,42 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getUniFyFilePath() {
+        return userPrefs.getUniFyFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setUniFyFilePath(Path uniFyFilePath) {
+        requireNonNull(uniFyFilePath);
+        userPrefs.setUniFyFilePath(uniFyFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== UniFy ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setUniFy(ReadOnlyUniFy uniFy) {
+        this.uniFy.resetData(uniFy);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyUniFy getUniFy() {
+        return uniFy;
     }
 
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return addressBook.hasTask(task);
+        return uniFy.hasTask(task);
     }
 
     @Override
     public void deleteTask(Task target) {
-        addressBook.removeTask(target);
+        uniFy.removeTask(target);
     }
 
     @Override
     public void addTask(Task task) {
-        addressBook.addTask(task);
+        uniFy.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -109,7 +109,7 @@ public class ModelManager implements Model {
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
-        addressBook.setTask(target, editedTask);
+        uniFy.setTask(target, editedTask);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -143,7 +143,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return uniFy.equals(other.uniFy)
                 && userPrefs.equals(other.userPrefs)
                 && filteredTasks.equals(other.filteredTasks);
     }

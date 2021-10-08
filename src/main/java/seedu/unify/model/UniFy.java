@@ -9,10 +9,10 @@ import seedu.unify.model.task.Task;
 import seedu.unify.model.task.UniqueTaskList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the unify level
  * Duplicates are not allowed (by .isSameTask comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class UniFy implements ReadOnlyUniFy {
 
     private final UniqueTaskList tasks;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks = new UniqueTaskList();
     }
 
-    public AddressBook() {}
+    public UniFy() {}
 
     /**
-     * Creates an AddressBook using the Tasks in the {@code toBeCopied}
+     * Creates an UniFy using the Tasks in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public UniFy(ReadOnlyUniFy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code UniFy} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyUniFy newData) {
         requireNonNull(newData);
 
         setTasks(newData.getTaskList());
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// task-level operations
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in the unify.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
@@ -67,8 +67,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a task to the address book.
-     * The task must not already exist in the address book.
+     * Adds a task to the unify.
+     * The task must not already exist in the unify.
      */
     public void addTask(Task p) {
         tasks.add(p);
@@ -76,8 +76,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the address book.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
+     * {@code target} must exist in the unify.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the unify.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
@@ -86,8 +86,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code UniFy}.
+     * {@code key} must exist in the unify.
      */
     public void removeTask(Task key) {
         tasks.remove(key);
@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && tasks.equals(((AddressBook) other).tasks));
+                || (other instanceof UniFy // instanceof handles nulls
+                && tasks.equals(((UniFy) other).tasks));
     }
 
     @Override

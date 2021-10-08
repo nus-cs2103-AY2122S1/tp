@@ -22,25 +22,25 @@ import seedu.unify.model.task.Task;
 import seedu.unify.model.task.exceptions.DuplicateTaskException;
 import seedu.unify.testutil.TaskBuilder;
 
-public class AddressBookTest {
+public class UniFyTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final UniFy uniFy = new UniFy();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getTaskList());
+        assertEquals(Collections.emptyList(), uniFy.getTaskList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> uniFy.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        UniFy newData = getTypicalAddressBook();
+        uniFy.resetData(newData);
+        assertEquals(newData, uniFy);
     }
 
     @Test
@@ -49,47 +49,47 @@ public class AddressBookTest {
         Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newTasks);
+        UniFyStub newData = new UniFyStub(newTasks);
 
-        assertThrows(DuplicateTaskException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateTaskException.class, () -> uniFy.resetData(newData));
     }
 
     @Test
     public void hasTask_nullTask_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasTask(null));
+        assertThrows(NullPointerException.class, () -> uniFy.hasTask(null));
     }
 
     @Test
     public void hasTask_taskNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasTask(ALICE));
+        assertFalse(uniFy.hasTask(ALICE));
     }
 
     @Test
     public void hasTask_taskInAddressBook_returnsTrue() {
-        addressBook.addTask(ALICE);
-        assertTrue(addressBook.hasTask(ALICE));
+        uniFy.addTask(ALICE);
+        assertTrue(uniFy.hasTask(ALICE));
     }
 
     @Test
     public void hasTask_taskWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addTask(ALICE);
+        uniFy.addTask(ALICE);
         Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasTask(editedAlice));
+        assertTrue(uniFy.hasTask(editedAlice));
     }
 
     @Test
     public void getTaskList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniFy.getTaskList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose tasks list can violate interface constraints.
+     * A stub ReadOnlyUniFy whose tasks list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class UniFyStub implements ReadOnlyUniFy {
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Task> tasks) {
+        UniFyStub(Collection<Task> tasks) {
             this.tasks.setAll(tasks);
         }
 

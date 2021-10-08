@@ -4,9 +4,9 @@ import javafx.collections.ObservableList;
 import seedu.unify.model.task.Task;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of unify tasks
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyUniFy {
 
     /**
      * Returns an unmodifiable view of the tasks list.
