@@ -1,0 +1,10 @@
+{
+  "students": [ {
+    "name": "Valid Student",
+    "email": "hans@example.com"
+  }, {
+    "name": "Student With Invalid Email Field",
+    "email": "hansexample.com"
+  } ],
+  "tasks" : [ ]
+}

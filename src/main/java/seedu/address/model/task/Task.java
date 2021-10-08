@@ -12,6 +12,7 @@ public class Task {
     private final TaskName name;
     private final Deadline deadline;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isDone;
 
     /**
      * Constructs a {@code Task}.
@@ -24,6 +25,7 @@ public class Task {
         this.name = name;
         this.deadline = deadline;
         this.tags.addAll(tags);
+        this.isDone = false;
     }
 
     public TaskName getName() {
@@ -34,9 +36,17 @@ public class Task {
         return deadline;
     }
 
+    public String getStatus() {
+        return this.isDone ? "Completed" : "Pending";
+    }
+
+    public void markTaskComplete() {
+        this.isDone = true;
+    }
+
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -93,6 +103,7 @@ public class Task {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+        builder.append("; Status: ").append(getStatus());
         return builder.toString();
     }
 }

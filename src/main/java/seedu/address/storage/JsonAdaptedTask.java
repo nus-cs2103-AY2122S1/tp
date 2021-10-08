@@ -21,18 +21,21 @@ public class JsonAdaptedTask {
     private final String name;
     private final String deadline;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String status;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                           @JsonProperty("status") String status) {
         this.name = name;
         this.deadline = deadline;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.status = status;
     }
 
     /**
@@ -44,12 +47,13 @@ public class JsonAdaptedTask {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        status = source.getStatus();
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();

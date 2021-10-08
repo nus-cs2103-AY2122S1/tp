@@ -1,0 +1,11 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "email": "alice@example.com",
+    "tagged": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "email": "pauline@example.com"
+  } ],
+  "tasks" : [ ]
+}

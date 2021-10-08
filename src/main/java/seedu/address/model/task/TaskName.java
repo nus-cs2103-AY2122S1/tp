@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Basically a copy of Name from the person package
+ * Basically a copy of Name from the student package
  */
 public class TaskName {
 

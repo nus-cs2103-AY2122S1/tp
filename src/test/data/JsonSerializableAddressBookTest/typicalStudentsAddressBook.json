@@ -1,0 +1,40 @@
+{
+  "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "email" : "alice@example.com",
+    "tagged" : [ "friends" ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  }, {
+    "name" : "Benson Meier",
+    "email" : "johnd@example.com",
+    "tagged" : [ "owesMoney", "friends" ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  }, {
+    "name" : "Carl Kurz",
+    "email" : "heinz@example.com",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  }, {
+    "name" : "Daniel Meier",
+    "email" : "cornelia@example.com",
+    "tagged" : [ "friends" ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  }, {
+    "name" : "Elle Meyer",
+    "email" : "werner@example.com",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  }, {
+    "name" : "Fiona Kunz",
+    "email" : "lydia@example.com",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  }, {
+    "name" : "George Best",
+    "email" : "anna@example.com",
+    "tagged" : [ ],
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  } ],
+  "tasks" : [ ]
+}
