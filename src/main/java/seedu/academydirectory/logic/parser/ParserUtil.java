@@ -12,10 +12,10 @@ import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.Address;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Email;
-import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
+import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
 /**

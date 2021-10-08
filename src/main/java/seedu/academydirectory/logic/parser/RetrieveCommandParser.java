@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.stream.Stream;
 
