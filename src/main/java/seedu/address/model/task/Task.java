@@ -84,7 +84,6 @@ public class Task {
     public String toString() {
         return getName()
                 + "; Deadline: "
-                + getDeadline()
-                + "; Completion Status: ";
+                + getDeadline();
     }
 }
