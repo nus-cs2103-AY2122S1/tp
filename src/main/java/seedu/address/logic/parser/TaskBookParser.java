@@ -12,8 +12,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SwitchTabContactsCommand;
 import seedu.address.logic.commands.SwitchTabTasksCommand;
 import seedu.address.logic.commands.taskcommand.AddTaskCommand;
+import seedu.address.logic.commands.taskcommand.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.taskcommand.AddTaskCommandParser;
+import seedu.address.logic.parser.taskcommand.DeleteTaskCommandParser;
 
 /**
  * Parses user input.
@@ -44,6 +46,9 @@ public class TaskBookParser {
 
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
+
+        case DeleteTaskCommand.COMMAND_WORD:
+            return new DeleteTaskCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
