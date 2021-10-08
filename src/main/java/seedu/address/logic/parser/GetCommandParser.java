@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_SPACE;
 
 import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,10 +19,10 @@ public class GetCommandParser implements Parser<GetCommand> {
      */
     public GetCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, FLAG_FRIEND);
+                ArgumentTokenizer.tokenize(args, FLAG_FRIEND_SPACE);
 
-        if (argMultimap.getValue(FLAG_FRIEND).isPresent()) {
-            String keyword = argMultimap.getValue(FLAG_FRIEND).get();
+        if (argMultimap.getValue(FLAG_FRIEND_SPACE).isPresent()) {
+            String keyword = argMultimap.getValue(FLAG_FRIEND_SPACE).get();
             if (keyword.isEmpty()) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
