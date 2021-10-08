@@ -8,6 +8,7 @@ import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
+import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.student.StudioRecord;
@@ -99,6 +100,17 @@ public class StudentBuilder {
         Attendance newAttendance = new Attendance(sessionCount);
         newAttendance.setAttendance(boolArr);
         this.studioRecord = new StudioRecord(newAttendance, studioRecord.getParticipation());
+        return this;
+    }
+
+    /**
+     * Sets the {@code Participation} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withParticipation(int[] intArr) {
+        Integer sessionCount = studioRecord.getAttendance().getSessionCount();
+        Participation newParticipation = new Participation(sessionCount);
+        newParticipation.setParticipation(intArr);
+        this.studioRecord = new StudioRecord(studioRecord.getAttendance(), newParticipation);
         return this;
     }
 

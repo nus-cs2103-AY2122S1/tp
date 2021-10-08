@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 public class Participation implements Information {
 
-    private int[] participationArray;
+    private static final String VALIDATION_REGEX = "^-?[0-9]\\d*$";
 
-    private static final String VALIDATION_REGEX = "^-?[1-9]\\d*$";
+    private int[] participationArray;
 
     /**
      * The constructor for an Participation object.
+     *
      * @param numberOfSessions The number of Studios scheduled
      *                         for the semester that the student has to attend
      */
@@ -18,6 +19,14 @@ public class Participation implements Information {
         participationArray = new int[numberOfSessions];
     }
 
+    /**
+     * Increments or decrements the participation count of the
+     * given index in the participation array.
+     *
+     * @param index
+     * @param participationAdd
+     * @return
+     */
     public Participation add(Integer index, int participationAdd) {
         int participationResult = participationArray[index - 1] + participationAdd;
         if (participationResult < 0) {
@@ -68,6 +77,11 @@ public class Participation implements Information {
         return "[" + participationCountString + "]"; // participation score of a student
     }
 
+    /**
+     * Checks if the given participation change is valid
+     *
+     * @param test The participation modifier being tested
+     */
     public static boolean isValidParticipation(String test) {
         requireNonNull(test);
         if (!test.matches(VALIDATION_REGEX)) {

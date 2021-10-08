@@ -61,7 +61,7 @@ public class Attendance implements Information {
             } else {
                 sessionToPrint += "  " + (session + 1) + " ";
             }
-            return "[" + sessionToPrint+ "]"; // session index displayed if attended
+            return "[" + sessionToPrint + "]"; // session index displayed if attended
         } else {
             return "[       ]"; // session index omitted if unattended
         }

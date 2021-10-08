@@ -35,15 +35,6 @@ public class AttendanceTest {
     }
 
     @Test
-    public void stringFormat() {
-        // TODO: Make more extensive and comprehensive
-        Attendance emptyAttendance = new Attendance(10);
-        final String emptyAttendanceString = "[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]";
-
-        assertTrue(emptyAttendance.toString().equals(emptyAttendanceString));
-    }
-
-    @Test
     public void getSessionCount() {
         Attendance attendanceFive = new Attendance(5);
         assertTrue(attendanceFive.getSessionCount() == 5);

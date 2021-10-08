@@ -27,7 +27,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status is not 0 or 1.";
-    public static final String MESSAGE_INVALID_PARTICIPATION_STATUS = "Change in Participation must be between -100 and 100.";
+    public static final String MESSAGE_INVALID_PARTICIPATION_STATUS =
+            "Change in Participation must be between -100 and 100.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -43,7 +44,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneOrZero} into an {@code boolean} and returns it.
+     * Parses {@code attendance} into an {@code boolean} and returns it.
      * @throws ParseException if the specified input is invalid (not one or zero).
      */
     public static boolean parseAttendance(String attendance) throws ParseException {
@@ -56,6 +57,12 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String participation} into a {@code Integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Integer} is invalid.
+     */
     public static Integer parseParticipation(String participation) throws ParseException {
         requireNonNull(participation);
         String trimmedParticipation = participation.trim();
@@ -183,6 +190,12 @@ public class ParserUtil {
         return Integer.parseInt(trimmedGrade);
     }
 
+    /**
+     * Parses a {@code String studioRecord} into a {@code Integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studioRecord} is invalid.
+     */
     public static Integer parseStudioRecord(String studioRecord) throws ParseException {
         requireNonNull(studioRecord);
         String trimmedStudioRecord = studioRecord.trim();

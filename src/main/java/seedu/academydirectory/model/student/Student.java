@@ -43,8 +43,8 @@ public class Student {
     /**
      * Constructor for Student with Attendance and Assessment.
      */
-    public Student(Name name, Phone phone, Email email, Address address, StudioRecord studioRecord, Assessment assessment,
-                   Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email,
+                   Address address, StudioRecord studioRecord, Assessment assessment, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;

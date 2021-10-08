@@ -78,11 +78,9 @@ public class ParticipationCommand extends Command {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof ParticipationCommand)) {
             return false;
         }
-
         ParticipationCommand e = (ParticipationCommand) other;
         return indexArrayList.equals(e.indexArrayList)
                 && participationUpdate == e.participationUpdate

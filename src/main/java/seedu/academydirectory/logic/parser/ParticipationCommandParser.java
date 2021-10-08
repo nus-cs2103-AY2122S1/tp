@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.student.Participation;
 
 public class ParticipationCommandParser implements Parser<ParticipationCommand> {
 
