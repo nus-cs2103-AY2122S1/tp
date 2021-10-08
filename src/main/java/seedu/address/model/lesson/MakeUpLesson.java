@@ -26,6 +26,16 @@ public class MakeUpLesson extends Lesson {
     }
 
     /**
+     * Return the original starting date of the makeup lesson.
+     *
+     * @return {@code Date} that the lesson first started.
+     */
+    @Override
+    public Date getStartDate() {
+        return getDate();
+    }
+
+    /**
      * Check if the Lesson object is recurring.
      *
      * @return False
