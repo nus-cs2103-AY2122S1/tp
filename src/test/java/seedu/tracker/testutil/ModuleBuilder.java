@@ -3,6 +3,9 @@ package seedu.tracker.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Description;
 import seedu.tracker.model.module.Mc;
@@ -26,6 +29,8 @@ public class ModuleBuilder {
     private Description description;
     private Mc mc;
     private Set<Tag> tags;
+    private boolean hasAcademicCalendar = false;
+    private AcademicCalendar academicCalendar;
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.
@@ -47,6 +52,10 @@ public class ModuleBuilder {
         description = moduleToCopy.getDescription();
         mc = moduleToCopy.getMc();
         tags = new HashSet<>(moduleToCopy.getTags());
+        if (moduleToCopy.hasAcademicCalendar()) {
+            academicCalendar = moduleToCopy.getAcademicCalendar();
+            hasAcademicCalendar = true;
+        }
     }
 
     /**
@@ -89,7 +98,23 @@ public class ModuleBuilder {
         return this;
     }
 
+    /**
+     * Sets the academic calendar of the Module that we are building.
+     */
+    public ModuleBuilder withAcademicCalendar(int year, int semester) {
+        this.academicCalendar = new AcademicCalendar(new AcademicYear(year), new Semester(semester));
+        this.hasAcademicCalendar = true;
+        return this;
+    }
+
+    /**
+     * Builds a module with the attributes in this ModuleBuilder.
+     * @return Module newly built.
+     */
     public Module build() {
+        if (hasAcademicCalendar) {
+            return new Module(code, title, description, mc, tags, academicCalendar);
+        }
         return new Module(code, title, description, mc, tags);
     }
 

@@ -103,7 +103,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setModuleTrackerFilePath(Path addressBookFilePath) {
+        public void setModuleTrackerFilePath(Path moduleTrackerFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
