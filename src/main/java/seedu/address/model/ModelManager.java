@@ -98,8 +98,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        requireAllNonNull(tutorialClass);
+        return addressBook.hasTutorialClass(tutorialClass);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
+    }
+
+    @Override
+    public void deleteTutorialClass(TutorialClass target) {
+        addressBook.removeTutorialClass(target);
     }
 
     @Override
@@ -109,11 +120,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addTutorialClass(TutorialClass tutorialClass) {
+        addressBook.addTutorialClass(tutorialClass);
+
+    }
+
+    @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
         addressBook.setStudent(target, editedStudent);
     }
+
+    @Override
+    public ObservableList<TutorialClass> getFliteredTutorialClassList() {
+        return filteredTutorialClasses;
+    }
+
 
     //=========== Filtered Student List Accessors =============================================================
 
@@ -130,6 +153,12 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updaateFilteredTutorialClassList(Predicate<TutorialClass> predicate) {
+        requireNonNull(predicate);
+        filteredTutorialClasses.setPredicate(predicate);
     }
 
     @Override

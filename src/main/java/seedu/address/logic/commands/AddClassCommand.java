@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tutorialclass.TutorialClass;
 
@@ -36,8 +37,21 @@ public class AddClassCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return null;
+
+        if (model.hasTutorialClass(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CLASS);
+        }
+
+        model.addTutorialClass(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddClassCommand // instanceof handles nulls
+                && toAdd.equals(((AddClassCommand) other).toAdd));
     }
 }
