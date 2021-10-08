@@ -41,7 +41,10 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
 
+    @Test
+    public void execute_validRangeUnfilteredList_success() {
         //Deletes 2 persons
         Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
@@ -64,7 +67,10 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
 
+    @Test
+    public void execute_invalidRangeUnfilteredList_throwsCommandException() {
         Index invalidStartIndex = Index.fromOneBased(model.getFilteredPersonList().size() - 2);
         Index invalidEndIndex = Index.fromOneBased(model.getFilteredPersonList().size() - 4);
         DeleteCommand deleteCommand1 = new DeleteCommand(invalidStartIndex, invalidEndIndex);
