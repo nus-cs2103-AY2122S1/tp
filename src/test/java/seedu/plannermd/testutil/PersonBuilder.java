@@ -22,8 +22,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "";
     public static final String DEFAULT_BIRTH_DATE = "20/02/1967";
-    public static final String DEFAULT_REMARK = "Orange CHAS card";
 
     private Name name;
     private Phone phone;
