@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -25,8 +26,18 @@ public class FindCommandParserTest {
     public void parse_validIdArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new IdContainsNumberPredicate(Arrays.asList("#140262")));
-        assertParseSuccess(parser, "#140262", expectedFindCommand);
+                new FindCommand(new IdContainsNumberPredicate(Arrays.asList("140262")));
+        assertParseSuccess(parser, "140262", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_negativeIdArgs_throwsParseException() {
+        assertParseFailure(parser, "-123123", String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_notSixDigitsIdArgs_throwsParseException() {
+        assertParseFailure(parser, "123", String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
