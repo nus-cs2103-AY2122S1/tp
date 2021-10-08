@@ -37,7 +37,7 @@
       <FlowPane fx:id="moduleCodes" />
       <FlowPane fx:id="tags">
             <padding>
-               <Insets bottom="5.0" />
+               <Insets top="5.0" />
             </padding></FlowPane>
       <Label fx:id="email" styleClass="cell_small_label" text="\$email">
             <padding>
