@@ -37,7 +37,7 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the
      * AddDoctorCommand and returns an AddDoctorCommand object for execution.
-     * 
+     *
      * @param args arguments to be parsed
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -65,7 +65,7 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values
      * in the given {@code ArgumentMultimap}.
-     * 
+     *
      * @return boolean
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
