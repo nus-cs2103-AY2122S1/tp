@@ -23,7 +23,7 @@ public class Student {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private Attendance attendance;
+    private StudioRecord studioRecord;
     private Assessment assessment;
 
     /**
@@ -36,14 +36,14 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.attendance = new Attendance(10); // for now, we just assume its 10.
+        this.studioRecord = new StudioRecord(10); // for now, we just assume its 10.
         this.assessment = new Assessment();
     }
 
     /**
      * Constructor for Student with Attendance and Assessment.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Attendance attendance, Assessment assessment,
+    public Student(Name name, Phone phone, Email email, Address address, StudioRecord studioRecord, Assessment assessment,
                    Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
@@ -51,12 +51,12 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.attendance = attendance;
+        this.studioRecord = studioRecord;
         this.assessment = assessment;
     }
 
     public void setAttendance(Attendance attendance) {
-        this.attendance = attendance;
+        this.studioRecord.setAttendance(attendance);
     }
 
     public Name getName() {
@@ -76,7 +76,11 @@ public class Student {
     }
 
     public Attendance getAttendance() {
-        return attendance;
+        return studioRecord.getAttendance();
+    }
+
+    public StudioRecord getStudioRecord() {
+        return studioRecord;
     }
 
     public Assessment getAssessment() {
@@ -128,7 +132,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, attendance);
+        return Objects.hash(name, phone, email, address, tags, studioRecord);
     }
 
     @Override

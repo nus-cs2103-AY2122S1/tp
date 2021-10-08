@@ -18,6 +18,7 @@ import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.tag.Tag;
 
 /**
@@ -111,12 +112,14 @@ class JsonAdaptedStudent {
 
         Attendance tempAttendance = new Attendance(attendance.length);
         tempAttendance.setAttendance(attendance);
-        final Attendance modelAttendance = tempAttendance;
+        StudioRecord tempStudioRecord = new StudioRecord(attendance.length);
+        tempStudioRecord.setAttendance(tempAttendance);
+        final StudioRecord modelStudioRecord = tempStudioRecord;
 
         final Assessment modelAssessment = new Assessment();
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelAttendance, modelAssessment,
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelStudioRecord, modelAssessment,
                 modelTags);
     }
 

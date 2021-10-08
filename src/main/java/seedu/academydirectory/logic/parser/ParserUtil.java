@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ibm.icu.impl.number.Parse;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
@@ -15,6 +16,7 @@ import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
+import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.tag.Tag;
 
 /**
@@ -166,5 +168,14 @@ public class ParserUtil {
             throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedGrade);
+    }
+
+    public static Integer parseStudioRecord(String studioRecord) throws ParseException {
+        requireNonNull(studioRecord);
+        String trimmedStudioRecord = studioRecord.trim();
+        if (!StudioRecord.isValidStudioRecord(trimmedStudioRecord)) {
+            throw new ParseException(StudioRecord.MESSAGE_CONSTRAINTS);
+        }
+        return Integer.parseInt(trimmedStudioRecord);
     }
 }
