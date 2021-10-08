@@ -13,7 +13,7 @@ import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.RemarkCommand;
 import seedu.plannermd.logic.commands.ToggleCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
-import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
+import seedu.plannermd.logic.commands.deletecommand.DeleteCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
@@ -54,8 +54,12 @@ public class PlannerMdParser {
         case EditPatientCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeletePatientCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            if (state == State.PATIENT) {
+                return new DeletePatientCommandParser().parse(arguments);
+            } else if (state == State.DOCTOR) {
+                return new DeleteDoctorCommandParser().parse(arguments);
+            }
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
