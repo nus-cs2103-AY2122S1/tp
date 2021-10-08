@@ -78,7 +78,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addFriendCommand = AddFriendCommand.COMMAND_WORD + NAME_DESC_AMY + FRIEND_ID_DESC_AMY;
+        String addFriendCommand = AddFriendCommand.COMMAND_WORD + FRIEND_ID_DESC_AMY + NAME_DESC_AMY;
         Friend expectedFriend = new FriendBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFriend(expectedFriend);

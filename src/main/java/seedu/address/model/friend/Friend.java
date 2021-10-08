@@ -44,15 +44,6 @@ public class Friend {
         this.friendName = friendName;
     }
 
-    /**
-     * Constructor using only friendId.
-     * @param friendId Unique id of friend.
-     */
-    public Friend(FriendId friendId) {
-        requireAllNonNull(friendId);
-        this.friendId = friendId;
-    }
-
     public FriendId getFriendId() {
         return friendId;
     }

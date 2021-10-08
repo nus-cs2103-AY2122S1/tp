@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
@@ -67,4 +68,9 @@ public class FriendBuilder {
     public Friend build() {
         return new Friend(friendId, friendName, games);
     }
+
+    public Friend buildNoName() {
+        return new Friend(friendId, AddFriendCommand.DEFAULT_FRIEND_NAME);
+    }
+
 }

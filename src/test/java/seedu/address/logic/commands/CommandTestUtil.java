@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -31,17 +30,17 @@ public class CommandTestUtil {
     public static final String VALID_GAME_CSGO = "CSGO";
     public static final String VALID_GAME_APEX_LEGENDS = "Apex Legends";
 
-    public static final String FRIEND_ID_DESC_AMY = " " + FLAG_FRIEND_ID + VALID_FRIEND_ID_AMY;
-    public static final String FRIEND_ID_DESC_BOB = " " + FLAG_FRIEND_ID + VALID_FRIEND_ID_BOB;
-    public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + VALID_NAME_BOB;
+    public static final String FRIEND_ID_DESC_AMY = " " + VALID_FRIEND_ID_AMY;
+    public static final String FRIEND_ID_DESC_BOB = " " + VALID_FRIEND_ID_BOB;
+    public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_BOB;
     public static final String GAME_DESC_AMY = " " + PREFIX_GAME + VALID_GAME_APEX_LEGENDS;
     public static final String GAME_DESC_BOB = " " + PREFIX_GAME + VALID_GAME_CSGO;
 
     public static final String GAME_DESC_CSGO = " " + PREFIX_GAME + VALID_GAME_CSGO;
     public static final String GAME_DESC_APEX_LEGENDS = " " + PREFIX_GAME + VALID_GAME_APEX_LEGENDS;
 
-    public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
     public static final String INVALID_GAME_DESC = " " + PREFIX_GAME + "kickstar*"; // '*' not allowed in games
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  --name";

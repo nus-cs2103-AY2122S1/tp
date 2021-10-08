@@ -9,7 +9,7 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendName;
 
 public class AddFriendCommand extends FriendCommand {
-    public static final String COMMAND_WORD = "friend --id";
+    public static final String COMMAND_WORD = "friend";
     public static final String MESSAGE_SUCCESS = "New friend added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This friend already exists in the gitGud friends list.";
     public static final FriendName DEFAULT_FRIEND_NAME = new FriendName("No name assigned");
