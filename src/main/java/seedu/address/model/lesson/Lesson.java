@@ -203,13 +203,20 @@ public class Lesson {
     }
 
     /**
-     * Returns true if the lessons overlap in timing.
+     * Returns true if the lessons overlap in timing and day.
      */
     public boolean hasOverlappedTiming(Lesson otherLesson) {
         LocalTime otherStartTime = otherLesson.getStartTime();
         LocalTime otherEndTime = otherLesson.getEndTime();
-        return (otherStartTime.isAfter(startTime) && otherStartTime.isBefore(endTime))
-                || (otherEndTime.isAfter(startTime) && otherEndTime.isBefore(endTime));
+
+        boolean isClashingStartTime = (otherStartTime.isAfter(startTime) && otherStartTime.isBefore(endTime));
+        boolean isClashingEndTime = (otherEndTime.isAfter(startTime) && otherEndTime.isBefore(endTime));
+        boolean isOnSameDay = otherLesson.getDayOfWeek().equals(dayOfWeek);
+
+        if (!isOnSameDay) {
+            return false;
+        }
+        return (isClashingStartTime || isClashingEndTime);
     }
 
     /**
