@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.UniqueFriendsList;
 
 /**
@@ -67,6 +69,14 @@ public class FriendsList implements ReadOnlyFriendsList {
     }
 
     /**
+     * Returns true if a friend with the same FriendId as (@code friendId} exists in the friends list.
+     */
+    public boolean hasFriendWithId(FriendId friendId) {
+        requireNonNull(friendId);
+        return friends.containsId(friendId);
+    }
+
+    /**
      * Adds a friend to the friends list.
      * The friend must not already exist in the friends list.
      */
@@ -83,6 +93,10 @@ public class FriendsList implements ReadOnlyFriendsList {
         requireNonNull(editedFriend);
 
         friends.setFriend(target, editedFriend);
+    }
+
+    public void linkFriend(Friend toLink, HashMap<String, String> games) {
+        friends.link(toLink, games);
     }
 
     /**

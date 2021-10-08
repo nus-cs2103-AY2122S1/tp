@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFriendsList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddCommandTest {
@@ -124,6 +126,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasFriendWithId(FriendId friendId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteFriend(Friend target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -145,6 +152,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredFriendsList(Predicate<Friend> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void linkFriend(Friend toLink, HashMap<String, String> games) {
             throw new AssertionError("This method should not be called.");
         }
     }

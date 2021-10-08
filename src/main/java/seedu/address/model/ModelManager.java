@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 
 /**
  * Represents the in-memory model of the gitGud friends list data.
@@ -95,6 +97,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasFriendWithId(FriendId friendId) {
+        requireNonNull(friendId);
+        return friendsList.hasFriendWithId(friendId);
+    }
+
+    @Override
     public void deleteFriend(Friend target) {
         friendsList.removeFriend(target);
     }
@@ -110,6 +118,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedFriend);
 
         friendsList.setFriend(target, editedFriend);
+    }
+
+    @Override
+    public void linkFriend(Friend toLink, HashMap<String, String> games) {
+        friendsList.linkFriend(toLink, games);
     }
 
     //=========== Filtered Person List Accessors =============================================================

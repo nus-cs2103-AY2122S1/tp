@@ -5,6 +5,10 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,6 +27,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_GAME_NAME = "Counter Strike";
+    private static final String VALID_IN_GAME_USERNAME = "Ferrari_peek";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -67,6 +73,15 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         FriendName expectedFriendName = new FriendName(VALID_NAME);
         assertEquals(expectedFriendName, ParserUtil.parseFriendName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseGamesAndUsernames_validInput_success() throws ParseException {
+        List<String> games = new ArrayList<String>();
+        games.add(VALID_GAME_NAME + ":" + VALID_IN_GAME_USERNAME);
+        HashMap<String, String> expectedGamesHashMap = new HashMap<>();
+        expectedGamesHashMap.put(VALID_GAME_NAME, VALID_IN_GAME_USERNAME);
+        assertEquals(expectedGamesHashMap, ParserUtil.parseGamesAndUsernames(games));
     }
 
     // TODO: Add tests for parseFriendId and parseGame
