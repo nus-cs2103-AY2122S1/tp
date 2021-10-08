@@ -14,6 +14,12 @@ src/main/resources/docs/
 /preferences.json
 /*.log.*
 
+# Other files/folders
+.classpath
+.project
+.settings/
+bin/
+
 # Test sandbox files
 src/test/data/sandbox/
 
