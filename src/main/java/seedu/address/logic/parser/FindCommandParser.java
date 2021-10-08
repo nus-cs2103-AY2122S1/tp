@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
@@ -18,7 +17,6 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
@@ -46,8 +44,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = " " + args.trim();
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
+                ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME,
+                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
                         PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
                         PREFIX_EXPERIENCE, PREFIX_TAG);
 
@@ -95,15 +93,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
                     predicateList.add(new EmailContainsKeywordsPredicate(Arrays.asList(keywords)));
-                }
-            }
-
-            if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_ADDRESS).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    predicateList.add(new AddressContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
 
