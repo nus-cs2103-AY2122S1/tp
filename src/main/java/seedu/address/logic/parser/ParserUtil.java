@@ -2,15 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
@@ -32,9 +32,12 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String MESSAGE_INVALID_KEYWORD = "Keyword cannot be empty.";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -238,8 +241,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> homework} into a {@code Set<Homework>}.
      */
-    public static Set<Homework> parseHomeworkList(Collection<String> homework)
-            throws ParseException {
+    public static Set<Homework> parseHomeworkList(Collection<String> homework) throws ParseException {
         requireNonNull(homework);
         final Set<Homework> homeworkSet = new HashSet<>();
         for (String description : homework) {
@@ -247,13 +249,37 @@ public class ParserUtil {
         }
         return homeworkSet;
     }
-    
+
+    /**
+     * Parses {@code String keywords} into a {@code List<String>}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
     public static List<String> parseKeywords(String keywords) throws ParseException {
         requireNonNull(keywords);
         String strippedKeywords = keywords.strip();
-//        if (trimmedKeywords.isEmpty()) {
-//            throw new ParseException(Keyword.MESSAGE_CONSTRAINTS);
-//        }
-        return strippedKeywords.isEmpty() ? Collections.emptyList() : List.of(strippedKeywords.split("\\s+"));
+        if (strippedKeywords.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_KEYWORD);
+        }
+        return List.of(strippedKeywords.split("\\s+"));
+    }
+
+    /**
+     * Parses a {@code String condition} into a {@code FindCondition}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code Subject} is invalid.
+     */
+    public static FindCondition parseFindCondition(String condition) throws ParseException {
+        requireNonNull(condition);
+        String strippedCondition = condition.strip();
+
+        FindCondition findCondition = FindCondition.valueOfName(strippedCondition);
+        if (findCondition == null) {
+            throw new ParseException(FindCommand.MESSAGE_CONDITION_CONSTRAINTS);
+        }
+
+        return findCondition;
     }
 }

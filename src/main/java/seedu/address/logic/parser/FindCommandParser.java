@@ -2,15 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 
 /**
@@ -24,15 +23,16 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        Prefix[] prefixes = new Prefix[]{PREFIX_NAME, PREFIX_ADDRESS};
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, prefixes);
-        
-        if (!areAnyPrefixesPresent(argMultimap,prefixes) || !argMultimap.getPreamble().isEmpty()) {
+
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS,
+            PREFIX_FIND_CONDITION);
+
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicate(); 
-        
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicate();
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             List<String> nameKeywords = ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_NAME).get());
             predicate.setNameKeywords(nameKeywords);
@@ -42,15 +42,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicate.setAddressKeywords(addressKeywords);
         }
 
+        if (!predicate.isAnyFieldSearched()) {
+            throw new ParseException(FindCommand.MESSAGE_FIELD_REQUIRED);
+        }
+
+        // Find condition is optional and defaults to match all fields
+        if (argMultimap.getValue(PREFIX_FIND_CONDITION).isPresent()) {
+            FindCondition condition = ParserUtil.parseFindCondition(argMultimap.getValue(PREFIX_FIND_CONDITION).get());
+            predicate.setCondition(condition);
+        }
+
         return new FindCommand(predicate);
     }
-
-    /**
-     * Returns true if at least one of the prefixes does not contain empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }
