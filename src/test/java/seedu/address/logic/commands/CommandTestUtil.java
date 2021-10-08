@@ -137,6 +137,10 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the persons at the given {@code targetIndex1} and
+     * {@code targetIndex2} in the {@code model}'s address book.
+     */
     public static void showPersonAtMultipleIndex(Model model, Index targetIndex1, Index targetIndex2) {
         assertTrue(targetIndex1.getZeroBased() < model.getFilteredPersonList().size());
         assertTrue(targetIndex2.getZeroBased() < model.getFilteredPersonList().size());

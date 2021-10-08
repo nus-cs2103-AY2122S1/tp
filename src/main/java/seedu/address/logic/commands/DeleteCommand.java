@@ -26,11 +26,22 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Index endIndex;
 
+    /**
+     * Creates a DeleteCommand to delete the person at specified index
+     *
+     * @param targetIndex the person to be deleted
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         endIndex = targetIndex;
     }
 
+    /**
+     * Creates a DeleteCommand to delete the persons between the specified indexes.
+     *
+     * @param targetIndex the first person to be deleted
+     * @param endIndex the last person to be deleted
+     */
     public DeleteCommand(Index targetIndex, Index endIndex) {
         this.targetIndex = targetIndex;
         this.endIndex = endIndex;
