@@ -3,11 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +16,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_LASTMET = "24-09-2021";
+    public static final String DEFAULT_CURRENTPLAN = "Prudential PRUwealth";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private LastMet lastMet;
+    private CurrentPlan currentPlan;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +35,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        lastMet = new LastMet(DEFAULT_LASTMET);
+        currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
         tags = new HashSet<>();
     }
 
@@ -46,6 +48,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        currentPlan = personToCopy.getCurrentPlan();
+        lastMet = personToCopy.getLastMet();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,8 +93,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastMet(String lastMetDate) {
+        this.lastMet = new LastMet(lastMetDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCurrentPlan(String currentPlan) {
+        this.currentPlan = new CurrentPlan(currentPlan);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, currentPlan, lastMet, tags);
     }
 
 }
