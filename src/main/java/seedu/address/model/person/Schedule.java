@@ -9,6 +9,15 @@ public class Schedule {
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
 
+    private static final String SCHEDULE_DEFAULT = "Schedule:\n"
+            + "Monday: %1$s\n"
+            + "Tuesday: %2$s\n"
+            + "Wednesday: %3$s\n"
+            + "Thursday: %4$s\n"
+            + "Friday: %5$s\n"
+            + "Saturday: %6$s\n"
+            + "Sunday: %7$s\n";
+
     private Shift[][] shifts;
 
     /**
@@ -50,4 +59,37 @@ public class Schedule {
     public boolean isWorking(DayOfWeek dayOfWeek, Slot slot) {
         return shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null;
     }
+
+    /**
+     * Creates the shift array in a legible text output.
+     * @param shifts The shifts in to format.
+     * @return The string format to display.
+     */
+    private static String formatShiftsToString(Shift[] shifts) {
+        String result = "";
+        for (Shift shift: shifts) {
+            if (shift == null) {
+                continue;
+            }
+            result += "\n\t";
+            result += shift;
+
+        }
+        return result;
+
+    }
+
+    @Override
+    public String toString() {
+        return String.format(SCHEDULE_DEFAULT,
+                formatShiftsToString(shifts[0]),
+                formatShiftsToString(shifts[1]),
+                formatShiftsToString(shifts[2]),
+                formatShiftsToString(shifts[3]),
+                formatShiftsToString(shifts[4]),
+                formatShiftsToString(shifts[5]),
+                formatShiftsToString(shifts[6]));
+
+    }
+
 }

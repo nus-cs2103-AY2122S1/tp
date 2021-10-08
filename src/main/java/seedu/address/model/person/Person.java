@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -47,6 +48,14 @@ public class Person {
     public Email getEmail() {
         return email;
     }
+
+    public Schedule getSchedule() {
+        //todo: implement an actual schedule
+        Schedule fakeSchedule = new Schedule();
+        fakeSchedule.addTask(DayOfWeek.MONDAY, Slot.MORNING, "Shift 1");
+        return fakeSchedule;
+    }
+
 
     public Address getAddress() {
         return address;
