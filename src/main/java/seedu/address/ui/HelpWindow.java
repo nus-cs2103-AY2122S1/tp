@@ -22,7 +22,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "1. Purge Sample Data (Delete all)\n"
             + "   -> purge\n"
             + "2. Create records of individual students (Add)\n"
-            + "   -> add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>\n"
+            + "   -> add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -grade<GRADE>\n"
             + "3. View the records of individual students (Read)\n"
             + "   -> view -sid <STUDENT_ID>\n"
             + "4. Update a student's record (Update)\n"
