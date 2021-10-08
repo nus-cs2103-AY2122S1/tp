@@ -106,7 +106,6 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
@@ -127,6 +126,29 @@ public class Person {
                 break;
             }
             isClash = lesson.isClashing(toCheck);
+        }
+        return isClash;
+    }
+
+    /**
+     * Returns true if {@code Person} to check has clashing lessons.
+     *
+     * @param toCheck The lesson to be compared with.
+     * @return True if and only if there is at least one clash.
+     */
+    public boolean hasClashingLessons(Person toCheck) {
+        if (toCheck == null) {
+            return false;
+        }
+        if (isSamePerson(toCheck)) {
+            return false; // prevents checking with self as that would always return true
+        }
+        boolean isClash = false;
+        for (Lesson lesson : lessons) {
+            if (isClash) {
+                break;
+            }
+            isClash = toCheck.hasClashingLessons(lesson);
         }
         return isClash;
     }

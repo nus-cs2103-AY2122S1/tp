@@ -119,7 +119,7 @@ public class LessonAddCommand extends Command {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.addLesson(personToEdit, editedPerson, toAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, editedPerson));
     }

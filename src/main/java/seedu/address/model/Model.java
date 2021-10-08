@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
@@ -67,9 +69,9 @@ public interface Model {
     boolean hasClashingLesson(Lesson lesson);
 
     /**
-     * Adds the given lesson to the calendar.
+     * Adds the given lesson to the target person.
      */
-    void addCalendarEntry(Lesson lesson);
+    void addLesson(Person target, Person editedPerson, Lesson toAdd);
 
     /**
      * Deletes the given person.

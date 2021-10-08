@@ -30,6 +30,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
 
+    // TODO: Lesson name
     private final Name name = new Name("Placeholder");
 
     /**
