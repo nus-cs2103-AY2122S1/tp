@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddToFolderCommand;
-import seedu.address.logic.commands.CreateFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 
 import java.util.List;
@@ -63,7 +61,6 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
                 stringBuilder.append(allValues.get(i));
                 allValues.remove(i);
             } catch (NumberFormatException e) {
-//                System.out.println("Input String cannot be parsed to Integer.");
                 continue;
             }
         }

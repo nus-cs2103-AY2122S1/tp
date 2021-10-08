@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -24,13 +23,12 @@ public class AddToFolderCommand extends Command {
             + "3 >> CS2103";
 
     public static final String MESSAGE_SUCCESS = "Contact added to Folder: %1$s";
-//    public static final String MESSAGE_DUPLICATE_FOLDER = "This folder already exists in UNIon";
 
     private final Index index;
     private final FolderName folderName;
 
     /**
-     * Creates a AddToFolderCommand to add the specified {@code Folder}
+     * Creates a AddToFolderCommand to add the specified {@code FolderName}
      * @param index,folderName
      */
     public AddToFolderCommand(Index index, FolderName folderName) {
