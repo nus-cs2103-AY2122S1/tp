@@ -388,3 +388,13 @@
     -fx-background-radius: 5;
     -fx-font-size: 11;
 }
+
+#contactHeader, #favourites {
+    -fx-padding: 5 5 5 5;
+    -fx-text-fill: purple;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 5;
+    -fx-border-color: purple;
+    -fx-background-radius: 5;
+    -fx-font-size: 15;
+}
