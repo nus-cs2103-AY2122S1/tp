@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-TutorAid is a **desktop app for private tutors to match their students' contacts, optimized for use via a Command Line 
-Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TutorAid 
+TutorAid is a **desktop app for private tutors to match their students' contacts, optimized for use via a Command Line
+Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TutorAid
 can get your student management tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -28,9 +28,8 @@ can get your student management tasks done faster than traditional GUI apps.
 
    * **`list`** : Lists all contacts.
 
-   * **`add -s`** sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` : 
-     Adds a student named `John Doe` to TutorAid, along with the student's contact number, parent's name and parent's 
-     contact number.
+   * **`add -s`** sn/John Does sp/81234567 pn/Mrs Doe pp/91234567` :
+     Adds a student named `John Doe` to TutorAid, along with the student's contact number, parent's name and parent's contact number.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -118,7 +117,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from TutorAid.
 
 Format: `clear`
 
@@ -130,14 +129,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TutorAid data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TutorAid data are saved as a JSON file `[JAR file location]/data/tutoraid.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TutorAid will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Adding progress for a student : `add -p`
@@ -172,7 +171,7 @@ _Details coming soon ..._
 
 ### Set payment made: `paid`
 
-Sets the payment status of the specified student to `paid` for the current month. 
+Sets the payment status of the specified student to `paid` for the current month.
 
 Format: `paid STUDENT_INDEX`
 
@@ -203,7 +202,7 @@ Examples:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutorAid home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -211,14 +210,12 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
+**Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
-**Delete** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **List** | `list`
 **Help** | `help`
-**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3` 
+**Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
 **Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`

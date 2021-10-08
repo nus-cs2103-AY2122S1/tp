@@ -76,12 +76,26 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Views the given person.
+     * {@code person} must exist in the address book.
+     */
+    void viewPerson(Person person);
+
+    /**
+     * Views the list of people in the database.
+     */
+    void viewList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
 }
