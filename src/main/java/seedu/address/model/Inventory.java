@@ -89,6 +89,16 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
+     * Adds a list of items to the inventory.
+     * If the item already exists in the inventory, increment its count.
+     */
+    public void addItems(List<Item> newItems) {
+        for (Item newItem : newItems) {
+            addItem(newItem);
+        }
+    }
+
+    /**
      * Replaces the given item {@code target} in the list with {@code editedItem}.
      * {@code target} must exist in the inventory.
      * The item identity of {@code editedItem} must not be the same as another existing item in the inventory.
