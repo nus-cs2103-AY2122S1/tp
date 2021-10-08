@@ -10,23 +10,23 @@ import seedu.address.commons.util.StringUtil;
  * Only output items with id that matches exactly with the query
  */
 public class IdContainsNumberPredicate implements Predicate<Item> {
-    private final List<String> keywords;
+    private final List<String> keynumbers;
 
-    public IdContainsNumberPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public IdContainsNumberPredicate(List<String> keynumbers) {
+        this.keynumbers = keynumbers;
     }
 
     @Override
     public boolean test(Item item) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(item.getId(), keyword));
+        return keynumbers.stream()
+                .anyMatch(keynumbers -> StringUtil.containsWordIgnoreCase(item.getId(), keynumbers));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IdContainsNumberPredicate // instanceof handles nulls
-                && keywords.equals(((IdContainsNumberPredicate) other).keywords)); // state check
+                && keynumbers.equals(((IdContainsNumberPredicate) other).keynumbers)); // state check
     }
 
 }
