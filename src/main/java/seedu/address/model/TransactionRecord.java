@@ -5,12 +5,12 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
 
 /**
- * Records a list of items transacted in an order. Immutable.
+ * Records a list of items transacted items in an order. Immutable.
  */
-public class Transaction {
+public class TransactionRecord {
     private final UniqueItemList items;
 
-    public Transaction(UniqueItemList items) {
+    public TransactionRecord(UniqueItemList items) {
         this.items = items;
     }
 
