@@ -53,8 +53,8 @@ public class ParserUtil {
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
         String trimmedSid = studentId.trim();
-        if (!Name.isValidName(trimmedSid)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!StudentId.isValidStudentId(trimmedSid)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(trimmedSid);
     }
@@ -68,8 +68,8 @@ public class ParserUtil {
     public static ClassId parseClassId(String classId) throws ParseException {
         requireNonNull(classId);
         String trimmedCid = classId.trim();
-        if (!Name.isValidName(trimmedCid)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!ClassId.isValidClassId(trimmedCid)) {
+            throw new ParseException(ClassId.MESSAGE_CONSTRAINTS);
         }
         return new ClassId(trimmedCid);
     }
@@ -83,8 +83,8 @@ public class ParserUtil {
     public static Grade parseGrade(String grade) throws ParseException {
         requireNonNull(grade);
         String trimmedGrade = grade.trim();
-        if (!Name.isValidName(trimmedGrade)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!Grade.isValidGrade(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
         return new Grade(trimmedGrade);
     }

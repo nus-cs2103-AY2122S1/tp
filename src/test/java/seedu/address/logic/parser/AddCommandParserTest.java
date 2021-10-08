@@ -28,6 +28,7 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
+    //TODO
     @Test
     public void parse_allFieldsPresent_success() {
         System.out.println(NAME_DESC_BOB);
@@ -42,6 +43,7 @@ public class AddCommandParserTest {
                 + GRADE_DESC_BOB , new AddCommand(expectedPerson));
     }
 
+    //TODO
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags

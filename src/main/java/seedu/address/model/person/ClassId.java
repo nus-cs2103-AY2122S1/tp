@@ -34,7 +34,7 @@ public class ClassId {
      * Returns true if a given string is a valid grade.
      */
     public static boolean isValidClassId(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && test.contains("B");
     }
 
 
