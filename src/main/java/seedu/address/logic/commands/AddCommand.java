@@ -44,7 +44,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "neighbour";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Note: at least one contact field must be present. \n"
             + "Example: " + COMMAND_EXAMPLE;
