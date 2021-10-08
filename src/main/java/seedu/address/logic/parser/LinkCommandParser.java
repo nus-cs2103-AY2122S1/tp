@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME_AND_USERNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Arrays;
@@ -25,10 +25,9 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GAME_AND_USERNAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_GAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GAME_AND_USERNAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_GAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 
@@ -45,7 +44,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         }
 
         HashMap<String, String> games = ParserUtil.parseGamesAndUsernames(
-                argMultimap.getAllValues(PREFIX_GAME_AND_USERNAME));
+                argMultimap.getAllValues(PREFIX_GAME));
 
         return new LinkCommand(friendId, games);
     }
