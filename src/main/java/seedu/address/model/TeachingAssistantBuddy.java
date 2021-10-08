@@ -14,9 +14,8 @@ import seedu.address.model.task.UniqueTaskList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class Module implements ReadOnlyModule {
-    private static final String MODULE_NAME = "CS2103";
-    private final String name;
+public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
+
     private final UniqueStudentList students;
     private final UniqueTaskList tasks;
 
@@ -32,14 +31,16 @@ public class Module implements ReadOnlyModule {
         tasks = new UniqueTaskList();
     }
 
-    public Module() {
-        this.name = MODULE_NAME;
-    }
+    public TeachingAssistantBuddy() {}
 
     /**
+<<<<<<< HEAD:src/main/java/seedu/address/model/Module.java
      * Creates a Module using the Persons in the {@code toBeCopied}
+=======
+     * Creates an TeachingAssistantBuddy using the Persons in the {@code toBeCopied}
+>>>>>>> feecc5ad964f8cf2e7a3b881a6daf5647d2619d4:src/main/java/seedu/address/model/TeachingAssistantBuddy.java
      */
-    public Module(ReadOnlyModule toBeCopied) {
+    public TeachingAssistantBuddy(ReadOnlyTeachingAssistantBuddy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -54,11 +55,8 @@ public class Module implements ReadOnlyModule {
         this.students.setStudents(students);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     /**
+<<<<<<< HEAD:src/main/java/seedu/address/model/Module.java
      * Replaces the contents of the task list with {@code tasks}.
      * {@code persons} must not contain duplicate tasks.
      */
@@ -68,8 +66,11 @@ public class Module implements ReadOnlyModule {
 
     /**
      * Resets the existing data of this {@code Module} with {@code newData}.
+=======
+     * Resets the existing data of this {@code TeachingAssistantBuddy} with {@code newData}.
+>>>>>>> feecc5ad964f8cf2e7a3b881a6daf5647d2619d4:src/main/java/seedu/address/model/TeachingAssistantBuddy.java
      */
-    public void resetData(ReadOnlyModule newData) {
+    public void resetData(ReadOnlyTeachingAssistantBuddy newData) {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
         setTasks(newData.getTaskList());
@@ -124,6 +125,7 @@ public class Module implements ReadOnlyModule {
     }
 
     /**
+<<<<<<< HEAD:src/main/java/seedu/address/model/Module.java
      * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the address book.
      * The task identity of {@code editedTask} must not be the same
@@ -136,6 +138,9 @@ public class Module implements ReadOnlyModule {
 
     /**
      * Removes {@code key} from this {@code Module}.
+=======
+     * Removes {@code key} from this {@code TeachingAssistantBuddy}.
+>>>>>>> feecc5ad964f8cf2e7a3b881a6daf5647d2619d4:src/main/java/seedu/address/model/TeachingAssistantBuddy.java
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
@@ -170,9 +175,8 @@ public class Module implements ReadOnlyModule {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Module // instanceof handles nulls
-                && students.equals(((Module) other).students)
-                && tasks.equals(((Module) other).tasks));
+                || (other instanceof TeachingAssistantBuddy // instanceof handles nulls
+                && students.equals(((TeachingAssistantBuddy) other).students));
     }
 
     @Override

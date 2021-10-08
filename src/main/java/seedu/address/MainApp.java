@@ -17,16 +17,16 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.Module;
-import seedu.address.model.ReadOnlyModule;
+import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonTeachingAssistantBuddyStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TeachingAssistantBuddyStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing Module ]===========================");
+        logger.info("=============================[ Initializing TeachingAssistantBuddy ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,8 +56,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        TeachingAssistantBuddyStorage TeachingAssistantBuddyStorage =
+                new JsonTeachingAssistantBuddyStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(TeachingAssistantBuddyStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,20 +75,22 @@ public class MainApp extends Application {
      * or an empty module will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyModule> moduleOptional;
-        ReadOnlyModule initialData;
+        Optional<ReadOnlyTeachingAssistantBuddy> tabOptional;
+        ReadOnlyTeachingAssistantBuddy initialData;
         try {
-            moduleOptional = storage.readAddressBook();
-            if (!moduleOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample Module");
+            tabOptional = storage.readTeachingAssistantBuddy();
+            if (!tabOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TeachingAssistantBuddy");
             }
-            initialData = moduleOptional.orElseGet(SampleDataUtil::getSampleModule);
+            initialData = tabOptional.orElseGet(SampleDataUtil::getSampleModule);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty Module");
-            initialData = new Module();
+            logger.warning(
+                    "Data file not in the correct format. Will be starting with an empty TeachingAssistantBuddy");
+            initialData = new TeachingAssistantBuddy();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Module");
-            initialData = new Module();
+            logger.warning(
+                    "Problem while reading from the file. Will be starting with an empty TeachingAssistantBuddy");
+            initialData = new TeachingAssistantBuddy();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -151,7 +154,8 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty Module");
+            logger.warning(
+                    "Problem while reading from the file. Will be starting with an empty TeachingAssistantBuddy");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,7 +171,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting Module " + MainApp.VERSION);
+        logger.info("Starting TeachingAssistantBuddy " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

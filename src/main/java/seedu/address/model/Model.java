@@ -47,10 +47,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setModule(ReadOnlyModule addressBook);
+    void setBuddy(ReadOnlyTeachingAssistantBuddy addressBook);
 
-    /** Returns the Module */
-    ReadOnlyModule getModule();
+    /** Returns the TeachingAssistantBuddy */
+    ReadOnlyTeachingAssistantBuddy getBuddy();
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.

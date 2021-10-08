@@ -19,26 +19,26 @@ import seedu.address.model.student.Student;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final Module module;
+    private final TeachingAssistantBuddy teachingAssistantBuddy;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
 
     /**
-     * Initializes a ModelManager with the given module and userPrefs.
+     * Initializes a ModelManager with the given teachingAssistantBuddy and userPrefs.
      */
-    public ModelManager(ReadOnlyModule module, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTeachingAssistantBuddy tab, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(module, userPrefs);
+        requireAllNonNull(tab, userPrefs);
 
-        logger.fine("Initializing with address book: " + module + " and user prefs " + userPrefs);
-        //The string name is hardcoded for now. Ability to change module name will come later
-        this.module = new Module(module);
+        logger.fine("Initializing with address book: " + tab + " and user prefs " + userPrefs);
+        //The string name is hardcoded for now. Ability to change teachingAssistantBuddy name will come later
+        this.teachingAssistantBuddy = new TeachingAssistantBuddy(tab);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.module.getStudentList());
+        filteredStudents = new FilteredList<>(this.teachingAssistantBuddy.getStudentList());
     }
 
     public ModelManager() {
-        this(new Module(), new UserPrefs());
+        this(new TeachingAssistantBuddy(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -76,42 +76,42 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== Module ================================================================================
+    //=========== TeachingAssistantBuddy ==================================================================
 
     @Override
-    public void setModule(ReadOnlyModule module) {
-        this.module.resetData(module);
+    public void setBuddy(ReadOnlyTeachingAssistantBuddy module) {
+        this.teachingAssistantBuddy.resetData(module);
     }
 
     @Override
-    public ReadOnlyModule getModule() {
-        return module;
+    public ReadOnlyTeachingAssistantBuddy getBuddy() {
+        return teachingAssistantBuddy;
     }
 
     /**
      * @param student
-     * @return true if current module has specified student
+     * @return true if current teachingAssistantBuddy has specified student
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return module.hasStudent(student);
+        return teachingAssistantBuddy.hasStudent(student);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        module.removeStudent(target);
+        teachingAssistantBuddy.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
-        module.addStudent(student);
+        teachingAssistantBuddy.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-        module.setStudent(target, editedStudent);
+        teachingAssistantBuddy.setStudent(target, editedStudent);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -145,7 +145,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return module.equals(other.module)
+        return teachingAssistantBuddy.equals(other.teachingAssistantBuddy)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents);
     }
