@@ -3,14 +3,19 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -114,6 +119,17 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public ObservableList<Tag> asUnmodifiableTagList() {
+        List<Tag> tagList = internalList.stream()
+                .flatMap(person -> person.getTags().stream())
+                .sorted(Comparator.comparing(tag -> tag.tagName)) // TODO: increment num duplicated tags
+                .distinct()
+                .collect(Collectors.toList());
+        ObservableList<Tag> tagObservableList = FXCollections.observableArrayList();
+        tagObservableList.setAll(tagList);
+        return tagObservableList;
     }
 
     @Override

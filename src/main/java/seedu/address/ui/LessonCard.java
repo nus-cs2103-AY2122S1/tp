@@ -15,7 +15,7 @@ public class LessonCard extends UiPart<Region> {
 
     public final Lesson lesson;
 
-    @javafx.fxml.FXML
+    @FXML
     private HBox cardPane;
     @FXML
     private Label lessonId;

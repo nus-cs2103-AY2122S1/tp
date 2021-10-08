@@ -162,6 +162,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays tag list instead of the default person list.
+     */
+    @FXML
+    public void handleShowTagList() {
+        // TODO
+        personListPanelPlaceholder.getChildren().add(new TagListPanel(logic.getFilteredTagList()).getRoot());
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -195,6 +204,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowTagList()) {
+                handleShowTagList();
             }
 
             if (commandResult.isExit()) {

@@ -13,6 +13,7 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    private int numDuplicates = 0;
 
     /**
      * Constructs a {@code Tag}.
@@ -30,6 +31,14 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public void incrementNumDuplicates() {
+        numDuplicates++;
+    }
+
+    public int getNumSameTag() {
+        return numDuplicates + 1;
     }
 
     @Override

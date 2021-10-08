@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -111,6 +112,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the tag list.
+     *
+     * @return An unmodifiable view of the tag list.
+     */
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return persons.asUnmodifiableTagList();
     }
 
     @Override
