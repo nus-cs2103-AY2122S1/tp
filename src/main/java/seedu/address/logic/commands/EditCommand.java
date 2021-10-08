@@ -39,6 +39,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Edit Student";
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
@@ -91,7 +93,7 @@ public class EditCommand extends Command {
      * @return Description of what the command does.
      */
     public String getAction() {
-        return "Edit Student";
+        return COMMAND_ACTION;
     }
 
     /**
@@ -100,16 +102,7 @@ public class EditCommand extends Command {
      * @return The format of the valid command.
      */
     public String getFormat() {
-        return COMMAND_WORD + " INDEX (must be a positive integer) "
-                + "[" + PREFIX_NAME + "NAME] "
-                + "[" + PREFIX_PHONE + "PHONE] "
-                + "[" + PREFIX_EMAIL + "EMAIL] "
-                + "[" + PREFIX_PARENT_PHONE + "PHONE] "
-                + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
-                + "[" + PREFIX_ADDRESS + "ADDRESS] "
-                + "[" + PREFIX_FEE + "FEE] "
-                + "[" + PREFIX_REMARK + "REMARK] "
-                + "[" + PREFIX_TAG + "TAG]...";
+        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
     }
 
     /**
@@ -118,9 +111,7 @@ public class EditCommand extends Command {
      * @return Example usage of the command.
      */
     public String getExample() {
-        return COMMAND_WORD + " 1 "
-                + PREFIX_PHONE + "91234567 "
-                + PREFIX_EMAIL + "johndoe@example.com";
+        return COMMAND_EXAMPLE;
     }
 
     @Override

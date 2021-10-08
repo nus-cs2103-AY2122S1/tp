@@ -12,6 +12,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Find Student";
+
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "KEYWORD [MORE_KEYWORDS]...";
@@ -38,7 +40,7 @@ public class FindCommand extends Command {
      * @return Description of what the command does.
      */
     public String getAction() {
-        return "Find Student";
+        return COMMAND_ACTION;
     }
 
     /**
@@ -47,7 +49,7 @@ public class FindCommand extends Command {
      * @return The format of the valid command.
      */
     public String getFormat() {
-        return COMMAND_WORD + " KEYWORD [MORE_KEYWORDS]...";
+        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
     }
 
     /**
@@ -56,7 +58,7 @@ public class FindCommand extends Command {
      * @return Example usage of the command.
      */
     public String getExample() {
-        return COMMAND_WORD + " alice bob charlie";
+        return COMMAND_EXAMPLE;
     }
 
     @Override

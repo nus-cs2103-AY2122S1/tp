@@ -10,6 +10,8 @@ import seedu.address.model.Model;
  */
 public class ClearCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Clear All Data";
+
     public static final String COMMAND_WORD = "clear";
 
     public static final String USER_TIP = "You may clear all the data with: " + COMMAND_WORD;
@@ -22,7 +24,7 @@ public class ClearCommand extends Command {
      * @return Description of what the command does.
      */
     public String getAction() {
-        return "Clear All Data";
+        return COMMAND_ACTION;
     }
 
     /**

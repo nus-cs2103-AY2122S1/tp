@@ -15,6 +15,8 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Delete Student";
+
     public static final String COMMAND_WORD = "delete";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer)";
@@ -47,7 +49,7 @@ public class DeleteCommand extends Command {
      * @return Description of what the command does.
      */
     public String getAction() {
-        return "Delete Student";
+        return COMMAND_ACTION;
     }
 
     /**
@@ -56,7 +58,7 @@ public class DeleteCommand extends Command {
      * @return The format of the valid command.
      */
     public String getFormat() {
-        return COMMAND_WORD + " INDEX (must be a positive integer)";
+        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
     }
 
     /**
@@ -65,7 +67,7 @@ public class DeleteCommand extends Command {
      * @return Example usage of the command.
      */
     public String getExample() {
-        return COMMAND_WORD + " 1";
+        return COMMAND_EXAMPLE;
     }
 
     @Override

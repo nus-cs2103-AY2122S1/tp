@@ -7,6 +7,8 @@ import seedu.address.model.Model;
  */
 public class ExitCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Exit Program";
+
     public static final String COMMAND_WORD = "exit";
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
@@ -17,7 +19,7 @@ public class ExitCommand extends Command {
      * @return Description of what the command does.
      */
     public String getAction() {
-        return "Exit Program";
+        return COMMAND_ACTION;
     }
 
     /**
