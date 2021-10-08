@@ -95,4 +95,6 @@ public interface Model {
 
     /** Returns an unmodifiable view of the display task list. */
     ObservableList<Task> getDisplayTaskList();
+
+    void updateSortedPersonList(boolean isReverseOrder);
 }

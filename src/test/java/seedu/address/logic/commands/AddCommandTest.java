@@ -165,6 +165,10 @@ public class AddCommandTest {
         public ObservableList<Task> getDisplayTaskList() {
             throw new AssertionError("This method should not be called");
         }
+
+        public void updateSortedPersonList(boolean isReverseOrder) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
