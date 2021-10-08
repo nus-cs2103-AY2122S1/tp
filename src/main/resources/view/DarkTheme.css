@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: derive(#121212, 20%);
+    background-color: #121212; /* Used in the default.html file */
 }
 
 .label {
@@ -26,7 +26,7 @@
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Open Sans Semibold";
+    -fx-font-family: "Lato";
 }
 
 .tab-pane {
@@ -39,10 +39,11 @@
     -fx-max-height: 0;
 }
 
+/* Not used: no table
 .table-view {
-    -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
-    -fx-background-color: #1d1d1d;
+    -fx-base: #121212;
+    -fx-control-inner-background: #121212;
+    -fx-background-color: #121212;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -76,79 +77,91 @@
     -fx-background-color: -fx-focus-color;
 }
 
+*/
+
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#121212, 20%);
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#121212, 20%);
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#121212, 20%);
 }
 
+/* PersonListPanel consists of all the cells */
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: white;
+    -fx-border-insets: 3;
+    -fx-background-insets: 3;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #334E68;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #243B53;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #627D98;
 }
 
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-border-width: 0;
 }
 
+/* font colour of cells */
 .list-cell .label {
     -fx-text-fill: white;
 }
 
+/* name */
 .cell_big_label {
-    -fx-font-family: "Open Sans Semibold";
+    -fx-font-family: "Lato";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
+/* module, tags, email, remarks... */
 .cell_small_label {
-    -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
+    -fx-font-family: "Lato";
+    -fx-font-size: 14px;
     -fx-text-fill: #010504;
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: derive(#121212, 20%);
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: derive(#121212, 20%);
+     -fx-border-color: derive(#121212, 10%);
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#121212, 30%);
 }
 
+/* result-display text label */
 .result-display {
-    -fx-background-color: transparent;
-    -fx-font-family: "Open Sans Light";
+    -fx-background-color: #383838;
+    -fx-font-family: "Lato";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
@@ -157,16 +170,17 @@
     -fx-text-fill: black !important;
 }
 
+/* status bar at the bottom */
 .status-bar .label {
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Lato";
     -fx-text-fill: white;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#121212, 30%);
+    -fx-border-color: derive(#121212, 25%);
     -fx-border-width: 1px;
 }
 
@@ -175,30 +189,31 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#121212, 30%);
+    -fx-border-color: derive(#121212, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#121212, 30%);
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #3B3B3B;
 }
 
 .context-menu .label {
     -fx-text-fill: white;
 }
 
+/* Menu bar at the top: File/Help */
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#121212, 20%);
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Lato";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -211,14 +226,16 @@
  * Metro style Push Button
  * Author: Pedro Duque Vieira
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
+ * not used: no button
+
+
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Open Sans Regular";
+    -fx-background-color: #121212;
+    -fx-font-family: "Lato";
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
@@ -230,7 +247,7 @@
 
 .button:pressed, .button:default:hover:pressed {
   -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+  -fx-text-fill: #121212;
 }
 
 .button:focused {
@@ -243,7 +260,7 @@
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #121212;
     -fx-text-fill: white;
 }
 
@@ -256,12 +273,15 @@
     -fx-background-color: derive(-fx-focus-color, 30%);
 }
 
+*/
+
+/* Not used: no DialogPane
 .dialog-pane {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #121212;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #121212;
 }
 
 .dialog-pane > *.label.content {
@@ -271,7 +291,7 @@
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: derive(#1d1d1d, 25%);
+    -fx-background-color: derive(#121212, 25%);
 }
 
 .dialog-pane:header *.header-panel *.label {
@@ -280,13 +300,15 @@
     -fx-fill: white;
     -fx-text-fill: white;
 }
+*/
 
+/* scroll bar */
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#121212, 20%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#121212, 50%);
     -fx-background-insets: 3;
 }
 
@@ -317,13 +339,16 @@
     -fx-text-fill: #F70D1A;
 }
 
+/* user input text field */
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: #334E68 transparent #334E68;
+    -fx-background-radius: 12;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-radius: 12;
+    -fx-border-color: #ffffff;
     -fx-border-insets: 0;
     -fx-border-width: 1;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Lato";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
 }
@@ -332,36 +357,52 @@
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
+/* result display */
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
 
+/* spacing between tags */
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
+/* tag labels */
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-color: white;
     -fx-font-size: 11;
 }
 
+/* spacing between module code labels */
 #moduleCodes {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
+/* module labels */
 #moduleCodes .label {
     -fx-text-fill: purple;
     -fx-background-color: #ffffff;
     -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
+    -fx-border-radius: 5;
     -fx-border-color: purple;
-    -fx-background-radius: 2;
+    -fx-background-radius: 5;
     -fx-font-size: 11;
+}
+
+#contactHeader, #favourites {
+    -fx-padding: 5 5 5 5;
+    -fx-text-fill: white;
+    -fx-background-color: #424242;
+    -fx-border-radius: 5;
+    -fx-border-color: white;
+    -fx-background-radius: 5;
+    -fx-font-size: 15;
 }
