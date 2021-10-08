@@ -3,7 +3,7 @@ layout: page
 title: About Us
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg). This project team was formed for the module CS2103T in AY21/22 Sem 1.
 
 
 
