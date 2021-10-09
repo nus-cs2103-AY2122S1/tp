@@ -18,7 +18,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
