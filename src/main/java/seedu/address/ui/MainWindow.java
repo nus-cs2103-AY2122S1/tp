@@ -30,8 +30,11 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
+    private boolean isListingPersons = true;
+
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -115,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -126,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        Toggle toggle = new Toggle();
+        Toggle toggle = new Toggle(this::toggleToListPersons, this::toggleToListTasks);
         togglePlaceholder.getChildren().add(toggle.getRoot());
     }
 
@@ -174,6 +177,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public TaskListPanel getTaskListPanel() {
+        return taskListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -199,5 +206,32 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * List persons in list panel, if not already done so.
+     */
+    private void toggleToListPersons() {
+        if (!isListingPersons) {
+            listPanelPlaceholder.getChildren().clear();
+            assert personListPanel != null : "personListPanel should have been created when filling inner parts";
+            listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            isListingPersons = true;
+        }
+    }
+
+    /**
+     * List tasks in list panel, if not already done so.
+     */
+    private void toggleToListTasks() {
+        if (!isListingPersons) {
+            return;
+        }
+        if (taskListPanel == null) {
+            taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        }
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        isListingPersons = false;
     }
 }

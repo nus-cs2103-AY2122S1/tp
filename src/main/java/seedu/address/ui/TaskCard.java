@@ -20,6 +20,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label label;
     @FXML
+    private Label date;
+    @FXML
     private CheckBox isDone;
 
     /**
@@ -30,6 +32,7 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         label.setText(task.getLabel().toString());
+        date.setText(task.getDate().parsedDate);
         isDone.setSelected(task.getIsDone());
     }
 
