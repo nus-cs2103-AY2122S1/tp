@@ -129,6 +129,9 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedYear)) {
             throw new ParseException(AcademicYear.MESSAGE_CONSTRAINTS);
         }
+        if (!AcademicYear.isValidAcademicYear(Integer.parseInt(trimmedYear))) {
+            throw new ParseException(AcademicYear.MESSAGE_CONSTRAINTS);
+        }
         return new AcademicYear(Integer.parseInt(trimmedYear));
     }
 
@@ -140,6 +143,9 @@ public class ParserUtil {
     public static Semester parseSemester(String semester) throws ParseException {
         String trimmedSemester = semester.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedSemester)) {
+            throw new ParseException(Semester.MESSAGE_CONSTRAINTS);
+        }
+        if (!Semester.isValidSemester(Integer.parseInt(trimmedSemester))) {
             throw new ParseException(Semester.MESSAGE_CONSTRAINTS);
         }
         return new Semester(Integer.parseInt(trimmedSemester));
