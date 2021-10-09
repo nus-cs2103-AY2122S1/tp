@@ -15,6 +15,11 @@ public class Role {
 
     public final String value;
 
+    /**
+     * Constructs a {@code Role}.
+     *
+     * @param role A valid role.
+     */
     public Role(String role) {
         requireNonNull(role);
         checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
@@ -34,7 +39,8 @@ public class Role {
         return value;
     }
 
-     public boolean equals(Object other) {
+    @Override
+    public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Role // instanceof handles nulls
                 && value.equals(((Role) other).value)); // state check

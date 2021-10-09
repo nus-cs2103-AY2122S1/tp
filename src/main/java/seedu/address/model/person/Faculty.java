@@ -17,6 +17,11 @@ public class Faculty {
 
     public final String value;
 
+    /**
+     * Constructs a {@code Faculty}.
+     *
+     * @param faculty A valid faculty.
+     */
     public Faculty(String faculty) {
         requireNonNull(faculty);
         checkArgument(isValidFaculty(faculty), MESSAGE_CONSTRAINTS);
@@ -39,6 +44,7 @@ public class Faculty {
         return value;
     }
 
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Faculty // instanceof handles nulls
