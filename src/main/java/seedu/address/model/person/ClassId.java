@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ClassId {
     public static final String MESSAGE_CONSTRAINTS =
-            "Class ID should only contain 3 alphanumeric characters, and it should not be blank";
+            "Class ID should only contain 3 alphanumeric characters that begins with B followed by class number "
+                    + "(eg. B01 or B11), and it should not be blank";
 
     /*
      * A class ID must start with an alphabet followed by two numbers.
@@ -32,8 +33,8 @@ public class ClassId {
     /**
      * Returns true if a given string is a valid grade.
      */
-    public static boolean isValidClassId(String test) {
-        return test.matches(VALIDATION_REGEX) && test.contains("B");
+    public static boolean isValidClassId(String classId) {
+        return classId.matches(VALIDATION_REGEX) && classId.startsWith("B") && classId.length() == 3;
     }
 
 
