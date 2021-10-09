@@ -1,4 +1,4 @@
-package seedu.address.storage; //TODO finish test cases
+package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
