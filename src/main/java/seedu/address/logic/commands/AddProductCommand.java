@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_PRICE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,10 +17,12 @@ public class AddProductCommand extends Command {
             COMMAND_WORD + ": Adds a product to the address book. "
                     + "Parameters: "
                     + "NAME "
-                    + PREFIX_UNIT_PRICE + "UNIT_PRICE \n"
+                    + PREFIX_UNIT_PRICE + "UNIT_PRICE "
+                    + "[" + PREFIX_QUANTITY + "] QUANTITY \n"
                     + "Example: " + COMMAND_WORD + " "
                     + "pen "
-                    + PREFIX_UNIT_PRICE + "20";
+                    + PREFIX_UNIT_PRICE + "20"
+                    + PREFIX_QUANTITY + "150";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in Sellah";

@@ -10,6 +10,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_UNIT_PRICE = new Prefix("-$ ");
     public static final Prefix PREFIX_EMAIL = new Prefix("-e ");
     public static final Prefix PREFIX_ADDRESS = new Prefix("-a ");
+    public static final Prefix PREFIX_QUANTITY = new Prefix("-q ");
 
     // todo remove later
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
