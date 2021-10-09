@@ -11,6 +11,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_INDEX = new Prefix("i/");
 
     /*Edit lookup prefix definitions*/
     public static final Prefix EDIT_PREFIX_INDEX = new Prefix("-i");
