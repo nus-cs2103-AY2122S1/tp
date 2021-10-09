@@ -38,7 +38,7 @@
                 </MenuBar>
                 <HBox fx:id="windowHbox" prefHeight="513.0" prefWidth="954.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                     <children>
-                          <StackPane fx:id="resultDisplayPlaceholder" minHeight="100" prefHeight="423.0" prefWidth="257.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                          <StackPane fx:id="resultDisplayPlaceholder" alignment="TOP_LEFT" minHeight="100" prefHeight="423.0" prefWidth="257.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                               <padding>
                                   <Insets bottom="5" left="10" right="10" top="5" />
                               </padding>
