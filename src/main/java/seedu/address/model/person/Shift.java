@@ -97,15 +97,14 @@ public class Shift {
     public static boolean isValidShift(String test) {
         boolean resultBoolean = false;
         if (test.equals("")) {
-            return true;
-        } else {
-            String[] stringSplit = test.split("-");
-            if (2 == stringSplit.length || stringSplit.length == 3) {
-                String dayString = stringSplit[0];
-                String slotString = stringSplit[1];
-                resultBoolean = isValidDayOfWeek(dayString);
-                resultBoolean &= Slot.isValidSlot(slotString);
-            }
+            return false;
+        }
+        String[] stringSplit = test.split("-");
+        if (2 == stringSplit.length || stringSplit.length == 3) {
+            String dayString = stringSplit[0];
+            String slotString = stringSplit[1];
+            resultBoolean = isValidDayOfWeek(dayString);
+            resultBoolean &= Slot.isValidSlot(slotString);
         }
         return resultBoolean;
     }

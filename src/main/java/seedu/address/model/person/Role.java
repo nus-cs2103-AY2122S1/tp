@@ -42,7 +42,7 @@ public enum Role {
                 resultRole = r;
             }
         }
-        if (Objects.isNull(resultRole)) {
+        if (resultRole == null) {
             throw new IllegalArgumentException("String provided does not match any roles.");
         } else {
             return resultRole;

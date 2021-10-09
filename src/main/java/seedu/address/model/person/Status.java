@@ -43,7 +43,7 @@ public enum Status {
                 resultStatus = r;
             }
         }
-        if (Objects.isNull(resultStatus)) {
+        if (resultStatus == null) {
             throw new IllegalArgumentException("String provided does not match any statuses.");
         } else {
             return resultStatus;
