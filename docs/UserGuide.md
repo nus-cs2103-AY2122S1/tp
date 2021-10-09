@@ -23,10 +23,10 @@ tasks done faster than traditional GUI apps.
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`add teachingAssistantBuddy CS2103`** and pressing Enter will add the teachingAssistantBuddy CS2103 to TAB.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`add module CS2103`** and pressing Enter will add the module CS2103 to TAB.<br>
    Some example commands you can try:
 
-   * **`teachingAssistantBuddy add CS2103`** : Adds the teachingAssistantBuddy CS2103 to TAB
+   * **`module add CS2103`** : Adds the module CS2103 to TAB
 
    * **`student add A0123456A, John Doe, @johndoe, john.doe@u.nus.edu`** : Adds student John Doe to TAB
 
@@ -41,10 +41,10 @@ tasks done faster than traditional GUI apps.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `<angle brackets>` are the parameters to be supplied by the user.<br>
-  e.g. in `teachingAssistantBuddy add <teachingAssistantBuddy name>`, `<teachingAssistantBuddy name>` is a parameter which can be used as `add teachingAssistantBuddy CS2103`.
+  e.g. in `module add <module name>`, `<module name>` is a parameter which can be used as `add module CS2103`.
 
 * Parameters must be in the specified order.<br>
-  e.g. if the command specifies `teachingAssistantBuddy add <teachingAssistantBuddy name>, <task name>`, `teachingAssistantBuddy add <task name>, <teachingAssistantBuddy name>` will not work
+  e.g. if the command specifies `module add <module name>, <task name>`, `module add <task name>, <module name>` will not work
 
 * Commas are used to separate parameters supplied by the user.
 
@@ -55,64 +55,64 @@ tasks done faster than traditional GUI apps.
 
 ### Module add task: `add task`
 
-Create a new task for a specific teachingAssistantBuddy
+Create a new task for a specific module
 
-Format: `teachingAssistantBuddy add <teachingAssistantBuddy name>, <task name>`
-
-Examples:
-* `teachingAssistantBuddy add CS2103, assignment1`: Adds the task assignment1 to teachingAssistantBuddy CS2103
-* `teachingAssistantBuddy add CS2100, lab1`: Adds the task lab1 to teachingAssistantBuddy CS2100
-
-### Creating a new teachingAssistantBuddy: `teachingAssistantBuddy add`
-
-Adds a new teachingAssistantBuddy to TAB
-
-Format: `teachingAssistantBuddy add <teachingAssistantBuddy name>`
+Format: `module add <module name>, <task name>`
 
 Examples:
-* `teachingAssistantBuddy add CS2103`: Adds teachingAssistantBuddy CS2103 to TAB
-* `teachingAssistantBuddy add CS2100`: Adds teachingAssistantBuddy CS2100 to TAB
+* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
+* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
 
-### Creating a new task for a specific teachingAssistantBuddy: `teachingAssistantBuddy add task`
+### Creating a new module: `module add`
 
-Adds a new task to the specified teachingAssistantBuddy
+Adds a new module to TAB
 
-Format: `teachingAssistantBuddy add <teachingAssistantBuddy name>, <task name>`
-
-Examples:
-* `teachingAssistantBuddy add CS2103, assignment1`: Adds the task assignment1 to teachingAssistantBuddy CS2103
-* `teachingAssistantBuddy add CS2100, lab1`: Adds the task lab1 to teachingAssistantBuddy CS2100
-
-### Add student to a specific teachingAssistantBuddy: `teachingAssistantBuddy add student`
-
-Add a new student to the specified teachingAssistantBuddy
-Also automatically copies over the task list from the teachingAssistantBuddy to the student
-
-Format: `teachingAssistantBuddy add <teachingAssistantBuddy name>, <student name>`
+Format: `module add <module name>`
 
 Examples:
-* `teachingAssistantBuddy add CS2103, A1234567A`: Adds student with id A1234567A to teachingAssistantBuddy CS2103
-* `teachingAssistantBuddy add CS2100, A7654321A`: Adds student with id A7654321A to teachingAssistantBuddy CS2100
+* `module add CS2103`: Adds module CS2103 to TAB
+* `module add CS2100`: Adds module CS2100 to TAB
 
-### Delete student from a specific teachingAssistantBuddy: `teachingAssistantBuddy delete student`
+### Creating a new task for a specific module: `module add task`
 
-Deletes the specified student from the specified teachingAssistantBuddy
+Adds a new task to the specified module
 
-Format: `teachingAssistantBuddy delete <teachingAssistantBuddy name>, <student id>`
-
-Examples:
-* `teachingAssistantBuddy delete CS2103, A1234567A`: Removes student with id A1234567A from teachingAssistantBuddy CS2103’s list of students
-* `teachingAssistantBuddy delete CS2100, A7654321A`: Removes student with id A7654321A from teachingAssistantBuddy CS2100’s list of students
-
-### Delete teachingAssistantBuddy from TAB: `teachingAssistantBuddy delete`
-
-Deletes the specified teachingAssistantBuddy from TAB
-
-Format: `teachingAssistantBuddy delete <teachingAssistantBuddy name>`
+Format: `module add <module name>, <task name>`
 
 Examples:
-* `teachingAssistantBuddy delete CS2103`: Deletes teachingAssistantBuddy CS2103 from TAB
-* `teachingAssistantBuddy delete CS2100`: Deletes teachingAssistantBuddy CS2100 from TAB
+* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
+* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
+
+### Add student to a specific module: `module add student`
+
+Add a new student to the specified module
+Also automatically copies over the task list from the module to the student
+
+Format: `module add <module name>, <student name>`
+
+Examples:
+* `module add CS2103, A1234567A`: Adds student with id A1234567A to module CS2103
+* `module add CS2100, A7654321A`: Adds student with id A7654321A to module CS2100
+
+### Delete student from a specific module: `module delete student`
+
+Deletes the specified student from the specified module
+
+Format: `module delete <module name>, <student id>`
+
+Examples:
+* `module delete CS2103, A1234567A`: Removes student with id A1234567A from module CS2103’s list of students
+* `module delete CS2100, A7654321A`: Removes student with id A7654321A from module CS2100’s list of students
+
+### Delete module from TAB: `module delete`
+
+Deletes the specified module from TAB
+
+Format: `module delete <module name>`
+
+Examples:
+* `module delete CS2103`: Deletes module CS2103 from TAB
+* `module delete CS2100`: Deletes module CS2100 from TAB
 
 ### Create a new student: `student add`
 
@@ -135,7 +135,7 @@ Examples:
 ## FAQ
 
 **Q**: How do I assign tasks to students<br>
-**A**: Adding the student to the teachingAssistantBuddy will automatically add the tasks in the teachingAssistantBuddy to the student
+**A**: Adding the student to the module will automatically add the tasks in the module to the student
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -143,5 +143,5 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `teachingAssistantBuddy add <teachingAssistantBuddy name>` <br> e.g., `teachingAssistantBuddy add CS2103`
-**Delete** | `teachingAssistantBuddy delete <teachingAssistantBuddy name>`<br> e.g., `teachingAssistantBuddy delete CS2103`
+**Add** | `module add <module name>` <br> e.g., `module add CS2103`
+**Delete** | `module delete <module name>`<br> e.g., `module delete CS2103`
