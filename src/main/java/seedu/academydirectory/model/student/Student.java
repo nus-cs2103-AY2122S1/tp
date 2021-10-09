@@ -36,7 +36,7 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.studioRecord = new StudioRecord(10); // for now, we just assume its 10.
+        this.studioRecord = new StudioRecord(12);
         this.assessment = new Assessment();
     }
 
@@ -152,9 +152,7 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; Attendance: ")
-                .append(getAttendance());
+                .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

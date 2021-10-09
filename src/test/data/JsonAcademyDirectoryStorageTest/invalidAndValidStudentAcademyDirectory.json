@@ -4,14 +4,14 @@
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street",
-    "attendance" : [ true, true, false, false, false, false, false, false, false, true ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "address": "4th street",
-    "attendance" : [ true, true, false, false, false, false, false, false, false, true ],
-    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   } ]
 }

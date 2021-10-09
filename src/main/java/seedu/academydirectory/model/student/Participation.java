@@ -31,8 +31,8 @@ public class Participation implements Information {
         int participationResult = participationArray[index - 1] + participationAdd;
         if (participationResult < 0) {
             participationArray[index - 1] = 0;
-        } else if (participationResult > 100) { // TODO: Work out a proper max
-            participationArray[index - 1] = 100;
+        } else if (participationResult > 500) {
+            participationArray[index - 1] = 500;
         } else {
             participationArray[index - 1] += participationAdd;
         }
@@ -88,7 +88,7 @@ public class Participation implements Information {
             return false;
         } else {
             Integer testInt = Integer.parseInt(test);
-            return -100 <= testInt && testInt <= 100; // arbitrary max number first TODO: work out a proper max
+            return -500 <= testInt && testInt <= 500; // arbitrary max number first
         }
     }
 
