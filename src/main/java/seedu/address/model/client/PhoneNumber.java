@@ -33,7 +33,7 @@ public class PhoneNumber {
      *
      * @param phoneNumber Phone number to be tested.
      */
-    public boolean isValidPhoneNumber(String phoneNumber) {
+    public static boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber.matches(VALIDATION_REGEX);
     }
 
