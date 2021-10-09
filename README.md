@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2122S1-CS2103T-W11-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-W11-2/tp/actions/workflows/gradle.yml)
 
 ![Ui](docs/images/Ui.png)
 ### **Staff'd**
@@ -18,5 +18,3 @@ This is because it can be complicated and tedious for managers of such food chai
   * additionally, you can find and view the information of any staff easily by searching up their name, staff ID, or even index in the staff list generated
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-
-[![Java CI](https://github.com/AY2122S1-CS2103T-W11-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-W11-2/tp/actions/workflows/gradle.yml)
