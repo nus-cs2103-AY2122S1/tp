@@ -16,7 +16,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTaggedTypicalAddressBook;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,8 +55,8 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        Set<Tag> removedTags = descriptor.getTags().orElse(new HashSet<Tag>());
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS, removedTags);
+        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -77,8 +76,8 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        Set<Tag> removedTags = descriptor.getTags().orElse(new HashSet<Tag>());
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS, removedTags);
+        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -98,8 +97,8 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_SECOND_PERSON, descriptor);
 
-        Set<Tag> removedTags = descriptor.getTags().orElse(new HashSet<Tag>());
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS, removedTags);
+        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -119,8 +118,8 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_STUDENT, VALID_TAG_TEACHING_ASSISTANT).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_THIRD_PERSON, descriptor);
 
-        Set<Tag> removedTags = descriptor.getTags().orElse(new HashSet<Tag>());
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS, removedTags);
+        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(thirdPerson, editedPerson);
@@ -140,8 +139,8 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_HUSBAND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        Set<Tag> removedTags = descriptor.getTags().orElse(new HashSet<Tag>());
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS, removedTags);
+        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);

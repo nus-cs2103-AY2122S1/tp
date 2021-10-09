@@ -33,13 +33,13 @@ public class UntagCommand extends EditCommand {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";
 
-    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed tag from Person: %1$s";
-    public static final String MESSAGE_NOT_REMOVED = "At least tag to remove must be provided.";
+    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed tag(s) from %1$s: %2$s";
+    public static final String MESSAGE_NOT_REMOVED = "At least one tag to be removed must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_TAG_NOT_IN_PERSON = "This person does not have the following tags: %s";
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public UntagCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -64,8 +64,8 @@ public class UntagCommand extends EditCommand {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        Set<Tag> removedTags = getEditPersonDescriptor().getTags().orElse(new HashSet<Tag>());
-        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, removedTags));
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, editedPerson.getName(),
+                getRemovedTags(getEditPersonDescriptor())));
     }
 
     /**
@@ -96,6 +96,11 @@ public class UntagCommand extends EditCommand {
     public static String getNotFoundTags(Set<Tag> originalTags, Set<Tag> removedTags) {
         return removedTags.stream().map(x -> originalTags.contains(x) ? "" : x.tagName).filter(x -> x != "")
                 .collect(Collectors.joining(", "));
+    }
+
+    public static String getRemovedTags(EditPersonDescriptor editPersonDescriptor) {
+        return editPersonDescriptor.getTags().orElse(new HashSet<Tag>()).stream()
+                .map(tag -> tag.tagName).collect(Collectors.joining(", "));
     }
 
     @Override
