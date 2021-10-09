@@ -11,7 +11,7 @@ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TAG_CORE;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TITLE_CP3108A;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.tracker.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.tracker.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
@@ -85,7 +85,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Module moduleInFilteredList = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         Module editedPerson = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_CS1101S).build();
@@ -111,7 +111,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         // edit person in filtered list into a duplicate in address book
         Module moduleInList = model.getModuleTracker().getModuleList().get(INDEX_SECOND_MODULE.getZeroBased());
@@ -136,7 +136,7 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Index outOfBoundIndex = INDEX_SECOND_MODULE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getModuleTracker().getModuleList().size());
