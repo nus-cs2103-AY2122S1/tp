@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -7,14 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
-
-
-
-
-
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays the important information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -43,9 +39,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label lastMet;
     @FXML
-    private Label remark;
+    private Label currentPlan;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        remark.setText(person.getRemark().value);
+        lastMet.setText(person.getLastMet().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

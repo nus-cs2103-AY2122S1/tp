@@ -1,13 +1,14 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the address book.
@@ -19,22 +20,25 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Remark remark;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final CurrentPlan currentPlan;
+    private final LastMet lastMet;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, CurrentPlan currentPlan, LastMet lastMet,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.remark = remark;
+        this.currentPlan = currentPlan;
+        this.lastMet = lastMet;
         this.tags.addAll(tags);
     }
 
@@ -54,9 +58,14 @@ public class Person {
         return address;
     }
 
-    public Remark getRemark() {
-        return this.remark;
+    public LastMet getLastMet() {
+        return lastMet;
     }
+
+    public CurrentPlan getCurrentPlan() {
+        return currentPlan;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -74,7 +83,8 @@ public class Person {
             return true;
         }
 
-        return (otherPerson != null) && otherPerson.getName().equals(getName());
+        return otherPerson != null
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -93,30 +103,34 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+            && otherPerson.getCurrentPlan().equals(getCurrentPlan())
+            && otherPerson.getLastMet().equals(getLastMet())
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail())
+            && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, lastMet, currentPlan, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Remark: ")
-                .append(getRemark());
+            .append("; Last Met: ")
+            .append(getLastMet())
+            .append("; current plans: ")
+            .append(getCurrentPlan())
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Address: ")
+            .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
