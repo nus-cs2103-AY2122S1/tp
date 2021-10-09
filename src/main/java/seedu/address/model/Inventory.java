@@ -22,12 +22,12 @@ public class Inventory implements ReadOnlyInventory {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         items = new UniqueItemList();
     }
 
-    public Inventory() {}
+    public Inventory() {
+    }
 
     /**
      * Creates an Inventory using the Items in the {@code toBeCopied}
@@ -72,7 +72,7 @@ public class Inventory implements ReadOnlyInventory {
     public Item getItemWithName(String name) {
         requireNonNull(name);
         ObservableList<Item> ls = items.asUnmodifiableObservableList();
-        for (Item item: ls) {
+        for (Item item : ls) {
             if (item.getName().toString().equals(name)) {
                 return item;
             }
@@ -86,6 +86,59 @@ public class Inventory implements ReadOnlyInventory {
      */
     public void addItem(Item newItem) {
         items.add(newItem);
+    }
+
+    /**
+     * Adds a list of items to the inventory.
+     * If the item already exists in the inventory, increment its count.
+     */
+    public void addItems(List<Item> newItems) {
+        for (Item newItem : newItems) {
+            addItem(newItem);
+        }
+    }
+
+    /**
+     * Makes transaction of the item.
+     *
+     * @return Number of items actually consumed in the transaction.
+     */
+    private int transactItem(Item toTransact) {
+        requireNonNull(toTransact);
+
+        int transactedQuantity = 0;
+        for (Item item : items.asUnmodifiableObservableList()) {
+            if (item.equals(toTransact)) {
+                transactedQuantity = Math.min(item.getCount(), toTransact.getCount());
+                if (transactedQuantity == item.getCount()) {
+                    items.remove(item);
+                } else {
+                    items.setItem(item, item.updateCount(item.getCount() - transactedQuantity));
+                }
+            }
+        }
+
+        return transactedQuantity;
+    }
+
+    /**
+     * Updates {@code Inventory} according to {@code Order}, and save the transaction as {@code TransactionRecord}.
+     *
+     * @return A {@code Transaction} recording items transacted.
+     */
+    public TransactionRecord transactOrder(Order order) {
+        requireNonNull(order);
+
+        UniqueItemList transactedItems = new UniqueItemList();
+
+        for (Item item : order.getOrderItems()) {
+            int transactedQuantity = transactItem(item);
+            if (transactedQuantity > 0) {
+                transactedItems.add(new Item(item, transactedQuantity));
+            }
+        }
+
+        return new TransactionRecord(transactedItems);
     }
 
     /**

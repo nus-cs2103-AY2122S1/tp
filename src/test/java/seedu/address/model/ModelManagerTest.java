@@ -11,10 +11,13 @@ import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.testutil.InventoryBuilder;
 
@@ -129,4 +132,20 @@ public class ModelManagerTest {
         differentUserPrefs.setInventoryFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(inventory, differentUserPrefs)));
     }
+
+    @Test
+    public void setOrder_emptyOrder_orderIsSet() {
+        Order order = new Order();
+        modelManager.setOrder(order);
+
+        assertTrue(modelManager.hasUnclosedOrder());
+    }
+
+    @Test
+    public void addToOrder_normalItem_itemAdded() {
+        Item milk = new Item(new Name("Milk"), "AS0123", 15, new HashSet<>());
+        modelManager.addToOrder(milk);
+    }
+
+
 }
