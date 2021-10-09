@@ -22,8 +22,10 @@ public class Messages {
             + "<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`\n"
             + "**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`\n"
             + "**List** | `list`\n"
-            + "**Attendance** | `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`<br> e.g., `attendance s/1 k/Aaron a/0`\n"
-            + "**Studio Participation** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE`<br> e.g., `studiopart s/12 k/Benny a/3`\n"
+            + "**Attendance** | `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`<br> "
+            + "e.g., `attendance s/1 k/Aaron a/0`\n"
+            + "**Studio Participation** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE`<br> e.g., "
+            + "`studiopart s/12 k/Benny a/3`\n"
             + "**Grade** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE` <br> e.g., `grade n/Aaron a/RA1 g/15`\n"
             + "**Show Grades** | `showgrade a/ASSESSMENT [s/STUDIO_GROUP]` <br> e.g., `showgrade a/RA1`\n"
             + "**Help** | `help`\n";

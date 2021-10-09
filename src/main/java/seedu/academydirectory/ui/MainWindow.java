@@ -136,7 +136,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-
+    /**
+     * Open the default menu help to show command summary.
+     */
     @FXML
     public void openDefaultHelp() {
         String defaultHelp = Messages.GENERAL_HELP_MESSAGE;

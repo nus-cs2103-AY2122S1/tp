@@ -30,6 +30,10 @@ public class CommandResult {
         this.exit = exit;
     }
 
+    /**
+     * Alternative constructor of CommandResult, creating a {@code CommandResult}, this time taking
+     * another help message in.
+     */
     public CommandResult(String feedbackToUser, String helpContent, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.helpContent = helpContent;

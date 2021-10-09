@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.academydirectory.commons.core.LogsCenter;
-import seedu.academydirectory.logic.LogicManager;
 import seedu.academydirectory.logic.commands.AddCommand;
 import seedu.academydirectory.logic.commands.AttendanceCommand;
 import seedu.academydirectory.logic.commands.ClearCommand;
@@ -28,12 +27,15 @@ import seedu.academydirectory.logic.parser.exceptions.ParseException;
  */
 public class AcademyDirectoryParser {
 
-    private final Logger logger = LogsCenter.getLogger(AcademyDirectoryParser.class);
-
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    /**
+     * Used for logging input parsed.
+     */
+    private final Logger logger = LogsCenter.getLogger(AcademyDirectoryParser.class);
 
     /**
      * Parses user input into command for execution.
@@ -90,5 +92,4 @@ public class AcademyDirectoryParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

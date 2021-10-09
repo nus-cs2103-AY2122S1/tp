@@ -27,6 +27,9 @@ public class HelpCommand extends Command {
     private final String commandWord;
     private final String helpMessage;
 
+    /**
+     * Default constructor of help, resulting in a summary table on the help window.
+     */
     public HelpCommand() {
         this.commandWord = COMMAND_WORD;
         this.helpMessage = DEFAULT_MESSAGE;
