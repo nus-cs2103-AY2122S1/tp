@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.supplier.Supplier;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,15 +21,19 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_SUPPLIER = "Persons list contains duplicate supplier(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedSupplier> suppliers = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers) {
         this.persons.addAll(persons);
+        this.suppliers.addAll(suppliers);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        suppliers.addAll(source.getSupplierList().stream().map(JsonAdaptedSupplier::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +59,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+
+        for (JsonAdaptedSupplier jsonAdaptedSupplier : suppliers) {
+            Supplier supplier = jsonAdaptedSupplier.toModelType();
+            if (addressBook.hasSupplier(supplier)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_SUPPLIER);
+            }
+            addressBook.addSupplier(supplier);
         }
         return addressBook;
     }
