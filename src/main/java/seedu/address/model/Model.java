@@ -103,6 +103,11 @@ public interface Model {
     void resetFacilityList();
 
     /**
+     * Clears the contents of the member list.
+     */
+    void resetMemberList();
+
+    /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
