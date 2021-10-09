@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientCommand extends Command {
@@ -13,9 +15,11 @@ public class AddClientCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Adds a client to the address book. "
                     + "Parameters: "
-                    + "NAME \n"
+                    + "NAME "
+                    + PREFIX_PHONE_NUMBER + "PHONE_NUMBER \n"
                     + "Example: " + COMMAND_WORD + " "
-                    + "John Doe ";
+                    + "John Doe "
+                    + PREFIX_PHONE_NUMBER + "98765432";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in Sellah";
@@ -54,7 +58,8 @@ public class AddClientCommand extends Command {
      */
     private static Client createAddedClient(AddClientDescriptor addClientDescriptor) {
         Name name = addClientDescriptor.getName();
-        return new Client(name, null);
+        PhoneNumber phoneNumber = addClientDescriptor.getPhoneNumber();
+        return new Client(name, phoneNumber);
     }
 
     @Override
@@ -69,14 +74,16 @@ public class AddClientCommand extends Command {
      */
     public static class AddClientDescriptor {
         private Name name;
+        private PhoneNumber phoneNumber;
 
         /**
          * Constructor of the class `AddClientDescriptor`.
          *
          * @param name Name of the client.
          */
-        public AddClientDescriptor(Name name) {
+        public AddClientDescriptor(Name name, PhoneNumber phoneNumber) {
             this.name = name;
+            this.phoneNumber = phoneNumber;
         }
 
         /**
@@ -86,6 +93,10 @@ public class AddClientCommand extends Command {
          */
         public Name getName() {
             return name;
+        }
+
+        public PhoneNumber getPhoneNumber() {
+            return phoneNumber;
         }
     }
 }
