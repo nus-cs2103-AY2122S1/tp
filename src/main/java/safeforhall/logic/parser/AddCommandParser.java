@@ -1,18 +1,24 @@
 package safeforhall.logic.parser;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
-import safeforhall.model.tag.Tag;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -25,27 +31,25 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        // TODO: Fix
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE,
-                        CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS,
-                                        CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Room room = ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get());
+        VaccStatus vaccStatus = ParserUtil.parseVaccStatus(argMultimap.getValue(PREFIX_VACCSTATUS).get());
+        Faculty faculty = ParserUtil.parseFaculty(argMultimap.getValue(PREFIX_FACULTY).get());
 
-        // Person person = new Person(name, phone, email, address, tagList);
 
-        // TODO
-        Person person = new Person(null, null, null, null, null, null, null, null);
+        Person person = new Person(name, room, phone, email, vaccStatus, faculty, null, null);
         return new AddCommand(person);
     }
 
