@@ -2,17 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
+import static seedu.address.model.lesson.Lesson.parseStringToDayOfWeek;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.EnrollCommand;
 import seedu.address.logic.commands.UnenrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -26,6 +31,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_TIME = "Time formatting is invalid.";
+    public static final String MESSAGE_INVALID_DAY = "Day formatting is invalid.";
+    public static final String MESSAGE_INVALID_COST_NOT_NUMBER = "Cost formating is invalid, it is not a number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -143,41 +151,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String day} into {@code DayOfWeek}.
+     * Parses a {@code String time} into a {@code LocalTime}.
      */
-    public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
-        requireNonNull(day);
-        String trimmedDay = day.trim();
-        String prefix = trimmedDay.substring(0, 2);
-
-        if (prefix.equals("Mo")) {
-            return DayOfWeek.MONDAY;
-        } else if (prefix.equals("Tu")) {
-            return DayOfWeek.TUESDAY;
-        } else if (prefix.equals("We")) {
-            return DayOfWeek.WEDNESDAY;
-        } else if (prefix.equals("Th")) {
-            return DayOfWeek.THURSDAY;
-        } else if (prefix.equals("Fr")) {
-            return DayOfWeek.FRIDAY;
-        } else if (prefix.equals("Sa")) {
-            return DayOfWeek.SATURDAY;
-        } else if (prefix.equals("Su")) {
-            return DayOfWeek.SUNDAY;
-        } else {
-            throw new ParseException("Something went wrong with your DAY");
+    public static LocalTime parseLocalTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        try {
+            return LocalTime.parse(trimmedTime, TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_TIME);
         }
     }
 
     /**
-     * Parses a {@code String time} into a {@code LocalTime}.
+     * Parses a {@code String day} into {@code DayOfWeek}.
      */
-    public static LocalTime parseLocalTime(String time) {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        int hour = Integer.parseInt(trimmedTime.substring(0, 2));
-        int minute = Integer.parseInt(trimmedTime.substring(2, 4));
-        return LocalTime.of(hour, minute);
+    public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
+        requireNonNull(day);
+        String cleanedDay = StringUtil.capitalize(day.trim());
+        try {
+            return parseStringToDayOfWeek(cleanedDay);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MESSAGE_INVALID_DAY);
+        }
     }
 
     /**
@@ -193,12 +189,76 @@ public class ParserUtil {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, UnenrollCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(UnenrollCommand.MESSAGE_USAGE, pe);
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
-            lessonCode = argMultimap.getValue(PREFIX_LESSON).get();
+            lessonCode = argMultimap.getValue(PREFIX_LESSON).get().trim();
         }
         return new UnenrollCommand(index, lessonCode);
+    }
+
+    /**
+     * Parses a {@code String lesson Code} into a {@code EnrollCommand}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static EnrollCommand parseEnrollArgs(String args) throws ParseException {
+        requireNonNull(args);
+        Index index;
+        String lessonCode = null;
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(EnrollCommand.MESSAGE_USAGE, pe);
+        }
+
+        if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
+            lessonCode = argMultimap.getValue(PREFIX_LESSON).get().trim();
+        }
+        return new EnrollCommand(index, lessonCode);
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code String subject}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param args Subject
+     * @throws ParseException if the given {@code subject} is invalid
+     */
+    public static String parseSubjectArgs(String args) throws ParseException {
+        requireNonNull(args);
+        String trimmedSubject = args.trim();
+
+        if (!Lesson.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Lesson.SUBJECT_MESSAGE_CONSTRAINTS);
+        }
+
+        return trimmedSubject;
+    }
+
+    /**
+     * Parses a {@code String cost} into a {@code double cost}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cost} is invalid
+     */
+    public static double parseCostArgs(String args) throws ParseException {
+        requireNonNull(args);
+        String trimmedCost = args.trim();
+        double cost;
+
+        try {
+            cost = Double.parseDouble(args);
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_COST_NOT_NUMBER);
+        }
+
+        if (!Lesson.isValidPrice(cost)) {
+            throw new ParseException(Lesson.PRICE_MESSAGE_CONSTRAINT);
+        }
+
+        return cost;
     }
 }
