@@ -100,7 +100,7 @@ public interface Model {
     /**
      * Destroys the current order when ordering finish.
      */
-    void clearOrder();
+    void transactAndClearOrder();
 
     /** Returns an unmodifiable view of the filtered item list */
     ObservableList<Item> getFilteredItemList();

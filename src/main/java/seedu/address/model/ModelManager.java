@@ -205,7 +205,10 @@ public class ModelManager implements Model {
      * Destroys the current order when ordering finish.
      */
     @Override
-    public void clearOrder() {
+    public void transactAndClearOrder() {
+        assert hasUnclosedOrder();
+
+        inventory.transactOrder(optionalOrder.get());
         optionalOrder = Optional.empty();
     }
 }
