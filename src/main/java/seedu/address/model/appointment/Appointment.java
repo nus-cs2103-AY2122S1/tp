@@ -1,6 +1,7 @@
 package seedu.address.model.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,7 +26,10 @@ public class Appointment {
      * @param dateTimeString the string representation of the desired appointment.
      */
     public Appointment(String dateTimeString) {
-        if (dateTimeString == null || dateTimeString.equals("")) {
+        requireNonNull(dateTimeString);
+        checkArgument(isValidMeetingTime(dateTimeString), MESSAGE_CONSTRAINTS);
+
+        if (dateTimeString.equals("")) {
             this.appointmentTime = null;
         } else {
             this.appointmentTime = Appointment.parseString(dateTimeString);
@@ -37,7 +41,7 @@ public class Appointment {
         if (appointmentTime == null) {
             return "";
         }
-        return appointmentTime.toString();
+        return this.appointmentTime.format(FORMATTER);
     }
 
     @Override
@@ -54,14 +58,13 @@ public class Appointment {
      * @return true if string is parsable, empty or null.
      */
     public static boolean isValidMeetingTime(String meetingDateTime) {
-        if (meetingDateTime == null || meetingDateTime.equals("")) {
+        if (meetingDateTime.equals("")) {
             return true;
         }
         try {
             LocalDateTime.parse(meetingDateTime, FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
-            e.printStackTrace();
             return false;
         }
     }
