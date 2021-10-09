@@ -153,7 +153,6 @@ Formats:
 `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`\
 `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
 
-
 * Edits the staff of the specified `NAME`, `INDEX`, or `ID`.
 The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -175,13 +174,15 @@ Examples:
 |-t|Tag|Contacts with that tag will be edited.|
 
 
-### Locating persons by name: `find`
+### Locating staff: `find`
 
-Finds staff whose names contain any of the given keywords.
+Finds staff whose names contain any of the given keywords, or by their ID in the staff list.
 
 Format:
 
-`find KEYWORD [MORE_KEYWORDS]`
+`find -n KEYWORD [MORE_KEYWORDS]`
+`find -id ID`
+`find -i INDEX`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -189,10 +190,18 @@ Format:
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Staff matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* However, when searching by ID, the ID must be written in full and match exactly.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li` 
+* `find -n John` returns `john` and `John Doe`
+* `find -n alex david` returns `Alex Yeoh`, `David Li` 
+* `find -id [Staff ID]` returns the staff with the corresponding ID
+* `find -i 3` returns the staff at the 3rd position on the list
+
+|Tag|Name|Description|
+|---|----|-----------|
+|-n|Name|Contacts with the name will be found.|
+|-id|ID|Contact with that id will be found.|
 
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
