@@ -214,6 +214,7 @@ public class MainWindow extends UiPart<Stage> {
     private void toggleToListPersons() {
         if (!isListingPersons) {
             listPanelPlaceholder.getChildren().clear();
+            assert personListPanel != null : "personListPanel should have been created when filling inner parts";
             listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
             isListingPersons = true;
         }
