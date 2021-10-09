@@ -18,6 +18,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.position.Position;
 
+/**
+ * Parses input arguments and creates a new AddApplicantCommand object
+ */
 public class AddApplicantParser implements Parser<AddApplicantCommand> {
 
     /**
