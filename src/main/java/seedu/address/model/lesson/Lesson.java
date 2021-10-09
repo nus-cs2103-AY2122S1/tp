@@ -366,6 +366,6 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return '[' + getLessonCode() + ']';
+        return getLessonCode();
     }
 }
