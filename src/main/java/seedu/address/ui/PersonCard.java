@@ -33,11 +33,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label nusNetId;
     @FXML
-    private Label address;
+    private Label group;
     @FXML
-    private Label email;
+    private Label assessment;
     @FXML
     private FlowPane tags;
 
@@ -49,9 +49,10 @@ public class PersonCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        phone.setText("### Phone field deprecated ###");
-        address.setText("### Address field deprecated ###");
-        email.setText("### Email field deprecated ###");
+        nusNetId.setText("ID: " + student.getId().value);
+        int length = student.getGroups().toString().length();
+        group.setText("Group: " + student.getGroups().toString().substring(1, length - 1));
+        assessment.setText("Assessment: "); //TODO: add in the assessment stuff after add score is implemented
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
