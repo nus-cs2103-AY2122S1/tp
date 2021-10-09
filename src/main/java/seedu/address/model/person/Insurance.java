@@ -48,7 +48,7 @@ public class Insurance {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return type.getTypeName() + INSURANCE_SUFFIX;
     }
 }

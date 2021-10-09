@@ -218,8 +218,8 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code insurances} is null.
          */
         public Optional<Set<Insurance>> getInsurances() {
-            return (insurances != null) ?
-                    Optional.of(Collections.unmodifiableSet(insurances)) : Optional.empty();
+            return (insurances != null)
+                    ? Optional.of(Collections.unmodifiableSet(insurances)) : Optional.empty();
         }
 
         @Override

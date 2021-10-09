@@ -137,7 +137,7 @@ public class Person {
             tags.forEach(builder::append);
         }
         Set<Insurance> insurances = getInsurances();
-        if (!insurances.isEmpty()){
+        if (!insurances.isEmpty()) {
             builder.append("; Insurances: ");
             insurances.forEach(builder::append);
         }
