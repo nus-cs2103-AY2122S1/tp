@@ -32,7 +32,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/rldefa.png" width="200px">
 
-[[github](http://github.com/rldefa)] [[portfolio](team/richardli.md)]
+[[github](http://github.com/rldefa)] [[portfolio](team/rldefa.md)]
 
 * Role: Git Expert
 * Responsibilities: Integration
