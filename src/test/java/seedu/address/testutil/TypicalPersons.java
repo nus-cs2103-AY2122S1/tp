@@ -81,6 +81,10 @@ public class TypicalPersons {
         for (Student student : getTypicalPersons()) {
             ab.addStudent(student);
         }
+        List<Assessment> assessments = AssessmentBuilder.createAssessmentListFromStudents(getTypicalPersons());
+        for (Assessment assessment : assessments) {
+            ab.addAssessment(assessment);
+        }
         return ab;
     }
 

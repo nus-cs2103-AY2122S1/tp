@@ -51,8 +51,8 @@ public class PersonCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         nusNetId.setText("ID: " + student.getId().value);
         int length = student.getGroups().toString().length();
-        group.setText("Group: " + student.getGroups().toString().substring(1, length - 1));
-        assessment.setText("Assessment: "); //TODO: add in the assessment stuff after add score is implemented
+        group.setText("Groups: " + student.getGroups().toString().substring(1, length - 1));
+        assessment.setText("Assessments: "); //TODO: add in the assessment stuff after add score is implemented
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
