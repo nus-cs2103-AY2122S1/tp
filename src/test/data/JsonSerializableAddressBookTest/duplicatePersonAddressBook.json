@@ -1,14 +1,20 @@
 {
   "persons": [ {
+    "clientId": "0",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "riskAppetite": "3",
+    "disposableIncome":  "5000",
     "tagged": [ "friends" ]
   }, {
+    "clientId": "0",
     "name": "Alice Pauline",
     "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "email": "alice@example.com",
+    "address": "4th street",
+    "riskAppetite": "3",
+    "disposableIncome":  "5000"
   } ]
 }

@@ -1,13 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.*;
 
 /**
  * An UI component that displays the important information of a {@code Person}.
@@ -29,6 +30,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label clientId;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -38,6 +41,10 @@ public class PersonCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label riskAppetite;
+    @FXML
+    private Label disposableIncome;
     @FXML
     private Label lastMet;
     @FXML
@@ -52,11 +59,21 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+        clientId.setText(person.getClientId().value);
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        currentPlan.setText(person.getCurrentPlan().toString());
         lastMet.setText(person.getLastMet().toString());
+        Optional<Phone> phoneNumber = (Optional<Phone>) person.getPhone();
+        phone.setText(phoneNumber.isEmpty() ? "No phone number stored yet" : phoneNumber.get().value);
+        Optional<Address> addressString = (Optional<Address>) person.getAddress();
+        address.setText(addressString.isEmpty() ? "No address stored yet" : addressString.get().value);
+        Optional<RiskAppetite> riskAppetiteString = (Optional<RiskAppetite>) person.getRiskAppetite();
+        riskAppetite.setText(riskAppetiteString.isEmpty() ? "No risk appetite stored yet"
+            : riskAppetiteString.get().value);
+        Optional<DisposableIncome> disposableIncomeString = (Optional<DisposableIncome>) person.getDisposableIncome();
+        disposableIncome.setText(disposableIncomeString.isEmpty() ? "No disposable income stored yet" :
+                disposableIncomeString.get().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
