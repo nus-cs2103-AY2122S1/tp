@@ -198,41 +198,49 @@ Format: `list`
 
 #### Finding students by fields: `find`
 
-Finds all students whose fields match the given keywords.
+Finds all students whose fields match the given , based on the given find condition.
 
-Format: `find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …] [p/PHONE_KEYWORD …] [sch/SCHOOL_KEYWORD …] [stream/ACAD_STREAM_KEYWORD …] [lvl/ACAD_LEVEL_KEYWORD …]`
+Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORDS]…​`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the find command:**<br>
 
-* You must provide at least one field.<br>
-  e.g. entering just `find` alone is not a valid command. You need to include the fields you wish to search for.
+* The filter condition indicates that a student is only considered a match when `all`, `any` or `none`
+  of the the fields which you are searching for match their keywords.<br>
+  e.g. 
+    * `find n/John t/math cond/all` will return students with both name `John` and tag `math`.
+    * `find n/John t/math cond/any` will return students with only name `John`, or only tag `math`, or both.
+    * `find n/John t/math cond/none` will return students without both name `John` and tag `math`.
+
+* The filter condition will not accept other arguments besides `all`, `any` and `none`.<br>
+  e.g. `cond/every` will result in an error.
+  
+* The filter condition is optional and defaults to `all` if not specified.
+
+* You must provide at least one field to search.<br>
+  e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
+
+* You must provide at least one keyword to search a field.<br>
+  e.g. entering just `find n/ ` alone is not a valid command as the keyword is empty.
 
 * The search is case-insensitive.<br>
-  e.g.`hans` will match `Hans`.
-
-* The order of the keywords does not matter.<br>
-  e.g. `Clementi West` will match `West Clementi`.
-
-* The keyword does not need to match the field exactly.<br>
-  e.g. `john@gmail.com` will match `leejohn@gmail.com`.
+  e.g. keyword `hans` will match `Hans`.
 
 * A field just needs to match at least one keyword.<br>
-  e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
-
-* A student is only considered a match when all fields which you are searching for match their keywords.<br>
-  e.g. `find n/john a/Clementi`
-  * will match student named `john` with address `West Clementi Street`
-  * will not match student named `john` with address `Bedok Reservoir`
+  e.g. keywords `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
+  
+* The keyword can be a part of a word.<br>
+  e.g. keyword `math` will match `mathematics`.
 
 </div>
 
 Examples:
 * `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
-* `find a/Jurong east n/Ben e/gmail`
+* `find cond/all a/Jurong east n/Ben e/gmail`
   * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
   * will match a student named `benjamin`, with address `yishun east ave 1`, and email `benj@gmail.com`
+* `find cond/none t/paid sch/nus` will return students without the `paid` tag and whose school does not match `nus`
 
 #### Filtering students by tags: `filter`
 
