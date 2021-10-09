@@ -35,6 +35,11 @@ public class PersonCard extends UiPart<Region> {
     private Label parentName;
     @FXML
     private Label parentPhone;
+    @FXML
+    private Label progress;
+    @FXML
+    private Label paymentStatus;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,6 +52,8 @@ public class PersonCard extends UiPart<Region> {
         studentPhone.setText(person.getStudentPhone().value);
         parentName.setText(person.getParentName().fullName);
         parentPhone.setText(person.getParentPhone().value);
+        progress.setText(person.getProgress().toString());
+        paymentStatus.setText(person.getPaymentStatus().toString());
     }
 
     @Override

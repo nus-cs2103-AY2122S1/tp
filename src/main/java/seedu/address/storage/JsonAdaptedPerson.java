@@ -6,8 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ParentName;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Progress;
 import seedu.address.model.person.StudentName;
 
 /**
@@ -21,6 +23,8 @@ class JsonAdaptedPerson {
     private final String studentPhone;
     private final String parentName;
     private final String parentPhone;
+    private final String progress;
+    private final boolean hasPaid;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -28,12 +32,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(
             @JsonProperty("studentName") String studentName, @JsonProperty("studentPhone") String studentPhone,
-            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone) {
+            @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
+            @JsonProperty("progress") String progress, @JsonProperty("paymentStatus") boolean hasPaid) {
 
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
+        this.progress = progress;
+        this.hasPaid = hasPaid;
     }
 
     /**
@@ -44,6 +51,8 @@ class JsonAdaptedPerson {
         studentPhone = source.getStudentPhone().value;
         parentName = source.getParentName().fullName;
         parentPhone = source.getParentPhone().value;
+        progress = source.getProgress().progress;
+        hasPaid = source.getPaymentStatus().hasPaid;
     }
 
     /**
@@ -75,7 +84,19 @@ class JsonAdaptedPerson {
         }
         final Phone modelParentPhone = new Phone(parentPhone);
 
-        return new Person(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone);
+        if (progress == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Progress.class.getSimpleName()));
+        }
+        if (!Progress.isValidProgress(progress)) {
+            throw new IllegalValueException(Progress.MESSAGE_CONSTRAINTS);
+        }
+        final Progress modelProgress = new Progress(progress);
+
+        final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
+
+        return new Person(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
+                modelProgress, modelPaymentStatus);
     }
 
 }

@@ -35,6 +35,9 @@ public class Phone {
 
     @Override
     public String toString() {
+        if (value.equals("")) {
+            return "No number";
+        }
         return value;
     }
 

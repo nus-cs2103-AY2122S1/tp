@@ -30,7 +30,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_PARENT_PHONE + "91234567 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in TutorAid";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
 
     private final Person toAdd;
 
@@ -47,7 +47,7 @@ public class AddStudentCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.addPerson(toAdd);

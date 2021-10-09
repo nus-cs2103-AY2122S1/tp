@@ -11,8 +11,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ParentName;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Progress;
 import seedu.address.model.person.StudentName;
 
 /**
@@ -40,8 +42,10 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Phone studentPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_STUDENT_PHONE).get());
         ParentName parentName = ParserUtil.parseParentName(argMultimap.getValue(PREFIX_PARENT_NAME).get());
         Phone parentPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PARENT_PHONE).get());
+        Progress progress = new Progress("No Progress");
+        PaymentStatus paymentStatus = new PaymentStatus(false);
 
-        Person person = new Person(studentName, studentPhone, parentName, parentPhone);
+        Person person = new Person(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
 
         return new AddStudentCommand(person);
     }

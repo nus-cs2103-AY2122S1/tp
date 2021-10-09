@@ -17,8 +17,12 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.ParentName;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Progress;
+import seedu.address.model.person.StudentName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -80,15 +84,15 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
-        /*
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        */
-        return new Person(personToEdit.getStudentName(), personToEdit.getStudentPhone(),
-                personToEdit.getParentName(), personToEdit.getParentPhone());
+        StudentName updatedStudentName = personToEdit.getStudentName();
+        Phone updatedStudentPhone = personToEdit.getStudentPhone();
+        ParentName updatedParentName = personToEdit.getParentName();
+        Phone updatedParentPhone = personToEdit.getParentPhone();
+        Progress updatedProgress = personToEdit.getProgress();
+        PaymentStatus updatedPaymentStatus = personToEdit.getPaymentStatus();
+
+        return new Person(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
+                updatedProgress, updatedPaymentStatus);
     }
 
     @Override

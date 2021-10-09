@@ -47,7 +47,7 @@ public class AddCommandTest {
         AddStudentCommand addCommand = new AddStudentCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddStudentCommand.MESSAGE_DUPLICATE_STUDENT, () ->
                 addCommand.execute(modelStub));
     }
 
@@ -141,6 +141,11 @@ public class AddCommandTest {
 
         @Override
         public void viewPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void viewList() {
             throw new AssertionError("This method should not be called.");
         }
 

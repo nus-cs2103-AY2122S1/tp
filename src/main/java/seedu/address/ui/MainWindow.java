@@ -107,11 +107,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Fills up all the student's particulars of this window.
+     */
+    void fillPersonCard(boolean viewAll) {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), viewAll);
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts(boolean viewAll) {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), viewAll);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        fillPersonCard(viewAll);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

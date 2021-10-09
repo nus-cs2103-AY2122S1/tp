@@ -39,6 +39,9 @@ public class Name {
 
     @Override
     public String toString() {
+        if (fullName.equals("")) {
+            return "No number";
+        }
         return fullName;
     }
 

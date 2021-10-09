@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.ParentName;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Progress;
 import seedu.address.model.person.StudentName;
 import seedu.address.model.tag.Tag;
 
@@ -117,6 +118,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String progress} into a {@code Progress}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code progress} is invalid.
+     */
+    public static Progress parseProgress(String progress) throws ParseException {
+        requireNonNull(progress);
+        String trimmedProgress = progress.trim();
+        if (!Progress.isValidProgress(trimmedProgress)) {
+            throw new ParseException(Progress.MESSAGE_CONSTRAINTS);
+        }
+        return new Progress(trimmedProgress);
     }
 
     /**

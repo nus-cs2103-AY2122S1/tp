@@ -16,15 +16,22 @@ public class Person {
     private final ParentName parentName;
     private final Phone parentPhone;
 
+    // Data fields
+    private final Progress progress;
+    private final PaymentStatus paymentStatus;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone) {
+    public Person(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
+                  Progress progress, PaymentStatus paymentStatus) {
         requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
+        this.progress = progress;
+        this.paymentStatus = paymentStatus;
     }
 
     public StudentName getStudentName() {
@@ -41,6 +48,14 @@ public class Person {
 
     public Phone getParentPhone() {
         return parentPhone;
+    }
+
+    public Progress getProgress() {
+        return progress;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
     }
 
     /**
@@ -74,18 +89,21 @@ public class Person {
         return otherPerson.getStudentName().equals(getStudentName())
                 && otherPerson.getStudentPhone().equals(getStudentPhone())
                 && otherPerson.getParentName().equals(getParentName())
-                && otherPerson.getParentPhone().equals(getParentPhone());
+                && otherPerson.getParentPhone().equals(getParentPhone())
+                && otherPerson.getProgress().equals(getProgress())
+                && otherPerson.getPaymentStatus().equals(getPaymentStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentName, studentPhone, parentName, parentPhone);
+        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+
         builder.append(getStudentName());
 
         if (studentPhone != null) {
@@ -96,12 +114,18 @@ public class Person {
         if (parentName != null) {
             builder.append("; Parent's name: ")
                     .append(getParentName());
+
         }
 
         if (parentPhone != null) {
             builder.append("; Parent's phone: ")
                     .append(getParentPhone());
         }
+
+        builder.append("; Progress: ")
+                .append(getProgress())
+                .append("; Payment Status: ")
+                .append(getPaymentStatus());
 
         return builder.toString();
     }

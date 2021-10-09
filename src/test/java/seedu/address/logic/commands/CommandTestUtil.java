@@ -23,7 +23,6 @@ import seedu.address.model.person.Person;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
     public static final String VALID_STUDENT_NAME_AMY = "Amy Bee";
     public static final String VALID_STUDENT_NAME_BOB = "Bob Choo";
     public static final String VALID_STUDENT_PHONE_AMY = "11111111";
@@ -33,6 +32,11 @@ public class CommandTestUtil {
     public static final String VALID_PARENT_NAME_BOB = "Mrs Clara Choo";
     public static final String VALID_PARENT_PHONE_AMY = "33333333";
     public static final String VALID_PARENT_PHONE_BOB = "44444444";
+
+    public static final String VALID_PROGRESS_BOB = "No Progress";
+    public static final String VALID_PROGRESS_AMY = "No Progress";
+    public static final boolean VALID_PAYMENT_STATUS_AMY = false;
+    public static final boolean VALID_PAYMENT_STATUS_BOB = false;
 
     public static final String STUDENT_NAME_DESC_AMY = " " + PREFIX_STUDENT_NAME + VALID_STUDENT_NAME_AMY;
     public static final String STUDENT_NAME_DESC_BOB = " " + PREFIX_STUDENT_NAME + VALID_STUDENT_NAME_BOB;
@@ -51,6 +55,7 @@ public class CommandTestUtil {
             " " + PREFIX_PARENT_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PARENT_PHONE_DESC =
             " " + PREFIX_PARENT_PHONE + "911a"; // 'a' not allowed in phones
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
