@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_PRICE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.UnitPrice;
 
 public class AddProductCommand extends Command {
     public static final String COMMAND_WORD = "add -p";
@@ -13,9 +15,11 @@ public class AddProductCommand extends Command {
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Adds a product to the address book. "
                     + "Parameters: "
-                    + "NAME \n"
+                    + "NAME "
+                    + PREFIX_UNIT_PRICE + "UNIT_PRICE \n"
                     + "Example: " + COMMAND_WORD + " "
-                    + "pen ";
+                    + "pen "
+                    + PREFIX_UNIT_PRICE + "20";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
     public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in Sellah";
@@ -54,7 +58,8 @@ public class AddProductCommand extends Command {
      */
     private static Product createAddedProduct(AddProductDescriptor addProductDescriptor) {
         Name name = addProductDescriptor.getName();
-        return new Product(name, null);
+        UnitPrice unitPrice = addProductDescriptor.getUnitPrice();
+        return new Product(name, unitPrice);
     }
 
     @Override
@@ -69,14 +74,16 @@ public class AddProductCommand extends Command {
      */
     public static class AddProductDescriptor {
         private Name name;
+        private UnitPrice unitPrice;
 
         /**
          * Constructor of the class `AddProductDescriptor`.
          *
          * @param name Name of the product.
          */
-        public AddProductDescriptor(Name name) {
+        public AddProductDescriptor(Name name, UnitPrice unitPrice) {
             this.name = name;
+            this.unitPrice = unitPrice;
         }
 
         /**
@@ -86,6 +93,15 @@ public class AddProductCommand extends Command {
          */
         public Name getName() {
             return name;
+        }
+
+        /**
+         * Gets the unit price of a product.
+         *
+         * @return The unit price of a product.
+         */
+        public UnitPrice getUnitPrice() {
+            return unitPrice;
         }
     }
 }
