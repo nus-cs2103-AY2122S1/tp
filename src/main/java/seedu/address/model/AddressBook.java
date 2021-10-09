@@ -78,8 +78,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
+     * Any new groups that the student has are added into the group list.
      */
     public void addStudent(Student s) {
+        List<Group> studentGroups = s.getGroups();
+        for (Group group : studentGroups) {
+            if (!groups.contains(group)) {
+                groups.add(group);
+            }
+        }
         students.add(s);
     }
 
