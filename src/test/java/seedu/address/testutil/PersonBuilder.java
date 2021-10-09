@@ -95,6 +95,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Claim} of the {@code Person} that we are building.
+     */
     public PersonBuilder withClaim(ClaimBuilder ... claims) {
         this.claims = Arrays.stream(claims)
                 .map(claim -> claim.build())

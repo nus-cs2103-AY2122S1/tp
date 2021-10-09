@@ -1,8 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ClaimCommand;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.CLAIM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CLAIM_DESCRIPTION_DESC_AMY;
@@ -12,6 +9,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.ClaimCommand;
 
 public class ClaimCommandParserTest {
     private ClaimCommandParser parser = new ClaimCommandParser();

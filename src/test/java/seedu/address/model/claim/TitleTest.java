@@ -1,10 +1,12 @@
 package seedu.address.model.claim;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
-
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class TitleTest {
     @Test
@@ -33,15 +35,15 @@ public class TitleTest {
     @Test
     public void equals() {
         // Different titles
-        assertFalse(new Title("Title 1").equals(new Title("Title 2")));
+        assertNotEquals(new Title("Title 2"), new Title("Title 1"));
         // Same titles
-        assertTrue(new Title("Title 1").equals(new Title("Title 1")));
+        assertEquals(new Title("Title 1"), new Title("Title 1"));
     }
 
     @Test
     public void compareTo() {
         // Equal titles
-        assertTrue(new Title("a").compareTo(new Title("a")) == 0);
+        assertEquals(new Title("a").compareTo(new Title("a")), 0);
         // Less
         assertTrue(new Title("a").compareTo(new Title("b")) < 0);
         // More

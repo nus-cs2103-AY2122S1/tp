@@ -1,22 +1,26 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.ClaimCommand.MESSAGE_CLAIM_ADDED_SUCCESS;
+import static seedu.address.logic.commands.CommandTestUtil.CLAIM_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CLAIM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.ClaimCommand.MESSAGE_CLAIM_ADDED_SUCCESS;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class ClaimCommandTest {
 
@@ -49,23 +53,21 @@ public class ClaimCommandTest {
     @Test
     public void equals() {
         // same values -> return true
-        assertTrue(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY)
-                .equals(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY)));
+        assertEquals(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY), new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY));
 
         // same object -> return true
         ClaimCommand claimCommand = new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY);
-        assertTrue(claimCommand.equals(claimCommand));
+        assertEquals(claimCommand, claimCommand);
 
         // different index -> return false
-        assertFalse(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY)
-                .equals(new ClaimCommand(INDEX_SECOND_PERSON, CLAIM_AMY)));
+        assertNotEquals(new ClaimCommand(INDEX_SECOND_PERSON, CLAIM_AMY),
+                new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY));
 
         // different claim -> return false
-        assertFalse(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY)
-                .equals(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_BOB)));
+        assertNotEquals(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_BOB),
+                new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY));
 
         // different type -> return false
-        assertFalse(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY)
-                .equals(2));
+        assertNotEquals(new ClaimCommand(INDEX_FIRST_PERSON, CLAIM_AMY), 2);
     }
 }
