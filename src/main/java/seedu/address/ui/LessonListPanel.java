@@ -31,7 +31,7 @@ public class LessonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custome {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}
+     * Custom {@code ListCell} that displays the graphics of a {@code Lesson} using a {@code LessonCard}
      */
     class LessonListViewCell extends ListCell<Lesson> {
         @Override
