@@ -106,7 +106,6 @@ public interface Model {
     void setTask(Task target, Task editedTask);
 
     /** Returns and unmodifiable view of the filtered task list */
-    //added prior to the ui functionality actually being implemented.
     ObservableList<Task> getFilteredTaskList();
 
     void deleteTask(Task toDelete);
