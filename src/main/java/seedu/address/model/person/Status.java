@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Objects;
-
 /**
  * This class stands for every possible status for a staff
  */

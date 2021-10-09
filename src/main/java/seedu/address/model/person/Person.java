@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,6 +28,7 @@ public class Person {
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
     private final Schedule schedule;
+    private final Set<Field> fields = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -43,7 +45,12 @@ public class Person {
         this.status = status;
         this.tags.addAll(tags);
         this.schedule = new Schedule();
+        this.fields.addAll(tags);
+        Field.addToFieldSet(fields, name, phone, email, address, salary);
     }
+
+
+
 
     public Name getName() {
         return name;
@@ -75,6 +82,10 @@ public class Person {
 
     public Schedule getSchedule() {
         return schedule;
+    }
+
+    public boolean containsFields(List<Field> fields) {
+        return this.fields.containsAll(fields);
     }
 
     /**

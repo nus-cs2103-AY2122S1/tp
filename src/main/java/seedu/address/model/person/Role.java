@@ -1,11 +1,9 @@
 package seedu.address.model.person;
 
-import java.util.Objects;
-
 /**
  * This class stands for every possible role for a staff
  */
-public enum Role {
+public enum Role implements Field {
     //Can add more later
     KITCHEN("kitchen"), BARTENDER("bartender"), FLOOR("floor"), NO_ROLE("norole");
 

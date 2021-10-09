@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSalary(String)}
  */
-public class Salary {
+public class Salary implements Field {
 
     public static final String MESSAGE_CONSTRAINTS = "Salaries have to be an integer representing the pay in cents.";
 
