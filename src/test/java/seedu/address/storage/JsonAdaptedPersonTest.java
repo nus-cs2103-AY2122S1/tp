@@ -24,7 +24,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_TELEGRAM = "c4nnot_!!!";
+    private static final String INVALID_TELEGRAM = "c4nnot!!!";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_TELEGRAM = BENSON.getTelegram().toString();
@@ -55,6 +55,23 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_TELEGRAM, VALID_PHONE,
                 VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTelegram_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, INVALID_TELEGRAM, VALID_PHONE,
+                        VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        String expectedMessage = Telegram.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTelegram_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Telegram.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

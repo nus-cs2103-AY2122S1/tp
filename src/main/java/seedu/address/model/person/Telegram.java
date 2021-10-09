@@ -11,8 +11,8 @@ public class Telegram {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Telegram should only contain alphabets,numbers or underscore,"
-                    + " and it should be at least 5 characters long";
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+                    + " and it should be between 5 to 64 characters long ";
+    public static final String VALIDATION_REGEX = "\\w{5,64}";
     public final String value;
 
     /**
@@ -41,8 +41,8 @@ public class Telegram {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+                || (other instanceof Telegram // instanceof handles nulls
+                && value.equals(((Telegram) other).value)); // state check
     }
 
     @Override
