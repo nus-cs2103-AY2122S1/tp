@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reservation.Reservation;
 
 /**
  * Represents the command to add reservation
@@ -22,6 +24,7 @@ public class ReserveCommand extends Command {
             COMMAND_WORD,
             PREFIX_PHONE, PREFIX_TIME
     );
+    public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
 
     private Phone phone;
     private int numberOfPeople;
@@ -42,9 +45,12 @@ public class ReserveCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format("Reserve: phone=%s, numberOfPeople=%d, time=%s", phone, numberOfPeople, time)
-        );
+        requireNonNull(model);
+        // TODO: Check the time whether can add or not
+
+        Reservation reservation = new Reservation(phone, numberOfPeople, time);
+        model.addReservation(reservation);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, reservation));
     }
 
     /**

@@ -24,8 +24,6 @@ public class ReserveCommandParser implements Parser<ReserveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReserveCommand.MESSAGE_USAGE));
         }
 
-        System.out.println(argMultimap);
-        System.out.println("Preamble: " + argMultimap.getPreamble());
         int numberOfPeople = ParserUtil.parseNumberOfPeople(argMultimap.getPreamble());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         LocalDateTime time = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_TIME).get());
