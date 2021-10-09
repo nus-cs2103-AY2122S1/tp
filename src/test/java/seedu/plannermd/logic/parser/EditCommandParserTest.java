@@ -14,6 +14,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.plannermd.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.RISK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -23,6 +24,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_RISK_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
@@ -166,6 +168,12 @@ public class EditCommandParserTest {
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPatientDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        expectedCommand = new EditPatientCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // risk
+        userInput = targetIndex.getOneBased() + RISK_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withRisk(VALID_RISK_AMY).build();
         expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
