@@ -48,7 +48,8 @@ public class Appointment {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Appointment // instanceof handles nulls
-                    && appointmentTime.equals(((Appointment) other).appointmentTime)); // state check
+                    && (appointmentTime == null && ((Appointment) other).appointmentTime == null // both no apptmt
+                        || appointmentTime.equals(((Appointment) other).appointmentTime))); // state check
     }
 
     /**
