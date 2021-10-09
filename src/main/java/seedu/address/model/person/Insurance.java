@@ -25,6 +25,11 @@ public class Insurance {
         this.type = type;
     }
 
+    /**
+     * Returns an Insurance with the given name
+     * @param insuranceName The name of the Insurance to return
+     * @return The Insurance with the supplied name
+     */
     public static Insurance of(String insuranceName) {
         for (InsuranceType type : InsuranceType.values()) {
             if (type.getTypeName().equalsIgnoreCase(insuranceName)) {
@@ -34,6 +39,10 @@ public class Insurance {
         throw new IllegalArgumentException(insuranceName + INVALID_ARG_SUFFIX);
     }
 
+    /**
+     * Gets the type of this Insurance
+     * @return
+     */
     public InsuranceType getType() {
         return type;
     }
