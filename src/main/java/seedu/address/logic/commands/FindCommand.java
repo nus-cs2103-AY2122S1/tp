@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
@@ -19,20 +24,27 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String COMMAND_PARAMETERS = PREFIX_NAME + "NAME "
-        + PREFIX_ADDRESS + "ADDRESS "
+    public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_ADDRESS + "ADDRESS] "
+        + "[" + PREFIX_PHONE + "PHONE] "
+        + "[" + PREFIX_EMAIL + "EMAIL] "
+        + "[" + PREFIX_PARENT_PHONE + "PHONE] "
+        + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
+        + "[" + PREFIX_ADDRESS + "ADDRESS] "
         + "[" + PREFIX_TAG + "TAG]...";
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
+        + PREFIX_FIND_CONDITION + "any "
         + PREFIX_NAME + "John Tan "
         + PREFIX_ADDRESS + "Clementi "
         + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of the"
-        + "specified keywords (case-insensitive). You can optionally specify one of these find conditions:\n"
-        + "all -> a student must match all specified fields to be returned (default)\n"
-        + "any -> a student who matches at least one specified field will be returned\n"
-        + "all -> a student must match none of the specified fields to be returned\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of the "
+        + "specified keywords (case-insensitive).\n"
+        + "You can specify one of these find conditions: 'all' / 'any' / 'none'\n"
+        + "It indicates that a student is only considered a match when all, any or none of the the fields "
+        + "which you are searching for match their keywords. The default is 'all'.\n"
         + "Parameters: " + COMMAND_PARAMETERS + "\n"
         + "Example: " + COMMAND_EXAMPLE;
 
