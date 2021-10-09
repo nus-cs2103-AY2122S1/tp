@@ -28,20 +28,18 @@ public class Person {
     private final Experience experience;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
+    public Person(Name name, Phone phone, Email email,
                   Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
                   LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, role, expectedSalary, levelOfEducation, experience, tags);
+        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.role = role;
         this.employmentType = employmentType;
         this.expectedSalary = expectedSalary;
@@ -60,10 +58,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public Role getRole() {
@@ -125,7 +119,6 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRole().equals(getRole())
                 && otherPerson.getEmploymentType().equals(getEmploymentType())
                 && otherPerson.getExpectedSalary().equals(getExpectedSalary())
@@ -137,7 +130,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, employmentType,
+        return Objects.hash(name, phone, email, role, employmentType,
                 expectedSalary, levelOfEducation, experience, tags);
     }
 
@@ -149,8 +142,6 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
                 .append("; Applied Role: ")
                 .append(getRole())
                 .append("; Employment Type: ")
