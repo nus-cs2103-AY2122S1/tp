@@ -2,15 +2,80 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.facility.Facility;
+
 /**
- * Contains unit tests for {@code DeleteFacilityCommand}.
+ * Contains integration tests (interaction with the Mode) and unit tests for {@code DeleteFacilityCommand}.
  */
 public class DeleteFacilityCommandTest {
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_validIndexUnfilteredList_success() {
+        Facility facilityToDelete = model.getFilteredFacilityList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteFacilityCommand command = new DeleteFacilityCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = String.format(DeleteFacilityCommand.MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deleteFacility(facilityToDelete);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFacilityList().size() + 1);
+        DeleteFacilityCommand command = new DeleteFacilityCommand(outOfBoundIndex);
+
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        showFacilityAtIndex(model, INDEX_FIRST_PERSON);
+
+        Facility facilityToDelete = model.getFilteredFacilityList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteFacilityCommand command = new DeleteFacilityCommand(INDEX_FIRST_PERSON);
+
+        String expectedMessage = String.format(DeleteFacilityCommand.MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deleteFacility(facilityToDelete);
+        showNoFacility(expectedModel);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+    }
+
+    @Test
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showFacilityAtIndex(model, INDEX_FIRST_PERSON);
+
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex still in bounds of SportsPA facility list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilityList().size());
+
+        DeleteFacilityCommand command = new DeleteFacilityCommand(outOfBoundIndex);
+
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX);
+    }
+
     @Test
     public void equals() {
         DeleteFacilityCommand deleteFacilFirstCommand = new DeleteFacilityCommand(INDEX_FIRST_PERSON);
@@ -31,5 +96,14 @@ public class DeleteFacilityCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFacilFirstCommand.equals(deleteFacilSecondCommand));
+    }
+
+    /**
+     * Updates {@code model}'s filtered facility list to show no one.
+     */
+    private void showNoFacility(Model model) {
+        model.updateFilteredFacilityList(f -> false);
+
+        assertTrue(model.getFilteredFacilityList().isEmpty());
     }
 }
