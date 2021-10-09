@@ -35,7 +35,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
-     * 
+     *
      * @param name the input name
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -67,7 +67,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String classId} into an {@code ClassId}.
      * Leading and trailing whitespaces will be trimmed.
-     * 
+     *
      * @param classId the input classId
      * @throws ParseException if the given {@code classId} is invalid.
      */

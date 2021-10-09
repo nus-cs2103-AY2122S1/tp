@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,13 +224,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -268,48 +268,48 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students. 
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                               | So that I can…​                                                     
+| Priority | As a …​                                    | I want to …​                                                                               | So that I can…​
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
-| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        
-| `* * *`  | user ready to start using the app          | purge all current data         |  get rid of sample/experimental data I used for exploring the app.      
+| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.
+| `* * *`  | user ready to start using the app          | purge all current data         |  get rid of sample/experimental data I used for exploring the app.
 | `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall Grade)| so that I can identify and track their progress separately.
-| `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.                                       
-| `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class.   
-| `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly.                                      
+| `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.
+| `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class.
+| `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly.
 | `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and grade.
-| `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made.                   
-| `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.         
-| `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.           
-| `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.                                           
-| `* * `  | busy CS2100 TA                              | view students' statstics formatted in a standard form                                            | avoid sorting the information on my own.                               
-| `* * `  |  CS2100 TA                                  | use the app to track students' performance                                                       | identify those who need more help.                                     
-| `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.                 
-| `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.                    
-| `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.                                
-| `* *`   | CS2100 TA                                   | update attendance to keep track of participation grade%                                          | I can fulfil my obligations as a TA.                                   
-| `* *`   | CS2100 TA                                   | edit a student's participation score                                                             | the records are up to date.                                            
-| `* *`   | CS2100 TA                                   | upload the students' performance to LumiNUS conveniently                                         |                                                                        
-| `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/grade from the database.       
-| `* *`   | CS2100 TA who loves using the keyboard      | type commands                                                                                    | practice my typing skills.                                              
-| `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |                                                                        
-| `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.                               
-| `* *`   | CS2100 TA                                   | use tags to identify the topics which many students have difficulty in                           | prepare more notes on the topic.                                       
+| `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made.
+| `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.
+| `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.
+| `* * `  | CS2100 TA with multiple devices             | export the data in my ProgrammerError                                                            | import it on another device.
+| `* * `  | busy CS2100 TA                              | view students' statstics formatted in a standard form                                            | avoid sorting the information on my own.
+| `* * `  |  CS2100 TA                                  | use the app to track students' performance                                                       | identify those who need more help.
+| `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.
+| `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.
+| `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.
+| `* *`   | CS2100 TA                                   | update attendance to keep track of participation grade%                                          | I can fulfil my obligations as a TA.
+| `* *`   | CS2100 TA                                   | edit a student's participation score                                                             | the records are up to date.
+| `* *`   | CS2100 TA                                   | upload the students' performance to LumiNUS conveniently                                         |
+| `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/grade from the database.
+| `* *`   | CS2100 TA who loves using the keyboard      | type commands                                                                                    | practice my typing skills.
+| `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |
+| `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.
+| `* *`   | CS2100 TA                                   | use tags to identify the topics which many students have difficulty in                           | prepare more notes on the topic.
 | `*`     | CS2100 TA with multiple classes             | filter the contact list by classes  | easily identify those in the current class.                |                                                                        
-| `*`     | archive previous batch statistics           | compare current batch performance with them                                                      |                                                                        
-| `*`     | expert user                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.                                                          
-| `*`     | CS2100 TA                                   | use tags to mark the weak areas of a student                                                     | provide more targetted help to my students.                            
-| `*`     | user                                        | add a time to a task                                                                             | record when a task need to be done.                                    
-| `*`     | user                                        | see the pending task that has the next earliest deadline                                         | know what I need to do next.                                           
-| `*`     | a student                                   | easily view my participation statistics                                                          | verify that it was recorded correctly.                                 
-| `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.                                         
-| `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.                                
+| `*`     | archive previous batch statistics           | compare current batch performance with them                                                      |
+| `*`     | expert user                                 | archive/hide unused data                                                                         | avoid being distracted by irrelevant data.
+| `*`     | CS2100 TA                                   | use tags to mark the weak areas of a student                                                     | provide more targetted help to my students.
+| `*`     | user                                        | add a time to a task                                                                             | record when a task need to be done.
+| `*`     | user                                        | see the pending task that has the next earliest deadline                                         | know what I need to do next.
+| `*`     | a student                                   | easily view my participation statistics                                                          | verify that it was recorded correctly.
+| `*`     | a TA with many students and classes         | store vital information of my students                                                           | query it when the need arises.
+| `*`     | CS2100 Teaching Staff                       | easily search and update student's contact details                                               | I can reach them throughout the module.
 
 *{More to be added}*
 
@@ -482,15 +482,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -499,16 +499,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -516,6 +516,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
