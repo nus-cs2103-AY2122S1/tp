@@ -20,16 +20,16 @@ public class LevelOfEducationTest {
     }
 
     @Test
-    public void isValidAddress() {
-        // null address
+    public void isValidLevelOfEducation() {
+        // null level of education
         assertThrows(NullPointerException.class, () -> LevelOfEducation.isValidLevelOfEducation(null));
 
-        // invalid addresses
+        // invalid level of education
         assertFalse(LevelOfEducation.isValidLevelOfEducation("")); // empty string
         assertFalse(LevelOfEducation.isValidLevelOfEducation(" ")); // spaces only
         assertFalse(LevelOfEducation.isValidLevelOfEducation("Kindergarten")); // unsupported level of education
 
-        // valid addresses
+        // valid level of education
         assertTrue(LevelOfEducation.isValidLevelOfEducation("Elementary"));
         assertTrue(LevelOfEducation.isValidLevelOfEducation("Middle School"));
         assertTrue(LevelOfEducation.isValidLevelOfEducation("High School"));

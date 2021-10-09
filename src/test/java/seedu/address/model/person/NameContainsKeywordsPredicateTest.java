@@ -74,6 +74,5 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withRole("Engineer").withEmploymentType("Temporary")
                 .withExpectedSalary("4000").withLevelOfEducation("PhD").withExperience("5").build()));
-
     }
 }

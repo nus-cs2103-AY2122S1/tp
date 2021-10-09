@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -24,7 +23,6 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ROLE = "Software Engineer";
     public static final String DEFAULT_EMPLOYMENT_TYPE = "Full time";
     public static final String DEFAULT_EXPECTED_SALARY = "3200";
@@ -34,7 +32,6 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Role role;
     private EmploymentType employmentType;
     private ExpectedSalary expectedSalary;
@@ -49,7 +46,6 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         role = new Role(DEFAULT_ROLE);
         employmentType = new EmploymentType(DEFAULT_EMPLOYMENT_TYPE);
         expectedSalary = new ExpectedSalary(DEFAULT_EXPECTED_SALARY);
@@ -65,7 +61,6 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
         role = personToCopy.getRole();
         employmentType = personToCopy.getEmploymentType();
         expectedSalary = personToCopy.getExpectedSalary();
@@ -79,22 +74,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -155,11 +134,19 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
      * Builds a {@code Person} with the given information.
      */
     public Person build() {
-        return new Person(name, phone, email, address, role,
-                employmentType, expectedSalary, levelOfEducation, experience, tags);
+        return new Person(name, phone, email, role, employmentType,
+                expectedSalary, levelOfEducation, experience, tags);
     }
 
 }
