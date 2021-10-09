@@ -1,16 +1,13 @@
 package seedu.address.ui;
 
 import java.time.format.TextStyle;
-import java.util.Comparator;
 import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Student;
 
 /**
  * An UI component that displays information of a {@code Lesson}
