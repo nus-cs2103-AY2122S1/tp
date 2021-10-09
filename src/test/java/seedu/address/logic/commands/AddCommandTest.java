@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
+import seedu.address.model.Order;
 import seedu.address.model.ReadOnlyInventory;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.item.Item;
@@ -151,6 +152,31 @@ public class AddCommandTest {
 
         @Override
         public Item getItemWithName(String name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setOrder(Order order) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasUnclosedOrder() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToOrder(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeFromOrder(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void transactAndClearOrder() {
             throw new AssertionError("This method should not be called.");
         }
     }
