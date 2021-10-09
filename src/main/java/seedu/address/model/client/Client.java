@@ -23,7 +23,8 @@ public class Client implements Category {
         this(new ID(), name);
     }
 
-    private Client(ID id, Name name) {
+    /** Constructs a {@code Client}. */
+    public Client(ID id, Name name) {
         requireAllNonNull(id, name);
 
         this.id = id;

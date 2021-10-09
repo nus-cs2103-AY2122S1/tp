@@ -23,7 +23,10 @@ public class Product implements Category {
         this(new ID(), name);
     }
 
-    private Product(ID id, Name name) {
+    /**
+     * Every field must be present and not null.
+     */
+    public Product(ID id, Name name) {
         requireAllNonNull(id, name);
 
         this.id = id;
