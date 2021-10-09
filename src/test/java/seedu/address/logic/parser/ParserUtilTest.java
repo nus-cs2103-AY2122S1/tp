@@ -20,7 +20,7 @@ public class ParserUtilTest {
     private static final String INVALID_GRADE = "56";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_STUDENT_ID = "a0213221h";
+    private static final String VALID_STUDENT_ID = "A0214325H";
     private static final String VALID_CLASS_ID = "B01";
     private static final String VALID_GRADE = "A";
 
@@ -82,15 +82,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseStudentId_validValueWithoutWhitespace_returnsStudentId() throws Exception {
-        StudentId expectedId = new StudentId(VALID_STUDENT_ID);
-        assertEquals(expectedId, ParserUtil.parseStudentId(VALID_STUDENT_ID));
+        StudentId expectedStudentId = new StudentId(VALID_STUDENT_ID);
+        assertEquals(expectedStudentId, ParserUtil.parseStudentId(VALID_STUDENT_ID));
     }
 
     @Test
     public void parseStudentId_validValueWithWhitespace_returnsTrimmedStudentId() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_STUDENT_ID + WHITESPACE;
-        StudentId expectedPhone = new StudentId(VALID_STUDENT_ID);
-        assertEquals(expectedPhone, ParserUtil.parseStudentId(phoneWithWhitespace));
+        String studentIdWithWhitespace = WHITESPACE + VALID_STUDENT_ID + WHITESPACE;
+        StudentId expectedStudentId = new StudentId(VALID_STUDENT_ID);
+        assertEquals(expectedStudentId, ParserUtil.parseStudentId(studentIdWithWhitespace));
     }
 
     @Test
@@ -101,15 +101,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseClassId_validValueWithoutWhitespace_returnsClassId() throws Exception {
-        ClassId expectedAddress = new ClassId(VALID_CLASS_ID);
-        assertEquals(expectedAddress, ParserUtil.parseClassId(VALID_CLASS_ID));
+        ClassId expectedClassId = new ClassId(VALID_CLASS_ID);
+        assertEquals(expectedClassId, ParserUtil.parseClassId(VALID_CLASS_ID));
     }
 
     @Test
     public void parseClassId_validValueWithWhitespace_returnsTrimmedClassId() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_CLASS_ID + WHITESPACE;
-        ClassId expectedAddress = new ClassId(VALID_CLASS_ID);
-        assertEquals(expectedAddress, ParserUtil.parseClassId(addressWithWhitespace));
+        String classIdWithWhitespace = WHITESPACE + VALID_CLASS_ID + WHITESPACE;
+        ClassId expectedClassId = new ClassId(VALID_CLASS_ID);
+        assertEquals(expectedClassId, ParserUtil.parseClassId(classIdWithWhitespace));
     }
 
     @Test
@@ -119,14 +119,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseGrade_validValueWithoutWhitespace_returnsGrade() throws Exception {
-        Grade expectedEmail = new Grade(VALID_GRADE);
-        assertEquals(expectedEmail, ParserUtil.parseGrade(VALID_GRADE));
+        Grade expectedGrade = new Grade(VALID_GRADE);
+        assertEquals(expectedGrade, ParserUtil.parseGrade(VALID_GRADE));
     }
 
     @Test
     public void parseGrade_validValueWithWhitespace_returnsTrimmedGrade() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_GRADE + WHITESPACE;
-        Grade expectedEmail = new Grade(VALID_GRADE);
-        assertEquals(expectedEmail, ParserUtil.parseGrade(emailWithWhitespace));
+        String gradeWithWhitespace = WHITESPACE + VALID_GRADE + WHITESPACE;
+        Grade expectedGrade = new Grade(VALID_GRADE);
+        assertEquals(expectedGrade, ParserUtil.parseGrade(gradeWithWhitespace));
     }
 }
