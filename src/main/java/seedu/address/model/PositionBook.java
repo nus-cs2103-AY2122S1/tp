@@ -68,7 +68,8 @@ public class PositionBook implements ReadOnlyPositionBook {
     /**
      * Replaces the given position {@code target} in the list with {@code editedPosition}.
      * {@code target} must exist in the position book.
-     * The position identity of {@code editedPosition} must not be the same as another existing position in the position book.
+     * The position identity of {@code editedPosition} must not be the same as
+     * another existing position in the position book.
      */
     public void setPosition(Position target, Position editedPosition) {
         requireNonNull(editedPosition);

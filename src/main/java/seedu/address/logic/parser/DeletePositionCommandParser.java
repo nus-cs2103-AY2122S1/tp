@@ -11,6 +11,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeletePositionCommandParser implements Parser<DeletePositionCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeletePositionCommand
+     * and returns a DeletePositionCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DeletePositionCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);

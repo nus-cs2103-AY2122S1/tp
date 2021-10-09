@@ -12,7 +12,7 @@ public class AddPositionCommand extends Command {
 
     public static final String COMMAND_WORD = "add-position";
 
-    public static final String MESSAGE_USAGE =  COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a position to the MTR system. "
             + "Parameters: "
             + PREFIX_TITLE + "TITLE "
