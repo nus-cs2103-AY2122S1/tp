@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_PRICE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.List;
@@ -28,8 +29,10 @@ public class EditProductCommand extends Command {
                     + "Existing values will be overwritten by the input values.\n"
                     + "Parameters: INDEX (must be a positive integer) "
                     + "[" + PREFIX_NAME + "NAME]\n"
+                    + "[" + PREFIX_UNIT_PRICE + "UNIT_PRICE]\n"
                     + "Example: " + COMMAND_WORD + " 1 "
-                    + PREFIX_NAME + " Ben";
+                    + PREFIX_NAME + " Ben10"
+                    + PREFIX_UNIT_PRICE + " 10.00";
 
     public static final String MESSAGE_EDIT_PRODUCT_SUCCESS = "Edited Product: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

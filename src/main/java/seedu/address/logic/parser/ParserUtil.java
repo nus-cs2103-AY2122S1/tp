@@ -14,6 +14,7 @@ import seedu.address.model.commons.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
+import seedu.address.model.product.UnitPrice;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,21 +53,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-    /**
      * Parses a {@code String phoneNumber} into a {@code PhoneNumber}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -79,6 +65,36 @@ public class ParserUtil {
             throw new ParseException(PhoneNumber.MESSAGE_CONSTRAINTS);
         }
         return new PhoneNumber(trimmedPhoneNumber);
+    }
+
+    /**
+     * Parses a {@code String unitPrice} into a {@code UnitPrice}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code unitPrice} is invalid.
+     */
+    public static UnitPrice parseUnitPrice(String unitPrice) throws ParseException {
+        requireNonNull(unitPrice);
+        String trimmedUnitPrice = unitPrice.trim();
+        if (!UnitPrice.isValidUnitPrice(trimmedUnitPrice)) {
+            throw new ParseException(UnitPrice.MESSAGE_CONSTRAINTS);
+        }
+        return new UnitPrice(trimmedUnitPrice);
+    }
+
+    /**
+     * Parses a {@code String phone} into a {@code Phone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static Phone parsePhone(String phone) throws ParseException {
+        requireNonNull(phone);
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new Phone(trimmedPhone);
     }
 
     /**

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditClientCommand;
@@ -21,7 +22,7 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
      */
     public EditClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE_NUMBER);
 
         Index index;
         try {
@@ -34,6 +35,11 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
         EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editClientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_PHONE_NUMBER).isPresent()) {
+            editClientDescriptor.setPhoneNumber(
+                    ParserUtil.parsePhoneNumber(argMultimap.getValue(PREFIX_PHONE_NUMBER).get()));
         }
 
         if (!editClientDescriptor.isAnyFieldEdited()) {
