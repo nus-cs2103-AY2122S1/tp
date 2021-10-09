@@ -29,7 +29,7 @@ You can reach us at the email `e0518538@u.nus.edu`
 * Responsibilities: Documentation, Deliverables & Deadlines
 
 
-### Darren Heng
+### Heng Chen Kai, Darren
 
 <img src="images/darren2pro.png" width="200px">
 
