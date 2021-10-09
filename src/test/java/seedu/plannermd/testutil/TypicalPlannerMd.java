@@ -1,8 +1,10 @@
 package seedu.plannermd.testutil;
 
+import static seedu.plannermd.testutil.doctor.TypicalDoctors.getTypicalDoctors;
 import static seedu.plannermd.testutil.patient.TypicalPatients.getTypicalPatients;
 
 import seedu.plannermd.model.PlannerMd;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 
 public class TypicalPlannerMd {
@@ -15,7 +17,9 @@ public class TypicalPlannerMd {
         for (Patient patient : getTypicalPatients()) {
             pm.addPatient(patient);
         }
-        //TODO: Add typical doctors
+        for (Doctor doctor : getTypicalDoctors()) {
+            pm.addDoctor(doctor);
+        }
         return pm;
     }
 

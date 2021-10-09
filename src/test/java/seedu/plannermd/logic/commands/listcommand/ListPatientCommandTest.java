@@ -1,4 +1,4 @@
-package seedu.plannermd.logic.commands;
+package seedu.plannermd.logic.commands.listcommand;
 
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.logic.commands.CommandTestUtil.showPatientAtIndex;
