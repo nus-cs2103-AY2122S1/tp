@@ -62,12 +62,11 @@ public class ExperienceContainsKeywordsPredicateTest {
 
         // Keywords match every other category except experience
         predicate = new ExperienceContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com",
-                "Main", "Street",
                 "Programmer", "Full", "time", "3000", "High", "School", "3", "friend"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withRole("Cat Whisperer")
+                .withEmail("alice@email.com").withRole("Cat Whisperer")
                 .withEmploymentType("Full time").withExpectedSalary("3000")
-                .withLevelOfEducation("High School").withExperience("10")
+                .withLevelOfEducation("High School").withExperience("10").withTags("friend")
                 .build()));
     }
 }
