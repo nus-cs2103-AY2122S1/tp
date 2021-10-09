@@ -70,12 +70,12 @@ class RoleContainsKeywordsPredicateTest {
 
         // Keywords match all other prefixes, but does not match role
         predicate = new RoleContainsKeywordsPredicate(
-                Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street",
+                Arrays.asList("Alice", "12345", "alice@email.com",
                         "Programmer", "Full", "time", "3000", "High", "School", "3", "friend"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withRole("Cat Whisperer")
+                .withEmail("alice@email.com").withRole("Cat Whisperer")
                 .withEmploymentType("Full time").withExpectedSalary("3000")
-                .withLevelOfEducation("High School").withExperience("3")
+                .withLevelOfEducation("High School").withExperience("3").withTags("friend")
                 .build()));
     }
 
