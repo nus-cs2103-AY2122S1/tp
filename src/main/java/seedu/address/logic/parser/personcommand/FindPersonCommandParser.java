@@ -36,7 +36,6 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         FindPersonDescriptor findPersonDescriptor = new FindPersonDescriptor();
         boolean namePresent = argMultimap.getValue(PREFIX_NAME).isPresent();
-        System.out.println(namePresent);
         boolean phonePresent = argMultimap.getValue(PREFIX_PHONE).isPresent();
         boolean emailPresent = argMultimap.getValue(PREFIX_EMAIL).isPresent();
         boolean addressPresent = argMultimap.getValue(PREFIX_ADDRESS).isPresent();

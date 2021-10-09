@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TabMenu tabMenu;
@@ -119,6 +120,8 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         tabMenu.getContactsGridPane().add(personListPanel.getRoot(), 0, 1);
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        tabMenu.getTasksGridPane().add(taskListPanel.getRoot(), 0, 1);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

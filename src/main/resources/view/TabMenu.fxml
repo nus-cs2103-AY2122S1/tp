@@ -45,7 +45,7 @@
           <ColumnConstraints hgrow="SOMETIMES" percentWidth="100"/>
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints vgrow="ALWAYS" minHeight="50" maxHeight="50" />
+          <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21" />
           <RowConstraints vgrow="ALWAYS" fillHeight="true" />
         </rowConstraints>
       </GridPane>
