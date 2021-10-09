@@ -59,6 +59,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Clears the contents of the member list.
+     */
+    public void resetMemberList() {
+        this.persons.resetMembers();
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
