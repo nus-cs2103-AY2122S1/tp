@@ -18,12 +18,25 @@ public class CommandResult {
     private final boolean exit;
 
     /**
+     * The application should switch to person view.
+     */
+    private final boolean showPerson;
+
+    /**
+     * The application should switch to supplier view.
+     */
+    private final boolean showSupplier;
+
+    /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean showPerson, boolean showSupplier) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showPerson = showPerson;
+        this.showSupplier = showSupplier;
     }
 
     /**
@@ -31,7 +44,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +57,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowPerson() {
+        return showPerson;
+    }
+
+    public boolean isShowSupplier() {
+        return showSupplier;
     }
 
     @Override
