@@ -19,17 +19,21 @@ public class Client implements Category {
     // Data fields
     private final Name name;
     private final PhoneNumber phoneNumber;
+    private final Email email;
+    private final Address address;
 
-    public Client(Name name, PhoneNumber phoneNumber) {
-        this(new ID(), name, phoneNumber);
+    public Client(Name name, PhoneNumber phoneNumber, Email email, Address address) {
+        this(new ID(), name, phoneNumber, email, address);
     }
 
-    private Client(ID id, Name name, PhoneNumber phoneNumber) {
+    private Client(ID id, Name name, PhoneNumber phoneNumber, Email email, Address address) {
         requireAllNonNull(id, name, phoneNumber);
 
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
     }
 
     public ID getId() {
@@ -44,8 +48,16 @@ public class Client implements Category {
         return phoneNumber;
     }
 
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
     public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber) {
-        return new Client(client.getId(), name, phoneNumber);
+        return new Client(client.getId(), name, phoneNumber, null, null);
     }
 
     /**
@@ -99,6 +111,12 @@ public class Client implements Category {
                 .append(getName())
                 .append("; Phone Number: ")
                 .append(getPhoneNumber());
+        if (this.email != null) {
+            builder.append("; Email: ").append(getEmail());
+        }
+        if (this.address != null) {
+            builder.append("; Address: ").append(getAddress());
+        }
 
         return builder.toString();
     }
