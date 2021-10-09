@@ -23,13 +23,13 @@ import seedu.plannermd.model.tag.Tag;
 /**
  * Parses input arguments and creates a new EditPatientCommand object
  */
-public class EditCommandParser implements Parser<EditPatientCommand> {
+public class EditPatientCommandParser implements Parser<EditPatientCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
      * EditPatientCommand and returns an EditPatientCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public EditPatientCommand parse(String args) throws ParseException {
         requireNonNull(args);
