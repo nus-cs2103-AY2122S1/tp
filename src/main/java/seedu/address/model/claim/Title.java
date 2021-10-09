@@ -3,12 +3,22 @@ package seedu.address.model.claim;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class Title implements Comparable<Title>{
+/**
+ * Represents a Claim's title in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTitle(String)}
+ */
+
+public class Title implements Comparable<Title> {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}\\p{Space}]*";
     public static final String MESSAGE_CONSTRAINTS = "Title should only contain alphanumeric letters";
 
     private final String title;
 
+    /**
+     * Constructs a {@Code Title}.
+     *
+     * @param title A valid title
+     */
     public Title(String title) {
         requireNonNull(title);
         checkArgument(isValidTitle(title), MESSAGE_CONSTRAINTS);

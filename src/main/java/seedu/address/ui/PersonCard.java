@@ -8,7 +8,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.claim.Claim;
 import seedu.address.model.person.Person;
 
 /**
@@ -61,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getClaims().stream()
                 .sorted(Comparator.comparing(claim -> claim.getTitle()))
-                .forEach(claim -> claims.getChildren().add(new Label(claim.toString()+"\n")));
+                .forEach(claim -> claims.getChildren().add(new Label(claim.toString() + "\n")));
     }
 
     @Override

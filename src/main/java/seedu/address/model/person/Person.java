@@ -39,11 +39,16 @@ public class Person {
         this.claims.addAll(claims);
     }
 
-
+    /**
+     * Overridden constructor with empty set as the default value for claims
+     */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         this(name, phone, email, address, tags, new HashSet<>());
     }
 
+    /**
+     * Overridden constructor which takes in a person and overwrites its claims with another set of claims.
+     */
     public Person(Person previousPerson, Set<Claim> claims) {
         this(previousPerson.name,
              previousPerson.phone,

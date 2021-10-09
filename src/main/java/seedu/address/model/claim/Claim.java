@@ -1,14 +1,25 @@
 package seedu.address.model.claim;
 
-import java.util.Objects;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
+/**
+ * Represents a Person's claim in the address book.
+ * Guarantees: immutable
+ */
 public class Claim {
     private final Title title;
     private final Description description;
     private final Status status;
 
+    /**
+     * Constructs a {@code Claim}
+     *
+     * @param title A valid title
+     * @param description A valid description
+     * @param status A valid status
+     */
     public Claim(Title title, Description description, Status status) {
         requireAllNonNull(title, description, status);
         this.title = title;
@@ -30,14 +41,12 @@ public class Claim {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Claim: ")
-               .append(getTitle())
-               .append("; Description: ")
-               .append(getDescription())
-               .append("; Status: ")
-               .append(getStatus());
-        return builder.toString();
+        return "Claim: "
+                + getTitle()
+                + "; Description: "
+                + getDescription()
+                + "; Status: "
+                + getStatus();
     }
 
     @Override
