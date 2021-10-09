@@ -20,6 +20,7 @@ import seedu.plannermd.model.patient.Patient;
 class JsonSerializablePlannerMd {
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
+    public static final String MESSAGE_DUPLICATE_DOCTOR = "Placeholdertext";
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
 

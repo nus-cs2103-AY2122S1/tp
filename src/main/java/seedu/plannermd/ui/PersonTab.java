@@ -47,7 +47,6 @@ public class PersonTab extends UiPart<Region> {
         patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
         patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
-        // TODO pass in the filteredDoctorsList to the DoctorListPanel constructor
         doctorListPanel = new DoctorListPanel(null);
         doctorListPanelPlaceholder.getChildren().add(doctorListPanel.getRoot());
     }
