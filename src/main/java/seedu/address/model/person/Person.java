@@ -39,7 +39,6 @@ public class Person {
         this.currentPlan = currentPlan;
         this.lastMet = lastMet;
         this.tags.addAll(tags);
-
     }
 
     public Name getName() {
