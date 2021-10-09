@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 
 /**
  * Represents a tuition class in the book
@@ -17,6 +18,7 @@ public class TuitionClass {
     private final Counter counter;
     private final Timeslot timeslot;
     private StudentList studentList;
+    private final Remark remark;
 
     /**
      * Constructor for Tuition Class.
@@ -27,12 +29,14 @@ public class TuitionClass {
      * @param timeslot
      * @param studentList
      */
-    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList) {
+    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList,
+                        Remark remark) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
         this.timeslot = timeslot;
         this.studentList = studentList;
+        this.remark = remark;
         MOST_RECENT = this;
     }
 
@@ -54,6 +58,10 @@ public class TuitionClass {
 
     public StudentList getStudentList() {
         return studentList;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     public int getStudentCount() {
@@ -93,13 +101,14 @@ public class TuitionClass {
                 && otherClass.limit.equals(this.limit)
                 && otherClass.counter.equals(this.counter)
                 && otherClass.timeslot.equals(this.timeslot)
-                && otherClass.studentList.equals(this.studentList);
+                && otherClass.studentList.equals(this.studentList)
+                && otherClass.remark.equals(this.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, limit, counter, timeslot, studentList);
+        return Objects.hash(name, limit, counter, timeslot, studentList, remark);
     }
 
     @Override
@@ -114,7 +123,9 @@ public class TuitionClass {
                 .append(" Timeslot: ")
                 .append(getTimeslot())
                 .append("; Students: ")
-                .append(getStudentList());
+                .append(getStudentList())
+                .append("; Remark: ")
+                .append(getRemark());
         return builder.toString();
     }
 
