@@ -26,7 +26,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> onlyfilteredPersons;
+    private final FilteredList<Person> onlyFilteredPersons;
     private final SortedList<Person> filteredPersons;
 
     private final ObservableList<Task> displayTaskList;
@@ -46,8 +46,8 @@ public class ModelManager implements Model {
         displayTaskList = FXCollections.observableArrayList();
         unmodifiableDisplayTaskList = FXCollections.unmodifiableObservableList(displayTaskList);
 
-        onlyfilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredPersons = new SortedList<>(onlyfilteredPersons);
+        onlyFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new SortedList<>(onlyFilteredPersons);
     }
 
     public ModelManager() {
@@ -139,7 +139,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        onlyfilteredPersons.setPredicate(predicate);
+        onlyFilteredPersons.setPredicate(predicate);
     }
 
     @Override
