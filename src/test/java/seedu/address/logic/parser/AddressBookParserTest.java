@@ -24,6 +24,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -91,6 +92,16 @@ public class AddressBookParserTest {
         SearchCommand command = (SearchCommand) parser.parseCommand(
                 SearchCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new SearchCommand(new PersonContainsKeywordsPredicate(aMM)), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        String keywords = "do t/friends e/example.com";
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(keywords,
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords);
+        assertEquals(new FilterCommand(new PersonContainsKeywordsPredicate(aMM)), command);
     }
 
     @Test
