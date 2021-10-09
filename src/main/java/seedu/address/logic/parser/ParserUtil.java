@@ -13,6 +13,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.position.Description;
+import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +123,9 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Position parsePosition(String position) {
+        return new Position(new Title(position), new Description(""));
     }
 }

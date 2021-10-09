@@ -39,11 +39,11 @@ public class AddApplicantParser implements Parser<AddApplicantCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get())
+        Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
 
         Applicant applicant = new Applicant(name, phone, email, address, position);
 
-        return new AddApplicantCommand(applicant);
+        return new AddApplicantCommand(applicant, position);
     }
 
     /**

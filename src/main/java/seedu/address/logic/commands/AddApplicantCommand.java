@@ -37,15 +37,15 @@ public class AddApplicantCommand extends Command {
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in MrTechRecruiter";
 
     private final Applicant toAdd;
-    private final Position applyingPosition;
+    private final Position position;
 
     /**
      * Creates an AddApplicantCommand to add the specified {@code Applicant}
      */
-    public AddApplicantCommand(Applicant applicant, Position applyingPosition) {
+    public AddApplicantCommand(Applicant applicant, Position position) {
         requireNonNull(applicant);
         toAdd = applicant;
-        this.applyingPosition = applyingPosition;
+        this.position = position;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AddApplicantCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
-        model.addApplicantToPosition(toAdd, applyingPosition);
+        model.addApplicantToPosition(toAdd, position);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
@@ -65,7 +65,7 @@ public class AddApplicantCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddApplicantCommand // instanceof handles nulls
                 && toAdd.equals(((AddApplicantCommand) other).toAdd)
-                && applyingPosition.equals(((AddApplicantCommand) other).applyingPosition));
+                && position.equals(((AddApplicantCommand) other).position));
     }
 
 }

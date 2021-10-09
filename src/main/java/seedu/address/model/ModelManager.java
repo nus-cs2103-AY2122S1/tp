@@ -132,6 +132,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteApplicant(Applicant target) {
+
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -142,6 +147,11 @@ public class ModelManager implements Model {
         applicantBook.addApplicant(applicant);
         applicationBook.addApplication(new Application(applicant, position));
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // TODO: update to show applicants
+    }
+
+    @Override
+    public boolean hasApplicant(Applicant applicant) {
+        return false;
     }
 
     @Override
@@ -163,9 +173,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return null;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants) {
+
     }
 
     @Override
