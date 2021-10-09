@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.application.Application;
 import seedu.address.model.position.Position;
 
 /**
@@ -19,7 +20,7 @@ public class Applicant {
 
     // Data fields
     private final Address address;
-    private final Position position;
+    private final Application application;
 
     /**
      * Every field must be present and not null
@@ -30,7 +31,7 @@ public class Applicant {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.position = position;
+        this.application = new Application(this, position);
     }
 
     public Name getName() {
@@ -49,8 +50,8 @@ public class Applicant {
         return address;
     }
 
-    public Position getPosition() {
-        return position;
+    public Application getApplication() {
+        return application;
     }
 
     /**
@@ -85,13 +86,13 @@ public class Applicant {
                 && otherApplicant.getPhone().equals(getPhone())
                 && otherApplicant.getEmail().equals(getEmail())
                 && otherApplicant.getAddress().equals(getAddress())
-                && otherApplicant.getPosition().equals(getPosition());
+                && otherApplicant.getApplication().equals(getApplication());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, position);
+        return Objects.hash(name, phone, email, address, application);
     }
 
     @Override
@@ -104,8 +105,8 @@ public class Applicant {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; Position: ")
-                .append(getPosition());
+                .append("; Application: ")
+                .append(getApplication());
 
         return builder.toString();
     }
