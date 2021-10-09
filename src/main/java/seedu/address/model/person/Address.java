@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
+    public static final String EMPTY_FIELD = "";
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
@@ -26,7 +27,9 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        if (!address.equals(EMPTY_FIELD)) {
+            checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        }
         value = address;
     }
 

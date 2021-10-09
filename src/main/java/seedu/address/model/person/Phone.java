@@ -10,6 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Phone {
 
 
+    public static final String EMPTY_FIELD = "";
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
     public static final String VALIDATION_REGEX = "\\d{3,}";
@@ -22,7 +23,9 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        if (!phone.equals(EMPTY_FIELD)) {
+            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        }
         value = phone;
     }
 
