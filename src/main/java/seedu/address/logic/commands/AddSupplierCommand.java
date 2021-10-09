@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
 
 public class AddSupplierCommand extends Command {
-    public static final String COMMAND_WORD = "supplier";
+    public static final String COMMAND_WORD = "addsupplier";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -50,11 +50,11 @@ public class AddSupplierCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasSupplier(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addSupplier(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
