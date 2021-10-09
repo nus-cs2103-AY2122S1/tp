@@ -24,19 +24,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
-    private static Person samplePersonA;
-    private static AddCommand sampleCommandA;
-    private static AddCommand sampleCommandB;
-
-    @BeforeAll
-    public static void oneTimeSetUp() {
-        // Initialize variables once before all tests
-        samplePersonA = new PersonBuilder().withName("Alice").build();
-        Person samplePersonB = new PersonBuilder().withName("Bob").build();
-        sampleCommandA = new AddCommand(samplePersonA);
-        sampleCommandB = new AddCommand(samplePersonB);
-    }
-
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -44,9 +31,8 @@ public class AddCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
-
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
@@ -64,30 +50,19 @@ public class AddCommandTest {
     }
 
     @Test
-    public void equals_sameValues_returnsTrue() {
-        AddCommand sampleCommandACopy = new AddCommand(samplePersonA);
-        assertEquals(sampleCommandA, sampleCommandACopy);
-    }
+    public void execute_invalidName_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-    @Test
-    public void equals_differentTypes_returnsFalse() {
-        assertNotEquals(1, sampleCommandA);
-    }
-
-    @Test
-    public void equals_nullValue_returnsFalse() {
-        assertNotEquals(null, sampleCommandA);
-    }
-
-    @Test
-    public void equals_differentPerson_returnsFalse() {
-        assertNotEquals(sampleCommandA, sampleCommandB);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+            addCommand.execute(modelStub));
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -162,7 +137,7 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private static class ModelStubWithPerson extends ModelStub {
         private final Person person;
 
         ModelStubWithPerson(Person person) {
@@ -180,7 +155,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private static class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
