@@ -18,6 +18,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_PARAMETERS = "KEYWORD [MORE_KEYWORDS]...";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " alice bob charlie";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
@@ -25,40 +27,10 @@ public class FindCommand extends Command {
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    private NameContainsKeywordsPredicate predicate;
-
-    public FindCommand() {
-    }
+    private final NameContainsKeywordsPredicate predicate;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
-    }
-
-    /**
-     * Returns the description of what the command does.
-     *
-     * @return Description of what the command does.
-     */
-    public String getAction() {
-        return COMMAND_ACTION;
-    }
-
-    /**
-     * Returns the format of the valid command with command word and parameters.
-     *
-     * @return The format of the valid command.
-     */
-    public String getFormat() {
-        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
-    }
-
-    /**
-     * Returns an example usage of the command.
-     *
-     * @return Example usage of the command.
-     */
-    public String getExample() {
-        return COMMAND_EXAMPLE;
     }
 
     @Override

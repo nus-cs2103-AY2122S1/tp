@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,17 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.LessonAddCommand;
-import seedu.address.logic.commands.LessonDeleteCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.util.CommandSummary;
 
 /**
  * Controller for a help page
@@ -41,22 +30,19 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    private final ObservableList<Command> list = FXCollections.observableArrayList(
-            new HelpCommand(), new AddCommand(), new EditCommand(), new DeleteCommand(), new FindCommand(),
-            new ListCommand(), new LessonAddCommand(), new LessonDeleteCommand(), new ClearCommand(),
-            new ExitCommand());
+    private final ObservableList<CommandSummary> list = CommandSummary.getCommandSummaryList();
 
     @FXML
-    private TableView<Command> table;
+    private TableView<CommandSummary> table;
 
     @FXML
-    private TableColumn<Command, String> action;
+    private TableColumn<CommandSummary, String> action;
 
     @FXML
-    private TableColumn<Command, String> format;
+    private TableColumn<CommandSummary, String> format;
 
     @FXML
-    private TableColumn<Command, String> example;
+    private TableColumn<CommandSummary, String> example;
 
     @FXML
     private Button copyButton;
@@ -76,7 +62,7 @@ public class HelpWindow extends UiPart<Stage> {
         // @@author: James_D - reused
         // Lines 78 - 96 reused from: https://stackoverflow.com/questions/22732013/javafx-tablecolumn-text-wrapping
         format.setCellFactory(tc -> {
-            TableCell<Command, String> cell = new WrapTextEditableTableCell<>();
+            TableCell<CommandSummary, String> cell = new WrapTextEditableTableCell<>();
             Text text = new Text();
             cell.setGraphic(text);
             cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
@@ -86,7 +72,7 @@ public class HelpWindow extends UiPart<Stage> {
         });
 
         example.setCellFactory(tc -> {
-            TableCell<Command, String> cell = new WrapTextEditableTableCell<>();
+            TableCell<CommandSummary, String> cell = new WrapTextEditableTableCell<>();
             Text text = new Text();
             cell.setGraphic(text);
             cell.setPrefHeight(Control.USE_COMPUTED_SIZE);

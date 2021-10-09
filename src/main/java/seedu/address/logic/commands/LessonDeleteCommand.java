@@ -34,6 +34,8 @@ public class LessonDeleteCommand extends Command {
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
             + "LESSON_INDEX (must be a positive integer)";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 " + "1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the lesson identified by lesson index"
@@ -44,11 +46,8 @@ public class LessonDeleteCommand extends Command {
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s\nfor student: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
 
-    private Index index;
-    private Index lessonIndex;
-
-    public LessonDeleteCommand() {
-    }
+    private final Index index;
+    private final Index lessonIndex;
 
     /**
      * @param index of the person in the filtered person list to delete lesson from
@@ -58,33 +57,6 @@ public class LessonDeleteCommand extends Command {
         requireNonNull(lessonIndex);
         this.index = index;
         this.lessonIndex = lessonIndex;
-    }
-
-    /**
-     * Returns the description of what the command does.
-     *
-     * @return Description of what the command does.
-     */
-    public String getAction() {
-        return COMMAND_ACTION;
-    }
-
-    /**
-     * Returns the format of the valid command with command word and parameters.
-     *
-     * @return The format of the valid command.
-     */
-    public String getFormat() {
-        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
-    }
-
-    /**
-     * Returns an example usage of the command.
-     *
-     * @return Example usage of the command.
-     */
-    public String getExample() {
-        return COMMAND_EXAMPLE;
     }
 
     @Override

@@ -34,6 +34,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -58,10 +60,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private Person toAdd;
-
-    public AddCommand() {
-    }
+    private final Person toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -69,33 +68,6 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
-    }
-
-    /**
-     * Returns the description of what the command does.
-     *
-     * @return Description of what the command does.
-     */
-    public String getAction() {
-        return COMMAND_ACTION;
-    }
-
-    /**
-     * Returns the format of the valid command with command word and parameters.
-     *
-     * @return The format of the valid command.
-     */
-    public String getFormat() {
-        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
-    }
-
-    /**
-     * Returns an example usage of the command.
-     *
-     * @return Example usage of the command.
-     */
-    public String getExample() {
-        return COMMAND_EXAMPLE;
     }
 
     @Override

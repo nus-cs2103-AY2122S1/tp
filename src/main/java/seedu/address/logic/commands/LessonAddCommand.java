@@ -39,6 +39,8 @@ public class LessonAddCommand extends Command {
             + PREFIX_SUBJECT + "SUBJECT "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
     public static final String COMMAND_EXAMPLE_RECURRING_LESSON = COMMAND_WORD + " 1 "
             + PREFIX_RECURRING + " "
             + PREFIX_DATE + "09 Dec 2021 "
@@ -69,11 +71,8 @@ public class LessonAddCommand extends Command {
     public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor student: %2$s";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
-    private Index index;
-    private Lesson toAdd;
-
-    public LessonAddCommand() {
-    }
+    private final Index index;
+    private final Lesson toAdd;
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
@@ -106,33 +105,6 @@ public class LessonAddCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
                 updatedParentEmail, updatedAddress, updatedOutstandingFee, updatedRemark,
                 updatedTags, lessons);
-    }
-
-    /**
-     * Returns the description of what the command does.
-     *
-     * @return Description of what the command does.
-     */
-    public String getAction() {
-        return COMMAND_ACTION;
-    }
-
-    /**
-     * Returns the format of the valid command with command word and parameters.
-     *
-     * @return The format of the valid command.
-     */
-    public String getFormat() {
-        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
-    }
-
-    /**
-     * Returns an example usage of the command.
-     *
-     * @return Example usage of the command.
-     */
-    public String getExample() {
-        return COMMAND_EXAMPLE_RECURRING_LESSON;
     }
 
     @Override

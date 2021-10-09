@@ -21,6 +21,8 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer)";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -34,40 +36,10 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private Index targetIndex;
-
-    public DeleteCommand() {
-    }
+    private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
-    }
-
-    /**
-     * Returns the description of what the command does.
-     *
-     * @return Description of what the command does.
-     */
-    public String getAction() {
-        return COMMAND_ACTION;
-    }
-
-    /**
-     * Returns the format of the valid command with command word and parameters.
-     *
-     * @return The format of the valid command.
-     */
-    public String getFormat() {
-        return COMMAND_WORD + " " + COMMAND_PARAMETERS;
-    }
-
-    /**
-     * Returns an example usage of the command.
-     *
-     * @return Example usage of the command.
-     */
-    public String getExample() {
-        return COMMAND_EXAMPLE;
     }
 
     @Override
