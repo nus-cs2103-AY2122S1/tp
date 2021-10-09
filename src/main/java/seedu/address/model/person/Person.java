@@ -17,6 +17,7 @@ public class Person {
 
     // Identity fields
     private final Name name;
+    private final Telegram telegram;
     private final Phone phone;
     private final Email email;
 
@@ -27,9 +28,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Telegram telegram, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, telegram, phone, email, address, tags);
         this.name = name;
+        this.telegram = telegram;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -38,6 +40,10 @@ public class Person {
 
     public Name getName() {
         return name;
+    }
+
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     public Phone getPhone() {
@@ -89,6 +95,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
+                && otherPerson.getTelegram().equals(getTelegram())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
@@ -98,13 +105,15 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, telegram, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Telegram: ")
+                .append(getTelegram())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")

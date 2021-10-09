@@ -34,6 +34,8 @@ public class PersonDetails extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label telegram;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -58,6 +60,7 @@ public class PersonDetails extends UiPart<Region> {
         }
         cardPane.setVisible(true);
         name.setText(person.getName().fullName);
+        telegram.setText("@" + person.getTelegram().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
