@@ -61,7 +61,8 @@ public class ExperienceContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withExperience("10").build()));
 
         // Keywords match name, phone, email and address, but does not match level of education
-        predicate = new ExperienceContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street",
+        predicate = new ExperienceContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com",
+                "Main", "Street",
                 "Programmer", "Full", "time", "3000", "High", "School", "3", "friend"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").withRole("Cat Whisperer")
