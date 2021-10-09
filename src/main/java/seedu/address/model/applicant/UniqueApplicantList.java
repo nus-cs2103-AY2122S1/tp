@@ -13,10 +13,11 @@ import seedu.address.model.applicant.exceptions.DuplicateApplicantException;
 
 /**
  * A list of applicants that enforces uniqueness between its elements and does not allow nulls.
- * An applicant is considered unique by comparing using {@code Applicant#isSameApplicant(Applicant)}. As such, adding and updating of
- * applicants uses Applicant#isSameApplicant(Applicant) for equality so as to ensure that the applicant being added or updated is
- * unique in terms of identity in the UniqueApplicantList. However, the removal of an applicant uses Applicant#equals(Object) so
- * as to ensure that the applicant with exactly the same fields will be removed.
+ * An applicant is considered unique by comparing using {@code Applicant#isSameApplicant(Applicant)}. As such, adding
+ * and updating of applicants uses Applicant#isSameApplicant(Applicant) for equality so as to ensure that the applicant
+ * being added or updated is unique in terms of identity in the UniqueApplicantList. However, the removal of an
+ * applicant uses Applicant#equals(Object) so as to ensure that the applicant with exactly the same fields will
+ * be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -25,7 +26,8 @@ import seedu.address.model.applicant.exceptions.DuplicateApplicantException;
 public class UniqueApplicantList implements Iterable<Applicant> {
 
     private final ObservableList<Applicant> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Applicant> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Applicant> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent applicant as the given argument.
