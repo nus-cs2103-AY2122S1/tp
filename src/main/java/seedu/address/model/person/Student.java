@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,10 +25,8 @@ public class Student {
     // Data fields
     private final Address address;
     private final Grade grade;
-
-
-
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Lesson> lessons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -70,6 +70,14 @@ public class Student {
     }
 
     /**
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -77,9 +85,29 @@ public class Student {
         if (otherStudent == this) {
             return true;
         }
-
         return otherStudent != null
                 && otherStudent.getName().equals(getName());
+    }
+
+    /**
+     * Returns an unmodifiable set of enrolled lesson codes for equality checks.
+     */
+    public Set<String> getEnrolledLessonCodes() {
+        return lessons.stream().map(Lesson::getLessonCode).collect(Collectors.toUnmodifiableSet());
+    }
+
+    /**
+     * Adds lesson to student instance.
+     */
+    public void enrollForLesson(Lesson lesson) {
+        lessons.add(lesson);
+    }
+
+    /**
+     * Remove lesson from student instance.
+     */
+    public void unenrollFromLesson(Lesson lesson) {
+        lessons.remove(lesson);
     }
 
     /**
@@ -101,13 +129,14 @@ public class Student {
                 && otherStudent.getParentContact().equals(getParentContact())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getAddress().equals(getAddress())
-                && otherStudent.getTags().equals(getTags());
+                && otherStudent.getTags().equals(getTags())
+                && otherStudent.getEnrolledLessonCodes().equals(getEnrolledLessonCodes());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, parentContact, email, address, tags);
+        return Objects.hash(name, parentContact, email, address, tags, getEnrolledLessonCodes());
     }
 
     @Override
@@ -125,6 +154,11 @@ public class Student {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+        Set<String> lessons = getEnrolledLessonCodes();
+        if (!lessons.isEmpty()) {
+            builder.append("; Lesson: ");
+            lessons.forEach(builder::append);
         }
         return builder.toString();
     }
