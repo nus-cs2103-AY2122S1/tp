@@ -72,10 +72,10 @@ public class EmploymentTypeContainsKeywordsPredicateTest {
         // Keywords match name, phone, email, address, applied role, employment type, expected salary,
         // level of education, years of experience and tags, but does not match employment type
         predicate = new EmploymentTypeContainsKeywordsPredicate(
-                Arrays.asList("Alice", "12345", "alice@email.com", "Main",
-                "Street", "Software", "Engineer", "Full time", "4000", "PhD", "5", "young"));
+                Arrays.asList("Alice", "12345", "alice@email.com",
+                              "Software", "Engineer", "Full time", "4000", "PhD", "5", "young"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withRole("Software Engineer")
+                .withEmail("alice@email.com").withRole("Software Engineer")
                 .withEmploymentType("Part time").withExpectedSalary("4000").withLevelOfEducation("PhD")
                 .withExperience("5").withTags("young").build()));
 
