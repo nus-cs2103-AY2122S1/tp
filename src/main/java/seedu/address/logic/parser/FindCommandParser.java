@@ -120,7 +120,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String arg = argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get();
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
-                    predicateList.add(new EmploymentTypeContainsKeywordsPredicate(trimmedArg));
+                    String[] keywords = splitByWhiteSpace(trimmedArg);
+                    predicateList.add(new EmploymentTypeContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
 

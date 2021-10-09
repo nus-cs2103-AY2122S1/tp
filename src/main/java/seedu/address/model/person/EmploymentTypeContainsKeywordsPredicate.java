@@ -7,30 +7,24 @@ import seedu.address.commons.util.StringUtil;
 
 public class EmploymentTypeContainsKeywordsPredicate implements Predicate<Person> {
 
-    private final String keyword;
+    private final List<String> keywords;
 
-    public EmploymentTypeContainsKeywordsPredicate(String keyword) {
-        this.keyword = keyword;
+    public EmploymentTypeContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
     }
-
-//    @Override
-//    public boolean test(Person person) {
-//        System.out.println(person.getEmploymentType().employmentType);
-//        return keywords.stream()
-//                .anyMatch(keyword -> StringUtil
-//                        .containsWordIgnoreCase(person.getEmploymentType().employmentType, keyword));
-//
-//    }
 
     @Override
     public boolean test(Person person) {
-        return keyword.equalsIgnoreCase(person.getEmploymentType().employmentType);
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil
+                        .containsWordIgnoreCase(person.getEmploymentType().employmentType, keyword));
+
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EmploymentTypeContainsKeywordsPredicate // instanceof handles nulls
-                && keyword.equals(((EmploymentTypeContainsKeywordsPredicate) other).keyword)); // state check
+                && keywords.equals(((EmploymentTypeContainsKeywordsPredicate) other).keywords)); // state check
     }
 }
