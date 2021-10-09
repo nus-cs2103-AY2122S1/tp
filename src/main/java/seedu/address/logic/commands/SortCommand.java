@@ -19,7 +19,7 @@ public class SortCommand extends Command {
 
     public static final String DESCRIPTION = "Sorts the list of persons";
 
-    private String messageSuccess = "Sorted all persons";
+    private static String messageSuccess = "Sorted all persons";
 
     private final boolean isReverseOrder;
 

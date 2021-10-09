@@ -77,7 +77,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = HelpWindow.getWindow();
     }
 
     public Stage getPrimaryStage() {

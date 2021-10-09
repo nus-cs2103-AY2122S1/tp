@@ -58,6 +58,8 @@ public class HelpWindow extends AnchorPane {
     private static final Hashtable<String, CommandDetail> commandTable = new Hashtable<>();
 
     private static Stage stage;
+    private static boolean isActive = false;
+    private static HelpWindow helpWindow;
 
     private interface CommandDetail {
         void execute();
@@ -83,7 +85,7 @@ public class HelpWindow extends AnchorPane {
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
+    private HelpWindow() {
         stage = new Stage();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/view/HelpWindow.fxml"));
@@ -107,6 +109,13 @@ public class HelpWindow extends AnchorPane {
         additionalInfo.setText("");
         userGuideMessage.setText(USER_GUIDE_MESSAGE);
         copyButton.setText("Copy URL");
+    }
+
+    public static HelpWindow getWindow() {
+        if (!HelpWindow.isActive) {
+            helpWindow = new HelpWindow();
+        }
+        return helpWindow;
     }
 
     /**
@@ -265,7 +274,7 @@ public class HelpWindow extends AnchorPane {
         }
     }
 
-    private boolean isValidCommand(String userInput) {
+    public boolean isValidCommand(String userInput) {
         return commandTable.containsKey(userInput);
     }
 
