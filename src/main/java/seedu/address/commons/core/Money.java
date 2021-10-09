@@ -13,7 +13,7 @@ public class Money {
     }
 
     public float getInDollars() {
-        return (this.cents/ CONVERT_BETWEEN_CURRENCY);
+        return (this.cents / CONVERT_BETWEEN_CURRENCY);
     }
 
     @Override

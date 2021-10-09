@@ -11,8 +11,16 @@ import seedu.address.logic.commands.RevenueCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Revenue;
 
-public class RevenueCommandParser implements Parser<RevenueCommand>{
+public class RevenueCommandParser implements Parser<RevenueCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the RevenueCommand
+     * and returns a RevenueCommand object for execution.
+     *
+     * @param args Command input by the user to be parsed.
+     * @return RevenueCommand object for execution based on the command input given.
+     * @throws ParseException If the user input does not conform the expected format
+     */
     public RevenueCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REVENUE);

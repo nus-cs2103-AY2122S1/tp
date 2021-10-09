@@ -27,7 +27,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not statedd.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -39,6 +39,9 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Every field for this case is provided and hence a revenue value will be tagged to the person.
+     */
     public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, revenue, address, tags);
         this.name = name;

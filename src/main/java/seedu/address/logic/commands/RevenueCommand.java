@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.Money;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,8 +20,8 @@ public class RevenueCommand extends Command {
     public static final String COMMAND_WORD = "revenue";
 
     public static final String MESSAGE_ADD_REVENUE_SUCCESS = "Added revenue to Person: %1$s";
-    public static final String MESSAGE_ADD_REVENUE_FAIL = "Failed to add revenue from Person: %1$s, " +
-            "resulting revenue is negative!";
+    public static final String MESSAGE_ADD_REVENUE_FAIL = "Failed to add revenue from Person: %1$s, "
+            + "resulting revenue is negative!";
 
     private final Index index;
     private final Revenue revenue;

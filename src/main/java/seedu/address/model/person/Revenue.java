@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.commons.core.Money;
 
@@ -44,12 +43,19 @@ public class Revenue {
                 && value.equals(((Revenue) other).value)); // state check
     }
 
+    /**
+     * Adds a revenue value to the current revenue.
+     *
+     * @param revenueToBeAdded Revenue value to be added.
+     * @return A new revenue object with its value the result of the 2 added revenues.
+     */
     public Revenue addRevenue(Revenue revenueToBeAdded) {
         int updatedValue = this.value.getCents() + revenueToBeAdded.value.getCents();
-        float updatedValueInDollars = updatedValue/ 100f;
+        float updatedValueInDollars = updatedValue / 100f;
         Revenue revenue = new Revenue(new Money(updatedValueInDollars));
         return revenue;
     }
+
     @Override
     public int hashCode() {
         return value.hashCode();
