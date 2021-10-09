@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
