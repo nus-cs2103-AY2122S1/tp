@@ -28,7 +28,7 @@ public class Gender {
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
         value = getGenderType(gender);
     }
-    
+
     public String getSymbol() {
         if (value.equals(GenderType.MALE)) {
             return "M";
