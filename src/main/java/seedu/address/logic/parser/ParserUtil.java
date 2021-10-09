@@ -163,8 +163,8 @@ public class ParserUtil {
      * @throws ParseException if the given {@code dayOfWeek} is invalid.
      */
     public static DayOfWeek parseDayOfWeek(String dayOfWeek) throws ParseException {
-        String MESSAGE_CONSTRAINTS = "List of valid dayOfWeek: " +
-                "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.";;
+        String messageConstraints = "List of valid dayOfWeek: "
+                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.";;
         requireNonNull(dayOfWeek);
         String trimmedDayOfWeek = dayOfWeek.trim().toLowerCase();
         switch (trimmedDayOfWeek) {
@@ -175,7 +175,7 @@ public class ParserUtil {
         case "friday": return DayOfWeek.FRIDAY;
         case "saturday": return DayOfWeek.SATURDAY;
         case "sunday": return DayOfWeek.SUNDAY;
-        default: throw new ParseException(MESSAGE_CONSTRAINTS);
+        default: throw new ParseException(messageConstraints);
         }
     }
 
@@ -192,7 +192,8 @@ public class ParserUtil {
         if (!Slot.isValidSlot(trimmedSlot)) {
             throw new ParseException(Slot.MESSAGE_CONSTRAINTS);
         }
-        return Slot.translateStringToSlot(slot);    //maybe need to assert slot cannot be null
+        //maybe need to assert slot cannot be null
+        return Slot.translateStringToSlot(slot);
     }
 
     /**
