@@ -7,6 +7,7 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -18,6 +19,7 @@ import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand.EditPatientDescriptor;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -34,7 +36,7 @@ public class EditCommandParser implements Parser<EditPatientCommand> {
     public EditPatientCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_BIRTH_DATE, PREFIX_TAG);
+                PREFIX_ADDRESS, PREFIX_BIRTH_DATE, PREFIX_TAG, PREFIX_RISK);
 
         Index index;
 
@@ -63,6 +65,11 @@ public class EditCommandParser implements Parser<EditPatientCommand> {
                     .setBirthDate(ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_BIRTH_DATE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
+        if (argMultimap.getValue(PREFIX_RISK).isPresent()) {
+            editPatientDescriptor.setRisk(ParserUtil.parseRisk(argMultimap.getValue(PREFIX_RISK).get()));
+        } else {
+            editPatientDescriptor.setRisk(Risk.getUnclassifiedRisk());
+        }
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditPatientCommand.MESSAGE_NOT_EDITED);
