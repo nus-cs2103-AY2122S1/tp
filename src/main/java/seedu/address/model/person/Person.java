@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.Money;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +22,7 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Revenue revenue;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -32,6 +34,17 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.revenue = new Revenue(new Money(0));
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, revenue, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.revenue = revenue;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -46,6 +59,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Revenue getRevenue() {
+        return revenue;
     }
 
     public Address getAddress() {
@@ -91,6 +108,7 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getRevenue().equals(getRevenue())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -98,7 +116,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, revenue, address, tags);
     }
 
     @Override
@@ -109,6 +127,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Revenue: ")
+                .append(getRevenue())
                 .append("; Address: ")
                 .append(getAddress());
 

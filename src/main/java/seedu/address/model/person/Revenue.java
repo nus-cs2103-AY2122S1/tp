@@ -1,0 +1,58 @@
+package seedu.address.model.person;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.core.Money;
+
+/**
+ * Represents a Person's revenue in the address book.
+ * Guarantees: immutable; is always valid
+ */
+public class Revenue {
+
+    public static final String MESSAGE_CONSTRAINTS = "Revenue can take any values, and it should not be negative";
+
+    public final Money value;
+
+    /**
+     * Constructs an {@code Address}.
+     *
+     * @param revenue A valid address.
+     */
+    public Revenue(Money revenue) {
+        requireNonNull(revenue);
+        value = revenue;
+    }
+
+    /**
+     * Returns true if the resulting Revenue value is a valid.
+     */
+    public boolean isValidRevenue() {
+        return this.value.getInDollars() >= 0;
+    }
+
+    @Override
+    public String toString() {
+        return this.value.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Revenue // instanceof handles nulls
+                && value.equals(((Revenue) other).value)); // state check
+    }
+
+    public Revenue addRevenue(Revenue revenueToBeAdded) {
+        int updatedValue = this.value.getCents() + revenueToBeAdded.value.getCents();
+        float updatedValueInDollars = updatedValue/ 100f;
+        Revenue revenue = new Revenue(new Money(updatedValueInDollars));
+        return revenue;
+    }
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+}
