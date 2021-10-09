@@ -15,7 +15,11 @@ import seedu.address.model.lesson.Lesson;
 public class LessonCard extends UiPart<Region> {
 
     private static final String FXML = "LessonListCard.fxml";
-
+    private static final String STRING_FORMAT_SUBJECT = "Subject: \t%s";
+    private static final String STRING_FORMAT_GRADE = "Grade: \t%s";
+    private static final String STRING_FORMAT_DAY = "Day: \t\t%s";
+    private static final String STRING_FORMAT_TIME = "Time: \t%s - %s";
+    private static final String STRING_FORMAT_PRICE = "Price: \tSGD$%s";
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -53,11 +57,16 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         id.setText(displayIndex + ". ");
         lessonCode.setText(lesson.getLessonCode());
-        subject.setText(lesson.getSubject());
-        grade.setText(lesson.getGrade().value);
-        dayOfWeek.setText(lesson.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-        time.setText(String.format("%s - %s", lesson.getStartTime().toString(), lesson.getEndTime().toString()));
-        price.setText(Double.toString(lesson.getPrice()));
+        subject.setText(String.format(STRING_FORMAT_SUBJECT, lesson.getSubject()));
+        grade.setText(String.format(STRING_FORMAT_GRADE, lesson.getGrade().value));
+        dayOfWeek.setText(String.format(
+                STRING_FORMAT_DAY,
+                lesson.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH)));
+        time.setText(String.format(
+                STRING_FORMAT_TIME,
+                lesson.getStartTime().toString(),
+                lesson.getEndTime().toString()));
+        price.setText(String.format(STRING_FORMAT_PRICE, Double.toString(lesson.getPrice())));
     }
 
     @Override
