@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_OWES_MONEY;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -178,9 +179,9 @@ public class UniquePersonListTest {
     public void getDistinctTagList_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BENSON);
-        List<Tag> expectedList = BENSON.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .collect(Collectors.toList());
+        List<Tag> expectedList = new ArrayList<>();
+        expectedList.add(new Tag(VALID_TAG_FRIENDS));
+        expectedList.add(new Tag(VALID_TAG_OWES_MONEY));
         assertEquals(expectedList, uniquePersonList.getDistinctTagList());
     }
 
@@ -188,10 +189,23 @@ public class UniquePersonListTest {
     public void calculateNumDuplicateTags_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BENSON);
-        List<Tag> expectedList = BENSON.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .collect(Collectors.toList());
-        assertEquals(expectedList, uniquePersonList.getDistinctTagList());
+        Tag tagWithOneDuplicate = new Tag(VALID_TAG_OWES_MONEY);
+        tagWithOneDuplicate.incrementNumDuplicates();
+        Tag tagWithTwoDuplicates = new Tag(VALID_TAG_FRIENDS);
+        tagWithTwoDuplicates.incrementNumDuplicates();
+        tagWithTwoDuplicates.incrementNumDuplicates();
+
+        List<Tag> sampleList = new ArrayList<>();
+        Tag tagWithOneDuplicateForCalculation = new Tag(VALID_TAG_OWES_MONEY);
+        Tag tagWithTwoDuplicatesForCalculation = new Tag(VALID_TAG_FRIENDS);
+        sampleList.add(tagWithOneDuplicateForCalculation);
+        sampleList.add(tagWithTwoDuplicatesForCalculation);
+        uniquePersonList.calculateNumDuplicateTags(sampleList);
+
+        assertEquals(tagWithOneDuplicate.getNumDuplicatesString(),
+                tagWithOneDuplicateForCalculation.getNumDuplicatesString());
+        assertEquals(tagWithTwoDuplicates.getNumDuplicatesString(),
+                tagWithTwoDuplicatesForCalculation.getNumDuplicatesString());
     }
 
     @Test
