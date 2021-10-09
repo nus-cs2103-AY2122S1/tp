@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TaskDescription {
     public static final String MESSAGE_CONSTRAINTS =
-            "Task descriptions should not be blank";
+            "Task descriptions should not be blank.";
 
     /*
      * The first character of the description must not be a whitespace,
