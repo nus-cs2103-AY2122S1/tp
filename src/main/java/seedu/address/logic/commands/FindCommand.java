@@ -21,20 +21,30 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or the index specified and "
             + "displays them as a list with index numbers.\n"
-            + "Name Search Parameters: -n KEYWORD [MORE_KEYWORDS]...\n"
+            + "Name Search Parameters: " + COMMAND_TAG_NAME + " KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie\n"
-            + "Index Search Parameters: -i INDEX\n"
+            + "Index Search Parameters: " + COMMAND_TAG_INDEX + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final int index;
     private StaffHasCorrectIndexPredicate indexPredicate = null;
 
+    /**
+     * Constructs a FindCommand object which searches by name
+     *
+     * @param namePredicate Predicate to filter the list by names that match a given name.
+     */
     public FindCommand(NameContainsKeywordsPredicate namePredicate) {
         this.namePredicate = namePredicate;
         this.index = -1; // not used
     }
 
+    /**
+     * Constructs a FindCommand object which searches for the person at a specific index.
+     *
+     * @param index The index that the user searched for.
+     */
     public FindCommand(int index) {
         this.namePredicate = null;
         this.index = index;
@@ -48,25 +58,53 @@ public class FindCommand extends Command {
             return executeNameSearch(model);
 
         } else if (index > -1) {
-            indexPredicate = new StaffHasCorrectIndexPredicate(index, model);
+            checkIndex(model);
             return executeIndexSearch(model);
 
         } else {
-            throw new CommandException("Check if your input are correct: -n for name, -i for index, and check that " +
-                    "your index stated is in range!");
+            throw new CommandException("Check if your input are correct: -n for name, -i for index,\n"
+                    + "and that the index given is correct!");
         }
     }
 
+    /**
+     * Executes a search by name.
+     *
+     * @param model The model which contains the list to be searched on.
+     * @return a CommandResult to be displayed.
+     */
     public CommandResult executeNameSearch(Model model) {
         model.updateFilteredPersonList(namePredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Executes a search by index.
+     *
+     * @param model The model which contains the list to be searched on.
+     * @return a CommandResult to be displayed.
+     */
     public CommandResult executeIndexSearch(Model model) {
         model.updateFilteredPersonList(indexPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    /**
+     * Checks if the index is within a suitable range for the list contained in the model.
+     *
+     * @param model The model which contains the list to be searched on.
+     * @throws CommandException When the index inputted is not within range.
+     */
+    public void checkIndex(Model model) throws CommandException {
+        int personListSize = model.getAddressBook().getPersonList().size();
+        if (index > personListSize) {
+            throw new CommandException(String.format(
+                    "The index you are trying to access is out of bounds!\n" + "Please input an index from %d to %d",
+                    model.getFilteredPersonList().isEmpty() ? 0 : 1, personListSize));
+        }
+        indexPredicate = new StaffHasCorrectIndexPredicate(index, model);
     }
 
     @Override

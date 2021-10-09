@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Iterator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -113,23 +112,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedStaff);
     }
 
-    @Override
-    public Person getPerson(int index) {
-        int counter = 0;
-        Person resultPerson = null;
-        Iterable<Person> staffs = addressBook.getPersonList();
-
-        for (Person p : staffs) {
-            if (index == counter) {
-                resultPerson = p;
-                break;
-            }
-            counter++;
-        }
-
-        return resultPerson;
-    }
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -148,18 +130,11 @@ public class ModelManager implements Model {
      */
     @Override
     public Person getFilteredPersonListByIndex(int index) {
-        int counter = 0;
-        Person resultPerson = null;
-
-        for (Person p : filteredPersons) {
-            if (counter == index) {
-                resultPerson = p;
-                break;
-            }
-            counter++;
+        if (filteredPersons.size() == 0) {
+            return new FilteredList<>(this.addressBook.getPersonList()).get(index);
+        } else {
+            return filteredPersons.get(index);
         }
-
-        return resultPerson;
     }
 
     /**

@@ -77,13 +77,6 @@ public interface Model {
     void setPerson(Person target, Person editedStaff);
 
     /**
-     * Retrieves the Person at the index specified. The index refers to the overall index, not the filtered list.
-     * @param index The index of the Person desired.
-     * @return the Person at the index of the overall list specified.
-     */
-    Person getPerson(int index);
-
-    /**
      * Retrieves the Person at the index specified of the observed filtered list.
      *
      * @param index The index of the Person desired
