@@ -54,7 +54,7 @@ public class AddClientCommand extends Command {
      */
     private static Client createAddedClient(AddClientDescriptor addClientDescriptor) {
         Name name = addClientDescriptor.getName();
-        return new Client(name);
+        return new Client(name, null);
     }
 
     @Override

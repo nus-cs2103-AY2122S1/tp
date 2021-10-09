@@ -54,7 +54,7 @@ public class AddProductCommand extends Command {
      */
     private static Product createAddedProduct(AddProductDescriptor addProductDescriptor) {
         Name name = addProductDescriptor.getName();
-        return new Product(name);
+        return new Product(name, null);
     }
 
     @Override

@@ -14,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.UnitPrice;
 
 /**
  * Edits the details of an existing product in the address book.
@@ -78,8 +79,9 @@ public class EditProductCommand extends Command {
         assert productToEdit != null;
 
         Name updatedName = editProductDescriptor.getName().orElse(productToEdit.getName());
+        UnitPrice updatedUnitPrice = editProductDescriptor.getUnitPrice().orElse(productToEdit.getUnitPrice());
 
-        return Product.updateProduct(productToEdit, updatedName);
+        return Product.updateProduct(productToEdit, updatedName, updatedUnitPrice);
     }
 
     @Override
@@ -106,6 +108,7 @@ public class EditProductCommand extends Command {
      */
     public static class EditProductDescriptor {
         private Name name;
+        private UnitPrice unitPrice;
 
         public EditProductDescriptor() {}
 
@@ -114,13 +117,14 @@ public class EditProductCommand extends Command {
          */
         public EditProductDescriptor(EditProductDescriptor toCopy) {
             setName(toCopy.name);
+            setUnitPrice(toCopy.unitPrice);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name);
+            return CollectionUtil.isAnyNonNull(name, unitPrice);
         }
 
         public void setName(Name name) {
@@ -129,6 +133,14 @@ public class EditProductCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setUnitPrice(UnitPrice unitPrice) {
+            this.unitPrice = unitPrice;
+        }
+
+        public Optional<UnitPrice> getUnitPrice() {
+            return Optional.ofNullable(unitPrice);
         }
 
         @Override
@@ -146,7 +158,8 @@ public class EditProductCommand extends Command {
             // state check
             EditProductDescriptor e = (EditProductDescriptor) other;
 
-            return getName().equals(e.getName());
+            return getName().equals(e.getName())
+                           && getUnitPrice().equals(e.getUnitPrice());
         }
     }
 }
