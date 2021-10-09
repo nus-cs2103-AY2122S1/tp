@@ -3,7 +3,7 @@ package seedu.address.model.person;
 /**
  * This class stands for every possible role for a staff
  */
-public enum Role {
+public enum Role implements Field {
     //Can add more later
     MANAGER("manager"), DIRECTOR("director"), HR("hr");
 
