@@ -11,13 +11,13 @@ public class LastMet {
         + "where Day, month and year should be numerical values.";
     // TODO: why call it alternative?
     public static final String ALTERNATIVE_VALIDATION_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
-
+    
     public static final boolean IS_NULL_VALUE_ALLOWED = true;
     public static final String DEFAULT_VALUE = "";
-
+    
     public final LocalDate value;
     public final String dateInString;
-
+    
     /**
      * Constructs an {@code Email}.
      *
@@ -30,16 +30,18 @@ public class LastMet {
         if (lastMetDate == null) {
             lastMetDate = "";
         }
+
         checkArgument(isValidLastMet(lastMetDate), MESSAGE_CONSTRAINTS);
         dateInString = lastMetDate;
-        if (dateInString.isEmpty()) {
+        
+        if (lastMetDate.isEmpty()) {
             value = null;
         } else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             value = LocalDate.parse(lastMetDate, formatter);
         }
     }
-
+    
     /**
      * Returns if a given string is a valid LastMet.
      */
@@ -47,19 +49,19 @@ public class LastMet {
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
             || test.matches(ALTERNATIVE_VALIDATION_REGEX);
     }
-
+    
     @Override
     public String toString() {
         return this.dateInString;
     }
-
+    
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof LastMet // instanceof handles nulls
             && value.equals(((LastMet) other).value)); // state check
     }
-
+    
     @Override
     public int hashCode() {
         return value.hashCode();
