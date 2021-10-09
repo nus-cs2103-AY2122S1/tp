@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
 import java.util.stream.Stream;
@@ -15,7 +17,8 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
     @Override
     public AddClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PHONE_NUMBER);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+                args, PREFIX_PHONE_NUMBER, PREFIX_EMAIL, PREFIX_ADDRESS);
 
         Name name;
         try {
@@ -35,6 +38,16 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
 
         AddClientCommand.AddClientDescriptor descriptor =
                 new AddClientCommand.AddClientDescriptor(name, phoneNumber);
+
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            System.out.println("!");
+            descriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            descriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+
         return new AddClientCommand(descriptor);
     }
 

@@ -9,11 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Phone;
 import seedu.address.model.product.UnitPrice;
 import seedu.address.model.tag.Tag;
 
@@ -82,20 +81,20 @@ public class ParserUtil {
         return new UnitPrice(trimmedUnitPrice);
     }
 
-    /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
+//    /**
+//     * Parses a {@code String phone} into a {@code Phone}.
+//     * Leading and trailing whitespaces will be trimmed.
+//     *
+//     * @throws ParseException if the given {@code phone} is invalid.
+//     */
+//    public static Phone parsePhone(String phone) throws ParseException {
+//        requireNonNull(phone);
+//        String trimmedPhone = phone.trim();
+//        if (!Phone.isValidPhone(trimmedPhone)) {
+//            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+//        }
+//        return new Phone(trimmedPhone);
+//    }
 
     /**
      * Parses a {@code String address} into an {@code Address}.

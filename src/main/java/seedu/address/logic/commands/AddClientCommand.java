@@ -5,7 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
@@ -59,7 +61,9 @@ public class AddClientCommand extends Command {
     private static Client createAddedClient(AddClientDescriptor addClientDescriptor) {
         Name name = addClientDescriptor.getName();
         PhoneNumber phoneNumber = addClientDescriptor.getPhoneNumber();
-        return new Client(name, phoneNumber);
+        Email email = addClientDescriptor.getEmail();
+        Address address = addClientDescriptor.getAddress();
+        return new Client(name, phoneNumber, email, address);
     }
 
     @Override
@@ -75,6 +79,8 @@ public class AddClientCommand extends Command {
     public static class AddClientDescriptor {
         private Name name;
         private PhoneNumber phoneNumber;
+        private Email email;
+        private Address address;
 
         /**
          * Constructor of the class `AddClientDescriptor`.
@@ -95,8 +101,45 @@ public class AddClientCommand extends Command {
             return name;
         }
 
+        /**
+         * Gets the phone number of a client.
+         *
+         * @return The phone number of a client.
+         */
         public PhoneNumber getPhoneNumber() {
             return phoneNumber;
+        }
+
+        /**
+         * Updates a client's email.
+         */
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+
+        /**
+         * Gets the email of a client.
+         *
+         * @return The email of a client.
+         */
+        public Email getEmail() {
+            return this.email;
+        }
+
+        /**
+         * Updates a client's address.
+         */
+        public void setAddress(Address address) {
+            this.address = address;
+        }
+
+        /**
+         * Gets the address of a client.
+         *
+         * @return The address of a client.
+         */
+        public Address getAddress() {
+            return this.address;
         }
     }
 }
