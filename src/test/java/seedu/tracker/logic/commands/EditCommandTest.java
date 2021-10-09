@@ -1,33 +1,33 @@
- package seedu.tracker.logic.commands;
+package seedu.tracker.logic.commands;
 
- import static org.junit.jupiter.api.Assertions.assertFalse;
- import static org.junit.jupiter.api.Assertions.assertTrue;
- import static seedu.tracker.logic.commands.CommandTestUtil.DESC_CS2103T;
- import static seedu.tracker.logic.commands.CommandTestUtil.DESC_GEQ1000;
- import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CP3108A;
- import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CS1101S;
- import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_GEQ1000;
- import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TAG_CORE;
- import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TITLE_CP3108A;
- import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandFailure;
- import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
- import static seedu.tracker.logic.commands.CommandTestUtil.showPersonAtIndex;
- import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
- import static seedu.tracker.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
- import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.tracker.logic.commands.CommandTestUtil.DESC_CS2103T;
+import static seedu.tracker.logic.commands.CommandTestUtil.DESC_GEQ1000;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CP3108A;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_CS1101S;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_CODE_GEQ1000;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TAG_CORE;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_TITLE_CP3108A;
+import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tracker.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
+import static seedu.tracker.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
+import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
- import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
- import seedu.tracker.commons.core.Messages;
- import seedu.tracker.commons.core.index.Index;
- import seedu.tracker.logic.commands.EditCommand.EditModuleDescriptor;
- import seedu.tracker.model.Model;
- import seedu.tracker.model.ModelManager;
- import seedu.tracker.model.ModuleTracker;
- import seedu.tracker.model.UserPrefs;
- import seedu.tracker.model.module.Module;
- import seedu.tracker.testutil.EditModuleDescriptorBuilder;
- import seedu.tracker.testutil.ModuleBuilder;
+import seedu.tracker.commons.core.Messages;
+import seedu.tracker.commons.core.index.Index;
+import seedu.tracker.logic.commands.EditCommand.EditModuleDescriptor;
+import seedu.tracker.model.Model;
+import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.ModuleTracker;
+import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.module.Module;
+import seedu.tracker.testutil.EditModuleDescriptorBuilder;
+import seedu.tracker.testutil.ModuleBuilder;
 
 /**
 *Contains integration tests (interaction with the Model) and unit tests for EditCommand.

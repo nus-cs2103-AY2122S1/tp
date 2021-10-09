@@ -127,8 +127,8 @@ public class CommandTestUtil {
 
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the module at the given {@code targetIndex} in the
+     * {@code model}'s Module Tracker.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleList().size());

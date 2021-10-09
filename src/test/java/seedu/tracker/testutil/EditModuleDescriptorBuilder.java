@@ -63,6 +63,9 @@ public class EditModuleDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Mc} of the {@code EditModuleDescriptor} that we are building.
+     */
     public EditModuleDescriptorBuilder withMc(int mc) {
         descriptor.setMc(new Mc(mc));
         return this;

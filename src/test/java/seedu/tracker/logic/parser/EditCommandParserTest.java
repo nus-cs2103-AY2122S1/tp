@@ -98,7 +98,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_CORE + TAG_DESC_GE, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_CODE_DESC + INVALID_MC_DESC + VALID_DESCRIPTION_CS2103T + VALID_TITLE_CS2103T,
+        assertParseFailure(parser,
+                "1" + INVALID_CODE_DESC + INVALID_MC_DESC + VALID_DESCRIPTION_CS2103T + VALID_TITLE_CS2103T,
                 Code.MESSAGE_CONSTRAINTS);
     }
 
@@ -170,8 +171,8 @@ public class EditCommandParserTest {
                 + TITLE_DESC_GEQ1000 + DESCRIPTION_DESC_GEQ1000 + MC_DESC_GEQ1000 + TAG_DESC_GE;
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withTitle(VALID_TITLE_GEQ1000)
-                .withMc(VALID_MC_GEQ1000).withDescription(VALID_DESCRIPTION_GEQ1000).withTags(VALID_TAG_GE,VALID_TAG_CORE)
-                .build();
+                .withMc(VALID_MC_GEQ1000).withDescription(VALID_DESCRIPTION_GEQ1000)
+                .withTags(VALID_TAG_GE, VALID_TAG_CORE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
