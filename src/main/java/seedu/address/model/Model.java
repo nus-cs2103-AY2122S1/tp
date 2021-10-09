@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.supplier.Supplier;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +88,37 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
+     */
+    boolean hasSupplier(Supplier supplier);
+
+    /**
+     * Deletes the given supplier.
+     * The person must exist in the address book.
+     */
+    void deleteSupplier(Supplier target);
+
+    /**
+     * Adds the given supplier.
+     * {@code supplier} must not already exist in the address book.
+     */
+    void addSupplier(Supplier supplier);
+
+    /**
+     * Replaces the given person {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    void setSupplier(Supplier target, Supplier editedPerson);
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Supplier> getFilteredSupplierList();
+
+    /**
+     * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredSupplierList(Predicate<Supplier> predicate);
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.person.supplier.UniqueSupplierList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueSupplierList suppliers;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        suppliers = new UniqueSupplierList();
     }
 
     public AddressBook() {}
@@ -45,6 +49,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+    }
+
+    /**
+     * Replaces the contents of the supplier list with {@code suppliers}.
+     * {@code persons} must not contain duplicate suppliers.
+     */
+    public void setSuppliers(List<Supplier> suppliers) {
+        this.suppliers.setSuppliers(suppliers);
     }
 
     /**
@@ -93,11 +105,50 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /// supplier level operations
+    /**
+     * Returns true if a supplier with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasSupplier(Supplier supplier) {
+        requireNonNull(supplier);
+        return suppliers.contains(supplier);
+    }
+
+    /**
+     * Adds a supplier to the address book.
+     * The supplier must not already exist in the address book.
+     */
+    public void addSupplier(Supplier s) {
+        suppliers.add(s);
+    }
+
+    /**
+     * Replaces the given supplier {@code target} in the list with {@code editedSupplier}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing supplier in the address
+     * book.
+     */
+    public void setSupplier(Supplier target, Supplier editedSupplier) {
+        requireNonNull(editedSupplier);
+
+        suppliers.setSupplier(target, editedSupplier);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeSupplier(Supplier key) {
+        suppliers.remove(key);
+    }
+
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " persons\n"
+                + suppliers.asUnmodifiableObservableList().size() + " suppliers\n";
         // TODO: refine later
     }
 
@@ -107,14 +158,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Supplier> getSupplierList() {
+        return suppliers.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && suppliers.equals(((AddressBook) other).suppliers));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return persons.hashCode() + suppliers.hashCode();
     }
 }
