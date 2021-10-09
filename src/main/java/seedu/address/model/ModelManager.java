@@ -130,8 +130,8 @@ public class ModelManager implements Model {
 
     @Override
     public void addContactToFolder(Person target, FolderName folderName) {
-        requireAllNonNull(target,folderName);
-        addressBook.addContactToFolder(target,folderName);
+        requireAllNonNull(target, folderName);
+        addressBook.addContactToFolder(target, folderName);
     }
     //=========== Filtered Person List Accessors =============================================================
 

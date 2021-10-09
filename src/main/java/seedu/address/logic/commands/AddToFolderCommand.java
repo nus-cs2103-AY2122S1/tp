@@ -29,7 +29,8 @@ public class AddToFolderCommand extends Command {
 
     /**
      * Creates a AddToFolderCommand to add the specified {@code FolderName}
-     * @param index,folderName
+     * @param index
+     * @param folderName
      */
     public AddToFolderCommand(Index index, FolderName folderName) {
         requireNonNull(index);
@@ -47,7 +48,7 @@ public class AddToFolderCommand extends Command {
 
         Person personToAdd = lastShownList.get(index.getZeroBased());
 
-        model.addContactToFolder(personToAdd,folderName);
+        model.addContactToFolder(personToAdd, folderName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, folderName));
     }
 
@@ -60,7 +61,7 @@ public class AddToFolderCommand extends Command {
             return false;
         }
         AddToFolderCommand that = (AddToFolderCommand) other;
-        return this.index.equals(that.index) &&
-                this.folderName.equals(that.folderName);
+        return this.index.equals(that.index)
+                && this.folderName.equals(that.folderName);
     }
 }

@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.folder.UniqueFolderList;
@@ -131,8 +130,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The contact must not already exist in the Folder.
      */
     public void addContactToFolder(Person target, FolderName folderName) {
-        requireAllNonNull(target,folderName);
-        folders.addContact(target,folderName);
+        requireAllNonNull(target, folderName);
+        folders.addContact(target, folderName);
     }
 
 

@@ -1,13 +1,12 @@
 package seedu.address.logic.parser;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddToFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.FolderName;
-
-import java.util.List;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class AddToFolderParser implements Parser<AddToFolderCommand> {
 
@@ -24,7 +23,7 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
         }
         Index index = extractContactIndex(allValues);
         FolderName folderName = extractFolderName(allValues);
-        return new AddToFolderCommand(index,folderName);
+        return new AddToFolderCommand(index, folderName);
     }
 
     /**
