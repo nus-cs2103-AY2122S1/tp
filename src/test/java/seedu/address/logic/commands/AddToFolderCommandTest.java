@@ -7,9 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.ParserUtil;
@@ -23,15 +27,11 @@ import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
-
 public class AddToFolderCommandTest {
 
     @Test
     public void constructor_nullFolderNameAndIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddToFolderCommand(null,null));
+        assertThrows(NullPointerException.class, () -> new AddToFolderCommand(null, null));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class AddToFolderCommandTest {
         FolderName folderName = new FolderName("Folder 1");
         Folder validFolder = new Folder(folderName);
         Index index = ParserUtil.parseIndex("1");
-        CommandResult commandResult = new AddToFolderCommand(index,folderName).execute(modelStub);
+        CommandResult commandResult = new AddToFolderCommand(index, folderName).execute(modelStub);
 
         assertEquals(String.format(AddToFolderCommand.MESSAGE_SUCCESS, validFolder), commandResult.getFeedbackToUser());
     }
@@ -56,14 +56,14 @@ public class AddToFolderCommandTest {
         Folder cs2103 = new Folder(cs2103FolderName);
         Index indexTwo = ParserUtil.parseIndex("2");
 
-        AddToFolderCommand addCS2100Command = new AddToFolderCommand(indexOne,cs2100FolderName);
-        AddToFolderCommand addCS2103Command = new AddToFolderCommand(indexTwo,cs2103FolderName);
+        AddToFolderCommand addCS2100Command = new AddToFolderCommand(indexOne, cs2100FolderName);
+        AddToFolderCommand addCS2103Command = new AddToFolderCommand(indexTwo, cs2103FolderName);
 
         // same object -> returns true
         assertTrue(addCS2100Command.equals(addCS2100Command));
 
         // same values -> returns true
-        AddToFolderCommand addCS2100CommandDuplicate = new AddToFolderCommand(indexOne,cs2100FolderName);
+        AddToFolderCommand addCS2100CommandDuplicate = new AddToFolderCommand(indexOne, cs2100FolderName);
         assertTrue(addCS2100Command.equals(addCS2100CommandDuplicate));
 
         // different types -> returns false
@@ -191,7 +191,7 @@ public class AddToFolderCommandTest {
 
         @Override
         public void addContactToFolder(Person target, FolderName folderName) {
-            requireAllNonNull(target,folderName);
+            requireAllNonNull(target, folderName);
             personsAdded.add(target);
         }
 
