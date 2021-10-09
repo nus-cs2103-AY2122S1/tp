@@ -4,7 +4,15 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentPlan;
+import seedu.address.model.person.DisposableIncome;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.LastMet;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -18,12 +26,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_LASTMET = "24-09-2021";
+    public static final String DEFAULT_CURRENTPLAN = "Prudential PRUwealth";
     public static final String DEFAULT_RISKAPPETITE = "3";
     public static final String DEFAULT_DISPOSABLEINCOME = "10000";
 
     private ClientId clientId;
     private Name name;
     private Email email;
+    private LastMet lastMet;
+    private CurrentPlan currentPlan;
     private Optional<Phone> phone;
     private Optional<Address> address;
     private Optional<RiskAppetite> riskAppetite;
@@ -37,6 +49,9 @@ public class PersonBuilder {
         clientId = new ClientId(DEFAULT_CLIENTID);
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
+        address = new Address(DEFAULT_ADDRESS);
+        lastMet = new LastMet(DEFAULT_LASTMET);
+        currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
         phone = Optional.of(new Phone(DEFAULT_PHONE));
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         riskAppetite = Optional.of(new RiskAppetite(DEFAULT_RISKAPPETITE));
@@ -55,6 +70,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         riskAppetite = personToCopy.getRiskAppetite();
         disposableIncome = personToCopy.getDisposableIncome();
+        currentPlan = personToCopy.getCurrentPlan();
+        lastMet = personToCopy.getLastMet();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -113,7 +130,7 @@ public class PersonBuilder {
         this.riskAppetite = Optional.of(new RiskAppetite(riskAppetite));
         return this;
     }
-
+  
     /**
      * Sets the {@code DisposableIncome} of the {@code Person} that we are building.
      */
@@ -122,10 +139,25 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastMet(String lastMetDate) {
+        this.lastMet = new LastMet(lastMetDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCurrentPlan(String currentPlan) {
+        this.currentPlan = new CurrentPlan(currentPlan);
+        return this;
+    }
 
     public Person build() {
         return new Person(clientId, name, phone.get(), email, address.get(), riskAppetite.get(),
-            disposableIncome.get(), tags);
+            disposableIncome.get(), currentPlan, lastMet, tags);
     }
 
 }

@@ -18,6 +18,9 @@ public class Name {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
+    public static final boolean IS_BLANK_VALUE_ALLOWED = false;
+    public static final String DEFAULT_VALUE = "";
+
     public final String fullName;
 
     /**
@@ -35,7 +38,8 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty())
+                || test.matches(VALIDATION_REGEX);
     }
 
 

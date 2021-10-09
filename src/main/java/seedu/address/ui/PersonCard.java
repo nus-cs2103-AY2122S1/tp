@@ -11,7 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.*;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays the important information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -46,6 +46,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label disposableIncome;
     @FXML
+    private Label lastMet;
+    @FXML
+    private Label currentPlan;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -58,6 +62,8 @@ public class PersonCard extends UiPart<Region> {
         clientId.setText(person.getClientId().value);
         name.setText(person.getName().fullName);
         email.setText(person.getEmail().value);
+        currentPlan.setText(person.getCurrentPlan().toString());
+        lastMet.setText(person.getLastMet().toString());
         Optional<Phone> phoneNumber = (Optional<Phone>) person.getPhone();
         phone.setText(phoneNumber.isEmpty() ? "No phone number stored yet" : phoneNumber.get().value);
         Optional<Address> addressString = (Optional<Address>) person.getAddress();
