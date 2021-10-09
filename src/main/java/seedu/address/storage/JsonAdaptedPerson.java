@@ -157,7 +157,8 @@ class JsonAdaptedPerson {
         if (schedule.equals("")) {
             modelSchedule = new Schedule();
         } else {
-            modelSchedule = new Schedule(schedule);
+//            modelSchedule = new Schedule(schedule);
+            modelSchedule = new Schedule();
         }
         return new Person(modelName, modelPhone, modelEmail,
                 modelAddress, modelRole, modelSalary, modelStatus, modelTags);

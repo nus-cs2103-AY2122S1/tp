@@ -63,7 +63,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editStaffDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editStaffDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editStaffDescriptor) {

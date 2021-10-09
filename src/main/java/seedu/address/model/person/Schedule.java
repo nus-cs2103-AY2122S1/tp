@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import java.time.DayOfWeek;
 import java.util.Objects;
 
+import seedu.address.model.person.exceptions.DuplicateShiftException;
+
 /**
  * Represents the schedule for the staff, which contains all the task for the staff.
  */
@@ -51,9 +53,28 @@ public class Schedule {
      * @param dayOfWeek The day of the shift in a week.
      * @param slot The slot of the shift located.
      * @param shiftName The name of the shift.
+     * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot, String shiftName) {
+    public void addShift(DayOfWeek dayOfWeek, Slot slot, String shiftName) throws DuplicateShiftException {
         Shift shift = new Shift(dayOfWeek, slot, shiftName);
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null) {
+            throw new DuplicateShiftException();
+        }
+        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift;
+    }
+
+    /**
+     * Adds a new shift for a staff.
+     *
+     * @param dayOfWeek The day of the shift in a week.
+     * @param slot The slot of the shift located.
+     * @throws DuplicateShiftException throws when there is already a shift in the target slot.
+     */
+    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+        Shift shift = new Shift(dayOfWeek, slot);
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null) {
+            throw new DuplicateShiftException();
+        }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift;
     }
 

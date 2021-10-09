@@ -1,11 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.DayOfWeek;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Slot;
+import seedu.address.model.person.exceptions.DuplicateShiftException;
 
 /**
  * The API of the Model component.
@@ -75,6 +78,17 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedStaff);
+
+    /**
+     * Add a shift to a target staff's schedule.
+     * {@code target} must exist in the address book.
+     *
+     * @param target The target staff.
+     * @param dayOfWeek of the shift.
+     * @param slot of the shift.
+     * @throws DuplicateShiftException Throws when there is already a shift at the target slot.
+     */
+    void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

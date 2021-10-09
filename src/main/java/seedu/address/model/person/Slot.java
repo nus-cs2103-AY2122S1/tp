@@ -6,6 +6,9 @@ package seedu.address.model.person;
 public enum Slot {
     MORNING("morning", 0), AFTERNOON("afternoon", 1);
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "List of valid slots: morning, afternoon.";
+
     private String period;
     private int order;
 
@@ -58,7 +61,7 @@ public enum Slot {
     public static boolean isValidSlot(String test) {
         String trimmedTest = test.trim();
         for (Slot s : Slot.values()) {
-            String sString = String.valueOf(s.getOrder());
+            String sString = String.valueOf(s.getValue());
             if (sString.equals(trimmedTest)) {
                 return true;
             }

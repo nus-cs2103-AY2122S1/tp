@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.Slot;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
@@ -151,6 +153,46 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return Status.translateStringToStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     * This parser is not case sensitive.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static DayOfWeek parseDayOfWeek(String dayOfWeek) throws ParseException {
+        String MESSAGE_CONSTRAINTS = "List of valid dayOfWeek: " +
+                "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.";;
+        requireNonNull(dayOfWeek);
+        String trimmedDayOfWeek = dayOfWeek.trim().toLowerCase();
+        switch (trimmedDayOfWeek) {
+        case "monday": return DayOfWeek.MONDAY;
+        case "tuesday": return DayOfWeek.TUESDAY;
+        case "wednesday": return DayOfWeek.WEDNESDAY;
+        case "thursday": return DayOfWeek.THURSDAY;
+        case "friday": return DayOfWeek.FRIDAY;
+        case "saturday": return DayOfWeek.SATURDAY;
+        case "sunday": return DayOfWeek.SUNDAY;
+        default: throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     * This parser is not case sensitive.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static Slot parseSlot(String slot) throws ParseException {
+        requireNonNull(slot);
+        String trimmedSlot = slot.trim();
+        if (!Slot.isValidSlot(trimmedSlot)) {
+            throw new ParseException(Slot.MESSAGE_CONSTRAINTS);
+        }
+        return Slot.translateStringToSlot(slot);    //maybe need to assert slot cannot be null
     }
 
     /**
