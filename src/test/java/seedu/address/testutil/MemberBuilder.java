@@ -9,6 +9,7 @@ import seedu.address.model.member.Member;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
+import seedu.address.model.task.TaskList;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -26,6 +27,7 @@ public class MemberBuilder {
     private Email email;
     private Address address;
     private Set<Position> positions;
+    private TaskList taskList;
 
     /**
      * Creates a {@code MemberBuilder} with the default details.
@@ -36,6 +38,7 @@ public class MemberBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         positions = new HashSet<>();
+        taskList = new TaskList();
     }
 
     /**
@@ -47,6 +50,7 @@ public class MemberBuilder {
         email = memberToCopy.getEmail();
         address = memberToCopy.getAddress();
         positions = new HashSet<>(memberToCopy.getPositions());
+        taskList.setTasks(memberToCopy.getTaskList());
     }
 
     /**

@@ -2,12 +2,15 @@ package seedu.address.model.member;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.position.Position;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskList;
 
 /**
  * Represents a Member in the address book.
@@ -23,6 +26,7 @@ public class Member {
     // Data fields
     private final Address address;
     private final Set<Position> positions = new HashSet<>();
+    private final TaskList taskList = new TaskList();
 
     /**
      * Every field must be present and not null.
@@ -34,6 +38,20 @@ public class Member {
         this.email = email;
         this.address = address;
         this.positions.addAll(positions);
+        this.taskList.setTasks(new ArrayList<Task>());
+    }
+
+    /**
+     * Constructs a member with tasks.
+     */
+    public Member(Name name, Phone phone, Email email, Address address, Set<Position> positions, TaskList taskList) {
+        requireAllNonNull(name, phone, email, address, positions, taskList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.positions.addAll(positions);
+        setTaskList(taskList);
     }
 
     public Name getName() {
@@ -58,6 +76,14 @@ public class Member {
      */
     public Set<Position> getPositions() {
         return Collections.unmodifiableSet(positions);
+    }
+
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        taskList.setTasks(taskList);
     }
 
     /**
@@ -92,7 +118,8 @@ public class Member {
                 && otherMember.getPhone().equals(getPhone())
                 && otherMember.getEmail().equals(getEmail())
                 && otherMember.getAddress().equals(getAddress())
-                && otherMember.getPositions().equals(getPositions());
+                && otherMember.getPositions().equals(getPositions())
+                && otherMember.getTaskList().equals(getTaskList());
     }
 
     @Override
@@ -116,6 +143,10 @@ public class Member {
         if (!positions.isEmpty()) {
             builder.append("; Positions: ");
             positions.forEach(builder::append);
+        }
+        if (taskList.isEmpty()) {
+            builder.append("; Tasks: ");
+            taskList.iterator().forEachRemaining(builder::append);
         }
         return builder.toString();
     }

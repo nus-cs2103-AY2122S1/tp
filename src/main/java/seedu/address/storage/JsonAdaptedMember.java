@@ -16,6 +16,8 @@ import seedu.address.model.member.Member;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskList;
 
 /**
  * Jackson-friendly version of {@link Member}.
@@ -29,20 +31,42 @@ class JsonAdaptedMember {
     private final String email;
     private final String address;
     private final List<JsonAdaptedPosition> attachedPositions = new ArrayList<>();
+    private final List<JsonAdaptedTask> attachedTasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedMember} with the given member details.
      */
     @JsonCreator
     public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("attachedPosition") List<JsonAdaptedPosition> attachedPositions) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("attachedPosition") List<JsonAdaptedPosition> attachedPositions
+                             ) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (attachedPositions != null) {
             this.attachedPositions.addAll(attachedPositions);
+        }
+    }
+
+    /**
+     * Constructs a {@code JsonAdaptedMember} with the given member details.
+     */
+    @JsonCreator
+    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("attachedPosition") List<JsonAdaptedPosition> attachedPositions,
+                             @JsonProperty("attachedTasks") List<JsonAdaptedTask> attachedTasks) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        if (attachedPositions != null) {
+            this.attachedPositions.addAll(attachedPositions);
+        }
+        if (attachedTasks != null) {
+            this.attachedTasks.addAll(attachedTasks);
         }
     }
 
@@ -57,6 +81,7 @@ class JsonAdaptedMember {
         attachedPositions.addAll(source.getPositions().stream()
                 .map(JsonAdaptedPosition::new)
                 .collect(Collectors.toList()));
+        source.getTaskList().iterator().forEachRemaining((task -> attachedTasks.add(new JsonAdaptedTask(task))));
     }
 
     /**
@@ -67,8 +92,13 @@ class JsonAdaptedMember {
 
     public Member toModelType() throws IllegalValueException {
         final List<Position> memberPositions = new ArrayList<>();
-        for (JsonAdaptedPosition tag : attachedPositions) {
-            memberPositions.add(tag.toModelType());
+        for (JsonAdaptedPosition position : attachedPositions) {
+            memberPositions.add(position.toModelType());
+        }
+
+        final List<Task> memberTaskList = new ArrayList<>();
+        for (JsonAdaptedTask task : attachedTasks) {
+            memberTaskList.add(task.toModelType());
         }
 
         if (name == null) {
@@ -104,7 +134,9 @@ class JsonAdaptedMember {
         final Address modelAddress = new Address(address);
 
         final Set<Position> modelPositions = new HashSet<>(memberPositions);
-        return new Member(modelName, modelPhone, modelEmail, modelAddress, modelPositions);
+        final TaskList modelTaskList = new TaskList();
+        modelTaskList.setTasks(memberTaskList);
+        return new Member(modelName, modelPhone, modelEmail, modelAddress, modelPositions, modelTaskList);
     }
 
 }
