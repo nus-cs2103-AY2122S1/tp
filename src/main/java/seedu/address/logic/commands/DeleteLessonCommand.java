@@ -23,7 +23,7 @@ public class DeleteLessonCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Lesson: %1$s";
+    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
 
     private final Index targetIndex;
 
@@ -40,15 +40,15 @@ public class DeleteLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, studentToDelete));
+        Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteLesson(lessonToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteLessonCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteLessonCommand) other).targetIndex)); // state check
     }
 }

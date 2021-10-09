@@ -106,7 +106,7 @@ public interface Model {
     /**
      * Returns an unmodifiable list of lessons.
      */
-    ObservableList<Lesson> getLessonList();
+    ObservableList<Lesson> getFilteredLessonList();
 
     /**
      * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
