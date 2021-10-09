@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.tracker.commons.exceptions.IllegalValueException;
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Description;
 import seedu.tracker.model.module.Mc;
@@ -28,6 +31,8 @@ class JsonAdaptedModule {
     private final String title;
     private final String description;
     private final int mc;
+    private final int academicYear;
+    private final int semester;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,11 +41,14 @@ class JsonAdaptedModule {
     @JsonCreator
     public JsonAdaptedModule(@JsonProperty("code") String code, @JsonProperty("title") String title,
                              @JsonProperty("description") String description, @JsonProperty("mc") int mc,
+                             @JsonProperty("academicYear") int academicYear, @JsonProperty("semester") int semester,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.code = code;
         this.title = title;
         this.description = description;
         this.mc = mc;
+        this.academicYear = academicYear;
+        this.semester = semester;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +62,15 @@ class JsonAdaptedModule {
         title = source.getTitle().value;
         description = source.getDescription().value;
         mc = source.getMc().value;
+
+        if (source.hasAcademicCalendar()) {
+            academicYear = source.getAcademicCalendar().getAcademicYear().value;
+            semester = source.getAcademicCalendar().getSemester().value;
+        } else {
+            academicYear = 0;
+            semester = 0;
+        }
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -103,7 +120,25 @@ class JsonAdaptedModule {
         final Mc modelMc = new Mc(mc);
 
         final Set<Tag> modelTags = new HashSet<>(moduleTags);
-        return new Module(modelCode, modelTitle, modelDescription, modelMc, modelTags);
+
+        if (academicYear == 0 || semester == 0) {
+            return new Module(modelCode, modelTitle, modelDescription, modelMc, modelTags);
+        } else {
+
+            if (!AcademicYear.isValidAcademicYear(academicYear)) {
+                throw new IllegalValueException(AcademicYear.MESSAGE_CONSTRAINTS);
+            }
+            final AcademicYear modelAcademicYear = new AcademicYear(academicYear);
+
+            if (!Semester.isValidSemester(semester)) {
+                throw new IllegalValueException(Semester.MESSAGE_CONSTRAINTS);
+            }
+            final Semester modelSemester = new Semester(semester);
+
+            final AcademicCalendar modelAcademicCalendar = new AcademicCalendar(modelAcademicYear, modelSemester);
+
+            return new Module(modelCode, modelTitle, modelDescription, modelMc, modelTags, modelAcademicCalendar);
+        }
     }
 
 }
