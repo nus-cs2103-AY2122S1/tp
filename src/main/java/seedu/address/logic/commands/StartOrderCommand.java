@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.OrderManager;
+import seedu.address.model.Order;
 
 /**
  * Creates an order.
@@ -33,7 +33,7 @@ public class StartOrderCommand extends Command {
         if (model.hasUnclosedOrder()) {
             return new CommandResult(MESSAGE_HAS_UNCLOSED_ORDER);
         } else {
-            model.setOrder(new OrderManager());
+            model.setOrder(new Order());
             return new CommandResult(MESSAGE_SUCCESS);
         }
     }
