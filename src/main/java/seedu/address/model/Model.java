@@ -112,4 +112,10 @@ public interface Model {
      * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
      */
     Lesson searchLessons(String lessonCode);
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
 }

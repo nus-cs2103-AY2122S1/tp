@@ -22,7 +22,7 @@ public class TypicalLessons {
     private TypicalLessons() {} //prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical lessons.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

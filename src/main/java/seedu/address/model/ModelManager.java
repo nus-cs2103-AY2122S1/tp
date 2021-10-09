@@ -131,7 +131,7 @@ public class ModelManager implements Model {
         addressBook.addLesson(lesson);
     }
 
-    //=========== Filtered Person and Lesson List Accessors ===========================================================
+    //=========== Filtered Person and Lesson List Accessors ======================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -146,6 +146,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
     }
 
     @Override
