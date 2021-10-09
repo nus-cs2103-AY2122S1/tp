@@ -35,8 +35,4 @@ class TaskTest {
         assertTrue(Task.isValidTaskName("very-very-very-very-very-very-long-long-long long long long long long name"));
         assertTrue(Task.isValidTaskName("0 1 2 3 4 5 6 7 8 9"));
     }
-
-    @Test
-    void isSameTask() {
-    }
 }

@@ -53,12 +53,13 @@ public class TaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
 
-        /*if (!target.isSameTask(editedTask) && contains(editedTask)) {
+        if (!target.isSameTask(editedTask) && contains(editedTask)) {
             throw new DuplicateTaskException();
-        }*/
+        }
 
         internalList.set(index, editedTask);
     }
+
     /**
      * Removes the equivalent task from the list.
      * The task must exist in the list.
@@ -81,9 +82,9 @@ public class TaskList implements Iterable<Task> {
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
-        /*if (!tasksAreUnique(tasks)) {
+        if (!tasksAreUnique(tasks)) {
             throw new DuplicateTaskException();
-        }*/
+        }
 
         internalList.setAll(tasks);
     }
@@ -114,12 +115,20 @@ public class TaskList implements Iterable<Task> {
             return false;
         }
         TaskList tasks = (TaskList) o;
-        return Objects.equals(internalList, tasks.internalList);
+        return internalList.equals(tasks.internalList);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(internalList, internalUnmodifiableList);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Tasks: ");
+        this.internalList.forEach(builder::append);
+        return builder.toString();
     }
 
     /**

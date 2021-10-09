@@ -66,7 +66,7 @@ public class Task {
      * This defines a weaker notion of equality between two tasks.
      */
     public boolean isSameTask(Task otherTask) {
-        return false;
+        return this.taskName.equals(otherTask.taskName);
     }
 
     @Override
@@ -92,6 +92,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "]" + taskName;
+        return "(" + getStatusIcon() + ")" + taskName;
     }
 }

@@ -2,14 +2,12 @@ package seedu.address.model.member;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.position.Position;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList;
 
 /**
@@ -38,7 +36,6 @@ public class Member {
         this.email = email;
         this.address = address;
         this.positions.addAll(positions);
-        this.taskList.setTasks(new ArrayList<Task>());
     }
 
     /**
@@ -51,7 +48,7 @@ public class Member {
         this.email = email;
         this.address = address;
         this.positions.addAll(positions);
-        setTaskList(taskList);
+        this.taskList.setTasks(taskList);
     }
 
     public Name getName() {
@@ -83,7 +80,7 @@ public class Member {
     }
 
     public void setTaskList(TaskList taskList) {
-        taskList.setTasks(taskList);
+        this.taskList.setTasks(taskList);
     }
 
     /**
@@ -144,7 +141,7 @@ public class Member {
             builder.append("; Positions: ");
             positions.forEach(builder::append);
         }
-        if (taskList.isEmpty()) {
+        if (!taskList.isEmpty()) {
             builder.append("; Tasks: ");
             taskList.iterator().forEachRemaining(builder::append);
         }

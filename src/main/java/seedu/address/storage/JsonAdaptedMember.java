@@ -39,23 +39,6 @@ class JsonAdaptedMember {
     @JsonCreator
     public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("attachedPosition") List<JsonAdaptedPosition> attachedPositions
-                             ) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        if (attachedPositions != null) {
-            this.attachedPositions.addAll(attachedPositions);
-        }
-    }
-
-    /**
-     * Constructs a {@code JsonAdaptedMember} with the given member details.
-     */
-    @JsonCreator
-    public JsonAdaptedMember(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("attachedPosition") List<JsonAdaptedPosition> attachedPositions,
                              @JsonProperty("attachedTasks") List<JsonAdaptedTask> attachedTasks) {
         this.name = name;

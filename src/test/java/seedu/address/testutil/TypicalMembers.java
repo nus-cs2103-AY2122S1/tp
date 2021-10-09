@@ -26,11 +26,13 @@ public class TypicalMembers {
     public static final Member ALICE = new MemberBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withPositions("friends").build();
+            .withPositions("friends")
+            .withTaskList(TypicalTasks.getTypicalTasks()).build();
     public static final Member BENSON = new MemberBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withPositions("owesMoney", "friends").build();
+            .withPositions("owesMoney", "friends")
+            .withTaskList(TypicalTasks.getTypicalTasks()).build();
     public static final Member CARL = new MemberBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Member DANIEL = new MemberBuilder().withName("Daniel Meier").withPhone("87652533")
