@@ -11,7 +11,6 @@ import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.tracker.commons.core.index.Index;

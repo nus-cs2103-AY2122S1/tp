@@ -7,6 +7,7 @@ import static seedu.tracker.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
 import java.util.List;
 import java.util.Set;
+
 import seedu.tracker.commons.core.Messages;
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.logic.commands.exceptions.CommandException;
@@ -38,6 +39,10 @@ public class TakeCommand extends Command {
     private final Index index;
     private final AcademicCalendar academicCalendar;
 
+    /**
+     * @param index of the module in the filtered module list to schedule
+     * @param academicCalendar the specific semester in which the module is scheduled
+     */
     public TakeCommand(Index index, AcademicCalendar academicCalendar) {
         requireNonNull(index);
         requireNonNull(academicCalendar);
@@ -46,6 +51,10 @@ public class TakeCommand extends Command {
         this.academicCalendar = academicCalendar;
     }
 
+    /**
+     * Creates and returns a {@code Module} with the details of {@code moduleToSchedule}
+     * scheduled for {@code academicCalendar}.
+     */
     public Module createScheduledModule(Module moduleToSchedule, AcademicCalendar academicCalendar) {
         assert moduleToSchedule != null;
 
