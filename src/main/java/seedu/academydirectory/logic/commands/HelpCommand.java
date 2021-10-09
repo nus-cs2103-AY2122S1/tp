@@ -3,7 +3,9 @@ package seedu.academydirectory.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.util.UserGuideReaderUtil;
+import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
 
 /**
@@ -12,17 +14,17 @@ import seedu.academydirectory.model.Model;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
+    public static final String DEFAULT_SYNTAX = "`all`";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows program usage instructions for the command in query\n"
             + "Example: " + COMMAND_WORD + "add";
     public static final String SHOWING_HELP_MESSAGE = "Showing help.";
     public static final String MESSAGE_HELP_SUCCESS = "Show help for command: %1$s";
-    public static final String MESSAGE_ARGUMENTS = "Syntax: %2$s";
 
     private final String syntax;
 
     public HelpCommand() {
-        this.syntax = null;
+        this.syntax = DEFAULT_SYNTAX;
     }
 
     /**
@@ -35,15 +37,18 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        CommandResult commandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
-        if (this.syntax.length() == 0) {
-            commandResult.setHelpContent(UserGuideReaderUtil.getGeneralHelp());
-        } else {
-            commandResult.setHelpContent(UserGuideReaderUtil.getSpecificHelp(this.syntax));
+        if (this.syntax.equals(DEFAULT_SYNTAX)) {
+            String generalHelp = UserGuideReaderUtil.getGeneralHelp();
+            return new CommandResult(SHOWING_HELP_MESSAGE, generalHelp, true, false);
         }
-        return commandResult;
+        String specificHelp = UserGuideReaderUtil.getSpecificHelp(this.syntax);
+        if (specificHelp.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
+        }
+        return new CommandResult(String.format(MESSAGE_HELP_SUCCESS, this.syntax),
+                specificHelp, true, false);
     }
 
     @Override

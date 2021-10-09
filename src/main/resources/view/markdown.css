@@ -90,7 +90,7 @@
 
 .markdown-table-table {
   -fx-vgap: -1;
-  -fx-hgap: -1;
+  -fx-hgap: 1;
 }
 
 .markdown-table-cell {

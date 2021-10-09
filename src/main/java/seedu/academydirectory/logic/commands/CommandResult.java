@@ -8,6 +8,7 @@ import java.util.Objects;
  * Represents the result of a command execution.
  */
 public class CommandResult {
+    private static final String DEFAULT_HELP = "### None";
 
     private final String feedbackToUser;
 
@@ -17,13 +18,21 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private String helpContent = "None";
+    private final String helpContent;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.helpContent = DEFAULT_HELP;
+        this.showHelp = showHelp;
+        this.exit = exit;
+    }
+
+    public CommandResult(String feedbackToUser, String helpContent, boolean showHelp, boolean exit) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.helpContent = helpContent;
         this.showHelp = showHelp;
         this.exit = exit;
     }
@@ -46,12 +55,6 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
-    }
-
-    public void setHelpContent(String helpContent) {
-        if (showHelp) {
-            this.helpContent = helpContent;
-        }
     }
 
     public String getHelpContent() {
@@ -80,4 +83,8 @@ public class CommandResult {
         return Objects.hash(feedbackToUser, showHelp, exit);
     }
 
+    @Override
+    public String toString() {
+        return helpContent;
+    }
 }

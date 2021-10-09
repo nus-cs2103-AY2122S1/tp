@@ -9,7 +9,6 @@ public class UserGuideReaderUtil {
     private static final File USER_GUIDE= new File("docs/UserGuide.md");
     private static final String SUMMARY_HEADER = "## Command summary";
     private static final String COMMAND_HEADER = "### ";
-    private static final String ERROR_MESSAGE = "### No command match your query";
 
     private static boolean isTerminatedCondition(String currentLine, String keyword) {
         return currentLine.startsWith(COMMAND_HEADER) && !currentLine.contains(keyword);
@@ -60,10 +59,6 @@ public class UserGuideReaderUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (!hasKeyword) {
-            return ERROR_MESSAGE;
-        } else {
-            return specificHelp.toString();
-        }
+        return specificHelp.toString();
     }
 }
