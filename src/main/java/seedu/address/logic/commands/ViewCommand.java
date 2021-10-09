@@ -27,7 +27,7 @@ public class ViewCommand extends Command {
     private final Index index;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to view
      */
     public ViewCommand(Index index) {
         requireNonNull(index);
@@ -45,7 +45,10 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, personToView.getName()));
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, personToView.getName()));
+        commandResult.setPersonToView(personToView);
+
+        return commandResult;
     }
 
     @Override
