@@ -2,16 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -25,6 +24,18 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
+    private static Person samplePersonA;
+    private static AddCommand sampleCommandA;
+    private static AddCommand sampleCommandB;
+
+    @BeforeAll
+    public static void oneTimeSetUp() {
+        // Initialize variables once before all tests
+        samplePersonA = new PersonBuilder().withName("Alice").build();
+        Person samplePersonB = new PersonBuilder().withName("Bob").build();
+        sampleCommandA = new AddCommand(samplePersonA);
+        sampleCommandB = new AddCommand(samplePersonB);
+    }
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -39,7 +50,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
     }
 
     @Test
@@ -53,24 +64,24 @@ public class AddCommandTest {
     }
 
     @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+    public void equals_sameValues_returnsTrue() {
+        AddCommand sampleCommandACopy = new AddCommand(samplePersonA);
+        assertEquals(sampleCommandA, sampleCommandACopy);
+    }
 
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertEquals(addAliceCommand, addAliceCommandCopy);
+    @Test
+    public void equals_differentTypes_returnsFalse() {
+        assertNotEquals(1, sampleCommandA);
+    }
 
-        // different types -> returns false
-        assertNotEquals(1, addAliceCommand);
+    @Test
+    public void equals_nullValue_returnsFalse() {
+        assertNotEquals(null, sampleCommandA);
+    }
 
-        // null -> returns false
-        assertNotEquals(null, addAliceCommand);
-
-        // different person -> returns false
-        assertNotEquals(addAliceCommand, addBobCommand);
+    @Test
+    public void equals_differentPerson_returnsFalse() {
+        assertNotEquals(sampleCommandA, sampleCommandB);
     }
 
     /**
