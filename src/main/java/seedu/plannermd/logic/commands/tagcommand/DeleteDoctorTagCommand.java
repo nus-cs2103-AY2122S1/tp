@@ -13,20 +13,21 @@ import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
-import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.tag.Tag;
 
 /**
- * Deletes a tag from an existing patient in the plannermd.
+ * Deletes a tag from an existing doctor in the plannermd.
  */
-public class DeletePatientTagCommand extends DeleteTagCommand {
+public class DeleteDoctorTagCommand extends DeleteTagCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tag from the patient identified "
-            + "by the index number used in the displayed patient list.\n" + "Parameters: " + PREFIX_ID
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tag from the doctor identified "
+            + "by the index number used in the displayed doctor list.\n" + "Parameters: " + PREFIX_ID
             + "ID (must be a positive integer) " + PREFIX_TAG + "TAG\n" + "Example: " + COMMAND_WORD + " " + PREFIX_ID
             + "1 " + PREFIX_TAG + "healthy";
 
-    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag from Patient: %1$s";
+    public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag from Doctor: %1$s";
+    public static final String MESSAGE_INVALID_TAG = "The tag does not exist.";
 
     private final Index index;
     private final Tag tag;
@@ -35,7 +36,7 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
      * @param index of the person in the filtered person list for deleting a tag
      * @param tag the tag to be deleted
      */
-    public DeletePatientTagCommand(Index index, Tag tag) {
+    public DeleteDoctorTagCommand(Index index, Tag tag) {
         requireNonNull(index);
         requireNonNull(tag);
 
@@ -44,7 +45,7 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
     }
 
     /**
-     * Executes the command to delete a tag from a patient.
+     * Executes the command to delete a tag from a doctor.
      *
      * @param model {@code Model} which the command should operate on.
      * @return {@code CommandResult} which represents the result after executing
@@ -53,23 +54,23 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Doctor> lastShownList = model.getFilteredDoctorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
-        Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Set<Tag> existingTags = new HashSet<>(patientToEdit.getTags());
+        Doctor doctorToEdit = lastShownList.get(index.getZeroBased());
+        Set<Tag> existingTags = new HashSet<>(doctorToEdit.getTags());
 
         if (!existingTags.contains(tag)) {
             throw new CommandException(MESSAGE_INVALID_TAG);
         }
 
         existingTags.remove(tag);
-        Patient editedPatient = setPatientTags(model, patientToEdit, existingTags);
+        Doctor editedDoctor = setDoctorTags(model, doctorToEdit, existingTags);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedPatient));
+        return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, editedDoctor));
     }
 
     @Override
@@ -80,12 +81,12 @@ public class DeletePatientTagCommand extends DeleteTagCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeletePatientTagCommand)) {
+        if (!(other instanceof DeleteDoctorTagCommand)) {
             return false;
         }
 
         // state check
-        DeletePatientTagCommand c = (DeletePatientTagCommand) other;
+        DeleteDoctorTagCommand c = (DeleteDoctorTagCommand) other;
         return index.equals(c.index) && tag.equals(c.tag);
     }
 }
