@@ -17,5 +17,6 @@ Student -up-> "*" Tag
 Student *--> Name
 Student *--> Phone
 Student *--> Email
+Student *--> Telegram
 Student *--> Address
 @enduml

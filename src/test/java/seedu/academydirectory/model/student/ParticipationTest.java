@@ -33,8 +33,11 @@ public class ParticipationTest {
         participation.add(1, 100);
         assertTrue(participation.getParticipationArray()[0] == 100);
 
-        participation.add(1, 100);
-        assertTrue(participation.getParticipationArray()[0] == 100);
+        participation.add(1, 500);
+        assertTrue(participation.getParticipationArray()[0] == 500);
+
+        participation.add(1, 500);
+        assertTrue(participation.getParticipationArray()[0] == 500);
     }
 
     @Test
@@ -52,8 +55,8 @@ public class ParticipationTest {
         assertFalse(Participation.isValidParticipation("a"));
         assertFalse(Participation.isValidParticipation("1a"));
         assertFalse(Participation.isValidParticipation("a1"));
-        assertFalse(Participation.isValidParticipation("-101"));
-        assertFalse(Participation.isValidParticipation("101"));
+        assertFalse(Participation.isValidParticipation("-501"));
+        assertFalse(Participation.isValidParticipation("501"));
 
     }
 

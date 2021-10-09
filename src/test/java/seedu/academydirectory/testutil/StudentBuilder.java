@@ -12,6 +12,7 @@ import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.student.StudioRecord;
+import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 import seedu.academydirectory.model.util.SampleDataUtil;
 
@@ -23,12 +24,14 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_TELEGRAM = "@amy";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final int DEFAULT_NUMBER_OF_STUDIO_SESSIONS = 12;
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Telegram telegram;
     private Address address;
     private Set<Tag> tags;
     private StudioRecord studioRecord;
@@ -41,6 +44,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         studioRecord = new StudioRecord(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
@@ -54,6 +58,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
+        telegram = studentToCopy.getTelegram();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         studioRecord = studentToCopy.getStudioRecord();
@@ -123,6 +128,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Telegram} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
+        return this;
+    }
+
+    /**
      * Sets the {@code Assessment} of the {@code Student} that we are building.
      */
     public StudentBuilder withAssessment() {
@@ -134,7 +147,8 @@ public class StudentBuilder {
      * Builds the Student object for testing.
      */
     public Student build() {
-        Student newStudent = new Student(name, phone, email, address, tags);
+
+        Student newStudent = new Student(name, phone, email, telegram, address, tags);
         newStudent.setAttendance(studioRecord.getAttendance());
         return newStudent;
     }

@@ -63,8 +63,8 @@ public class ParticipationCommand extends Command {
 
             Student editedPerson = new Student(
                     studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                    studentToEdit.getAddress(), studentToEdit.getStudioRecord(), studentToEdit.getAssessment(),
-                    studentToEdit.getTags());
+                    studentToEdit.getTelegram(), studentToEdit.getAddress(), studentToEdit.getStudioRecord(),
+                    studentToEdit.getAssessment(), studentToEdit.getTags());
             editedPerson.setParticipation(participationToEdit);
             model.setStudent(studentToEdit, editedPerson);
         }
