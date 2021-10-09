@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Cheah Yan (Xie Yan)
 
-<img src="images/cheahyan.png" width="200px">
+<img src="images/cheahyan.png" width="200px" height="300px">
 
 
 [[github](https://github.com/CheahYan)]
