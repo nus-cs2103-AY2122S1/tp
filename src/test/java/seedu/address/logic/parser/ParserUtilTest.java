@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseLastVisit;
 import static seedu.address.logic.parser.ParserUtil.parseVisit;
+import static seedu.address.logic.parser.ParserUtil.parseVisitForAdd;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -18,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
@@ -37,7 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_LANGUAGE = "English";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_VISIT = "2020-11-11";
+    private static final String VALID_VISIT_DATE = "2020-11-11";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -211,14 +214,60 @@ public class ParserUtilTest {
 
     @Test
     public void parseVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
-        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT);
-        assertEquals(expectedVisit, ParserUtil.parseVisit(VALID_VISIT));
+        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT_DATE);
+        assertEquals(expectedVisit, ParserUtil.parseVisit(VALID_VISIT_DATE));
     }
 
     @Test
     public void parseVisit_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
-        String visitWithWhitespace = WHITESPACE + VALID_VISIT + WHITESPACE;
-        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT);
+        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATE + WHITESPACE;
+        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT_DATE);
         assertEquals(expectedVisit, ParserUtil.parseVisit(visitWithWhitespace));
+    }
+
+    @Test
+    public void parseVisitForAdd_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVisitForAdd((String) null));
+    }
+
+    @Test
+    public void parseVisitForAdd_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisitForAdd(INVALID_VISIT));
+    }
+
+    @Test
+    public void parseVisitForAdd_validValueWithoutWhitespace_returnsVisit() throws Exception {
+        Optional<Visit> expectedVisit = parseVisitForAdd(VALID_VISIT_DATE);
+        assertEquals(expectedVisit, ParserUtil.parseVisitForAdd(VALID_VISIT_DATE));
+    }
+
+    @Test
+    public void parseVisitForAdd_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
+        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATE + WHITESPACE;
+        Optional<Visit> expectedVisit = parseVisitForAdd(VALID_VISIT_DATE);
+        assertEquals(expectedVisit, ParserUtil.parseVisitForAdd(visitWithWhitespace));
+    }
+
+    @Test
+    public void parseLastVisit_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLastVisit((String) null));
+    }
+
+    @Test
+    public void parseLastVisit_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLastVisit(INVALID_VISIT));
+    }
+
+    @Test
+    public void parseLastVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
+        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATE);
+        assertEquals(expectedLastVisit, ParserUtil.parseLastVisit(VALID_VISIT_DATE));
+    }
+
+    @Test
+    public void parseLastVisit_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
+        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATE + WHITESPACE;
+        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATE);
+        assertEquals(expectedLastVisit, parseLastVisit(visitWithWhitespace));
     }
 }

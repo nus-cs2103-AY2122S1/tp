@@ -186,6 +186,34 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String Visit} into an {@code Visit} for the add command.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Visit} is invalid.
+     */
+    public static Optional<Visit> parseVisitForAdd(String visit) throws ParseException {
+        requireNonNull(visit);
+        String trimmedVisit = visit.trim();
+
+        if (trimmedVisit.isEmpty()) {
+            return Optional.ofNullable(new Visit(""));
+        }
+
+        if (!Visit.isValidVisit(trimmedVisit)) {
+            throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            LocalDate.parse(trimmedVisit, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        return Optional.ofNullable(new Visit(trimmedVisit));
+    }
+
+    /**
      * Parses {@code frequency} into a {@code frequency} and returns it.
      * Leading and trailing whitespaces will be trimmed.
      *

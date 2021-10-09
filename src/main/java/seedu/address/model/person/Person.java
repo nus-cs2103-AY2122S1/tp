@@ -147,7 +147,7 @@ public class Person {
                 .append("; Last Visit: ")
                 .append(getLastVisit())
                 .append("; Visit: ")
-                .append(getVisit());
+                .append(getVisit().get());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
