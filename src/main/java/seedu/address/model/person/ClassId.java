@@ -15,7 +15,7 @@ public class ClassId {
     /*
      * A class ID must start with an alphabet followed by two numbers.
      */
-    public static final String VALIDATION_REGEX = "[A-Z][0-9]{2}";
+    public static final String VALIDATION_REGEX = "[B][0-9]{2}";
 
     public final String classId;
 
@@ -34,7 +34,8 @@ public class ClassId {
      * Returns true if a given string is a valid grade.
      */
     public static boolean isValidClassId(String classId) {
-        return classId.matches(VALIDATION_REGEX) && classId.startsWith("B") && classId.length() == 3;
+
+        return classId.matches(VALIDATION_REGEX);
     }
 
 
