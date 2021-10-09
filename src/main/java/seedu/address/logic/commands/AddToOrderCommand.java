@@ -35,7 +35,6 @@ public class AddToOrderCommand extends Command {
      */
     public AddToOrderCommand(Item item) {
         requireNonNull(item);
-
         itemToAdd = item;
     }
 

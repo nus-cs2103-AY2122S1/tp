@@ -179,8 +179,6 @@ public class ModelManager implements Model {
 
     /**
      * Adds item to the current order list.
-     *
-     * @param item
      */
     @Override
     public void addToOrder(Item item) {
@@ -191,8 +189,6 @@ public class ModelManager implements Model {
 
     /**
      * Removes the item from the current order list.
-     *
-     * @param item
      */
     @Override
     public void removeFromOrder(Item item) {
@@ -208,7 +204,7 @@ public class ModelManager implements Model {
     public void transactAndClearOrder() {
         assert hasUnclosedOrder();
 
-        inventory.transactOrder(optionalOrder.get());
-        optionalOrder = Optional.empty();
+        TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
+        optionalOrder = Optional.empty();  // Reset to no order status
     }
 }
