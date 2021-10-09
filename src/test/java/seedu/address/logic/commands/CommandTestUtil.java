@@ -44,8 +44,8 @@ public class CommandTestUtil {
     public static final String VALID_EXPECTED_SALARY_BOB = "2600";
     public static final String VALID_LEVEL_OF_EDUCATION_AMY = "PhD";
     public static final String VALID_LEVEL_OF_EDUCATION_BOB = "Masters";
-    public static final Integer VALID_EXPERIENCE_AMY = 1;
-    public static final Integer VALID_EXPERIENCE_BOB = 2;
+    public static final String VALID_EXPERIENCE_AMY = "1";
+    public static final String VALID_EXPERIENCE_BOB = "2";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

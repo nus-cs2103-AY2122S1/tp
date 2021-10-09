@@ -160,7 +160,7 @@ public class ParserUtil {
      */
     public static Experience parseExperience(String experience) throws ParseException {
         requireNonNull(experience);
-        Integer years = Integer.parseInt(experience.trim());
+        String years = experience.trim();
         if (!Experience.isValidExperience(years)) {
             throw new ParseException(Experience.MESSAGE_CONSTRAINTS);
         }

@@ -156,11 +156,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Experience.class.getSimpleName()));
         }
-
-        if (!Experience.isValidExperience(Integer.parseInt(experience))) {
+        if (!Experience.isValidExperience(experience)) {
             throw new IllegalValueException(Experience.MESSAGE_CONSTRAINTS);
         }
-        final Experience modelExperience = new Experience(Integer.parseInt(experience));
+        final Experience modelExperience = new Experience(experience);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 

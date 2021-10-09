@@ -15,6 +15,16 @@ public class EmploymentType {
         Type(String term) {
             this.term = term;
         }
+
+        public static String getRegex() {
+            StringBuilder regex = new StringBuilder("(?i)\\b(?:");
+            for (Type type: Type.values()) {
+                regex.append(type.term);
+                regex.append("|");
+            }
+            regex.append("\\w+)\\b");
+            return regex.toString();
+        }
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Employment type can only be one of the following: "

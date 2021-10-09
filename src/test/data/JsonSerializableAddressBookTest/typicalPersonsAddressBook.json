@@ -8,7 +8,7 @@
     "employmentType": "Full time",
     "expectedSalary" : "2500",
     "levelOfEducation" : "PhD",
-    "experience" : 0,
+    "experience" : "0",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -18,7 +18,7 @@
     "employmentType": "Part time",
     "expectedSalary" : "2700",
     "levelOfEducation" : "Masters",
-    "experience" : 1,
+    "experience" : "1",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -28,7 +28,7 @@
     "employmentType": "Temporary",
     "expectedSalary" : "5500",
     "levelOfEducation" : "Elementary",
-    "experience" : 2,
+    "experience" : "2",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -38,7 +38,7 @@
     "employmentType": "Internship",
     "expectedSalary" : "3500",
     "levelOfEducation" : "Middle School",
-    "experience" : 3,
+    "experience" : "3",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -48,7 +48,7 @@
     "employmentType": "Full time",
     "expectedSalary" : "5700",
     "levelOfEducation" : "Bachelors",
-    "experience" : 4,
+    "experience" : "4",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -58,7 +58,7 @@
     "employmentType": "Part time",
     "expectedSalary" : "1900",
     "levelOfEducation" : "High School",
-    "experience" : 5,
+    "experience" : "5",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -68,7 +68,7 @@
     "employmentType": "Internship",
     "expectedSalary" : "900",
     "levelOfEducation" : "University",
-    "experience" : 6,
+    "experience" : "6",
     "tagged" : [ ]
   } ]
 }

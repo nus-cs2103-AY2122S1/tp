@@ -13,12 +13,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
+import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
 import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
@@ -67,7 +72,7 @@ public class FindCommandParser implements Parser<FindCommand> {
          * Constructs a FindDescriptor.
          * FindDescriptors extracts user input for each Prefix and converts them into a list of Predicates.
          */
-        FindDescriptor(ArgumentMultimap argMultimap) {
+        FindDescriptor(ArgumentMultimap argMultimap) throws ParseException {
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_NAME).get();
@@ -109,18 +114,27 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String arg = argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get();
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    predicateList.add(new EmploymentTypeContainsKeywordsPredicate(Arrays.asList(keywords)));
+                    List<String> keywords = new ArrayList<>();
+                    Pattern r = Pattern.compile(EmploymentType.Type.getRegex());
+                    Matcher m = r.matcher(trimmedArg);
+                    while (m.find()) {
+                        keywords.add(m.group());
+                    }
+                    System.out.println(keywords);
+                    predicateList.add(new EmploymentTypeContainsKeywordsPredicate(keywords));
                 }
             }
 
             if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_EXPECTED_SALARY).get();
                 String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    predicateList.add(new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords)));
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!ExpectedSalary.isValidExpectedSalary(keyword)) {
+                        throw new ParseException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+                    }
                 }
+                predicateList.add(new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords)));
             }
 
             if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
