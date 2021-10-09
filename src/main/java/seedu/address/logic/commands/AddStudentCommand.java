@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a student to TutorAid.
  */
 public class AddStudentCommand extends Command {
 
@@ -35,7 +35,7 @@ public class AddStudentCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddStudentCommand to add the specified {@code Person}
      */
     public AddStudentCommand(Person person) {
         requireNonNull(person);

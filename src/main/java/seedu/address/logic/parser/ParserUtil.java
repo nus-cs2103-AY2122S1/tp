@@ -60,14 +60,15 @@ public class ParserUtil {
      */
     public static ParentName parseParentName(String name) throws ParseException {
         requireNonNull(name);
-        if (!name.equals("")) {
-            String trimmedName = name.trim();
-            if (!Name.isValidName(trimmedName)) {
-                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-            }
-            return new ParentName(trimmedName);
+        if (name.equals("")) {
+            return new ParentName("");
         }
-        return new ParentName("");
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new ParentName(trimmedName);
+
     }
 
     /**
@@ -78,14 +79,14 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
-        if (!phone.equals("")) {
-            String trimmedPhone = phone.trim();
-            if (!Phone.isValidPhone(trimmedPhone)) {
-                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-            }
-            return new Phone(trimmedPhone);
+        if (phone.equals("")) {
+            return new Phone("");
         }
-        return new Phone("");
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new Phone(trimmedPhone);
     }
 
     /**

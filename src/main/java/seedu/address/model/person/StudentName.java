@@ -4,7 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class StudentName extends Name {
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code StudentName}.
      *
      * @param name A valid name.
      */
