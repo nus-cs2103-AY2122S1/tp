@@ -1,4 +1,4 @@
-package seedu.address.storage.TaskList;
+package seedu.address.storage.tasklist;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,7 +38,8 @@ class JsonAdaptedTask {
     public Task toModelType() throws IllegalValueException {
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDescription.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                TaskDescription.class.getSimpleName()));
         }
         if (!TaskDescription.isValidDescription(description)) {
             throw new IllegalValueException(TaskDescription.MESSAGE_CONSTRAINTS);

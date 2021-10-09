@@ -10,9 +10,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList;
-import seedu.address.storage.TaskList.TaskListStorage;
+import seedu.address.storage.tasklist.TaskListStorage;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -85,7 +84,9 @@ public class StorageManager implements Storage {
     // ================ TaskList methods ==============================
 
     @Override
-    public Path getTaskListFilePath() {return taskListStorage.getTaskListFilePath(); }
+    public Path getTaskListFilePath() {
+        return taskListStorage.getTaskListFilePath();
+    }
 
     @Override
     public Optional<TaskList> readTaskList() throws DataConversionException, IOException {

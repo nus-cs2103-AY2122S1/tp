@@ -28,9 +28,9 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
-import seedu.address.storage.TaskList.JsonTaskListStorage;
-import seedu.address.storage.TaskList.TaskListStorage;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.tasklist.JsonTaskListStorage;
+import seedu.address.storage.tasklist.TaskListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 

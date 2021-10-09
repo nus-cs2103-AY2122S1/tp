@@ -52,7 +52,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return addressBookFilePath;
     }
 
-    public Path getTaskListFilePath() { return taskListFilePath; }
+    public Path getTaskListFilePath() {
+        return taskListFilePath;
+    }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);

@@ -1,4 +1,4 @@
-package seedu.address.storage.TaskList;
+package seedu.address.storage.tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.TaskList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskList;
 
 /**
  * An Immutable TaskList that is serializable to JSON format.

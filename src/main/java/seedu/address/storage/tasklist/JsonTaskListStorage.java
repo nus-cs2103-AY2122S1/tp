@@ -1,4 +1,4 @@
-package seedu.address.storage.TaskList;
+package seedu.address.storage.tasklist;
 
 import static java.util.Objects.requireNonNull;
 

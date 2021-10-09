@@ -9,7 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.TaskList;
-import seedu.address.storage.TaskList.TaskListStorage;
+import seedu.address.storage.tasklist.TaskListStorage;
 
 /**
  * API of the Storage component

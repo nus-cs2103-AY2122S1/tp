@@ -1,4 +1,4 @@
-package seedu.address.storage.TaskList;
+package seedu.address.storage.tasklist;
 
 import java.io.IOException;
 import java.nio.file.Path;

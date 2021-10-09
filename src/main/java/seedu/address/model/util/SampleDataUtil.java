@@ -13,9 +13,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
 import seedu.address.model.task.TaskDescription;
-
+import seedu.address.model.task.TaskList;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -46,10 +45,10 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-                new Task(new TaskDescription("Submit CS2100 Assignment by 23:59")),
-                new Task(new TaskDescription("ST2334 quiz before Friday")),
-                new Task(new TaskDescription("Do PR review")),
-                new Task(new TaskDescription("Catch up with ST lectures"))
+            new Task(new TaskDescription("Submit CS2100 Assignment by 23:59")),
+            new Task(new TaskDescription("ST2334 quiz before Friday")),
+            new Task(new TaskDescription("Do PR review")),
+            new Task(new TaskDescription("Catch up with ST lectures"))
         };
     }
 
