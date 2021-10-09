@@ -16,9 +16,12 @@ Finding your next lead has never been easier.
     * [Retrieve particular contact: view](#retrieve-particular-contact--view)
     * [Update existing contact: update](#update-existing-contact--update)
     * [Delete particular contact: delete](#delete-particular-contact--delete)
+    * [List all contacts](#list-all-contacts--list)
     * [Clearing all entries: clear](#clearing-all-entries--clear)
     * [Sort Contacts: sort](#sort-contacts--sort)
-    * [Locating clients by keywords: find](#locating-clients-by-keywords--find)
+    * [Locating person by name: find](#locating-clients-by-keywords--find)
+    * [Locating clients by keywords](#locating-clients-by-keywords--search)
+    * [Filter current list](#filter-current-list-by-keywords--filter)
     * [Exiting the program: exit](#exiting-the-program--exit)
     * [Saving data](#saving-the-data)
     * [Edit data file](#editing-data-file)
@@ -58,6 +61,7 @@ Finding your next lead has never been easier.
 ## Client Information
 
 Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag.
+
 Client Attribute | Type of Attribute | Argument Tag
 -----------------|-----------------|-----------------
 Client ID (**unique**) | integer | None. Assigned on creation of new contact
@@ -197,6 +201,28 @@ Examples:
 * `search John` returns `john` and `John Doe`
 * `search alex david` returns `Alex Yeoh`, `David Li`<br>
 
+### Filter current list by keywords : `filter`
+
+Filter the current list by the given keywords.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...`
+
+* Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts.
+* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all attribute of the person
+* `attribute/` refers to the argument tag for the client's attribute.
+* `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.
+* `*` can be used for the `KEYWORD` along with 1 or more `ATTRIBUTE/ATTRIBUTE_KEYWORD` to filter using only attribute.
+* The filter is case-insensitive. e.g `keith` will match `Keith`.
+* The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
+* Clients matching at least one keyword will be returned (i.e. `OR` filter).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* Only clients whose attribute matches with the attribute keyword will be returned (i.e. `AND` search), if attribute keyword is provided.
+  e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.
+
+Examples:
+* `search John` returns `john` and `John Doe`
+* `search alex david` returns `Alex Yeoh`, `David Li`<br>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -241,5 +267,6 @@ Action | Format | Examples
 **List** | `list` | - |
 **Find** | `find KEYWORD [OTHER_KEYWORD]` | find alex tom |
 **Search** | `search KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com risk-appetite/5 |
+**Filter** | `filter KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com p/9 |
 **Sort** | `sort <attribute>/{ASC/DESC}` | sort risk-appetite/asc |
 **Exit** | `exit` | - |
