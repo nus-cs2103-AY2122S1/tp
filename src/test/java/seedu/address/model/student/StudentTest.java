@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
@@ -48,9 +49,10 @@ public class StudentTest {
         Student editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSameStudent(editedBob));
 
-        // ID differs in case, all other attributes same -> returns false
+        // ID differs in case, all other attributes same -> returns true
         editedBob = new PersonBuilder(BOB).withId(VALID_ID_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameStudent(editedBob));
+        assertEquals(editedBob.getId().value, VALID_ID_BOB);
+        assertTrue(BOB.isSameStudent(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";

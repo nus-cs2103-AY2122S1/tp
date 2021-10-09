@@ -80,8 +80,15 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Student expectedStudent = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY, new AddCommand(expectedStudent));
+        Student expectedStudent = new PersonBuilder(AMY).withTags().withScores(new HashMap<>()).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + GROUP_DESC_TUTORIAL,
+                new AddCommand(expectedStudent));
+
+        // zero groups
+        Student expectedStudentWithNoGroups = new PersonBuilder(AMY).withScores(new HashMap<>())
+                .withGroups().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedStudentWithNoGroups));
     }
 
     @Test

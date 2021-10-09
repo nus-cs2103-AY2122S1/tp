@@ -27,17 +27,14 @@ public class GroupTest {
         // invalid Group numbers
         assertFalse(Group.isValidGroup("")); // empty string
         assertFalse(Group.isValidGroup(" ")); // spaces only
-        assertFalse(Group.isValidGroup("group")); // words only
-        assertFalse(Group.isValidGroup("T03")); // missing group identification
-        assertFalse(Group.isValidGroup("03C")); // missing group type
-        assertFalse(Group.isValidGroup("T1B")); // wrong length for class number
-        assertFalse(Group.isValidGroup("T012B")); // wrong length for class number
-        assertFalse(Group.isValidGroup("T01 D")); // spaces within digits
 
         // valid Group numbers
         assertTrue(Group.isValidGroup("T03C")); // upper case
         assertTrue(Group.isValidGroup("r05b")); // lower case
         assertTrue(Group.isValidGroup("r03A")); // mix of upper lower case
+        assertTrue(Group.isValidGroup("r03 A")); // with spaces
+        assertTrue(Group.isValidGroup("r")); // words only
+        assertTrue(Group.isValidGroup("03")); // numbers only
     }
 
 }

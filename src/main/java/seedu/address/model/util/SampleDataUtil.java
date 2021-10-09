@@ -46,7 +46,7 @@ public class SampleDataUtil {
                 getTagSet("classmates")),
             new Student(new Name("Roy Balakrishnan"), new ID("E0539221"),
                 getGroupList("T08C", "R01C"),
-                Map.of(new Assessment("P013"), new Score("83")),
+                Map.of(new Assessment("P13"), new Score("83")),
                 getTagSet("colleagues"))
         };
     }

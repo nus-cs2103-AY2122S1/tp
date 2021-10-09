@@ -56,7 +56,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "E0123"; // ID length too short
-    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05"; // missing prefix
+    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05&"; // '&' not allowed in name
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
