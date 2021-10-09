@@ -46,13 +46,13 @@ public class RemarkClassCommand extends Command {
         List<TuitionClass> lastShownList = model.getFilteredTuitionList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
         }
 
         TuitionClass classToEdit = lastShownList.get(index.getZeroBased());
         TuitionClass editedClass = new TuitionClass(classToEdit.getName(), classToEdit.getLimit(),
                 classToEdit.getCounter(), classToEdit.getTimeslot(), classToEdit.getStudentList(),
-                classToEdit.getRemark());
+                remark);
 
         model.setTuition(classToEdit, editedClass);
         model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);

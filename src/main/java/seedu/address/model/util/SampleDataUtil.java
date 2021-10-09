@@ -31,7 +31,7 @@ public class SampleDataUtil {
     public static final StudentList SAMPLE_STUDENTS = new StudentList(SAMPLE_STUDENT);
     public static final TuitionClass SAMPLE_TUITION_CLASS =
             new TuitionClass(new ClassName("Physics"),
-            new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"), SAMPLE_STUDENTS);
+            new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"), SAMPLE_STUDENTS, EMPTY_REMARK);
 
     public static final ArrayList<TuitionClass> SAMPLE_CLASSES = new ArrayList<>() {
         {

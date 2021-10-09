@@ -23,11 +23,12 @@ public class TuitionClass {
     /**
      * Constructor for Tuition Class.
      *
-     * @param name
-     * @param limit
-     * @param counter
-     * @param timeslot
-     * @param studentList
+     * @param name The name of the tuition class.
+     * @param limit The maximum number of students allowed.
+     * @param counter The number of weeks the tuition class will recur.
+     * @param timeslot The date and time of the tuition.
+     * @param studentList The list of students attending the tuition.
+     * @param remark Any remarks noted for the tuition class.
      */
     public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList,
                         Remark remark) {
