@@ -78,6 +78,11 @@ public interface Model {
     void addApplicantToPosition(Applicant applicant, Position position);
 
     /**
+     * Returns true if an applicant with the same identity as {@code applicant} exists MrTechRecruiter.
+     */
+    boolean hasApplicant(Applicant applicant);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
