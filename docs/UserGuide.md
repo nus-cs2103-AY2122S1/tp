@@ -28,7 +28,7 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
     
     * **`list`** : Lists all applicants.
     
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/Finance` : Adds an applicant named `John Doe` to RecruitIn.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/3000` : Adds an applicant named `John Doe` to RecruitIn.
    
     * **`find`**`n/John Mary` : Finds all applicants with either `John` or `Mary` as values for name prefix.
 
@@ -79,10 +79,10 @@ Format: `help`
 
 Adds an applicant to RecruitIn.
 
-Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG]​`
+Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG]​`
 
 Examples:
-* `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering et/Full time s/4000 l/High School y/2`
+* `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2`
 
 ### Listing all applicants : `list`
 
@@ -94,7 +94,7 @@ Format: `list`
 
 Finds applicants by specific prefixes.
 
-Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]`
+Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]`
 
 * Find command must take at least 1 prefix input.
 * Find command can only take 1 input for each prefix.
@@ -104,7 +104,7 @@ Examples:
 * `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
 * `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
-* `find n/Bob p/87654321 e/bob@gmail.com  a/Chinatown r/Software Engineering et/Full time s/4000 l/High School y/2`
+* `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2`
 
 ### Deleting an applicant : `delete`
 
@@ -170,8 +170,8 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com a/Chinatown r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend`
+**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend`
 **List** | `list`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [a/ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG]`<br> e.g., `find n/John Mary`
+**Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG]`<br> e.g., `find n/John Mary`
 **Help** | `help`
