@@ -18,16 +18,18 @@ public class Client implements Category {
 
     // Data fields
     private final Name name;
+    private final PhoneNumber phoneNumber;
 
-    public Client(Name name) {
-        this(new ID(), name);
+    public Client(Name name, PhoneNumber phoneNumber) {
+        this(new ID(), name, phoneNumber);
     }
 
-    private Client(ID id, Name name) {
-        requireAllNonNull(id, name);
+    private Client(ID id, Name name, PhoneNumber phoneNumber) {
+        requireAllNonNull(id, name, phoneNumber);
 
         this.id = id;
         this.name = name;
+        this.phoneNumber = phoneNumber;
     }
 
     public ID getId() {
@@ -38,8 +40,12 @@ public class Client implements Category {
         return name;
     }
 
-    public static Client updateClient(Client client, Name name) {
-        return new Client(client.getId(), name);
+    public PhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber) {
+        return new Client(client.getId(), name, phoneNumber);
     }
 
     /**
@@ -73,13 +79,15 @@ public class Client implements Category {
         }
 
         Client otherClient = (Client) other;
-        return this.getId() == otherClient.getId();
+        return getId().equals(otherClient.getId())
+                       && getName().equals(otherClient.getName())
+                       && getPhoneNumber().equals(otherClient.getPhoneNumber());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, phoneNumber);
     }
 
     @Override
@@ -88,7 +96,9 @@ public class Client implements Category {
         builder.append("ID: ")
                 .append(getId())
                 .append("; Name: ")
-                .append(getName());
+                .append(getName())
+                .append("; Phone Number: ")
+                .append(getPhoneNumber());
 
         return builder.toString();
     }
