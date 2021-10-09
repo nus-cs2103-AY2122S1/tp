@@ -12,6 +12,7 @@ public class Position {
 
     // Identity fields
     private final Title title;
+
     private final Description description;
 
     // Data field is empty
