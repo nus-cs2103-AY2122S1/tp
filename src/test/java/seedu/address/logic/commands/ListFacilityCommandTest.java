@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -13,10 +13,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListMemberCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListFacilityCommand.
  */
-public class ListMemberCommandTest {
-
+public class ListFacilityCommandTest {
     private Model model;
     private Model expectedModel;
 
@@ -27,13 +26,14 @@ public class ListMemberCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListMemberCommand(), model, ListMemberCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_facilityListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListFacilityCommand(), model, ListFacilityCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListMemberCommand(), model, ListMemberCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_facilityListIsFiltered_showsEverything() {
+        showFacilityAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(new ListFacilityCommand(), model, ListFacilityCommand.MESSAGE_SUCCESS, expectedModel);
+
     }
 }

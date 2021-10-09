@@ -45,11 +45,11 @@ public class AddMemberCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddMemberCommand AddMemberCommand = new AddMemberCommand(validPerson);
+        AddMemberCommand addMemberCommand = new AddMemberCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> AddMemberCommand.execute(modelStub));
+                AddMemberCommand.MESSAGE_DUPLICATE_MEMBER, () -> addMemberCommand.execute(modelStub));
     }
 
     @Test
@@ -156,6 +156,11 @@ public class AddMemberCommandTest {
 
         @Override
         public void resetFacilityList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void resetMemberList() {
             throw new AssertionError("This method should not be called");
         }
 
