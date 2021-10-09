@@ -9,14 +9,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Student;
 
 /**
  * Deletes a lesson identified using it's displayed index from the lesson panel in address book.
  */
 public class DeleteLessonCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete -l";
+    public static final String COMMAND_WORD = "delete-l";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
@@ -37,7 +36,7 @@ public class DeleteLessonCommand extends Command {
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
