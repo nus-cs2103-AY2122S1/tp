@@ -16,6 +16,7 @@ public enum Slot {
 
     /**
      * Gets the value of a slot.
+     *
      * @return The value of a slot.
      */
     public String getValue() {
@@ -24,9 +25,44 @@ public enum Slot {
 
     /**
      * Gets the order of a slot.
+     *
      * @return The order of a slot.
      */
     public int getOrder() {
         return order;
+    }
+
+    /**
+     * Translate a string into a Slot enum if the string matches any Slot values. Trims string.
+     *
+     * @param string String to be translated.
+     * @return The translated Slot if the string is valid, null object otherwise.
+     */
+    public static Slot translateStringToSlot(String string) {
+        String trimmedString = string.trim();
+        Slot resultSlot = null;
+        for (Slot s : Slot.values()) {
+            if (s.getValue().equalsIgnoreCase(trimmedString)) {
+                resultSlot = s;
+            }
+        }
+        return resultSlot;
+    }
+
+    /**
+     * Checks if the string provided matches with any Slot enum strings.
+     *
+     * @param test String to be checked.
+     * @return boolean true if valid, false otherwise
+     */
+    public static boolean isValidSlot(String test) {
+        String trimmedTest = test.trim();
+        for (Slot s : Slot.values()) {
+            String sString = String.valueOf(s.getOrder());
+            if (sString.equals(trimmedTest)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

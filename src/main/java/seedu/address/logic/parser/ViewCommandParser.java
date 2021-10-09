@@ -33,20 +33,9 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      */
     @Override
     public ViewCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-        //when no argument is given to the argMultiMap
-        if (argMultimap.isEmpty()) {
-            throw new ParseException(ViewCommand.HELP_MESSAGE);
-        }
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME).map(Name::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE).map(Phone::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL).map(Email::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_ADDRESS).map(Address::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_TAG).map(Tag::new));
+        PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(args);
         return new ViewCommand(predicate);
     }
+
+
 }

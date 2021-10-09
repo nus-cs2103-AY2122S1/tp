@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.DayOfWeek;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -24,22 +23,30 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Role role;
+    private final Salary salary;
+    private final Status status;
     private final Set<Tag> tags = new HashSet<>();
+    private final Schedule schedule;
     private final Set<Field> fields = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, Salary salary, Status status, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
+        this.salary = salary;
+        this.status = status;
         this.tags.addAll(tags);
+        this.schedule = new Schedule();
         this.fields.addAll(tags);
-        Field.addToFieldSet(fields, name, phone, email, address);
-
+        Field.addToFieldSet(fields, name, phone, email, address, salary);
     }
 
 
@@ -57,16 +64,25 @@ public class Person {
         return email;
     }
 
-    public Schedule getSchedule() {
-        //todo: implement an actual schedule
-        Schedule fakeSchedule = new Schedule();
-        fakeSchedule.addTask(DayOfWeek.MONDAY, Slot.MORNING, "Shift 1");
-        return fakeSchedule;
-    }
-
 
     public Address getAddress() {
         return address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
     }
 
     public boolean containsFields(List<Field> fields) {
@@ -113,6 +129,9 @@ public class Person {
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
                 && otherStaff.getAddress().equals(getAddress())
+                && otherStaff.getRole().equals(getRole())
+                && otherStaff.getSalary().equals(getSalary())
+                && otherStaff.getStatus().equals(getStatus())
                 && otherStaff.getTags().equals(getTags());
     }
 
@@ -131,7 +150,13 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Role: ")
+                .append(getRole())
+                .append("; Salary: ")
+                .append(getSalary())
+                .append("; Status: ")
+                .append(getStatus());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -140,5 +165,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

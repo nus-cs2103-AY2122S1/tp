@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonContainsFieldsPredicate;
 
 /**
  * Class representing the view schedule command
@@ -22,32 +22,27 @@ public class ViewScheduleCommand extends Command {
 
     private static final String NAME_NOT_IN_LIST_ERROR = "Name used not in dataset.";
 
-    private final Name name;
+    private final PersonContainsFieldsPredicate predicate;
 
-    /**
-     * Constructor for the view schedule class with
-     * a name of a person.
-     *
-     * @param name
-     */
-    public ViewScheduleCommand(Name name) {
-        this.name = name;
+    public ViewScheduleCommand(PersonContainsFieldsPredicate predicate) {
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+        //todo: change this filtered list to the overall model
         FilteredList<Person> staffs = model.getFilteredPersonList()
-                .filtered(per -> per.getName().equals(this.name));
+                .filtered(this.predicate);
         if (staffs.size() == 0) {
             throw new CommandException(NAME_NOT_IN_LIST_ERROR);
         }
-        model.updateScheduleDisplay(person -> person.getName().equals(this.name));
+        model.updateScheduleDisplay(this.predicate);
 
         String result = "";
         for (int i = 0; i < staffs.size(); i++) {
             result += String.format(DEFAULT_MESSAGE, staffs.get(i).getName());
-            result += staffs.get(i).getSchedule();
+            result += staffs.get(i).getSchedule().toViewScheduleString();
         }
         return new CommandResult(result);
     }
