@@ -64,7 +64,8 @@ public class UntagCommand extends EditCommand {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, editedPerson));
+        Set<Tag> removedTags = getEditPersonDescriptor().getTags().orElse(new HashSet<Tag>());
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, removedTags));
     }
 
     /**
