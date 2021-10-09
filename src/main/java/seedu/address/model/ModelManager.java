@@ -127,6 +127,12 @@ public class ModelManager implements Model {
         return addressBook.hasFolder(folder);
     }
 
+    @Override
+    public void deleteFolder(Folder folder) {
+        addressBook.deleteFolder(folder);
+        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

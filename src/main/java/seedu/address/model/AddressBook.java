@@ -124,6 +124,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
+    /**
+     * Deletes a folder in the address book.
+     * The folder must already exist in the address book.
+     */
+    public void deleteFolder(Folder f) {
+        folders.remove(f);
+    }
+
 
     //// util methods
 
