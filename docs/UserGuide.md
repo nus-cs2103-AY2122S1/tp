@@ -202,7 +202,7 @@ Adds revenue earned from an existing person in the address book.
 Format: `revenue AMOUNT`
 
 * Adds to the revenue earned from an existing person in the address book by the given `AMOUNT`. The amount refers to the
-amount of revenue that the user earn from an existing person in S$. The amount can be **any float number of up to 2 
+amount of revenue that the user earn from an existing person in S$. The amount can be **any float number of up to 2
 decimal places 100, 250.11, 50000, ...**
 * Existing value will be updated with the current value added to the `AMOUNT` given.
 * Default value for revenue of a person will be 0 when he/she is added to the address book.

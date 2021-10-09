@@ -442,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given revenue is of an invalid format
     * 3b1. InsurancePal shows an error message.
-  
+
       Use case resumes at step 2.
 
 **Use case: Add a claim to a client**
@@ -464,11 +464,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
     * 3a1. InsurancePal shows an error message.
- 
+
       Use case resumes at step 2.
 * 3b. The given claim is of an invalid format
     * 3b1. InsurancePal shows an error message.
- 
+
       Use case resumes at step 2.
 
 **Use case: Add a note to a client**
