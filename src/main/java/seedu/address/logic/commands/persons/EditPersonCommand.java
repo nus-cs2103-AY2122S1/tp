@@ -21,6 +21,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -100,8 +101,9 @@ public class EditPersonCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        NoOverlapLessonList lessonList = editPersonDescriptor.getLessonsList().orElse(personToEdit.getLessonsList());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, lessonList);
     }
 
     @Override
@@ -132,6 +134,7 @@ public class EditPersonCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private NoOverlapLessonList lessonsList;
 
         public EditPersonDescriptor() {}
 
@@ -145,6 +148,7 @@ public class EditPersonCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setLessonsList(toCopy.lessonsList);
         }
 
         /**
@@ -194,6 +198,14 @@ public class EditPersonCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
+        public Optional<NoOverlapLessonList> getLessonsList() {
+            return Optional.ofNullable(lessonsList);
+        }
+
+        public void setLessonsList(NoOverlapLessonList lessonsList) {
+            this.lessonsList = lessonsList;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -222,7 +234,9 @@ public class EditPersonCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getLessonsList().equals(e.getLessonsList());
         }
+
     }
 }
