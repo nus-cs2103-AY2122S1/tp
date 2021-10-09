@@ -109,7 +109,7 @@ Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
 </div>
 
 Examples:
-* `add-l s/Science g/P5 d/Wed t/12:30 c/12.0`
+* `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
 ### Listing all students: `list`
