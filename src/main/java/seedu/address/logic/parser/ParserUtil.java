@@ -67,18 +67,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String phoneNumber} into a {@code PhoneNumber}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code phoneNumber} is invalid.
      */
-    public static PhoneNumber parsePhoneNumber(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!PhoneNumber.isValidPhoneNumber(trimmedPhone)) {
+    public static PhoneNumber parsePhoneNumber(String phoneNumber) throws ParseException {
+        requireNonNull(phoneNumber);
+        String trimmedPhoneNumber = phoneNumber.trim();
+        if (!PhoneNumber.isValidPhoneNumber(trimmedPhoneNumber)) {
             throw new ParseException(PhoneNumber.MESSAGE_CONSTRAINTS);
         }
-        return new PhoneNumber(trimmedPhone);
+        return new PhoneNumber(trimmedPhoneNumber);
     }
 
     /**
