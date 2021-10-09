@@ -152,7 +152,7 @@ public class Event implements Comparable<Event> {
     public int compareTo(Event o) {
         int compareDateResult = this.eventDate.date.compareTo(o.eventDate.date);
         if (compareDateResult == 0) { // same date
-            int compareTimeResult = this.eventTime.time.compareTo(o.eventTime.time);
+            int compareTimeResult = this.eventTime.compareTo(o.eventTime);
             if (compareTimeResult == 0) { // same time
                 return this.eventName.eventName.compareTo(o.eventName.eventName);
             } else {
