@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * This is an EventTime class that represents the Time of an Event.
  */
-public class EventTime {
+public class EventTime implements Comparable<EventTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be in 2359 format.";
     public static final String TIME_FORMAT = "HHmm";
@@ -75,5 +75,18 @@ public class EventTime {
     @Override
     public int hashCode() {
         return time.hashCode();
+    }
+
+    @Override
+    public int compareTo(EventTime o) {
+        if (hasTime && o.hasTime) {
+            return this.time.compareTo(o.time);
+        } else if (hasTime) {
+            return 1;
+        } else if (o.hasTime) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
