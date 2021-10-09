@@ -35,6 +35,7 @@ public class Participant {
 
     /**
      * Every field must be present and not null.
+     * Called upon creation of new Participant.
      *
      * @param name       Name object of the person.
      * @param phone      Phone object of the person.
@@ -43,7 +44,7 @@ public class Participant {
      * @param tags       tags of the person.
      * @param birthDate  birthdate of the person.
      * @param notes      notes attached by the manager.
-     * @param nextOfKin nextOfKin of the person.
+     * @param nextOfKin  nextOfKin of the person.
      */
     public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
                        Set<Note> notes, Collection<NextOfKin> nextOfKin) {
@@ -57,6 +58,34 @@ public class Participant {
         this.notes.addAll(notes);
         this.nextOfKins.addAll(nextOfKin);
         this.id = ParticipantId.of(this);
+    }
+
+    /**
+     * Overloaded constructor with provided Participant ID. Every field must be present and not null.
+     * Called when converting existing Participants in memory (JSONAdaptedParticipant) to Participant.
+     *
+     * @param name       Name object of the person.
+     * @param phone      Phone object of the person.
+     * @param email      Email object of the person.
+     * @param address    Address object of the person.
+     * @param tags       tags of the person.
+     * @param birthDate  birthdate of the person.
+     * @param notes      notes attached by the manager.
+     * @param nextOfKin  nextOfKin of the person.
+     * @param id         ParticipantId object of the person.
+     */
+    public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
+                       Set<Note> notes, Collection<NextOfKin> nextOfKin, ParticipantId id) {
+        requireAllNonNull(name, phone, email, address, tags, birthDate, notes);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.birthDate = birthDate;
+        this.notes.addAll(notes);
+        this.nextOfKins.addAll(nextOfKin);
+        this.id = id;
     }
 
     public Name getName() {
