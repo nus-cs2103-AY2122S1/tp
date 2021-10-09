@@ -141,14 +141,14 @@ Advanced users are welcome to update data directly by editing that data file.
 Example of format of data for one applicant in applicants:
 
 ```JSON
-"applicants" : [ {
+"persons" : [ {
  "name" : "Alice Yeoh",
  "phone" : "87438807",
  "email" : "alexyeoh@example.com",
  "role" : "Software Engineering",
  "employmentType" : "Full time",  
  "expectedSalary" : "3600",
- "education" : "High School",
+ "levelOfEducation" : "High School",
  "experience" : "2",
  "tagged" : [ ]
 }]
