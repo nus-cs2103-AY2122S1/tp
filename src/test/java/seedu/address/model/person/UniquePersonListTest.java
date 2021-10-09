@@ -15,9 +15,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -210,13 +208,13 @@ public class UniquePersonListTest {
 
     @Test
     public void calculateNumDuplicateTags_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniquePersonList.calculateNumDuplicateTags(null));
+        assertThrows(NullPointerException.class, () ->
+                uniquePersonList.calculateNumDuplicateTags(null));
     }
 
     @Test
     public void asUnmodifiableTagList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniquePersonList.asUnmodifiableTagList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniquePersonList.asUnmodifiableTagList().remove(0));
     }
 }

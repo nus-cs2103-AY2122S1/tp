@@ -1,23 +1,13 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-import java.util.Set;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Tag}.
  */
 public class TagCard extends UiPart<Region> {
 
@@ -41,7 +31,9 @@ public class TagCard extends UiPart<Region> {
     private Label numDuplicates;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Constructs a TagCard object with the specified tag.
+     *
+     * @param tag Tag to be displayed in the TagCard.
      */
     public TagCard(Tag tag) {
         super(FXML);
