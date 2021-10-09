@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
+
 /**
  * This class stands for every possible status for a staff
  */
@@ -7,7 +9,8 @@ public enum Status {
     //Can add more later
     FULL_TIME("fulltime"), PART_TIME("parttime"), NO_STATUS("nostatus");
 
-    public static final String MESSAGE_CONSTRAINTS ="List of valid Statuses: fulltime, parttime, nostatus if not assigned." ; //cleanup next time
+    public static final String MESSAGE_CONSTRAINTS =
+            "List of valid Statuses: fulltime, parttime, (nostatus if no status is assigned)."; //cleanup next time
 
 
     private final String status;
@@ -29,9 +32,10 @@ public enum Status {
      * Translate a string into a Status enum if the string matches any Status values. Trims string.
      *
      * @param string String to be translated.
-     * @return The translated Status if the string is valid, null object otherwise.
+     * @return The translated Status if the string is valid.
+     * @throws IllegalArgumentException if the string is invalid.
      */
-    public static Status translateStringToStatus(String string) {
+    public static Status translateStringToStatus(String string) throws IllegalArgumentException {
         String trimmedString = string.trim();
         Status resultStatus = null;
         for (Status r : Status.values()) {
@@ -39,14 +43,15 @@ public enum Status {
                 resultStatus = r;
             }
         }
-        return resultStatus;
+        if (Objects.isNull(resultStatus)) {
+            throw new IllegalArgumentException("String provided does not match any statuses.");
+        } else {
+            return resultStatus;
+        }
     }
 
     /**
-     * Checks if the string provided matches with any Status enum strings.
-     *
-     * @param test String to be checked.
-     * @return boolean true if valid, false otherwise
+     * Returns if a given string is a valid Status.
      */
     public static boolean isValidStatus(String test) {
         String trimmedTest = test.trim();

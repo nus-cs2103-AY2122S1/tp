@@ -31,7 +31,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Role role, Salary salary, Status status, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, Salary salary, Status status, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -152,5 +153,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

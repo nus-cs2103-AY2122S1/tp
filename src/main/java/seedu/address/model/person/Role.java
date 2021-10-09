@@ -1,13 +1,16 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
+
 /**
  * This class stands for every possible role for a staff
  */
 public enum Role {
     //Can add more later
-    MANAGER("manager"), DIRECTOR("director"), HR("hr"), NO_ROLE("norole");
+    KITCHEN("kitchen"), BARTENDER("bartender"), FLOOR("floor"), NO_ROLE("norole");
 
-    public static final String MESSAGE_CONSTRAINTS ="List of valid Roles: manager, director, hr, norole if not assigned."; //cleanup next time
+    public static final String MESSAGE_CONSTRAINTS =
+            "List of valid Roles: manager, director, hr, (norole if no role is assigned)."; //cleanup next time
 
     private final String role;
 
@@ -28,9 +31,10 @@ public enum Role {
      * Translate a string into a Role enum if the string matches any Role values. Trims string.
      *
      * @param string String to be translated.
-     * @return The translated Role if the string is valid, null object otherwise.
+     * @return The translated Role if the string is valid.
+     * @throws IllegalArgumentException if the string is invalid.
      */
-    public static Role translateStringToRole(String string) {
+    public static Role translateStringToRole(String string) throws IllegalArgumentException {
         String trimmedString = string.trim();
         Role resultRole = null;
         for (Role r : Role.values()) {
@@ -38,14 +42,16 @@ public enum Role {
                 resultRole = r;
             }
         }
-        return resultRole;
+        if (Objects.isNull(resultRole)) {
+            throw new IllegalArgumentException("String provided does not match any roles.");
+        } else {
+            return resultRole;
+        }
+
     }
 
     /**
-     * Checks if the string provided matches with any Role enum strings.
-     *
-     * @param test String to be checked.
-     * @return boolean true if valid, false otherwise
+     * Returns if a given string is a valid Role.
      */
     public static boolean isValidRole(String test) {
         String trimmedTest = test.trim();

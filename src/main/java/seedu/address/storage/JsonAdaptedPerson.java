@@ -10,7 +10,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.Schedule;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -139,7 +147,8 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (schedule == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Schedule.class.getSimpleName()));
         }
         if (!Schedule.isValidSchedule(schedule)) {
             throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);
@@ -150,8 +159,9 @@ class JsonAdaptedPerson {
         } else {
             modelSchedule = new Schedule(schedule);
         }
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelSalary, modelStatus, modelTags);
-        //todo is there a way for you to edit schedule of this person to the modelSchedule schedule
+        return new Person(modelName, modelPhone, modelEmail,
+                modelAddress, modelRole, modelSalary, modelStatus, modelTags);
+        // editStaff implementer: todo is there a way for you to edit schedule of this person to have modelSchedule
     }
 
 }

@@ -7,10 +7,11 @@ import java.util.Objects;
  * Represents the schedule for the staff, which contains all the task for the staff.
  */
 public class Schedule {
+
+    public static final String MESSAGE_CONSTRAINTS = "Schedule json string error! Invalid format."; //todo idek if need
+
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
-
-    public static final String MESSAGE_CONSTRAINTS = "Schedule string formats"; //todo idek if need
 
     private Shift[][] shifts;
 
@@ -94,6 +95,9 @@ public class Schedule {
         return builder.toString();
     }
 
+    /**
+     * Returns if a given string is a valid scheduleString.
+     */
     public static boolean isValidSchedule(String test) {
         if (test.equals("")) {
             return true;

@@ -58,7 +58,8 @@ public enum Slot {
     public static boolean isValidSlot(String test) {
         String trimmedTest = test.trim();
         for (Slot s : Slot.values()) {
-            if (s.getValue().equals(trimmedTest)) {
+            String sString = String.valueOf(s.getOrder());
+            if (sString.equals(trimmedTest)) {
                 return true;
             }
         }

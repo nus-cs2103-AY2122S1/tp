@@ -68,6 +68,9 @@ public class Shift {
         return shiftName + ": in " + dayOfWeek.toString() + " " + slot.getValue();
     }
 
+    /**
+     * Returns a String representation of the shift that is suitable for json.
+     */
     public String toSaveString() {
         String add = shiftName;
         if (Objects.isNull(shiftName)) {
@@ -76,6 +79,9 @@ public class Shift {
         return dayOfWeek.toString() + "-" + slot.getValue() + "-" + add;
     }
 
+    /**
+     * Returns if a given string is a valid DayOfWeek.
+     */
     public static boolean isValidDayOfWeek(String test) {
         for (DayOfWeek d :DayOfWeek.values()) {
             if (d.toString().equalsIgnoreCase(test)) {
@@ -84,10 +90,14 @@ public class Shift {
         }
         return false;
     }
+
+    /**
+     * Returns if a given string is a valid shift.
+     */
     public static boolean isValidShift(String test) {
         boolean resultBoolean = false;
         if (test.equals("")) {
-            return false;
+            return true;
         } else {
             String[] stringSplit = test.split("-");
             if (2 == stringSplit.length || stringSplit.length == 3) {
