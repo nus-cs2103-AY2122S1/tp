@@ -12,9 +12,9 @@ public class Position {
 
     // Identity fields
     private final Title title;
-
-    // Data fields
     private final Description description;
+
+    // Data field is empty
 
     /**
      * Every field must be present and not null.
