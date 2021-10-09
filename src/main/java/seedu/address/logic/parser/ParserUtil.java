@@ -104,7 +104,34 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+     * Parses a {@code String current plan} into an {@code CurrentPlan}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code currentPlan} is invalid.
+     */
+    public static CurrentPlan parseCurrentPlan(String currentPlan) throws ParseException {
+        requireNonNull(currentPlan);
+        String trimmedCurrentPlan = currentPlan.trim();
+        if (!CurrentPlan.isValidCurrentPlan(trimmedCurrentPlan)) {
+            throw new ParseException(CurrentPlan.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentPlan(trimmedCurrentPlan);
+    }
+
+    /**
+     * Parses a {@code String LastMet} into an {@code LastMet}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code LastMet} is invalid.
+     */
+    public static LastMet parseLastMet(String lastMet) throws ParseException {
+        requireNonNull(lastMet);
+        String trimmedLastMet = lastMet.trim();
+        return new LastMet(trimmedLastMet);
+      
+    }
+
+    /** Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code RiskAppetite} is invalid.

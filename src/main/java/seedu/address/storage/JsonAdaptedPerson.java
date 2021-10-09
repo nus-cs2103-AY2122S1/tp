@@ -7,7 +7,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+
+import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientId;
+import seedu.address.model.person.CurrentPlan;
+import seedu.address.model.person.DisposableIncome;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.LastMet;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,11 +40,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("clientId") String clientId, @JsonProperty("name") String name,
-            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("riskAppetite") String riskAppetite,
-            @JsonProperty("disposabeIncome") String disposableIncome,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+
+    public JsonAdaptedPerson(@JsonProperty("clientId") String clientId, @JsonProperty("name") String name, @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email, @JsonProperty("address") String address, @JsonProperty("riskAppetite") String riskAppetite,
+            @JsonProperty("disposabeIncome") String disposableIncome, @JsonProperty("current-plan") String currentPlan,
+            @JsonProperty("last-met") String lastMet, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
 
         this.clientId = clientId;
         this.name = name;

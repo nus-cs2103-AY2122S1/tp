@@ -6,6 +6,8 @@ import java.util.*;
 
 import seedu.address.model.tag.Tag;
 
+import javax.swing.text.html.Option;
+
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -22,6 +24,8 @@ public class Person {
     private final Optional<Address> address;
     private final Optional<RiskAppetite> riskAppetite;
     private final Optional<DisposableIncome> disposableIncome;
+    private final Optional<CurrentPlan> currentPlan;
+    private final Optional<LastMet> lastMet;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -38,6 +42,8 @@ public class Person {
         this.address = address == null ? Optional.empty() : Optional.of(address);
         this.riskAppetite = riskAppetite == null ? Optional.empty() : Optional.of(riskAppetite);
         this.disposableIncome = disposableIncome == null ? Optional.empty() : Optional.of(disposableIncome);
+        this.currentPlan = currentPlan == null ? Optional.empty() : Optional.of(currentPlan);
+        this.lastMet = lastMet == null ? Optional.empty() : Optional.of(lastMet);
         this.tags.addAll(tags);
     }
 
@@ -60,6 +66,14 @@ public class Person {
     public Optional<Address> getAddress() {
 
         return address;
+    }
+
+    public Optional<LastMet> getLastMet() {
+        return lastMet;
+    }
+
+    public Optional<CurrentPlan> getCurrentPlan() {
+        return currentPlan;
     }
 
     public Optional<RiskAppetite> getRiskAppetite() {
@@ -135,7 +149,11 @@ public class Person {
                 .append("; Name: ")
                 .append(getName())
                 .append("; Email: ")
-                .append(getEmail());
+                .append(getEmail())
+                .append("; Last Met: ")
+                .append(getLastMet())
+                .append("; current plans: ")
+                .append(getCurrentPlan());
 
         if (!phone.isEmpty()) {
             builder.append("; Phone: ").append(getPhone().get().value);
