@@ -167,7 +167,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -186,10 +186,10 @@ Finds clients whose contacts match with the given keywords.
 
 Format: `search KEYWORD [MORE_KEYWORDS]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...`
 
-* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all attribute of the person
-* `attribute/` refers to the argument tag for the client's attribute.
+* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all attribute of the person.
+* `ATTRIBUTE/` refers to the argument tag for the client's attribute.
 * `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.
-* `*` can be used for the `KEYWORD` along with 1 or more `ATTRIBUTE/ATTRIBUTE_KEYWORD` to search using only attribute.
+* If no `KEYWORD` is provided, search will be based on `ATTRIBUTE/ATTRIBUTE_KEYWORD` only.
 * The search is case-insensitive. e.g `keith` will match `Keith`.
 * The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
@@ -205,13 +205,13 @@ Examples:
 
 Filter the current list by the given keywords.
 
-Format: `filter KEYWORD [MORE_KEYWORDS]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...`
+Format: `filter [KEYWORD]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...`
 
 * Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts.
-* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all attribute of the person
-* `attribute/` refers to the argument tag for the client's attribute.
+* `KEYWORD` will be used to match will all attribute of the person.
+* If no `KEYWORD` is provided, then filter will be based on `ATTRIBUTE/ATTRIBUTE_KEYWORDS`
+* `ATTRIBUTE/` refers to the argument tag for the client's attribute.
 * `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.
-* `*` can be used for the `KEYWORD` along with 1 or more `ATTRIBUTE/ATTRIBUTE_KEYWORD` to filter using only attribute.
 * The filter is case-insensitive. e.g `keith` will match `Keith`.
 * The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
 * Clients matching at least one keyword will be returned (i.e. `OR` filter).
@@ -266,7 +266,7 @@ Action | Format | Examples
 **Update** | `update {Client’s id number} <attribute>/{change value of attribute}` | update 1234 name/Dominic phone-number/12345678 |
 **List** | `list` | - |
 **Find** | `find KEYWORD [OTHER_KEYWORD]` | find alex tom |
-**Search** | `search KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com risk-appetite/5 |
+**Search** | `search [KEYWORD]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com risk-appetite/5 |
 **Filter** | `filter KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com p/9 |
 **Sort** | `sort <attribute>/{ASC/DESC}` | sort risk-appetite/asc |
 **Exit** | `exit` | - |

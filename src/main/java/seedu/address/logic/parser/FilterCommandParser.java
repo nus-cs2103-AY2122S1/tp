@@ -26,8 +26,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
+
+        // appends " " in front as Filter Command can accept arguments without a preamble
+        String preparedArgs = " ".concat(trimmedArgs);
         ArgumentMultimap argMultimap = ArgumentTokenizer
-                .tokenize(trimmedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                .tokenize(preparedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_LASTMET, PREFIX_CURRENTPLAN, PREFIX_TAG);
         return new FilterCommand(new PersonContainsKeywordsPredicate(argMultimap));
     }

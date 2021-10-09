@@ -17,7 +17,6 @@ import seedu.address.logic.parser.ArgumentMultimap;
  * Tests that a {@code Person}'s attributes matches any of the keywords given.
  */
 public class PersonContainsKeywordsPredicate implements Predicate<Person> {
-    private static final String WILDCARD_KEYWORD = "*";
     private final ArgumentMultimap keywords;
 
     public PersonContainsKeywordsPredicate(ArgumentMultimap keywords) {
@@ -27,8 +26,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         String[] generalKeywords = keywords.getPreamble().split(" ");
-        boolean checkGeneral = generalKeywords[0].equals(WILDCARD_KEYWORD)
-            || Arrays.stream(generalKeywords).anyMatch(x -> {
+        boolean checkGeneral = generalKeywords[0].isBlank() || Arrays.stream(generalKeywords).anyMatch(x -> {
                 boolean checkAttribute = Stream.of(person.getName().fullName, person.getPhone().value,
                     person.getEmail().value, person.getAddress().value).anyMatch(y -> containsIgnoreCase(y, x));
                 boolean checkAttributeTag = person.getTags().stream()

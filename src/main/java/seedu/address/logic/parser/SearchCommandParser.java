@@ -28,8 +28,10 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
 
+        // appends " " in front as Search Command can accept arguments without a preamble
+        String preparedArgs = " ".concat(trimmedArgs);
         ArgumentMultimap argMultimap = ArgumentTokenizer
-                .tokenize(trimmedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                .tokenize(preparedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
         return new SearchCommand(new PersonContainsKeywordsPredicate(argMultimap));
     }
 
