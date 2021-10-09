@@ -40,7 +40,6 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
                 new AddClientCommand.AddClientDescriptor(name, phoneNumber);
 
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            System.out.println("!");
             descriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
 

@@ -13,6 +13,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
 import seedu.address.model.tag.Tag;
 
@@ -79,6 +80,23 @@ public class ParserUtil {
             throw new ParseException(UnitPrice.MESSAGE_CONSTRAINTS);
         }
         return new UnitPrice(trimmedUnitPrice);
+    }
+
+    /**
+     * Parses a {@code String quantity} into a {@code Quantity}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param quantity Quantity of a product as a string.
+     * @return Quantity of a product as a {@code Quantity}.
+     * @throws ParseException if the given {@code quantity} is invalid.
+     */
+    public static Quantity parseQuantity(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new ParseException(Quantity.MESSAGE_CONSTRAINTS);
+        }
+        return new Quantity(trimmedQuantity);
     }
 
 //    /**

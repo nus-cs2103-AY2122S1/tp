@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
 
 public class AddProductCommand extends Command {
@@ -21,7 +22,7 @@ public class AddProductCommand extends Command {
                     + "[" + PREFIX_QUANTITY + "] QUANTITY \n"
                     + "Example: " + COMMAND_WORD + " "
                     + "pen "
-                    + PREFIX_UNIT_PRICE + "20"
+                    + PREFIX_UNIT_PRICE + "20 "
                     + PREFIX_QUANTITY + "150";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
@@ -62,7 +63,8 @@ public class AddProductCommand extends Command {
     private static Product createAddedProduct(AddProductDescriptor addProductDescriptor) {
         Name name = addProductDescriptor.getName();
         UnitPrice unitPrice = addProductDescriptor.getUnitPrice();
-        return new Product(name, unitPrice);
+        Quantity quantity = addProductDescriptor.getQuantity();
+        return new Product(name, unitPrice, quantity);
     }
 
     @Override
@@ -78,6 +80,7 @@ public class AddProductCommand extends Command {
     public static class AddProductDescriptor {
         private Name name;
         private UnitPrice unitPrice;
+        private Quantity quantity;
 
         /**
          * Constructor of the class `AddProductDescriptor`.
@@ -105,6 +108,24 @@ public class AddProductCommand extends Command {
          */
         public UnitPrice getUnitPrice() {
             return unitPrice;
+        }
+
+        /**
+         * Gets the quantity of a product.
+         *
+         * @return The quantity of a product.
+         */
+        public Quantity getQuantity() {
+            return quantity;
+        }
+
+        /**
+         * Updates a product's quantity.
+         *
+         * @param quantity The new quantity of the product.
+         */
+        public void setQuantity(Quantity quantity) {
+            this.quantity = quantity;
         }
     }
 }

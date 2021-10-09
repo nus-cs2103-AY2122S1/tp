@@ -118,6 +118,8 @@ public class AddClientCommand extends Command {
 
         /**
          * Updates a client's email.
+         *
+         * @param email The client's new email.
          */
         public void setEmail(Email email) {
             this.email = email;
@@ -134,6 +136,8 @@ public class AddClientCommand extends Command {
 
         /**
          * Updates a client's address.
+         *
+         * @param address The client's new address.
          */
         public void setAddress(Address address) {
             this.address = address;
