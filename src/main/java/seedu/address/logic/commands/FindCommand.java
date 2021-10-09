@@ -21,6 +21,7 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    // TODO: make predicate for id and group as well
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
