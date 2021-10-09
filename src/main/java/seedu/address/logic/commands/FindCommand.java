@@ -58,7 +58,8 @@ public class FindCommand extends Command {
             return executeNameSearch(model);
 
         } else if (index > -1) {
-            checkIndex(model);
+            checkIndex(model); // throws an exception if index is out of range
+            indexPredicate = new StaffHasCorrectIndexPredicate(index, model);
             return executeIndexSearch(model);
 
         } else {
@@ -100,11 +101,8 @@ public class FindCommand extends Command {
     public void checkIndex(Model model) throws CommandException {
         int personListSize = model.getAddressBook().getPersonList().size();
         if (index > personListSize) {
-            throw new CommandException(String.format(
-                    "The index you are trying to access is out of bounds!\n" + "Please input an index from %d to %d",
-                    model.getFilteredPersonList().isEmpty() ? 0 : 1, personListSize));
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        indexPredicate = new StaffHasCorrectIndexPredicate(index, model);
     }
 
     @Override
