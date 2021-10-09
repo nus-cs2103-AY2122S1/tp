@@ -66,7 +66,7 @@ public class StudioRecord implements Information {
             return false;
         }
         Integer studioRecord = Integer.parseInt(test);
-        return 0 < studioRecord && studioRecord < 11;
+        return 0 < studioRecord && studioRecord < 13;
     }
 
     public Attendance getAttendance() {
