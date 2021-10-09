@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.academydirectory.commons.core.Messages;
-import seedu.academydirectory.commons.util.UserGuideReaderUtil;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
 
@@ -14,41 +13,43 @@ import seedu.academydirectory.model.Model;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
-    public static final String DEFAULT_SYNTAX = "`all`";
+
+    public static final String DEFAULT_MESSAGE = Messages.GENERAL_HELP_MESSAGE;
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows program usage instructions for the command in query\n"
             + "Example: " + COMMAND_WORD + "add";
-    public static final String SHOWING_HELP_MESSAGE = "Showing help.";
-    public static final String MESSAGE_HELP_SUCCESS = "Show help for command: %1$s";
 
-    private final String syntax;
+    public static final String SHOWING_HELP_MESSAGE = "Showing summary help.";
+
+    public static final String MESSAGE_HELP_SUCCESS = "Show help for command: %1$s.";
+
+    private final String commandWord;
+    private final String helpMessage;
 
     public HelpCommand() {
-        this.syntax = DEFAULT_SYNTAX;
+        this.commandWord = COMMAND_WORD;
+        this.helpMessage = DEFAULT_MESSAGE;
     }
 
     /**
      * Constructor for the Help command
-     * @param syntax of the command needed to be clarified by the users
+     * @param helpMessage of the command needed to be clarified by the users
      */
-    public HelpCommand(String syntax) {
-        requireAllNonNull(syntax);
-        this.syntax = syntax;
+    public HelpCommand(String commandWord, String helpMessage) {
+        requireAllNonNull(helpMessage);
+        this.commandWord = commandWord;
+        this.helpMessage = helpMessage;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (this.syntax.equals(DEFAULT_SYNTAX)) {
-            String generalHelp = UserGuideReaderUtil.getGeneralHelp();
-            return new CommandResult(SHOWING_HELP_MESSAGE, generalHelp, true, false);
-        }
-        String specificHelp = UserGuideReaderUtil.getSpecificHelp(this.syntax);
-        if (specificHelp.isEmpty()) {
+        if (this.commandWord == null || this.helpMessage == null) {
             throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
         }
-        return new CommandResult(String.format(MESSAGE_HELP_SUCCESS, this.syntax),
-                specificHelp, true, false);
+        return new CommandResult(String.format(MESSAGE_HELP_SUCCESS, this.commandWord),
+                this.helpMessage, true, false);
     }
 
     @Override
@@ -60,6 +61,6 @@ public class HelpCommand extends Command {
             return false;
         }
         HelpCommand curr = (HelpCommand) obj;
-        return curr.syntax.equals(this.syntax);
+        return curr.helpMessage.equals(this.helpMessage);
     }
 }

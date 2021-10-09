@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
-import seedu.academydirectory.commons.util.UserGuideReaderUtil;
+import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     public void openDefaultHelp() {
-        String defaultHelp = UserGuideReaderUtil.getGeneralHelp();
+        String defaultHelp = Messages.GENERAL_HELP_MESSAGE;
         showHelpFrom(defaultHelp);
     }
 

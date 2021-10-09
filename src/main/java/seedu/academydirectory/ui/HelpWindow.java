@@ -1,9 +1,6 @@
 package seedu.academydirectory.ui;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 import com.sandec.mdfx.MarkdownView;
@@ -19,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.LogsCenter;
-import seedu.academydirectory.commons.util.UserGuideReaderUtil;
+import seedu.academydirectory.commons.core.Messages;
 
 /**
  * Controller for a help page
@@ -55,7 +52,7 @@ public class HelpWindow extends UiPart<Stage> {
         this.root = root;
         this.markdownView = new MarkdownView();
         markdownView.getStylesheets().add(MARKDOWN_CSS);
-        setHelpMessage(UserGuideReaderUtil.getGeneralHelp());
+        setHelpMessage(Messages.GENERAL_HELP_MESSAGE);
     }
 
     /**

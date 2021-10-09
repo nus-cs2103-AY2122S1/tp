@@ -17,6 +17,20 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String HELP_MESSAGE = "### Deleting a student: `delete`\n"
+            + "\n"
+            + "Tutors will be able to delete their tutees.\n"
+            + "\n"
+            + "Format: `delete INDEX`\n"
+            + "\n"
+            + "* `INDEX` is an unique id assigned to each student in the system.\n"
+            + "* Deletes the student at the specified `INDEX`\n"
+            + "* The index refers to the index number shown in the displayed student list.\n"
+            + "* The index **must be a positive integer** 1, 2, 3, …\u200B\n"
+            + "\n"
+            + "Examples:\n"
+            + "* `delete 2` deletes the 2nd student in the list.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"

@@ -12,6 +12,11 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
+    public static final String HELP_MESSAGE = "### Listing all students : `list`\n"
+            + "\n"
+            + "Shows a list of all students in the address book.\n"
+            + "\n"
+            + "Format: `list`";
     public static final String MESSAGE_SUCCESS = "Listed all students";
 
 
