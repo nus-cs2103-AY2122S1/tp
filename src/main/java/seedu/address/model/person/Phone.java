@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Optional;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -16,7 +14,7 @@ public class Phone {
     "Phone numbers should only contain numbers, and it should be at least 3 digits long";
 
     public static final String VALIDATION_REGEX = "\\d{3,}";
-    public final Optional<String> value;
+    public final String value;
 
     /**
      * Constructs a {@code Phone}.
@@ -24,13 +22,10 @@ public class Phone {
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
-        if (phone.isEmpty()) {
-            value = Optional.empty();
-        } else {
-            requireNonNull(phone);
-            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-            value = Optional.of(phone);
-        }
+
+        requireNonNull(phone);
+        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        value = phone;
 
     }
 
@@ -44,16 +39,7 @@ public class Phone {
     @Override
     public String toString() {
 
-        if (value.isEmpty()) {
-
-            return "No Phone Number yet";
-
-        } else {
-
-            return value.get();
-
-        }
-
+        return value;
 
     }
 
@@ -61,9 +47,8 @@ public class Phone {
     public boolean equals(Object other) {
 
         return other == this // short circuit if same object
-                || ( value.isEmpty() ? false : //returns false if not same object and current phone number is empty
-                    (other instanceof Phone // instanceof handles nulls
-                    && value.equals(((Phone) other).value))); // state check
+                ||  (other instanceof Phone // instanceof handles nulls
+                    && value.equals(((Phone) other).value)); // state check
     }
 
     @Override

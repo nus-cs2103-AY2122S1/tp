@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.*;
@@ -12,7 +13,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_CLIENTID ="69";
+    public static final String DEFAULT_CLIENTID ="1";
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -22,11 +23,11 @@ public class PersonBuilder {
 
     private ClientId clientId;
     private Name name;
-    private Phone phone;
     private Email email;
-    private Address address;
-    private RiskAppetite riskAppetite;
-    private DisposableIncome disposableIncome;
+    private Optional<Phone> phone;
+    private Optional<Address> address;
+    private Optional<RiskAppetite> riskAppetite;
+    private Optional<DisposableIncome> disposableIncome;
     private Set<Tag> tags;
 
     /**
@@ -35,11 +36,11 @@ public class PersonBuilder {
     public PersonBuilder() {
         clientId = new ClientId(DEFAULT_CLIENTID);
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        riskAppetite = new RiskAppetite(DEFAULT_RISKAPPETITE);
-        disposableIncome = new DisposableIncome(DEFAULT_DISPOSABLEINCOME);
+        phone = Optional.of(new Phone(DEFAULT_PHONE));
+        address = Optional.of(new Address(DEFAULT_ADDRESS));
+        riskAppetite = Optional.of(new RiskAppetite(DEFAULT_RISKAPPETITE));
+        disposableIncome = Optional.of(new DisposableIncome(DEFAULT_DISPOSABLEINCOME));
         tags = new HashSet<>();
     }
 
@@ -49,8 +50,8 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         clientId = personToCopy.getClientId();
         name = personToCopy.getName();
-        phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        phone = personToCopy.getPhone();
         address = personToCopy.getAddress();
         riskAppetite = personToCopy.getRiskAppetite();
         disposableIncome = personToCopy.getDisposableIncome();
@@ -85,15 +86,7 @@ public class PersonBuilder {
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.address = Optional.of(new Address(address));
         return this;
     }
 
@@ -106,10 +99,18 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Phone} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPhone(String phone) {
+        this.phone = Optional.of(new Phone(phone));
+        return this;
+    }
+
+    /**
      * Sets the {@code RiskAppetite} of the {@code Person} that we are building.
      */
     public PersonBuilder withRiskAppetite(String riskAppetite) {
-        this.riskAppetite = new RiskAppetite(riskAppetite);
+        this.riskAppetite = Optional.of(new RiskAppetite(riskAppetite));
         return this;
     }
 
@@ -117,13 +118,14 @@ public class PersonBuilder {
      * Sets the {@code DisposableIncome} of the {@code Person} that we are building.
      */
     public PersonBuilder withDisposableIncome(String disposableIncome) {
-        this.disposableIncome = new DisposableIncome(disposableIncome);
+        this.disposableIncome = Optional.of(new DisposableIncome(disposableIncome));
         return this;
     }
 
 
     public Person build() {
-        return new Person(clientId, name, phone, email, address, riskAppetite, disposableIncome ,tags);
+        return new Person(clientId, name, phone.get(), email, address.get(), riskAppetite.get(),
+            disposableIncome.get(), tags);
     }
 
 }

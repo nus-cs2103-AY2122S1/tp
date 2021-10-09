@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.model.tag.Tag;
 
@@ -21,10 +18,10 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Phone phone;
-    private final Address address;
-    private final RiskAppetite riskAppetite;
-    private final DisposableIncome disposableIncome;
+    private final Optional<Phone> phone;
+    private final Optional<Address> address;
+    private final Optional<RiskAppetite> riskAppetite;
+    private final Optional<DisposableIncome> disposableIncome;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -33,14 +30,14 @@ public class Person {
     public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
         DisposableIncome disposableIncome ,Set<Tag> tags) {
 
-        requireAllNonNull(name, phone, email, address, riskAppetite, disposableIncome, tags);
+        requireAllNonNull(name, email, tags);
         this.clientId = clientId;
         this.name = name;
-        this.phone = phone;
+        this.phone = phone == null ? Optional.empty() : Optional.of(phone);
         this.email = email;
-        this.address = address;
-        this.riskAppetite = riskAppetite;
-        this.disposableIncome = disposableIncome;
+        this.address = address == null ? Optional.empty() : Optional.of(address);
+        this.riskAppetite = riskAppetite == null ? Optional.empty() : Optional.of(riskAppetite);
+        this.disposableIncome = disposableIncome == null ? Optional.empty() : Optional.of(disposableIncome);
         this.tags.addAll(tags);
     }
 
@@ -50,23 +47,29 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
+    public Optional<Phone> getPhone() {
+
         return phone;
+
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
+    public Optional<Address> getAddress() {
+
         return address;
     }
 
-    public RiskAppetite getRiskAppetite() {
+    public Optional<RiskAppetite> getRiskAppetite() {
+
         return riskAppetite;
     }
 
-    public DisposableIncome getDisposableIncome() { return disposableIncome; }
+    public Optional<DisposableIncome> getDisposableIncome() {
+        return disposableIncome;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -81,12 +84,16 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+
+        }
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
-                && otherPerson.getEmail().equals(getEmail());
+                &&  otherPerson.getClientId().equals(getClientId())
+                    || otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -117,7 +124,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, email);
     }
 
     @Override
@@ -127,16 +134,24 @@ public class Person {
                 .append(getClientId())
                 .append("; Name: ")
                 .append(getName())
-                .append("; Phone: ")
-                .append(getPhone().value)
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Risk Appetite: ")
-                .append(getRiskAppetite())
-                .append("; Disposable Income: ")
-                .append(getDisposableIncome());
+                .append(getEmail());
+
+        if (!phone.isEmpty()) {
+            builder.append("; Phone: ").append(getPhone().get().value);
+        }
+
+        if (!address.isEmpty()) {
+            builder.append("; Address: ").append(getAddress().get().value);
+        }
+
+        if (!riskAppetite.isEmpty()) {
+            builder.append("; Risk Appetite: ").append(getRiskAppetite().get().value);
+        }
+
+        if (!disposableIncome.isEmpty()) {
+            builder.append("; Disposable Income: ").append(getDisposableIncome().get().value);
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

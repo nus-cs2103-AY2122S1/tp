@@ -1,5 +1,6 @@
 {
   "persons": [ {
+    "clientId": "0",
     "name": "Valid Person",
     "phone": "9482424",
     "email": "hans@example.com",
@@ -7,6 +8,7 @@
     "riskAppetite": "3",
     "disposableIncome":  "5000"
   }, {
+    "clientId": "1",
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",

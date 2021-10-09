@@ -20,10 +20,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     private Model model;
 
-    public AddCommandParser() {
-
-    }
-
     public AddCommandParser(Model model) {
         this.model = model;
 
@@ -56,12 +52,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         ClientId clientId = new ClientId(clientCounter);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Phone phone = ParserUtil.parsePhone(parseOptionalField(argMultimap.getValue(PREFIX_PHONE)));
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE));
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
         RiskAppetite riskAppetite = ParserUtil.parseRiskAppetite(argMultimap
-            .getValue(PREFIX_RISKAPPETITE).get());
+            .getValue(PREFIX_RISKAPPETITE));
         DisposableIncome disposableIncome = ParserUtil.parseDisposableIncome(argMultimap
-            .getValue(PREFIX_DISPOSABLEINCOME).get());
+            .getValue(PREFIX_DISPOSABLEINCOME));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(clientId, name, phone, email, address, riskAppetite, disposableIncome, tagList);
@@ -71,16 +67,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         this.model.getAddressBook().setClientCounter(newClientCounter);
 
         return new AddCommand(person);
-    }
-
-    public String parseOptionalField(Optional<String> optionalField) {
-
-        if (optionalField.isEmpty()) {
-            return "";
-        } else {
-            return optionalField.get();
-        }
-
     }
 
     /**

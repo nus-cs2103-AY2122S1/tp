@@ -1,9 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -57,11 +54,15 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         clientId = source.getClientId().value;
         name = source.getName().fullName;
-        phone = source.getPhone().toString();
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        riskAppetite = source.getRiskAppetite().value;
-        disposableIncome = source.getDisposableIncome().value;
+        Optional<Phone> checkPhoneNumber = source.getPhone();
+        phone = checkPhoneNumber.isEmpty() ? "" : checkPhoneNumber.get().value;
+        Optional<Address> checkAddress = source.getAddress();
+        address = checkAddress.isEmpty() ? "" : checkAddress.get().value;
+        Optional<RiskAppetite> checkRiskAppetite = source.getRiskAppetite();
+        riskAppetite = checkRiskAppetite.isEmpty() ? "" : checkRiskAppetite.get().value;
+        Optional<DisposableIncome> checkDisposableIncome = source.getDisposableIncome();
+        disposableIncome = checkDisposableIncome.isEmpty() ? "" : checkDisposableIncome.get().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -92,14 +93,6 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
-
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -108,32 +101,53 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        final Phone modelPhone;
+
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        } else if (phone.isEmpty()) {
+            modelPhone = null;
+        } else if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        } else {
+            modelPhone = new Phone(phone);
+        }
+
+        final Address modelAddress;
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
+        } else if (address.isEmpty()) {
+            modelAddress = null;
+        } else if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        } else {
+            modelAddress = new Address(address);
         }
 
-        final Address modelAddress = new Address(address);
-
+        final RiskAppetite modelRiskAppetite;
         if (riskAppetite == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!RiskAppetite.isValidRiskAppetite(riskAppetite)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT
+                , RiskAppetite.class.getSimpleName()));
+        } else if (riskAppetite.isEmpty()) {
+            modelRiskAppetite = null;
+        } else if (!RiskAppetite.isValidRiskAppetite(riskAppetite)) {
+            throw new IllegalValueException(RiskAppetite.MESSAGE_CONSTRAINTS);
+        } else {
+            modelRiskAppetite = new RiskAppetite(riskAppetite);
         }
 
-        final RiskAppetite modelRiskAppetite = new RiskAppetite(riskAppetite);
+        final DisposableIncome modelDisposableIncome;
 
         if (disposableIncome == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DisposableIncome.class.getSimpleName()));
+        } else if (disposableIncome.isEmpty()) {
+            modelDisposableIncome = null;
+        } else if (!DisposableIncome.isValidDisposableIncome(disposableIncome)) {
+            throw new IllegalValueException(DisposableIncome.MESSAGE_CONSTRAINTS);
+        } else {
+            modelDisposableIncome = new DisposableIncome(disposableIncome);
         }
-        if (!DisposableIncome.isValidDisposableIncome(disposableIncome)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-
-        final DisposableIncome modelDisposableIncome = new DisposableIncome(disposableIncome);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite,

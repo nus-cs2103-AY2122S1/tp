@@ -17,10 +17,6 @@ public class AddressBookParser {
 
     private Model model;
 
-    public AddressBookParser() {
-
-    }
-
     public AddressBookParser(Model model) {
         this.model = model;
     }

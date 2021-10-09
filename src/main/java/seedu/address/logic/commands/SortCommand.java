@@ -7,8 +7,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Sorts all persons in address book whose according to the specified attribute in either ascending or descending
+ * order.
  */
 public class SortCommand extends Command {
 
