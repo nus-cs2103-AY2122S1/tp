@@ -57,9 +57,7 @@ Finding your next lead has never been easier.
 
 ## Client Information
 
-
 Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag.
-
 Client Attribute | Type of Attribute | Argument Tag
 -----------------|-----------------|-----------------
 Client ID (**unique**) | integer | None. Assigned on creation of new contact
@@ -106,6 +104,7 @@ Examples:
 * `create Benedict Chua email/benchua@hotmail.com`
 * `create Keith email/keithtan@ymail.com phone-no/12345678 risk-appetite/4`
 
+
 ### Retrieve Particular Contact : `view`
 
 View a particular client on your address book to view the client’s information.
@@ -147,6 +146,7 @@ Examples:
 Shows a list of all tasks in the list.
 
 Format: `list`
+
 
 ### Sort Contacts : `sort`
 
