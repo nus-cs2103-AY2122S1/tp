@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -28,8 +29,9 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday) {
-        requireAllNonNull(name, phone, email, address, tags, birthday);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Birthday birthday) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -62,8 +64,8 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Birthday getBirthday() {
-        return this.birthday;
+    public Optional<Birthday> getBirthday() {
+        return Optional.ofNullable(this.birthday);
     }
 
     /**
@@ -124,8 +126,10 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        builder.append("; Birthday: ")
-                .append(getBirthday());
+        if (getBirthday().isPresent()) {
+            builder.append("; Birthday: ")
+                    .append(getBirthday().map(Birthday::toString).get());
+        }
         return builder.toString();
     }
 

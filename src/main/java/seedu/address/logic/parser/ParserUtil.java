@@ -127,7 +127,9 @@ public class ParserUtil {
      * Parses {@code String birthday} into a {@code Set<Tag>}.
      */
     public static Birthday parseBirthday(String birthday) throws ParseException {
-        requireNonNull(birthday);
+        if (birthday == null) {
+            return null;
+        }
         String trimmedBirthday = birthday.trim();
         if (!Birthday.isValidFormat(trimmedBirthday)) {
             throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);

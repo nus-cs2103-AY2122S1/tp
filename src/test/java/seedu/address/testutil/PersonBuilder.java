@@ -51,7 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        birthday = personToCopy.getBirthday();
+        birthday = personToCopy.getBirthday().orElse(null);
     }
 
     /**

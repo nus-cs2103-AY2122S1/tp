@@ -60,7 +60,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        birthday = source.getBirthday().toString();
+        birthday = source.getBirthday().map(Birthday::toString).orElse(null);
     }
 
     /**
@@ -109,9 +109,10 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         if (birthday == null) {
-            throw new IllegalValueException((String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Birthday.class.getSimpleName())));
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, null);
         }
+
+        // Set birthday if non-null
         if (!Birthday.isValidFormat(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
         }
