@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.applicant.Applicant;
+import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
+import seedu.address.model.position.Position;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,10 +23,36 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final PositionBook positionBook;
+    private final ApplicantBook applicantBook;
+    private final ApplicationBook applicationBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
+     * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
+            ReadOnlyApplicantBook applicantBook, ApplicationBook applicationBook, ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(addressBook, positionBook, applicantBook, applicationBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook
+                + ", position book: " + positionBook
+                + ", applicant book: " + applicantBook
+                + ", application book: " + applicationBook
+                + ", userPrefs: " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.positionBook = new PositionBook(positionBook);
+        this.applicantBook = new ApplicantBook(applicantBook);
+        this.applicationBook = new ApplicationBook(applicationBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+    }
+
+    /**
+     * Old constructor - left temporarily to pass unit tests
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
@@ -33,12 +62,15 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.positionBook = new PositionBook();
+        this.applicantBook = new ApplicantBook();
+        this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new PositionBook(), new ApplicantBook(), new ApplicationBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -103,6 +135,13 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addApplicantToPosition(Applicant applicant, Position position) {
+        applicantBook.addApplicant(applicant);
+        applicationBook.addApplication(new Application(applicant, position));
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // TODO: update to show applicants
     }
 
     @Override
