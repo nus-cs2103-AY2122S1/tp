@@ -13,6 +13,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 /**
@@ -78,8 +79,9 @@ public class EditClientCommand extends Command {
         assert clientToEdit != null;
 
         Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
+        PhoneNumber updatedPhoneNumber = editClientDescriptor.getPhoneNumber().orElse(clientToEdit.getPhoneNumber());
 
-        return Client.updateClient(clientToEdit, updatedName);
+        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber);
     }
 
     @Override
@@ -96,8 +98,7 @@ public class EditClientCommand extends Command {
 
         // state check
         EditClientCommand e = (EditClientCommand) other;
-        return index.equals(e.index)
-                       && editClientDescriptor.equals(e.editClientDescriptor);
+        return index.equals(e.index) && editClientDescriptor.equals(e.editClientDescriptor);
     }
 
     /**
@@ -106,6 +107,7 @@ public class EditClientCommand extends Command {
      */
     public static class EditClientDescriptor {
         private Name name;
+        private PhoneNumber phoneNumber;
 
         public EditClientDescriptor() {}
 
@@ -114,13 +116,14 @@ public class EditClientCommand extends Command {
          */
         public EditClientDescriptor(EditClientDescriptor toCopy) {
             setName(toCopy.name);
+            setPhoneNumber(toCopy.phoneNumber);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name);
+            return CollectionUtil.isAnyNonNull(name, phoneNumber);
         }
 
         public void setName(Name name) {
@@ -129,6 +132,14 @@ public class EditClientCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setPhoneNumber(PhoneNumber phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public Optional<PhoneNumber> getPhoneNumber() {
+            return Optional.ofNullable(phoneNumber);
         }
 
         @Override
@@ -146,7 +157,8 @@ public class EditClientCommand extends Command {
             // state check
             EditClientDescriptor e = (EditClientDescriptor) other;
 
-            return getName().equals(e.getName());
+            return getName().equals(e.getName())
+                           && getPhoneNumber().equals(e.getPhoneNumber());
         }
     }
 }
