@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +27,8 @@ public class DeleteFacilityCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Facility facilityToDelete = model.getFilteredFacilityList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteFacilityCommand command = new DeleteFacilityCommand(INDEX_FIRST_PERSON);
+        Facility facilityToDelete = model.getFilteredFacilityList().get(INDEX_FIRST.getZeroBased());
+        DeleteFacilityCommand command = new DeleteFacilityCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteFacilityCommand.MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete);
 
@@ -48,10 +48,10 @@ public class DeleteFacilityCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showFacilityAtIndex(model, INDEX_FIRST_PERSON);
+        showFacilityAtIndex(model, INDEX_FIRST);
 
-        Facility facilityToDelete = model.getFilteredFacilityList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteFacilityCommand command = new DeleteFacilityCommand(INDEX_FIRST_PERSON);
+        Facility facilityToDelete = model.getFilteredFacilityList().get(INDEX_FIRST.getZeroBased());
+        DeleteFacilityCommand command = new DeleteFacilityCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteFacilityCommand.MESSAGE_DELETE_FACILITY_SUCCESS, facilityToDelete);
 
@@ -65,9 +65,9 @@ public class DeleteFacilityCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showFacilityAtIndex(model, INDEX_FIRST_PERSON);
+        showFacilityAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex still in bounds of SportsPA facility list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFacilityList().size());
 
@@ -78,14 +78,14 @@ public class DeleteFacilityCommandTest {
 
     @Test
     public void equals() {
-        DeleteFacilityCommand deleteFacilFirstCommand = new DeleteFacilityCommand(INDEX_FIRST_PERSON);
-        DeleteFacilityCommand deleteFacilSecondCommand = new DeleteFacilityCommand(INDEX_SECOND_PERSON);
+        DeleteFacilityCommand deleteFacilFirstCommand = new DeleteFacilityCommand(INDEX_FIRST);
+        DeleteFacilityCommand deleteFacilSecondCommand = new DeleteFacilityCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFacilFirstCommand.equals(deleteFacilFirstCommand));
 
         // same values -> returns true
-        DeleteFacilityCommand deleteFacilFirstCommandCopy = new DeleteFacilityCommand(INDEX_FIRST_PERSON);
+        DeleteFacilityCommand deleteFacilFirstCommandCopy = new DeleteFacilityCommand(INDEX_FIRST);
         assertTrue(deleteFacilFirstCommand.equals(deleteFacilFirstCommandCopy));
 
         // different types -> returns false
