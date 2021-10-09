@@ -17,7 +17,6 @@ public class OrderManager implements Order {
     @Override
     public void addItem(Item newItem) {
         items.add(newItem);
-
     }
 
     /**
@@ -25,7 +24,12 @@ public class OrderManager implements Order {
      */
     @Override
     public void removeItem(Item toBeRemoved) {
-        items.remove(toBeRemoved);
+        for(Item item : items.asUnmodifiableObservableList()) {
+            if(item.isSameItem(toBeRemoved)) { // Same name OR same id
+                items.remove(item);
+                break;
+            };
+        }
     }
 
     @Override
