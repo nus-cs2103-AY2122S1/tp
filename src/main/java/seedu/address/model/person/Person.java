@@ -22,18 +22,23 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Progress progress;
     private final PaymentStatus paymentStatus;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, PaymentStatus paymentStatus, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Progress progress,
+                  PaymentStatus paymentStatus, Set<Tag> tags) {
+
         requireAllNonNull(name, phone, email, address, paymentStatus, tags);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.progress = progress;
         this.paymentStatus = paymentStatus;
         this.tags.addAll(tags);
     }
@@ -52,6 +57,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Progress getProgress() {
+        return progress;
     }
 
     public PaymentStatus getPaymentStatus() {
@@ -98,6 +107,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getProgress().equals(getProgress())
                 && otherPerson.getPaymentStatus().equals(getPaymentStatus())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -105,7 +115,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, paymentStatus, tags);
+        return Objects.hash(name, phone, email, address, progress, paymentStatus, tags);
     }
 
     @Override
@@ -118,6 +128,8 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Progress: ")
+                .append(getProgress())
                 .append("; Payment Status: ")
                 .append(getPaymentStatus());
 
