@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.supplier;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -43,8 +43,8 @@ public class SupplyType {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && this.supplyType.equals(((Name) other).fullName)); // state check
+                || (other instanceof SupplyType // instanceof handles nulls
+                && this.supplyType.equals(((SupplyType) other).supplyType)); // state check
     }
 
     @Override
