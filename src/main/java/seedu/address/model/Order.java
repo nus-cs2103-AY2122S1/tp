@@ -22,11 +22,12 @@ public class Order {
      * Remove the specified {@code Item} from order.
      */
     public void removeItem(Item toBeRemoved) {
-        for(Item item : items.asUnmodifiableObservableList()) {
-            if(item.isSameItem(toBeRemoved)) { // Same name OR same id
+        for (Item item : items.asUnmodifiableObservableList()) {
+            if (item.isSameItem(toBeRemoved)) { // Same name OR same id
                 items.remove(item);
                 break;
-            };
+            }
+            ;
         }
     }
 

@@ -192,7 +192,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void removeFromOrder(Item item) {
-        assert  hasUnclosedOrder();
+        assert hasUnclosedOrder();
 
         optionalOrder.get().removeItem(item);
     }
