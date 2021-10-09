@@ -18,7 +18,7 @@ public class EmploymentType {
 
         public static String getRegex() {
             StringBuilder regex = new StringBuilder("(?i)\\b(?:");
-            for (Type type: Type.values()){
+            for (Type type: Type.values()) {
                 regex.append(type.term);
                 regex.append("|");
             }
