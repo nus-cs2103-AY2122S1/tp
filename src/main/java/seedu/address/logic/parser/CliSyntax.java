@@ -14,5 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_LAST_VISIT = new Prefix("lv/");
     public static final Prefix PREFIX_VISIT = new Prefix("v/");
     public static final Prefix PREFIX_DATE = new Prefix("at/");
+    public static final Prefix PREFIX_FREQUENCY = new Prefix("f/");
+    public static final Prefix PREFIX_OCCURRENCE = new Prefix("o/");
 
 }

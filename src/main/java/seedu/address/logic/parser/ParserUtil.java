@@ -14,9 +14,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
 import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
 import seedu.address.model.tag.Tag;
@@ -28,6 +30,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
+    public static final String MESSAGE_INVALID_FREQUENCY = "Frequency can only be daily, weekly, "
+            + "biweekly, monthly or quarterly.";
+    public static final String MESSAGE_INVALID_OCCURRENCE = "Occurrence is a positive number";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -207,4 +212,38 @@ public class ParserUtil {
 
         return Optional.ofNullable(new Visit(trimmedVisit));
     }
+
+    /**
+     * Parses {@code frequency} into a {@code frequency} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified frequency is invalid.
+     */
+    public static Optional<Frequency> parseFrequency(String frequency) throws ParseException {
+        String trimmedFrequency = frequency.trim();
+        if (!Frequency.isValidFrequency(trimmedFrequency)) {
+            throw new ParseException(MESSAGE_INVALID_FREQUENCY);
+        }
+        return Optional.ofNullable(Frequency.find(trimmedFrequency));
+    }
+
+
+    /**
+     * Parses {@code occurrence} into a {@code occurrence} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified occurrence is invalid.
+     */
+    public static Optional<Occurrence> parseOccurrence(String occurrence) throws ParseException {
+        requireNonNull(occurrence);
+        String trimmedOccurrence = occurrence.trim();
+
+        if (!Occurrence.isValidOccurrence(trimmedOccurrence)) {
+            throw new ParseException(MESSAGE_INVALID_OCCURRENCE);
+        }
+
+        int convertedOccurrence = Integer.parseInt(trimmedOccurrence);
+        return Optional.ofNullable(new Occurrence(convertedOccurrence));
+    }
+
 }

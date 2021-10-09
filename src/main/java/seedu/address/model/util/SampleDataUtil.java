@@ -27,22 +27,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Language("English"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), Optional.of(new LastVisit("2021-03-25")),
-                EXAMPLE_VISIT, getTagSet("friends")),
+                EXAMPLE_VISIT, Optional.empty(), Optional.empty(), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Language("Chinese"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), Optional.of(new LastVisit("2021-04-27")),
-                EXAMPLE_VISIT, getTagSet("colleagues", "friends")),
+                EXAMPLE_VISIT, Optional.empty(), Optional.empty(), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Language("English"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), Optional.of(new LastVisit("2021-05-11")),
-                EXAMPLE_VISIT, getTagSet("neighbours")),
+                    EXAMPLE_VISIT, Optional.empty(), Optional.empty(), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Language("English"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), Optional.of(new LastVisit("2021-08-23")),
-                EXAMPLE_VISIT, getTagSet("family")),
+                EXAMPLE_VISIT, Optional.empty(), Optional.empty(), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Language("Malay"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), Optional.of(new LastVisit("2021-09-01")),
-                EXAMPLE_VISIT, getTagSet("classmates")),
+                EXAMPLE_VISIT, Optional.empty(), Optional.empty(), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Language("Tamil"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), Optional.of(new LastVisit("2021-09-28")),
-                EXAMPLE_VISIT, getTagSet("colleagues"))
+                EXAMPLE_VISIT, Optional.empty(), Optional.empty(), getTagSet("colleagues"))
         };
     }
 

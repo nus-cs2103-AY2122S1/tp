@@ -26,7 +26,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.VisitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -43,7 +45,9 @@ public class AddressBookParserTest {
         VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + visit.value);
         Optional<Visit> expectedVisit = Optional.ofNullable(visit);
-        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, expectedVisit), command);
+        Optional<Frequency> frequency = Optional.ofNullable(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.ofNullable(new Occurrence(1));
+        assertEquals(new VisitCommand(INDEX_FIRST_PERSON, expectedVisit, frequency, occurrence), command);
     }
 
     @Test

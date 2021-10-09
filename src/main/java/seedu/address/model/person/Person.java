@@ -23,15 +23,18 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Optional<Frequency> frequency;
     private final Optional<LastVisit> lastVisit;
+    private final Optional<Occurrence> occurrence;
     private final Optional<Visit> visit;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Language language, Address address,
-                  Optional<LastVisit> lastVisit, Optional<Visit> visit, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Language language, Address address, Optional<LastVisit> lastVisit,
+                  Optional<Visit> visit, Optional<Frequency> frequency, Optional<Occurrence> occurrence,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, language, address, tags);
         this.name = name;
         this.phone = phone;
@@ -39,8 +42,11 @@ public class Person {
         this.address = address;
         this.lastVisit = lastVisit;
         this.visit = visit;
+        this.frequency = frequency;
+        this.occurrence = occurrence;
         this.tags.addAll(tags);
     }
+
 
     public Name getName() {
         return name;
@@ -65,6 +71,10 @@ public class Person {
     public Optional<Visit> getVisit() {
         return visit;
     }
+
+    public Optional<Frequency> getFrequency() { return frequency; }
+
+    public Optional<Occurrence> getOccurrence() { return occurrence; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

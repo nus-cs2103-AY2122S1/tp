@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -11,6 +13,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.VisitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Visit;
 
 /**
@@ -24,7 +28,8 @@ public class VisitCommandParser implements Parser<VisitCommand> {
      */
     public VisitCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE,
+                PREFIX_FREQUENCY, PREFIX_OCCURRENCE);
 
         Index index;
         try {
@@ -40,7 +45,13 @@ public class VisitCommandParser implements Parser<VisitCommand> {
         String visit = argMultimap.getValue(PREFIX_DATE).orElse("");
         Optional<Visit> convertedVisit = ParserUtil.parseVisit(visit);
 
-        return new VisitCommand(index, convertedVisit);
+        String frequency = argMultimap.getValue(PREFIX_FREQUENCY).orElse("");
+        Optional<Frequency> convertedFrequency = ParserUtil.parseFrequency(frequency);
+
+        String occurrence = argMultimap.getValue(PREFIX_OCCURRENCE).orElse("1");
+        Optional<Occurrence> convertedOccurrence = ParserUtil.parseOccurrence(occurrence);
+
+        return new VisitCommand(index, convertedVisit, convertedFrequency, convertedOccurrence);
     }
 
     /**

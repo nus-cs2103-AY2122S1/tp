@@ -3,6 +3,8 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "language": " ",
-    "address": "4th street"
+    "address": "4th street",
+    "frequency" : "",
+    "occurrence" : "1"
   } ]
 }
