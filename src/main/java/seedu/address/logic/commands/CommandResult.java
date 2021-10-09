@@ -77,6 +77,7 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && isShowPersonList == otherCommandResult.isShowPersonList
                 && isShowHelp == otherCommandResult.isShowHelp
                 && isShowTagList == otherCommandResult.isShowTagList
                 && isExit == otherCommandResult.isExit;
@@ -84,7 +85,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, isShowHelp, isShowTagList, isExit);
+        return Objects.hash(feedbackToUser, isShowPersonList, isShowHelp, isShowTagList, isExit);
     }
 
 }
