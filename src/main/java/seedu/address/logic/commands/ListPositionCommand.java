@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POSITIONS;
 
+import seedu.address.model.Model;
+
+/**
+ * Lists all positions in the position book to the user.
+ */
 public class ListPositionCommand extends Command {
 
     public static final String COMMAND_WORD = "list-position";
@@ -17,5 +20,4 @@ public class ListPositionCommand extends Command {
         model.updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
 }

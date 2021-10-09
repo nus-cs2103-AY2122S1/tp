@@ -1,15 +1,17 @@
 package seedu.address.model;
 
-import javafx.collections.FXCollections;
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.UniquePositionList;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
-
+/**
+ * Wraps all position data at the position-book level
+ * Duplicates are not allowed (by .isSamePosition comparison)
+ */
 public class PositionBook implements ReadOnlyPositionBook {
 
     private final UniquePositionList positions;
@@ -38,7 +40,7 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code PositionBook} with {@code newData}.
      */
     public void resetData(ReadOnlyPositionBook newData) {
         requireNonNull(newData);
@@ -48,7 +50,7 @@ public class PositionBook implements ReadOnlyPositionBook {
 
     //// position-level operations
     /**
-     * Returns true if a position with the same identity as {@code position} exists in the address book.
+     * Returns true if a position with the same identity as {@code position} exists in the position book.
      */
     public boolean hasPosition(Position position) {
         requireNonNull(position);
@@ -56,8 +58,8 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     /**
-     * Adds a position to the address book.
-     * The position must not already exist in the address book.
+     * Adds a position to the position book.
+     * The position must not already exist in the position book.
      */
     public void addPosition(Position p) {
         positions.add(p);
@@ -65,8 +67,8 @@ public class PositionBook implements ReadOnlyPositionBook {
 
     /**
      * Replaces the given position {@code target} in the list with {@code editedPosition}.
-     * {@code target} must exist in the address book.
-     * The position identity of {@code editedPosition} must not be the same as another existing position in the address book.
+     * {@code target} must exist in the position book.
+     * The position identity of {@code editedPosition} must not be the same as another existing position in the position book.
      */
     public void setPosition(Position target, Position editedPosition) {
         requireNonNull(editedPosition);
@@ -75,8 +77,8 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PositionBook}.
+     * {@code key} must exist in the position book.
      */
     public void removePosition(Position key) {
         positions.remove(key);

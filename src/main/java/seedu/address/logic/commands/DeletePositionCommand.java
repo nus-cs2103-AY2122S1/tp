@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
 /**
- * Deletes a position identified using it's displayed index from the address book.
+ * Deletes a position identified using it's displayed index from the position book.
  */
 public class DeletePositionCommand extends Command {
 
@@ -44,4 +44,10 @@ public class DeletePositionCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_POSITION_SUCCESS, positionToDelete));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeletePositionCommand // instanceof handles nulls
+                && targetIndex.equals(((DeletePositionCommand) other).targetIndex)); // state check
+    }
 }
