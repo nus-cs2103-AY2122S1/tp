@@ -33,7 +33,9 @@ public class ArgumentTokenizer {
      * respective argument values. Only the given prefixes will be recognized in the arguments string. Does not
      * include Preamble as an additional prefix.
      *
-     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * Take note that argsString must have a single space preceding the first prefix.
+     *
+     * @param argsString Arguments string of the form: {@code <prefix>value <prefix>value ...}
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
@@ -123,6 +125,17 @@ public class ArgumentTokenizer {
         return argMultimap;
     }
 
+    /**
+     * Extracts prefixes and their argument values, and returns an {@code ArgumentMultimap} object that maps the
+     * extracted prefixes to their respective arguments. Prefixes are extracted based on their zero-based positions in
+     * {@code argsString}. This is different from extractArguments as it does not insert a preamble prefix.
+     *
+     * Take note that argsString must have a single space preceding the first prefix.
+     *
+     * @param argsString      Arguments string of the form: {@code <prefix>value <prefix>value ...}
+     * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
+     * @return                ArgumentMultimap object that maps prefixes to their arguments
+     */
     private static ArgumentMultimap extractArgumentsWithoutPreamble(String argsString,
             List<PrefixPosition> prefixPositions) {
         // Sort by start position
