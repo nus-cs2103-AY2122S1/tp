@@ -50,4 +50,29 @@ public class Supplier extends Person {
     public DeliveryDetails getDeliveryDetails() {
         return this.deliveryDetails;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Address: ")
+                .append(getAddress());
+
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("; Tags: ");
+            tags.forEach(builder::append);
+        }
+
+        builder.append("; Supply Type: ")
+                .append(getSupplyType())
+                .append("; Delivery Details: ")
+                .append(getDeliveryDetails());
+
+        return builder.toString();
+    }
 }

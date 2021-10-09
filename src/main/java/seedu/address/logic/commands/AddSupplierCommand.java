@@ -55,7 +55,8 @@ public class AddSupplierCommand extends Command {
         }
 
         model.addSupplier(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
+                false, false, false, true);
     }
 
     @Override
