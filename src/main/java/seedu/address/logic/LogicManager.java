@@ -60,6 +60,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveTaskList(model.getTaskList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -80,6 +81,11 @@ public class LogicManager implements Logic {
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public Path getTaskListFilePath() {
+        return model.getTaskListFilePath();
     }
 
     @Override

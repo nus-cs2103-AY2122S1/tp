@@ -80,15 +80,27 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Returns the user prefs' task list file path.
+     */
+    Path getTaskListFilePath();
+
+    /**
+     * Sets the user prefs' task list file path.
+     */
+    void setTaskListFilePath(Path taskListPath);
+
+    /**
      * Replaces task list data with the data in {@code taskList}.
      */
     void setTaskList(TaskList taskList);
 
-    /** Returns the TaskList */
+    /**
+     * Returns the TaskList
+     */
     TaskList getTaskList();
 
     /**
-     * Returns true if a task with the same description as {@code task} exists in the task list.
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
      */
     boolean hasTask(Task task);
 

@@ -28,6 +28,8 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TaskList.JsonTaskListStorage;
+import seedu.address.storage.TaskList.TaskListStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -58,7 +60,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        TaskListStorage taskListStorage = new JsonTaskListStorage(userPrefs.getTaskListFilePath());
+        storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -76,22 +79,38 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<TaskList> taskListOptional;
+        ReadOnlyAddressBook initialAddressBookData;
+        TaskList initialTaskListData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBookData = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressBookData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs, new TaskList());
+        try {
+            taskListOptional = storage.readTaskList();
+            if (!taskListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskList");
+            }
+            initialTaskListData = taskListOptional.orElseGet(SampleDataUtil::getSampleTaskList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskList");
+            initialTaskListData = new TaskList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskList");
+            initialTaskListData = new TaskList();
+        }
+
+        return new ModelManager(initialAddressBookData, userPrefs, initialTaskListData);
     }
 
     private void initLogging(Config config) {

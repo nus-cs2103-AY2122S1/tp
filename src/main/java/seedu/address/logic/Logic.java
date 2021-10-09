@@ -39,6 +39,11 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' task list file path.
+     */
+    Path getTaskListFilePath();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
