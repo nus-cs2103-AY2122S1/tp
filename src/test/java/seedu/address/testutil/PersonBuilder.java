@@ -5,9 +5,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
 import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
@@ -32,6 +34,8 @@ public class PersonBuilder {
     private Address address;
     private Optional<LastVisit> lastVisit;
     private Optional<Visit> visit;
+    private Optional<Frequency> frequency;
+    private Optional<Occurrence> occurrence;
     private Set<Tag> tags;
 
     /**
@@ -44,6 +48,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         lastVisit = Optional.ofNullable(new LastVisit(DEFAULT_LAST_VISIT));
         visit = Optional.ofNullable(new Visit(DEFAULT_VISIT));
+        frequency = Optional.ofNullable(Frequency.EMPTY);
+        occurrence = Optional.ofNullable(new Occurrence(1));
         tags = new HashSet<>();
     }
 
@@ -57,6 +63,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         lastVisit = personToCopy.getLastVisit();
         visit = personToCopy.getVisit();
+        frequency = personToCopy.getFrequency();
+        occurrence = personToCopy.getOccurrence();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -116,8 +124,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Frequency} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFrequency(String frequency) {
+        this.frequency = Optional.ofNullable(Frequency.find(frequency));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Occurrence} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOccurrence(int occurrence) {
+        this.occurrence = Optional.ofNullable(new Occurrence(occurrence));
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, language, address, lastVisit, visit, tags);
+        return new Person(name, phone, language, address, lastVisit, visit, frequency, occurrence, tags);
     }
 
 }

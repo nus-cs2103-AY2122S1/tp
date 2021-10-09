@@ -10,7 +10,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.LastVisit;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
@@ -54,9 +56,24 @@ public class DoneCommand extends Command {
         }
 
         String newLastVisitedDate = personToDone.getVisit().toString();
+        Visit newLastVisit = personToDone.getVisit().get();
         Optional<LastVisit> newLastVisited = Optional.of(new LastVisit(newLastVisitedDate));
+
+        Occurrence currentOccurrence = personToDone.getOccurrence().get();
+        Optional<Occurrence> newOccurrence;
+        Optional<Visit> newVisit;
+        Frequency currentFrequency = personToDone.getFrequency().get();
+        if (currentOccurrence.value == 1) {
+            newOccurrence = Optional.of(new Occurrence(1));
+            newVisit = Optional.ofNullable(new Visit(""));
+        } else {
+            newOccurrence = Optional.of(currentOccurrence.getNext());
+            newVisit = Optional.ofNullable(currentFrequency.nextVisit(newLastVisit));
+        }
+
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
-                personToDone.getAddress(), newLastVisited, Optional.ofNullable(new Visit("")), personToDone.getTags());
+                personToDone.getAddress(), newLastVisited, newVisit,
+                personToDone.getFrequency(), newOccurrence, personToDone.getTags());
 
         model.setPerson(personToDone, donePerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

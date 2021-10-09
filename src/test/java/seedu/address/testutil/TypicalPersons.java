@@ -27,21 +27,22 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLanguage("English")
             .withPhone("94351253").withVisit("2021-10-10").withLastVisit("2021-07-07")
-            .withTags("friends").build();
+            .withFrequency("").withOccurrence(1).withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withLanguage("French").withPhone("98765432").withLastVisit("2021-08-08")
-            .withTags("owesMoney", "friends").build();
+            .withFrequency("").withOccurrence(1).withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withLanguage("English").withAddress("wall street").build();
+            .withFrequency("").withOccurrence(1).withLanguage("English").withAddress("wall street").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withLanguage("Chinese").withAddress("10th street").withTags("friends").build();
+            .withFrequency("").withOccurrence(1).withLanguage("Chinese")
+            .withAddress("10th street").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withLanguage("English").withAddress("michegan ave").build();
+            .withFrequency("").withOccurrence(1).withLanguage("English").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withLanguage("Hokkien").withAddress("little tokyo").build();
+            .withFrequency("").withOccurrence(1).withLanguage("Hokkien").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withLanguage("Cantonese").withAddress("4th street").build();
+            .withFrequency("").withOccurrence(1).withLanguage("Cantonese").withAddress("4th street").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

@@ -38,7 +38,8 @@ public class DoneCommandTest {
         String personNewLastVisitedDate = personToDone.getVisit().toString();
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
-                personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT, personToDone.getTags());
+                personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT,
+                personToDone.getFrequency(), personToDone.getOccurrence(), personToDone.getTags());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
@@ -56,7 +57,8 @@ public class DoneCommandTest {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personToDoneNoVisit = new Person(personToDone.getName(), personToDone.getPhone(),
                 personToDone.getLanguage(), personToDone.getAddress(),
-                personToDone.getLastVisit(), EMPTY_VISIT, personToDone.getTags());
+                personToDone.getLastVisit(), EMPTY_VISIT, personToDone.getFrequency(),
+                personToDone.getOccurrence(), personToDone.getTags());
         ModelManager newModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         newModel.setPerson(personToDone, personToDoneNoVisit);
 
@@ -81,7 +83,8 @@ public class DoneCommandTest {
         String personNewLastVisitedDate = personToDone.getVisit().toString();
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
-                personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT, personToDone.getTags());
+                personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT,
+                personToDone.getFrequency(), personToDone.getOccurrence(), personToDone.getTags());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 

@@ -12,9 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
 import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
@@ -33,6 +35,8 @@ class JsonAdaptedPerson {
     private final String address;
     private final String lastVisit;
     private final String visit;
+    private final String frequency;
+    private final String occurrence;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -42,6 +46,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("language") String language, @JsonProperty("address") String address,
             @JsonProperty("lastVisit") String lastVisit, @JsonProperty("visit") String visit,
+            @JsonProperty("frequency") String frequency, @JsonProperty("occurrence") String occurrence,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
@@ -49,6 +54,8 @@ class JsonAdaptedPerson {
         this.address = address;
         this.lastVisit = lastVisit;
         this.visit = visit;
+        this.frequency = frequency;
+        this.occurrence = occurrence;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -64,6 +71,8 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         lastVisit = source.getLastVisit().orElse(new LastVisit("")).value;
         visit = source.getVisit().orElse(new Visit("")).value;
+        frequency = source.getFrequency().orElse(Frequency.EMPTY).value;
+        occurrence = String.valueOf(source.getOccurrence().orElse(new Occurrence(1)).value);
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -123,8 +132,29 @@ class JsonAdaptedPerson {
         }
         final Optional<Visit> modelVisit = Optional.ofNullable(new Visit(visit));
 
+        if (frequency == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Frequency.class.getSimpleName()));
+        }
+        if (!Frequency.isValidFrequency(frequency)) {
+            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        final Optional<Frequency> modelFrequency = Optional.ofNullable(Frequency.find(frequency));
+
+        if (occurrence == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Occurrence.class.getSimpleName()));
+        }
+        if (!Occurrence.isValidOccurrence(occurrence)) {
+            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        // TODO: abstract all convert occurrence from string to int into a method
+        int convertedOccurrence = Integer.parseInt(occurrence);
+        final Optional<Occurrence> modelOccurrence = Optional.ofNullable(new Occurrence(convertedOccurrence));
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelLanguage, modelAddress, modelLastVisit, modelVisit, modelTags);
+        return new Person(modelName, modelPhone, modelLanguage, modelAddress, modelLastVisit, modelVisit,
+                modelFrequency, modelOccurrence, modelTags);
     }
 
 }

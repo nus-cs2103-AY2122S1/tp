@@ -6,6 +6,8 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "lastVisit": "",
     "visit" : "",
+    "frequency" : "",
+    "occurrence" : "1",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -13,6 +15,8 @@
     "language": "English",
     "address": "4th street",
     "lastVisit": "",
+    "frequency" : "",
+    "occurrence" : "1",
     "visit" : ""
   } ]
 }

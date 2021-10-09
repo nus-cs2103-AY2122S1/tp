@@ -10,6 +10,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
 
@@ -24,7 +26,7 @@ public class DeleteCommand extends Command {
             + ": Deletes the person identified by the index number used in the displayed person list. "
             + "Or delete the visit of that person using optional flag " + PREFIX_VISIT + ".\n"
             + "Parameters: [" + PREFIX_VISIT + "] INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "or delete v/1";
+            + "Example: " + COMMAND_WORD + " 1 " + "or " + COMMAND_WORD + " v/1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Deleted Visit for Person: %1$s";
@@ -75,9 +77,12 @@ public class DeleteCommand extends Command {
             throw new CommandException(String.format(MESSAGE_NO_EXISTING_VISIT, personToDelete));
         }
 
+        // if frequency and occurrence are not empty, delete visit will delete rest of the recurring
+        // visits, resets frequency and occurrence
         Person editedPerson =
                 new Person(personToDelete.getName(), personToDelete.getPhone(), personToDelete.getLanguage(),
-                personToDelete.getAddress(), personToDelete.getLastVisit(), EMPTY_VISIT, personToDelete.getTags());
+                personToDelete.getAddress(), personToDelete.getLastVisit(), EMPTY_VISIT,
+                        Optional.of(Frequency.EMPTY), Optional.of(new Occurrence(1)), personToDelete.getTags());
         model.setPerson(personToDelete, editedPerson);
 
         return new CommandResult(String.format(MESSAGE_DELETE_VISIT_SUCCESS, personToDelete));
