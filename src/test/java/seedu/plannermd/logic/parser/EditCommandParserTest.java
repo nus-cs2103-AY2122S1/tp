@@ -25,6 +25,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -48,6 +49,7 @@ import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String RISK_EMPTY = " " + PREFIX_RISK;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPatientCommand.MESSAGE_USAGE);
@@ -208,6 +210,17 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withTags().build();
+        EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetRisk_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + RISK_EMPTY;
+
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withRisk("UNCLASSIFIED").build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
