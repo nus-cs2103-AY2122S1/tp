@@ -240,7 +240,7 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + ROLE_DESC_AMY + EMPLOYMENT_TYPE_DESC_AMY
                 + EXPECTED_SALARY_DESC_AMY + EXPERIENCE_DESC_AMY
-                + PHONE_DESC_BOB+ EMAIL_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ROLE_DESC_BOB + EMPLOYMENT_TYPE_DESC_BOB
                 + EXPECTED_SALARY_DESC_BOB + LEVEL_OF_EDUCATION_DESC_BOB
                 + EXPERIENCE_DESC_BOB + TAG_DESC_HUSBAND;
