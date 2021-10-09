@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -39,7 +40,6 @@ public class Person {
         this.currentPlan = currentPlan;
         this.lastMet = lastMet;
         this.tags.addAll(tags);
-
     }
 
     public Name getName() {
@@ -84,7 +84,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -103,12 +103,12 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getCurrentPlan().equals(getCurrentPlan())
-                && otherPerson.getLastMet().equals(getLastMet())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+            && otherPerson.getCurrentPlan().equals(getCurrentPlan())
+            && otherPerson.getLastMet().equals(getLastMet())
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail())
+            && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getTags().equals(getTags());
     }
 
     @Override
@@ -121,16 +121,16 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Last Met: ")
-                .append(getLastMet())
-                .append("; current plans: ")
-                .append(getCurrentPlan())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+            .append("; Last Met: ")
+            .append(getLastMet())
+            .append("; current plans: ")
+            .append(getCurrentPlan())
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Address: ")
+            .append(getAddress());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

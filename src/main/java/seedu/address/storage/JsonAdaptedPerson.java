@@ -40,9 +40,9 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("last-met") String lastMet, @JsonProperty("current-plan") String currentPlan,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("last-met") String lastMet, @JsonProperty("current-plan") String currentPlan,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -62,11 +62,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        lastMet = source.getLastMet().value.toString();
+        lastMet = source.getLastMet().dateInString;
         currentPlan = source.getCurrentPlan().value;
         tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList()));
     }
 
     /**
