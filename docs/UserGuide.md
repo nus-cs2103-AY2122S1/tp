@@ -35,7 +35,11 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/bartender` or as `n/John Doe`.
+
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
   
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -63,13 +67,14 @@ Format: `help`
 
 |Tag|Description|
 |---|-----------|
-|n/|Name of Staff|
+|n/|Name|
 |s/|Status (as a full-time/part-time worker)|
 |r/|Role (e.g. Cook, Staff Management)|
+|a/|Address|
+|$/|Salary|
+|i/|Index|
 |e/|Email|
-|a/|Address of Staff|
-|i/|Index of Staff
-|d/|Shift identifier (Format: fullDayName-shiftNumber)|
+|t/|Extra tags|
 
 ### View a staff - `view`
 
@@ -82,17 +87,17 @@ Examples:
 
 ### Adding a staff - `add`
 
-Adds a staff to the stored information. Information can be presented in any order.
-Upon creation of a staff, the system creates a staff `index` for them which can be used to refer to them and access the system.
+* Adds a staff to the system. The tags and information are optional and can be presented in any order.
+* Upon creation of a staff, the system creates an index for them which can be used to refer to them and access the system.
 
 Format:
 
-`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [s/STATUS]`
+`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [r/ROLE] [s/STATUS] [t/TAG...]`
 
 Examples:
 
-`add n/Joe s/fulltime r/manager p/98765432 e/Joe@example.com a/John street, block 123, #01-01`\
-`add n/Candice s/parttime p/91234567 e/candice@example.com a/Newgate Prison`
+`add n/Joe s/fulltime r/manager p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`\
+`add n/Candice s/parttime p/91234567 $/2 e/candice@example.com a/Newgate Prison`
 
 ### Listing all persons : `list`
 
@@ -130,8 +135,8 @@ Edits an existing staff in the Staff List.
 
 Formats:
 
-`edit -n NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`\
-`edit -i INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+`edit -n NAME [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [s/STATUS] [$/SALARY] [a/ADDRESS] [t/TAGS...]`\
+`edit -i INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [s/STATUS] [$/SALARY] [a/ADDRESS] [t/TAGS...]`
 
 
 * Edits the staff of the specified `NAME`, `INDEX`
