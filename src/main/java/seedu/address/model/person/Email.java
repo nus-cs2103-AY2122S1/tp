@@ -9,6 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
+    public static final boolean IS_BLANK_VALUE_ALLOWED = false;
+    public static final String DEFAULT_VALUE = "";
+
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -31,8 +34,6 @@ public class Email {
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
-    public static final boolean IS_BLANK_VALUE_ALLOWED = false;
-    public static final String DEFAULT_VALUE = "";
 
     public final String value;
 

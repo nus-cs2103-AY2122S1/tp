@@ -1,14 +1,14 @@
 package seedu.address.model.person;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class LastMet {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
-            + "where Day, month and year should be numerical values.";
+        + "where Day, month and year should be numerical values.";
     // TODO: why call it alternative?
     public static final String ALTERNATIVE_VALIDATION_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
 
@@ -45,7 +45,7 @@ public class LastMet {
      */
     public static boolean isValidLastMet(String test) {
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
-                || test.matches(ALTERNATIVE_VALIDATION_REGEX);
+            || test.matches(ALTERNATIVE_VALIDATION_REGEX);
     }
 
     @Override
@@ -56,8 +56,8 @@ public class LastMet {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LastMet // instanceof handles nulls
-                && value.equals(((LastMet) other).value)); // state check
+            || (other instanceof LastMet // instanceof handles nulls
+            && value.equals(((LastMet) other).value)); // state check
     }
 
     @Override

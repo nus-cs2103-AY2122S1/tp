@@ -28,8 +28,8 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-    private static final Prefix REQUIRED_PREFIXES[] = {
-            PREFIX_NAME, PREFIX_EMAIL
+    private static final Prefix[] REQUIRED_PREFIXES = {
+        PREFIX_NAME, PREFIX_EMAIL
     };
 
     /**
@@ -38,10 +38,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_LASTMET, PREFIX_CURRENTPLAN, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_LASTMET, PREFIX_CURRENTPLAN, PREFIX_TAG);
 
         // make sure the required fields are present
         if (!arePrefixesPresent(argMultimap, REQUIRED_PREFIXES) || !argMultimap.getPreamble().isEmpty()) {
@@ -54,7 +55,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(Email.DEFAULT_VALUE));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(Address.DEFAULT_VALUE));
         LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
-        CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN).orElse(CurrentPlan.DEFAULT_VALUE));
+        CurrentPlan currentPlan =
+            ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN).orElse(CurrentPlan.DEFAULT_VALUE));
 
         Person person = new Person(name, phone, email, address, currentPlan, lastMet, tagList);
 
