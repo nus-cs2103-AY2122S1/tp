@@ -16,9 +16,8 @@ public class EmploymentTypeContainsKeywordsPredicate implements Predicate<Person
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil
-                        .containsWordIgnoreCase(person.getEmploymentType().employmentType, keyword));
-
+                .anyMatch(keyword -> person.getEmploymentType().employmentType.toLowerCase()
+                        .contains(keyword.toLowerCase()));
     }
 
     @Override
