@@ -19,6 +19,7 @@ import seedu.tracker.model.Model;
 import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.NameContainsKeywordsPredicate;
+import seedu.tracker.testutil.EditModuleDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -28,10 +29,12 @@ public class CommandTestUtil {
     public static final String VALID_CODE_GEQ1000 = "GEQ1000";
     public static final String VALID_CODE_CS1101S = "CS1101S";
     public static final String VALID_CODE_CS2100 = "CS2100";
+    public static final String VALID_CODE_CP3108A = "CP3108A";
 
     public static final String VALID_TITLE_CS2103T = "Software Engineering";
     public static final String VALID_TITLE_GEQ1000 = "Asking Questions";
     public static final String VALID_TITLE_CS1101S = "Programming Methodology";
+    public static final String VALID_TITLE_CP3108A = "Independent work";
     public static final String VALID_DESCRIPTION_CS1101S = "Introduces the concepts of programming and "
             + "computational problem solving";
     public static final String VALID_DESCRIPTION_CP3108A = "Independent work";
@@ -46,6 +49,8 @@ public class CommandTestUtil {
 
     public static final String CODE_DESC_CS2103T = " " + PREFIX_CODE + VALID_CODE_CS2103T;
     public static final String CODE_DESC_GEQ1000 = " " + PREFIX_CODE + VALID_CODE_GEQ1000;
+    public static final String CODE_DESC_CP3108A = " " + PREFIX_CODE + VALID_CODE_CP3108A;
+    public static final String TITLE_DESC_CP3108A = " " + PREFIX_TITLE + VALID_TITLE_CP3108A;
     public static final String TITLE_DESC_CS2103T = " " + PREFIX_TITLE + VALID_TITLE_CS2103T;
     public static final String TITLE_DESC_GEQ1000 = " " + PREFIX_TITLE + VALID_TITLE_GEQ1000;
     public static final String DESCRIPTION_DESC_CS2103T = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS2103T;
@@ -64,6 +69,18 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final EditCommand.EditModuleDescriptor DESC_CS2103T;
+    public static final EditCommand.EditModuleDescriptor DESC_GEQ1000;
+
+    static {
+        DESC_CS2103T = new EditModuleDescriptorBuilder().withCode(VALID_CODE_CS2103T)
+                .withTitle(VALID_TITLE_CS2103T).withDescription(VALID_DESCRIPTION_CS2103T).withMc(VALID_MC_CS2103T)
+                .withTags(VALID_TAG_CORE).build();
+        DESC_GEQ1000 = new EditModuleDescriptorBuilder().withCode(VALID_CODE_GEQ1000)
+                .withTitle(VALID_TITLE_GEQ1000).withDescription(VALID_DESCRIPTION_GEQ1000).withMc(VALID_MC_GEQ1000)
+                .withTags(VALID_TAG_GE).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -95,25 +112,25 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the module tracker, filtered module list and selected module in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        ModuleTracker expectedAddressBook = new ModuleTracker(actualModel.getModuleTracker());
+        ModuleTracker expectedModuleTracker = new ModuleTracker(actualModel.getModuleTracker());
         List<Module> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getModuleTracker());
+        assertEquals(expectedModuleTracker, actualModel.getModuleTracker());
         assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
     }
 
 
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s module tracker.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showModuleAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleList().size());
 
         Module module = model.getFilteredModuleList().get(targetIndex.getZeroBased());
