@@ -1,11 +1,10 @@
 package seedu.address.model.appointment;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Phone;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class AppointmentTest {
     @Test
@@ -35,11 +34,11 @@ public class AppointmentTest {
     @Test
     public void isValidMeetingTime() {
         // null phone number
-        assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
+        assertThrows(NullPointerException.class, () -> Appointment.isValidMeetingTime(null));
 
         // invalid phone numbers
 
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
+        assertFalse(Appointment.isValidMeetingTime(" ")); // spaces only
         assertFalse(Appointment.isValidMeetingTime("05 Feb 2021 05:30")); // no dash
         assertFalse(Appointment.isValidMeetingTime("05-Feb-2021")); // no time
         assertFalse(Appointment.isValidMeetingTime("05-02-2021 05:30")); // incorrect month format
