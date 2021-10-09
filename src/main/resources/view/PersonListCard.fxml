@@ -27,7 +27,7 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-            <Label fx:id="gender" layoutX="15.0" layoutY="10.0" styleClass="cell_big_label" />
+        <Label fx:id="gender" layoutX="15.0" layoutY="10.0" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
          <HBox spacing="5.0" />

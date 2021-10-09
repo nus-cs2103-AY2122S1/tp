@@ -22,8 +22,8 @@
          <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
          <CheckBox fx:id="isDone" disable="true" mnemonicParsing="false" selected="true" text="Done" />
     </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
+    <rowConstraints>
+       <RowConstraints />
+    </rowConstraints>
   </GridPane>
 </HBox>
