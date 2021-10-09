@@ -100,8 +100,12 @@ public interface Model {
 
     void addPosition(Position toAdd);
 
+    void deletePosition(Position positionToDelete);
+
     //=========== Filtered Position List Accessors =============================================================
     ObservableList<Position> getFilteredPositionList();
 
     void updateFilteredPositionList(Predicate<Position> predicate);
+
+
 }

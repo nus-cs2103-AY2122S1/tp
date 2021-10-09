@@ -203,6 +203,12 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    @Override
+    public void deletePosition(Position positionToDelete) {
+        positionBook.removePosition(positionToDelete);
+    }
+
+
     //=========== Filtered Position List Accessors =============================================================
     @Override
     public ObservableList<Position> getFilteredPositionList() {

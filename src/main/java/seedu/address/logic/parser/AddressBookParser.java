@@ -64,7 +64,10 @@ public class AddressBookParser {
             return new AddPositionCommandParser().parse(arguments);
 
         case ListPositionCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListPositionCommand();
+
+        case DeletePositionCommand.COMMAND_WORD:
+            return new DeletePositionCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
