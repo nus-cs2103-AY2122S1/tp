@@ -11,10 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.supplier.Supplier;
 
 public class AddSupplierCommand extends Command {
-    public static final String COMMAND_WORD = "add supplier";
+    public static final String COMMAND_WORD = "supplier";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
@@ -36,14 +36,14 @@ public class AddSupplierCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This supplier already exists in the address book";
 
-    private final Person toAdd;
+    private final Supplier toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddSupplierCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddSupplierCommand(Supplier supplier) {
+        requireNonNull(supplier);
+        toAdd = supplier;
     }
 
     @Override
