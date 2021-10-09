@@ -2,17 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -32,8 +28,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_CLIENTID_AMY = "1";
-    public static final String VALID_CLIENTID_BOB = "1";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -42,10 +36,6 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_RISKAPPETITE_AMY = "3";
-    public static final String VALID_RISKAPPETITE_BOB = "4";
-    public static final String VALID_DISPOSABLEINCOME_AMY = "500";
-    public static final String VALID_DISPOSABLEINCOME_BOB = "600";
     public static final String VALID_LASTMET_AMY = "24-09-2021";
     public static final String VALID_LASTMET_BOB = "24-09-2021";
     public static final String VALID_CURRENTPLAN_AMY = "Prudential PRUwealth";
@@ -60,10 +50,6 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String RISKAPPETITE_DESC_AMY = " " + PREFIX_RISKAPPETITE + VALID_RISKAPPETITE_AMY;
-    public static final String RISKAPPETITE_DESC_BOB = " " + PREFIX_RISKAPPETITE + VALID_RISKAPPETITE_BOB;
-    public static final String DISPOSABLEINCOME_DESC_AMY = " " + PREFIX_DISPOSABLEINCOME + VALID_DISPOSABLEINCOME_AMY;
-    public static final String DISPOSABLEINCOME_DESC_BOB = " " + PREFIX_DISPOSABLEINCOME + VALID_DISPOSABLEINCOME_BOB;
     public static final String LASTMET_DESC_AMY = " " + PREFIX_LASTMET + VALID_LASTMET_AMY;
     public static final String LASTMET_DESC_BOB = " " + PREFIX_LASTMET + VALID_LASTMET_BOB;
     public static final String CURRENTPLAN_DESC_AMY = " " + PREFIX_CURRENTPLAN + VALID_CURRENTPLAN_AMY;
@@ -85,11 +71,9 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withRiskAppetite(VALID_RISKAPPETITE_AMY).withDisposableIncome(VALID_DISPOSABLEINCOME_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withRiskAppetite(VALID_RISKAPPETITE_BOB).withDisposableIncome(VALID_DISPOSABLEINCOME_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

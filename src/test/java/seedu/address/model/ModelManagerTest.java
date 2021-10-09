@@ -11,17 +11,11 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -135,5 +129,4 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
-
 }

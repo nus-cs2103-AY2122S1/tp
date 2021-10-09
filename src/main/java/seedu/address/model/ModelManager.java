@@ -112,11 +112,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    public String getClientCounter() {
-        return addressBook.getClientCounter();
-    }
-
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**

@@ -14,14 +14,4 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    /**
-     * Returns the current client counter
-     */
-    String getClientCounter();
-
-    /**
-     * Sets the client counter stored with the new client counter
-     */
-    void setClientCounter(String clientCounter);
-
 }

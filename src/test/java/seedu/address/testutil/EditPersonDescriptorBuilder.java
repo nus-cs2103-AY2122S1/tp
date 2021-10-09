@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -8,13 +7,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentPlan;
-import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,17 +35,11 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
+        descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setAddress(person.getAddress());
         descriptor.setLastMet(person.getLastMet());
         descriptor.setCurrentPlan(person.getCurrentPlan());
-        Optional<Phone> phoneNumber = (Optional<Phone>) person.getPhone();
-        descriptor.setPhone(phoneNumber.isEmpty() ? null : phoneNumber.get());
-        Optional<Address> addressString = (Optional<Address>) person.getAddress();
-        descriptor.setAddress(person.getAddress().isEmpty() ? null : addressString.get());
-        Optional<RiskAppetite> riskAppetiteString = (Optional<RiskAppetite>) person.getRiskAppetite();
-        descriptor.setRiskAppetite(person.getRiskAppetite().isEmpty() ? null : riskAppetiteString.get());
-        Optional<DisposableIncome> disposableIncomeString = (Optional<DisposableIncome>) person.getDisposableIncome();
-        descriptor.setDisposableIncome(person.getDisposableIncome().isEmpty() ? null : disposableIncomeString.get());
         descriptor.setTags(person.getTags());
     }
 
@@ -93,29 +84,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code RiskAppetite} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withRiskAppetite(String riskAppetite) {
-        descriptor.setRiskAppetite(new RiskAppetite(riskAppetite));
-        return this;
-    }
-
-    /**
-     * Sets the {@code LastMet} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withLastMet(String lastMetDate) {
         descriptor.setLastMet(new LastMet(lastMetDate));
         return this;
     }
-
-    /**
-     * Sets the {@code DisposableIncome} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withDisposableIncome(String disposableIncome) {
-        descriptor.setDisposableIncome(new DisposableIncome(disposableIncome));
-        return this;
-    }
-
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
