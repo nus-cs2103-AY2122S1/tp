@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class EventTime implements Comparable<EventTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be in 2359 format.";
-    public static final String TIME_FORMAT = "HHmm";
+    private static final String TIME_FORMAT = "HHmm";
 
     private final LocalTime time;
     private boolean hasTime;
