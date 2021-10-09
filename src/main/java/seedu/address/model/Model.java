@@ -80,6 +80,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Student> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered lesson list */
+    ObservableList<Lesson> getFilteredLessonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -102,11 +105,6 @@ public interface Model {
      * {@code lesson} must not already exist in TuitiONE.
      */
     void addLesson(Lesson lesson);
-
-    /**
-     * Returns an unmodifiable list of lessons.
-     */
-    ObservableList<Lesson> getLessonList();
 
     /**
      * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
