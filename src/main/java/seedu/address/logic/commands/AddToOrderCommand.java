@@ -14,16 +14,16 @@ import seedu.address.model.item.Item;
 public class AddToOrderCommand extends Command {
     public static final String COMMAND_WORD = "iorder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds . "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to current order list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_COUNT + "COUNT "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_COUNT + "COUNT ";
+            + PREFIX_NAME + "Milk "
+            + PREFIX_COUNT + "10 ";
 
 
-    public static final String MESSAGE_SUCCESS = "Ordering mode: Please enter item name and quantity.";
+    public static final String MESSAGE_SUCCESS = " has been added to order.";
 
     public static final String MESSAGE_NO_UNCLOSED_ORDER = "Please use `sorder` to enter ordering mode first.";
 
@@ -52,7 +52,7 @@ public class AddToOrderCommand extends Command {
 
         if (model.hasUnclosedOrder()) {
             model.addToOrder(itemToAdd);
-            return new CommandResult(MESSAGE_SUCCESS);
+            return new CommandResult(itemToAdd.getName() + MESSAGE_SUCCESS);
         } else {
             // Not in ordering mode, tell user to enter ordering mode first.
             return new CommandResult(MESSAGE_NO_UNCLOSED_ORDER);
