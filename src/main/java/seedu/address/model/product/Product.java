@@ -19,16 +19,14 @@ public class Product implements Category {
     // Data fields
     private final Name name;
 
-    /**
-     * Constructs a {@code Product}.
-     * Every field must be present and not null.
-     *
-     * @param name Name of Product
-     */
     public Product(Name name) {
-        requireAllNonNull(name);
+        this(new ID(), name);
+    }
 
-        id = new ID();
+    private Product(ID id, Name name) {
+        requireAllNonNull(id, name);
+
+        this.id = id;
         this.name = name;
     }
 
@@ -38,6 +36,10 @@ public class Product implements Category {
 
     public Name getName() {
         return name;
+    }
+
+    public static Product updateProduct(Product product, Name name) {
+        return new Product(product.getId(), name);
     }
 
     /**
