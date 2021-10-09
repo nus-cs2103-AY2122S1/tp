@@ -44,6 +44,9 @@ public class Timeslot {
     public boolean isTimeFormatCorrect(String mytime) {
 
         String[] timeRange = mytime.split("-");
+        if (timeRange.length != 2) {
+            return false;
+        }
         String first = timeRange[0];
         String second = timeRange[1];
         System.out.println(first + "  " + second);
