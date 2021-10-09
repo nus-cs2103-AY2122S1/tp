@@ -6,8 +6,6 @@ import java.util.*;
 
 import seedu.address.model.tag.Tag;
 
-import javax.swing.text.html.Option;
-
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -27,14 +25,16 @@ public class Person {
     private final Optional<CurrentPlan> currentPlan;
     private final Optional<LastMet> lastMet;
     private final Set<Tag> tags = new HashSet<>();
+    private final CurrentPlan currentPlan;
+    private final LastMet lastMet;
 
     /**
-     * Every field must be present and not null.
+     * Only clientId, email and name fields needs to be present
      */
     public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
-        DisposableIncome disposableIncome ,Set<Tag> tags) {
+        DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
 
-        requireAllNonNull(name, email, tags);
+        requireAllNonNull(clientId, name, email, tags);
         this.clientId = clientId;
         this.name = name;
         this.phone = phone == null ? Optional.empty() : Optional.of(phone);
@@ -94,7 +94,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same email.
+     * Returns true if both persons have the same email or clientId.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -125,6 +125,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+      
         return otherPerson.getClientId().equals(getClientId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
@@ -132,18 +133,23 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRiskAppetite().equals(getRiskAppetite())
                 && otherPerson.getDisposableIncome().equals(getDisposableIncome())
+                && otherPerson.getCurrentPlan().equals(getCurrentPlan())
+                && otherPerson.getLastMet().equals(getLastMet())
                 && otherPerson.getTags().equals(getTags());
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email);
+
+        return Objects.hash(name, phone, email, address, riskAppetite, disposableIncome, currentPlan, lastMet, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+
         builder.append("Client ID: ")
                 .append(getClientId())
                 .append("; Name: ")

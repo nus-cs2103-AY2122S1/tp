@@ -6,7 +6,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentPlan;
+import seedu.address.model.person.DisposableIncome;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.LastMet;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +39,8 @@ public class EditPersonDescriptorBuilder {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
         descriptor.setEmail(person.getEmail());
+        descriptor.setLastMet(person.getLastMet());
+        descriptor.setCurrentPlan(person.getCurrentPlan());
         Optional<Phone> phoneNumber = (Optional<Phone>) person.getPhone();
         descriptor.setPhone(phoneNumber.isEmpty() ? null : phoneNumber.get());
         Optional<Address> addressString = (Optional<Address>) person.getAddress();
@@ -75,7 +85,15 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Current Plan} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withCurrentPlan(String currentPlan) {
+        descriptor.setCurrentPlan(new CurrentPlan(currentPlan));
+        return this;
+    }
+
+    /**
+     * Sets the {@code RiskAppetite} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withRiskAppetite(String riskAppetite) {
         descriptor.setRiskAppetite(new RiskAppetite(riskAppetite));
@@ -83,7 +101,15 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code LastMet} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLastMet(String lastMetDate) {
+        descriptor.setLastMet(new LastMet(lastMetDate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code DisposableIncome} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withDisposableIncome(String disposableIncome) {
         descriptor.setDisposableIncome(new DisposableIncome(disposableIncome));

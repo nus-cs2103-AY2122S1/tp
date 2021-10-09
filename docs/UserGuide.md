@@ -57,9 +57,7 @@ Finding your next lead has never been easier.
 
 ## Client Information
 
-
 Every client that is registered in LeadsForce have the following attributes that has the corresponding attribute type and argument tag.
-
 Client Attribute | Type of Attribute | Argument Tag
 -----------------|-----------------|-----------------
 Client ID (**unique**) | integer | None. Assigned on creation of new contact
@@ -96,15 +94,16 @@ Disposable Income | Integer | disposable-income/
 
 Adds a new client to the address book.
 
-Format: `create {client’s name} /<email> {email} /<phone-no> {phone number} /<risk-appetite> {risk appetite}...​`
+Format: `create {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}...​`
 
 * A client must have minimally the name and email tag filled during creation
 * Any other tags are optional
 * Tags that can be added are as seen in the client information in the Client Info Section
 
 Examples:
-* `create Benedict Chua /email benchua@hotmail.com`
-* `create Keith /email keithtan@ymail.com /phone-no 12345678 /risk-appetite 4`
+* `create Benedict Chua email/benchua@hotmail.com`
+* `create Keith email/keithtan@ymail.com phone-no/12345678 risk-appetite/4`
+
 
 ### Retrieve Particular Contact : `view`
 
@@ -121,26 +120,26 @@ attributes of a client, using the tag of the client’s attribute.
 
 * Multiple attributes could be changed with one command.
 
-Format: `update {Client’s id number} /<attribute> {changed value of attribute} ...`
+Format: `update {Client’s id number} <attribute>/{changed value of attribute} ...`
 
 Examples:
 
-* `update 15 /name Dominic` command changes the name of client 15 to “Dominic”.
-* `update 3 /contact-number 12345678 /risk-appetite 5` command changes the contact number to “12345678” and
+* `update 15 name/Dominic` command changes the name of client 15 to “Dominic”.
+* `update 3 contact-number/12345678 risk-appetite/5` command changes the contact number to “12345678” and
   the risk appetite to 5 for the client who’s id number is 3.
 
 ### Delete particular contact : `delete`
 
 Deletes an existing client from the address book using any specified attribute to identify the client.
 
-Format: `delete /<attribute> {value}`
+Format: `delete <attribute>/{value}`
 
 * Attributes would be limited to client id, email or contact number.
 * It is possible to bulk delete multiple clients by inputting multiple keys separated by ‘,’.
 
 Examples:
-* `delete /id 4,6,7`(deletes clients with client id 4, client id 6 and client 7)
-* `delete /email keithtan@gmail.com`(deletes a client whose email address is keithtan@gmail.com)
+* `delete id/4,6,7`(deletes clients with client id 4, client id 6 and client 7)
+* `delete email/keithtan@gmail.com`(deletes a client whose email address is keithtan@gmail.com)
 
 ### List all contacts : `list`
 
@@ -148,36 +147,55 @@ Shows a list of all tasks in the list.
 
 Format: `list`
 
+
 ### Sort Contacts : `sort`
 
 Sorts clients in order based off the inputted attribute
 
-Format: `sort /<attribute> {ASC/DESC}`
+Format: `sort <attribute>/{ASC/DESC}`
 
 * The asc and desc tag dictates whether filtered client list is sorted in ascending or descending order
 
 Examples:
-* `sort /risk-appetite ASC`
+* `sort risk-appetite/ASC`
 
-### Locating clients by keywords : `find`
+### Locating persons by name: `find`
 
-Finds clients whose contacts match with the given keywords.
+Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]... [attribute/ATTRIBUTE_KEYWORD]...`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all key
-* `attribute/` refers to the argument tag for the client's attribute
-* `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute
-* The search is case-insensitive. e.g `keith` will match `Keith`
-* The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`
-* Clients matching at least one keyword will be returned (i.e. `OR` search).
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Only clients whose attribute matches with the attribute keyword will be returned (i.e. `AND` search), if attribute keyword is provided.
-  e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
+### Locating clients by keywords : `search`
+
+Finds clients whose contacts match with the given keywords.
+
+Format: `search KEYWORD [MORE_KEYWORDS]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...`
+
+* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all attribute of the person
+* `attribute/` refers to the argument tag for the client's attribute.
+* `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.
+* `*` can be used for the `KEYWORD` along with 1 or more `ATTRIBUTE/ATTRIBUTE_KEYWORD` to search using only attribute.
+* The search is case-insensitive. e.g `keith` will match `Keith`.
+* The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* Only clients whose attribute matches with the attribute keyword will be returned (i.e. `AND` search), if attribute keyword is provided.
+  e.g. `Tom Tim e/@gmail.com` will return `Tom Lee e/Tom@gmail.com` and not `Tim Shum e/Tim@yahoo.com`.
+
+Examples:
+* `search John` returns `john` and `John Doe`
+* `search alex david` returns `Alex Yeoh`, `David Li`<br>
 
 ### Clearing all entries : `clear`
 
@@ -216,11 +234,12 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `create {client’s name} /<email> {email} /<phone-no> {phone number} /<risk-appetite> {risk appetite}`| create benedict /email benedict@gmail.com /phone-no 90909898 /risk-appetite 3 |
+**Create** | `create {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| create benedict email/benedict@gmail.com phone-no/90909898 risk-appetite/3 |
 **View** | `view {client’s id number}` | view 123 |
-**Delete** | `delete /<attribute> {value}` | delete /id 4,6,7  |
-**Update** | `update {Client’s id number} /<attribute> {change value of attribute}` | update 1234 /name Dominic /phone-number 12345678 |
+**Delete** | `delete <attribute>/{value}` | delete id/4,6,7  |
+**Update** | `update {Client’s id number} <attribute>/{change value of attribute}` | update 1234 name/Dominic phone-number/12345678 |
 **List** | `list` | - |
-**Search** | `search KEYWORD [OTHER_KEYWORD] [/tag ATTRIBUTE]...` | search * /email doe@gmail.com /risk-appetite 5 |
-**Sort** | `sort /<attribute> {ASC/DESC}` | sort /risk-appetite asc |
+**Find** | `find KEYWORD [OTHER_KEYWORD]` | find alex tom |
+**Search** | `search KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com risk-appetite/5 |
+**Sort** | `sort <attribute>/{ASC/DESC}` | sort risk-appetite/asc |
 **Exit** | `exit` | - |

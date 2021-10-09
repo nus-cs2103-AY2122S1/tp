@@ -17,6 +17,20 @@
     -fx-opacity: 1;
 }
 
+.label-view-header {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Open Sans Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-view {
+    -fx-font-size: 9pt;
+    -fx-font-family: "Open Sans Regular";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Open Sans Light";
