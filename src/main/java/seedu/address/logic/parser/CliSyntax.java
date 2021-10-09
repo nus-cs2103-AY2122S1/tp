@@ -7,7 +7,7 @@ public class CliSyntax {
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("-n ");
     public static final Prefix PREFIX_PHONE_NUMBER = new Prefix("-pn ");
-    public static final Prefix PREFIX_PRICE = new Prefix("-$ ");
+    public static final Prefix PREFIX_UNIT_PRICE = new Prefix("-$ ");
 
     // todo remove later
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
