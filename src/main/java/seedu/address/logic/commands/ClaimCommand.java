@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ClaimCommand extends Command {
@@ -23,7 +24,7 @@ public class ClaimCommand extends Command {
     public static final String MESSAGE_USAGE = "This should be a message usage";
 
     public static final String MESSAGE_ARGUMENTS = "Index %1$d, Title: %2$s, Description: %2$s, Status: %2$s";
-    private static final String MESSAGE_CLAIM_ADDED_SUCCESS = "Claim added: %1$s";
+    public static final String MESSAGE_CLAIM_ADDED_SUCCESS = "Claim added: %1$s";
 
     private final Index index;
     private final Claim claim;
@@ -62,12 +63,15 @@ public class ClaimCommand extends Command {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof ClaimCommand)) {
             return false;
         }
-
         ClaimCommand e = (ClaimCommand) other;
-        return index.equals(e.index) && claim.equals(other);
+        return index.equals(e.index) && claim.equals(e.claim);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, claim);
     }
 }
