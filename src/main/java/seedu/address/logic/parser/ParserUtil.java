@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -252,7 +253,8 @@ public class ParserUtil {
 
     /**
      * Parses {@code String keywords} into a {@code List<String>}.
-     * Leading and trailing whitespaces will be stripped.
+     * Leading and trailing whitespaces will be stripped and
+     * keywords string is split into a list of words.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -263,6 +265,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_KEYWORD);
         }
         return List.of(strippedKeywords.split("\\s+"));
+    }
+
+    /**
+     * Parses {@code String keywords} into a {@code List<String>}.
+     * Leading and trailing whitespaces of keywords will be stripped.
+     * A tag keyword can be a phrase.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static List<String> parseTagKeywords(Collection<String> keywords) throws ParseException {
+        requireNonNull(keywords);
+        final List<String> tagKeywords = new ArrayList<>();
+        for (String keyword : keywords) {
+            String strippedKeyword = keyword.strip();
+            if (strippedKeyword.isEmpty()) {
+                throw new ParseException(MESSAGE_INVALID_KEYWORD);
+            }
+            tagKeywords.add(strippedKeyword);
+        }
+        return tagKeywords;
     }
 
     /**
