@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+enum GenderType {
+    MALE, FEMALE
+}
+
 /**
  * Represents a Person's gender in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidGender(String)}
@@ -23,6 +27,16 @@ public class Gender {
         requireNonNull(gender);
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
         value = getGenderType(gender);
+    }
+    
+    public String getSymbol() {
+        if (value.equals(GenderType.MALE)) {
+            return "M";
+        } else if (value.equals(GenderType.FEMALE)) {
+            return "F";
+        }
+        assert false : "value should be one of the GenderTypes";
+        return "";
     }
 
     /**
