@@ -1,10 +1,12 @@
 package seedu.siasa.storage;
 
 import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+
 import seedu.siasa.commons.core.LogsCenter;
 import seedu.siasa.commons.exceptions.DataConversionException;
 import seedu.siasa.commons.exceptions.IllegalValueException;
@@ -12,7 +14,7 @@ import seedu.siasa.commons.util.FileUtil;
 import seedu.siasa.commons.util.JsonUtil;
 import seedu.siasa.model.ReadOnlySiasa;
 
-public class JsonPolicyBookStorage implements PolicyBookStorage{
+public class JsonPolicyBookStorage implements PolicyBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonPolicyBookStorage.class);
 

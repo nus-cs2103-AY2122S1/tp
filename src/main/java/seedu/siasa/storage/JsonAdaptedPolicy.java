@@ -3,8 +3,10 @@ package seedu.siasa.storage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Person;
@@ -33,7 +35,8 @@ public class JsonAdaptedPolicy {
      */
     @JsonCreator
     public JsonAdaptedPolicy(@JsonProperty("title") String title, @JsonProperty("price") String price,
-                             @JsonProperty("expiryDate") String expiryDate, @JsonProperty("commission") String commission,
+                             @JsonProperty("expiryDate") String expiryDate,
+                             @JsonProperty("commission") String commission,
                              @JsonProperty("owner") JsonAdaptedPerson owner) {
         this.title = title;
         this.price = price;
@@ -75,7 +78,7 @@ public class JsonAdaptedPolicy {
             if (!Price.isValidPrice(Integer.parseInt(price))) {
                 throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
             }
-        } catch (IllegalValueException | NumberFormatException e){
+        } catch (IllegalValueException | NumberFormatException e) {
             throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
         }
 
