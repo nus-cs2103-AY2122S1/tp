@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,10 +20,14 @@ public class AddClientCommand extends Command {
             COMMAND_WORD + ": Adds a client to the address book. "
                     + "Parameters: "
                     + "NAME "
-                    + PREFIX_PHONE_NUMBER + "PHONE_NUMBER \n"
+                    + PREFIX_PHONE_NUMBER + "PHONE_NUMBER "
+                    + "[" + PREFIX_EMAIL + "] EMAIL "
+                    + "[" + PREFIX_ADDRESS + "] ADDRESS \n"
                     + "Example: " + COMMAND_WORD + " "
                     + "John Doe "
-                    + PREFIX_PHONE_NUMBER + "98765432";
+                    + PREFIX_PHONE_NUMBER + "98765432"
+                    + PREFIX_EMAIL + "john.doe@eg.email"
+                    + PREFIX_ADDRESS + "24, XXX Rd, Singapore";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in Sellah";
@@ -112,6 +118,8 @@ public class AddClientCommand extends Command {
 
         /**
          * Updates a client's email.
+         *
+         * @param email The client's new email.
          */
         public void setEmail(Email email) {
             this.email = email;
@@ -128,6 +136,8 @@ public class AddClientCommand extends Command {
 
         /**
          * Updates a client's address.
+         *
+         * @param address The client's new address.
          */
         public void setAddress(Address address) {
             this.address = address;
