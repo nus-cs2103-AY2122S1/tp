@@ -11,8 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.StudentId;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser
- * classes.
+ * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
 
