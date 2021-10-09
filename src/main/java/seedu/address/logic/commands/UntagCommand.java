@@ -14,6 +14,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -78,6 +79,7 @@ public class UntagCommand extends EditCommand {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
 
         Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
@@ -87,7 +89,7 @@ public class UntagCommand extends EditCommand {
         }
         updatedTags.removeAll(removedTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
     }
 
     public static String getNotFoundTags(Set<Tag> originalTags, Set<Tag> removedTags) {
