@@ -19,7 +19,6 @@ import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand.EditPatientDescriptor;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -67,8 +66,6 @@ public class EditCommandParser implements Parser<EditPatientCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPatientDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_RISK).isPresent()) {
             editPatientDescriptor.setRisk(ParserUtil.parseRisk(argMultimap.getValue(PREFIX_RISK).get()));
-        } else {
-            editPatientDescriptor.setRisk(Risk.getUnclassifiedRisk());
         }
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {
@@ -93,5 +90,4 @@ public class EditCommandParser implements Parser<EditPatientCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }
