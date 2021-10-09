@@ -13,7 +13,7 @@ import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.doctor.Doctor;
 
-public class AddDoctorCommand extends AddCommand{
+public class AddDoctorCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a doctor to PlannerMD "
             + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL "

@@ -10,7 +10,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
-
 import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.parser.ArgumentMultimap;
 import seedu.plannermd.logic.parser.ArgumentTokenizer;
