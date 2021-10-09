@@ -163,7 +163,7 @@ Format: `delete-l INDEX`
 
     
 Examples:
-* `delete-l 1` deletes the lesson with corresponding lesson code.
+* `delete-l 1` deletes the lesson with corresponding index.
 
 ### Enrolling a student from lesson: `enroll`
 
