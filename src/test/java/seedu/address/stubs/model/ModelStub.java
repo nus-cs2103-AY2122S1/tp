@@ -1,6 +1,7 @@
 package seedu.address.stubs.model;
 
 import java.nio.file.Path;
+import java.time.DayOfWeek;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,6 +10,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Slot;
+import seedu.address.model.person.exceptions.DuplicateShiftException;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -67,6 +70,11 @@ public class ModelStub implements Model {
     @Override
     public void deletePerson(Person target) {
         throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+        throw new AssertionError("This method should not be called");
     }
 
     @Override
