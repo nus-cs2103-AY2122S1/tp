@@ -64,6 +64,12 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments").trim();
 
         switch (commandWord) {
+        case AddClientCommand.COMMAND_WORD:
+            return new AddClientCommandParser().parse(arguments);
+
+        case AddProductCommand.COMMAND_WORD:
+            return new AddProductCommandParser().parse(arguments);
+
         case ViewClientCommand.COMMAND_WORD:
             return new ViewClientCommandParser().parse(arguments);
 
@@ -75,12 +81,6 @@ public class AddressBookParser {
 
         case EditProductCommand.COMMAND_WORD:
             return new EditProductCommandParser().parse(arguments);
-
-        case AddClientCommand.COMMAND_WORD:
-            return new AddClientCommandParser().parse(arguments);
-
-        case AddProductCommand.COMMAND_WORD:
-            return new AddProductCommandParser().parse(arguments);
 
         case DeleteClientCommand.COMMAND_WORD:
             return new DeleteClientCommandParser().parse(arguments);
@@ -94,20 +94,20 @@ public class AddressBookParser {
         case ListProductCommand.COMMAND_WORD:
             return new ListProductCommand();
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindClientCommand.COMMAND_WORD:
             return new FindClientCommandParser().parse(arguments);
 
         case FindProductCommand.COMMAND_WORD:
             return new FindProductCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
