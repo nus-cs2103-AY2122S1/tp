@@ -66,5 +66,6 @@ public class EditPatientDescriptorTest {
         //same birth date -> returns true
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_AMY).build();
         assertTrue(DESC_AMY.equals(editedAmy));
+
     }
 }
