@@ -44,5 +44,5 @@ public class Role {
         return other == this // short circuit if same object
                 || (other instanceof Role // instanceof handles nulls
                 && value.equals(((Role) other).value)); // state check
-     }
+    }
 }
