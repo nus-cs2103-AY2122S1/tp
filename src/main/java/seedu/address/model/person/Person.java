@@ -23,14 +23,16 @@ public class Person {
     private final Optional<RiskAppetite> riskAppetite;
     private final Optional<DisposableIncome> disposableIncome;
     private final Set<Tag> tags = new HashSet<>();
+    private final CurrentPlan currentPlan;
+    private final LastMet lastMet;
 
     /**
-     * Every field must be present and not null.
+     * Only clientId, email and name fields needs to be present
      */
     public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
-        DisposableIncome disposableIncome ,Set<Tag> tags) {
+        DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
 
-        requireAllNonNull(name, email, tags);
+        requireAllNonNull(clientId, name, email, tags);
         this.clientId = clientId;
         this.name = name;
         this.phone = phone == null ? Optional.empty() : Optional.of(phone);
@@ -38,7 +40,10 @@ public class Person {
         this.address = address == null ? Optional.empty() : Optional.of(address);
         this.riskAppetite = riskAppetite == null ? Optional.empty() : Optional.of(riskAppetite);
         this.disposableIncome = disposableIncome == null ? Optional.empty() : Optional.of(disposableIncome);
+        this.currentPlan = currentPlan;
+        this.lastMet = lastMet;
         this.tags.addAll(tags);
+
     }
 
     public ClientId getClientId() { return clientId; }
@@ -62,6 +67,13 @@ public class Person {
         return address;
     }
 
+    public LastMet getLastMet() {
+        return lastMet;
+    }
+
+    public CurrentPlan getCurrentPlan() {
+        return currentPlan;
+    }
     public Optional<RiskAppetite> getRiskAppetite() {
 
         return riskAppetite;
@@ -111,6 +123,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+      
         return otherPerson.getClientId().equals(getClientId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
@@ -118,24 +131,32 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getRiskAppetite().equals(getRiskAppetite())
                 && otherPerson.getDisposableIncome().equals(getDisposableIncome())
+                && otherPerson.getCurrentPlan().equals(getCurrentPlan())
+                && otherPerson.getLastMet().equals(getLastMet())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email);
+
+        return Objects.hash(name, phone, email, address, riskAppetite, disposableIncome, currentPlan, lastMet, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+
         builder.append("Client ID: ")
                 .append(getClientId())
                 .append("; Name: ")
                 .append(getName())
                 .append("; Email: ")
                 .append(getEmail());
+                .append("; Last Met: ")
+                .append(getLastMet())
+                .append("; current plans: ")
+                .append(getCurrentPlan())  
 
         if (!phone.isEmpty()) {
             builder.append("; Phone: ").append(getPhone().get().value);
