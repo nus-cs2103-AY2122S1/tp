@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -175,7 +175,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code groups} is used internally.
          */
         public void setGroups(List<Group> groups) {
-            this.groups = (groups != null) ? new ArrayList<>(groups) : null;
+            this.groups = (groups != null) ? groups.stream().distinct().collect(Collectors.toList()) : null;
         }
 
         /**

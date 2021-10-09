@@ -95,14 +95,16 @@ public class AssessmentList {
             throw new DuplicateAssessmentException();
         }
 
-        Collections.copy(this.assessments, assessments);
+        this.assessments.clear();
+        this.assessments.addAll(assessments);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AssessmentList // instanceof handles nulls
-                && assessments.equals(((AssessmentList) other).assessments));
+                && assessments.size() == ((AssessmentList) other).assessments.size()
+                && assessments.stream().allMatch(((AssessmentList) other)::contains)); // state check
     }
 
     @Override

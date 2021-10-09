@@ -113,7 +113,8 @@ public class UniqueStudentList implements Iterable<Student> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueStudentList // instanceof handles nulls
-                        && internalList.equals(((UniqueStudentList) other).internalList));
+                        && internalList.size() == ((UniqueStudentList) other).internalList.size()
+                        && internalList.stream().allMatch(((UniqueStudentList) other)::contains));
     }
 
     @Override

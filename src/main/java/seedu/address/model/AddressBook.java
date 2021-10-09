@@ -13,6 +13,7 @@ import seedu.address.model.student.GroupList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameStudent comparison)
@@ -57,12 +58,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
+     * Replaces the contents of the assessment list with {@code assessments}.
+     * {@code assessments} must not contain duplicate assessments.
+     */
+    public void setAssessments(List<Assessment> assessments) {
+        this.assessments.setAssessments(assessments);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setGroups(newData.getGroupList());
+        setAssessments(newData.getAssessmentList());
     }
 
     //// student-level operations
@@ -167,30 +186,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public List<Assessment> getAssessmentList() {
         return assessments.assessments;
-    }
-
-    /**
-     * Provides a weaker notion of equality for address books
-     */
-    public boolean isSameAddressBook(AddressBook other) {
-        if (other == null) {
-            return false;
-        }
-
-        boolean equal = true;
-
-        equal = equal && other.getStudentList().size() == getStudentList().size();
-        // all students are the same
-        equal = equal && other.getStudentList().stream().allMatch(otherStudent -> {
-            for (Student student : getStudentList()) {
-                if (otherStudent.isSameStudent(student)) {
-                    return true;
-                }
-            }
-            return false;
-        });
-        // TODO: check that all groups, assessments, and scores are also the same
-        return equal;
     }
 
     @Override

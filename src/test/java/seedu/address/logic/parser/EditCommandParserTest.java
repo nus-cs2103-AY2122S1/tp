@@ -102,7 +102,7 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + ID_DESC_BOB + TAG_DESC_HUSBAND
-                + GROUP_DESC_TUTORIAL + NAME_DESC_AMY + VALID_GROUP_RECITATION + TAG_DESC_FRIEND;
+                + GROUP_DESC_TUTORIAL + NAME_DESC_AMY + GROUP_DESC_RECITATION + TAG_DESC_FRIEND;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withId(VALID_ID_BOB).withGroups(VALID_GROUP_TUTORIAL, VALID_GROUP_RECITATION)
@@ -160,7 +160,7 @@ public class EditCommandParserTest {
                 + ID_DESC_BOB + GROUP_DESC_RECITATION + TAG_DESC_HUSBAND;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withId(VALID_ID_BOB)
-                .withGroups(VALID_GROUP_RECITATION, VALID_GROUP_RECITATION)
+                .withGroups(VALID_GROUP_TUTORIAL, VALID_GROUP_RECITATION)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

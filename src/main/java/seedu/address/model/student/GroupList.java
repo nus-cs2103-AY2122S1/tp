@@ -92,14 +92,16 @@ public class GroupList {
             throw new DuplicateGroupException();
         }
 
-        Collections.copy(this.groups, groups);
+        this.groups.clear();
+        this.groups.addAll(groups);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GroupList // instanceof handles nulls
-                && groups.equals(((GroupList) other).groups));
+                && groups.size() == ((GroupList) other).groups.size()
+                && groups.stream().allMatch(((GroupList) other)::contains)); // state check
     }
 
     @Override
