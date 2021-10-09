@@ -41,8 +41,12 @@ public class AddressBookParser {
         final String arguments;
 
         if (userInput.contains("-s")) {
-            String[] extracts = userInput.split("-s");
+            String[] extracts = userInput.split("-s", 2);
             commandWord = extracts[0] + "-s";
+            arguments = extracts[1];
+        } else if (userInput.contains("-p")) {
+            String[] extracts = userInput.split("-p", 2);
+            commandWord = extracts[0] + "-p";
             arguments = extracts[1];
         } else {
             matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -52,8 +56,8 @@ public class AddressBookParser {
             commandWord = matcher.group("commandWord");
             arguments = matcher.group("arguments");
         }
-
         switch (commandWord) {
+
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
