@@ -120,6 +120,11 @@ public class ModelManager implements Model {
         UiManager.showViewWindow();
     }
 
+    @Override
+    public void viewList() {
+        UiManager.hideViewWindow();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
