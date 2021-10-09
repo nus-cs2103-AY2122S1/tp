@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.List;
+
 import seedu.address.logic.commands.DeleteFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
-
-import java.util.List;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class DeleteFolderCommandParser implements Parser<DeleteFolderCommand>  {
 

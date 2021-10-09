@@ -1,12 +1,13 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Objects;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
 
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes folder name specified by user.
