@@ -2,17 +2,20 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
+import seedu.address.model.student.ID;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Score;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,8 +26,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -51,48 +54,75 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String score} into a {@code Score}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code score} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static Score parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedScore = score.trim();
+        if (!Score.isValidScore(trimmedScore)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Score(trimmedScore);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String assessment} into an {@code Assessment}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code assessment} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Assessment parseAssessment(String assessment) throws ParseException {
+        requireNonNull(assessment);
+        String trimmedAssessment = assessment.trim();
+        if (!Assessment.isValidAssessment(trimmedAssessment)) {
+            throw new ParseException(Assessment.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Assessment(trimmedAssessment);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String ID} into an {@code ID}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code ID} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static ID parseID(String id) throws ParseException {
+        requireNonNull(id);
+        String trimmedID = id.trim();
+        if (!ID.isValidID(trimmedID)) {
+            throw new ParseException(ID.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new ID(trimmedID);
+    }
+
+    /**
+     * Parses a {@code String Group} into an {@code Group}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Group} is invalid.
+     */
+    public static Group parseGroup(String group) throws ParseException {
+        requireNonNull(group);
+        String trimmedGroup = group.trim();
+        if (!Group.isValidGroup(trimmedGroup)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
+        return new Group(trimmedGroup);
+    }
+
+    /**
+     * Parses {@code Collection<String> groups} into a {@code List<Group>}.
+     */
+    public static List<Group> parseGroups(Collection<String> groups) throws ParseException {
+        requireNonNull(groups);
+        final List<Group> groupList = new ArrayList<>();
+        for (String groupName : groups) {
+            groupList.add(parseGroup(groupName));
+        }
+        return groupList;
     }
 
     /**
