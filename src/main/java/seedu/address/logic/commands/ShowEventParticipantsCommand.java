@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -47,7 +49,9 @@ public class ShowEventParticipantsCommand extends Command {
 
         Event desiredEvent = filteredEventList.get(0);
         List<Participant> participantList = desiredEvent.getParticipants();
-        String displayedMessage = String.format("Event Name: %s\nParticipants:\n%s", desiredEvent.getName(),
+        participantList.sort(Comparator.comparing(Participant::getFullName));
+        String displayedMessage = String.format("Event Name: %s\nParticipants:\n%s",
+                desiredEvent.getName(),
                 Stream.iterate(0, i -> i + 1)
                         .limit(participantList.size())
                         .map(i -> (i + 1) + ". " + participantList.get(i).getName() + "\n")
