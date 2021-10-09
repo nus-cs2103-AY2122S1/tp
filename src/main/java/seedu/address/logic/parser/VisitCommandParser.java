@@ -42,6 +42,10 @@ public class VisitCommandParser implements Parser<VisitCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VisitCommand.MESSAGE_USAGE));
         }
 
+        if (!areOptionalPrefixesValid(argMultimap)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VisitCommand.MESSAGE_USAGE));
+        }
+
         String visit = argMultimap.getValue(PREFIX_DATE).orElse("");
         Optional<Visit> convertedVisit = ParserUtil.parseVisit(visit);
 
@@ -60,5 +64,16 @@ public class VisitCommandParser implements Parser<VisitCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static boolean areOptionalPrefixesValid(ArgumentMultimap argumentMultimap) {
+        boolean isEitherTrue = arePrefixesPresent(argumentMultimap, PREFIX_FREQUENCY)
+                || arePrefixesPresent(argumentMultimap, PREFIX_OCCURRENCE);
+
+        if (arePrefixesPresent(argumentMultimap, PREFIX_FREQUENCY, PREFIX_OCCURRENCE)) {
+            return true;
+        } else {
+            return !isEitherTrue;
+        }
     }
 }

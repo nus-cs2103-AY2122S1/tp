@@ -43,6 +43,7 @@ public class VisitCommand extends Command {
     public static final String MESSAGE_ADD_VISIT_SUCCESS = "Added visit to Person: %1$s";
     public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Removed visit from Person: %1$s";
     public static final String MESSAGE_ADD_RECURRING_VISIT_SUCCESS = "Added recurring visit to Person: %1$s";
+    public static final String MESSAGE_INVALID_OPTIONAL_FLAG = "Frequency cannot be empty for multiple occurrence.";
 
     private final Index index;
     private final Optional<Visit> visit;
@@ -71,6 +72,10 @@ public class VisitCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        if (occurrence.get().isMoreThan(1) && frequency.get().equals(Frequency.EMPTY)) {
+            throw new CommandException(MESSAGE_INVALID_OPTIONAL_FLAG);
+        }
+
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getLanguage(),
@@ -88,7 +93,18 @@ public class VisitCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !visit.get().value.isEmpty() ? MESSAGE_ADD_VISIT_SUCCESS : MESSAGE_DELETE_VISIT_SUCCESS;
+        String message;
+
+        if (visit.get().value.isEmpty()) {
+            // if the visit is empty
+            message = MESSAGE_DELETE_VISIT_SUCCESS;
+        } else if (frequency.get().isEmpty()) {
+            // if the visit is not a recurring visit
+            message = MESSAGE_ADD_VISIT_SUCCESS;
+        } else {
+            // if the visit is a recurring visit
+            message = MESSAGE_ADD_RECURRING_VISIT_SUCCESS;
+        }
         return String.format(message, personToEdit);
     }
 

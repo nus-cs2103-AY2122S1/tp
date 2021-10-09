@@ -43,7 +43,15 @@ public class Occurrence {
         }
         int intOccurrence = Integer.parseInt(occurrence);
         return Occurrence.isValidOccurrence(intOccurrence);
+    }
 
+    /**
+     * Checks if the occurrence is more than a certain value.
+     * @param floor The floor value.
+     * @return true if occurrence is more than the given value, otherwise false.
+     */
+    public boolean isMoreThan(int floor) {
+        return value > floor;
     }
 
     @Override
