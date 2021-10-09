@@ -42,7 +42,7 @@ public enum Status {
             }
         }
         if (resultStatus == null) {
-            throw new IllegalArgumentException("String provided does not match any statuses.");
+            throw new IllegalArgumentException(Status.MESSAGE_CONSTRAINTS);
         } else {
             return resultStatus;
         }
@@ -60,4 +60,11 @@ public enum Status {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return status;
+    }
+
+    
 }
