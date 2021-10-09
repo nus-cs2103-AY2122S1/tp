@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 
+// Adds a position to MrTechRecruiter.
 public class AddPositionCommand extends Command {
 
     public static final String COMMAND_WORD = "add-position";
