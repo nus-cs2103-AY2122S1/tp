@@ -59,7 +59,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             return new HelpCommand();
 
         default:
-            throw new ParseException(MESSAGE_HELP_NOT_EXIST);
+            throw new ParseException(String.format(MESSAGE_HELP_NOT_EXIST, userInput));
         }
     }
 }
