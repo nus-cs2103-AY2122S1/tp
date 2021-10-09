@@ -23,4 +23,26 @@ public class TypicalAddressBook {
         }
         return ab;
     }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons and no facilities.
+     */
+    public static AddressBook getTypicalAddressBookEmptyFacilityList() {
+        AddressBook ab = new AddressBook();
+        for (Person person: getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical facilities and no persons.
+     */
+    public static AddressBook getTypicalAddressBookEmptyMemberList() {
+        AddressBook ab = new AddressBook();
+        for (Facility facility: getTypicalFacilities()) {
+            ab.addFacility(facility);
+        }
+        return ab;
+    }
 }
