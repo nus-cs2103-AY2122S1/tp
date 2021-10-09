@@ -10,7 +10,7 @@
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
     </columnConstraints>
     <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
+        <Insets top="5" right="5" bottom="5" left="10" />
     </padding>
     <Label fx:id="personType"
            style=" -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: coral; -fx-margin-left: 10" />
