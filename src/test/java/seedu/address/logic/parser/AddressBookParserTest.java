@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
+import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -44,7 +44,7 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addMember() throws Exception {
         Person person = new PersonBuilder().build();
         AddMemberCommand command = (AddMemberCommand) parser.parseCommand(PersonUtil.getAddMemberCommand(person));
         assertEquals(new AddMemberCommand(person), command);
