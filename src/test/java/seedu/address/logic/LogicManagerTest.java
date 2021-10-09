@@ -64,8 +64,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String ListMemberCommandWord = ListMemberCommand.COMMAND_WORD;
-        assertCommandSuccess(ListMemberCommandWord, ListMemberCommand.MESSAGE_SUCCESS, model);
+        String listMemberCommandWord = ListMemberCommand.COMMAND_WORD;
+        assertCommandSuccess(listMemberCommandWord, ListMemberCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -79,13 +79,13 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String AddMemberCommandWord = AddMemberCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        String addMemberCommandWord = AddMemberCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(AddMemberCommandWord, CommandException.class, expectedMessage, expectedModel);
+        assertCommandFailure(addMemberCommandWord, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
