@@ -19,7 +19,7 @@ public class AddPositionCommand extends Command {
             + PREFIX_DESCRIPTION + "DESCRIPTION " + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "software engineer "
-            + PREFIX_DESCRIPTION + "write codes everyday :/ ";
+            + PREFIX_DESCRIPTION + "writes code everyday :/ ";
 
 
     public static final String MESSAGE_SUCCESS = "New position added: %1$s";
