@@ -2,23 +2,35 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.UniqueItemList;
 
-/**
- * API of the Order component
- */
-public interface Order {
+public class Order {
+    private final UniqueItemList items;
+
+    public Order() {
+        items = new UniqueItemList();
+    }
+
     /**
      * Add an {@code Item} to the order.
      */
-    void addItem(Item newItem);
+    public void addItem(Item newItem) {
+        items.add(newItem);
+    }
 
     /**
      * Remove the specified {@code Item} from order.
      */
-    void removeItem(Item toBeRemoved);
+    public void removeItem(Item toBeRemoved) {
+        for(Item item : items.asUnmodifiableObservableList()) {
+            if(item.isSameItem(toBeRemoved)) { // Same name OR same id
+                items.remove(item);
+                break;
+            };
+        }
+    }
 
-    /**
-     * Get a list of items in the order.
-     */
-    ObservableList<Item> getOrderItems();
+    public ObservableList<Item> getOrderItems() {
+        return items.asUnmodifiableObservableList();
+    }
 }

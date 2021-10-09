@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 
-class OrderManagerTest {
+class OrderTest {
 
-    private OrderManager order = new OrderManager();
+    private Order order = new Order();
     private Item milk = new Item(new Name("Milk"), "AS0123", 15, new HashSet<>());
     private Item milkWithNameOnly = new Item(new Name("Milk"), "Dummy ID", 15, new HashSet<>());
     private Item milkWithIdOnly = new Item(new Name("Dummy name"), "AS0123", 15, new HashSet<>());
