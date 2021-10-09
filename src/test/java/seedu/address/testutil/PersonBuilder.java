@@ -5,9 +5,12 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Faculty;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +23,17 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ROLE = "student";
+    public static final String DEFAULT_FACULTY = "computing";
+    public static final String DEFAULT_MAJOR = "computer science";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Role role;
+    private Faculty faculty;
+    private Major major;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +44,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        role = new Role(DEFAULT_ROLE);
+        faculty = new Faculty(DEFAULT_FACULTY);
+        major = new Major(DEFAULT_MAJOR);
         tags = new HashSet<>();
     }
 
@@ -46,6 +58,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        role = personToCopy.getRole();
+        faculty = personToCopy.getFaculty();
+        major = personToCopy.getMajor();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,8 +104,32 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Role} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRole(String role) {
+        this.role = new Role(role);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Faculty} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFaculty(String faculty) {
+        this.faculty = new Faculty(faculty);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Major} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMajor(String major) {
+        this.major = new Major(major);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, role, faculty, major, tags);
     }
 
 }
