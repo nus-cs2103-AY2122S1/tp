@@ -24,7 +24,9 @@ import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.util.SampleDataUtil;
 import seedu.siasa.storage.AddressBookStorage;
 import seedu.siasa.storage.JsonAddressBookStorage;
+import seedu.siasa.storage.JsonPolicyBookStorage;
 import seedu.siasa.storage.JsonUserPrefsStorage;
+import seedu.siasa.storage.PolicyBookStorage;
 import seedu.siasa.storage.Storage;
 import seedu.siasa.storage.StorageManager;
 import seedu.siasa.storage.UserPrefsStorage;
@@ -57,7 +59,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getSiasaFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        PolicyBookStorage policyBookStorage = new JsonPolicyBookStorage(userPrefs.getPolicyFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
 
         initLogging(config);
 
