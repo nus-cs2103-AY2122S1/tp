@@ -37,6 +37,8 @@ public class TagCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label tagName;
+    @FXML
+    private Label numDuplicates;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -45,6 +47,7 @@ public class TagCard extends UiPart<Region> {
         super(FXML);
         this.tag = tag;
         tagName.setText(tag.tagName);
+        numDuplicates.setText(tag.getNumDuplicatesString());
     }
 
     @Override

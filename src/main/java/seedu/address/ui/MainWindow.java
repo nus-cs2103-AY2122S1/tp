@@ -45,6 +45,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -151,6 +152,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Displays the person list.
+     */
+    @FXML
+    public void handleShowPersonList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -167,8 +177,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleShowTagList() {
-        // TODO
-        personListPanelPlaceholder.getChildren().add(new TagListPanel(logic.getFilteredTagList()).getRoot());
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+        personListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
     }
 
     void show() {
@@ -202,6 +212,10 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowPersonList()) {
+                handleShowPersonList();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -209,6 +223,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowTagList()) {
                 handleShowTagList();
             }
+
 
             if (commandResult.isExit()) {
                 handleExit();

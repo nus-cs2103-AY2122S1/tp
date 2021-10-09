@@ -121,12 +121,26 @@ public class UniquePersonList implements Iterable<Person> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns an unmodifiable distinct tag list.
+     *
+     * @return An unmodifiable distinct tag observable list.
+     */
     public ObservableList<Tag> asUnmodifiableTagList() {
+        // get a list of distinct tag list
         List<Tag> tagList = internalList.stream()
                 .flatMap(person -> person.getTags().stream())
-                .sorted(Comparator.comparing(tag -> tag.tagName)) // TODO: increment num duplicated tags
                 .distinct()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
                 .collect(Collectors.toList());
+
+        // calculate the number of students grouped under the same tag
+        tagList.forEach(t -> internalList.forEach(person -> {
+            if (person.getTags().contains(t)) {
+                t.incrementNumDuplicates();
+            }
+        }));
+
         ObservableList<Tag> tagObservableList = FXCollections.observableArrayList();
         tagObservableList.setAll(tagList);
         return tagObservableList;

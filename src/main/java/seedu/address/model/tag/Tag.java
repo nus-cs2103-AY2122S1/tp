@@ -37,8 +37,8 @@ public class Tag {
         numDuplicates++;
     }
 
-    public int getNumSameTag() {
-        return numDuplicates + 1;
+    public String getNumDuplicatesString() {
+        return Integer.toString(numDuplicates);
     }
 
     @Override

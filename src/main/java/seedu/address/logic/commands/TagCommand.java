@@ -15,6 +15,6 @@ public class TagCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.getFilteredTagList();
-        return new CommandResult(MESSAGE_SUCCESS, false, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
 }
