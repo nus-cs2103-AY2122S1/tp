@@ -38,17 +38,17 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <StackPane fx:id="togglePlaceholder" layoutX="10.0" layoutY="45.0" styleClass="pane-with-border">
-               <padding>
-                  <Insets bottom="5" left="10" right="10" top="5" />
-               </padding>
-            </StackPane>
 
         <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
+            <StackPane fx:id="togglePlaceholder" layoutX="10.0" layoutY="45.0" styleClass="pane-with-border">
+               <padding>
+                  <Insets bottom="5" left="10" right="10" top="5" />
+               </padding>
+            </StackPane>
 
         <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
