@@ -37,7 +37,7 @@ public class ShowEventDetailsCommandTest {
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ShowEventDetailsCommand(null));
     }
 
@@ -54,7 +54,7 @@ public class ShowEventDetailsCommandTest {
      * @throws CommandException if model provided to ShowEventDetailsCommand execute method is invalid.
      */
     @Test
-    public void execute_noUiChange_showDetailsSuccessful() throws CommandException {
+    public void execute_eventInList_noUiChangeSuccessful() throws CommandException {
         Event sampleEvent = new Event(
                 new EventName("Cooking class"),
                 new EventDate("2020-11-11"),

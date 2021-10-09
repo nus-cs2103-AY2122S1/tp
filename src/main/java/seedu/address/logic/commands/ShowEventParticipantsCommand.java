@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -24,14 +23,14 @@ public class ShowEventParticipantsCommand extends Command {
     public static final String COMMAND_WORD = "showParticipants";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays a list of participants of the Event matching the given name.\n"
+            + ": Displays a list of Participants of the Event matching the given name.\n"
             + "Parameters: EVENT_NAME \n"
             + "Example: " + COMMAND_WORD + " CS2103T Finals ";
 
     private final Predicate<Event> eventName;
 
     /**
-     * Creates an ShowParticipantsCommand to find Event with the specified {@code eventName}
+     * Creates a ShowEventParticipantsCommand for the Event with the specified {@code eventName}
      */
     public ShowEventParticipantsCommand(Predicate<Event> eventName) {
         requireNonNull(eventName);
@@ -54,7 +53,7 @@ public class ShowEventParticipantsCommand extends Command {
                 desiredEvent.getName(),
                 Stream.iterate(0, i -> i + 1)
                         .limit(participantList.size())
-                        .map(i -> (i + 1) + ". " + participantList.get(i).getName() + "\n")
+                        .map(i -> (i + 1) + ". " + participantList.get(i).getFullName() + "\n")
                         .collect(Collectors.joining())
                 );
 

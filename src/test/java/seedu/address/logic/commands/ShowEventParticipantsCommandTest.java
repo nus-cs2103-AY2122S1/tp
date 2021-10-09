@@ -38,7 +38,7 @@ public class ShowEventParticipantsCommandTest {
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ShowEventParticipantsCommand(null));
     }
 
@@ -55,7 +55,7 @@ public class ShowEventParticipantsCommandTest {
      * @throws CommandException if model provided to ShowEventParticipantsCommand execute method is invalid.
      */
     @Test
-    public void execute_noUiChange_showDetailsSuccessful() throws CommandException {
+    public void execute_eventInList_noUiChangeSuccessful() throws CommandException {
         Event sampleEvent = new Event(
                 new EventName("Cooking class"),
                 new EventDate("2020-11-11"),
@@ -111,7 +111,7 @@ public class ShowEventParticipantsCommandTest {
     }
 
     /**
-     * A Model stub that contains a single Event.
+     * A Model stub that contains a single Event that has accepted a single Participant.
      */
     private class ModelStubWithEventWithParticipant extends ModelStub {
         private final Event event;
