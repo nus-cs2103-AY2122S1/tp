@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.AllergyList;
+import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.customer.LoyaltyPoints;
+import seedu.address.model.person.customer.SrList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +42,34 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
+        };
+    }
+
+    public static Customer[] getSampleCustomers() {
+        return new Customer[] {
+                new Customer(new Name("Javier Phon"), new Phone("87438807"), new Email("imphonofyou@example"
+                        + ".com"), new Address("Blk 30 Geylang Street 29, #06-40"), new LoyaltyPoints("1000"),
+                        new AllergyList(List.of("McSpicy, Pineapples")), new SrList(List.of("Doesn't eat "
+                        + "meat")), getTagSet("boss")),
+                new Customer(new Name("Pham Ba Thang"), new Phone("99272758"), new Email("igotchupham"
+                        + "@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                        new LoyaltyPoints("10000"), new AllergyList(List.of("Peanuts, milk")),
+                        new SrList(List.of("Nothing under 100 dollars")),
+                        getTagSet("most handsome", "friends")),
+                new Customer(new Name("Clement Kong"), new Phone("93210283"), new Email("kingkongbingbong"
+                        + "@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                        new LoyaltyPoints("5000"), new AllergyList(List.of("Cheese, rice")),
+                        new SrList(List.of("Loves window seats")), getTagSet("mouse hunt specialist")),
+                new Customer(new Name("Lee Hern Ping"), new Phone("91031282"), new Email("wohernhandsome"
+                        + "@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                        new LoyaltyPoints("1000"), new AllergyList(List.of("Apples")),
+                        new SrList(List.of("Every visit is his birthday")),
+                        getTagSet("second most handsome after thang")),
+                new Customer(new Name("Chetwin Low"), new Phone("92492021"), new Email("chetwinchickenwing"
+                        + "@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
+                        new LoyaltyPoints("0500"),
+                        new AllergyList(List.of("coriander")),
+                        new SrList(List.of("Everything should be deep fried")), getTagSet("sick of AB3"))
         };
     }
 

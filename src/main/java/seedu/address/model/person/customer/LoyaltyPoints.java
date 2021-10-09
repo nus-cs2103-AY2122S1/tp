@@ -17,14 +17,14 @@ public class LoyaltyPoints {
      */
     public LoyaltyPoints(String value) {
         requireNonNull(value);
-        checkArgument(isValidPhone(value), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLoyaltyPoints(value), MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 
     /**
      * Returns true if a given value is a valid point value.
      */
-    public static boolean isValidPhone(String value) {
+    public static boolean isValidLoyaltyPoints(String value) {
         return value.matches(VALIDATION_REGEX);
     }
 

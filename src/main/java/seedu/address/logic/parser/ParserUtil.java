@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -13,6 +14,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.AllergyList;
+import seedu.address.model.person.customer.LoyaltyPoints;
+import seedu.address.model.person.customer.SrList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,6 +97,53 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String loyaltyPoints} into an {@code loyaltyPoints}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code loyaltyPoints} is invalid.
+     */
+    public static LoyaltyPoints parseLoyaltyPoints(String loyaltyPoints) throws ParseException {
+        requireNonNull(loyaltyPoints);
+        String trimmedLoyaltyPoints = loyaltyPoints.trim();
+        if (!LoyaltyPoints.isValidLoyaltyPoints(trimmedLoyaltyPoints)) {
+            throw new ParseException(LoyaltyPoints.MESSAGE_CONSTRAINTS);
+        }
+        return new LoyaltyPoints(trimmedLoyaltyPoints);
+    }
+
+    /**
+     * Parses a {@code String allergies} into an {@code Allergies}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code allergies} is invalid.
+     */
+    public static AllergyList parseAllergies(String allergies) throws ParseException {
+        requireNonNull(allergies);
+        String trimmedAllergies = allergies.trim();
+        List<String> formattedAllergyList = List.of(trimmedAllergies.split("\\s*,\\s*"));
+        if (!AllergyList.isValidAllergyList(formattedAllergyList)) {
+            throw new ParseException(AllergyList.MESSAGE_CONSTRAINTS);
+        }
+        return new AllergyList(formattedAllergyList);
+    }
+
+    /**
+     * Parses a {@code String specialRequests} into an {@code SpecialRequests}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialRequests} is invalid.
+     */
+    public static SrList parseSpecialRequests(String specialRequests) throws ParseException {
+        requireNonNull(specialRequests);
+        String trimmedSpecialRequests = specialRequests.trim();
+        List<String> formattedSrList = List.of(trimmedSpecialRequests.split("\\s*,\\s*"));
+        if (!SrList.isValidSrList(formattedSrList)) {
+            throw new ParseException(SrList.MESSAGE_CONSTRAINTS);
+        }
+        return new SrList(formattedSrList);
     }
 
     /**

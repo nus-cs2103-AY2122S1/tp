@@ -1,8 +1,13 @@
 package seedu.address.model.person.customer;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SrList {
+
+    public static final String MESSAGE_CONSTRAINTS = "All special requests in the special requests list has"
+            + " to be alphanumeric";
 
     private ArrayList<SpecialRequest> specialRequests;
 
@@ -20,6 +25,17 @@ public class SrList {
      */
     public SrList(ArrayList<SpecialRequest> specialRequests) {
         this.specialRequests = specialRequests;
+    }
+
+    /**
+     * Constructs an SrList from a list of strings of special requests.
+     *
+     * @param specialRequests The given list of strings.
+     */
+    public SrList(List<String> specialRequests) {
+        this.specialRequests = new ArrayList<>(specialRequests.stream()
+                .map(s -> new SpecialRequest(s))
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -52,10 +68,17 @@ public class SrList {
 
     @Override
     public String toString() {
-        String temp = "";
-        for (int i = 0; i < this.specialRequests.size(); i++) {
-            temp += String.format("%s. %s\n", i + 1, this.specialRequests.get(i).toString());
+        int length = this.specialRequests.size();
+        if (length == 0) {
+            return "";
+        } else if (length == 1) {
+            return this.specialRequests.get(0).toString();
         }
+        String temp = "";
+        for (int i = 0; i < length - 1; i++) {
+            temp += String.format("%s, ", this.specialRequests.get(i).toString());
+        }
+        temp += String.format("%s", this.specialRequests.get(this.specialRequests.size() - 1).toString());
         return temp;
     }
 
@@ -66,5 +89,17 @@ public class SrList {
      */
     public void delete(int index) {
         this.specialRequests.remove(index);
+    }
+
+    /**
+     * Returns true if a given list contains valid special requests.
+     */
+    public static boolean isValidSrList(List<String> specialRequests) {
+        for (int i = 0; i < specialRequests.size(); i++) {
+            if (!SpecialRequest.isValidSpecialRequest(specialRequests.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

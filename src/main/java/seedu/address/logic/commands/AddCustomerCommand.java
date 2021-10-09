@@ -16,7 +16,7 @@ import seedu.address.model.person.customer.Customer;
 
 public class AddCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "add customer";
+    public static final String COMMAND_WORD = "addcustomer";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the address book. "
             + "Parameters: "
@@ -60,7 +60,7 @@ public class AddCustomerCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addCustomer(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
