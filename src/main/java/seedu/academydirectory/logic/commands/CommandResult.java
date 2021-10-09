@@ -17,6 +17,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private String helpContent = "None";
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -44,6 +46,16 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public void setHelpContent(String helpContent) {
+        if (showHelp) {
+            this.helpContent = helpContent;
+        }
+    }
+
+    public String getHelpContent() {
+        return this.helpContent;
     }
 
     @Override

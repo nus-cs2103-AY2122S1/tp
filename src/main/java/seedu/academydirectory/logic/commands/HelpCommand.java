@@ -1,7 +1,9 @@
 package seedu.academydirectory.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.academydirectory.commons.util.UserGuideReaderUtil;
 import seedu.academydirectory.model.Model;
 
 /**
@@ -16,10 +18,6 @@ public class HelpCommand extends Command {
     public static final String SHOWING_HELP_MESSAGE = "Showing help.";
     public static final String MESSAGE_HELP_SUCCESS = "Show help for command: %1$s";
     public static final String MESSAGE_ARGUMENTS = "Syntax: %2$s";
-    private static final String[] APPROVED_COMMAND = {
-        "add", "attendance", "clear", "delete", "edit",
-        "exit", "find", "list", "retrieve"
-    };
 
     private final String syntax;
 
@@ -36,13 +34,16 @@ public class HelpCommand extends Command {
         this.syntax = syntax;
     }
 
-    private String generateSuccessMessage(String syntax) {
-        return String.format(MESSAGE_HELP_SUCCESS, syntax);
-    }
-
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        requireNonNull(model);
+        CommandResult commandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        if (this.syntax.length() == 0) {
+            commandResult.setHelpContent(UserGuideReaderUtil.getGeneralHelp());
+        } else {
+            commandResult.setHelpContent(UserGuideReaderUtil.getSpecificHelp(this.syntax));
+        }
+        return commandResult;
     }
 
     @Override

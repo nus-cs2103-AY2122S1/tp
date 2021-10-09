@@ -39,6 +39,8 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button copyButton;
 
+    private String helpMessage = HELP_MESSAGE;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -47,9 +49,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
 
-        StringBuilder builder = new StringBuilder(HELP_MESSAGE);
-        addHelpContent(builder);
-        Label label = new Label(builder.toString());
+        Label label = new Label(helpMessage);
         label.setVisible(false);
 
         MarkdownView markdownView = new MarkdownView();
@@ -92,6 +92,10 @@ public class HelpWindow extends UiPart<Stage> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setHelpMessage(String helpMessage) {
+        this.helpMessage = helpMessage;
     }
 
     /**
