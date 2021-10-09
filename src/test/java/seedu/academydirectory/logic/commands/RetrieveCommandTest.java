@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
 import java.util.stream.Collectors;
@@ -33,9 +34,11 @@ public class RetrieveCommandTest {
     public void equals() {
         InformationWantedFunction firstFunction = new InformationWantedFunction(PREFIX_EMAIL);
         InformationWantedFunction secondFunction = new InformationWantedFunction(PREFIX_ADDRESS);
+        InformationWantedFunction thirdFunction = new InformationWantedFunction(PREFIX_TELEGRAM);
 
         RetrieveCommand retrieveFirstCommand = new RetrieveCommand(firstFunction);
         RetrieveCommand retrieveSecondCommand = new RetrieveCommand(secondFunction);
+        RetrieveCommand retrieveThirdCommand = new RetrieveCommand(thirdFunction);
 
         // same object -> returns true
         assertEquals(retrieveFirstCommand, retrieveFirstCommand);
@@ -46,12 +49,15 @@ public class RetrieveCommandTest {
 
         // different types -> returns false
         assertNotEquals(1, retrieveFirstCommand);
+        assertNotEquals(0, retrieveThirdCommand);
 
         // null -> returns false
         assertFalse(retrieveFirstCommand.equals(null));
+        assertFalse(retrieveThirdCommand.equals(null));
 
         // different student -> returns false
         assertNotEquals(retrieveFirstCommand, retrieveSecondCommand);
+        assertNotEquals(retrieveFirstCommand, retrieveThirdCommand);
     }
 
     @Test

@@ -16,6 +16,7 @@ import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
+import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
 /**
@@ -112,6 +113,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return new Telegram(trimmedTelegram);
     }
 
     /**

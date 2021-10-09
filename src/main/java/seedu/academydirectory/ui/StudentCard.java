@@ -39,6 +39,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label telegram;
+    @FXML
     private Label attendance;
     @FXML
     private Label assessment;
@@ -56,6 +58,7 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
+        telegram.setText(student.getTelegram().value);
         attendance.setText(student.getAttendance().toString());
         assessment.setText(student.getAssessment().toString());
         student.getTags().stream()

@@ -9,6 +9,7 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_EMAIL_
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +46,10 @@ public class EditStudentDescriptorTest {
 
         // different email -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different telegram -> returns false
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false

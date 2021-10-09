@@ -64,8 +64,8 @@ public class GradeCommand extends Command {
         assessmentToEdit.updateAssessmentGrade(assessment, grade);
         Student editedStudent = new Student(
                 studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                studentToEdit.getAddress(), studentToEdit.getAttendance(), studentToEdit.getAssessment(),
-                studentToEdit.getTags());
+                studentToEdit.getTelegram(), studentToEdit.getAddress(), studentToEdit.getAttendance(),
+                studentToEdit.getAssessment(), studentToEdit.getTags());
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment));
