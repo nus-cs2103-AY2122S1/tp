@@ -71,10 +71,10 @@ public class TagContainsKeywordsPredicateTest {
         // Keywords match name, phone, email, address, applied role, employment type, expected salary,
         // level of education, and years of experience, but does not match tags
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com", "Main",
-                "Street", "Software", "Engineer", "Full", "time", "4000", "PhD", "5", "old"));
+                "Street", "Engineer", "Temporary", "4000", "PhD", "5", "old"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").withRole("Software Engineer")
-                .withEmploymentType("Full time").withExpectedSalary("4000").withLevelOfEducation("PhD")
-                .withExperience("5").withTags("young").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withRole("Engineer")
+                .withEmploymentType("Temporary").withExpectedSalary("4000").withLevelOfEducation("PhD")
+                .withExperience("5").build()));
     }
 }
