@@ -110,7 +110,7 @@ Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
 
 Examples:
 * `add-l s/Science g/P5 d/Wed t/12:30 c/12.0`
-* `add-l s/Mathematics g/S4 d/Fri t/15:00 c/10.3`
+* `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
 ### Listing all students: `list`
 
@@ -231,7 +231,7 @@ If your changes to the data file makes its format invalid, TuitiONE will discard
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]…` <br> e.g. `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 t/foreign student`
-**Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add-l s/Science g/P5 d/Wed t/12:30 c/12.0`
+**Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Delete lesson** | `delete-l INDEX`<br> e.g. `delete-l 1`
