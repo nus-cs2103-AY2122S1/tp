@@ -3,10 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CAPACITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -36,6 +39,24 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_FACILITY_NAME_COURT = "Court 1";
+    public static final String VALID_LOCATION_COURT = "University Sports Hall";
+    public static final String VALID_TIME_COURT = "11:30";
+    public static final String VALID_CAPACITY_COURT = "5";
+    public static final String VALID_FACILITY_NAME_FIELD = "NUS Field 2";
+    public static final String VALID_LOCATION_FIELD = "Opp University Hall";
+    public static final String VALID_TIME_FIELD = "13:30";
+    public static final String VALID_CAPACITY_FIELD = "8";
+
+    public static final String NAME_DESC_COURT = " " + PREFIX_NAME + VALID_FACILITY_NAME_COURT;
+    public static final String LOCATION_DESC_COURT = " " + PREFIX_LOCATION + VALID_LOCATION_COURT;
+    public static final String TIME_DESC_COURT = " " + PREFIX_TIME + VALID_TIME_COURT;
+    public static final String CAPACITY_DESC_COURT = " " + PREFIX_CAPACITY + VALID_CAPACITY_COURT;
+    public static final String NAME_DESC_FIELD = " " + PREFIX_NAME + VALID_FACILITY_NAME_FIELD;
+    public static final String LOCATION_DESC_FIELD = " " + PREFIX_LOCATION + VALID_LOCATION_FIELD;
+    public static final String TIME_DESC_FIELD = " " + PREFIX_TIME + VALID_TIME_FIELD;
+    public static final String CAPACITY_DESC_FIELD = " " + PREFIX_CAPACITY + VALID_CAPACITY_FIELD;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

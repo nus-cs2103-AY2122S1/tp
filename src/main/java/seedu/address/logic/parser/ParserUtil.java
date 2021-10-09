@@ -9,6 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -48,6 +52,58 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a string into FacilityName. Leading or trailing
+     * whitespaces are trimmed.
+     *
+     * @param name String to be parsed.
+     * @return FacilityName object with specified name.
+     */
+    public static FacilityName parseFacilityName(String name) {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        return new FacilityName(trimmedName);
+    }
+
+    /**
+     * Parses a string into Location. Leading or trailing
+     * whitespaces are trimmed.
+     *
+     * @param location String to be parsed.
+     * @return Location object with specified value.
+     */
+    public static Location parseLocation(String location) {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        return new Location(trimmedLocation);
+    }
+
+    /**
+     * Parses a string into Time. Leading or trailing
+     * whitespaces are trimmed.
+     *
+     * @param time String to be parsed.
+     * @return Time object with specified value.
+     */
+    public static Time parseTime(String time) {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        return new Time(trimmedTime);
+    }
+
+    /**
+     * Parses a string into Capacity. Leading or trailing
+     * whitespaces are trimmed.
+     *
+     * @param capacity String to be parsed.
+     * @return Capacity object with specified value.
+     */
+    public static Capacity parseCapacity(String capacity) {
+        requireNonNull(capacity);
+        String trimmedCapacity = capacity.trim();
+        return new Capacity(trimmedCapacity);
     }
 
     /**

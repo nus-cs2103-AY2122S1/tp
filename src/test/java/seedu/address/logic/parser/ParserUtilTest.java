@@ -14,6 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.facility.Capacity;
+import seedu.address.model.facility.FacilityName;
+import seedu.address.model.facility.Location;
+import seedu.address.model.facility.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,6 +37,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String FACILITY_NAME = "Court";
+    private static final String FACILITY_LOCATION = "University Hall";
+    private static final String FACILITY_TIME = "11:30";
+    private static final String FACILITY_CAPACITY = "5";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -54,6 +63,74 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseFacilityName_null_exceptionThrown() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFacilityName((String) null));
+    }
+
+    @Test
+    public void parseFacilityName_valueWithoutWhiteSpace_returnsFacilityName() {
+        FacilityName name = new FacilityName(FACILITY_NAME);
+        assertEquals(name, ParserUtil.parseFacilityName(FACILITY_NAME));
+    }
+
+    @Test
+    public void parseFacilityName_valueWithWhiteSpace_returnsTrimmedName() {
+        FacilityName name = new FacilityName(FACILITY_NAME);
+        assertEquals(name, ParserUtil.parseFacilityName(WHITESPACE + FACILITY_NAME + WHITESPACE));
+    }
+
+    @Test
+    public void parseLocation_null_exceptionThrown() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLocation((String) null));
+    }
+
+    @Test
+    public void parseLocation_valueWithoutWhiteSpace_returnsLocation() {
+        Location location = new Location(FACILITY_LOCATION);
+        assertEquals(location, ParserUtil.parseLocation(FACILITY_LOCATION));
+    }
+
+    @Test
+    public void parseLocation_valueWithWhiteSpace_returnsTrimmedLocation() {
+        Location location = new Location(FACILITY_LOCATION);
+        assertEquals(location, ParserUtil.parseLocation(WHITESPACE + FACILITY_LOCATION + WHITESPACE));
+    }
+
+    @Test
+    public void parseTime_null_exceptionThrown() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTime((String) null));
+    }
+
+    @Test
+    public void parseTime_valueWithoutWhiteSpace_returnsTime() {
+        Time time = new Time(FACILITY_TIME);
+        assertEquals(time, ParserUtil.parseTime(FACILITY_TIME));
+    }
+
+    @Test
+    public void parseTime_valueWithWhiteSpace_returnsTrimmedTime() {
+        Time time = new Time(FACILITY_TIME);
+        assertEquals(time, ParserUtil.parseTime(WHITESPACE + FACILITY_TIME + WHITESPACE));
+    }
+
+    @Test
+    public void parseCapacity_null_exceptionThrown() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCapacity((String) null));
+    }
+
+    @Test
+    public void parseCapacity_valueWithoutWhiteSpace_returnsCapacity() {
+        Capacity capacity = new Capacity(FACILITY_CAPACITY);
+        assertEquals(capacity, ParserUtil.parseCapacity(FACILITY_CAPACITY));
+    }
+
+    @Test
+    public void parseLocation_valueWithWhiteSpace_returnsTrimmedCapacity() {
+        Capacity capacity = new Capacity(FACILITY_CAPACITY);
+        assertEquals(capacity, ParserUtil.parseCapacity(WHITESPACE + FACILITY_CAPACITY + WHITESPACE));
     }
 
     @Test
