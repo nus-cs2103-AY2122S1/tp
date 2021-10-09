@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Field.addToFieldSet;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -46,7 +47,7 @@ public class Person {
         this.tags.addAll(tags);
         this.schedule = new Schedule();
         this.fields.addAll(tags);
-        Field.addToFieldSet(fields, name, phone, email, address, salary);
+        addToFieldSet(fields, name, phone, email, address, salary, status, role);
     }
 
 
