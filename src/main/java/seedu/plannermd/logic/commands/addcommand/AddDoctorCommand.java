@@ -1,18 +1,17 @@
 package seedu.plannermd.logic.commands.addcommand;
 
-import seedu.plannermd.logic.commands.CommandResult;
-import seedu.plannermd.logic.commands.exceptions.CommandException;
-import seedu.plannermd.model.Model;
-import seedu.plannermd.model.doctor.Doctor;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.plannermd.logic.commands.CommandResult;
+import seedu.plannermd.logic.commands.exceptions.CommandException;
+import seedu.plannermd.model.Model;
+import seedu.plannermd.model.doctor.Doctor;
 
 public class AddDoctorCommand extends AddCommand{
 

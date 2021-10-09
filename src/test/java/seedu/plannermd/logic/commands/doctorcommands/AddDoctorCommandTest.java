@@ -48,7 +48,7 @@ public class AddDoctorCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Doctor validDoctor = new DoctorBuilder().build();
         AddDoctorCommand addDoctorCommand = new AddDoctorCommand(validDoctor);
-        AddDoctorCommandTest.ModelStub modelStub = new AddDoctorCommandTest.ModelStubWithPerson(validDoctor);
+        AddDoctorCommandTest.ModelStub modelStub = new AddDoctorCommandTest.ModelStubWithDoctor(validDoctor);
 
         assertThrows(CommandException.class,
                 AddDoctorCommand.MESSAGE_DUPLICATE_DOCTOR, () -> addDoctorCommand.execute(modelStub));
@@ -86,18 +86,17 @@ public class AddDoctorCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setState(State state) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public State getState() {
-            return null;
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void toggleState() {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -204,18 +203,17 @@ public class AddDoctorCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPerson extends AddDoctorCommandTest.ModelStub {
+    private class ModelStubWithDoctor extends AddDoctorCommandTest.ModelStub {
         private final Person person;
 
-        ModelStubWithPerson(Person person) {
+        ModelStubWithDoctor(Person person) {
             requireNonNull(person);
             this.person = person;
         }
 
         @Override
         public boolean hasPatient(Patient patient) {
-            requireNonNull(patient);
-            return this.person.isSamePerson(patient);
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
