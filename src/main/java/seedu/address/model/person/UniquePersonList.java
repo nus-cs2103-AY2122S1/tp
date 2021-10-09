@@ -156,11 +156,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void setLessons(UniquePersonList replacement) {
         requireNonNull(replacement);
         calendar.clear();
-        for (Person person: replacement.internalList) {
-            for (Lesson lesson: person.getLessons()) {
-                calendar.addEntry(lesson.asCalendarEntry());
-            }
-        }
+        setLessons(replacement.internalList);
     }
 
     public void setLessons(List<Person> persons) {
