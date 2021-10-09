@@ -19,8 +19,13 @@ import seedu.address.model.person.Grade;
 /**
  * Parses input arguments and creates a new AddLessonCommand object
  */
-public class AddLessonCommandParser implements Parser<AddLessonCommand>{
+public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddLessonCommand
+     * and returns an AddLessonCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddLessonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_GRADE, PREFIX_DAY, PREFIX_TIME, PREFIX_COST);

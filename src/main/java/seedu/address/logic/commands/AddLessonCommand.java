@@ -29,6 +29,9 @@ public class AddLessonCommand extends Command {
 
     private final Lesson toAdd;
 
+    /**
+     * Creates an AddLessonCommand to add the specified {@code Lesson}
+     */
     public AddLessonCommand(Lesson lesson) {
         requireNonNull(lesson);
         toAdd = lesson;
@@ -48,8 +51,8 @@ public class AddLessonCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof AddLessonCommand
-        && toAdd.equals(((AddLessonCommand) other).toAdd));
+        return other == this // short circuit if same object
+                || (other instanceof AddLessonCommand // instanceof handles nulls
+                && toAdd.equals(((AddLessonCommand) other).toAdd));
     }
 }
