@@ -10,6 +10,7 @@ import seedu.tracker.logic.commands.AddCommand;
 import seedu.tracker.logic.commands.ClearCommand;
 import seedu.tracker.logic.commands.Command;
 import seedu.tracker.logic.commands.DeleteCommand;
+import seedu.tracker.logic.commands.EditCommand;
 import seedu.tracker.logic.commands.ExitCommand;
 import seedu.tracker.logic.commands.HelpCommand;
 import seedu.tracker.logic.commands.ListCommand;
@@ -45,8 +46,8 @@ public class ModuleTrackerParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        // case EditCommand.COMMAND_WORD:
-            // return new EditCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
