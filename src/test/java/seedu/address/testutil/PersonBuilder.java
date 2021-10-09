@@ -94,6 +94,11 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withAppointment(Appointment appointment) {
+        this.appointment = appointment;
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, address, tags, appointment);
     }
