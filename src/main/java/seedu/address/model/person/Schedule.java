@@ -89,7 +89,7 @@ public class Schedule {
     /**
      * Creates the shift array in a legible text output.
      * @param shifts The shifts in to format.
-     *               
+     *
      * @return The string format to display.
      */
     private static String formatShiftsToString(Shift[] shifts) {
