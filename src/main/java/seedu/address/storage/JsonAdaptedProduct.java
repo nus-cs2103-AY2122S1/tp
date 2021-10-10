@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.UnitPrice;
 
 /**
  * Jackson-friendly version of {@link Product}.
@@ -51,8 +52,10 @@ public class JsonAdaptedProduct {
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ID.class.getSimpleName()));
         }
-        final ID modelId = new ID(id);
-        return new Product(modelId, modelName);
+        // final ID modelId = new ID(id);
+
+        final UnitPrice unitPrice = new UnitPrice("1");
+        return new Product(modelName, unitPrice, null);
     }
 }
 
