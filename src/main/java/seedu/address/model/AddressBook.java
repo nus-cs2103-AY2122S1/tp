@@ -53,8 +53,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the person list with {@code tasks}.
+     * {@code tasks} must not contain duplicate persons.
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
