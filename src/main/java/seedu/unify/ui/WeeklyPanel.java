@@ -40,7 +40,7 @@ public class WeeklyPanel extends UiPart<Region> {
             placeHolderVBox.setStyle("-fx-border-style: solid inside;"
                     + "-fx-border-width: 1;");
             dailyHBox.widthProperty().addListener(e -> placeHolderVBox.setPrefWidth(dailyHBox.getWidth() / 7));
-            dailyHBox.getChildren().add(0, placeHolderVBox);
+            dailyHBox.getChildren().add(placeHolderVBox);
         }
     }
 
