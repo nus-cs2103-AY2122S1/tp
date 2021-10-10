@@ -18,8 +18,8 @@ import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditMemberCommand;
+import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
@@ -35,7 +35,7 @@ import seedu.address.model.facility.LocationContainsKeywordsPredicate;
 import seedu.address.model.facility.Time;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -85,10 +85,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder(person).build();
+        EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
                 + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST, descriptor), command);
+        assertEquals(new EditMemberCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
