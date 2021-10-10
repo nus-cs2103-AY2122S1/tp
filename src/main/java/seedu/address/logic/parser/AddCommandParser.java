@@ -37,8 +37,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -53,11 +53,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         // NOT REQUIRED
         BirthDate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_DATE).orElse("NA"));
+        // TODO: If separating adding of notes and NOK, change to simply an Empty Set and Empty Arraylist.
         Set<Note> noteList = ParserUtil.parseNotes(argMultimap.getAllValues(PREFIX_NOTE));
         ArrayList<NextOfKin> nextOfKins = ParserUtil.parseNextOfKins(argMultimap.getAllValues(PREFIX_NEXT_OF_KIN));
 
         Participant participant = new Participant(name, phone, email, address, tagList, birthDate, noteList,
-            nextOfKins);
+                nextOfKins);
 
         return new AddCommand(participant);
     }
