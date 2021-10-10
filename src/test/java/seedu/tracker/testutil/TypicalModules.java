@@ -11,7 +11,6 @@ import seedu.tracker.model.module.Module;
  * A utility class containing a list of {@code Module} objects to be used in tests.
  */
 public class TypicalModules {
-
     public static final Module CS2103T = new ModuleBuilder().withCode("CS2103T")
             .withTitle("Software Engineering").withMc(4)
             .withDescription("Covers the main areas of software development")
