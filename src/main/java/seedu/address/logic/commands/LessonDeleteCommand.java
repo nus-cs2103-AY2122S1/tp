@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -103,6 +105,8 @@ public class LessonDeleteCommand extends Command {
         Phone updatedParentPhone = personToEdit.getParentPhone();
         Email updatedParentEmail = personToEdit.getParentEmail();
         Address updatedAddress = personToEdit.getAddress();
+        School updatedSchool = personToEdit.getSchool();
+        AcadStream updatedAcadStream = personToEdit.getAcadStream();
         Fee updatedOutstandingFee = personToEdit.getFee();
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
@@ -110,9 +114,9 @@ public class LessonDeleteCommand extends Command {
         updatedLessons.remove(toRemove);
         TreeSet<Lesson> updatedLessonSet = new TreeSet<>(updatedLessons);
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
-            updatedParentPhone, updatedParentEmail, updatedAddress,
-            updatedOutstandingFee, updatedRemark, updatedTags, updatedLessonSet);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
+                updatedAddress, updatedSchool, updatedAcadStream, updatedOutstandingFee,
+                updatedRemark, updatedTags, updatedLessonSet);
     }
 
     @Override

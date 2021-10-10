@@ -19,6 +19,15 @@ public class Remark {
         value = remark;
     }
 
+    /**
+     * Returns true if remark value is empty.
+     *
+     * @return True if remark value is empty.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
     @Override
     public String toString() {
         return value;
