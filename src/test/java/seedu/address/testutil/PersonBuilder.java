@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +27,8 @@ public class PersonBuilder {
     private Email email;
     private Note note;
     private Set<Tag> tags;
+    private HashSet<String> superGroups;
+    private HashSet<String> subGroups;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +39,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
+        superGroups = new HashSet<>();
+        subGroups = new HashSet<>();
     }
 
     /**
@@ -47,6 +52,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
+        superGroups = new HashSet<>(personToCopy.getSuperGroups());
+        subGroups = new HashSet<>(personToCopy.getSubGroups());
     }
 
     /**
@@ -62,6 +69,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withSuperGroups(String... superGroups) {
+        this.superGroups = new HashSet<>(Arrays.asList(superGroups));
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withSubGroups(String... subGroups) {
+        this.subGroups = new HashSet<>(Arrays.asList(subGroups));
         return this;
     }
 
@@ -90,7 +113,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, note, tags);
+        return new Person(name, phone, email, note, tags, superGroups, subGroups);
     }
 
 }

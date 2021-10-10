@@ -134,6 +134,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         addressBook.deleteSuperGroup(superGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -144,6 +145,18 @@ public class ModelManager implements Model {
     @Override
     public SubGroup findSubGroup(String name) {
         return addressBook.findSubGroup(name);
+    }
+
+    @Override
+    public void addSubGroup(SubGroup subGroup) {
+        addressBook.addSubGroup(subGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deleteSubGroup(SubGroup subGroup) {
+        addressBook.deleteSubGroup(subGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================

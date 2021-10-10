@@ -64,6 +64,7 @@ public class PersonAddSubGroupCommand extends Command {
         SubGroup subGroup = model.findSubGroup(groupName + "_" + subGroupName);
         if (subGroup == null) {
             subGroup = new SubGroup(subGroupName, superGroup);
+            model.addSubGroup(subGroup);
         }
         superGroup.addSubGroup(subGroup);
         superGroup.addPerson(personToEdit);

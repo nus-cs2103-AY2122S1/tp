@@ -136,6 +136,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteSubGroup(SubGroup subGroup) {
+
+        }
+
+        @Override
+        public void addSubGroup(SubGroup subGroup) {
+
+        }
+
+        @Override
         public SuperGroup findSuperGroup(String name) {
             return null;
         }

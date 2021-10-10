@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import seedu.address.model.AddressBook;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,7 +30,9 @@ public class TypicalPersons {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withNote("He is Ben's son.")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withSuperGroups("Orbital", "CS2103")
+            .withSubGroups("Orbital_Group1").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563")
             .withEmail("heinz@example.com").build();
@@ -76,6 +78,9 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
+        for (SuperGroup superGroup: TypicalGroups.getSuperGroups()) {
+            ab.addSuperGroup(superGroup);
+        }
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

@@ -9,6 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -104,6 +107,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
         }
         final Note modelNote = new Note(note);
+
+        if (!superGroups.stream().allMatch(SuperGroup::isValidGroupName)) {
+            throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!subGroups.stream().allMatch(SubGroup::isValidGroupName)) {
+            throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+        }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelNote, modelTags,

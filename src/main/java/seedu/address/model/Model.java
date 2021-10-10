@@ -89,6 +89,10 @@ public interface Model {
 
     SubGroup findSubGroup(String name);
 
+    void addSubGroup(SubGroup subGroup);
+
+    void deleteSubGroup(SubGroup subGroup);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
