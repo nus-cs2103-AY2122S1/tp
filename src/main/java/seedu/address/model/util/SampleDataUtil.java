@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ import seedu.address.model.member.Member;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
+import seedu.address.model.task.Task;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -65,4 +67,10 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a list of tasks containing the list of tasks given.
+     */
+    public static List<Task> getTaskList(Task ... tasks) {
+        return Arrays.stream(tasks).collect(Collectors.toList());
+    }
 }

@@ -4,7 +4,23 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "attachedPosition": [ "friends" ]
+    "attachedPosition": [ "friends" ],
+    "attachedTasks": [{
+      "taskName": "team meeting",
+      "isDone": false
+    }, {
+      "taskName": "group project",
+      "isDone": false
+    }, {
+      "taskName": "check payment",
+      "isDone": false
+    }, {
+      "taskName": "check vaccination status",
+      "isDone": false
+    }, {
+      "taskName": "rehearse 2 times",
+      "isDone": false
+    }]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

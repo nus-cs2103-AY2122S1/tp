@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.position.Position;
+import seedu.address.model.task.TaskList;
 
 /**
  * Represents a Member in the address book.
@@ -23,6 +24,7 @@ public class Member {
     // Data fields
     private final Address address;
     private final Set<Position> positions = new HashSet<>();
+    private final TaskList taskList = new TaskList();
 
     /**
      * Every field must be present and not null.
@@ -34,6 +36,19 @@ public class Member {
         this.email = email;
         this.address = address;
         this.positions.addAll(positions);
+    }
+
+    /**
+     * Constructs a member with tasks.
+     */
+    public Member(Name name, Phone phone, Email email, Address address, Set<Position> positions, TaskList taskList) {
+        requireAllNonNull(name, phone, email, address, positions, taskList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.positions.addAll(positions);
+        this.taskList.setTasks(taskList);
     }
 
     public Name getName() {
@@ -58,6 +73,14 @@ public class Member {
      */
     public Set<Position> getPositions() {
         return Collections.unmodifiableSet(positions);
+    }
+
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList.setTasks(taskList);
     }
 
     /**
@@ -92,7 +115,8 @@ public class Member {
                 && otherMember.getPhone().equals(getPhone())
                 && otherMember.getEmail().equals(getEmail())
                 && otherMember.getAddress().equals(getAddress())
-                && otherMember.getPositions().equals(getPositions());
+                && otherMember.getPositions().equals(getPositions())
+                && otherMember.getTaskList().equals(getTaskList());
     }
 
     @Override
@@ -117,6 +141,10 @@ public class Member {
             builder.append("; Positions: ");
             positions.forEach(builder::append);
         }
+        /*if (!taskList.isEmpty()) {
+            builder.append("; Tasks: ");
+            taskList.iterator().forEachRemaining(builder::append);
+        }*/
         return builder.toString();
     }
 

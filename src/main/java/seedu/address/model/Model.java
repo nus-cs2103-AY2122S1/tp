@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -39,22 +40,22 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
-
-    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /** Returns the user prefs' address book file path. */
+    Path getAddressBookFilePath();
+
+    /**
+     * Returns the AddressBook
+     */
+    ReadOnlyAddressBook getAddressBook();
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
 
     /**
      * Returns true if a member with the same identity as {@code member} exists in the address book.
@@ -122,4 +123,56 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+  
+    /**
+     * Load the given {@code Member} object's task list.
+     */
+    void loadTaskList(Member member);
+
+    /**
+     * Returns ture if a given {@code task} with the same identity as task
+     * exist in the task list of the given {@code member}.
+     */
+    void hasTask(Member member, Task task);
+
+    /**
+     * Adds the given {@code task} to the given {@code member}'s task list.
+     */
+    void addTask(Member member, Task task);
+
+    /**
+     * Deletes the given {@code task} from the given {@code member}'s task list.
+     * The task must exist in the member's task list.
+     */
+    void deleteTask(Member member, Task task);
+
+    /**
+     * Deletes the task specified by {@code index} from the given {@code member}'s task list.
+     * The task must exist in the member's task list.
+     */
+    void deleteTask(Member member, int index);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask} in the given {@code member}'s task list.
+     * {@code target} must exist in the task list.
+     */
+    void setTask(Member member, Task target, Task editedTask);
+
+    /**
+     * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
+     */
+    void setTask(Member member, int index, Task editedTask);
+
+    /**
+     * Returns an unmodifiable view of the filtered task list of the given {@code member}.
+     */
+    ObservableList<Task> getFilteredTaskList(Member member);
+
+    /**
+     * Updates the filter of the filtered task list of the given {@code member}
+     * to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Member member, Predicate<Task> predicate);
 }
