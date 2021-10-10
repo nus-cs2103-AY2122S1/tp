@@ -52,9 +52,8 @@ public class PaidCommand extends Command {
         }
 
         Person editedStudent = new Person(
-                studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                studentToEdit.getAddress(), studentToEdit.getProgress(),
-                new PaymentStatus(true), studentToEdit.getTags());
+                studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
+                studentToEdit.getParentPhone(), studentToEdit.getProgress(), new PaymentStatus(true));
 
         model.setPerson(studentToEdit, editedStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
