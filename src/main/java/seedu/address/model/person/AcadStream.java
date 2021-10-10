@@ -11,7 +11,7 @@ public class AcadStream {
     public final String value;
 
     /**
-     * Constructs a {@code Stream}.
+     * Constructs a {@code AcadStream}.
      *
      * @param acadStream A valid academic stream.
      */

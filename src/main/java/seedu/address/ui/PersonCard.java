@@ -120,11 +120,19 @@ public class PersonCard extends UiPart<Region> {
             outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
         }
 
-        person.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        setLessonListView(person.getLessons());
+        if (person.getTags().isEmpty()) {
+            tags.setManaged(false);
+        } else {
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        }
 
+        if (person.getLessons().isEmpty()) {
+            lessonListView.setManaged(false);
+        } else {
+            setLessonListView(person.getLessons());
+        }
     }
 
     private void setLessonListView(Set<Lesson> lessons) {
