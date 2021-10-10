@@ -11,7 +11,6 @@ import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.Remark;
 
 public class RemarkPatientCommand extends RemarkCommand {
@@ -60,13 +59,13 @@ public class RemarkPatientCommand extends RemarkCommand {
 
     /**
      * Generates a command execution success message based on whether the remark is
-     * added to or removed from {@code personToEdit}.
+     * added to or removed from {@code patientToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    private String generateSuccessMessage(Patient patientToEdit) {
         String message = !remark.value.isEmpty()
                 ? MESSAGE_ADD_PATIENT_REMARK_SUCCESS
                 : MESSAGE_DELETE_PATIENT_REMARK_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, patientToEdit);
     }
 
     @Override

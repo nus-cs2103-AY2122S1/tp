@@ -15,11 +15,11 @@ import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeleteCommand;
 import seedu.plannermd.logic.commands.editcommand.EditCommand;
+import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListDoctorCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
-import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.commands.tagcommand.TagCommand;
 import seedu.plannermd.logic.parser.addcommandparser.AddDoctorCommandParser;
 import seedu.plannermd.logic.parser.addcommandparser.AddPatientCommandParser;
@@ -89,11 +89,11 @@ public class PlannerMdParser {
         case RemarkCommand.COMMAND_WORD:
             return new RemarkPatientCommandParser().parse(arguments);
 
-        case AddPatientTagCommand.COMMAND_WORD:
+        case TagCommand.COMMAND_WORD:
             return new TagPatientCommandParser().parse(arguments);
 
         case FindPatientCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new FindPatientCommandParser().parse(arguments);
 
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
@@ -107,12 +107,6 @@ public class PlannerMdParser {
 
         switch (commandWord) {
 
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkDoctorCommandParser().parse(arguments);
-
-        case TagCommand.COMMAND_WORD:
-            return new TagDoctorCommandParser().parse(arguments);
-
         case AddDoctorCommand.COMMAND_WORD:
             return new AddDoctorCommandParser().parse(arguments);
 
@@ -121,6 +115,15 @@ public class PlannerMdParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteDoctorCommandParser().parse(arguments);
+
+        case RemarkCommand.COMMAND_WORD:
+            return new RemarkDoctorCommandParser().parse(arguments);
+
+        case TagCommand.COMMAND_WORD:
+            return new TagDoctorCommandParser().parse(arguments);
+
+        case FindDoctorCommand.COMMAND_WORD:
+            return new FindDoctorCommandParser().parse(arguments);
 
         case ListDoctorCommand.COMMAND_WORD:
             return new ListDoctorCommand();

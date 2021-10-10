@@ -27,7 +27,9 @@ import seedu.plannermd.logic.commands.deletecommand.DeleteDoctorCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
+import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
+import seedu.plannermd.logic.commands.listcommand.ListDoctorCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkDoctorCommand;
@@ -170,12 +172,22 @@ public class PlannerMdParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findPatient() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindPatientCommand command = (FindPatientCommand) parser.parseCommand(
                 FindPatientCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
                 patientState);
         assertEquals(new FindPatientCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findDoctor() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindDoctorCommand command = (FindDoctorCommand) parser.parseCommand(
+                FindDoctorCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")),
+                doctorState);
+        assertEquals(new FindDoctorCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -185,10 +197,17 @@ public class PlannerMdParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listPatient() throws Exception {
         assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD, patientState) instanceof ListPatientCommand);
         assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD + " 3",
                 patientState) instanceof ListPatientCommand);
+    }
+
+    @Test
+    public void parseCommand_listDoctor() throws Exception {
+        assertTrue(parser.parseCommand(ListDoctorCommand.COMMAND_WORD, doctorState) instanceof ListDoctorCommand);
+        assertTrue(parser.parseCommand(
+                ListDoctorCommand.COMMAND_WORD + " 3", doctorState) instanceof ListDoctorCommand);
     }
 
     @Test
