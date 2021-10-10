@@ -43,7 +43,7 @@ class JsonAdaptedTuition {
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("limit") int limit,
                              @JsonProperty("counter") int counter, @JsonProperty("timeslot") String timeslot,
                              @JsonProperty("students") ArrayList<String> student,
-                             @JsonProperty("remark") String remark,  @JsonProperty("id") int id) {
+                             @JsonProperty("remark") String remark, @JsonProperty("id") int id) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
