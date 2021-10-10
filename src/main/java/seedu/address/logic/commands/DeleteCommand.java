@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_NAME + "Alex Yeoh";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted these people:\n";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted these people:\n\n";
 
     private Index targetIndex = null;
     private Name name = null;
@@ -80,44 +80,63 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> staffs = new ArrayList<>(model.getAddressBook().getPersonList());
-        StringBuilder deletedPeople = new StringBuilder(MESSAGE_DELETE_PEOPLE_SUCCESS);
 
         if (role != null) {
-            for (Person staff : staffs) {
-                if (staff.getRole() == role) {
-                    model.deletePerson(staff);
-                    deletedPeople.append(staff).append("\n");
-                }
-            }
-            return new CommandResult(deletedPeople.toString());
+            return executeBasedOnRole(model, staffs);
         } else if (status != null) {
-            for (Person staff : staffs) {
-                if (staff.getStatus() == status) {
-                    model.deletePerson(staff);
-                    deletedPeople.append(staff).append("\n");
-                }
-            }
-            return new CommandResult(deletedPeople.toString());
+            return executeBasedOnStatus(model, staffs);
         } else if (targetIndex != null) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person staffToDelete = lastShownList.get(targetIndex.getZeroBased());
-            model.deletePerson(staffToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete));
+            return executeBasedOnTargetIndex(model, lastShownList);
         } else {
-            int index = getIndexByName(name, lastShownList);
-            if (index == INVALID_INDEX) {
-                throw new CommandException(Messages.MESSAGE_NAME_NOT_FOUND);
-            }
+            return executeBasedOnName(model, lastShownList);
+        }
+    }
 
-            Person staffToDelete = lastShownList.get(index);
-            model.deletePerson(staffToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete));
+    private CommandResult executeBasedOnRole(Model model, List<Person> staffs) {
+        StringBuilder deletedPeople = new StringBuilder(MESSAGE_DELETE_PEOPLE_SUCCESS);
+        for (Person staff : staffs) {
+            if (staff.getRole() == role) {
+                model.deletePerson(staff);
+                deletedPeople.append(staff).append("\n\n");
+            }
+        }
+        return new CommandResult(deletedPeople.toString());
+    }
+
+    private CommandResult executeBasedOnStatus(Model model, List<Person> staffs) {
+        StringBuilder deletedPeople = new StringBuilder(MESSAGE_DELETE_PEOPLE_SUCCESS);
+        for (Person staff : staffs) {
+            if (staff.getStatus() == status) {
+                model.deletePerson(staff);
+                deletedPeople.append(staff).append("\n\n");
+            }
+        }
+        return new CommandResult(deletedPeople.toString());
+    }
+
+    private CommandResult executeBasedOnTargetIndex(Model model, List<Person> lastShownList)
+            throws CommandException {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        Person staffToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(staffToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete));
     }
+
+    private CommandResult executeBasedOnName(Model model, List<Person> lastShownList)
+            throws CommandException {
+        int index = getIndexByName(name, lastShownList);
+        if (index == INVALID_INDEX) {
+            throw new CommandException(Messages.MESSAGE_NAME_NOT_FOUND);
+        }
+
+        Person staffToDelete = lastShownList.get(index);
+        model.deletePerson(staffToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete));
+    }
+
 
     private int getIndexByName(Name name, List<Person> lastShownList) {
         for (int i = 0; i < lastShownList.size(); i++) {
