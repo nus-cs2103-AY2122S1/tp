@@ -22,7 +22,8 @@ public class AddToClassCommand extends Command {
             + "Parameters: "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + PREFIX_TUITION_CLASS + "CLASS_INDEX"
-            + "\n" + "Example: " + COMMAND_WORD + " si/3 tc/3";
+            + "\n" + "Example1: " + COMMAND_WORD + " si/3 tc/3"
+            + "\n" + "Example2: " + COMMAND_WORD + " s/Felicia,James tc/3";
     public static final String MESSAGE_SUCCESS = "New student %1$s is added to class: %2$s";
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
     private static final String MESSAGE_CLASS_IS_FULL = "Cannot add student as the class limit has been exceeded.";
