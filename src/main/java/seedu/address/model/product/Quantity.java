@@ -15,7 +15,7 @@ public class Quantity {
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    private String quantity;
+    public final String quantity;
 
     /**
      * Constructs a {@code Quantity}.

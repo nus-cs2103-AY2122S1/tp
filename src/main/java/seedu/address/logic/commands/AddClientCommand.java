@@ -25,8 +25,8 @@ public class AddClientCommand extends Command {
                     + "[" + PREFIX_ADDRESS + "] ADDRESS \n"
                     + "Example: " + COMMAND_WORD + " "
                     + "John Doe "
-                    + PREFIX_PHONE_NUMBER + "98765432"
-                    + PREFIX_EMAIL + "john.doe@eg.email"
+                    + PREFIX_PHONE_NUMBER + "98765432 "
+                    + PREFIX_EMAIL + "john.doe@eg.email "
                     + PREFIX_ADDRESS + "24, XXX Rd, Singapore";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
