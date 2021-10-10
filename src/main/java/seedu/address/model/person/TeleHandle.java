@@ -12,7 +12,7 @@ import java.util.Objects;
 public class TeleHandle {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram handles should begin with a '@' and it should be at least 5 characters long";
+            "Telegram handles should begin with a '@' and it should be at least 5 characters long with no spaces";
 
     public static final String VALIDATION_REGEX = "@[\\p{Alnum}]{5,}";
     public final String value;
