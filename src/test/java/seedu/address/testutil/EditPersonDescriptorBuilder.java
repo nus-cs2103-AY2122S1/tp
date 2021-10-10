@@ -5,12 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nationality;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.TutorialGroup;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,6 +33,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setNationality(person.getNationality());
         descriptor.setTutorialGroup(person.getTutorialGroup());
+        descriptor.setSocialHandle(person.getSocialHandle());
         descriptor.setTags(person.getTags());
     }
 
@@ -78,6 +74,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTutorialGroup(String tutorialGroup) {
         descriptor.setTutorialGroup(new TutorialGroup(tutorialGroup));
+        return this;
+    }
+
+    /**
+     * Sets the {@code SocialHandle} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSocialHandle(String socialHandle) {
+        descriptor.setSocialHandle(new SocialHandle(socialHandle));
         return this;
     }
 

@@ -1,18 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
-
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -36,6 +31,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_NATIONALITY + person.getNationality().value + " ");
         sb.append(PREFIX_TUTORIAL_GROUP + person.getTutorialGroup().value + " ");
+        sb.append(PREFIX_SOCIAL_HANDLE + person.getSocialHandle().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -54,6 +50,8 @@ public class PersonUtil {
                 .append(nationality.value).append(" "));
         descriptor.getTutorialGroup().ifPresent(tutorialGroup -> sb.append(PREFIX_TUTORIAL_GROUP)
                 .append(tutorialGroup.value).append(" "));
+        descriptor.getSocialHandle().ifPresent(socialHandle -> sb.append(PREFIX_SOCIAL_HANDLE)
+                .append(socialHandle.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
