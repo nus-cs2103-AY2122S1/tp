@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 public class DateTest {
-    private static final String DATE = "14 Jan 2022";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -19,12 +20,6 @@ public class DateTest {
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "";
         assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
-    }
-
-    @Test
-    public void updateDateWithWeek_validDate_success() {
-        String validOneWeekLaterDateString = "21 Jan 2022";
-        assertEquals(new Date(validOneWeekLaterDateString), (new Date(DATE)).updateDateWithWeek());
     }
 
     @Test
@@ -42,6 +37,28 @@ public class DateTest {
         assertTrue(Date.isValidDate("23 Feb 2021"));
         assertTrue(Date.isValidDate("12 Jan 2022"));
         assertTrue(Date.isValidDate("29 Feb 2020")); // leap year
+    }
+
+    @Test
+    public void updateDate() {
+        // At least 1 week has passed
+        LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);
+        Date dateOneWeekAgo = new Date(oneWeekAgo.format(Date.FORMATTER));
+        assertEquals(LocalDate.now(), dateOneWeekAgo.updateDate().getLocalDate());
+
+        /*
+        Less than a week has passed but the date is over.
+         */
+        long daysBefore = 2;
+        long daysInAWeek = 7;
+        LocalDate lessThanOneWeekAgo = LocalDate.now().minusDays(daysBefore);
+        Date dateLessThanOneWeekAgo = new Date(lessThanOneWeekAgo.format(Date.FORMATTER));
+        assertEquals(LocalDate.now().plusDays(daysInAWeek - daysBefore),
+            dateLessThanOneWeekAgo.updateDate().getLocalDate());
+
+        // Current date (date is not over yet)
+        Date today = new Date(LocalDate.now().format(Date.FORMATTER));
+        assertEquals(LocalDate.now(), today.updateDate().getLocalDate());
     }
 
 }

@@ -7,8 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -86,8 +84,6 @@ public class PersonCard extends UiPart<Region> {
         lessonSet.forEach(lesson -> lessonObservableList.add(lesson));
         return lessonObservableList;
     }
-
-
 
     @Override
     public boolean equals(Object other) {

@@ -18,8 +18,6 @@ public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
-    private static final int CELL_HEIGHT = 105;
-
     @FXML
     private ListView<Lesson> lessonListView;
 

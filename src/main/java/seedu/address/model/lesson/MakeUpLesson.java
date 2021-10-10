@@ -30,10 +30,10 @@ public class MakeUpLesson extends Lesson {
     }
 
     /**
-     * Get the date of the makeup lesson.
+     * This method should not be called since MakeUpLesson only has one date.
      */
     @Override
-    public Date getUpcomingDate() {
+    public Date getNextDate() {
         throw new UnsupportedOperationException("Makeup lesson has no upcoming date.");
     }
 

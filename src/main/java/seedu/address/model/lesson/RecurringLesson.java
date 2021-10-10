@@ -32,10 +32,13 @@ public class RecurringLesson extends Lesson {
     }
 
     /**
-     * Get the date of lesson for the current week.
+     * Get the upcoming date of the lesson.
+     *
+     * @return The upcoming date on the same day of week if start date
+     * has passed or start date if it has yet to pass.
      */
     @Override
-    public Date getUpcomingDate() {
+    public Date getNextDate() {
         if (getStartDate().isOver()) {
             return getStartDate().updateDate();
         }
@@ -66,7 +69,7 @@ public class RecurringLesson extends Lesson {
         String typeOfLesson = "Recurring Lesson";
         builder.append(typeOfLesson)
             .append("\n")
-            .append(getUpcomingDate())
+            .append(getNextDate())
             .append("\nTime: ")
             .append(getTimeRange())
             .append("\nSubject: ")
