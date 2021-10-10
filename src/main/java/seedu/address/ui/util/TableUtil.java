@@ -1,5 +1,7 @@
 package seedu.address.ui.util;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
@@ -25,6 +27,8 @@ public class TableUtil {
      * @param table Table to copy cell values from.
      */
     public static void installCopyPasteHandler(TableView<?> table) {
+        requireNonNull(table);
+
         // install copy/paste keyboard handler
         table.setOnKeyPressed(new TableKeyEventHandler());
     }
@@ -45,6 +49,8 @@ public class TableUtil {
          * @param keyEvent Event of keys pressed.
          */
         public void handle(final KeyEvent keyEvent) {
+            requireNonNull(keyEvent);
+
             if (copyKeyCodeCombiWin.match(keyEvent) || copyKeyCodeCombiMac.match(keyEvent)) {
 
                 if (keyEvent.getSource() instanceof TableView) {
@@ -64,6 +70,7 @@ public class TableUtil {
      * @param table Table of the selected cells.
      */
     public static void copySelectionToClipboard(TableView<?> table) {
+        requireNonNull(table);
 
         StringBuilder clipboardString = new StringBuilder();
 
