@@ -21,11 +21,7 @@ import seedu.plannermd.model.patient.Patient;
 class JsonSerializablePlannerMd {
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
-<<<<<<< HEAD
-    public static final String MESSAGE_DUPLICATE_DOCTOR = "Placeholdertext";
-=======
     public static final String MESSAGE_DUPLICATE_DOCTOR = "Doctors list contains duplicate doctor(s).";
->>>>>>> 34a773be707bafa55d3ceae0e22e234df42ee8bc
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
     private final List<JsonAdaptedDoctor> doctors = new ArrayList<>();
