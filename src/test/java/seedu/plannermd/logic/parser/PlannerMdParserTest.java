@@ -41,12 +41,15 @@ public class PlannerMdParserTest {
     private final State doctorState = State.DOCTOR;
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addPatient() throws Exception {
         Patient patient = new PatientBuilder().build();
         AddPatientCommand patentCommand =
                 (AddPatientCommand) parser.parseCommand(PatientUtil.getAddCommand(patient), patientState);
         assertEquals(new AddPatientCommand(patient), patentCommand);
+    }
 
+    @Test
+    public void parseCommand_addDoctor() throws Exception {
         Doctor doctor = new DoctorBuilder().build();
         AddDoctorCommand doctorCommand =
                 (AddDoctorCommand) parser.parseCommand(DoctorUtil.getAddCommand(doctor), doctorState);
