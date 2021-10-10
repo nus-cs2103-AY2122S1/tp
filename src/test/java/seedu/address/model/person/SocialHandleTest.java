@@ -27,10 +27,15 @@ public class SocialHandleTest {
         // invalid socialHandle
         assertFalse(SocialHandle.isValidSocialHandle("")); // empty string
         assertFalse(SocialHandle.isValidSocialHandle(" ")); // spaces only
+        assertFalse(SocialHandle.isValidSocialHandle("@")); // no value after @
+        assertFalse(SocialHandle.isValidSocialHandle("@fewf fewfef")); // contains space in handle
+        assertFalse(SocialHandle.isValidSocialHandle("@ rgekre")); // contains space in handle
+        assertFalse(SocialHandle.isValidSocialHandle("@efref ")); // trailing space
 
         // valid socialHandle
         assertTrue(SocialHandle.isValidSocialHandle("@valid"));
         assertTrue(SocialHandle.isValidSocialHandle("@v")); // one character
+        assertTrue(SocialHandle.isValidSocialHandle("@3432")); // contains number
     }
 
 }

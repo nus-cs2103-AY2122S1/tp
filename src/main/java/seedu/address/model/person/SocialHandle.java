@@ -9,13 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SocialHandle {
 
-    public static final String MESSAGE_CONSTRAINTS = "Social handle (Telegram handle) can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Social handle (Telegram handle) should be a single string without whitespaces, " +
+            "starts with a '@' character, and it should not be blank";
 
     /*
      * The first character of the social handle must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "@\\S+";
 
     public final String value;
 
