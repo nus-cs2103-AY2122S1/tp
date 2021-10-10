@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -36,6 +37,11 @@ public class DeleteGroupCommand extends Command {
 
         // Get the group that we want to delete, indicated by the given group name
         model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(targetGroupName.toString())));
+
+        if (model.getFilteredGroupList().size() == 0) {
+            throw new CommandException(Messages.MESSAGE_GROUP_NOT_FOUND);
+        }
+
         Group groupToDelete = model.getFilteredGroupList().get(0);
 
         model.deleteGroup(groupToDelete);
