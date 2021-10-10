@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Adds a student to the address book.
+ * Allocates an existing student to an existing group.
  */
 public class AddAllocCommand extends Command {
 
