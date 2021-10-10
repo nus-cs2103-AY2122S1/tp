@@ -95,6 +95,19 @@ public class Person {
     }
 
     /**
+     * Removes all traces of a tuition class from the student.
+     */
+    public Person removeClass(TuitionClass tuitionClass) {
+        for (TuitionClass c : classes.getClasses()) {
+            if (c.getTimeslot().equals(tuitionClass.getTimeslot())) {
+                classes.removeClass(c);
+                removeTag(new Tag(tuitionClass.getName().getName()));
+            }
+        }
+        return this;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
