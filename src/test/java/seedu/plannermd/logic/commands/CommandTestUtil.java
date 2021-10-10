@@ -135,7 +135,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the patient at the given
+     * Updates {@code model}'s patient filtered list to show only the patient at the given
      * {@code targetIndex} in the {@code model}'s plannermd.
      */
     public static void showPatientAtIndex(Model model, Index targetIndex) {
@@ -149,7 +149,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the doctor at the given
+     * Updates {@code model}'s doctor filtered list to show only the doctor at the given
      * {@code targetIndex} in the {@code model}'s plannermd.
      */
     public static void showDoctorAtIndex(Model model, Index targetIndex) {
@@ -161,4 +161,5 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredDoctorList().size());
     }
+
 }

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.deletecommand.DeleteDoctorCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
@@ -97,6 +98,10 @@ public class DeletePatientCommandTest {
 
         // different person -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        // DeletePatientCommand vs DeleteDoctorCommand -> returns false
+        DeleteDoctorCommand deleteFirstDoctorCommand = new DeleteDoctorCommand(INDEX_FIRST_PERSON);
+        assertFalse(deleteFirstCommand.equals(deleteFirstDoctorCommand));
     }
 
     /**
