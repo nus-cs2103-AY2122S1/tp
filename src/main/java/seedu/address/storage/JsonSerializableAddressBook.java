@@ -21,17 +21,18 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_MEMBER = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_FACILITY = "Persons list contains duplicate facilities.";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedPerson> members = new ArrayList<>();
     private final List<JsonAdaptedFacility> facilities = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and facilities.
+     * Constructs a {@code JsonSerializableAddressBook} with the given members and facilities.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+    public JsonSerializableAddressBook(@JsonProperty("members") List<JsonAdaptedPerson> members,
                                        @JsonProperty("facilities") List<JsonAdaptedFacility> facilities) {
-        this.persons.addAll(persons);
+        this.members.addAll(members);
         this.facilities.addAll(facilities);
     }
 
@@ -43,7 +44,7 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        members.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         facilities.addAll(source.getFacilityList().stream().map(JsonAdaptedFacility::new).collect(Collectors.toList()));
     }
 
@@ -54,7 +55,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+        for (JsonAdaptedPerson jsonAdaptedPerson : members) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
@@ -65,7 +66,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedFacility jsonAdaptedFacility : facilities) {
             Facility facility = jsonAdaptedFacility.toModelType();
             if (addressBook.hasFacility(facility)) {
-                throw new IllegalValueException("DUPLICATE MEMBER MESSAGE TODO");
+                throw new IllegalValueException(MESSAGE_DUPLICATE_FACILITY);
             }
             addressBook.addFacility(facility);
         }

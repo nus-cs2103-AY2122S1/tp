@@ -53,7 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the facility list with {@code facilities}.
-     * {@code facilities} must not contain duplicate persons.
+     * {@code facilities} must not contain duplicate facilities.
      */
     public void setFacilities(List<Facility> facilities) {
         this.facilities.setFacilities(facilities);
@@ -78,7 +78,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setFacilities(newData.getFacilityList());
         setPersons(newData.getPersonList());
         setFacilities(newData.getFacilityList());
     }

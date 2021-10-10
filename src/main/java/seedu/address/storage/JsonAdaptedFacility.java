@@ -9,7 +9,6 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Name;
 
 /**
  * Jackson-friendly version of {@link Facility}.
@@ -53,37 +52,41 @@ public class JsonAdaptedFacility {
     public Facility toModelType() throws IllegalValueException {
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, FacilityName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    FacilityName.class.getSimpleName()));
         }
         if (!FacilityName.isValidFacilityName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(FacilityName.MESSAGE_CONSTRAINTS);
         }
 
         final FacilityName modelFacilityName = new FacilityName(name);
 
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
         }
 
         final Location modelLocation = new Location(location);
 
         if (time == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Time.class.getSimpleName()));
         }
         if (!Time.isValidTime(time)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
 
         final Time modelTime = new Time(time);
 
         if (capacity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Capacity.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Capacity.class.getSimpleName()));
         }
         if (!Capacity.isValidCapacity(capacity)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Capacity.MESSAGE_CONSTRAINTS);
         }
 
         final Capacity modelCapacity = new Capacity(capacity);

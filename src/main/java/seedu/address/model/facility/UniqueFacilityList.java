@@ -6,10 +6,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+
 
 
 /**

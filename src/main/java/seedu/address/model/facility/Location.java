@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 public class Location {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Facility names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Locations should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
