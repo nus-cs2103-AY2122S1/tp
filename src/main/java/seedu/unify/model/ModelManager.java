@@ -67,13 +67,13 @@ public class ModelManager implements Model {
 
     @Override
     public Path getUniFyFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getUniFyFilePath();
     }
 
     @Override
     public void setUniFyFilePath(Path uniFyFilePath) {
         requireNonNull(uniFyFilePath);
-        userPrefs.setAddressBookFilePath(uniFyFilePath);
+        userPrefs.setUniFyFilePath(uniFyFilePath);
     }
 
     //=========== UniFy ================================================================================
