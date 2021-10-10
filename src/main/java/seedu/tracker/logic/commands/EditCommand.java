@@ -19,6 +19,7 @@ import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.commons.util.CollectionUtil;
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
+import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Description;
 import seedu.tracker.model.module.Mc;
@@ -99,7 +100,13 @@ public class EditCommand extends Command {
         Mc updatedMc = editModuleDescriptor.getMc().orElse(moduleToEdit.getMc());
         Set<Tag> updatedTags = editModuleDescriptor.getTags().orElse(moduleToEdit.getTags());
 
-        return new Module(updatedCode, updatedTitle, updatedDescription, updatedMc, updatedTags);
+        if (moduleToEdit.hasAcademicCalendar()) {
+            AcademicCalendar academicCalendar = moduleToEdit.getAcademicCalendar();
+            return new Module(updatedCode, updatedTitle, updatedDescription, updatedMc, updatedTags, academicCalendar);
+        } else {
+            return new Module(updatedCode, updatedTitle, updatedDescription, updatedMc, updatedTags);
+        }
+
     }
 
     @Override
