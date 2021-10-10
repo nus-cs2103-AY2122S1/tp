@@ -24,7 +24,8 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(getTempFilePath("ab"));
+        JsonProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(
+                getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(programmerErrorStorage, userPrefsStorage);
     }
