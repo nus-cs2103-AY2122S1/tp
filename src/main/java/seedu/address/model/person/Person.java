@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.core.id.UniqueId;
-import seedu.address.model.HasUniqueId;
+import seedu.address.model.id.HasUniqueId;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
 

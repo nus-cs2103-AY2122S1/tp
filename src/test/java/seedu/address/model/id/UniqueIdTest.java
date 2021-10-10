@@ -1,7 +1,6 @@
-package seedu.address.commons.core.id;
+package seedu.address.model.id;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.HasUniqueId;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalPersons;

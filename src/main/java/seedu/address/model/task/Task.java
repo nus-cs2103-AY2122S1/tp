@@ -4,8 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.commons.core.id.UniqueId;
-import seedu.address.model.HasUniqueId;
+import seedu.address.model.id.HasUniqueId;
+import seedu.address.model.id.UniqueId;
 
 /**
  * Represents a Task in the address book.

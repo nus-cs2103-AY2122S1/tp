@@ -1,6 +1,4 @@
-package seedu.address.model;
-
-import seedu.address.commons.core.id.UniqueId;
+package seedu.address.model.id;
 
 /**
  * An interface such that all classes having unique id should implement from it.

@@ -1,12 +1,11 @@
-package seedu.address.commons.core.id;
-
-import seedu.address.model.HasUniqueId;
-import seedu.address.model.person.Person;
-import seedu.address.model.task.Task;
+package seedu.address.model.id;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.UUID;
+
+import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * A class that represents unique ids for tasks/students using UUID.
