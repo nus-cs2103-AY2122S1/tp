@@ -16,16 +16,23 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     public ListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_KEYWORD, CliSyntax.PREFIX_DATE);
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYWORD)
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_KEYWORD, CliSyntax.PREFIX_DATE1,
+                        CliSyntax.PREFIX_DATE2);
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYWORD, CliSyntax.PREFIX_DATE1)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
 
         String keyword = argMultimap.getValue(CliSyntax.PREFIX_KEYWORD).get();
-        LastDate lastDate = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE).get());
 
-        return new ListCommand(keyword, lastDate);
+        if (argMultimap.getValue(CliSyntax.PREFIX_DATE2).isEmpty()) {
+            LastDate date = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE1).get());
+            return new ListCommand(keyword, date);
+        } else {
+            LastDate date1 = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE1).get());
+            LastDate date2 = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE2).get());
+            return new ListCommand(keyword, date1, date2);
+        }
     }
 
     /**

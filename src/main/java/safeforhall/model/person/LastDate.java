@@ -1,5 +1,7 @@
 package safeforhall.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,7 +13,13 @@ public class LastDate {
 
     public final String date;
 
+    /**
+     * Constructs a {@code LastDate}.
+     *
+     * @param date A valid date.
+     */
     public LastDate(String date) {
+        requireNonNull(date);
         this.date = date;
     }
 
@@ -33,5 +41,12 @@ public class LastDate {
 
     public LocalDate getLocalDate() {
         return LocalDate.parse(date, dateFormatter);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LastDate // instanceof handles nulls
+                && date.equals(((LastDate) other).date)); // state check
     }
 }

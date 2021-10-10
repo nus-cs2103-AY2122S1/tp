@@ -5,25 +5,25 @@ import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
 
 public class NameNearLastDatePredicate implements Predicate<Person> {
-    private final LocalDate today;
-    private final LocalDate lastDate;
+    private final LocalDate date1;
+    private final LocalDate date2;
     private final String keyword;
 
     /**
      * Creates a NameNearLastDatePredicate without the optional date parameter
      */
-    public NameNearLastDatePredicate(String keyword) {
-        this.today = LocalDate.now();
-        this.lastDate = LocalDate.now();
+    public NameNearLastDatePredicate(String keyword, LastDate date) {
+        this.date1 = date.getLocalDate();
+        this.date2 = date.getLocalDate();
         this.keyword = keyword;
     }
 
     /**
      * Creates a NameNearLastDatePredicate with the optional date parameter {@code LastDate}
      */
-    public NameNearLastDatePredicate(String keyword, LastDate lastDate) {
-        this.today = LocalDate.now();
-        this.lastDate = lastDate.getLocalDate();
+    public NameNearLastDatePredicate(String keyword, LastDate date1, LastDate date2) {
+        this.date1 = date1.getLocalDate();
+        this.date2 = date2.getLocalDate();
         this.keyword = keyword;
     }
 
@@ -35,8 +35,8 @@ public class NameNearLastDatePredicate implements Predicate<Person> {
         } else {
             currentPersonLastDate = person.getLastCollectionDate().getLocalDate().plusMonths(1);
         }
-        long p1 = ChronoUnit.DAYS.between(today, currentPersonLastDate);
-        long p2 = ChronoUnit.DAYS.between(currentPersonLastDate, lastDate);
+        long p1 = ChronoUnit.DAYS.between(date1, currentPersonLastDate);
+        long p2 = ChronoUnit.DAYS.between(currentPersonLastDate, date2);
         return ((p1 >= 0) && (p2 >= 0));
     }
 }

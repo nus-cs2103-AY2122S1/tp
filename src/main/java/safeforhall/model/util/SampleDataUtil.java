@@ -14,26 +14,25 @@ import safeforhall.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
-        // TODO: Compete lastFetDate and lastCollectionDate
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Room("E417"), new Phone("87438807"),
                     new Email("alexyeoh@example.com"), new VaccStatus("1"),
-                    new Faculty("SoC"), new LastDate("TODO"), new LastDate("TODO")),
+                    new Faculty("SoC"), new LastDate("09-09-2021"), new LastDate("10-09-2021")),
             new Person(new Name("Bernice Yu"), new Room("A213"), new Phone("99272758"),
                     new Email("berniceyu@example.com"), new VaccStatus("0"),
-                    new Faculty("FASS"), new LastDate("TODO"), new LastDate("TODO")),
+                    new Faculty("FASS"), new LastDate("10-09-2021"), new LastDate("11-09-2021")),
             new Person(new Name("Charlotte Oliveiro"), new Room("B423"), new Phone("93210283"),
                     new Email("charlotte@example.com"), new VaccStatus("1"),
-                    new Faculty("SoC"), new LastDate("TODO"), new LastDate("TODO")),
+                    new Faculty("SoC"), new LastDate("11-09-2021"), new LastDate("12-09-2021")),
             new Person(new Name("David Li"), new Room("C112"), new Phone("91031282"),
                     new Email("lidavid@example.com"), new VaccStatus("1"),
-                    new Faculty("SDE"), new LastDate("TODO"), new LastDate("TODO")),
+                    new Faculty("SDE"), new LastDate("09-09-2021"), new LastDate("08-09-2021")),
             new Person(new Name("Irfan Ibrahim"), new Room("D422"), new Phone("92492021"),
                     new Email("irfan@example.com"), new VaccStatus("1"),
-                    new Faculty("FoE"), new LastDate("TODO"), new LastDate("TODO")),
+                    new Faculty("FoE"), new LastDate("12-09-2021"), new LastDate("12-09-2021")),
             new Person(new Name("Roy Balakrishnan"), new Room("A309"), new Phone("92624417"),
                     new Email("royb@example.com"), new VaccStatus("1"),
-                    new Faculty("BIZ"), new LastDate("TODO"), new LastDate("TODO")),
+                    new Faculty("BIZ"), new LastDate("20-09-2021"), new LastDate("21-09-2021")),
         };
     }
 

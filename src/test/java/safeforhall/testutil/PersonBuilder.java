@@ -1,6 +1,13 @@
 package safeforhall.testutil;
 
-import safeforhall.model.person.*;
+import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
+import safeforhall.model.person.Name;
+import safeforhall.model.person.Phone;
+import safeforhall.model.person.Person;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 
 /**
  * A utility class to help with building Person objects.
@@ -13,9 +20,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_VACC = "True";
     public static final String DEFAULT_FACULTY = "SoC";
-    // TODO
-    public static final String DEFAULT_FETDATE = "TODO";
-    public static final String DEFAULT_COLLECTDATE = "TODO";
+    public static final String DEFAULT_FETDATE = "10-09-2021";
+    public static final String DEFAULT_COLLECTDATE = "10-09-2021";
 
     private Name name;
     private Room room;

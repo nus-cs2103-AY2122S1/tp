@@ -2,8 +2,10 @@ package safeforhall.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE1;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE2;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,6 +38,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_LAST_DATE1_OCT = "10-10-2021";
+    public static final String VALID_LAST_DATE2_OCT = "15-10-2021";
+    public static final String VALID_KEYWORD_F = "f";
+    public static final String VALID_KEYWORD_C = "c";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -43,15 +49,16 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String LAST_DATE1_DESC_OCT = " " + PREFIX_DATE1 + VALID_LAST_DATE1_OCT;
+    public static final String LAST_DATE2_DESC_OCT = " " + PREFIX_DATE2 + VALID_LAST_DATE2_OCT;
+    public static final String KEYWORD_DESC_F = " " + PREFIX_KEYWORD + VALID_KEYWORD_F;
+    public static final String KEYWORD_DESC_C = " " + PREFIX_KEYWORD + VALID_KEYWORD_C;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

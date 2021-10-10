@@ -62,9 +62,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    public void execute_validFetCommand_success() throws Exception {
+        String listCommand = "list k/f d1/10-10-2021";
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_FET, model);
+    }
+
+    @Test
+    public void execute_validArtCommand_success() throws Exception {
+        String listCommand = "list k/c d1/10-10-2021";
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_ART, model);
     }
 
     // TODO: FIx after add command is done

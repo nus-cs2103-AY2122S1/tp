@@ -25,8 +25,8 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withVaccStatus("1")
             .withFaculty("SoC")
-            .withFet("TODO")
-            .withCollection("TODO")
+            .withFet("10-10-2021")
+            .withCollection("10-10-2021")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withRoom("A101")
@@ -34,8 +34,8 @@ public class TypicalPersons {
             .withPhone("98765432")
             .withVaccStatus("1")
             .withFaculty("SoC")
-            .withFet("TODO")
-            .withCollection("TODO")
+            .withFet("10-10-2021")
+            .withCollection("10-10-2021")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withRoom("A102")
@@ -43,8 +43,8 @@ public class TypicalPersons {
             .withEmail("heinz@example.com")
             .withVaccStatus("1")
             .withFaculty("SoC")
-            .withFet("TODO")
-            .withCollection("TODO")
+            .withFet("10-10-2021")
+            .withCollection("10-10-2021")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withRoom("A103")
@@ -52,8 +52,8 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withVaccStatus("1")
             .withFaculty("SoC")
-            .withFet("TODO")
-            .withCollection("TODO")
+            .withFet("10-10-2021")
+            .withCollection("10-10-2021")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withRoom("A104")
@@ -61,8 +61,8 @@ public class TypicalPersons {
             .withEmail("werner@example.com")
             .withVaccStatus("1")
             .withFaculty("SoC")
-            .withFet("TODO")
-            .withCollection("TODO")
+            .withFet("10-10-2021")
+            .withCollection("10-10-2021")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withRoom("A105")
@@ -70,8 +70,8 @@ public class TypicalPersons {
             .withEmail("lydia@example.com")
             .withVaccStatus("1")
             .withFaculty("SoC")
-            .withFet("TODO")
-            .withCollection("TODO")
+            .withFet("10-10-2021")
+            .withCollection("10-10-2021")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withRoom("A106")
@@ -79,8 +79,8 @@ public class TypicalPersons {
             .withEmail("anna@example.com")
             .withVaccStatus("1")
             .withFaculty("SoC")
-            .withFet("TODO")
-            .withCollection("TODO")
+            .withFet("10-10-2021")
+            .withCollection("10-10-2021")
             .build();
 
     // Manually added
