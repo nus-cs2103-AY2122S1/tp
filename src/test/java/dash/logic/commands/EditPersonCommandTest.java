@@ -23,7 +23,7 @@ import dash.testutil.TypicalIndexes;
 import dash.testutil.TypicalPersons;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditPersonCommand.
  */
 public class EditPersonCommandTest {
 
