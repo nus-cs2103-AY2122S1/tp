@@ -109,7 +109,7 @@ public class AppointmentCommand extends Command {
             message = MESSAGE_DELETE_APPOINTMENT_FAILED;
         } else if (isEmptyStatusBefore && !isEmptyStatusAfter) {
             message = MESSAGE_ADD_APPOINTMENT_SUCCESS;
-        } else if (!isEmptyStatusBefore && !isEmptyStatusAfter){
+        } else if (!isEmptyStatusBefore && !isEmptyStatusAfter) {
             message = MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
         } else {
             // should never reach here
