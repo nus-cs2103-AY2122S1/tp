@@ -82,6 +82,9 @@ public class FileUtil {
 
     /**
      * Deletes a file if it exists.
+     *
+     * @param file Path of file to be deleted.
+     * @throws IOException If there was an error deleting the file.
      */
     public static void deleteFileIfExists(Path file) throws IOException {
         if (isFileExists(file)) {
@@ -91,6 +94,9 @@ public class FileUtil {
 
     /**
      * Deletes a file.
+     *
+     * @param file Path of the file to be deleted.
+     * @throws IOException If there was an error deleting the file.
      */
     public static void deleteFile(Path file) throws IOException {
         if (!Files.exists(file)) {
