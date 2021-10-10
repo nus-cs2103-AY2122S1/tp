@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
@@ -27,6 +27,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+    public static final String DATETIME_PARSE_FORMAT = "yyyy-MM-dd HH:mm";
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
@@ -124,9 +125,9 @@ public class ParserUtil {
             throw new ParseException(LastVisit.MESSAGE_CONSTRAINTS);
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
         try {
-            LocalDate.parse(trimmedLastVisit, formatter);
+            LocalDateTime.parse(trimmedLastVisit, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
@@ -175,9 +176,9 @@ public class ParserUtil {
             throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
         try {
-            LocalDate.parse(trimmedVisit, formatter);
+            LocalDateTime.parse(trimmedVisit, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
@@ -203,9 +204,9 @@ public class ParserUtil {
             throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
         try {
-            LocalDate.parse(trimmedVisit, formatter);
+            LocalDateTime.parse(trimmedVisit, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
