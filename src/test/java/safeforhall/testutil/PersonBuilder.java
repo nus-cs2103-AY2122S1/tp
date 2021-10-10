@@ -1,14 +1,6 @@
 package safeforhall.testutil;
 
-import safeforhall.model.person.Email;
-import safeforhall.model.person.Faculty;
-import safeforhall.model.person.LastCollectionDate;
-import safeforhall.model.person.LastFetDate;
-import safeforhall.model.person.Name;
-import safeforhall.model.person.Person;
-import safeforhall.model.person.Phone;
-import safeforhall.model.person.Room;
-import safeforhall.model.person.VaccStatus;
+import safeforhall.model.person.*;
 
 /**
  * A utility class to help with building Person objects.
@@ -31,8 +23,8 @@ public class PersonBuilder {
     private Email email;
     private VaccStatus vaccStatus;
     private Faculty faculty;
-    private LastFetDate lastFetDate;
-    private LastCollectionDate lastCollectionDate;
+    private LastDate lastFetDate;
+    private LastDate lastCollectionDate;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,8 +36,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         vaccStatus = new VaccStatus(DEFAULT_VACC);
         faculty = new Faculty(DEFAULT_FACULTY);
-        lastFetDate = new LastFetDate(DEFAULT_FETDATE);
-        lastCollectionDate = new LastCollectionDate(DEFAULT_COLLECTDATE);
+        lastFetDate = new LastDate(DEFAULT_FETDATE);
+        lastCollectionDate = new LastDate(DEFAULT_COLLECTDATE);
     }
 
     /**
@@ -111,18 +103,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code LastFetDate} of the {@code Person} that we are building.
+     * Sets the {@code LastDate} of the {@code Person} that we are building.
      */
     public PersonBuilder withFet(String lastFetDate) {
-        this.lastFetDate = new LastFetDate(lastFetDate);
+        this.lastFetDate = new LastDate(lastFetDate);
         return this;
     }
 
     /**
-     * Sets the {@code LastCollectionDate} of the {@code Person} that we are building.
+     * Sets the {@code LastDate} of the {@code Person} that we are building.
      */
     public PersonBuilder withCollection(String lastCollectionDate) {
-        this.lastCollectionDate = new LastCollectionDate(lastCollectionDate);
+        this.lastCollectionDate = new LastDate(lastCollectionDate);
         return this;
     }
 

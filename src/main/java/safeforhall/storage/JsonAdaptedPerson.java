@@ -4,15 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import safeforhall.commons.exceptions.IllegalValueException;
-import safeforhall.model.person.Email;
-import safeforhall.model.person.Faculty;
-import safeforhall.model.person.LastCollectionDate;
-import safeforhall.model.person.LastFetDate;
-import safeforhall.model.person.Name;
-import safeforhall.model.person.Person;
-import safeforhall.model.person.Phone;
-import safeforhall.model.person.Room;
-import safeforhall.model.person.VaccStatus;
+import safeforhall.model.person.*;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -125,16 +117,16 @@ class JsonAdaptedPerson {
         final Faculty modelFaculty = new Faculty(faculty);
 
         // LastFetDate
-        if (!LastFetDate.isValidFetDate(lastFetDate)) {
-            throw new IllegalValueException(LastCollectionDate.MESSAGE_CONSTRAINTS);
+        if (!LastDate.isValidDate(lastFetDate)) {
+            throw new IllegalValueException(LastDate.MESSAGE_CONSTRAINTS);
         }
-        final LastFetDate modelFetDate = new LastFetDate(lastFetDate);
+        final LastDate modelFetDate = new LastDate(lastFetDate);
 
         // LastCollectionDate
-        if (!LastCollectionDate.isValidCollectionDate(lastCollectionDate)) {
-            throw new IllegalValueException(LastCollectionDate.MESSAGE_CONSTRAINTS);
+        if (!LastDate.isValidDate(lastCollectionDate)) {
+            throw new IllegalValueException(LastDate.MESSAGE_CONSTRAINTS);
         }
-        final LastCollectionDate modelCollectionDate = new LastCollectionDate(lastCollectionDate);
+        final LastDate modelCollectionDate = new LastDate(lastCollectionDate);
 
         return new Person(modelName, modelRoom, modelPhone, modelEmail,
                 modelVaccStatus, modelFaculty, modelFetDate, modelCollectionDate);

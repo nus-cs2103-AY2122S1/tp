@@ -9,10 +9,7 @@ import java.util.Set;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.person.Address;
-import safeforhall.model.person.Email;
-import safeforhall.model.person.Name;
-import safeforhall.model.person.Phone;
+import safeforhall.model.person.*;
 import safeforhall.model.tag.Tag;
 
 /**
@@ -120,5 +117,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LastDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LastDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!LastDate.isValidDate(trimmedDate)) {
+            throw new ParseException(LastDate.MESSAGE_CONSTRAINTS);
+        }
+        return new LastDate(trimmedDate);
     }
 }
