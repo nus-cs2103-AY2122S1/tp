@@ -122,7 +122,7 @@ public class ModelManager implements Model {
     @Override
     public void addEmployee(Employee employee) {
         addressBook.addEmployee(employee);
-        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredEmployeeList(Predicate<Person> predicate) {
+    public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
         requireNonNull(predicate);
         filteredEmployees.setPredicate(predicate);
     }

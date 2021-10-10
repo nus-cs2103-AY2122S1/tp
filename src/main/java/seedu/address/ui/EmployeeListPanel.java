@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
-import javax.swing.plaf.synth.Region;
+import javafx.scene.layout.Region;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,8 +11,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.employee.Employee;
 
 public class EmployeeListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private static final String FXML = "EmployeeListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(EmployeeListPanel.class);
 
     @FXML
     private ListView<Employee> employeeListView;

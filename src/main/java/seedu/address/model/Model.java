@@ -16,7 +16,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
+    Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -121,5 +121,5 @@ public interface Model {
      * Updates the filter of the filtered Employee list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredEmployeeList(Predicate<Person> predicate);
+    void updateFilteredEmployeeList(Predicate<Employee> predicate);
 }

@@ -44,7 +44,7 @@ public class EmployeeCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
      */
     public EmployeeCard(Employee employee, int displayedIndex) {
         super(FXML);
@@ -54,6 +54,9 @@ public class EmployeeCard extends UiPart<Region> {
         phone.setText(employee.getPhone().value);
         address.setText(employee.getAddress().value);
         email.setText(employee.getEmail().value);
+        leaves.setText(employee.getLeaves().currentLeaves);
+        salary.setText(employee.getSalary().currentSalary);
+        jobTitle.setText(employee.getJobTitle().jobTitle);
         employee.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -67,7 +70,7 @@ public class EmployeeCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof EmployeeCard)) {
             return false;
         }
 
