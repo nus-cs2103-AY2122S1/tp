@@ -21,7 +21,8 @@ import seedu.fast.model.tag.Tag;
 public class SampleDataUtil {
 
     public static final Remark EMPTY_REMARK = new Remark("");
-    public static final Appointment EMPTY_APPOINTMENT = new Appointment(Appointment.NO_APPOINTMENT, "");
+    public static final Appointment EMPTY_APPOINTMENT = new Appointment(Appointment.NO_APPOINTMENT,
+            Appointment.NO_TIME, Appointment.NO_VENUE);
 
     public static Person[] getSamplePersons() {
         return new Person[] {
@@ -31,9 +32,9 @@ public class SampleDataUtil {
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK,
                 getTagSet("colleagues", "friends"), EMPTY_APPOINTMENT),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK,
-                getTagSet("neighbours"), EMPTY_APPOINTMENT),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
+                    new Email("charlotte@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    EMPTY_REMARK, getTagSet("neighbours"), EMPTY_APPOINTMENT),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK,
                 getTagSet("family"), EMPTY_APPOINTMENT),

@@ -10,7 +10,7 @@ import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Remark;
 
-public class RemarkCommandParser implements Parser {
+public class RemarkCommandParser implements Parser<RemarkCommand> {
     @Override
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
