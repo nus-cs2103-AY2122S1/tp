@@ -13,7 +13,7 @@ import safeforhall.testutil.TypicalIndexes;
 import safeforhall.testutil.TypicalPersons;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ViewCommand.
  */
 public class ViewCommandTest {
 
