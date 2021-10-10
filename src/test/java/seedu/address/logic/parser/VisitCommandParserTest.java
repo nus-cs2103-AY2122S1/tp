@@ -6,15 +6,42 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_OCCURRENCE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.VisitCommand;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Occurrence;
+import seedu.address.model.person.Visit;
 
 public class VisitCommandParserTest {
     private VisitCommandParser parser = new VisitCommandParser();
-    private final String testVisit = "2020-11-11";
+    private final String VISIT_STUB = "2020-11-11";
+
+    @Test
+    public void parser_CompulsoryFieldsPresent_success() {
+        Optional<Visit> visit = Optional.of(new Visit(VISIT_STUB));
+        Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(1));
+        VisitCommand command = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
+        assertParseSuccess(parser, String.format("%s %s%s", "1", PREFIX_DATE, VISIT_STUB), command);
+    }
+
+    @Test
+    public void parser_OptionalFieldsPresent_success() {
+        Optional<Visit> visit = Optional.of(new Visit(VISIT_STUB));
+        Optional<Frequency> frequency = Optional.of(Frequency.WEEKLY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(2));
+        VisitCommand command = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
+        String userInput = String.format("%s %s%s %s%s %s%s", "1", PREFIX_DATE, VISIT_STUB, PREFIX_FREQUENCY, "Weekly",
+                PREFIX_OCCURRENCE, 2);
+        assertParseSuccess(parser, userInput, command);
+    }
 
     @Test
     public void parse_missingCompulsoryField_failure() {
@@ -24,7 +51,7 @@ public class VisitCommandParserTest {
         assertParseFailure(parser, "", expectedMessage);
 
         // no index
-        assertParseFailure(parser, " " + PREFIX_DATE + testVisit, expectedMessage);
+        assertParseFailure(parser, " " + PREFIX_DATE + VISIT_STUB, expectedMessage);
 
     }
 
