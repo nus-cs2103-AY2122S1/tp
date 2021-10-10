@@ -9,11 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,6 +90,24 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String review} into an {@code Review}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code review} is invalid.
+     */
+    public static Review parseReview(String review) throws ParseException {
+        requireNonNull(review);
+        String trimmedReview = review.trim();
+        if (!Review.isValidReview(trimmedReview)) {
+            throw new ParseException(Review.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedReview.equals("")) {
+            trimmedReview = "- No Review -";
+        }
+        return new Review(trimmedReview);
     }
 
     /**
