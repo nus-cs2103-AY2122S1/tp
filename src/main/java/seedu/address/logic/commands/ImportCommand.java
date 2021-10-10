@@ -1,5 +1,19 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -12,17 +26,6 @@ import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
@@ -49,6 +52,9 @@ public class ImportCommand extends Command {
     private final int tagCount;
     private final Path file;
 
+    /**
+     * Creates an ImportCommand to import data from the given {@code file}
+     */
     public ImportCommand(int groupCount, int assessmentCount, int tagCount, Path file) {
         this.groupCount = groupCount;
         this.assessmentCount = assessmentCount;
@@ -69,7 +75,7 @@ public class ImportCommand extends Command {
         List<Assessment> assessments = new ArrayList<>();
 
         String[] lines = fileContents.split("\n");
-        String[] headers = lines[0].split(",");
+        String[] headers = lines[0].split(",", -1);
         for (int i = 0; i < assessmentCount; i++) {
             String assessmentName = readValue(headers, groupCount + 2 + i);
             Assessment assessment = makeAssessment(assessmentName);
@@ -87,7 +93,7 @@ public class ImportCommand extends Command {
     }
 
     private Student readStudentFromRow(String row, List<Assessment> assessments) throws CommandException {
-        String[] values = row.split(",");
+        String[] values = row.split(",", -1);
         Name name = makeName(readValue(values, 0));
         ID id = makeId(readValue(values, 1));
         int readingColumn = 2;

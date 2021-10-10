@@ -2,7 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -41,7 +46,7 @@ public class CommandTestUtil {
             Map.of(new Assessment(VALID_ASSESSMENT_BOB), new Score(VALID_SCORE_BOB));
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_TYPICAL_PERSONS_CSV_PATH = "src/test/data/ImportCommandTest/properFormat.csv";
+    public static final String VALID_TYPICAL_PERSONS_CSV_PATH = "src/test/data/ImportCommandTest/typicalPersons.csv";
     public static final String VALID_WRONG_CSV_PATH = "src/test/data/ImportCommandTest/wrongFormat.csv";
     public static final String VALID_NON_EXISTENT_PATH = "src/test/data/ImportCommandTest/doesNotExist.csv";
     public static final int VALID_TYPICAL_PERSONS_GROUP_COUNT = 2;
@@ -71,8 +76,8 @@ public class CommandTestUtil {
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05&"; // '&' not allowed in name
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_GROUP_COUNT_DESC = " " + PREFIX_GROUP + "invalid1"; // only numbers allowed
-    public static final String INVALID_ASSESSMENT_COUNT_DESC = " " + PREFIX_ASSESSMENT + "invalid2"; // only numbers allowed
-    public static final String INVALID_TAG_COUNT_DESC = " " + PREFIX_TAG + "invalid3"; // only numbers allowed
+    public static final String INVALID_ASSESSMENT_COUNT_DESC = " " + PREFIX_ASSESSMENT + "invalid2"; // only numbers
+    public static final String INVALID_TAG_COUNT_DESC = " " + PREFIX_TAG + "invalid3"; // only numbers
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
