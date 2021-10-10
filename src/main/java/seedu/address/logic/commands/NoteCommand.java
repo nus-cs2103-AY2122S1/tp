@@ -27,7 +27,7 @@ public class NoteCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing note will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "n/[NOTE]\n"
+            + "no/[NOTE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "Enjoys western cuisine";
 
