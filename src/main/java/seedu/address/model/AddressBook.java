@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.employee.Employee;
+import seedu.address.model.person.employee.UniqueEmployeeList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueEmployeeList employees;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        employees = new UniqueEmployeeList();
     }
 
     public AddressBook() {}
@@ -48,12 +52,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the employee list with {@code employees}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setEmployees(List<Employee> employees) {
+        this.employees.setEmployees(employees);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setEmployees(newData.getEmployeeList());
     }
 
     //// person-level operations
@@ -116,5 +129,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public ObservableList<Employee> getEmployeeList() {
+        return employees.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns true if an employee with the same identity as {@code employee} exists in the address book.
+     */
+    public boolean hasEmployee(Employee employee) {
+        requireNonNull(employee);
+        return employees.contains(employee);
+    }
+
+    /**
+     * Removes {@code employee} from this {@code AddressBook}.
+     * {@code employee} must exist in the address book.
+     */
+    public void removeEmployee(Employee employee) {
+        employees.remove(employee);
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    public void setEmployee(Employee target, Employee editedEmployee) {
+        requireNonNull(editedEmployee);
+        employees.setEmployee(target, editedEmployee);
     }
 }
