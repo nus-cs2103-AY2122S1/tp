@@ -19,17 +19,19 @@ public class Product implements Category {
     // Data fields
     private final Name name;
     private final UnitPrice unitPrice;
+    private final Quantity quantity;
 
-    public Product(Name name, UnitPrice unitPrice) {
-        this(new ID(), name, unitPrice);
+    public Product(Name name, UnitPrice unitPrice, Quantity quantity) {
+        this(new ID(), name, unitPrice, quantity);
     }
 
-    private Product(ID id, Name name, UnitPrice unitPrice) {
+    private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
         requireAllNonNull(id, name, unitPrice);
 
         this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
+        this.quantity = quantity;
     }
 
     public ID getId() {
@@ -44,8 +46,12 @@ public class Product implements Category {
         return unitPrice;
     }
 
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
     public static Product updateProduct(Product product, Name name, UnitPrice unitPrice) {
-        return new Product(product.getId(), name, unitPrice);
+        return new Product(product.getId(), name, unitPrice, null);
     }
 
     /**
@@ -100,6 +106,9 @@ public class Product implements Category {
                 .append("; Unit Price: ")
                 .append(getUnitPrice());
 
+        if (quantity != null) {
+            builder.append("; Quantity: ").append(getQuantity());
+        }
         return builder.toString();
     }
 }

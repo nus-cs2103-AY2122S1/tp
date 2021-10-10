@@ -2,48 +2,52 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientCommandParser implements Parser<AddClientCommand> {
     @Override
     public AddClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        Prefix startOfCommand = new Prefix("");
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, startOfCommand);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+                args, PREFIX_PHONE_NUMBER, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        if (!arePrefixesPresent(argMultimap, startOfCommand)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientCommand.MESSAGE_USAGE));
+        Name name;
+        try {
+            name = ParserUtil.parseName(argMultimap.getPreamble());
+        } catch (ParseException parseException) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddClientCommand.MESSAGE_USAGE), parseException);
         }
 
-        Name name = ParserUtil.parseName(listToString(argMultimap.getAllValues(startOfCommand)));
+        if (!arePrefixesPresent(argMultimap, PREFIX_PHONE_NUMBER)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddClientCommand.MESSAGE_USAGE));
+        }
 
-        AddClientCommand.AddClientDescriptor descriptor = new AddClientCommand.AddClientDescriptor(name);
+        PhoneNumber phoneNumber = ParserUtil.parsePhoneNumber(
+                argMultimap.getValue(PREFIX_PHONE_NUMBER).get());
+
+        AddClientCommand.AddClientDescriptor descriptor =
+                new AddClientCommand.AddClientDescriptor(name, phoneNumber);
+
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            descriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            descriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+
         return new AddClientCommand(descriptor);
-    }
-
-    /**
-     * Converts a list of string into a string by inserting white spaces in between.
-     *
-     * @param list A list of string.
-     * @return Combined string.
-     */
-    private static String listToString(List<String> list) {
-        int len = list.size();
-        String result = "";
-        for (int i = 0; i < len; i++) {
-            if (i == len - 1) {
-                result += list.get(i);
-            } else {
-                result += String.format("%s ", list.get(i));
-            }
-        }
-        return result;
     }
 
     /**
