@@ -58,14 +58,6 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        // Changed for Managera
-        for (JsonAdaptedParticipant jsonAdaptedParticipant : participants) {
-            Participant participant = jsonAdaptedParticipant.toModelType();
-            if (addressBook.hasParticipant(participant)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PARTICIPANT);
-            }
-            addressBook.addParticipant(participant);
-        }
         //Add on for Managera
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType(participants);
@@ -74,6 +66,20 @@ class JsonSerializableAddressBook {
             }
             addressBook.addEvent(event);
         }
+
+        List<Event> eventList = addressBook.getEventList();
+
+        // Changed for Managera
+        for (JsonAdaptedParticipant jsonAdaptedParticipant : participants) {
+            Participant participant = jsonAdaptedParticipant.toModelType();
+            if (addressBook.hasParticipant(participant)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PARTICIPANT);
+            }
+
+            eventList.stream().filter(e -> e.hasParticipant(participant)).forEach(participant::addEvent);
+            addressBook.addParticipant(participant);
+        }
+
         return addressBook;
     }
 

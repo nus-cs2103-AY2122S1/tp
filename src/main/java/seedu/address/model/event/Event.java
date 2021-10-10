@@ -84,6 +84,38 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Adds the given participant to the list of participants.
+     *
+     * @param participant The participant to be added.
+     */
+    public void addParticipant(Participant participant) {
+        requireNonNull(participant);
+        this.participants.add(participant);
+        participant.addEvent(this);
+    }
+
+    /**
+     * Removes the given participant from the list of participants.
+     *
+     * @param participant The participant to be removed.
+     */
+    public void removeParticipant(Participant participant) {
+        requireNonNull(participant);
+        this.participants.remove(participant);
+        participant.removeEvent(this);
+    }
+
+    /** Returns true if the given participant is attending this event.
+     *
+     * @param participant The given participant.
+     * @return True if the participant is attending.
+     */
+    public boolean hasParticipant(Participant participant) {
+        requireNonNull(participant);
+        return this.participants.stream().anyMatch(p -> p.isSameParticipant(participant));
+    }
+
+    /**
      * Returns a copy of the Event that is marked done.
      *
      * @return An Event that is marked done.
