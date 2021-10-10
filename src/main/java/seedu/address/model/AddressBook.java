@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -127,6 +128,24 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the group.
+     */
+    public boolean hasStudentInGroup(Group g, Student s) {
+        requireAllNonNull(g, s);
+        return g.hasStudent(s);
+    }
+
+    /**
+     * Adds a student to a group.
+     * The group must already exist in the address book.
+     * The student must not already exist in the group.
+     * The student's group list needs to be updated accordingly.
+     */
+    public void addStudentToGroup(Group g, Student s) {
+        g.addStudent(s);
     }
 
     //// group-level operations

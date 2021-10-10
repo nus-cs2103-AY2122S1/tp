@@ -109,6 +109,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasStudentInGroup(Group group, Student student) {
+        requireAllNonNull(group, student);
+        return addressBook.hasStudentInGroup(group, student);
+    }
+
+    @Override
+    public void addStudentToGroup(Group group, Student student) {
+        addressBook.addStudentToGroup(group, student);
+    }
+
+    @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 

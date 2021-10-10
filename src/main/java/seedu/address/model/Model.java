@@ -79,6 +79,17 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     /**
+     * Returns true if a student with the same identity as {@code student} exists in the group.
+     */
+    boolean hasStudentInGroup(Group group, Student student);
+
+    /**
+     * Adds the given student to a group.
+     * {@code student} must not already exist in the group.
+     */
+    void addStudentToGroup(Group group, Student student);
+
+    /**
      * Returns true if a group with the same name as {@code group} exists in the group list.
      */
     boolean hasGroup(Group group);
