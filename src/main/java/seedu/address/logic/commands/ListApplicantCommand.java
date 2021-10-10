@@ -5,6 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import seedu.address.model.Model;
 
+// This class lists all applicants currently found in MrTechRecruiter.
 public class ListApplicantCommand extends Command {
 
     public static final String COMMAND_WORD = "list-applicant";
