@@ -1,10 +1,27 @@
 package seedu.address.commons.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SealedObject;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Writes and reads files
@@ -72,11 +89,31 @@ public class FileUtil {
         return new String(Files.readAllBytes(file), CHARSET);
     }
 
+    public static SealedObject readFromEncryptedFile() throws IOException {
+        try {
+            CipherInputStream cipherInputStream = new CipherInputStream(new BufferedInputStream(
+                    new FileInputStream("data/file")), EncryptionUtil.createCipherInstance(Cipher.DECRYPT_MODE));
+            ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
+            return (SealedObject) inputStream.readObject();
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     /**
      * Writes given string to a file.
      * Will create the file if it does not exist yet.
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    public static void writeToEncryptedFile(SealedObject file) throws IOException {
+        CipherOutputStream cipherOutputStream = new CipherOutputStream(new BufferedOutputStream(
+                new FileOutputStream("data/file")), EncryptionUtil.createCipherInstance(Cipher.ENCRYPT_MODE));
+        ObjectOutputStream outputStream = new ObjectOutputStream(cipherOutputStream);
+        outputStream.writeObject(file);
+        outputStream.close();
     }
 }
