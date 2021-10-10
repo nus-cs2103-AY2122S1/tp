@@ -71,14 +71,14 @@ public class Person {
      * @return the highest priority
      */
     public int getPriority() {
-        int temp = 0;
+        int temp = 10;
         if (tags.isEmpty()) {
             return temp;
         }
         Iterator<Tag> itr = tags.iterator();
         while (itr.hasNext()) {
             int prio = itr.next().getPriority();
-            if (prio > temp) {
+            if (prio < temp) {
                 temp = prio;
             }
         }
