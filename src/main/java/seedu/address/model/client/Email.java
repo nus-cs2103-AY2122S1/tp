@@ -58,8 +58,8 @@ public class Email {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.person.Email // instanceof handles nulls
-                && value.equals(((seedu.address.model.person.Email) other).value)); // state check
+                || (other instanceof Email // instanceof handles nulls
+                && value.equals(((Email) other).value)); // state check
     }
 
     @Override
