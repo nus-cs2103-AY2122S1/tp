@@ -207,14 +207,14 @@ Format: `exit`
 
 ## Basic Management of Staff Schedules
 
-### Adding a staff's schedule: `addSchedule`
+### Adding a shift to staff's schedule: `addShift`
 
 Adds a time period where the staff is working to the staff’s schedule.
 
 Formats:
 
-`addSchedule n/name d/fullDayName-shiftNumber` \
-`addSchedule i/index d/fullDayName-shiftNumber`
+`addShift n/name d/fullDayName-shiftNumber` \
+`addShift i/index d/fullDayName-shiftNumber`
 
 
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
@@ -222,8 +222,8 @@ Formats:
 
 Examples:
 
-`addSchedule n/Candice d/Monday-1` \
-`addSchedule i/1234 d/tuesday-2`
+`addShift n/Candice d/Monday-1` \
+`addShift i/1234 d/tuesday-0`
 
 ### View a staff schedule : `viewSchedule`
 
