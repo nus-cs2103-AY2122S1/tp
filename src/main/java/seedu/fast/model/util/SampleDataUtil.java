@@ -21,7 +21,7 @@ import seedu.fast.model.tag.Tag;
 public class SampleDataUtil {
 
     public static final Remark EMPTY_REMARK = new Remark("");
-    public static final Appointment EMPTY_APPOINTMENT = new Appointment(Appointment.NO_APPOINTMENT);
+    public static final Appointment EMPTY_APPOINTMENT = new Appointment(Appointment.NO_APPOINTMENT, "");
 
     public static Person[] getSamplePersons() {
         return new Person[] {

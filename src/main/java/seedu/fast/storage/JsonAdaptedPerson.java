@@ -68,7 +68,24 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
-        appointment = source.getAppointment().getDate();
+        appointment = appointmentToText(source.getAppointment());
+    }
+
+    /**
+     * Returns the string representation of the appointment.
+     *
+     * The string will always contain the date detail of the appointment.
+     * If the time detail is present, it will be added to the string.
+     *
+     * @param appt The appointment information of the contact in FAST.
+     * @return A string representation
+     */
+    private String appointmentToText(Appointment appt) {
+        String text = appt.getDate();
+        text += appt.getTime().equals("") ? ""
+                : " " + appt.getTime() + "hrs";
+
+        return text;
     }
 
     /**
@@ -132,7 +149,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Appointment modelAppointment = new Appointment(appointment);
+        final Appointment modelAppointment = new Appointment(appointment, "");
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
                 modelAppointment);

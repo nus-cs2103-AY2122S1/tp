@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.fast.commons.util.Colors;
+import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 
 /**
@@ -63,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
-        appointment.setText("Appointment: " + person.getAppointment().getDate());
+        appointment.setText(appointmentToText());
     }
 
     /**
@@ -83,6 +84,22 @@ public class PersonCard extends UiPart<Region> {
             temp.setStyle(Colors.GREY);
         }
         return temp;
+    }
+
+    /**
+     * Formats the string representation of the appointment.
+     *
+     * The string will always contain the date detail of the appointment.
+     * If the time detail is present, it will be added to the string.
+     *
+     * @return A string representation
+     */
+    private String appointmentToText() {
+        String text = "Appointment: " + person.getAppointment().getDate();
+        text += person.getAppointment().getTime().equals("") ? person.getAppointment().getTime()
+                : " " + person.getAppointment().getTime() + "hrs";
+
+        return text;
     }
 
     @Override
