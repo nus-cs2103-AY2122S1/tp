@@ -20,6 +20,7 @@ import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeleteDoctorCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
+import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
@@ -83,20 +84,23 @@ public class PlannerMdParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findPatient() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindPatientCommand command = (FindPatientCommand) parser.parseCommand(
                 FindPatientCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")),
                 patientState);
         assertEquals(new FindPatientCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
 
+    @Test
+    public void parseCommand_findDoctor() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindPatientCommand command = (FindPatientCommand) parser.parseCommand(
-                FindPatientCommand.COMMAND_WORD + " "
+        FindDoctorCommand command = (FindDoctorCommand) parser.parseCommand(
+                FindDoctorCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")),
-                patientState);
-        assertEquals(new FindPatientCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                doctorState);
+        assertEquals(new FindDoctorCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
