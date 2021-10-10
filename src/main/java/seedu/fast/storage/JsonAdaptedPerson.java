@@ -68,7 +68,8 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
-        appointment = source.getAppointment().getDate();
+        appointment = source.getAppointment().getDate() + " " + source.getAppointment().getTime()
+                + " " + source.getAppointment().getVenue();
     }
 
     /**
@@ -132,7 +133,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Appointment modelAppointment = new Appointment(appointment);
+        final Appointment modelAppointment = new Appointment(appointment, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
                 modelAppointment);
