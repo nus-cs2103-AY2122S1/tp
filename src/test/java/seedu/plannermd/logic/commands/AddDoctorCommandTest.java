@@ -203,11 +203,11 @@ public class AddDoctorCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithDoctor extends AddDoctorCommandTest.ModelStub {
-        private final Person person;
+        private final Doctor doctor;
 
-        ModelStubWithDoctor(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            this.doctor = doctor;
         }
 
         @Override
@@ -218,7 +218,7 @@ public class AddDoctorCommandTest {
         @Override
         public boolean hasDoctor(Doctor doctor) {
             requireNonNull(doctor);
-            return this.person.isSamePerson(doctor);
+            return this.doctor.isSamePerson(doctor);
         }
     }
 

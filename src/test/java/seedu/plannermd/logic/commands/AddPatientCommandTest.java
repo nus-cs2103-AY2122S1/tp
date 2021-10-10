@@ -23,7 +23,6 @@ import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class AddPatientCommandTest {
@@ -48,7 +47,7 @@ public class AddPatientCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Patient validPatient = new PatientBuilder().build();
         AddPatientCommand addPatientCommand = new AddPatientCommand(validPatient);
-        ModelStub modelStub = new ModelStubWithPerson(validPatient);
+        ModelStub modelStub = new ModelStubWithPatient(validPatient);
 
         assertThrows(CommandException.class,
                 AddPatientCommand.MESSAGE_DUPLICATE_PATIENT, () -> addPatientCommand.execute(modelStub));
@@ -203,18 +202,18 @@ public class AddPatientCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithPatient extends ModelStub {
+        private final Patient patient;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithPatient(Patient patient) {
+            requireNonNull(patient);
+            this.patient = patient;
         }
 
         @Override
         public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return this.person.isSamePerson(patient);
+            return this.patient.isSamePerson(patient);
         }
     }
 
