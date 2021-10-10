@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 
-public class DeleteFolderCommandParser implements Parser<DeleteFolderCommand>  {
+public class DeleteFolderCommandParser implements Parser<DeleteFolderCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteFolderCommand
