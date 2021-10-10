@@ -48,7 +48,7 @@ public class JsonAdaptedModuleClass {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code ModuleClass} object.
+     * Converts this Jackson-friendly adapted class object into the model's {@code ModuleClass} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted module class.
      */

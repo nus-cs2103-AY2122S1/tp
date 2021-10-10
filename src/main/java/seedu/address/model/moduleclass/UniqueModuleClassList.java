@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class UniqueModuleClassList implements Iterable<ModuleClass> {
 
@@ -67,7 +69,27 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         }
     }
 
-    public void setModuleClass(UniqueModuleClassList replacement) {
+    /**
+     * Replaces the class {@code target} in the list with {@code editedClass}.
+     * {@code target} must exist in the list.
+     * The person identity of {@code editedClass} must not be the same as another existing class in the list.
+     */
+    public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
+        requireAllNonNull(target, editedClass);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        if (!target.isSameModuleClass(editedClass) && contains(editedClass)) {
+            throw new DuplicatePersonException();
+        }
+
+        internalList.set(index, editedClass);
+    }
+
+    public void setModuleClasses(UniqueModuleClassList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -76,7 +98,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
      * Replaces the contents of this list with {@code moduleClasses}.
      * {@code moduleClasses} must not contain duplicate module classes.
      */
-    public void setModuleClass(List<ModuleClass> moduleClasses) {
+    public void setModuleClasses(List<ModuleClass> moduleClasses) {
         requireAllNonNull(moduleClasses);
         if (!moduleClassesAreUnique(moduleClasses)) {
             throw new DuplicateModuleClassException();
@@ -123,6 +145,6 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         return true;
     }
 
-
 }
+
 

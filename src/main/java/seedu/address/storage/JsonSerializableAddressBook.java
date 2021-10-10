@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,15 +21,19 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_CLASS = "Class list contains duplicate class(es)";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedModuleClass> classes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and classes.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("classes") List<JsonAdaptedModuleClass> classes) {
         this.persons.addAll(persons);
+        this.classes.addAll(classes);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        classes.addAll(source.getModuleClassList().stream().map(JsonAdaptedModuleClass::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +59,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+
+        for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
+            ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
+            if (addressBook.hasClass(moduleClass)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_CLASS);
+            }
+            addressBook.addClass(moduleClass);
         }
         return addressBook;
     }
