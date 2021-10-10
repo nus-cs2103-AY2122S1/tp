@@ -9,14 +9,12 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
  */
 public class VaccStatus {
 
-    public static final String MESSAGE_CONSTRAINTS = "Vaccination status can be true or false (case insensitive).\n"
-            + "Alternatively, 0 or 1 can be used as well, with 0 representing false and 1 true.";
+    public static final String MESSAGE_CONSTRAINTS = "Vaccination status can be T or F (case insensitive).";
 
     /*
-     * Vaccination status can true/false (case insensitive)
-     * It could also be 0/1
+     * Vaccination status can T/F (case insensitive)
      */
-    public static final String VALIDATION_REGEX = "^([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee]|0|1)$";
+    public static final String VALIDATION_REGEX = "^([Tt]|[Ff])$";
 
     public final String vaccStatus;
 

@@ -16,21 +16,29 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + CliSyntax.PREFIX_NAME + "NAM "
+            + CliSyntax.PREFIX_NAME + "NAME "
+            + CliSyntax.PREFIX_ROOM + "ROOM "
             + CliSyntax.PREFIX_PHONE + "PHONE "
             + CliSyntax.PREFIX_EMAIL + "EMAIL "
-            + CliSyntax.PREFIX_ADDRESS + "ADDRESS "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
+            + CliSyntax.PREFIX_VACCSTATUS + "VACCINATION STATUS "
+            + CliSyntax.PREFIX_FACULTY + "FACULTY "
+            //TODO
+            + CliSyntax.PREFIX_FETDATE + "LAST FET DATE "
+            + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE \n"
+
             + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_NAME + "John Doe "
+            + CliSyntax.PREFIX_ROOM + "A100 "
             + CliSyntax.PREFIX_PHONE + "98765432 "
             + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
-            + CliSyntax.PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + CliSyntax.PREFIX_TAG + "friends "
-            + CliSyntax.PREFIX_TAG + "owesMoney";
+            + CliSyntax.PREFIX_VACCSTATUS + "T "
+            + CliSyntax.PREFIX_FACULTY + "SoC "
+            //TODO
+            + CliSyntax.PREFIX_FETDATE + "TODO "
+            + CliSyntax.PREFIX_COLLECTIONDATE + "TODO ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New resident added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This resident already exists in the address book";
 
     private final Person toAdd;
 
