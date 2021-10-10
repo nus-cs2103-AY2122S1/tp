@@ -31,4 +31,16 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
+    /**
+     * Same method as getSampleAddressBook but with AddressBook object as its return type.
+     * @return AddressBook filled with sample data
+     */
+    public static AddressBook fillSampleAddressBook() {
+        AddressBook sampleAb = new AddressBook();
+        for (Person samplePerson : getSamplePersons()) {
+            sampleAb.addPerson(samplePerson);
+        }
+        return sampleAb;
+    }
+
 }

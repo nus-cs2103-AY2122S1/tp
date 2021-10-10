@@ -21,6 +21,7 @@
 //import seedu.address.logic.commands.ExitCommand;
 //import seedu.address.logic.commands.HelpCommand;
 //import seedu.address.logic.commands.ListCommand;
+//import seedu.address.logic.commands.FillCommand;
 //import seedu.address.logic.commands.PurgeCommand;
 //import seedu.address.logic.parser.exceptions.ParseException;
 //import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -51,6 +52,11 @@
 //        DeleteCommand command = (DeleteCommand) parser.parseCommand(
 //                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
 //        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+//    }
+
+//    @Test
+//    public void parseCommand_fill() throws Exception {
+//        assertTrue(parser.parseCommand(FillCommand.COMMAND_WORD) instanceof FillCommand);
 //    }
 //
 //    //TODO
