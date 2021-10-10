@@ -20,15 +20,17 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Sorted all persons by ";
 
     private final Comparator<Person> comparator;
+    private final String keyword;
 
-    public SortCommand(Comparator<Person> comparator) {
+    public SortCommand(Comparator<Person> comparator, String keyword) {
         this.comparator = comparator;
+        this.keyword = keyword;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortPerson(comparator);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + keyword);
     }
 }
