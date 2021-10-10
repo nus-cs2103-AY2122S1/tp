@@ -18,15 +18,20 @@ import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
+import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
+import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
 import seedu.plannermd.testutil.PersonUtil;
+import seedu.plannermd.testutil.doctor.DoctorBuilder;
+import seedu.plannermd.testutil.doctor.DoctorUtil;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 import seedu.plannermd.testutil.patient.PatientUtil;
 
@@ -34,6 +39,7 @@ public class PlannerMdParserTest {
 
     private final PlannerMdParser parser = new PlannerMdParser();
     private final State patientState = State.PATIENT;
+    private final State doctorState = State.DOCTOR;
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -58,13 +64,27 @@ public class PlannerMdParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editPatient() throws Exception {
         Patient patient = new PatientBuilder().build();
         EditPatientCommand.EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder(patient).build();
-        EditPatientCommand command = (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
-                patientState);
+        EditPatientCommand command =
+                (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD + " "
+                                + INDEX_FIRST_PERSON.getOneBased() + " "
+                                + PersonUtil.getEditPersonDescriptorDetails(descriptor),
+                        patientState);
         assertEquals(new EditPatientCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editDoctor() throws Exception {
+        Doctor doctor = new DoctorBuilder().build();
+        EditDoctorCommand.EditDoctorDescriptor descriptor = new EditDoctorDescriptorBuilder(doctor).build();
+        EditDoctorCommand command =
+                (EditDoctorCommand) parser.parseCommand(EditDoctorCommand.COMMAND_WORD + " "
+                                + INDEX_FIRST_PERSON.getOneBased() + " "
+                                + DoctorUtil.getEditDoctorDescriptorDetails(descriptor),
+                        doctorState);
+        assertEquals(new EditDoctorCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

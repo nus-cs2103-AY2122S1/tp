@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.DESC_DR_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand.EditPatientDescriptor;
 import seedu.plannermd.model.Model;
@@ -172,6 +174,9 @@ public class EditPatientCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditPatientCommand(INDEX_FIRST_PERSON, DESC_BOB)));
-    }
 
+        // EditDoctorCommand vs EditPatientCommand -> returns false
+        EditDoctorCommand editDoctorCommand = new EditDoctorCommand(INDEX_FIRST_PERSON, DESC_DR_AMY);
+        assertFalse(standardCommand.equals(editDoctorCommand));
+    }
 }

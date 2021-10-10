@@ -17,13 +17,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
+import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -79,11 +82,21 @@ public class CommandTestUtil {
     public static final EditPatientCommand.EditPatientDescriptor DESC_AMY;
     public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
 
+    public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_AMY;
+    public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_BOB;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_DR_AMY = new EditDoctorDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_DR_BOB = new EditDoctorDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
@@ -148,4 +161,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPatientList().size());
     }
 
+    /**
+     * Updates {@code model}'s doctor filtered list to show only the doctor at the given
+     * {@code targetIndex} in the {@code model}'s plannermd.
+     */
+    public static void showDoctorAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredDoctorList().size());
+
+        Doctor doctor = model.getFilteredDoctorList().get(targetIndex.getZeroBased());
+        final String[] splitName = doctor.getName().fullName.split("\\s+");
+        model.updateFilteredDoctorList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredDoctorList().size());
+    }
 }
