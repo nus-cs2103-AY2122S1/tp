@@ -30,7 +30,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(programmerError, userPrefs);
 
-        logger.fine("Initializing with address book: " + programmerError + " and user prefs " + userPrefs);
+        logger.fine("Initializing with ProgrammerError: " + programmerError + " and user prefs " + userPrefs);
 
         this.programmerError = new ProgrammerError(programmerError);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -79,7 +79,7 @@ public class ModelManager implements Model {
     //=========== ProgrammerError ============================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyProgrammerError programmerError) {
+    public void setProgrammerError(ReadOnlyProgrammerError programmerError) {
         this.programmerError.resetData(programmerError);
     }
 

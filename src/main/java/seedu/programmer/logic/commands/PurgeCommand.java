@@ -25,7 +25,7 @@ public class PurgeCommand extends Command {
         if (checkEmpty(model)) {
             return new CommandResult(MESSAGE_FAIL);
         }
-        model.setAddressBook(new ProgrammerError());
+        model.setProgrammerError(new ProgrammerError());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

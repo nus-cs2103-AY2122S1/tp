@@ -67,7 +67,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     }
 
     /**
-     * Adds a person to the address book.
+     * Adds a person to ProgrammerError.
      * The person must not already exist in ProgrammerError.
      */
     public void addPerson(Person p) {

@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyProgrammerError getAddressBook() {
+    public ReadOnlyProgrammerError getProgrammerError() {
         return model.getProgrammerError();
     }
 
@@ -65,7 +65,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getProgrammerErrorFilePath() {
         return model.getProgrammerErrorFilePath();
     }
 

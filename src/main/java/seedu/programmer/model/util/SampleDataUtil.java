@@ -9,7 +9,7 @@ import seedu.programmer.model.person.Person;
 import seedu.programmer.model.person.StudentId;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ProgrammerError} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -32,10 +32,10 @@ public class SampleDataUtil {
     }
 
     /**
-     * Same method as getSampleAddressBook but with AddressBook object as its return type.
-     * @return AddressBook filled with sample data
+     * Same method as getSampleProgrammerError but with ProgrammerError object as its return type.
+     * @return ProgrammerError filled with sample data
      */
-    public static ProgrammerError fillSampleAddressBook() {
+    public static ProgrammerError fillSampleProgrammerError() {
         ProgrammerError sampleAb = new ProgrammerError();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
