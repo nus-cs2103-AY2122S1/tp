@@ -26,6 +26,8 @@ public class Person {
     private final Phone parentPhone;
     private final Email parentEmail;
     private final Address address;
+    private final School school;
+    private final AcadStream acadStream;
     private final Remark remark;
     private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
@@ -34,16 +36,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-
     public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
-                  Address address, Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
-        requireAllNonNull(name, phone, email, address, remark, tags, lessons);
+                  Address address, School school, AcadStream acadStream, Fee outstandingFee, Remark remark,
+                Set<Tag> tags, Set<Lesson> lessons) {
+        requireAllNonNull(name, phone, email, parentPhone, parentEmail, address,
+                school, acadStream, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
         this.address = address;
+        this.school = school;
+        this.acadStream = acadStream;
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
@@ -72,6 +77,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public AcadStream getAcadStream() {
+        return acadStream;
     }
 
     public Fee getFee() {
@@ -160,6 +173,8 @@ public class Person {
                 && otherPerson.getParentPhone().equals(getParentPhone())
                 && otherPerson.getParentEmail().equals(getParentEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getSchool().equals(getSchool())
+                && otherPerson.getAcadStream().equals(getAcadStream())
                 && otherPerson.getFee().equals(getFee())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags())
@@ -169,27 +184,55 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, school, acadStream, remark, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Parent Phone: ")
-                .append(getParentPhone())
-                .append("; Parent Email: ")
-                .append(getParentEmail())
                 .append("; Address: ")
-                .append(getAddress())
-                .append("; Outstanding Fees: ")
-                .append(getFee())
-                .append("; Remark: ")
-                .append(getRemark());
+                .append(getAddress());
+
+        if (!getPhone().isEmpty()) {
+            builder.append("; Phone: ")
+                    .append(getPhone());
+        }
+
+        if (!getEmail().isEmpty()) {
+            builder.append("; Email: ")
+                    .append(getEmail());
+        }
+
+        if (!getParentPhone().isEmpty()) {
+            builder.append("; Parent Phone: ")
+                    .append(getParentPhone());
+        }
+
+        if (!getParentEmail().isEmpty()) {
+            builder.append("; Parent Email: ")
+                    .append(getParentEmail());
+        }
+
+        if (!getSchool().isEmpty()) {
+            builder.append("; School: ")
+                    .append(getSchool());
+        }
+
+        if (!getAcadStream().isEmpty()) {
+            builder.append("; Academic Stream: ")
+                    .append(getAcadStream());
+        }
+
+        if (!getFee().isEmpty()) {
+            builder.append("; Outstanding Fees: ")
+                    .append(getFee());
+        }
+
+        if (!getRemark().isEmpty()) {
+            builder.append("; Remark: ")
+                    .append(getRemark());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
