@@ -15,17 +15,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <icons>
-        <Image url="@/images/address_book_32.png" />
-    </icons>
-    <scene>
-        <Scene>
-            <stylesheets>
-                <URL value="@Fonts.css" />
-                <URL value="@DarkTheme.css" />
-                <URL value="@Extensions.css" />
-            </stylesheets>
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Staff'd" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+  <icons>
+    <Image url="@/images/staffd_icon.jpg" />
+  </icons>
+  <scene>
+    <Scene>
+      <stylesheets>
+        <URL value="@Fonts.css" />
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+      </stylesheets>
 
             <VBox fx:id="mainVbox" prefHeight="471.0" prefWidth="925.0">
                 <MenuBar fx:id="menuBar" prefHeight="30.0" prefWidth="932.0" VBox.vgrow="NEVER">
