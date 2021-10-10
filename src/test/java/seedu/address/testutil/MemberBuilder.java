@@ -29,7 +29,7 @@ public class MemberBuilder {
     private Email email;
     private Address address;
     private Set<Position> positions;
-    private TaskList taskList = new TaskList();
+    private TaskList taskList;
 
     /**
      * Creates a {@code MemberBuilder} with the default details.
@@ -40,6 +40,7 @@ public class MemberBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         positions = new HashSet<>();
+        taskList = new TaskList();
     }
 
     /**
@@ -51,6 +52,7 @@ public class MemberBuilder {
         email = memberToCopy.getEmail();
         address = memberToCopy.getAddress();
         positions = new HashSet<>(memberToCopy.getPositions());
+        taskList = new TaskList();
         taskList.setTasks(memberToCopy.getTaskList());
     }
 
