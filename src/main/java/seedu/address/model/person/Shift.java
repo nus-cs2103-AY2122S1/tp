@@ -1,28 +1,13 @@
 package seedu.address.model.person;
 
 import java.time.DayOfWeek;
-import java.util.Objects;
 
 /**
  * Represents a piece of work for a staff.
  */
 public class Shift {
-    private String shiftName;
     private Slot slot;
     private DayOfWeek dayOfWeek;
-
-    /**
-     * Constructor of Shift given its weekday, time, and name.
-     *
-     * @param dayOfWeek Weekday of the shift.
-     * @param slot The slot when the task located.
-     * @param shiftName Name of the task.
-     */
-    public Shift(DayOfWeek dayOfWeek, Slot slot, String shiftName) {
-        this.dayOfWeek = dayOfWeek;
-        this.slot = slot;
-        this.shiftName = shiftName;
-    }
 
     /**
      * Constructor of Task given its weekday, time, and name.
@@ -33,15 +18,6 @@ public class Shift {
     public Shift(DayOfWeek dayOfWeek, Slot slot) {
         this.dayOfWeek = dayOfWeek;
         this.slot = slot;
-    }
-
-
-    /**
-     * Sets name of the shift.
-     * @param shiftName Name of the shift.
-     */
-    public void setShiftName(String shiftName) {
-        this.shiftName = shiftName;
     }
 
     /**
@@ -65,18 +41,14 @@ public class Shift {
 
     @Override
     public String toString() {
-        return shiftName + ": in " + dayOfWeek.toString() + " " + slot.getValue();
+        return dayOfWeek.toString() + "-" + slot.getValue();
     }
 
     /**
      * Returns a String representation of the shift that is suitable for json.
      */
     public String toSaveString() {
-        String add = shiftName;
-        if (Objects.isNull(shiftName)) {
-            add = "";
-        }
-        return dayOfWeek.toString() + "-" + slot.getValue() + "-" + add;
+        return dayOfWeek.toString() + "-" + slot.getValue() + " ";
     }
 
     /**
@@ -100,7 +72,7 @@ public class Shift {
             return false;
         }
         String[] stringSplit = test.split("-");
-        if (2 == stringSplit.length || stringSplit.length == 3) {
+        if (stringSplit.length == 2) {
             String dayString = stringSplit[0];
             String slotString = stringSplit[1];
             resultBoolean = isValidDayOfWeek(dayString);
@@ -118,6 +90,6 @@ public class Shift {
             return false;
         }
         Shift otherShift = (Shift) other;
-        return toString().equals(otherShift.toString());
+        return slot.equals(otherShift.slot) && dayOfWeek.equals(otherShift.dayOfWeek);
     }
 }
