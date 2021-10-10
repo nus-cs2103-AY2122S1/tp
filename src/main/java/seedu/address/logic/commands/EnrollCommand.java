@@ -68,7 +68,7 @@ public class EnrollCommand extends Command {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof EnrollCommand
-                && index.equals(((EnrollCommand) other).index))
-                && lessonCode.equals(((EnrollCommand) other).lessonCode);
+                && index.equals(((EnrollCommand) other).index)
+                && lessonCode.equals(((EnrollCommand) other).lessonCode));
     }
 }

@@ -19,8 +19,8 @@ public class EnrollCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsEnrollCommand() {
-        assertParseSuccess(parser, "1 l/Science-P5-Wed-1230\"",
-                new EnrollCommand(INDEX_FIRST_PERSON, "l/Science-P5-Wed-1230"));
+        assertParseSuccess(parser, "1 l/Science-P2-Wed-1230",
+                new EnrollCommand(INDEX_FIRST_PERSON, "Science-P2-Wed-1230"));
     }
 
     @Test
