@@ -3,8 +3,10 @@ package seedu.fast.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -23,7 +25,7 @@ public class AppointmentCommandParser implements Parser {
      */
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT, PREFIX_APPOINTMENT_TIME);
 
         Index index;
         try {
@@ -36,7 +38,10 @@ public class AppointmentCommandParser implements Parser {
         String retrievedDate = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
         String parsedDate = parseDateString(retrievedDate);
 
-        return new AppointmentCommand(index, new Appointment(parsedDate));
+        String retrievedTime = argMultimap.getValue(PREFIX_APPOINTMENT_TIME).orElse(Appointment.NO_TIME);
+        String parsedTime = parseTimeString(retrievedTime);
+
+        return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime));
     }
 
     /**
@@ -68,5 +73,40 @@ public class AppointmentCommandParser implements Parser {
             date = Appointment.NO_APPOINTMENT;
         }
         return date;
+    }
+
+    /**
+     * Checks if the retrieved time from user input is valid.
+     *
+     * A valid time input is of the format hh:mm (in 24-hour format).
+     * `hh` is a 2-digit number in the range 00-23, which represents the hour in the 24-hour format.
+     * `mm` is a 2-digit number in the range of 00-59, which represents the minute in the 24-hour format.
+     *
+     * If the retrieved time is valid, returns the time in `HHmm` format.
+     * Otherwise, it means that the user did not enter the correct input. A ParseException will be thrown.
+     *
+     * @param time Time String retrieved from user input
+     * @return A String representing the time in the specified format if it is valid.
+     * @throws ParseException Thrown when the date retrieved is invalid
+     */
+    private String parseTimeString(String time) throws ParseException {
+        String validationPattern = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$";
+
+        if (!time.equals(Appointment.NO_TIME)) {
+            if (!time.matches(validationPattern)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AppointmentCommand.MESSAGE_USAGE));
+            }
+
+            try {
+                // converts the time to the specified format
+                time = LocalTime.parse(time).format(DateTimeFormatter.ofPattern("HHmm"));
+            } catch (DateTimeParseException dtpe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AppointmentCommand.MESSAGE_USAGE), dtpe);
+            }
+        }
+
+        return time;
     }
 }

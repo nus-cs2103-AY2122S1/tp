@@ -2,6 +2,7 @@ package seedu.fast.logic.commands;
 
 import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -25,15 +26,23 @@ public class AppointmentCommand extends Command {
             + " by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer), "
             + PREFIX_APPOINTMENT + "DATE (must be yyyy-mm-dd) or "
-            + PREFIX_APPOINTMENT + APPOINTMENT_DELETE_COMMAND + "\n"
-            + PREFIX_APPOINTMENT + "[DATE] or " + PREFIX_APPOINTMENT + APPOINTMENT_DELETE_COMMAND + "\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-25 or "
-            + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + APPOINTMENT_DELETE_COMMAND + ", "
+            + PREFIX_APPOINTMENT_TIME + "TIME (must be hh:mm (24-hour format))" + "\n"
+            + PREFIX_APPOINTMENT + "[DATE] or " + PREFIX_APPOINTMENT + APPOINTMENT_DELETE_COMMAND + ", "
+            + PREFIX_APPOINTMENT_TIME + "[TIME]" + "\n"
+            + "Note: Appointment Time is optional, can left blank.\n"
+            + "Example 1: " + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + "2021-10-25 "
+            + PREFIX_APPOINTMENT_TIME + "22:15 \n"
+            + "Example 2: " + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + "2021-10-25 \n"
+            + "Example 3: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + APPOINTMENT_DELETE_COMMAND;
 
-    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s";
-    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s"
+            + "hrs";
+    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s %3$s"
+            + "hrs";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
 
     private final Index index;
@@ -85,7 +94,8 @@ public class AppointmentCommand extends Command {
         } else {
             message = MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
         }
-        return String.format(message, editedPerson.getName().fullName, editedPerson.getAppointment().getDate());
+        return String.format(message, editedPerson.getName().fullName, editedPerson.getAppointment().getDate(),
+                editedPerson.getAppointment().getTime());
     }
 
     @Override
