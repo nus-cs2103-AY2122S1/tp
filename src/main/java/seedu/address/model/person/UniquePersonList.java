@@ -103,8 +103,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void sortPersons() {
         Comparator<Person> comparator = new Comparator<Person>() {
-            public int compare(Person p1, Person p2)
-            {
+            public int compare(Person p1, Person p2) {
                 return p1.getName().toString().compareTo(p2.getName().toString());
             }
         };
