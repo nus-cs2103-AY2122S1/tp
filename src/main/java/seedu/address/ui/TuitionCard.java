@@ -10,13 +10,16 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code TuitionClass}.
  */
 public class TuitionCard extends UiPart<Region> {
 
     private static final String FXML = "TuitionListCard.fxml";
 
     private static final Logger logger = LogsCenter.getLogger(TuitionCard.class);
+
+    private static final String CAPACITY_LABEL = "Capacity: ";
+    private static final String REMARK_LABEL = "Notes: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -38,10 +41,11 @@ public class TuitionCard extends UiPart<Region> {
     private Label timeSlot;
     @FXML
     private Label name;
-
+    @FXML
+    private Label remark;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code TuitionCode} with the given {@code TuitionClass} and index to display.
      */
     public TuitionCard(TuitionClass tuitionClass, int displayedIndex) {
         super(FXML);
@@ -50,8 +54,9 @@ public class TuitionCard extends UiPart<Region> {
         this.tuitionClass = tuitionClass;
         id.setText(displayedIndex + ". ");
         name.setText(tuitionClass.getName().getName());
-        capacity.setText(tuitionClass.getStudentCount() + "/" + tuitionClass.getLimit());
+        capacity.setText(CAPACITY_LABEL + tuitionClass.getStudentCount() + "/" + tuitionClass.getLimit());
         timeSlot.setText(tuitionClass.getTimeslot().getTime());
+        remark.setText(REMARK_LABEL + tuitionClass.getRemark().value);
     }
 
     @Override
@@ -71,6 +76,4 @@ public class TuitionCard extends UiPart<Region> {
         return id.getText().equals(card.id.getText())
                 && tuitionClass.equals(card.tuitionClass);
     }
-
-
 }

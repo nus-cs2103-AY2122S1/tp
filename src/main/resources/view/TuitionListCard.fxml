@@ -28,7 +28,7 @@
             </HBox>
             <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
             <Label fx:id="timeSlot" styleClass="cell_small_label" text="\$timeslot" />
-
+            <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
         </VBox>
     </GridPane>
 </HBox>
