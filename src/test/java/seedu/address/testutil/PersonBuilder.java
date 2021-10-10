@@ -3,12 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,6 +16,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_CATEGORY_CODE = "att";
+    public static final String DEFAULT_RATING = "5";
 
     private CategoryCode category;
     private Name name;
@@ -28,6 +24,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Rating rating;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +36,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        rating = new Rating(DEFAULT_RATING);
     }
 
     /**
@@ -51,6 +49,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        rating = personToCopy.getRating();
     }
 
     /**
@@ -100,6 +99,15 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+
+    /**
+     * Sets the {@code Phone} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRating(String rating) {
+        this.rating = new Rating(rating);
+        return this;
+    }
+
 
     public Person build() {
         return new Person(category, name, phone, email, address, tags, rating);
