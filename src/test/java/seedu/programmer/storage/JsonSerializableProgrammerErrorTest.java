@@ -10,10 +10,10 @@
 //
 //import seedu.programmer.commons.exceptions.IllegalValueException;
 //import seedu.programmer.commons.util.JsonUtil;
-//import seedu.programmer.model.AddressBook;
+//import seedu.programmer.model.ProgrammerError;
 //import seedu.programmer.testutil.TypicalPersons;
 //
-//public class JsonSerializableAddressBookTest {
+//class JsonSerializableAddressBookTest {
 //
 //    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
 //    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
@@ -24,8 +24,8 @@
 //    public void toModelType_typicalPersonsFile_success() throws Exception {
 //        JsonSerializableProgrammerError dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
 //                JsonSerializableProgrammerError.class).get();
-//        AddressBook addressBookFromFile = dataFromFile.toModelType();
-//        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+//        ProgrammerError addressBookFromFile = dataFromFile.toModelType();
+//        ProgrammerError typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
 //        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
 //    }
 //
