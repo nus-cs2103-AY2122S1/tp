@@ -174,11 +174,11 @@ Examples:
 * `import -f student_data.csv -g 3 -a 30`
 
 
-### Resetting all data: `clear data`
+### Resetting all data: `clear`
 
 Clears all existing data.
 
-Format: `clear data`
+Format: `clear`
 
 
 ### Saving the data `[coming soon]`
