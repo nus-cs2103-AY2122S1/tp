@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -30,14 +29,14 @@ public class SetMemberAvailabilityCommand extends Command {
 
     public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Set availability of members";
 
-    private final ArrayList<Index> indices;
+    private final List<Index> indices;
     private final Availability availability;
 
     /**
      * @param indices of the person in the filtered person list to edit the availability
      * @param availability of the person to be updated to
      */
-    public SetMemberAvailabilityCommand(ArrayList<Index> indices, Availability availability) {
+    public SetMemberAvailabilityCommand(List<Index> indices, Availability availability) {
         requireAllNonNull(indices, availability);
 
         this.indices = indices;

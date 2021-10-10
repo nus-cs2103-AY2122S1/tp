@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AVAILABILITY;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.SetMemberAvailabilityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Availability;
-
-import java.util.ArrayList;
 
 /**
  * Parses input arguments and creates a new {@code SetMemberAvailabilityCommand} object
@@ -27,8 +28,8 @@ public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvail
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_AVAILABILITY);
-        
-        ArrayList<Index> indices;
+
+        List<Index> indices;
         try {
             indices = new ArrayList<>();
             String indicesString = argMultimap.getPreamble();
