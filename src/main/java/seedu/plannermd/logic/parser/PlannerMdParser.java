@@ -52,19 +52,19 @@ public class PlannerMdParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case ToggleCommand.COMMAND_WORD:
-                return new ToggleCommand();
+        case ToggleCommand.COMMAND_WORD:
+            return new ToggleCommand();
 
-            case ClearCommand.COMMAND_WORD:
-                return new ClearCommand();
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
-            default:
+        default:
         }
 
         if (state.equals(State.PATIENT)) {
