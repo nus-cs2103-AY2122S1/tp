@@ -24,29 +24,29 @@ import seedu.unify.model.task.Task;
 public class TypicalTasks {
 
     public static final Task ALICE = new TaskBuilder().withName("Alice Pauline")
-            .withDate("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withDate("2021-12-11").withEmail("alice@example.com")
             .withTime("12:45")
             .withTags("friends").build();
     public static final Task BENSON = new TaskBuilder().withName("Benson Meier")
-            .withDate("311, Clementi Ave 2, #02-25")
+            .withDate("2021-11-23")
             .withEmail("johnd@example.com").withTime("23:41")
             .withTags("owesMoney", "friends").build();
     public static final Task CARL = new TaskBuilder().withName("Carl Kurz").withTime("23:41")
-            .withEmail("heinz@example.com").withDate("wall street").build();
+            .withEmail("heinz@example.com").withDate("2021-10-25").build();
     public static final Task DANIEL = new TaskBuilder().withName("Daniel Meier").withTime("07:24")
-            .withEmail("cornelia@example.com").withDate("10th street").withTags("friends").build();
+            .withEmail("cornelia@example.com").withDate("2021-12-11").withTags("friends").build();
     public static final Task ELLE = new TaskBuilder().withName("Elle Meyer").withTime("12:33")
-            .withEmail("werner@example.com").withDate("michegan ave").build();
+            .withEmail("werner@example.com").withDate("2021-12-25").build();
     public static final Task FIONA = new TaskBuilder().withName("Fiona Kunz").withTime("03:40")
-            .withEmail("lydia@example.com").withDate("little tokyo").build();
+            .withEmail("lydia@example.com").withDate("2021-12-23").build();
     public static final Task GEORGE = new TaskBuilder().withName("George Best").withTime("13:44")
-            .withEmail("anna@example.com").withDate("4th street").build();
+            .withEmail("anna@example.com").withDate("2021-10-25").build();
 
     // Manually added
     public static final Task HOON = new TaskBuilder().withName("Hoon Meier").withTime("11:22")
-            .withEmail("stefan@example.com").withDate("little india").build();
+            .withEmail("stefan@example.com").withDate("2021-10-25").build();
     public static final Task IDA = new TaskBuilder().withName("Ida Mueller").withTime("23:59")
-            .withEmail("hans@example.com").withDate("chicago ave").build();
+            .withEmail("hans@example.com").withDate("2022-01-15").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task AMY = new TaskBuilder().withName(VALID_NAME_AMY).withTime(VALID_TIME_AMY)

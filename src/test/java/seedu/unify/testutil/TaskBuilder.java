@@ -19,7 +19,7 @@ public class TaskBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TIME = "16:40";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_DATE = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DATE = "2021-12-11";
 
     private Name name;
     private Time time;

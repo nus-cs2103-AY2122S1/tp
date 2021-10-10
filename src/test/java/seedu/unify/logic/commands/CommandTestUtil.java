@@ -32,8 +32,8 @@ public class CommandTestUtil {
     public static final String VALID_TIME_BOB = "11:35";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_DATE_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_DATE_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_DATE_AMY = "2021-12-11";
+    public static final String VALID_DATE_BOB = "2022-02-21";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

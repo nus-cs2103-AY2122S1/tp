@@ -27,10 +27,10 @@ public class DateTest {
         // invalid dates
         assertFalse(Date.isValidDate("")); // empty string
         assertFalse(Date.isValidDate(" ")); // spaces only
+        assertFalse(Date.isValidDate("-")); // one character
 
         // valid dates
-        assertTrue(Date.isValidDate("Blk 456, Den Road, #01-355"));
-        assertTrue(Date.isValidDate("-")); // one character
-        assertTrue(Date.isValidDate("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long date
+        assertTrue(Date.isValidDate("2021-12-11"));
+        assertTrue(Date.isValidDate("2022-12-11")); // date further from now
     }
 }

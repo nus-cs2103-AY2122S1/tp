@@ -4,43 +4,43 @@
     "name" : "Alice Pauline",
     "time" : "12:45",
     "email" : "alice@example.com",
-    "date" : "123, Jurong West Ave 6, #08-111",
+    "date" : "2021-12-11",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "time" : "23:41",
     "email" : "johnd@example.com",
-    "date" : "311, Clementi Ave 2, #02-25",
+    "date" : "2021-11-23",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "time" : "23:41",
     "email" : "heinz@example.com",
-    "date" : "wall street",
+    "date" : "2021-10-25",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
     "time" : "07:24",
     "email" : "cornelia@example.com",
-    "date" : "10th street",
+    "date" : "2021-12-11",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "time" : "12:33",
     "email" : "werner@example.com",
-    "date" : "michegan ave",
+    "date" : "2021-12-25",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "time" : "03:40",
     "email" : "lydia@example.com",
-    "date" : "little tokyo",
+    "date" : "2021-12-23",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
     "time" : "13:44",
     "email" : "anna@example.com",
-    "date" : "4th street",
+    "date" : "2021-10-25",
     "tagged" : [ ]
   } ]
 }
