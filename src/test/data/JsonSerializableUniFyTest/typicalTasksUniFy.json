@@ -2,43 +2,43 @@
   "_comment": "AddressBook save file which contains the same Task values as in TypicalTasks#getTypicalAddressBook()",
   "tasks" : [ {
     "name" : "Alice Pauline",
-    "phone" : "94351253",
+    "time" : "12:45",
     "email" : "alice@example.com",
     "date" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
-    "phone" : "98765432",
+    "time" : "23:41",
     "email" : "johnd@example.com",
     "date" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
-    "phone" : "95352563",
+    "time" : "23:41",
     "email" : "heinz@example.com",
     "date" : "wall street",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "phone" : "87652533",
+    "time" : "07:24",
     "email" : "cornelia@example.com",
     "date" : "10th street",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "time" : "12:33",
     "email" : "werner@example.com",
     "date" : "michegan ave",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "time" : "03:40",
     "email" : "lydia@example.com",
     "date" : "little tokyo",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "time" : "13:44",
     "email" : "anna@example.com",
     "date" : "4th street",
     "tagged" : [ ]

@@ -11,11 +11,11 @@ public class Time {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should only contain numbers in the format of HH:MM, "
             + "where HH is from 00 to 23 and MM is from 00 to 59.";
-    // private static final String HOUR_REGEX = "([01][0-9]|2[0-3])";
-    // private static final String MINUTE_REGEX = "([0-5][0-9])";
-    // new regex (must update test files)
-    // public static final String VALIDATION_REGEX = HOUR_REGEX + ":" + MINUTE_REGEX;
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+
+    private static final String HOUR_REGEX = "([01][0-9]|2[0-3])";
+    private static final String MINUTE_REGEX = "([0-5][0-9])";
+    public static final String VALIDATION_REGEX = HOUR_REGEX + ":" + MINUTE_REGEX;
+
 
     //public final LocalTime time;
     public final String value;

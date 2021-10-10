@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unify.logic.commands.CommandTestUtil.showTaskAtIndex;
@@ -54,11 +54,11 @@ public class EditCommandTest {
         Task lastTask = model.getFilteredTaskList().get(indexLastTask.getZeroBased());
 
         TaskBuilder taskInList = new TaskBuilder(lastTask);
-        Task editedTask = taskInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        Task editedTask = taskInList.withName(VALID_NAME_BOB).withTime(VALID_TIME_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTime(VALID_TIME_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastTask, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);

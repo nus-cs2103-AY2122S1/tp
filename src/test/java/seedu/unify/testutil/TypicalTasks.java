@@ -6,10 +6,10 @@ import static seedu.unify.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_AMY;
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,33 +25,33 @@ public class TypicalTasks {
 
     public static final Task ALICE = new TaskBuilder().withName("Alice Pauline")
             .withDate("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
+            .withTime("12:45")
             .withTags("friends").build();
     public static final Task BENSON = new TaskBuilder().withName("Benson Meier")
             .withDate("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com").withTime("23:41")
             .withTags("owesMoney", "friends").build();
-    public static final Task CARL = new TaskBuilder().withName("Carl Kurz").withPhone("95352563")
+    public static final Task CARL = new TaskBuilder().withName("Carl Kurz").withTime("23:41")
             .withEmail("heinz@example.com").withDate("wall street").build();
-    public static final Task DANIEL = new TaskBuilder().withName("Daniel Meier").withPhone("87652533")
+    public static final Task DANIEL = new TaskBuilder().withName("Daniel Meier").withTime("07:24")
             .withEmail("cornelia@example.com").withDate("10th street").withTags("friends").build();
-    public static final Task ELLE = new TaskBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Task ELLE = new TaskBuilder().withName("Elle Meyer").withTime("12:33")
             .withEmail("werner@example.com").withDate("michegan ave").build();
-    public static final Task FIONA = new TaskBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Task FIONA = new TaskBuilder().withName("Fiona Kunz").withTime("03:40")
             .withEmail("lydia@example.com").withDate("little tokyo").build();
-    public static final Task GEORGE = new TaskBuilder().withName("George Best").withPhone("9482442")
+    public static final Task GEORGE = new TaskBuilder().withName("George Best").withTime("13:44")
             .withEmail("anna@example.com").withDate("4th street").build();
 
     // Manually added
-    public static final Task HOON = new TaskBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Task HOON = new TaskBuilder().withName("Hoon Meier").withTime("11:22")
             .withEmail("stefan@example.com").withDate("little india").build();
-    public static final Task IDA = new TaskBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Task IDA = new TaskBuilder().withName("Ida Mueller").withTime("23:59")
             .withEmail("hans@example.com").withDate("chicago ave").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
-    public static final Task AMY = new TaskBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+    public static final Task AMY = new TaskBuilder().withName(VALID_NAME_AMY).withTime(VALID_TIME_AMY)
             .withEmail(VALID_EMAIL_AMY).withDate(VALID_DATE_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Task BOB = new TaskBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+    public static final Task BOB = new TaskBuilder().withName(VALID_NAME_BOB).withTime(VALID_TIME_BOB)
             .withEmail(VALID_EMAIL_BOB).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 

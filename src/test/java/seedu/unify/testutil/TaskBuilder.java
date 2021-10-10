@@ -17,7 +17,7 @@ import seedu.unify.model.util.SampleDataUtil;
 public class TaskBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_TIME = "16:40";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_DATE = "123, Jurong West Ave 6, #08-111";
 
@@ -32,7 +32,7 @@ public class TaskBuilder {
      */
     public TaskBuilder() {
         name = new Name(DEFAULT_NAME);
-        time = new Time(DEFAULT_PHONE);
+        time = new Time(DEFAULT_TIME);
         email = new Email(DEFAULT_EMAIL);
         date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
@@ -76,8 +76,8 @@ public class TaskBuilder {
     /**
      * Sets the {@code Time} of the {@code Task} that we are building.
      */
-    public TaskBuilder withPhone(String phone) {
-        this.time = new Time(phone);
+    public TaskBuilder withTime(String time) {
+        this.time = new Time(time);
         return this;
     }
 
