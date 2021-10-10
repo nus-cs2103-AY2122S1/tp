@@ -60,4 +60,10 @@ public enum Role implements Field {
         }
         return false;
     }
+
+
+    @Override
+    public String toString() {
+        return this.role;
+    }
 }
