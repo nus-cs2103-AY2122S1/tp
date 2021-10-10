@@ -1,14 +1,17 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.DuplicateLessonException;
 
 /**
  * Wraps all data at the address-book level
@@ -18,7 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
-    private final ArrayList<Lesson> lessons;
+    private final List<Lesson> lessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -48,8 +51,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setPersons(List<Student> students) {
+        this.persons.setPersons(students);
     }
 
     /**
@@ -59,6 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setLessons(newData.getLessonList());
     }
 
     //// person-level operations
@@ -66,16 +70,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(Student student) {
+        requireNonNull(student);
+        return persons.contains(student);
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
+    public void addPerson(Student p) {
         persons.add(p);
     }
 
@@ -84,17 +88,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPerson(Student target, Student editedStudent) {
+        requireNonNull(editedStudent);
 
-        persons.setPerson(target, editedPerson);
+        persons.setPerson(target, editedStudent);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
+    public void removePerson(Student key) {
         persons.remove(key);
     }
 
@@ -105,7 +109,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return lessons.contains(lesson);
+        for (Lesson l : lessons) {
+            // weak equality check
+            if (l.isSameLesson(lesson)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -124,27 +134,50 @@ public class AddressBook implements ReadOnlyAddressBook {
         lessons.remove(key);
     }
 
+    /**
+     * Replaces the contents of the lesson list with {@code lesson}.
+     * {@code lesson} must not contain duplicate lessons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        if (!lessonsAreUnique(lessons)) {
+            throw new DuplicateLessonException();
+        }
+        this.lessons.addAll(lessons);
+    }
+
+    /**
+     * Returns true if {@code lessons} contains only unique lessons.
+     */
+    public boolean lessonsAreUnique(List<Lesson> lessons) {
+        for (int i = 0; i < lessons.size() - 1; i++) {
+            for (int j = i + 1; j < lessons.size(); j++) {
+                if (lessons.get(i).isSameLesson(lessons.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        return "AddressBook["
+                + persons.asUnmodifiableObservableList().size() + " persons, "
+                + FXCollections.observableList(lessons).size() + " lessons]";
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Student> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
 
-    /**
-     * Returns list of lessons.
-     * @return the list of lessons.
-     */
-    public ArrayList<Lesson> getLessonList() {
-        return lessons;
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return FXCollections.observableList(lessons);
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -157,4 +190,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
 }
