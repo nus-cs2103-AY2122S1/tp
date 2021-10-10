@@ -106,7 +106,9 @@ public class ImportCommand extends Command {
         for (int i = 0; i < assessmentCount; i++, readingColumn++) {
             String assessmentScore = readValue(values, readingColumn);
             if (!assessmentScore.isEmpty()) {
-                scores.put(assessments.get(i), makeScore(assessmentScore));
+                Score score = makeScore(assessmentScore);
+                scores.put(assessments.get(i), score);
+                assessments.get(i).setScores(id, score);
             }
         }
 
