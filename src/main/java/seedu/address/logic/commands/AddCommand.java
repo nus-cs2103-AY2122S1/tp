@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -26,6 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_LANGUAGE + "LANGUAGE "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_LAST_VISIT + "LAST_VISIT] "
+            + "[" + PREFIX_VISIT + "VISIT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -33,6 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_LANGUAGE + "English "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_LAST_VISIT + "2021-07-28 "
+            + PREFIX_VISIT + "2021-07-30 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
