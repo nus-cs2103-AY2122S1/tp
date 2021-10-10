@@ -15,6 +15,8 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    public final int priority;
+
 
     /**
      * Constructs a {@code Tag}.
@@ -25,6 +27,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.priority = setPriority(tagName);
     }
 
     /**
@@ -51,6 +54,23 @@ public class Tag {
         return new Tag(term);
     }
 
+    public static int setPriority(String tagName) {
+        if (tagName.equals(PriorityTag.LowPriority.NAME)) {
+            return PriorityTag.LowPriority.PRIORITY;
+        }
+        if (tagName.equals(PriorityTag.MediumPriority.NAME)) {
+            return PriorityTag.MediumPriority.PRIORITY;
+        }
+        if (tagName.equals(PriorityTag.HighPriority.NAME)) {
+            return PriorityTag.HighPriority.PRIORITY;
+        }
+        return 10;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -67,7 +87,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + tagName + ']' + this.priority;
     }
 
 }
