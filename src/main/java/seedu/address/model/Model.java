@@ -47,27 +47,27 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setBuddy(ReadOnlyTeachingAssistantBuddy addressBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the TeachingAssistantBuddy */
+    ReadOnlyTeachingAssistantBuddy getBuddy();
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
-    boolean hasPerson(Student student);
+    boolean hasStudent(Student student);
 
     /**
      * Deletes the given student.
      * The student must exist in the address book.
      */
-    void deletePerson(Student target);
+    void deleteStudent(Student target);
 
     /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */
-    void addPerson(Student student);
+    void addStudent(Student student);
 
     /**
      * Replaces the given student {@code target} with {@code editedPerson}.
@@ -75,14 +75,14 @@ public interface Model {
      * The student identity of {@code editedPerson} must not be the same
      * as another existing student in the address book.
      */
-    void setPerson(Student target, Student editedStudent);
+    void setStudent(Student target, Student editedStudent);
 
     /** Returns an unmodifiable view of the filtered student list */
-    ObservableList<Student> getFilteredPersonList();
+    ObservableList<Student> getFilteredStudentList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Student> predicate);
+    void updateFilteredStudentList(Predicate<Student> predicate);
 }

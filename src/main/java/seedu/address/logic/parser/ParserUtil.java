@@ -58,9 +58,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static TeleHandle parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
+    public static TeleHandle parseTeleHandle(String teleHandle) throws ParseException {
+        requireNonNull(teleHandle);
+        String trimmedPhone = teleHandle.trim();
         if (!TeleHandle.isValidTeleHandle(trimmedPhone)) {
             throw new ParseException(TeleHandle.MESSAGE_CONSTRAINTS);
         }
@@ -73,9 +73,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static StudentId parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedAddress = studentId.trim();
         if (!StudentId.isValidStudentId(trimmedAddress)) {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
