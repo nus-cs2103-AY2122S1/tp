@@ -21,7 +21,7 @@ public class Task {
      * Constructs a {@code Task}.
      *
      * @param taskDescription A valid task description
-     * @param tags
+     * @param tags A valid tag
      */
     public Task(TaskDescription taskDescription, Set<Tag> tags) {
         requireAllNonNull(taskDescription, tags);
