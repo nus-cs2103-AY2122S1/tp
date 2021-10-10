@@ -10,17 +10,20 @@ import java.util.Objects;
  */
 public class Appointment {
     public static final String NO_APPOINTMENT = "No Appointment Scheduled Yet";
+    public static final String NO_TIME = "";
 
     private final String date;
+    private final String time;
 
     /**
      * Constructs an {@code Appointment}.
      *
      * @param date A valid date.
      */
-    public Appointment(String date) {
+    public Appointment(String date, String time) {
         requireNonNull(date);
         this.date = date;
+        this.time = time;
     }
 
     /**
@@ -32,6 +35,14 @@ public class Appointment {
         return this.date;
     }
 
+    /**
+     * Returns a string in the format 'HHmm' of the appointment.
+     *
+     * @return A string representing the time of the appointment.
+     */
+    public String getTime() {
+        return this.time;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -44,13 +55,14 @@ public class Appointment {
         }
 
         Appointment otherAppt = (Appointment) other;
-        return otherAppt.getDate().equals(getDate());
+        return otherAppt.getDate().equals(getDate())
+                && otherAppt.getTime().equals(getTime());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(date);
+        return Objects.hash(date, time);
     }
 
     @Override
@@ -59,6 +71,13 @@ public class Appointment {
 
         builder.append("Appointment: ")
                 .append(this.getDate());
+
+        // displays the string of the appointment time if it is not empty
+        if (!this.getTime().equals("")) {
+                builder.append(" ")
+                        .append(this.getTime())
+                        .append("hrs");
+        }
 
         return builder.toString();
     }
