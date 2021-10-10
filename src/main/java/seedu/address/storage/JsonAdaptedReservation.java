@@ -39,7 +39,7 @@ public class JsonAdaptedReservation {
     public JsonAdaptedReservation(Reservation source) {
         phone = source.getPhone().value;
         numberOfPeople = source.getNumberOfPeople();
-        time = source.getTime().toString();
+        time = source.getDateTime().toString();
     }
 
     /**
