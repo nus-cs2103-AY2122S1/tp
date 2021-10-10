@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-//import safeforhall.logic.commands.AddCommand;
+import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.DeleteCommand;
 //import safeforhall.logic.commands.EditCommand;
@@ -23,22 +23,21 @@ import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.NameContainsKeywordsPredicate;
-//import safeforhall.model.person.Person;
+import safeforhall.model.person.Person;
 //import safeforhall.testutil.EditPersonDescriptorBuilder;
-//import safeforhall.testutil.PersonBuilder;
-//import safeforhall.testutil.PersonUtil;
+import safeforhall.testutil.PersonBuilder;
+import safeforhall.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
-    // TODO: Fix after add command is done
-    // @Test
-    // public void parseCommand_add() throws Exception {
-    //     Person person = new PersonBuilder().build();
-    //     AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-    //     assertEquals(new AddCommand(person), command);
-    // }
+    @Test
+    public void parseCommand_add() throws Exception {
+        Person person = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new AddCommand(person), command);
+    }
 
     @Test
     public void parseCommand_clear() throws Exception {

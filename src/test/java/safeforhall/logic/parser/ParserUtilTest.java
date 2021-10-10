@@ -1,20 +1,19 @@
 package safeforhall.logic.parser;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static safeforhall.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static safeforhall.testutil.Assert.assertThrows;
+import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.Email;
-//import safeforhall.model.person.Faculty;
+import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
-//import safeforhall.model.person.VaccStatus;
-import safeforhall.testutil.TypicalIndexes;
+import safeforhall.model.person.VaccStatus;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -40,17 +39,17 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        Assertions.assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        Assertions.assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -66,14 +65,14 @@ public class ParserUtilTest {
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
-        Assertions.assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
+        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
-        Assertions.assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 
     @Test
@@ -89,14 +88,14 @@ public class ParserUtilTest {
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
         Phone expectedPhone = new Phone(VALID_PHONE);
-        Assertions.assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
-        Assertions.assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
     @Test
@@ -112,14 +111,14 @@ public class ParserUtilTest {
     @Test
     public void parseRoom_validValueWithoutWhitespace_returnsRoom() throws Exception {
         Room expectedRoom = new Room(VALID_ROOM);
-        Assertions.assertEquals(expectedRoom, ParserUtil.parseRoom(VALID_ROOM));
+        assertEquals(expectedRoom, ParserUtil.parseRoom(VALID_ROOM));
     }
 
     @Test
     public void parseRoom_validValueWithWhitespace_returnsTrimmedRoom() throws Exception {
         String roomWithWhitespace = WHITESPACE + VALID_ROOM + WHITESPACE;
         Room expectedRoom = new Room(VALID_ROOM);
-        Assertions.assertEquals(expectedRoom, ParserUtil.parseRoom(roomWithWhitespace));
+        assertEquals(expectedRoom, ParserUtil.parseRoom(roomWithWhitespace));
     }
 
     @Test
@@ -135,15 +134,59 @@ public class ParserUtilTest {
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
-        Assertions.assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
-        Assertions.assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
-    //add more for FACULTY and VACCSTATUS
+    @Test
+    public void parseVaccStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVaccStatus((String) null));
+    }
+
+    @Test
+    public void parseVaccStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVaccStatus(INVALID_VACCSTATUS));
+    }
+
+    @Test
+    public void parseVaccStatus_validValueWithoutWhitespace_returnsName() throws Exception {
+        VaccStatus expectedVaccStatus = new VaccStatus(VALID_VACCSTATUS);
+        assertEquals(expectedVaccStatus, ParserUtil.parseVaccStatus(VALID_VACCSTATUS));
+    }
+
+    @Test
+    public void parseVaccStatus_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String vaccStatusWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        VaccStatus expectedVaccStatus = new VaccStatus(VALID_VACCSTATUS);
+        assertEquals(expectedVaccStatus, ParserUtil.parseName(vaccStatusWithWhitespace));
+    }
+
+    @Test
+    public void parseFaculty_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFaculty((String) null));
+    }
+
+    @Test
+    public void parseFaculty_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFaculty(INVALID_FACULTY));
+    }
+
+    @Test
+    public void parseFaculty_validValueWithoutWhitespace_returnsName() throws Exception {
+        Faculty expectedFaculty = new Faculty(VALID_FACULTY);
+        assertEquals(expectedFaculty, ParserUtil.parseName(VALID_FACULTY));
+    }
+
+    @Test
+    public void parseFaculty_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String facultyWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+        Faculty expectedFaculty = new Faculty(VALID_FACULTY);
+        assertEquals(expectedFaculty, ParserUtil.parseName(facultyWithWhitespace));
+    }
 }

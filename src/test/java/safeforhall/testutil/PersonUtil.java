@@ -1,8 +1,11 @@
 package safeforhall.testutil;
 
 import static safeforhall.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_FACULTY;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
 
 import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
@@ -28,10 +31,9 @@ public class PersonUtil {
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        // sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        // person.getTags().stream().forEach(
-        //     s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        // );
+        sb.append(PREFIX_ROOM + person.getRoom().room + " ");
+        sb.append(PREFIX_FACULTY + person.getFaculty().faculty + " ");
+        sb.append(PREFIX_VACCSTATUS + person.getVaccStatus().vaccStatus + " ");
         return sb.toString();
     }
 
