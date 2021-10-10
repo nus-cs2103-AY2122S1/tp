@@ -7,6 +7,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.CategoryCode;
 import seedu.address.model.person.IsInCategoryPredicate;
 
+import java.util.Set;
+
 /**
  * Filters contacts in the address book by category.
  */
@@ -19,17 +21,17 @@ public class FilterCommand extends Command {
             + "Parameters: CATEGORY_CODE\n"
             + "Example: " + COMMAND_WORD + " c/att";
 
-    private final CategoryCode category;
+    private final Set<CategoryCode> categoryCodes;
     private final IsInCategoryPredicate predicate;
 
     /**
      * constructor for FilterCommand
-     * @param category type of contacts to be filtered
+     * @param categoryCodes types of contacts to be filtered
      */
-    public FilterCommand(CategoryCode category) {
-        requireNonNull(category);
-        this.category = category;
-        this.predicate = new IsInCategoryPredicate(category);
+    public FilterCommand(Set<CategoryCode> categoryCodes) {
+        requireNonNull(categoryCodes);
+        this.categoryCodes = categoryCodes;
+        this.predicate = new IsInCategoryPredicate(categoryCodes);
 
     }
 
@@ -55,6 +57,6 @@ public class FilterCommand extends Command {
 
         // state check
         FilterCommand e = (FilterCommand) other;
-        return category.equals(e.category);
+        return categoryCodes.equals(e.categoryCodes);
     }
 }

@@ -1,27 +1,29 @@
 package seedu.address.model.person;
 
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s {@code CategoryCode} matches the specified {@code CategoryCode}.
  */
 public class IsInCategoryPredicate implements Predicate<Person> {
-    private final CategoryCode category;
+    private final Set<CategoryCode> categoryCodes;
 
-    public IsInCategoryPredicate(CategoryCode category) {
-        this.category = category;
+    public IsInCategoryPredicate(Set<CategoryCode> categoryCodes) {
+        this.categoryCodes = categoryCodes;
     }
 
     @Override
     public boolean test(Person person) {
-        return person.getCategoryCode().equals(category);
+        CategoryCode category = person.getCategoryCode();
+        return categoryCodes.contains(category);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IsInCategoryPredicate// instanceof handles nulls
-                && category.equals(((IsInCategoryPredicate) other).category)); // state check
+                && categoryCodes.equals(((IsInCategoryPredicate) other).categoryCodes)); // state check
     }
 
 }
