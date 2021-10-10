@@ -50,7 +50,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different social handle -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTutorialGroup(VALID_SOCIAL_HANDLE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSocialHandle(VALID_SOCIAL_HANDLE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
