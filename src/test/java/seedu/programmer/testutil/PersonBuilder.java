@@ -51,7 +51,7 @@ public class PersonBuilder {
 
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code StudentId} of the {@code Person} that we are building.
      */
     public PersonBuilder withStudentId(String studentId) {
         this.studentId = new StudentId(studentId);
