@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.unify.model.AddressBook;
+import seedu.unify.model.UniFy;
 import seedu.unify.model.task.Task;
 
 /**
@@ -62,8 +62,8 @@ public class TypicalTasks {
     /**
      * Returns an {@code DateBook} with all the typical tasks.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static UniFy getTypicalAddressBook() {
+        UniFy ab = new UniFy();
         for (Task task : getTypicalTasks()) {
             ab.addTask(task);
         }

@@ -15,18 +15,18 @@ import seedu.unify.commons.util.ConfigUtil;
 import seedu.unify.commons.util.StringUtil;
 import seedu.unify.logic.Logic;
 import seedu.unify.logic.LogicManager;
-import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
-import seedu.unify.model.ReadOnlyAddressBook;
+import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.ReadOnlyUserPrefs;
+import seedu.unify.model.UniFy;
 import seedu.unify.model.UserPrefs;
 import seedu.unify.model.util.SampleDataUtil;
-import seedu.unify.storage.AddressBookStorage;
-import seedu.unify.storage.JsonAddressBookStorage;
+import seedu.unify.storage.JsonUniFyStorage;
 import seedu.unify.storage.JsonUserPrefsStorage;
 import seedu.unify.storage.Storage;
 import seedu.unify.storage.StorageManager;
+import seedu.unify.storage.UniFyStorage;
 import seedu.unify.storage.UserPrefsStorage;
 import seedu.unify.ui.Ui;
 import seedu.unify.ui.UiManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing UniFy ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        UniFyStorage uniFyStorage = new JsonUniFyStorage(userPrefs.getUniFyFilePath());
+        storage = new StorageManager(uniFyStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -74,20 +74,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyUniFy> addressBookOptional;
+        ReadOnlyUniFy initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readUniFy();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample UniFy");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleUniFy);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty UniFy");
+            initialData = new UniFy();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty UniFy");
+            initialData = new UniFy();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -151,7 +151,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty UniFy");
             initializedPrefs = new UserPrefs();
         }
 
@@ -167,7 +167,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting UniFy " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

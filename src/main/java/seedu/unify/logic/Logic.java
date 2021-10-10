@@ -7,7 +7,7 @@ import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.exceptions.ParseException;
-import seedu.unify.model.ReadOnlyAddressBook;
+import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.task.Task;
 
 /**
@@ -24,11 +24,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the UniFy.
      *
-     * @see seedu.unify.model.Model#getAddressBook()
+     * @see seedu.unify.model.Model#getUniFy()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyUniFy getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of tasks */
     ObservableList<Task> getFilteredTaskList();

@@ -13,7 +13,7 @@ import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.AddressBookParser;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.Model;
-import seedu.unify.model.ReadOnlyAddressBook;
+import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.task.Task;
 import seedu.unify.storage.Storage;
 
@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveUniFy(model.getUniFy());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,8 +55,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyUniFy getAddressBook() {
+        return model.getUniFy();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getUniFyFilePath();
     }
 
     @Override

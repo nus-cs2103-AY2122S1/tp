@@ -15,8 +15,8 @@ import java.util.List;
 
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.exceptions.CommandException;
-import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
+import seedu.unify.model.UniFy;
 import seedu.unify.model.task.NameContainsKeywordsPredicate;
 import seedu.unify.model.task.Task;
 import seedu.unify.testutil.EditTaskDescriptorBuilder;
@@ -104,11 +104,11 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        UniFy expectedUniFy = new UniFy(actualModel.getUniFy());
         List<Task> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTaskList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedUniFy, actualModel.getUniFy());
         assertEquals(expectedFilteredList, actualModel.getFilteredTaskList());
     }
     /**

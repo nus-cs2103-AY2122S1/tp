@@ -2,8 +2,8 @@ package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.unify.model.AddressBook;
 import seedu.unify.model.Model;
+import seedu.unify.model.UniFy;
 
 /**
  * Clears the address book.
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setUniFy(new UniFy());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

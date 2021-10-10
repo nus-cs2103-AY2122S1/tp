@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' unify file path.
      */
-    Path getAddressBookFilePath();
+    Path getUniFyFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' unify file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setUniFyFilePath(Path uniFyFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces unify data with the data in {@code uniFy}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setUniFy(ReadOnlyUniFy uniFy);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the UniFy */
+    ReadOnlyUniFy getUniFy();
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Returns true if a task with the same identity as {@code task} exists in the unify.
      */
     boolean hasTask(Task task);
 
     /**
      * Deletes the given task.
-     * The task must exist in the address book.
+     * The task must exist in the unify.
      */
     void deleteTask(Task target);
 
     /**
      * Adds the given task.
-     * {@code task} must not already exist in the address book.
+     * {@code task} must not already exist in the unify.
      */
     void addTask(Task task);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.
-     * {@code target} must exist in the address book.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
+     * {@code target} must exist in the unify.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the unify.
      */
     void setTask(Task target, Task editedTask);
 
