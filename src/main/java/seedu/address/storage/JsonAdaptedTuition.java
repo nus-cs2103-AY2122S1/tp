@@ -27,8 +27,13 @@ class JsonAdaptedTuition {
     private final int limit;
     private final int counter;
     private final String timeslot;
+
     private final ArrayList<String> students = new ArrayList<>();
     private final String remark;
+
+    private final int id;
+    private final ArrayList<String> student = new ArrayList<>();
+
 
 
     /**
@@ -38,12 +43,13 @@ class JsonAdaptedTuition {
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("limit") int limit,
                              @JsonProperty("counter") int counter, @JsonProperty("timeslot") String timeslot,
                              @JsonProperty("students") ArrayList<String> student,
-                              @JsonProperty("remark") String remark) {
+                             @JsonProperty("remark") String remark, @JsonProperty("id") int id) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
         this.timeslot = timeslot;
         this.remark = remark;
+        this.id = id;
 
         if (student != null) {
             this.students.addAll(student);
@@ -62,6 +68,8 @@ class JsonAdaptedTuition {
         timeslot = source.getTimeslot().getTime();
         students.addAll(source.getStudentList().getStudents());
         remark = source.getRemark().value;
+        id = source.getId();
+
     }
 
     /**
@@ -91,11 +99,13 @@ class JsonAdaptedTuition {
 
         final StudentList modelStudent = new StudentList(students);
 
+
+
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
 
-        return new TuitionClass(modelName, modelLimit, modelCounter, modelTimeslot, modelStudent, modelRemark);
+        return new TuitionClass(modelName, modelLimit, modelCounter, modelTimeslot, modelStudent, modelRemark, this.id);
     }
 }
