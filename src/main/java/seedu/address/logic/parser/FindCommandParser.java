@@ -23,11 +23,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         String trimmedArgs = args.trim().replace(FindCommand.COMMAND_WORD, "");
         checkTrimmedArgs(trimmedArgs);
 
-        if (trimmedArgs.contains("-n")) {
-            String[] nameKeywords = trimmedArgs.replace("-n", "").trim().split("\\s+");
+        if (trimmedArgs.contains(CliSyntax.PREFIX_DASH_NAME.getPrefix())) {
+            String[] nameKeywords = trimmedArgs.replace(CliSyntax.PREFIX_DASH_NAME.getPrefix(), "")
+                    .trim().split("\\s+");
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
 
-        } else if (trimmedArgs.contains("-i")) {
+        } else if (trimmedArgs.contains(CliSyntax.PREFIX_DASH_INDEX.getPrefix())) {
             String indexString = trimmedArgs.replace("-i", "").trim();
 
             try {

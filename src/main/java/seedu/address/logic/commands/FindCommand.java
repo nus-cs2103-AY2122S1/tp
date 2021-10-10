@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
@@ -15,16 +16,14 @@ import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-    public static final String COMMAND_TAG_INDEX = "-i";
-    public static final String COMMAND_TAG_NAME = "-n";
     public static final int INVALID_INDEX = -1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or the index specified and "
             + "displays them as a list with index numbers.\n"
-            + "Name Search Parameters: " + COMMAND_TAG_NAME + " KEYWORD [MORE_KEYWORDS]...\n"
+            + "Name Search Parameters: " + CliSyntax.PREFIX_DASH_NAME.getPrefix() + " KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie\n"
-            + "Index Search Parameters: " + COMMAND_TAG_INDEX + " INDEX\n"
+            + "Index Search Parameters: " + CliSyntax.PREFIX_DASH_INDEX + " INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     private final NameContainsKeywordsPredicate namePredicate;
@@ -100,8 +99,8 @@ public class FindCommand extends Command {
      * @throws CommandException When the index inputted is not within range.
      */
     public void checkIndex(Model model) throws CommandException {
-        int personListSize = model.getAddressBook().getPersonList().size();
-        if (index > personListSize) {
+        int personListSize = model.getFilteredPersonList().size();
+        if (index > personListSize - 1) { // -1 so that index starts from 0
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
