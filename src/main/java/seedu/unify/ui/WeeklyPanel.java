@@ -17,7 +17,6 @@ public class WeeklyPanel extends UiPart<Region> {
 
     private static final String FXML = "WeeklyPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(WeeklyPanel.class);
-    private DailyPanel dailyPanel;
     private Logic logic;
 
 
@@ -26,10 +25,6 @@ public class WeeklyPanel extends UiPart<Region> {
 
     @FXML
     private HBox dailyHBox;
-
-    @FXML
-    private StackPane dailyPanelPlaceholder;
-
 
     /**
      * Creates a {@code WeeklyPanel} with the given {@code ObservableList}.
@@ -43,7 +38,7 @@ public class WeeklyPanel extends UiPart<Region> {
         for (int i = 0; i < 7; i++) {
             // these are just placeholders
             VBox placeHolderVBox = new VBox();
-            dailyPanel = new DailyPanel(taskList,indexToDay(i));
+            DailyPanel dailyPanel = new DailyPanel(taskList,indexToDay(i));
             placeHolderVBox.getChildren().add(dailyPanel.getRoot());
             placeHolderVBox.setStyle("-fx-border-style: solid inside;"
                     + "-fx-border-width: 1;");
