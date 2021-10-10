@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.programmer.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +39,7 @@ public class AddCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         // Re-initialize model before each test
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
     }
 
     @Test

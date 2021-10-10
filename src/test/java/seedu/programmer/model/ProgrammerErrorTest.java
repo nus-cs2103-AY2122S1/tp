@@ -8,7 +8,7 @@ import static seedu.programmer.testutil.TypicalPersons.ALICE;
 
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 
-import static seedu.programmer.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,7 +39,7 @@ public class ProgrammerErrorTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        ProgrammerError newData = getTypicalAddressBook();
+        ProgrammerError newData = getTypicalProgrammerError();
         programmerError.resetData(newData);
         assertEquals(newData, programmerError);
     }

@@ -62,9 +62,9 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code ProgrammerError} with all the typical persons.
      */
-    public static ProgrammerError getTypicalAddressBook() {
+    public static ProgrammerError getTypicalProgrammerError() {
         ProgrammerError ab = new ProgrammerError();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

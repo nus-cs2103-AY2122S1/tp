@@ -2,7 +2,7 @@ package seedu.programmer.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.programmer.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
 
 import java.nio.file.Path;
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonProgrammerErrorStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        ProgrammerError original = getTypicalAddressBook();
+        ProgrammerError original = getTypicalProgrammerError();
         storageManager.saveProgrammerError(original);
         ReadOnlyProgrammerError retrieved = storageManager.readProgrammerError().get();
         assertEquals(original, new ProgrammerError(retrieved));

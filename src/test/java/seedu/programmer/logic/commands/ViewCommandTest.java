@@ -8,7 +8,7 @@ import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSucce
 import static seedu.programmer.testutil.TypicalPersons.CARL;
 import static seedu.programmer.testutil.TypicalPersons.ELLE;
 import static seedu.programmer.testutil.TypicalPersons.FIONA;
-import static seedu.programmer.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +24,8 @@ import seedu.programmer.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code ViewCommand}.
  */
 public class ViewCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 
     @Test
     public void equals() {
