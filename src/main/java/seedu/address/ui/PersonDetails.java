@@ -61,9 +61,21 @@ public class PersonDetails extends UiPart<Region> {
         cardPane.setVisible(true);
         name.setText(person.getName().fullName);
         telegram.setText("@" + person.getTelegram().value);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        if (person.getPhone().value.isBlank()) {
+            phone.setText("-");
+        } else {
+            phone.setText(person.getPhone().value);
+        }
+        if (person.getAddress().value.isBlank()) {
+            address.setText("-");
+        } else {
+            address.setText(person.getAddress().value);
+        }
+        if (person.getEmail().value.isBlank()) {
+            address.setText("-");
+        } else {
+            email.setText(person.getEmail().value);
+        }
         Rectangle clip = new Rectangle(
                 profileView.getFitWidth(), profileView.getFitHeight()
         );
