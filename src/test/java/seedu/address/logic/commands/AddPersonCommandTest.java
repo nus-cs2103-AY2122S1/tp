@@ -148,7 +148,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public Path getTaskListFilePath(){
+        public Path getTaskListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
