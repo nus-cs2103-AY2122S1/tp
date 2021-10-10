@@ -19,7 +19,6 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.plannermd.logic.commands.CommandTestUtil.RISK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -36,90 +35,88 @@ import static seedu.plannermd.testutil.patient.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
-import seedu.plannermd.logic.parser.addcommandparser.AddPatientCommandParser;
-import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.patient.Risk;
+import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
+import seedu.plannermd.logic.parser.addcommandparser.AddDoctorCommandParser;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.tag.Tag;
-import seedu.plannermd.testutil.patient.PatientBuilder;
+import seedu.plannermd.testutil.doctor.DoctorBuilder;
 
-public class AddPatientCommandParserTest {
-    private AddPatientCommandParser parser = new AddPatientCommandParser();
+public class AddDoctorCommandParserTest {
+    private AddDoctorCommandParser parser = new AddDoctorCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND).withRemark("")
-                .withRisk(Risk.getUnclassifiedRisk().toString()).build();
+        Doctor expectedDoctor = new DoctorBuilder(BOB).withTags(VALID_TAG_FRIEND).withRemark("")
+                .build();
         // whitespace only preamble
         assertParseSuccess(
                 parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + BIRTH_DATE_DESC_BOB + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+                new AddDoctorCommand(expectedDoctor));
 
         // multiple names - last name accepted
         assertParseSuccess(parser,
                 NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + BIRTH_DATE_DESC_BOB + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+                new AddDoctorCommand(expectedDoctor));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + BIRTH_DATE_DESC_BOB + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+                new AddDoctorCommand(expectedDoctor));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + BIRTH_DATE_DESC_BOB + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+                new AddDoctorCommand(expectedDoctor));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB
                         + BIRTH_DATE_DESC_BOB + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+                new AddDoctorCommand(expectedDoctor));
         // multiple birth dates - last birth date accepted
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + BIRTH_DATE_DESC_AMY
                         + BIRTH_DATE_DESC_BOB + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+                new AddDoctorCommand(expectedDoctor));
 
         // multiple tags - all accepted
-        Patient expectedPatientMultipleTags = new PatientBuilder(BOB)
+        Doctor expectedDoctorMultipleTags = new DoctorBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).withRemark("")
-                .withRisk(Risk.getUnclassifiedRisk().toString()).build();
+                .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + BIRTH_DATE_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatientMultipleTags));
+                new AddDoctorCommand(expectedDoctorMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Patient expectedPatient = new PatientBuilder(AMY).withTags().withRemark("").build();
+        Doctor expectedDoctor = new DoctorBuilder(AMY).withTags().withRemark("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + BIRTH_DATE_DESC_AMY + RISK_DESC_AMY,
-                new AddPatientCommand(expectedPatient));
+                        + BIRTH_DATE_DESC_AMY,
+                new AddDoctorCommand(expectedDoctor));
 
         // no risk
-        expectedPatient = new PatientBuilder(AMY).withRisk(Risk.getUnclassifiedRisk().toString())
-                .withRemark("").build();
+        expectedDoctor = new DoctorBuilder(AMY).withRemark("").build();
         assertParseSuccess(parser,
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + BIRTH_DATE_DESC_AMY
                         + TAG_DESC_FRIEND,
-                new AddPatientCommand(expectedPatient));
+                new AddDoctorCommand(expectedDoctor));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDoctorCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -186,12 +183,12 @@ public class AddPatientCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                        + BIRTH_DATE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + BIRTH_DATE_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser,
                 PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + BIRTH_DATE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPatientCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDoctorCommand.MESSAGE_USAGE));
     }
 }
