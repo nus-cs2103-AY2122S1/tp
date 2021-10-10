@@ -40,7 +40,7 @@ public class Appointment {
     }
 
     public Date convertDate() {
-        Date temp = new Date(Long.MAX_VALUE);
+        Date temp = DateUtil.MAX_DATE;
         if (date.equals(NO_APPOINTMENT)) {
             return temp;
         }
