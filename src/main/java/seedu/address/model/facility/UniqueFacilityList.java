@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 
 
 /**
@@ -24,6 +25,18 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void add(Facility facility) {
         requireNonNull(facility);
         facilityList.add(facility);
+    }
+
+    /**
+     * Removes the specified facility from the facilityList.
+     *
+     * @param toRemove Facility to be removed.
+     */
+    public void remove(Facility toRemove) {
+        requireNonNull(toRemove);
+        if (!facilityList.remove(toRemove)) {
+            throw new FacilityNotFoundException();
+        }
     }
 
     @Override
@@ -47,17 +60,15 @@ public class UniqueFacilityList implements Iterable<Facility> {
         facilityList.setAll();
     }
 
+    public void setFacilities(List<Facility> replacement) {
+        requireNonNull(replacement);
+        facilityList.setAll(replacement);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueFacilityList // instanceof handles nulls
                 && facilityList.equals(((UniqueFacilityList) other).facilityList));
-    }
-
-
-    public void setFacilities(List<Facility> replacement) {
-        requireNonNull(replacement);
-        facilityList.setAll(replacement);
-
     }
 }

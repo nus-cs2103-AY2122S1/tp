@@ -10,8 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,8 +36,9 @@ public class EditMemberCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
+
         EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder(editedPerson).build();
-        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST_PERSON, descriptor);
+        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(EditMemberCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
@@ -87,8 +88,9 @@ public class EditMemberCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST, new EditPersonDescriptor());
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditMemberCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
@@ -99,11 +101,12 @@ public class EditMemberCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST_PERSON,
+
+        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST,
                 new EditMemberDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditMemberCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
@@ -116,20 +119,21 @@ public class EditMemberCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder(firstPerson).build();
-        EditMemberCommand editCommand = new EditMemberCommand(INDEX_SECOND_PERSON, descriptor);
+        EditMemberCommand editCommand = new EditMemberCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(editCommand, model, EditMemberCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
         // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST_PERSON,
+        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND.getZeroBased());
+        EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST,
                 new EditMemberDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editCommand, model, EditMemberCommand.MESSAGE_DUPLICATE_MEMBER);
@@ -150,8 +154,8 @@ public class EditMemberCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showPersonAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
@@ -163,11 +167,13 @@ public class EditMemberCommandTest {
 
     @Test
     public void equals() {
-        final EditMemberCommand standardCommand = new EditMemberCommand(INDEX_FIRST_PERSON, DESC_AMY);
+
+        final EditMemberCommand standardCommand = new EditMemberCommand(INDEX_FIRST, DESC_AMY);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditMemberCommand commandWithSameValues = new EditMemberCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditMemberCommand commandWithSameValues = new EditMemberCommand(INDEX_FIRST, copyDescriptor);
+
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -180,10 +186,10 @@ public class EditMemberCommandTest {
         assertFalse(standardCommand.equals(new ClearMembersCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditMemberCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditMemberCommand(INDEX_SECOND, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditMemberCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditMemberCommand(INDEX_FIRST, DESC_BOB)));
     }
 
 }
