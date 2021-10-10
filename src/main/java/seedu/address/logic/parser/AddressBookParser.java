@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.*;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -23,9 +22,9 @@ public class AddressBookParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput full user input string.
+     * @return the command based on the user input.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -40,11 +39,17 @@ public class AddressBookParser {
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
+        case AddClassCommand.COMMAND_WORD:
+            return new AddClassCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteStudentCommand.COMMAND_WORD:
             return new DeleteStudentCommandParser().parse(arguments);
+
+        case DeleteClassCommand.COMMAND_WORD:
+            return new DeleteClassCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -52,8 +57,11 @@ public class AddressBookParser {
         case FindStudentCommand.COMMAND_WORD:
             return new FindStudentCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListStudentCommand.COMMAND_WORD:
+            return new ListStudentCommand();
+
+        case ListClassCommand.COMMAND_WORD:
+            return new ListClassCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

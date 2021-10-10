@@ -52,6 +52,7 @@ public class TutorialClass {
 
         return otherClass != null
                 && otherClass.getClassCode().equals(getClassCode());
+
     }
 
     @Override

@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.student.Student;
+import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandTest {
@@ -119,6 +120,11 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public void addTutorialClass(TutorialClass tutorialClass) {
+
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -134,7 +140,17 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public boolean hasTutorialClass(TutorialClass tutorialClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteStudent(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTutorialClass(TutorialClass target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,7 +165,17 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public ObservableList<TutorialClass> getFliteredTutorialClassList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updaateFilteredTutorialClassList(Predicate<TutorialClass> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
