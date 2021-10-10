@@ -17,6 +17,7 @@ public class VaccStatus {
     public static final String VALIDATION_REGEX = "^([Tt]|[Ff])$";
 
     public final String vaccStatus;
+    public final boolean vaccinated;
 
     /**
      * Constructs a {@code VaccStatus}.
@@ -26,7 +27,13 @@ public class VaccStatus {
     public VaccStatus(String vaccStatus) {
         requireNonNull(vaccStatus);
         checkArgument(isValidVaccStatus(vaccStatus), MESSAGE_CONSTRAINTS);
-        this.vaccStatus = vaccStatus;
+        if (vaccStatus.equals("T") || vaccStatus.equals("t")) {
+            this.vaccStatus = "T";
+            this.vaccinated = true;
+        } else {
+            this.vaccStatus = "F";
+            this.vaccinated = false;
+        }
     }
 
     /**
@@ -45,7 +52,7 @@ public class VaccStatus {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof VaccStatus // instanceof handles nulls
-                && vaccStatus.equals(((VaccStatus) other).vaccStatus)); // state check
+                && vaccinated == ((VaccStatus) other).vaccinated); // state check
     }
 
     @Override
