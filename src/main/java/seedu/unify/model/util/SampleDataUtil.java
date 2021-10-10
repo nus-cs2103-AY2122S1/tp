@@ -19,22 +19,22 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
             new Task(new Name("Alex Yeoh"), new Time("10:10"),
-                new Date("2020-10-10"),
+                new Date("2020-10-11"),
                 getTagSet("friends")),
             new Task(new Name("Bernice Yu"), new Time("10:10"),
-                new Date("2020-10-10"),
+                new Date("2020-10-12"),
                 getTagSet("colleagues", "friends")),
             new Task(new Name("Charlotte Oliveiro"), new Time("10:10"),
-                new Date("2020-10-10"),
+                new Date("2020-10-13"),
                 getTagSet("neighbours")),
             new Task(new Name("David Li"), new Time("10:10"),
-                new Date("2020-10-10"),
+                new Date("2020-10-14"),
                 getTagSet("family")),
             new Task(new Name("Irfan Ibrahim"), new Time("10:10"),
-                new Date("2020-10-10"),
+                new Date("2020-10-15"),
                 getTagSet("classmates")),
             new Task(new Name("Roy Balakrishnan"), new Time("10:10"),
-                new Date("2020-10-10"),
+                new Date("2020-10-16"),
                 getTagSet("colleagues"))
         };
     }
