@@ -1,4 +1,4 @@
-package seedu.plannermd.logic.parser;
+package seedu.plannermd.logic.parser.addcommandparser;
 
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -13,6 +13,11 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.parser.ArgumentMultimap;
+import seedu.plannermd.logic.parser.ArgumentTokenizer;
+import seedu.plannermd.logic.parser.Parser;
+import seedu.plannermd.logic.parser.ParserUtil;
+import seedu.plannermd.logic.parser.Prefix;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.Risk;
@@ -27,7 +32,7 @@ import seedu.plannermd.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddPatientCommand object
  */
-public class AddCommandParser implements Parser<AddPatientCommand> {
+public class AddPatientCommandParser implements Parser<AddPatientCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the
