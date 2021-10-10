@@ -5,6 +5,7 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_DELETE_APPOINTMENT;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,8 +27,8 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
      */
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT,
-                PREFIX_APPOINTMENT_TIME, PREFIX_APPOINTMENT_VENUE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DELETE_APPOINTMENT,
+                PREFIX_APPOINTMENT, PREFIX_APPOINTMENT_TIME, PREFIX_APPOINTMENT_VENUE);
 
         Index index;
         try {
@@ -35,6 +36,13 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentCommand.MESSAGE_USAGE), ive);
+        }
+
+        String retrievedDeleteCommand = argMultimap.getValue(PREFIX_DELETE_APPOINTMENT).orElse("");
+
+        if (isAppointmentDeleteCommand(retrievedDeleteCommand)) {
+            return new AppointmentCommand(index,
+                    new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME, Appointment.NO_VENUE));
         }
 
         String retrievedDate = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
@@ -50,33 +58,28 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
     }
 
     /**
-     * Checks if the retrieved date from user input is valid or if it is a delete appointment command.
+     * Checks if the retrieved date from user input is valid.
      *
      * A valid date input is of the format yyyy-mm-dd.
      * `mm` is a 2-digit number in the range 01-12, which represents a calendar month.
      * `dd` is a 2-digit number in the range of 01-31, depending on the number of days in the calendar month.
      *
      * If the retrieved date is valid, returns the date in `dd MMM yyyy` format.
-     * If the retrieved date is a delete appointment command, returns `No Appointment Scheduled Yet`.
      * Otherwise, it means that the user did not enter the correct input. A ParseException will be thrown.
      *
      * @param date Date String retrieved from user input
-     * @return A String representing the date in the specified format if it is valid (for add/update),
-     * or 'No Appointment Scheduled Yet' (for delete)
+     * @return A String representing the date in the specified format if it is valid (for add/update)
      * @throws ParseException Thrown when the date retrieved is invalid
      */
     private String parseDateString(String date) throws ParseException {
-        if (!date.equals(AppointmentCommand.APPOINTMENT_DELETE_COMMAND)) {
-            try {
-                // converts the date to the specified format
-                date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-            } catch (DateTimeParseException dtpe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AppointmentCommand.MESSAGE_USAGE), dtpe);
-            }
-        } else {
-            date = Appointment.NO_APPOINTMENT;
+        try {
+            // converts the date to the specified format
+            date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        } catch (DateTimeParseException dtpe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AppointmentCommand.MESSAGE_USAGE), dtpe);
         }
+
         return date.trim();
     }
 
@@ -98,6 +101,7 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         String validationPattern = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$";
 
         if (!time.equals(Appointment.NO_TIME)) {
+            // checks that time only contains HH:mm and nothing else
             if (!time.matches(validationPattern)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AppointmentCommand.MESSAGE_USAGE));
@@ -130,5 +134,9 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         }
 
         return venue.trim();
+    }
+
+    private boolean isAppointmentDeleteCommand(String commandString) {
+        return commandString.equals(AppointmentCommand.APPOINTMENT_DELETE_COMMAND);
     }
 }
