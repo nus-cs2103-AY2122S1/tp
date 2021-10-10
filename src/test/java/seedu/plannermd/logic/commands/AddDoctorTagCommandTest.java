@@ -83,7 +83,7 @@ class AddDoctorTagCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDoctorList().size() + 1);
         AddDoctorTagCommand addDoctorTagCommand = new AddDoctorTagCommand(outOfBoundIndex, tag);
 
-        assertCommandFailure(addDoctorTagCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(addDoctorTagCommand, model, Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
     }
 
     @Test
@@ -96,7 +96,7 @@ class AddDoctorTagCommandTest {
 
         AddDoctorTagCommand addDoctorTagCommand = new AddDoctorTagCommand(outOfBoundIndex, tag);
 
-        assertCommandFailure(addDoctorTagCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(addDoctorTagCommand, model, Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
     }
 
     @Test

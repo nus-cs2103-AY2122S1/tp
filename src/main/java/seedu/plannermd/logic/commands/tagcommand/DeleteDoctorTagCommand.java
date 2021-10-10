@@ -1,7 +1,7 @@
 package seedu.plannermd.logic.commands.tagcommand;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -57,7 +57,7 @@ public class DeleteDoctorTagCommand extends DeleteTagCommand {
         List<Doctor> lastShownList = model.getFilteredDoctorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
         }
 
         Doctor doctorToEdit = lastShownList.get(index.getZeroBased());

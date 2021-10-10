@@ -1,6 +1,5 @@
 package seedu.plannermd.logic.commands;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -85,7 +84,7 @@ class DeleteDoctorTagCommandTest {
         DeleteDoctorTagCommand deleteDoctorTagCommand =
                 new DeleteDoctorTagCommand(outOfBoundIndex, modelFirstPersonTag);
 
-        assertCommandFailure(deleteDoctorTagCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteDoctorTagCommand, model, Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
     }
 
     @Test
@@ -99,7 +98,7 @@ class DeleteDoctorTagCommandTest {
         DeleteDoctorTagCommand deleteDoctorTagCommand =
                 new DeleteDoctorTagCommand(outOfBoundIndex, modelFirstPersonTag);
 
-        assertCommandFailure(deleteDoctorTagCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteDoctorTagCommand, model, Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
     }
 
     @Test
