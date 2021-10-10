@@ -116,25 +116,27 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
-//        FileUtil.createIfMissing(filePath);
+        FileUtil.createIfMissing(filePath);
 
-        try {
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            byte[] keyBytes = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-            String algorithm = "AES";
-            SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
-            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[16]));
-            SealedObject sealedObject =
-                    new SealedObject(JsonUtil.toJsonString(new JsonSerializableAddressBook(addressBook)), cipher);
-            CipherOutputStream cipherOutputStream =
-                    new CipherOutputStream(new BufferedOutputStream(new FileOutputStream("data/file")), cipher);
-            ObjectOutputStream outputStream = new ObjectOutputStream(cipherOutputStream);
-            outputStream.writeObject(sealedObject);
-            outputStream.close();
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
-                | IllegalBlockSizeException | InvalidAlgorithmParameterException e) {
-            System.out.println(e);
-        }
+        FileUtil.writeToFile();
+
+        //        try {
+//            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+//            byte[] keyBytes = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+//            String algorithm = "AES";
+//            SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
+//            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+//            SealedObject sealedObject =
+//                    new SealedObject(JsonUtil.toJsonString(new JsonSerializableAddressBook(addressBook)), cipher);
+//            CipherOutputStream cipherOutputStream =
+//                    new CipherOutputStream(new BufferedOutputStream(new FileOutputStream("data/file")), cipher);
+//            ObjectOutputStream outputStream = new ObjectOutputStream(cipherOutputStream);
+//            outputStream.writeObject(sealedObject);
+//            outputStream.close();
+//        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
+//                | IllegalBlockSizeException | InvalidAlgorithmParameterException e) {
+//            System.out.println(e);
+//        }
 
 //        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
