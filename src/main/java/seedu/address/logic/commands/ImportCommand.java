@@ -2,7 +2,18 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.storage.JsonAddressBookStorage;
 
 public class ImportCommand extends Command {
 
@@ -15,7 +26,9 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_IMPORT_SUCCESS = "Imported from file: %s.json";
 
-    public static final String MESSAGE_IMPORT_FAILURE = "File with name &s.json could not be found!";
+    public static final String MESSAGE_IMPORT_FILE_NOT_FOUND = "File with name &s.json could not be found!";
+
+    public static final String MESSAGE_IMPORT_FILE_WRONG_TYPE = "%s is in the wrong format!";
 
     private final String testPath;
     private final String fileName;
@@ -45,7 +58,35 @@ public class ImportCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
-        return new CommandResult("Hello from import");
+    public CommandResult execute(Model model) throws CommandException {
+        Path filePath = Path.of(testPath + fileName + ".json");
+        JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
+        Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyAddressBook fileData;
+        try {
+            addressBookOptional = temporaryStorage.readAddressBook();
+            fileData = addressBookOptional.orElseThrow();
+        } catch (DataConversionException dce) {
+            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
+        } catch (NoSuchElementException nsee) {
+            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_NOT_FOUND, fileName));
+        }
+        ObservableList<Person> personList = fileData.getPersonList();
+        for (Person p: personList) {
+            try {
+                model.addPerson(p);
+            } catch (DuplicatePersonException dpe) {
+                // skip current person if it already exists
+                continue;
+            }
+        }
+        return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, fileName));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ImportCommand // instanceof handles nulls
+                && fileName.equals(((ImportCommand) other).fileName)); // state check
     }
 }
