@@ -41,7 +41,7 @@ public class Status {
 
     @Override
     public String toString() {
-        return this.status;
+        return this.status.toUpperCase();
     }
 
     @Override

@@ -35,9 +35,9 @@ public class StatusTest {
     @Test
     public void toStringTest() {
         // Proper toString behavior
-        assertTrue(new Status("pending").toString() == "pending");
+        assertTrue(new Status("pending").toString().equals("PENDING"));
         // Improper toString behavior
-        assertFalse(new Status("pending").toString() == "Pending");
+        assertFalse(new Status("pending").toString() == "pending");
     }
 
     @Test

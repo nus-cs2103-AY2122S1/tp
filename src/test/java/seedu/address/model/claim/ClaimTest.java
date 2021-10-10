@@ -31,13 +31,13 @@ public class ClaimTest {
 
     @Test
     public void getStatus() {
-        assertTrue(defaultClaim.getStatus().toString().equals(VALID_CLAIM_STATUS_AMY));
+        assertTrue(defaultClaim.getStatus().toString().equals(VALID_CLAIM_STATUS_AMY.toUpperCase()));
     }
 
     @Test
     public void toStringTest() {
         assertTrue(defaultClaim.toString().equals(String.format("Claim: %s; Description: %s; Status: %s",
-                VALID_CLAIM_TITLE_AMY, VALID_CLAIM_DESCRIPTION_AMY, VALID_CLAIM_STATUS_AMY)));
+                VALID_CLAIM_TITLE_AMY, VALID_CLAIM_DESCRIPTION_AMY, VALID_CLAIM_STATUS_AMY.toUpperCase())));
     }
 
     @Test

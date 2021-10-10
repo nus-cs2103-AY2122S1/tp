@@ -10,7 +10,7 @@ import seedu.address.model.claim.Status;
 import seedu.address.model.claim.Title;
 
 class JsonAdaptedClaim {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tag's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Claim's %s field is missing!";
 
     private final String title;
     private final String description;
