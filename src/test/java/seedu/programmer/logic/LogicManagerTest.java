@@ -27,7 +27,7 @@
 //import seedu.programmer.model.ReadOnlyAddressBook;
 //import seedu.programmer.model.UserPrefs;
 //import seedu.programmer.model.person.Person;
-//import seedu.programmer.storage.JsonAddressBookStorage;
+//import seedu.programmer.storage.JsonProgrammerErrorStorage;
 //import seedu.programmer.storage.JsonUserPrefsStorage;
 //import seedu.programmer.storage.StorageManager;
 //import seedu.programmer.testutil.PersonBuilder;
@@ -43,8 +43,8 @@
 //
 //    @BeforeEach
 //    public void setUp() {
-//        JsonAddressBookStorage addressBookStorage =
-//                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+//        JsonProgrammerErrorStorage addressBookStorage =
+//                new JsonProgrammerErrorStorage(temporaryFolder.resolve("addressBook.json"));
 //        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
 //        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 //        logic = new LogicManager(model, storage);
@@ -71,7 +71,7 @@
 ////    @Test
 ////    public void execute_storageThrowsIoException_throwsCommandException() {
 ////        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-////        JsonAddressBookStorage addressBookStorage =
+////        JsonProgrammerErrorStorage addressBookStorage =
 ////                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
 ////        JsonUserPrefsStorage userPrefsStorage =
 ////                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
@@ -149,7 +149,7 @@
 //    /**
 //     * A stub class to throw an {@code IOException} when the save method is called.
 //     */
-//    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
+//    private static class JsonAddressBookIoExceptionThrowingStub extends JsonProgrammerErrorStorage {
 //        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
 //            super(filePath);
 //        }

@@ -17,13 +17,13 @@ import seedu.programmer.model.ReadOnlyProgrammerError;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonProgrammerErrorStorage implements ProgrammerErrorStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonProgrammerErrorStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonProgrammerErrorStorage(Path filePath) {
         this.filePath = filePath;
     }
 

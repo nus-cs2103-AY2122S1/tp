@@ -18,12 +18,8 @@ import seedu.programmer.logic.LogicManager;
 import seedu.programmer.model.*;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.util.SampleDataUtil;
-import seedu.programmer.storage.AddressBookStorage;
-import seedu.programmer.storage.JsonAddressBookStorage;
-import seedu.programmer.storage.JsonUserPrefsStorage;
-import seedu.programmer.storage.Storage;
-import seedu.programmer.storage.StorageManager;
-import seedu.programmer.storage.UserPrefsStorage;
+import seedu.programmer.storage.*;
+import seedu.programmer.storage.JsonProgrammerErrorStorage;
 import seedu.programmer.ui.Ui;
 import seedu.programmer.ui.UiManager;
 
@@ -52,8 +48,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getProgrammerErrorFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(userPrefs.getProgrammerErrorFilePath());
+        storage = new StorageManager(programmerErrorStorage, userPrefsStorage);
 
         initLogging(config);
 

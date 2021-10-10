@@ -11,7 +11,7 @@ import seedu.programmer.model.ReadOnlyProgrammerError;
 /**x
  * Represents a storage for {@link ProgrammerError}.
  */
-public interface AddressBookStorage {
+public interface ProgrammerErrorStorage {
 
     /**
      * Returns the file path of the data file.
