@@ -37,6 +37,7 @@ import static seedu.plannermd.testutil.patient.TypicalPatients.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.parser.addcommandparser.AddPatientCommandParser;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
@@ -47,15 +48,13 @@ import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddPatientCommandParserTest {
+    private AddPatientCommandParser parser = new AddPatientCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND)
-                .withRemark("")
+        Patient expectedPatient = new PatientBuilder(BOB).withTags(VALID_TAG_FRIEND).withRemark("")
                 .withRisk(Risk.getUnclassifiedRisk().toString()).build();
-
         // whitespace only preamble
         assertParseSuccess(
                 parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -93,12 +92,11 @@ public class AddCommandParserTest {
 
         // multiple tags - all accepted
         Patient expectedPatientMultipleTags = new PatientBuilder(BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .withRemark("")
-                .withRisk(Risk.getUnclassifiedRisk().toString())
-                .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + BIRTH_DATE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).withRemark("")
+                .withRisk(Risk.getUnclassifiedRisk().toString()).build();
+        assertParseSuccess(parser,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + BIRTH_DATE_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddPatientCommand(expectedPatientMultipleTags));
     }
 
@@ -107,13 +105,16 @@ public class AddCommandParserTest {
         // zero tags
         Patient expectedPatient = new PatientBuilder(AMY).withTags().withRemark("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + BIRTH_DATE_DESC_AMY + RISK_DESC_AMY, new AddPatientCommand(expectedPatient));
+                        + BIRTH_DATE_DESC_AMY + RISK_DESC_AMY,
+                new AddPatientCommand(expectedPatient));
 
         // no risk
         expectedPatient = new PatientBuilder(AMY).withRisk(Risk.getUnclassifiedRisk().toString())
                 .withRemark("").build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + BIRTH_DATE_DESC_AMY + TAG_DESC_FRIEND, new AddPatientCommand(expectedPatient));
+        assertParseSuccess(parser,
+                NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + BIRTH_DATE_DESC_AMY
+                        + TAG_DESC_FRIEND,
+                new AddPatientCommand(expectedPatient));
     }
 
     @Test

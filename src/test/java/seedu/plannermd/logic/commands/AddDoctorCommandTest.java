@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
-import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
@@ -23,48 +23,47 @@ import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.testutil.patient.PatientBuilder;
+import seedu.plannermd.testutil.doctor.DoctorBuilder;
 
-public class AddPatientCommandTest {
-
+public class AddDoctorCommandTest {
     @Test
-    public void constructor_nullPatient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddPatientCommand(null));
+    public void constructor_nullDoctor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddDoctorCommand(null));
     }
-
     @Test
-    public void execute_patientAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPatientAdded modelStub = new ModelStubAcceptingPatientAdded();
-        Patient validPatient = new PatientBuilder().build();
+    public void execute_doctorAcceptedByModel_addSuccessful() throws Exception {
+        AddDoctorCommandTest.ModelStubAcceptingDoctorAdded modelStub =
+                new AddDoctorCommandTest.ModelStubAcceptingDoctorAdded();
+        Doctor validDoctor = new DoctorBuilder().build();
 
-        CommandResult commandResult = new AddPatientCommand(validPatient).execute(modelStub);
+        CommandResult commandResult = new AddDoctorCommand(validDoctor).execute(modelStub);
 
-        assertEquals(String.format(AddPatientCommand.MESSAGE_SUCCESS, validPatient), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPatient), modelStub.patientsAdded);
+        assertEquals(String.format(AddDoctorCommand.MESSAGE_SUCCESS, validDoctor), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validDoctor), modelStub.doctorsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Patient validPatient = new PatientBuilder().build();
-        AddPatientCommand addPatientCommand = new AddPatientCommand(validPatient);
-        ModelStub modelStub = new ModelStubWithPatient(validPatient);
+        Doctor validDoctor = new DoctorBuilder().build();
+        AddDoctorCommand addDoctorCommand = new AddDoctorCommand(validDoctor);
+        AddDoctorCommandTest.ModelStub modelStub = new AddDoctorCommandTest.ModelStubWithDoctor(validDoctor);
 
         assertThrows(CommandException.class,
-                AddPatientCommand.MESSAGE_DUPLICATE_PATIENT, () -> addPatientCommand.execute(modelStub));
+                AddDoctorCommand.MESSAGE_DUPLICATE_DOCTOR, () -> addDoctorCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Patient alice = new PatientBuilder().withName("Alice").build();
-        Patient bob = new PatientBuilder().withName("Bob").build();
-        AddPatientCommand addAliceCommand = new AddPatientCommand(alice);
-        AddPatientCommand addBobCommand = new AddPatientCommand(bob);
+        Doctor alice = new DoctorBuilder().withName("Alice").build();
+        Doctor bob = new DoctorBuilder().withName("Bob").build();
+        AddDoctorCommand addAliceCommand = new AddDoctorCommand(alice);
+        AddDoctorCommand addBobCommand = new AddDoctorCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddPatientCommand addAliceCommandCopy = new AddPatientCommand(alice);
+        AddDoctorCommand addAliceCommandCopy = new AddDoctorCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -77,24 +76,25 @@ public class AddPatientCommandTest {
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
+
+
     /**
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
         public void setState(State state) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public State getState() {
-            return null;
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void toggleState() {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -159,8 +159,7 @@ public class AddPatientCommandTest {
 
         @Override
         public boolean hasDoctor(Doctor doctor) {
-            return false;
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -170,12 +169,12 @@ public class AddPatientCommandTest {
 
         @Override
         public void addDoctor(Doctor doctor) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setDoctor(Doctor target, Doctor editedDoctor) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -195,44 +194,49 @@ public class AddPatientCommandTest {
 
         @Override
         public void updateFilteredDoctorList(Predicate<? super Doctor> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPatient extends ModelStub {
-        private final Patient patient;
+    private class ModelStubWithDoctor extends AddDoctorCommandTest.ModelStub {
+        private final Doctor doctor;
 
-        ModelStubWithPatient(Patient patient) {
-            requireNonNull(patient);
-            this.patient = patient;
+        ModelStubWithDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            this.doctor = doctor;
         }
 
         @Override
         public boolean hasPatient(Patient patient) {
-            requireNonNull(patient);
-            return this.patient.isSamePerson(patient);
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            return this.doctor.isSamePerson(doctor);
         }
     }
 
     /**
      * A Model stub that always accept the patient being added.
      */
-    private class ModelStubAcceptingPatientAdded extends ModelStub {
-        final ArrayList<Patient> patientsAdded = new ArrayList<>();
+    private class ModelStubAcceptingDoctorAdded extends AddDoctorCommandTest.ModelStub {
+        final ArrayList<Doctor> doctorsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPatient(Patient patient) {
-            requireNonNull(patient);
-            return patientsAdded.stream().anyMatch(patient::isSamePerson);
+        public boolean hasDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            return doctorsAdded.stream().anyMatch(doctor::isSamePerson);
         }
 
         @Override
-        public void addPatient(Patient patient) {
-            requireNonNull(patient);
-            patientsAdded.add(patient);
+        public void addDoctor(Doctor doctor) {
+            requireNonNull(doctor);
+            doctorsAdded.add(doctor);
         }
 
         @Override

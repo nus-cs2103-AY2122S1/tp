@@ -13,15 +13,14 @@ import seedu.plannermd.commons.util.JsonUtil;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.testutil.TypicalPlannerMd;
 
-@SuppressWarnings("OptionalGetWithoutIsPresent")
 public class JsonSerializablePlannerMdTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializablePlannerMdTest");
     private static final Path TYPICAL_PLANNERMD_FILE = TEST_DATA_FOLDER.resolve("typicalPlannerMd.json");
     private static final Path TYPICAL_PATIENTS_FILE = TEST_DATA_FOLDER.resolve("typicalPatientsPlannerMd.json");
+    private static final Path TYPICAL_DOCTORS_FILE = TEST_DATA_FOLDER.resolve("typicalDoctorsPlannerMd.json");
     private static final Path INVALID_PATIENT_FILE = TEST_DATA_FOLDER.resolve("invalidPatientPlannerMd.json");
     private static final Path DUPLICATE_PATIENT_FILE = TEST_DATA_FOLDER.resolve("duplicatePatientPlannerMd.json");
-    private static final Path TYPICAL_DOCTORS_FILE = TEST_DATA_FOLDER.resolve("typicalDoctorsPlannerMd.json");
     private static final Path INVALID_DOCTORS_FILE = TEST_DATA_FOLDER.resolve("invalidDoctorPlannerMd.json");
     private static final Path DUPLICATE_DOCTORS_FILE = TEST_DATA_FOLDER.resolve("duplicateDoctorPlannerMd.json");
 
