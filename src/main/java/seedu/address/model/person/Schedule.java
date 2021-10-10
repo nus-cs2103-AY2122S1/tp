@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import java.time.DayOfWeek;
 import java.util.Objects;
 
+import seedu.address.model.person.exceptions.DuplicateShiftException;
+
 /**
  * Represents the schedule for the staff, which contains all the task for the staff.
  */
@@ -13,6 +15,7 @@ public class Schedule {
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
 
+
     private static final String SCHEDULE_DEFAULT = "Schedule:\n"
             + "Monday: %1$s\n"
             + "Tuesday: %2$s\n"
@@ -22,7 +25,8 @@ public class Schedule {
             + "Saturday: %6$s\n"
             + "Sunday: %7$s\n";
 
-    private Shift[][] shifts;
+    private Shift[][] shifts = new Shift[7][2];
+
 
     /**
      * Initialize schedule object.
@@ -44,13 +48,7 @@ public class Schedule {
             String[] shiftString = s.split("-");
             DayOfWeek shiftDay = DayOfWeek.valueOf(shiftString[0]);
             Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
-            if (shiftString.length == 2) {
-                shifts[shiftDay.getValue()][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
-            } else {
-                String shiftName = shiftString[2];
-                shifts[shiftDay.getValue()][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot, shiftName);
-            }
-
+            shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
         }
     }
 
@@ -59,10 +57,13 @@ public class Schedule {
      *
      * @param dayOfWeek The day of the shift in a week.
      * @param slot The slot of the shift located.
-     * @param shiftName The name of the shift.
+     * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot, String shiftName) {
-        Shift shift = new Shift(dayOfWeek, slot, shiftName);
+    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+        Shift shift = new Shift(dayOfWeek, slot);
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null) {
+            throw new DuplicateShiftException();
+        }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift;
     }
 
