@@ -9,6 +9,7 @@ import java.util.List;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 
 
 /**
@@ -34,6 +35,18 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void add(Facility facility) {
         requireNonNull(facility);
         facilityList.add(facility);
+    }
+
+    /**
+     * Removes the specified facility from the facilityList.
+     *
+     * @param toRemove Facility to be removed.
+     */
+    public void remove(Facility toRemove) {
+        requireNonNull(toRemove);
+        if (!facilityList.remove(toRemove)) {
+            throw new FacilityNotFoundException();
+        }
     }
 
     @Override
@@ -77,7 +90,6 @@ public class UniqueFacilityList implements Iterable<Facility> {
                 && facilityList.equals(((UniqueFacilityList) other).facilityList));
     }
 
-
     /**
      * Returns true if {@code persons} contains only unique persons.
      */
@@ -91,4 +103,5 @@ public class UniqueFacilityList implements Iterable<Facility> {
         }
         return true;
     }
+
 }

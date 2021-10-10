@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.UniqueFacilityList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import javafx.collections.ObservableList;
 
 /**
  * Wraps all data at the address-book level
@@ -135,6 +135,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from SportsPA.
+     * {@code key} must exist in SportsPA.
+     */
+    public void removeFacility(Facility key) {
+        facilities.remove(key);
     }
 
     //// util methods
