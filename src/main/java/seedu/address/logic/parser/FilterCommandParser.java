@@ -23,14 +23,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_CATEGORY_CODE);
 
-        String category = (argMultimap.getValue(PREFIX_CATEGORY_CODE).orElse("")).trim();
-
         if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY_CODE)
-                || !argMultimap.getPreamble().isEmpty() || category.isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        return new FilterCommand(new CategoryCode(category));
+        CategoryCode categoryCode = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY_CODE).get());
+
+        return new FilterCommand(categoryCode);
     }
 
     /**
