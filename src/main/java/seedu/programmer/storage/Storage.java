@@ -21,12 +21,12 @@ public interface Storage extends ProgrammerErrorStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getProgrammerErrorFilePath();
 
     @Override
-    Optional<ReadOnlyProgrammerError> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyProgrammerError> readProgrammerError() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyProgrammerError addressBook) throws IOException;
+    void saveProgrammerError(ReadOnlyProgrammerError programmerError) throws IOException;
 
 }

@@ -69,7 +69,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyProgrammerError> addressBookOptional;
         ReadOnlyProgrammerError initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readProgrammerError();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }

@@ -12,7 +12,7 @@ import seedu.programmer.model.ReadOnlyUserPrefs;
 import seedu.programmer.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ProgrammerError data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -47,33 +47,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ ProgrammerError methods =========================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return programmerErrorStorage.getAddressBookFilePath();
+    public Path getProgrammerErrorFilePath() {
+        return programmerErrorStorage.getProgrammerErrorFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyProgrammerError> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(programmerErrorStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyProgrammerError> readProgrammerError() throws DataConversionException, IOException {
+        return readProgrammerError(programmerErrorStorage.getProgrammerErrorFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyProgrammerError> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyProgrammerError> readProgrammerError(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return programmerErrorStorage.readAddressBook(filePath);
+        return programmerErrorStorage.readProgrammerError(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyProgrammerError addressBook) throws IOException {
-        saveAddressBook(addressBook, programmerErrorStorage.getAddressBookFilePath());
+    public void saveProgrammerError(ReadOnlyProgrammerError programmerError) throws IOException {
+        saveProgrammerError(programmerError, programmerErrorStorage.getProgrammerErrorFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyProgrammerError addressBook, Path filePath) throws IOException {
+    public void saveProgrammerError(ReadOnlyProgrammerError programmerError, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        programmerErrorStorage.saveAddressBook(addressBook, filePath);
+        programmerErrorStorage.saveProgrammerError(programmerError, filePath);
     }
 
 }

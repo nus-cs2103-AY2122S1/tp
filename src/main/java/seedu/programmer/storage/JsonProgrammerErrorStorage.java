@@ -27,32 +27,32 @@ public class JsonProgrammerErrorStorage implements ProgrammerErrorStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getProgrammerErrorFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyProgrammerError> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyProgrammerError> readProgrammerError() throws DataConversionException {
+        return readProgrammerError(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readProgrammerError()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyProgrammerError> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyProgrammerError> readProgrammerError(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableProgrammerError> jsonProgrammerError = JsonUtil.readJsonFile(
+                filePath, JsonSerializableProgrammerError.class);
+        if (!jsonProgrammerError.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonProgrammerError.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonProgrammerErrorStorage implements ProgrammerErrorStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyProgrammerError addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveProgrammerError(ReadOnlyProgrammerError programmerError) throws IOException {
+        saveProgrammerError(programmerError, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyProgrammerError)}.
+     * Similar to {@link #saveProgrammerError(ReadOnlyProgrammerError)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyProgrammerError addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveProgrammerError(ReadOnlyProgrammerError programmerError, Path filePath) throws IOException {
+        requireNonNull(programmerError);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableProgrammerError(programmerError), filePath);
     }
 
 }

@@ -16,31 +16,31 @@ public interface ProgrammerErrorStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getProgrammerErrorFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyProgrammerError}.
+     * Returns ProgrammerError data as a {@link ReadOnlyProgrammerError}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyProgrammerError> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyProgrammerError> readProgrammerError() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getProgrammerErrorFilePath()
      */
-    Optional<ReadOnlyProgrammerError> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyProgrammerError> readProgrammerError(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyProgrammerError} to the storage.
-     * @param addressBook cannot be null.
+     * @param programmerError cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyProgrammerError addressBook) throws IOException;
+    void saveProgrammerError(ReadOnlyProgrammerError programmerError) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyProgrammerError)
+     * @see #saveProgrammerError(ReadOnlyProgrammerError)
      */
-    void saveAddressBook(ReadOnlyProgrammerError addressBook, Path filePath) throws IOException;
+    void saveProgrammerError(ReadOnlyProgrammerError addressBook, Path filePath) throws IOException;
 
 }
