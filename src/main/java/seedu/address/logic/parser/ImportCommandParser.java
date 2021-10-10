@@ -23,8 +23,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
 
-        Path filePath = argMultimap.getValue(PREFIX_FILE).map(Path::of).orElseThrow(() ->
-                new ParseException(ImportCommand.MESSAGE_INVALID_FILE));
+        Path filePath = argMultimap.getValue(PREFIX_FILE).map(Path::of).get();
 
         int groupCount = getCount(argMultimap, PREFIX_GROUP);
         int assessmentCount = getCount(argMultimap, PREFIX_ASSESSMENT);
@@ -33,7 +32,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         return new ImportCommand(groupCount, assessmentCount, tagCount, filePath);
     }
 
-    private int getCount(ArgumentMultimap argumentMultimap, Prefix prefix) throws ParseException{
+    private int getCount(ArgumentMultimap argumentMultimap, Prefix prefix) throws ParseException {
         try {
             return argumentMultimap.getValue(prefix).map(String::trim).map(Integer::parseInt).orElse(0);
         } catch (NumberFormatException e) {

@@ -70,7 +70,6 @@ public class CommandTestUtil {
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "E0123"; // ID length too short
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05&"; // '&' not allowed in name
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_FILE_DESC = " " + PREFIX_FILE + "*?/\0"; // such a path cannot exist
     public static final String INVALID_GROUP_COUNT_DESC = " " + PREFIX_GROUP + "invalid1"; // only numbers allowed
     public static final String INVALID_ASSESSMENT_COUNT_DESC = " " + PREFIX_ASSESSMENT + "invalid2"; // only numbers allowed
     public static final String INVALID_TAG_COUNT_DESC = " " + PREFIX_TAG + "invalid3"; // only numbers allowed

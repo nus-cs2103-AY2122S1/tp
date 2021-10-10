@@ -7,7 +7,23 @@ import seedu.address.logic.commands.ImportCommand;
 import java.nio.file.Path;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.ASSESSMENT_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.FILE_DESC_INVALID_FILE;
+import static seedu.address.logic.commands.CommandTestUtil.FILE_DESC_NON_EXISTENT_FILE;
+import static seedu.address.logic.commands.CommandTestUtil.FILE_DESC_VALID_FILE;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSESSMENT_COUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_COUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_COUNT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_COUNT_DESC_ABOVE_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NON_EXISTENT_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WRONG_CSV_PATH;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
@@ -32,7 +48,7 @@ public class ImportCommandParserTest {
                 GROUP_COUNT_DESC_TYPICAL + ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_TYPICAL, expectedCommand);
 
         // multiple arguments provided, only last one used
-        assertParseSuccess(parser, INVALID_FILE_DESC + FILE_DESC_VALID_FILE
+        assertParseSuccess(parser, FILE_DESC_NON_EXISTENT_FILE + FILE_DESC_VALID_FILE
                 + INVALID_GROUP_COUNT_DESC + GROUP_COUNT_DESC_TYPICAL
                 + INVALID_ASSESSMENT_COUNT_DESC + ASSESSMENT_COUNT_DESC_TYPICAL
                 + INVALID_TAG_COUNT_DESC + TAG_COUNT_DESC_TYPICAL, expectedCommand);
@@ -80,21 +96,25 @@ public class ImportCommandParserTest {
     @Test
     public void parse_fileNotPresent_failure() {
         assertParseFailure(parser,GROUP_COUNT_DESC_TYPICAL + ASSESSMENT_COUNT_DESC_TYPICAL +
-                TAG_COUNT_DESC_TYPICAL, MESSAGE_INVALID_COMMAND_FORMAT + ImportCommand.MESSAGE_USAGE);
+                TAG_COUNT_DESC_TYPICAL, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_tooManyColumnsSpecified_failure() {
-        assertParseFailure(parser, FILE_DESC_VALID_FILE + GROUP_COUNT_DESC_TYPICAL +
-                ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_ABOVE_TYPICAL, ImportCommand.MESSAGE_OUT_OF_BOUNDS);
+    public void parse_tooManyColumnsSpecified_success() {
+        ImportCommand expectedCommand = new ImportCommand(
+                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_PERSONS_TAG_COUNT + 1,
+                Path.of(VALID_TYPICAL_PERSONS_CSV_PATH));
+
+        // It's the command's job to read the file and validate column counts
+        assertParseSuccess(parser, FILE_DESC_VALID_FILE + GROUP_COUNT_DESC_TYPICAL +
+                ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_ABOVE_TYPICAL, expectedCommand);
     }
 
     @Test
     public void parse_invalidArguments_failure() {
-        // Provided path cannot be converted into a Path
-        assertParseFailure(parser, INVALID_FILE_DESC + GROUP_COUNT_DESC_TYPICAL +
-                ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_ABOVE_TYPICAL, ImportCommand.MESSAGE_INVALID_FILE);
-
+        // Not a number
         assertParseFailure(parser, FILE_DESC_VALID_FILE + INVALID_GROUP_COUNT_DESC +
                 ASSESSMENT_COUNT_DESC_TYPICAL + TAG_COUNT_DESC_TYPICAL, ImportCommand.MESSAGE_INVALID_NUMBER);
 
@@ -103,11 +123,10 @@ public class ImportCommandParserTest {
 
         assertParseFailure(parser, FILE_DESC_VALID_FILE + GROUP_COUNT_DESC_TYPICAL +
                 ASSESSMENT_COUNT_DESC_TYPICAL + INVALID_TAG_COUNT_DESC, ImportCommand.MESSAGE_INVALID_NUMBER);
-        // todo: check why this isn't working -- the invalid number isnt being thrown
     }
 
     @Test
-    public void parse_validWrongFile_success() {
+    public void parse_badFile_success() {
         ImportCommand expectedCommand = new ImportCommand(
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
