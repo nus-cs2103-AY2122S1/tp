@@ -70,12 +70,15 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         action.setCellValueFactory(new PropertyValueFactory<>("action"));
+        action.prefWidthProperty().bind(table.widthProperty().multiply(0.2));
 
         format.setCellFactory(getTableColumnTableCellCallback(format));
         format.setCellValueFactory(new PropertyValueFactory<>("format"));
+        format.prefWidthProperty().bind(table.widthProperty().multiply(0.4));
 
         example.setCellFactory(getTableColumnTableCellCallback(example));
         example.setCellValueFactory(new PropertyValueFactory<>("example"));
+        example.prefWidthProperty().bind(table.widthProperty().multiply(0.4));
         table.setItems(list);
         table.setColumnResizePolicy(p -> true);
 
