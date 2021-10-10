@@ -2,10 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import static seedu.address.logic.commands.UntagCommand.MESSAGE_NOT_REMOVED;
+import static seedu.address.logic.commands.UntagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.tag.Tag.MESSAGE_CONSTRAINTS;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,8 +20,8 @@ import seedu.address.model.tag.Tag;
 public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UntagCommand
+     * and returns an UntagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public UntagCommand parse(String args) throws ParseException {
@@ -31,14 +34,14 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
-        UntagCommand.EditPersonDescriptor editPersonDescriptor = new UntagCommand.EditPersonDescriptor();
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(UntagCommand.MESSAGE_NOT_REMOVED);
+            throw new ParseException(MESSAGE_NOT_REMOVED);
         }
 
         return new UntagCommand(index, editPersonDescriptor);
@@ -46,8 +49,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * @throws ParseException if tags contain empty string
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
@@ -56,9 +58,8 @@ public class UntagCommandParser implements Parser<UntagCommand> {
             return Optional.empty();
         }
         if (tags.contains("")) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_CONSTRAINTS);
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(ParserUtil.parseTags(tags));
     }
 }

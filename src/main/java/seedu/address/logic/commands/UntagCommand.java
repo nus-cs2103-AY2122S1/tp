@@ -36,7 +36,7 @@ public class UntagCommand extends EditCommand {
     public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed tag(s) from %1$s: %2$s";
     public static final String MESSAGE_NOT_REMOVED = "At least one tag to be removed must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_TAG_NOT_IN_PERSON = "This person does not have the following tags: %s";
+    public static final String MESSAGE_TAG_NOT_IN_PERSON = "%s does not have the following tags: %s";
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -85,7 +85,7 @@ public class UntagCommand extends EditCommand {
         Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
         if (!updatedTags.containsAll(removedTags)) {
-            throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON,
+            throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON, updatedName,
                     getNotFoundTags(updatedTags, removedTags)));
         }
         updatedTags.removeAll(removedTags);
@@ -93,11 +93,24 @@ public class UntagCommand extends EditCommand {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
     }
 
+    /**
+     * Retrieves tags that user wants to remove, but are not present in the contact.
+     * @param originalTags Tags that contact are tagged with
+     * @param removedTags Tags to be removed
+     * @return String containing tags that are not found
+     */
     public static String getNotFoundTags(Set<Tag> originalTags, Set<Tag> removedTags) {
-        return removedTags.stream().map(x -> originalTags.contains(x) ? "" : x.tagName).filter(x -> x != "")
+        // filters out tags that are not found in original tags
+        // map to abstract out tagNames and join them into a string
+        return removedTags.stream().filter(x -> !originalTags.contains(x)).map(x -> x.tagName)
                 .collect(Collectors.joining(", "));
     }
 
+    /**
+     * Retrieves tags that are removed.
+     * @param editPersonDescriptor details to edit the person with
+     * @return String containing tags that are removed
+     */
     public static String getRemovedTags(EditPersonDescriptor editPersonDescriptor) {
         return editPersonDescriptor.getTags().orElse(new HashSet<Tag>()).stream()
                 .map(tag -> tag.tagName).collect(Collectors.joining(", "));

@@ -10,6 +10,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WIFE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import static seedu.address.logic.commands.UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.UntagCommand.MESSAGE_TAG_NOT_IN_PERSON;
+import static seedu.address.logic.commands.UntagCommand.getNotFoundTags;
+import static seedu.address.logic.commands.UntagCommand.getRemovedTags;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -51,12 +56,12 @@ class UntagCommandTest {
         PersonBuilder personInList = new PersonBuilder(firstPerson);
         Person editedPerson = personInList.withTags().build();
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
-                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
+        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -72,12 +77,12 @@ class UntagCommandTest {
         PersonBuilder personInList = new PersonBuilder(firstPerson);
         Person editedPerson = personInList.withTags(VALID_TAG_HUSBAND).build();
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
-                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
+        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -93,12 +98,12 @@ class UntagCommandTest {
         PersonBuilder personInList = new PersonBuilder(secondPerson);
         Person editedPerson = personInList.withTags().build();
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_SECOND_PERSON, descriptor);
 
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
-                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
+        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -114,12 +119,12 @@ class UntagCommandTest {
         PersonBuilder personInList = new PersonBuilder(thirdPerson);
         Person editedPerson = personInList.withTags(VALID_TAG_HUSBAND).build();
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_STUDENT, VALID_TAG_TEACHING_ASSISTANT).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_THIRD_PERSON, descriptor);
 
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
-                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
+        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(thirdPerson, editedPerson);
@@ -135,12 +140,12 @@ class UntagCommandTest {
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withTags(VALID_TAG_FRIEND).build();
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_HUSBAND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS,
-                editedPerson.getName(), UntagCommand.getRemovedTags(descriptor));
+        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+                editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
@@ -152,29 +157,28 @@ class UntagCommandTest {
     public void execute_personNotTagged_failure() {
         Model model = generateFriendTaggedModel();
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_STUDENT).build();
         UntagCommand editCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String tagsNotFound = UntagCommand.getNotFoundTags(firstPerson.getTags(),
+        String tagsNotFound = getNotFoundTags(firstPerson.getTags(),
                 descriptor.getTags().orElse(new HashSet<Tag>()));
-        String message = String.format(UntagCommand.MESSAGE_TAG_NOT_IN_PERSON,
+        String message = String.format(MESSAGE_TAG_NOT_IN_PERSON, firstPerson.getName(),
                 tagsNotFound);
         assertCommandFailure(editCommand, model, message);
     }
 
     @Test
     void testEquals() {
-        UntagCommand.EditPersonDescriptor removeFriendDescriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor removeFriendDescriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND).build();
-        UntagCommand.EditPersonDescriptor removeWifeDescriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor removeWifeDescriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_WIFE).build();
 
         final UntagCommand standardCommand = new UntagCommand(INDEX_THIRD_PERSON, removeFriendDescriptor);
 
         // same values -> returns true
-        UntagCommand.EditPersonDescriptor copyDescriptor = new UntagCommand.EditPersonDescriptor(
-                removeFriendDescriptor);
+        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(removeFriendDescriptor);
         UntagCommand commandWithSameValues = new UntagCommand(INDEX_THIRD_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
