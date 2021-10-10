@@ -121,6 +121,11 @@ public class ModelManager implements Model {
         return addressBook.hasGroup(group);
     }
 
+    @Override
+    public void deleteGroup(Group target) {
+        addressBook.removeGroup(target);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
