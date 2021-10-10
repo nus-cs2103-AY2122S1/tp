@@ -80,7 +80,6 @@ public class AppointmentCommandTest {
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VENUE_STUB))));
     }
 
-    // Unfiltered List Tests
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -91,7 +90,7 @@ public class AppointmentCommandTest {
     }
 
     @Test
-    public void execute_deleteAppointmentUnfilteredList_success() {
+    public void execute_deleteNonEmptyAppointmentUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
                 .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
@@ -101,6 +100,25 @@ public class AppointmentCommandTest {
                 new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                editedPerson.getName().fullName);
+
+        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
+        expectedModel.setPerson(secondPerson, editedPerson);
+
+        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteEmptyAppointmentUnfilteredList_success() {
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(secondPerson)
+                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+        Appointment editedAppt = editedPerson.getAppointment();
+
+        AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
+                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+
+        String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED,
                 editedPerson.getName().fullName);
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -266,7 +284,6 @@ public class AppointmentCommandTest {
         assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
     }
 
-    // Filtered List Test
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -280,7 +297,7 @@ public class AppointmentCommandTest {
     }
 
     @Test
-    public void execute_deleteAppointmentFilteredList_success() {
+    public void execute_deleteNonEmptyAppointmentFilteredList_success() {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -293,6 +310,28 @@ public class AppointmentCommandTest {
                 new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                editedPerson.getName().fullName);
+
+        Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(appointmentCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteEmptyAppointmentFilteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+        Appointment editedAppt = editedPerson.getAppointment();
+
+        AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
+                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+
+        String expectedMessage = String.format(AppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED,
                 editedPerson.getName().fullName);
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());

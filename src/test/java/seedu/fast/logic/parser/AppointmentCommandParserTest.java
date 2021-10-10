@@ -5,6 +5,7 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_DELETE_APPOINTMENT;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -207,7 +208,7 @@ public class AppointmentCommandParserTest {
     public void parse_appointmentDelete_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
 
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_DELETE_APPOINTMENT
                 + AppointmentCommand.APPOINTMENT_DELETE_COMMAND;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(noAppointment, noAppointmentTime, noAppointmentVenue));
