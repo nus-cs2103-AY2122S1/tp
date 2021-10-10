@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.programmer.commons.exceptions.IllegalValueException;
-import seedu.programmer.model.AddressBook;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyAddressBook;
 import seedu.programmer.model.person.Person;
 
@@ -45,16 +45,16 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public ProgrammerError toModelType() throws IllegalValueException {
+        ProgrammerError programmerError = new ProgrammerError();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (programmerError.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            programmerError.addPerson(person);
         }
-        return addressBook;
+        return programmerError;
     }
 
 }

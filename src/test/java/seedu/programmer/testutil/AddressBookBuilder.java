@@ -1,6 +1,6 @@
 package seedu.programmer.testutil;
 
-import seedu.programmer.model.AddressBook;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.person.Person;
 
 /**
@@ -10,25 +10,25 @@ import seedu.programmer.model.person.Person;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private ProgrammerError programmerError;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        programmerError = new ProgrammerError();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(ProgrammerError programmerError) {
+        this.programmerError = programmerError;
     }
 
     /**
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+        programmerError.addPerson(person);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public ProgrammerError build() {
+        return programmerError;
     }
 }

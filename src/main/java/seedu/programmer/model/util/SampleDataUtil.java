@@ -1,6 +1,6 @@
 package seedu.programmer.model.util;
 
-import seedu.programmer.model.AddressBook;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyAddressBook;
 import seedu.programmer.model.person.ClassId;
 import seedu.programmer.model.person.Grade;
@@ -24,7 +24,7 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+        ProgrammerError sampleAb = new ProgrammerError();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
@@ -35,8 +35,8 @@ public class SampleDataUtil {
      * Same method as getSampleAddressBook but with AddressBook object as its return type.
      * @return AddressBook filled with sample data
      */
-    public static AddressBook fillSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ProgrammerError fillSampleAddressBook() {
+        ProgrammerError sampleAb = new ProgrammerError();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

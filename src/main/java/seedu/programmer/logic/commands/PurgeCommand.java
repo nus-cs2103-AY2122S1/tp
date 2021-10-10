@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.programmer.model.AddressBook;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.person.Person;
 
@@ -26,7 +26,7 @@ public class PurgeCommand extends Command {
         if (checkEmpty(model)) {
             return new CommandResult(MESSAGE_FAIL);
         }
-        model.setAddressBook(new AddressBook());
+        model.setAddressBook(new ProgrammerError());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

@@ -5,7 +5,7 @@ import static seedu.programmer.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.programmer.model.AddressBook;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.UserPrefs;
@@ -25,7 +25,7 @@ public class PurgeCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+        expectedModel.setAddressBook(new ProgrammerError());
 
         assertCommandSuccess(new PurgeCommand(), model, PurgeCommand.MESSAGE_SUCCESS, expectedModel);
     }

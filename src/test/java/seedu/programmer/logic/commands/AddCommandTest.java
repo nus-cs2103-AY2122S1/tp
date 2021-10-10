@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.logic.commands.exceptions.CommandException;
-import seedu.programmer.model.AddressBook;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ReadOnlyAddressBook;
 import seedu.programmer.model.ReadOnlyUserPrefs;
@@ -170,7 +170,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return new ProgrammerError();
         }
     }
 
