@@ -76,6 +76,10 @@ public class CommandTestUtil {
     public static final String INVALID_ACADEMIC_YEAR_DESC =
             " " + PREFIX_ACADEMIC_YEAR + "10"; // 10 is not a valid academic year
     public static final String INVALID_SEMESTER_DESC = " " + PREFIX_SEMESTER + "6"; // 6 is not a valid semester
+    public static final String INVALID_ACADEMIC_YEAR_SIGNED_DESC =
+            " " + PREFIX_ACADEMIC_YEAR + "+1"; // +1 is not a valid academic year
+    public static final String INVALID_SEMESTER_SIGNED_DESC = " "
+            + PREFIX_SEMESTER + "-6"; // -6 is not a valid semester
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

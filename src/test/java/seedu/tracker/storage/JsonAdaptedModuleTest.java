@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.tracker.commons.exceptions.IllegalValueException;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Description;
 import seedu.tracker.model.module.Mc;
@@ -50,8 +52,8 @@ public class JsonAdaptedModuleTest {
 
     @Test
     public void toModelType_validModuleDetailsWithAcademicYear_returnsModule() throws Exception {
-        JsonAdaptedModule module = new JsonAdaptedModule(GEQ1000);
-        assertEquals(GEQ1000, module.toModelType());
+        JsonAdaptedModule module = new JsonAdaptedModule(GEQ1000Scheduled);
+        assertEquals(GEQ1000Scheduled, module.toModelType());
     }
 
     @Test
@@ -109,5 +111,21 @@ public class JsonAdaptedModuleTest {
         JsonAdaptedModule module = new JsonAdaptedModule(VALID_CODE, VALID_TITLE, VALID_DESCRIPTION,
                 VALID_MC, VALID_ACADEMIC_YEAR, VALID_SEMESTER, invalidTags);
         assertThrows(IllegalValueException.class, module::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAcademicYear_throwsIllegalValueException() {
+        JsonAdaptedModule module = new JsonAdaptedModule(VALID_CODE, VALID_TITLE, VALID_DESCRIPTION,
+                VALID_MC, INVALID_ACADEMIC_YEAR, VALID_SEMESTER, VALID_TAGS);
+        String expectedMessage = AcademicYear.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidSemester_throwsIllegalValueException() {
+        JsonAdaptedModule module = new JsonAdaptedModule(VALID_CODE, VALID_TITLE, VALID_DESCRIPTION,
+                VALID_MC, VALID_ACADEMIC_YEAR, INVALID_SEMESTER, VALID_TAGS);
+        String expectedMessage = Semester.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
 }

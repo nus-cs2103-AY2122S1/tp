@@ -3,7 +3,9 @@ package seedu.tracker.logic.parser;
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tracker.logic.commands.CommandTestUtil.ACADEMIC_YEAR_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_ACADEMIC_YEAR_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_ACADEMIC_YEAR_SIGNED_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_SEMESTER_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_SEMESTER_SIGNED_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.SEMESTER_DESC;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_ACADEMIC_YEAR;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_SEMESTER;
@@ -75,10 +77,20 @@ public class TakeCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_SEMESTER_DESC, MESSAGE_INVALID_FORMAT);
 
         // invalid academic year followed by valid semester
-        assertParseFailure(parser, "1" + INVALID_ACADEMIC_YEAR_DESC + SEMESTER_DESC, AcademicYear.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_ACADEMIC_YEAR_DESC + SEMESTER_DESC,
+                AcademicYear.MESSAGE_CONSTRAINTS);
+
+        //invalid academic year (signed integer) followed by valid semester
+        assertParseFailure(parser, "1" + INVALID_ACADEMIC_YEAR_SIGNED_DESC + SEMESTER_DESC,
+                AcademicYear.MESSAGE_CONSTRAINTS);
+
+        // valid academic year followed by invalid semester (signed integer)
+        assertParseFailure(parser, "1" + ACADEMIC_YEAR_DESC + INVALID_SEMESTER_SIGNED_DESC,
+                Semester.MESSAGE_CONSTRAINTS);
 
         // valid academic year followed by invalid semester
-        assertParseFailure(parser, "1" + ACADEMIC_YEAR_DESC + INVALID_SEMESTER_DESC, Semester.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + ACADEMIC_YEAR_DESC + INVALID_SEMESTER_DESC,
+                Semester.MESSAGE_CONSTRAINTS);
 
         // both invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
