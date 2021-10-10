@@ -117,7 +117,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      */
     private boolean isMatch(List<String> keywords, String field) {
         requireAllNonNull(keywords, field);
-        return keywords.stream().anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(field, keyword));
+        return keywords.stream().allMatch(keyword -> StringUtil.containsSubstringIgnoreCase(field, keyword));
     }
 
     /**
@@ -125,7 +125,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      *
      * @return A predicate that tests a person's name.
      */
-    private Predicate<Person> nameMatchPredicate() {
+    private Predicate<Person> getNameMatchPredicate() {
         return person -> isMatch(nameKeywords, person.getName().fullName);
     }
 
@@ -134,7 +134,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      *
      * @return A predicate that tests a person's phone number.
      */
-    private Predicate<Person> phoneMatchPredicate() {
+    private Predicate<Person> getPhoneMatchPredicate() {
         return person -> isMatch(phoneKeywords, person.getPhone().value);
     }
 
@@ -143,7 +143,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      *
      * @return A predicate that tests a person's email.
      */
-    private Predicate<Person> emailMatchPredicate() {
+    private Predicate<Person> getEmailMatchPredicate() {
         return person -> isMatch(emailKeywords, person.getEmail().value);
     }
 
@@ -152,7 +152,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      *
      * @return A predicate that tests a person's phone number.
      */
-    private Predicate<Person> parentPhoneMatchPredicate() {
+    private Predicate<Person> getParentPhoneMatchPredicate() {
         return person -> isMatch(parentPhoneKeywords, person.getParentPhone().value);
     }
 
@@ -161,7 +161,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      *
      * @return A predicate that tests a person's email.
      */
-    private Predicate<Person> parentEmailMatchPredicate() {
+    private Predicate<Person> getParentEmailMatchPredicate() {
         return person -> isMatch(parentEmailKeywords, person.getParentEmail().value);
     }
 
@@ -170,7 +170,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      *
      * @return A predicate that tests a person's address.
      */
-    private Predicate<Person> addressMatchPredicate() {
+    private Predicate<Person> getAddressMatchPredicate() {
         return person -> isMatch(addressKeywords, person.getAddress().value);
     }
 
@@ -179,17 +179,18 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      *
      * @return A predicate that tests a person's tags.
      */
-    private List<Predicate<Person>> tagsMatchPredicates() {
-        return tagKeywords.stream().map(keyword -> tagMatchPredicate(keyword)).collect(Collectors.toList());
+    private List<Predicate<Person>> getTagsMatchPredicates() {
+        return tagKeywords.stream().map(keyword -> getTagMatchPredicate(keyword)).collect(Collectors.toList());
     }
 
     /**
-     * Returns a {@code Predicate} that tests that any of a {@code Person}'s {@code tag}s matches the keyword given.
+     * Returns a {@code Predicate} that tests that one of a {@code Person}'s {@code tag}s matches the keyword given.
+     * Ignores case, but the keyword must match the full tag name.
      *
      * @return A predicate that tests a person's phone number.
      */
-    private Predicate<Person> tagMatchPredicate(String keyword) {
-        return person -> person.getTags().stream().anyMatch(tag -> isMatch(List.of(keyword), tag.tagName));
+    private Predicate<Person> getTagMatchPredicate(String keyword) {
+        return person -> person.getTags().stream().anyMatch(tag -> keyword.equalsIgnoreCase(tag.tagName));
     }
 
     /**
@@ -200,25 +201,25 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     private List<Predicate<Person>> getPredicates() {
         List<Predicate<Person>> predicates = new ArrayList<>();
         if (nameKeywords != null) {
-            predicates.add(nameMatchPredicate());
+            predicates.add(getNameMatchPredicate());
         }
         if (phoneKeywords != null) {
-            predicates.add(phoneMatchPredicate());
+            predicates.add(getPhoneMatchPredicate());
         }
         if (emailKeywords != null) {
-            predicates.add(emailMatchPredicate());
+            predicates.add(getEmailMatchPredicate());
         }
         if (parentPhoneKeywords != null) {
-            predicates.add(parentPhoneMatchPredicate());
+            predicates.add(getParentPhoneMatchPredicate());
         }
         if (parentEmailKeywords != null) {
-            predicates.add(parentEmailMatchPredicate());
+            predicates.add(getParentEmailMatchPredicate());
         }
         if (addressKeywords != null) {
-            predicates.add(addressMatchPredicate());
+            predicates.add(getAddressMatchPredicate());
         }
         if (tagKeywords != null) {
-            predicates.addAll(tagsMatchPredicates());
+            predicates.addAll(getTagsMatchPredicates());
         }
 
         return predicates;
