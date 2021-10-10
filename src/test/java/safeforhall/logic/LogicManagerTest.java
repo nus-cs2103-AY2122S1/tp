@@ -18,6 +18,7 @@ import safeforhall.commons.core.Messages;
 //import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.ListCommand;
+import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.Model;
@@ -71,6 +72,12 @@ public class LogicManagerTest {
     public void execute_validArtCommand_success() throws Exception {
         String listCommand = "list k/c d1/10-10-2021";
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_ART, model);
+    }
+
+    @Test
+    public void execute_validCommand_success() throws Exception {
+        String listCommand = ViewCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ViewCommand.MESSAGE_SUCCESS, model);
     }
 
     // TODO: FIx after add command is done

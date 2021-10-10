@@ -6,7 +6,14 @@ import java.util.stream.Collectors;
 
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
-import safeforhall.model.person.*;
+import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
+import safeforhall.model.person.Name;
+import safeforhall.model.person.Person;
+import safeforhall.model.person.Phone;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 import safeforhall.model.tag.Tag;
 
 /**

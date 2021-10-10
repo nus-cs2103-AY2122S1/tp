@@ -9,7 +9,11 @@ import java.util.Set;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.person.*;
+import safeforhall.model.person.Address;
+import safeforhall.model.person.Email;
+import safeforhall.model.person.LastDate;
+import safeforhall.model.person.Name;
+import safeforhall.model.person.Phone;
 import safeforhall.model.tag.Tag;
 
 /**

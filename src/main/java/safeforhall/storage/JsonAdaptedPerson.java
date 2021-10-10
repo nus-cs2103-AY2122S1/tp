@@ -4,7 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import safeforhall.commons.exceptions.IllegalValueException;
-import safeforhall.model.person.*;
+import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
+import safeforhall.model.person.Name;
+import safeforhall.model.person.Person;
+import safeforhall.model.person.Phone;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 
 /**
  * Jackson-friendly version of {@link Person}.
