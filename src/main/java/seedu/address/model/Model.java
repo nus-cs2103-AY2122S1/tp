@@ -107,9 +107,4 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /**
-     * Updates the schedule display to filter the schedule by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null
-     */
-    void updateScheduleDisplay(Predicate<Person> predicate);
 }

@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.transformation.FilteredList;
@@ -30,14 +30,13 @@ public class ViewScheduleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireAllNonNull(model);
+        requireNonNull(model);
         //todo: change this filtered list to the overall model
         FilteredList<Person> staffs = model.getFilteredPersonList()
                 .filtered(this.predicate);
         if (staffs.size() == 0) {
             throw new CommandException(NAME_NOT_IN_LIST_ERROR);
         }
-        model.updateScheduleDisplay(this.predicate);
 
         String result = "";
         for (int i = 0; i < staffs.size(); i++) {

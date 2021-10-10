@@ -145,11 +145,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public void updateScheduleDisplay(Predicate<Person> predicate) {
-        //todo: implement the schedule display
-
-    }
 
     @Override
     public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
