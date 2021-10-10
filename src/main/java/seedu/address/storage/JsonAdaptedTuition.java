@@ -27,7 +27,7 @@ class JsonAdaptedTuition {
     private final int limit;
     private final int counter;
     private final String timeslot;
-    private final ArrayList<String> student = new ArrayList<>();
+    private final ArrayList<String> students = new ArrayList<>();
     private final String remark;
 
 
@@ -37,7 +37,7 @@ class JsonAdaptedTuition {
     @JsonCreator
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("limit") int limit,
                              @JsonProperty("counter") int counter, @JsonProperty("timeslot") String timeslot,
-                             @JsonProperty("student") ArrayList<String> student,
+                             @JsonProperty("students") ArrayList<String> student,
                               @JsonProperty("remark") String remark) {
         this.name = name;
         this.limit = limit;
@@ -46,7 +46,7 @@ class JsonAdaptedTuition {
         this.remark = remark;
 
         if (student != null) {
-            this.student.addAll(student);
+            this.students.addAll(student);
         }
 
 
@@ -60,7 +60,7 @@ class JsonAdaptedTuition {
         limit = source.getLimit().getLimit();
         counter = source.getCounter().getCounter();
         timeslot = source.getTimeslot().getTime();
-        student.addAll(source.getStudentList().getStudents());
+        students.addAll(source.getStudentList().getStudents());
         remark = source.getRemark().value;
     }
 
@@ -89,7 +89,7 @@ class JsonAdaptedTuition {
 
         final Timeslot modelTimeslot = new Timeslot(timeslot);
 
-        final StudentList modelStudent = new StudentList(student);
+        final StudentList modelStudent = new StudentList(students);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));

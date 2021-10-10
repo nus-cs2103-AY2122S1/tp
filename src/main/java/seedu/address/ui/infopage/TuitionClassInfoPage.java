@@ -36,6 +36,8 @@ public class TuitionClassInfoPage extends InfoPage {
     private Label timeSlot;
     @FXML
     private Label students;
+    @FXML
+    private Label notes;
 
     /**
      * Constructor for a TuitionClassInfoPage
@@ -50,7 +52,8 @@ public class TuitionClassInfoPage extends InfoPage {
         this.sizeLimit.setText("Maximum students: " + tuitionClass.getLimit());
         this.studentCount.setText("No. of students: " + tuitionClass.getStudentCount());
         this.timeSlot.setText("Timeslot: " + tuitionClass.getTimeslot());
-        this.students.setText("Students:\n" + tuitionClass.listStudents());
+        this.students.setText("Students: " + tuitionClass.listStudents());
+        this.notes.setText("Notes: " + tuitionClass.getRemark());
     }
 
 

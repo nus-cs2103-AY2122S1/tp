@@ -141,7 +141,23 @@ public class TuitionClass {
     }
 
     /**
+     * Return updated Tuition class after removing student.
+     *
+     * @param person the student to be removed.
+     * @return Updated tuition class.
+     */
+    public TuitionClass removeStudent(Person person) {
+        this.studentList.getStudents().remove(person.getName().fullName);
+        return this;
+    }
+
+    public boolean containsStudent(Person person) {
+        return this.studentList.getStudents().contains(person.getName().fullName);
+    }
+
+    /**
      * Adds a new student to an existing class if the student is not already in the class.
+     *
      * @param person student to be added
      * @return the tuition class after modification
      */
@@ -158,7 +174,7 @@ public class TuitionClass {
     }
 
     /**
-     * Convert students from an arraylist to a string to be displayed in UI
+     * Convert students from an arraylist to a string to be displayed in UI.
      * @return a string of all the student names combined into a list.
      */
     public String listStudents() {
