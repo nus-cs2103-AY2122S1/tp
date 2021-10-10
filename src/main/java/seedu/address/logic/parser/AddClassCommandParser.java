@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Counter;
@@ -45,8 +46,8 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
         Counter counter = ParserUtil.parseCounter(argMultimap.getValue(PREFIX_COUNTER).get());
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_TIMESLOT).get());
         StudentList student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
-
-        TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student);
+        Remark remark = new Remark(""); // add class command does not allow adding remarks straight away
+        TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student, remark);
 
         logger.info("AddClassCommandParser " + tuitionClass);
 

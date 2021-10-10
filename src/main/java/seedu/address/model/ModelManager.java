@@ -102,6 +102,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -113,7 +114,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -133,7 +133,6 @@ public class ModelManager implements Model {
         addressBook.updateTuitionClassInPersonObject(tuitionClass);
         this.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
     }
-
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -219,19 +218,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteTuition(TuitionClass target) {
-        addressBook.removeTuition(target);
-        this.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
-        this.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void addTuition(TuitionClass tuitionClass) {
-        addressBook.addTuition(tuitionClass);
-        updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
-    }
-
-    @Override
     public void setTuition(TuitionClass target, TuitionClass editedTuition) {
         requireAllNonNull(target, editedTuition);
         addressBook.setTuition(target, editedTuition);
@@ -250,5 +236,18 @@ public class ModelManager implements Model {
         TuitionClass c = addressBook.addToClass(tuitionClass, person);
         updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
         return c;
+    }
+
+    @Override
+    public void addTuition(TuitionClass tuitionClass) {
+        addressBook.addTuition(tuitionClass);
+        updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
+    }
+
+    @Override
+    public void deleteTuition(TuitionClass target) {
+        addressBook.removeTuition(target);
+        this.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
+        this.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 }

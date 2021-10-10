@@ -16,7 +16,7 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
-        value = remark;
+        this.value = remark;
     }
 
     @Override

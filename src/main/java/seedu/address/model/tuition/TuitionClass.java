@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 
 /**
  * Represents a tuition class in the book
@@ -17,24 +18,27 @@ public class TuitionClass {
     private final Counter counter;
     private final Timeslot timeslot;
     private StudentList studentList;
+    private final Remark remark;
     private int id;
-
 
     /**
      * Constructor for Tuition Class.
      *
-     * @param name
-     * @param limit
-     * @param counter
-     * @param timeslot
-     * @param studentList
+     * @param name The name of the tuition class.
+     * @param limit The maximum number of students allowed.
+     * @param counter The number of weeks the tuition class will recur.
+     * @param timeslot The date and time of the tuition.
+     * @param studentList The list of students attending the tuition.
+     * @param remark Any remarks noted for the tuition class.
      */
-    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList) {
+    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList,
+                        Remark remark) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
         this.timeslot = timeslot;
         this.studentList = studentList;
+        this.remark = remark;
         this.id = this.hashCode();
         MOST_RECENT = this;
     }
@@ -79,6 +83,10 @@ public class TuitionClass {
         return studentList;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
     public int getStudentCount() {
         return studentList.getStudents().size();
     }
@@ -120,13 +128,14 @@ public class TuitionClass {
                 && otherClass.limit.equals(this.limit)
                 && otherClass.counter.equals(this.counter)
                 && otherClass.timeslot.equals(this.timeslot)
-                && otherClass.studentList.equals(this.studentList);
+                && otherClass.studentList.equals(this.studentList)
+                && otherClass.remark.equals(this.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, limit, counter, timeslot, studentList);
+        return Objects.hash(name, limit, counter, timeslot, studentList, remark);
     }
 
     @Override
@@ -141,7 +150,9 @@ public class TuitionClass {
                 .append(" Timeslot: ")
                 .append(getTimeslot())
                 .append("; Students: ")
-                .append(getStudentList());
+                .append(getStudentList())
+                .append("; Remark: ")
+                .append(getRemark());
         return builder.toString();
     }
 
@@ -156,7 +167,23 @@ public class TuitionClass {
     }
 
     /**
+     * Return updated Tuition class after removing student.
+     *
+     * @param person the student to be removed.
+     * @return Updated tuition class.
+     */
+    public TuitionClass removeStudent(Person person) {
+        this.studentList.getStudents().remove(person.getName().fullName);
+        return this;
+    }
+
+    public boolean containsStudent(Person person) {
+        return this.studentList.getStudents().contains(person.getName().fullName);
+    }
+
+    /**
      * Adds a new student to an existing class if the student is not already in the class.
+     *
      * @param person student to be added
      * @return the tuition class after modification
      */
@@ -173,7 +200,7 @@ public class TuitionClass {
     }
 
     /**
-     * Convert students from an arraylist to a string to be displayed in UI
+     * Convert students from an arraylist to a string to be displayed in UI.
      * @return a string of all the student names combined into a list.
      */
     public String listStudents() {
