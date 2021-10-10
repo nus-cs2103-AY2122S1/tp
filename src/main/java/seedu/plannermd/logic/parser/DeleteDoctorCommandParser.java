@@ -7,7 +7,7 @@ import seedu.plannermd.logic.commands.deletecommand.DeleteDoctorCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeletePatientCommand object.
+ * Parses input arguments and creates a new DeleteDoctorCommand object.
  */
 public class DeleteDoctorCommandParser implements Parser<DeleteDoctorCommand> {
 
