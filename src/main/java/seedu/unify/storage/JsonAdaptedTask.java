@@ -14,8 +14,8 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Phone;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.Time;
 
 /**
  * Jackson-friendly version of {@link Task}.
@@ -79,12 +79,12 @@ class JsonAdaptedTask {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Time.isValidTime(phone)) {
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Time modelTime = new Time(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -103,7 +103,7 @@ class JsonAdaptedTask {
         final Date modelDate = new Date(date);
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelName, modelPhone, modelEmail, modelDate, modelTags);
+        return new Task(modelName, modelTime, modelEmail, modelDate, modelTags);
     }
 
 }

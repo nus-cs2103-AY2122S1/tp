@@ -23,8 +23,8 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Phone;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.Time;
 
 /**
  * Edits the details of an existing task in the Uni-Fy app.
@@ -94,12 +94,12 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
-        Phone updatedPhone = editTaskDescriptor.getPhone().orElse(taskToEdit.getPhone());
+        Time updatedTime = editTaskDescriptor.getPhone().orElse(taskToEdit.getPhone());
         Email updatedEmail = editTaskDescriptor.getEmail().orElse(taskToEdit.getEmail());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedName, updatedPhone, updatedEmail, updatedDate, updatedTags);
+        return new Task(updatedName, updatedTime, updatedEmail, updatedDate, updatedTags);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class EditCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private Name name;
-        private Phone phone;
+        private Time time;
         private Email email;
         private Date date;
         private Set<Tag> tags;
@@ -139,7 +139,7 @@ public class EditCommand extends Command {
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
+            setPhone(toCopy.time);
             setEmail(toCopy.email);
             setDate(toCopy.date);
             setTags(toCopy.tags);
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, date, tags);
+            return CollectionUtil.isAnyNonNull(name, time, email, date, tags);
         }
 
         public void setName(Name name) {
@@ -160,12 +160,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setPhone(Time time) {
+            this.time = time;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Time> getPhone() {
+            return Optional.ofNullable(time);
         }
 
         public void setEmail(Email email) {
