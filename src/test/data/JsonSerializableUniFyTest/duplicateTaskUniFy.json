@@ -3,12 +3,12 @@
     "name": "Alice Pauline",
     "time": "12:45",
     "email": "alice@example.com",
-    "date": "123, Jurong West Ave 6, #08-111",
+    "date": "2021-12-11",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "time": "12:45",
     "email": "pauline@example.com",
-    "date": "4th street"
+    "date": "2022-02-01"
   } ]
 }
