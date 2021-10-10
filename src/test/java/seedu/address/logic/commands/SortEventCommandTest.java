@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalEvents.CODE_FOR_SANITY;
 import static seedu.address.testutil.TypicalEvents.MARATHON_HAS_TIME;
 import static seedu.address.testutil.TypicalEvents.MARATHON_NO_TIME;
+import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
