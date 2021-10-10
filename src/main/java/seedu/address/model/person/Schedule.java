@@ -15,7 +15,7 @@ public class Schedule {
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
 
-    private Shift[][] shifts;
+    private Shift[][] shifts = new Shift[7][2];
 
     /**
      * Initialize schedule object.
@@ -37,30 +37,8 @@ public class Schedule {
             String[] shiftString = s.split("-");
             DayOfWeek shiftDay = DayOfWeek.valueOf(shiftString[0]);
             Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
-            if (shiftString.length == 2) {
-                shifts[shiftDay.getValue()][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
-            } else {
-                String shiftName = shiftString[2];
-                shifts[shiftDay.getValue()][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot, shiftName);
-            }
-
+            shifts[shiftDay.getValue()][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
         }
-    }
-
-    /**
-     * Adds a new shift for a staff.
-     *
-     * @param dayOfWeek The day of the shift in a week.
-     * @param slot The slot of the shift located.
-     * @param shiftName The name of the shift.
-     * @throws DuplicateShiftException throws when there is already a shift in the target slot.
-     */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot, String shiftName) throws DuplicateShiftException {
-        Shift shift = new Shift(dayOfWeek, slot, shiftName);
-        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null) {
-            throw new DuplicateShiftException();
-        }
-        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift;
     }
 
     /**
