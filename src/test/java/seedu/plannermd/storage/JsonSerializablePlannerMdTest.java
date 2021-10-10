@@ -81,5 +81,4 @@ public class JsonSerializablePlannerMdTest {
         assertThrows(IllegalValueException.class, JsonSerializablePlannerMd.MESSAGE_DUPLICATE_DOCTOR,
                 dataFromFile::toModelType);
     }
-
 }
