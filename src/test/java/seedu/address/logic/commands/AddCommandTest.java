@@ -70,7 +70,6 @@ public class AddCommandTest {
     }
 
 
-
     /**
      * A Model stub that contains a single person.
      */
