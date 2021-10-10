@@ -30,7 +30,7 @@ import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 
 public class AnimeListParserTest {
 
-    private final AniListParser parser = new AniListParser();
+    private final AnimeListParser parser = new AnimeListParser();
 
     @Test
     public void parseCommand_add() throws Exception {

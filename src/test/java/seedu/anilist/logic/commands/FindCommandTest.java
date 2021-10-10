@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.testutil.TypicalAnime.CARL;
-import static seedu.anilist.testutil.TypicalAnime.ELLE;
-import static seedu.anilist.testutil.TypicalAnime.FIONA;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.CARL;
+import static seedu.anilist.testutil.TypicalAnimes.ELLE;
+import static seedu.anilist.testutil.TypicalAnimes.FIONA;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import java.util.Arrays;
 import java.util.Collections;

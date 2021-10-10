@@ -9,7 +9,7 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
 
@@ -41,7 +41,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
-        Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), editedAnime);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -61,7 +61,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
-        Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
         expectedModel.setAnime(lastAnime, editedAnime);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
-        Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -90,7 +90,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);
 
-        Model expectedModel = new ModelManager(new AnimeList(model.getAniList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AnimeList(model.getAnimeList()), new UserPrefs());
         expectedModel.setAnime(model.getFilteredAnimeList().get(0), editedAnime);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -110,7 +110,7 @@ public class EditCommandTest {
         showAnimeAtIndex(model, INDEX_FIRST_ANIME);
 
         // edit anime in filtered list into a duplicate in anime list
-        Anime animeInList = model.getAniList().getAnimeList().get(INDEX_SECOND_ANIME.getZeroBased());
+        Anime animeInList = model.getAnimeList().getAnimeList().get(INDEX_SECOND_ANIME.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ANIME,
                 new EditAnimeDescriptorBuilder(animeInList).build());
 
@@ -135,7 +135,7 @@ public class EditCommandTest {
         showAnimeAtIndex(model, INDEX_FIRST_ANIME);
         Index outOfBoundIndex = INDEX_SECOND_ANIME;
         // ensures that outOfBoundIndex is still in bounds of anime list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAniList().getAnimeList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAnimeList().getAnimeList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA).build());

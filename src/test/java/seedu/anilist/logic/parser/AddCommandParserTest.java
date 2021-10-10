@@ -14,8 +14,8 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.anilist.testutil.TypicalAnime.AKIRA;
-import static seedu.anilist.testutil.TypicalAnime.BNHA;
+import static seedu.anilist.testutil.TypicalAnimes.AKIRA;
+import static seedu.anilist.testutil.TypicalAnimes.BNHA;
 
 import org.junit.jupiter.api.Test;
 

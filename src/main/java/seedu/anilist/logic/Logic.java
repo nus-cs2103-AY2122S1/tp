@@ -26,9 +26,9 @@ public interface Logic {
     /**
      * Returns the AniList.
      *
-     * @see seedu.anilist.model.Model#getAniList()
+     * @see seedu.anilist.model.Model#getAnimeList()
      */
-    ReadOnlyAnimeList getAniList();
+    ReadOnlyAnimeList getAnimeList();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Anime> getFilteredAnimeList();
@@ -36,7 +36,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAniListFilePath();
+    Path getAnimeListFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

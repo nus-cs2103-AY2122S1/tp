@@ -2,7 +2,7 @@ package seedu.anilist.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import java.nio.file.Path;
 
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAniListStorage addressBookStorage = new JsonAniListStorage(getTempFilePath("ab"));
+        JsonAnimeListStorage animeListStorage = new JsonAnimeListStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(animeListStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -47,22 +47,23 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
+
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void animeListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonAnimeListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonAnimeListStorageTest} class.
          */
         AnimeList original = getTypicalAnimeList();
-        storageManager.saveAniList(original);
-        ReadOnlyAnimeList retrieved = storageManager.readAniList().get();
+        storageManager.saveAnimeList(original);
+        ReadOnlyAnimeList retrieved = storageManager.readAnimeList().get();
         assertEquals(original, new AnimeList(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAniListFilePath());
+    public void getAnimeListFilePath() {
+        assertNotNull(storageManager.getAnimeListFilePath());
     }
 
 }

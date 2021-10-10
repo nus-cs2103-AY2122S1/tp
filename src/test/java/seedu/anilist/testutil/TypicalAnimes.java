@@ -15,7 +15,7 @@ import seedu.anilist.model.anime.Anime;
 /**
  * A utility class containing a list of {@code Anime} objects to be used in tests.
  */
-public class TypicalAnime {
+public class TypicalAnimes {
 
     public static final Anime ALICE = new AnimeBuilder().withName("Alice Pauline").withTags("friends").build();
     public static final Anime BENSON = new AnimeBuilder().withName("Benson Meier")
@@ -39,7 +39,7 @@ public class TypicalAnime {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalAnime() {} // prevents instantiation
+    private TypicalAnimes() {} // prevents instantiation
 
     /**
      * Returns an {@code AnimeList} with all the typical anime.
