@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,7 +23,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final TaskList tasks;
     private final FilteredList<Task> filteredTasks;
 
     /**
@@ -34,13 +32,10 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.tasks = new TaskList();
-        filteredTasks = new FilteredList<>(this.tasks.asUnmodifiableObservableList());
+        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -120,25 +115,36 @@ public class ModelManager implements Model {
 
     //=========== Task Management ==================================================================================
 
+    /**
+     * check if tasklist has this task.
+     */
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return tasks.hasTask(task);
+        return addressBook.hasTask(task);
     }
 
+    /**
+     * adding a task to tasklist.
+     */
     public void addTask(Task toAdd) {
-        tasks.add(toAdd);
+        addressBook.addTask(toAdd);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
+    /**
+     * deleting a task from tasklist.
+     */
     public void deleteTask(Task toDelete) {
-        tasks.remove(toDelete);
+        addressBook.deleteTask(toDelete);
+
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
-        tasks.setTask(target, editedTask);
+        addressBook.setTask(target, editedTask);
     }
 
     @Override
@@ -153,7 +159,7 @@ public class ModelManager implements Model {
     }
 
     public void markDone(Task task) {
-        tasks.markDone(task);
+        addressBook.markDone(task);
     }
 
     //=========== Filtered Person List Accessors =============================================================

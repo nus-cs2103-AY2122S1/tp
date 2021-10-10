@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -79,6 +80,13 @@ public class TaskList implements Iterable<Task> {
         }
         int index = internalList.indexOf(toMark);
         internalList.get(index).setIsDone(true);
+    }
+
+
+    public void setTasks(List<Task> tasks) {
+        requireAllNonNull(tasks);
+
+        internalList.setAll(tasks);
     }
 
     public ObservableList<Task> asUnmodifiableObservableList() {
