@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="tuitionPagePane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="name" styleClass="cell_big_label" text="Name"/>
+      <Label fx:id="sizeLimit" styleClass="cell_small_label" text="Max size" />
+      <Label fx:id="studentCount" styleClass="cell_small_label" text="Current size" />
+      <Label fx:id="timeSlot" styleClass="cell_small_label" text="Timeslot" />
+      <Label fx:id="students" styleClass="cell_small_label" text="Students" />
+      <Label fx:id="notes" styleClass="cell_small_label" text="Notes" />
+   </children>
+</VBox>

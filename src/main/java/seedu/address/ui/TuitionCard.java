@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -11,7 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code TuitionClass}.
  */
 public class TuitionCard extends UiPart<Region> {
 
@@ -19,6 +18,8 @@ public class TuitionCard extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(TuitionCard.class);
 
+    private static final String CAPACITY_LABEL = "Capacity: ";
+    private static final String REMARK_LABEL = "Notes: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -35,19 +36,16 @@ public class TuitionCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label limit;
-    @FXML
-    private Label counter;
+    private Label capacity;
     @FXML
     private Label timeSlot;
     @FXML
     private Label name;
     @FXML
-    private Label student;
-
+    private Label remark;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code TuitionCode} with the given {@code TuitionClass} and index to display.
      */
     public TuitionCard(TuitionClass tuitionClass, int displayedIndex) {
         super(FXML);
@@ -55,13 +53,10 @@ public class TuitionCard extends UiPart<Region> {
 
         this.tuitionClass = tuitionClass;
         id.setText(displayedIndex + ". ");
-        name.setText(tuitionClass.getName().name);
-        limit.setText("Class Limit: " + tuitionClass.getLimit().toString());
-        counter.setText("Class session: " + tuitionClass.getCounter().toString());
-        timeSlot.setText("Class time slot: " + tuitionClass.getTimeslot().time);
-        ArrayList<String> studentNames = tuitionClass.getStudent().getStudents();
-        String students = processStudents(studentNames);
-        student.setText("Students: " + students);
+        name.setText(tuitionClass.getName().getName());
+        capacity.setText(CAPACITY_LABEL + tuitionClass.getStudentCount() + "/" + tuitionClass.getLimit());
+        timeSlot.setText(tuitionClass.getTimeslot().getTime());
+        remark.setText(REMARK_LABEL + tuitionClass.getRemark().value);
     }
 
     @Override
@@ -80,26 +75,5 @@ public class TuitionCard extends UiPart<Region> {
         TuitionCard card = (TuitionCard) other;
         return id.getText().equals(card.id.getText())
                 && tuitionClass.equals(card.tuitionClass);
-    }
-
-    /**
-     * Convert students from an arraylist to a string to be displayed in UI
-     * @param students an arraylist from a tuition class
-     * @return a string of all the student names combined
-     */
-    private String processStudents(ArrayList<String> students) {
-        String studentString = "";
-        if (students.size() == 0) {
-            studentString = "No student yet.";
-            return studentString;
-        }
-        String lastStudent = students.get(students.size() - 1);
-        for (String name: students) {
-            studentString += name;
-            if (!name.equals(lastStudent)) {
-                studentString += ", ";
-            }
-        }
-        return studentString;
     }
 }

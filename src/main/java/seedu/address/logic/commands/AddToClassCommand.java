@@ -3,16 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.TuitionClass;
-
-
-
-
 
 public class AddToClassCommand extends Command {
     public static final String COMMAND_WORD = "addtoclass";
@@ -24,11 +21,6 @@ public class AddToClassCommand extends Command {
             + "\n" + "Example: " + COMMAND_WORD + " si/3 tc/3";
     public static final String MESSAGE_SUCCESS = "New student %1$s is added to class: %2$s";
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
-    private static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found. Please key in a valid index."
-            + "\n" + "Example: " + COMMAND_WORD + " si/3 tc/3";
-    private static final String MESSAGE_CLASS_NOT_FOUND = "This tuition class is not found. "
-            + "Please key in a valid index."
-            + "\n" + "Example: " + COMMAND_WORD + " si/3 tc/3";
     private static final String MESSAGE_CLASS_IS_FULL = "Cannot add student as the class limit has been exceeded.";
     private Index studentIndex;
     private Index classIndex;
@@ -57,13 +49,13 @@ public class AddToClassCommand extends Command {
         TuitionClass tuitionClass = model.getTuitionClass(classIndex);
 
         if (studentToAdd == null) {
-            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
         }
 
         if (tuitionClass == null) {
-            throw new CommandException(MESSAGE_CLASS_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_CLASS_NOT_FOUND);
         }
-        boolean isClassFull = tuitionClass.getLimit().limit == tuitionClass.getStudent().getStudents().size();
+        boolean isClassFull = tuitionClass.isFull();
         if (isClassFull) {
             throw new CommandException(MESSAGE_CLASS_IS_FULL);
         }

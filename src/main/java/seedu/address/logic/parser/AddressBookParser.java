@@ -11,13 +11,17 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddToClassCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemarkClassCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.ViewClassCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -74,11 +78,23 @@ public class AddressBookParser {
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
 
+        case RemarkClassCommand.COMMAND_WORD:
+            return new RemarkClassCommandParser().parse(arguments);
+
         case AddClassCommand.COMMAND_WORD:
             return new AddClassCommandParser().parse(arguments);
 
         case AddToClassCommand.COMMAND_WORD:
             return new AddToClassCommandParser().parse(arguments);
+
+        case DeleteClassCommand.COMMAND_WORD:
+            return new DeleteClassCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        case ViewClassCommand.COMMAND_WORD:
+            return new ViewClassCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

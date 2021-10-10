@@ -3,35 +3,40 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox id="tuitionPane" fx:id="tuitionPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="tuitionPane" fx:id="tuitionPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
-                <Insets top="5" right="5" bottom="5" left="15" />
+                <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <HBox spacing="5" alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" spacing="5">
                 <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$name" styleClass="cell_big_label" />
+                <Label fx:id="name" style="-fx-font-weight: bold;" styleClass="cell_big_label" text="\\$name">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
             </HBox>
-            <Label fx:id="limit" styleClass="cell_small_label" text="\$limit" />
-            <Label fx:id="counter" styleClass="cell_small_label" text="\$counter" />
+            <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
             <Label fx:id="timeSlot" styleClass="cell_small_label" text="\$timeslot" />
-            <Label fx:id="student" styleClass="cell_small_label" text="\$student" />
-
+            <Label fx:id="remark" style="-fx-font-style: italic;" styleClass="cell_small_label" text="\$remark" />
         </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
 </HBox>

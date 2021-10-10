@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Counter;
-import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -28,10 +28,10 @@ import seedu.address.model.tuition.TuitionClass;
 public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
     public static final ArrayList<String> SAMPLE_STUDENT = new ArrayList<>();
-    public static final Student SAMPLE_STUDENTS = new Student(SAMPLE_STUDENT);
+    public static final StudentList SAMPLE_STUDENTS = new StudentList(SAMPLE_STUDENT);
     public static final TuitionClass SAMPLE_TUITION_CLASS =
             new TuitionClass(new ClassName("Physics"),
-            new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"), SAMPLE_STUDENTS);
+            new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"), SAMPLE_STUDENTS, EMPTY_REMARK);
 
     public static final ArrayList<TuitionClass> SAMPLE_CLASSES = new ArrayList<>() {
         {

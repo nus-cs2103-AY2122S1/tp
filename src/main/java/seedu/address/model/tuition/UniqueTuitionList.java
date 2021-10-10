@@ -73,8 +73,8 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
     }
 
     /**
-     * Removes the equivalent tuition from the list.
-     * The person must exist in the list.
+     * Removes the equivalent tuition class from the list.
+     * The class must exist in the list.
      */
     public void remove(TuitionClass toRemove) {
         requireNonNull(toRemove);

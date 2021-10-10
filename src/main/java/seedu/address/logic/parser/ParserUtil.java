@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Counter;
-import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 
 /**
@@ -189,7 +189,7 @@ public class ParserUtil {
      * @return a single student object containing an arraylist
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Student parseStudent(List students) throws ParseException {
+    public static StudentList parseStudent(List students) throws ParseException {
         requireNonNull(students);
         String trimmedStudents = (String) students.get(0);
         String[] studentNames = trimmedStudents.split(",");
@@ -200,7 +200,7 @@ public class ParserUtil {
             }
             studentList.add(s);
         }
-        return new Student(studentList);
+        return new StudentList(studentList);
     }
 
 

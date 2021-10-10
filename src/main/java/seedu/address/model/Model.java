@@ -100,8 +100,8 @@ public interface Model {
     boolean hasTuition(TuitionClass tuitionClass);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given tuition class.
+     * The class must exist in the address book.
      */
     void deleteTuition(TuitionClass target);
 

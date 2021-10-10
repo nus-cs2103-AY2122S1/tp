@@ -16,6 +16,8 @@ import seedu.address.model.tuition.TuitionClass;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+    /** Most recently view person */
+    private static Person MOST_RECENT;
 
     // Identity fields
     private final Name name;
@@ -42,6 +44,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.classes = classes;
+        MOST_RECENT = this;
     }
 
     /**
@@ -92,6 +95,19 @@ public class Person {
     }
 
     /**
+     * Removes all traces of a tuition class from the student.
+     */
+    public Person removeClass(TuitionClass tuitionClass) {
+        for (TuitionClass c : classes.getClasses()) {
+            if (c.getTimeslot().equals(tuitionClass.getTimeslot())) {
+                classes.removeClass(c);
+                removeTag(new Tag(tuitionClass.getName().getName()));
+            }
+        }
+        return this;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -108,6 +124,15 @@ public class Person {
         this.tags.add(tag);
         return this.tags;
     }
+
+    /**
+     * Removes tag from the person.
+     * @param tag tag to be removed
+     */
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -202,6 +227,22 @@ public class Person {
                 tuitionClasses.set(position, tuitionClass);
             }
         }
+    }
+
+    /**
+     * Sets most recently viewed student to a given Person.
+     * @param student Student to set as most recently looked at.
+     */
+    public static void setMostRecentTo(Person student) {
+        MOST_RECENT = student;
+    }
+
+    /**
+     * Returns the most recently viewed student
+     * @return most recently viewed student.
+     */
+    public static Person getMostRecent() {
+        return MOST_RECENT;
     }
 
 }

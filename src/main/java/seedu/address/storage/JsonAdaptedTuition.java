@@ -8,26 +8,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Counter;
-import seedu.address.model.tuition.Student;
+import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link TuitionClass}.
  */
 class JsonAdaptedTuition {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tuition class' %s field is missing!";
 
     private final String name;
     private final int limit;
     private final int counter;
     private final String timeslot;
-    private final ArrayList<String> student = new ArrayList<>();
+    private final ArrayList<String> students = new ArrayList<>();
+    private final String remark;
 
 
     /**
@@ -36,14 +37,16 @@ class JsonAdaptedTuition {
     @JsonCreator
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("limit") int limit,
                              @JsonProperty("counter") int counter, @JsonProperty("timeslot") String timeslot,
-                             @JsonProperty("student") ArrayList<String> student) {
+                             @JsonProperty("students") ArrayList<String> student,
+                              @JsonProperty("remark") String remark) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
         this.timeslot = timeslot;
+        this.remark = remark;
 
         if (student != null) {
-            this.student.addAll(student);
+            this.students.addAll(student);
         }
 
 
@@ -57,7 +60,8 @@ class JsonAdaptedTuition {
         limit = source.getLimit().getLimit();
         counter = source.getCounter().getCounter();
         timeslot = source.getTimeslot().getTime();
-        student.addAll(source.getStudent().getStudents());
+        students.addAll(source.getStudentList().getStudents());
+        remark = source.getRemark().value;
     }
 
     /**
@@ -85,9 +89,13 @@ class JsonAdaptedTuition {
 
         final Timeslot modelTimeslot = new Timeslot(timeslot);
 
-        final Student modelStudent = new Student(student);
-        return new TuitionClass(modelName, modelLimit, modelCounter, modelTimeslot, modelStudent);
+        final StudentList modelStudent = new StudentList(students);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
+        return new TuitionClass(modelName, modelLimit, modelCounter, modelTimeslot, modelStudent, modelRemark);
     }
-
 }

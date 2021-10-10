@@ -21,7 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private static final Logger LOGGER = LogsCenter.getLogger(AddressBook.class);
 
     private final UniquePersonList persons;
-    private final UniqueTuitionList tuitons;
+    private final UniqueTuitionList tuitions;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,7 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        tuitons = new UniqueTuitionList();
+        tuitions = new UniqueTuitionList();
     }
 
     public AddressBook() {}
@@ -60,7 +60,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code persons} must not contain duplicate persons.
      */
     public void setTuition(List<TuitionClass> tuitionClasses) {
-        this.tuitons.setTuitions(tuitionClasses);
+        this.tuitions.setTuitions(tuitionClasses);
     }
 
     /**
@@ -70,8 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTuition(TuitionClass target, TuitionClass editedTuition) {
         requireNonNull(editedTuition);
-
-        tuitons.setTuition(target, editedTuition);
+        tuitions.setTuition(target, editedTuition);
     }
 
     /**
@@ -79,7 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code persons} must not contain duplicate persons.
      */
     public void setTuitions(List<TuitionClass> tuitionClasses) {
-        this.tuitons.setTuitions(tuitionClasses);
+        this.tuitions.setTuitions(tuitionClasses);
     }
 
     /**
@@ -112,10 +111,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public TuitionClass getTuition(Index index) {
         requireNonNull(index);
-        if (tuitons.tuitionListSize() < index.getOneBased()) {
+        if (tuitions.tuitionListSize() < index.getOneBased()) {
             return null;
         }
-        return tuitons.getTuitionClass(index.getOneBased() - 1);
+        return tuitions.getTuitionClass(index.getOneBased() - 1);
     }
 
     /**
@@ -160,7 +159,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<TuitionClass> getTuitionList() {
-        return tuitons.asUnmodifiableObservableList();
+        return tuitions.asUnmodifiableObservableList();
     }
 
 
@@ -181,15 +180,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasTuition(TuitionClass tuitionClass) {
         requireNonNull(tuitionClass);
-        return tuitons.contains(tuitionClass);
+        return tuitions.contains(tuitionClass);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a tuition class to the address book.
+     * The tuition class must not already exist in the address book.
      */
     public void addTuition(TuitionClass t) {
-        tuitons.add(t);
+        tuitions.add(t);
     }
 
     /**
@@ -197,7 +196,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeTuition(TuitionClass key) {
-        tuitons.remove(key);
+        tuitions.remove(key);
     }
 
     public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
@@ -206,6 +205,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Returns a person with the same name as the input person.
+     *
      * @param otherPerson the person to be checked
      * @return the person with the same name as input.
      */
@@ -216,12 +216,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Updates the tuition class when a new student is added
      * or information of the tuition class has been changed.
+     *
      * @param tuitionClass the tuition class that has been changed.
      */
     public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
-        for (Person person: persons) {
+        for (Person person : persons) {
             person.updateTuitionClass(tuitionClass);
         }
     }
-
 }

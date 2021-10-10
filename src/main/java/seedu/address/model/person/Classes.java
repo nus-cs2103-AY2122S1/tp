@@ -34,17 +34,6 @@ public class Classes {
         return this.classes;
     }
 
-    /**
-     * Returns a list of removed classes.
-     *
-     * @param tuitionClass
-     * @return
-     */
-    public ArrayList<TuitionClass> removeClasses(TuitionClass tuitionClass) {
-        this.classes.remove(tuitionClass);
-        return this.classes;
-    }
-
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -94,4 +83,15 @@ public class Classes {
         this.getClasses().add(tuitionClass);
         return this;
     }
+
+    /**
+     *
+     * @param tuitionClass
+     * @return
+     */
+    public Classes removeClass(TuitionClass tuitionClass) {
+        this.classes.remove(tuitionClass);
+        return this;
+    }
+
 }
