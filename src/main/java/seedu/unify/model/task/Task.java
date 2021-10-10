@@ -40,7 +40,7 @@ public class Task {
         return name;
     }
 
-    public Time getPhone() {
+    public Time getTime() {
         return time;
     }
 
@@ -89,7 +89,7 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getPhone().equals(getPhone())
+                && otherTask.getTime().equals(getTime())
                 && otherTask.getEmail().equals(getEmail())
                 && otherTask.getDate().equals(getDate())
                 && otherTask.getTags().equals(getTags());
@@ -106,7 +106,7 @@ public class Task {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Time: ")
-                .append(getPhone())
+                .append(getTime())
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Date: ")

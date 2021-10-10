@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.unify.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.Collections;
@@ -38,12 +38,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_TIME + "TIME] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_TIME + "16:40 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
-        Time updatedTime = editTaskDescriptor.getPhone().orElse(taskToEdit.getPhone());
+        Time updatedTime = editTaskDescriptor.getTime().orElse(taskToEdit.getTime());
         Email updatedEmail = editTaskDescriptor.getEmail().orElse(taskToEdit.getEmail());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
@@ -139,7 +139,7 @@ public class EditCommand extends Command {
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.time);
+            setTime(toCopy.time);
             setEmail(toCopy.email);
             setDate(toCopy.date);
             setTags(toCopy.tags);
@@ -160,11 +160,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Time time) {
+        public void setTime(Time time) {
             this.time = time;
         }
 
-        public Optional<Time> getPhone() {
+        public Optional<Time> getTime() {
             return Optional.ofNullable(time);
         }
 
@@ -217,7 +217,7 @@ public class EditCommand extends Command {
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
+                    && getTime().equals(e.getTime())
                     && getEmail().equals(e.getEmail())
                     && getDate().equals(e.getDate())
                     && getTags().equals(e.getTags());

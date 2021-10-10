@@ -14,28 +14,27 @@ public class TimeTest {
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
-        assertThrows(IllegalArgumentException.class, () -> new Time(invalidPhone));
+    public void constructor_invalidTime_throwsIllegalArgumentException() {
+        String invalidTime = "";
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime));
     }
 
     @Test
-    public void isValidPhone() {
-        // null phone number
+    public void isValidTime() {
+        // null time number
         assertThrows(NullPointerException.class, () -> Time.isValidTime(null));
 
-        // invalid phone numbers
+        // invalid time numbers
         assertFalse(Time.isValidTime("")); // empty string
         assertFalse(Time.isValidTime(" ")); // spaces only
-        assertFalse(Time.isValidTime("91")); // less than 3 numbers
-        assertFalse(Time.isValidTime("phone")); // non-numeric
+        assertFalse(Time.isValidTime("9:1")); // less than 3 numbers
+        assertFalse(Time.isValidTime("time")); // non-numeric
         assertFalse(Time.isValidTime("9011p041")); // alphabets within digits
         assertFalse(Time.isValidTime("9312 1534")); // spaces within digits
 
-        // valid phone numbers
-        assertTrue(Time.isValidTime("911")); // exactly 3 numbers
-        assertTrue(Time.isValidTime("93121534"));
-        assertTrue(Time.isValidTime("124293842033123")); // long phone numbers
+        // valid time numbers
+        assertTrue(Time.isValidTime("16:40")); // proper
+        assertTrue(Time.isValidTime("11:23"));
 
         /*
         updated test

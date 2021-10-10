@@ -4,8 +4,8 @@ import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -31,15 +31,15 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_DATE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TIME, PREFIX_EMAIL, PREFIX_DATE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_TIME, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Time time = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

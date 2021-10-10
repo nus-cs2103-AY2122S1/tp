@@ -6,7 +6,7 @@ import static seedu.unify.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.unify.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.unify.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.unify.logic.commands.CommandTestUtil.TIME_DESC_AMY;
 import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalTasks.AMY;
 
@@ -79,7 +79,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + TIME_DESC_AMY + EMAIL_DESC_AMY
                 + DATE_DESC_AMY;
         Task expectedTask = new TaskBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();

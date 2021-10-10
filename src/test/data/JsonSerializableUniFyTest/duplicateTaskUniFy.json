@@ -1,13 +1,13 @@
 {
   "tasks": [ {
     "name": "Alice Pauline",
-    "phone": "94351253",
+    "time": "12:45",
     "email": "alice@example.com",
     "date": "123, Jurong West Ave 6, #08-111",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
-    "phone": "94351253",
+    "time": "12:45",
     "email": "pauline@example.com",
     "date": "4th street"
   } ]

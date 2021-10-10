@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
@@ -21,13 +21,13 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Uni-Fy app. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+            + PREFIX_TIME + "TIME "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_DATE + "DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
+            + PREFIX_TIME + "16:40 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_DATE + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "

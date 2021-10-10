@@ -25,7 +25,7 @@ class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final String time;
     private final String email;
     private final String date;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -34,11 +34,11 @@ class JsonAdaptedTask {
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("time") String time,
             @JsonProperty("email") String email, @JsonProperty("date") String date,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
+        this.time = time;
         this.email = email;
         this.date = date;
         if (tagged != null) {
@@ -51,7 +51,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getName().taskName;
-        phone = source.getPhone().value;
+        time = source.getTime().value;
         email = source.getEmail().value;
         date = source.getDate().value;
         tagged.addAll(source.getTags().stream()
@@ -78,13 +78,13 @@ class JsonAdaptedTask {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        if (!Time.isValidTime(phone)) {
+        if (!Time.isValidTime(time)) {
             throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
-        final Time modelTime = new Time(phone);
+        final Time modelTime = new Time(time);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));

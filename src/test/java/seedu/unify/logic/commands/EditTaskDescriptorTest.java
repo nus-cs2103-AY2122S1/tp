@@ -7,8 +7,8 @@ import static seedu.unify.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +40,7 @@ public class EditTaskDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditTaskDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditTaskDescriptorBuilder(DESC_AMY).withTime(VALID_TIME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false

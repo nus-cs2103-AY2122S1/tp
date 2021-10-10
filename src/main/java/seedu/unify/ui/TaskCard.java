@@ -49,7 +49,7 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().taskName);
-        time.setText(task.getPhone().value);
+        time.setText(task.getTime().value);
         date.setText(task.getDate().value);
         email.setText(task.getEmail().value);
         task.getTags().stream()

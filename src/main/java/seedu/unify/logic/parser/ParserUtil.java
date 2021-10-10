@@ -51,18 +51,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Time}.
+     * Parses a {@code String time} into a {@code Time}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code time} is invalid.
      */
-    public static Time parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Time.isValidTime(trimmedPhone)) {
+    public static Time parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
             throw new ParseException(Time.MESSAGE_CONSTRAINTS);
         }
-        return new Time(trimmedPhone);
+        return new Time(trimmedTime);
     }
 
     /**
