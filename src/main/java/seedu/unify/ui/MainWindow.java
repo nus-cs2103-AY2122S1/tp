@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private WeeklyPanel weeklyPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane weeklyPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +125,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        weeklyPanel = new WeeklyPanel();
+        weeklyPanelPlaceholder.getChildren().add(weeklyPanel.getRoot());
     }
 
     /**
