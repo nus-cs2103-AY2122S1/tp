@@ -6,10 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +17,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ExportCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
     private static final String PATH_FILE_CREATED_FOLDER = "src/test/data/ExportCommandTest/FileDoesNotExist/";
     private static final String PATH_FILE_EXISTS_FOLDER = "src/test/data/ExportCommandTest/FileExists/";
     private static final String TEST_FILE_NAME = "testFile";
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+
 
     @Test
     public void equals() {
