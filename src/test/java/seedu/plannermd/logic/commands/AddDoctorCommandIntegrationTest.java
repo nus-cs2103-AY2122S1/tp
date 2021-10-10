@@ -1,4 +1,4 @@
-package seedu.plannermd.logic.commands.doctorcommands;
+package seedu.plannermd.logic.commands;
 
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;

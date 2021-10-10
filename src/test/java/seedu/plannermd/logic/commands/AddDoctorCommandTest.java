@@ -1,4 +1,4 @@
-package seedu.plannermd.logic.commands.doctorcommands;
+package seedu.plannermd.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
-import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
