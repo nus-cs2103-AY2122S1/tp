@@ -1,18 +1,30 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PersonContainsFieldsPredicate;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.Slot;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -97,6 +109,110 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String role} into an {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Role parseRoles(List<String> role) throws ParseException {
+        int length = role.size();
+        if (length == 0) {
+            return Role.NO_ROLE;
+        }
+        String roleLast = role.get(role.size() - 1);
+        String trimmedRole = roleLast.trim();
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return Role.translateStringToRole(trimmedRole);
+    }
+
+    /**
+     * Parses a {@code String salary} into a {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
+    }
+
+    /**
+     * Parses a {@code String status} into an {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseStatuses(List<String> status) throws ParseException {
+        int length = status.size();
+        if (length == 0) {
+            return Status.NO_STATUS;
+        }
+        String statusLast = status.get(status.size() - 1);
+        String trimmedStatus = statusLast.trim();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return Status.translateStringToStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     * This parser is not case sensitive.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static String parseDayOfWeek(String shiftDay) throws ParseException {
+        String messageConstraints = "Valid input format: dayOfWeek + slotNumber:" + "List of valid dayOfWeek: "
+                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. (Not case-sensitive)\n"
+                + "List of valid slotNumber: 1, 2.";
+        requireNonNull(shiftDay);
+        String trimmedStr = shiftDay.trim().toLowerCase();
+        String[] strings = trimmedStr.split("-");
+        switch (strings[0]) {
+        case "monday":
+        case "tuesday":
+        case "wednesday":
+        case "thursday":
+        case "friday":
+        case "saturday":
+        case "sunday":
+            break;
+        default: throw new ParseException(messageConstraints);
+        }
+        switch (strings[1]) {
+        case "0":
+        case "1":
+            break;
+        default: throw new ParseException(messageConstraints);
+        }
+        return trimmedStr;
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     * This parser is not case sensitive.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static Slot parseSlot(String slot) throws ParseException {
+        requireNonNull(slot);
+        String trimmedSlot = slot.trim();
+        if (!Slot.isValidSlot(trimmedSlot)) {
+            throw new ParseException(Slot.MESSAGE_CONSTRAINTS);
+        }
+        //maybe need to assert slot cannot be null
+        return Slot.translateStringToSlot(slot);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -112,6 +228,39 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalud
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        try {
+            return Status.translateStringToStatus(trimmedStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+
+    }
+
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        try {
+            return Role.translateStringToRole(trimmedRole);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -121,5 +270,28 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code args} into {@code PersonContainsFieldsPredicate} which tests a person for all
+     * of the qualifiers of the predicate.
+     * @throws ParseException
+     */
+    public static PersonContainsFieldsPredicate testByAllFields(String args) throws ParseException {
+        requireNonNull(args);
+        PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        //when no argument is given to the argMultiMap
+        if (argMultimap.isEmpty()) {
+            throw new ParseException(ViewCommand.HELP_MESSAGE);
+        }
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME).map(Name::new));
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE).map(Phone::new));
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL).map(Email::new));
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_ADDRESS).map(Address::new));
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_TAG).map(Tag::new));
+        return predicate;
     }
 }
