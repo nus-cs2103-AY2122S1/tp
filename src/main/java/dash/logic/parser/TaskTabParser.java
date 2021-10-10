@@ -18,6 +18,7 @@ import dash.logic.commands.taskcommand.ListTaskCommand;
 import dash.logic.parser.exceptions.ParseException;
 import dash.logic.parser.taskcommand.AddTaskCommandParser;
 import dash.logic.parser.taskcommand.DeleteTaskCommandParser;
+import dash.logic.parser.taskcommand.EditTaskCommandParser;
 import dash.logic.parser.taskcommand.FindTaskCommandParser;
 
 /**
