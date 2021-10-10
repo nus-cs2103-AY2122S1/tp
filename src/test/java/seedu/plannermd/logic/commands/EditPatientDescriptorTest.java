@@ -15,7 +15,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
-import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
+import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 
 public class EditPatientDescriptorTest {
 
@@ -40,31 +40,31 @@ public class EditPatientDescriptorTest {
 
         // different name -> returns false
         EditPatientCommand.EditPatientDescriptor editedAmy =
-                new EditPersonDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+                new EditPatientDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different birth date -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_BOB).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         //same birth date -> returns true
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_AMY).build();
+        editedAmy = new EditPatientDescriptorBuilder(DESC_AMY).withBirthDate(VALID_BIRTH_DATE_AMY).build();
         assertTrue(DESC_AMY.equals(editedAmy));
 
     }

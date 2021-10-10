@@ -2,6 +2,7 @@ package seedu.plannermd.testutil.patient;
 
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_RISK_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_RISK_BOB;
+import static seedu.plannermd.model.patient.Risk.UNCLASSIFIED_RISK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,13 +21,13 @@ public class TypicalPatients {
     public static final Patient BENSON = new PatientBuilder(TypicalPersons.BENSON)
             .withRisk("LOW").build();
     public static final Patient CARL = new PatientBuilder(TypicalPersons.CARL)
-            .withRisk("UNCLASSIFIED").build();
+            .withRisk(UNCLASSIFIED_RISK).build();
     public static final Patient DANIEL = new PatientBuilder(TypicalPersons.DANIEL)
             .withRisk("MEDIUM").build();
     public static final Patient ELLE = new PatientBuilder(TypicalPersons.ELLE)
             .withRisk("LOW").build();
     public static final Patient FIONA = new PatientBuilder(TypicalPersons.FIONA)
-            .withRisk("UNCLASSIFIED").build();
+            .withRisk(UNCLASSIFIED_RISK).build();
     public static final Patient GEORGE = new PatientBuilder(TypicalPersons.GEORGE)
             .withRisk("HIGH").build();
 

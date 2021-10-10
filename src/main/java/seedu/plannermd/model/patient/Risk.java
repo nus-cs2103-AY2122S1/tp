@@ -14,6 +14,8 @@ public class Risk {
         UNCLASSIFIED
     }
 
+    public static final String UNCLASSIFIED_RISK = RiskLevel.UNCLASSIFIED.name();
+
     public static final String MESSAGE_CONSTRAINTS =
             "Risks should only be either HIGH, MEDIUM OR LOW, and it should not be blank";
 
