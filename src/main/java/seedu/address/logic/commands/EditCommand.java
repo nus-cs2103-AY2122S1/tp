@@ -25,6 +25,7 @@ import seedu.address.model.member.Member;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
+import seedu.address.model.task.TaskList;
 
 /**
  * Edits the details of an existing member in the address book.
@@ -98,8 +99,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editMemberDescriptor.getEmail().orElse(memberToEdit.getEmail());
         Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
         Set<Position> updatedPositions = editMemberDescriptor.getPositions().orElse(memberToEdit.getPositions());
+        TaskList originalTaskList = memberToEdit.getTaskList();
 
-        return new Member(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPositions);
+        return new Member(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPositions, originalTaskList);
     }
 
     @Override

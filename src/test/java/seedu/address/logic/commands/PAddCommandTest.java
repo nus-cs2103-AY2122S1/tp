@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.member.Member;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.MemberBuilder;
 
 public class PAddCommandTest {
@@ -43,11 +44,11 @@ public class PAddCommandTest {
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member validMember = new MemberBuilder().build();
-        PAddCommand PAddCommand = new PAddCommand(validMember);
+        PAddCommand pAddCommand = new PAddCommand(validMember);
         ModelStub modelStub = new ModelStubWithMember(validMember);
 
         assertThrows(CommandException.class, PAddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
-                PAddCommand.execute(modelStub));
+                pAddCommand.execute(modelStub));
     }
 
     @Test
@@ -145,6 +146,54 @@ public class PAddCommandTest {
 
         @Override
         public void updateFilteredMemberList(Predicate<Member> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void loadTaskList(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void hasTask(Member member, Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTask(Member member, Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTask(Member member, Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTask(Member member, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTask(Member member, Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
+         */
+        @Override
+        public void setTask(Member member, int index, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getFilteredTaskList(Member member) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

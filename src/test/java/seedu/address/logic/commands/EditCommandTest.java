@@ -26,6 +26,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.member.Member;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.TypicalTasks;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -36,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Member editedMember = new MemberBuilder().build();
+        Member editedMember = new MemberBuilder().withTaskList(TypicalTasks.getTypicalTasks()).build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(editedMember).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MEMBER, descriptor);
 

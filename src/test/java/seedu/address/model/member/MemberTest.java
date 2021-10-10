@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalMembers.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.TypicalTasks;
 
 public class MemberTest {
 
@@ -86,6 +87,10 @@ public class MemberTest {
 
         // different tags -> returns false
         editedAlice = new MemberBuilder(ALICE).withPositions(VALID_POSITION_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different task list -> return false
+        editedAlice = new MemberBuilder(ALICE).withTaskList(TypicalTasks.getTypicalTasksDone()).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
