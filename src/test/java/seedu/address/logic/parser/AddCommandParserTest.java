@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LANGUAGE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LANGUAGE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.LAST_VISIT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LAST_VISIT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -21,10 +22,13 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LANGUAGE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LAST_VISIT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VISIT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VISIT_DESC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -77,10 +81,33 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withLastVisit("").withTags().build();
+        // zero tags, no visit, no last visit
+        Person expectedPerson = new PersonBuilder(AMY).withVisit("").withLastVisit("").withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_optionalVisitPresent_success() {
+        Person expectedPerson = new PersonBuilder(AMY).withVisit(VALID_VISIT_AMY).withLastVisit("").withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY
+                        + VISIT_DESC_AMY, new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_optionalLastVisitPresent_success() {
+        Person expectedPerson = new PersonBuilder(AMY).withVisit("").withLastVisit(VALID_LAST_VISIT_AMY)
+                .withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY
+                        + LAST_VISIT_DESC_AMY, new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_visitAndLastVisitPresent_success() {
+        Person expectedPerson = new PersonBuilder(AMY).withVisit(VALID_VISIT_AMY).withLastVisit(VALID_LAST_VISIT_AMY)
+                .withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + LANGUAGE_DESC_AMY + ADDRESS_DESC_AMY
+                + VISIT_DESC_AMY + LAST_VISIT_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
