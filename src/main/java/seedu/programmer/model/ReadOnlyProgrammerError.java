@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.programmer.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a ProgrammerError
  */
 public interface ReadOnlyProgrammerError {
 

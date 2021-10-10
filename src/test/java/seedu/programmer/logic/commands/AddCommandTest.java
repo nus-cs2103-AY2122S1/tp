@@ -82,12 +82,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getProgrammerErrorFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setProgrammerErrorFilePath(Path programmerErrorFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

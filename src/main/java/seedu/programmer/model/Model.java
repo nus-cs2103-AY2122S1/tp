@@ -37,42 +37,42 @@ public interface Model {
     /**
      * Returns the user prefs' ProgrammerError file path.
      */
-    Path getAddressBookFilePath();
+    Path getProgrammerErrorFilePath();
 
     /**
      * Sets the user prefs' ProgrammerError file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setProgrammerErrorFilePath(Path programmerErrorFilePath);
 
     /**
      * Replaces ProgrammerError data with the data in {@code programmerError}.
      */
     void setAddressBook(ReadOnlyProgrammerError programmerError);
 
-    /** Returns the AddressBook */
+    /** Returns the ProgrammerError */
     ReadOnlyProgrammerError getProgrammerError();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in ProgrammerError.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in ProgrammerError.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in ProgrammerError.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in ProgrammerError.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in ProgrammerError.
      */
     void setPerson(Person target, Person editedPerson);
 

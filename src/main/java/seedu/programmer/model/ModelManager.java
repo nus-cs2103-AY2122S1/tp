@@ -24,15 +24,15 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given ProgrammerError and userPrefs.
      */
-    public ModelManager(ReadOnlyProgrammerError addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyProgrammerError programmerError, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(programmerError, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + programmerError + " and user prefs " + userPrefs);
 
-        this.programmerError = new ProgrammerError(addressBook);
+        this.programmerError = new ProgrammerError(programmerError);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.programmerError.getPersonList());
     }
@@ -66,17 +66,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getProgrammerErrorFilePath() {
         return userPrefs.getProgrammerErrorFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setProgrammerErrorFilePath(addressBookFilePath);
+    public void setProgrammerErrorFilePath(Path programmerErrorFilePath) {
+        requireNonNull(programmerErrorFilePath);
+        userPrefs.setProgrammerErrorFilePath(programmerErrorFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ProgrammerError ============================================================================
 
     @Override
     public void setAddressBook(ReadOnlyProgrammerError programmerError) {
@@ -116,7 +116,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedProgrammerError}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
