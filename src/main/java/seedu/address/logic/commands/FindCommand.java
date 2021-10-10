@@ -17,6 +17,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String COMMAND_TAG_INDEX = "-i";
     public static final String COMMAND_TAG_NAME = "-n";
+    public static final int INVALID_INDEX = -1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or the index specified and "
@@ -37,7 +38,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate) {
         this.namePredicate = namePredicate;
-        this.index = -1; // not used
+        this.index = INVALID_INDEX; // not used
     }
 
     /**
@@ -105,11 +106,52 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Returns the index of the FindCommand object.
+     *
+     * @return index
+     */
+    public int getIndex() {
+        return this.index;
+    }
+
+    /**
+     * Returns the namePredicate of the FindCommand object.
+     *
+     * @return namePredicate
+     */
+    public NameContainsKeywordsPredicate getNamePredicate() {
+        return this.namePredicate;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && (namePredicate == null || namePredicate.equals(((FindCommand) other).namePredicate))
-                && (indexPredicate == null || indexPredicate.equals(((FindCommand) other).indexPredicate)));
+                && ((findByNameIsEquals((FindCommand) other)) || findByIndexIsEquals((FindCommand) other)));
+    }
+
+    /**
+     * Checks if another FindCommand object which searches by name is equal to the current FindCommand object.
+     *
+     * @param otherFind The other FindCommand object to be checked
+     * @return Whether the otherFind is equal to this
+     */
+    public boolean findByNameIsEquals(FindCommand otherFind) {
+        return (otherFind.getIndex() == INVALID_INDEX && this.index == INVALID_INDEX)
+                && (otherFind.getNamePredicate() != null && this.namePredicate != null)
+                && (this.namePredicate.equals(otherFind.getNamePredicate()));
+    }
+
+    /**
+     * Checks if another FindCommand object which searches by index is equal to the current FindCommand object.
+     *
+     * @param otherFind The other FindCommand object to be checked
+     * @return Whether the otherFind is equal to this
+     */
+    public boolean findByIndexIsEquals(FindCommand otherFind) {
+        return (otherFind.namePredicate == null && this.namePredicate == null)
+                && (otherFind.getIndex() != INVALID_INDEX && this.index != INVALID_INDEX)
+                && (this.index == otherFind.getIndex());
     }
 }

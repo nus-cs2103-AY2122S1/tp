@@ -39,6 +39,8 @@ public class FindCommandTest {
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findThirdCommand = new FindCommand(1);
+        FindCommand findFourthCommand = new FindCommand(2);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
@@ -55,6 +57,12 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+
+        // Test equals() method for Find Commands that search by index
+        assertTrue(findThirdCommand.equals(new FindCommand(1)));
+        assertFalse(findThirdCommand.equals(findFourthCommand));
+        assertFalse(findFirstCommand.equals(findThirdCommand));
+        assertFalse(findFourthCommand.equals(findFirstCommand));
     }
 
     @Test
