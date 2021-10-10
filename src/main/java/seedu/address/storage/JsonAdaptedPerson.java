@@ -4,16 +4,22 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+<<<<<<< HEAD
 import seedu.address.model.person.AcadLevel;
+=======
+import seedu.address.model.lesson.Lesson;
+>>>>>>> master
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -31,32 +37,58 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String parentPhone;
+    private final String parentEmail;
     private final String address;
     private final String school;
     private final String acadStream;
+<<<<<<< HEAD
     private final String acadLevel;
+=======
+    private final String outstandingFee;
+>>>>>>> master
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+<<<<<<< HEAD
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
             @JsonProperty("acadLevel") String acadLevel,
             @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+=======
+                             @JsonProperty("email") String email, @JsonProperty("parent phone") String parentPhone,
+                             @JsonProperty("parent email") String parentEmail, @JsonProperty("address") String address,
+                             @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
+                             @JsonProperty("outstanding fee") String outstandingFee,
+                             @JsonProperty("remark") String remark,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+>>>>>>> master
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.parentPhone = parentPhone;
+        this.parentEmail = parentEmail;
         this.address = address;
         this.school = school;
         this.acadStream = acadStream;
+<<<<<<< HEAD
         this.acadLevel = acadLevel;
+=======
+        this.outstandingFee = outstandingFee;
+>>>>>>> master
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
         }
     }
 
@@ -67,13 +99,24 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        parentPhone = source.getParentPhone().value;
+        parentEmail = source.getParentEmail().value;
         address = source.getAddress().value;
+<<<<<<< HEAD
         school = source.getSchool().schName;
         acadStream = source.getAcadStream().acadStream;
         acadLevel = source.getAcadLevel().acadLevel;
+=======
+        school = source.getSchool().value;
+        acadStream = source.getAcadStream().value;
+        outstandingFee = source.getFee().value;
+>>>>>>> master
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        lessons.addAll(source.getLessons().stream()
+                .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
     }
 
@@ -86,6 +129,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Lesson> personLessons = new ArrayList<>();
+        for (JsonAdaptedLesson lesson : lessons) {
+            personLessons.add(lesson.toModelType());
         }
 
         if (name == null) {
@@ -112,6 +160,22 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (parentPhone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(parentPhone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        final Phone modelParentPhone = new Phone(parentPhone);
+
+        if (parentEmail == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(parentEmail)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        final Email modelParentEmail = new Email(parentEmail);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -123,20 +187,15 @@ class JsonAdaptedPerson {
         if (school == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
         }
-        if (!school.isEmpty() && !School.isValidSchName(school)) {
-            throw new IllegalValueException(School.MESSAGE_CONSTRAINTS);
-        }
         final School modelSchool = new School(school);
 
         if (acadStream == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadStream.class.getSimpleName()));
         }
-        if (!acadStream.isEmpty() && !AcadStream.isValidAcadStream(acadStream)) {
-            throw new IllegalValueException(AcadStream.MESSAGE_CONSTRAINTS);
-        }
         final AcadStream modelAcadStream = new AcadStream(acadStream);
 
+<<<<<<< HEAD
         if (acadLevel == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadLevel.class.getSimpleName()));
@@ -145,6 +204,13 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(AcadLevel.MESSAGE_CONSTRAINTS);
         }
         final AcadLevel modelAcadLevel = new AcadLevel(acadLevel);
+=======
+        if (outstandingFee == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
+        }
+        final Fee modelFee = new Fee(outstandingFee);
+
+>>>>>>> master
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -152,8 +218,16 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+<<<<<<< HEAD
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
                 modelSchool, modelAcadStream, modelAcadLevel, modelRemark, modelTags);
     }
+=======
+>>>>>>> master
 
+        final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
+
+        return new Person(modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
+                modelAddress, modelSchool, modelAcadStream, modelFee, modelRemark, modelTags, modelLessons);
+    }
 }

@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class AcadLevel {
-    public static final String MESSAGE_CONSTRAINTS = "Academic level should only contain one case-insensitive "
-            + "alphabetic (P/S/J/Y) followed by one numeric characters (1-6 for P/Y; 1-5 for S; 1-2 for J).";
+    public static final String MESSAGE_CONSTRAINTS = "Academic level should contain a maximum of "
+            + "15 alphanumeric characters";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      * Valid academic streams include case-insensitive p1 to p6, y1 to y6, s1 to s5 and j1 to j2.
      */
-    public static final String VALIDATION_REGEX = "(([pyPY][1-6][\\s]*)|([sS][1-5][\\s]*)|([jJ][1-2][\\s]*))";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]{0,15}";
 
     public final String acadLevel;
 
@@ -23,9 +23,7 @@ public class AcadLevel {
      */
     public AcadLevel(String acadLevel) {
         requireNonNull(acadLevel);
-        if (!acadLevel.isEmpty()) {
-            checkArgument(isValidAcadLevel(acadLevel), MESSAGE_CONSTRAINTS);
-        }
+        checkArgument(isValidAcadLevel(acadLevel), MESSAGE_CONSTRAINTS);
         this.acadLevel = acadLevel.toUpperCase();
     }
 
@@ -33,7 +31,7 @@ public class AcadLevel {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidAcadLevel(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
     /**

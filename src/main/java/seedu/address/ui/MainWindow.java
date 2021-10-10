@@ -14,9 +14,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -28,11 +30,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
-    // TODO: Add Lesson message usage once Eliana's part has been merged.
     private static final String QUICK_START_INSTRUCTIONS = "💡 Quick Tips:\n"
-            + AddCommand.MESSAGE_USAGE + "\n\n"
-            + DeleteCommand.MESSAGE_USAGE + "\n\n"
-            + FindCommand.MESSAGE_USAGE;
+            + AddCommand.USER_TIP + "\n\n"
+            + DeleteCommand.USER_TIP + "\n\n"
+            + LessonAddCommand.USER_TIP + "\n\n"
+            + ClearCommand.USER_TIP + "\n\n"
+            + HelpCommand.USER_TIP + "\n\n"
+            + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -43,6 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
