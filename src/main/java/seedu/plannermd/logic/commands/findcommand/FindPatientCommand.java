@@ -8,19 +8,14 @@ import seedu.plannermd.model.Model;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in PlannerMD whose name contains any of the argument keywords.
+ * Finds and lists all patients in PlannerMD whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindPatientCommand extends FindCommand {
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
-
     private final NameContainsKeywordsPredicate predicate;
 
     public FindPatientCommand(NameContainsKeywordsPredicate predicate) {
+        super(predicate);
         this.predicate = predicate;
     }
 

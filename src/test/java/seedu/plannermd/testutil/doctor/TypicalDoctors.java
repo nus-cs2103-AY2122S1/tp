@@ -6,6 +6,7 @@ import static seedu.plannermd.testutil.TypicalPersons.BENSON;
 import static seedu.plannermd.testutil.TypicalPersons.BOB;
 import static seedu.plannermd.testutil.TypicalPersons.CARL;
 import static seedu.plannermd.testutil.TypicalPersons.DANIEL;
+import static seedu.plannermd.testutil.TypicalPersons.ELLE;
 import static seedu.plannermd.testutil.TypicalPersons.FIONA;
 import static seedu.plannermd.testutil.TypicalPersons.GEORGE;
 import static seedu.plannermd.testutil.TypicalPersons.HOON;
@@ -26,7 +27,7 @@ public class TypicalDoctors {
     public static final Doctor DR_BENSON = new DoctorBuilder(BENSON).build();
     public static final Doctor DR_CARL = new DoctorBuilder(CARL).build();
     public static final Doctor DR_DANIEL = new DoctorBuilder(DANIEL).build();
-    public static final Doctor DR_ELLE = new DoctorBuilder(DANIEL).build();
+    public static final Doctor DR_ELLE = new DoctorBuilder(ELLE).build();
     public static final Doctor DR_FIONA = new DoctorBuilder(FIONA).build();
     public static final Doctor DR_GEORGE = new DoctorBuilder(GEORGE).build();
 
