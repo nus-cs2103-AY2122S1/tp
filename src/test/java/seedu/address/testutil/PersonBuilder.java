@@ -12,7 +12,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tuition.TuitionClass;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -114,7 +113,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Classes} of the {@code Person} that we are building.
      */
-    public PersonBuilder withClasses(ArrayList<TuitionClass> classes) {
+    public PersonBuilder withClasses(ArrayList<Integer> classes) {
         this.classes = new Classes(classes);
         return this;
     }

@@ -18,7 +18,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tuition.TuitionClass;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -32,7 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String remark;
-    private final List<JsonAdaptedTuition> classes = new ArrayList<>();
+    private final List<Integer> classes = new ArrayList<>();
 
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -43,7 +42,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
              @JsonProperty("remark") String remark,
-            @JsonProperty("classes") List<JsonAdaptedTuition> classes,
+            @JsonProperty("classes") List<Integer> classes,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
@@ -51,9 +50,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.remark = remark;
         if (classes != null) {
-            for (JsonAdaptedTuition tc: classes) {
-                this.classes.add(tc);
-            }
+            this.classes.addAll(classes);
         }
 
         if (tagged != null) {
@@ -74,10 +71,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        for (TuitionClass tc: source.getClasses().getClasses()) {
-            JsonAdaptedTuition jsonAdaptedTuition = new JsonAdaptedTuition(tc);
-            classes.add(jsonAdaptedTuition);
-        }
+        classes.addAll(source.getClasses().getClasses());
     }
 
     /**
@@ -128,12 +122,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
-        final Classes modelClasses = new Classes(new ArrayList<TuitionClass>());
-        ArrayList<TuitionClass> tuitionClasses = new ArrayList<>();
-        for (JsonAdaptedTuition tuition: classes) {
-            tuitionClasses.add(tuition.toModelType());
-        }
-        modelClasses.updateClasses(tuitionClasses);
+        final Classes modelClasses = new Classes(new ArrayList<Integer>(classes));
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags, modelClasses);
     }
 

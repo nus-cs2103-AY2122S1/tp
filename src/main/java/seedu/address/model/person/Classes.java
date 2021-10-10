@@ -4,20 +4,19 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
-import seedu.address.model.tuition.TuitionClass;
 /**
  * Represents the tuition classes that this student takes
  */
 public class Classes {
 
-    private ArrayList<TuitionClass> classes;
+    private ArrayList<Integer> classes;
 
     /**
      * Constructor for classes.
      *
      * @param classes
      */
-    public Classes(ArrayList<TuitionClass> classes) {
+    public Classes(ArrayList<Integer> classes) {
         requireNonNull(classes);
         this.classes = classes;
     }
@@ -26,18 +25,18 @@ public class Classes {
         return classes.size();
     }
 
-    public void updateClasses(ArrayList<TuitionClass> classes) {
+    public void updateClasses(ArrayList<Integer> classes) {
         this.classes = classes;
     }
 
-    public ArrayList<TuitionClass> getClasses() {
+    public ArrayList<Integer> getClasses() {
         return this.classes;
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        for (TuitionClass t : classes) {
+        for (Integer t : classes) {
             builder.append(t.toString());
             builder.append("\n");
         }
@@ -62,7 +61,7 @@ public class Classes {
      * @param cmpClasses
      * @return
      */
-    public boolean equalClasses(ArrayList<TuitionClass> cmpClasses) {
+    public boolean equalClasses(ArrayList<Integer> cmpClasses) {
         if (cmpClasses.size() != this.classes.size()) {
             return false;
         }
@@ -79,7 +78,7 @@ public class Classes {
      * @param tuitionClass the tuition class to be added.
      * @return the updated Classes object.
      */
-    public Classes addClass(TuitionClass tuitionClass) {
+    public Classes addClass(Integer tuitionClass) {
         this.getClasses().add(tuitionClass);
         return this;
     }
@@ -89,7 +88,7 @@ public class Classes {
      * @param tuitionClass
      * @return
      */
-    public Classes removeClass(TuitionClass tuitionClass) {
+    public Classes removeClass(Integer tuitionClass) {
         this.classes.remove(tuitionClass);
         return this;
     }

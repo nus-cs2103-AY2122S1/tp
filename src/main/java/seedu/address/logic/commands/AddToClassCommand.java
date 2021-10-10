@@ -21,6 +21,7 @@ public class AddToClassCommand extends Command {
             + "\n"
             + "Parameters: "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
+            + "[OR " + PREFIX_STUDENT + "STUDENT_NAME" + "] "
             + PREFIX_TUITION_CLASS + "CLASS_INDEX"
             + "\n" + "Example1: " + COMMAND_WORD + " si/3 tc/3"
             + "\n" + "Example2: " + COMMAND_WORD + " s/Felicia,James tc/3";
@@ -81,7 +82,6 @@ public class AddToClassCommand extends Command {
 
     private void updateModel(Model model, TuitionClass tuitionClass,
                              TuitionClass modifiedClass, Person studentToAdd, Person studentToChange) {
-        model.updateTuitionClassInPersonObject(modifiedClass);
         model.setPerson(studentToChange, studentToAdd);
         model.setTuition(tuitionClass, modifiedClass);
     }

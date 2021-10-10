@@ -41,9 +41,12 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         if (personToDelete != null) {
-            for (TuitionClass tuitionClass : personToDelete.getClasses().getClasses()) {
-                TuitionClass updatedClass = tuitionClass.removeStudent(personToDelete);
-                model.setTuition(tuitionClass, updatedClass);
+            for (Integer tuitionClassId : personToDelete.getClasses().getClasses()) {
+                TuitionClass tuitionClass = model.getClassById(tuitionClassId);
+                if (tuitionClass != null) {
+                    TuitionClass updatedClass = tuitionClass.removeStudent(personToDelete);
+                    model.setTuition(tuitionClass, updatedClass);
+                }
             }
             model.deletePerson(personToDelete);
         }

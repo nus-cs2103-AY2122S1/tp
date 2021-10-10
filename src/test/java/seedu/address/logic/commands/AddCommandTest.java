@@ -231,8 +231,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
-
+        public TuitionClass getClassById(Integer id) {
+            return null;
         }
     }
 

@@ -31,13 +31,13 @@ public class SampleDataUtil {
     public static final StudentList SAMPLE_STUDENTS = new StudentList(SAMPLE_STUDENT);
     public static final TuitionClass SAMPLE_TUITION_CLASS =
             new TuitionClass(new ClassName("Physics"),
-            new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"), SAMPLE_STUDENTS, EMPTY_REMARK);
+            new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"), SAMPLE_STUDENTS, EMPTY_REMARK, 1234567);
 
-    public static final ArrayList<TuitionClass> SAMPLE_CLASSES = new ArrayList<>() {
+    public static final ArrayList<Integer> SAMPLE_CLASSES = new ArrayList<>() {
         {
-            add(SAMPLE_TUITION_CLASS);
-            add(SAMPLE_TUITION_CLASS);
-            add(SAMPLE_TUITION_CLASS);
+            add(1234567);
+            add(1234567);
+            add(1234567);
         }
     };
 
