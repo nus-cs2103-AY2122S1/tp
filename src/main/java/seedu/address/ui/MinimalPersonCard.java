@@ -37,7 +37,7 @@ public class MinimalPersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
+        name.setText(person.getStudentName().fullName);
     }
 
     @Override
