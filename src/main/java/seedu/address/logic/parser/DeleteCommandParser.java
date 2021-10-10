@@ -31,46 +31,27 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_NAME, PREFIX_ROLE, PREFIX_STATUS);
 
         if (!exactlyOneAcceptedPrefix(argMultimap)) {
-
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-
-        } else if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
-
-            try {
+        }
+        try {
+            if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
                 return new DeleteCommand(index);
-            } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
-            }
-
-        } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            return new DeleteCommand(name);
-
-        } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-
-            try {
+            } else if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+                return new DeleteCommand(name);
+            } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
                 Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
                 return new DeleteCommand(role);
-            } catch (IllegalArgumentException e) {
-                throw new ParseException(e.getMessage());
-            }
-
-        } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-
-            try {
+            } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
                 Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
                 return new DeleteCommand(status);
-            } catch (IllegalArgumentException e) {
-                throw new ParseException(e.getMessage());
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
-
-        } else {
-
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 
