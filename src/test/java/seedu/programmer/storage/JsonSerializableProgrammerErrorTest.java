@@ -25,9 +25,9 @@
 //    public void toModelType_typicalPersonsFile_success() throws Exception {
 //        JsonSerializableProgrammerError dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
 //                JsonSerializableProgrammerError.class).get();
-//        ProgrammerError addressBookFromFile = dataFromFile.toModelType();
-//        ProgrammerError typicalPersonsAddressBook = TypicalPersons.getTypicalProgrammerError();
-//        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
+//        ProgrammerError ProgrammerErrorFromFile = dataFromFile.toModelType();
+//        ProgrammerError typicalPersonsProgrammerError = TypicalPersons.getTypicalProgrammerError();
+//        assertEquals(ProgrammerErrorFromFile, typicalPersonsProgrammerError);
 //    }
 //
 //    @Test

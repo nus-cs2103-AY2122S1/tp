@@ -1,10 +1,10 @@
-package seedu.programmer.model.person;
+package seedu.programmer.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's Grade in the ProgrammerError.
+ * Represents a student's Grade in the ProgrammerError.
  * Guarantees: immutable; is valid as declared in {@link #isValidGrade(String)}
  */
 public class Grade {

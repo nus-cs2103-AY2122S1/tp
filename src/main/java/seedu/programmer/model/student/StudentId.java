@@ -1,4 +1,4 @@
-package seedu.programmer.model.person;
+package seedu.programmer.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.AppUtil.checkArgument;

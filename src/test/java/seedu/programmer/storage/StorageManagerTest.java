@@ -2,7 +2,7 @@ package seedu.programmer.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
+import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
 import java.nio.file.Path;
 
@@ -52,7 +52,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonProgrammerErrorStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonProgrammerErrorStorageTest} class.
          */
         ProgrammerError original = getTypicalProgrammerError();
         storageManager.saveProgrammerError(original);

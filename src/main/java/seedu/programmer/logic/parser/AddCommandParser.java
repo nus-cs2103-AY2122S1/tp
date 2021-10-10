@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 
 import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.person.ClassId;
-import seedu.programmer.model.person.Grade;
-import seedu.programmer.model.person.Name;
-import seedu.programmer.model.person.Person;
-import seedu.programmer.model.person.StudentId;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -41,9 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASS_ID).orElse(null));
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).orElse(null));
 
-        Person person = new Person(name, studentId, classId, grade);
+        Student student = new Student(name, studentId, classId, grade);
 
-        return new AddCommand(person);
+        return new AddCommand(student);
     }
 
     /**

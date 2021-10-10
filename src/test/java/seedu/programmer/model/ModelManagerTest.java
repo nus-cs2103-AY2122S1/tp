@@ -3,10 +3,10 @@ package seedu.programmer.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.programmer.testutil.Assert.assertThrows;
-import static seedu.programmer.testutil.TypicalPersons.ALICE;
-import static seedu.programmer.testutil.TypicalPersons.BENSON;
+import static seedu.programmer.testutil.TypicalStudents.ALICE;
+import static seedu.programmer.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,8 +15,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.commons.core.GuiSettings;
-import seedu.programmer.model.person.NameContainsKeywordsPredicate;
-import seedu.programmer.testutil.AddressBookBuilder;
+import seedu.programmer.model.student.NameContainsKeywordsPredicate;
+import seedu.programmer.testutil.ProgrammerErrorBuilder;
 
 public class ModelManagerTest {
 
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setProgrammerErrorFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setProgrammerErrorFilePath(Paths.get("programmer/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setProgrammerErrorFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setProgrammerErrorFilePath(Paths.get("new/programmer/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -67,35 +67,35 @@ public class ModelManagerTest {
 
     @Test
     public void setProgrammerErrorFilePath_validPath_setsProgrammerErrorFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("programmer/book/file/path");
         modelManager.setProgrammerErrorFilePath(path);
         assertEquals(path, modelManager.getProgrammerErrorFilePath());
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasStudent(null));
     }
 
     @Test
     public void hasPerson_personNotInProgrammerError_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasStudent(ALICE));
     }
 
     @Test
     public void hasPerson_personInProgrammerError_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addStudent(ALICE);
+        assertTrue(modelManager.hasStudent(ALICE));
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
     }
 
     @Test
     public void equals() {
-        ProgrammerError programmerError = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        ProgrammerError programmerError = new ProgrammerErrorBuilder().withStudent(ALICE).withStudent(BENSON).build();
         ProgrammerError differentProgrammerError = new ProgrammerError();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -113,16 +113,16 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different ProgrammerError -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentProgrammerError, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(programmerError, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

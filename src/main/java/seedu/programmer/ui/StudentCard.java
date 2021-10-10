@@ -5,24 +5,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code student}.
  */
-public class PersonCard extends UiPart<Region> {
+public class StudentCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "StudentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
@@ -38,16 +37,16 @@ public class PersonCard extends UiPart<Region> {
     private Label grade;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code studentCode} with the given {@code student} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public StudentCard(Student student, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        studentId.setText("Student_ID: " + person.getStudentId().studentId);
-        classId.setText("Class_ID: " + person.getClassId().classId);
-        grade.setText("Grade: " + person.getGrade().grade);
+        name.setText(student.getName().fullName);
+        studentId.setText("Student_ID: " + student.getStudentId().studentId);
+        classId.setText("Class_ID: " + student.getClassId().classId);
+        grade.setText("Grade: " + student.getGrade().grade);
     }
 
     @Override
@@ -58,13 +57,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof StudentCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        StudentCard card = (StudentCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && student.equals(card.student);
     }
 }

@@ -1,7 +1,7 @@
 package seedu.programmer.logic.commands;
 
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
+import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import seedu.programmer.model.UserPrefs;
 public class PurgeCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyProgrammerError_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -22,10 +22,10 @@ public class PurgeCommandTest {
 
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyProgrammerError_success() {
         Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
-        expectedModel.setAddressBook(new ProgrammerError());
+        expectedModel.setProgrammerError(new ProgrammerError());
 
         assertCommandSuccess(new PurgeCommand(), model, PurgeCommand.MESSAGE_SUCCESS, expectedModel);
     }
