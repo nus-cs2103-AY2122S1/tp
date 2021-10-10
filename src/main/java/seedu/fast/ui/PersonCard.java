@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.fast.commons.util.Colors;
+import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 
 /**
@@ -44,7 +45,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private Label appointment;
+    private Label appointmentDate;
+    @FXML
+    private Label appointmentTime;
+    @FXML
+    private Label appointmentVenue;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -63,9 +68,9 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
-        appointment.setText("Appointment: " + person.getAppointment().getDate()
-                + " " + person.getAppointment().getTime()
-                + " " + person.getAppointment().getVenue());
+        appointmentDate.setText(checkAndAddHeader(person.getAppointment().getDate(), "Date"));
+        appointmentTime.setText(checkAndAddHeader(person.getAppointment().getTime(), "Time"));
+        appointmentVenue.setText(checkAndAddHeader(person.getAppointment().getVenue(), "Venue"));
     }
 
     /**
@@ -86,6 +91,15 @@ public class PersonCard extends UiPart<Region> {
         }
         return temp;
     }
+
+    private String checkAndAddHeader(String text, String header) {
+        if (!text.equals(Appointment.NO_APPOINTMENT) && !text.equals(Appointment.NO_TIME)) {
+            text = header + ": " + text;
+        }
+
+        return text;
+    }
+
 
     @Override
     public boolean equals(Object other) {
