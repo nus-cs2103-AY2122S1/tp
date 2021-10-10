@@ -7,7 +7,7 @@
 
 <StackPane fx:id="placeHolder" styleClass="pane-without-border" xmlns="http://javafx.com/javafx/8"
            xmlns:fx="http://javafx.com/fxml/1">
-    <TabPane fx:id="personTab" tabClosingPolicy="UNAVAILABLE" mouseTransparent="true">
+    <TabPane fx:id="personTab" tabClosingPolicy="UNAVAILABLE">
         <Tab fx:id="patientsTab" text="Patients">
             <StackPane fx:id="patientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
         </Tab>
