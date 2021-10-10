@@ -3,8 +3,9 @@ package seedu.plannermd.testutil.doctor;
 import static seedu.plannermd.testutil.PersonUtil.getPersonDetails;
 
 import seedu.plannermd.logic.commands.addcommand.AddCommand;
-import seedu.plannermd.logic.commands.editcommand.EditPatientCommand.EditPatientDescriptor;
+import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.model.doctor.Doctor;
+import seedu.plannermd.testutil.PersonUtil;
 
 /**
  * A utility class for Doctor.
@@ -28,11 +29,11 @@ public class DoctorUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPatientDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditDoctorDescriptor}'s details.
      */
-    public static String getEditDoctorDescriptorDetails(EditPatientDescriptor descriptor) {
+    public static String getEditDoctorDescriptorDetails(EditDoctorCommand.EditDoctorDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        sb.append(getEditDoctorDescriptorDetails(descriptor));
+        sb.append(PersonUtil.getEditDoctorDescriptorDetails(descriptor));
         return sb.toString();
     }
 }
