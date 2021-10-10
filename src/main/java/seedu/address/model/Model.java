@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -9,7 +8,6 @@ import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 

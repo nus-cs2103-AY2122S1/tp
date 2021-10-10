@@ -24,7 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
@@ -59,7 +59,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_ladd() throws Exception {
-        Lesson lesson = SampleDataUtil.getSampleLesson();
+        LessonWithoutOwner lesson = SampleDataUtil.getSampleLessonWithoutOwner();
         LessonAddCommand command = (LessonAddCommand) parser.parseCommand(
             LessonUtil.getLessonAddCommand(
                 INDEX_FIRST_PERSON.getOneBased(),

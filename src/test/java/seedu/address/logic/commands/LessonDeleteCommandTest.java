@@ -11,8 +11,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,8 +45,7 @@ public class LessonDeleteCommandTest {
         LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
         ModelStub modelStub = new ModelStubWithPerson(editedPerson);
 
-        Lesson lessonToDelete = editedPerson.getLessons().stream()
-            .collect(Collectors.toList())
+        Lesson lessonToDelete = new ArrayList<>(editedPerson.getLessons())
             .get(INDEX_FIRST_LESSON.getZeroBased());
         String expectedMessage = String.format(
             LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, editedPerson);

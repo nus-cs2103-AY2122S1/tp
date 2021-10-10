@@ -5,12 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -86,7 +86,6 @@ public class UniquePersonList implements Iterable<Person> {
             throw new ClashingLessonException();
         }
         setPerson(target, editedPerson);
-        calendar.addEntry(toAdd.asCalendarEntry());
     }
 
     /**
@@ -107,6 +106,8 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        removeLessons(target.getLessons());
+        addLessons(editedPerson.getLessons());
     }
 
     /**
@@ -118,9 +119,7 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
-        for (Lesson lesson: toRemove.getLessons()) {
-            calendar.removeEntry(lesson.asCalendarEntry());
-        }
+        removeLessons(toRemove.getLessons());
     }
 
     /**
@@ -131,7 +130,6 @@ public class UniquePersonList implements Iterable<Person> {
         requireAllNonNull(target, editedPerson, toRemove);
 
         setPerson(target, editedPerson);
-        calendar.removeEntry(toRemove.asCalendarEntry());
     }
 
     public void setPersons(UniquePersonList replacement) {
@@ -143,6 +141,8 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
+     *
+     * @param persons The Persons to be set.
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
@@ -155,18 +155,50 @@ public class UniquePersonList implements Iterable<Person> {
 
     public void setLessons(UniquePersonList replacement) {
         requireNonNull(replacement);
-        calendar.clear();
         setLessons(replacement.internalList);
     }
 
+    /**
+     * Replaces the entries of the calendar with {@code persons}.
+     * {@code persons} must not contain clashing lessons.
+     */
     public void setLessons(List<Person> persons) {
         requireAllNonNull(persons);
         calendar.clear();
         for (Person person : persons) {
-            for (Lesson lesson : person.getLessons()) {
-                calendar.addEntry(lesson.asCalendarEntry());
-            }
+            addLessons(person.getLessons());
         }
+    }
+
+    /**
+     * Adds all specified lessons into the calendar.
+     *
+     * @param lessons The lessons to be added.
+     */
+    public void addLessons(Set<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        calendar.startBatchUpdates();
+        for (Lesson lesson : lessons) {
+            calendar.addEntry(lesson.asCalendarEntry());
+        }
+        calendar.stopBatchUpdates();
+    }
+
+    /**
+     * Removes all specified lessons into the calendar.
+     *
+     * @param lessons The lessons to be removed.
+     */
+    public void removeLessons(Set<Lesson> lessons) {
+        if (lessons.isEmpty()) {
+            return;
+        }
+        requireAllNonNull(lessons);
+        calendar.startBatchUpdates();
+        for (Lesson lesson : lessons) {
+            calendar.removeEntry(lesson.asCalendarEntry());
+        }
+        calendar.stopBatchUpdates();
     }
 
     /**

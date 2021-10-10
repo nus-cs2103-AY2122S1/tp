@@ -13,8 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.MakeUpLesson;
-import seedu.address.model.lesson.RecurringLesson;
+import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 
@@ -67,7 +66,7 @@ class JsonAdaptedLesson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
-    public Lesson toModelType() throws IllegalValueException {
+    public LessonWithoutOwner toModelType() throws IllegalValueException {
         final List<Homework> lessonHomework = new ArrayList<>();
         for (JsonAdaptedHomework hw : homework) {
             lessonHomework.add(hw.toModelType());
@@ -99,11 +98,6 @@ class JsonAdaptedLesson {
         final Subject modelSubject = new Subject(subject);
 
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
-        return isRecurring
-                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework)
-                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework);
+        return new LessonWithoutOwner(modelDate, modelTimeRange, modelSubject, modelHomework, isRecurring);
     }
-
 }
-
-

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -99,9 +99,9 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Lesson> personLessons = new ArrayList<>();
+        final List<LessonWithoutOwner> personLessons = new ArrayList<>();
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
-            Lesson lesson = jsonAdaptedLesson.toModelType();
+            LessonWithoutOwner lesson = jsonAdaptedLesson.toModelType();
             if (personLessons.stream().anyMatch(personLesson -> personLesson.isClashing(lesson))) {
                 throw new IllegalValueException(MESSAGE_CLASHING_LESSON);
             }
@@ -168,10 +168,10 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
+        final Set<LessonWithoutOwner> modelLessonWithoutOwner = new TreeSet<>(personLessons);
 
-        return new Person(modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
-                modelAddress, modelFee, modelRemark, modelTags, modelLessons);
+        return new Person(modelLessonWithoutOwner, modelName, modelPhone, modelEmail,
+                modelParentPhone, modelParentEmail, modelAddress, modelFee, modelRemark, modelTags);
     }
 
 }

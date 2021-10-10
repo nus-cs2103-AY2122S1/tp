@@ -3,8 +3,10 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -38,7 +40,7 @@ public class PersonBuilder {
     private Fee fee;
     private Remark remark;
     private Set<Tag> tags;
-    private Set<Lesson> lessons;
+    private Set<LessonWithoutOwner> lessons;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -69,7 +71,8 @@ public class PersonBuilder {
         fee = personToCopy.getFee();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
-        lessons = new TreeSet<>(personToCopy.getLessons());
+        lessons = new TreeSet<>(
+                personToCopy.getLessons().stream().map(Lesson::getLessonWithoutOwner).collect(Collectors.toSet()));
     }
 
     /**
@@ -92,7 +95,7 @@ public class PersonBuilder {
      * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withLessons() {
-        this.lessons = SampleDataUtil.getSampleLessons();
+        this.lessons = SampleDataUtil.getSampleLessonsWithoutOwner();
         return this;
     }
 
@@ -100,8 +103,8 @@ public class PersonBuilder {
      * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
      */
     public PersonBuilder withSampleLesson() {
-        Set<Lesson> lessonSetWithOneLesson = new TreeSet<>();
-        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
+        Set<LessonWithoutOwner> lessonSetWithOneLesson = new TreeSet<>();
+        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLessonWithoutOwner());
         this.lessons = lessonSetWithOneLesson;
         return this;
     }
@@ -176,7 +179,7 @@ public class PersonBuilder {
      * @return {@code Person} container the information given.
      */
     public Person build() {
-        return new Person(name, phone, email, parentPhone, parentEmail,
-            address, fee, remark, tags, lessons);
+        return new Person(lessons, name, phone, email, parentPhone, parentEmail,
+            address, fee, remark, tags);
     }
 }

@@ -24,6 +24,12 @@ public class CenterPanel extends UiPart<Region> {
     @FXML
     private StackPane centerPanelPlaceholder;
 
+    /**
+     * Construtor for a CenterPanel.
+     *
+     * @param calendar The calendar in the CenterPanel.
+     * @param personList The ObservableList of persons.
+     */
     public CenterPanel(Calendar calendar, ObservableList<Person> personList) {
         super(FXML);
         personListPanel = new PersonListPanel(personList);
@@ -56,39 +62,4 @@ public class CenterPanel extends UiPart<Region> {
             centerPanelPlaceholder.getChildren().setAll(schedulePanel.getRoot());
         }
     }
-
-//    @Subscribe
-//    private void handleChangeCalendarViewRequestEvent(ChangeCalendarViewRequestEvent event) {
-//        calendarPanel.handleChangeCalendarViewRequestEvent(event);
-//        displayCalendarPanel();
-//    }
-//
-//    @Subscribe
-//    public void handleChangeCalendarPageRequestEvent(ChangeCalendarPageRequestEvent event) {
-//        calendarPanel.handleChangeCalendarPageRequestEvent(event);
-//        displayCalendarPanel();
-//    }
-//
-//    @Subscribe
-//    private void handleChangeCalendarDateRequestEvent(ChangeCalendarDateRequestEvent event) {
-//        calendarPanel.handleChangeCalendarDateRequestEvent(event);
-//        displayCalendarPanel();
-//    }
-//
-//    @Subscribe
-//    private void handleDisplayPersonPanelRequestEvent(DisplayPersonPanelRequestEvent event) {
-//        displayPersonPanel();
-//    }
-//
-//    @Subscribe
-//    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
-//        personPanel.handlePersonPanelSelectionChangedEvent(event);
-//        displayPersonPanel();
-//    }
-//
-//    @Subscribe
-//    private void handleResetPersonPanelRequestEvent(ResetPersonPanelRequestEvent event) {
-//        personPanel.handleResetPersonPanelRequestEvent(event);
-//        displayPersonPanel();
-//    }
 }

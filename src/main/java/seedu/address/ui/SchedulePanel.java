@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Logger;
@@ -29,6 +27,9 @@ public class SchedulePanel extends UiPart<Region> {
     @FXML
     private StackPane scheduleView;
 
+    /**
+     * Creates a {@code SchedulePanel} with the given {@code Calendar}.
+     */
     public SchedulePanel(Calendar calendar) {
         super(FXML);
         calendarView = new DetailedWeekView();

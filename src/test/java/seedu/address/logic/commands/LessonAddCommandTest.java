@@ -42,16 +42,16 @@ public class LessonAddCommandTest {
     @Test
     public void equals() {
         LessonAddCommand addSampleLessonCommand = new LessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLesson());
+                SampleDataUtil.getSampleLessonWithoutOwner());
         LessonAddCommand addSampleLessonCommand2 = new LessonAddCommand(INDEX_SECOND_PERSON,
-                SampleDataUtil.getSampleLesson());
+                SampleDataUtil.getSampleLessonWithoutOwner());
 
         // same object -> returns true
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommand));
 
         // same values -> returns true
         LessonAddCommand addSampleLessonCommandCopy = new LessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLesson());
+                SampleDataUtil.getSampleLessonWithoutOwner());
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommandCopy));
 
         // different types -> returns false

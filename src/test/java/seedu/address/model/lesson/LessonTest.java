@@ -36,9 +36,6 @@ public class LessonTest {
     @Test
     public void updateDateWithWeek_validDateString_success() {
         String validOneWeekLaterDateString = "21 Jan 2022";
-        Lesson lesson = new RecurringLesson(new Date(DATE),
-            new TimeRange(TIME_RANGE),
-            new Subject(SUBJECT), HOMEWORK);
         assertEquals(new Date(validOneWeekLaterDateString), (new Date(DATE)).updateDateWithWeek());
     }
 
@@ -124,7 +121,7 @@ public class LessonTest {
         @Override
         public Calendar getCalendar() {
             throw new AssertionError("This method should not be called.");
-       }
+        }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {

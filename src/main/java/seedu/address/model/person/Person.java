@@ -7,8 +7,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,15 +31,14 @@ public class Person {
     private final Remark remark;
     private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Lesson> lessons = new TreeSet<>();
+    private final Set<Lesson> lessons;
 
     /**
      * Every field must be present and not null.
      */
-
     public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
                   Address address, Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
-        requireAllNonNull(name, phone, email, address, remark, tags, lessons);
+        requireAllNonNull(name, phone, email, parentPhone, parentEmail, address, outstandingFee, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,7 +48,40 @@ public class Person {
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
-        this.lessons.addAll(lessons);
+        this.lessons = copyLessons(lessons);
+    }
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Set<LessonWithoutOwner> lessonWithoutOwnerSet,
+                  Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
+                  Address address, Fee outstandingFee, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, parentPhone, parentEmail, address, outstandingFee, remark, tags,
+                lessonWithoutOwnerSet);
+
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.parentPhone = parentPhone;
+        this.parentEmail = parentEmail;
+        this.address = address;
+        this.outstandingFee = outstandingFee;
+        this.remark = remark;
+        this.tags.addAll(tags);
+        this.lessons = setOwner(lessonWithoutOwnerSet);
+    }
+
+    private Set<Lesson> setOwner(Set<LessonWithoutOwner> lessonWithoutOwnerSet) {
+        Set<Lesson> lessons = new TreeSet<>();
+        for (LessonWithoutOwner lessonWithoutOwner : lessonWithoutOwnerSet) {
+            Lesson newLesson = lessonWithoutOwner.buildLessonWithOwner(this);
+            lessons.add(newLesson);
+        }
+        return lessons;
+    }
+
+    private Set<Lesson> copyLessons(Set<Lesson> otherPersonLessons) {
+        return setOwner(otherPersonLessons.stream().map(Lesson::getLessonWithoutOwner).collect(Collectors.toSet()));
     }
 
     public Name getName() {
