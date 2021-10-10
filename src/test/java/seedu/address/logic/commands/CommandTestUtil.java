@@ -20,6 +20,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.facility.Facility;
+import seedu.address.model.facility.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
@@ -142,6 +144,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered facility list to show only the facility at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showFacilityAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredFacilityList().size());
+        Facility facility = model.getFilteredFacilityList().get(targetIndex.getZeroBased());
+        final String[] splitLocation = facility.getLocation().location.split("\\s+");
+        model.updateFilteredFacilityList(new LocationContainsKeywordsPredicate(Arrays.asList(splitLocation[0])));
+
+        assertEquals(1, model.getFilteredFacilityList().size());
     }
 
 }

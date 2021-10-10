@@ -134,4 +134,11 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Replaces the contents of this list with empty list.
+     */
+    public void resetMembers() {
+        internalList.setAll();
+    }
 }

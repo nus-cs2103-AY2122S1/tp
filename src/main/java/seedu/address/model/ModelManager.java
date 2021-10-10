@@ -120,6 +120,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void resetMemberList() {
+        addressBook.resetMemberList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -153,7 +158,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredFacilities.equals(other.filteredFacilities);
     }
 
     //=========== Filtered Facility List Accessors =============================================================
