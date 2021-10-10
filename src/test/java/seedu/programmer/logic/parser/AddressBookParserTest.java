@@ -23,7 +23,7 @@ import seedu.programmer.testutil.EditPersonDescriptorBuilder;
 import seedu.programmer.testutil.PersonBuilder;
 import seedu.programmer.testutil.PersonUtil;
 
-public class ProgrammerErrorParserTest {
+class ProgrammerErrorParserTest {
 
     private final ProgrammerErrorParser parser = new ProgrammerErrorParser();
 

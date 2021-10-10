@@ -14,7 +14,7 @@ import seedu.programmer.logic.commands.ExitCommand;
 import seedu.programmer.logic.commands.FillCommand;
 import seedu.programmer.logic.commands.HelpCommand;
 import seedu.programmer.logic.commands.ListCommand;
-import seedu.programmer.logic.commands.PurgeCommand; 
+import seedu.programmer.logic.commands.PurgeCommand;
 import seedu.programmer.logic.commands.ViewCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 
