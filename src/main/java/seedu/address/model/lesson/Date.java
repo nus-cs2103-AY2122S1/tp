@@ -80,27 +80,25 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Update the lesson date to the same day on the following week.
-     *
-     * @return newDate The date of the same day on the following week.
-     */
-    public Date updateDateWithWeek() {
-        Date newDate = new Date(getLocalDate().plusWeeks(1).format(FORMATTER));
-        return newDate;
-    }
-
-    /**
      * Update the lesson date to the same day on the most recent week
      * that has yet to be pass.
      *
      * @return newDate The date of the same day on the week that has yet to pass.
      */
     public Date updateDate() {
-        long weeks = ChronoUnit.WEEKS.between(getLocalDate(), LocalDate.now());
-        if (weeks <= 0) { // No need update if week has not passed
+        /*
+        Check the number of weeks between this date and the current date.
+        Round up the number of weeks between the 2 dates.
+         */
+        int numberOfDaysInAWeek = 7;
+        long numberOfDays = ChronoUnit.DAYS.between(getLocalDate(), LocalDate.now());
+        long numberOfWeeks = ChronoUnit.WEEKS.between(getLocalDate(), LocalDate.now())
+            + (numberOfDays % numberOfDaysInAWeek > 0 ? 1 : 0);
+
+        if (numberOfWeeks <= 0) { // No need update if week has not passed
             return this;
         }
-        Date newDate = new Date(getLocalDate().plusWeeks(weeks).format(FORMATTER));
+        Date newDate = new Date(getLocalDate().plusWeeks(numberOfWeeks).format(FORMATTER));
         return newDate;
     }
 
