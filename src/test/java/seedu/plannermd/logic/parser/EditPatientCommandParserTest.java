@@ -51,7 +51,7 @@ import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 
-public class EditCommandParserTest {
+public class EditPatientCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
     private static final String RISK_EMPTY = " " + PREFIX_RISK;
@@ -59,7 +59,7 @@ public class EditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPatientCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditPatientCommandParser parser = new EditPatientCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
