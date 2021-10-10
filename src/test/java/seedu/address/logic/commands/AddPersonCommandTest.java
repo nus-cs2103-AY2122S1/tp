@@ -148,6 +148,16 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public Path getTaskListFilePath(){
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTaskListFilePath(Path taskListFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public TaskList getTaskList() {
             throw new AssertionError("This method should not be called.");
         }
