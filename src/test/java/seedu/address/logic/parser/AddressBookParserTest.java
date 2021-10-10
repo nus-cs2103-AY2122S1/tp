@@ -4,9 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ASSESSMENT_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.FILE_DESC_VALID_FILE;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_TAG_COUNT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +30,7 @@ import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
@@ -86,6 +96,18 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_import() throws Exception {
+        ImportCommand command = new ImportCommand(
+                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                Path.of(VALID_TYPICAL_PERSONS_CSV_PATH));
+        assertEquals(parser.parseCommand(ImportCommand.COMMAND_WORD + FILE_DESC_VALID_FILE
+                + GROUP_COUNT_DESC_TYPICAL + ASSESSMENT_COUNT_DESC_TYPICAL
+                + TAG_COUNT_DESC_TYPICAL), command);
     }
 
     @Test
