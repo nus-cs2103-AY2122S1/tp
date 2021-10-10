@@ -4,30 +4,29 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-
+import seedu.address.model.util.SampleDataUtil;
 
 /**
- * Purges ProgrammerError.
+ * Fills the model with sample data if there is no data.
  */
-public class PurgeCommand extends Command {
+public class FillCommand extends Command {
 
-    public static final String COMMAND_WORD = "purge";
-    public static final String MESSAGE_SUCCESS = "ProgrammerError has been purged of data!";
-    public static final String MESSAGE_FAIL = "There is no data to purge!";
+    public static final String COMMAND_WORD = "fill";
+    public static final String MESSAGE_SUCCESS = "ProgrammerError has been filled with sample data!";
+    public static final String MESSAGE_FAIL = "There is existing data! Please purge the "
+                                                    + "existing data to import sample data";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (checkEmpty(model)) {
-            return new CommandResult(MESSAGE_FAIL);
+            model.setAddressBook(SampleDataUtil.fillSampleAddressBook());
+            return new CommandResult(MESSAGE_SUCCESS);
         }
-        model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_FAIL);
     }
 
     /**

@@ -10,13 +10,14 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 - [Features](#features)
   1. [View Sample Data](#view-sample-data)
   2. [Purge All Data: `purge`](#purge-all-data)
-  3. [View Help: `help`](#view-help)
-  4. [Add Student: `add`](#add-student)
-  5. [View Student Details: `view`](#view-student)
-  6. [Update Student's Grade: `update`](#update-student)
-  7. [Delete Student: `delete`](#delete-student)
-  8. [Exit: `exit`](#exit)
-  9. [Save data](#save-data)
+  3. [Fill Sample Data: `fill`](#fill-sample-data)
+  4. [View Help: `help`](#view-help)
+  5. [Add Student: `add`](#add-student)
+  6. [View Student Details: `view`](#view-student)
+  7. [Update Student's Grade: `update`](#update-student)
+  8. [Delete Student: `delete`](#delete-student)
+  9. [Exit: `exit`](#exit)
+  10. [Save data](#save-data)
 - [Command Summary](#command-summary)
 
 
@@ -42,6 +43,8 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
    * **`delete -sid A1234567X`**  : Deletes a student's record by the student ID
 
    * **`purge`**: Deletes all existing contacts
+    
+   * **`fill`**: Fills the app with sample data
 
    * **`exit`**: Exits the app.
 
@@ -63,9 +66,14 @@ Sample Data will be available on starting PE.
 
 ### <a name="purge-all-data"></a>2. Purge all Data: `purge`
 
-Purges all existing data to start adding your own data. \
-Clears all entries data in PE. \
+Purges all pre-existing sample data to start adding your own data or purge the user data. \
+Clears all data in PE. \
 Example: `purge`
+
+### <a name="fill-sample-data"></a>2. Fills Sample Data: `fill`
+
+If no data present, fills it with sample data. Otherwise, throws an error message. \
+Example: `fill`
 
 ### <a name="view-help"></a>3. View Help: `help`
 
@@ -136,6 +144,7 @@ ProgrammerError data is saved in the hard disk automatically after any command t
 Command | Format & Examples
 --------| ----------------------
 **Purge** | `purge`
+**Fill** | `fill`
 **Help** | `help`
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 **View** | `view -sid <STUDENT_ID>`
