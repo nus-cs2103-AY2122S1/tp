@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -24,56 +22,76 @@ import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
-class CreateFolderCommandTest {
+public class DeleteFolderCommandTest {
 
     @Test
     public void constructor_nullFolder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CreateFolderCommand(null));
+        assertThrows(NullPointerException.class, () -> new DeleteFolderCommand(null));
     }
 
     @Test
-    public void execute_folderAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingFolderAdded modelStub = new ModelStubAcceptingFolderAdded();
+    public void execute_deleteFolderFromModel_success() throws Exception {
         Folder validFolder = new Folder(new FolderName("Folder 1"));
+        ModelStubWithFolder modelWithFolderStub = new ModelStubWithFolder();
 
-        CommandResult commandResult = new CreateFolderCommand(validFolder).execute(modelStub);
+        modelWithFolderStub.addNewFolder(validFolder);
 
-        assertEquals(String.format(CreateFolderCommand.MESSAGE_SUCCESS, validFolder),
+        CommandResult commandResult = new DeleteFolderCommand(validFolder).execute(modelWithFolderStub);
+
+        assertEquals(String.format(DeleteFolderCommand.MESSAGE_SUCCESS, validFolder),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validFolder), modelStub.foldersAdded);
+        assertEquals(new ArrayList<>(), modelWithFolderStub.existingFolders);
     }
 
     @Test
-    public void execute_duplicateFolder_throwsCommandException() {
-        Folder validFolder = new Folder(new FolderName("Folder 1"));
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(validFolder);
-        ModelStub modelStub = new ModelStubWithFolder(validFolder);
+    public void execute_deleteNonExistingFolder_throwsCommandException() {
+        Folder firstFolder = new Folder(new FolderName("Folder 1"));
+        Folder otherFolder = new Folder(new FolderName("Folder 2"));
+        ModelStubWithFolder modelWithFolderStub = new ModelStubWithFolder();
 
-        assertThrows(CommandException.class, () -> createFolderCommand.execute(modelStub));
+        modelWithFolderStub.addNewFolder(firstFolder);
+        DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(otherFolder);
+
+        assertThrows(CommandException.class, () -> deleteFolderCommand.execute(modelWithFolderStub));
+    }
+
+    @Test
+    public void execute_deleteFromEmptyListOfFolders_throwsCommandException() {
+        Folder validFolder = new Folder(new FolderName("Folder 1"));
+        ModelStubWithFolder modelWithFolderStub = new ModelStubWithFolder();
+
+        DeleteFolderCommand deleteFolderCommand = new DeleteFolderCommand(validFolder);
+
+        assertThrows(CommandException.class, () -> deleteFolderCommand.execute(modelWithFolderStub));
     }
 
     @Test
     public void equals() {
-        Folder nus = new Folder(new FolderName("NUS"));
-        Folder cs = new Folder(new FolderName("CS"));
-        CreateFolderCommand addNusCommand = new CreateFolderCommand(nus);
-        CreateFolderCommand addCsCommand = new CreateFolderCommand(cs);
+        Folder myFolder = new Folder(new FolderName("myFolder"));
+        Folder otherFolder = new Folder(new FolderName("otherFolder"));
+        DeleteFolderCommand myFolderCommand = new DeleteFolderCommand(myFolder);
+        DeleteFolderCommand otherFolderCommand = new DeleteFolderCommand(otherFolder);
 
-        // same object -> returns true
-        assertTrue(addNusCommand.equals(addNusCommand));
+        // same Object -> returns true
+        assertTrue(myFolderCommand.equals(myFolderCommand));
+        assertTrue(otherFolderCommand.equals(otherFolderCommand));
 
         // same values -> returns true
-        CreateFolderCommand addNusCommandDuplicate = new CreateFolderCommand(nus);
-        assertTrue(addNusCommand.equals(addNusCommandDuplicate));
+        DeleteFolderCommand myFolderCommandDuplicate = new DeleteFolderCommand(myFolder);
+        assertTrue(myFolderCommand.equals(myFolderCommandDuplicate));
+        DeleteFolderCommand otherFolderCommandDuplicate = new DeleteFolderCommand(otherFolder);
+        assertTrue(otherFolderCommand.equals(otherFolderCommandDuplicate));
 
         // different types -> returns false
-        assertFalse(addNusCommand.equals(1));
+        assertFalse(myFolderCommand.equals(1));
+        assertFalse(otherFolderCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addNusCommand.equals(null));
+        assertFalse(myFolderCommand.equals(null));
+        assertFalse(otherFolderCommand.equals(null));
 
         // different folder -> returns false
-        assertFalse(addNusCommand.equals(addCsCommand));
+        assertFalse(myFolderCommand.equals(otherFolderCommand));
     }
 
     /**
@@ -179,42 +197,24 @@ class CreateFolderCommandTest {
     /**
      * A Model stub that contains a single folder.
      */
-    private class ModelStubWithFolder extends CreateFolderCommandTest.ModelStub {
-        private final Folder folder;
-
-        ModelStubWithFolder(Folder folder) {
-            requireNonNull(folder);
-            this.folder = folder;
-        }
+    private class ModelStubWithFolder extends DeleteFolderCommandTest.ModelStub {
+        private final ArrayList<Folder> existingFolders = new ArrayList<>();
 
         @Override
         public boolean hasFolder(Folder folder) {
             requireNonNull(folder);
-            return this.folder.isSameFolder(folder);
+            return existingFolders.stream().anyMatch(folder::isSameFolder);
+        }
+
+        public void addNewFolder(Folder folder) {
+            this.existingFolders.add(folder);
+        }
+
+        @Override
+        public void deleteFolder(Folder folder) {
+            requireNonNull(folder);
+            this.existingFolders.remove(folder);
         }
     }
 
-    /**
-     * A Model stub that always accept the folder being added.
-     */
-    private class ModelStubAcceptingFolderAdded extends CreateFolderCommandTest.ModelStub {
-        final ArrayList<Folder> foldersAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasFolder(Folder folder) {
-            requireNonNull(folder);
-            return foldersAdded.stream().anyMatch(folder::isSameFolder);
-        }
-
-        @Override
-        public void addFolder(Folder folder) {
-            requireNonNull(folder);
-            foldersAdded.add(folder);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
 }
