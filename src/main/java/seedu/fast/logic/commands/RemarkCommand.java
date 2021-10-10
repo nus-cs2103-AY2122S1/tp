@@ -12,7 +12,7 @@ import seedu.fast.model.person.Person;
 import seedu.fast.model.person.Remark;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the remark of an existing person in FAST.
  */
 public class RemarkCommand extends Command {
 

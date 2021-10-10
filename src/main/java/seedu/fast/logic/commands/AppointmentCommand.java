@@ -1,7 +1,11 @@
 package seedu.fast.logic.commands;
 
+import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_DELETE_APPOINTMENT;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -19,21 +23,40 @@ import seedu.fast.model.person.Person;
 public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "appointment";
-    public static final String DELETE_COMMAND = "delete";
+    public static final String APPOINTMENT_DELETE_COMMAND = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
             + " by the index number used in the last person listing.\n"
-            + "Parameters: INDEX (must be a positive integer), "
-            + "DATE (must be yyyy-mm-dd) or DELETE_COMMAND\n"
-            + PREFIX_APPOINTMENT + "[DATE] or [DELETE_COMMAND]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-10 or "
-            + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + DELETE_COMMAND;
+            + "Parameters (add): INDEX (must be a positive integer), "
+            + PREFIX_APPOINTMENT + "DATE (must be yyyy-mm-dd), "
+            + PREFIX_APPOINTMENT_TIME + "TIME (must be hh:mm (24-hour format)), "
+            + PREFIX_APPOINTMENT_VENUE + "VENUE (maximum 50 characters long)" + "\n"
+            + PREFIX_APPOINTMENT + "[DATE], "
+            + PREFIX_APPOINTMENT_TIME + "[TIME], "
+            + PREFIX_APPOINTMENT_VENUE + "[VENUE]" + "\n"
+            + "Note: Appointment Time and Appointment Venue are optional, can be excluded.\n"
+            + "Example 1: " + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + "2021-10-25 "
+            + PREFIX_APPOINTMENT_TIME + "22:15 "
+            + PREFIX_APPOINTMENT_VENUE + "Orchard Central" + "\n"
+            + "Example 2: " + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + "2021-10-25 "
+            + PREFIX_APPOINTMENT_TIME + "19:00 \n"
+            + "Example 3: " + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + "2021-10-25 "
+            + PREFIX_APPOINTMENT_VENUE + "Ion \n"
+            + "Example 4: " + COMMAND_WORD + " 1 "
+            + PREFIX_APPOINTMENT + "2021-10-25 \n\n"
+            + "Parameters (delete): INDEX (must be a positive integer), "
+            + PREFIX_DELETE_APPOINTMENT + APPOINTMENT_DELETE_COMMAND + "\n"
+            + "Example 5: " + COMMAND_WORD + " 1 "
+            + PREFIX_DELETE_APPOINTMENT + APPOINTMENT_DELETE_COMMAND;
 
-    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s";
-    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s %4$s";
+    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s %3$s "
+            + "%4$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_FAILED = "No appointment with %1$s yet!";
 
     private final Index index;
     private final Appointment appointment;
@@ -77,14 +100,25 @@ public class AppointmentCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit, Person editedPerson) {
         String message = "";
-        if (editedPerson.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT)) {
+        boolean isEmptyStatusAfter = editedPerson.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT);
+        boolean isEmptyStatusBefore = personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT);
+
+        if (isEmptyStatusAfter && !isEmptyStatusBefore) {
             message = MESSAGE_DELETE_APPOINTMENT_SUCCESS;
-        } else if (personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT)) {
+        } else if (isEmptyStatusAfter && isEmptyStatusBefore) {
+            message = MESSAGE_DELETE_APPOINTMENT_FAILED;
+        } else if (isEmptyStatusBefore && !isEmptyStatusAfter) {
             message = MESSAGE_ADD_APPOINTMENT_SUCCESS;
-        } else {
+        } else if (!isEmptyStatusBefore && !isEmptyStatusAfter) {
             message = MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
+        } else {
+            // should never reach here
+            message = MESSAGE_INVALID_COMMAND_FORMAT;
         }
-        return String.format(message, editedPerson.getName().fullName, editedPerson.getAppointment().getDate());
+
+        return String.format(message, editedPerson.getName().fullName, editedPerson.getAppointment().getDate(),
+                editedPerson.getAppointment().getTime(),
+                editedPerson.getAppointment().getVenue());
     }
 
     @Override

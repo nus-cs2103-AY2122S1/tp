@@ -11,7 +11,7 @@ import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from FAST.
  */
 public class DeleteCommand extends Command {
 
