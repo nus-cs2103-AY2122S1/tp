@@ -155,16 +155,16 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseVaccStatus_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseVaccStatus_validValueWithoutWhitespace_returnsVaccStatus() throws Exception {
         VaccStatus expectedVaccStatus = new VaccStatus(VALID_VACCSTATUS);
         assertEquals(expectedVaccStatus, ParserUtil.parseVaccStatus(VALID_VACCSTATUS));
     }
 
     @Test
-    public void parseVaccStatus_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String vaccStatusWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+    public void parseVaccStatus_validValueWithWhitespace_returnsTrimmedVaccStatus() throws Exception {
+        String vaccStatusWithWhitespace = WHITESPACE + VALID_VACCSTATUS + WHITESPACE;
         VaccStatus expectedVaccStatus = new VaccStatus(VALID_VACCSTATUS);
-        assertEquals(expectedVaccStatus, ParserUtil.parseName(vaccStatusWithWhitespace));
+        assertEquals(expectedVaccStatus, ParserUtil.parseVaccStatus(vaccStatusWithWhitespace));
     }
 
     @Test
@@ -178,15 +178,15 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseFaculty_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseFaculty_validValueWithoutWhitespace_returnsFaculty() throws Exception {
         Faculty expectedFaculty = new Faculty(VALID_FACULTY);
-        assertEquals(expectedFaculty, ParserUtil.parseName(VALID_FACULTY));
+        assertEquals(expectedFaculty, ParserUtil.parseFaculty(VALID_FACULTY));
     }
 
     @Test
-    public void parseFaculty_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String facultyWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
+    public void parseFaculty_validValueWithWhitespace_returnsTrimmedFaculty() throws Exception {
+        String facultyWithWhitespace = WHITESPACE + VALID_FACULTY + WHITESPACE;
         Faculty expectedFaculty = new Faculty(VALID_FACULTY);
-        assertEquals(expectedFaculty, ParserUtil.parseName(facultyWithWhitespace));
+        assertEquals(expectedFaculty, ParserUtil.parseFaculty(facultyWithWhitespace));
     }
 }

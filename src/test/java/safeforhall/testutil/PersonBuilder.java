@@ -2,8 +2,8 @@ package safeforhall.testutil;
 
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
-//import safeforhall.model.person.LastCollectionDate;
-//import safeforhall.model.person.LastFetDate;
+import safeforhall.model.person.LastCollectionDate;
+import safeforhall.model.person.LastFetDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
@@ -22,8 +22,8 @@ public class PersonBuilder {
     public static final String DEFAULT_VACCSTATUS = "T";
     public static final String DEFAULT_FACULTY = "SoC";
     // TODO
-    /*public static final String DEFAULT_FETDATE = "TODO";
-    public static final String DEFAULT_COLLECTDATE = "TODO";*/
+    public static final String DEFAULT_FETDATE = null;
+    public static final String DEFAULT_COLLECTDATE = null;
 
     private Name name;
     private Room room;
@@ -31,8 +31,8 @@ public class PersonBuilder {
     private Email email;
     private VaccStatus vaccStatus;
     private Faculty faculty;
-    /*private LastFetDate lastFetDate;
-    private LastCollectionDate lastCollectionDate;*/
+    private LastFetDate lastFetDate;
+    private LastCollectionDate lastCollectionDate;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,8 +44,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         vaccStatus = new VaccStatus(DEFAULT_VACCSTATUS);
         faculty = new Faculty(DEFAULT_FACULTY);
-        /*lastFetDate = new LastFetDate(DEFAULT_FETDATE);
-        lastCollectionDate = new LastCollectionDate(DEFAULT_COLLECTDATE);*/
+        lastFetDate = new LastFetDate(DEFAULT_FETDATE);
+        lastCollectionDate = new LastCollectionDate(DEFAULT_COLLECTDATE);
     }
 
     /**
@@ -58,8 +58,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         vaccStatus = personToCopy.getVaccStatus();
         faculty = personToCopy.getFaculty();
-        /*lastFetDate = personToCopy.getLastFetDate();
-        lastCollectionDate = personToCopy.getLastCollectionDate();*/
+        lastFetDate = personToCopy.getLastFetDate();
+        lastCollectionDate = personToCopy.getLastCollectionDate();
     }
 
     /**
@@ -110,24 +110,24 @@ public class PersonBuilder {
         return this;
     }
 
-    ///**
-    //* Sets the {@code LastFetDate} of the {@code Person} that we are building.
-    //*/
-    /*public PersonBuilder withFet(String lastFetDate) {
+    /**
+    * Sets the {@code LastFetDate} of the {@code Person} that we are building.
+    */
+    public PersonBuilder withFet(String lastFetDate) {
         this.lastFetDate = new LastFetDate(lastFetDate);
         return this;
-    }*/
+    }
 
-    ///**
-    //* Sets the {@code LastCollectionDate} of the {@code Person} that we are building.
-    //*/
-    /*public PersonBuilder withCollection(String lastCollectionDate) {
+    /**
+    * Sets the {@code LastCollectionDate} of the {@code Person} that we are building.
+    */
+    public PersonBuilder withCollection(String lastCollectionDate) {
         this.lastCollectionDate = new LastCollectionDate(lastCollectionDate);
         return this;
-    }*/
+    }
 
     public Person build() {
-        return new Person(name, room, phone, email, vaccStatus, faculty, null, null);
+        return new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
     }
 
 }

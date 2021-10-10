@@ -21,7 +21,9 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_EMAIL + "EMAIL "
             + CliSyntax.PREFIX_ROOM + "ROOM "
             + CliSyntax.PREFIX_VACCSTATUS + "VACCINATION STATUS "
-            + CliSyntax.PREFIX_FACULTY + "FACULTY \n"
+            + CliSyntax.PREFIX_FACULTY + "FACULTY "
+            + CliSyntax.PREFIX_FETDATE + "LAST FET DATE"
+            + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE \n"
 
             + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_NAME + "John Doe "
@@ -29,7 +31,9 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
             + CliSyntax.PREFIX_ROOM + "A100 "
             + CliSyntax.PREFIX_VACCSTATUS + "T "
-            + CliSyntax.PREFIX_FACULTY + "SoC ";
+            + CliSyntax.PREFIX_FACULTY + "SoC "
+            + CliSyntax.PREFIX_FETDATE + "TODO"
+            + CliSyntax.PREFIX_COLLECTIONDATE + "TODO";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

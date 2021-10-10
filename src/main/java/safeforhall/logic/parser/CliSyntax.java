@@ -12,4 +12,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ROOM = new Prefix("r/");
     public static final Prefix PREFIX_VACCSTATUS = new Prefix("v/");
     public static final Prefix PREFIX_FACULTY = new Prefix("f/");
+    public static final Prefix PREFIX_FETDATE = new Prefix("fd/");
+    public static final Prefix PREFIX_COLLECTIONDATE = new Prefix("cd/");
+
 }

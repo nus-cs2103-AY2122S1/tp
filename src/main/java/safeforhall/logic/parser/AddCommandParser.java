@@ -1,8 +1,10 @@
 package safeforhall.logic.parser;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_COLLECTIONDATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_FETDATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
@@ -33,7 +35,8 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY);
+                        PREFIX_EMAIL, PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY,
+                        PREFIX_FETDATE, PREFIX_COLLECTIONDATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY)
@@ -47,7 +50,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Room room = ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get());
         VaccStatus vaccStatus = ParserUtil.parseVaccStatus(argMultimap.getValue(PREFIX_VACCSTATUS).get());
         Faculty faculty = ParserUtil.parseFaculty(argMultimap.getValue(PREFIX_FACULTY).get());
-
 
         Person person = new Person(name, room, phone, email, vaccStatus, faculty, null, null);
         return new AddCommand(person);
