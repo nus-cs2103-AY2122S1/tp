@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+
 <VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <Label text="Week..." />
-   <HBox prefHeight="100.0" prefWidth="200.0">
-      <children>
-         <ListView prefHeight="200.0" prefWidth="200.0" />
-      </children>
-   </HBox>
+   <children>
+      <Label fx:id="weekLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" text="week" textAlignment="CENTER" textFill="WHITE" />
+      <HBox fx:id="dailyHBox" VBox.vgrow="ALWAYS" />
+   </children>
 </VBox>
