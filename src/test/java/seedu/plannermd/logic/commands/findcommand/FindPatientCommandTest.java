@@ -9,16 +9,12 @@ import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 import static seedu.plannermd.testutil.patient.TypicalPatients.CARL;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ELLE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
-//import static seedu.plannermd.testutil.patient.TypicalPatients.CARL;
-//import static seedu.plannermd.testutil.patient.TypicalPatients.ELLE;
-//import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.UserPrefs;

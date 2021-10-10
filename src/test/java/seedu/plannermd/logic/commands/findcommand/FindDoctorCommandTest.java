@@ -1,22 +1,24 @@
 package seedu.plannermd.logic.commands.findcommand;
 
-import org.junit.jupiter.api.Test;
-import seedu.plannermd.model.Model;
-import seedu.plannermd.model.ModelManager;
-import seedu.plannermd.model.UserPrefs;
-import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_DOCTORS_LISTED_OVERVIEW;
-import static seedu.plannermd.commons.core.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_CARL;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_ELLE;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_FIONA;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.plannermd.model.Model;
+import seedu.plannermd.model.ModelManager;
+import seedu.plannermd.model.UserPrefs;
+import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for

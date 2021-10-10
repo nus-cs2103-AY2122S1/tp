@@ -1,12 +1,12 @@
 package seedu.plannermd.logic.parser;
 
-import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
-import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
+import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
+import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 public class FindDoctorCommandParser implements Parser<FindDoctorCommand> {
     /**

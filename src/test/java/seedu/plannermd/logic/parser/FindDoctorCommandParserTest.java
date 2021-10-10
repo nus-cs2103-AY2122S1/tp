@@ -1,14 +1,15 @@
 package seedu.plannermd.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
-import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
-
-import java.util.Arrays;
-
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
+import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 class FindDoctorCommandParserTest {
 
@@ -30,5 +31,4 @@ class FindDoctorCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindDoctorCommand);
     }
-
 }

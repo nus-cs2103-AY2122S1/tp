@@ -12,11 +12,8 @@ import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
  * Keyword matching is case insensitive.
  */
 public class FindPatientCommand extends FindCommand {
-    private final NameContainsKeywordsPredicate predicate;
-
     public FindPatientCommand(NameContainsKeywordsPredicate predicate) {
         super(predicate);
-        this.predicate = predicate;
     }
 
     @Override

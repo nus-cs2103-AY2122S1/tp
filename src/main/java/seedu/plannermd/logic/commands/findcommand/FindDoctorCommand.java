@@ -1,11 +1,11 @@
 package seedu.plannermd.logic.commands.findcommand;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Finds and lists all doctors in PlannerMD whose name contains any of the argument keywords.

@@ -49,7 +49,6 @@ public class PlannerMdParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -103,11 +102,10 @@ public class PlannerMdParser {
 
     private Command parseDoctorCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
-
-            case FindDoctorCommand.COMMAND_WORD:
-                return new FindDoctorCommandParser().parse(arguments);
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        case FindDoctorCommand.COMMAND_WORD:
+            return new FindDoctorCommandParser().parse(arguments);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 }

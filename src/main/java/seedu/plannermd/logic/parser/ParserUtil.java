@@ -142,12 +142,16 @@ public class ParserUtil {
     /**
      * Parses a {@code String risk} into an {@code Risk}.
      * Leading and trailing whitespaces will be trimmed.
+     * Optional Risk field accepts an empty string as UNCLASSIFIED.
      *
      * @throws ParseException if the given {@code risk} is invalid.
      */
     public static Risk parseRisk(String risk) throws ParseException {
         requireNonNull(risk);
         String trimmedAndUpperCaseRisk = risk.trim().toUpperCase();
+        if (trimmedAndUpperCaseRisk.isEmpty()) {
+            return Risk.getUnclassifiedRisk();
+        }
         if (!Risk.isValidRisk(trimmedAndUpperCaseRisk)) {
             throw new ParseException(Risk.MESSAGE_CONSTRAINTS);
         }
