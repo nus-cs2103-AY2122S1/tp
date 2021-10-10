@@ -1,5 +1,7 @@
 package seedu.address.model.position;
 
+import seedu.address.model.applicant.Applicant;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -15,8 +17,14 @@ public class Position {
 
     private final Description description;
 
-    // Data field is empty
-    private Integer rejectionRate;
+    // Data fields
+    private int rejectionRate;
+
+    // Total number of applicants for this position.
+    private int noOfApplicants;
+
+    // Total number of accepted applicants for this position.
+    private int noOfAcceptedApplicants;
 
     /**
      * Every field must be present and not null.
@@ -83,4 +91,56 @@ public class Position {
         return builder.toString();
     }
 
+    /* Data calculations and others for Rejection rates */
+    public int getNoOfApplicants() {
+        return this.noOfApplicants;
+    }
+
+    public int getNoOfAcceptedApplicants() {
+        return this.noOfAcceptedApplicants;
+    }
+
+    public void updateNoOfApplicants(int newTotal) {
+        this.noOfApplicants = newTotal;
+    }
+
+    public void updateNoOfAcceptedApplicants(int newTotal) {
+        this.noOfAcceptedApplicants = newTotal;
+    }
+
+    /**
+     * Returns the rejection rate of a current position.
+     *
+     * @return The rejection rate of the position.
+     */
+    public int calculateRejectionRate() {
+        int newRate;
+        try {
+            newRate = Math.round((this.noOfApplicants - this.noOfAcceptedApplicants) / this.noOfApplicants);
+        } catch (ArithmeticException e) {
+            newRate = 0;
+        }
+        return newRate;
+    }
+
+    /**
+     * Updates the rejection rate of current position.
+     *
+     * @param total Total number of applicants in current position.
+     * @param count Total number of accepted applicants in current position.
+     */
+    public void updateRejectionRate(int total, int count) {
+        updateNoOfAcceptedApplicants(count);
+        updateNoOfApplicants(total);
+        this.rejectionRate = calculateRejectionRate();
+    }
+
+    /**
+     * Returns the rejection rate of the current position.
+     *
+     * @return Rejection rate of current position.
+     */
+    public int getRejectionRate() {
+        return this.rejectionRate;
+    }
 }
