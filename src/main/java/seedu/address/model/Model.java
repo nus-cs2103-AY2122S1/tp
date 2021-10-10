@@ -123,7 +123,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
-  
+
     /**
      * Load the given {@code Member} object's task list.
      */

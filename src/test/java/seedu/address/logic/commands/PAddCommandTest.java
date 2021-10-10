@@ -172,7 +172,8 @@ public class PAddCommandTest {
 
         @Override
         public ObservableList<Event> getFilteredEventList() {
-        
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void loadTaskList(Member member) {
             throw new AssertionError("This method should not be called.");
@@ -180,7 +181,9 @@ public class PAddCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
-        
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void hasTask(Member member, Task task) {
             throw new AssertionError("This method should not be called.");
