@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -16,7 +17,7 @@ import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Appointment;
 
-public class AppointmentCommandParser implements Parser {
+public class AppointmentCommandParser implements Parser<AppointmentCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AppointmentCommand
@@ -25,7 +26,8 @@ public class AppointmentCommandParser implements Parser {
      */
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT, PREFIX_APPOINTMENT_TIME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT,
+                PREFIX_APPOINTMENT_TIME, PREFIX_APPOINTMENT_VENUE);
 
         Index index;
         try {
@@ -41,7 +43,10 @@ public class AppointmentCommandParser implements Parser {
         String retrievedTime = argMultimap.getValue(PREFIX_APPOINTMENT_TIME).orElse(Appointment.NO_TIME);
         String parsedTime = parseTimeString(retrievedTime);
 
-        return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime));
+        String retrievedVenue = argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).orElse(Appointment.NO_VENUE);
+        String parsedVenue = parseVenueString(retrievedVenue);
+
+        return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime, parsedVenue));
     }
 
     /**
@@ -72,7 +77,7 @@ public class AppointmentCommandParser implements Parser {
         } else {
             date = Appointment.NO_APPOINTMENT;
         }
-        return date;
+        return date.trim();
     }
 
     /**
@@ -107,6 +112,23 @@ public class AppointmentCommandParser implements Parser {
             }
         }
 
-        return time;
+        return time.trim();
+    }
+
+    /**
+     * Checks if the retrieved venue from user input is too long.
+     * The venue description should not be longer than 50 characters.
+     *
+     * If the retrieved venue if longer than 50 characters, the string will be truncated.
+     *
+     * @param venue Time String retrieved from user input
+     * @return A String representing the venue (no longer than 50 characters).
+     */
+    private String parseVenueString(String venue) throws ParseException {
+        if (venue.length() > 50) {
+            return venue.substring(0, 49);
+        }
+
+        return venue.trim();
     }
 }
