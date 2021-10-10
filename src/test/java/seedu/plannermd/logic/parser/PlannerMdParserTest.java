@@ -24,6 +24,7 @@ import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
+import seedu.plannermd.logic.commands.listcommand.ListDoctorCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
@@ -131,10 +132,17 @@ public class PlannerMdParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_listPatient() throws Exception {
         assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD, patientState) instanceof ListPatientCommand);
         assertTrue(parser.parseCommand(ListPatientCommand.COMMAND_WORD + " 3",
                 patientState) instanceof ListPatientCommand);
+    }
+
+    @Test
+    public void parseCommand_listDoctor() throws Exception {
+        assertTrue(parser.parseCommand(ListDoctorCommand.COMMAND_WORD, doctorState) instanceof ListDoctorCommand);
+        assertTrue(parser.parseCommand(
+                ListDoctorCommand.COMMAND_WORD + " 3", doctorState) instanceof ListDoctorCommand);
     }
 
     @Test
