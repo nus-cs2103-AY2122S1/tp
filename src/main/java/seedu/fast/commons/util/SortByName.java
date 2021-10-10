@@ -9,7 +9,7 @@ public class SortByName implements Comparator<Person> {
     public static final String KEYWORD = "name";
 
     @Override
-    public int compare(Person o1, Person o2) {
-        return o1.getName().fullName.compareTo(o2.getName().fullName);
+    public int compare(Person p1, Person p2) {
+        return p1.getName().fullName.compareTo(p2.getName().fullName);
     }
 }

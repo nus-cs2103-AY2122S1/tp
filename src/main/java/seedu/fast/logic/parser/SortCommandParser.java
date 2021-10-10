@@ -4,6 +4,7 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
+import seedu.fast.commons.util.SortByAppointment;
 import seedu.fast.commons.util.SortByName;
 import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.commands.SortCommand;
@@ -31,6 +32,9 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         case SortByName.KEYWORD:
             return new SortCommand(new SortByName());
+
+        case SortByAppointment.KEYWORD:
+            return new SortCommand(new SortByAppointment());
 
         default:
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
