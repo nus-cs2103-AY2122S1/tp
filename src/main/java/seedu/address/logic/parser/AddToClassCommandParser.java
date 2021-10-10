@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.stream.Stream;
 
@@ -15,15 +14,15 @@ public class AddToClassCommandParser implements Parser<AddToClassCommand> {
     @Override
     public AddToClassCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT, PREFIX_TUITION_CLASS);
+            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_TUITION_CLASS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT, PREFIX_TUITION_CLASS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_TUITION_CLASS)
                     || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddToClassCommand.MESSAGE_USAGE));
         }
 
-        Index studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT).get());
+        Index studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
         Index classIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUITION_CLASS).get());
         return new AddToClassCommand(studentIndex, classIndex);
     }

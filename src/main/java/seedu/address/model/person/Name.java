@@ -11,6 +11,9 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS_ADD_STUDENT_TO_CLASS =
+            "Use comma to separate names, and there should be no space around comma." + "\n"
+            + "Example: s/Jason,James,Felicia";
 
     /*
      * The first character of the address must not be a whitespace,

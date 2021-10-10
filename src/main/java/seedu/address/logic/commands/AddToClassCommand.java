@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,13 +17,18 @@ import seedu.address.model.tuition.TuitionClass;
 public class AddToClassCommand extends Command {
     public static final String COMMAND_WORD = "addtoclass";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add students to existing class. "
+            + "\n"
             + "Parameters: "
-            + PREFIX_STUDENT + "STUDENT_INDEX"
-            + PREFIX_TUITION_CLASS + "CLASS_INDEX";
+            + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
+            + PREFIX_TUITION_CLASS + "CLASS_INDEX"
+            + "\n" + "Example: " + COMMAND_WORD + " si/3 tc/3";
     public static final String MESSAGE_SUCCESS = "New student %1$s is added to class: %2$s";
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
-    private static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found.";
-    private static final String MESSAGE_CLASS_NOT_FOUND = "This tuition class is not found.";
+    private static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found. Please key in a valid index."
+            + "\n" + "Example: " + COMMAND_WORD + " si/3 tc/3";
+    private static final String MESSAGE_CLASS_NOT_FOUND = "This tuition class is not found. "
+            + "Please key in a valid index."
+            + "\n" + "Example: " + COMMAND_WORD + " si/3 tc/3";
     private static final String MESSAGE_CLASS_IS_FULL = "Cannot add student as the class limit has been exceeded.";
     private Index studentIndex;
     private Index classIndex;
