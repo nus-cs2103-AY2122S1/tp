@@ -37,8 +37,8 @@ public class WeeklyPanel extends UiPart<Region> {
             VBox placeHolderVBox = new VBox();
             placeHolderLabel.setText(indexToDay(i));
             placeHolderVBox.getChildren().add(placeHolderLabel);
-            placeHolderVBox.setStyle("-fx-border-style: solid inside;" +
-                    "-fx-border-width: 1;");
+            placeHolderVBox.setStyle("-fx-border-style: solid inside;"
+                    + "-fx-border-width: 1;");
             dailyHBox.widthProperty().addListener(e -> placeHolderVBox.setPrefWidth(dailyHBox.getWidth() / 7));
             dailyHBox.getChildren().add(0, placeHolderVBox);
         }
