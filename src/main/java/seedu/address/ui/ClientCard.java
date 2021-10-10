@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+//import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -49,7 +49,7 @@ public class ClientCard extends UiPart<Region> {
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
-        phone.setText(client.getPhoneNumber().phoneNumber);
+        phone.setText(client.getPhoneNumber().getPhoneNumber());
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
 //        person.getTags().stream()

@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+//import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -47,8 +47,8 @@ public class ProductCard extends UiPart<Region> {
         this.product = product;
         id.setText(displayedIndex + ". ");
         name.setText(product.getName().fullName);
-        unitPrice.setText(product.getUnitPrice().unitPrice);
-        quantity.setText(product.getQuantity().quantity);
+        unitPrice.setText(product.getUnitPrice().getUnitPrice());
+        quantity.setText(product.getQuantity().getQuantity());
         //        person.getTags().stream()
         //                .sorted(Comparator.comparing(tag -> tag.tagName))
         //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
