@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,6 +14,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Status;
 
 /**
  * Deletes a person identified using it's displayed index or name from the address book.
@@ -29,9 +32,12 @@ public class DeleteCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_NAME + "Alex Yeoh";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted these people:\n";
 
-    private final Index targetIndex;
-    private final Name name;
+    private Index targetIndex = null;
+    private Name name = null;
+    private Role role = null;
+    private Status status = null;
 
     /**
      * Constructs delete command using a targetIndex.
@@ -40,7 +46,6 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
-        this.name = null;
     }
 
     /**
@@ -50,32 +55,68 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(Name name) {
         this.name = name;
-        this.targetIndex = null;
+    }
+
+    /**
+     * Constructs delete command using a role.
+     *
+     * @param role The role of the people to be deleted
+     */
+    public DeleteCommand(Role role) {
+        this.role = role;
+    }
+
+    /**
+     * Constructs delete command using a status.
+     *
+     * @param status The status of the people to be deleted
+     */
+    public DeleteCommand(Status status) {
+        this.status = status;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        Person staffToDelete;
+        List<Person> staffs = new ArrayList<>(model.getAddressBook().getPersonList());
+        StringBuilder deletedPeople = new StringBuilder(MESSAGE_DELETE_PEOPLE_SUCCESS);
 
-        if (targetIndex != null) {
+        if (role != null) {
+            for (Person staff : staffs) {
+                if (staff.getRole() == role) {
+                    model.deletePerson(staff);
+                    deletedPeople.append(staff).append("\n");
+                }
+            }
+            return new CommandResult(deletedPeople.toString());
+        } else if (status != null) {
+            for (Person staff : staffs) {
+                if (staff.getStatus() == status) {
+                    model.deletePerson(staff);
+                    deletedPeople.append(staff).append("\n");
+                }
+            }
+            return new CommandResult(deletedPeople.toString());
+        } else if (targetIndex != null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
-            staffToDelete = lastShownList.get(targetIndex.getZeroBased());
+            Person staffToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deletePerson(staffToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete));
         } else {
             int index = getIndexByName(name, lastShownList);
             if (index == INVALID_INDEX) {
                 throw new CommandException(Messages.MESSAGE_NAME_NOT_FOUND);
             }
 
-            staffToDelete = lastShownList.get(index);
+            Person staffToDelete = lastShownList.get(index);
+            model.deletePerson(staffToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete));
         }
 
-        model.deletePerson(staffToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, staffToDelete));
     }
 
     private int getIndexByName(Name name, List<Person> lastShownList) {
@@ -96,7 +137,7 @@ public class DeleteCommand extends Command {
             return false;
         }
         DeleteCommand that = (DeleteCommand) o;
-        return Objects.equals(targetIndex, that.targetIndex) && Objects.equals(name, that.name);
+        return Objects.equals(targetIndex, that.targetIndex) && Objects.equals(name, that.name)
+                && role == that.role && status == that.status;
     }
-
 }
