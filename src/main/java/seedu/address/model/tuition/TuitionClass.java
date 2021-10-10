@@ -17,6 +17,8 @@ public class TuitionClass {
     private final Counter counter;
     private final Timeslot timeslot;
     private StudentList studentList;
+    private int id;
+
 
     /**
      * Constructor for Tuition Class.
@@ -33,6 +35,27 @@ public class TuitionClass {
         this.counter = counter;
         this.timeslot = timeslot;
         this.studentList = studentList;
+        this.id = this.hashCode();
+        MOST_RECENT = this;
+    }
+
+    /**
+     * Constructor for Tuition Class used in reading data.
+     *
+     * @param name
+     * @param limit
+     * @param counter
+     * @param timeslot
+     * @param studentList
+     * @param id
+     */
+    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList, int id) {
+        this.name = name;
+        this.limit = limit;
+        this.counter = counter;
+        this.timeslot = timeslot;
+        this.studentList = studentList;
+        this.id = id;
         MOST_RECENT = this;
     }
 
@@ -62,6 +85,10 @@ public class TuitionClass {
 
     public boolean isFull() {
         return this.getStudentCount() == this.limit.getLimit();
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**
