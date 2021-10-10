@@ -93,7 +93,7 @@ public class RemarkDoctorCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDoctorList().size() + 1);
         RemarkCommand remarkCommand = new RemarkDoctorCommand(outOfBoundIndex, new Remark(SAMPLE_REMARK));
 
-        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
     }
 
     /**
@@ -111,7 +111,7 @@ public class RemarkDoctorCommandTest {
         RemarkDoctorCommand remarkCommand = new RemarkDoctorCommand(outOfBoundIndex,
                 new Remark(SAMPLE_REMARK));
 
-        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
     }
 
     @Test

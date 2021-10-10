@@ -47,7 +47,7 @@ public class RemarkDoctorCommand extends RemarkCommand {
         List<Doctor> lastShownList = model.getFilteredDoctorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
         }
 
         Doctor doctorToEdit = lastShownList.get(index.getZeroBased());
