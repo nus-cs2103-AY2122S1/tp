@@ -13,12 +13,12 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    private final String STUDENT_NAME_LABEL = "";
-    private final String STUDENT_PHONE_LABEL = "Mobile";
-    private final String PARENT_NAME_LABEL = "Parent";
-    private final String PARENT_PHONE_LABEL = "Parent Mobile";
-    private final String PROGRESS_LABEL = "Progress";
-    private final String PAYMENT_STATUS_LABEL = "";
+    private static final String STUDENT_NAME_LABEL = "";
+    private static final String STUDENT_PHONE_LABEL = "Mobile";
+    private static final String PARENT_NAME_LABEL = "Parent";
+    private static final String PARENT_PHONE_LABEL = "Parent Mobile";
+    private static final String PROGRESS_LABEL = "Progress";
+    private static final String PAYMENT_STATUS_LABEL = "";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -81,6 +81,15 @@ public class PersonCard extends UiPart<Region> {
                 && person.equals(card.person);
     }
 
+    /**
+     * Formats the text for a PersonCard to include both the name and value if present.
+     * If the value is empty, it is displayed as (None).
+     * If the name is empty, we will display only the value.
+     *
+     * @param fieldName The name of the field
+     * @param value The value of the field
+     * @return A formatted string that includes the field name and its value
+     */
     public static String formatCardLabel(String fieldName, String value) {
         if (value.equals("")) {
             value = "(None)";
