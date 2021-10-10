@@ -13,7 +13,7 @@ import dash.testutil.PersonBuilder;
 import dash.testutil.TypicalPersons;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddPersonCommand}.
  */
 public class AddPersonCommandIntegrationTest {
 
