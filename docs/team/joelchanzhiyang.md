@@ -16,5 +16,6 @@ claims to a contact
 * **Documentation**: 
   * Wrote documentation for claims feature
 * **Community**:
+  * PRs Reviewed (with non-trivial comments): [#23](https://github.com/AY2122S1-CS2103T-T17-4/tp/pull/23)
 * **Tools**: 
-    * Added CodeCov integration to the repo
+  * Added CodeCov integration to the repo
