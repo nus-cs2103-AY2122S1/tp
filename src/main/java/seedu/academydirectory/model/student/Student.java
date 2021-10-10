@@ -130,6 +130,7 @@ public class Student {
      */
     @Override
     public boolean equals(Object other) {
+        System.out.println(other);
         if (other == this) {
             return true;
         }

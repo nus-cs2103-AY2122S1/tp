@@ -81,7 +81,8 @@ public class StudioRecord implements Information {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StudioRecord // instanceof handles nulls
-                && attendance.equals(((StudioRecord) other).attendance));
+                && attendance.equals(((StudioRecord) other).attendance)
+                && participation.equals((((StudioRecord) other).participation)));
     }
 
 }

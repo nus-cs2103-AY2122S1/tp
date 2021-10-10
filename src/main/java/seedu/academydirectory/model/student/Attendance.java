@@ -2,6 +2,8 @@ package seedu.academydirectory.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+
 public class Attendance implements Information {
 
     private boolean[] attendanceArray;
@@ -105,6 +107,6 @@ public class Attendance implements Information {
 
     @Override
     public int hashCode() {
-        return attendanceArray.hashCode();
+        return Arrays.hashCode(attendanceArray);
     }
 }

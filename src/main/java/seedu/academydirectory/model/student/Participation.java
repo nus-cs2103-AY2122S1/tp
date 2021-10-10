@@ -2,6 +2,8 @@ package seedu.academydirectory.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+
 public class Participation implements Information {
 
     private static final String VALIDATION_REGEX = "^-?[0-9]\\d*$";
@@ -125,6 +127,6 @@ public class Participation implements Information {
 
     @Override
     public int hashCode() {
-        return participationArray.hashCode();
+        return Arrays.hashCode(participationArray);
     }
 }
