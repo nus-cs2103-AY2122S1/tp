@@ -17,6 +17,7 @@ import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
+import seedu.plannermd.logic.commands.listcommand.ListDoctorCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
@@ -104,6 +105,8 @@ public class PlannerMdParser {
         switch (commandWord) {
         case FindDoctorCommand.COMMAND_WORD:
             return new FindDoctorCommandParser().parse(arguments);
+        case ListDoctorCommand.COMMAND_WORD:
+            return new ListDoctorCommand();
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
