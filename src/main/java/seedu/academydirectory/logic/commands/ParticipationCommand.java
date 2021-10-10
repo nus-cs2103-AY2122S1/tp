@@ -56,6 +56,11 @@ public class ParticipationCommand extends Command {
             }
         }
 
+        if (participationUpdate > 0) {
+            AttendanceCommand attendanceCommand = new AttendanceCommand(true, studioSession, indexArrayList);
+            attendanceCommand.execute(model);
+        }
+
         for (Index index : indexArrayList) {
             Student studentToEdit = lastShownList.get(index.getZeroBased());
             Participation participationToEdit = studentToEdit.getParticipation();

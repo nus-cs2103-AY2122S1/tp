@@ -42,6 +42,7 @@ public class ParticipationCommandTest {
         INDEX_ARRAYLIST_STUB.add(INDEX_STUB);
         INTEGER_ARRAY_STUB[0] = PARTICIPATION_COUNT_STUB;
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student firstStudentCopy = new StudentBuilder(firstStudent).withParticipation(INTEGER_ARRAY_STUB).build();
         Student editedStudent = new StudentBuilder(firstStudent).withParticipation(INTEGER_ARRAY_STUB).build();
 
         ParticipationCommand participationCommand =
@@ -50,14 +51,27 @@ public class ParticipationCommandTest {
 
         Model expectedModel = new ModelManager(new AcademyDirectory(model.getAcademyDirectory()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
+
+        // attendance before command is false
+        assertFalse(editedStudent.getAttendance().getAttendanceArray()[STUDIO_SESSION_STUB - 1]);
+
+        // assert command success
         assertCommandSuccess(participationCommand, model, expectedMessage, expectedModel);
+
+        // attendance after command is true
+        assertTrue(editedStudent.getAttendance().getAttendanceArray()[STUDIO_SESSION_STUB - 1]);
 
         INTEGER_ARRAY_STUB[0] = 0;
         Student otherEditedStudent = new StudentBuilder(firstStudent).withParticipation(INTEGER_ARRAY_STUB).build();
         expectedModel.setStudent(editedStudent, otherEditedStudent);
+
         ParticipationCommand resetParticipationCommand =
                 new ParticipationCommand(-100, STUDIO_SESSION_STUB, INDEX_ARRAYLIST_STUB);
+
         assertCommandSuccess(resetParticipationCommand, model, expectedMessage, expectedModel);
+
+        // reset model after tests
+        expectedModel.setStudent(otherEditedStudent, firstStudentCopy);
 
     }
 
