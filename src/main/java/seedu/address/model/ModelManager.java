@@ -122,6 +122,14 @@ public class ModelManager implements Model {
         updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
     }
 
+    /**
+     * Deletes a folder
+     */
+    public void deleteFolder(Folder folder) {
+        addressBook.deleteFolder(folder);
+        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+    }
+
     @Override
     public boolean hasFolder(Folder folder) {
         requireNonNull(folder);
@@ -132,11 +140,6 @@ public class ModelManager implements Model {
     public void addContactToFolder(Person target, FolderName folderName) {
         requireAllNonNull(target, folderName);
         addressBook.addContactToFolder(target, folderName);
-    }
-
-    public void deleteFolder(Folder folder) {
-        addressBook.deleteFolder(folder);
-        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
