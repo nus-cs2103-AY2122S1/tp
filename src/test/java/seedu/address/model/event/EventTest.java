@@ -13,9 +13,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.participant.Participant;
-
-
 
 public class EventTest {
     private Event testEvent;
