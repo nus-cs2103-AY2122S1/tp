@@ -30,7 +30,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note, Appointment appointment) {
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Note note, Appointment appointment) {
         requireAllNonNull(name, phone, email, address, note, tags);
         this.name = name;
         this.phone = phone;
@@ -125,16 +126,15 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Note: ")
+                .append(getNote())
                 .append("; Meeting: ")
                 .append(getAppointment());
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        builder.append("; Note: ")
-                .append(getNote());
         return builder.toString();
     }
 
