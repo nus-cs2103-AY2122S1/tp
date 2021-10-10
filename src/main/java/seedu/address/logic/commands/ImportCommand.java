@@ -29,15 +29,15 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports data from a file. \n"
             + "Parameters: "
-            + PREFIX_FILE + "<file_path> "
-            + PREFIX_GROUP + "<number_of_group_columns> "
-            + PREFIX_ASSESSMENT + "<number_of_assessment_columns> "
-            + PREFIX_TAG + "<number_of_tag_columns>\n"
+            + PREFIX_FILE + " <file_path> "
+            + "[" + PREFIX_GROUP + " <number_of_group_columns>] "
+            + "[" + PREFIX_ASSESSMENT + " <number_of_assessment_columns>] "
+            + "[" + PREFIX_TAG + "<number_of_tag_columns>]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_FILE + "data.csv "
             + PREFIX_GROUP + "2 "
             + PREFIX_ASSESSMENT + "10 "
-            + PREFIX_TAG + "3 ";
+            + PREFIX_TAG + "3";
 
     public static final String MESSAGE_SUCCESS = "Imported all students";
     public static final String MESSAGE_INVALID_FILE = "Failed to read from the file";
@@ -58,7 +58,6 @@ public class ImportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        System.out.println(groupCount + " " + assessmentCount + " " + tagCount);
         String fileContents;
         try {
             fileContents = FileUtil.readFromFile(file);
@@ -88,7 +87,6 @@ public class ImportCommand extends Command {
     }
 
     private Student readStudentFromRow(String row, List<Assessment> assessments) throws CommandException {
-        System.out.println(row);
         String[] values = row.split(",");
         Name name = makeName(readValue(values, 0));
         ID id = makeId(readValue(values, 1));

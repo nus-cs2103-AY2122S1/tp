@@ -16,7 +16,6 @@ public class ImportCommandParser implements Parser<ImportCommand> {
     @Override
     public ImportCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        System.out.println("args: " + args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_FILE, PREFIX_GROUP, PREFIX_ASSESSMENT, PREFIX_TAG);
 
