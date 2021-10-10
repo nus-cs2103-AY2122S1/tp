@@ -3,10 +3,10 @@
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static seedu.programmer.testutil.Assert.assertThrows;
-//import static seedu.programmer.testutil.TypicalPersons.ALICE;
-//import static seedu.programmer.testutil.TypicalPersons.HOON;
-//import static seedu.programmer.testutil.TypicalPersons.IDA;
-//import static seedu.programmer.testutil.TypicalPersons.getTypicalAddressBook;
+//import static seedu.programmer.testutil.Typicalstudents.ALICE;
+//import static seedu.programmer.testutil.Typicalstudents.HOON;
+//import static seedu.programmer.testutil.Typicalstudents.IDA;
+//import static seedu.programmer.testutil.Typicalstudents.getTypicalProgrammerError;
 //
 //import java.io.IOException;
 //import java.nio.file.Path;
@@ -19,19 +19,20 @@
 //import seedu.programmer.model.ProgrammerError;
 //import seedu.programmer.model.ReadOnlyProgrammerError;
 //
-//public class JsonAddressBookStorageTest {
-//    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+//public class JsonProgrammerErrorStorageTest {
+//    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonProgrammerErrorStorageTest");
 //
 //    @TempDir
 //    public Path testFolder;
 //
 //    @Test
-//    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+//    public void readProgrammerError_nullFilePath_throwsNullPointerException() {
+//        assertThrows(NullPointerException.class, () -> readProgrammerError(null));
 //    }
 //
 //    private java.util.Optional<ReadOnlyProgrammerError> readOnlyProgrammerError(String filePath) throws Exception {
-//   return new JsonProgrammerErrorStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+//   return new JsonProgrammerErrorStorage(Paths.get(filePath))
+//   .readProgrammerError(addToTestDataPathIfNotNull(filePath));
 //    }
 //
 //    private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -42,69 +43,69 @@
 //
 //    @Test
 //    public void read_missingFile_emptyResult() throws Exception {
-//        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+//        assertFalse(readProgrammerError("NonExistentFile.json").isPresent());
 //    }
 //
 //    @Test
 //    public void read_notJsonFormat_exceptionThrown() {
-//        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatProgrammerError.json"));
+//        assertThrows(DataConversionException.class, () -> readProgrammerError("notJsonFormatProgrammerError.json"));
+//    }
+//
+//    public void readProgrammerError_invalidstudentProgrammerError_throwDataConversionException() {
+//        assertThrows(DataConversionException.class, () -> readProgrammerError("invalidstudentProgrammerError.json"));
 //    }
 //
 //    @Test
-//    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-//        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonProgrammerError.json"));
+//    public void readProgrammerError_invalidAndValidstudentProgrammerError_throwDataConversionException() {
+//        assertThrows(DataConversionException.class,
+//        () -> readProgrammerError("invalidAndValidstudentProgrammerError.json"));
 //    }
 //
 //    @Test
-//    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-//     assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonProgrammerError.json"));
-//    }
-//
-//    @Test
-//    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-//        Path filePath = testFolder.resolve("TempAddressBook.json");
-//        AddressBook original = getTypicalAddressBook();
-//        JsonProgrammerErrorStorage jsonAddressBookStorage = new JsonProgrammerErrorStorage(filePath);
+//    public void readAndSaveProgrammerError_allInOrder_success() throws Exception {
+//        Path filePath = testFolder.resolve("TempProgrammerError.json");
+//        ProgrammerError original = getTypicalProgrammerError();
+//        JsonProgrammerErrorStorage jsonProgrammerErrorStorage = new JsonProgrammerErrorStorage(filePath);
 //
 //        // Save in new file and read back
-//        jsonAddressBookStorage.saveAddressBook(original, filePath);
-//        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-//        assertEquals(original, new AddressBook(readBack));
+//        jsonProgrammerErrorStorage.saveProgrammerError(original, filePath);
+//        ReadOnlyProgrammerError readBack = jsonProgrammerErrorStorage.readProgrammerError(filePath).get();
+//        assertEquals(original, new ProgrammerError(readBack));
 //
 //        // Modify data, overwrite exiting file, and read back
-//        original.addPerson(HOON);
-//        original.removePerson(ALICE);
-//        jsonAddressBookStorage.saveAddressBook(original, filePath);
-//        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-//        assertEquals(original, new AddressBook(readBack));
+//        original.addstudent(HOON);
+//        original.removestudent(ALICE);
+//        jsonProgrammerErrorStorage.saveProgrammerError(original, filePath);
+//        readBack = jsonProgrammerErrorStorage.readProgrammerError(filePath).get();
+//        assertEquals(original, new ProgrammerError(readBack));
 //
 //        // Save and read without specifying file path
-//        original.addPerson(IDA);
-//        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-//        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
-//        assertEquals(original, new AddressBook(readBack));
+//        original.addstudent(IDA);
+//        jsonProgrammerErrorStorage.saveProgrammerError(original); // file path not specified
+//        readBack = jsonProgrammerErrorStorage.readProgrammerError().get(); // file path not specified
+//        assertEquals(original, new ProgrammerError(readBack));
 //
 //    }
 //
 //    @Test
-//    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+//    public void saveProgrammerError_nullProgrammerError_throwsNullPointerException() {
+//        assertThrows(NullPointerException.class, () -> saveProgrammerError(null, "SomeFile.json"));
 //    }
 //
 //    /**
-//     * Saves {@code addressBook} at the specified {@code filePath}.
+//     * Saves {@code ProgrammerError} at the specified {@code filePath}.
 //     */
-//    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+//    private void saveProgrammerError(ReadOnlyProgrammerError ProgrammerError, String filePath) {
 //        try {
 //            new JsonProgrammerErrorStorage(Paths.get(filePath))
-//                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+//                    .saveProgrammerError(ProgrammerError, addToTestDataPathIfNotNull(filePath));
 //        } catch (IOException ioe) {
 //            throw new AssertionError("There should not be an error writing to the file.", ioe);
 //        }
 //    }
 //
 //    @Test
-//    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-//        assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
+//    public void saveProgrammerError_nullFilePath_throwsNullPointerException() {
+//        assertThrows(NullPointerException.class, () -> saveProgrammerError(new ProgrammerError(), null));
 //    }
 //}

@@ -5,10 +5,10 @@ import static java.util.Objects.requireNonNull;
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.StringUtil;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.person.ClassId;
-import seedu.programmer.model.person.Grade;
-import seedu.programmer.model.person.Name;
-import seedu.programmer.model.person.StudentId;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.StudentId;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

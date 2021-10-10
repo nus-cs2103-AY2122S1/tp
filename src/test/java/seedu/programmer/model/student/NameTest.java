@@ -1,4 +1,4 @@
-package seedu.programmer.model.person;
+package seedu.programmer.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

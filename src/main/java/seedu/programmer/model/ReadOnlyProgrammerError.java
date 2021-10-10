@@ -1,7 +1,7 @@
 package seedu.programmer.model;
 
 import javafx.collections.ObservableList;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
 
 /**
  * Unmodifiable view of a ProgrammerError
@@ -9,9 +9,9 @@ import seedu.programmer.model.person.Person;
 public interface ReadOnlyProgrammerError {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the students list.
+     * This list will not contain any duplicate students.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Student> getStudentList();
 
 }

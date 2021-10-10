@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.programmer.testutil.Assert.assertThrows;
-import static seedu.programmer.testutil.TypicalPersons.ALICE;
-import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
+import static seedu.programmer.testutil.TypicalStudents.ALICE;
+import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,9 +17,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.programmer.model.person.Person;
-import seedu.programmer.model.person.exceptions.DuplicatePersonException;
-import seedu.programmer.testutil.PersonBuilder;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.exceptions.DuplicateStudentException;
+import seedu.programmer.testutil.StudentBuilder;
 
 public class ProgrammerErrorTest {
 
@@ -27,7 +27,7 @@ public class ProgrammerErrorTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), programmerError.getPersonList());
+        assertEquals(Collections.emptyList(), programmerError.getStudentList());
     }
 
     @Test
@@ -36,62 +36,62 @@ public class ProgrammerErrorTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyProgrammerError_replacesData() {
         ProgrammerError newData = getTypicalProgrammerError();
         programmerError.resetData(newData);
         assertEquals(newData, programmerError);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
+        List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
+        ProgrammerErrorStub newData = new ProgrammerErrorStub(newStudents);
 
-        assertThrows(DuplicatePersonException.class, () -> programmerError.resetData(newData));
+        assertThrows(DuplicateStudentException.class, () -> programmerError.resetData(newData));
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> programmerError.hasPerson(null));
+    public void hasStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> programmerError.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(programmerError.hasPerson(ALICE));
+    public void hasStudent_personNotInProgrammerError_returnsFalse() {
+        assertFalse(programmerError.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        programmerError.addPerson(ALICE);
-        assertTrue(programmerError.hasPerson(ALICE));
+    public void hasStudent_personInProgrammerError_returnsTrue() {
+        programmerError.addStudent(ALICE);
+        assertTrue(programmerError.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        programmerError.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
-        assertTrue(programmerError.hasPerson(editedAlice));
+    public void hasStudent_personWithSameIdentityFieldsInProgrammerError_returnsTrue() {
+        programmerError.addStudent(ALICE);
+        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
+        assertTrue(programmerError.hasStudent(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> programmerError.getPersonList().remove(0));
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> programmerError.getStudentList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyProgrammerError whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyProgrammerError {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+    private static class ProgrammerErrorStub implements ReadOnlyProgrammerError {
+        private final ObservableList<Student> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        ProgrammerErrorStub(Collection<Student> persons) {
             this.persons.setAll(persons);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Student> getStudentList() {
             return persons;
         }
     }

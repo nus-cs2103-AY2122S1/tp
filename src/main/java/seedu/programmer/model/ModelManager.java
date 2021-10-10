@@ -11,7 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
+
 
 /**
  * Represents the in-memory model of ProgrammerError data.
@@ -21,7 +22,7 @@ public class ModelManager implements Model {
 
     private final ProgrammerError programmerError;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given ProgrammerError and userPrefs.
@@ -30,11 +31,11 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(programmerError, userPrefs);
 
-        logger.fine("Initializing with address book: " + programmerError + " and user prefs " + userPrefs);
+        logger.fine("Initializing with programmer book: " + programmerError + " and user prefs " + userPrefs);
 
         this.programmerError = new ProgrammerError(programmerError);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.programmerError.getPersonList());
+        filteredStudents = new FilteredList<>(this.programmerError.getStudentList());
     }
 
     public ModelManager() {
@@ -79,7 +80,7 @@ public class ModelManager implements Model {
     //=========== ProgrammerError ============================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyProgrammerError programmerError) {
+    public void setProgrammerError(ReadOnlyProgrammerError programmerError) {
         this.programmerError.resetData(programmerError);
     }
 
@@ -89,44 +90,43 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return programmerError.hasPerson(person);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return programmerError.hasStudent(student);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        programmerError.removePerson(target);
+    public void deleteStudent(Student target) {
+        programmerError.removeStudent(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        programmerError.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addStudent(Student student) {
+        programmerError.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        programmerError.setPerson(target, editedPerson);
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        programmerError.setStudent(target, editedStudent);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered student List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedProgrammerError}
-     */
+    */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredStudents.setPredicate(predicate);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return programmerError.equals(other.programmerError)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredStudents.equals(other.filteredStudents);
     }
 
 }

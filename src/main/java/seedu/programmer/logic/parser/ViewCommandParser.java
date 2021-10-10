@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.programmer.logic.commands.ViewCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.person.NameContainsKeywordsPredicate;
+import seedu.programmer.model.student.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new ViewCommand object

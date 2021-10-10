@@ -1,7 +1,7 @@
 package seedu.programmer.logic.commands;
 
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
+import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,16 +16,16 @@ import seedu.programmer.model.util.SampleDataUtil;
 public class FillCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyProgrammerError_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        expectedModel.setAddressBook(SampleDataUtil.fillSampleAddressBook());
+        expectedModel.setProgrammerError(SampleDataUtil.fillSampleProgrammerError());
 
         assertCommandSuccess(new FillCommand(), model, FillCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyProgrammerError_success() {
         Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 

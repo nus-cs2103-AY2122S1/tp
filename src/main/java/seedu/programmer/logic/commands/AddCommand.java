@@ -8,16 +8,16 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
 
 /**
- * Adds a person to ProgrammerError.
+ * Adds a student to ProgrammerError.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to ProgrammerError. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the ProgrammerError. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_STUDENT_ID + "STUDENTID "
@@ -29,28 +29,28 @@ public class AddCommand extends Command {
             + PREFIX_CLASS_ID + "B01 "
             + PREFIX_GRADE + "A+ ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the ProgrammerError";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError";
 
-    private final Person toAdd;
+    private final Student toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Student}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Student student) {
+        requireNonNull(student);
+        toAdd = student;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasStudent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.addPerson(toAdd);
+        model.addStudent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

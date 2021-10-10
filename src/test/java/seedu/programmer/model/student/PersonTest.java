@@ -1,4 +1,4 @@
-//package seedu.programmer.model.person;
+//package seedu.programmer.model.student;
 //
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,46 +6,46 @@
 //import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASSID_BOB;
 //import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 //import static seedu.programmer.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
-//import static seedu.programmer.testutil.TypicalPersons.ALICE;
-//import static seedu.programmer.testutil.TypicalPersons.BOB;
+//import static seedu.programmer.testutil.Typicalstudents.ALICE;
+//import static seedu.programmer.testutil.Typicalstudents.BOB;
 //
 //import org.junit.jupiter.api.Test;
 //
-//import seedu.programmer.testutil.PersonBuilder;
+//import seedu.programmer.testutil.studentBuilder;
 //
-//public class PersonTest {
+//public class studentTest {
 //
 //    @Test
-//    public void isSamePerson() {
+//    public void isSamestudent() {
 //        // same object -> returns true
-//        assertTrue(ALICE.isSamePerson(ALICE));
+//        assertTrue(ALICE.isSamestudent(ALICE));
 //
 //        // null -> returns false
-//        assertFalse(ALICE.isSamePerson(null));
+//        assertFalse(ALICE.isSamestudent(null));
 //
 //        // same name, all other attributes different -> returns true
-//   Person editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).withClassId(VALID_CLASSID_BOB)
+//   student editedAlice = new studentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).withClassId(VALID_CLASSID_BOB)
 //                .withGrade(VALID_GRADE_BOB).build();
-//        assertTrue(ALICE.isSamePerson(editedAlice));
+//        assertTrue(ALICE.isSamestudent(editedAlice));
 //
 //        // different name, all other attributes same -> returns false
-//        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-//        assertFalse(ALICE.isSamePerson(editedAlice));
+//        editedAlice = new studentBuilder(ALICE).withName(VALID_NAME_BOB).build();
+//        assertFalse(ALICE.isSamestudent(editedAlice));
 //
 //        // name differs in case, all other attributes same -> returns false
-//        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-//        assertFalse(BOB.isSamePerson(editedBob));
+//        student editedBob = new studentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+//        assertFalse(BOB.isSamestudent(editedBob));
 //
 //        // name has trailing spaces, all other attributes same -> returns false
 //        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-//        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-//        assertFalse(BOB.isSamePerson(editedBob));
+//        editedBob = new studentBuilder(BOB).withName(nameWithTrailingSpaces).build();
+//        assertFalse(BOB.isSamestudent(editedBob));
 //    }
 //
 //    @Test
 //    public void equals() {
 //        // same values -> returns true
-//        Person aliceCopy = new PersonBuilder(ALICE).build();
+//        student aliceCopy = new studentBuilder(ALICE).build();
 //        assertTrue(ALICE.equals(aliceCopy));
 //
 //        // same object -> returns true
@@ -57,22 +57,22 @@
 //        // different type -> returns false
 //        assertFalse(ALICE.equals(5));
 //
-//        // different person -> returns false
+//        // different student -> returns false
 //        assertFalse(ALICE.equals(BOB));
 //
 //        // different name -> returns false
-//        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+//        student editedAlice = new studentBuilder(ALICE).withName(VALID_NAME_BOB).build();
 //        assertFalse(ALICE.equals(editedAlice));
 //
 //        // different phone -> returns false
-//        editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
+//        editedAlice = new studentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
 //        assertFalse(ALICE.equals(editedAlice));
 //
 //        // different email -> returns false
-//        editedAlice = new PersonBuilder(ALICE).withClassId(VALID_CLASSID_BOB).build();
+//        editedAlice = new studentBuilder(ALICE).withClassId(VALID_CLASSID_BOB).build();
 //        assertFalse(ALICE.equals(editedAlice));
 //
-//        // different address -> returns false
-//        editedAlice = new PersonBuilder(ALICE).withGrade(VALID_GRADE_BOB).build();
+//        // different programmer -> returns false
+//        editedAlice = new studentBuilder(ALICE).withGrade(VALID_GRADE_BOB).build();
 //        assertFalse(ALICE.equals(editedAlice));
 //}

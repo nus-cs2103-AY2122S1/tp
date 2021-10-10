@@ -15,7 +15,7 @@ import seedu.programmer.commons.util.JsonUtil;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access ProgrammerError data stored as a json file on the hard disk.
  */
 public class JsonProgrammerErrorStorage implements ProgrammerErrorStorage {
 

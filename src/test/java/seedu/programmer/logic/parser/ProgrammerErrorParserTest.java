@@ -5,23 +5,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.programmer.testutil.Assert.assertThrows;
-import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.DeleteCommand;
 import seedu.programmer.logic.commands.EditCommand;
-import seedu.programmer.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.programmer.logic.commands.ExitCommand;
 import seedu.programmer.logic.commands.HelpCommand;
 import seedu.programmer.logic.commands.ListCommand;
 import seedu.programmer.logic.commands.PurgeCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.person.Person;
-import seedu.programmer.testutil.EditPersonDescriptorBuilder;
-import seedu.programmer.testutil.PersonBuilder;
-import seedu.programmer.testutil.PersonUtil;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.testutil.EditStudentDescriptorBuilder;
+import seedu.programmer.testutil.StudentBuilder;
+import seedu.programmer.testutil.StudentUtil;
 
 class ProgrammerErrorParserTest {
 
@@ -29,9 +29,9 @@ class ProgrammerErrorParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        Student student = new StudentBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
+        assertEquals(new AddCommand(student), command);
     }
 
     @Test
@@ -43,18 +43,18 @@ class ProgrammerErrorParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_STUDENT), command);
     }
 
     //TODO
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Student student = new StudentBuilder().build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_STUDENT, descriptor), command);
     }
 
     @Test
