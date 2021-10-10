@@ -37,8 +37,6 @@ public class DayCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -51,7 +49,6 @@ public class DayCard extends UiPart<Region> {
         name.setText(task.getName().taskName);
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
-        email.setText(task.getEmail().value);
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagTaskName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));

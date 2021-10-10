@@ -2,7 +2,6 @@ package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.unify.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
@@ -21,7 +20,6 @@ import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -39,12 +37,11 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TIME + "TIME] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TIME + "16:40 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_NAME + "Homework 2A";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -95,11 +92,10 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
         Time updatedTime = editTaskDescriptor.getTime().orElse(taskToEdit.getTime());
-        Email updatedEmail = editTaskDescriptor.getEmail().orElse(taskToEdit.getEmail());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedName, updatedTime, updatedEmail, updatedDate, updatedTags);
+        return new Task(updatedName, updatedTime, updatedDate, updatedTags);
     }
 
     @Override
@@ -127,7 +123,6 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Name name;
         private Time time;
-        private Email email;
         private Date date;
         private Set<Tag> tags;
 
@@ -140,7 +135,6 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setName(toCopy.name);
             setTime(toCopy.time);
-            setEmail(toCopy.email);
             setDate(toCopy.date);
             setTags(toCopy.tags);
         }
@@ -149,7 +143,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, time, email, date, tags);
+            return CollectionUtil.isAnyNonNull(name, time, date, tags);
         }
 
         public void setName(Name name) {
@@ -166,14 +160,6 @@ public class EditCommand extends Command {
 
         public Optional<Time> getTime() {
             return Optional.ofNullable(time);
-        }
-
-        public void setEmail(Email email) {
-            this.email = email;
-        }
-
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
         }
 
         public void setDate(Date date) {
@@ -218,7 +204,6 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getTime().equals(e.getTime())
-                    && getEmail().equals(e.getEmail())
                     && getDate().equals(e.getDate())
                     && getTags().equals(e.getTags());
         }

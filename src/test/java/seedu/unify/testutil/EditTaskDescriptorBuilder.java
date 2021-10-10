@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -34,7 +33,6 @@ public class EditTaskDescriptorBuilder {
         descriptor = new EditTaskDescriptor();
         descriptor.setName(task.getName());
         descriptor.setTime(task.getTime());
-        descriptor.setEmail(task.getEmail());
         descriptor.setDate(task.getDate());
         descriptor.setTags(task.getTags());
     }
@@ -52,14 +50,6 @@ public class EditTaskDescriptorBuilder {
      */
     public EditTaskDescriptorBuilder withTime(String time) {
         descriptor.setTime(new Time(time));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code EditTaskDescriptor} that we are building.
-     */
-    public EditTaskDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
         return this;
     }
 

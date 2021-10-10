@@ -3,7 +3,6 @@ package seedu.unify.model.task;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
@@ -32,7 +31,7 @@ public class TaskTest {
         assertFalse(ALICE.isSameTask(null));
 
         // same name, all other attributes different -> returns true
-        Task editedAlice = new TaskBuilder(ALICE).withTime(VALID_TIME_BOB).withEmail(VALID_EMAIL_BOB)
+        Task editedAlice = new TaskBuilder(ALICE).withTime(VALID_TIME_BOB)
                 .withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameTask(editedAlice));
 
@@ -74,10 +73,6 @@ public class TaskTest {
 
         // different phone -> returns false
         editedAlice = new TaskBuilder(ALICE).withTime(VALID_TIME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different email -> returns false
-        editedAlice = new TaskBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different date -> returns false

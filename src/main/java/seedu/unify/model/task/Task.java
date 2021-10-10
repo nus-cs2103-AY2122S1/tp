@@ -18,7 +18,6 @@ public class Task {
     // Identity fields
     private final Name name;
     private final Time time;
-    private final Email email;
 
     // Data fields
     private final Date date;
@@ -27,11 +26,10 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Time time, Email email, Date date, Set<Tag> tags) {
-        requireAllNonNull(name, time, email, date, tags);
+    public Task(Name name, Time time, Date date, Set<Tag> tags) {
+        requireAllNonNull(name, time, date, tags);
         this.name = name;
         this.time = time;
-        this.email = email;
         this.date = date;
         this.tags.addAll(tags);
     }
@@ -42,10 +40,6 @@ public class Task {
 
     public Time getTime() {
         return time;
-    }
-
-    public Email getEmail() {
-        return email;
     }
 
     public Date getDate() {
@@ -90,7 +84,6 @@ public class Task {
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
                 && otherTask.getTime().equals(getTime())
-                && otherTask.getEmail().equals(getEmail())
                 && otherTask.getDate().equals(getDate())
                 && otherTask.getTags().equals(getTags());
     }
@@ -98,7 +91,7 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, email, date, tags);
+        return Objects.hash(name, time, date, tags);
     }
 
     @Override
@@ -107,8 +100,6 @@ public class Task {
         builder.append(getName())
                 .append("; Time: ")
                 .append(getTime())
-                .append("; Email: ")
-                .append(getEmail())
                 .append("; Date: ")
                 .append(getDate());
 
