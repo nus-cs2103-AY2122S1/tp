@@ -6,35 +6,34 @@ import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalParticipants.getTypicalAddressBook;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
 import seedu.address.model.event.EventNamePredicate;
-import seedu.address.model.event.EventTime;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.participant.Participant;
+import seedu.address.testutil.DefaultModelStub;
+import seedu.address.testutil.TypicalEvents;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ShowEventDetailsCommand}.
  */
 public class ShowEventDetailsCommandTest {
 
+    private final Event sampleEvent = TypicalEvents.SAMPLE_EVENT_3;
+    private final EventNamePredicate samplePredicate = preparePredicate(sampleEvent.getNameString());
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    public ShowEventDetailsCommandTest() {
+        model.addEvent(sampleEvent);
+        expectedModel.addEvent(sampleEvent);
+    }
 
     @Test
     public void constructor_nullEvent_throwsNullPointerException() {
@@ -55,14 +54,7 @@ public class ShowEventDetailsCommandTest {
      */
     @Test
     public void execute_eventInList_noUiChangeSuccessful() throws CommandException {
-        Event sampleEvent = new Event(
-                new EventName("Cooking class"),
-                new EventDate("2020-11-11"),
-                new EventTime("1900"));
-        model.addEvent(sampleEvent);
-        expectedModel.addEvent(sampleEvent);
-        EventNamePredicate predicate = preparePredicate("Cooking class");
-        CommandResult commandResult = new ShowEventDetailsCommand(predicate).execute(model);
+        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicate).execute(model);
         assertEquals(model.getFilteredEventList(), expectedModel.getFilteredEventList());
     }
 
@@ -73,17 +65,13 @@ public class ShowEventDetailsCommandTest {
      */
     @Test
     public void execute_eventInList_showDetailsSuccessful() throws CommandException {
-        Event sampleEvent = new Event(
-                new EventName("Cooking class"),
-                new EventDate("2020-11-11"),
-                new EventTime("1900"));
-        model.addEvent(sampleEvent);
-        EventNamePredicate predicate = preparePredicate("Cooking class");
-        CommandResult commandResult = new ShowEventDetailsCommand(predicate).execute(model);
-        String expectedOutput = "Event Name: Cooking class\n"
-                + "Event Date: 2020-11-11\n"
-                + "Event Time: 1900\n"
-                + "Completion Status: Uncompleted";
+        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicate).execute(model);
+        String expectedOutput = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
+                sampleEvent.getNameString(),
+                sampleEvent.getDateString(),
+                sampleEvent.getTimeString(),
+                sampleEvent.getIsDone() ? "Completed" : "Uncompleted"
+                );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
 
@@ -94,24 +82,21 @@ public class ShowEventDetailsCommandTest {
      */
     @Test
     public void execute_eventInListUsingModelStub_showDetailsSuccessful() throws CommandException {
-        Event sampleEvent = new Event(
-                new EventName("Cooking class"),
-                new EventDate("2020-11-11"),
-                new EventTime("1900"));
         ModelStubWithEvent modelStub = new ModelStubWithEvent(sampleEvent);
-        EventNamePredicate predicate = preparePredicate("Cooking class");
-        CommandResult commandResult = new ShowEventDetailsCommand(predicate).execute(modelStub);
-        String expectedOutput = "Event Name: Cooking class\n"
-                + "Event Date: 2020-11-11\n"
-                + "Event Time: 1900\n"
-                + "Completion Status: Uncompleted";
+        CommandResult commandResult = new ShowEventDetailsCommand(samplePredicate).execute(modelStub);
+        String expectedOutput = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
+                sampleEvent.getNameString(),
+                sampleEvent.getDateString(),
+                sampleEvent.getTimeString(),
+                sampleEvent.getIsDone() ? "Completed" : "Uncompleted"
+        );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
 
     /**
      * A Model stub that contains a single Event.
      */
-    private class ModelStubWithEvent extends ModelStub {
+    private static class ModelStubWithEvent extends DefaultModelStub {
         private final Event event;
 
         ModelStubWithEvent(Event event) {
@@ -132,115 +117,5 @@ public class ShowEventDetailsCommandTest {
      */
     private EventNamePredicate preparePredicate(String userInput) {
         return new EventNamePredicate(userInput.trim().replaceAll("\\s+", " "));
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addParticipant(Participant participant) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasParticipant(Participant participant) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteParticipant(Participant target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setParticipant(Participant target, Participant editedParticipant) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Participant> getFilteredParticipantList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredParticipantList(Predicate<Participant> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasEvent(Event event) {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public void addEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void removeEvent(Event target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void markEventAsDone(Event target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Event> getFilteredEventList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredEventList(Predicate<Event> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void sortEvents() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 }
