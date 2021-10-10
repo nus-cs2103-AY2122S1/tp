@@ -1,6 +1,6 @@
 {
   "_comment": "ProgrammerError save file which contains the same Person values as in TypicalPersons#getTypicalProgrammerError()",
-  "persons" : [ {
+  "students" : [ {
     "name" : "Alice Pauline",
     "studentId": "A0212352F",
     "classId": "B01",
