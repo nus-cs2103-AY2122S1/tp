@@ -7,6 +7,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
+import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_ALICE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
 
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
+import seedu.plannermd.testutil.doctor.DoctorBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class PlannerMdTest {
@@ -56,7 +58,15 @@ public class PlannerMdTest {
 
         assertThrows(DuplicatePersonException.class, () -> plannerMd.resetData(newData));
 
-        //TODO: Doctor
+        // Two doctors with the same identity fields
+        Doctor editedDoctorAlice = new DoctorBuilder(DR_ALICE).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        List<Doctor> newDoctors = Arrays.asList(DR_ALICE, editedDoctorAlice);
+
+        PlannerMdStub newDoctorData = new PlannerMdStub().setDoctors(newDoctors);
+
+        assertThrows(DuplicatePersonException.class, () -> plannerMd.resetData(newDoctorData));
     }
 
 
@@ -69,7 +79,7 @@ public class PlannerMdTest {
     @Test
     public void hasPerson_personNotInPlannerMd_returnsFalse() {
         assertFalse(plannerMd.hasPatient(ALICE));
-        //TODO: Doctor
+        assertFalse(plannerMd.hasDoctor(DR_ALICE));
     }
 
     @Test
@@ -77,7 +87,8 @@ public class PlannerMdTest {
         plannerMd.addPatient(ALICE);
         assertTrue(plannerMd.hasPatient(ALICE));
 
-        //TODO: Doctor
+        plannerMd.addDoctor(DR_ALICE);
+        assertTrue(plannerMd.hasDoctor(DR_ALICE));
     }
 
     @Test
@@ -87,7 +98,10 @@ public class PlannerMdTest {
                 .build();
         assertTrue(plannerMd.hasPatient(editedAlice));
 
-        //TODO: Doctor
+        plannerMd.addDoctor(DR_ALICE);
+        Doctor editedDoctor = new DoctorBuilder(DR_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(plannerMd.hasDoctor(editedDoctor));
     }
 
     @Test
@@ -113,8 +127,8 @@ public class PlannerMdTest {
             return this;
         }
 
-        public PlannerMdStub setDoctors(Collection<Patient> doctors) {
-            this.patients.setAll(doctors);
+        public PlannerMdStub setDoctors(Collection<Doctor> doctors) {
+            this.doctors.setAll(doctors);
             return this;
         }
 

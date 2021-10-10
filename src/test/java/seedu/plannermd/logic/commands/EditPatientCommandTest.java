@@ -28,7 +28,7 @@ import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
-import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
+import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 
 /**
@@ -43,7 +43,7 @@ public class EditPatientCommandTest {
         PatientBuilder editedPatientBuilder = new PatientBuilder()
                 .withRemark(model.getFilteredPatientList().get(0).getRemark().value);
         Patient editedPatient = editedPatientBuilder.build();
-        EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder(editedPatient).build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(editedPatient).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
@@ -63,8 +63,8 @@ public class EditPatientCommandTest {
         Patient editedPatient = patientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditPatientCommand.EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder()
+                .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
@@ -94,7 +94,7 @@ public class EditPatientCommandTest {
         Patient patientInFilteredList = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
         Patient editedPatient = new PatientBuilder(patientInFilteredList).withName(VALID_NAME_BOB).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditPatientCommand.MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient);
 
@@ -106,8 +106,8 @@ public class EditPatientCommandTest {
 
     @Test
     public void execute_duplicatePatientUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
+        Patient firstPatient = model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(firstPatient).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_SECOND_PERSON, descriptor);
 
         assertCommandFailure(editPatientCommand, model, EditPatientCommand.MESSAGE_DUPLICATE_PATIENT);
@@ -118,9 +118,9 @@ public class EditPatientCommandTest {
         showPatientAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in plannermd
-        Person personInList = model.getPlannerMd().getPatientList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Patient patientInList = model.getPlannerMd().getPatientList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditPatientCommand editPatientCommand = new EditPatientCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder(personInList).build());
+                new EditPatientDescriptorBuilder(patientInList).build());
 
         assertCommandFailure(editPatientCommand, model, EditPatientCommand.MESSAGE_DUPLICATE_PATIENT);
     }
@@ -128,7 +128,7 @@ public class EditPatientCommandTest {
     @Test
     public void execute_invalidPatientIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPatientList().size() + 1);
-        EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditPatientCommand editPatientCommand = new EditPatientCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editPatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
@@ -146,7 +146,7 @@ public class EditPatientCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getPlannerMd().getPatientList().size());
 
         EditPatientCommand editPatientCommand = new EditPatientCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editPatientCommand, model, Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
     }

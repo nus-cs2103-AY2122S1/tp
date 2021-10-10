@@ -157,7 +157,7 @@ public class EditPatientCommand extends EditCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, risk);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthDate, tags, risk);
         }
 
         public void setName(Name name) {
