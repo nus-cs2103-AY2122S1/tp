@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_PRICE;
 
 import seedu.address.commons.core.index.Index;
@@ -22,7 +23,8 @@ public class EditProductCommandParser implements Parser<EditProductCommand> {
      */
     public EditProductCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_UNIT_PRICE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_UNIT_PRICE,
+                PREFIX_QUANTITY);
 
         Index index;
         try {
@@ -40,6 +42,10 @@ public class EditProductCommandParser implements Parser<EditProductCommand> {
         if (argMultimap.getValue(PREFIX_UNIT_PRICE).isPresent()) {
             editProductDescriptor.setUnitPrice(
                     ParserUtil.parseUnitPrice(argMultimap.getValue(PREFIX_UNIT_PRICE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
+            editProductDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
 
         if (!editProductDescriptor.isAnyFieldEdited()) {
