@@ -75,7 +75,6 @@ public class HelpWindow extends UiPart<Stage> {
 
         example.setCellFactory(getTableColumnTableCellCallback(example));
         example.setCellValueFactory(new PropertyValueFactory<>("example"));
-        table.setEditable(true);
         table.setItems(list);
         table.setColumnResizePolicy(p -> true);
 
