@@ -3,6 +3,8 @@ package safeforhall.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
@@ -24,11 +26,11 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_ROOM, CliSyntax.PREFIX_VACCSTATUS,
                         CliSyntax.PREFIX_FACULTY);
-
-        Index index;
+        ArrayList<Index> indexArray;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            indexArray = ParserUtil.parseIndexes(argMultimap.getPreamble().trim().split(" "));
+            System.out.println(indexArray);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -46,17 +48,24 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL)
                                 .get()));
         }
-        /*if (argMultimap.getValue(CliSyntax.PREFIX_ROOM).isPresent()) {
+        if (argMultimap.getValue(CliSyntax.PREFIX_ROOM).isPresent()) {
             editPersonDescriptor.setRoom(ParserUtil.parseRoom(argMultimap.getValue(CliSyntax.PREFIX_ROOM)
                                 .get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);*/
+        if (argMultimap.getValue(CliSyntax.PREFIX_VACCSTATUS).isPresent()) {
+            editPersonDescriptor.setVaccStatus(ParserUtil.parseVaccStatus(argMultimap
+                    .getValue(CliSyntax.PREFIX_VACCSTATUS).get()));
+        }
+        if (argMultimap.getValue(CliSyntax.PREFIX_FACULTY).isPresent()) {
+            editPersonDescriptor.setFaculty(ParserUtil.parseFaculty(argMultimap.getValue(CliSyntax.PREFIX_FACULTY)
+                    .get()));
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(indexArray, editPersonDescriptor);
     }
 
 }
