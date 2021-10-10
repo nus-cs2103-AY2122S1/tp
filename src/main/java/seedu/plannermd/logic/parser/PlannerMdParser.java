@@ -91,23 +91,11 @@ public class PlannerMdParser {
         case AddPatientTagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case ToggleCommand.COMMAND_WORD:
-            return new ToggleCommand();
-
         case FindPatientCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
