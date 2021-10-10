@@ -184,7 +184,7 @@ public class EditCommandParserTest {
         // other valid values specified
         userInput = targetIndex.getOneBased() + CLASSID_DESC_BOB + INVALID_STUDENTID_DESC + GRADE_DESC_BOB
                 + STUDENTID_DESC_BOB;
-   descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_BOB).withClassId(VALID_CLASSID_BOB)
+        descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_BOB).withClassId(VALID_CLASSID_BOB)
                 .withGrade(VALID_GRADE_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
