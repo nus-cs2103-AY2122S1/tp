@@ -31,6 +31,7 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.plannermd.model.patient.Risk.UNCLASSIFIED_RISK;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -228,7 +229,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + RISK_EMPTY;
 
-        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withRisk("UNCLASSIFIED").build();
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withRisk(UNCLASSIFIED_RISK).build();
         EditPatientCommand expectedCommand = new EditPatientCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
