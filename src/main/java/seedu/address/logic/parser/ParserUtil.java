@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.Slot;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
@@ -151,6 +152,57 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return Status.translateStringToStatus(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     * This parser is not case sensitive.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static String parseDayOfWeek(String shiftDay) throws ParseException {
+        String messageConstraints = "Valid input format: dayOfWeek + slotNumber:" + "List of valid dayOfWeek: "
+                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. (Not case-sensitive)\n"
+                + "List of valid slotNumber: 1, 2.";
+        requireNonNull(shiftDay);
+        String trimmedStr = shiftDay.trim().toLowerCase();
+        String[] strings = trimmedStr.split("-");
+        switch (strings[0]) {
+        case "monday":
+        case "tuesday":
+        case "wednesday":
+        case "thursday":
+        case "friday":
+        case "saturday":
+        case "sunday":
+            break;
+        default: throw new ParseException(messageConstraints);
+        }
+        switch (strings[1]) {
+        case "0":
+        case "1":
+            break;
+        default: throw new ParseException(messageConstraints);
+        }
+        return trimmedStr;
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
+     * Leading and trailing whitespaces will be trimmed.
+     * This parser is not case sensitive.
+     *
+     * @throws ParseException if the given {@code dayOfWeek} is invalid.
+     */
+    public static Slot parseSlot(String slot) throws ParseException {
+        requireNonNull(slot);
+        String trimmedSlot = slot.trim();
+        if (!Slot.isValidSlot(trimmedSlot)) {
+            throw new ParseException(Slot.MESSAGE_CONSTRAINTS);
+        }
+        //maybe need to assert slot cannot be null
+        return Slot.translateStringToSlot(slot);
     }
 
     /**
