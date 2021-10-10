@@ -33,7 +33,7 @@ public class EditTaskDescriptorBuilder {
     public EditTaskDescriptorBuilder(Task task) {
         descriptor = new EditTaskDescriptor();
         descriptor.setName(task.getName());
-        descriptor.setPhone(task.getPhone());
+        descriptor.setPhone(task.getTime());
         descriptor.setEmail(task.getEmail());
         descriptor.setDate(task.getDate());
         descriptor.setTags(task.getTags());

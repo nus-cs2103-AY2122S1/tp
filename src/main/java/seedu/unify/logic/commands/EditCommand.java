@@ -94,7 +94,7 @@ public class EditCommand extends Command {
         assert taskToEdit != null;
 
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
-        Time updatedTime = editTaskDescriptor.getPhone().orElse(taskToEdit.getPhone());
+        Time updatedTime = editTaskDescriptor.getPhone().orElse(taskToEdit.getTime());
         Email updatedEmail = editTaskDescriptor.getEmail().orElse(taskToEdit.getEmail());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());

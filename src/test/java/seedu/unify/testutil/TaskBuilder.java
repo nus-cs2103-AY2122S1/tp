@@ -43,7 +43,7 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         name = taskToCopy.getName();
-        time = taskToCopy.getPhone();
+        time = taskToCopy.getTime();
         email = taskToCopy.getEmail();
         date = taskToCopy.getDate();
         tags = new HashSet<>(taskToCopy.getTags());

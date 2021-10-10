@@ -51,7 +51,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getName().taskName;
-        phone = source.getPhone().value;
+        phone = source.getTime().value;
         email = source.getEmail().value;
         date = source.getDate().value;
         tagged.addAll(source.getTags().stream()

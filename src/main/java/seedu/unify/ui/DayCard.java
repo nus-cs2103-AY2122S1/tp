@@ -49,7 +49,7 @@ public class DayCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().taskName);
-        phone.setText(task.getPhone().value);
+        phone.setText(task.getTime().value);
         date.setText(task.getDate().value);
         email.setText(task.getEmail().value);
         task.getTags().stream()
