@@ -22,8 +22,7 @@ import seedu.plannermd.commons.util.CollectionUtil;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
-import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.patient.Risk;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
@@ -33,76 +32,75 @@ import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
- * Edits the details of an existing patient in the plannermd.
+ * Edits the details of an existing doctor in the plannermd.
  */
-public class EditPatientCommand extends EditCommand {
+public class EditDoctorCommand extends EditCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified "
-            + "by the index number used in the displayed patient list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the doctor identified "
+            + "by the index number used in the displayed doctor list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE
             + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_BIRTH_DATE
             + "BIRTH_DATE] " + "[" + PREFIX_TAG + "TAG]..." + "[" + PREFIX_RISK + "RISK]\n" + "Example: "
             + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s";
+    public static final String MESSAGE_EDIT_DOCTOR_SUCCESS = "Edited Doctor: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the plannermd.";
+    public static final String MESSAGE_DUPLICATE_DOCTOR = "This doctor already exists in the plannermd.";
 
     private final Index index;
-    private final EditPatientDescriptor editPatientDescriptor;
+    private final EditDoctorDescriptor editDoctorDescriptor;
 
     /**
-     * @param index                 of the person in the filtered person list to edit
-     * @param editPatientDescriptor details to edit the person with
+     * @param index of the doctor in the filtered doctor list to edit
+     * @param editDoctorDescriptor details to edit the doctor with
      */
-    public EditPatientCommand(Index index, EditPatientDescriptor editPatientDescriptor) {
+    public EditDoctorCommand(Index index, EditDoctorDescriptor editDoctorDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPatientDescriptor);
+        requireNonNull(editDoctorDescriptor);
 
         this.index = index;
-        this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
+        this.editDoctorDescriptor = new EditDoctorDescriptor(editDoctorDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Patient> lastShownList = model.getFilteredPatientList();
+        List<Doctor> lastShownList = model.getFilteredDoctorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
         }
 
-        Patient patientToEdit = lastShownList.get(index.getZeroBased());
-        Patient editedPerson = createEditedPatient(patientToEdit, editPatientDescriptor);
+        Doctor doctorToEdit = lastShownList.get(index.getZeroBased());
+        Doctor editedDoctor = createEditedDoctor(doctorToEdit, editDoctorDescriptor);
 
-        if (!patientToEdit.isSamePerson(editedPerson) && model.hasPatient(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
+        if (!doctorToEdit.isSamePerson(editedDoctor) && model.hasDoctor(editedDoctor)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DOCTOR);
         }
 
-        model.setPatient(patientToEdit, editedPerson);
-        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPerson));
+        model.setDoctor(doctorToEdit, editedDoctor);
+        model.updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_DOCTOR_SUCCESS, editedDoctor));
     }
 
     /**
-     * Creates and returns a {@code Patient} with the details of
-     * {@code patientToEdit} edited with {@code editPatientDescriptor}.
+     * Creates and returns a {@code Doctor} with the details of
+     * {@code doctorToEdit} edited with {@code editDoctorDescriptor}.
      */
-    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor) {
-        assert patientToEdit != null;
+    private static Doctor createEditedDoctor(Doctor doctorToEdit, EditDoctorDescriptor editDoctorDescriptor) {
+        assert doctorToEdit != null;
 
-        Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
-        Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
-        Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
-        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
-        BirthDate updatedBirthDate = editPatientDescriptor.getBirthDate().orElse(patientToEdit.getBirthDate());
-        Set<Tag> updatedTags = editPatientDescriptor.getTags().orElse(patientToEdit.getTags());
-        Risk updatedRisk = editPatientDescriptor.getRisk().orElse(patientToEdit.getRisk());
-        Remark updatedRemark = patientToEdit.getRemark();
+        Name updatedName = editDoctorDescriptor.getName().orElse(doctorToEdit.getName());
+        Phone updatedPhone = editDoctorDescriptor.getPhone().orElse(doctorToEdit.getPhone());
+        Email updatedEmail = editDoctorDescriptor.getEmail().orElse(doctorToEdit.getEmail());
+        Address updatedAddress = editDoctorDescriptor.getAddress().orElse(doctorToEdit.getAddress());
+        BirthDate updatedBirthDate = editDoctorDescriptor.getBirthDate().orElse(doctorToEdit.getBirthDate());
+        Set<Tag> updatedTags = editDoctorDescriptor.getTags().orElse(doctorToEdit.getTags());
+        Remark updatedRemark = doctorToEdit.getRemark();
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthDate, updatedRemark,
-                updatedTags, updatedRisk);
+        return new Doctor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthDate, updatedRemark,
+                updatedTags);
     }
 
     @Override
@@ -113,20 +111,20 @@ public class EditPatientCommand extends EditCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditPatientCommand)) {
+        if (!(other instanceof EditDoctorCommand)) {
             return false;
         }
 
         // state check
-        EditPatientCommand e = (EditPatientCommand) other;
-        return index.equals(e.index) && editPatientDescriptor.equals(e.editPatientDescriptor);
+        EditDoctorCommand e = (EditDoctorCommand) other;
+        return index.equals(e.index) && editDoctorDescriptor.equals(e.editDoctorDescriptor);
     }
 
     /**
-     * Stores the details to edit the patient with. Each non-empty field value will
-     * replace the corresponding field value of the patient.
+     * Stores the details to edit the doctor with. Each non-empty field value will
+     * replace the corresponding field value of the doctor.
      */
-    public static class EditPatientDescriptor {
+    public static class EditDoctorDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -134,15 +132,14 @@ public class EditPatientCommand extends EditCommand {
         private BirthDate birthDate;
         private Remark remark;
         private Set<Tag> tags;
-        private Risk risk;
 
-        public EditPatientDescriptor() {
+        public EditDoctorDescriptor() {
         }
 
         /**
          * Copy constructor. A defensive copy of {@code tags} is used internally.
          */
-        public EditPatientDescriptor(EditPatientDescriptor toCopy) {
+        public EditDoctorDescriptor(EditDoctorDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -150,14 +147,13 @@ public class EditPatientCommand extends EditCommand {
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
             setBirthDate(toCopy.birthDate);
-            setRisk(toCopy.risk);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthDate, tags, risk);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthDate, tags);
         }
 
         public void setName(Name name) {
@@ -225,14 +221,6 @@ public class EditPatientCommand extends EditCommand {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setRisk(Risk risk) {
-            this.risk = risk;
-        }
-
-        public Optional<Risk> getRisk() {
-            return Optional.ofNullable(risk);
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -241,17 +229,16 @@ public class EditPatientCommand extends EditCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPatientDescriptor)) {
+            if (!(other instanceof EditDoctorDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPatientDescriptor e = (EditPatientDescriptor) other;
+            EditDoctorDescriptor e = (EditDoctorDescriptor) other;
 
             return getName().equals(e.getName()) && getPhone().equals(e.getPhone()) && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress()) && getBirthDate().equals(e.getBirthDate())
-                    && getRemark().equals(e.getRemark()) && getTags().equals(e.getTags())
-                    && getRisk().equals(e.getRisk());
+                    && getRemark().equals(e.getRemark()) && getTags().equals(e.getTags());
         }
     }
 }
