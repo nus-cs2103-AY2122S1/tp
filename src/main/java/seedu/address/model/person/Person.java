@@ -2,62 +2,60 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in the TutorAid.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private final StudentName studentName;
+    private final Phone studentPhone;
+    private final ParentName parentName;
+    private final Phone parentPhone;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Progress progress;
+    private final PaymentStatus paymentStatus;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+    public Person(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
+                  Progress progress, PaymentStatus paymentStatus) {
+        requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
+        this.studentName = studentName;
+        this.studentPhone = studentPhone;
+        this.parentName = parentName;
+        this.parentPhone = parentPhone;
+        this.progress = progress;
+        this.paymentStatus = paymentStatus;
     }
 
-    public Name getName() {
-        return name;
+    public StudentName getStudentName() {
+        return studentName;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Phone getStudentPhone() {
+        return studentPhone;
     }
 
-    public Email getEmail() {
-        return email;
+    public ParentName getParentName() {
+        return parentName;
     }
 
-    public Address getAddress() {
-        return address;
+    public Phone getParentPhone() {
+        return parentPhone;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Progress getProgress() {
+        return progress;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
     }
 
     /**
@@ -70,7 +68,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getStudentName().equals(getStudentName());
     }
 
     /**
@@ -88,35 +86,47 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        return otherPerson.getStudentName().equals(getStudentName())
+                && otherPerson.getStudentPhone().equals(getStudentPhone())
+                && otherPerson.getParentName().equals(getParentName())
+                && otherPerson.getParentPhone().equals(getParentPhone())
+                && otherPerson.getProgress().equals(getProgress())
+                && otherPerson.getPaymentStatus().equals(getPaymentStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        builder.append(getStudentName());
+
+        if (studentPhone != null) {
+            builder.append("; Student's phone: ")
+                    .append(getStudentPhone());
         }
+
+        if (parentName != null) {
+            builder.append("; Parent's name: ")
+                    .append(getParentName());
+
+        }
+
+        if (parentPhone != null) {
+            builder.append("; Parent's phone: ")
+                    .append(getParentPhone());
+        }
+
+        builder.append("; Progress: ")
+                .append(getProgress())
+                .append("; Payment Status: ")
+                .append(getPaymentStatus());
+
         return builder.toString();
     }
 

@@ -12,7 +12,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.ParentName;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Progress;
+import seedu.address.model.person.StudentName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,18 +39,37 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String name} into a {@code StudentName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static StudentName parseStudentName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new StudentName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code ParentName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ParentName parseParentName(String name) throws ParseException {
+        requireNonNull(name);
+        if (name.equals("")) {
+            return new ParentName("");
+        }
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new ParentName(trimmedName);
+
     }
 
     /**
@@ -58,6 +80,9 @@ public class ParserUtil {
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
+        if (phone.equals("")) {
+            return new Phone("");
+        }
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -93,6 +118,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String progress} into a {@code Progress}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code progress} is invalid.
+     */
+    public static Progress parseProgress(String progress) throws ParseException {
+        requireNonNull(progress);
+        String trimmedProgress = progress.trim();
+        if (!Progress.isValidProgress(trimmedProgress)) {
+            throw new ParseException(Progress.MESSAGE_CONSTRAINTS);
+        }
+        return new Progress(trimmedProgress);
     }
 
     /**
