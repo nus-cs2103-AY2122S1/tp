@@ -13,6 +13,13 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
+    private final String STUDENT_NAME_LABEL = "";
+    private final String STUDENT_PHONE_LABEL = "Mobile";
+    private final String PARENT_NAME_LABEL = "Parent";
+    private final String PARENT_PHONE_LABEL = "Parent Mobile";
+    private final String PROGRESS_LABEL = "Progress";
+    private final String PAYMENT_STATUS_LABEL = "";
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -48,12 +55,12 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        studentName.setText(person.getStudentName().fullName);
-        studentPhone.setText(person.getStudentPhone().value);
-        parentName.setText(person.getParentName().fullName);
-        parentPhone.setText(person.getParentPhone().value);
-        progress.setText(person.getProgress().toString());
-        paymentStatus.setText(person.getPaymentStatus().toString());
+        studentName.setText(formatCardLabel(STUDENT_NAME_LABEL, person.getStudentName().fullName));
+        studentPhone.setText(formatCardLabel(STUDENT_PHONE_LABEL, person.getStudentPhone().value));
+        parentName.setText(formatCardLabel(PARENT_NAME_LABEL, person.getParentName().fullName));
+        parentPhone.setText(formatCardLabel(PARENT_PHONE_LABEL, person.getParentPhone().value));
+        progress.setText(formatCardLabel(PROGRESS_LABEL, person.getProgress().toString()));
+        paymentStatus.setText(formatCardLabel(PAYMENT_STATUS_LABEL, person.getPaymentStatus().toString()));
     }
 
     @Override
@@ -72,5 +79,14 @@ public class PersonCard extends UiPart<Region> {
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
                 && person.equals(card.person);
+    }
+
+    public static String formatCardLabel(String fieldName, String value) {
+        if (value.equals("")) {
+            value = "(None)";
+        }
+        return fieldName.equals("")
+                ? value
+                : String.format("%s: %s", fieldName, value);
     }
 }
