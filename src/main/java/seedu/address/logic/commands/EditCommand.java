@@ -19,7 +19,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.CategoryCode;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -97,7 +103,8 @@ public class EditCommand extends Command {
         Review updateReview = editPersonDescriptor.getReview().orElse(personToEdit.getReview());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedCategoryCode, updatedName, updatedPhone, updatedEmail, updatedAddress, updateReview, updatedTags);
+        return new Person(updatedCategoryCode, updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updateReview, updatedTags);
     }
 
     @Override
