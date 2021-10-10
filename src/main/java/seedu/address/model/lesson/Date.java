@@ -90,15 +90,14 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Update the lesson date to the same day on the most recent date
-     * that has yet to be passed.
+     * Update the lesson date to the same day on the most recent week
+     * that has yet to be pass.
      *
-     * @return newDate The date of the same day that has yet to be passed.
+     * @return newDate The date of the same day on the week that has yet to pass.
      */
     public Date updateDate() {
-        long days = ChronoUnit.DAYS.between(getLocalDate(), LocalDate.now());
-        long weeks = days / 7 + (days % 7 > 0 ? 1 : 0);
-        if (weeks <= 0) { // No need update if date has not passed
+        long weeks = ChronoUnit.WEEKS.between(getLocalDate(), LocalDate.now());
+        if (weeks <= 0) { // No need update if week has not passed
             return this;
         }
         Date newDate = new Date(getLocalDate().plusWeeks(weeks).format(FORMATTER));

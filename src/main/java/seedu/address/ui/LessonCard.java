@@ -15,7 +15,7 @@ public class LessonCard extends UiPart<Region> {
 
     public final Lesson lesson;
 
-    @javafx.fxml.FXML
+    @FXML
     private HBox cardPane;
     @FXML
     private Label lessonId;
@@ -38,7 +38,7 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
         type.setText(lesson.getTypeOfLesson());
-        date.setText("Date: " + lesson.getDate().value);
+        date.setText("Date: " + lesson.getStartDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         subject.setText("Subject: " + lesson.getSubject().toString());
         lesson.getHomework().stream()

@@ -29,7 +29,7 @@ public class LessonUtil {
         if (lesson.isRecurring()) {
             sb.append(PREFIX_RECURRING + " ");
         }
-        sb.append(PREFIX_DATE + lesson.getDate().toString() + " ");
+        sb.append(PREFIX_DATE + lesson.getStartDate().toString() + " ");
         sb.append(PREFIX_TIME + lesson.getTimeRange().value + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
         lesson.getHomework().stream().forEach(

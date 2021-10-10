@@ -20,7 +20,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     private static final String MAKEUP = "Makeup Lesson";
 
     // Time fields
-    private final Date date;
+    private final Date startDate;
     private final TimeRange timeRange;
 
     // Data fields
@@ -37,22 +37,22 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
         requireAllNonNull(date, timeRange, subject, homework);
-        this.date = date;
+        this.startDate = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
     }
 
     public LocalDate getLocalDate() {
-        return date.getLocalDate();
+        return startDate.getLocalDate();
     }
 
     public DayOfWeek getDayOfWeek() {
-        return date.getDayOfWeek();
+        return startDate.getDayOfWeek();
     }
 
     public Subject getSubject() {
@@ -83,6 +83,11 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isRecurring();
 
     /**
+     * Get the upcoming date of the lesson.
+     */
+    public abstract Date getUpcomingDate();
+
+    /**
      * Returns true both lessons clash.
      *
      * @param otherLesson The other lesson to be compared with.
@@ -91,22 +96,8 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isClashing(Lesson otherLesson);
 
     public boolean isOver() {
-        return getDate().isOver();
+        return getStartDate().isOver();
     }
-
-    /**
-     * Edit the date of the particular type of lesson.
-     *
-     * @return {@code Lesson} with the updated date.
-     */
-    public abstract Lesson updateDate();
-
-    /**
-     * Return the original starting date of the lesson.
-     *
-     * @return {@code Date} that the lesson first started.
-     */
-    public abstract Date getStartDate();
 
     /**
      * Check if both lessons have the same data fields.
@@ -126,7 +117,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return otherLesson.getDate().equals(getDate())
+        return otherLesson.getStartDate().equals(getStartDate())
             && otherLesson.getTimeRange().equals(getTimeRange())
             && otherLesson.getSubject().equals(getSubject())
             && otherLesson.getHomework().equals(getHomework())
@@ -136,27 +127,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(date, timeRange, subject, homework);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
-        builder.append(typeOfLesson)
-            .append("\n")
-            .append(getDate())
-            .append("\nTime: ")
-            .append(getTimeRange())
-            .append("\nSubject: ")
-            .append(getSubject());
-
-        Set<Homework> homework = getHomework();
-        if (!homework.isEmpty()) {
-            builder.append("\nHomework: ");
-            homework.forEach(builder::append);
-        }
-        return builder.toString();
+        return Objects.hash(startDate, timeRange, subject, homework);
     }
 
     /**
@@ -167,7 +138,7 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     @Override
     public int compareTo(Lesson other) {
-        int compareDate = getDate().compareTo(other.getDate());
+        int compareDate = getStartDate().compareTo(other.getStartDate());
         int compareTime = getTimeRange().compareTo(other.getTimeRange());
         // Compare time if date is equal
         return compareDate == 0 ? compareTime : compareDate;

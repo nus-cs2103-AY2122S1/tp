@@ -3,6 +3,8 @@ package seedu.address.model.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,27 +19,18 @@ class RecurringLessonTest {
     private static final Set<Homework> HOMEWORK = new HashSet<>();
 
     @Test
-    void updateDate_validLesson_success() {
+    public void getNextDate() {
         Lesson lesson = new RecurringLesson(new Date(DATE),
             new TimeRange(TIME_RANGE),
             new Subject(SUBJECT), HOMEWORK);
-        Lesson updatedLesson = lesson.updateDate();
-
-        assertEquals(lesson.getDate(), updatedLesson.getStartDate());
-        assertEquals(lesson.getStartDate(), updatedLesson.getStartDate());
+        long weeks = ChronoUnit.WEEKS.between(lesson.getLocalDate(), LocalDate.now());
+        LocalDate recentDate = lesson.getLocalDate().plusWeeks(weeks);
+        assertEquals(recentDate, lesson.getUpcomingDate().getLocalDate());
     }
 
-    @Test
-    void getStartDate_outdatedLessonDate_success() {
-        Lesson lesson = new RecurringLesson(new Date(DATE),
-            new TimeRange(TIME_RANGE),
-            new Subject(SUBJECT), HOMEWORK);
-        Lesson updatedLesson = lesson.updateDate();
-        assertEquals(updatedLesson.getStartDate(), new Date(DATE));
-    }
 
     @Test
-    void isClashing() {
+    public void isClashing() {
         Date oneWeekLaterDate = new Date("21 Jan 2021");
         Lesson lesson = new RecurringLesson(new Date(DATE),
             new TimeRange(TIME_RANGE),

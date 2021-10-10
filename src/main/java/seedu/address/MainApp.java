@@ -15,7 +15,6 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.logic.init.LessonManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -63,7 +62,6 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        initLessons(model);
 
         logic = new LogicManager(model, storage);
 
@@ -97,10 +95,6 @@ public class MainApp extends Application {
 
     private void initLogging(Config config) {
         LogsCenter.init(config);
-    }
-
-    private void initLessons(Model model) {
-        LessonManager.init(model);
     }
 
     /**

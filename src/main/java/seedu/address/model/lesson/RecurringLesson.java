@@ -8,8 +8,6 @@ import java.util.Set;
  */
 public class RecurringLesson extends Lesson {
 
-    private final Date startDate;
-
     /**
      * Every field must be present and not null.
      *
@@ -21,22 +19,6 @@ public class RecurringLesson extends Lesson {
     public RecurringLesson(Date date, TimeRange timeRange,
                            Subject subject, Set<Homework> homework) {
         super(date, timeRange, subject, homework);
-        startDate = date;
-    }
-
-    /**
-     * Every field must be present and not null.
-     *
-     * @param startDate Start date of this recurring lesson.
-     * @param date Date of lesson.
-     * @param timeRange Time range of the lesson.
-     * @param subject Subject of the lesson.
-     * @param homework Homework for the lesson.
-     */
-    public RecurringLesson(Date startDate, Date date, TimeRange timeRange,
-                           Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
-        this.startDate = startDate;
     }
 
     /**
@@ -50,32 +32,14 @@ public class RecurringLesson extends Lesson {
     }
 
     /**
-     * Updates the date of the recurring lesson to the latest
-     * date on the same day of the week that has yet to be passed.
-     *
-     * @return {@code RecurringLesson} with the updated date.
+     * Get the date of lesson for the current week.
      */
     @Override
-    public Lesson updateDate() {
-        Date newDate = getDate().updateDate();
-
-        if (newDate.compareTo(getDate()) <= 0) {
-            return this;
+    public Date getUpcomingDate() {
+        if (getStartDate().isOver()) {
+            return getStartDate().updateDate();
         }
-
-        // Update the date
-        return new RecurringLesson(getStartDate(), newDate, getTimeRange(),
-            getSubject(), getHomework());
-    }
-
-    /**
-     * Return the original starting date of the recurring lesson.
-     *
-     * @return {@code Date} that the lesson first started.
-     */
-    @Override
-    public Date getStartDate() {
-        return startDate;
+        return getStartDate();
     }
 
     /**
@@ -94,5 +58,25 @@ public class RecurringLesson extends Lesson {
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        String typeOfLesson = "Recurring Lesson";
+        builder.append(typeOfLesson)
+            .append("\n")
+            .append(getUpcomingDate())
+            .append("\nTime: ")
+            .append(getTimeRange())
+            .append("\nSubject: ")
+            .append(getSubject());
+
+        Set<Homework> homework = getHomework();
+        if (!homework.isEmpty()) {
+            builder.append("\nHomework: ");
+            homework.forEach(hw -> builder.append(hw + "\n"));
+        }
+        return builder.toString();
     }
 }

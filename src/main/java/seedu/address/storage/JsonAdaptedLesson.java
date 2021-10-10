@@ -52,7 +52,7 @@ class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this class for Json use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        date = source.getDate().value;
+        date = source.getStartDate().value;
         timeRange = source.getTimeRange().value;
         subject = source.getSubject().subject;
         homework.addAll(source.getHomework().stream()

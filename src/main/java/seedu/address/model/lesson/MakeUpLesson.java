@@ -20,21 +20,6 @@ public class MakeUpLesson extends Lesson {
         super(date, timeRange, subject, homework);
     }
 
-    @Override
-    public Lesson updateDate() {
-        return this;
-    }
-
-    /**
-     * Return the original starting date of the makeup lesson.
-     *
-     * @return {@code Date} that the lesson first started.
-     */
-    @Override
-    public Date getStartDate() {
-        return getDate();
-    }
-
     /**
      * Check if the Lesson object is recurring.
      *
@@ -42,6 +27,14 @@ public class MakeUpLesson extends Lesson {
      */
     public boolean isRecurring() {
         return false;
+    }
+
+    /**
+     * Get the date of the makeup lesson.
+     */
+    @Override
+    public Date getUpcomingDate() {
+        throw new UnsupportedOperationException("Makeup lesson has no upcoming date.");
     }
 
     /**
@@ -60,6 +53,26 @@ public class MakeUpLesson extends Lesson {
             return getLocalDate().equals(otherLesson.getLocalDate())
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        String typeOfLesson = "Makeup Lesson";
+        builder.append(typeOfLesson)
+            .append("\n")
+            .append(getStartDate())
+            .append("\nTime: ")
+            .append(getTimeRange())
+            .append("\nSubject: ")
+            .append(getSubject());
+
+        Set<Homework> homework = getHomework();
+        if (!homework.isEmpty()) {
+            builder.append("\nHomework: ");
+            homework.forEach(hw -> builder.append(hw + "\n"));
+        }
+        return builder.toString();
     }
 }
 
