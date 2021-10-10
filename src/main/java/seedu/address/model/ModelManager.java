@@ -118,6 +118,12 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
+    @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return addressBook.hasGroup(group);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**

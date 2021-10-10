@@ -84,6 +84,11 @@ public interface Model {
      */
     void addStudentToGroup(Group group, Student student);
 
+    /**
+     * Returns true if a group with the same name as {@code group} exists in the address book.
+     */
+    boolean hasGroup(Group group);
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
