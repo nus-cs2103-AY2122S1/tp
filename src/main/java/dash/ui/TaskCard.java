@@ -1,5 +1,7 @@
 package dash.ui;
 
+import java.util.Comparator;
+
 import dash.model.task.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -42,6 +44,9 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         desc.setText(task.getTaskDescription().description);
+        task.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
