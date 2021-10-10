@@ -1,10 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -42,6 +39,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ROLE + "EMAIL] "
+            + "[" + PREFIX_FACULTY + "PHONE] "
+            + "[" + PREFIX_MAJOR + "PHONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -98,9 +98,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Role updatedRole = personToEdit.getRole();
-        Faculty updatedFaculty = personToEdit.getFaculty();
-        Major updatedMajor = personToEdit.getMajor();
+        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
+        Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
+        Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
@@ -134,6 +134,9 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Role role;
+        private Faculty faculty;
+        private Major major;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -147,6 +150,9 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setFaculty(toCopy.faculty);
+            setMajor(toCopy.major);
+            setRole(toCopy.role);
             setTags(toCopy.tags);
         }
 
@@ -154,7 +160,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,role,faculty,major, tags);
         }
 
         public void setName(Name name) {
@@ -189,6 +195,29 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setRole(Role role) {
+            this.role = role;
+        }
+
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
+        }
+
+        public void setMajor(Major major) {
+            this.major = major;
+        }
+
+        public Optional<Major> getMajor() {
+            return Optional.ofNullable(major);
+        }
+
+        public void setFaculty(Faculty faculty) {
+            this.faculty = faculty;
+        }
+
+        public Optional<Faculty> getFaculty() {
+            return Optional.ofNullable(faculty);
+        }
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -225,6 +254,9 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getRole().equals(e.getRole())
+                    && getFaculty().equals(e.getFaculty())
+                    && getMajor().equals(e.getMajor())
                     && getTags().equals(e.getTags());
         }
     }
