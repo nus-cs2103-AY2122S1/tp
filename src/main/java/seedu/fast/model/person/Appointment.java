@@ -1,7 +1,14 @@
 package seedu.fast.model.person;
 
-import static java.util.Objects.requireNonNull;
+import seedu.fast.commons.util.DateUtil;
+import seedu.fast.logic.commands.AppointmentCommand;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -30,6 +37,19 @@ public class Appointment {
      */
     public String getDate() {
         return this.date;
+    }
+
+    public Date convertDate() {
+        Date temp = new Date(Long.MAX_VALUE);
+        if (date.equals(NO_APPOINTMENT)) {
+            return temp;
+        }
+        try {
+            temp = new SimpleDateFormat("dd MMM yyyy").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return temp;
     }
 
 

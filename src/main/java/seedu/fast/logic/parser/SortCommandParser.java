@@ -31,13 +31,14 @@ public class SortCommandParser implements Parser<SortCommand> {
         switch (trimmedArgs) {
 
         case SortByName.KEYWORD:
-            return new SortCommand(new SortByName());
+            return new SortCommand(new SortByName(), SortByName.KEYWORD);
 
         case SortByAppointment.KEYWORD:
-            return new SortCommand(new SortByAppointment());
+            return new SortCommand(new SortByAppointment(), SortByAppointment.KEYWORD);
 
         default:
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
 
