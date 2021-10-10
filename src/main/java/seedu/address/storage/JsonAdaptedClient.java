@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
 
@@ -51,7 +52,9 @@ public class JsonAdaptedClient {
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ID.class.getSimpleName()));
         }
-        final ID modelId = new ID(id);
-        return new Client(modelId, modelName);
+        // final ID modelId = new ID(id);
+
+        final PhoneNumber phoneNumber = new PhoneNumber("12345678");
+        return new Client(modelName, phoneNumber, null, null);
     }
 }
