@@ -1,0 +1,8 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "studentId": "A0212352F",
+    "classId": "B011",
+    "grade": "A"
+  } ]
+}
