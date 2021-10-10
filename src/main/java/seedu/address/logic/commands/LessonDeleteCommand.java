@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Deletes a Lesson from an existing person in the address book.
  */
-public class LessonDeleteCommand extends Command {
+public class LessonDeleteCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "ldelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the lesson identified by lesson index"
@@ -38,6 +38,8 @@ public class LessonDeleteCommand extends Command {
 
     private final Index index;
     private final Index lessonIndex;
+    private Person personBeforeLessonDelete;
+    private Person personAfterLessonDelete;
 
     /**
      * @param index of the person in the filtered person list to delete lesson from
@@ -50,7 +52,7 @@ public class LessonDeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -58,9 +60,9 @@ public class LessonDeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        personBeforeLessonDelete = lastShownList.get(index.getZeroBased());
 
-        Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
+        Set<Lesson> lessons = new TreeSet<>(personBeforeLessonDelete.getLessons());
         if (lessonIndex.getZeroBased() >= lessons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
@@ -68,15 +70,15 @@ public class LessonDeleteCommand extends Command {
         List<Lesson> lessonList = lessons.stream().sorted().collect(Collectors.toList());
         Lesson toRemove = lessonList.get(lessonIndex.getZeroBased());
 
-        Person editedPerson = createEditedPerson(personToEdit, lessonList, toRemove);
+        personAfterLessonDelete = createEditedPerson(personBeforeLessonDelete, lessonList, toRemove);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personBeforeLessonDelete.isSamePerson(personAfterLessonDelete) && model.hasPerson(personAfterLessonDelete)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, editedPerson));
+        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, personAfterLessonDelete));
     }
 
     /**
@@ -103,6 +105,13 @@ public class LessonDeleteCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail,
             updatedParentPhone, updatedParentEmail, updatedAddress,
             updatedOutstandingFee, updatedRemark, updatedTags, updatedLessonSet);
+    }
+
+    @Override
+    public void undo() {
+        requireNonNull(model);
+
+        model.setPerson(personAfterLessonDelete, personBeforeLessonDelete);
     }
 
     @Override

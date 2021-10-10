@@ -26,7 +26,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
-public class LessonAddCommand extends Command {
+public class LessonAddCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "ladd";
 
@@ -69,6 +69,8 @@ public class LessonAddCommand extends Command {
 
     private final Index index;
     private final Lesson toAdd;
+    private Person personBeforeLessonAdd;
+    private Person personAfterLessonAdd;
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
@@ -104,7 +106,7 @@ public class LessonAddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -112,16 +114,23 @@ public class LessonAddCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, toAdd);
+        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
+        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
 
         if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, personAfterLessonAdd));
+    }
+
+    @Override
+    public void undo() {
+        requireNonNull(model);
+
+        model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
     }
 
     @Override
