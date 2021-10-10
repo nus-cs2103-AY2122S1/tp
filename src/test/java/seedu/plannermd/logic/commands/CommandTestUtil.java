@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
@@ -25,6 +26,7 @@ import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
+import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 
 /**
@@ -73,18 +75,27 @@ public class CommandTestUtil {
     public static final String INVALID_BIRTH_DATE_DESC = " "
             + PREFIX_BIRTH_DATE + "2020/02/11"; // not DD/MM/YYYY format
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditPatientCommand.EditPatientDescriptor DESC_AMY;
     public static final EditPatientCommand.EditPatientDescriptor DESC_BOB;
 
+    public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_AMY;
+    public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_BOB;
+
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPatientDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_DR_AMY = new EditDoctorDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_DR_BOB = new EditDoctorDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
@@ -136,7 +147,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the patient at the given
+     * Updates {@code model}'s patient filtered list to show only the patient at the given
      * {@code targetIndex} in the {@code model}'s plannermd.
      */
     public static void showPatientAtIndex(Model model, Index targetIndex) {
@@ -162,4 +173,5 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredDoctorList().size());
     }
+
 }

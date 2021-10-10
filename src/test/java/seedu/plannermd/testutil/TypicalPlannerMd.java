@@ -45,5 +45,4 @@ public class TypicalPlannerMd {
         }
         return pm;
     }
-
 }

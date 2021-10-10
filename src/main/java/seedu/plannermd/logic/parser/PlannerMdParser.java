@@ -11,13 +11,18 @@ import seedu.plannermd.logic.commands.Command;
 import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.ToggleCommand;
+import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
-import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
-import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
+import seedu.plannermd.logic.commands.deletecommand.DeleteCommand;
+import seedu.plannermd.logic.commands.editcommand.EditCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
+import seedu.plannermd.logic.commands.listcommand.ListDoctorCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
 import seedu.plannermd.logic.commands.tagcommand.TagCommand;
+import seedu.plannermd.logic.parser.addcommandparser.AddDoctorCommandParser;
+import seedu.plannermd.logic.parser.addcommandparser.AddPatientCommandParser;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
 
@@ -48,7 +53,6 @@ public class PlannerMdParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -73,27 +77,26 @@ public class PlannerMdParser {
 
     private Command parsePatientCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
-
         case AddPatientCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddPatientCommandParser().parse(arguments);
 
-        case EditPatientCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditPatientCommandParser().parse(arguments);
 
-        case DeletePatientCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeletePatientCommandParser().parse(arguments);
 
         case RemarkCommand.COMMAND_WORD:
             return new RemarkPatientCommandParser().parse(arguments);
+
+        case AddPatientTagCommand.COMMAND_WORD:
+            return new TagPatientCommandParser().parse(arguments);
 
         case FindPatientCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
-
-        case TagCommand.COMMAND_WORD:
-            return new TagPatientCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -109,6 +112,18 @@ public class PlannerMdParser {
 
         case TagCommand.COMMAND_WORD:
             return new TagDoctorCommandParser().parse(arguments);
+
+        case AddDoctorCommand.COMMAND_WORD:
+            return new AddDoctorCommandParser().parse(arguments);
+
+        case EditCommand.COMMAND_WORD:
+            return new EditDoctorCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteDoctorCommandParser().parse(arguments);
+
+        case ListDoctorCommand.COMMAND_WORD:
+            return new ListDoctorCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

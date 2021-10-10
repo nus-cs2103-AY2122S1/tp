@@ -1,4 +1,4 @@
-package seedu.plannermd.logic.commands;
+package seedu.plannermd.logic.commands.listcommand;
 
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.logic.commands.CommandTestUtil.showPatientAtIndex;
@@ -8,7 +8,6 @@ import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.UserPrefs;

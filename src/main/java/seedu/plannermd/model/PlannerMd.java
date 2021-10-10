@@ -11,7 +11,7 @@ import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the Plannermd level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class PlannerMd implements ReadOnlyPlannerMd {
@@ -133,7 +133,6 @@ public class PlannerMd implements ReadOnlyPlannerMd {
      */
     public void setDoctor(Doctor target, Doctor editedDoctor) {
         requireNonNull(editedDoctor);
-
         doctors.setPerson(target, editedDoctor);
     }
 
