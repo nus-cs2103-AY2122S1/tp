@@ -19,7 +19,7 @@ public class AddProductCommand extends Command {
                     + "Parameters: "
                     + "NAME "
                     + PREFIX_UNIT_PRICE + "UNIT_PRICE "
-                    + "[" + PREFIX_QUANTITY + "] QUANTITY \n"
+                    + "[" + PREFIX_QUANTITY + "QUANTITY] \n"
                     + "Example: " + COMMAND_WORD + " "
                     + "pen "
                     + PREFIX_UNIT_PRICE + "20 "

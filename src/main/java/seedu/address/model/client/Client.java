@@ -56,8 +56,8 @@ public class Client implements Category {
         return address;
     }
 
-    public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber) {
-        return new Client(client.getId(), name, phoneNumber, null, null);
+    public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber, Email email, Address address) {
+        return new Client(client.getId(), name, phoneNumber, email, address);
     }
 
     /**
@@ -91,31 +91,35 @@ public class Client implements Category {
         }
 
         Client otherClient = (Client) other;
-        return getId().equals(otherClient.getId())
-                       && getName().equals(otherClient.getName())
-                       && getPhoneNumber().equals(otherClient.getPhoneNumber());
+        return id.equals(otherClient.id)
+                       && name.equals(otherClient.name)
+                       && phoneNumber.equals(otherClient.phoneNumber)
+                       && email.equals(otherClient.email)
+                       && address.equals(otherClient.address);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name, phoneNumber);
+        return Objects.hash(id, name, phoneNumber, email, address);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("ID: ")
-                .append(getId())
+                .append(id)
                 .append("; Name: ")
-                .append(getName())
+                .append(name)
                 .append("; Phone Number: ")
-                .append(getPhoneNumber());
-        if (this.email != null) {
-            builder.append("; Email: ").append(getEmail());
+                .append(phoneNumber);
+
+        if (email != null) {
+            builder.append("; Email: ").append(email);
         }
-        if (this.address != null) {
-            builder.append("; Address: ").append(getAddress());
+
+        if (address != null) {
+            builder.append("; Address: ").append(address);
         }
 
         return builder.toString();

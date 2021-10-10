@@ -50,8 +50,8 @@ public class Product implements Category {
         return quantity;
     }
 
-    public static Product updateProduct(Product product, Name name, UnitPrice unitPrice) {
-        return new Product(product.getId(), name, unitPrice, null);
+    public static Product updateProduct(Product product, Name name, UnitPrice unitPrice, Quantity quantity) {
+        return new Product(product.getId(), name, unitPrice, quantity);
     }
 
     /**
@@ -85,30 +85,32 @@ public class Product implements Category {
         }
 
         Product otherProduct = (Product) other;
-        return this.getId() == otherProduct.getId()
-                       && getName().equals(otherProduct.getName())
-                       && getUnitPrice().equals(otherProduct.getUnitPrice());
+        return id.equals(otherProduct.id)
+                       && name.equals(otherProduct.name)
+                       && unitPrice.equals(otherProduct.unitPrice)
+                       && quantity.equals(otherProduct.quantity);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name, unitPrice);
+        return Objects.hash(id, name, unitPrice, quantity);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("ID: ")
-                .append(getId())
+                .append(id)
                 .append("; Name: ")
-                .append(getName())
+                .append(name)
                 .append("; Unit Price: ")
-                .append(getUnitPrice());
+                .append(unitPrice);
 
         if (quantity != null) {
-            builder.append("; Quantity: ").append(getQuantity());
+            builder.append("; Quantity: ").append(quantity);
         }
+
         return builder.toString();
     }
 }
