@@ -133,7 +133,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Calculates the number of students grouped under the same tags by checking the number of duplicate tags used.
+     * Calculates the number of students labelled under each tag.
      *
      * @param tagList List of distinct tags to be checked against.
      */
