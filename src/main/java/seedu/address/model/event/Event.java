@@ -16,14 +16,20 @@ import seedu.address.model.member.Member;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
-    // Identity fields
+    /**
+     * Identity fields
+     */
     private final String name;
     private final LocalDate date;
 
-    // Data fields
+    /**
+     * Data field is a hashmap of members and booleans that represent their attendance.
+     */
     private final HashMap<Member, Boolean> participants = new HashMap<>();
 
     /**
+     * Creates a {@code Event} with the given {@code String} for name, {@code LocalDate} and {@code Set<Member>}
+     * for participants.
      * Every field must be present and not null.
      */
     public Event(String name, LocalDate date, Set<Member> participants) {
@@ -44,8 +50,10 @@ public class Event {
     }
 
     /**
-     * Returns an immutable set of participants, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Set of participants of the event.
+     *
+     * @return an immutable set of participants, which throws {@code UnsupportedOperationException}
+     * if modification is attempted
      */
     public Set<Member> getParticipants() {
         return Collections.unmodifiableSet(participants.keySet());
@@ -63,20 +71,20 @@ public class Event {
     }
 
     /**
-     * Check if a member is part of the event.
+     * Checks if a member is part of the event.
      *
      * @param member to check
      * @return boolean indicating if member is included
      */
-    public boolean isParticipant(Member member) {
+    public boolean isParticipatingInEvent(Member member) {
         return participants.containsKey(member);
     }
 
     /**
-     * Check if a member has attended in this event.
+     * Checks if a member has attended in this event.
      *
      * @param member to check
-     * @return boolean indicating member's attendance
+     * @return boolean indicating whether the member has attended the event
      */
     public boolean hasAttended(Member member) {
         return participants.get(member);
@@ -105,7 +113,10 @@ public class Event {
     }
 
     /**
-     * Returns true if both Events have the same name.
+     * Checks if two events are similar types.
+     *
+     * @param otherEvent is the event to be compared with
+     * @return true if both Events have the same name
      */
     public boolean isSameTypeOfEvent(Event otherEvent) {
         if (otherEvent == this) {
@@ -117,8 +128,10 @@ public class Event {
     }
 
     /**
-     * Returns true if both members have the same identity and data fields.
-     * This defines a stronger notion of equality between two members.
+     * Checks if something is equal to the event. This defines a stronger notion of equality between two events.
+     *
+     * @param other is the object to be compared to
+     * @return true if both events have the same identity and data fields
      */
     @Override
     public boolean equals(Object other) {
@@ -136,12 +149,21 @@ public class Event {
                 && otherEvent.getParticipants().equals(getParticipants());
     }
 
+    /**
+     * use this method for custom fields hashing instead of implementing your own
+     *
+     * @return integer obtained from hashing
+     */
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, date, participants);
     }
 
+    /**
+     * Returns the name and date of the event in string.
+     *
+     * @return String representation of the event
+     */
     @Override
     public String toString() {
         return String.format("%s ; Date: %s", name, date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
