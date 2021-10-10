@@ -16,7 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_DAY_SHIFT = new Prefix("d/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
-    public static final Prefix PREFIX_SLOT_SHIFT = new Prefix("sl/");
-    public static final Prefix PREFIX_TYPE_SHIFT = new Prefix("ty/");
 
 }
