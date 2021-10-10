@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,13 +18,11 @@ class RecurringLessonTest {
     private static final Set<Homework> HOMEWORK = new HashSet<>();
 
     @Test
-    public void getNextDate() {
-        Lesson lesson = new RecurringLesson(new Date(DATE),
+    public void getNextDate_dateNotOver_sameDate() {
+        Lesson lesson = new RecurringLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
             new TimeRange(TIME_RANGE),
             new Subject(SUBJECT), HOMEWORK);
-        long weeks = ChronoUnit.WEEKS.between(lesson.getLocalDate(), LocalDate.now());
-        LocalDate recentDate = lesson.getLocalDate().plusWeeks(weeks);
-        assertEquals(recentDate, lesson.getUpcomingDate().getLocalDate());
+        assertEquals(LocalDate.now(), lesson.getNextDate().getLocalDate());
     }
 
 
