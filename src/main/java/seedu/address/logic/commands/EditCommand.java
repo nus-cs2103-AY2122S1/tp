@@ -68,6 +68,14 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    public Index getIndex() {
+        return index;
+    }
+
+    public EditPersonDescriptor getEditPersonDescriptor() {
+        return editPersonDescriptor;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
