@@ -3,11 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -26,6 +22,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Insurance> insurances;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +33,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        insurances = new HashSet<>();
     }
 
     /**
@@ -47,6 +45,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        insurances = new HashSet<>(personToCopy.getInsurances());
     }
 
     /**
@@ -86,6 +85,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Insurances} of the {@code Insurance} that we are building.
+     */
+    public PersonBuilder withInsurances(String... insurances) {
+        this.insurances = SampleDataUtil.getInsuranceSet(insurances);
         return this;
     }
 
