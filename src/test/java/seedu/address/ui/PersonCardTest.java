@@ -20,12 +20,12 @@ public class PersonCardTest {
     }
 
     @Test
-    public void formatCardLabel_ValidLabelEmptyField() {
+    public void formatCardLabel_validLabelEmptyField() {
         assertEquals("Field: (None)", formatCardLabel("Field", ""));
     }
 
     @Test
-    public void formatCardLabel_ValidLabelValidField() {
+    public void formatCardLabel_validLabelValidField() {
         assertEquals("Field: Name", formatCardLabel("Field", "Name"));
     }
 }
