@@ -12,7 +12,7 @@ import seedu.fast.model.person.Person;
 import seedu.fast.model.person.Remark;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the remark of an existing person in FAST.
  */
 public class RemarkCommand extends Command {
 
@@ -34,6 +34,8 @@ public class RemarkCommand extends Command {
     private Remark remark;
 
     /**
+     * Construct for a {@code RemarkCommand}
+     *
      * @param index index of the person in the filtered person list to edit the remark
      * @param remark remark of the person to be updated to
      */
@@ -55,7 +57,7 @@ public class RemarkCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+                personToEdit.getAddress(), remark, personToEdit.getTags(), personToEdit.getAppointment());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

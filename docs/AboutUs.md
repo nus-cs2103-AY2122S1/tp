@@ -32,7 +32,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/trash-bin99.png" width="200px">
 
-[[github](https://github.com/trash-bin99)] 
+[[github](https://github.com/trash-bin99)]
 [[portfolio](team/wangbin.md)]
 
 * Role: Developer

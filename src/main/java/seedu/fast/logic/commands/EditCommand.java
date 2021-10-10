@@ -20,6 +20,7 @@ import seedu.fast.commons.util.CollectionUtil;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Address;
+import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Person;
@@ -28,7 +29,7 @@ import seedu.fast.model.person.Remark;
 import seedu.fast.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in FAST.
  */
 public class EditCommand extends Command {
 
@@ -49,7 +50,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in FAST.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -100,8 +101,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Appointment updatedAppointment = personToEdit.getAppointment();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags,
+                updatedAppointment);
     }
 
     @Override

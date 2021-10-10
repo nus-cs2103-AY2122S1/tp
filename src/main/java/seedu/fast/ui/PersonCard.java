@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.fast.commons.util.Colors;
 import seedu.fast.model.person.Person;
 
 /**
@@ -42,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label remark;
+    @FXML
+    private Label appointment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,7 +60,29 @@ public class PersonCard extends UiPart<Region> {
         remark.setText(person.getRemark().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
+
+        // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
+        appointment.setText("Appointment: " + person.getAppointment().getDate());
+    }
+
+    /**
+     * Creates a Label with the given tag name.
+     * @param tagName The given tag name.
+     * @return Label with the given tag name and custom color.
+     */
+    public Label colorSelector(String tagName) {
+        Label temp = new Label(tagName);
+
+        switch (tagName.toLowerCase()) { //Todo: add more color tags & abstract out case names
+
+        case "friends":
+            temp.setStyle(Colors.BLUE);
+            break;
+        default:
+            temp.setStyle(Colors.GREY);
+        }
+        return temp;
     }
 
     @Override

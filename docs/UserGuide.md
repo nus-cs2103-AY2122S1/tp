@@ -6,7 +6,7 @@ title: User Guide
 Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FAST can get your contact management tasks done faster than traditional GUI apps.
 
  Table of Contents
-- [Quick start](#quick-start) 
+- [Quick start](#quick-start)
 - [Features](#features)
     * [Viewing help](#viewing-help-help)
     * [Adding a person](#adding-a-person-add)
