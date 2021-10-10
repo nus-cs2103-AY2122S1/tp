@@ -1,9 +1,10 @@
 [![Java CI](https://github.com/AY2122S1-CS2103T-T17-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-T17-4/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T17-4/tp/branch/master/graph/badge.svg?token=W8OO51MUAS)](https://codecov.io/gh/AY2122S1-CS2103T-T17-4/tp)
+
 ![Ui](docs/images/Ui.png)
 
 ## Welcome to InsurancePal
-* Insurance Pal is a client management software specially designed to help manage the logistics of being an insurance agent.
+* InsurancePal is a client management software specially designed to help manage the logistics of being an insurance agent.
 * This application is built from [Address Book Level 3](https://github.com/nus-cs2103-AY2122S1/tp)
 
 **InsurancePal** aims to help insurance agents
