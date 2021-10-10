@@ -26,7 +26,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newAnime_success() {
         Anime validAnime = new AnimeBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAniList(), new UserPrefs());
@@ -37,9 +37,9 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateAnime_throwsCommandException() {
         Anime animeInList = model.getAniList().getAnimeList().get(0);
-        assertCommandFailure(new AddCommand(animeInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddCommand(animeInList), model, AddCommand.MESSAGE_DUPLICATE_ANIME);
     }
 
 }
