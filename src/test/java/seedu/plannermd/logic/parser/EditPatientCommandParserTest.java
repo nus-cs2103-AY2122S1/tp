@@ -3,6 +3,7 @@ package seedu.plannermd.logic.parser;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.BIRTH_DATE_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -19,6 +20,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_BIRTH_DATE_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -163,6 +165,12 @@ public class EditPatientCommandParserTest {
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
         descriptor = new EditPatientDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        expectedCommand = new EditPatientCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // birth date
+        userInput = targetIndex.getOneBased() + BIRTH_DATE_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withBirthDate(VALID_BIRTH_DATE_AMY).build();
         expectedCommand = new EditPatientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
