@@ -1,7 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
@@ -12,7 +16,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 /**
@@ -26,9 +33,15 @@ public class EditClientCommand extends Command {
                     + "client list.\n"
                     + "Existing values will be overwritten by the input values.\n"
                     + "Parameters: INDEX (must be a positive integer) "
-                    + "[" + PREFIX_NAME + "NAME]\n"
+                    + "[" + PREFIX_NAME + "NAME] "
+                    + "[" + PREFIX_PHONE_NUMBER + "PHONE_NUMBER] "
+                    + "[" + PREFIX_EMAIL + "EMAIL] "
+                    + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
                     + "Example: " + COMMAND_WORD + " 1 "
-                    + PREFIX_NAME + " Ben";
+                    + PREFIX_NAME + "Ben "
+                    + PREFIX_PHONE_NUMBER + "12345678 "
+                    + PREFIX_EMAIL + "ben@gmail.com "
+                    + PREFIX_ADDRESS + "Ridley Park, Singapore 248473";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -42,8 +55,7 @@ public class EditClientCommand extends Command {
      * @param editClientDescriptor details to edit the client with
      */
     public EditClientCommand(Index index, EditClientDescriptor editClientDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editClientDescriptor);
+        requireAllNonNull(index, editClientDescriptor);
 
         this.index = index;
         this.editClientDescriptor = new EditClientDescriptor(editClientDescriptor);
@@ -52,8 +64,8 @@ public class EditClientCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Client> lastShownList = model.getFilteredClientList();
 
+        List<Client> lastShownList = model.getFilteredClientList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
@@ -78,8 +90,11 @@ public class EditClientCommand extends Command {
         assert clientToEdit != null;
 
         Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
+        PhoneNumber updatedPhoneNumber = editClientDescriptor.getPhoneNumber().orElse(clientToEdit.getPhoneNumber());
+        Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
+        Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
 
-        return Client.updateClient(clientToEdit, updatedName);
+        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail, updatedAddress);
     }
 
     @Override
@@ -96,8 +111,7 @@ public class EditClientCommand extends Command {
 
         // state check
         EditClientCommand e = (EditClientCommand) other;
-        return index.equals(e.index)
-                       && editClientDescriptor.equals(e.editClientDescriptor);
+        return index.equals(e.index) && editClientDescriptor.equals(e.editClientDescriptor);
     }
 
     /**
@@ -106,6 +120,9 @@ public class EditClientCommand extends Command {
      */
     public static class EditClientDescriptor {
         private Name name;
+        private PhoneNumber phoneNumber;
+        private Email email;
+        private Address address;
 
         public EditClientDescriptor() {}
 
@@ -114,13 +131,16 @@ public class EditClientCommand extends Command {
          */
         public EditClientDescriptor(EditClientDescriptor toCopy) {
             setName(toCopy.name);
+            setPhoneNumber(toCopy.phoneNumber);
+            setEmail(toCopy.email);
+            setAddress(toCopy.address);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name);
+            return CollectionUtil.isAnyNonNull(name, phoneNumber, email, address);
         }
 
         public void setName(Name name) {
@@ -129,6 +149,30 @@ public class EditClientCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setPhoneNumber(PhoneNumber phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public Optional<PhoneNumber> getPhoneNumber() {
+            return Optional.ofNullable(phoneNumber);
+        }
+
+        public void setEmail(Email email) {
+            this.email = email;
+        }
+
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
+        }
+
+        public Optional<Address> getAddress() {
+            return Optional.ofNullable(address);
         }
 
         @Override
@@ -146,7 +190,10 @@ public class EditClientCommand extends Command {
             // state check
             EditClientDescriptor e = (EditClientDescriptor) other;
 
-            return getName().equals(e.getName());
+            return getName().equals(e.getName())
+                           && getPhoneNumber().equals(e.getPhoneNumber())
+                           && getEmail().equals(e.getEmail())
+                           && getAddress().equals(e.getAddress());
         }
     }
 }

@@ -18,19 +18,19 @@ public class Product implements Category {
 
     // Data fields
     private final Name name;
+    private final UnitPrice unitPrice;
+    private final Quantity quantity;
 
-    public Product(Name name) {
-        this(new ID(), name);
+    public Product(Name name, UnitPrice unitPrice, Quantity quantity) {
+        this(new ID(), name, unitPrice, quantity);
     }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Product(ID id, Name name) {
-        requireAllNonNull(id, name);
+    private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
+        requireAllNonNull(id, name, unitPrice);
 
         this.id = id;
         this.name = name;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
     }
 
     public ID getId() {
@@ -41,8 +41,16 @@ public class Product implements Category {
         return name;
     }
 
-    public static Product updateProduct(Product product, Name name) {
-        return new Product(product.getId(), name);
+    public UnitPrice getUnitPrice() {
+        return unitPrice;
+    }
+
+    public Quantity getQuantity() {
+        return quantity;
+    }
+
+    public static Product updateProduct(Product product, Name name, UnitPrice unitPrice, Quantity quantity) {
+        return new Product(product.getId(), name, unitPrice, quantity);
     }
 
     /**
@@ -76,22 +84,31 @@ public class Product implements Category {
         }
 
         Product otherProduct = (Product) other;
-        return this.getId() == otherProduct.getId();
+        return id.equals(otherProduct.id)
+                       && name.equals(otherProduct.name)
+                       && unitPrice.equals(otherProduct.unitPrice)
+                       && quantity.equals(otherProduct.quantity);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, unitPrice, quantity);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("ID: ")
-                .append(getId())
+                .append(id)
                 .append("; Name: ")
-                .append(getName());
+                .append(name)
+                .append("; Unit Price: ")
+                .append(unitPrice);
+
+        if (quantity != null) {
+            builder.append("; Quantity: ").append(quantity);
+        }
 
         return builder.toString();
     }
