@@ -75,7 +75,6 @@ public class CommandTestUtil {
     public static final String INVALID_BIRTH_DATE_DESC = " "
             + PREFIX_BIRTH_DATE + "2020/02/11"; // not DD/MM/YYYY format
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

@@ -133,7 +133,6 @@ public class PlannerMd implements ReadOnlyPlannerMd {
      */
     public void setDoctor(Doctor target, Doctor editedDoctor) {
         requireNonNull(editedDoctor);
-
         doctors.setPerson(target, editedDoctor);
     }
 
