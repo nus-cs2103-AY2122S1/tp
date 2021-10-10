@@ -60,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        rating.setText(person.getRating().value);
+        rating.setText(person.getRating().value + "\u2B50");
     }
 
     @Override

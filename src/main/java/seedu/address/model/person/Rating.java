@@ -12,7 +12,7 @@ public class Rating {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Ratings should be a single integer between 1 to 5 inclusive";
-    public static final String VALIDATION_REGEX = "[1-5]";// "\\d{1,}";// "/^[1-5]$|^(5)$/g"; //CHANGE /^[1-5]$|^(5)$/g   ^[1-5]$|^(5)$ /^[1-5]$|^(5)$/g
+    public static final String VALIDATION_REGEX = "[1-5]";
     public final String value;
 
     /**
