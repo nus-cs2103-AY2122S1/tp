@@ -63,7 +63,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String room} into an {@code Room}.
+     * Parses a {@code String room} into a {@code Room}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code room} is invalid.
@@ -93,7 +93,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String vaccStatus} into an {@code VaccStatus}.
+     * Parses a {@code String vaccStatus} into a {@code VaccStatus}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code vaccStatus} is invalid.
@@ -108,7 +108,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String faculty} into an {@code Faculty}.
+     * Parses a {@code String faculty} into a {@code Faculty}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code faculty} is invalid.
