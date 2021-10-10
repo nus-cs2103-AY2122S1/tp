@@ -3,6 +3,7 @@ package seedu.fast.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -102,8 +103,8 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the persons in the list.
      * Todo: sort by different sorting conditions
      */
-    public void sortPersons() {
-        internalList.sort(new SortByName());
+    public void sortPersons(Comparator<Person> sortBy) {
+        internalList.sort(sortBy);
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.fast.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -86,8 +87,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Sorts the list of persons
-     * Todo: sort by keyword
+     * Sorts the list of persons by the given comparator
      */
-    void sortPerson();
+    void sortPerson(Comparator<Person> comparator);
 }
