@@ -1,0 +1,13 @@
+{
+  "persons": [ {
+    "name": "Valid Person",
+    "studentId": "A0212352F",
+    "classId": "B01",
+    "grade": "A"
+  }, {
+    "name": "Person With Invalid Grade",
+    "studentId": "A0212352F",
+    "classId": "B01",
+    "grade": "F+"
+  } ]
+}
