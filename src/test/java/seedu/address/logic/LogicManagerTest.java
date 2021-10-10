@@ -55,7 +55,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
@@ -63,7 +63,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -71,7 +71,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
@@ -85,7 +85,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_profileAlreadyCreated_throwsCommandException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         assertCommandException(createProfileCommand, PROFILE_CREATED_ERROR_MESSAGE + "\n" + EditCommand.MESSAGE_USAGE);
     }
