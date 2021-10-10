@@ -1,10 +1,10 @@
 package seedu.address.model.student;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Group {
 
@@ -35,8 +35,6 @@ public class Group {
     public static boolean isValidGroup(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
-    //// student-level operations
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the group.
