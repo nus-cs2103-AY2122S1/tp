@@ -43,7 +43,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_done() throws Exception {
         DoneCommand command = (DoneCommand) parser.parseCommand(DoneCommand.COMMAND_WORD + " "
-        + INDEX_FIRST_PERSON.getOneBased());
+            + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DoneCommand(INDEX_FIRST_PERSON), command);
     }
 

@@ -20,25 +20,26 @@ import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Visit;
 
 public class VisitCommandParserTest {
+    private static final String TEST_VISIT = "2021-11-11";
+
     private VisitCommandParser parser = new VisitCommandParser();
-    private final String VISIT_STUB = "2020-11-11";
 
     @Test
-    public void parser_CompulsoryFieldsPresent_success() {
-        Optional<Visit> visit = Optional.of(new Visit(VISIT_STUB));
+    public void parser_compulsoryFieldsPresent_success() {
+        Optional<Visit> visit = Optional.of(new Visit(TEST_VISIT));
         Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
         Optional<Occurrence> occurrence = Optional.of(new Occurrence(1));
         VisitCommand command = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
-        assertParseSuccess(parser, String.format("%s %s%s", "1", PREFIX_DATE, VISIT_STUB), command);
+        assertParseSuccess(parser, String.format("%s %s%s", "1", PREFIX_DATE, TEST_VISIT), command);
     }
 
     @Test
-    public void parser_OptionalFieldsPresent_success() {
-        Optional<Visit> visit = Optional.of(new Visit(VISIT_STUB));
+    public void parser_optionalFieldsPresent_success() {
+        Optional<Visit> visit = Optional.of(new Visit(TEST_VISIT));
         Optional<Frequency> frequency = Optional.of(Frequency.WEEKLY);
         Optional<Occurrence> occurrence = Optional.of(new Occurrence(2));
         VisitCommand command = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
-        String userInput = String.format("%s %s%s %s%s %s%s", "1", PREFIX_DATE, VISIT_STUB, PREFIX_FREQUENCY, "Weekly",
+        String userInput = String.format("%s %s%s %s%s %s%s", "1", PREFIX_DATE, TEST_VISIT, PREFIX_FREQUENCY, "Weekly",
                 PREFIX_OCCURRENCE, 2);
         assertParseSuccess(parser, userInput, command);
     }
@@ -51,7 +52,7 @@ public class VisitCommandParserTest {
         assertParseFailure(parser, "", expectedMessage);
 
         // no index
-        assertParseFailure(parser, " " + PREFIX_DATE + VISIT_STUB, expectedMessage);
+        assertParseFailure(parser, " " + PREFIX_DATE + TEST_VISIT, expectedMessage);
 
     }
 
