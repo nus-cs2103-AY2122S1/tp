@@ -79,40 +79,10 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the group.
-     */
-    boolean hasStudentInGroup(Group group, Student student);
-
-    /**
      * Adds the given student to a group.
      * {@code student} must not already exist in the group.
      */
     void addStudentToGroup(Group group, Student student);
-
-    /**
-     * Returns true if a group with the same name as {@code group} exists in the group list.
-     */
-    boolean hasGroup(Group group);
-
-    /**
-     * Deletes the given group.
-     * The group must exist in the group list.
-     */
-    void deleteGroup(Group target);
-
-    /**
-     * Adds the given group.
-     * {@code group} must not already exist in the group list.
-     */
-    void addGroup(Group group);
-
-    /**
-     * Replaces the given group {@code target} with {@code editedGroup}.
-     * {@code target} must exist in the group list.
-     * The group name of {@code editedGroup} must not be the same as another existing group in the
-     * group list.
-     */
-    void setGroup(Group target, Group editedGroup);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();

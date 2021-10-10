@@ -131,14 +131,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the group.
-     */
-    public boolean hasStudentInGroup(Group g, Student s) {
-        requireAllNonNull(g, s);
-        return g.hasStudent(s);
-    }
-
-    /**
      * Adds a student to a group.
      * The group must already exist in the address book.
      * The student must not already exist in the group.
@@ -164,26 +156,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addGroup(Group g) {
         groups.add(g);
-    }
-
-    /**
-     * Replaces the given group {@code target} in the list with {@code editedGroup}.
-     * {@code target} must exist in the group list.
-     * The group name of {@code editedGroup} must not be the same as another existing group in the
-     * group list.
-     */
-    public void setGroup(Group target, Group editedGroup) {
-        requireNonNull(editedGroup);
-
-        groups.setGroup(target, editedGroup);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeGroup(Group key) {
-        groups.remove(key);
     }
 
     //// assessment-level operations

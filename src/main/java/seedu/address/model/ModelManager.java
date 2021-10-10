@@ -89,8 +89,6 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
-    //// student-level operations
-
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -109,12 +107,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasStudentInGroup(Group group, Student student) {
-        requireAllNonNull(group, student);
-        return addressBook.hasStudentInGroup(group, student);
-    }
-
-    @Override
     public void addStudentToGroup(Group group, Student student) {
         addressBook.addStudentToGroup(group, student);
     }
@@ -124,31 +116,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedStudent);
 
         addressBook.setStudent(target, editedStudent);
-    }
-
-    //// group-level operations
-
-    @Override
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return addressBook.hasGroup(group);
-    }
-
-    @Override
-    public void deleteGroup(Group target) {
-        addressBook.removeGroup(target);
-    }
-
-    @Override
-    public void addGroup(Group group) {
-        addressBook.addGroup(group);
-    }
-
-    @Override
-    public void setGroup(Group target, Group editedGroup) {
-        requireAllNonNull(target, editedGroup);
-
-        addressBook.setGroup(target, editedGroup);
     }
 
     //=========== Filtered Student List Accessors =============================================================
