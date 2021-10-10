@@ -147,6 +147,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(g);
     }
 
+    /**
+     * Replaces the given group {@code target} in the list with {@code editedGroup}.
+     * {@code target} must exist in the group list.
+     * The group name of {@code editedGroup} must not be the same as another existing group in the
+     * group list.
+     */
+    public void setGroup(Group target, Group editedGroup) {
+        requireNonNull(editedGroup);
+
+        groups.setGroup(target, editedGroup);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeGroup(Group key) {
+        groups.remove(key);
+    }
+
     //// assessment-level operations
 
     /**
