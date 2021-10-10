@@ -53,21 +53,21 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE)));
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)));
+            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_RISKAPPETITE).isPresent()) {
             editPersonDescriptor.setRiskAppetite(ParserUtil
-                .parseRiskAppetite(argMultimap.getValue(PREFIX_RISKAPPETITE)));
+                .parseRiskAppetite(argMultimap.getValue(PREFIX_RISKAPPETITE).get()));
         }
         if (argMultimap.getValue(PREFIX_DISPOSABLEINCOME).isPresent()) {
             editPersonDescriptor.setDisposableIncome(ParserUtil
-                .parseDisposableIncome(argMultimap.getValue(PREFIX_DISPOSABLEINCOME)));
+                .parseDisposableIncome(argMultimap.getValue(PREFIX_DISPOSABLEINCOME).get()));
         }
         if (argMultimap.getValue(PREFIX_LASTMET).isPresent()) {
             editPersonDescriptor.setLastMet(ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).get()));

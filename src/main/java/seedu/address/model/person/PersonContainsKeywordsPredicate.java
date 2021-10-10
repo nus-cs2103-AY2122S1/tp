@@ -29,8 +29,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         String[] generalKeywords = keywords.getPreamble().split(" ");
         boolean checkGeneral = generalKeywords[0].equals(WILDCARD_KEYWORD)
                 || Arrays.stream(generalKeywords).anyMatch(x -> {
-                    boolean checkAttribute = Stream.of(person.getName().fullName, person.getPhone().get().value,
-                            person.getEmail().value, person.getAddress().get().value).anyMatch(y -> containsIgnoreCase(y, x));
+                    boolean checkAttribute = Stream.of(person.getName().fullName, person.getPhone().value,
+                            person.getEmail().value, person.getAddress().value).anyMatch(y -> containsIgnoreCase(y, x));
                     boolean checkAttributeTag = person.getTags().stream()
                             .anyMatch(y -> containsIgnoreCase(y.tagName, x));
                     return checkAttribute || checkAttributeTag;
@@ -40,11 +40,11 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         boolean checkName = keywords.getValue(PREFIX_NAME)
                 .map(x -> containsIgnoreCase(person.getName().fullName, x)).orElse(true);
         boolean checkPhone = keywords.getValue(PREFIX_PHONE)
-                .map(x -> containsIgnoreCase(person.getPhone().get().value, x)).orElse(true);
+                .map(x -> containsIgnoreCase(person.getPhone().value, x)).orElse(true);
         boolean checkEmail = keywords.getValue(PREFIX_EMAIL)
                 .map(x -> containsIgnoreCase(person.getEmail().value, x)).orElse(true);
         boolean checkAddress = keywords.getValue(PREFIX_ADDRESS)
-                .map(x -> containsIgnoreCase(person.getAddress().get().value, x)).orElse(true);
+                .map(x -> containsIgnoreCase(person.getAddress().value, x)).orElse(true);
         boolean checkTags = keywords.getValue(PREFIX_TAG)
                 .map(x -> person.getTags().stream().anyMatch(y -> containsIgnoreCase(y.tagName, x))).orElse(true);
         return checkGeneral && checkName && checkPhone && checkEmail && checkAddress && checkTags;

@@ -18,15 +18,13 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Optional<Phone> phone;
-    private final Optional<Address> address;
-    private final Optional<RiskAppetite> riskAppetite;
-    private final Optional<DisposableIncome> disposableIncome;
-    private final Optional<CurrentPlan> currentPlan;
-    private final Optional<LastMet> lastMet;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Phone phone;
+    private final Address address;
+    private final RiskAppetite riskAppetite;
+    private final DisposableIncome disposableIncome;
     private final CurrentPlan currentPlan;
     private final LastMet lastMet;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Only clientId, email and name fields needs to be present
@@ -37,13 +35,13 @@ public class Person {
         requireAllNonNull(clientId, name, email, tags);
         this.clientId = clientId;
         this.name = name;
-        this.phone = phone == null ? Optional.empty() : Optional.of(phone);
+        this.phone = phone;
         this.email = email;
-        this.address = address == null ? Optional.empty() : Optional.of(address);
-        this.riskAppetite = riskAppetite == null ? Optional.empty() : Optional.of(riskAppetite);
-        this.disposableIncome = disposableIncome == null ? Optional.empty() : Optional.of(disposableIncome);
-        this.currentPlan = currentPlan == null ? Optional.empty() : Optional.of(currentPlan);
-        this.lastMet = lastMet == null ? Optional.empty() : Optional.of(lastMet);
+        this.address = address;
+        this.riskAppetite = riskAppetite;
+        this.disposableIncome = disposableIncome;
+        this.currentPlan = currentPlan;
+        this.lastMet = lastMet;
         this.tags.addAll(tags);
     }
 
@@ -53,7 +51,7 @@ public class Person {
         return name;
     }
 
-    public Optional<Phone> getPhone() {
+    public Phone getPhone() {
 
         return phone;
 
@@ -63,25 +61,25 @@ public class Person {
         return email;
     }
 
-    public Optional<Address> getAddress() {
+    public Address getAddress() {
 
         return address;
     }
 
-    public Optional<LastMet> getLastMet() {
+    public LastMet getLastMet() {
         return lastMet;
     }
 
-    public Optional<CurrentPlan> getCurrentPlan() {
+    public CurrentPlan getCurrentPlan() {
         return currentPlan;
     }
 
-    public Optional<RiskAppetite> getRiskAppetite() {
+    public RiskAppetite getRiskAppetite() {
 
         return riskAppetite;
     }
 
-    public Optional<DisposableIncome> getDisposableIncome() {
+    public DisposableIncome getDisposableIncome() {
         return disposableIncome;
     }
 
@@ -156,26 +154,18 @@ public class Person {
                 .append(getName())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Last Met: ")
-                .append(getLastMet())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Risk Appetite: ")
+                .append(getRiskAppetite())
+                .append("; Disposable Income: ")
+                .append(getDisposableIncome())
                 .append("; current plans: ")
-                .append(getCurrentPlan());
-
-        if (!phone.isEmpty()) {
-            builder.append("; Phone: ").append(getPhone().get().value);
-        }
-
-        if (!address.isEmpty()) {
-            builder.append("; Address: ").append(getAddress().get().value);
-        }
-
-        if (!riskAppetite.isEmpty()) {
-            builder.append("; Risk Appetite: ").append(getRiskAppetite().get().value);
-        }
-
-        if (!disposableIncome.isEmpty()) {
-            builder.append("; Disposable Income: ").append(getDisposableIncome().get().value);
-        }
+                .append(getCurrentPlan())
+                .append("; Last Met: ")
+                .append(getLastMet());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

@@ -69,16 +69,12 @@ class JsonAdaptedPerson {
         clientId = source.getClientId().value;
         name = source.getName().fullName;
         email = source.getEmail().value;
+        phone = source.getPhone().value;
+        address = source.getAddress().value;
+        disposableIncome = source.getDisposableIncome().value;
+        riskAppetite = source.getRiskAppetite().value;
+        currentPlan = source.getCurrentPlan().value;
         lastMet = source.getLastMet().value.toString();
-        currentPlan = source.getCurrentPlan().value;      
-        Optional<Phone> checkPhoneNumber = source.getPhone();
-        phone = checkPhoneNumber.isEmpty() ? "" : checkPhoneNumber.get().value;
-        Optional<Address> checkAddress = source.getAddress();
-        address = checkAddress.isEmpty() ? "" : checkAddress.get().value;
-        Optional<RiskAppetite> checkRiskAppetite = source.getRiskAppetite();
-        riskAppetite = checkRiskAppetite.isEmpty() ? "" : checkRiskAppetite.get().value;
-        Optional<DisposableIncome> checkDisposableIncome = source.getDisposableIncome();
-        disposableIncome = checkDisposableIncome.isEmpty() ? "" : checkDisposableIncome.get().value;
         tagged.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
@@ -132,53 +128,49 @@ class JsonAdaptedPerson {
         }
         final CurrentPlan modelCurrentPlan = new CurrentPlan(currentPlan);
 
-        final Phone modelPhone;
-
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        } else if (phone.isEmpty()) {
-            modelPhone = null;
-        } else if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        } else {
-            modelPhone = new Phone(phone);
         }
 
-        final Address modelAddress;
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+
+        final Phone modelPhone = new Phone(phone);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        } else if (address.isEmpty()) {
-            modelAddress = null;
-        } else if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        } else {
-            modelAddress = new Address(address);
         }
 
-        final RiskAppetite modelRiskAppetite;
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+
+        final Address modelAddress = new Address(address);
+
+
+
         if (riskAppetite == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT
                 , RiskAppetite.class.getSimpleName()));
-        } else if (riskAppetite.isEmpty()) {
-            modelRiskAppetite = null;
-        } else if (!RiskAppetite.isValidRiskAppetite(riskAppetite)) {
-            throw new IllegalValueException(RiskAppetite.MESSAGE_CONSTRAINTS);
-        } else {
-            modelRiskAppetite = new RiskAppetite(riskAppetite);
         }
 
-        final DisposableIncome modelDisposableIncome;
+        if (!RiskAppetite.isValidRiskAppetite(riskAppetite)) {
+            throw new IllegalValueException(RiskAppetite.MESSAGE_CONSTRAINTS);
+        }
+
+        final RiskAppetite modelRiskAppetite = new RiskAppetite(riskAppetite);
 
         if (disposableIncome == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DisposableIncome.class.getSimpleName()));
-        } else if (disposableIncome.isEmpty()) {
-            modelDisposableIncome = null;
-        } else if (!DisposableIncome.isValidDisposableIncome(disposableIncome)) {
-            throw new IllegalValueException(DisposableIncome.MESSAGE_CONSTRAINTS);
-        } else {
-            modelDisposableIncome = new DisposableIncome(disposableIncome);
         }
+
+        if (!DisposableIncome.isValidDisposableIncome(disposableIncome)) {
+            throw new IllegalValueException(DisposableIncome.MESSAGE_CONSTRAINTS);
+        }
+
+        final DisposableIncome modelDisposableIncome = new DisposableIncome(disposableIncome);
+
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite, 

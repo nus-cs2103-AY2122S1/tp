@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -62,18 +61,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(Optional<String> phone) throws ParseException {
-        if (phone.isEmpty()) {
-            return null;
-        } else {
-            String phoneNumber = phone.get();
-            requireNonNull(phoneNumber);
-            String trimmedPhone = phoneNumber.trim();
-            if (!Phone.isValidPhone(trimmedPhone)) {
-                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-            }
-            return new Phone(trimmedPhone);
+    public static Phone parsePhone(String phone) throws ParseException {
+        requireNonNull(phone);
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
+        return new Phone(trimmedPhone);
     }
 
     /**
@@ -82,18 +76,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(Optional<String> address) throws ParseException {
-        if (address.isEmpty()) {
-            return null;
-        } else {
-            String addressString = address.get();
-            requireNonNull(addressString);
-            String trimmedAddress = addressString.trim();
-            if (!Address.isValidAddress(trimmedAddress)) {
-                throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-            }
-            return new Address(trimmedAddress);
+    public static Address parseAddress(String address) throws ParseException {
+        requireNonNull(address);
+        String trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        return new Address(trimmedAddress);
     }
 
     /**
@@ -144,18 +133,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code RiskAppetite} is invalid.
      */
-    public static RiskAppetite parseRiskAppetite(Optional<String> riskAppetite) throws ParseException {
-        if (riskAppetite.isEmpty()) {
-            return null;
-        } else {
-            String riskAppetiteString = riskAppetite.get();
-            requireNonNull(riskAppetiteString);
-            String trimmedRiskAppetite = riskAppetiteString.trim();
-            if (!RiskAppetite.isValidRiskAppetite(trimmedRiskAppetite)) {
-                throw new ParseException(RiskAppetite.MESSAGE_CONSTRAINTS);
-            }
-            return new RiskAppetite(trimmedRiskAppetite);
+    public static RiskAppetite parseRiskAppetite(String riskAppetite) throws ParseException {
+        requireNonNull(riskAppetite);
+        String trimmedRiskAppetite = riskAppetite.trim();
+        if (!RiskAppetite.isValidRiskAppetite(trimmedRiskAppetite)) {
+            throw new ParseException(RiskAppetite.MESSAGE_CONSTRAINTS);
         }
+        return new RiskAppetite(trimmedRiskAppetite);
     }
 
     /**
@@ -164,18 +148,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code DisposableIncome} is invalid.
      */
-    public static DisposableIncome parseDisposableIncome(Optional<String> disposableIncome) throws ParseException {
-        if (disposableIncome.isEmpty()) {
-            return null;
-        } else {
-            String disposableIncomeString = disposableIncome.get();
-            requireNonNull(disposableIncomeString);
-            String trimmedDisposableIncome = disposableIncomeString.trim();
-            if (!DisposableIncome.isValidDisposableIncome(trimmedDisposableIncome)) {
-                throw new ParseException(DisposableIncome.MESSAGE_CONSTRAINTS);
-            }
-            return new DisposableIncome(trimmedDisposableIncome);
+    public static DisposableIncome parseDisposableIncome(String disposableIncome) throws ParseException {
+        requireNonNull(disposableIncome);
+        String trimmedDisposableIncome = disposableIncome.trim();
+        if (!DisposableIncome.isValidDisposableIncome(trimmedDisposableIncome)) {
+            throw new ParseException(DisposableIncome.MESSAGE_CONSTRAINTS);
         }
+        return new DisposableIncome(trimmedDisposableIncome);
     }
 
     /**

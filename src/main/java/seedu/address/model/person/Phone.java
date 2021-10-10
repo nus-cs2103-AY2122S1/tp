@@ -7,16 +7,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements OptionalPersonStringField{
 
 
     public static final String MESSAGE_CONSTRAINTS =
     "Phone numbers should only contain numbers, and it should be at least 3 digits long";
 
     public static final String VALIDATION_REGEX = "\\d{3,}";
-
-    public static final boolean IS_BLANK_VALUE_ALLOWED = true;
-    public static final String DEFAULT_VALUE = "";
 
     public final String value;
 

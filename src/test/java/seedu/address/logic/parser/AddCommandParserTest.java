@@ -52,7 +52,7 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandParserTest {
 
     private ModelManager model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private AddCommandParser parser = new AddCommandParser(model);
+    private AddCommandParser parser = new AddCommandParser();
 
     @BeforeEach
     public void setUp() {

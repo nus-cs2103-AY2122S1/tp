@@ -2,11 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-public class CurrentPlan {
+public class CurrentPlan implements OptionalPersonStringField {
 
     public static final String MESSAGE_CONSTRAINTS = "Current plan can take any values, and it can be blank";
-    public static final boolean IS_BLANK_VALUE_ALLOWED = true;
-    public static final String DEFAULT_VALUE = "";
 
     /*
      * The first character of the current plan must not be a whitespace,

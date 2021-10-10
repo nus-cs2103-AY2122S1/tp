@@ -4,7 +4,7 @@ import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class RiskAppetite {
+public class RiskAppetite implements OptionalPersonStringField{
 
     public static final String MESSAGE_CONSTRAINTS =
     "Risk Appetite number should be a single digit integer between 1 and 5";
@@ -27,19 +27,7 @@ public class RiskAppetite {
      */
     public static boolean isValidRiskAppetite(String test) {
 
-        if (test.matches(VALIDATION_REGEX)) {
-            try {
-                int validInt = parseInt(test);
-                return validInt > 0 && validInt < 6;
-
-
-            } catch (NumberFormatException e) {
-                return false;
-            }
-
-        } else {
-            return false;
-        }
+        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty()) || test.matches(VALIDATION_REGEX);
 
     }
 

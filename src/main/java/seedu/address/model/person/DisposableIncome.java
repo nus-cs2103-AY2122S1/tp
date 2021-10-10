@@ -4,7 +4,7 @@ import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class DisposableIncome {
+public class DisposableIncome implements OptionalPersonStringField {
     public static final String MESSAGE_CONSTRAINTS =
             "Disposable Income numbers should be a positive integer only";
     public static final String VALIDATION_REGEX = "\\d{1,}";
@@ -26,19 +26,7 @@ public class DisposableIncome {
      */
     public static boolean isValidDisposableIncome(String test) {
 
-        if (test.matches(VALIDATION_REGEX)) {
-            try {
-                int validInt = parseInt(test);
-                return validInt > 0;
-
-
-            } catch (NumberFormatException e) {
-                return false;
-            }
-
-        } else {
-            return false;
-        }
+        return (IS_BLANK_VALUE_ALLOWED && test.isEmpty()) || test.matches(VALIDATION_REGEX);
 
     }
 

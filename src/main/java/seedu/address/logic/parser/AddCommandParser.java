@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -44,11 +43,13 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     private Model model;
 
-    public AddCommandParser(Model model) {
-        this.model = model;
+    public AddCommandParser() {
 
     }
 
+    public AddCommandParser(Model model) {
+        this.model = model;
+    }
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -58,7 +59,6 @@ public class AddCommandParser implements Parser<AddCommand> {
     @Override
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                     PREFIX_RISKAPPETITE, PREFIX_DISPOSABLEINCOME, PREFIX_CURRENTPLAN, PREFIX_LASTMET, PREFIX_TAG);
       
@@ -79,21 +79,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         ClientId clientId = new ClientId(clientCounter);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE));
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse(Phone.DEFAULT_VALUE));
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(Address.DEFAULT_VALUE));
         RiskAppetite riskAppetite = ParserUtil.parseRiskAppetite(argMultimap
-            .getValue(PREFIX_RISKAPPETITE));
+            .getValue(PREFIX_RISKAPPETITE).orElse(RiskAppetite.DEFAULT_VALUE));
         DisposableIncome disposableIncome = ParserUtil.parseDisposableIncome(argMultimap
-            .getValue(PREFIX_DISPOSABLEINCOME));
-        LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).get());
-        CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN).get());
+            .getValue(PREFIX_DISPOSABLEINCOME).orElse(DisposableIncome.DEFAULT_VALUE));
+        LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
+        CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN)
+            .orElse(CurrentPlan.DEFAULT_VALUE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(clientId, name, phone, email, address, riskAppetite, disposableIncome, currentPlan, lastMet, tagList);
-
-        int tempClientCounter = Integer.parseInt(clientCounter);
-        String newClientCounter = Integer.toString(tempClientCounter + 1);
-        this.model.getAddressBook().setClientCounter(newClientCounter);
+        Person person = new Person(clientId, name, phone, email, address, riskAppetite, disposableIncome,
+            currentPlan, lastMet, tagList);
 
         return new AddCommand(person);
     }

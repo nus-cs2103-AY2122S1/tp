@@ -62,18 +62,12 @@ public class PersonCard extends UiPart<Region> {
         clientId.setText(person.getClientId().value);
         name.setText(person.getName().fullName);
         email.setText(person.getEmail().value);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        riskAppetite.setText(person.getRiskAppetite().value);
+        disposableIncome.setText(person.getDisposableIncome().value);
         currentPlan.setText(person.getCurrentPlan().toString());
         lastMet.setText(person.getLastMet().toString());
-        Optional<Phone> phoneNumber = (Optional<Phone>) person.getPhone();
-        phone.setText(phoneNumber.isEmpty() ? "No phone number stored yet" : phoneNumber.get().value);
-        Optional<Address> addressString = (Optional<Address>) person.getAddress();
-        address.setText(addressString.isEmpty() ? "No address stored yet" : addressString.get().value);
-        Optional<RiskAppetite> riskAppetiteString = (Optional<RiskAppetite>) person.getRiskAppetite();
-        riskAppetite.setText(riskAppetiteString.isEmpty() ? "No risk appetite stored yet"
-            : riskAppetiteString.get().value);
-        Optional<DisposableIncome> disposableIncomeString = (Optional<DisposableIncome>) person.getDisposableIncome();
-        disposableIncome.setText(disposableIncomeString.isEmpty() ? "No disposable income stored yet" :
-                disposableIncomeString.get().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

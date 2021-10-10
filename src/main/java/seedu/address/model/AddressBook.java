@@ -59,6 +59,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Increments the clientCounter of the address book by 1 {@code clientCounter}.
+     *
+     */
+    @Override
+    public void incrementClientCounter() {
+        try {
+            int clientCounterInt = Integer.parseInt(this.clientCounter) + 1;
+            this.clientCounter = String.valueOf(clientCounterInt);
+        } catch (NumberFormatException e) {
+            this.clientCounter = "1";
+        }
+    }
+
+    /**
      * Gets the clientCounter of the address book.
      *
      */

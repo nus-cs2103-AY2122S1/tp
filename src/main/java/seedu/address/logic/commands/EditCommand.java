@@ -104,18 +104,15 @@ public class EditCommand extends Command {
 
         ClientId oldClientId = personToEdit.getClientId();
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone().isEmpty() ? null
-            : personToEdit.getPhone().get());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        RiskAppetite updateRiskAppetite = editPersonDescriptor.getRiskAppetite()
+                .orElse(personToEdit.getRiskAppetite());
+        DisposableIncome updatedDisposableIncome = editPersonDescriptor.getDisposableIncome()
+                .orElse(personToEdit.getDisposableIncome());
         CurrentPlan updatedCurrentPlan = editPersonDescriptor.getCurrentPlan().orElse(personToEdit.getCurrentPlan());
         LastMet updatedLastMet = editPersonDescriptor.getLastMet().orElse(personToEdit.getLastMet());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress().isEmpty() ? null
-            : personToEdit.getAddress().get());
-        RiskAppetite updateRiskAppetite = editPersonDescriptor.getRiskAppetite()
-            .orElse(personToEdit.getRiskAppetite().isEmpty() ? null : personToEdit.getRiskAppetite().get());
-        DisposableIncome updatedDisposableIncome = editPersonDescriptor.getDisposableIncome()
-            .orElse(personToEdit.getDisposableIncome().isEmpty() ? null
-            : editPersonDescriptor.getDisposableIncome().get());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,

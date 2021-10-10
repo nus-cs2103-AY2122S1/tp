@@ -24,4 +24,10 @@ public interface ReadOnlyAddressBook {
      */
     void setClientCounter(String clientCounter);
 
+    /**
+     * Increments the clientCounter of the address book by 1 {@code clientCounter}.
+     *
+     */
+    void incrementClientCounter();
+
 }
