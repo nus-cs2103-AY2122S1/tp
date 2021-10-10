@@ -16,6 +16,7 @@ public class Position {
     private final Description description;
 
     // Data field is empty
+    private Integer rejectionRate;
 
     /**
      * Every field must be present and not null.
@@ -81,4 +82,5 @@ public class Position {
 
         return builder.toString();
     }
+
 }
