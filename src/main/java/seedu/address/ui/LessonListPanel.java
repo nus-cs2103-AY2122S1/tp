@@ -30,7 +30,8 @@ public class LessonListPanel extends UiPart<Region> {
         super(FXML);
         lessonListView.setItems(lessonList);
         lessonListView.setOrientation(Orientation.HORIZONTAL);
-        lessonListView.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        lessonListView.setPrefWidth(500);
+        lessonListView.setPrefHeight(150);
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 

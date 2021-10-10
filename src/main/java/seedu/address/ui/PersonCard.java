@@ -7,10 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
@@ -55,7 +57,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private FlowPane lessonListPanelPlaceholder;
+    private StackPane lessonListPanelPlaceholder;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
