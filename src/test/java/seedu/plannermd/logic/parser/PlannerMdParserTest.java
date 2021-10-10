@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.plannermd.logic.commands.ClearCommand;
 import seedu.plannermd.logic.commands.ExitCommand;
 import seedu.plannermd.logic.commands.HelpCommand;
+import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
@@ -23,8 +24,11 @@ import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
+import seedu.plannermd.testutil.doctor.DoctorBuilder;
+import seedu.plannermd.testutil.doctor.DoctorUtil;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 import seedu.plannermd.testutil.patient.PatientUtil;
@@ -33,13 +37,19 @@ public class PlannerMdParserTest {
 
     private final PlannerMdParser parser = new PlannerMdParser();
     private final State patientState = State.PATIENT;
+    private final State doctorState = State.DOCTOR;
 
     @Test
     public void parseCommand_add() throws Exception {
         Patient patient = new PatientBuilder().build();
-        AddPatientCommand command =
+        AddPatientCommand patentCommand =
                 (AddPatientCommand) parser.parseCommand(PatientUtil.getAddCommand(patient), patientState);
-        assertEquals(new AddPatientCommand(patient), command);
+        assertEquals(new AddPatientCommand(patient), patentCommand);
+
+        Doctor doctor = new DoctorBuilder().build();
+        AddDoctorCommand doctorCommand =
+                (AddDoctorCommand) parser.parseCommand(DoctorUtil.getAddCommand(doctor), doctorState);
+        assertEquals(new AddDoctorCommand(doctor), doctorCommand);
     }
 
     @Test
