@@ -48,9 +48,8 @@ public class DeleteProgressCommand extends Command {
         Progress deletedProgress = studentToEdit.getProgress();
 
         Person editedStudent = new Person(
-                studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
-                studentToEdit.getAddress(), new Progress("No Progress"), studentToEdit.getPaymentStatus(),
-                studentToEdit.getTags());
+                studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
+                studentToEdit.getParentPhone(), new Progress("No Progress"), studentToEdit.getPaymentStatus());
 
         model.setPerson(studentToEdit, editedStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

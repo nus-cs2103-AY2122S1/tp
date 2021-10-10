@@ -1,17 +1,16 @@
 {
   "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
+    "studentName": "Alice Pauline",
+    "studentPhone": "94351253",
+    "parentName": "Mrs Koh",
+    "parentPhone": "94351238",
     "progress": "No Progress",
-    "paymentStatus": false,
-    "tagged": [ "friends" ]
+    "paymentStatus": false
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street",
+    "studentName": "Alice Pauline",
+    "studentPhone": "94351253",
+    "parentName": "Mr Koh",
+    "parentPhone": "86351238",
     "progress": "No Progress",
     "paymentStatus": false
   } ]
