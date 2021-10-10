@@ -3,10 +3,13 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.ReservationList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final ReservationList reservations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        reservations = new ReservationList();
     }
 
     public AddressBook() {}
@@ -47,6 +52,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations.setReservations(reservations);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -54,6 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setReservations(newData.getReservationList());
     }
 
     //// person-level operations
@@ -93,12 +103,49 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// reservation-level operations
+
+    /**
+     * Check if {@code reservation} exists in the database
+     */
+    public boolean hasReservation(Reservation reservation) {
+        requireNonNull(reservation);
+        return reservations.contains(reservation);
+    }
+
+    /**
+     * Adds a new reservation to the list
+     */
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
+    /**
+     * Replaces the reservation {@code target} in the list with {@code editedReservation}
+     */
+    public void setReservation(Reservation target, Reservation editedReservation) {
+        requireNonNull(editedReservation);
+
+        reservations.setReservation(target, editedReservation);
+    }
+
+    /**
+     * Removes {@code key} from the database
+     * {@code key} must exist in the list
+     */
+    public void removeReservation(Reservation key) {
+        reservations.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
+        return String.format(
+                "%d persons, %d reservations",
+                persons.asUnmodifiableObservableList().size(),
+                reservations.asUnmodifiableObservableList().size());
     }
 
     @Override
@@ -107,14 +154,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Reservation> getReservationList() {
+        return reservations.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons)
+                && reservations.equals(((AddressBook) other).reservations));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, reservations);
     }
 }
