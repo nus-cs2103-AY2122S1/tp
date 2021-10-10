@@ -37,7 +37,7 @@ public class Schedule {
             String[] shiftString = s.split("-");
             DayOfWeek shiftDay = DayOfWeek.valueOf(shiftString[0]);
             Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
-            shifts[shiftDay.getValue()][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
+            shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
         }
     }
 

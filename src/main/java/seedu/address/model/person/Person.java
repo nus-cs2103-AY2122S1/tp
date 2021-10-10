@@ -29,8 +29,9 @@ public class Person {
     private final Salary salary;
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
-    private final Schedule schedule;
     private final Set<Field> fields = new HashSet<>();
+
+    private Schedule schedule;
 
     /**
      * Every field must be present and not null.
@@ -105,8 +106,12 @@ public class Person {
      * @param slot The time slot of the shift.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void setSchedule(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+    public void changeSchedule(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         schedule.addShift(dayOfWeek, slot);
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     /**

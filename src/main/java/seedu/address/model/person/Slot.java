@@ -47,6 +47,19 @@ public enum Slot {
         for (Slot s : Slot.values()) {
             if (s.getValue().equalsIgnoreCase(trimmedString)) {
                 resultSlot = s;
+                break;
+            }
+        }
+        return resultSlot;
+    }
+
+    public static Slot getSlotByOrder(String string) {
+        String trimmedString = string.trim();
+        Slot resultSlot = null;
+        for (Slot s : Slot.values()) {
+            if (String.valueOf(s.getOrder()).equals(trimmedString)) {
+                resultSlot = s;
+                break;
             }
         }
         return resultSlot;

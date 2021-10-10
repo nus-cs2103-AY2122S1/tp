@@ -5,13 +5,16 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
@@ -115,6 +118,16 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedStaff);
     }
 
+    @Override
+    public Person findPersonByName(Name name) {
+        List<Person> results = filteredPersons.stream().filter(person -> person.getName().equals(name))
+                .collect(Collectors.toList());
+        if (results.size() == 0) {
+            return null;
+        }
+        return results.get(0);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -135,7 +148,7 @@ public class ModelManager implements Model {
     @Override
     public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         requireAllNonNull(target, dayOfWeek, slot);
-        target.setSchedule(dayOfWeek, slot);
+        target.changeSchedule(dayOfWeek, slot);
     }
 
     @Override

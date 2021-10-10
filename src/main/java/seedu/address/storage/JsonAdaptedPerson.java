@@ -150,19 +150,20 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Schedule.class.getSimpleName()));
         }
-        if (!Schedule.isValidSchedule(schedule)) {
+
+        if (!Schedule.isValidSchedule(schedule.trim())) {
             throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);
         }
         Schedule modelSchedule;
-        if (schedule.equals("")) {
+        if (schedule.trim().equals("")) {
             modelSchedule = new Schedule();
         } else {
-            modelSchedule = new Schedule(schedule);
-            //modelSchedule = new Schedule();
+            modelSchedule = new Schedule(schedule.trim());
         }
-        return new Person(modelName, modelPhone, modelEmail,
+        Person p = new Person(modelName, modelPhone, modelEmail,
                 modelAddress, modelRole, modelSalary, modelStatus, modelTags);
-        // editStaff implementer: todo is there a way for you to edit schedule of this person to have modelSchedule
+        p.setSchedule(modelSchedule);
+        return p;
     }
 
 }

@@ -3,16 +3,16 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SLOT_SHIFT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE_SHIFT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.time.DayOfWeek;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Slot;
+import seedu.address.model.person.Name;
+
 
 public class AddShiftCommandParser implements Parser<AddShiftCommand> {
 
@@ -25,23 +25,33 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
     public AddShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DAY_SHIFT, PREFIX_TYPE_SHIFT, PREFIX_SLOT_SHIFT);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_DAY_SHIFT, PREFIX_NAME);
 
-        Index index;
-        DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
-        Slot slot = ParserUtil.parseSlot(argMultimap.getValue(PREFIX_SLOT_SHIFT).get());
+        Index index = null;
+        Name name = null;
+        String shiftDayAndSlot;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT, PREFIX_SLOT_SHIFT)
-                || argMultimap.getPreamble().isEmpty()) {
+        //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
+        if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
+                || !argMultimap.getPreamble().isEmpty() || (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
+                && !arePrefixesPresent(argMultimap, PREFIX_NAME))
+                || (arePrefixesPresent(argMultimap, PREFIX_INDEX)
+                        && arePrefixesPresent(argMultimap, PREFIX_NAME))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE));
         }
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
+                index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+            }
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            }
+            shiftDayAndSlot = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE), pe);
         }
-        return new AddShiftCommand(index, dayOfWeek, slot);
+        return new AddShiftCommand(index, name, shiftDayAndSlot);
     }
 
     /**

@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.DayOfWeek;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -162,21 +161,31 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dayOfWeek} is invalid.
      */
-    public static DayOfWeek parseDayOfWeek(String dayOfWeek) throws ParseException {
-        String messageConstraints = "List of valid dayOfWeek: "
-                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.";;
-        requireNonNull(dayOfWeek);
-        String trimmedDayOfWeek = dayOfWeek.trim().toLowerCase();
-        switch (trimmedDayOfWeek) {
-        case "monday": return DayOfWeek.MONDAY;
-        case "tuesday": return DayOfWeek.TUESDAY;
-        case "wednesday": return DayOfWeek.WEDNESDAY;
-        case "thursday": return DayOfWeek.THURSDAY;
-        case "friday": return DayOfWeek.FRIDAY;
-        case "saturday": return DayOfWeek.SATURDAY;
-        case "sunday": return DayOfWeek.SUNDAY;
+    public static String parseDayOfWeek(String shiftDay) throws ParseException {
+        String messageConstraints = "Valid input format: dayOfWeek + slotNumber:" + "List of valid dayOfWeek: "
+                + "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. (Not case-sensitive)\n"
+                + "List of valid slotNumber: 1, 2.";
+        requireNonNull(shiftDay);
+        String trimmedStr = shiftDay.trim().toLowerCase();
+        String[] strings = trimmedStr.split("-");
+        switch (strings[0]) {
+        case "monday":
+        case "tuesday":
+        case "wednesday":
+        case "thursday":
+        case "friday":
+        case "saturday":
+        case "sunday":
+            break;
         default: throw new ParseException(messageConstraints);
         }
+        switch (strings[1]) {
+        case "0":
+        case "1":
+            break;
+        default: throw new ParseException(messageConstraints);
+        }
+        return trimmedStr;
     }
 
     /**

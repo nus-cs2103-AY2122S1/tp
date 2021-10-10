@@ -48,7 +48,7 @@ public class Shift {
      * Returns a String representation of the shift that is suitable for json.
      */
     public String toSaveString() {
-        return dayOfWeek.toString() + "-" + slot.getValue();
+        return dayOfWeek.toString() + "-" + slot.getValue() + " ";
     }
 
     /**

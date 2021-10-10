@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
@@ -78,6 +79,13 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedStaff);
+
+    /**
+     * Returns the person with given name.
+     * @param name Given name.
+     * @return Matched Person.
+     */
+    Person findPersonByName(Name name);
 
     /**
      * Add a shift to a target staff's schedule.
