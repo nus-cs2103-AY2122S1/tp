@@ -25,7 +25,7 @@ import dash.logic.parser.personcommand.FindPersonCommandParser;
 /**
  * Parses user input.
  */
-public class ContactsTabParser {
+public class HelpTabParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -49,35 +49,17 @@ public class ContactsTabParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddPersonCommand.COMMAND_WORD:
-            return new AddPersonCommandParser().parse(arguments);
-
-        case EditPersonCommand.COMMAND_WORD:
-            return new EditPersonCommandParser().parse(arguments);
-
-        case DeletePersonCommand.COMMAND_WORD:
-            return new DeletePersonCommandParser().parse(arguments);
-
-        case ClearPeopleCommand.COMMAND_WORD:
-            return new ClearPeopleCommand();
-
-        case FindPersonCommand.COMMAND_WORD:
-            return new FindPersonCommandParser().parse(arguments);
-
-        case ListPeopleCommand.COMMAND_WORD:
-            return new ListPeopleCommand();
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
-            return new SwitchTabContactsCommand(0);
+            return new SwitchTabContactsCommand(2);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
-            return new SwitchTabTasksCommand(0);
+            return new SwitchTabTasksCommand(2);
 
         case SwitchTabHelpCommand.COMMAND_WORD:
-            return new SwitchTabHelpCommand(0);
+            return new SwitchTabHelpCommand(2);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

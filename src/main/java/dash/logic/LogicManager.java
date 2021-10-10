@@ -10,6 +10,7 @@ import dash.logic.commands.Command;
 import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
 import dash.logic.parser.ContactsTabParser;
+import dash.logic.parser.HelpTabParser;
 import dash.logic.parser.TaskTabParser;
 import dash.logic.parser.exceptions.ParseException;
 import dash.model.Model;
@@ -30,6 +31,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final ContactsTabParser contactsTabParser;
     private final TaskTabParser taskTabParser;
+    private final HelpTabParser helpTabParser;
 
     private int tabNumber = 0;
 
@@ -41,6 +43,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         contactsTabParser = new ContactsTabParser();
         taskTabParser = new TaskTabParser();
+        helpTabParser = new HelpTabParser();
     }
 
     @Override
@@ -55,6 +58,9 @@ public class LogicManager implements Logic {
             break;
         case (1):
             command = taskTabParser.parseCommand(commandText);
+            break;
+        case (2):
+            command = helpTabParser.parseCommand(commandText);
             break;
         default:
             command = contactsTabParser.parseCommand(commandText);

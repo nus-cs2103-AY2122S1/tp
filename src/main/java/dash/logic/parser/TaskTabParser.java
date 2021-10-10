@@ -8,6 +8,7 @@ import dash.logic.commands.Command;
 import dash.logic.commands.ExitCommand;
 import dash.logic.commands.HelpCommand;
 import dash.logic.commands.SwitchTabContactsCommand;
+import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
 import dash.logic.commands.personcommand.ListPeopleCommand;
 import dash.logic.commands.taskcommand.AddTaskCommand;
@@ -66,14 +67,14 @@ public class TaskTabParser {
         case ListPeopleCommand.COMMAND_WORD:
             return new ListTaskCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
         case SwitchTabContactsCommand.COMMAND_WORD:
             return new SwitchTabContactsCommand(1);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
             return new SwitchTabTasksCommand(1);
+
+        case SwitchTabHelpCommand.COMMAND_WORD:
+            return new SwitchTabHelpCommand(1);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
