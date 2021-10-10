@@ -16,7 +16,6 @@ import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
-import seedu.address.model.position.exceptions.PositionNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -237,7 +236,7 @@ public class ModelManager implements Model {
         boolean hasPosition = positionBook.hasPosition(p);
         if (hasPosition) {
             int total = p.getNoOfApplicants() + 1;
-            int count = p.getNoOfAcceptedApplicants();
+            int count = p.getNoOfRejectedApplicants();
             if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
                 count++;
             }
@@ -258,7 +257,7 @@ public class ModelManager implements Model {
         if (hasApplicant) {
             Position p = target.getApplication().getPosition();
             int total = p.getNoOfApplicants();
-            int count = p.getNoOfAcceptedApplicants();
+            int count = p.getNoOfRejectedApplicants();
             total--;
             if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
                 count--;
