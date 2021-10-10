@@ -9,7 +9,7 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Phone;
+import seedu.unify.model.task.Time;
 import seedu.unify.model.task.Task;
 
 /**
@@ -48,10 +48,10 @@ public class EditTaskDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditTaskDescriptor} that we are building.
+     * Sets the {@code Time} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditTaskDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        descriptor.setPhone(new Time(phone));
         return this;
     }
 

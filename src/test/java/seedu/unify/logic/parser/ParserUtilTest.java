@@ -18,7 +18,7 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Phone;
+import seedu.unify.model.task.Time;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -91,15 +91,15 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+        Time expectedTime = new Time(VALID_PHONE);
+        assertEquals(expectedTime, ParserUtil.parsePhone(VALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+        Time expectedTime = new Time(VALID_PHONE);
+        assertEquals(expectedTime, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
     @Test

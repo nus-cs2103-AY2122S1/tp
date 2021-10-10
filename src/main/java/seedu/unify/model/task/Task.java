@@ -17,7 +17,7 @@ public class Task {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
+    private final Time time;
     private final Email email;
 
     // Data fields
@@ -27,10 +27,10 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Date date, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, date, tags);
+    public Task(Name name, Time time, Email email, Date date, Set<Tag> tags) {
+        requireAllNonNull(name, time, email, date, tags);
         this.name = name;
-        this.phone = phone;
+        this.time = time;
         this.email = email;
         this.date = date;
         this.tags.addAll(tags);
@@ -40,8 +40,8 @@ public class Task {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Time getPhone() {
+        return time;
     }
 
     public Email getEmail() {
@@ -98,14 +98,14 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, date, tags);
+        return Objects.hash(name, time, email, date, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
+                .append("; Time: ")
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())

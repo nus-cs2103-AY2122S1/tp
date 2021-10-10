@@ -7,7 +7,7 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Phone;
+import seedu.unify.model.task.Time;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.util.SampleDataUtil;
 
@@ -22,7 +22,7 @@ public class TaskBuilder {
     public static final String DEFAULT_DATE = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private Phone phone;
+    private Time time;
     private Email email;
     private Date date;
     private Set<Tag> tags;
@@ -32,7 +32,7 @@ public class TaskBuilder {
      */
     public TaskBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        time = new Time(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
@@ -43,7 +43,7 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         name = taskToCopy.getName();
-        phone = taskToCopy.getPhone();
+        time = taskToCopy.getPhone();
         email = taskToCopy.getEmail();
         date = taskToCopy.getDate();
         tags = new HashSet<>(taskToCopy.getTags());
@@ -74,10 +74,10 @@ public class TaskBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Task} that we are building.
+     * Sets the {@code Time} of the {@code Task} that we are building.
      */
     public TaskBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.time = new Time(phone);
         return this;
     }
 
@@ -90,6 +90,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, phone, email, date, tags);
+        return new Task(name, time, email, date, tags);
     }
 }

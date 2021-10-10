@@ -15,7 +15,7 @@ import seedu.unify.commons.exceptions.IllegalValueException;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Phone;
+import seedu.unify.model.task.Time;
 
 public class JsonAdaptedTaskTest {
     private static final String INVALID_NAME = "R@chel";
@@ -57,14 +57,14 @@ public class JsonAdaptedTaskTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedTask task =
                 new JsonAdaptedTask(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_DATE, VALID_TAGS);
-        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Time.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedTask task = new JsonAdaptedTask(VALID_NAME, null, VALID_EMAIL, VALID_DATE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
