@@ -22,17 +22,24 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Role role;
+    private final Faculty faculty;
+    private final Major major;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, Faculty faculty, Major major, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, faculty, major, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
+        this.faculty = faculty;
+        this.major = major;
         this.tags.addAll(tags);
     }
 
@@ -50,6 +57,18 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public Major getMajor() {
+        return major;
     }
 
     /**
@@ -92,13 +111,16 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getRole().equals(getRole())
+                && otherPerson.getFaculty().equals(getFaculty())
+                && otherPerson.getMajor().equals(getMajor())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, role, faculty, major, tags);
     }
 
     @Override
@@ -110,7 +132,13 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Role: ")
+                .append(getRole())
+                .append("; Faculty: ")
+                .append(getFaculty())
+                .append("; Major: ")
+                .append(getMajor());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
