@@ -19,7 +19,11 @@ public class ProductContainsIdPredicate implements Predicate<Product> {
     @Override
     public boolean test(Product product) {
         return id.stream()
-                .anyMatch(id -> StringUtil.containsWordIgnoreCase(product.getId().toString(), id));
+                .anyMatch(id -> {
+                    Integer integerId = Integer.parseInt(id);
+                    String stringOfId = integerId.toString();
+                    return StringUtil.containsWordIgnoreCase(product.getId().toString(), stringOfId);
+                });
     }
 
     @Override
