@@ -6,6 +6,9 @@ import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.plannermd.logic.parser.CliSyntax.FLAG_DELETE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -26,11 +29,17 @@ import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkDoctorCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkPatientCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddDoctorTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.AddPatientTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.DeleteDoctorTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.DeletePatientTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.TagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Remark;
+import seedu.plannermd.model.tag.Tag;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 import seedu.plannermd.testutil.patient.PatientUtil;
@@ -86,6 +95,40 @@ public class PlannerMdParserTest {
                 RemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + REMARK_DESC_AMY,
                 State.DOCTOR);
         assertEquals(new RemarkDoctorCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY)), command);
+    }
+
+    @Test
+    public void parseCommand_tagPatient() throws Exception {
+        String validTag = "Patient";
+
+        // Adding a tag
+        AddPatientTagCommand addCommand = (AddPatientTagCommand) parser.parseCommand(
+                TagCommand.COMMAND_WORD + " " + PREFIX_ID + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_TAG + validTag, State.PATIENT);
+        assertEquals(new AddPatientTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), addCommand);
+
+        // Deleting a tag
+        DeletePatientTagCommand deleteCommand = (DeletePatientTagCommand) parser.parseCommand(
+                TagCommand.COMMAND_WORD + " " + FLAG_DELETE + " " + PREFIX_ID
+                        + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + validTag, State.PATIENT);
+        assertEquals(new DeletePatientTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), deleteCommand);
+    }
+
+    @Test
+    public void parseCommand_tagDoctor() throws Exception {
+        String validTag = "Doctor";
+
+        // Adding a tag
+        AddDoctorTagCommand addCommand = (AddDoctorTagCommand) parser.parseCommand(
+                TagCommand.COMMAND_WORD + " " + PREFIX_ID + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_TAG + validTag, State.DOCTOR);
+        assertEquals(new AddDoctorTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), addCommand);
+
+        // Deleting a tag
+        DeleteDoctorTagCommand deleteCommand = (DeleteDoctorTagCommand) parser.parseCommand(
+                TagCommand.COMMAND_WORD + " " + FLAG_DELETE + " " + PREFIX_ID
+                        + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + validTag, State.DOCTOR);
+        assertEquals(new DeleteDoctorTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), deleteCommand);
     }
 
     @Test

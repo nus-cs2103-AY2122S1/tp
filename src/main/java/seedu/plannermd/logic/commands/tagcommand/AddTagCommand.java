@@ -5,7 +5,5 @@ package seedu.plannermd.logic.commands.tagcommand;
  */
 public abstract class AddTagCommand extends TagCommand {
 
-    public static final String COMMAND_WORD = "tag";
-
     public static final String MESSAGE_NOT_ADDED = "A tag must be provided.";
 }

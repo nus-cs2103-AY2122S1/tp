@@ -17,6 +17,8 @@ public abstract class TagCommand extends Command {
 
     public static final String TOO_MANY_TAGS_MESSAGE = "Please enter only one tag.";
 
+    public static final String COMMAND_WORD = "tag";
+
     /**
      * Updates the tags of the given doctor in the {@code model} and returns the edited doctor
      * with the updated tags.

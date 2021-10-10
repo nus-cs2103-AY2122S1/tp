@@ -17,7 +17,7 @@ import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.logic.commands.listcommand.ListPatientCommand;
 import seedu.plannermd.logic.commands.remarkcommand.RemarkCommand;
-import seedu.plannermd.logic.commands.tagcommand.AddTagCommand;
+import seedu.plannermd.logic.commands.tagcommand.TagCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
 
@@ -92,7 +92,7 @@ public class PlannerMdParser {
         case ListPatientCommand.COMMAND_WORD:
             return new ListPatientCommand();
 
-        case AddTagCommand.COMMAND_WORD:
+        case TagCommand.COMMAND_WORD:
             return new TagPatientCommandParser().parse(arguments);
 
         default:
@@ -107,7 +107,7 @@ public class PlannerMdParser {
         case RemarkCommand.COMMAND_WORD:
             return new RemarkDoctorCommandParser().parse(arguments);
 
-        case AddTagCommand.COMMAND_WORD:
+        case TagCommand.COMMAND_WORD:
             return new TagDoctorCommandParser().parse(arguments);
 
         default:
