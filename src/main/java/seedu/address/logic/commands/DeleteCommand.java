@@ -79,7 +79,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> staffs = new ArrayList<>(model.getAddressBook().getPersonList());
+        List<Person> staffs = new ArrayList<>(model.getUnFilteredPersonList());
 
         if (role != null) {
             return executeBasedOnRole(model, staffs);
@@ -129,7 +129,7 @@ public class DeleteCommand extends Command {
             throws CommandException {
         int index = getIndexByName(name, lastShownList);
         if (index == INVALID_INDEX) {
-            throw new CommandException(Messages.MESSAGE_NAME_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_SEARCHED);
         }
 
         Person staffToDelete = lastShownList.get(index);

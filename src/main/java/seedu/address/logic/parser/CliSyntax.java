@@ -17,4 +17,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
 
+    /*Edit lookup prefix definitions*/
+    public static final Prefix EDIT_PREFIX_INDEX = new Prefix("-i");
+    public static final Prefix EDIT_PREFIX_NAME = new Prefix("-n");
+    public static final Prefix EDIT_PREFIX_IDENT = new Prefix("-id");
+
 }

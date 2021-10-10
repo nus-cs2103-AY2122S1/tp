@@ -221,6 +221,39 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalud
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        try {
+            return Status.translateStringToStatus(trimmedStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+
+    }
+
+    /**
+     * Parses a {@code String role} into a {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        try {
+            return Role.translateStringToRole(trimmedRole);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {

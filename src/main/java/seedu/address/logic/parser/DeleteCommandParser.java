@@ -52,7 +52,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
 
             try {
-                Role role = Role.translateStringToRole(argMultimap.getValue(PREFIX_ROLE).get());
+                Role role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
                 return new DeleteCommand(role);
             } catch (IllegalArgumentException e) {
                 throw new ParseException(e.getMessage());
@@ -61,7 +61,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } else if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
 
             try {
-                Status status = Status.translateStringToStatus(argMultimap.getValue(PREFIX_STATUS).get());
+                Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
                 return new DeleteCommand(status);
             } catch (IllegalArgumentException e) {
                 throw new ParseException(e.getMessage());

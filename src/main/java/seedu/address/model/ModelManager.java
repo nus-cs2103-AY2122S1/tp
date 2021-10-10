@@ -140,6 +140,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getUnFilteredPersonList() {
+        return this.addressBook.getPersonList();
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
