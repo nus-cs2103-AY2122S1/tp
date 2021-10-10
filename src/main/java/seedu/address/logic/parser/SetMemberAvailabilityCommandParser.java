@@ -10,6 +10,8 @@ import seedu.address.logic.commands.SetMemberAvailabilityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Availability;
 
+import java.util.ArrayList;
+
 /**
  * Parses input arguments and creates a new {@code SetMemberAvailabilityCommand} object
  */
@@ -25,10 +27,15 @@ public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvail
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_AVAILABILITY);
-
-        Index index;
+        
+        ArrayList<Index> indices;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            indices = new ArrayList<>();
+            String indicesString = argMultimap.getPreamble();
+            String[] indicesArray = indicesString.split(" ");
+            for (String s : indicesArray) {
+                indices.add(ParserUtil.parseIndex(s));
+            }
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SetMemberAvailabilityCommand.MESSAGE_USAGE), ive);
@@ -36,6 +43,6 @@ public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvail
 
         String availability = argMultimap.getValue(PREFIX_AVAILABILITY).orElse("");
 
-        return new SetMemberAvailabilityCommand(index, new Availability(availability));
+        return new SetMemberAvailabilityCommand(indices, new Availability(availability));
     }
 }
