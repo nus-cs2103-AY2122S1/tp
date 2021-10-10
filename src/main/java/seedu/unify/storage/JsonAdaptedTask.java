@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.unify.commons.exceptions.IllegalValueException;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -26,7 +25,6 @@ class JsonAdaptedTask {
 
     private final String name;
     private final String time;
-    private final String email;
     private final String date;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -35,11 +33,9 @@ class JsonAdaptedTask {
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("time") String time,
-            @JsonProperty("email") String email, @JsonProperty("date") String date,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("date") String date, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.time = time;
-        this.email = email;
         this.date = date;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -52,7 +48,6 @@ class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         name = source.getName().taskName;
         time = source.getTime().value;
-        email = source.getEmail().value;
         date = source.getDate().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -86,14 +81,6 @@ class JsonAdaptedTask {
         }
         final Time modelTime = new Time(time);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
@@ -103,7 +90,7 @@ class JsonAdaptedTask {
         final Date modelDate = new Date(date);
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelName, modelTime, modelEmail, modelDate, modelTags);
+        return new Task(modelName, modelTime, modelDate, modelTags);
     }
 
 }

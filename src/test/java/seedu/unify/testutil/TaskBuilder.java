@@ -5,7 +5,6 @@ import java.util.Set;
 
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -18,12 +17,11 @@ public class TaskBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TIME = "16:40";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_DATE = "2021-12-11";
 
     private Name name;
     private Time time;
-    private Email email;
+
     private Date date;
     private Set<Tag> tags;
 
@@ -33,7 +31,6 @@ public class TaskBuilder {
     public TaskBuilder() {
         name = new Name(DEFAULT_NAME);
         time = new Time(DEFAULT_TIME);
-        email = new Email(DEFAULT_EMAIL);
         date = new Date(DEFAULT_DATE);
         tags = new HashSet<>();
     }
@@ -44,7 +41,6 @@ public class TaskBuilder {
     public TaskBuilder(Task taskToCopy) {
         name = taskToCopy.getName();
         time = taskToCopy.getTime();
-        email = taskToCopy.getEmail();
         date = taskToCopy.getDate();
         tags = new HashSet<>(taskToCopy.getTags());
     }
@@ -81,15 +77,7 @@ public class TaskBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Email} of the {@code Task} that we are building.
-     */
-    public TaskBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
     public Task build() {
-        return new Task(name, time, email, date, tags);
+        return new Task(name, time, date, tags);
     }
 }
