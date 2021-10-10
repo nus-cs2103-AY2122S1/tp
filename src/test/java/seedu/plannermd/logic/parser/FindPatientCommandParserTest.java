@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import seedu.plannermd.logic.commands.findcommand.FindPatientCommand;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
-public class FindCommandParserTest {
+public class FindPatientCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindPatientCommandParser parser = new FindPatientCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -31,5 +31,4 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindPatientCommand);
     }
-
 }
