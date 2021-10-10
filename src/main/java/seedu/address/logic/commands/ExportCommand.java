@@ -28,6 +28,7 @@ public class ExportCommand extends Command {
 
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
 
+    private final String testPath;
     private final String fileName;
 
     /**
@@ -37,12 +38,19 @@ public class ExportCommand extends Command {
      */
     public ExportCommand(String fileName) {
         requireNonNull(fileName);
+        this.testPath = "";
+        this.fileName = fileName;
+    }
+
+    public ExportCommand(String testPath, String fileName) {
+        requireNonNull(fileName);
+        this.testPath = testPath;
         this.fileName = fileName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Path filePath = Path.of(fileName + ".json");
+        Path filePath = Path.of(testPath + fileName + ".json");
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
         try {
             temporaryStorage.exportToJson(model.getAddressBook());
