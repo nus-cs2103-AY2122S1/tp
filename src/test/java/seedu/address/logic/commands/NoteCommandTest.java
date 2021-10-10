@@ -1,12 +1,16 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.index.Index.fromZeroBased;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -101,5 +105,31 @@ class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_BOB));
 
         assertCommandFailure(noteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Check if the equals method of NoteCommand is behaving as expected
+     */
+    @Test
+    public void equals() {
+        Index index0 = fromZeroBased(0);
+        Index index1 = fromZeroBased(1);
+
+        NoteCommand aliceIndex0 = new NoteCommand(index0, ALICE.getNote());
+        NoteCommand aliceIndex1 = new NoteCommand(index1, ALICE.getNote());
+        NoteCommand bobIndex0 = new NoteCommand(index0, BOB.getNote());
+        NoteCommand bobIndex1 = new NoteCommand(index1, BOB.getNote());
+
+        // same Index and Note -> returns true
+        assertTrue(aliceIndex0.equals(aliceIndex0));
+
+        // different Index and Same Note -> returns false
+        assertFalse(aliceIndex0.equals(aliceIndex1));
+
+        // same Index and different Note -> returns false
+        assertFalse(aliceIndex0.equals(bobIndex0));
+
+        // different Index and Note -> returns false
+        assertFalse(aliceIndex0.equals(bobIndex1));
     }
 }
