@@ -3,10 +3,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
 <VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="weekLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="Infinity" text="week" textAlignment="CENTER" textFill="WHITE" />
+      <StackPane fx:id="dailyPanelPlaceholder" VBox.vgrow="ALWAYS" />
       <HBox fx:id="dailyHBox" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>
