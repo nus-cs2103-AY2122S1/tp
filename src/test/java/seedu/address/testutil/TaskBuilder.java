@@ -9,11 +9,14 @@ import seedu.address.model.task.Task;
  */
 public class TaskBuilder {
 
-    public static final String DEFAULT_LABEL = "Buy Cloth";
-    public static final String DEFAULT_DATE = "12th September 2021";
+    public static final String DEFAULT_LABEL = "Get new cloth";
+    public static final String DEFAULT_DATE = "20th September 2021";
+    public static final boolean DEFAULT_IS_DONE = false;
+
 
     private Label label;
     private Date date;
+    private boolean isDone;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -21,6 +24,8 @@ public class TaskBuilder {
     public TaskBuilder() {
         label = new Label(DEFAULT_LABEL);
         date = new Date(DEFAULT_DATE);
+        isDone = DEFAULT_IS_DONE;
+
     }
 
     /**
@@ -29,6 +34,7 @@ public class TaskBuilder {
     public TaskBuilder(Task taskToCopy) {
         label = taskToCopy.getLabel();
         date = taskToCopy.getDate();
+        isDone = taskToCopy.getIsDone();
     }
 
     /**
@@ -47,8 +53,21 @@ public class TaskBuilder {
         return this;
     }
 
-    public Task build() {
-        return new Task(label, date);
+    /**
+     * Sets the {@code isDone} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withIsDone(boolean isDone) {
+        this.isDone = isDone;
+        return this;
     }
 
+    /**
+     * builds the Task.
+     */
+    public Task build() {
+        Task task = new Task(label, date);
+        task.setIsDone(isDone);
+        return task;
+    }
 }
+
