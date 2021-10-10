@@ -21,6 +21,7 @@ import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
@@ -148,4 +149,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPatientList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the doctor at the given
+     * {@code targetIndex} in the {@code model}'s plannermd.
+     */
+    public static void showDoctorAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredDoctorList().size());
+
+        Doctor doctor = model.getFilteredDoctorList().get(targetIndex.getZeroBased());
+        final String[] splitName = doctor.getName().fullName.split("\\s+");
+        model.updateFilteredDoctorList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredDoctorList().size());
+    }
 }
