@@ -1,5 +1,3 @@
 package seedu.address.model.applicant;
 
-public class Applicant {
-
-}
+public class Applicant {}
