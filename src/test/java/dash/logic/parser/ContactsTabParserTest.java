@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import dash.logic.commands.ExitCommand;
 import dash.logic.commands.HelpCommand;
+import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.personcommand.AddPersonCommand;
 import dash.logic.commands.personcommand.ClearPeopleCommand;
 import dash.logic.commands.personcommand.DeletePersonCommand;
@@ -81,8 +82,8 @@ public class ContactsTabParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(SwitchTabHelpCommand.COMMAND_WORD) instanceof SwitchTabHelpCommand);
+        assertTrue(parser.parseCommand(SwitchTabHelpCommand.COMMAND_WORD + " 3") instanceof SwitchTabHelpCommand);
     }
 
     @Test
