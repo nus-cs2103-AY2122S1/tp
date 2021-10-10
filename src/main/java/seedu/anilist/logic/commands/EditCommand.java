@@ -21,30 +21,30 @@ import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing anime in the anime list.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the anime identified "
+            + "by the index number used in the displayed anime list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_ANIME_SUCCESS = "Edited Anime: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_ANIME = "This anime already exists in the anime list.";
 
     private final Index index;
     private final EditAnimeDescriptor editAnimeDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editAnimeDescriptor details to edit the person with
+     * @param index of the anime in the filtered anime list to edit
+     * @param editAnimeDescriptor details to edit the anime with
      */
     public EditCommand(Index index, EditAnimeDescriptor editAnimeDescriptor) {
         requireNonNull(index);
@@ -64,22 +64,22 @@ public class EditCommand extends Command {
         }
 
         Anime animeToEdit = lastShownList.get(index.getZeroBased());
-        Anime editedAnime = createEditedPerson(animeToEdit, editAnimeDescriptor);
+        Anime editedAnime = createEditedAnime(animeToEdit, editAnimeDescriptor);
 
         if (!animeToEdit.isSameAnime(editedAnime) && model.hasAnime(editedAnime)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ANIME);
         }
 
         model.setAnime(animeToEdit, editedAnime);
         model.updateFilteredAnimeList(PREDICATE_SHOW_ALL_ANIME);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedAnime));
+        return new CommandResult(String.format(MESSAGE_EDIT_ANIME_SUCCESS, editedAnime));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Anime} with the details of {@code animeToEdit}
+     * edited with {@code editAnimeDescriptor}.
      */
-    private static Anime createEditedPerson(Anime animeToEdit, EditAnimeDescriptor editAnimeDescriptor) {
+    private static Anime createEditedAnime(Anime animeToEdit, EditAnimeDescriptor editAnimeDescriptor) {
         assert animeToEdit != null;
 
         Name updatedName = editAnimeDescriptor.getName().orElse(animeToEdit.getName());
@@ -107,8 +107,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the anime with. Each non-empty field value will replace the
+     * corresponding field value of the anime.
      */
     public static class EditAnimeDescriptor {
         private Name name;

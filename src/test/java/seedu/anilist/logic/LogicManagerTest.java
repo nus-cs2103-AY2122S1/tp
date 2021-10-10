@@ -3,9 +3,9 @@ package seedu.anilist.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX;
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnime.AMY;
+import static seedu.anilist.testutil.TypicalAnime.AKIRA;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -76,8 +76,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY;
-        Anime expectedAnime = new AnimeBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AKIRA;
+        Anime expectedAnime = new AnimeBuilder(AKIRA).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addAnime(expectedAnime);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
