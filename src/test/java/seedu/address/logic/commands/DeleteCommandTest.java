@@ -85,7 +85,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundName);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NAME_NOT_FOUND);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_SEARCHED);
     }
 
     @Test
