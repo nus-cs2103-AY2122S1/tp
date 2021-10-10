@@ -31,7 +31,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(programmerError, userPrefs);
 
-        logger.fine("Initializing with programmer book: " + programmerError + " and user prefs " + userPrefs);
+        logger.fine("Initializing with ProgrammerError: " + programmerError + " and user prefs " + userPrefs);
 
         this.programmerError = new ProgrammerError(programmerError);
         this.userPrefs = new UserPrefs(userPrefs);
