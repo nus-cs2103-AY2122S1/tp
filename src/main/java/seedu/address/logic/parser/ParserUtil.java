@@ -117,7 +117,7 @@ public class ParserUtil {
         requireNonNull(socialHandle);
         String trimmedSocialHandle = socialHandle.trim();
         if (!SocialHandle.isValidSocialHandle(trimmedSocialHandle)) {
-            throw new ParseException(TutorialGroup.MESSAGE_CONSTRAINTS);
+            throw new ParseException(SocialHandle.MESSAGE_CONSTRAINTS);
         }
         return new SocialHandle(trimmedSocialHandle);
     }
