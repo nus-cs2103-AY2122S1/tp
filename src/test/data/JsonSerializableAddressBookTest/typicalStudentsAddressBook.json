@@ -35,5 +35,9 @@
     "telegramHandle" : "@george_best",
     "email" : "anna@example.com",
     "groupName": "CS2103T"
+  } ],
+  "groups" : [ {
+    "name" : "CS2103T",
+    "description" : "A Software engineering module"
   } ]
 }
