@@ -37,7 +37,7 @@ public class WeeklyPanel extends UiPart<Region> {
             VBox placeHolderVBox = new VBox();
             placeHolderLabel.setText(indexToDay(i));
             placeHolderVBox.getChildren().add(placeHolderLabel);
-            dailyHBox.widthProperty().addListener(e -> placeHolderVBox.setMinWidth(dailyHBox.getWidth()/7));
+            dailyHBox.widthProperty().addListener(e -> placeHolderVBox.setMinWidth(dailyHBox.getWidth() / 7));
             dailyHBox.getChildren().add(0, placeHolderVBox);
         }
     }
