@@ -17,18 +17,18 @@ public class ModuleClass {
     // Identity fields
     private final ModuleCode moduleCode;
     private final Day day;
-    private final DateTime dateTime;
+    private final Time time;
     private final Remark remark;
 
 
     /**
      * Every field must be present and not null.
      */
-    public ModuleClass(ModuleCode moduleCode, Day day, DateTime dateTime, Remark remark) {
-        requireAllNonNull(moduleCode, day, dateTime, remark);
+    public ModuleClass(ModuleCode moduleCode, Day day, Time time, Remark remark) {
+        requireAllNonNull(moduleCode, day, time, remark);
         this.moduleCode = moduleCode;
         this.day = day;
-        this.dateTime = dateTime;
+        this.time = time;
         this.remark = remark;
     }
 
@@ -40,8 +40,8 @@ public class ModuleClass {
         return day;
     }
 
-    public DateTime getDateTime() {
-        return dateTime;
+    public Time getTime() {
+        return time;
     }
 
     public Remark getRemark() {
@@ -78,13 +78,13 @@ public class ModuleClass {
         ModuleClass otherModuleClass = (ModuleClass) other;
         return ((ModuleClass) other).getModuleCode().equals(getModuleCode())
                 && otherModuleClass.getDay().equals(getDay())
-                && otherModuleClass.getDateTime().equals(getDateTime());
+                && otherModuleClass.getTime().equals(getTime());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleCode, day, dateTime, remark);
+        return Objects.hash(moduleCode, day, time, remark);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class ModuleClass {
                 .append("; Day: ")
                 .append(getDay().toString())
                 .append("; Time: ")
-                .append(getDateTime().toString());
+                .append(getTime().toString());
 
         if (!remark.toString().trim().isEmpty()) {
             builder.append("; Remark: ");

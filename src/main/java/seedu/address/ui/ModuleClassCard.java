@@ -31,7 +31,7 @@ public class ModuleClassCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         moduleCode.setText(moduleClass.getModuleCode().value);
         day.setText(moduleClass.getDay().toString());
-        dateTime.setText(moduleClass.getDateTime().toString());
+        dateTime.setText(moduleClass.getTime().toString());
         remark.setText(moduleClass.getRemark().value);
     }
 

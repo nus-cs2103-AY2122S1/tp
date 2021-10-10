@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.moduleclass.DateTime;
+import seedu.address.model.moduleclass.Time;
 import seedu.address.model.moduleclass.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.person.ModuleCode;
@@ -43,7 +43,7 @@ public class JsonAdaptedModuleClass {
     public JsonAdaptedModuleClass(ModuleClass source) {
         moduleCode = source.getModuleCode().value;
         day = source.getDay().toString();
-        dateTime = source.getDateTime().toString();
+        dateTime = source.getTime().toString();
         remark = source.getRemark().value;
     }
 
@@ -64,9 +64,9 @@ public class JsonAdaptedModuleClass {
         final Day classDay = new Day(day);
 
         if (dateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        final DateTime classDateTime = new DateTime(dateTime);
+        final Time classDateTime = new Time(dateTime);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
