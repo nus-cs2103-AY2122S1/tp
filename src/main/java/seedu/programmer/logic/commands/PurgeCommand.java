@@ -4,10 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.Model;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.person.Person;
-
 
 
 /**

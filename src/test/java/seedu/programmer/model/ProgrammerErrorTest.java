@@ -3,11 +3,9 @@ package seedu.programmer.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalPersons.ALICE;
-
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-
 import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError;
 
 import java.util.Arrays;

@@ -5,9 +5,9 @@ import static seedu.programmer.testutil.TypicalPersons.getTypicalProgrammerError
 
 import org.junit.jupiter.api.Test;
 
-import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.UserPrefs;
 
 public class PurgeCommandTest {

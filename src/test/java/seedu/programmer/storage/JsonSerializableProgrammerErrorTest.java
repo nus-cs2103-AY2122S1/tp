@@ -15,7 +15,8 @@
 //
 //class JsonSerializableProgrammerErrorTest {
 //
-//    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableProgrammerErrorTest");
+//    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+//    "JsonSerializableProgrammerErrorTest");
 //    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsProgrammerError.json");
 //    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonProgrammerError.json");
 //    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonProgrammerError.json");

@@ -15,11 +15,19 @@ import seedu.programmer.commons.util.ConfigUtil;
 import seedu.programmer.commons.util.StringUtil;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.LogicManager;
-import seedu.programmer.model.*;
+import seedu.programmer.model.Model;
+import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.ProgrammerError;
+import seedu.programmer.model.ReadOnlyProgrammerError;
+import seedu.programmer.model.ReadOnlyUserPrefs;
+import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.util.SampleDataUtil;
-import seedu.programmer.storage.*;
 import seedu.programmer.storage.JsonProgrammerErrorStorage;
+import seedu.programmer.storage.JsonUserPrefsStorage;
+import seedu.programmer.storage.ProgrammerErrorStorage;
+import seedu.programmer.storage.Storage;
+import seedu.programmer.storage.StorageManager;
+import seedu.programmer.storage.UserPrefsStorage;
 import seedu.programmer.ui.Ui;
 import seedu.programmer.ui.UiManager;
 
@@ -48,7 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        ProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(userPrefs.getProgrammerErrorFilePath());
+        ProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(
+                userPrefs.getProgrammerErrorFilePath());
         storage = new StorageManager(programmerErrorStorage, userPrefsStorage);
 
         initLogging(config);

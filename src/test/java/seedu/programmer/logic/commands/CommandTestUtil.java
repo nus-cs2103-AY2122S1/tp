@@ -14,8 +14,8 @@ import java.util.List;
 
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.exceptions.CommandException;
-import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.Model;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.person.NameContainsKeywordsPredicate;
 import seedu.programmer.model.person.Person;
 import seedu.programmer.testutil.EditPersonDescriptorBuilder;
