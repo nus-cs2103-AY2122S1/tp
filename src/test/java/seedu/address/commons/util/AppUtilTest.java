@@ -9,7 +9,7 @@ public class AppUtilTest {
 
     @Test
     public void getImage_exitingImage() {
-        assertNotNull(AppUtil.getImage("/images/staff'd_icon.jpg"));
+        assertNotNull(AppUtil.getImage("/images/staffd_icon.jpg"));
     }
 
     @Test

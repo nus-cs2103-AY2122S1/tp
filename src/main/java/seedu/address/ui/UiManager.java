@@ -22,7 +22,7 @@ public class UiManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     // private static final String ICON_APPLICATION = "/images/
     // found under build/resources/main/images
-    private static final String ICON_APPLICATION = "/images/staff'd_icon.jpg";
+    private static final String ICON_APPLICATION = "/images/staffd_icon.jpg";
 
     private Logic logic;
     private MainWindow mainWindow;

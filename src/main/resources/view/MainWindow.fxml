@@ -17,7 +17,7 @@
 
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Staff'd" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/staff'd_icon.jpg" />
+    <Image url="@/images/staffd_icon.jpg" />
   </icons>
   <scene>
     <Scene>
