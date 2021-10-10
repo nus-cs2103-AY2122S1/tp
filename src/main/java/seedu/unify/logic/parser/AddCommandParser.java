@@ -16,8 +16,8 @@ import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Email;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Time;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.Time;
 
 /**
  * Parses input arguments and creates a new AddCommand object
