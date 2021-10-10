@@ -58,7 +58,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                         
+
                         <HBox prefHeight="180.0" prefWidth="490.0" VBox.vgrow="ALWAYS">
                            <children>
                               <VBox fx:id="dailyPanel1" minWidth="70.0" prefWidth="220.0" styleClass="pane-with-border">
