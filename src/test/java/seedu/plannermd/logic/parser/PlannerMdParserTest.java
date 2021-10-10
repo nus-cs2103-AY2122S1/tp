@@ -26,8 +26,7 @@ import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
-import seedu.plannermd.testutil.EditPersonDescriptorBuilder;
-import seedu.plannermd.testutil.PersonUtil;
+import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 import seedu.plannermd.testutil.patient.PatientUtil;
 
@@ -70,10 +69,10 @@ public class PlannerMdParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Patient patient = new PatientBuilder().build();
-        EditPatientCommand.EditPatientDescriptor descriptor = new EditPersonDescriptorBuilder(patient).build();
-        EditPatientCommand command = (EditPatientCommand) parser.parseCommand(EditPatientCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
-                patientState);
+        EditPatientCommand.EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
+        EditPatientCommand command = (EditPatientCommand) parser.parseCommand(
+                EditPatientCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PatientUtil.getEditPatientDescriptorDetails(descriptor), patientState);
         assertEquals(new EditPatientCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

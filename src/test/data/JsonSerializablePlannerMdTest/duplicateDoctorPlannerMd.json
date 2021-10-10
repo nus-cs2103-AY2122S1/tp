@@ -1,15 +1,20 @@
 {
+  "patients": [],
   "doctors": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "birthDate": "12/12/1922",
+    "remark": "Awaiting PCR test result",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "4th street",
+    "birthDate": "12/12/1921",
+    "remark": "PCR done",
     "tagged": [ "colleagues" ]
   } ]
 }
