@@ -27,7 +27,7 @@ public class Client implements Category {
     }
 
     private Client(ID id, Name name, PhoneNumber phoneNumber, Email email, Address address) {
-        requireAllNonNull(id, name, phoneNumber, email, address);
+        requireAllNonNull(id, name, phoneNumber);
 
         this.id = id;
         this.name = name;

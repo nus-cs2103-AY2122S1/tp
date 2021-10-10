@@ -26,7 +26,7 @@ public class Product implements Category {
     }
 
     private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
-        requireAllNonNull(id, name, unitPrice, quantity);
+        requireAllNonNull(id, name, unitPrice);
 
         this.id = id;
         this.name = name;
