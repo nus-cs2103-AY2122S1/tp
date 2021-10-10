@@ -89,74 +89,69 @@ public class EditCommandParserTest {
 
         // valid studentId followed by invalid studentId. The test case for invalid studentId followed by valid
         // studentId is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-//        assertParseFailure(parser, "1" + STUDENTID_DESC_BOB + INVALID_STUDENTID_DESC,
-//                StudentId.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + STUDENTID_DESC_BOB + INVALID_STUDENTID_DESC,
+                StudentId.MESSAGE_CONSTRAINTS);
 
-//        // multiple invalid values, but only the first invalid value is captured
-//        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_STUDENTID_DESC
-//                        + VALID_CLASSID_AMY + VALID_STUDENTID_AMY, Name.MESSAGE_CONSTRAINTS);
+        // multiple invalid values, but only the first invalid value is captured
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_STUDENTID_DESC
+                        + VALID_CLASSID_AMY + VALID_STUDENTID_AMY, Name.MESSAGE_CONSTRAINTS);
     }
-//
-//    @Test
-//    public void parse_allFieldsSpecified_success() {
-//        Index targetIndex = INDEX_SECOND_PERSON;
-//        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-//                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
-//
-//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-//                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withStudentId(VALID_ADDRESS_AMY)
-//                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-//        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-//
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//    }
-//
-//    @Test
-//    public void parse_someFieldsSpecified_success() {
-//        Index targetIndex = INDEX_FIRST_PERSON;
-//        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
-//
-//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-//                .withEmail(VALID_EMAIL_AMY).build();
-//        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-//
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//    }
-//
-//    @Test
-//    public void parse_oneFieldSpecified_success() {
-//        // name
-//        Index targetIndex = INDEX_THIRD_PERSON;
-//        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-//        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-//        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//
-//        // phone
-//        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-//        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+
+    @Test
+    public void parse_allFieldsSpecified_success() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInput = targetIndex.getOneBased() + STUDENTID_DESC_BOB
+                + CLASSID_DESC_AMY + GRADE_DESC_AMY + NAME_DESC_AMY;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withStudentId(VALID_STUDENTID_BOB).withClassId(VALID_CLASSID_AMY).withGrade(VALID_GRADE_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_someFieldsSpecified_success() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + STUDENTID_DESC_BOB + GRADE_DESC_AMY;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_BOB)
+                .withGrade(VALID_GRADE_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_oneFieldSpecified_success() {
+        // name
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // student ID
+        userInput = targetIndex.getOneBased() + STUDENTID_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // grade
+        userInput = targetIndex.getOneBased() + GRADE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withGrade(VALID_GRADE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        //TODO
+//        // class ID
+//        userInput = targetIndex.getOneBased() + CLASSID_DESC_AMY;
+//        descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_CLASSID_AMY).build();
 //        expectedCommand = new EditCommand(targetIndex, descriptor);
 //        assertParseSuccess(parser, userInput, expectedCommand);
-//
-//        // email
-//        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-//        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-//        expectedCommand = new EditCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//
-//        // address
-//        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-//        descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_ADDRESS_AMY).build();
-//        expectedCommand = new EditCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//
-//        // tags
-//        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-//        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-//        expectedCommand = new EditCommand(targetIndex, descriptor);
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//    }
-//
+
+    }
+
 //    @Test
 //    public void parse_multipleRepeatedFields_acceptsLast() {
 //        Index targetIndex = INDEX_FIRST_PERSON;
@@ -171,7 +166,7 @@ public class EditCommandParserTest {
 //
 //        assertParseSuccess(parser, userInput, expectedCommand);
 //    }
-//
+
 //    @Test
 //    public void parse_invalidValueFollowedByValidValue_success() {
 //        // no other valid values specified
@@ -181,7 +176,7 @@ public class EditCommandParserTest {
 //    EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_BOB).build();
 //        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 //        assertParseSuccess(parser, userInput, expectedCommand);
-
+//
 //        // other valid values specified
 //        userInput = targetIndex.getOneBased() + CLASSID_DESC_BOB + INVALID_STUDENTID_DESC + GRADE_DESC_BOB
 //                + STUDENTID_DESC_BOB;
