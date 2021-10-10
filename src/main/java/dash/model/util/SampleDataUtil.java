@@ -45,10 +45,10 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[]{
-            new Task(new TaskDescription("Submit CS2100 Assignment by 23:59")),
-            new Task(new TaskDescription("ST2334 quiz before Friday")),
-            new Task(new TaskDescription("Do PR review")),
-            new Task(new TaskDescription("Catch up with ST lectures"))
+            new Task(new TaskDescription("Submit CS2100 Assignment by 23:59"), getTagSet("homework")),
+            new Task(new TaskDescription("ST2334 quiz before Friday"), getTagSet("homework")),
+            new Task(new TaskDescription("Do PR review"), getTagSet("groupwork")),
+            new Task(new TaskDescription("Catch up with ST lectures"), getTagSet("classmates"))
         };
     }
 
