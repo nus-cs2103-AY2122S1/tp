@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Reservation> filteredReservations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredReservations = new FilteredList<>(this.addressBook.getReservationList());
     }
 
     public ModelManager() {
@@ -112,6 +115,28 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasReservation(Reservation reservation) {
+        requireNonNull(reservation);
+        return addressBook.hasReservation(reservation);
+    }
+
+    @Override
+    public void deleteReservation(Reservation target) {
+        addressBook.removeReservation(target);
+    }
+
+    @Override
+    public void addReservation(Reservation reservation) {
+        addressBook.addReservation(reservation);
+
+    }
+
+    @Override
+    public void setReservation(Reservation target, Reservation editedReservation) {
+
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -124,9 +149,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Reservation> getFilteredReservationList() {
+        return filteredReservations;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredReservationList(Predicate<Reservation> predicate) {
+        requireNonNull(predicate);
+        filteredReservations.setPredicate(predicate);
     }
 
     @Override
