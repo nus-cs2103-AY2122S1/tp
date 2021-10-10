@@ -40,7 +40,6 @@ import seedu.fast.testutil.PersonUtil;
 public class FastParserTest {
 
     private final FastParser parser = new FastParser();
-    private final String noApptTime = "";
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -120,7 +119,7 @@ public class FastParserTest {
     public void parseCommand_appointment() throws Exception {
         final LocalDate date = LocalDate.parse("2021-10-10");
         final String dateString = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        final Appointment appt = new Appointment(dateString, noApptTime);
+        final Appointment appt = new Appointment(dateString, "", "");
         AppointmentCommand command = (AppointmentCommand) parser.parseCommand(
                 AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PREFIX_APPOINTMENT + "2021-10-10");
