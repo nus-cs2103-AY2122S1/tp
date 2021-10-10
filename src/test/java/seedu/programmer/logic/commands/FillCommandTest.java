@@ -19,7 +19,7 @@ public class FillCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        expectedModel.setAddressBook(SampleDataUtil.fillSampleAddressBook());
+        expectedModel.setProgrammerError(SampleDataUtil.fillSampleProgrammerError());
 
         assertCommandSuccess(new FillCommand(), model, FillCommand.MESSAGE_SUCCESS, expectedModel);
     }

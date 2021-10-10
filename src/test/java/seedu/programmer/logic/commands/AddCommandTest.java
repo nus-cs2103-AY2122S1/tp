@@ -97,7 +97,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyProgrammerError programmerError) {
+        public void setProgrammerError(ReadOnlyProgrammerError programmerError) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -28,7 +28,7 @@ public interface Logic {
      *
      * @see seedu.programmer.model.Model#getProgrammerError()
      */
-    ReadOnlyProgrammerError getAddressBook();
+    ReadOnlyProgrammerError getProgrammerError();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -36,7 +36,7 @@ public interface Logic {
     /**
      * Returns the user prefs' ProgrammerError file path.
      */
-    Path getAddressBookFilePath();
+    Path getProgrammerErrorFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

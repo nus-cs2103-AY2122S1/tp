@@ -14,7 +14,7 @@ import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable ProgrammerError that is serializable to JSON format.
  */
 @JsonRootName(value = "programmererror")
 class JsonSerializableProgrammerError {

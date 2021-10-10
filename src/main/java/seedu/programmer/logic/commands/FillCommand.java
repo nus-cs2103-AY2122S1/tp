@@ -23,7 +23,7 @@ public class FillCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (checkEmpty(model)) {
-            model.setAddressBook(SampleDataUtil.fillSampleAddressBook());
+            model.setProgrammerError(SampleDataUtil.fillSampleProgrammerError());
             return new CommandResult(MESSAGE_SUCCESS);
         }
         return new CommandResult(MESSAGE_FAIL);

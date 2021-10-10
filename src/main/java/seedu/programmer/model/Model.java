@@ -47,7 +47,7 @@ public interface Model {
     /**
      * Replaces ProgrammerError data with the data in {@code programmerError}.
      */
-    void setAddressBook(ReadOnlyProgrammerError programmerError);
+    void setProgrammerError(ReadOnlyProgrammerError programmerError);
 
     /** Returns the ProgrammerError */
     ReadOnlyProgrammerError getProgrammerError();

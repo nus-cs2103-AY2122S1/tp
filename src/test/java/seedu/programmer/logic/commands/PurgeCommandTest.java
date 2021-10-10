@@ -25,7 +25,7 @@ public class PurgeCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
-        expectedModel.setAddressBook(new ProgrammerError());
+        expectedModel.setProgrammerError(new ProgrammerError());
 
         assertCommandSuccess(new PurgeCommand(), model, PurgeCommand.MESSAGE_SUCCESS, expectedModel);
     }
