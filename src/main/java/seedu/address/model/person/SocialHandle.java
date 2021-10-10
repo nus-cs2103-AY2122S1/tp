@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's social handle in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidSocial(String)}
  */
-public class Social {
+public class SocialHandle {
 
     public static final String MESSAGE_CONSTRAINTS = "Social handle (Telegram handle) can take any values, and it should not be blank";
 
@@ -24,7 +24,7 @@ public class Social {
      *
      * @param handle A valid Telegram handle.
      */
-    public Social(String handle) {
+    public SocialHandle(String handle) {
         requireNonNull(handle);
         checkArgument(isValidSocial(handle), MESSAGE_CONSTRAINTS);
         value = handle;
@@ -45,8 +45,8 @@ public class Social {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Social // instanceof handles nulls
-                && value.equals(((Social) other).value)); // state check
+                || (other instanceof SocialHandle // instanceof handles nulls
+                && value.equals(((SocialHandle) other).value)); // state check
     }
 
     @Override
