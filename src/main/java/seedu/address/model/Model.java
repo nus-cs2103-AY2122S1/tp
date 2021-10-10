@@ -113,4 +113,10 @@ public interface Model {
      * Returns true if a folder with the same identity as {@code folder} exists in the address book.
      */
     boolean hasFolder(Folder folder);
+
+    /**
+     * Deletes the specified folder.
+     * {@code folder} must already exist in the address book.
+     */
+    void deleteFolder(Folder folder);
 }

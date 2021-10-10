@@ -174,6 +174,12 @@ public class AddCommandTest {
         public boolean hasFolder(Folder folder) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteFolder(Folder folder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

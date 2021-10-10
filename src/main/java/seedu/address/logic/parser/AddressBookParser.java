@@ -12,6 +12,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateFolderCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteFolderCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -24,11 +25,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class AddressBookParser {
-
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern
+            .compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -44,11 +45,12 @@ public class AddressBookParser {
         }
 
         final String arguments = matcher.group("arguments");
-
         // using if-else and String.startsWith() instead of switch-case
         // allows for the flexibility of having commands with multiple words, e.g. rm -contacts
         if (userInput.startsWith(AddCommand.COMMAND_WORD)) {
             return new AddCommandParser().parse(arguments);
+        } else if (userInput.startsWith(DeleteFolderCommand.COMMAND_WORD)) {
+            return new DeleteFolderCommandParser().parse(arguments);
         } else if (userInput.startsWith(EditCommand.COMMAND_WORD)) {
             return new EditCommandParser().parse(arguments);
         } else if (userInput.startsWith(ClearCommand.COMMAND_WORD)) {

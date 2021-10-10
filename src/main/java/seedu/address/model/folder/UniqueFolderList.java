@@ -55,13 +55,18 @@ public class UniqueFolderList implements Iterable<Folder> {
      */
     public void addContact(Person contact, FolderName name) {
         requireNonNull(contact);
-        for (int i = 0; i < internalList.size(); i++) {
-            Folder folder = internalList.get(i);
-            if (folder.getFolderName() == name) {
-                folder.addContacts(contact);
-            }
-        }
-
+//        for (int i = 0; i < internalList.size(); i++) {
+//            Folder folder = internalList.get(i);
+//            if (folder.getFolderName() == name) {
+//                folder.addContacts(contact);
+//                break;
+//            }
+//        }
+        internalList.stream()
+                .filter(folder -> folder.getFolderName() == name)
+                .findFirst()
+                .get()
+                .addContacts(contact);
     }
 
     /**
