@@ -136,7 +136,14 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         return venue.trim();
     }
 
+    /**
+     * Returns true if the argument passed in is a delete appointment command.
+     * Returns false if it is not a delete appointment command.
+     *
+     * @param commandString The input retrieved from the argument.
+     * @return A boolean indicating whether if it is a appointment delete command.
+     */
     private boolean isAppointmentDeleteCommand(String commandString) {
-        return commandString.equals(AppointmentCommand.APPOINTMENT_DELETE_COMMAND);
+        return commandString.equalsIgnoreCase(AppointmentCommand.APPOINTMENT_DELETE_COMMAND);
     }
 }
