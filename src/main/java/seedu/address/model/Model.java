@@ -88,6 +88,7 @@ public interface Model {
      */
     Person getFilteredPersonListByIndex(int index);
 
+
     /**
      * Returns the person with given name.
      * @param name Given name.
