@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
 
         Participant participantToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteParticipant(participantToDelete);
-        participantToDelete.getEvents().forEach(e -> e.removeParticipant(participantToDelete));
+        participantToDelete.deletefromEvents();
         return new CommandResult(String.format(MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete));
     }
 

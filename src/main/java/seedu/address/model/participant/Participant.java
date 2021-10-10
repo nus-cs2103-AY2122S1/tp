@@ -227,6 +227,10 @@ public class Participant {
                 && otherParticipant.getBirthDate().equals(getBirthDate());
     }
 
+    public void deletefromEvents() {
+        this.events.forEach(e -> e.removeParticipant(this));
+    }
+
     /**
      * Returns true if both participants have the same identity and data fields.
      * This defines a stronger notion of equality between two participants.
