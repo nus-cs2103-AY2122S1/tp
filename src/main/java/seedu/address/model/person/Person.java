@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.id.UniqueId;
+import seedu.address.model.HasUniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
 
@@ -14,10 +16,11 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements HasUniqueId {
 
     // Identity fields
     private final Name name;
+    private final UniqueId id;
     private final Phone phone;
     private final Email email;
 
@@ -31,7 +34,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   NoOverlapLessonList lessonsList) {
-        requireAllNonNull(name, phone, email, address, tags);
+        this.id = UniqueId.generateId(this);
+        requireAllNonNull(name, phone, email, address, tags, id);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +54,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public UniqueId getId() {
+        return id;
     }
 
     public Address getAddress() {
@@ -116,7 +124,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, lessonsList);
+        return Objects.hash(name, id, phone, email, address, tags, lessonsList);
     }
 
     @Override

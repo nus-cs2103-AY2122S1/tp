@@ -11,6 +11,7 @@ import seedu.address.model.task.Task;
  */
 public class TypicalTasks {
     public static final Task REPORT_1 = new TaskBuilder().withName("Report 1").withDeadline("2021-10-10").build();
+    public static final Task REPORT_2 = new TaskBuilder().withName("Report 2").withDeadline("2021-11-11").build();
 
     /**
      * Returns an {@code AddressBook} with all the typical tasks.
@@ -24,6 +25,6 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(List.of(REPORT_1));
+        return new ArrayList<>(List.of(REPORT_1, REPORT_2));
     }
 }
