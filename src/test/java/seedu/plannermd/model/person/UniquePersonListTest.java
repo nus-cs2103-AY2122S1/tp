@@ -3,6 +3,8 @@ package seedu.plannermd.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
@@ -14,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
 import seedu.plannermd.model.person.exceptions.PersonNotFoundException;
+import seedu.plannermd.testutil.PersonBuilder;
+
 
 public abstract class UniquePersonListTest<T extends Person> {
 
@@ -25,6 +29,7 @@ public abstract class UniquePersonListTest<T extends Person> {
     //Typical People should not be in sample list
     protected abstract T typicalPersonAlice();
     protected abstract T typicalPersonBob();
+    protected abstract T samplePerson(Person person);
 
     @BeforeEach
     void setUp() {
@@ -52,14 +57,13 @@ public abstract class UniquePersonListTest<T extends Person> {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         personList.add(alice);
-        //TODO: Generic PersonBuilder workaround
+        Person editedAlicePerson = new PersonBuilder(alice)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        T editedAlice = samplePerson(editedAlicePerson);
 
-        //        T editedAlice = new PatientBuilder(alice)
-        //                .withAddress(VALID_ADDRESS_BOB)
-        //                .withTags(VALID_TAG_HUSBAND)
-        //                .withRisk(VALID_RISK_BOB)
-        //                .build();
-        //        assertTrue(personList.contains(editedAlice));
+        assertTrue(personList.contains(editedAlice));
     }
 
     @Test
@@ -100,16 +104,17 @@ public abstract class UniquePersonListTest<T extends Person> {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         personList.add(alice);
-        //TODO: Generic PersonBuilder workaround
 
-        //        T editedAlice = new PatientBuilder(alice)
-        //                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-        //                .withRisk(VALID_RISK_BOB)
-        //                .build();
-        //        personList.setPerson(alice, editedAlice);
-        //        UniquePersonList<T> expectedUniquePersonList = new UniquePersonList<>();
-        //        expectedUniquePersonList.add(editedAlice);
-        //        assertEquals(expectedUniquePersonList, personList);
+        Person editedAlicePerson = new PersonBuilder(alice)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
+                .build();
+        T editedAlice = samplePerson(editedAlicePerson);
+
+        personList.setPerson(alice, editedAlice);
+        UniquePersonList<T> expectedUniquePersonList = new UniquePersonList<>();
+        expectedUniquePersonList.add(editedAlice);
+        assertEquals(expectedUniquePersonList, personList);
     }
 
     @Test
