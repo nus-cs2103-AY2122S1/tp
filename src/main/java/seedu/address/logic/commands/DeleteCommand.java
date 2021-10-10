@@ -33,11 +33,21 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Name name;
 
+    /**
+     * Constructs delete command using a targetIndex.
+     *
+     * @param targetIndex The index of a person to be deleted
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.name = null;
     }
 
+    /**
+     * Constructs delete command using a name.
+     *
+     * @param name The name of a person to be deleted
+     */
     public DeleteCommand(Name name) {
         this.name = name;
         this.targetIndex = null;
