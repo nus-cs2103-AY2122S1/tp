@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddToClassCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tuition.StudentList;
 
 public class AddToClassCommandParser implements Parser<AddToClassCommand> {
 
@@ -15,13 +16,22 @@ public class AddToClassCommandParser implements Parser<AddToClassCommand> {
     public AddToClassCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_INDEX, PREFIX_TUITION_CLASS);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_TUITION_CLASS)
-                    || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        ArgumentMultimap argMultimapName =
+                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT, PREFIX_TUITION_CLASS);
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_TUITION_CLASS)) {
+            if (!arePrefixesPresent(argMultimapName, PREFIX_STUDENT, PREFIX_TUITION_CLASS)
+                    || !argMultimapName.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddToClassCommand.MESSAGE_USAGE));
+            }
+            StudentList student = ParserUtil.parseStudent(argMultimapName.getAllValues(PREFIX_STUDENT));
+            Index classIndex = ParserUtil.parseIndex(argMultimapName.getValue(PREFIX_TUITION_CLASS).get());
+            return new AddToClassCommand(student, classIndex);
         }
-
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddToClassCommand.MESSAGE_USAGE));
+        }
         Index studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
         Index classIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TUITION_CLASS).get());
         return new AddToClassCommand(studentIndex, classIndex);
