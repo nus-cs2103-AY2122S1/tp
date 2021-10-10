@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.Logic;
@@ -38,7 +37,7 @@ public class WeeklyPanel extends UiPart<Region> {
         for (int i = 0; i < 7; i++) {
             // these are just placeholders
             VBox placeHolderVBox = new VBox();
-            DailyPanel dailyPanel = new DailyPanel(taskList,indexToDay(i));
+            DailyPanel dailyPanel = new DailyPanel(taskList, indexToDay(i));
             placeHolderVBox.getChildren().add(dailyPanel.getRoot());
             placeHolderVBox.setStyle("-fx-border-style: solid inside;"
                     + "-fx-border-width: 1;");

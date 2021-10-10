@@ -47,8 +47,8 @@ class JsonSerializableUniFy {
      */
     public UniFy toModelType() throws IllegalValueException {
         UniFy uniFy = new UniFy();
-        for (JsonAdaptedTask JsonAdaptedTask : tasks) {
-            Task task = JsonAdaptedTask.toModelType();
+        for (JsonAdaptedTask jsonAdaptedTask : tasks) {
+            Task task = jsonAdaptedTask.toModelType();
             if (uniFy.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }

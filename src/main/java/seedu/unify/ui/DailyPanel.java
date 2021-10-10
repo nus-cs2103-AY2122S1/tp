@@ -1,5 +1,7 @@
 package seedu.unify.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,7 +11,6 @@ import javafx.scene.layout.Region;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.task.Task;
 
-import java.util.logging.Logger;
 
 public class DailyPanel extends UiPart<Region> {
 
