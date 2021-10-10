@@ -1,18 +1,18 @@
 //package seedu.address.storage;
 //
 //import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+//import static seedu.address.storage.JsonAdaptedstudent.MISSING_FIELD_MESSAGE_FORMAT;
 //import static seedu.address.testutil.Assert.assertThrows;
-//import static seedu.address.testutil.TypicalPersons.BENSON;
+//import static seedu.address.testutil.Typicalstudents.BENSON;
 //
 //import org.junit.jupiter.api.Test;
 //
 //import seedu.address.commons.exceptions.IllegalValueException;
-//import seedu.address.model.person.ClassId;
-//import seedu.address.model.person.Name;
-//import seedu.address.model.person.StudentId;
+//import seedu.address.model.student.ClassId;
+//import seedu.address.model.student.Name;
+//import seedu.address.model.student.StudentId;
 //
-//public class JsonAdaptedPersonTest {
+//public class JsonAdaptedstudentTest {
 //    private static final String INVALID_NAME = "R@chel";
 //    private static final String INVALID_STUDENTID = "+651234";
 //    private static final String INVALID_CLASSID = " ";
@@ -24,47 +24,47 @@
 //    private static final String VALID_GRADE = BENSON.getGrade().toString();
 //
 //    @Test
-//    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-//        JsonAdaptedPerson person = new JsonAdaptedPerson(BENSON);
-//        assertEquals(BENSON, person.toModelType());
+//    public void toModelType_validstudentDetails_returnsstudent() throws Exception {
+//        JsonAdaptedstudent student = new JsonAdaptedstudent(BENSON);
+//        assertEquals(BENSON, student.toModelType());
 //    }
 //
 //    @Test
 //    public void toModelType_invalidName_throwsIllegalValueException() {
-//        JsonAdaptedPerson person =
-//                new JsonAdaptedPerson(INVALID_NAME, VALID_STUDENTID, VALID_CLASSID, VALID_GRADE);
+//        JsonAdaptedstudent student =
+//                new JsonAdaptedstudent(INVALID_NAME, VALID_STUDENTID, VALID_CLASSID, VALID_GRADE);
 //        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-//        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+//        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
 //    }
 //
 //    @Test
 //    public void toModelType_nullName_throwsIllegalValueException() {
-//        JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_STUDENTID, VALID_CLASSID, VALID_GRADE);
+//        JsonAdaptedstudent student = new JsonAdaptedstudent(null, VALID_STUDENTID, VALID_CLASSID, VALID_GRADE);
 //        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-//        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+//        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
 //    }
 //
 //    @Test
 //    public void toModelType_invalidStudentId_throwsIllegalValueException() {
-//        JsonAdaptedPerson person =
-//                new JsonAdaptedPerson(VALID_NAME, INVALID_STUDENTID, VALID_CLASSID, VALID_GRADE);
+//        JsonAdaptedstudent student =
+//                new JsonAdaptedstudent(VALID_NAME, INVALID_STUDENTID, VALID_CLASSID, VALID_GRADE);
 //        String expectedMessage = StudentId.MESSAGE_CONSTRAINTS;
-//        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+//        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
 //    }
 //
 //    @Test
 //    public void toModelType_nullStudentId_throwsIllegalValueException() {
-//        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_CLASSID, VALID_GRADE);
+//        JsonAdaptedstudent student = new JsonAdaptedstudent(VALID_NAME, null, VALID_CLASSID, VALID_GRADE);
 //        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, StudentId.class.getSimpleName());
-//        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+//        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
 //    }
 //
 //    @Test
 //    public void toModelType_invalidClassId_throwsIllegalValueException() {
-//        JsonAdaptedPerson person =
-//                new JsonAdaptedPerson(VALID_NAME, VALID_STUDENTID, INVALID_CLASSID, VALID_GRADE);
+//        JsonAdaptedstudent student =
+//                new JsonAdaptedstudent(VALID_NAME, VALID_STUDENTID, INVALID_CLASSID, VALID_GRADE);
 //        String expectedMessage = ClassId.MESSAGE_CONSTRAINTS;
-//        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+//        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
 //    }
 //
 //}

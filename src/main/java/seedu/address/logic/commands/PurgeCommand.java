@@ -6,8 +6,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-
+import seedu.address.model.student.Student;
 
 
 /**
@@ -36,10 +35,7 @@ public class PurgeCommand extends Command {
      * @return Whether the list is empty or not.
      */
     public Boolean checkEmpty(Model model) {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (lastShownList.size() == 0) {
-            return true;
-        }
-        return false;
+        List<Student> lastShownList = model.getFilteredStudentList();
+        return lastShownList.size() == 0;
     }
 }

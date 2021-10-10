@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.ClassId;
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentId;
+import seedu.address.model.student.ClassId;
+import seedu.address.model.student.Grade;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Student}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedStudent {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "student's %s field is missing!";
 
     private final String name;
     private final String studentId;
@@ -24,10 +24,10 @@ class JsonAdaptedPerson {
     private final String grade;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedstudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
             @JsonProperty("classId") String classId, @JsonProperty("grade") String grade) {
         this.name = name;
         this.studentId = studentId;
@@ -36,9 +36,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code student} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
         studentId = source.getStudentId().studentId;
         classId = source.getClassId().classId;
@@ -46,11 +46,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted student object into the model's {@code student} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Student toModelType() throws IllegalValueException {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -85,7 +85,7 @@ class JsonAdaptedPerson {
         }
         final Grade modelGrade = new Grade(grade);
 
-        return new Person(modelName, modelStudentId, modelClassId, modelGrade);
+        return new Student(modelName, modelStudentId, modelClassId, modelGrade);
     }
 
 }

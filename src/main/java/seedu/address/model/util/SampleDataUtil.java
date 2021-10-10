@@ -2,31 +2,31 @@ package seedu.address.model.util;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.ClassId;
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentId;
+import seedu.address.model.student.ClassId;
+import seedu.address.model.student.Grade;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Allard Quek"), new StudentId("A0212425H"), new ClassId("B01"), new Grade("F")),
-            new Person(new Name("Samay Sagar"), new StudentId("A0212425H"), new ClassId("B02"), new Grade("A")),
-            new Person(new Name("Erwin Quek"), new StudentId("A0212425H"), new ClassId("B03"), new Grade("A")),
-            new Person(new Name("David Li"), new StudentId("A0212425H"), new ClassId("B04"), new Grade("A")),
-            new Person(new Name("Irfan Ibrahim"), new StudentId("A0212425H"), new ClassId("B05"), new Grade("A")),
-            new Person(new Name("Roy Balakrishnan"), new StudentId("A0212425H"), new ClassId("B06"), new Grade("A"))
+    public static Student[] getSampleStudents() {
+        return new Student[] {
+            new Student(new Name("Allard Quek"), new StudentId("A0212425H"), new ClassId("B01"), new Grade("F")),
+            new Student(new Name("Samay Sagar"), new StudentId("A0212425H"), new ClassId("B02"), new Grade("A")),
+            new Student(new Name("Erwin Quek"), new StudentId("A0212425H"), new ClassId("B03"), new Grade("A")),
+            new Student(new Name("David Li"), new StudentId("A0212425H"), new ClassId("B04"), new Grade("A")),
+            new Student(new Name("Irfan Ibrahim"), new StudentId("A0212425H"), new ClassId("B05"), new Grade("A")),
+            new Student(new Name("Roy Balakrishnan"), new StudentId("A0212425H"), new ClassId("B06"), new Grade("A"))
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Student sampleStudent : getSampleStudents()) {
+            sampleAb.addStudent(sampleStudent);
         }
         return sampleAb;
     }
@@ -37,8 +37,8 @@ public class SampleDataUtil {
      */
     public static AddressBook fillSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Student sampleStudent : getSampleStudents()) {
+            sampleAb.addStudent(sampleStudent);
         }
         return sampleAb;
     }

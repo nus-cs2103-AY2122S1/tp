@@ -1,4 +1,4 @@
-//package seedu.address.model.person;
+//package seedu.address.model.student;
 //
 //import static org.junit.jupiter.api.Assertions.assertFalse;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,7 +9,7 @@
 //
 //import org.junit.jupiter.api.Test;
 //
-//import seedu.address.testutil.PersonBuilder;
+//import seedu.address.testutil.studentBuilder;
 //
 //public class NameContainsKeywordsPredicateTest {
 //
@@ -35,7 +35,7 @@
 //        // null -> returns false
 //        assertFalse(firstPredicate.equals(null));
 //
-//        // different person -> returns false
+//        // different student -> returns false
 //        assertFalse(firstPredicate.equals(secondPredicate));
 //    }
 //
@@ -44,34 +44,34 @@
 //        // One keyword
 //        NameContainsKeywordsPredicate predicate = ne
 //        w NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-//        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+//        assertTrue(predicate.test(new studentBuilder().withName("Alice Bob").build()));
 //
 //        // Multiple keywords
 //        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-//        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+//        assertTrue(predicate.test(new studentBuilder().withName("Alice Bob").build()));
 //
 //        // Only one matching keyword
 //        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-//        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+//        assertTrue(predicate.test(new studentBuilder().withName("Alice Carol").build()));
 //
 //        // Mixed-case keywords
 //        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-//        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+//        assertTrue(predicate.test(new studentBuilder().withName("Alice Bob").build()));
 //    }
 //
 //    @Test
 //    public void test_nameDoesNotContainKeywords_returnsFalse() {
 //        // Zero keywords
 //        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-//        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
+//        assertFalse(predicate.test(new studentBuilder().withName("Alice").build()));
 //
 //        // Non-matching keyword
 //        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-//        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+//        assertFalse(predicate.test(new studentBuilder().withName("Alice Bob").build()));
 //
 //        // Keywords match phone, email and address, but does not match name
 //        predicate = new NameContainsKeywordsPredicate(Arrays.asList("A0214212H", "B01", "D"));
-//        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withStudentId("A0214212H")
+//        assertFalse(predicate.test(new studentBuilder().withName("Alice").withStudentId("A0214212H")
 //                .withClassId("B01").withGrade("D").build()));
 //    }
 //}

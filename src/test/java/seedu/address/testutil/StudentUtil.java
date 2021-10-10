@@ -6,39 +6,39 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.model.student.Student;
 
 
 /**
- * A utility class for Person.
+ * A utility class for student.
  */
-public class PersonUtil {
+public class StudentUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code student}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Student student) {
+        return AddCommand.COMMAND_WORD + " " + getStudentDetails(student);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code student}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getStudentDetails(Student student) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_STUDENT_ID + person.getStudentId().studentId + " ");
-        sb.append(PREFIX_CLASS_ID + person.getClassId().classId + " ");
-        sb.append(PREFIX_GRADE + person.getGrade().grade + " ");
+        sb.append(PREFIX_NAME + student.getName().fullName + " ");
+        sb.append(PREFIX_STUDENT_ID + student.getStudentId().studentId + " ");
+        sb.append(PREFIX_CLASS_ID + student.getClassId().classId + " ");
+        sb.append(PREFIX_GRADE + student.getGrade().grade + " ");
 
         return sb.toString();
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditStudentDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
+    public static String getEditStudentDescriptorDetails(EditStudentDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getStudentId().ifPresent(studentId ->

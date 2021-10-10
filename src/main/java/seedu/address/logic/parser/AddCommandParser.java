@@ -10,11 +10,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ClassId;
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentId;
+import seedu.address.model.student.ClassId;
+import seedu.address.model.student.Grade;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentId;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -28,7 +28,6 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        System.out.println("here");
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_GRADE);
 
@@ -42,9 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         ClassId classId = ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASS_ID).orElse(null));
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).orElse(null));
 
-        Person person = new Person(name, studentId, classId, grade);
+        Student student = new Student(name, studentId, classId, grade);
 
-        return new AddCommand(person);
+        return new AddCommand(student);
     }
 
     /**

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -6,10 +6,10 @@ import java.util.Objects;
 
 
 /**
- * Represents a Person in the ProgrammerError.
+ * Represents a student in the ProgrammerError.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Student {
 
     // Identity fields
     private final Name name;
@@ -20,7 +20,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId studentId, ClassId classId, Grade grade) {
+    public Student(Name name, StudentId studentId, ClassId classId, Grade grade) {
         requireAllNonNull(name, studentId, classId, grade);
         this.name = name;
         this.studentId = studentId;
@@ -45,21 +45,21 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameStudent(Student otherStudent) {
+        if (otherStudent == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherStudent != null
+                && otherStudent.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both students have the same identity and data fields.
+     * This defines a stronger notion of equality between two students.
      */
     @Override
     public boolean equals(Object other) {
@@ -67,15 +67,15 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Student)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getStudentId().equals(getStudentId())
-                && otherPerson.getClassId().equals(getClassId())
-                && otherPerson.getGrade().equals(getGrade());
+        Student otherStudent = (Student) other;
+        return otherStudent.getName().equals(getName())
+                && otherStudent.getStudentId().equals(getStudentId())
+                && otherStudent.getClassId().equals(getClassId())
+                && otherStudent.getGrade().equals(getGrade());
     }
 
     @Override
