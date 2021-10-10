@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.unify.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Task's phone number in the address book.
+ * Represents a Task's time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
 public class Time {
-
 
     public static final String MESSAGE_CONSTRAINTS = "Time should only contain numbers in the format of HH:MM, "
             + "where HH is from 00 to 23 and MM is from 00 to 59.";
@@ -33,7 +32,7 @@ public class Time {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid time.
      */
     public static boolean isValidTime(String test) {
         return test.matches(VALIDATION_REGEX);
