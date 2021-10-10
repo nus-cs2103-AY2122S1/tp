@@ -2,21 +2,30 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
+import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SealedObject;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import seedu.address.commons.core.LogsCenter;
@@ -57,8 +66,29 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableAddressBook> jsonAddressBook = Optional.empty();
+        try {
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            byte[] keyBytes = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+            String algorithm = "AES";
+            SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new byte[16]));
+            CipherInputStream cipherInputStream =
+                    new CipherInputStream(new BufferedInputStream(new FileInputStream("data/file")), cipher);
+            ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
+            SealedObject sealedObject = (SealedObject) inputStream.readObject();
+            String jsonString = (String) sealedObject.getObject(cipher);
+            jsonAddressBook =
+                    Optional.of(JsonUtil.fromJsonString(jsonString, JsonSerializableAddressBook.class));
+
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
+                | IOException | ClassNotFoundException | IllegalBlockSizeException
+                | BadPaddingException | InvalidAlgorithmParameterException e) {
+            System.out.println(e);
+        }
+
+//        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
+//                filePath, JsonSerializableAddressBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -66,6 +96,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         try {
             return Optional.of(jsonAddressBook.get().toModelType());
         } catch (IllegalValueException ive) {
+            System.out.println(ive.getMessage());
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
@@ -85,15 +116,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
-        FileUtil.createIfMissing(filePath);
+//        FileUtil.createIfMissing(filePath);
 
-        Cipher cipher;
         try {
-            cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             byte[] keyBytes = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
             String algorithm = "AES";
             SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
-            cipher.init(Cipher.ENCRYPT_MODE, key);
+            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[16]));
             SealedObject sealedObject =
                     new SealedObject(JsonUtil.toJsonString(new JsonSerializableAddressBook(addressBook)), cipher);
             CipherOutputStream cipherOutputStream =
@@ -101,11 +131,12 @@ public class JsonAddressBookStorage implements AddressBookStorage {
             ObjectOutputStream outputStream = new ObjectOutputStream(cipherOutputStream);
             outputStream.writeObject(sealedObject);
             outputStream.close();
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
+                | IllegalBlockSizeException | InvalidAlgorithmParameterException e) {
             System.out.println(e);
         }
 
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+//        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
 
 }
