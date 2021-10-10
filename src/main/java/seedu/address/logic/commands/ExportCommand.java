@@ -42,6 +42,12 @@ public class ExportCommand extends Command {
         this.fileName = fileName;
     }
 
+    /**
+     * Creates an ExportCommand with a custom filePath for testing purposes.
+     *
+     * @param testPath Path where the JSON file will be exported to.
+     * @param fileName Name of the JSON file.
+     */
     public ExportCommand(String testPath, String fileName) {
         requireNonNull(fileName);
         this.testPath = testPath;
