@@ -97,12 +97,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyProgrammerError newData) {
+        public void setAddressBook(ReadOnlyProgrammerError programmerError) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyProgrammerError getAddressBook() {
+        public ReadOnlyProgrammerError getProgrammerError() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -169,7 +169,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyProgrammerError getAddressBook() {
+        public ReadOnlyProgrammerError getProgrammerError() {
             return new ProgrammerError();
         }
     }

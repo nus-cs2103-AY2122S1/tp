@@ -79,12 +79,12 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyProgrammerError addressBook) {
-        this.programmerError.resetData(addressBook);
+    public void setAddressBook(ReadOnlyProgrammerError programmerError) {
+        this.programmerError.resetData(programmerError);
     }
 
     @Override
-    public ReadOnlyProgrammerError getAddressBook() {
+    public ReadOnlyProgrammerError getProgrammerError() {
         return programmerError;
     }
 
