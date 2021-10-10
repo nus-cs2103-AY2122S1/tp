@@ -49,7 +49,7 @@ public class ClientCard extends UiPart<Region> {
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
-        phone.setText(client.getPhoneNumber().getPhoneNumber());
+        phone.setText(client.getPhoneNumber().phoneNumber);
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
 //        person.getTags().stream()

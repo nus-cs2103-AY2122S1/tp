@@ -15,7 +15,7 @@ public class PhoneNumber {
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    private String phoneNumber;
+    public final String phoneNumber;
 
     /**
      * Constructs a {@code PhoneNumber}.
@@ -35,10 +35,6 @@ public class PhoneNumber {
      */
     public static boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber.matches(VALIDATION_REGEX);
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class UnitPrice {
      */
     public static final String VALIDATION_REGEX = "[0-9]+(\\.[0-9]{2})?";
 
-    private String unitPrice;
+    public final String unitPrice;
 
     /**
      * Constructs a {@code UnitPrice}.
@@ -36,10 +36,6 @@ public class UnitPrice {
      */
     public static boolean isValidUnitPrice(String unitPrice) {
         return unitPrice.matches(VALIDATION_REGEX);
-    }
-
-    public String getUnitPrice() {
-        return unitPrice;
     }
 
     @Override
