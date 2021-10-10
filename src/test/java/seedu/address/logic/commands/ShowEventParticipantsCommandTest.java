@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalParticipants.getTypicalAddressBook;
@@ -26,7 +28,7 @@ import seedu.address.testutil.TypicalEvents;
  */
 public class ShowEventParticipantsCommandTest {
 
-    private final Event sampleEvent = TypicalEvents.SAMPLE_EVENT_3;
+    private final Event sampleEvent = TypicalEvents.SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION;
     private final EventNamePredicate samplePredicate = preparePredicate(sampleEvent.getNameString());
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -34,6 +36,34 @@ public class ShowEventParticipantsCommandTest {
     public ShowEventParticipantsCommandTest() {
         model.addEvent(sampleEvent);
         expectedModel.addEvent(sampleEvent);
+    }
+
+    @Test
+    public void equals() {
+        EventNamePredicate firstPredicate = new EventNamePredicate("first");
+        EventNamePredicate secondPredicate = new EventNamePredicate("second");
+
+        ShowEventParticipantsCommand showEventParticipantsFirstCommand =
+                new ShowEventParticipantsCommand(firstPredicate);
+        ShowEventParticipantsCommand showEventParticipantsSecondCommand =
+                new ShowEventParticipantsCommand(secondPredicate);
+
+        // same object -> returns true
+        assertTrue(showEventParticipantsFirstCommand.equals(showEventParticipantsFirstCommand));
+
+        // same values -> returns true
+        ShowEventParticipantsCommand showEventParticipantsFirstCommandCopy =
+                new ShowEventParticipantsCommand(firstPredicate);
+        assertTrue(showEventParticipantsFirstCommand.equals(showEventParticipantsFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(showEventParticipantsFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(showEventParticipantsFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(showEventParticipantsFirstCommand.equals(showEventParticipantsSecondCommand));
     }
 
     @Test
