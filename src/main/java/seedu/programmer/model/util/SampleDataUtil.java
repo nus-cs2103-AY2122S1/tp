@@ -1,7 +1,7 @@
 package seedu.programmer.model.util;
 
 import seedu.programmer.model.ProgrammerError;
-import seedu.programmer.model.ReadOnlyAddressBook;
+import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.person.ClassId;
 import seedu.programmer.model.person.Grade;
 import seedu.programmer.model.person.Name;
@@ -23,7 +23,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyProgrammerError getSampleAddressBook() {
         ProgrammerError sampleAb = new ProgrammerError();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

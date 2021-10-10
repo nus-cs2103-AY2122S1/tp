@@ -16,7 +16,7 @@ import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.Model;
-import seedu.programmer.model.ReadOnlyAddressBook;
+import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.ReadOnlyUserPrefs;
 import seedu.programmer.model.person.Person;
 import seedu.programmer.testutil.PersonBuilder;
@@ -97,12 +97,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyProgrammerError newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyProgrammerError getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -169,7 +169,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyProgrammerError getAddressBook() {
             return new ProgrammerError();
         }
     }

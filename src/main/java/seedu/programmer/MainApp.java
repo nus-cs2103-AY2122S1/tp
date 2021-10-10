@@ -70,8 +70,8 @@ public class MainApp extends Application {
      * or an empty ProgrammerError will be used instead if errors occur when reading {@code storage}'s ProgrammerError.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyProgrammerError> addressBookOptional;
+        ReadOnlyProgrammerError initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {

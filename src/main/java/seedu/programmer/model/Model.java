@@ -47,10 +47,10 @@ public interface Model {
     /**
      * Replaces ProgrammerError data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyProgrammerError addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyProgrammerError getAddressBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
