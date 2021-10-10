@@ -53,12 +53,13 @@ public class TuitionClass {
      * @param studentList
      * @param id
      */
-    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList, int id) {
+    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList, Remark remark, int id) {
         this.name = name;
         this.limit = limit;
         this.counter = counter;
         this.timeslot = timeslot;
         this.studentList = studentList;
+        this.remark = remark;
         this.id = id;
         MOST_RECENT = this;
     }
