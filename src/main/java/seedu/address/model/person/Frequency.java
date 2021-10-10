@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 
 /**
@@ -38,6 +39,14 @@ public enum Frequency {
             }
         }
         return false;
+    }
+
+    /**
+     * Check if the frequency is empty.
+     * @return true if the frequency is empty, otherwise false.
+     */
+    public boolean isEmpty() {
+        return Objects.equals(this.value, "");
     }
 
     /**

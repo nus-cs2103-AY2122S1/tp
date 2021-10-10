@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VISIT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VISIT_BOB;
@@ -34,15 +35,15 @@ public class VisitCommandTest {
 
     private static final String VISIT_STUB = "2021-11-11";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addVisitUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withVisit(VISIT_STUB).build();
-        Optional<Visit> visit = Optional.ofNullable(new Visit(editedPerson.getVisit().get().value));
-        Optional<Frequency> frequency = Optional.ofNullable(Frequency.EMPTY);
-        Optional<Occurrence> occurrence = Optional.ofNullable(new Occurrence(1));
+        Optional<Visit> visit = Optional.of(new Visit(editedPerson.getVisit().get().value));
+        Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(1));
 
         VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
 
@@ -55,15 +56,33 @@ public class VisitCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_addRecurringVisitUnfilteredList_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withVisit(VISIT_STUB).build();
+        Optional<Visit> visit = Optional.of(new Visit(editedPerson.getVisit().get().value));
+        Optional<Frequency> frequency = Optional.of(Frequency.WEEKLY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(2));
+
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
+
+        String expectedMessage = String.format(VisitCommand.MESSAGE_ADD_RECURRING_VISIT_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(visitCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addVisitFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withVisit(VISIT_STUB).build();
-        Optional<Visit> visit = Optional.ofNullable(new Visit(editedPerson.getVisit().get().value));
-        Optional<Frequency> frequency = Optional.ofNullable(Frequency.EMPTY);
-        Optional<Occurrence> occurrence = Optional.ofNullable(new Occurrence(1));
+        Optional<Visit> visit = Optional.of(new Visit(editedPerson.getVisit().get().value));
+        Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(1));
 
         VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
 
@@ -76,11 +95,47 @@ public class VisitCommandTest {
     }
 
     @Test
+    public void execute_addRecurringVisitFilteredList_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withVisit(VISIT_STUB).build();
+        Optional<Visit> visit = Optional.of(new Visit(editedPerson.getVisit().get().value));
+        Optional<Frequency> frequency = Optional.of(Frequency.WEEKLY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(2));
+
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
+
+        String expectedMessage = String.format(VisitCommand.MESSAGE_ADD_RECURRING_VISIT_SUCCESS, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(firstPerson, editedPerson);
+
+        assertCommandSuccess(visitCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_addInvalidRecurringVisitFilteredList_throwCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
+                .withVisit(VISIT_STUB).build();
+        Optional<Visit> visit = Optional.of(new Visit(editedPerson.getVisit().get().value));
+        Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(2));
+
+        VisitCommand visitCommand = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
+        assertCommandFailure(visitCommand, model, VisitCommand.MESSAGE_INVALID_OPTIONAL_FLAG);
+
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        Optional<Visit> visit = Optional.ofNullable(new Visit(VALID_VISIT_BOB));
-        Optional<Frequency> frequency = Optional.ofNullable(Frequency.EMPTY);
-        Optional<Occurrence> occurrence = Optional.ofNullable(new Occurrence(1));
+        Optional<Visit> visit = Optional.of(new Visit(VALID_VISIT_BOB));
+        Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(1));
         VisitCommand visitCommand = new VisitCommand(outOfBoundIndex, visit, frequency, occurrence);
 
         assertCommandFailure(visitCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -94,9 +149,9 @@ public class VisitCommandTest {
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        Optional<Visit> visit = Optional.ofNullable(new Visit(VALID_VISIT_BOB));
-        Optional<Frequency> frequency = Optional.ofNullable(Frequency.EMPTY);
-        Optional<Occurrence> occurrence = Optional.ofNullable(new Occurrence(1));
+        Optional<Visit> visit = Optional.of(new Visit(VALID_VISIT_BOB));
+        Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(1));
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
@@ -107,30 +162,30 @@ public class VisitCommandTest {
 
     @Test
     public void equals() {
-        Optional<Visit> visit = Optional.ofNullable(new Visit(VALID_VISIT_AMY));
-        Optional<Visit> differentVisit = Optional.ofNullable(new Visit(VALID_VISIT_BOB));
-        Optional<Frequency> frequency = Optional.ofNullable(Frequency.EMPTY);
-        Optional<Occurrence> occurrence = Optional.ofNullable(new Occurrence(1));
+        Optional<Visit> visit = Optional.of(new Visit(VALID_VISIT_AMY));
+        Optional<Visit> differentVisit = Optional.of(new Visit(VALID_VISIT_BOB));
+        Optional<Frequency> frequency = Optional.of(Frequency.EMPTY);
+        Optional<Occurrence> occurrence = Optional.of(new Occurrence(1));
         final VisitCommand standardCommand = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
 
         // same values -> returns true
         VisitCommand commandWithSameValues = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new VisitCommand(INDEX_SECOND_PERSON, visit, frequency, occurrence)));
+        assertNotEquals(standardCommand, new VisitCommand(INDEX_SECOND_PERSON, visit, frequency, occurrence));
 
         // different visit -> returns false
-        assertFalse(standardCommand.equals(new VisitCommand(INDEX_FIRST_PERSON, differentVisit,
-                frequency, occurrence)));
+        assertNotEquals(standardCommand, new VisitCommand(INDEX_FIRST_PERSON, differentVisit,
+                frequency, occurrence));
     }
 }

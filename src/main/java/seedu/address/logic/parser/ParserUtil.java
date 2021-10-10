@@ -32,7 +32,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
     public static final String MESSAGE_INVALID_FREQUENCY = "Frequency can only be daily, weekly, "
             + "biweekly, monthly or quarterly.";
-    public static final String MESSAGE_INVALID_OCCURRENCE = "Occurrence is a positive number";
+    public static final String MESSAGE_INVALID_OCCURRENCE = "Occurrence should be a positive number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

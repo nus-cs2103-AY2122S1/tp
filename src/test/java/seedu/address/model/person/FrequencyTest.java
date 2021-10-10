@@ -23,7 +23,7 @@ public class FrequencyTest {
         // null frequency
         assertThrows(NullPointerException.class, () -> Frequency.isValidFrequency(null));
 
-        // blank frequency
+        // invalid frequency
         assertFalse(Frequency.isValidFrequency(" ")); // spaces only
 
         // valid frequency

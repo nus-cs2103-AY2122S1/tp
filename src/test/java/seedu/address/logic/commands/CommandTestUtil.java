@@ -39,10 +39,6 @@ public class CommandTestUtil {
     public static final String VALID_LAST_VISIT_BOB = "2021-01-02";
     public static final String VALID_VISIT_AMY = "2021-11-11";
     public static final String VALID_VISIT_BOB = "2021-11-12";
-    public static final String VALID_FREQUENCY_BOB = "";
-    public static final String VALID_FREQUENCY_AMY = "";
-    public static final String VALID_OCCURRENCE_BOB = "1";
-    public static final String VALID_OCCURRENCE_AMY = "1";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -63,8 +59,6 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LANGUAGE_DESC = " " + PREFIX_LANGUAGE; // empty string not allowed for languages
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_FREQUENCY_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_OCCURRENCE_DESC = "a" + PREFIX_ADDRESS; // 'a' not allowed in occurrences
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
