@@ -17,7 +17,7 @@ public class PurgeCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new PurgeCommand(), model, PurgeCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new PurgeCommand(), model, PurgeCommand.MESSAGE_FAIL, expectedModel);
     }
 
 
