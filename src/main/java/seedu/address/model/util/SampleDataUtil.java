@@ -1,11 +1,14 @@
 package seedu.address.model.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
 import seedu.address.model.member.Member;
@@ -45,6 +48,11 @@ public class SampleDataUtil {
         for (Member sampleMember : getSampleMembers()) {
             sampleAb.addMember(sampleMember);
         }
+        Set<Member> set = new HashSet<>();
+        set.add(new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                        new Address("Blk 45 Aljunied Street 85, #11-31"),
+                        getPositionSet("colleagues")));
+        sampleAb.addEvent(new Event("GenshinTime", LocalDate.parse("2021-10-11"), set));
         return sampleAb;
     }
 

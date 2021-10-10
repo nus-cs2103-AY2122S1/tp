@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class Event {
     /**
      * Data field is a hashmap of members and booleans that represent their attendance.
      */
-    private final HashMap<Member, Boolean> participants = new HashMap<>();
+    private final Map<Member, Boolean> participants;
 
     /**
      * Creates a {@code Event} with the given {@code String} for name, {@code LocalDate} and {@code Set<Member>}
@@ -36,10 +37,24 @@ public class Event {
         requireAllNonNull(name, date);
         this.name = name;
         this.date = date;
+        this.participants = new HashMap<>();
         for (Member m : participants) {
             this.participants.put(m, false);
         }
     }
+
+    /**
+     * Creates a {@code Event} with the given {@code String} for name, {@code LocalDate} and
+     * {@code Map<Member, Boolean>} for participants.
+     * Every field must be present and not null.
+     */
+    public Event(String name, LocalDate date, Map<Member, Boolean> participants) {
+        requireAllNonNull(name, date);
+        this.name = name;
+        this.date = date;
+        this.participants = participants;
+    }
+
 
     public String getName() {
         return name;
@@ -47,6 +62,10 @@ public class Event {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public Map<Member, Boolean> getMap() {
+        return participants;
     }
 
     /**
@@ -116,7 +135,7 @@ public class Event {
      * Checks if two events are similar types.
      *
      * @param otherEvent is the event to be compared with
-     * @return true if both Events have the same name
+     * @return true if both Events have the same name and date
      */
     public boolean isSameTypeOfEvent(Event otherEvent) {
         if (otherEvent == this) {
@@ -124,7 +143,7 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getName().equals(getName());
+                && otherEvent.getName().equals(getName()) && otherEvent.getDate().equals(getDate());
     }
 
     /**
