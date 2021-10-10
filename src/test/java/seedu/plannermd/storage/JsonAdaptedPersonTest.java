@@ -116,7 +116,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidBirthDate1_throwsIllegalValueException() {
+    public void toModelType_invalidBirthDate_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_BIRTH_DATE_1, VALID_REMARK, VALID_TAGS);
         String expectedMessage = BirthDate.MESSAGE_CONSTRAINTS;

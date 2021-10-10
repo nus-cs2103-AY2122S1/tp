@@ -34,7 +34,7 @@ class JsonAdaptedDoctor extends JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted patient object into the model's
+     * Converts this Jackson-friendly adapted doctor object into the model's
      * {@code Doctor} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in
