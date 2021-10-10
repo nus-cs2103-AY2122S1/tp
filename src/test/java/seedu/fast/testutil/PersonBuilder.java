@@ -24,6 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
     public static final String DEFAULT_APPOINTMENT = "10 Oct 2021";
+    public static final String DEFAULT_APPOINTMENT_TIME = "20:00";
 
     private Name name;
     private Phone phone;
@@ -43,7 +44,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
-        appointment = new Appointment(DEFAULT_APPOINTMENT);
+        appointment = new Appointment(DEFAULT_APPOINTMENT, DEFAULT_APPOINTMENT_TIME);
     }
 
     /**
@@ -110,8 +111,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAppointment(String remark) {
-        this.appointment = new Appointment(remark);
+    public PersonBuilder withAppointment(String date, String time) {
+        this.appointment = new Appointment(date, time);
         return this;
     }
 
