@@ -23,7 +23,7 @@ public class AddClassCommand extends Command {
             + PREFIX_SCHEDULE + "Tuesday 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm"
             + PREFIX_TAG + "Best class woohoo!";
 
-    public static final String MESSAGE_SUCCESS = "New class added: %1$c";
+    public static final String MESSAGE_SUCCESS = "New class added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLASS = "This class already exists in Classmate";
 
     private final TutorialClass toAdd;

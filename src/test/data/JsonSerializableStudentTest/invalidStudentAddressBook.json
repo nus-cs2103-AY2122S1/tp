@@ -1,0 +1,15 @@
+{
+  "students": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street"
+  } ],
+  "tutorialClasses": [
+    {
+      "classCode": "G04",
+      "schedule": "mon 16:00 to 18:00, tues 17:00 to 19:00",
+      "tagged": ["evening"]
+    }
+  ]
+}
