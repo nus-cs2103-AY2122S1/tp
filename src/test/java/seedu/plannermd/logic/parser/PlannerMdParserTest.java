@@ -43,9 +43,9 @@ public class PlannerMdParserTest {
     @Test
     public void parseCommand_addPatient() throws Exception {
         Patient patient = new PatientBuilder().build();
-        AddPatientCommand patentCommand =
+        AddPatientCommand patientCommand =
                 (AddPatientCommand) parser.parseCommand(PatientUtil.getAddCommand(patient), patientState);
-        assertEquals(new AddPatientCommand(patient), patentCommand);
+        assertEquals(new AddPatientCommand(patient), patientCommand);
     }
 
     @Test
