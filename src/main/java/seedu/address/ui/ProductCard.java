@@ -48,11 +48,11 @@ public class ProductCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(product.getName().fullName);
         if (product.getUnitPrice() != null) {
-            unitPrice.setText("Price: " + product.getUnitPrice().unitPrice);
+            unitPrice.setText("Price: $" + product.getUnitPrice().unitPrice);
         }
-        if (product.getQuantity() != null) {
-            quantity.setText("Quantity: " + product.getQuantity().quantity);
-        }
+//        if (product.getQuantity() != null) {
+//            quantity.setText("Quantity: " + product.getQuantity().quantity);
+//        }
         //        person.getTags().stream()
         //                .sorted(Comparator.comparing(tag -> tag.tagName))
         //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
