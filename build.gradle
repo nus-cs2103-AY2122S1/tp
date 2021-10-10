@@ -23,7 +23,6 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-    systemProperties System.getProperties()
 }
 
 task coverage(type: JacocoReport) {

@@ -12,20 +12,18 @@ import seedu.address.model.task.Task;
  * The API of the Model component.
  */
 public interface Model {
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
+    /** {@code Predicate} that always evaluate to true */
     Predicate<Member> PREDICATE_SHOW_ALL_MEMBERS = unused -> true;
-
-    /**
-     * Returns the user prefs.
-     */
-    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+
+    /**
+     * Returns the user prefs.
+     */
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -38,14 +36,12 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
-     */
-    Path getAddressBookFilePath();
-
-    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /** Returns the user prefs' address book file path. */
+    Path getAddressBookFilePath();
 
     /**
      * Returns the AddressBook
@@ -81,14 +77,11 @@ public interface Model {
      */
     void setMember(Member target, Member editedMember);
 
-    /**
-     * Returns an unmodifiable view of the filtered member list
-     */
+    /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();
 
     /**
      * Updates the filter of the filtered member list to filter by the given {@code predicate}.
-     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMemberList(Predicate<Member> predicate);
