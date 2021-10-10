@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.util;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddCommand;
@@ -18,13 +20,13 @@ import seedu.address.logic.commands.ListCommand;
  */
 public class CommandSummary {
     /** Description of what the command does. */
-    private String action;
+    private StringProperty action;
 
     /** Format of a valid command. */
-    private String format;
+    private StringProperty format;
 
     /** Example of a valid command. */
-    private String example;
+    private StringProperty example;
 
     /**
      * Constructs a CommandSummary object.
@@ -34,9 +36,9 @@ public class CommandSummary {
      * @param example Example of a valid command.
      */
     public CommandSummary(String action, String format, String example) {
-        this.action = action;
-        this.format = format;
-        this.example = example;
+        this.action = new SimpleStringProperty(action);
+        this.format = new SimpleStringProperty(format);
+        this.example = new SimpleStringProperty(example);
     }
 
     /**
@@ -45,7 +47,7 @@ public class CommandSummary {
      * @return Description of what the command does.
      */
     public String getAction() {
-        return action;
+        return action.get();
     }
 
     /**
@@ -54,7 +56,7 @@ public class CommandSummary {
      * @return Format of a valid command.
      */
     public String getFormat() {
-        return format;
+        return format.get();
     }
 
     /**
@@ -63,6 +65,39 @@ public class CommandSummary {
      * @return Example of a valid command.
      */
     public String getExample() {
+        return example.get();
+    }
+
+    /**
+     * Returns the StringProperty for action.
+     * Note: Naming convention needs to start with the name of the property as described in
+     * https://docs.oracle.com/javafx/2/binding/jfxpub-binding.htm
+     *
+     * @return StringProperty for action.
+     */
+    public StringProperty actionProperty() {
+        return action;
+    }
+
+    /**
+     * Returns the StringProperty for format.
+     * Note: Naming convention needs to start with the name of the property as described in
+     * https://docs.oracle.com/javafx/2/binding/jfxpub-binding.htm
+     *
+     * @return StringProperty for format.
+     */
+    public StringProperty formatProperty() {
+        return format;
+    }
+
+    /**
+     * Returns the StringProperty for example.
+     * Note: Naming convention needs to start with the name of the property as described in
+     * https://docs.oracle.com/javafx/2/binding/jfxpub-binding.htm
+     *
+     * @return StringProperty for example.
+     */
+    public StringProperty exampleProperty() {
         return example;
     }
 

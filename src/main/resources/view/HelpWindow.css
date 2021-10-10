@@ -31,14 +31,16 @@
     -fx-text-fill: #424874;
     -fx-label-padding: 5;
     -fx-wrap-text: true;
-    -fx-spacing: 5;
 }
 
 .table-view .table-cell:hover {
     -fx-cursor: hand;
 }
 
-/* Style adapted from: https://edencoding.com/style-tableview-javafx/ */
+.table-view .table-cell:selected {
+    -fx-background-color: #A6B1E185;
+}
+
 .table-row-cell:odd{
     -fx-background-color: #D3DAFB50;
 }
@@ -47,6 +49,7 @@
     -fx-background-color: #A6B1E150;
 }
 
+/* Style adapted from: https://edencoding.com/style-tableview-javafx/ */
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track,
 .table-view .virtual-flow .scroll-bar:vertical .track-background,
