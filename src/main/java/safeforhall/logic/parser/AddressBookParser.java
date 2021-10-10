@@ -14,7 +14,7 @@ import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
-import safeforhall.logic.commands.ListCommand;
+import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
@@ -59,8 +59,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
