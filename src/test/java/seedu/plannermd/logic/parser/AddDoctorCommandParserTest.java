@@ -30,8 +30,8 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.plannermd.testutil.patient.TypicalPatients.AMY;
-import static seedu.plannermd.testutil.patient.TypicalPatients.BOB;
+import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_AMY;
+import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,7 +51,7 @@ public class AddDoctorCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Doctor expectedDoctor = new DoctorBuilder(BOB).withTags(VALID_TAG_FRIEND).withRemark("")
+        Doctor expectedDoctor = new DoctorBuilder(DR_BOB).withTags(VALID_TAG_FRIEND).withRemark("")
                 .build();
         // whitespace only preamble
         assertParseSuccess(
@@ -89,7 +89,7 @@ public class AddDoctorCommandParserTest {
                 new AddDoctorCommand(expectedDoctor));
 
         // multiple tags - all accepted
-        Doctor expectedDoctorMultipleTags = new DoctorBuilder(BOB)
+        Doctor expectedDoctorMultipleTags = new DoctorBuilder(DR_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).withRemark("")
                 .build();
         assertParseSuccess(parser,
@@ -101,13 +101,13 @@ public class AddDoctorCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Doctor expectedDoctor = new DoctorBuilder(AMY).withTags().withRemark("").build();
+        Doctor expectedDoctor = new DoctorBuilder(DR_AMY).withTags().withRemark("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + BIRTH_DATE_DESC_AMY,
                 new AddDoctorCommand(expectedDoctor));
 
         // no risk
-        expectedDoctor = new DoctorBuilder(AMY).withRemark("").build();
+        expectedDoctor = new DoctorBuilder(DR_AMY).withRemark("").build();
         assertParseSuccess(parser,
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + BIRTH_DATE_DESC_AMY
                         + TAG_DESC_FRIEND,

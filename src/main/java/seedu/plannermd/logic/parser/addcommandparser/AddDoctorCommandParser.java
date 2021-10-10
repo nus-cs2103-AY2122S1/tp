@@ -28,7 +28,7 @@ import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddPatientCommand object
+ * Parses input arguments and creates a new AddDoctorCommand object
  */
 public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
 
