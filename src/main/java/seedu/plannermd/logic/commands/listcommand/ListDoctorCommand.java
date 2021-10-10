@@ -1,12 +1,12 @@
 package seedu.plannermd.logic.commands.listcommand;
 
-import seedu.plannermd.logic.commands.CommandResult;
-import seedu.plannermd.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-public class ListDoctorCommand extends ListCommand{
+import seedu.plannermd.logic.commands.CommandResult;
+import seedu.plannermd.model.Model;
+
+public class ListDoctorCommand extends ListCommand {
     public static final String MESSAGE_SUCCESS = "Listed all doctors";
 
     @Override
