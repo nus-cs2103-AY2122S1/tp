@@ -276,7 +276,8 @@ public class ModelManager implements Model {
      * @param p The position to be initialised.
      */
     public void initialiseRejectionRate(Position p) {
-        int total = 0, count = 0;
+        int total = 0;
+        int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
             Position currentPosition = a.getApplication().getPosition();
             if (currentPosition == p) {
