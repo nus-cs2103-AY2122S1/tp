@@ -48,6 +48,18 @@ public class Insurance {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof Insurance)) {
+            return false;
+        } else {
+            Insurance insuranceObj = (Insurance)obj;
+            return this.type.equals(insuranceObj.type);
+        }
+    }
+
+    @Override
     public String toString() {
         return type.getTypeName() + INSURANCE_SUFFIX;
     }
