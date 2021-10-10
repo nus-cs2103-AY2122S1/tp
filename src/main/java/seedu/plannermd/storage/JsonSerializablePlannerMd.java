@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.plannermd.commons.exceptions.IllegalValueException;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
+import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 
 /**
@@ -20,16 +21,23 @@ import seedu.plannermd.model.patient.Patient;
 class JsonSerializablePlannerMd {
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
+<<<<<<< HEAD
     public static final String MESSAGE_DUPLICATE_DOCTOR = "Placeholdertext";
+=======
+    public static final String MESSAGE_DUPLICATE_DOCTOR = "Doctors list contains duplicate doctor(s).";
+>>>>>>> 34a773be707bafa55d3ceae0e22e234df42ee8bc
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
+    private final List<JsonAdaptedDoctor> doctors = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializablePlannerMd} with the given persons.
      */
     @JsonCreator
-    public JsonSerializablePlannerMd(@JsonProperty("patients") List<JsonAdaptedPatient> patients) {
+    public JsonSerializablePlannerMd(@JsonProperty("patients") List<JsonAdaptedPatient> patients,
+                                     @JsonProperty("doctors") List<JsonAdaptedDoctor> doctors) {
         this.patients.addAll(patients);
+        this.doctors.addAll(doctors);
     }
 
     /**
@@ -39,6 +47,7 @@ class JsonSerializablePlannerMd {
      */
     public JsonSerializablePlannerMd(ReadOnlyPlannerMd source) {
         patients.addAll(source.getPatientList().stream().map(JsonAdaptedPatient::new).collect(Collectors.toList()));
+        doctors.addAll(source.getDoctorList().stream().map(JsonAdaptedDoctor::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +63,13 @@ class JsonSerializablePlannerMd {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PATIENT);
             }
             plannerMd.addPatient(patient);
+        }
+        for (JsonAdaptedDoctor jsonAdaptedDoctor : doctors) {
+            Doctor doctor = jsonAdaptedDoctor.toModelType();
+            if (plannerMd.hasDoctor(doctor)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_DOCTOR);
+            }
+            plannerMd.addDoctor(doctor);
         }
         return plannerMd;
     }
