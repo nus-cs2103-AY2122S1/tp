@@ -23,7 +23,6 @@ import seedu.plannermd.model.ReadOnlyPlannerMd;
 import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
-import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.doctor.DoctorBuilder;
 
 public class AddDoctorCommandTest {
