@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -125,6 +125,11 @@ public class ModelManager implements Model {
         addressBook.resetMemberList();
     }
 
+    @Override
+    public void resetFacilityList() {
+        addressBook.resetFacilityList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -173,11 +178,6 @@ public class ModelManager implements Model {
     public void updateFilteredFacilityList(Predicate<Facility> predicate) {
         requireNonNull(predicate);
         filteredFacilities.setPredicate(predicate);
-    }
-
-    @Override
-    public void resetFacilityList() {
-        addressBook.resetFacilityList();
     }
 
 }

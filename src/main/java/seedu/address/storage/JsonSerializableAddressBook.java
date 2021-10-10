@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,14 +23,19 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_MEMBER = "Persons list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedFacility> facilities = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and facilities.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("facilities") List<JsonAdaptedFacility> facilities) {
         this.persons.addAll(persons);
+        this.facilities.addAll(facilities);
     }
+
+
 
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
@@ -38,6 +44,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        facilities.addAll(source.getFacilityList().stream().map(JsonAdaptedFacility::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +60,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
             }
             addressBook.addPerson(person);
+        }
+
+        for (JsonAdaptedFacility jsonAdaptedFacility : facilities) {
+            Facility facility = jsonAdaptedFacility.toModelType();
+            if (addressBook.hasFacility(facility)) {
+                throw new IllegalValueException("DUPLICATE MEMBER MESSAGE TODO");
+            }
+            addressBook.addFacility(facility);
         }
         return addressBook;
     }

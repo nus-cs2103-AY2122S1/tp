@@ -63,6 +63,11 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+
+        for (Facility sampleFacility : getSampleFacilities()) {
+            sampleAb.addFacility(sampleFacility);
+        }
+
         return sampleAb;
     }
 

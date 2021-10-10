@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.UniqueFacilityList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import javafx.collections.ObservableList;
 
 /**
  * Wraps all data at the address-book level
@@ -53,16 +53,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the facility list with {@code facilities}.
+     * {@code facilities} must not contain duplicate persons.
      */
     public void setFacilities(List<Facility> facilities) {
         this.facilities.setFacilities(facilities);
-    }
-
-    /**
-     * Clears the contents of the facility list.
-     */
-    public void resetFacilityList() {
-        this.facilities.resetFacilities();
     }
 
     /**
@@ -73,12 +67,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Clears the contents of the facility list.
+     */
+    public void resetFacilityList() {
+        this.facilities.resetFacilities();
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setFacilities(newData.getFacilityList());
         setPersons(newData.getPersonList());
+        setFacilities(newData.getFacilityList());
     }
 
     //// person-level operations
@@ -89,6 +91,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a facility with the same details as {@code facility} exists in the address book.
+     */
+    public boolean hasFacility(Facility facility) {
+        requireNonNull(facility);
+        return facilities.contains(facility);
     }
 
     /**
