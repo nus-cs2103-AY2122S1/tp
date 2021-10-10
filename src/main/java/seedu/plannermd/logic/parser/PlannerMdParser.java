@@ -102,7 +102,6 @@ public class PlannerMdParser {
 
     private Command parseDoctorCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
-            
         case DeleteCommand.COMMAND_WORD:
             return new DeleteDoctorCommandParser().parse(arguments);
 
