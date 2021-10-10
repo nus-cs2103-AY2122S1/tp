@@ -2,10 +2,7 @@ package seedu.address.model.moduleclass;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
-import java.util.Locale;
 import java.util.Objects;
 
 import seedu.address.model.person.ModuleCode;
@@ -19,15 +16,15 @@ public class ModuleClass {
 
     // Identity fields
     private final ModuleCode moduleCode;
-    private final DayOfWeek day;
-    private final LocalDateTime dateTime;
+    private final Day day;
+    private final DateTime dateTime;
     private final Remark remark;
 
 
     /**
      * Every field must be present and not null.
      */
-    public ModuleClass(ModuleCode moduleCode, DayOfWeek day, LocalDateTime dateTime, Remark remark) {
+    public ModuleClass(ModuleCode moduleCode, Day day, DateTime dateTime, Remark remark) {
         requireAllNonNull(moduleCode, day, dateTime, remark);
         this.moduleCode = moduleCode;
         this.day = day;
@@ -39,11 +36,11 @@ public class ModuleClass {
         return moduleCode;
     }
 
-    public DayOfWeek getDay() {
+    public Day getDay() {
         return day;
     }
 
-    public LocalDateTime getDateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 
@@ -97,7 +94,9 @@ public class ModuleClass {
                 .append("; Module: ")
                 .append(getModuleCode())
                 .append("; Day: ")
-                .append(day.getDisplayName(TextStyle.FULL, Locale.US));
+                .append(getDay().toString())
+                .append("; Time: ")
+                .append(getDateTime().toString());
 
         if (!remark.toString().trim().isEmpty()) {
             builder.append("; Remark: ");
