@@ -8,8 +8,10 @@ import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
+import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 import seedu.academydirectory.model.util.SampleDataUtil;
@@ -24,7 +26,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEGRAM = "@amy";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final int DEFAULT_NUMBER_OF_STUDIO_SESSIONS = 10;
+    public static final int DEFAULT_NUMBER_OF_STUDIO_SESSIONS = 12;
 
     private Name name;
     private Phone phone;
@@ -32,7 +34,7 @@ public class StudentBuilder {
     private Telegram telegram;
     private Address address;
     private Set<Tag> tags;
-    private Attendance attendance;
+    private StudioRecord studioRecord;
     private Assessment assessment;
 
     /**
@@ -45,7 +47,7 @@ public class StudentBuilder {
         telegram = new Telegram(DEFAULT_TELEGRAM);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        attendance = new Attendance(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
+        studioRecord = new StudioRecord(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
         assessment = new Assessment();
     }
 
@@ -59,7 +61,7 @@ public class StudentBuilder {
         telegram = studentToCopy.getTelegram();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
-        attendance = studentToCopy.getAttendance();
+        studioRecord = studentToCopy.getStudioRecord();
         assessment = studentToCopy.getAssessment();
     }
 
@@ -99,9 +101,21 @@ public class StudentBuilder {
      * Sets the {@code Attendance} of the {@code Student} that we are building.
      */
     public StudentBuilder withAttendance(boolean[] boolArr) {
-        Attendance newAttendance = new Attendance(this.attendance.getSessionCount());
+        Integer sessionCount = studioRecord.getAttendance().getSessionCount();
+        Attendance newAttendance = new Attendance(sessionCount);
         newAttendance.setAttendance(boolArr);
-        this.attendance = newAttendance;
+        this.studioRecord = new StudioRecord(newAttendance, studioRecord.getParticipation());
+        return this;
+    }
+
+    /**
+     * Sets the {@code Participation} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withParticipation(int[] intArr) {
+        Integer sessionCount = studioRecord.getAttendance().getSessionCount();
+        Participation newParticipation = new Participation(sessionCount);
+        newParticipation.setParticipation(intArr);
+        this.studioRecord = new StudioRecord(studioRecord.getAttendance(), newParticipation);
         return this;
     }
 
@@ -133,8 +147,9 @@ public class StudentBuilder {
      * Builds the Student object for testing.
      */
     public Student build() {
+
         Student newStudent = new Student(name, phone, email, telegram, address, tags);
-        newStudent.setAttendance(this.attendance);
+        newStudent.setAttendance(studioRecord.getAttendance());
         return newStudent;
     }
 

@@ -6,6 +6,7 @@
     "telegram": "@alice",
     "address": "123, Jurong West Ave 6, #08-111",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -13,6 +14,7 @@
     "email": "pauline@example.com",
     "telegram": "@pauline",
     "address": "4th street",
-    "attendance" : [ false, false, false, false, false, false, false, false, false, false ]
+    "attendance" : [ false, false, false, false, false, false, false, false, false, false ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   } ]
 }

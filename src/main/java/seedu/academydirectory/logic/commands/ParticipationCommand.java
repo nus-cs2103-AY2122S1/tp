@@ -10,39 +10,39 @@ import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
-import seedu.academydirectory.model.student.Attendance;
+import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Student;
-import seedu.academydirectory.model.student.StudioRecord;
 
-public class AttendanceCommand extends Command {
+public class ParticipationCommand extends Command {
 
-    public static final String COMMAND_WORD = "attendance";
+    public static final String COMMAND_WORD = "part";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the attendance status of the student(s) identified "
+            + ": Edits the participation count of the student(s) identified "
             + "by the index number used in the last person listing as well "
-            + "as the index of the Studio session. Existing attendance will "
-            + "be overwritten by the input.\n"
+            + "as the index of the Studio session. Existing participation will "
+            + "be overwritten by the input or incremented/decremented depending on the flag.\n"
             + "Parameters: INDEX(ES) (must be a positive integer(s))"
             + "ses/ STUDIO_SESSION_INDEX (must be a positive integer within range)"
-            + "att/ ATTENDANCE_STATUS (0 or 1)\n"
-            + "Example: " + COMMAND_WORD + " 1 ses/ 7 att/ 1";
+            + "add/ PARTICIPATION_TO_ADD"
+            + "Example: " + COMMAND_WORD + " 1 ses/ 7 add/ 1";
 
-    public static final String MESSAGE_UPDATE_ATTENDANCE_SUCCESS = "Attendance updated!";
+    public static final String MESSAGE_UPDATE_PARTICIPATION_SUCCESS = "Participation updated!";
 
     private final ArrayList<Index> indexArrayList;
-    private final boolean attendanceStatus;
     private final Integer studioSession;
+    private final Integer participationUpdate;
 
     /**
-     * @param attendanceStatus true if attended, false otherwise
+     * @param participationUpdate The new updated participation count
      * @param studioSession The studio session number
-     * @param indexArrayList The ArrayList of students that are involved in the AttendanceCommand
+     * @param indexArrayList The ArrayList of students that are involved in the ParticipationCommand
      */
-    public AttendanceCommand(boolean attendanceStatus, Integer studioSession, ArrayList<Index> indexArrayList) {
-        requireAllNonNull(indexArrayList, attendanceStatus, studioSession);
+    public ParticipationCommand(Integer participationUpdate, Integer studioSession,
+                                ArrayList<Index> indexArrayList) {
+        requireAllNonNull(indexArrayList, participationUpdate, studioSession);
         this.indexArrayList = indexArrayList;
-        this.attendanceStatus = attendanceStatus;
+        this.participationUpdate = participationUpdate;
         this.studioSession = studioSession;
     }
 
@@ -56,18 +56,25 @@ public class AttendanceCommand extends Command {
             }
         }
 
+        if (participationUpdate > 0) {
+            AttendanceCommand attendanceCommand = new AttendanceCommand(true, studioSession, indexArrayList);
+            attendanceCommand.execute(model);
+        }
+
         for (Index index : indexArrayList) {
             Student studentToEdit = lastShownList.get(index.getZeroBased());
-            Attendance attendanceToEdit = studentToEdit.getAttendance();
-            attendanceToEdit = attendanceToEdit.update(studioSession, attendanceStatus);
-            StudioRecord newStudioRecord = new StudioRecord(attendanceToEdit, studentToEdit.getParticipation());
-            Student editedPerson = new Student(studentToEdit.getName(), studentToEdit.getPhone(),
-                    studentToEdit.getEmail(), studentToEdit.getTelegram(), studentToEdit.getAddress(), newStudioRecord,
+            Participation participationToEdit = studentToEdit.getParticipation();
+            participationToEdit = participationToEdit.add(studioSession, participationUpdate);
+
+            Student editedPerson = new Student(
+                    studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
+                    studentToEdit.getTelegram(), studentToEdit.getAddress(), studentToEdit.getStudioRecord(),
                     studentToEdit.getAssessment(), studentToEdit.getTags());
+            editedPerson.setParticipation(participationToEdit);
             model.setStudent(studentToEdit, editedPerson);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
+        return new CommandResult(MESSAGE_UPDATE_PARTICIPATION_SUCCESS);
 
     }
 
@@ -76,14 +83,12 @@ public class AttendanceCommand extends Command {
         if (other == this) {
             return true;
         }
-
-        if (!(other instanceof AttendanceCommand)) {
+        if (!(other instanceof ParticipationCommand)) {
             return false;
         }
-
-        AttendanceCommand e = (AttendanceCommand) other;
+        ParticipationCommand e = (ParticipationCommand) other;
         return indexArrayList.equals(e.indexArrayList)
-                && attendanceStatus == e.attendanceStatus
+                && participationUpdate == e.participationUpdate
                 && studioSession.equals(e.studioSession);
     }
 

@@ -33,7 +33,7 @@ public class AttendanceCommandTest {
     private static final Index INDEX_STUB = INDEX_FIRST_STUDENT;
     private static final ArrayList<Index> INDEX_ARRAYLIST_STUB = new ArrayList<>();
     private static final ArrayList<Index> INDEX_ARRAYLIST_STUB_2 = new ArrayList<>();
-    private static final boolean[] BOOLEAN_ARRAY_STUB = new boolean[10];
+    private static final boolean[] BOOLEAN_ARRAY_STUB = new boolean[12];
 
     private Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
 

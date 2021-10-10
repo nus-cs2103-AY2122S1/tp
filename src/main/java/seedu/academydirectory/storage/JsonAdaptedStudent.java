@@ -16,8 +16,10 @@ import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
+import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
@@ -34,6 +36,7 @@ class JsonAdaptedStudent {
     private final String telegram;
     private final String address;
     private final boolean[] attendance;
+    private final int[] participation;
     private final HashMap<String, Integer> assessment;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -42,6 +45,7 @@ class JsonAdaptedStudent {
                               @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
                               @JsonProperty("address") String address,
                               @JsonProperty("attendance") boolean[] attendance,
+                              @JsonProperty("participation") int[] participation,
                               @JsonProperty("assessment") HashMap<String, Integer> assessment,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
@@ -50,6 +54,7 @@ class JsonAdaptedStudent {
         this.telegram = telegram;
         this.address = address;
         this.attendance = attendance;
+        this.participation = participation;
         this.assessment = assessment;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -64,7 +69,8 @@ class JsonAdaptedStudent {
         email = source.getEmail().value;
         telegram = source.getTelegram().value;
         address = source.getAddress().value;
-        attendance = source.getAttendance().getAttendanceInBoolean();
+        attendance = source.getAttendance().getAttendanceArray();
+        participation = source.getParticipation().getParticipationArray();
         assessment = source.getAssessment().getAssessment();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -125,12 +131,19 @@ class JsonAdaptedStudent {
 
         Attendance tempAttendance = new Attendance(attendance.length);
         tempAttendance.setAttendance(attendance);
-        final Attendance modelAttendance = tempAttendance;
+
+        Participation tempParticipation = new Participation(participation.length); // should be same length as attend
+        tempParticipation.setParticipation(participation);
+
+        StudioRecord tempStudioRecord = new StudioRecord(tempAttendance, tempParticipation);
+
+        final StudioRecord modelStudioRecord = tempStudioRecord;
 
         final Assessment modelAssessment = new Assessment();
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelTelegram, modelAddress, modelAttendance,
+
+        return new Student(modelName, modelPhone, modelEmail, modelTelegram, modelAddress, modelStudioRecord,
                 modelAssessment, modelTags);
     }
 

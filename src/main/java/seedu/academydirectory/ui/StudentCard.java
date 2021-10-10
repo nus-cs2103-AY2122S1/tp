@@ -41,7 +41,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label telegram;
     @FXML
-    private Label attendance;
+    private Label studioRecord;
     @FXML
     private Label assessment;
     @FXML
@@ -58,8 +58,8 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
+        studioRecord.setText(student.getStudioRecord().toString());
         telegram.setText(student.getTelegram().value);
-        attendance.setText(student.getAttendance().toString());
         assessment.setText(student.getAssessment().toString());
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

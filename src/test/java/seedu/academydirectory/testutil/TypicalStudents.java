@@ -68,11 +68,11 @@ public class TypicalStudents {
      * Returns an {@code AcademyDirectory} with all the typical students.
      */
     public static AcademyDirectory getTypicalAcademyDirectory() {
-        AcademyDirectory ab = new AcademyDirectory();
+        AcademyDirectory ad = new AcademyDirectory();
         for (Student student : getTypicalStudents()) {
-            ab.addStudent(student);
+            ad.addStudent(student);
         }
-        return ab;
+        return ad;
     }
 
     public static List<Student> getTypicalStudents() {

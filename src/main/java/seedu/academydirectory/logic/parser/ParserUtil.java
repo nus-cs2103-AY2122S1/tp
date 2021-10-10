@@ -15,7 +15,9 @@ import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
+import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
+import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
@@ -25,8 +27,9 @@ import seedu.academydirectory.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     public static final String MESSAGE_INVALID_ATTENDANCE_STATUS = "Attendance status is not 0 or 1.";
+    public static final String MESSAGE_INVALID_PARTICIPATION_STATUS =
+            "Change in Participation must be between -100 and 100.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -42,16 +45,32 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneOrZero} into an {@code boolean} and returns it.
+     * Parses {@code attendance} into an {@code boolean} and returns it.
      * @throws ParseException if the specified input is invalid (not one or zero).
      */
     public static boolean parseAttendance(String attendance) throws ParseException {
         requireNonNull(attendance);
-        String trimmedIndex = attendance.trim();
-        if (Attendance.isValidAttendance(trimmedIndex)) {
-            return trimmedIndex.equals("1");
+        String trimmedAttendance = attendance.trim();
+        if (Attendance.isValidAttendance(trimmedAttendance)) {
+            return trimmedAttendance.equals("1");
         } else {
             throw new ParseException(MESSAGE_INVALID_ATTENDANCE_STATUS);
+        }
+    }
+
+    /**
+     * Parses a {@code String participation} into a {@code Integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Integer} is invalid.
+     */
+    public static Integer parseParticipation(String participation) throws ParseException {
+        requireNonNull(participation);
+        String trimmedParticipation = participation.trim();
+        if (Participation.isValidParticipation(trimmedParticipation)) {
+            return Integer.parseInt(trimmedParticipation);
+        } else {
+            throw new ParseException(MESSAGE_INVALID_PARTICIPATION_STATUS);
         }
     }
 
@@ -186,4 +205,20 @@ public class ParserUtil {
         }
         return Integer.parseInt(trimmedGrade);
     }
+
+    /**
+     * Parses a {@code String studioRecord} into a {@code Integer}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studioRecord} is invalid.
+     */
+    public static Integer parseStudioRecord(String studioRecord) throws ParseException {
+        requireNonNull(studioRecord);
+        String trimmedStudioRecord = studioRecord.trim();
+        if (!StudioRecord.isValidStudioRecord(trimmedStudioRecord)) {
+            throw new ParseException(StudioRecord.MESSAGE_CONSTRAINTS);
+        }
+        return Integer.parseInt(trimmedStudioRecord);
+    }
+
 }

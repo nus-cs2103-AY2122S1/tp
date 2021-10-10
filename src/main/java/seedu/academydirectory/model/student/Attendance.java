@@ -2,9 +2,11 @@ package seedu.academydirectory.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+
 public class Attendance implements Information {
 
-    private boolean[] attendanceInBoolean;
+    private boolean[] attendanceArray;
 
     /**
      * The constructor for an Attendance object.
@@ -13,7 +15,7 @@ public class Attendance implements Information {
      */
     public Attendance(Integer numberOfSessions) {
         requireNonNull(numberOfSessions);
-        attendanceInBoolean = new boolean[numberOfSessions];
+        attendanceArray = new boolean[numberOfSessions];
     }
 
     /**
@@ -22,7 +24,7 @@ public class Attendance implements Information {
      * @param attendanceStatus true if attended, false otherwise
      */
     public Attendance update(Integer index, boolean attendanceStatus) {
-        attendanceInBoolean[index - 1] = attendanceStatus;
+        attendanceArray[index - 1] = attendanceStatus;
         return this;
     }
 
@@ -31,21 +33,21 @@ public class Attendance implements Information {
      * @param boolArr The new boolean array
      */
     public void setAttendance(boolean[] boolArr) {
-        this.attendanceInBoolean = boolArr;
+        this.attendanceArray = boolArr;
     }
 
     /**
      * Gets the number of sessions in total
      */
     public Integer getSessionCount() {
-        return attendanceInBoolean.length;
+        return attendanceArray.length;
     }
 
     /**
      * Gets the boolean array representation of the Attendance object
      */
-    public boolean[] getAttendanceInBoolean() {
-        return this.attendanceInBoolean;
+    public boolean[] getAttendanceArray() {
+        return this.attendanceArray;
     }
 
     /**
@@ -53,11 +55,17 @@ public class Attendance implements Information {
      * @param attendanceStatus Boolean of attendance
      * @param session The session index
      */
-    public String attendanceStatusToString(boolean attendanceStatus, int session) {
+    private String attendanceStatusToString(boolean attendanceStatus, int session) {
         if (attendanceStatus) {
-            return "[" + (session + 1) + "]"; // session index displayed if attended
+            String sessionToPrint = "";
+            if (session + 1 < 10) {
+                sessionToPrint = "  " + (session + 1) + "  ";
+            } else {
+                sessionToPrint += "  " + (session + 1) + " ";
+            }
+            return "[" + sessionToPrint + "]"; // session index displayed if attended
         } else {
-            return "[ ]"; // session index omitted if unattended
+            return "[       ]"; // session index omitted if unattended
         }
     }
 
@@ -68,8 +76,8 @@ public class Attendance implements Information {
     @Override
     public String toString() {
         String str = "";
-        for (int i = 0; i < attendanceInBoolean.length; i++) {
-            boolean attendanceStatus = attendanceInBoolean[i];
+        for (int i = 0; i < attendanceArray.length; i++) {
+            boolean attendanceStatus = attendanceArray[i];
             str += attendanceStatusToString(attendanceStatus, i);
         }
         return str;
@@ -84,12 +92,12 @@ public class Attendance implements Information {
             return false;
         }
         Attendance a = (Attendance) other;
-        boolean[] e = a.attendanceInBoolean;
-        if (e.length != attendanceInBoolean.length) {
+        boolean[] e = a.attendanceArray;
+        if (e.length != attendanceArray.length) {
             return false;
         }
-        for (int i = 0; i < attendanceInBoolean.length; i++) {
-            if (e[i] != attendanceInBoolean[i]) {
+        for (int i = 0; i < attendanceArray.length; i++) {
+            if (e[i] != attendanceArray[i]) {
                 return false;
             }
         }
@@ -99,6 +107,6 @@ public class Attendance implements Information {
 
     @Override
     public int hashCode() {
-        return attendanceInBoolean.hashCode();
+        return Arrays.hashCode(attendanceArray);
     }
 }
