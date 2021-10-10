@@ -3,12 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,14 +21,16 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
-
+    public static final String DEFAULT_NATIONALITY = "Singapore";
+    public static final String DEFAULT_TUTORIAL_GROUP = "01";
+  
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
     private Remark remark;
+    private Nationality nationality;
+    private TutorialGroup tutorialGroup;
     private Set<Tag> tags;
 
     /**
@@ -37,8 +40,9 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_REMARK);
+        nationality = new Nationality(DEFAULT_NATIONALITY);
+        tutorialGroup = new TutorialGroup(DEFAULT_TUTORIAL_GROUP);
         tags = new HashSet<>();
     }
 
@@ -49,8 +53,9 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
+        nationality = personToCopy.getNationality();
+        tutorialGroup = personToCopy.getTutorialGroup();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -71,10 +76,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Nationality} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withNationality(String nationality) {
+        this.nationality = new Nationality(nationality);
         return this;
     }
 
@@ -100,10 +105,16 @@ public class PersonBuilder {
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
+    /**
+     * Sets the {@code TutorialGroup} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTutorialGroup(String tutorialGroup) {
+        this.tutorialGroup = new TutorialGroup(tutorialGroup);
+        return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        return new Person(name, phone, email, remark, nationality, tutorialGroup, tags);
     }
 
 }

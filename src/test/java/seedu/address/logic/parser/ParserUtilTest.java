@@ -14,23 +14,26 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_NATIONALITY = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_TUTORIAL_GROUP = "B";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_NATIONALITY = "Vietnam";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_TUTORIAL_GROUP = "09";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -103,26 +106,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseNationality_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNationality((String) null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    public void parseNationality_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNationality(INVALID_NATIONALITY));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    public void parseNationality_validValueWithoutWhitespace_returnsNationality() throws Exception {
+        Nationality expectedNationality = new Nationality(VALID_NATIONALITY);
+        assertEquals(expectedNationality, ParserUtil.parseNationality(VALID_NATIONALITY));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    public void parseNationality_validValueWithWhitespace_returnsTrimmedNationality() throws Exception {
+        String nationalityWithWhitespace = WHITESPACE + VALID_NATIONALITY + WHITESPACE;
+        Nationality expectedNationality = new Nationality(VALID_NATIONALITY);
+        assertEquals(expectedNationality, ParserUtil.parseNationality(nationalityWithWhitespace));
     }
 
     @Test
@@ -146,6 +149,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseTutorialGroup_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorialGroup((String) null));
+    }
+
+    @Test
+    public void parseTutorialGroup_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorialGroup(INVALID_TUTORIAL_GROUP));
+    }
+
+    @Test
+    public void parseTutorialGroup_validValueWithoutWhitespace_returnsTutorialGroup() throws Exception {
+        TutorialGroup expectedTutorialGroup = new TutorialGroup(VALID_TUTORIAL_GROUP);
+        assertEquals(expectedTutorialGroup, ParserUtil.parseTutorialGroup(VALID_TUTORIAL_GROUP));
+    }
+
+    @Test
+    public void parseTutorialGroup_validValueWithWhitespace_returnsTrimmedTutorialGroup() throws Exception {
+        String tutorialGroupWithWhitespace = WHITESPACE + VALID_TUTORIAL_GROUP + WHITESPACE;
+        TutorialGroup expectedTutorialGroup = new TutorialGroup(VALID_TUTORIAL_GROUP);
+        assertEquals(expectedTutorialGroup, ParserUtil.parseTutorialGroup(tutorialGroupWithWhitespace));
     }
 
     @Test
