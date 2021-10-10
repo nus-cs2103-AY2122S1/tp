@@ -29,9 +29,9 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports data from a file. \n"
             + "Parameters: "
-            + PREFIX_FILE + " <file_path> "
-            + "[" + PREFIX_GROUP + " <number_of_group_columns>] "
-            + "[" + PREFIX_ASSESSMENT + " <number_of_assessment_columns>] "
+            + PREFIX_FILE + "<file_path> "
+            + "[" + PREFIX_GROUP + "<number_of_group_columns>] "
+            + "[" + PREFIX_ASSESSMENT + "<number_of_assessment_columns>] "
             + "[" + PREFIX_TAG + "<number_of_tag_columns>]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_FILE + "data.csv "
@@ -169,6 +169,16 @@ public class ImportCommand extends Command {
             throw new CommandException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(tagName);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof ImportCommand
+                && this.file.equals(((ImportCommand) other).file)
+                && this.groupCount == ((ImportCommand) other).groupCount
+                && this.assessmentCount == ((ImportCommand) other).assessmentCount
+                && this.tagCount == ((ImportCommand) other).tagCount);
     }
 }
 
