@@ -10,12 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +26,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String rating;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,12 +35,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("category") String category, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("rating") String rating) {
         this.category = category;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.rating = rating;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -62,6 +60,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        rating = source.getRating().value;
     }
 
     /**
@@ -116,7 +115,16 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (rating == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rating.class.getSimpleName()));
+        }
+        if (!Rating.isValidRating(rating)) {
+            throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        final Rating modelRating = new Rating(rating);
+
+        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRating);
     }
 
 }
