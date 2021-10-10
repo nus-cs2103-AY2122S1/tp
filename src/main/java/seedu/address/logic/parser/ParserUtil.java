@@ -9,11 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Nationality;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.TutorialGroup;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -109,6 +105,21 @@ public class ParserUtil {
             throw new ParseException(TutorialGroup.MESSAGE_CONSTRAINTS);
         }
         return new TutorialGroup(trimmedTutorialGroup);
+    }
+
+    /**
+     * Parses a {@code String socialHandle} into an {@code SocialHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code socialHandle} is invalid.
+     */
+    public static SocialHandle parseSocialHandle(String socialHandle) throws ParseException {
+        requireNonNull(socialHandle);
+        String trimmedSocialHandle = socialHandle.trim();
+        if (!SocialHandle.isValidSocialHandle(trimmedSocialHandle)) {
+            throw new ParseException(TutorialGroup.MESSAGE_CONSTRAINTS);
+        }
+        return new SocialHandle(trimmedSocialHandle);
     }
 
     /**

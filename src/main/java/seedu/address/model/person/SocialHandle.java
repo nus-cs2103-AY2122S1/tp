@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's social handle in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidSocial(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidSocialHandle(String)}
  */
 public class SocialHandle {
 
@@ -20,20 +20,20 @@ public class SocialHandle {
     public final String value;
 
     /**
-     * Constructs an {@code Social}.
+     * Constructs an {@code SocialHandle}.
      *
-     * @param handle A valid Telegram handle.
+     * @param socialHandle A valid Telegram handle.
      */
-    public SocialHandle(String handle) {
-        requireNonNull(handle);
-        checkArgument(isValidSocial(handle), MESSAGE_CONSTRAINTS);
-        value = handle;
+    public SocialHandle(String socialHandle) {
+        requireNonNull(socialHandle);
+        checkArgument(isValidSocialHandle(socialHandle), MESSAGE_CONSTRAINTS);
+        value = socialHandle;
     }
 
     /**
-     * Returns true if a given string is a valid Social handle.
+     * Returns true if a given string is a valid social handle.
      */
-    public static boolean isValidSocial(String test) {
+    public static boolean isValidSocialHandle(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
