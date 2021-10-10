@@ -156,24 +156,38 @@ Examples:
 |-i|Index|Contact with that index will be edited.|
 
 
-### Locating persons by name: `find`
+### Locating staff: `find`
 
-Finds staff whose names contain any of the given keywords.
+Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
 Format:
 
-`find KEYWORD [MORE_KEYWORDS]`
+`find -n KEYWORD [MORE_KEYWORDS]`
+`find -i INDEX`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+Name Search:
+* The search is case-insensitive. e.g `bob` will match `Bob`
+* The order of the keywords does not matter. e.g. `Candice Dee` will match `Dee Candice`
+* Only full words will be matched e.g. `Boba` will not match `Bob`
 * Staff matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `John Nathan` will return `John Wick`, `Nathan Tan`
+
+Index Search:
+* If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will 
+  be performed on the overall staff list.
+* The index must be within range (i.e. from 1 until the size of the Staff List, or trivially 0 
+  if the Staff List is empty)
+* Only single search is supported, and this search will return only the specific Staff at that index
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li` 
+* `find -n John` returns `john` and `John Doe`
+* `find -n alex david` returns `Alex Yeoh`, `David Li`
+* `find -i 3` returns the staff at the 3rd position on the list
+
+|Tag|Name|Description|
+|---|----|-----------|
+|-n|Name|Contacts with the name will be found.|
+|-i|Index|Contact corresponding to that index in the displayed staff list will be found.|
 
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
