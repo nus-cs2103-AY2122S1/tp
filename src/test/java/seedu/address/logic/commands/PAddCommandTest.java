@@ -44,11 +44,11 @@ public class PAddCommandTest {
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member validMember = new MemberBuilder().build();
-        PAddCommand PAddCommand = new PAddCommand(validMember);
+        PAddCommand pAddCommand = new PAddCommand(validMember);
         ModelStub modelStub = new ModelStubWithMember(validMember);
 
         assertThrows(CommandException.class, PAddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
-                PAddCommand.execute(modelStub));
+                pAddCommand.execute(modelStub));
     }
 
     @Test
