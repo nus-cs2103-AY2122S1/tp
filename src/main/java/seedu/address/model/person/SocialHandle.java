@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SocialHandle {
 
-    public static final String MESSAGE_CONSTRAINTS = "Social handle (Telegram handle) should be a single string without whitespaces, " +
-            "starts with a '@' character, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Social handle (Telegram handle) should be "
+            + "a single string without whitespaces, starts with a '@' character, "
+            + "and not be blank";
 
     /*
      * The first character of the social handle must not be a whitespace,
