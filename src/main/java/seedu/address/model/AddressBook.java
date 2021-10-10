@@ -127,6 +127,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Removes {@code key} from SportsPA.
+     * {@code key} must exist in SportsPA.
+     */
+    public void removeFacility(Facility key) {
+        facilities.remove(key);
+    }
+
     //// util methods
 
     @Override
