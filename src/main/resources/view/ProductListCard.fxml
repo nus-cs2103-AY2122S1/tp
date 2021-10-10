@@ -29,7 +29,6 @@
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="unitPrice" styleClass="cell_small_label" text="\$unitPrice" />
-      <Label fx:id="quantity" styleClass="cell_small_label" text="\$quantity" />
     </VBox>
   </GridPane>
 </HBox>

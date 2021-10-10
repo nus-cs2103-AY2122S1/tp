@@ -49,9 +49,15 @@ public class ClientCard extends UiPart<Region> {
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
-        phone.setText(client.getPhoneNumber().phoneNumber);
-        address.setText(client.getAddress().value);
-        email.setText(client.getEmail().value);
+        if (client.getPhoneNumber() != null) {
+            phone.setText("Phone: " + client.getPhoneNumber().phoneNumber);
+        }
+//        if (client.getEmail() != null) {
+//            email.setText("Email: " + client.getEmail().value);
+//        }
+//        if (client.getAddress() != null) {
+//            address.setText("Address: " + client.getAddress().value);
+//        }
 //        person.getTags().stream()
 //                .sorted(Comparator.comparing(tag -> tag.tagName))
 //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
