@@ -63,8 +63,8 @@ Sample Data will be available on starting PE.
 
 ### <a name="purge-all-data"></a>2. Purge all Data: `purge`
 
-Purges all existing data to start adding your own data. \
-Clears all entries data in PE. \
+Purges all pre-existing sample data to start adding your own data or purge the user data. \
+Clears all data in PE. \
 Example: `purge`
 
 ### <a name="view-help"></a>3. View Help: `help`
