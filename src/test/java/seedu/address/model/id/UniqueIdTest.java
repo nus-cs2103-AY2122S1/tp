@@ -1,18 +1,21 @@
 package seedu.address.model.id;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.testutil.TypicalTasks;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class UniqueIdTest {
-    List<Task> tasks = TypicalTasks.getTypicalTasks();
-    List<Person> students = TypicalPersons.getTypicalPersons();
+    private final List<Task> tasks = TypicalTasks.getTypicalTasks();
+    private final List<Person> students = TypicalPersons.getTypicalPersons();
 
     @Test
     public void generateIdTest() {
