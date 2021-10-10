@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-public class HelpPanel extends UiPart<Region>{
+public class HelpPanel extends UiPart<Region> {
     private static final String FXML = "helpPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
@@ -20,6 +20,10 @@ public class HelpPanel extends UiPart<Region>{
 
     private final String helpContent = "test";
 
+    /**
+     * Creates a new Help Panel to contain help messages.
+     *
+     */
     public HelpPanel() {
         super(FXML);
         text.setText(helpContent);

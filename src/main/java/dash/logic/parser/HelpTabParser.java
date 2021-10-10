@@ -10,17 +10,7 @@ import dash.logic.commands.HelpCommand;
 import dash.logic.commands.SwitchTabContactsCommand;
 import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
-import dash.logic.commands.personcommand.AddPersonCommand;
-import dash.logic.commands.personcommand.ClearPeopleCommand;
-import dash.logic.commands.personcommand.DeletePersonCommand;
-import dash.logic.commands.personcommand.EditPersonCommand;
-import dash.logic.commands.personcommand.FindPersonCommand;
-import dash.logic.commands.personcommand.ListPeopleCommand;
 import dash.logic.parser.exceptions.ParseException;
-import dash.logic.parser.personcommand.AddPersonCommandParser;
-import dash.logic.parser.personcommand.DeletePersonCommandParser;
-import dash.logic.parser.personcommand.EditPersonCommandParser;
-import dash.logic.parser.personcommand.FindPersonCommandParser;
 
 /**
  * Parses user input.
