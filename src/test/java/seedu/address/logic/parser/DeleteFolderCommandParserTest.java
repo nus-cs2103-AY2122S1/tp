@@ -1,16 +1,14 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.CreateFolderCommand;
+
 import seedu.address.logic.commands.DeleteFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_NAME_CCA;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class DeleteFolderCommandParserTest {
 
