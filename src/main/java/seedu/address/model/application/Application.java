@@ -51,9 +51,20 @@ public class Application {
 
     /**
      * Returns the status of the /application.
+     *
+     * @return Status of current application.
      */
     public ApplicationStatus getStatus() {
-        return status;
+        return this.status;
+    }
+
+    /**
+     * Returns the position requested in application by the applicant.
+     *
+     * @return Position requested by the applicant.
+     */
+    public Position getPosition() {
+        return this.position;
     }
 
     @Override
