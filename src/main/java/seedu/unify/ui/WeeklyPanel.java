@@ -21,6 +21,9 @@ public class WeeklyPanel extends UiPart<Region> {
     @FXML
     private HBox dailyHBox;
 
+    /**
+     * Creates a {@code WeeklyPanel} with the given {@code ObservableList}.
+     */
     public WeeklyPanel(ObservableList<Task> taskList) {
         super(FXML);
         weekLabel.setText("11/10/2021"); // get date.toString

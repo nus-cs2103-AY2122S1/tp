@@ -12,6 +12,9 @@ public class DailyPanel extends UiPart<Region> {
     @FXML
     private Label day;
 
+    /**
+     * Creates a {@code DailyPanel} with the given {@code Task} and dayString to display.
+     */
     public DailyPanel(Task task, String dayString) {
         super(FXML);
         //this.task = task;
