@@ -1,13 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,6 +30,8 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_RISKAPPETITE + "RISK APPETITE "
             + PREFIX_DISPOSABLEINCOME + "DISPOSABLE INCOME "
+            + PREFIX_CURRENTPLAN + "CURRENT PLAN "
+            + PREFIX_LASTMET + "LAST MET "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -37,6 +40,8 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_RISKAPPETITE + "3 "
             + PREFIX_DISPOSABLEINCOME + "4000 "
+            + PREFIX_CURRENTPLAN + "Prudential Proshield "
+            + PREFIX_LASTMET + "21-03-2020 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

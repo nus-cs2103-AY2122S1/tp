@@ -125,7 +125,6 @@ public class ParserUtil {
         requireNonNull(lastMet);
         String trimmedLastMet = lastMet.trim();
         return new LastMet(trimmedLastMet);
-      
     }
 
     /** Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.

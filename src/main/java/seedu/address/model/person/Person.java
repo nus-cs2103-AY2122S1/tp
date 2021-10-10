@@ -2,7 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
@@ -45,7 +48,9 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-    public ClientId getClientId() { return clientId; }
+    public ClientId getClientId() {
+        return clientId;
+    }
 
     public Name getName() {
         return name;
@@ -104,7 +109,7 @@ public class Person {
             return true;
         }
         return otherPerson != null
-                &&  otherPerson.getClientId().equals(getClientId())
+                && otherPerson.getClientId().equals(getClientId())
                     || otherPerson.getEmail().equals(getEmail());
     }
 
@@ -123,7 +128,6 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-      
         return otherPerson.getClientId().equals(getClientId())
                 && otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())

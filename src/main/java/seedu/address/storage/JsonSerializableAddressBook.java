@@ -36,6 +36,16 @@ class JsonSerializableAddressBook {
     }
 
     /**
+     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     *
+     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     */
+    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        this.clientCounter = source.getClientCounter();
+    }
+
+    /**
      * Returns the clientCounter stored in the addressbook json
      *
      * @return String clientCounter that is stored in the addressbook json
@@ -44,16 +54,6 @@ class JsonSerializableAddressBook {
 
         return this.clientCounter;
 
-    }
-
-    /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
-     *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
-     */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        this.clientCounter = source.getClientCounter();
     }
 
     /**

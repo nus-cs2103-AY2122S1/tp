@@ -1,13 +1,15 @@
 package seedu.address.storage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -42,8 +44,9 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("clientId") String clientId, @JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address, @JsonProperty("riskAppetite") String riskAppetite,
+    public JsonAdaptedPerson(@JsonProperty("clientId") String clientId, @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("riskAppetite") String riskAppetite,
             @JsonProperty("disposabeIncome") String disposableIncome, @JsonProperty("current-plan") String currentPlan,
             @JsonProperty("last-met") String lastMet, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
 
@@ -151,8 +154,8 @@ class JsonAdaptedPerson {
 
 
         if (riskAppetite == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT
-                , RiskAppetite.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                RiskAppetite.class.getSimpleName()));
         }
 
         if (!RiskAppetite.isValidRiskAppetite(riskAppetite)) {
@@ -162,7 +165,8 @@ class JsonAdaptedPerson {
         final RiskAppetite modelRiskAppetite = new RiskAppetite(riskAppetite);
 
         if (disposableIncome == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DisposableIncome.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                DisposableIncome.class.getSimpleName()));
         }
 
         if (!DisposableIncome.isValidDisposableIncome(disposableIncome)) {
@@ -171,9 +175,8 @@ class JsonAdaptedPerson {
 
         final DisposableIncome modelDisposableIncome = new DisposableIncome(disposableIncome);
 
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite, 
+        return new Person(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite,
             modelDisposableIncome, modelCurrentPlan, modelLastMet, modelTags);
     }
 

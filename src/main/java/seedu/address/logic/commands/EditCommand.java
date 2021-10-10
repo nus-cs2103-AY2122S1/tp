@@ -24,13 +24,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
+import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
-import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -116,7 +116,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,
-            updatedDisposableIncome, updatedCurrentPlan, updatedLastMet,updatedTags);
+            updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedTags);
     }
 
     @Override
@@ -176,7 +176,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, riskAppetite, disposableIncome, currentPlan, lastMet, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, riskAppetite, disposableIncome,
+                currentPlan, lastMet, tags);
 
         }
 

@@ -9,7 +9,7 @@ public class ClientId {
     public static final String MESSAGE_CONSTRAINTS = "ClientId should only contain positive integers";
     public final String value;
 
-    /*
+    /**
      * Constructs an {@code ClientId}.
      *
      * @param clientId ClientId
@@ -20,7 +20,7 @@ public class ClientId {
         this.value = clientId;
     }
 
-    /*
+    /**
      * Returns if a given string is a valid email.
      * @param test
      */
