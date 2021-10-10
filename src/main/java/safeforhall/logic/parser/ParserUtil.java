@@ -2,6 +2,7 @@ package safeforhall.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,6 +34,23 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code indexes} into their relevant {@code Index} and returns it.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    @SafeVarargs
+    public static ArrayList<Index> parseIndexes(String... indexes) throws ParseException {
+        ArrayList<Index> indexArray = new ArrayList<>();
+        for (String i : indexes) {
+            if (!StringUtil.isNonZeroUnsignedInteger(i)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            indexArray.add(Index.fromOneBased(Integer.parseInt(i)));
+        }
+        return indexArray;
     }
 
     /**

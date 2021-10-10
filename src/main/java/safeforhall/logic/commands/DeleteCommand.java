@@ -2,6 +2,7 @@ package safeforhall.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import safeforhall.commons.core.Messages;
@@ -18,36 +19,47 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the people identified by the index number used in the displayed person list.\n"
+            + "Parameters: INDEXES (positive integers, separated by a space)\n"
+            + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted People: \n%1$s";
 
-    private final Index targetIndex;
+    private final ArrayList<Index> targetIndexArray;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(ArrayList<Index> targetIndexArray) {
+        this.targetIndexArray = targetIndexArray;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> targetResidentsArray = new ArrayList<>();
+        String deletedResidents = "";
+        int count = 0;
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Index targetIndex : targetIndexArray) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            targetResidentsArray.add(personToDelete);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        for (Person personToDelete : targetResidentsArray) {
+            deletedResidents += ((count + 1) + ".\t" + personToDelete.getName() + "\n");
+            model.deletePerson(personToDelete);
+            count++;
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedResidents));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                && targetIndexArray.equals(((DeleteCommand) other).targetIndexArray)); // state check
     }
 }
