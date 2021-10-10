@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -18,14 +19,22 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-         <HBox spacing="5.0">
-            <children>
-               <Label fx:id="id" styleClass="cell_small_label" />
-            <Label fx:id="label" styleClass="cell_small_label" text="\$label" />
-            </children>
-         </HBox>
-         <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-         <CheckBox fx:id="isDone" disable="true" mnemonicParsing="false" selected="true" text="Done" />
+      <HBox alignment="CENTER_LEFT">
+          <Label fx:id="taskid" styleClass="cell_big_label">
+              <minWidth>
+                  <Region fx:constant="USE_PREF_SIZE" />
+              </minWidth>
+          </Label>
+          <Label fx:id="id" styleClass="cell_big_label" />
+          <Label fx:id="label" styleClass="cell_big_label" text="\$label" />
+      </HBox>
+      <HBox spacing="5.0" />
+      <HBox alignment="CENTER_LEFT" spacing="10.0">
+          <children>
+              <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
+              <CheckBox fx:id="isDone" disable="true" mnemonicParsing="false" selected="true"/>
+          </children>
+      </HBox>
     </VBox>
     <rowConstraints>
        <RowConstraints />
