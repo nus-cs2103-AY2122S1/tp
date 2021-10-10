@@ -4,7 +4,7 @@
     "room": "A100",
     "phone": "94351253",
     "email": "alice@example.com",
-    "vaccStatus": "True",
+    "vaccStatus": "T",
     "faculty" : "SoC",
     "lastFetDate" : "TODO",
     "lastCollectionDate" : "TODO"
@@ -13,7 +13,7 @@
     "room": "A100",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "vaccStatus": "True",
+    "vaccStatus": "T",
     "faculty" : "SoC",
     "lastFetDate" : "TODO",
     "lastCollectionDate" : "TODO"
