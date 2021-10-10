@@ -8,10 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.task.Task;
 
 public class WeeklyPanel extends UiPart<Region> {
+
     private static final String FXML = "WeeklyPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(WeeklyPanel.class);
 
@@ -28,8 +30,16 @@ public class WeeklyPanel extends UiPart<Region> {
         super(FXML);
         weekLabel.setText("11/10/2021"); // get date.toString
         StackPane dailyPane = new StackPane(); // replaced with getting pane from daily panel
-        // something like DailyPanel.get(index)
-        dailyHBox.getChildren().add(dailyPane); // loop 7 times
+
+        for (int i = 0; i < 7; i++) {
+            // these are just placeholders
+            Label placeHolderLabel = new Label();
+            VBox placeHolderVBox = new VBox();
+            placeHolderLabel.setText(indexToDay(i));
+            placeHolderVBox.getChildren().add(placeHolderLabel);
+            dailyHBox.widthProperty().addListener(e -> placeHolderVBox.setMinWidth(dailyHBox.getWidth()/7));
+            dailyHBox.getChildren().add(0, placeHolderVBox);
+        }
     }
 
     private String indexToDay(Integer index) {
