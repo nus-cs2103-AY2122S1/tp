@@ -24,7 +24,7 @@ public class TaskList implements Iterable<Task> {
     public TaskList() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates a TaskList using the Tasks in the {@code toBeCopied}
      */
     public TaskList(TaskList toBeCopied) {
         this();

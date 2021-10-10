@@ -8,11 +8,13 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.task.TaskList;
+import seedu.address.storage.tasklist.TaskListStorage;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, TaskListStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -29,4 +31,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
+    @Override
+    Path getTaskListFilePath();
+
+    @Override
+    Optional<TaskList> readTaskList() throws DataConversionException, IOException;
+
+    @Override
+    void saveTaskList(TaskList taskList) throws IOException;
 }
