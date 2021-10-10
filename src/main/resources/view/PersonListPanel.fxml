@@ -23,7 +23,7 @@
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0">
         <children>
-          <Label fx:id="favourites" alignment="CENTER_RIGHT" text="Favourites" textAlignment="CENTER">
+          <Label fx:id="moduleClass" alignment="CENTER_RIGHT" text="Classes" textAlignment="CENTER">
             <VBox.margin>
               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </VBox.margin>
