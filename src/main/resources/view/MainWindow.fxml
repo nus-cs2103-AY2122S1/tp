@@ -26,7 +26,6 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
-
             <VBox fx:id="mainVbox" prefHeight="471.0" prefWidth="925.0">
                 <MenuBar fx:id="menuBar" prefHeight="30.0" prefWidth="932.0" VBox.vgrow="NEVER">
                     <Menu mnemonicParsing="false" text="File">

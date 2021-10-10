@@ -150,10 +150,12 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+
     @Override
     public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         requireAllNonNull(target, dayOfWeek, slot);
         target.changeSchedule(dayOfWeek, slot);
+
     }
 
     @Override
