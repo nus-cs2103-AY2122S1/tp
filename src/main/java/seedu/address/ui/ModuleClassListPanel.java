@@ -42,6 +42,5 @@ public class ModuleClassListPanel extends UiPart<Region> {
             }
         }
 
-
     }
 }

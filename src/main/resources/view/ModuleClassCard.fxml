@@ -22,7 +22,7 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" styleClass="cell_big_label" text="\$moduleCode">
+                <Label fx:id="moduleCode" styleClass="cell_big_label" text="\$moduleCode">
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
@@ -34,7 +34,7 @@
                 <padding>
                     <Insets bottom="2.0" />
                 </padding></Label>
-            <Label fx:id="dateTime" styleClass="cell_small_label" text="\$dateTime">
+            <Label fx:id="time" styleClass="cell_small_label" text="\$time">
                 <padding>
                     <Insets bottom="2.0" />
                 </padding></Label>

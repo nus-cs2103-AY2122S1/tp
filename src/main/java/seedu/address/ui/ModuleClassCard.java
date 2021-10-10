@@ -21,7 +21,7 @@ public class ModuleClassCard extends UiPart<Region> {
     @FXML
     private Label day;
     @FXML
-    private Label dateTime;
+    private Label time;
     @FXML
     private Label remark;
 
@@ -31,7 +31,7 @@ public class ModuleClassCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         moduleCode.setText(moduleClass.getModuleCode().value);
         day.setText(moduleClass.getDay().toString());
-        dateTime.setText(moduleClass.getTime().toString());
+        time.setText(moduleClass.getTime().toString());
         remark.setText(moduleClass.getRemark().value);
     }
 

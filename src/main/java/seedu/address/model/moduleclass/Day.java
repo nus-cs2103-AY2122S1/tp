@@ -10,7 +10,7 @@ public class Day {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Days should only contain numbers";
-    public static final String VALIDATION_REGEX = "\\{Alum}+";
+    public static final String VALIDATION_REGEX = "\\d";
     public final DayOfWeek value;
 
     /**

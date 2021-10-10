@@ -19,7 +19,7 @@ public class JsonAdaptedModuleClass {
 
     private final String moduleCode;
     private final String day;
-    private final String dateTime;
+    private final String time;
     private final String remark;
 
     /**
@@ -29,11 +29,11 @@ public class JsonAdaptedModuleClass {
     @JsonCreator
     public JsonAdaptedModuleClass(@JsonProperty("moduleCode") String moduleCode,
                                   @JsonProperty("day") String day,
-                                  @JsonProperty("time") String dateTime,
+                                  @JsonProperty("time") String time,
                                   @JsonProperty("remark") String remark) {
         this.moduleCode = moduleCode;
         this.day = day;
-        this.dateTime = dateTime;
+        this.time = time;
         this.remark = remark;
     }
 
@@ -43,7 +43,7 @@ public class JsonAdaptedModuleClass {
     public JsonAdaptedModuleClass(ModuleClass source) {
         moduleCode = source.getModuleCode().value;
         day = source.getDay().toString();
-        dateTime = source.getTime().toString();
+        time = source.getTime().toString();
         remark = source.getRemark().value;
     }
 
@@ -63,17 +63,17 @@ public class JsonAdaptedModuleClass {
         }
         final Day classDay = new Day(day);
 
-        if (dateTime == null) {
+        if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
-        final Time classDateTime = new Time(dateTime);
+        final Time classTime = new Time(time);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark classRemark = new Remark(remark);
 
-        return new ModuleClass(classModuleCode, classDay, classDateTime, classRemark);
+        return new ModuleClass(classModuleCode, classDay, classTime, classRemark);
     }
 
 }
