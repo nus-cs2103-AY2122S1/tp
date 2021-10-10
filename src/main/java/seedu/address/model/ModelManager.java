@@ -176,6 +176,16 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Deletes the task specified by {@code index} from the given {@code member}'s task list.
+     * The task must exist in the member's task list.
+     */
+    @Override
+    public void deleteTask(Member member, int index) {
+        loadTaskList(member);
+        taskListManager.removeTask(index);
+    }
+
+    /**
      * Replaces the given task {@code target} with {@code editedTask} in the given {@code member}'s task list.
      * {@code target} must exist in the task list.
      * The member identity of {@code editedTask} must not be the same as another existing task in the task list.
@@ -184,6 +194,15 @@ public class ModelManager implements Model {
     public void setTask(Member member, Task target, Task editedTask) {
         loadTaskList(member);
         taskListManager.setTask(target, editedTask);
+    }
+
+    /**
+     * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
+     */
+    @Override
+    public void setTask(Member member, int index, Task editedTask) {
+        loadTaskList(member);
+        taskListManager.setTask(index, editedTask);
     }
 
     /**

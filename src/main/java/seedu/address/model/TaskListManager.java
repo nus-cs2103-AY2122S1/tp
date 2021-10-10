@@ -47,11 +47,19 @@ public class TaskListManager {
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the task list.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     public void setTask(Task target, Task editedTask) {
         requireNonNull(editedTask);
         tasks.setTask(target, editedTask);
+    }
+
+    /**
+     * Replaces the task specified by {@code index} in the list with {@code editedTask}.
+     * {@code target} must exist in the task list.
+     */
+    public void setTask(int index, Task editedTask) {
+        requireNonNull(editedTask);
+        tasks.setTask(index, editedTask);
     }
 
     /**
@@ -60,6 +68,13 @@ public class TaskListManager {
      */
     public void removeTask(Task key) {
         tasks.remove(key);
+    }
+
+    /**
+     * Removes task specified by {@code index} from the current task list.
+     */
+    public void removeTask(int index) {
+        tasks.remove(index);
     }
 
     //// util methods

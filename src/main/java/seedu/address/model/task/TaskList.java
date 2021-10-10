@@ -9,7 +9,6 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 public class TaskList implements Iterable<Task> {
@@ -22,7 +21,7 @@ public class TaskList implements Iterable<Task> {
      */
     public boolean contains(Task toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTask);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     public boolean isEmpty() {
@@ -34,16 +33,15 @@ public class TaskList implements Iterable<Task> {
      */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        /* if (contains(toAdd)) {
             throw new DuplicateTaskException();
-        }
+        } */
         internalList.add(toAdd);
     }
 
     /**
      * Replaces the task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the list.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -53,10 +51,21 @@ public class TaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
 
-        if (!target.isSameTask(editedTask) && contains(editedTask)) {
+        /*if (!target.isSameTask(editedTask) && contains(editedTask)) {
             throw new DuplicateTaskException();
-        }
+        }*/
 
+        internalList.set(index, editedTask);
+    }
+
+    /**
+     * Replaces the task specified by the given {@code index} in the list with {@code editedTask}.
+     */
+    public void setTask(int index, Task editedTask) {
+        requireNonNull(editedTask);
+        if (index < 0 || index >= internalList.size()) {
+            throw new TaskNotFoundException();
+        }
         internalList.set(index, editedTask);
     }
 
@@ -71,6 +80,17 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Removes the task specified by the index from the list.
+     * The task must exist in the list.
+     */
+    public void remove(int index) {
+        if (index < 0 || index >= internalList.size()) {
+            throw new TaskNotFoundException();
+        }
+        internalList.remove(index);
+    }
+
     public void setTasks(TaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -82,9 +102,9 @@ public class TaskList implements Iterable<Task> {
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
-        if (!tasksAreUnique(tasks)) {
+        /*if (!tasksAreUnique(tasks)) {
             throw new DuplicateTaskException();
-        }
+        }*/
 
         internalList.setAll(tasks);
     }
@@ -137,7 +157,7 @@ public class TaskList implements Iterable<Task> {
     private boolean tasksAreUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {
             for (int j = i + 1; j < tasks.size(); j++) {
-                if (tasks.get(i).isSameTask(tasks.get(j))) {
+                if (tasks.get(i).equals(tasks.get(j))) {
                     return false;
                 }
             }

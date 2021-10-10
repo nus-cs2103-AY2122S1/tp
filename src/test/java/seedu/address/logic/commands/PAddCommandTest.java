@@ -170,7 +170,20 @@ public class PAddCommandTest {
         }
 
         @Override
+        public void deleteTask(Member member, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setTask(Member member, Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
+         */
+        @Override
+        public void setTask(Member member, int index, Task editedTask) {
             throw new AssertionError("This method should not be called.");
         }
 

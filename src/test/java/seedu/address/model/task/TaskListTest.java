@@ -53,11 +53,11 @@ public class TaskListTest {
         assertThrows(NullPointerException.class, () -> taskList.add(null));
     }
 
-    @Test
+    /*@Test
     public void add_duplicateTask_throwsDuplicateTaskException() {
         taskList.add(MEETING);
         assertThrows(DuplicateTaskException.class, () -> taskList.add(MEETING));
-    }
+    }*/
 
     @Test
     public void setTask_nullTargetTask_throwsNullPointerException() {
@@ -101,12 +101,12 @@ public class TaskListTest {
         assertEquals(expectedTaskList, taskList);
     }
 
-    @Test
-    public void setMember_editedTaskHasNonUniqueIdentity_throwsDuplicateTaskException() {
+    /*@Test
+    public void setTask_editedTaskHasNonUniqueIdentity_throwsDuplicateTaskException() {
         taskList.add(MEETING);
         taskList.add(PROJECT);
         assertThrows(DuplicateTaskException.class, () -> taskList.setTask(MEETING, PROJECT));
-    }
+    }*/
 
     @Test
     public void remove_nullTask_throwsNullPointerException() {

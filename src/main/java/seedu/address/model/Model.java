@@ -106,7 +106,6 @@ public interface Model {
 
     /**
      * Adds the given {@code task} to the given {@code member}'s task list.
-     * The tasks must not exist in the member's task list.
      */
     void addTask(Member member, Task task);
 
@@ -117,11 +116,21 @@ public interface Model {
     void deleteTask(Member member, Task task);
 
     /**
+     * Deletes the task specified by {@code index} from the given {@code member}'s task list.
+     * The task must exist in the member's task list.
+     */
+    void deleteTask(Member member, int index);
+
+    /**
      * Replaces the given task {@code target} with {@code editedTask} in the given {@code member}'s task list.
      * {@code target} must exist in the task list.
-     * The member identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     void setTask(Member member, Task target, Task editedTask);
+
+    /**
+     * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
+     */
+    void setTask(Member member, int index, Task editedTask);
 
     /**
      * Returns an unmodifiable view of the filtered task list of the given {@code member}.

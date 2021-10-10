@@ -65,9 +65,9 @@ public class Task {
      * Returns true if both tasks are the same as defined
      * This defines a weaker notion of equality between two tasks.
      */
-    public boolean isSameTask(Task otherTask) {
+    /*public boolean isSameTask(Task otherTask) {
         return this.taskName.equals(otherTask.taskName);
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
