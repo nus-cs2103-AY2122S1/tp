@@ -9,7 +9,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.fast.commons.util.SortByName;
 import seedu.fast.model.person.exceptions.DuplicatePersonException;
 import seedu.fast.model.person.exceptions.PersonNotFoundException;
 

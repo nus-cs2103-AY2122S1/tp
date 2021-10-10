@@ -1,15 +1,13 @@
 package seedu.fast.model.person;
 
-import seedu.fast.commons.util.DateUtil;
-import seedu.fast.logic.commands.AppointmentCommand;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+
+import seedu.fast.commons.util.DateUtil;
 
 /**
  * Represents an appointment with the Person in the address book.
@@ -39,6 +37,11 @@ public class Appointment {
         return this.date;
     }
 
+    /**
+     * Converts the date from a String to a Date object.
+     *
+     * @return Date object from the string.
+     */
     public Date convertDate() {
         Date temp = DateUtil.MAX_DATE;
         if (date.equals(NO_APPOINTMENT)) {

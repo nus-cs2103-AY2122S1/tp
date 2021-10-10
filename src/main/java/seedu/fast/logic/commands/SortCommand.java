@@ -2,10 +2,10 @@ package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
+
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
-
-import java.util.Comparator;
 
 /**
  * Lists all persons in the FAST to the user.
@@ -22,6 +22,12 @@ public class SortCommand extends Command {
     private final Comparator<Person> comparator;
     private final String keyword;
 
+    /**
+     * Constructor for SortCommand
+     *
+     * @param comparator Custom comparator that is used to sort.
+     * @param keyword Identifier of the sort.
+     */
     public SortCommand(Comparator<Person> comparator, String keyword) {
         this.comparator = comparator;
         this.keyword = keyword;

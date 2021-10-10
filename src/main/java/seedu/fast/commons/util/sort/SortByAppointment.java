@@ -1,4 +1,4 @@
-package seedu.fast.commons.util;
+package seedu.fast.commons.util.sort;
 
 import java.util.Comparator;
 

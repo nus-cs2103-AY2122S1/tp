@@ -2,14 +2,10 @@ package seedu.fast.logic.parser;
 
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
-
-import seedu.fast.commons.util.SortByAppointment;
-import seedu.fast.commons.util.SortByName;
-import seedu.fast.logic.commands.FindCommand;
+import seedu.fast.commons.util.sort.SortByAppointment;
+import seedu.fast.commons.util.sort.SortByName;
 import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new SortCommand object
