@@ -2,19 +2,16 @@ package safeforhall.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;
-import safeforhall.model.tag.Tag;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -67,18 +64,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String room} into a {@code Room}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code room} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Room parseRoom(String room) throws ParseException {
+        requireNonNull(room);
+        String trimmedRoom = room.trim();
+        if (!Room.isValidRoom(trimmedRoom)) {
+            throw new ParseException(Room.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Room(trimmedRoom);
     }
 
     /**
@@ -97,30 +94,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String vaccStatus} into a {@code VaccStatus}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code vaccStatus} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static VaccStatus parseVaccStatus(String vaccStatus) throws ParseException {
+        requireNonNull(vaccStatus);
+        String trimmedVaccStatus = vaccStatus.trim();
+        if (!VaccStatus.isValidVaccStatus(trimmedVaccStatus)) {
+            throw new ParseException(VaccStatus.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new VaccStatus(trimmedVaccStatus);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String faculty} into a {@code Faculty}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code faculty} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Faculty parseFaculty(String faculty) throws ParseException {
+        requireNonNull(faculty);
+        String trimmedFaculty = faculty.trim();
+        if (!Faculty.isValidFaculty(trimmedFaculty)) {
+            throw new ParseException(Faculty.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        return new Faculty(trimmedFaculty);
     }
 
     /**

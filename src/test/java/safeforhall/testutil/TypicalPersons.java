@@ -2,10 +2,16 @@ package safeforhall.testutil;
 
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_FACULTY_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_FACULTY_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_VACCSTATUS_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_VACCSTATUS_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +29,7 @@ public class TypicalPersons {
             .withRoom("A100")
             .withPhone("94351253")
             .withEmail("alice@example.com")
-            .withVaccStatus("1")
+            .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("10-10-2021")
@@ -32,7 +38,7 @@ public class TypicalPersons {
             .withRoom("A101")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withVaccStatus("1")
+            .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("10-10-2021")
@@ -41,7 +47,7 @@ public class TypicalPersons {
             .withRoom("A102")
             .withPhone("95352563")
             .withEmail("heinz@example.com")
-            .withVaccStatus("1")
+            .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("10-10-2021")
@@ -50,7 +56,7 @@ public class TypicalPersons {
             .withRoom("A103")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
-            .withVaccStatus("1")
+            .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("10-10-2021")
@@ -59,7 +65,7 @@ public class TypicalPersons {
             .withRoom("A104")
             .withPhone("9482224")
             .withEmail("werner@example.com")
-            .withVaccStatus("1")
+            .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("10-10-2021")
@@ -68,7 +74,7 @@ public class TypicalPersons {
             .withRoom("A105")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
-            .withVaccStatus("1")
+            .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("10-10-2021")
@@ -77,7 +83,7 @@ public class TypicalPersons {
             .withRoom("A106")
             .withPhone("9482442")
             .withEmail("anna@example.com")
-            .withVaccStatus("1")
+            .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("10-10-2021")
@@ -87,20 +93,40 @@ public class TypicalPersons {
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withPhone("8482424")
             .withEmail("stefan@example.com")
+            .withRoom("A103")
+            .withVaccStatus("T")
+            .withFaculty("SoC")
+            .withFet("TODO")
+            .withCollection("TODO")
             .build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withPhone("8482131")
             .withEmail("hans@example.com")
+            .withRoom("C200")
+            .withVaccStatus("F")
+            .withFaculty("SoC")
+            .withFet("TODO")
+            .withCollection("TODO")
             .build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
+            .withRoom(VALID_ROOM_AMY)
+            .withFaculty(VALID_FACULTY_AMY)
+            .withVaccStatus(VALID_VACCSTATUS_AMY)
+            .withFet("TODO")
+            .withCollection("TODO")
             .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
+            .withRoom(VALID_ROOM_BOB)
+            .withFaculty(VALID_FACULTY_BOB)
+            .withVaccStatus(VALID_VACCSTATUS_BOB)
+            .withFet("TODO")
+            .withCollection("TODO")
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

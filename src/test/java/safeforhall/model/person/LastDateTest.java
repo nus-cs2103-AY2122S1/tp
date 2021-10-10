@@ -13,12 +13,6 @@ public class LastDateTest {
     }
 
     @Test
-    public void constructor_invalidLastDate_throwsIllegalArgumentException() {
-        String invalidLastDate = "";
-        assertThrows(IllegalArgumentException.class, () -> new LastDate(invalidLastDate));
-    }
-
-    @Test
     public void isValidDate() {
         // null dates
         assertThrows(NullPointerException.class, () -> new LastDate(null));

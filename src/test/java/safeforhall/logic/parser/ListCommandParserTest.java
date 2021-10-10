@@ -1,7 +1,11 @@
 package safeforhall.logic.parser;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static safeforhall.logic.commands.CommandTestUtil.*;
+import static safeforhall.logic.commands.CommandTestUtil.KEYWORD_DESC_C;
+import static safeforhall.logic.commands.CommandTestUtil.KEYWORD_DESC_F;
+import static safeforhall.logic.commands.CommandTestUtil.LAST_DATE1_DESC_OCT;
+import static safeforhall.logic.commands.CommandTestUtil.LAST_DATE2_DESC_OCT;
+import static safeforhall.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
 

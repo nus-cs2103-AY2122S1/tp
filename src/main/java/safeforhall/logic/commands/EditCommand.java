@@ -36,8 +36,9 @@ public class EditCommand extends Command {
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
-            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
+            + "[" + CliSyntax.PREFIX_ROOM + "ROOM] "
+            + "[" + CliSyntax.PREFIX_VACCSTATUS + "VACCINATION STATUS] "
+            + "[" + CliSyntax.PREFIX_FACULTY + "FACULTY] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_PHONE + "91234567 "
             + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";

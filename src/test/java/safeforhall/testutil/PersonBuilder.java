@@ -4,8 +4,8 @@ import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
-import safeforhall.model.person.Phone;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
@@ -18,7 +18,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ROOM = "A100";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_VACC = "True";
+    public static final String DEFAULT_VACCSTATUS = "T";
     public static final String DEFAULT_FACULTY = "SoC";
     public static final String DEFAULT_FETDATE = "10-09-2021";
     public static final String DEFAULT_COLLECTDATE = "10-09-2021";
@@ -40,7 +40,7 @@ public class PersonBuilder {
         room = new Room(DEFAULT_ROOM);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        vaccStatus = new VaccStatus(DEFAULT_VACC);
+        vaccStatus = new VaccStatus(DEFAULT_VACCSTATUS);
         faculty = new Faculty(DEFAULT_FACULTY);
         lastFetDate = new LastDate(DEFAULT_FETDATE);
         lastCollectionDate = new LastDate(DEFAULT_COLLECTDATE);

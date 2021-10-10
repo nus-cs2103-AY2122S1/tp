@@ -125,6 +125,7 @@ class JsonAdaptedPerson {
 
         // LastFetDate
         if (!LastDate.isValidDate(lastFetDate)) {
+            System.out.println(lastFetDate);
             throw new IllegalValueException(LastDate.MESSAGE_CONSTRAINTS);
         }
         final LastDate modelFetDate = new LastDate(lastFetDate);
