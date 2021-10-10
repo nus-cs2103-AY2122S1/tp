@@ -48,7 +48,6 @@ public class PlannerMdParser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 

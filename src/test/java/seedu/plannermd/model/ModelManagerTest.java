@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_ALICE;
+import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_BENSON;
 import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
 import static seedu.plannermd.testutil.patient.TypicalPatients.BENSON;
 
@@ -84,7 +85,7 @@ public class ModelManagerTest {
     @Test
     public void hasPerson_personNotInPlannerMd_returnsFalse() {
         assertFalse(modelManager.hasPatient(ALICE));
-        //TODO: Doctor
+        assertFalse(modelManager.hasDoctor(DR_ALICE));
     }
 
     @Test
@@ -92,7 +93,8 @@ public class ModelManagerTest {
         modelManager.addPatient(ALICE);
         assertTrue(modelManager.hasPatient(ALICE));
 
-        //TODO: Doctor
+        modelManager.addDoctor(DR_ALICE);
+        assertTrue(modelManager.hasDoctor(DR_ALICE));
     }
 
     @Test
@@ -121,7 +123,10 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        PlannerMd plannerMd = new PlannerMdBuilder().withPatient(ALICE).withPatient(BENSON).build();
+        PlannerMd plannerMd = new PlannerMdBuilder()
+                .withPatient(ALICE).withPatient(BENSON)
+                .withDoctor(DR_ALICE).withDoctor(DR_BENSON).build();
+
         PlannerMd differentPlannerMd = new PlannerMd();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -151,7 +156,9 @@ public class ModelManagerTest {
         modelManager.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different filteredDoctorList -> returns false
-        //TODO
+        String[] keywordsDoctor = DR_ALICE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredDoctorList(new NameContainsKeywordsPredicate(Arrays.asList(keywordsDoctor)));
+        assertFalse(modelManager.equals(new ModelManager(plannerMd, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
