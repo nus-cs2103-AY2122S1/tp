@@ -234,10 +234,23 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+--------------------------------------------------------------------------------------------------------------------
 
-_{Explain here how the data archiving feature will be implemented}_
+## **Glossary, Naming Conventions**
 
+### Anime
+Represents a single season of an anime series. 
+
+### Animes 
+We chose this to denote multiple anime even though the plural for anime is anime.
+This is to distinct between a single anime and multiple animes.
+
+### AniList
+The name of our app. Only used for package name.
+
+### AnimeList
+A list of Anime, also the overall structure of the data. 
+I.e. the user data is stored as an instance of AnimeList in json format.
 
 --------------------------------------------------------------------------------------------------------------------
 
