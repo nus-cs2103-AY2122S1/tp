@@ -56,7 +56,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        UniFyStorage uniFyStorage = new JsonUniFyStorage(userPrefs.getUniFyFilePath());
+        UniFyStorage uniFyStorage = new JsonUniFyStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(uniFyStorage, userPrefsStorage);
 
         initLogging(config);
