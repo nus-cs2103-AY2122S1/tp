@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * Represents a Friend in the gitGud friend's list.
@@ -21,12 +21,17 @@ public class Friend {
     private FriendName friendName;
 
     // Data fields
-    private final Set<Game> games = new HashSet<>();
+    private final Set<GameFriendLink> games = new HashSet<>();
 
     /**
+     * Constructs a {@code Friend}.
      * Every field must be present and not null.
+     *
+     * @param friendId a valid friend id.
+     * @param friendName a valid friend name.
+     * @param games a set of game-friend links of this friend.
      */
-    public Friend(FriendId friendId, FriendName friendName, Set<Game> games) {
+    public Friend(FriendId friendId, FriendName friendName, Set<GameFriendLink> games) {
         requireAllNonNull(friendId, friendName, games);
         this.friendId = friendId;
         this.friendName = friendName;
@@ -34,7 +39,8 @@ public class Friend {
     }
 
     /**
-     * Constructor using only friendId and friendName.
+     * Overloaded constructor using only friendId and friendName.
+     *
      * @param friendId Unique id of friend.
      * @param friendName Name of friend.
      */
@@ -47,6 +53,7 @@ public class Friend {
     public FriendId getFriendId() {
         return friendId;
     }
+
     public FriendName getName() {
         return friendName;
     }
@@ -55,7 +62,7 @@ public class Friend {
      * Returns an immutable game set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Game> getGames() {
+    public Set<GameFriendLink> getGames() {
         return Collections.unmodifiableSet(games);
     }
 
@@ -93,7 +100,7 @@ public class Friend {
                 .append("; Name: ")
                 .append(getName());
 
-        Set<Game> gameSet = getGames();
+        Set<GameFriendLink> gameSet = getGames();
         if (!gameSet.isEmpty()) {
             builder.append("; Games: ");
             gameSet.forEach(builder::append);

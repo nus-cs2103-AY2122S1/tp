@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalFriends.CARL;
 import static seedu.address.testutil.TypicalFriends.ELLE;
 import static seedu.address.testutil.TypicalFriends.FIONA;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +25,9 @@ import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private final Model model = new ModelManager(getTypicalFriendsList(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalFriendsList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(),
+            new UserPrefs());
 
     @Test
     public void equals() {

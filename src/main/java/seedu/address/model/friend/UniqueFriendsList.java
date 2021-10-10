@@ -3,7 +3,6 @@ package seedu.address.model.friend;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * A list of friends that enforces uniqueness between its elements and does not allow nulls.
@@ -96,12 +95,14 @@ public class UniqueFriendsList implements Iterable<Friend> {
     /**
      * Links a friend with the games he plays.
      */
-    public void link(Friend toLink, HashMap<String, String> games) {
-        requireNonNull(games);
-        Set<Game> newGameList = new HashSet<>(toLink.getGames());
-        for (String key : games.keySet()) { // temporary solution till we implement the actual Game class
-            newGameList.add(new Game(key));
-        }
+    public void link(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
+        requireAllNonNull(toLink, gameFriendLinks);
+        Set<GameFriendLink> newGameList = new HashSet<>(toLink.getGames());
+
+        // TODO - Yu Zher
+        // Temporary fix. Change as deemed necessary.
+        newGameList.addAll(gameFriendLinks);
+
         Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getName(), newGameList);
         this.setFriend(toLink, editedFriend);
     }

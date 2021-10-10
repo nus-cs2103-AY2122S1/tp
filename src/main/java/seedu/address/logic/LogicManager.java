@@ -14,7 +14,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.game.Game;
 import seedu.address.storage.Storage;
 
 /**
@@ -46,6 +48,8 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
+            // TODO - Kevin
+            // update storage with games list
             storage.saveAddressBook(model.getFriendsList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
@@ -55,13 +59,23 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyFriendsList getAddressBook() {
+    public ReadOnlyFriendsList getFriendsBook() {
         return model.getFriendsList();
     }
 
     @Override
-    public ObservableList<Friend> getFilteredPersonList() {
+    public ReadOnlyGamesList getGamesBook() {
+        return model.getGamesList();
+    }
+
+    @Override
+    public ObservableList<Friend> getFilteredFriendsList() {
         return model.getFilteredFriendsList();
+    }
+
+    @Override
+    public ObservableList<Game> getFilteredGamesList() {
+        return model.getFilteredGamesList();
     }
 
     @Override

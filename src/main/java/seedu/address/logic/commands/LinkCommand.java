@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -59,8 +60,8 @@ public class LinkCommand extends Command {
 
         // update the game(s) in the model (since the usernames for them have been changed)
 
-        model.linkFriend(friendToEdit, games);
-        model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.linkFriend(friendToEdit, new HashSet<>());
+        model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
 
         return new CommandResult(generateSuccessMessage(friendToEdit));
     }

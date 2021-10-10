@@ -8,7 +8,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.game.Game;
 
 /**
  * API of the Logic component
@@ -24,14 +26,24 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the FriendsBook.
      *
      * @see seedu.address.model.Model#getFriendsList()
      */
-    ReadOnlyFriendsList getAddressBook();
+    ReadOnlyFriendsList getFriendsBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Friend> getFilteredPersonList();
+    /**
+     * Returns the GamesBook.
+     *
+     * @see seedu.address.model.Model#getGamesList()
+     */
+    ReadOnlyGamesList getGamesBook();
+
+    /** Returns an unmodifiable view of the filtered list of friends */
+    ObservableList<Friend> getFilteredFriendsList();
+
+    /** Returns an unmodifiable view of the filtered list of games */
+    ObservableList<Game> getFilteredGamesList();
 
     /**
      * Returns the user prefs' address book file path.

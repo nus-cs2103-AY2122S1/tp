@@ -1,57 +1,61 @@
 package seedu.address.model.game;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 /**
  * Represents a Game in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidGameName(String)}
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Game {
 
-    // TODO: update game names to accept non-alphanumeric values
-    //  (currently set this way since currently its skeleton code)
-    public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric characters and spaces, "
-            + "and it should not be blank";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-    public final String gameName;
+    // Identity field
+    // used to uniquely identify each Game.
+    public final GameId gameId;
 
     /**
      * Constructs a {@code Game}.
      *
-     * @param tagName A valid game name.
+     * @param gameId A valid game name.
      */
-    public Game (String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidGameName(tagName), MESSAGE_CONSTRAINTS);
-        this.gameName = tagName;
+    public Game (GameId gameId) {
+        requireNonNull(gameId);
+        this.gameId = gameId;
     }
 
-    /**
-     * Returns true if a given string is a valid game name.
-     */
-    public static boolean isValidGameName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public GameId getGameId() {
+        return gameId;
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Game // instanceof handles nulls
-                && gameName.equals(((Game) other).gameName)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Game)) {
+            return false;
+        }
+
+        Game otherGame = (Game) other;
+        return otherGame.getGameId().equals(getGameId());
     }
 
     @Override
     public int hashCode() {
-        return gameName.hashCode();
+        return Objects.hash(gameId);
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + gameName + ']';
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Game ID: ")
+                .append(getGameId());
+
+        return builder.toString();
     }
 
 }

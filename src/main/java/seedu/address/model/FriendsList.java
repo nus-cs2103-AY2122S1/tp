@@ -2,13 +2,14 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.UniqueFriendsList;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * Wraps all data at the address-book level
@@ -95,8 +96,8 @@ public class FriendsList implements ReadOnlyFriendsList {
         friends.setFriend(target, editedFriend);
     }
 
-    public void linkFriend(Friend toLink, HashMap<String, String> games) {
-        friends.link(toLink, games);
+    public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
+        friends.link(toLink, gameFriendLinks);
     }
 
     /**

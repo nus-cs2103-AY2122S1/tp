@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 import seedu.address.model.game.Game;
 
 /**
@@ -46,9 +46,9 @@ class JsonAdaptedFriend {
     public JsonAdaptedFriend(Friend sourceInstance) {
         friendId = sourceInstance.getFriendId().value;
         friendName = sourceInstance.getName().fullName;
-        games.addAll(sourceInstance.getGames().stream()
-                .map(JsonAdaptedGame::new)
-                .collect(Collectors.toList()));
+        //        games.addAll(sourceInstance.getGames().stream()
+        //                .map(JsonAdaptedGame::new)
+        //                .collect(Collectors.toList()));
     }
 
     /**
@@ -79,7 +79,7 @@ class JsonAdaptedFriend {
 
         final FriendId modelFriendId = new FriendId(friendId);
         final FriendName modelFriendName = new FriendName(friendName);
-        final Set<Game> modelGames = new HashSet<>(friendGames);
+        final Set<GameFriendLink> modelGames = new HashSet<>();
 
         return new Friend(modelFriendId, modelFriendName, modelGames);
     }

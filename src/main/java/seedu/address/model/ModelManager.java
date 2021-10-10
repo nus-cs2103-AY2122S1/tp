@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,33 +14,43 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
 
 /**
- * Represents the in-memory model of the gitGud friends list data.
+ * Represents the in-memory model of the gitGud friends and games list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final FriendsList friendsList;
-    private final UserPrefs userPrefs;
     private final FilteredList<Friend> filteredFriends;
+    private final GamesList gamesList;
+    private final FilteredList<Game> filteredGames;
+    private final UserPrefs userPrefs;
 
     /**
      * Initializes a ModelManager with the given friends list and userPrefs.
      */
-    public ModelManager(ReadOnlyFriendsList readOnlyFriendsList, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyFriendsList readOnlyFriendsList, ReadOnlyGamesList readOnlyGamesList,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(readOnlyFriendsList, userPrefs);
+        requireAllNonNull(readOnlyFriendsList, readOnlyGamesList, userPrefs);
 
-        logger.fine("Initializing with address book: " + readOnlyFriendsList + " and user prefs " + userPrefs);
+        logger.fine("Initializing with friends book: " + readOnlyFriendsList
+                + " games book: " + readOnlyGamesList
+                + " and user prefs " + userPrefs);
 
         this.friendsList = new FriendsList(readOnlyFriendsList);
-        this.userPrefs = new UserPrefs(userPrefs);
         filteredFriends = new FilteredList<>(this.friendsList.getFriendsList());
+        this.gamesList = new GamesList(readOnlyGamesList);
+        filteredGames = new FilteredList<>(this.gamesList.getGamesList());
+        this.userPrefs = new UserPrefs(userPrefs);
     }
 
     public ModelManager() {
-        this(new FriendsList(), new UserPrefs());
+        this(new FriendsList(), new GamesList(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -78,7 +88,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== FriendsBook ================================================================================
 
     @Override
     public void setFriendsList(ReadOnlyFriendsList readOnlyFriendsList) {
@@ -116,7 +126,7 @@ public class ModelManager implements Model {
     @Override
     public void addFriend(Friend friend) {
         friendsList.addFriend(friend);
-        updateFilteredFriendsList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
     }
 
     @Override
@@ -127,11 +137,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void linkFriend(Friend toLink, HashMap<String, String> games) {
-        friendsList.linkFriend(toLink, games);
+    public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
+        friendsList.linkFriend(toLink, gameFriendLinks);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Friend List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -155,6 +165,74 @@ public class ModelManager implements Model {
                 .anyMatch(friend -> friend.getFriendId().equals(idToFind));
     }
 
+    //=========== GamesBook ==================================================================================
+
+    @Override
+    public void setGamesList(ReadOnlyGamesList readOnlyGamesList) {
+        this.gamesList.resetData(readOnlyGamesList);
+    }
+
+    @Override
+    public ReadOnlyGamesList getGamesList() {
+        return gamesList;
+    }
+
+    @Override
+    public boolean hasGame(Game game) {
+        requireNonNull(game);
+        return gamesList.hasGame(game);
+    }
+
+    @Override
+    public boolean hasGameWithId(GameId gameId) {
+        requireNonNull(gameId);
+        return gamesList.hasGameWithId(gameId);
+    }
+
+    @Override
+    public void deleteGame(GameId targetId) {
+        Game gameToDelete =
+                this.getGamesList().getGamesList()
+                        .stream()
+                        .filter(game -> game.getGameId().equals(targetId))
+                        .findFirst()
+                        .get();
+        gamesList.removeGame(gameToDelete);
+    }
+
+    @Override
+    public void addGame(Game game) {
+        gamesList.addGame(game);
+        updateFilteredGamesList(PREDICATE_SHOW_ALL_GAMES);
+    }
+
+    @Override
+    public void setGame(Game target, Game editedGame) {
+        requireAllNonNull(target, editedGame);
+
+        gamesList.setGame(target, editedGame);
+    }
+
+    //=========== Filtered Game List Accessors =============================================================
+
+    @Override
+    public ObservableList<Game> getFilteredGamesList() {
+        return filteredGames;
+    }
+
+    @Override
+    public void updateFilteredGamesList(Predicate<Game> predicate) {
+        requireNonNull(predicate);
+        filteredGames.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasGameId(GameId idToFind) {
+        requireNonNull(idToFind);
+        return this.getGamesList().getGamesList().stream()
+                .anyMatch(game -> game.getGameId().equals(idToFind));
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -170,8 +248,10 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return friendsList.equals(other.friendsList)
-                && userPrefs.equals(other.userPrefs)
-                && filteredFriends.equals(other.filteredFriends);
+                && filteredFriends.equals(other.filteredFriends)
+                && gamesList.equals(other.gamesList)
+                && filteredGames.equals(other.filteredGames)
+                && userPrefs.equals(other.userPrefs);
     }
 
 }

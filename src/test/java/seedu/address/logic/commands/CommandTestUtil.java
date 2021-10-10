@@ -27,18 +27,18 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_FRIEND_ID_AMY = "123";
     public static final String VALID_FRIEND_ID_BOB = "456";
-    public static final String VALID_GAME_CSGO = "CSGO";
-    public static final String VALID_GAME_APEX_LEGENDS = "Apex Legends";
+    public static final String VALID_GAME_ID_CSGO = "CSGO";
+    public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
 
     public static final String FRIEND_ID_DESC_AMY = " " + VALID_FRIEND_ID_AMY;
     public static final String FRIEND_ID_DESC_BOB = " " + VALID_FRIEND_ID_BOB;
     public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_BOB;
-    public static final String GAME_DESC_AMY = " " + PREFIX_GAME + VALID_GAME_APEX_LEGENDS;
-    public static final String GAME_DESC_BOB = " " + PREFIX_GAME + VALID_GAME_CSGO;
+    public static final String GAME_DESC_AMY = " " + PREFIX_GAME + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_BOB = " " + PREFIX_GAME + VALID_GAME_ID_CSGO;
 
-    public static final String GAME_DESC_CSGO = " " + PREFIX_GAME + VALID_GAME_CSGO;
-    public static final String GAME_DESC_APEX_LEGENDS = " " + PREFIX_GAME + VALID_GAME_APEX_LEGENDS;
+    public static final String GAME_DESC_CSGO = " " + PREFIX_GAME + VALID_GAME_ID_CSGO;
+    public static final String GAME_DESC_APEX_LEGENDS = " " + PREFIX_GAME + VALID_GAME_ID_APEX_LEGENDS;
 
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
     public static final String INVALID_GAME_DESC = " " + PREFIX_GAME + "kickstar*"; // '*' not allowed in games
@@ -51,9 +51,9 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditFriendDescriptorBuilder().withFriendId(VALID_FRIEND_ID_AMY)
-                .withFriendName(VALID_NAME_AMY).withGames(VALID_GAME_APEX_LEGENDS).build();
+                .withFriendName(VALID_NAME_AMY).withGames(VALID_GAME_ID_APEX_LEGENDS).build();
         DESC_BOB = new EditFriendDescriptorBuilder().withFriendId(VALID_FRIEND_ID_BOB)
-                .withFriendName(VALID_NAME_BOB).withGames(VALID_GAME_CSGO).build();
+                .withFriendName(VALID_NAME_BOB).withGames(VALID_GAME_ID_CSGO).build();
     }
 
     /**

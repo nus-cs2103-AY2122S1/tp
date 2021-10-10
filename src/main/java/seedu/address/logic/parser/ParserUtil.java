@@ -16,7 +16,7 @@ import seedu.address.logic.commands.friends.FriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -76,29 +76,30 @@ public class ParserUtil {
         return new FriendName(trimmedName);
     }
 
-    /**
-     * Parses a {@code String gameName} into a {@code Game}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code gameName} is invalid.
-     */
-    public static Game parseGame(String gameName) throws ParseException {
-        requireNonNull(gameName);
-        String trimmedGameName = gameName.trim();
-        if (!Game.isValidGameName(trimmedGameName)) {
-            throw new ParseException(Game.MESSAGE_CONSTRAINTS);
-        }
-        return new Game(trimmedGameName);
-    }
+    //    /**
+    //     * Parses a {@code String gameName} into a {@code Game}.
+    //     * Leading and trailing whitespaces will be trimmed.
+    //     *
+    //     * @throws ParseException if the given {@code gameName} is invalid.
+    //     */
+    //    public static Game parseGame(String gameName) throws ParseException {
+    //        requireNonNull(gameName);
+    //        String trimmedGameName = gameName.trim();
+    //        if (!Game.isValidGameName(trimmedGameName)) {
+    //            throw new ParseException(Game.MESSAGE_CONSTRAINTS);
+    //        }
+    //        return new Game(trimmedGameName);
+    //    }
 
     /**
-     * Parses {@code Collection<String> games} into a {@code Set<Game>}.
+     * Parses {@code Collection<String> games} into a {@code Set<GameFriendLink>}.
      */
-    public static Set<Game> parseGames(Collection<String> games) throws ParseException {
+    public static Set<GameFriendLink> parseGames(Collection<String> games) throws ParseException {
         requireNonNull(games);
-        final Set<Game> gameSet = new HashSet<>();
+        final Set<GameFriendLink> gameSet = new HashSet<>();
         for (String gameName : games) {
-            gameSet.add(parseGame(gameName));
+            // TODO - Edit command
+            // gameSet.add(parseGame(gameName));
         }
         return gameSet;
     }

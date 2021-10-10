@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalFriends.AMY;
 import static seedu.address.testutil.TypicalFriends.BOB;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ import seedu.address.testutil.FriendBuilder;
  */
 public class DeleteFriendCommandTest {
 
-    private final Model model = new ModelManager(getTypicalFriendsList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
 
     @Test
     public void execute_validIdUnfilteredList_success() {
@@ -36,7 +37,7 @@ public class DeleteFriendCommandTest {
         String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 friendToDelete.getFriendId());
 
-        ModelManager expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
         expectedModel.deleteFriend(friendToDelete.getFriendId());
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -56,7 +57,7 @@ public class DeleteFriendCommandTest {
         DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
         String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 friendToDelete.getFriendId());
-        Model expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
 
         // show no one
         showNoPerson(expectedModel);
