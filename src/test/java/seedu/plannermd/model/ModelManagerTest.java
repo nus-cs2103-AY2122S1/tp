@@ -98,6 +98,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteDoctor_doesNotDeletePatientWithSameName_returnsTrue() {
+        modelManager.addPatient(ALICE);
+        modelManager.addDoctor(DR_ALICE);
+        modelManager.deleteDoctor(DR_ALICE);
+        assertFalse(modelManager.hasDoctor(DR_ALICE));
+        assertTrue(modelManager.hasPatient(ALICE));
+    }
+
+    @Test
+    public void deletePatient_doesNotDeleteDoctorWithSameName_returnsTrue() {
+        modelManager.addPatient(ALICE);
+        modelManager.addDoctor(DR_ALICE);
+        modelManager.deletePatient(ALICE);
+        assertFalse(modelManager.hasPatient(ALICE));
+        assertTrue(modelManager.hasDoctor(DR_ALICE));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPatientList().remove(0));
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDoctorList().remove(0));

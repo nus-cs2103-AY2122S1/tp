@@ -9,13 +9,14 @@ import seedu.plannermd.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new DeletePatientCommand object
  */
-public class DeleteCommandParser implements Parser<DeletePatientCommand> {
+public class DeletePatientCommandParser implements Parser<DeletePatientCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeletePatientCommand
      * and returns a DeletePatientCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException If the user input does not conform to the expected format
      */
+    @Override
     public DeletePatientCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
