@@ -10,6 +10,9 @@ import javafx.scene.layout.Region;
 import seedu.siasa.commons.core.LogsCenter;
 import seedu.siasa.model.policy.Policy;
 
+/**
+ * Panel containing the list of policies.
+ */
 public class PolicyListPanel extends UiPart<Region> {
     private static final String FXML = "PolicyListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PolicyListPanel.class);

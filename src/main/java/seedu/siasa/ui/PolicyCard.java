@@ -26,9 +26,11 @@ public class PolicyCard extends UiPart<Region> {
     private Label expiryDate;
     @FXML
     private Label commission;
+    @FXML
+    private Label owner;
 
     /**
-     * Creates a {@code PolicyCode} with the given {@code Policy} and index to display.
+     * Creates a {@code PolicyCard} with the given {@code Policy} and index to display.
      */
     public PolicyCard(Policy policy, int displayedIndex) {
         super(FXML);
@@ -38,6 +40,7 @@ public class PolicyCard extends UiPart<Region> {
         price.setText(String.valueOf(policy.getPrice()));
         expiryDate.setText(String.valueOf(policy.getExpiryDate()));
         commission.setText(String.valueOf(policy.getCommission()));
+        owner.setText(String.valueOf(policy.getOwner()));
     }
 
     @Override
