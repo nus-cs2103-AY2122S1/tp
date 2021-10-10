@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class CurrentPlan implements OptionalPersonStringField {
 
@@ -21,6 +22,7 @@ public class CurrentPlan implements OptionalPersonStringField {
      */
     public CurrentPlan(String currentPlan) {
         requireNonNull(currentPlan);
+        checkArgument(isValidCurrentPlan(currentPlan), MESSAGE_CONSTRAINTS);
         value = currentPlan;
     }
 

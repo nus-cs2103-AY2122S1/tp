@@ -108,6 +108,16 @@ public class AddressBookTest {
         public void setClientCounter(String clientCounter) {
             this.clientCounter = clientCounter;
         }
+
+        @Override
+        public void incrementClientCounter() {
+            try {
+                int tempClientCounter = Integer.parseInt(this.clientCounter) + 1;
+                this.clientCounter = String.valueOf(tempClientCounter);
+            } catch (NumberFormatException e) {
+                this.clientCounter = "1";
+            }
+        }
     }
 
 }

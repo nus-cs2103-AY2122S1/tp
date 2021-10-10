@@ -27,11 +27,13 @@ public class PersonUtil {
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().get().value + " ");
+        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().get().value + " ");
-        sb.append(PREFIX_RISKAPPETITE + person.getRiskAppetite().get().value + " ");
-        sb.append(PREFIX_DISPOSABLEINCOME + person.getDisposableIncome().get().value + " ");
+        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
+        sb.append(PREFIX_RISKAPPETITE + person.getRiskAppetite().value + " ");
+        sb.append(PREFIX_DISPOSABLEINCOME + person.getDisposableIncome().value + " ");
+        sb.append(PREFIX_CURRENTPLAN + person.getCurrentPlan().value + " ");
+        sb.append(PREFIX_LASTMET + person.getLastMet().dateInString + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

@@ -37,12 +37,10 @@ public class PersonBuilder {
     private Email email;
     private LastMet lastMet;
     private CurrentPlan currentPlan;
-    private Optional<Phone> phone;
-    private Optional<Address> address;
-    private Optional<RiskAppetite> riskAppetite;
-    private Optional<DisposableIncome> disposableIncome;
-    private Optional<CurrentPlan> currentPlan;
-    private Optional<LastMet> lastMet;
+    private Phone phone;
+    private Address address;
+    private RiskAppetite riskAppetite;
+    private DisposableIncome disposableIncome;
     private Set<Tag> tags;
 
     /**
@@ -55,12 +53,12 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         lastMet = new LastMet(DEFAULT_LASTMET);
         currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
-        phone = Optional.of(new Phone(DEFAULT_PHONE));
-        address = Optional.of(new Address(DEFAULT_ADDRESS));
-        riskAppetite = Optional.of(new RiskAppetite(DEFAULT_RISKAPPETITE));
-        disposableIncome = Optional.of(new DisposableIncome(DEFAULT_DISPOSABLEINCOME));
-        lastMet = Optional.of(new LastMet(DEFAULT_LASTMET));
-        currentPlan = Optional.of(new CurrentPlan(DEFAULT_CURRENTPLAN));
+        phone = new Phone(DEFAULT_PHONE);
+        address = new Address(DEFAULT_ADDRESS);
+        riskAppetite = new RiskAppetite(DEFAULT_RISKAPPETITE);
+        disposableIncome = new DisposableIncome(DEFAULT_DISPOSABLEINCOME);
+        lastMet = new LastMet(DEFAULT_LASTMET);
+        currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
         tags = new HashSet<>();
     }
 
@@ -108,7 +106,7 @@ public class PersonBuilder {
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
-        this.address = Optional.of(new Address(address));
+        this.address = new Address(address);
         return this;
     }
 
@@ -124,7 +122,7 @@ public class PersonBuilder {
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = Optional.of(new Phone(phone));
+        this.phone = new Phone(phone);
         return this;
     }
 
@@ -132,7 +130,7 @@ public class PersonBuilder {
      * Sets the {@code RiskAppetite} of the {@code Person} that we are building.
      */
     public PersonBuilder withRiskAppetite(String riskAppetite) {
-        this.riskAppetite = Optional.of(new RiskAppetite(riskAppetite));
+        this.riskAppetite = new RiskAppetite(riskAppetite);
         return this;
     }
   
@@ -140,7 +138,7 @@ public class PersonBuilder {
      * Sets the {@code DisposableIncome} of the {@code Person} that we are building.
      */
     public PersonBuilder withDisposableIncome(String disposableIncome) {
-        this.disposableIncome = Optional.of(new DisposableIncome(disposableIncome));
+        this.disposableIncome = new DisposableIncome(disposableIncome);
         return this;
     }
 
@@ -161,8 +159,8 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(clientId, name, phone.get(), email, address.get(), riskAppetite.get(),
-            disposableIncome.get(), currentPlan, lastMet, tags);
+        return new Person(clientId, name, phone, email, address, riskAppetite,
+            disposableIncome, currentPlan, lastMet, tags);
     }
 
 }

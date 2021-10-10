@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -8,7 +7,7 @@ public class RiskAppetite implements OptionalPersonStringField{
 
     public static final String MESSAGE_CONSTRAINTS =
     "Risk Appetite number should be a single digit integer between 1 and 5";
-    public static final String VALIDATION_REGEX = "\\d{1,1}";
+    public static final String VALIDATION_REGEX = "^([1-5])";
     public final String value;
 
     /**

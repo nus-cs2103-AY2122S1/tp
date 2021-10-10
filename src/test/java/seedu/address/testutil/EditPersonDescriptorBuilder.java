@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,18 +36,15 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
+        descriptor.setClientId(person.getClientId());
         descriptor.setName(person.getName());
         descriptor.setEmail(person.getEmail());
         descriptor.setLastMet(person.getLastMet());
         descriptor.setCurrentPlan(person.getCurrentPlan());
-        Optional<Phone> phoneNumber = (Optional<Phone>) person.getPhone();
-        descriptor.setPhone(phoneNumber.isEmpty() ? null : phoneNumber.get());
-        Optional<Address> addressString = (Optional<Address>) person.getAddress();
-        descriptor.setAddress(person.getAddress().isEmpty() ? null : addressString.get());
-        Optional<RiskAppetite> riskAppetiteString = (Optional<RiskAppetite>) person.getRiskAppetite();
-        descriptor.setRiskAppetite(person.getRiskAppetite().isEmpty() ? null : riskAppetiteString.get());
-        Optional<DisposableIncome> disposableIncomeString = (Optional<DisposableIncome>) person.getDisposableIncome();
-        descriptor.setDisposableIncome(person.getDisposableIncome().isEmpty() ? null : disposableIncomeString.get());
+        descriptor.setPhone(person.getPhone());
+        descriptor.setAddress(person.getAddress());
+        descriptor.setRiskAppetite(person.getRiskAppetite());
+        descriptor.setDisposableIncome(person.getDisposableIncome());
         descriptor.setTags(person.getTags());
     }
 

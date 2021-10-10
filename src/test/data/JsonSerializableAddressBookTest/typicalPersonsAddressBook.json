@@ -8,8 +8,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "riskAppetite": "3",
     "disposableIncome":  "300",
-    "last-met" : "24-09-2021",
-    "current-plan" : "Prudential PruWealth",
+    "last-met" : "07-10-2021",
+    "current-plan" : "Prudential PRUShield",
     "tagged" : [ "friends" ]
   }, {
     "clientId" : "1",
@@ -19,8 +19,8 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "riskAppetite": "3",
     "disposableIncome":  "300",
-    "last-met" : "24-09-2021",
-    "current-plan" : "Prudential PruWealth",
+    "last-met" : "07-10-2021",
+    "current-plan" : "Prudential PRUShield",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "clientId" : "2",
@@ -30,8 +30,8 @@
     "address" : "wall street",
     "riskAppetite": "3",
     "disposableIncome":  "300",
-    "last-met" : "24-09-2021",
-    "current-plan" : "Prudential PruWealth",
+    "last-met" : "07-10-2021",
+    "current-plan" : "Prudential PRUShield",
     "tagged" : [ ]
   }, {
     "clientId" : "3",
@@ -41,8 +41,8 @@
     "address" : "10th street",
     "riskAppetite": "3",
     "disposableIncome":  "300",
-    "last-met" : "24-09-2021",
-    "current-plan" : "Prudential PruWealth",
+    "last-met" : "07-10-2021",
+    "current-plan" : "Prudential PRUShield",
     "tagged" : [ "friends" ]
   }, {
     "clientId" : "4",
@@ -52,8 +52,8 @@
     "address" : "michegan ave",
     "riskAppetite": "3",
     "disposableIncome":  "300",
-    "last-met" : "24-09-2021",
-    "current-plan" : "Prudential PruWealth",
+    "last-met" : "07-10-2021",
+    "current-plan" : "Prudential PRUShield",
     "tagged" : [ ]
   }, {
     "clientId" : "5",
@@ -63,8 +63,8 @@
     "address" : "little tokyo",
     "riskAppetite": "3",
     "disposableIncome":  "300",
-    "last-met" : "24-09-2021",
-    "current-plan" : "Prudential PruWealth",
+    "last-met" : "07-10-2021",
+    "current-plan" : "Prudential PRUShield",
     "tagged" : [ ]
   }, {
     "clientId" : "6",
@@ -74,8 +74,8 @@
     "address" : "4th street",
     "riskAppetite": "3",
     "disposableIncome":  "300",
-    "last-met" : "24-09-2021",
-    "current-plan" : "Prudential PruWealth", 
+    "last-met" : "07-10-2021",
+    "current-plan" : "Prudential PRUShield",
     "tagged" : [ ]
   } ]
 }

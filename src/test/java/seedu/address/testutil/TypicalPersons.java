@@ -31,7 +31,7 @@ public class TypicalPersons {
             .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withClientId("4").withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withRiskAppetite("3")
-            .withDisposableIncome("300")..withCurrentPlan("Prudential PRUShield")
+            .withDisposableIncome("300").withCurrentPlan("Prudential PRUShield")
             .withLastMet("07-10-2021").build();
     public static final Person FIONA = new PersonBuilder().withClientId("5").withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withRiskAppetite("3")
@@ -43,18 +43,20 @@ public class TypicalPersons {
     // Manually added
     public static final Person HOON = new PersonBuilder().withClientId("7").withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").withRiskAppetite("3")
-            .withDisposableIncome("300").build();
+            .withDisposableIncome("300").withCurrentPlan("Prudential PRUShield").withLastMet("10-06-2021").build();
     public static final Person IDA = new PersonBuilder().withClientId("8").withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withRiskAppetite("3")
-            .withDisposableIncome("300").build();
+            .withDisposableIncome("300").withCurrentPlan("Prudential PRUShield").withLastMet("10-06-2021").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withClientId("9").withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRiskAppetite(VALID_RISKAPPETITE_AMY)
-            .withDisposableIncome(VALID_DISPOSABLEINCOME_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withDisposableIncome(VALID_DISPOSABLEINCOME_AMY).withCurrentPlan(VALID_CURRENTPLAN_AMY)
+            .withLastMet(VALID_LASTMET_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withClientId("10").withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRiskAppetite(VALID_RISKAPPETITE_BOB)
-            .withDisposableIncome(VALID_DISPOSABLEINCOME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withDisposableIncome(VALID_DISPOSABLEINCOME_BOB).withCurrentPlan(VALID_CURRENTPLAN_BOB)
+            .withLastMet(VALID_LASTMET_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

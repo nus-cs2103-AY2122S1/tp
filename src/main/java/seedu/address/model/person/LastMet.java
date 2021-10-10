@@ -11,8 +11,7 @@ public class LastMet implements OptionalPersonNonStringField {
         + "where Day, month and year should be numerical values.";
     // TODO: why call it alternative?
     public static final String ALTERNATIVE_VALIDATION_REGEX =
-        "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
-        //"^([0]?[1-9]|[1][0-2])[./-]([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0-9]{4}|[0-9]{2})$";
+        "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
 
     public final LocalDate value;
     public final String dateInString;
@@ -36,7 +35,7 @@ public class LastMet implements OptionalPersonNonStringField {
         if (lastMetDate.isEmpty()) {
             value = null;
         } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             value = LocalDate.parse(lastMetDate, formatter);
         }
     }
@@ -53,7 +52,7 @@ public class LastMet implements OptionalPersonNonStringField {
     public String toString() {
 
         if (value == null) {
-            return "";
+            return DEFAULT_VALUE;
         } else {
             return this.dateInString;
         }

@@ -20,15 +20,15 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_EMAIL = "example.com";
-    private static final Optional<String> INVALID_PHONE_FROM_PARSER = Optional.of("+651234");
+    private static final String INVALID_PHONE_FROM_PARSER = "+651234";
     private static final String INVALID_PHONE = "651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final Optional<String> VALID_PHONE_FROM_PARSER = Optional.of("123456");
+    private static final String VALID_PHONE_FROM_PARSER = "123456";
     private static final String VALID_PHONE = "123456";
-    private static final Optional<String> VALID_ADDRESS_FROM_PARSER = Optional.of("123 Main Street #0505");
+    private static final String VALID_ADDRESS_FROM_PARSER = "123 Main Street #0505";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
@@ -99,7 +99,7 @@ public class ParserUtilTest {
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(Optional.of(phoneWithWhitespace)));
+        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class ParserUtilTest {
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(Optional.of(addressWithWhitespace)));
+        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
     }
 
     @Test

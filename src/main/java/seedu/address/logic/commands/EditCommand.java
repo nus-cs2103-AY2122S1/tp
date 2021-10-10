@@ -142,6 +142,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+        private ClientId clientId;
         private Name name;
         private Phone phone;
         private Email email;
@@ -159,6 +160,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setClientId(toCopy.clientId);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -176,6 +178,10 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, riskAppetite, disposableIncome, currentPlan, lastMet, tags);
 
+        }
+
+        public void setClientId(ClientId clientId) {
+            this.clientId = clientId;
         }
 
         public void setName(Name name) {

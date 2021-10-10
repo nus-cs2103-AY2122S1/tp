@@ -27,14 +27,15 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same email, all other attributes different -> returns true
+        // same email and client ID, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withRiskAppetite(VALID_RISKAPPETITE_BOB)
+                .withDisposableIncome(VALID_DISPOSABLEINCOME_BOB).withCurrentPlan(VALID_CURRENTPLAN_BOB)
+                .withLastMet(VALID_LASTMET_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // same email, all other attributes different -> returns true
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withName(VALID_NAME_AMY).withClientId("2")
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        // different client id, all other attributes same -> returns true
+        editedAlice = new PersonBuilder(ALICE).withClientId(VALID_CLIENTID_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different email, all other attributes same -> returns true
@@ -79,6 +80,22 @@ public class PersonTest {
 
         // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different risk appetite -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRiskAppetite(VALID_RISKAPPETITE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different disposable income -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDisposableIncome(VALID_DISPOSABLEINCOME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different current plan -> returns false
+        editedAlice = new PersonBuilder(ALICE).withCurrentPlan(VALID_CURRENTPLAN_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different last met-> returns false
+        editedAlice = new PersonBuilder(ALICE).withLastMet(VALID_LASTMET_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

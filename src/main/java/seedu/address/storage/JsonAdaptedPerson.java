@@ -74,7 +74,7 @@ class JsonAdaptedPerson {
         disposableIncome = source.getDisposableIncome().value;
         riskAppetite = source.getRiskAppetite().value;
         currentPlan = source.getCurrentPlan().value;
-        lastMet = source.getLastMet().value.toString();
+        lastMet = source.getLastMet().dateInString;
         tagged.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
