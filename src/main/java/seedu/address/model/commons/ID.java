@@ -14,6 +14,10 @@ public class ID {
         idCounter++;
     }
 
+    public ID(String idString) {
+        id = Integer.parseInt(idString);
+    }
+
     public int getId() {
         return id;
     }
