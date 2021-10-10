@@ -8,11 +8,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -23,19 +23,19 @@
         <URL value="@Fonts.css" />
         <URL value="@HelpWindow.css" />
       </stylesheets>
-         <AnchorPane prefHeight="589.0" prefWidth="549.0">
+         <AnchorPane prefHeight="616.0" prefWidth="573.0">
             <children>
-               <TableView fx:id="table" fixedCellSize="0.0" layoutY="-1.0" minHeight="527.0" minWidth="552.0">
+               <TableView fx:id="table" fixedCellSize="0.0" layoutY="-1.0" minHeight="527.0" minWidth="552.0" prefHeight="537.0" prefWidth="575.0">
                  <columns>
                    <TableColumn fx:id="action" prefWidth="111.0" reorderable="false" text="Action" />
-                   <TableColumn fx:id="format" prefWidth="215.0" reorderable="false" text="Format" />
-                     <TableColumn fx:id="example" prefWidth="225.0" reorderable="false" text="Example" />
+                   <TableColumn fx:id="format" prefWidth="232.0" reorderable="false" text="Format" />
+                     <TableColumn fx:id="example" prefWidth="229.0" reorderable="false" text="Example" />
                  </columns>
                   <opaqueInsets>
                      <Insets />
                   </opaqueInsets>
                </TableView>
-            <HBox alignment="CENTER" layoutY="525.0" prefHeight="64.0" prefWidth="551.0" style="-fx-background-color: D3DAFB50;">
+            <HBox alignment="CENTER" layoutX="1.0" layoutY="536.0" prefHeight="80.0" prefWidth="572.0" style="-fx-background-color: D3DAFB50;">
               <children>
                 <Label fx:id="helpMessage" text="Label" textFill="#424874" wrapText="true" HBox.hgrow="ALWAYS">
                     <padding>
