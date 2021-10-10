@@ -24,26 +24,26 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com").withNationality("Malaysia ")
-            .withTutorialGroup("05").withSocialHandle("@carl").build();
+            .withTutorialGroup("05").withSocialHandle("@carlk").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withNationality("Thailand ")
-            .withTutorialGroup("09").withSocialHandle("@daniel")
+            .withTutorialGroup("09").withSocialHandle("@danielm")
             .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withNationality("USA ").withTutorialGroup("29")
-            .withSocialHandle("@elle").build();
+            .withSocialHandle("@ellem").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withNationality("Australia ").withTutorialGroup("19")
-            .withSocialHandle("@fiona").build();
+            .withSocialHandle("@fionak").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withNationality("Vietnam ").withTutorialGroup("28")
-            .withSocialHandle("@george").build();
+            .withSocialHandle("@georgeb").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withNationality("India ").withSocialHandle("@hoon").build();
+            .withEmail("stefan@example.com").withNationality("India ").withSocialHandle("@hoonm").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withNationality("China ").withSocialHandle("@ida").build();
+            .withEmail("hans@example.com").withNationality("China ").withSocialHandle("@idam").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
