@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents an Applicant's address in the MTR system.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
