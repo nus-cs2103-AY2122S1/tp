@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.folder.Folder;
+import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
 /**
@@ -121,6 +122,14 @@ public class ModelManager implements Model {
         updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
     }
 
+    /**
+     * Deletes a folder
+     */
+    public void deleteFolder(Folder folder) {
+        addressBook.deleteFolder(folder);
+        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+    }
+
     @Override
     public boolean hasFolder(Folder folder) {
         requireNonNull(folder);
@@ -128,9 +137,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteFolder(Folder folder) {
-        addressBook.deleteFolder(folder);
-        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+    public void addContactToFolder(Person target, FolderName folderName) {
+        requireAllNonNull(target, folderName);
+        addressBook.addContactToFolder(target, folderName);
     }
 
     //=========== Filtered Person List Accessors =============================================================

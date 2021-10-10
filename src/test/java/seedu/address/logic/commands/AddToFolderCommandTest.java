@@ -5,17 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,57 +25,55 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
-class CreateFolderCommandTest {
+public class AddToFolderCommandTest {
 
     @Test
-    public void constructor_nullFolder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new CreateFolderCommand(null));
+    public void constructor_nullFolderNameAndIndex_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddToFolderCommand(null, null));
     }
 
     @Test
-    public void execute_folderAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingFolderAdded modelStub = new ModelStubAcceptingFolderAdded();
-        Folder validFolder = new Folder(new FolderName("Folder 1"));
+    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        FolderName folderName = new FolderName("Folder 1");
+        Folder validFolder = new Folder(folderName);
+        Index index = ParserUtil.parseIndex("1");
+        CommandResult commandResult = new AddToFolderCommand(index, folderName).execute(modelStub);
 
-        CommandResult commandResult = new CreateFolderCommand(validFolder).execute(modelStub);
-
-        assertEquals(String.format(CreateFolderCommand.MESSAGE_SUCCESS, validFolder),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validFolder), modelStub.foldersAdded);
+        assertEquals(String.format(AddToFolderCommand.MESSAGE_SUCCESS, validFolder), commandResult.getFeedbackToUser());
     }
 
-    @Test
-    public void execute_duplicateFolder_throwsCommandException() {
-        Folder validFolder = new Folder(new FolderName("Folder 1"));
-        CreateFolderCommand createFolderCommand = new CreateFolderCommand(validFolder);
-        ModelStub modelStub = new ModelStubWithFolder(validFolder);
-
-        assertThrows(CommandException.class, () -> createFolderCommand.execute(modelStub));
-    }
 
     @Test
-    public void equals() {
-        Folder nus = new Folder(new FolderName("NUS"));
-        Folder cs = new Folder(new FolderName("CS"));
-        CreateFolderCommand addNusCommand = new CreateFolderCommand(nus);
-        CreateFolderCommand addCsCommand = new CreateFolderCommand(cs);
+    public void equals() throws ParseException {
+        FolderName cs2100FolderName = new FolderName("CS2100");
+        Folder cs2100 = new Folder(cs2100FolderName);
+        Index indexOne = ParserUtil.parseIndex("1");
+
+        FolderName cs2103FolderName = new FolderName("CS2103");
+        Folder cs2103 = new Folder(cs2103FolderName);
+        Index indexTwo = ParserUtil.parseIndex("2");
+
+        AddToFolderCommand addCS2100Command = new AddToFolderCommand(indexOne, cs2100FolderName);
+        AddToFolderCommand addCS2103Command = new AddToFolderCommand(indexTwo, cs2103FolderName);
 
         // same object -> returns true
-        assertTrue(addNusCommand.equals(addNusCommand));
+        assertTrue(addCS2100Command.equals(addCS2100Command));
 
         // same values -> returns true
-        CreateFolderCommand addNusCommandDuplicate = new CreateFolderCommand(nus);
-        assertTrue(addNusCommand.equals(addNusCommandDuplicate));
+        AddToFolderCommand addCS2100CommandDuplicate = new AddToFolderCommand(indexOne, cs2100FolderName);
+        assertTrue(addCS2100Command.equals(addCS2100CommandDuplicate));
 
         // different types -> returns false
-        assertFalse(addNusCommand.equals(1));
+        assertFalse(addCS2100Command.equals(1));
 
         // null -> returns false
-        assertFalse(addNusCommand.equals(null));
+        assertFalse(addCS2100Command.equals(null));
 
         // different folder -> returns false
-        assertFalse(addNusCommand.equals(addCsCommand));
+        assertFalse(addCS2100Command.equals(addCS2103Command));
     }
 
     /**
@@ -181,40 +181,28 @@ class CreateFolderCommandTest {
         }
     }
 
-    /**
-     * A Model stub that contains a single folder.
-     */
-    private class ModelStubWithFolder extends CreateFolderCommandTest.ModelStub {
-        private final Folder folder;
-
-        ModelStubWithFolder(Folder folder) {
-            requireNonNull(folder);
-            this.folder = folder;
-        }
-
-        @Override
-        public boolean hasFolder(Folder folder) {
-            requireNonNull(folder);
-            return this.folder.isSameFolder(folder);
-        }
-    }
 
     /**
-     * A Model stub that always accept the folder being added.
+     * A Model stub with one Person inside Folder.
      */
-    private class ModelStubAcceptingFolderAdded extends CreateFolderCommandTest.ModelStub {
-        final ArrayList<Folder> foldersAdded = new ArrayList<>();
+    private class ModelStubAcceptingPersonAdded extends AddToFolderCommandTest.ModelStub {
+        final ObservableList<Person> personsAdded = FXCollections.observableArrayList(new PersonBuilder().build());
 
         @Override
-        public boolean hasFolder(Folder folder) {
-            requireNonNull(folder);
-            return foldersAdded.stream().anyMatch(folder::isSameFolder);
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
         }
 
         @Override
-        public void addFolder(Folder folder) {
-            requireNonNull(folder);
-            foldersAdded.add(folder);
+        public void addContactToFolder(Person target, FolderName folderName) {
+            requireAllNonNull(target, folderName);
+            personsAdded.add(target);
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            return personsAdded;
         }
 
         @Override

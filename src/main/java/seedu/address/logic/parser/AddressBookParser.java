@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddToFolderCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateFolderCommand;
@@ -68,6 +69,8 @@ public class AddressBookParser {
             return new HelpCommand();
         } else if (userInput.startsWith(CreateFolderCommand.COMMAND_WORD)) {
             return new CreateFolderCommandParser().parse(arguments);
+        } else if (userInput.startsWith(AddToFolderCommand.COMMAND_WORD)) {
+            return new AddToFolderParser().parse(arguments);
         } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

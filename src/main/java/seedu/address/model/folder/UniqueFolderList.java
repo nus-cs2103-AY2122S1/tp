@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.folder.exceptions.DuplicateFolderException;
 import seedu.address.model.folder.exceptions.FolderNotFoundException;
+import seedu.address.model.person.Person;
 
 /**
  * A list of folders that enforces uniqueness between its elements and does not allow nulls.
@@ -46,6 +47,21 @@ public class UniqueFolderList implements Iterable<Folder> {
             throw new DuplicateFolderException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a contact to the folder.
+     * The contact must not already exist in the folder.
+     */
+    public void addContact(Person contact, FolderName name) {
+        requireNonNull(contact);
+        for (int i = 0; i < internalList.size(); i++) {
+            Folder folder = internalList.get(i);
+            if (folder.getFolderName() == name) {
+                folder.addContacts(contact);
+                break;
+            }
+        }
     }
 
     /**
