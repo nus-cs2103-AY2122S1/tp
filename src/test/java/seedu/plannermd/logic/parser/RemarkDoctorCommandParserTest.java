@@ -3,31 +3,32 @@ package seedu.plannermd.logic.parser;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.RemarkCommand;
+import seedu.plannermd.logic.commands.remarkcommand.RemarkDoctorCommand;
 import seedu.plannermd.model.person.Remark;
 
-class RemarkCommandParserTest {
+public class RemarkDoctorCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkDoctorCommand.MESSAGE_USAGE);
 
-    private RemarkCommandParser parser = new RemarkCommandParser();
+    private RemarkDoctorCommandParser parser = new RemarkDoctorCommandParser();
 
     @Test
     public void parse_validArgs_returnsRemarkCommand() {
         //Non-empty remark
         assertParseSuccess(parser, "1" + REMARK_DESC_AMY,
-                new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY)));
+                new RemarkDoctorCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY)));
 
         //empty remark
-        assertParseSuccess(parser, "1" + REMARK_DESC_AMY,
-                new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY)));
+        assertParseSuccess(parser, "1 " + PREFIX_REMARK,
+                new RemarkDoctorCommand(INDEX_FIRST_PERSON, new Remark("")));
     }
 
     @Test
