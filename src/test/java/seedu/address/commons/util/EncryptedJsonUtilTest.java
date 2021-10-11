@@ -22,8 +22,10 @@ public class EncryptedJsonUtilTest {
         SerializableTestClass serializableTestClass = new SerializableTestClass();
         serializableTestClass.setTestValues();
 
-        assertEquals(FileUtil.readFromFile(SERIALIZATION_FILE),
-                SerializableTestClass.ENCRYPTED_JSON_STRING_REPRESENTATION);
+        EncryptedJsonUtil.serializeObjectToEncryptedJsonFile(SERIALIZATION_FILE, serializableTestClass);
+
+        assertEquals(EncryptionUtil.decryptSealedObject(FileUtil.readFromEncryptedFile(SERIALIZATION_FILE)),
+                SerializableTestClass.JSON_STRING_REPRESENTATION);
     }
 
     @Test
