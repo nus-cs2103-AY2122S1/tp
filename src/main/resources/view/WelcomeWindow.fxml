@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
-
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.ImageView?>
 <?import java.net.URL?>
+
 <fx:root resizable="false" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" type="javafx.stage.Stage">
     <scene>
         <Scene>
@@ -21,11 +18,6 @@
                     <children>
                         <ImageView fx:id="appLogo" fitHeight="240.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true"/>
                         <Label fx:id="appTagLine" text="Label">
-                            <!--
-                            <HBox.margin>
-                                <Insets right="5.0" left="5.0"/>
-                            </HBox.margin>
-                            -->
                         </Label>
                     </children>
                 </VBox>
