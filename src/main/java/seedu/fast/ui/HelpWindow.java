@@ -31,7 +31,7 @@ import seedu.fast.logic.commands.SortCommand;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t09-4.github.io/tp/";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "View our user guide: " + USERGUIDE_URL;
     public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
         "Edit", "Find", "List", "Help", "Remark", "Sort", "Misc"};
 
