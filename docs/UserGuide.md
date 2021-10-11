@@ -397,16 +397,16 @@ Square brackets `[]` refer to optional arguments.<p>
 *TODO: Make command action words below link to their entries above.*
 
 ### Person
-Action     | Format                                                                | Advanced Format
------------|-----------------------------------------------------------------------|--------------------------------------------------------------
-**Create** | `person (INDEX) /create [g:GROUP_NAME]`                               | `p (INDEX) /c [g:GROUP_NAME]`
-**Edit**   | `person (INDEX) /edit [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]` | `p (INDEX) /e [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]`
-**Delete** | `person (INDEX) /delete`                                              | `p (INDEX) /d`
-**Add**    | `person (INDEX) /add (g:GROUP_NAME) `                                 | `p (INDEX) /a (g:GROUP_NAME)`
-**Remove** | `person (INDEX) /remove (g:GROUP_NAME) `                              | `p (INDEX) /r (g:GROUP_NAME)`
-**Note**   | `person (INDEX) /note (NOTE)`                                         | `p (INDEX) /n (NOTE)`
-**List**   | `person /list [g:GROUP_NAME] [sg:SUBGROUP_NAME]`                      | `p /l [g:GROUP_NAME] [sg:SUBGROUP_NAME]`
-**Find**   | `person /find (n:QUERY)`                                              | `p /f (n:QUERY)`
+Action     | Format                                                                                 | Advanced Format
+-----------|----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------
+**Create** | `person (INDEX) /create [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_NAME]` | `p (INDEX) /c [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_NAME]`
+**Edit**   | `person (INDEX) /edit [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]`                  | `p (INDEX) /e [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]`
+**Delete** | `person (INDEX) /delete`                                                               | `p (INDEX) /d`
+**Add**    | `person (INDEX) /add (g:GROUP_NAME) `                                                  | `p (INDEX) /a (g:GROUP_NAME)`
+**Remove** | `person (INDEX) /remove (g:GROUP_NAME) `                                               | `p (INDEX) /r (g:GROUP_NAME)`
+**Note**   | `person (INDEX) /note (NOTE)`                                                          | `p (INDEX) /n (NOTE)`
+**List**   | `person /list [g:GROUP_NAME][:SUBGROUP_NAME]`                                          | `p /l [g:GROUP_NAME][:SUBGROUP_NAME]`
+**Find**   | `person /find (n:QUERY)`                                                               | `p /f (n:QUERY)`
 
 ### Group
 Action     | Format                             | Short Format
