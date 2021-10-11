@@ -18,7 +18,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaidCommand;
 import seedu.address.logic.commands.UnpaidCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -28,9 +28,9 @@ public class TutorAidParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddStudentCommand(person), command);
+        Student student = new PersonBuilder().build();
+        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(PersonUtil.getAddCommand(student));
+        assertEquals(new AddStudentCommand(student), command);
     }
 
     @Test

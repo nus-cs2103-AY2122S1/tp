@@ -24,9 +24,9 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Phone;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddStudentCommandParserTest {
@@ -34,35 +34,35 @@ public class AddStudentCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).build();
+        Student expectedStudent = new PersonBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB
-                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedPerson));
+                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, STUDENT_NAME_DESC_AMY + STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB
-                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedPerson));
+                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_AMY + STUDENT_PHONE_DESC_BOB
-                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedPerson));
+                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_AMY
-                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedPerson));
+                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB
-                + PARENT_PHONE_DESC_AMY + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedPerson));
+                + PARENT_PHONE_DESC_AMY + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withParentName("").build();
+        Student expectedStudent = new PersonBuilder(AMY).withParentName("").build();
         assertParseSuccess(parser, STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY + PARENT_PHONE_DESC_AMY,
-                new AddStudentCommand(expectedPerson));
+                new AddStudentCommand(expectedStudent));
     }
 
     @Test

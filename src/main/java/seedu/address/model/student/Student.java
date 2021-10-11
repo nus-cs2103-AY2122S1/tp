@@ -1,14 +1,14 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
 /**
- * Represents a Person in the TutorAid.
+ * Represents a Student in the TutorAid.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Student {
 
     // Identity fields
     private final StudentName studentName;
@@ -23,8 +23,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
-                  Progress progress, PaymentStatus paymentStatus) {
+    public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
+                   Progress progress, PaymentStatus paymentStatus) {
         requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
@@ -62,13 +62,13 @@ public class Person {
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Student otherStudent) {
+        if (otherStudent == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getStudentName().equals(getStudentName());
+        return otherStudent != null
+                && otherStudent.getStudentName().equals(getStudentName());
     }
 
     /**
@@ -81,17 +81,17 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Student)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getStudentName().equals(getStudentName())
-                && otherPerson.getStudentPhone().equals(getStudentPhone())
-                && otherPerson.getParentName().equals(getParentName())
-                && otherPerson.getParentPhone().equals(getParentPhone())
-                && otherPerson.getProgress().equals(getProgress())
-                && otherPerson.getPaymentStatus().equals(getPaymentStatus());
+        Student otherStudent = (Student) other;
+        return otherStudent.getStudentName().equals(getStudentName())
+                && otherStudent.getStudentPhone().equals(getStudentPhone())
+                && otherStudent.getParentName().equals(getParentName())
+                && otherStudent.getParentPhone().equals(getParentPhone())
+                && otherStudent.getProgress().equals(getProgress())
+                && otherStudent.getPaymentStatus().equals(getPaymentStatus());
     }
 
     @Override

@@ -17,7 +17,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -30,8 +30,8 @@ public class PaidCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person studentToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(true).build();
+        Student studentToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(true).build();
 
         PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON);
 
@@ -55,8 +55,8 @@ public class PaidCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person studentToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(true).build();
+        Student studentToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(true).build();
 
         PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON);
 
@@ -99,7 +99,7 @@ public class PaidCommandTest {
         // null -> returns false
         assertFalse(paidFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(paidFirstCommand.equals(paidSecondCommand));
     }
 }

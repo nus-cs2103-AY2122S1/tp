@@ -146,7 +146,7 @@ Adds a given string representing progress to a student with a given student inde
 Format: `add -p STUDENT_INDEX PROGRESS`
 
 * Adds `PROGRESS` for the student at the specified `STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -159,7 +159,7 @@ Removes the string representing progress from the student with a given student i
 Format: `del -p STUDENT_INDEX`
 
 * Deletes the `PROGRESS` for the student at the specified `STUDENT_INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:

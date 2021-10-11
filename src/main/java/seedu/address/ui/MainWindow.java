@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -110,8 +110,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the student's particulars of this window.
      */
     void fillPersonCard(boolean viewAll) {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), viewAll);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredPersonList(), viewAll);
+        personListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
     /**
@@ -170,8 +170,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudentListPanel getPersonListPanel() {
+        return studentListPanel;
     }
 
     /**

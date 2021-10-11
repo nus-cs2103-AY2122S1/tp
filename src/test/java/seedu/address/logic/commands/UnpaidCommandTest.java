@@ -18,7 +18,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -31,8 +31,8 @@ public class UnpaidCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person studentToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(false).build();
+        Student studentToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Student editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(false).build();
 
         UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_SECOND_PERSON);
 
@@ -83,7 +83,7 @@ public class UnpaidCommandTest {
         // null -> returns false
         assertFalse(unpaidFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(unpaidFirstCommand.equals(unpaidSecondCommand));
     }
 }

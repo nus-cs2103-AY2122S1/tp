@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Student}.
  */
-public class MinimalPersonCard extends UiPart<Region> {
+public class MinimalStudentCard extends UiPart<Region> {
 
-    private static final String FXML = "MinimalPersonListCard.fxml";
+    private static final String FXML = "MinimalStudentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,7 +21,7 @@ public class MinimalPersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
@@ -31,13 +31,13 @@ public class MinimalPersonCard extends UiPart<Region> {
     private Label id;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Student} and index to display.
      */
-    public MinimalPersonCard(Person person, int displayedIndex) {
+    public MinimalStudentCard(Student student, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getStudentName().fullName);
+        name.setText(student.getStudentName().fullName);
     }
 
     @Override
@@ -48,13 +48,13 @@ public class MinimalPersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MinimalPersonCard)) {
+        if (!(other instanceof MinimalStudentCard)) {
             return false;
         }
 
         // state check
-        MinimalPersonCard card = (MinimalPersonCard) other;
+        MinimalStudentCard card = (MinimalStudentCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && student.equals(card.student);
     }
 }

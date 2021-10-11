@@ -10,12 +10,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ParentName;
-import seedu.address.model.person.PaymentStatus;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Progress;
-import seedu.address.model.person.StudentName;
+import seedu.address.model.student.*;
+import seedu.address.model.student.Student;
 
 /**
  * Parses input arguments and creates a new AddStudentCommand object
@@ -45,9 +41,9 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Progress progress = new Progress("No Progress");
         PaymentStatus paymentStatus = new PaymentStatus(false);
 
-        Person person = new Person(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
+        Student student = new Student(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
 
-        return new AddStudentCommand(person);
+        return new AddStudentCommand(student);
     }
 
     /**

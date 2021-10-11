@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-public class PersonTest {
+public class StudentTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
@@ -23,7 +23,7 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withStudentPhone(VALID_STUDENT_PHONE_BOB)
+        Student editedAlice = new PersonBuilder(ALICE).withStudentPhone(VALID_STUDENT_PHONE_BOB)
                 .withParentName(VALID_PARENT_NAME_BOB).withParentPhone(VALID_PARENT_PHONE_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
@@ -32,7 +32,7 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withStudentName(VALID_STUDENT_NAME_BOB.toLowerCase()).build();
+        Student editedBob = new PersonBuilder(BOB).withStudentName(VALID_STUDENT_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
@@ -44,7 +44,7 @@ public class PersonTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
+        Student aliceCopy = new PersonBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
 
         // same object -> returns true
@@ -60,7 +60,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(BOB));
 
         // different student name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withStudentName(VALID_STUDENT_NAME_BOB).build();
+        Student editedAlice = new PersonBuilder(ALICE).withStudentName(VALID_STUDENT_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different student phone -> returns false

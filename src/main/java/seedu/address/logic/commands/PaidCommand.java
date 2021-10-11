@@ -9,8 +9,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.PaymentStatus;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.PaymentStatus;
+import seedu.address.model.student.Student;
 
 /**
  * Sets the payment status of the student identified using the displayed index in TutorAid, to
@@ -39,19 +39,19 @@ public class PaidCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
 
         if (studentToEdit.getPaymentStatus().hasPaid) {
             throw new CommandException(MESSAGE_ALREADY_PAID);
         }
 
-        Person editedStudent = new Person(
+        Student editedStudent = new Student(
                 studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
                 studentToEdit.getParentPhone(), studentToEdit.getProgress(), new PaymentStatus(true));
 

@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Adds a student to TutorAid.
@@ -32,14 +32,14 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
 
-    private final Person toAdd;
+    private final Student toAdd;
 
     /**
-     * Creates an AddStudentCommand to add the specified {@code Person}
+     * Creates an AddStudentCommand to add the specified {@code Student}
      */
-    public AddStudentCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddStudentCommand(Student student) {
+        requireNonNull(student);
+        toAdd = student;
     }
 
     @Override

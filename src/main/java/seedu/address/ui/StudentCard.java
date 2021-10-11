@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Student}.
  */
-public class PersonCard extends UiPart<Region> {
+public class StudentCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "StudentListCard.fxml";
 
     private static final String STUDENT_NAME_LABEL = "";
     private static final String STUDENT_PHONE_LABEL = "Mobile";
@@ -28,7 +28,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
@@ -49,18 +49,18 @@ public class PersonCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Student} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public StudentCard(Student student, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.student = student;
         id.setText(displayedIndex + ". ");
-        studentName.setText(formatCardLabel(STUDENT_NAME_LABEL, person.getStudentName().fullName));
-        studentPhone.setText(formatCardLabel(STUDENT_PHONE_LABEL, person.getStudentPhone().value));
-        parentName.setText(formatCardLabel(PARENT_NAME_LABEL, person.getParentName().fullName));
-        parentPhone.setText(formatCardLabel(PARENT_PHONE_LABEL, person.getParentPhone().value));
-        progress.setText(formatCardLabel(PROGRESS_LABEL, person.getProgress().toString()));
-        paymentStatus.setText(formatCardLabel(PAYMENT_STATUS_LABEL, person.getPaymentStatus().toString()));
+        studentName.setText(formatCardLabel(STUDENT_NAME_LABEL, student.getStudentName().fullName));
+        studentPhone.setText(formatCardLabel(STUDENT_PHONE_LABEL, student.getStudentPhone().value));
+        parentName.setText(formatCardLabel(PARENT_NAME_LABEL, student.getParentName().fullName));
+        parentPhone.setText(formatCardLabel(PARENT_PHONE_LABEL, student.getParentPhone().value));
+        progress.setText(formatCardLabel(PROGRESS_LABEL, student.getProgress().toString()));
+        paymentStatus.setText(formatCardLabel(PAYMENT_STATUS_LABEL, student.getPaymentStatus().toString()));
     }
 
     @Override
@@ -71,18 +71,18 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof StudentCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        StudentCard card = (StudentCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && student.equals(card.student);
     }
 
     /**
-     * Formats the text for a PersonCard to include both the name and value if present.
+     * Formats the text for a StudentCard to include both the name and value if present.
      * If the value is empty, it is displayed as (None).
      * If the name is empty, we will display only the value.
      *

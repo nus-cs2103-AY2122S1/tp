@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 /**
  * Represents a student's payment status in TutorAid.

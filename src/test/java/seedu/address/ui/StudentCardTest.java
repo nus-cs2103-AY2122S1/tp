@@ -1,13 +1,13 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.ui.PersonCard.formatCardLabel;
+import static seedu.address.ui.StudentCard.formatCardLabel;
 
 import org.junit.jupiter.api.Test;
 
 
 
-public class PersonCardTest {
+public class StudentCardTest {
 
     @Test
     public void formatCardLabel_emptyLabelEmptyField() {

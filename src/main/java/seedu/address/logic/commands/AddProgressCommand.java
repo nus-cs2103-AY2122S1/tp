@@ -9,8 +9,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Progress;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Progress;
 
 /**
  * Adds a progress to an exiting student in TutorAid. Updates the progress if one already exists.
@@ -20,7 +20,7 @@ public class AddProgressCommand extends Command {
     public static final String COMMAND_WORD = "add -p";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a progress for a student in TutorAid identified "
-            + "by the index number used in the last person listing. "
+            + "by the index number used in the last student listing. "
             + "Existing progress will be overwritten by the input.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
             + "PROGRESS\n"
@@ -44,14 +44,14 @@ public class AddProgressCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person studentToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Person editedStudent = new Person(
+        Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Student editedStudent = new Student(
                 studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
                 studentToEdit.getParentPhone(), this.progress, studentToEdit.getPaymentStatus());
 

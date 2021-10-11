@@ -4,16 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.ParentName;
-import seedu.address.model.person.PaymentStatus;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Progress;
-import seedu.address.model.person.StudentName;
+import seedu.address.model.student.*;
+import seedu.address.model.student.Student;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Student}.
  */
 class JsonAdaptedPerson {
 
@@ -27,7 +22,7 @@ class JsonAdaptedPerson {
     private final boolean hasPaid;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedPerson(
@@ -44,9 +39,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Student} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedPerson(Student source) {
         studentName = source.getStudentName().fullName;
         studentPhone = source.getStudentPhone().value;
         parentName = source.getParentName().fullName;
@@ -56,11 +51,11 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
-    public Person toModelType() throws IllegalValueException {
+    public Student toModelType() throws IllegalValueException {
         if (studentName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -95,7 +90,7 @@ class JsonAdaptedPerson {
 
         final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
 
-        return new Person(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
+        return new Student(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
                 modelProgress, modelPaymentStatus);
     }
 
