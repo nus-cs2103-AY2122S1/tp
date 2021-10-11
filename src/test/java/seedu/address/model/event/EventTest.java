@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_2;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_COPY_DIFFERENT_COMPLETION;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_COPY_DIFFERENT_DATE;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_COPY_DIFFERENT_NAME;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_COPY_DIFFERENT_PARTICIPANTS;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_COPY_DIFFERENT_TIME;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_DEFAULT_TIME_AND_COMPLETION;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION;
@@ -73,18 +77,21 @@ public class EventTest {
 
     @Test
     public void isSameEvent() {
-        // same name
+        // same name -> returns true
         assertTrue(SAMPLE_EVENT.isSameEvent(SAMPLE_EVENT));
         assertTrue(SAMPLE_EVENT.isSameEvent(SAMPLE_EVENT_COPY_DIFFERENT_TIME));
+
+        //null -> returns false
+        assertFalse(SAMPLE_EVENT.isSameEvent(null));
     }
 
     @Test
     public void testEquals() {
-        // same name but different other fields
-        assertFalse(SAMPLE_EVENT.equals(ANOTHER_EVENT));
-
         // same Event
         assertTrue(SAMPLE_EVENT.equals(SAMPLE_EVENT));
+
+        // same name but different other fields
+        assertFalse(SAMPLE_EVENT.equals(ANOTHER_EVENT));
 
         // different Event, identical details
         assertTrue(SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION
@@ -92,6 +99,21 @@ public class EventTest {
 
         // null -> returns false
         assertFalse(SAMPLE_EVENT.equals(null));
+
+        // different name
+        assertFalse(SAMPLE_EVENT.equals(SAMPLE_EVENT_COPY_DIFFERENT_NAME));
+
+        // different date
+        assertFalse(SAMPLE_EVENT.equals(SAMPLE_EVENT_COPY_DIFFERENT_DATE));
+
+        // different time
+        assertFalse(SAMPLE_EVENT.equals(SAMPLE_EVENT_COPY_DIFFERENT_TIME));
+
+        // different completion status
+        assertFalse(SAMPLE_EVENT.equals(SAMPLE_EVENT_COPY_DIFFERENT_COMPLETION));
+
+        // different participant list
+        assertFalse(SAMPLE_EVENT.equals(SAMPLE_EVENT_COPY_DIFFERENT_PARTICIPANTS));
 
         // TODO: If implementing edit Event, can add more testcases.
     }

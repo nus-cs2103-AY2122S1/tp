@@ -146,10 +146,10 @@ public class Event implements Comparable<Event> {
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
             return true;
-        } else {
-            return otherEvent != null
-                    && otherEvent.getName().equals(getName());
         }
+
+        return otherEvent != null
+                && otherEvent.getName().equals(getName());
     }
 
     /**
@@ -164,14 +164,14 @@ public class Event implements Comparable<Event> {
 
         if (!(other instanceof Event)) {
             return false;
-        } else {
-            Event otherEvent = (Event) other;
-            return otherEvent.getName().equals(getName())
-                    && otherEvent.getDate().equals(getDate())
-                    && otherEvent.getTime().equals(getTime())
-                    && otherEvent.getIsDone() == (getIsDone())
-                    && otherEvent.getParticipants().equals(getParticipants());
         }
+
+        Event otherEvent = (Event) other;
+        return otherEvent.getName().equals(getName())
+                && otherEvent.getDate().equals(getDate())
+                && otherEvent.getTime().equals(getTime())
+                && otherEvent.getIsDone() == (getIsDone())
+                && otherEvent.getParticipants().equals(getParticipants());
     }
 
     @Override
