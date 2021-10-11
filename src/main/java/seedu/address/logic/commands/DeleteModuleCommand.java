@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.student.Student;
 
 /**
@@ -24,10 +25,10 @@ public class DeleteModuleCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private final ModuleName moduleName;
 
-    public DeleteModuleCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteModuleCommand(ModuleName moduleName) {
+        this.moduleName = moduleName;
     }
 
     @Override
