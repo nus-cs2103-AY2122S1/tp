@@ -11,18 +11,19 @@ import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientDescriptorTest {
-    Name name = new Name("John Doe");
-    PhoneNumber phoneNumber = new PhoneNumber("12345678");
-    AddClientCommand.AddClientDescriptor descriptor = new AddClientCommand.AddClientDescriptor(name, phoneNumber);
+    private Name name = new Name("John Doe");
+    private PhoneNumber phoneNumber = new PhoneNumber("12345678");
+    private AddClientCommand.AddClientDescriptor descriptor =
+            new AddClientCommand.AddClientDescriptor(name, phoneNumber);
 
     @Test
     public void getName_hasName_nameReturned() {
-        assertEquals(descriptor.getName(), name);
+        assertEquals(name, descriptor.getName());
     }
 
     @Test
     public void getPhoneNumber_hasPhoneNumber_phoneNumberReturned() {
-        assertEquals(descriptor.getPhoneNumber(), phoneNumber);
+        assertEquals(phoneNumber, descriptor.getPhoneNumber());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class AddClientDescriptorTest {
     public void getEmail_hasEmail_emailReturned() {
         Email email = new Email("john.doe@email.example.com");
         descriptor.setEmail(email);
-        assertEquals(descriptor.getEmail(), email);
+        assertEquals(email, descriptor.getEmail());
     }
 
     @Test
@@ -46,6 +47,6 @@ public class AddClientDescriptorTest {
     public void getAddress_hasAddress_addressReturned() {
         Address address = new Address("Earth");
         descriptor.setAddress(address);
-        assertEquals(descriptor.getAddress(), address);
+        assertEquals(address, descriptor.getAddress());
     }
 }
