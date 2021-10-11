@@ -1,13 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.nio.file.Path;
+
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import java.nio.file.Path;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+/**
+ * Imports and Merges a Json file to address book
+ */
 
 public class ImportCommand extends Command {
 
@@ -24,7 +28,10 @@ public class ImportCommand extends Command {
 
     private final Path filePath;
 
-    public ImportCommand(Path filePath){
+    /**
+     * Creates a Import Command to merge a json file with the address book
+     */
+    public ImportCommand(Path filePath) {
         requireAllNonNull(filePath);
         this.filePath = filePath;
     }
