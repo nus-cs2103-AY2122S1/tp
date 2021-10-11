@@ -72,7 +72,7 @@ public class PersonDetails extends UiPart<Region> {
             address.setText(person.getAddress().value);
         }
         if (person.getEmail().value.isBlank()) {
-            address.setText("-");
+            email.setText("-");
         } else {
             email.setText(person.getEmail().value);
         }

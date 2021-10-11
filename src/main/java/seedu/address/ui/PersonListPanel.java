@@ -17,6 +17,7 @@ import seedu.address.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final PersonDetails personDetails;
 
     @FXML
     private ListView<Person> personListView;
@@ -26,23 +27,30 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList, PersonDetails personDetails) {
         super(FXML);
+        this.personDetails = personDetails;
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.getSelectionModel().selectedItemProperty().addListener((
                 observable, oldValue, newValue
         ) -> personDetails.setPerson(newValue));
+
+        setSelectedIndex(0);
+        personListView.getItems().addListener((ListChangeListener<? super Person>) observable -> {
+            setSelectedIndex(0);
+        });
+    }
+
+    public void setSelectedIndex(int index) {
         if (!personListView.getItems().isEmpty()) {
-            personListView.getSelectionModel().select(0);
+            personListView.getSelectionModel().select(index);
+            personListView.scrollTo(index);
         } else {
             personDetails.setPerson(null);
         }
-        personListView.getItems().addListener((ListChangeListener<? super Person>) observable -> {
-            if (!personListView.getItems().isEmpty()) {
-                personListView.getSelectionModel().select(0);
-            } else {
-                personDetails.setPerson(null);
-            }
-        });
+    }
+
+    public int getSelectedIndex() {
+        return personListView.getSelectionModel().getSelectedIndex();
     }
 
     /**

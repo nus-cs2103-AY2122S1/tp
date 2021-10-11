@@ -22,6 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.PersonListPanel;
 
 public class AddCommandTest {
 
@@ -145,6 +146,21 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedIndex(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getSelectedIndex() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPersonListControl(PersonListPanel personListPanel) {
             throw new AssertionError("This method should not be called.");
         }
     }

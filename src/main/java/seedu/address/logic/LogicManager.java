@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+import seedu.address.ui.PersonListPanel;
 
 /**
  * The main LogicManager of the app.
@@ -77,5 +78,20 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public int getSelectedIndex() {
+        return model.getSelectedIndex();
+    }
+
+    @Override
+    public void setSelectedIndex(int index) {
+        model.setSelectedIndex(index);
+    }
+
+    @Override
+    public void setPersonList(PersonListPanel personListPanel) {
+        model.setPersonListControl(personListPanel);
     }
 }
