@@ -327,7 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Notes**: A short paragraph that is written for a person to remind the user about details of that person
-* **Above average typing speed**: More than 40 words per minute
+* **Client**: A person the user is selling or trying to sell insurance to
 
 --------------------------------------------------------------------------------------------------------------------
 
