@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -33,6 +34,12 @@ public class EnrollCommandTest {
             DayOfWeek.WEDNESDAY,
             LocalTime.of(12, 30),
             0.0);
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
+
     @Test
     public void execute_validEnrollment_success() throws CommandException {
         Student studentToEnroll = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

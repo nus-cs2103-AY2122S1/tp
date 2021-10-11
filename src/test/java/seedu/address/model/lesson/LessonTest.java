@@ -135,7 +135,8 @@ public class LessonTest {
     public void removeStudent() {
         Student toRemove = new PersonBuilder().build();
         // student not present
-        defaultLesson.removeStudent(toRemove);
+        String notPresentMessage = String.format(Lesson.STUDENT_NOT_ENROLLED, toRemove, defaultLesson);
+        assertThrows(IllegalArgumentException.class, notPresentMessage, () -> defaultLesson.removeStudent(toRemove));
         assertEquals(0, defaultLesson.getLessonSize());
 
         // student present and to remove
