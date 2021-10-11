@@ -270,4 +270,13 @@ public class ParserUtilTest {
         Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATETIME);
         assertEquals(expectedLastVisit, parseLastVisit(visitWithWhitespace));
     }
+
+
+    @Test
+    public void parseDisplayedDatetime() {
+        // parse datetime valid
+        String storedDate = "2021-02-01 23:59";
+        String displayedDate = "01 Feb 2021 23:59";
+        assertEquals(displayedDate, ParserUtil.parseDisplayedDatetime(storedDate));
+    }
 }

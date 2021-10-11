@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.parser.ParserUtil;
+
 /**
  * Represents a Person's visit in the address book.
  * Guarantees: immutable; is always valid
@@ -42,6 +44,18 @@ public class Visit {
     public boolean hasVisit() {
         return !(this.value == null || this.value.isEmpty());
     }
+
+    /**
+     * Returns formatted last visit date.
+     */
+    public String getFormatted() {
+        if (!hasVisit()) {
+            return value;
+        }
+
+        return ParserUtil.parseDisplayedDatetime(value);
+    }
+
 
     @Override
     public String toString() {

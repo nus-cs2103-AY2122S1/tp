@@ -55,7 +55,7 @@ public class DoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NO_SCHEDULED_VISIT);
         }
 
-        String newLastVisitedDate = personToDone.getVisit().toString();
+        String newLastVisitedDate = personToDone.getVisit().orElse(new Visit("")).toString();
         Visit newLastVisit = personToDone.getVisit().get();
         Optional<LastVisit> newLastVisited = Optional.of(new LastVisit(newLastVisitedDate));
 
