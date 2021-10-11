@@ -28,7 +28,7 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
     public AddClassCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LIMIT,
-                        PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT);
+                        PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LIMIT,
                 PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT)
