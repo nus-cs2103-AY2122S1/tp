@@ -32,7 +32,7 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         label.setText(task.getLabel().toString());
-        date.setText(task.getDate().parsedDate);
+        date.setText("Deadline:  " + task.getDate().parsedDate);
         isDone.setSelected(task.getIsDone());
     }
 
