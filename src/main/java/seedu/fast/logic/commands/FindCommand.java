@@ -5,6 +5,10 @@ import static java.util.Objects.requireNonNull;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.Person;
+import seedu.fast.model.person.PriorityPredicate;
+
+import java.util.function.Predicate;
 
 /**
  * Finds and lists all persons in FAST whose name contains any of the argument keywords.
@@ -16,13 +20,20 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) or priority tags \n"
+            + "and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "OR pr/PRIORITY [MORE_PRIORITIES]...\n"
+            + "Examples: " + COMMAND_WORD + " alice bob charlie\n"
+            + COMMAND_WORD + " pr/low medium\n";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Person> predicate;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    public FindCommand(PriorityPredicate predicate) {
         this.predicate = predicate;
     }
 
