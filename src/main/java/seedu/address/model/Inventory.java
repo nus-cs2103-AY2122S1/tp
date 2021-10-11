@@ -22,7 +22,8 @@ public class Inventory implements ReadOnlyInventory {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         items = new UniqueItemList();
     }
 
