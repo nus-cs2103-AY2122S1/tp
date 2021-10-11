@@ -34,16 +34,20 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withPhone("98765432").withRevenue("0.00f")
             .withTags("owesMoney", "friends").withNote("Has cancer").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withRevenue("0.00f").withEmail("heinz@example.com").withAddress("wall street").withNote("Has dementia").build();
+            .withRevenue("0.00f").withEmail("heinz@example.com").withAddress("wall street")
+            .withNote("Has dementia").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withRevenue("0.00f").withEmail("cornelia@example.com").withAddress("10th street")
             .withTags("friends").withNote("Has diabetes").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withRevenue("0.00f").withEmail("werner@example.com").withAddress("michegan ave").withNote("Has wrist pain").build();
+            .withRevenue("0.00f").withEmail("werner@example.com").withAddress("michegan ave")
+            .withNote("Has wrist pain").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withRevenue("0.00f").withEmail("lydia@example.com").withAddress("little tokyo").withNote("Has migraines").build();
+            .withRevenue("0.00f").withEmail("lydia@example.com").withAddress("little tokyo")
+            .withNote("Has migraines").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withRevenue("0.00f").withEmail("anna@example.com").withAddress("4th street").withNote("Has covid").build();
+            .withRevenue("0.00f").withEmail("anna@example.com").withAddress("4th street")
+            .withNote("Has covid").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

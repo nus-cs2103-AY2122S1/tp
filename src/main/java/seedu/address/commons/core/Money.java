@@ -1,7 +1,5 @@
 package seedu.address.commons.core;
 
-import seedu.address.model.person.Revenue;
-
 public class Money {
     private static final float CONVERT_BETWEEN_CURRENCY = 100f;
     private int cents;
