@@ -132,7 +132,11 @@ public class ModelManager implements Model {
     @Override
     public void filterFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate.and(filteredPersons.getPredicate()));
+        Predicate<? super Person> currentPredicate = filteredPersons.getPredicate();
+        if (currentPredicate == null) {
+            currentPredicate = PREDICATE_SHOW_ALL_PERSONS;
+        }
+        filteredPersons.setPredicate(predicate.and(currentPredicate));
     }
 
     @Override
