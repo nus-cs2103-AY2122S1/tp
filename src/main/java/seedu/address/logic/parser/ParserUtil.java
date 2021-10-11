@@ -17,6 +17,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.EnrollCommand;
 import seedu.address.logic.commands.UnenrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -32,6 +33,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_TIME = "Time formatting is invalid.";
     public static final String MESSAGE_INVALID_DAY = "Day formatting is invalid.";
+    public static final String MESSAGE_INVALID_COST_NOT_NUMBER = "Cost formating is invalid, it is not a number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -216,5 +218,47 @@ public class ParserUtil {
             lessonCode = argMultimap.getValue(PREFIX_LESSON).get().trim();
         }
         return new EnrollCommand(index, lessonCode);
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code String subject}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param args Subject
+     * @throws ParseException if the given {@code subject} is invalid
+     */
+    public static String parseSubjectArgs(String args) throws ParseException {
+        requireNonNull(args);
+        String trimmedSubject = args.trim();
+
+        if (!Lesson.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Lesson.SUBJECT_MESSAGE_CONSTRAINTS);
+        }
+
+        return trimmedSubject;
+    }
+
+    /**
+     * Parses a {@code String cost} into a {@code double cost}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cost} is invalid
+     */
+    public static double parseCostArgs(String args) throws ParseException {
+        requireNonNull(args);
+        String trimmedCost = args.trim();
+        double cost;
+
+        try {
+            cost = Double.parseDouble(args);
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_COST_NOT_NUMBER);
+        }
+
+        if (!Lesson.isValidPrice(cost)) {
+            throw new ParseException(Lesson.PRICE_MESSAGE_CONSTRAINT);
+        }
+
+        return cost;
     }
 }
