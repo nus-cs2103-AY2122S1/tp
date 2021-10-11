@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
@@ -57,70 +58,82 @@ public class AddAllocCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
 
-        Optional<Group> groupToAlloc = allocDescriptor.getGroup();
-        Optional<List<Student>> studentsToAlloc = getAllocStudents(lastShownList, allocDescriptor);
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        List<Group> groupList = addressBook.getGroupList();
+        List<Student> studentList = addressBook.getStudentList();
 
-        assert groupToAlloc.isPresent();
-        Group checkedGroup = groupToAlloc.get();
+        assert allocDescriptor.getGroup().isPresent();
+        Group groupToEdit = getAllocGroup(groupList, allocDescriptor);
+        List<Student> studentsToEdit = getAllocStudents(studentList, allocDescriptor);
 
-        if (!model.hasGroup(checkedGroup)) {
+        if (!groupList.contains(groupToEdit)) {
             throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
         }
 
-        if (studentsToAlloc.isEmpty()) {
+        if (studentsToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
 
-        if (studentsToAlloc.get().size() > 1) {
+        if (studentsToEdit.size() > 1) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_NAME);
         }
 
-        Student checkedStudent = studentsToAlloc.get().get(0);
+        Student studentToEdit = studentsToEdit.get(0);
 
-        if (checkedGroup.hasStudent(checkedStudent)) {
+        if (groupToEdit.hasStudent(studentToEdit.getId())) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        Student updatedStudent = createAllocStudents(checkedStudent, allocDescriptor);
+        Student editedStudent = createEditedStudents(studentToEdit, allocDescriptor);
 
-        model.addStudentToGroup(checkedGroup, checkedStudent);
-        model.setStudent(checkedStudent, updatedStudent);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, updatedStudent));
+        groupToEdit.addStudent(editedStudent.getId());
+        model.setStudent(studentToEdit, editedStudent);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent));
     }
 
     /**
      * Get and returns a list of {@code Student} with matching identity specified in the {@code allocDescriptor}.
      */
-    public static Optional<List<Student>> getAllocStudents(List<Student> students, AllocDescriptor allocDescriptor) {
-        List<Student> allocStudents = students.stream()
-                .filter(allocDescriptor.isAllocStudent())
+    public static Group getAllocGroup(List<Group> groups, AllocDescriptor allocDescriptor) {
+        List<Group> allocGroups = groups.stream()
+                .filter(allocDescriptor.isAllocGroup())
                 .collect(Collectors.toList());
-        return Optional.of(Collections.unmodifiableList(allocStudents));
+        assert allocGroups.size() == 1;
+        return allocGroups.get(0);
     }
 
     /**
-     * Create and returns a {@code Student} with the details of {@code preAllocStudent}
+     * Get and returns a list of {@code Student} with matching identity specified in the {@code allocDescriptor}.
+     */
+    public static List<Student> getAllocStudents(List<Student> students, AllocDescriptor allocDescriptor) {
+        List<Student> allocStudents = students.stream()
+                .filter(allocDescriptor.isAllocStudent())
+                .collect(Collectors.toList());
+        return Collections.unmodifiableList(allocStudents);
+    }
+
+    /**
+     * Creates and returns a {@code Student} with the details of {@code preAllocStudent}
      * allocated to the group specified in the {@code allocDescriptor}.
      */
-    public static Student createAllocStudents(Student preAllocStudent, AllocDescriptor allocDescriptor) {
-        assert preAllocStudent != null;
+    public static Student createEditedStudents(Student toEditStudent, AllocDescriptor allocDescriptor) {
+        assert toEditStudent != null;
         assert allocDescriptor.getGroup().isPresent();
 
-        Name name = preAllocStudent.getName();
-        ID id = preAllocStudent.getId();
-        List<Group> groups = preAllocStudent.getGroups();
-        Map<Assessment, Score> scores = preAllocStudent.getScores();
-        Set<Tag> tags = preAllocStudent.getTags();
+        Name name = toEditStudent.getName();
+        ID id = toEditStudent.getId();
+        List<Group> groups = toEditStudent.getGroups();
+        Map<Assessment, Score> scores = toEditStudent.getScores();
+        Set<Tag> tags = toEditStudent.getTags();
 
-        Group groupToAlloc = allocDescriptor.getGroup().get();
-        assert !groups.contains(groupToAlloc);
+        Group groupToEdit = allocDescriptor.getGroup().get();
+        assert !groups.contains(groupToEdit);
 
-        List<Group> updatedGroups = new ArrayList<>(groups);
-        updatedGroups.add(groupToAlloc);
+        List<Group> editedGroups = new ArrayList<>(groups);
+        editedGroups.add(groupToEdit);
 
-        return new Student(name, id, updatedGroups, scores, tags);
+        return new Student(name, id, editedGroups, scores, tags);
     }
 
     @Override
@@ -172,6 +185,13 @@ public class AddAllocCommand extends Command {
 
         public Optional<Group> getGroup() {
             return Optional.ofNullable(group);
+        }
+
+        /**
+         * Returns a {@code Predicate} checking if a group have a matched name.
+         */
+        public Predicate<Group> isAllocGroup() {
+            return toCheck -> toCheck.equals(group);
         }
 
         /**
