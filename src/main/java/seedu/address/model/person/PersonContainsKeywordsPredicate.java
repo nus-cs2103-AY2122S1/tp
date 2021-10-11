@@ -36,24 +36,24 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         );
 
         boolean checkName = keywords.getValue(PREFIX_NAME)
-            .map(x -> containsIgnoreCase(person.getName().fullName, x)).orElse(true);
+                .map(x -> containsIgnoreCase(person.getName().fullName, x)).orElse(true);
         boolean checkPhone = keywords.getValue(PREFIX_PHONE)
-            .map(x -> containsIgnoreCase(person.getPhone().value, x)).orElse(true);
+                .map(x -> containsIgnoreCase(person.getPhone().value, x)).orElse(true);
         boolean checkEmail = keywords.getValue(PREFIX_EMAIL)
-            .map(x -> containsIgnoreCase(person.getEmail().value, x)).orElse(true);
+                .map(x -> containsIgnoreCase(person.getEmail().value, x)).orElse(true);
         boolean checkAddress = keywords.getValue(PREFIX_ADDRESS)
-            .map(x -> containsIgnoreCase(person.getAddress().value, x)).orElse(true);
+                .map(x -> containsIgnoreCase(person.getAddress().value, x)).orElse(true);
         boolean checkTags = keywords.getValue(PREFIX_TAG)
-            .map(x -> person.getTags().stream().anyMatch(y -> containsIgnoreCase(y.tagName, x))).orElse(true);
-
+                .map(x -> person.getTags().stream().anyMatch(y -> containsIgnoreCase(y.tagName, x))).orElse(true);
         return checkGeneral && checkName && checkPhone && checkEmail && checkAddress && checkTags;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof PersonContainsKeywordsPredicate // instanceof handles nulls
-            && keywords.equals(((PersonContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof PersonContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((PersonContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }
+
