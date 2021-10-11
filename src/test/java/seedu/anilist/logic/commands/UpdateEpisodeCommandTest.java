@@ -1,6 +1,19 @@
 package seedu.anilist.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ONE;
+import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ZERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
+import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
+import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.model.AnimeList;
@@ -9,25 +22,7 @@ import seedu.anilist.model.ModelManager;
 import seedu.anilist.model.UserPrefs;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.testutil.AnimeBuilder;
-import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 import seedu.anilist.testutil.EpisodeDescriptorBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.DESC_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.DESC_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ONE;
-import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ZERO;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_ONE;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
-import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
-import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
 
 public class UpdateEpisodeCommandTest {
 

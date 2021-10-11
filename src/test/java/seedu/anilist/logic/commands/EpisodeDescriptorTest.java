@@ -1,13 +1,14 @@
 package seedu.anilist.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.anilist.testutil.EpisodeDescriptorBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_EPISODE_ZERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.anilist.testutil.EpisodeDescriptorBuilder;
 
 public class EpisodeDescriptorTest {
     @Test

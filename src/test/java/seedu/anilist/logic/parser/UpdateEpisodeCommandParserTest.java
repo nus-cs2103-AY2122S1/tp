@@ -1,25 +1,23 @@
 package seedu.anilist.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.anilist.commons.core.index.Index;
-import seedu.anilist.logic.commands.UpdateEpisodeCommand;
-import seedu.anilist.model.anime.Episode;
-import seedu.anilist.testutil.EpisodeDescriptorBuilder;
-
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_TWO;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_DECIMAL;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_NEG;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 
-public class UpdateEpisodeCommandParserTest {
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+import org.junit.jupiter.api.Test;
 
+import seedu.anilist.commons.core.index.Index;
+import seedu.anilist.logic.commands.UpdateEpisodeCommand;
+import seedu.anilist.model.anime.Episode;
+import seedu.anilist.testutil.EpisodeDescriptorBuilder;
+
+public class UpdateEpisodeCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
         String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateEpisodeCommand.MESSAGE_USAGE);
 

@@ -1,10 +1,10 @@
 package seedu.anilist.model.anime;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class EpisodeTest {
     @Test

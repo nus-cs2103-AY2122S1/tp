@@ -1,7 +1,6 @@
 package seedu.anilist.testutil;
 
 import seedu.anilist.logic.commands.UpdateEpisodeCommand;
-import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 
 public class EpisodeDescriptorBuilder {

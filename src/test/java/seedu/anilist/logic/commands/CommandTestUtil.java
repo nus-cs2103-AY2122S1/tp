@@ -42,7 +42,8 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Akira&"; // '&' not allowed in names
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "shounen*"; // '*' not allowed in tags
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + "-1"; // '-' not allowed in episode
-    public static final String INVALID_EPISODE_DESC_DECIMAL = " " + PREFIX_EPISODE + "0.1"; // '.' not allowed in episode
+    public static final String INVALID_EPISODE_DESC_DECIMAL = " "
+        + PREFIX_EPISODE + "0.1"; // '.' not allowed in episode
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
