@@ -57,6 +57,7 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         id.setText(displayIndex + ". ");
         lessonCode.setText(lesson.getLessonCode());
+        lessonCode.setUnderline(true);
         subject.setText(String.format(STRING_FORMAT_SUBJECT, lesson.getSubject()));
         grade.setText(String.format(STRING_FORMAT_GRADE, lesson.getGrade().value));
         dayOfWeek.setText(String.format(

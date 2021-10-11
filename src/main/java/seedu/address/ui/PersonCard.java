@@ -59,6 +59,7 @@ public class PersonCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
+        name.setUnderline(true);
         parentContact.setText(String.format(STRING_FORMAT_PARENT_CONTACT, student.getParentContact().value));
         address.setText(String.format(STRING_FORMAT_ADDRESS, student.getAddress().value));
         email.setText(String.format(STRING_FORMAT_EMAIL, student.getEmail().value));
