@@ -15,6 +15,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -75,9 +76,10 @@ public class ScheduleCommand extends Command {
         Email originalEmail = personToMeet.getEmail();
         Address originalAddress = personToMeet.getAddress();
         Set<Tag> originalTags = personToMeet.getTags();
+        Note originalNote = personToMeet.getNote();
 
         return new Person(originalName, originalPhone, originalEmail,
-                originalAddress, originalTags, desiredAppointment);
+                originalAddress, originalTags, originalNote, desiredAppointment);
     }
 
     @Override

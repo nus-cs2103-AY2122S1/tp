@@ -25,13 +25,15 @@ public class Person {
     private final Revenue revenue;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Note note;
     private final Appointment appointment;
 
     /**
      * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not statedd.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Appointment appointment) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Note note, Appointment appointment) {
+        requireAllNonNull(name, phone, email, address, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +55,7 @@ public class Person {
         this.revenue = revenue;
         this.address = address;
         this.tags.addAll(tags);
+        this.note = note;
         this.appointment = appointment;
     }
 
@@ -74,6 +77,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     public Appointment getAppointment() {
@@ -121,13 +128,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getRevenue().equals(getRevenue())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getNote().equals(getNote());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, revenue, address, tags);
+        return Objects.hash(name, phone, email, revenue, address, tags, note);
     }
 
     @Override
@@ -142,9 +150,10 @@ public class Person {
                 .append(getRevenue())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Note: ")
+                .append(getNote())
                 .append("; Meeting: ")
                 .append(getAppointment());
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

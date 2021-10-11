@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -23,6 +24,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Revenue;
@@ -43,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_NOTE + "NOTE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -98,12 +101,14 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Revenue updatedRevenue = personToEdit.getRevenue();
+        Revenue originalRevenue = personToEdit.getRevenue();
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Appointment originalAppointment = personToEdit.getAppointment();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedRevenue, updatedAddress, updatedTags, originalAppointment);
+        return new Person(updatedName, updatedPhone, updatedEmail, originalRevenue
+                updatedAddress, updatedTags, updatedNote, originalAppointment);
     }
 
     @Override
@@ -135,6 +140,7 @@ public class EditCommand extends Command {
         private Revenue revenue;
         private Address address;
         private Set<Tag> tags;
+        private Note note;
 
         public EditPersonDescriptor() {}
 
@@ -149,6 +155,7 @@ public class EditCommand extends Command {
             setRevenue(toCopy.revenue);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setNote(toCopy.note);
         }
 
         /**
@@ -215,6 +222,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -235,7 +250,8 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getRevenue().equals(e.getRevenue())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getNote().equals(e.getNote());
         }
     }
 }

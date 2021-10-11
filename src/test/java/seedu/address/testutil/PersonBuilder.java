@@ -8,6 +8,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Revenue;
@@ -24,6 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final Money DEFAULT_REVENUE = new Money(0);
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_MEETING = "";
 
     private Name name;
@@ -32,6 +34,7 @@ public class PersonBuilder {
     private Revenue revenue;
     private Address address;
     private Set<Tag> tags;
+    private Note note;
     private Appointment appointment;
 
     /**
@@ -44,6 +47,7 @@ public class PersonBuilder {
         revenue = new Revenue(DEFAULT_REVENUE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        note = new Note(DEFAULT_NOTE);
         appointment = new Appointment(DEFAULT_MEETING);
     }
 
@@ -57,6 +61,7 @@ public class PersonBuilder {
         revenue = personToCopy.getRevenue();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        note = personToCopy.getNote();
         appointment = personToCopy.getAppointment();
     }
 
@@ -110,6 +115,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
+    /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      */
     public PersonBuilder withAppointment(Appointment appointment) {
@@ -118,7 +131,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, revenue, address, tags, appointment);
+        return new Person(name, phone, email, revenue, address, tags, note, appointment);
     }
 
 }
