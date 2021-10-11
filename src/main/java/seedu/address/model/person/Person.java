@@ -18,7 +18,7 @@ public class Person {
     // Identity fields
     private final Name name;
     private final GitHubId gitHubId;
-    private  final NusNetworkId nusNetworkId;
+    private final NusNetworkId nusNetworkId;
     private final Type type;
     private final StudentId studentId;
     private final Email email;
@@ -71,15 +71,25 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public GitHubId getGitHubId() {return gitHubId;}
+    public GitHubId getGitHubId() {
+        return gitHubId;
+    }
 
-    public NusNetworkId getNusNetworkId() {return nusNetworkId;}
+    public NusNetworkId getNusNetworkId() {
+        return nusNetworkId;
+    }
 
-    public Type getType() {return type;}
+    public Type getType() {
+        return type;
+    }
 
-    public StudentId getStudentId() {return studentId;}
+    public StudentId getStudentId() {
+        return studentId;
+    }
 
-    public TutorialId getTutorialId() {return tutorialId;}
+    public TutorialId getTutorialId() {
+        return tutorialId;
+    }
 
     /**
      * Returns true if both persons have the same name.

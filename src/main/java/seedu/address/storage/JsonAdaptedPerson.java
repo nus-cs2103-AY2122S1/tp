@@ -10,7 +10,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.GitHubId;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NusNetworkId;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TutorialId;
+import seedu.address.model.person.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,7 +47,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("gitHubId") String gitHubId,
-            @JsonProperty("nusNetworkId") String nusNetworkId,@JsonProperty("type") String type,
+            @JsonProperty("nusNetworkId") String nusNetworkId, @JsonProperty("type") String type,
             @JsonProperty("studentId") String studentId, @JsonProperty("tutorialId") String tutorialId) {
 
         this.name = name;

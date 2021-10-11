@@ -31,11 +31,9 @@ public class GitHubIdTest {
         // invalid GitHubId
         assertFalse(GitHubId.isValidGitHubId("sid1234-")); // invalid because can't end with -
         assertFalse(GitHubId.isValidGitHubId("-sid123")); // invalid because can't start with -
-        assertFalse(GitHubId.isValidGitHubId("_s12-id")); // invalid because can't have anything other than
-                                                           // alphanumeric characters and single hyphens
+        assertFalse(GitHubId.isValidGitHubId("_s12-id")); // invalid because underscore not allowed
         assertFalse(GitHubId.isValidGitHubId("siddharth--Sid")); // invalid because only single hyphens are allowed
-        assertFalse(GitHubId.isValidGitHubId("siddharth-@Sid")); // invalid because special characters are not
-                                                                      // allowed
+        assertFalse(GitHubId.isValidGitHubId("@Sid")); // invalid because special characters are not allowed
 
         // valid GitHubId
         assertTrue(GitHubId.isValidGitHubId("siddharth"));

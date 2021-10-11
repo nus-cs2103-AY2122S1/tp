@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
 
-    private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Emails should be of the format <NUS Network ID>@u.nus.edu\n";
     public static final String VALIDATION_REGEX = "[eE][0-9]{7}@u.nus.edu{1}"; //LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
     public final String value;

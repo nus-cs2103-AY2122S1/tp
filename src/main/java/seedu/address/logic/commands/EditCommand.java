@@ -1,7 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUS_NETWORK_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -15,8 +24,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.GitHubId;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NusNetworkId;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TutorialId;
+import seedu.address.model.person.Type;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -24,7 +43,6 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -218,25 +236,45 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setGitHubId(GitHubId gitHubId) {this.gitHubId = gitHubId;}
+        public void setGitHubId(GitHubId gitHubId) {
+            this.gitHubId = gitHubId;
+        }
 
-        public Optional<GitHubId> getGitHubId() {return Optional.ofNullable(gitHubId);}
+        public Optional<GitHubId> getGitHubId() {
+            return Optional.ofNullable(gitHubId);
+        }
 
-        public void setNusNetworkId(NusNetworkId nusNetworkId) {this.nusNetworkId = nusNetworkId;}
+        public void setNusNetworkId(NusNetworkId nusNetworkId) {
+            this.nusNetworkId = nusNetworkId;
+        }
 
-        public Optional<NusNetworkId> getNusNetworkId() {return Optional.ofNullable(nusNetworkId);}
+        public Optional<NusNetworkId> getNusNetworkId() {
+            return Optional.ofNullable(nusNetworkId);
+        }
 
-        public void setType(Type type) {this.type = type;}
+        public void setType(Type type) {
+            this.type = type;
+        }
 
-        public Optional<Type> getType() {return Optional.ofNullable(type);}
+        public Optional<Type> getType() {
+            return Optional.ofNullable(type);
+        }
 
-        public void setStudentId(StudentId studentId) {this.studentId = studentId;}
+        public void setStudentId(StudentId studentId) {
+            this.studentId = studentId;
+        }
 
-        public Optional<StudentId> getStudentId() {return Optional.ofNullable(studentId);}
+        public Optional<StudentId> getStudentId() {
+            return Optional.ofNullable(studentId);
+        }
 
-        public void setTutorialId(TutorialId tutorialId) {this.tutorialId = tutorialId;}
+        public void setTutorialId(TutorialId tutorialId) {
+            this.tutorialId = tutorialId;
+        }
 
-        public Optional<TutorialId> getTutorialId() {return Optional.ofNullable(tutorialId);}
+        public Optional<TutorialId> getTutorialId() {
+            return Optional.ofNullable(tutorialId);
+        }
 
         @Override
         public boolean equals(Object other) {
