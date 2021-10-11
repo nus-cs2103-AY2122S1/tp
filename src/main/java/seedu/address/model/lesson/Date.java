@@ -28,10 +28,10 @@ public class Date implements Comparable<Date> {
     Date strings should be formatted as dd MMM uuuu, where dd and uuuu are digits.
     and MMM are alphabets e.g. Jan, Mar, Nov, etc.
      */
-    public static final String VALIDATION_REGEX = "^[0-9]{2}\\s[a-zA-Z]{3}\\s[0-9]{4}";
+    public static final String VALIDATION_REGEX = "^[0-2]?[0-9]\\s[a-zA-Z]{3}\\s[0-9]{4}";
     public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
         .parseCaseInsensitive()
-        .appendPattern("dd MMM uuuu")
+        .appendPattern("d MMM uuuu")
         .toFormatter(Locale.ENGLISH)
         .withResolverStyle(ResolverStyle.STRICT);
 
@@ -108,7 +108,7 @@ public class Date implements Comparable<Date> {
      * @return true if date is earlier than now.
      */
     public boolean isOver() {
-        return getLocalDate().compareTo(LocalDate.now()) < 0;
+        return getLocalDate().isBefore(LocalDate.now());
     }
 
     @Override

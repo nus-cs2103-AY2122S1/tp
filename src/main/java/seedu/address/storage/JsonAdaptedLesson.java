@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -39,7 +40,7 @@ class JsonAdaptedLesson {
                              @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework) {
-        this.date = date;
+        this.date = StringUtil.stripLeadingZeroes(date);
         this.timeRange = timeRange;
         this.subject = subject;
         if (homework != null) {

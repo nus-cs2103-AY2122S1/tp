@@ -185,6 +185,8 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String strippedDate = date.strip();
+        // remove leading zeroes
+        strippedDate = StringUtil.stripLeadingZeroes(strippedDate);
         if (!Date.isValidDate(strippedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
