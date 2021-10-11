@@ -17,7 +17,7 @@ Class StorageManager
 package "Classmate Storage" #F4F6F6{
 Interface ClassmateStorage <<Interface>>
 Class JsonClassmateStorage
-Class JsonSerializableClassmate
+Class JsonSerializableStudent
 Class JsonAdaptedStudent
 Class JsonAdaptedTag
 }
@@ -36,8 +36,8 @@ Storage -right-|> ClassmateStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonClassmateStorage .up.|> ClassmateStorage
-JsonClassmateStorage ..> JsonSerializableClassmate
-JsonSerializableClassmate --> "*" JsonAdaptedStudent
+JsonClassmateStorage ..> JsonSerializableStudent
+JsonSerializableStudent --> "*" JsonAdaptedStudent
 JsonAdaptedStudent --> "*" JsonAdaptedTag
 
 @enduml

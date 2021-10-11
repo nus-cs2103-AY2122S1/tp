@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialclass.UniqueTutorialClassList;
 
 /**
  * Wraps all data at the address-book level
@@ -15,6 +17,7 @@ import seedu.address.model.student.UniqueStudentList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
+    private final UniqueTutorialClassList tutorialClasses;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
+        tutorialClasses = new UniqueTutorialClassList();
     }
 
     public AddressBook() {}
@@ -48,12 +52,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the tutorial class list with {@code tutorialClasses}.
+     * {@code tutorialClasses} must not contain duplicate students.
+     */
+    public void setTutorialClasses(List<TutorialClass> tutorialClasses) {
+        this.tutorialClasses.setTutorialClasses(tutorialClasses);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setTutorialClasses(newData.getTutorialClassList());
     }
 
     //// student-level operations
@@ -93,6 +106,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    //// tutorialclass-level operations
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     */
+    public boolean hasTutorialClass(TutorialClass tutorialClass) {
+        requireNonNull(tutorialClass);
+        return tutorialClasses.contains(tutorialClass);
+    }
+
+    /**
+     * Adds a student to the address book.
+     * The student must not already exist in the address book.
+     */
+    public void addTutorialClass(TutorialClass c) {
+        tutorialClasses.add(c);
+    }
+
+    /**
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
+     */
+    public void setTutorialClass(TutorialClass target, TutorialClass editedTutorialClass) {
+        requireNonNull(editedTutorialClass);
+
+        tutorialClasses.setTutorialClass(target, editedTutorialClass);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTutorialClass(TutorialClass key) {
+        tutorialClasses.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -104,6 +154,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<TutorialClass> getTutorialClassList() {
+        return tutorialClasses.asUnmodifiableObservableList();
     }
 
     @Override

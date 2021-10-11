@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddressBookTest {
@@ -46,10 +48,11 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
+        //TODO: Add sample tutorialClasses to tests. Replace new ArrayList in newData constructor line.
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents);
+        AddressBookStub newData = new AddressBookStub(newStudents, new ArrayList<>());
 
         assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
     }
@@ -88,14 +91,21 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
+        private final ObservableList<TutorialClass> tutorialClasses = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students) {
+        AddressBookStub(Collection<Student> students, Collection<TutorialClass> tutorialClasses) {
             this.students.setAll(students);
+            this.tutorialClasses.setAll(tutorialClasses);
         }
 
         @Override
         public ObservableList<Student> getStudentList() {
             return students;
+        }
+
+        @Override
+        public ObservableList<TutorialClass> getTutorialClassList() {
+            return tutorialClasses;
         }
     }
 

@@ -14,10 +14,9 @@ public class Schedule {
                     + "between start and end time and should not be blank";
 
     private static final String TIME_REGEX = "[^(1[0-2]|0?[1-9]):([0-5]?[0-9])(●?[AP]M)?$]";
-    private static final String VALIDATION_REGEX = "[\\p{Alnum} ]" + TIME_REGEX
-            + "[ \\p{Alnum} ]" + TIME_REGEX;
+    private static final String VALIDATION_REGEX = "[^\\s].*";
 
-    private final String schedule;
+    public final String schedule;
 
     /**
      * Constructor for Schedule class.

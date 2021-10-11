@@ -41,6 +41,20 @@ public class TutorialClass {
         return tags;
     }
 
+    /**
+     * Returns true if both tutorial classes have the same name.
+     * This defines a weaker notion of equality between two tutorial classes.
+     */
+    public boolean isSameTutorialClass(TutorialClass otherClass) {
+        if (otherClass == this) {
+            return true;
+        }
+
+        return otherClass != null
+                && otherClass.getClassCode().equals(getClassCode());
+
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
