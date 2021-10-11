@@ -30,26 +30,26 @@ import seedu.address.testutil.PersonBuilder;
 
 public class PersonCreateCommandTest {
 
-	@Test
-	public void constructor_nullPerson_throwsNullPointerException() {
-		assertThrows(NullPointerException.class, () -> new PersonCreateCommand(null, null));
-	}
+    @Test
+    public void constructor_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new PersonCreateCommand(null, null));
+    }
 
-	@Test
-	public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-		ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-		Executor.setup(modelStub);
+    @Test
+    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Executor.setup(modelStub);
 
-		Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().build();
 
-		CommandResult commandResult = new PersonCreateCommand(null, validPerson).execute(modelStub);
+        CommandResult commandResult = new PersonCreateCommand(null, validPerson).execute(modelStub);
 
-		assertEquals(String.format(PersonCreateExecutor.MESSAGE_SUCCESS, validPerson),
-				commandResult.getFeedbackToUser());
-		assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-	}
+        assertEquals(String.format(PersonCreateExecutor.MESSAGE_SUCCESS, validPerson),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+    }
 
-	// @formatter:off
+    // @formatter:off
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws ParseException {
         Person validPerson = new PersonBuilder().build();

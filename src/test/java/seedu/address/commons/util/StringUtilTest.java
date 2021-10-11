@@ -11,56 +11,56 @@ import org.junit.jupiter.api.Test;
 @SuppressWarnings("NumericOverflow")
 public class StringUtilTest {
 
-	//---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
+    //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
 
-	@Test
-	public void isNonZeroUnsignedInteger() {
+    @Test
+    public void isNonZeroUnsignedInteger() {
 
-		// EP: empty strings
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("")); // Boundary value
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("  "));
+        // EP: empty strings
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("")); // Boundary value
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("  "));
 
-		// EP: not a number
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("a"));
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("aaa"));
+        // EP: not a number
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("a"));
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("aaa"));
 
-		// EP: zero
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("0"));
+        // EP: zero
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("0"));
 
-		// EP: zero as prefix
-		assertTrue(StringUtil.isNonZeroUnsignedInteger("01"));
+        // EP: zero as prefix
+        assertTrue(StringUtil.isNonZeroUnsignedInteger("01"));
 
-		// EP: signed numbers
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("-1"));
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("+1"));
+        // EP: signed numbers
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("-1"));
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("+1"));
 
-		// EP: numbers with white space
-		assertFalse(StringUtil.isNonZeroUnsignedInteger(" 10 ")); // Leading/trailing spaces
-		assertFalse(StringUtil.isNonZeroUnsignedInteger("1 0")); // Spaces in the middle
+        // EP: numbers with white space
+        assertFalse(StringUtil.isNonZeroUnsignedInteger(" 10 ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isNonZeroUnsignedInteger("1 0")); // Spaces in the middle
 
-		// EP: number larger than Integer.MAX_VALUE
-		assertFalse(StringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
+        // EP: number larger than Integer.MAX_VALUE
+        assertFalse(StringUtil.isNonZeroUnsignedInteger(Long.toString(Integer.MAX_VALUE + 1)));
 
-		// EP: valid numbers, should return true
-		assertTrue(StringUtil.isNonZeroUnsignedInteger("1")); // Boundary value
-		assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
-	}
+        // EP: valid numbers, should return true
+        assertTrue(StringUtil.isNonZeroUnsignedInteger("1")); // Boundary value
+        assertTrue(StringUtil.isNonZeroUnsignedInteger("10"));
+    }
 
 
-	//---------------- Tests for containsWordIgnoreCase --------------------------------------
+    //---------------- Tests for containsWordIgnoreCase --------------------------------------
 
-	/*
-	 * Invalid equivalence partitions for word: null, empty, multiple words
-	 * Invalid equivalence partitions for sentence: null
-	 * The four test cases below test one invalid input at a time.
-	 */
+    /*
+     * Invalid equivalence partitions for word: null, empty, multiple words
+     * Invalid equivalence partitions for sentence: null
+     * The four test cases below test one invalid input at a time.
+     */
 
-	@Test
-	public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
-		assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase("typical sentence", null));
-	}
+    @Test
+    public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase("typical sentence", null));
+    }
 
-	// @formatter:off
+    // @formatter:off
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
