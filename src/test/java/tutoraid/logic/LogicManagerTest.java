@@ -8,7 +8,7 @@ import static tutoraid.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_NAME_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_PHONE_DESC_AMY;
 import static tutoraid.testutil.Assert.assertThrows;
-import static tutoraid.testutil.TypicalPersons.AMY;
+import static tutoraid.testutil.TypicalStudents.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -30,7 +30,7 @@ import tutoraid.model.student.Student;
 import tutoraid.storage.JsonTutorAidStorage;
 import tutoraid.storage.JsonUserPrefsStorage;
 import tutoraid.storage.StorageManager;
-import tutoraid.testutil.PersonBuilder;
+import tutoraid.testutil.StudentBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -43,10 +43,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonTutorAidStorage addressBookStorage =
-                new JsonTutorAidStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonTutorAidStorage studentBookStorage =
+                new JsonTutorAidStorage(temporaryFolder.resolve("tutoraid.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(studentBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -71,17 +71,17 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonTutorAidIoExceptionThrowingStub
-        JsonTutorAidStorage addressBookStorage =
-                new JsonTutorAidIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonTutorAidStorage studentBookStorage =
+                new JsonTutorAidIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionStudentBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(studentBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
         String addCommand = AddStudentCommand.COMMAND_WORD + STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY
                 + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY;
-        Student expectedStudent = new PersonBuilder(AMY).build();
+        Student expectedStudent = new StudentBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -89,7 +89,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
     }
 

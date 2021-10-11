@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutoraid.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static tutoraid.testutil.TypicalPersons.getTypicalAddressBook;
+import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.student.Student;
-import tutoraid.testutil.PersonBuilder;
+import tutoraid.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -26,14 +26,14 @@ import tutoraid.testutil.PersonBuilder;
  */
 public class PaidCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Student editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(true).build();
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(studentToEdit).withPaymentStatus(true).build();
 
-        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON);
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_STUDENT);
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_SET_TO_PAID_SUCCESS, editedStudent);
 
@@ -53,12 +53,12 @@ public class PaidCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Student editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(true).build();
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(studentToEdit).withPaymentStatus(true).build();
 
-        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_PERSON);
+        PaidCommand paidCommand = new PaidCommand(INDEX_FIRST_STUDENT);
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_SET_TO_PAID_SUCCESS, editedStudent);
 
@@ -70,10 +70,10 @@ public class PaidCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        Index outOfBoundIndex = INDEX_SECOND_STUDENT;
+        // ensures that outOfBoundIndex is still in bounds of student book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
         PaidCommand paidCommand = new PaidCommand(outOfBoundIndex);
@@ -83,14 +83,14 @@ public class PaidCommandTest {
 
     @Test
     public void equals() {
-        PaidCommand paidFirstCommand = new PaidCommand(INDEX_FIRST_PERSON);
-        PaidCommand paidSecondCommand = new PaidCommand(INDEX_SECOND_PERSON);
+        PaidCommand paidFirstCommand = new PaidCommand(INDEX_FIRST_STUDENT);
+        PaidCommand paidSecondCommand = new PaidCommand(INDEX_SECOND_STUDENT);
 
         // same object -> returns true
         assertTrue(paidFirstCommand.equals(paidFirstCommand));
 
         // same values -> returns true
-        PaidCommand paidFirstCommandCopy = new PaidCommand(INDEX_FIRST_PERSON);
+        PaidCommand paidFirstCommandCopy = new PaidCommand(INDEX_FIRST_STUDENT);
         assertTrue(paidFirstCommand.equals(paidFirstCommandCopy));
 
         // different types -> returns false

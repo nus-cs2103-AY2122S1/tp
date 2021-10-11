@@ -13,7 +13,7 @@ import tutoraid.commons.core.GuiSettings;
 import tutoraid.model.StudentBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.UserPrefs;
-import tutoraid.testutil.TypicalPersons;
+import tutoraid.testutil.TypicalStudents;
 
 public class StorageManagerTest {
 
@@ -54,7 +54,7 @@ public class StorageManagerTest {
          * {@link JsonTutorAidStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonStudentBookStorageTest} class.
          */
-        StudentBook original = TypicalPersons.getTypicalAddressBook();
+        StudentBook original = TypicalStudents.getTypicalStudentBook();
         storageManager.saveStudentBook(original);
         ReadOnlyStudentBook retrieved = storageManager.readStudentBook().get();
         assertEquals(original, new StudentBook(retrieved));

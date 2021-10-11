@@ -1,12 +1,11 @@
 package tutoraid.testutil;
 
-import seedu.address.model.student.*;
 import tutoraid.model.student.*;
 
 /**
  * A utility class to help with building Student objects.
  */
-public class PersonBuilder {
+public class StudentBuilder {
     public static final String DEFAULT_STUDENT_NAME = "Amy Bee";
     public static final String DEFAULT_STUDENT_PHONE = "96355255";
     public static final String DEFAULT_PARENT_NAME = "Mr Bee";
@@ -22,9 +21,9 @@ public class PersonBuilder {
     private PaymentStatus paymentStatus;
 
     /**
-     * Creates a {@code PersonBuilder} with the default details.
+     * Creates a {@code StudentBuilder} with the default details.
      */
-    public PersonBuilder() {
+    public StudentBuilder() {
         studentName = new StudentName(DEFAULT_STUDENT_NAME);
         studentPhone = new Phone(DEFAULT_STUDENT_PHONE);
         parentName = new ParentName(DEFAULT_PARENT_NAME);
@@ -34,9 +33,9 @@ public class PersonBuilder {
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code studentToCopy}.
+     * Initializes the StudentBuilder with the data of {@code studentToCopy}.
      */
-    public PersonBuilder(Student studentToCopy) {
+    public StudentBuilder(Student studentToCopy) {
         studentName = studentToCopy.getStudentName();
         studentPhone = studentToCopy.getStudentPhone();
         parentName = studentToCopy.getParentName();
@@ -48,7 +47,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code StudentName} of the {@code Student} that we are building.
      */
-    public PersonBuilder withStudentName(String name) {
+    public StudentBuilder withStudentName(String name) {
         this.studentName = new StudentName(name);
         return this;
     }
@@ -56,7 +55,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code ParentName} of the {@code Student} that we are building.
      */
-    public PersonBuilder withParentName(String name) {
+    public StudentBuilder withParentName(String name) {
         this.parentName = new ParentName(name);
         return this;
     }
@@ -64,7 +63,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code StudentPhone} of the {@code Student} that we are building.
      */
-    public PersonBuilder withStudentPhone(String phone) {
+    public StudentBuilder withStudentPhone(String phone) {
         this.studentPhone = new Phone(phone);
         return this;
     }
@@ -72,7 +71,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code ParentPhone} of the {@code Student} that we are building.
      */
-    public PersonBuilder withParentPhone(String phone) {
+    public StudentBuilder withParentPhone(String phone) {
         this.parentPhone = new Phone(phone);
         return this;
     }
@@ -80,7 +79,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Progress} of the {@code Student} that we are building.
      */
-    public PersonBuilder withProgress(String progress) {
+    public StudentBuilder withProgress(String progress) {
         this.progress = new Progress(progress);
         return this;
     }
@@ -88,7 +87,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Payment Statis} of the {@code Student} that we are building.
      */
-    public PersonBuilder withPaymentStatus(boolean hasPaid) {
+    public StudentBuilder withPaymentStatus(boolean hasPaid) {
         this.paymentStatus = new PaymentStatus(hasPaid);
         return this;
     }

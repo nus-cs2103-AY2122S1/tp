@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutoraid.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static tutoraid.testutil.TypicalPersons.getTypicalAddressBook;
+import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,12 +24,12 @@ import tutoraid.model.student.Student;
  */
 public class ViewCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Student studentToView = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
+        Student studentToView = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_STUDENT);
 
         String expectedMessage = "Viewing requested student";
 
@@ -49,10 +49,10 @@ public class ViewCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Student studentToView = model.getFilteredStudentList().get(INDEX_FIRST_PERSON.getZeroBased());
-        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
+        Student studentToView = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_STUDENT);
 
         String expectedMessage = "Viewing requested student";
 
@@ -64,9 +64,9 @@ public class ViewCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_STUDENT;
         // ensures that outOfBoundIndex is still in bounds of student list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
@@ -77,14 +77,14 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        ViewCommand viewFirstCommand = new ViewCommand(INDEX_FIRST_PERSON);
-        ViewCommand viewSecondCommand = new ViewCommand(INDEX_SECOND_PERSON);
+        ViewCommand viewFirstCommand = new ViewCommand(INDEX_FIRST_STUDENT);
+        ViewCommand viewSecondCommand = new ViewCommand(INDEX_SECOND_STUDENT);
 
         // same object -> returns true
         assertTrue(viewFirstCommand.equals(viewFirstCommand));
 
         // same values -> returns true
-        ViewCommand viewFirstCommandCopy = new ViewCommand(INDEX_FIRST_PERSON);
+        ViewCommand viewFirstCommandCopy = new ViewCommand(INDEX_FIRST_STUDENT);
         assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
         // different types -> returns false

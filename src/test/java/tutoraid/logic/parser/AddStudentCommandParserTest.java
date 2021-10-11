@@ -5,7 +5,6 @@ import static tutoraid.logic.commands.CommandTestUtil.INVALID_PARENT_NAME_DESC;
 import static tutoraid.logic.commands.CommandTestUtil.INVALID_PARENT_PHONE_DESC;
 import static tutoraid.logic.commands.CommandTestUtil.INVALID_STUDENT_NAME_DESC;
 import static tutoraid.logic.commands.CommandTestUtil.INVALID_STUDENT_PHONE_DESC;
-import static tutoraid.logic.commands.CommandTestUtil.PARENT_NAME_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.PARENT_NAME_DESC_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_BOB;
@@ -16,8 +15,8 @@ import static tutoraid.logic.commands.CommandTestUtil.STUDENT_NAME_DESC_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_PHONE_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_PHONE_DESC_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_BOB;
-import static tutoraid.testutil.TypicalPersons.AMY;
-import static tutoraid.testutil.TypicalPersons.BOB;
+import static tutoraid.testutil.TypicalStudents.AMY;
+import static tutoraid.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,14 +24,14 @@ import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.Phone;
-import tutoraid.testutil.PersonBuilder;
+import tutoraid.testutil.StudentBuilder;
 
 public class AddStudentCommandParserTest {
     private AddStudentCommandParser parser = new AddStudentCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Student expectedStudent = new PersonBuilder(BOB).build();
+        Student expectedStudent = new StudentBuilder(BOB).build();
 
         // whitespace only preamble
         CommandParserTestUtil.assertParseSuccess(parser, PREAMBLE_WHITESPACE + STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB
@@ -46,19 +45,13 @@ public class AddStudentCommandParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_AMY + STUDENT_PHONE_DESC_BOB
                 + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
 
-        // multiple emails - last email accepted
-        CommandParserTestUtil.assertParseSuccess(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_AMY
-                + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
-
-        // multiple addresses - last address accepted
-        CommandParserTestUtil.assertParseSuccess(parser, STUDENT_NAME_DESC_BOB + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB
-                + PARENT_PHONE_DESC_AMY + PARENT_PHONE_DESC_BOB, new AddStudentCommand(expectedStudent));
+        // TODO: add more tests for multiple parent name, parent phone
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Student expectedStudent = new PersonBuilder(AMY).withParentName("").build();
+        // TODO: add tests with missing parent phone etc.
+        Student expectedStudent = new StudentBuilder(AMY).withParentName("").build();
         CommandParserTestUtil.assertParseSuccess(parser, STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY + PARENT_PHONE_DESC_AMY,
                 new AddStudentCommand(expectedStudent));
     }

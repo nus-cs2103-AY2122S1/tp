@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutoraid.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static tutoraid.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static tutoraid.testutil.TypicalPersons.getTypicalAddressBook;
+import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutoraid.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.student.Student;
-import tutoraid.testutil.PersonBuilder;
+import tutoraid.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -27,14 +27,14 @@ import tutoraid.testutil.PersonBuilder;
  */
 public class UnpaidCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Student studentToEdit = model.getFilteredStudentList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Student editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(false).build();
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(studentToEdit).withPaymentStatus(false).build();
 
-        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_SECOND_PERSON);
+        UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_SECOND_STUDENT);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_SET_TO_UNPAID_SUCCESS, editedStudent);
 
@@ -54,10 +54,10 @@ public class UnpaidCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        Index outOfBoundIndex = INDEX_SECOND_STUDENT;
+        // ensures that outOfBoundIndex is still in bounds of student book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
         UnpaidCommand unpaidCommand = new UnpaidCommand(outOfBoundIndex);
@@ -67,14 +67,14 @@ public class UnpaidCommandTest {
 
     @Test
     public void equals() {
-        UnpaidCommand unpaidFirstCommand = new UnpaidCommand(INDEX_FIRST_PERSON);
-        UnpaidCommand unpaidSecondCommand = new UnpaidCommand(INDEX_THIRD_PERSON);
+        UnpaidCommand unpaidFirstCommand = new UnpaidCommand(INDEX_FIRST_STUDENT);
+        UnpaidCommand unpaidSecondCommand = new UnpaidCommand(INDEX_THIRD_STUDENT);
 
         // same object -> returns true
         assertTrue(unpaidFirstCommand.equals(unpaidFirstCommand));
 
         // same values -> returns true
-        UnpaidCommand unpaidFirstCommandCopy = new UnpaidCommand(INDEX_FIRST_PERSON);
+        UnpaidCommand unpaidFirstCommandCopy = new UnpaidCommand(INDEX_FIRST_STUDENT);
         assertTrue(unpaidFirstCommand.equals(unpaidFirstCommandCopy));
 
         // different types -> returns false

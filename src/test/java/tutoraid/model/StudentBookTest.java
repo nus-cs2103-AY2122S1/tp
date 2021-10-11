@@ -17,9 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.exceptions.DuplicateStudentException;
-import tutoraid.testutil.PersonBuilder;
+import tutoraid.testutil.StudentBuilder;
 import tutoraid.testutil.Assert;
-import tutoraid.testutil.TypicalPersons;
+import tutoraid.testutil.TypicalStudents;
 
 public class StudentBookTest {
 
@@ -37,7 +37,7 @@ public class StudentBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        StudentBook newData = TypicalPersons.getTypicalAddressBook();
+        StudentBook newData = TypicalStudents.getTypicalStudentBook();
         studentBook.resetData(newData);
         assertEquals(newData, studentBook);
     }
@@ -45,8 +45,8 @@ public class StudentBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two students with the same identity fields
-        Student editedAlice = new PersonBuilder(TypicalPersons.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
-        List<Student> newStudents = Arrays.asList(TypicalPersons.ALICE, editedAlice);
+        Student editedAlice = new StudentBuilder(TypicalStudents.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
+        List<Student> newStudents = Arrays.asList(TypicalStudents.ALICE, editedAlice);
         StudentBookStub newData = new StudentBookStub(newStudents);
 
         Assert.assertThrows(DuplicateStudentException.class, () -> studentBook.resetData(newData));
@@ -59,19 +59,19 @@ public class StudentBookTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(studentBook.hasStudent(TypicalPersons.ALICE));
+        assertFalse(studentBook.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        studentBook.addStudent(TypicalPersons.ALICE);
-        assertTrue(studentBook.hasStudent(TypicalPersons.ALICE));
+        studentBook.addStudent(TypicalStudents.ALICE);
+        assertTrue(studentBook.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        studentBook.addStudent(TypicalPersons.ALICE);
-        Student editedAlice = new PersonBuilder(TypicalPersons.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
+        studentBook.addStudent(TypicalStudents.ALICE);
+        Student editedAlice = new StudentBuilder(TypicalStudents.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
         assertTrue(studentBook.hasStudent(editedAlice));
     }
 

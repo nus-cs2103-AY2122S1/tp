@@ -1,7 +1,7 @@
 package tutoraid.logic.parser;
 
 import static tutoraid.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsViewCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, "1", new ViewCommand(INDEX_FIRST_PERSON));
+        CommandParserTestUtil.assertParseSuccess(parser, "1", new ViewCommand(INDEX_FIRST_STUDENT));
     }
 
     @Test

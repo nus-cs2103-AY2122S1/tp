@@ -9,23 +9,23 @@ import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.Phone;
 import tutoraid.testutil.Assert;
-import tutoraid.testutil.TypicalPersons;
+import tutoraid.testutil.TypicalStudents;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
 
-    private static final String VALID_STUDENT_NAME = TypicalPersons.BENSON.getStudentName().toString();
-    private static final String VALID_STUDENT_PHONE = TypicalPersons.BENSON.getStudentPhone().toString();
-    private static final String VALID_PARENT_NAME = TypicalPersons.BENSON.getParentName().toString();
-    private static final String VALID_PARENT_PHONE = TypicalPersons.BENSON.getParentPhone().toString();
-    private static final String VALID_PROGRESS = TypicalPersons.BENSON.getProgress().toString();
-    private static final boolean VALID_PAYMENT_STATUS = TypicalPersons.BENSON.getPaymentStatus().hasPaid;
+    private static final String VALID_STUDENT_NAME = TypicalStudents.BENSON.getStudentName().toString();
+    private static final String VALID_STUDENT_PHONE = TypicalStudents.BENSON.getStudentPhone().toString();
+    private static final String VALID_PARENT_NAME = TypicalStudents.BENSON.getParentName().toString();
+    private static final String VALID_PARENT_PHONE = TypicalStudents.BENSON.getParentPhone().toString();
+    private static final String VALID_PROGRESS = TypicalStudents.BENSON.getProgress().toString();
+    private static final boolean VALID_PAYMENT_STATUS = TypicalStudents.BENSON.getPaymentStatus().hasPaid;
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(TypicalPersons.BENSON);
-        assertEquals(TypicalPersons.BENSON, person.toModelType());
+        JsonAdaptedStudent person = new JsonAdaptedStudent(TypicalStudents.BENSON);
+        assertEquals(TypicalStudents.BENSON, person.toModelType());
     }
 
     @Test

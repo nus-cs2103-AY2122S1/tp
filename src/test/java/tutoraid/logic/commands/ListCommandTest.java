@@ -9,7 +9,7 @@ import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
 import tutoraid.testutil.TypicalIndexes;
-import tutoraid.testutil.TypicalPersons;
+import tutoraid.testutil.TypicalStudents;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -21,7 +21,7 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(TypicalStudents.getTypicalStudentBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
     }
 
@@ -32,7 +32,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        CommandTestUtil.showStudentAtIndex(model, TypicalIndexes.INDEX_FIRST_STUDENT);
         CommandTestUtil.assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

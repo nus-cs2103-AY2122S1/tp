@@ -3,7 +3,7 @@ package tutoraid.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutoraid.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static tutoraid.testutil.Assert.assertThrows;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,10 +37,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test

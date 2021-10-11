@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutoraid.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutoraid.testutil.Assert.assertThrows;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,8 @@ import tutoraid.logic.commands.PaidCommand;
 import tutoraid.logic.commands.UnpaidCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.student.Student;
-import tutoraid.testutil.PersonBuilder;
-import tutoraid.testutil.PersonUtil;
+import tutoraid.testutil.StudentBuilder;
+import tutoraid.testutil.StudentUtil;
 
 public class TutorAidParserTest {
 
@@ -28,8 +28,8 @@ public class TutorAidParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Student student = new PersonBuilder().build();
-        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(PersonUtil.getAddCommand(student));
+        Student student = new StudentBuilder().build();
+        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
         assertEquals(new AddStudentCommand(student), command);
     }
 
@@ -42,8 +42,8 @@ public class TutorAidParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
-                DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteStudentCommand(INDEX_FIRST_PERSON), command);
+                DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new DeleteStudentCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
@@ -67,15 +67,15 @@ public class TutorAidParserTest {
     @Test
     public void parseCommand_paid() throws Exception {
         PaidCommand command = (PaidCommand) parser.parseCommand(
-                PaidCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new PaidCommand(INDEX_FIRST_PERSON), command);
+                PaidCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new PaidCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
     public void parseCommand_unpaid() throws Exception {
         UnpaidCommand command = (UnpaidCommand) parser.parseCommand(
-                UnpaidCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnpaidCommand(INDEX_FIRST_PERSON), command);
+                UnpaidCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
+        assertEquals(new UnpaidCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test

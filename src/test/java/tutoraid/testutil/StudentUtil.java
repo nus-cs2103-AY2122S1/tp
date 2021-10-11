@@ -11,7 +11,7 @@ import tutoraid.model.student.Student;
 /**
  * A utility class for Student.
  */
-public class PersonUtil {
+public class StudentUtil {
 
     /**
      * Returns an add command string for adding the {@code student}.

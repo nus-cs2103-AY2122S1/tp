@@ -15,7 +15,7 @@ import tutoraid.commons.exceptions.DataConversionException;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.StudentBook;
 import tutoraid.testutil.Assert;
-import tutoraid.testutil.TypicalPersons;
+import tutoraid.testutil.TypicalStudents;
 
 public class JsonStudentBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonStudentBookStorageTest");
@@ -45,23 +45,23 @@ public class JsonStudentBookStorageTest {
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatStudentBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonStudentBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonStudentBook.json"));
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        StudentBook original = TypicalPersons.getTypicalAddressBook();
+        StudentBook original = TypicalStudents.getTypicalStudentBook();
         JsonTutorAidStorage jsonAddressBookStorage = new JsonTutorAidStorage(filePath);
 
         // Save in new file and read back
@@ -70,14 +70,14 @@ public class JsonStudentBookStorageTest {
         assertEquals(original, new StudentBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addStudent(TypicalPersons.HOON);
-        original.removeStudent(TypicalPersons.ALICE);
+        original.addStudent(TypicalStudents.HOON);
+        original.removeStudent(TypicalStudents.ALICE);
         jsonAddressBookStorage.saveStudentBook(original, filePath);
         readBack = jsonAddressBookStorage.readStudentBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Save and read without specifying file path
-        original.addStudent(TypicalPersons.IDA);
+        original.addStudent(TypicalStudents.IDA);
         jsonAddressBookStorage.saveStudentBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readStudentBook().get(); // file path not specified
         assertEquals(original, new StudentBook(readBack));

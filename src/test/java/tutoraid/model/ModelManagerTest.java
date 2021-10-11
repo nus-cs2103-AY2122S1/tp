@@ -16,7 +16,7 @@ import tutoraid.commons.core.GuiSettings;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
 import tutoraid.testutil.AddressBookBuilder;
 import tutoraid.testutil.Assert;
-import tutoraid.testutil.TypicalPersons;
+import tutoraid.testutil.TypicalStudents;
 
 public class ModelManagerTest {
 
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasStudent(TypicalPersons.ALICE));
+        assertFalse(modelManager.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addStudent(TypicalPersons.ALICE);
-        assertTrue(modelManager.hasStudent(TypicalPersons.ALICE));
+        modelManager.addStudent(TypicalStudents.ALICE);
+        assertTrue(modelManager.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        StudentBook studentBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(TypicalPersons.BENSON).build();
+        StudentBook studentBook = new AddressBookBuilder().withPerson(TypicalStudents.ALICE).withPerson(TypicalStudents.BENSON).build();
         StudentBook differentStudentBook = new StudentBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,7 +118,7 @@ public class ModelManagerTest {
 
         //TODO: The only test that is failing
         // different filteredList -> returns false
-        String[] keywords = TypicalPersons.ALICE.getStudentName().fullName.split("\\s+");
+        String[] keywords = TypicalStudents.ALICE.getStudentName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(studentBook, userPrefs)));
 

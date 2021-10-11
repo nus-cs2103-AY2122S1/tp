@@ -1,6 +1,6 @@
 {
-  "_comment": "TutorAid save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
+  "_comment": "TutorAid save file which contains the same Student values as in TypicalPersons#getTypicalStudentBook()",
+  "students" : [ {
     "studentName" : "Alice Pauline",
     "studentPhone" : "94351234",
     "parentName" : "Mrs Tan",
