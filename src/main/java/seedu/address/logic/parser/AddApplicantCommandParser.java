@@ -11,17 +11,17 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.position.Position;
 
 /**
  * Parses input arguments and creates a new AddApplicantCommand object
  */
-public class AddApplicantParser implements Parser<AddApplicantCommand> {
+public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddApplicantCommand
@@ -38,15 +38,15 @@ public class AddApplicantParser implements Parser<AddApplicantCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Position position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
+        Name name = ApplicantParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ApplicantParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ApplicantParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ApplicantParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Position dummyPosition = ApplicantParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
 
-        Applicant applicant = new Applicant(name, phone, email, address, position);
+        Applicant applicant = new Applicant(name, phone, email, address);
 
-        return new AddApplicantCommand(applicant, position);
+        return new AddApplicantCommand(applicant, dummyPosition);
     }
 
     /**
