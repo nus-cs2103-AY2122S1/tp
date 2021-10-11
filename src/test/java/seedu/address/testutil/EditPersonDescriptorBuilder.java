@@ -45,11 +45,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setSchool(person.getSchool());
         descriptor.setAcadStream(person.getAcadStream());
-<<<<<<< HEAD
         descriptor.setAcadLevel(person.getAcadLevel());
-=======
         descriptor.setFee(person.getFee());
->>>>>>> master
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
     }

@@ -114,7 +114,7 @@ public class PersonCard extends UiPart<Region> {
             acadLevel.setVisible(false);
             acadLevel.setManaged(false);
         } else {
-            acadLevel.setText(person.getAcadLevel().acadLevel);
+            acadLevel.setText("Academic Level: " + person.getAcadLevel().value);
         }
 
         if (person.getRemark().isEmpty()) {

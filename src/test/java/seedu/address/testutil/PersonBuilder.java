@@ -4,11 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-<<<<<<< HEAD
-import seedu.address.model.person.AcadLevel;
-=======
 import seedu.address.model.lesson.Lesson;
->>>>>>> master
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -34,11 +31,8 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SCHOOL = "";
     public static final String DEFAULT_ACAD_STREAM = "";
-<<<<<<< HEAD
     public static final String DEFAULT_ACAD_LEVEL = "";
-=======
     public static final String DEFAULT_FEE = "";
->>>>>>> master
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
@@ -49,11 +43,8 @@ public class PersonBuilder {
     private Address address;
     private School school;
     private AcadStream acadStream;
-<<<<<<< HEAD
     private AcadLevel acadLevel;
-=======
     private Fee fee;
->>>>>>> master
     private Remark remark;
     private Set<Tag> tags;
     private Set<Lesson> lessons;
@@ -70,11 +61,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         school = new School(DEFAULT_SCHOOL);
         acadStream = new AcadStream(DEFAULT_ACAD_STREAM);
-<<<<<<< HEAD
         acadLevel = new AcadLevel(DEFAULT_ACAD_LEVEL);
-=======
         fee = new Fee(DEFAULT_FEE);
->>>>>>> master
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
         lessons = new TreeSet<>();
@@ -92,11 +80,8 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         school = personToCopy.getSchool();
         acadStream = personToCopy.getAcadStream();
-<<<<<<< HEAD
         acadLevel = personToCopy.getAcadLevel();
-=======
         fee = personToCopy.getFee();
->>>>>>> master
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
         lessons = new TreeSet<>(personToCopy.getLessons());
@@ -199,32 +184,34 @@ public class PersonBuilder {
     }
 
     /**
-<<<<<<< HEAD
      * Sets the {@code AcadLevel} of the {@code Person} that we are building.
      */
     public PersonBuilder withAcadLevel(String acadLevel) {
         this.acadLevel = new AcadLevel(acadLevel);
-=======
-     * Sets the {@code Fee} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withFee(String fee) {
-        this.fee = new Fee(fee);
->>>>>>> master
         return this;
     }
 
     /**
-<<<<<<< HEAD
      * Sets the {@code AcadLevel} of the {@code Person} that we are building as blank.
      */
     public PersonBuilder withAcadLevel() {
         this.acadLevel = new AcadLevel(DEFAULT_ACAD_LEVEL);
-=======
+        return this;
+    }
+
+    /**
+     * Sets the {@code Fee} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFee(String fee) {
+        this.fee = new Fee(fee);
+        return this;
+    }
+
+    /**
      * Sets the default {@code Fee} of the {@code Person} that we are building.
      */
     public PersonBuilder withFee() {
         this.fee = new Fee(DEFAULT_FEE);
->>>>>>> master
         return this;
     }
 
@@ -276,11 +263,7 @@ public class PersonBuilder {
      * @return {@code Person} container the information given.
      */
     public Person build() {
-<<<<<<< HEAD
-        return new Person(name, phone, email, address, school, acadStream, acadLevel, remark, tags);
-=======
         return new Person(name, phone, email, parentPhone, parentEmail,
-            address, school, acadStream, fee, remark, tags, lessons);
->>>>>>> master
+            address, school, acadStream, acadLevel, fee, remark, tags, lessons);
     }
 }

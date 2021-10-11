@@ -11,11 +11,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-<<<<<<< HEAD
-import seedu.address.model.person.AcadLevel;
-=======
 import seedu.address.model.lesson.Lesson;
->>>>>>> master
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -42,11 +39,8 @@ class JsonAdaptedPerson {
     private final String address;
     private final String school;
     private final String acadStream;
-<<<<<<< HEAD
     private final String acadLevel;
-=======
     private final String outstandingFee;
->>>>>>> master
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
@@ -56,20 +50,14 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-<<<<<<< HEAD
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
-            @JsonProperty("acadLevel") String acadLevel,
-            @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-=======
                              @JsonProperty("email") String email, @JsonProperty("parent phone") String parentPhone,
                              @JsonProperty("parent email") String parentEmail, @JsonProperty("address") String address,
                              @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
+                             @JsonProperty("acadLevel") String acadLevel,
                              @JsonProperty("outstanding fee") String outstandingFee,
                              @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                              @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
->>>>>>> master
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -78,11 +66,8 @@ class JsonAdaptedPerson {
         this.address = address;
         this.school = school;
         this.acadStream = acadStream;
-<<<<<<< HEAD
         this.acadLevel = acadLevel;
-=======
         this.outstandingFee = outstandingFee;
->>>>>>> master
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -102,15 +87,10 @@ class JsonAdaptedPerson {
         parentPhone = source.getParentPhone().value;
         parentEmail = source.getParentEmail().value;
         address = source.getAddress().value;
-<<<<<<< HEAD
-        school = source.getSchool().schName;
-        acadStream = source.getAcadStream().acadStream;
-        acadLevel = source.getAcadLevel().acadLevel;
-=======
         school = source.getSchool().value;
         acadStream = source.getAcadStream().value;
+        acadLevel = source.getAcadLevel().value;
         outstandingFee = source.getFee().value;
->>>>>>> master
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -195,22 +175,19 @@ class JsonAdaptedPerson {
         }
         final AcadStream modelAcadStream = new AcadStream(acadStream);
 
-<<<<<<< HEAD
         if (acadLevel == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadLevel.class.getSimpleName()));
         }
-        if (!acadLevel.isEmpty() && !AcadLevel.isValidAcadLevel(acadLevel)) {
+        if (!AcadLevel.isValidAcadLevel(acadLevel)) {
             throw new IllegalValueException(AcadLevel.MESSAGE_CONSTRAINTS);
         }
         final AcadLevel modelAcadLevel = new AcadLevel(acadLevel);
-=======
+
         if (outstandingFee == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
         }
         final Fee modelFee = new Fee(outstandingFee);
-
->>>>>>> master
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -218,16 +195,11 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-<<<<<<< HEAD
-        return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelSchool, modelAcadStream, modelAcadLevel, modelRemark, modelTags);
-    }
-=======
->>>>>>> master
 
         final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
 
         return new Person(modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
-                modelAddress, modelSchool, modelAcadStream, modelFee, modelRemark, modelTags, modelLessons);
+                modelAddress, modelSchool, modelAcadStream, modelAcadLevel, modelFee, modelRemark, modelTags,
+                modelLessons);
     }
 }

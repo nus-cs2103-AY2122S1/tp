@@ -66,14 +66,10 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getSchool().ifPresent(school -> sb.append(PREFIX_SCHOOL).append(school.value).append(" "));
         descriptor.getAcadStream().ifPresent(acadStream ->
-<<<<<<< HEAD
-                sb.append(PREFIX_ACAD_STREAM).append(acadStream.acadStream).append(" "));
-        descriptor.getAcadLevel().ifPresent(acadLevel ->
-                sb.append(PREFIX_ACAD_LEVEL).append(acadLevel.acadLevel).append(" "));
-=======
                 sb.append(PREFIX_ACAD_STREAM).append(acadStream.value).append(" "));
+        descriptor.getAcadLevel().ifPresent(acadLevel ->
+                sb.append(PREFIX_ACAD_LEVEL).append(acadLevel.value).append(" "));
         descriptor.getFee().ifPresent(fee -> sb.append(PREFIX_FEE).append(fee.value).append(" "));
->>>>>>> master
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

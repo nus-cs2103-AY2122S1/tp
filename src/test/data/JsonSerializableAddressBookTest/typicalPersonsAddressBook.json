@@ -9,11 +9,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "school": "RI",
     "acadStream": "IP",
-<<<<<<< HEAD
     "acadLevel": "Y6",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : "She likes Cheesecake",
     "tagged" : [ "friends" ]
   }, {
@@ -25,11 +22,8 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "school": "HCI",
     "acadStream": "IP",
-<<<<<<< HEAD
     "acadLevel": "Y3",
-=======
     "outstandingFee": "99.99",
->>>>>>> master
     "remark" : "He likes chocolate ice cream",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
@@ -41,11 +35,8 @@
     "address" : "wall street",
     "school": "ACSI",
     "acadStream": "IB",
-<<<<<<< HEAD
     "acadLevel": "Y1",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : "He likes french fries",
     "tagged" : [ ]
   }, {
@@ -57,11 +48,8 @@
     "address" : "10th street",
     "school": "CCHM",
     "acadStream": "",
-<<<<<<< HEAD
     "acadLevel": "",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : "",
     "tagged" : [ "friends" ]
   }, {
@@ -73,11 +61,8 @@
     "address" : "michegan ave",
     "school": "",
     "acadStream": "IELTS",
-<<<<<<< HEAD
     "acadLevel": "",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : "",
     "tagged" : [ ]
   }, {
@@ -89,11 +74,8 @@
     "address" : "little tokyo",
     "school": "",
     "acadStream": "",
-<<<<<<< HEAD
     "acadLevel": "S5",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : "",
     "tagged" : [ ]
   }, {
@@ -105,11 +87,8 @@
     "address" : "4th street",
     "school": "",
     "acadStream": "",
-<<<<<<< HEAD
     "acadLevel": "J2",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : "",
     "tagged" : [ ]
   } ]

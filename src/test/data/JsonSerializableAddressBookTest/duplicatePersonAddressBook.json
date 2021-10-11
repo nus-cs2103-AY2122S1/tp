@@ -8,11 +8,8 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "school": "",
     "acadStream": "",
-<<<<<<< HEAD
     "acadLevel": "",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : "",
     "tagged": [ "friends" ]
   }, {
@@ -24,11 +21,8 @@
     "address": "4th street",
     "school": "",
     "acadStream": "",
-<<<<<<< HEAD
     "acadLevel": "",
-=======
     "outstandingFee": "0",
->>>>>>> master
     "remark" : ""
   } ]
 }

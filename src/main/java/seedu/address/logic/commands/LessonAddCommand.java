@@ -17,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -95,6 +96,7 @@ public class LessonAddCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         School updatedSchool = personToEdit.getSchool();
         AcadStream updatedAcadStream = personToEdit.getAcadStream();
+        AcadLevel updatedAcadLevel = personToEdit.getAcadLevel();
         Fee updatedOutstandingFee = personToEdit.getFee();
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
@@ -103,7 +105,7 @@ public class LessonAddCommand extends Command {
         lessons.add(lesson);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
-                updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream,
+                updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel,
                 updatedOutstandingFee, updatedRemark, updatedTags, lessons);
     }
 
