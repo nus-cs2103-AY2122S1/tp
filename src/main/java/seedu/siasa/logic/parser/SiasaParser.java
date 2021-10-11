@@ -6,21 +6,24 @@ import static seedu.siasa.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.siasa.logic.commands.AddCommand;
 import seedu.siasa.logic.commands.ClearCommand;
 import seedu.siasa.logic.commands.Command;
-import seedu.siasa.logic.commands.DeleteCommand;
 import seedu.siasa.logic.commands.EditCommand;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
 import seedu.siasa.logic.commands.ListCommand;
+import seedu.siasa.logic.commands.client.AddClientCommand;
+import seedu.siasa.logic.commands.client.DeleteClientCommand;
+import seedu.siasa.logic.commands.client.ListClientCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
+import seedu.siasa.logic.parser.client.AddClientCommandParser;
+import seedu.siasa.logic.parser.client.DeleteClientCommandParser;
 
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class SiasaParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -44,14 +47,14 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddClientCommand.COMMAND_WORD:
+            return new AddClientCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteClientCommand.COMMAND_WORD:
+            return new DeleteClientCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -59,8 +62,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListClientCommand.COMMAND_WORD:
+            return new ListClientCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

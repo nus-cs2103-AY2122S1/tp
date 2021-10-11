@@ -31,7 +31,7 @@ import seedu.siasa.testutil.PersonUtil;
 
 public class SiasaParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final SiasaParser parser = new SiasaParser();
 
     @Test
     public void parseCommand_add() throws Exception {
