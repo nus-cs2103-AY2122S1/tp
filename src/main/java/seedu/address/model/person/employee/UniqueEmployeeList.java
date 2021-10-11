@@ -8,9 +8,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicateEmployeeException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.EmployeeNotFoundException;
 
 /**
  * A list of employees that enforces uniqueness between its elements and does not allow nulls.
@@ -44,7 +44,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     public void add(Employee toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEmployeeException();
         }
         internalList.add(toAdd);
     }
@@ -59,11 +59,11 @@ public class UniqueEmployeeList implements Iterable<Employee> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new EmployeeNotFoundException();
         }
 
         if (!target.isSamePerson(editedEmployee) && contains(editedEmployee)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEmployeeException();
         }
 
         internalList.set(index, editedEmployee);
@@ -76,7 +76,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     public void remove(Employee toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new EmployeeNotFoundException();
         }
     }
 
@@ -92,7 +92,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     public void setEmployees(List<Employee> employees) {
         requireAllNonNull(employees);
         if (!employeesAreUnique(employees)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEmployeeException();
         }
 
         internalList.setAll(employees);
