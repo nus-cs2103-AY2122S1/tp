@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Anime's name in the address book.
+ * Represents an Anime's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {

@@ -12,7 +12,7 @@ import seedu.anilist.model.anime.exceptions.AnimeNotFoundException;
 import seedu.anilist.model.anime.exceptions.DuplicateAnimeException;
 
 /**
- * A list of anime that enforces uniqueness between its elements and does not allow nulls.
+ * A list of animes that enforces uniqueness between its elements and does not allow nulls.
  * An anime is considered unique by comparing using {@code Anime#isSameAnime()}. As such, adding and updating of
  * Anime uses Anime#isSameAnime(Anime) for equality so as to ensure that the Anime being added or updated is
  * unique in terms of identity in the UniqueAnimeList. However, the removal of a Anime uses Anime#equals(Object) so
