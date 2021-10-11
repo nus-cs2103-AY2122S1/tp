@@ -97,9 +97,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
-        NoteDate updatedNoteDate = editPersonDescriptor.getNoteDate().orElse(personToEdit.getNoteDate());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote, updatedNoteDate, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote, updatedTags);
     }
 
     @Override
@@ -130,7 +129,6 @@ public class EditCommand extends Command {
         private Email email;
         private Set<Tag> tags;
         private Note note;
-        private NoteDate noteDate;
 
         public EditPersonDescriptor() {}
 
@@ -144,7 +142,6 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTags(toCopy.tags);
             setNote(toCopy.note);
-            setNoteDate(toCopy.noteDate);
         }
 
         /**
@@ -183,14 +180,6 @@ public class EditCommand extends Command {
         }
         public Optional<Note> getNote() {
             return Optional.ofNullable(note);
-        }
-
-        public void setNoteDate(NoteDate noteDate) {
-            this.noteDate = noteDate;
-        }
-
-        public Optional<NoteDate> getNoteDate() {
-            return Optional.ofNullable(noteDate);
         }
 
         /**

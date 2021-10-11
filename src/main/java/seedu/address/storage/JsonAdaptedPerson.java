@@ -57,7 +57,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         note = source.getNote().value;
-        noteDate = source.getNoteDate().value;
+        noteDate = source.getNote().getSavedDate();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -103,13 +103,12 @@ class JsonAdaptedPerson {
         }
         if (noteDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    NoteDate.class.getSimpleName()));
+                    Note.class.getSimpleName()));
         }
-        final Note modelNote = new Note(note);
-        final NoteDate modelNoteDate = new NoteDate(noteDate);
+        final Note modelNote = new Note(note, noteDate);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelNote, modelNoteDate, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelNote, modelTags);
     }
 
 }

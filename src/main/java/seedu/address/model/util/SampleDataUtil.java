@@ -18,23 +18,23 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static final Note EMPTY_NOTE = new Note("");
+    public static final Note EMPTY_NOTE = new Note("", "");
     public static final NoteDate EMPTY_NOTE_DATE = new NoteDate();
 
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    EMPTY_NOTE, EMPTY_NOTE_DATE, getTagSet("friends")),
+                    EMPTY_NOTE, getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    EMPTY_NOTE, EMPTY_NOTE_DATE, getTagSet("colleagues", "friends")),
+                    EMPTY_NOTE, getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    EMPTY_NOTE, EMPTY_NOTE_DATE, getTagSet("neighbours")),
+                    EMPTY_NOTE, getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    EMPTY_NOTE, EMPTY_NOTE_DATE, getTagSet("family")),
+                    EMPTY_NOTE, getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    EMPTY_NOTE, EMPTY_NOTE_DATE, getTagSet("classmates")),
+                    EMPTY_NOTE, getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    EMPTY_NOTE, EMPTY_NOTE_DATE, getTagSet("colleagues"))
+                    EMPTY_NOTE, getTagSet("colleagues"))
         };
     }
 

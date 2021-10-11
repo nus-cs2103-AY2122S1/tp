@@ -15,7 +15,6 @@ import seedu.address.commons.util.DateUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Note;
-import seedu.address.model.person.NoteDate;
 import seedu.address.model.person.Person;
 
 
@@ -85,10 +84,9 @@ public class NoteWindow extends UiPart<Stage> {
     @FXML
     public void handleSave() throws CommandException {
         String paragraph = noteTextArea.getText();
-        Note editedNote = new Note(paragraph);
-        NoteDate newNoteDate = new NoteDate(DateUtil.getCurrentDateTime());
+        Note editedNote = new Note(paragraph, DateUtil.getCurrentDateTime());
         Person editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
-                editedNote, newNoteDate, person.getTags());
+                editedNote, person.getTags());
         logic.executeSaveNote(person, editedPerson);
     }
 

@@ -22,19 +22,17 @@ public class Person {
 
     // Data fields
     private final Note note;
-    private final NoteDate noteDate;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Note note, NoteDate noteDate, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.note = note;
-        this.noteDate = noteDate;
         this.tags.addAll(tags);
     }
 
@@ -53,10 +51,10 @@ public class Person {
     public Note getNote() {
         return note;
     }
-
-    public NoteDate getNoteDate() {
-        return noteDate;
+    public String getNoteSavedDate() {
+        return note.getSavedDate();
     }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -113,15 +111,20 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; NoteDate: ")
-                .append(getNoteDate());
+                .append(getEmail());
 
+        String noteSavedDate = note.getSavedDate();
+        if (!noteSavedDate.isEmpty()) {
+            builder.append("; Last Edited: ")
+                    .append(getNoteSavedDate());
+        }
         Set<Tag> tags = getTags();
+
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
         return builder.toString();
     }
 

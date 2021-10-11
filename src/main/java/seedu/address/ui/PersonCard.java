@@ -37,7 +37,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label note;
+    private Label noteLastSaved;
     @FXML
     private FlowPane tags;
 
@@ -51,7 +51,11 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        note.setText(person.getNoteDate().value);
+        if (!person.getNoteSavedDate().isEmpty()) {
+            noteLastSaved.setText(person.getNoteSavedDate());
+        } else {
+            noteLastSaved.setManaged(false);
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

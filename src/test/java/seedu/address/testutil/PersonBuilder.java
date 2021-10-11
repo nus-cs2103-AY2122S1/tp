@@ -21,12 +21,12 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "Why is her last name Bee tho?";
+    public static final String DEFAULT_NOTE_DATE = "Thu., 11/02/2022";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Note note;
-    private NoteDate noteDate;
     private Set<Tag> tags;
 
     /**
@@ -36,8 +36,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        note = new Note(DEFAULT_NOTE);
-        noteDate = new NoteDate();
+        note = new Note(DEFAULT_NOTE, DEFAULT_NOTE_DATE);
         tags = new HashSet<>();
     }
 
@@ -49,7 +48,6 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         note = personToCopy.getNote();
-        noteDate = personToCopy.getNoteDate();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -88,13 +86,13 @@ public class PersonBuilder {
     /**
      * Sets the {@code Note} of the {@code Person} that we are building.
      */
-    public PersonBuilder withNote(String note) {
-        this.note = new Note(note);
+    public PersonBuilder withNote(String note, String noteSavedDate) {
+        this.note = new Note(note, noteSavedDate);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, note, noteDate, tags);
+        return new Person(name, phone, email, note, tags);
     }
 
 }

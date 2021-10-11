@@ -9,6 +9,7 @@ public class Note {
 
     /** content of note **/
     public final String value;
+    public final String savedDate;
 
 
     /**
@@ -16,9 +17,19 @@ public class Note {
      *
      * @param value Value of the note.
      */
-    public Note(String value) {
+    public Note(String value, String savedDate) {
         requireNonNull(value);
         this.value = value;
+        this.savedDate = savedDate;
+    }
+
+    /**
+     * Returns string representation of saved date.
+     *
+     * @return String representation of saved date
+     */
+    public String getSavedDate() {
+        return savedDate;
     }
 
     @Override
@@ -30,7 +41,7 @@ public class Note {
             return false;
         }
         Note noteOther = (Note) other;
-        return value.equals(noteOther.value); // state check
+        return value.equals(noteOther.value) && savedDate.equals(noteOther.savedDate); // state check
     }
 
     @Override
