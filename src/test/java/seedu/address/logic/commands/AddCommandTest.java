@@ -68,6 +68,10 @@ public class AddCommandTest {
 
         // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+
+        assertFalse(addAliceCommand.hashCode() == addBobCommand.hashCode());
+        assertTrue(addAliceCommand.hashCode()
+                == new AddCommand(alice).hashCode());
     }
 
     /**
