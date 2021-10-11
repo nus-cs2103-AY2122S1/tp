@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
