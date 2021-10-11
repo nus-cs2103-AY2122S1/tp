@@ -1,0 +1,8 @@
+{
+  "_comment": "AddressBook save file which contains the same Task values as in TypicalTasks#getTypicalAddressBook()",
+  "tasks" : [ {
+    "name" : "Report 1",
+    "deadline" : "2021-10-10",
+    "uniqueId": "f31648db-5619-4bad-99d2-87367a2b5f28"
+  } ]
+}

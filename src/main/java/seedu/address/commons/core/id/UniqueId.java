@@ -20,6 +20,18 @@ public class UniqueId {
         this.id = UUID.randomUUID();
     }
 
+    public UniqueId(String id) {
+        requireNonNull(id);
+        this.owner = null;
+        this.id = UUID. fromString(id);
+    }
+
+    public UniqueId(UUID id) {
+        requireNonNull(id);
+        this.owner = null;
+        this.id = id;
+    }
+
     /**
      * Generates a unique id for a task.
      *
@@ -38,6 +50,10 @@ public class UniqueId {
         return new UniqueId(IdOwner.STUDENT);
     }
 
+    public UUID getUUID() {
+        return this.id;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -49,7 +65,8 @@ public class UniqueId {
         }
 
         UniqueId otherId = (UniqueId) other;
-        return this.id.equals(otherId.id) && this.owner.equals(otherId.owner);
+        //return this.id.equals(otherId.id) && this.owner.equals(otherId.owner);
+        return this.id.equals(otherId.id);
     }
 
     @Override

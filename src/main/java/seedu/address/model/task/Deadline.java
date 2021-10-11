@@ -16,6 +16,7 @@ public class Deadline {
     public static final String MESSAGE_CONSTRAINTS =
             "Deadlines should be in the format YYYY-MM-DD, such as 2007-12-03";
     public final LocalDate deadline;
+    public final String stringDeadline;
 
     /**
      * Constructs a {@code Deadline}.
@@ -25,6 +26,7 @@ public class Deadline {
     public Deadline(String deadline) {
         requireNonNull(deadline);
         checkArgument(isValidDeadline(deadline), MESSAGE_CONSTRAINTS);
+        this.stringDeadline = deadline;
         this.deadline = LocalDate.parse(deadline);
     }
 

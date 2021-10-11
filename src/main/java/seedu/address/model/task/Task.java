@@ -20,6 +20,8 @@ public class Task {
     // The id of the task
     private final UniqueId id;
 
+    //private final String stringId;
+
     /**
      * Every field must be present and not null.
      */
@@ -28,6 +30,16 @@ public class Task {
         requireAllNonNull(name, deadline, id);
         this.name = name;
         this.deadline = deadline;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Task(Name name, Deadline deadline, UniqueId id) {
+        requireAllNonNull(name, deadline, id);
+        this.name = name;
+        this.deadline = deadline;
+        this.id = id;
     }
 
     public Name getName() {
@@ -71,6 +83,7 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
+        System.out.println(isSameTask(otherTask));
         return otherTask.getId().equals(getId()) && isSameTask(otherTask);
     }
 
