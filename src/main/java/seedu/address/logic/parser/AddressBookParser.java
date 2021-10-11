@@ -18,6 +18,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses user input.
@@ -28,6 +29,12 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    private Model model;
+
+    public AddressBookParser(Model model) {
+        this.model = model;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -47,7 +54,7 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser(model).parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

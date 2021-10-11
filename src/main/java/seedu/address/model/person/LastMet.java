@@ -6,14 +6,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class LastMet {
+public class LastMet implements OptionalPersonNonStringField {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
         + "where Day, month and year should be numerical values.";
     // TODO: why call it alternative?
-    public static final String ALTERNATIVE_VALIDATION_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
-
-    public static final boolean IS_NULL_VALUE_ALLOWED = true;
-    public static final String DEFAULT_VALUE = "";
+    public static final String ALTERNATIVE_VALIDATION_REGEX =
+        "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
 
     public final LocalDate value;
     public final String dateInString;
@@ -37,7 +35,7 @@ public class LastMet {
         if (lastMetDate.isEmpty()) {
             value = null;
         } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             value = LocalDate.parse(lastMetDate, formatter);
         }
     }
@@ -52,7 +50,13 @@ public class LastMet {
 
     @Override
     public String toString() {
-        return this.dateInString;
+
+        if (value == null) {
+            return DEFAULT_VALUE;
+        } else {
+            return this.dateInString;
+        }
+
     }
 
     @Override

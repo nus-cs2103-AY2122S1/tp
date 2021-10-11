@@ -16,6 +16,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
+    private String clientCounter;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -48,12 +50,45 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the clientCounter of the address book with {@code clientCounter}.
+     *
+     */
+    @Override
+    public void setClientCounter(String clientCounter) {
+        this.clientCounter = clientCounter;
+    }
+
+    /**
+     * Increments the clientCounter of the address book by 1 {@code clientCounter}.
+     *
+     */
+    @Override
+    public void incrementClientCounter() {
+        try {
+            int clientCounterInt = Integer.parseInt(this.clientCounter) + 1;
+            this.clientCounter = String.valueOf(clientCounterInt);
+        } catch (NumberFormatException e) {
+            this.clientCounter = "1";
+        }
+    }
+
+    /**
+     * Gets the clientCounter of the address book.
+     *
+     */
+    @Override
+    public String getClientCounter() {
+        return this.clientCounter;
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setClientCounter(newData.getClientCounter());
     }
 
     //// person-level operations
