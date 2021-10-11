@@ -34,7 +34,7 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ "family" ]
   }, {
     "name" : "Fiona Kunz",
     "telegram": "fiona_kunz",
