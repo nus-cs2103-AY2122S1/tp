@@ -93,7 +93,7 @@ public class AddAllocCommand extends Command {
     }
 
     /**
-     * Get and returns a list of {@code Student} with matching identity specified in the {@code allocDescriptor}.
+     * Gets and returns a list of {@code Student} with matching identity specified in the {@code allocDescriptor}.
      */
     public static Group getAllocGroup(List<Group> groups, AllocDescriptor allocDescriptor) {
         List<Group> allocGroups = groups.stream()
@@ -104,7 +104,7 @@ public class AddAllocCommand extends Command {
     }
 
     /**
-     * Get and returns a list of {@code Student} with matching identity specified in the {@code allocDescriptor}.
+     * Gets and returns a list of {@code Student} with matching identity specified in the {@code allocDescriptor}.
      */
     public static List<Student> getAllocStudents(List<Student> students, AllocDescriptor allocDescriptor) {
         List<Student> allocStudents = students.stream()
