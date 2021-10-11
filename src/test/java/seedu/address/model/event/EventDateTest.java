@@ -3,7 +3,6 @@ package seedu.address.model.event;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +42,7 @@ public class EventDateTest {
         assertTrue(EventDate.isValidDate("121-9-1"));
 
     }
-    
+
     @Test
     public void testEquals() {
         EventDate firstEventDate = new EventDate("2020-11-11");
