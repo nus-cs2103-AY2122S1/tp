@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
@@ -8,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
@@ -58,8 +58,8 @@ public class PersonCard extends UiPart<Region> {
                 .map(Group::toString).collect(Collectors.joining(", "));
         group.setText("Groups: " + groupsString);
 
-        String assessmentsString = student.getScores().keySet().stream()
-                .map(Assessment::toString).sorted().collect(Collectors.joining(", "));
+        String assessmentsString = student.getScores().entrySet().stream()
+                .map(Map.Entry::toString).sorted().collect(Collectors.joining(", "));
         assessment.setText("Assessments: " + assessmentsString);
 
         student.getTags().stream()
