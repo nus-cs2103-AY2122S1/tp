@@ -1,9 +1,12 @@
 package seedu.address.ui;
 
+import java.io.File;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -17,6 +20,8 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
+    private static final File iconFile = new File("src/main/resources/images/fav_icon.png");
+    private static final Image favIcon = new Image(iconFile.toURI().toString());
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -40,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private ImageView fav;
+    @FXML
     private FlowPane mods;
 
     /**
@@ -50,6 +57,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ".");
         name.setText(person.getName().fullName);
+        if (person.getIsFavourite()) {
+            fav.setImage(favIcon);
+        }
         studentId.setText(person.getStudentId().value);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);

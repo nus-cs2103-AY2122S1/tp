@@ -20,6 +20,7 @@ public class Person {
     private final StudentId id;
     private final Phone phone;
     private final Email email;
+    private final boolean isFavourite;
 
     // Data fields
     private final Set<Mod> mods = new HashSet<>();
@@ -28,12 +29,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId id, Phone phone, Email email, Set<Mod> mods, boolean isMyProfile) {
+    public Person(Name name, StudentId id, Phone phone, Email email,
+                  boolean isFavourite, Set<Mod> mods, boolean isMyProfile) {
         requireAllNonNull(name, id, phone, email, mods, isMyProfile);
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
+        this.isFavourite = isFavourite;
         this.mods.addAll(mods);
         this.isMyProfile = isMyProfile;
     }
@@ -64,6 +67,10 @@ public class Person {
 
     public boolean getIsMyProfile() {
         return isMyProfile;
+    }
+
+    public boolean getIsFavourite() {
+        return isFavourite;
     }
 
     /**
@@ -97,7 +104,9 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getMods().equals(getMods());
+                && otherPerson.getMods().equals(getMods())
+                && otherPerson.getIsFavourite() == getIsFavourite()
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     @Override
@@ -115,7 +124,9 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail());
+                .append(getEmail())
+                .append("; isFavourite: ")
+                .append(getIsFavourite());
 
         Set<Mod> mods = getMods();
         if (!mods.isEmpty()) {

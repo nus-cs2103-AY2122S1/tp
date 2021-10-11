@@ -21,22 +21,22 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new StudentId("A1234567R"), new Phone("87438807"),
-                new Email("alexyeoh@example.com"),
+                new Email("alexyeoh@example.com"), true,
                 getTagSet("CS2103T have group", "CS2106", "CS2101 need member"), false),
             new Person(new Name("Bernice Yu"), new StudentId("A1234567R"),
-                    new Phone("99272758"), new Email("berniceyu@example.com"),
+                    new Phone("99272758"), new Email("berniceyu@example.com"), false,
                 getTagSet("CS2100", "CS3230 need group", "CS4234 need member"), false),
             new Person(new Name("Charlotte Oliveiro"), new StudentId("A1234567R"),
-                    new Phone("93210283"), new Email("charlotte@example.com"),
+                    new Phone("93210283"), new Email("charlotte@example.com"), true,
                 getTagSet("CS1101S", "CS3230 need member"), false),
             new Person(new Name("David Li"), new StudentId("A1234567R"),
-                    new Phone("91031282"), new Email("lidavid@example.com"),
+                    new Phone("91031282"), new Email("lidavid@example.com"), false,
                 getTagSet("IS1103"), false),
             new Person(new Name("Irfan Ibrahim"), new StudentId("A1234567R"),
-                    new Phone("92492021"), new Email("irfan@example.com"),
+                    new Phone("92492021"), new Email("irfan@example.com"), false,
                 getTagSet("ST2334 need group", "GEA1000 need member"), false),
             new Person(new Name("Roy Balakrishnan"), new StudentId("A1234567R"),
-                    new Phone("92624417"), new Email("royb@example.com"),
+                    new Phone("92624417"), new Email("royb@example.com"), false,
                 getTagSet("LAJ1000 need member", "GES1021", "MA2001"), false)
         };
     }

@@ -29,6 +29,7 @@ class JsonAdaptedPerson {
     private final String id;
     private final String phone;
     private final String email;
+    private final boolean isFavourite;
     private final List<JsonAdaptedTag> modules = new ArrayList<>();
     private final boolean isMyProfile;
 
@@ -38,12 +39,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("id") String id, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email,
+            @JsonProperty("email") String email, @JsonProperty("isFavourite") boolean isFavourite,
             @JsonProperty("modules") List<JsonAdaptedTag> modules, @JsonProperty("isMyProfile") boolean isMyProfile) {
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
+        this.isFavourite = isFavourite;
         if (modules != null) {
             this.modules.addAll(modules);
         }
@@ -58,6 +60,7 @@ class JsonAdaptedPerson {
         id = source.getStudentId().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        isFavourite = source.getIsFavourite();
         modules.addAll(source.getMods().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -109,7 +112,7 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         final Set<Mod> modelMods = new HashSet<>(personMods);
-        return new Person(modelName, modelId, modelPhone, modelEmail, modelMods, this.isMyProfile);
+        return new Person(modelName, modelId, modelPhone, modelEmail, this.isFavourite, modelMods, this.isMyProfile);
     }
 
 }

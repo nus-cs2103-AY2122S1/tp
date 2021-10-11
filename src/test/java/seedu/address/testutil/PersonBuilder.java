@@ -20,12 +20,14 @@ public class PersonBuilder {
     public static final String DEFAULT_ID = "A1234567Z";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final boolean DEFAULT_IS_FAVOURITE = false;
     public static final boolean DEFAULT_IS_MY_PROFILE = false;
 
     private Name name;
     private StudentId id;
     private Phone phone;
     private Email email;
+    private boolean isFavourite;
     private Set<Mod> mods;
     private boolean isMyProfile;
 
@@ -37,6 +39,7 @@ public class PersonBuilder {
         id = new StudentId(DEFAULT_ID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        isFavourite = DEFAULT_IS_FAVOURITE;
         mods = new HashSet<>();
         isMyProfile = DEFAULT_IS_MY_PROFILE;
     }
@@ -49,6 +52,7 @@ public class PersonBuilder {
         id = personToCopy.getStudentId();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        isFavourite = personToCopy.getIsFavourite();
         mods = new HashSet<>(personToCopy.getMods());
         isMyProfile = personToCopy.getIsMyProfile();
     }
@@ -94,7 +98,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, id, phone, email, mods, isMyProfile);
+        return new Person(name, id, phone, email, isFavourite, mods, isMyProfile);
     }
 
 }
