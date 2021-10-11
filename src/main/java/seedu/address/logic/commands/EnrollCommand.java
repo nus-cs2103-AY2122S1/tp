@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -59,9 +60,12 @@ public class EnrollCommand extends Command {
                     student.getName(),
                     lesson));
         }
-        lesson.addStudent(student);
+        Student newStudent = Student.createClone(student); // todo consider cloneable
+        lesson.addStudent(newStudent);
+        model.setPerson(student, newStudent);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), lesson));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newStudent.getName(), lesson));
     }
 
     @Override

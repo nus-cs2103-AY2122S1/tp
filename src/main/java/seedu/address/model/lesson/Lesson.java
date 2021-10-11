@@ -360,6 +360,21 @@ public class Lesson {
         return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault());
     }
 
+    /**
+     * to clean
+     * @param lesson
+     * @return
+     */
+    public static Lesson createClone(Lesson lesson) {
+        Lesson newLesson = Lesson.createFromCodeAndPrice(lesson.getLessonCode(), lesson.getPrice());
+        List<Student> enrolledStudents = lesson.students;
+        for (Student s : enrolledStudents) {
+            lesson.removeStudent(s);
+            newLesson.addStudent(s);
+        }
+        return newLesson;
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

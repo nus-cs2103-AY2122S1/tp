@@ -114,6 +114,11 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
+     * todo
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
+
+    /**
      * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
      */
     Lesson searchLessons(String lessonCode);
