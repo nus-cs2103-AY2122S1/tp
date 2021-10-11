@@ -13,7 +13,7 @@
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: #fafafa;
     -fx-opacity: 1;
 }
 

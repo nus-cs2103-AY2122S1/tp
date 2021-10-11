@@ -17,12 +17,11 @@
     <Scene>
       <stylesheets>
         <URL value="@Fonts.css"/>
-        <URL value="@HelpWindow.css"/>
         <URL value="@DarkTheme.css"/>
         <URL value="@Extensions.css"/>
 
       </stylesheets>
-      <BorderPane fx:id="mainPane" styleClass="border-pane" >
+      <BorderPane fx:id="mainPane" styleClass="border-pane">
         <center>
           <HBox alignment="CENTER">
             <children>
@@ -32,7 +31,8 @@
                 </HBox.margin>
               </Label>
 
-              <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" styleClass="button-copy-url">
+              <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL"
+                      styleClass="button-copy-url">
                 <HBox.margin>
                   <Insets left="5.0"/>
                 </HBox.margin>
@@ -51,7 +51,8 @@
         </center>
         <bottom>
 
-          <VBox minHeight="400.0" maxHeight="Infinity" minWidth="100.0" prefWidth="100.0" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS">
+          <VBox minHeight="400.0" maxHeight="Infinity" minWidth="100.0" prefWidth="100.0" BorderPane.alignment="CENTER"
+                VBox.vgrow="ALWAYS">
             <children>
               <ComboBox fx:id="commandList" prefWidth="150.0" promptText="(Select a command)"
                         styleClass="combo-box">

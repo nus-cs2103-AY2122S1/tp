@@ -24,6 +24,8 @@ import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
+import seedu.fast.model.tag.Tag;
+import seedu.fast.model.tag.PriorityTag;
 
 /**
  * Controller for a help page
@@ -33,7 +35,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t09-4.github.io/tp/";
     public static final String HELP_MESSAGE = "View our user guide: " + USERGUIDE_URL;
     public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
-        "Edit", "Find", "List", "Help", "Remark", "Sort", "Misc"};
+        "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -55,7 +57,8 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String HELP_COMMAND_USAGE = HelpCommand.MESSAGE_USAGE;
     private static final String REMARK_COMMAND_USAGE = RemarkCommand.MESSAGE_USAGE;
     private static final String SORT_COMMAND_USAGE = SortCommand.MESSAGE_USAGE;
-
+    private static final String TAG_USAGE = Tag.MESSAGE_USAGE;
+    private static final String PRIORITY_TAG_USAGE = PriorityTag.MESSAGE_USAGE;
 
     @FXML
     private Button copyButton;
@@ -181,6 +184,10 @@ public class HelpWindow extends UiPart<Stage> {
             return REMARK_COMMAND_USAGE;
         case "Sort":
             return SORT_COMMAND_USAGE;
+        case "Tag" :
+            return TAG_USAGE;
+        case "Priority Tag" :
+            return PRIORITY_TAG_USAGE;
         case "Misc":
             return "Coming soon!";
         default:
