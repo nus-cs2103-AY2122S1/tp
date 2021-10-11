@@ -17,7 +17,6 @@ public class Task {
     // Data fields
     private final Date date;
     private final Tag tag;
-//    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -28,7 +27,6 @@ public class Task {
         this.time = time;
         this.date = date;
         this.tag = tag;
-//        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -43,15 +41,9 @@ public class Task {
         return date;
     }
 
-    public Tag getTag() { return tag; }
-
-//    /**
-//     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-//     * if modification is attempted.
-//     */
-//    public Set<Tag> getTags() {
-//        return Collections.unmodifiableSet(tags);
-//    }
+    public Tag getTag() {
+        return tag;
+    }
 
     /**
      * Returns true if both tasks have the same name.
@@ -104,11 +96,6 @@ public class Task {
                 .append("; Tag: ")
                 .append(getTag());
 
-//        Set<Tag> tags = getTags();
-//        if (!tags.isEmpty()) {
-//            builder.append("; Tags: ");
-//            tags.forEach(builder::append);
-//        }
         return builder.toString();
     }
 
