@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.lesson.Price.isValidPrice;
+import static seedu.address.model.lesson.Subject.isValidSubject;
 import static seedu.address.model.person.Grade.isValidGrade;
 
 import java.time.DayOfWeek;
@@ -8,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonCode;
+import seedu.address.model.lesson.LessonTime;
+import seedu.address.model.lesson.Price;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Student;
 
@@ -17,18 +23,16 @@ import seedu.address.model.person.Student;
 public class LessonBuilder {
 
     // default constants for test lessons
-    public static final String DEFAULT_SUBJECT = "Science";
+    public static final Subject DEFAULT_SUBJECT = new Subject("Science");
     public static final Grade DEFAULT_GRADE = new Grade("S1");
-    public static final DayOfWeek DEFAULT_DAY_OF_WEEK = DayOfWeek.WEDNESDAY;
-    public static final LocalTime DEFAULT_START_TIME = LocalTime.of(15, 0);
-    public static final double DEFAULT_PRICE = 9.9;
-    public static final String DEFAULT_LESSON_CODE = "Science-S1-Wed-1500";
+    public static final LessonTime DEFAULT_LESSON_TIME = new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.of(15, 0));
+    public static final Price DEFAULT_PRICE = new Price(9.9);
+    public static final LessonCode DEFAULT_LESSON_CODE = new LessonCode("Science-S1-Wed-1500");
 
-    private String subject;
+    private Subject subject;
     private Grade grade;
-    private DayOfWeek dayOfWeek;
-    private LocalTime startTime;
-    private double price;
+    private LessonTime lessonTime;
+    private Price price;
     private final List<Student> students;
 
     /**
@@ -37,8 +41,7 @@ public class LessonBuilder {
     public LessonBuilder() {
         this.subject = DEFAULT_SUBJECT;
         this.grade = DEFAULT_GRADE;
-        this.dayOfWeek = DEFAULT_DAY_OF_WEEK;
-        this.startTime = DEFAULT_START_TIME;
+        this.lessonTime = DEFAULT_LESSON_TIME;
         this.price = DEFAULT_PRICE;
         this.students = new ArrayList<>();
     }
@@ -46,8 +49,18 @@ public class LessonBuilder {
     /**
      * Sets the {@code subject} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withSubject(String subject) {
+    public LessonBuilder withSubject(Subject subject) {
         this.subject = subject;
+        return this;
+    }
+
+    /**
+     * Sets the {@code subject} of the {@code Lesson} that we are building.
+     * An overloaded method that takes the string subject value instead as parameter.
+     */
+    public LessonBuilder withSubject(String subject) {
+        assert (isValidSubject(subject)) : "Subject to mock is invalid";
+        this.subject = new Subject(subject);
         return this;
     }
 
@@ -72,26 +85,16 @@ public class LessonBuilder {
     /**
      * Sets the {@code dayOfWeek} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withDayOfWeek(DayOfWeek dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
+    public LessonBuilder withLessonTime(LessonTime lessonTime) {
+        this.lessonTime = lessonTime;
         return this;
     }
 
     /**
-     * Sets the {@code startTime} of the {@code Lesson} that we are building.
+     * Sets the {@code price} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-        return this;
-    }
-
-    /**
-     * Sets the {@code startTime} of the {@code Lesson} that we are building.
-     * An overloaded method that takes the int hour and minutes instead as parameters.
-     */
-    public LessonBuilder withStartTime(int hour, int minutes) {
-        assert (0 <= hour && hour < 24) && (0 <= minutes && minutes < 60) : "Start time to mock is invalid";
-        this.startTime = LocalTime.of(hour, minutes);
+    public LessonBuilder withPrice(Price price) {
+        this.price = price;
         return this;
     }
 
@@ -99,7 +102,8 @@ public class LessonBuilder {
      * Sets the {@code price} of the {@code Lesson} that we are building.
      */
     public LessonBuilder withPrice(double price) {
-        this.price = price;
+        assert (isValidPrice(price)) : "Price to mock is invalid";
+        this.price = new Price(price);
         return this;
     }
 
@@ -116,7 +120,7 @@ public class LessonBuilder {
      * Creates a {@code Lesson} with the specified details.
      */
     public Lesson build() {
-        Lesson lesson = new Lesson(subject, grade, dayOfWeek, startTime, price);
+        Lesson lesson = new Lesson(subject, grade, lessonTime, price);
         for (Student student : students) {
             lesson.addStudent(student);
         }
