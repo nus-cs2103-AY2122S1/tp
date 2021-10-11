@@ -21,6 +21,17 @@ public class UniqueId {
     }
 
     /**
+     * Creates a UniqueId object.
+     *
+     * @param id String representation of the UUID of a task.
+     */
+    public UniqueId(String id) {
+        requireNonNull(id);
+        this.owner = null;
+        this.id = UUID.fromString(id);
+    }
+
+    /**
      * Generates a unique id for a task.
      *
      * @return A unique id for a task.
@@ -38,6 +49,10 @@ public class UniqueId {
         return new UniqueId(IdOwner.STUDENT);
     }
 
+    public UUID getUuid() {
+        return this.id;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -49,7 +64,8 @@ public class UniqueId {
         }
 
         UniqueId otherId = (UniqueId) other;
-        return this.id.equals(otherId.id) && this.owner.equals(otherId.owner);
+        //return this.id.equals(otherId.id) && this.owner.equals(otherId.owner);
+        return this.id.equals(otherId.id);
     }
 
     @Override
