@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -76,5 +77,15 @@ public class VisitTest {
 
         // incorrect minute range regex -> return false
         assertFalse(Visit.isValidVisit("2021-01-02 12:99"));
+    }
+
+    @Test
+    public void getFormatted() {
+        // format displayed date
+        String expectedDate = "01 Feb 2021 23:59";
+        assertEquals(expectedDate, new Visit("2021-02-01 23:59").getFormatted());
+
+        // format displayed date for empty visit
+        assertEquals("", new Visit("").getFormatted());
     }
 }
