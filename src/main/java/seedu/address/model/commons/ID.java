@@ -15,7 +15,11 @@ public class ID {
         id = idCounter;
         idCounter++;
     }
-
+    /**
+     * Constructs a {@code ID}.
+     *
+     * @param idString A valid id.
+     */
     public ID(String idString) {
         requireAllNonNull(idString);
         id = Integer.parseInt(idString);

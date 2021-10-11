@@ -38,7 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_CANNON = "Cannon";
     public static final String VALID_NAME_DAISY = "Daisy";
     public static final String VALID_UNIT_PRICE_CANNON = "1";
-    public static final String VALID_UNIT_PRICE_DAISY = "4.56";
+    public static final String VALID_UNIT_PRICE_DAISY = "4";
     public static final String VALID_QUANTITY_CANNON = "1";
     public static final String VALID_QUANTITY_DAISY = "456";
 

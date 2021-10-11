@@ -1,6 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.client.*;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.PhoneNumber;
+import seedu.address.model.commons.Name;
 
 /**
  * A utility class to help with building Client objects.
@@ -12,7 +16,7 @@ public class ClientBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    private seedu.address.model.commons.Name name;
+    private Name name;
     private PhoneNumber phoneNumber;
     private Email email;
     private Address address;
@@ -21,7 +25,7 @@ public class ClientBuilder {
      * Creates a {@code ClientBuilder} with the default details.
      */
     public ClientBuilder() {
-        name = new seedu.address.model.commons.Name(DEFAULT_NAME);
+        name = new Name(DEFAULT_NAME);
         phoneNumber = new PhoneNumber(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -41,7 +45,7 @@ public class ClientBuilder {
      * Sets the {@code Name} of the {@code Client} that we are building.
      */
     public ClientBuilder withName(String name) {
-        this.name = new seedu.address.model.commons.Name(name);
+        this.name = new Name(name);
         return this;
     }
 
