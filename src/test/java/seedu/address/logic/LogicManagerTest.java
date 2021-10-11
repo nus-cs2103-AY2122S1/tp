@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.LogicManager.PROFILE_CREATED_ERROR_MESSAGE;
 import static seedu.address.logic.LogicManager.PROFILE_NOT_CREATED_ERROR_MESSAGE;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -56,7 +55,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
@@ -64,7 +63,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -72,7 +71,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
@@ -86,7 +85,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_profileAlreadyCreated_throwsCommandException() throws CommandException, ParseException {
-        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com a/123 Computing";
+        String createProfileCommand = "create n/charlton id/a0123456x p/81234567 e/test@email.com";
         logic.execute(createProfileCommand);
         assertCommandException(createProfileCommand, PROFILE_CREATED_ERROR_MESSAGE + "\n" + EditCommand.MESSAGE_USAGE);
     }
@@ -102,8 +101,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = CreateCommand.COMMAND_WORD + NAME_DESC_AMY + ID_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+        String addCommand = CreateCommand.COMMAND_WORD + NAME_DESC_AMY + ID_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
@@ -20,7 +19,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -44,7 +42,6 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ID + "STUDENT ID] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_MOD + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -101,10 +98,9 @@ public class EditCommand extends Command {
         StudentId updatedId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Mod> updatedMods = editPersonDescriptor.getTags().orElse(personToEdit.getMods());
 
-        return new Person(updatedName, updatedId, updatedPhone, updatedEmail, updatedAddress, updatedMods, true);
+        return new Person(updatedName, updatedId, updatedPhone, updatedEmail, updatedMods, true);
     }
 
     @Override
@@ -134,7 +130,6 @@ public class EditCommand extends Command {
         private StudentId id;
         private Phone phone;
         private Email email;
-        private Address address;
         private Set<Mod> mods;
 
         public EditPersonDescriptor() {}
@@ -148,7 +143,6 @@ public class EditCommand extends Command {
             setStudentId(toCopy.id);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setTags(toCopy.mods);
         }
 
@@ -157,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, id, phone, email, address, mods);
+            return CollectionUtil.isAnyNonNull(name, id, phone, email, mods);
         }
 
         public void setName(Name name) {
@@ -190,14 +184,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         /**
@@ -236,7 +222,6 @@ public class EditCommand extends Command {
                     && getStudentId().equals(e.getStudentId())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
     }

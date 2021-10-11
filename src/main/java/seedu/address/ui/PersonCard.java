@@ -38,8 +38,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
     private FlowPane mods;
@@ -54,7 +52,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         studentId.setText(person.getStudentId().value);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getMods().stream()
                 .sorted(Comparator.comparing(mod -> mod.modName))

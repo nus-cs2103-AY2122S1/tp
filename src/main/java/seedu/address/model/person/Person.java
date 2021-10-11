@@ -22,21 +22,18 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final Set<Mod> mods = new HashSet<>();
     private final boolean isMyProfile;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId id, Phone phone, Email email,
-                  Address address, Set<Mod> mods, boolean isMyProfile) {
-        requireAllNonNull(name, id, phone, email, address, mods, isMyProfile);
+    public Person(Name name, StudentId id, Phone phone, Email email, Set<Mod> mods, boolean isMyProfile) {
+        requireAllNonNull(name, id, phone, email, mods, isMyProfile);
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.mods.addAll(mods);
         this.isMyProfile = isMyProfile;
     }
@@ -55,10 +52,6 @@ public class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -104,14 +97,13 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getMods().equals(getMods());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, mods);
+        return Objects.hash(name, phone, email, mods);
     }
 
     @Override
@@ -123,9 +115,7 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getEmail());
 
         Set<Mod> mods = getMods();
         if (!mods.isEmpty()) {
