@@ -49,8 +49,8 @@ public class ModuleClass {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both classes have the same module code and time.
+     * This defines a weaker notion of equality between two classes.
      */
     public boolean isSameModuleClass(ModuleClass otherModuleClass) {
         if (otherModuleClass == this) {
@@ -58,7 +58,9 @@ public class ModuleClass {
         }
 
         return otherModuleClass != null
-                && otherModuleClass.getModuleCode().equals(getModuleCode());
+                && otherModuleClass.getModuleCode().equals(getModuleCode())
+                && otherModuleClass.getDay().equals(getDay())
+                && otherModuleClass.getTime().equals(getTime());
     }
 
     /**
