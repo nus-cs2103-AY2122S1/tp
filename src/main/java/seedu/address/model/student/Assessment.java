@@ -44,8 +44,15 @@ public class Assessment {
         return value;
     }
 
-    public void setScores(ID id, Score score) {
+    public void setScore(ID id, Score score) {
         scores.put(id, score);
+    }
+
+    /**
+     * Returns true if the student with the given {@code id} is already graded.
+     */
+    public boolean isGraded(ID id) {
+        return scores.containsKey(id);
     }
 
     @Override
