@@ -66,6 +66,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         commandHistory.pop();
+        commandHistory.restore();
         commandHistory.push(new Command(commandText));
         commandHistory.push(new Command(""));
         commandTextField.setText("");

@@ -93,8 +93,10 @@ public class History<T extends Copyable<T>> implements Historyable<T> {
     @Override
     public void restore() {
         currentSnapshotIndex = 0;
-        for (Snapshot<T> snapshot : snapshots) {
-            snapshot.restore();
+        for (int index = 0; index < size(); index++) {
+            Snapshot<T> snapshot = snapshots.get(index);
+            Snapshot<T> restoredSnapshot = snapshot.restore();
+            snapshots.set(index, restoredSnapshot);
         }
     };
 }

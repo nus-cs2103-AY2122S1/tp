@@ -28,7 +28,7 @@ public class Snapshot<T extends Copyable<T>> {
      * Restores the object in snapshot to the last saved state.
      */
     public Snapshot<T> restore() {
-        return this;
+        return new Snapshot<>(object);
     }
 
     /**
