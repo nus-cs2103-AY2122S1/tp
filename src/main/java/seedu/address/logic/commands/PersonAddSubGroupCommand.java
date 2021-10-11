@@ -56,14 +56,16 @@ public class PersonAddSubGroupCommand extends Command {
         if (personToEdit.getSubGroups().contains(groupName + "_" + subGroupName)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
+
         SuperGroup superGroup = model.findSuperGroup(groupName);
         if (superGroup == null) {
             superGroup = new SuperGroup(groupName);
             model.addSuperGroup(superGroup);
         }
+
         SubGroup subGroup = model.findSubGroup(groupName + "_" + subGroupName);
         if (subGroup == null) {
-            subGroup = new SubGroup(subGroupName, superGroup);
+            subGroup = new SubGroup(subGroupName, superGroup.getName());
             model.addSubGroup(subGroup);
         }
         superGroup.addSubGroup(subGroup);

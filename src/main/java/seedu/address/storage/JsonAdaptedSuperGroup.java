@@ -30,7 +30,7 @@ public class JsonAdaptedSuperGroup {
      */
     public JsonAdaptedSuperGroup(SuperGroup source) {
         this.name = source.getName();
-        this.subGroups = source.getDisplaySubGroups();
+        this.subGroups = source.getSubGroups();
     }
 
     /**
@@ -42,7 +42,7 @@ public class JsonAdaptedSuperGroup {
     public SuperGroup toModelType() throws IllegalValueException {
         SuperGroup group = new SuperGroup(name);
         for (String sg : this.subGroups) {
-            group.addSubGroup(new SubGroup(sg, group));
+            group.addSubGroup(new SubGroup(sg, group.getName()));
         }
         return group;
     }

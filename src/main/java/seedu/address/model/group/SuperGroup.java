@@ -3,14 +3,14 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Represents a group that has many subgroups.
  */
 public class SuperGroup extends Group {
 
-    protected HashMap<String, SubGroup> subGroups;
+    protected HashSet<String> subGroups;
 
     /**
      * Creates a new SuperGroup where name is the name of the group.
@@ -19,7 +19,7 @@ public class SuperGroup extends Group {
      */
     public SuperGroup(String name) {
         super(name);
-        subGroups = new HashMap<>();
+        subGroups = new HashSet<>();
     }
 
     public String getName() {
@@ -32,15 +32,11 @@ public class SuperGroup extends Group {
      */
     public void addSubGroup(SubGroup subGroup) {
         requireNonNull(subGroup);
-        subGroups.put(subGroup.name, subGroup);
+        subGroups.add(subGroup.name);
     }
 
-    public ArrayList<String> getDisplaySubGroups() {
-        return new ArrayList<>(subGroups.keySet());
-    }
-
-    public HashMap<String, SubGroup> getSubGroups() {
-        return subGroups;
+    public ArrayList<String> getSubGroups() {
+        return new ArrayList<>(subGroups);
     }
 
     @Override

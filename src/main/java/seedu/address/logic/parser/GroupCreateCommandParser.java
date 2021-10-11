@@ -13,7 +13,7 @@ import seedu.address.model.group.SuperGroup;
 /**
  * Parses input arguments to create a group command.
  */
-public class GroupCreateCommandParser implements Parser<GroupCreateCommand> {
+public class GroupCreateCommandParser extends Parser<GroupCreateCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the {@code GroupCommand} and

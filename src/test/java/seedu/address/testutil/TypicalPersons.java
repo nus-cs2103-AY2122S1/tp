@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
@@ -81,6 +82,9 @@ public class TypicalPersons {
         AddressBook ab = new AddressBook();
         for (SuperGroup superGroup: TypicalGroups.getSuperGroups()) {
             ab.addSuperGroup(superGroup);
+        }
+        for (SubGroup subGroup: TypicalSubGroups.getSubGroups()) {
+            ab.addSubGroup(subGroup);
         }
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

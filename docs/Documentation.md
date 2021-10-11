@@ -1,5 +1,6 @@
 ---
-layout: page title: Documentation guide
+layout: page
+title: Documentation guide
 ---
 
 **Setting up and maintaining the project website:**

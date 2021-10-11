@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Elroy's Project Portfolio Page
 ---
 

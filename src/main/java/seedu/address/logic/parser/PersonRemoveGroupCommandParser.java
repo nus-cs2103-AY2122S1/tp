@@ -14,7 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments to create a person command.
  */
-public class PersonRemoveGroupCommandParser implements Parser<PersonRemoveGroupCommand> {
+public class PersonRemoveGroupCommandParser extends Parser<PersonRemoveGroupCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
      * and returns a {@code RemarkCommand} object for execution.

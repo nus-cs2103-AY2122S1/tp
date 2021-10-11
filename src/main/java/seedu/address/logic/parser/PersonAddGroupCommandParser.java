@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments to create a person command.
  */
-public class PersonAddGroupCommandParser implements Parser<PersonAddGroupCommand> {
+public class PersonAddGroupCommandParser extends Parser<PersonAddGroupCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
      * and returns a {@code RemarkCommand} object for execution.

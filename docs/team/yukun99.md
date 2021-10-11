@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Yukun's Project Portfolio Page
 ---
 

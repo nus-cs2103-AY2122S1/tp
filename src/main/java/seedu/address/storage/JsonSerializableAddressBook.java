@@ -24,16 +24,20 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
-    private final List<JsonAdaptedSuperGroup> superGroupList = new ArrayList<>();
+    private final List<JsonAdaptedSuperGroup> superGroups = new ArrayList<>();
+
+    private final List<JsonAdaptedSubGroup> subGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-        @JsonProperty("superGroupList") List<JsonAdaptedSuperGroup> superGroups) {
+        @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups,
+        @JsonProperty("subGroups") List<JsonAdaptedSubGroup> subGroups) {
         this.persons.addAll(persons);
-        this.superGroupList.addAll(superGroups);
+        this.superGroups.addAll(superGroups);
+        this.subGroups.addAll(subGroups);
     }
 
     /**
@@ -44,8 +48,12 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(
             Collectors.toList()));
-        superGroupList.addAll(source.getSuperGroups().values().stream().map(JsonAdaptedSuperGroup::new).collect(
+        superGroups
+            .addAll(source.getSuperGroups().values().stream().map(JsonAdaptedSuperGroup::new).collect(
             Collectors.toList()));
+        subGroups
+            .addAll(source.getSubGroups().values().stream().map(JsonAdaptedSubGroup::new).collect(
+                Collectors.toList()));
     }
 
     /**
@@ -55,15 +63,19 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedSuperGroup jsonAdaptedSuperGroup : superGroupList) {
-            SuperGroup sg = jsonAdaptedSuperGroup.toModelType();
-            for (SubGroup subGroup : sg.getSubGroups().values()) {
-                addressBook.addSubGroup(subGroup);
-            }
-            if (!addressBook.hasSuperGroup(sg)) {
-                addressBook.addSuperGroup(sg);
+        for (JsonAdaptedSuperGroup jsonAdaptedSuperGroup : superGroups) {
+            SuperGroup superGroup = jsonAdaptedSuperGroup.toModelType();
+            if (!addressBook.hasSuperGroup(superGroup)) {
+                addressBook.addSuperGroup(superGroup);
             }
         }
+        for (JsonAdaptedSubGroup jsonAdaptedSubGroups : subGroups) {
+            SubGroup subGroup = jsonAdaptedSubGroups.toModelType();
+            if (!addressBook.hasSubGroup(subGroup)) {
+                addressBook.addSubGroup(subGroup);
+            }
+        }
+
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
@@ -80,5 +92,4 @@ class JsonSerializableAddressBook {
         }
         return addressBook;
     }
-
 }
