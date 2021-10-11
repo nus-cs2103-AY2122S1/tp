@@ -1,5 +1,6 @@
 ---
-layout: page title: Testing guide
+layout: page
+title: Testing guide
 ---
 
 * Table of Contents {:toc}
