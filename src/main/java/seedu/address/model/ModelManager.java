@@ -146,6 +146,11 @@ public class ModelManager implements Model {
         applicantBook.addApplicant(applicant);
         applicationBook.addApplication(new Application(applicant, position));
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // TODO: update to show applicants
+        position.updateNoOfApplicants(position.getNoOfApplicants() + 1);
+        if (applicant.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+            position.updateNoOfRejectedApplicants(position.getNoOfRejectedApplicants() + 1);
+        }
+        position.updateRejectionRate();
     }
 
     @Override
@@ -222,30 +227,7 @@ public class ModelManager implements Model {
         filteredPositions.setPredicate(predicate);
     }
 
-
     //========== Applicant related methods ============================
-
-    /**
-     * Adds an applicant into the MTR ApplicantBook.
-     *
-     * @param target The new applicant to be added.
-     */
-    public void addApplicant(Applicant target) {
-        applicantBook.addApplicant(target);
-        Position p = target.getApplication().getPosition();
-        boolean hasPosition = positionBook.hasPosition(p);
-        if (hasPosition) {
-            int total = p.getNoOfApplicants() + 1;
-            int count = p.getNoOfRejectedApplicants();
-            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-                count++;
-            }
-            updateRejectionRate(p, total, count);
-        } else {
-            positionBook.addPosition(p);
-            addApplicant(target);
-        }
-    }
 
     /**
      * Deletes an applicant from the MTR ApplicantBook.
@@ -256,14 +238,12 @@ public class ModelManager implements Model {
         boolean hasApplicant = applicantBook.hasApplicant(target);
         if (hasApplicant) {
             Position p = target.getApplication().getPosition();
-            int total = p.getNoOfApplicants();
-            int count = p.getNoOfRejectedApplicants();
-            total--;
+            p.updateNoOfApplicants(p.getNoOfApplicants() - 1);
             if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-                count--;
+                p.updateNoOfRejectedApplicants(p.getNoOfRejectedApplicants() - 1);
             }
+            p.updateRejectionRate();
             applicantBook.removeApplicant(target);
-            updateRejectionRate(p, total, count);
         } else {
             throw new ApplicantNotFoundException(); // to be updated
         }
@@ -287,16 +267,9 @@ public class ModelManager implements Model {
                 }
             }
         }
-        p.updateRejectionRate(total, count);
-    }
-
-    /**
-     * Updates rejection rate for a given position.
-     *
-     * @param p A given position in the MTR.
-     */
-    public void updateRejectionRate(Position p, int total, int count) {
-        p.updateRejectionRate(total, count);
+        p.updateNoOfApplicants(total);
+        p.updateNoOfRejectedApplicants(count);
+        p.updateRejectionRate();
     }
 
     /**

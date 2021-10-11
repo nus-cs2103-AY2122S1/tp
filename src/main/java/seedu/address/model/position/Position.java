@@ -123,13 +123,8 @@ public class Position {
 
     /**
      * Updates the rejection rate of current position.
-     *
-     * @param total Total number of applicants in current position.
-     * @param count Total number of accepted applicants in current position.
      */
-    public void updateRejectionRate(int total, int count) {
-        updateNoOfRejectedApplicants(count);
-        updateNoOfApplicants(total);
+    public void updateRejectionRate() {
         this.rejectionRate = calculateRejectionRate();
     }
 
