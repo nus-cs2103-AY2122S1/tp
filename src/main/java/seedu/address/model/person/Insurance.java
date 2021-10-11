@@ -60,6 +60,11 @@ public class Insurance {
     }
 
     @Override
+    public int hashCode(){
+        return type.hashCode();
+    }
+
+    @Override
     public String toString() {
         return type.getTypeName() + INSURANCE_SUFFIX;
     }
