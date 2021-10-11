@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.id.UniqueId;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
@@ -71,7 +71,7 @@ public class JsonAdaptedTask {
                     UniqueId.class.getSimpleName()));
         }
 
-        final UniqueId modelUniqueId = new UniqueId(uniqueId);
+        final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
         return new Task(modelName, modelDeadline, modelUniqueId);
     }
 }

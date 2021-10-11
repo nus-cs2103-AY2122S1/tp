@@ -44,6 +44,21 @@ public class Person implements HasUniqueId {
         this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  NoOverlapLessonList lessonsList) {
+        requireAllNonNull(name, phone, email, address, tags, uniqueId);
+        this.id = uniqueId;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
+    }
+
     public Name getName() {
         return name;
     }
@@ -77,7 +92,8 @@ public class Person implements HasUniqueId {
     }
 
     /**
-     * Immutable way of updating the lessons list
+     * Immutable way of updating the lessons list. Note that the id will be re-generated.
+     *
      * @param newLessonsList to change to
      * @return new Person instance with the updated lessons list
      */
@@ -99,7 +115,7 @@ public class Person implements HasUniqueId {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both persons have the same id.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -113,12 +129,7 @@ public class Person implements HasUniqueId {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getLessonsList().equals(lessonsList);
+        return otherPerson.getId().equals(getId());
     }
 
     @Override
