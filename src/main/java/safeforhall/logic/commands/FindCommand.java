@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -43,7 +44,8 @@ public class FindCommand extends Command {
             + CliSyntax.PREFIX_VACCSTATUS + "T "
             + CliSyntax.PREFIX_FACULTY + "SoC";
 
-    public static final String MESSAGE_NOT_FILTERED = "At least one field to filter bu must be provided.";
+    public static final String MESSAGE_SUCCESS = "Matching residents listed.";
+    public static final String MESSAGE_NOT_FILTERED = "At least one field to filter be must be provided.";
 
     private final FindCompositePredicate predicate;
 
@@ -77,6 +79,14 @@ public class FindCommand extends Command {
         private Predicate<VaccStatus> vaccStatus;
         private Predicate<Faculty> faculty;
 
+        // For equality checks
+        private Name ename;
+        private Room eroom;
+        private Phone ephone;
+        private Email eemail;
+        private VaccStatus evaccStatus;
+        private Faculty efaculty;
+
         public FindCompositePredicate() {}
 
         /**
@@ -90,6 +100,12 @@ public class FindCommand extends Command {
             this.email = toCopy.email;
             this.vaccStatus = toCopy.vaccStatus;
             this.faculty = toCopy.faculty;
+            this.ename = toCopy.ename;
+            this.eroom = toCopy.eroom;
+            this.ephone = toCopy.ephone;
+            this.eemail = toCopy.eemail;
+            this.evaccStatus = toCopy.evaccStatus;
+            this.efaculty = toCopy.efaculty;
         }
 
         /**
@@ -100,27 +116,32 @@ public class FindCommand extends Command {
         }
 
         public void setName(Name name) {
+            this.ename = new Name(String.join(" ", name.fullName.split("\\s+")));
             this.name = new NameContainsKeywordsPredicate(Arrays.asList(name.fullName.split("\\s+")));
-            //this.name = name::equals;
         }
 
         public void setRoom(Room room) {
+            this.eroom = room;
             this.room = room::equals;
         }
 
         public void setPhone(Phone phone) {
+            this.ephone = phone;
             this.phone = phone::equals;
         }
 
         public void setEmail(Email email) {
+            this.eemail = email;
             this.email = email::equals;
         }
 
         public void setVaccStatus(VaccStatus vaccStatus) {
+            this.evaccStatus = vaccStatus;
             this.vaccStatus = vaccStatus::equals;
         }
 
         public void setFaculty(Faculty faculty) {
+            this.efaculty = faculty;
             this.faculty = faculty::equals;
         }
 
@@ -179,12 +200,12 @@ public class FindCommand extends Command {
             // state check
             FindCompositePredicate e = (FindCompositePredicate) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getRoom().equals(e.getRoom())
-                    && getEmail().equals(e.getEmail())
-                    && getVaccStatus().equals(e.getVaccStatus())
-                    && getFaculty().equals(e.getFaculty());
+            return Objects.equals(ename, e.ename)
+                    && Objects.equals(eroom, e.eroom)
+                    && Objects.equals(ephone, e.ephone)
+                    && Objects.equals(eemail, e.eemail)
+                    && Objects.equals(evaccStatus, e.evaccStatus)
+                    && Objects.equals(efaculty, e.efaculty);
         }
     }
 }
