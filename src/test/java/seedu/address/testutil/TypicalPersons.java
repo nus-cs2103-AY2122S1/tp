@@ -56,15 +56,6 @@ public class TypicalPersons {
             .withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_INTERNATIONAL, VALID_TAG_LOCAL).build();
 
-    // For testing of sort
-    public static final Person JOHN = new PersonBuilder().withName("John")
-            .withModuleCodes("CS2030S", "CS2100").build();
-    public static final Person OLIVIA = new PersonBuilder().withName("Olivia")
-            .withModuleCodes("CS2030S", "CS2040", "CS3230").build();
-    public static final Person ALICIA = new PersonBuilder().withName("Alicia")
-            .withModuleCodes("CS2030S", "CS2035").build();
-    public static final Person NOAH = new PersonBuilder().withName("Noah").withModuleCodes("CS2000").build();
-
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
