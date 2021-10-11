@@ -124,6 +124,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteLesson(Lesson target) {
         addressBook.removeLesson(target);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override

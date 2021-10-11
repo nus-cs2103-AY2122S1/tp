@@ -23,7 +23,7 @@ import seedu.address.model.person.Student;
 
 public class EnrollCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
     private final Lesson testLessonOne = new Lesson("Science",
             new Grade("P2"),
             DayOfWeek.WEDNESDAY,

@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicateLessonException;
@@ -21,7 +22,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
 
-    private final List<Lesson> lessons;
+    private final UniqueLessonList lessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,7 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        lessons = new ArrayList<>();
+        lessons = new UniqueLessonList();
     }
 
     public AddressBook() {}
@@ -143,7 +144,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         if (!lessonsAreUnique(lessons)) {
             throw new DuplicateLessonException();
         }
-        this.lessons.addAll(lessons);
+        this.lessons.setLessons(lessons);
     }
 
     /**
@@ -166,7 +167,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return "AddressBook["
                 + persons.asUnmodifiableObservableList().size() + " persons, "
-                + FXCollections.observableList(lessons).size() + " lessons]";
+                + lessons.asUnmodifiableObservableList().size() + " lessons]";
     }
 
     @Override
@@ -176,7 +177,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Lesson> getLessonList() {
-        return FXCollections.observableList(lessons);
+        return lessons.asUnmodifiableObservableList();
     }
 
     @Override
