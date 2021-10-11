@@ -412,8 +412,9 @@ Action | Format |  Advanced Format
 **Delete** | `group g:GROUP_NAME /delete g:GROUP_NAME` | `g g:GROUP_NAME /d g:GROUP_NAME`
 **Note** | `group g:GROUP_NAME /note` | `g g:GROUP_NAME /n g:GROUP_NAME`
 **Create subgroup** | `group GROUP_NAME /create sg:SUB_GROUP_NAME` | `g g:GROUP_NAME /c sg:SUB_GROUP_NAME`
-**Edit
-subgroup** | `group GROUP_NAME:SUB_GROUP_NAME /edit sg:SUB_GROUP_NAME` | `g g:GROUP_NAME:SUB_GROUP_NAME /e sg:SUB_GROUP_NAME`
+
+**Edit subgroup** | `group GROUP_NAME:SUB_GROUP_NAME /edit sg:SUB_GROUP_NAME`
+| `g g:GROUP_NAME:SUB_GROUP_NAME /e sg:SUB_GROUP_NAME`
 **Delete subgroup** | `group GROUP_NAME /delete sg:SUB_GROUP_NAME` | `g GROUP_NAME /d sg:SUB_GROUP_NAME`
 **Note subgroup** |  `group GROUP_NAME /note sg:SUB_GROUP_NAME` | `g GROUP_NAME /n sg:SUB_GROUP_NAME`
 
