@@ -4,9 +4,9 @@ import tutoraid.model.StudentBook;
 import tutoraid.model.student.Student;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building StudentBook objects.
  * Example usage: <br>
- *     {@code StudentBook ab = new StudentBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code StudentBook sb = new StudentBookBuilder().withStudent("John", "Doe").build();}
  */
 public class StudentBookBuilder {
 
