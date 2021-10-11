@@ -68,7 +68,10 @@ to help you with the installation. Follow the guide for your operation system fo
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
+  
+* Items in curly brackets separated by pipe character `|` indicates that you must select one parameter from the list of choices.
+  e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
+  
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
