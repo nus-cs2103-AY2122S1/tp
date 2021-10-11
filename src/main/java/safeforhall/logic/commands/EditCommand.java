@@ -96,8 +96,8 @@ public class EditCommand extends Command {
         Room updatedRoom = editPersonDescriptor.getRoom().orElse(personToEdit.getRoom());
         VaccStatus updatedVaccStatus = editPersonDescriptor.getVaccStatus().orElse(personToEdit.getVaccStatus());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
-        LastFetDate updatedLastFetDate = editPersonDescriptor.getLastFetDate().orElse(personToEdit.getLastFetDate());
-        LastCollectionDate updatedLastCollectionDate = editPersonDescriptor.getLastCollectionDate()
+        LastDate updatedLastFetDate = editPersonDescriptor.getLastFetDate().orElse(personToEdit.getLastFetDate());
+        LastDate updatedLastCollectionDate = editPersonDescriptor.getLastCollectionDate()
                 .orElse(personToEdit.getLastCollectionDate());
         // Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -135,8 +135,8 @@ public class EditCommand extends Command {
         private Room room;
         private VaccStatus vaccStatus;
         private Faculty faculty;
-        private LastFetDate lastFetDate;
-        private LastCollectionDate lastCollectionDate;
+        private LastDate lastFetDate;
+        private LastDate lastCollectionDate;
         //private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -212,19 +212,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(faculty);
         }
 
-        public void setLastFetDate(LastFetDate lastFetDate) {
+        public void setLastFetDate(LastDate lastFetDate) {
             this.lastFetDate = lastFetDate;
         }
 
-        public Optional<LastFetDate> getLastFetDate() {
+        public Optional<LastDate> getLastFetDate() {
             return Optional.ofNullable(lastFetDate);
         }
 
-        public void setLastCollectionDate(LastCollectionDate lastCollectionDate) {
+        public void setLastCollectionDate(LastDate lastCollectionDate) {
             this.lastCollectionDate = lastCollectionDate;
         }
 
-        public Optional<LastCollectionDate> getLastCollectionDate() {
+        public Optional<LastDate> getLastCollectionDate() {
             return Optional.ofNullable(lastCollectionDate);
         }
 

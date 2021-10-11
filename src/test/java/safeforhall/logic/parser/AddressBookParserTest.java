@@ -23,8 +23,10 @@ import safeforhall.logic.commands.DeleteCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.NameContainsKeywordsPredicate;
 import safeforhall.model.person.Person;
 //import safeforhall.testutil.EditPersonDescriptorBuilder;
@@ -85,6 +87,13 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_list() throws Exception {
+        ListCommand command = (ListCommand) parser.parseCommand(
+                ListCommand.COMMAND_WORD + " k/c d1/10-10-2021");
+        assertEquals(new ListCommand("c", new LastDate("10-10-2021")), command);
     }
 
     @Test

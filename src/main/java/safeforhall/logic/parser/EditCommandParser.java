@@ -61,11 +61,11 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_FETDATE).isPresent()) {
-            editPersonDescriptor.setLastFetDate(ParserUtil.parseLastFetDate(argMultimap.getValue(CliSyntax.PREFIX_FETDATE)
+            editPersonDescriptor.setLastFetDate(ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_FETDATE)
                     .get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_COLLECTIONDATE).isPresent()) {
-            editPersonDescriptor.setLastCollectionDate(ParserUtil.parseLastCollectionDate(argMultimap.getValue(
+            editPersonDescriptor.setLastCollectionDate(ParserUtil.parseDate(argMultimap.getValue(
                     CliSyntax.PREFIX_COLLECTIONDATE).get()));
         }
 

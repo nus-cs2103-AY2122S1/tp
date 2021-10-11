@@ -17,6 +17,7 @@ import org.junit.jupiter.api.io.TempDir;
 import safeforhall.commons.core.Messages;
 //import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.CommandResult;
+import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -59,6 +60,18 @@ public class LogicManagerTest {
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validFetCommand_success() throws Exception {
+        String listCommand = "list k/f d1/10-10-2021";
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_FET, model);
+    }
+
+    @Test
+    public void execute_validArtCommand_success() throws Exception {
+        String listCommand = "list k/c d1/10-10-2021";
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_ART, model);
     }
 
     @Test

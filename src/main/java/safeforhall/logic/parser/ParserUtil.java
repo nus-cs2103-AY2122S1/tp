@@ -7,7 +7,13 @@ import java.util.ArrayList;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.person.*;
+import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
+import safeforhall.model.person.Name;
+import safeforhall.model.person.Phone;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -137,34 +143,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String lastFetDate} into a {@code LastFetDate}.
+     * Parses a {@code String date} into a {@code LastDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code lastFetDate} is invalid.
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static LastFetDate parseLastFetDate(String lastFetDate) throws ParseException {
-        requireNonNull(lastFetDate);
-        String trimmedLastFetDate = lastFetDate.trim();
-        if (!LastFetDate.isValidFetDate(trimmedLastFetDate)) {
-            throw new ParseException(LastFetDate.MESSAGE_CONSTRAINTS);
+    public static LastDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!LastDate.isValidDate(trimmedDate)) {
+            throw new ParseException(LastDate.MESSAGE_CONSTRAINTS);
         }
-        return new LastFetDate(trimmedLastFetDate);
+        return new LastDate(trimmedDate);
     }
-
-    /**
-     * Parses a {@code String lastFetDate} into a {@code LastFetDate}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code lastFetDate} is invalid.
-     */
-    public static LastCollectionDate parseLastCollectionDate(String lastCollectionDate) throws ParseException {
-        requireNonNull(lastCollectionDate);
-        String trimmedLastCollectionDate = lastCollectionDate.trim();
-        if (!LastCollectionDate.isValidCollectionDate(trimmedLastCollectionDate)) {
-            throw new ParseException(LastCollectionDate.MESSAGE_CONSTRAINTS);
-        }
-        return new LastCollectionDate(trimmedLastCollectionDate);
-    }
-
-
 }

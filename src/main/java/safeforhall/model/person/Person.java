@@ -19,14 +19,14 @@ public class Person {
     // Data fields
     private final VaccStatus vaccStatus;
     private final Faculty faculty;
-    private final LastFetDate lastFetDate;
-    private final LastCollectionDate lastCollectionDate;
+    private final LastDate lastFetDate;
+    private final LastDate lastCollectionDate;
 
     /**
      * Every field must be present and only last 3 can be null.
      */
     public Person(Name name, Room room, Phone phone, Email email, VaccStatus vaccStatus,
-                    Faculty faculty, LastFetDate lastFetDate, LastCollectionDate lastCollectionDate) {
+                    Faculty faculty, LastDate lastFetDate, LastDate lastCollectionDate) {
         // Optionals: faculty, lastFetDate, lastCollectionDate
         requireAllNonNull(name, room, phone, email, vaccStatus);
         this.name = name;
@@ -63,11 +63,11 @@ public class Person {
         return faculty;
     }
 
-    public LastFetDate getLastFetDate() {
+    public LastDate getLastFetDate() {
         return lastFetDate;
     }
 
-    public LastCollectionDate getLastCollectionDate() {
+    public LastDate getLastCollectionDate() {
         return lastCollectionDate;
     }
 
