@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.tracker.logic.commands.CommandTestUtil.ACADEMIC_YEAR_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.SEMESTER_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_ACADEMIC_YEAR;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_SEMESTER;
 import static seedu.tracker.testutil.Assert.assertThrows;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 
@@ -15,7 +19,11 @@ import seedu.tracker.logic.commands.DeleteCommand;
 import seedu.tracker.logic.commands.ExitCommand;
 import seedu.tracker.logic.commands.HelpCommand;
 import seedu.tracker.logic.commands.ListCommand;
+import seedu.tracker.logic.commands.TakeCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.ModuleBuilder;
 import seedu.tracker.testutil.ModuleUtil;
@@ -54,6 +62,19 @@ public class ModuleTrackerParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_take() throws Exception {
+        TakeCommand command = (TakeCommand) parser.parseCommand(
+                TakeCommand.COMMAND_WORD + " " + INDEX_FIRST_MODULE.getOneBased()
+                        + ACADEMIC_YEAR_DESC + SEMESTER_DESC);
+
+        AcademicYear year = new AcademicYear(VALID_ACADEMIC_YEAR);
+        Semester semester = new Semester(VALID_SEMESTER);
+        AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
+
+        assertEquals(new TakeCommand(INDEX_FIRST_MODULE, academicCalendar), command);
     }
 
     @Test

@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.commons.util.StringUtil;
 import seedu.tracker.logic.parser.exceptions.ParseException;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Description;
 import seedu.tracker.model.module.Mc;
@@ -115,5 +117,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code year} into an {@code AcademicYear} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified year is invalid (not non-zero unsigned integer).
+     */
+    public static AcademicYear parseAcademicYear(String year) throws ParseException {
+        String trimmedYear = year.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedYear)) {
+            throw new ParseException(AcademicYear.MESSAGE_CONSTRAINTS);
+        }
+        if (!AcademicYear.isValidAcademicYear(Integer.parseInt(trimmedYear))) {
+            throw new ParseException(AcademicYear.MESSAGE_CONSTRAINTS);
+        }
+        return new AcademicYear(Integer.parseInt(trimmedYear));
+    }
+
+    /**
+     * Parses {@code semester} into an {@code Semester} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified semester is invalid (not non-zero unsigned integer).
+     */
+    public static Semester parseSemester(String semester) throws ParseException {
+        String trimmedSemester = semester.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedSemester)) {
+            throw new ParseException(Semester.MESSAGE_CONSTRAINTS);
+        }
+        if (!Semester.isValidSemester(Integer.parseInt(trimmedSemester))) {
+            throw new ParseException(Semester.MESSAGE_CONSTRAINTS);
+        }
+        return new Semester(Integer.parseInt(trimmedSemester));
     }
 }

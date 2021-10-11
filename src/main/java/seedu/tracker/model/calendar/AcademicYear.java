@@ -8,7 +8,7 @@ public class AcademicYear {
     public static final String MESSAGE_CONSTRAINTS =
             "Academic Year should only contain numbers from 1 to 6, and it should not be blank";
 
-    private final int value;
+    public final int value;
 
     /**
      * Constructs an academic year.
