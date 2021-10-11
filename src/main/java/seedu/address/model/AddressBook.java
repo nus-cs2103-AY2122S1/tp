@@ -73,6 +73,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(lesson);
         return persons.hasClashes(lesson);
     }
+
+    /**
+     * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
+     */
+    public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return persons.hasClashes(lesson, lessonToIgnore);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
