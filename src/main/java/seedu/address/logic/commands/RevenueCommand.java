@@ -69,4 +69,11 @@ public class RevenueCommand extends Command {
     private String generateSuccessMessage(Person personToEdit) {
         return String.format(MESSAGE_ADD_REVENUE_SUCCESS, personToEdit);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RevenueCommand // instanceof handles nulls
+                && revenue.equals(((RevenueCommand) other).revenue) && index.equals(((RevenueCommand) other).index));
+    }
 }
