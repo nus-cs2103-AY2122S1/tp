@@ -32,6 +32,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
+import seedu.address.testutil.DateTimeUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -49,7 +50,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_visit() throws Exception {
-        final Visit visit = new Visit("2020-11-11 12:00");
+        String date = DateTimeUtil.getValidVisitString();
+        final Visit visit = new Visit(date);
         VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + visit.value);
         Optional<Visit> expectedVisit = Optional.ofNullable(visit);

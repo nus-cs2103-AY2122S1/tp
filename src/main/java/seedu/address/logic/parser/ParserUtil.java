@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -27,11 +28,12 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-    public static final String DATETIME_PARSE_FORMAT = "yyyy-MM-dd HH:mm";
     public static final String DATETIME_DISPLAY_FORMAT = "dd LLL yyyy HH:mm";
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
+    public static final String MESSAGE_INVALID_LAST_VISIT_DATE = "Last visit date should be in the past.";
+    public static final String MESSAGE_INVALID_VISIT_DATE = "Visit date should be in the future.";
     public static final String MESSAGE_INVALID_FREQUENCY = "Frequency can only be daily, weekly, "
             + "biweekly, monthly or quarterly.";
     public static final String MESSAGE_INVALID_OCCURRENCE = "Occurrence should be a positive number.";
@@ -110,33 +112,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String lastVisit} into an {@code LastVisit}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code lastVisit} is invalid.
-     */
-    public static Optional<LastVisit> parseLastVisit(String lastVisit) throws ParseException {
-        requireNonNull(lastVisit);
-        String trimmedLastVisit = lastVisit.trim();
-        if (lastVisit.isEmpty()) {
-            return Optional.ofNullable(new LastVisit(trimmedLastVisit));
-        }
-
-        if (!LastVisit.isValidLastVisit(trimmedLastVisit)) {
-            throw new ParseException(LastVisit.MESSAGE_CONSTRAINTS);
-        }
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
-        try {
-            LocalDateTime.parse(trimmedLastVisit, formatter);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_INVALID_DATE);
-        }
-
-        return Optional.ofNullable(new LastVisit(trimmedLastVisit));
-    }
-
-    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -164,6 +139,37 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String lastVisit} into an {@code LastVisit}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lastVisit} is invalid.
+     */
+    public static Optional<LastVisit> parseLastVisit(String lastVisit) throws ParseException {
+        requireNonNull(lastVisit);
+        String trimmedLastVisit = lastVisit.trim();
+        if (lastVisit.isEmpty()) {
+            return Optional.ofNullable(new LastVisit(trimmedLastVisit));
+        }
+
+        if (!LastVisit.isValidLastVisit(trimmedLastVisit)) {
+            throw new ParseException(LastVisit.MESSAGE_CONSTRAINTS);
+        }
+
+        LocalDateTime parsedLastVisit;
+        try {
+            parsedLastVisit = LocalDateTime.parse(trimmedLastVisit, DateTimeUtil.FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        if (DateTimeUtil.isFuture(parsedLastVisit)) {
+            throw new ParseException(MESSAGE_INVALID_LAST_VISIT_DATE);
+        }
+
+        return Optional.ofNullable(new LastVisit(trimmedLastVisit));
+    }
+
+    /**
      * Parses a {@code String Visit} into an {@code Visit}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -177,11 +183,15 @@ public class ParserUtil {
             throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
+        LocalDateTime parsedVisit;
         try {
-            LocalDateTime.parse(trimmedVisit, formatter);
+            parsedVisit = LocalDateTime.parse(trimmedVisit, DateTimeUtil.FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        if (DateTimeUtil.isPast(parsedVisit)) {
+            throw new ParseException(MESSAGE_INVALID_VISIT_DATE);
         }
 
         return Optional.ofNullable(new Visit(trimmedVisit));
@@ -205,11 +215,15 @@ public class ParserUtil {
             throw new ParseException(Visit.MESSAGE_CONSTRAINTS);
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
+        LocalDateTime parsedVisit;
         try {
-            LocalDateTime.parse(trimmedVisit, formatter);
+            parsedVisit = LocalDateTime.parse(trimmedVisit, DateTimeUtil.FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        if (DateTimeUtil.isPast(parsedVisit)) {
+            throw new ParseException(MESSAGE_INVALID_VISIT_DATE);
         }
 
         return Optional.ofNullable(new Visit(trimmedVisit));
@@ -257,11 +271,10 @@ public class ParserUtil {
     public static String parseDisplayedDatetime(String storedDateString) {
         String displayedDateString;
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
         DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
 
         try {
-            LocalDateTime date = LocalDateTime.parse(storedDateString, formatter);
+            LocalDateTime date = LocalDateTime.parse(storedDateString, DateTimeUtil.FORMATTER);
             displayedDateString = displayFormat.format(date);
         } catch (DateTimeParseException ive) {
             // TODO: handle exception to display

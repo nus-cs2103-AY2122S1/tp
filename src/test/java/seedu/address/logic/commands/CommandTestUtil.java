@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.DateTimeUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -38,8 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_LAST_VISIT_AMY = "2021-01-01 12:00";
     public static final String VALID_LAST_VISIT_BOB = "2021-01-02 13:00";
-    public static final String VALID_VISIT_AMY = "2021-11-11 13:00";
-    public static final String VALID_VISIT_BOB = "2021-11-12 13:00";
+    public static final String VALID_VISIT_AMY = DateTimeUtil.getValidVisitString();
+    public static final String VALID_VISIT_BOB = DateTimeUtil.getValidVisitString2();
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
