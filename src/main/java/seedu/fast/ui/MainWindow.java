@@ -65,7 +65,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = new HelpWindow("");
     }
 
     public Stage getPrimaryStage() {
@@ -147,6 +147,19 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleHelp(String command) {
+        if (!helpWindow.isShowing()) {
+            helpWindow = new HelpWindow(command);
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -179,7 +192,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                String commandHelp = commandText.split(" ")[1];
+                handleHelp(commandHelp);
             }
 
             if (commandResult.isExit()) {

@@ -91,9 +91,27 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Creates a new HelpWindow.
+     *
+     * @param root Stage to use as the root of the HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(Stage root, String command) {
+        super(FXML, root);
+        helpMessage.setText(HELP_MESSAGE);
+        commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
+        commandList.getSelectionModel().select(command);
+        commandInstruction.setText(showCommandUsage(command));
+
+        // show different command usage depending on the selected command
+        EventHandler<ActionEvent> event =
+            e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));
+        commandList.setOnAction(event);
+    }
+
+    /**
+     * Creates a new HelpWindow.
+     */
+    public HelpWindow(String command) {
+        this(new Stage(), command);
     }
 
     /**
