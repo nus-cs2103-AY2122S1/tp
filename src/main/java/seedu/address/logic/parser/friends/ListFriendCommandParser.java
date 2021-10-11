@@ -1,7 +1,5 @@
 package seedu.address.logic.parser.friends;
 
-
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND;
 import static seedu.address.logic.parser.CliSyntax.FLAG_LIST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_POSTFIX;
 
