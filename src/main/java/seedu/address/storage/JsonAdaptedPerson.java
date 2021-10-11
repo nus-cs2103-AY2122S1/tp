@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedInsurance> insurances = new ArrayList<>();
+    private final String appointment;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +43,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("insurances") List<JsonAdaptedInsurance> insurances) {
+            @JsonProperty("insurances") List<JsonAdaptedInsurance> insurances,
+            @JsonProperty("appointment") String appointment) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -52,6 +55,7 @@ class JsonAdaptedPerson {
         if (insurances != null) {
             this.insurances.addAll(insurances);
         }
+        this.appointment = appointment;
     }
 
     /**
@@ -60,8 +64,9 @@ class JsonAdaptedPerson {
     @Deprecated
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-        this(name, phone, email, address, tagged, null);
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("appointment") String appointment) {
+        this(name, phone, email, address, tagged, null, appointment);
     }
 
     /**
@@ -78,6 +83,7 @@ class JsonAdaptedPerson {
         insurances.addAll(source.getInsurances().stream()
                 .map(JsonAdaptedInsurance::new)
                 .collect(Collectors.toList()));
+        appointment = source.getAppointment().getValue();
     }
 
     /**
@@ -130,7 +136,14 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Insurance> modelInsurances = new HashSet<>(personInsurances);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelInsurances);
+
+        if (!Appointment.isValidMeetingTime(appointment)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final Appointment modelAppointment = new Appointment(appointment);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelInsurances, modelAppointment);
     }
 
 }

@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane insurances;
+    @FXML
+    private Label meeting;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,6 +62,7 @@ public class PersonCard extends UiPart<Region> {
         person.getInsurances().stream()
                 .forEach(insurance -> insurances.getChildren().add(
                         new Label(insurance.getType().getTypeName())));
+        meeting.setText("Meeting: " + person.getAppointment().getValue());
     }
 
     @Override

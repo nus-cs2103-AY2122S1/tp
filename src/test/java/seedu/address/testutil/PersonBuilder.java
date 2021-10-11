@@ -3,7 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -16,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_MEETING = "";
 
     private Name name;
     private Phone phone;
@@ -23,6 +30,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<Insurance> insurances;
+    private Appointment appointment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,6 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         insurances = new HashSet<>();
+        appointment = new Appointment(DEFAULT_MEETING);
     }
 
     /**
@@ -46,6 +55,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         insurances = new HashSet<>(personToCopy.getInsurances());
+        appointment = personToCopy.getAppointment();
     }
 
     /**
@@ -95,9 +105,16 @@ public class PersonBuilder {
         this.insurances = SampleDataUtil.getInsuranceSet(insurances);
         return this;
     }
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(Appointment appointment) {
+        this.appointment = appointment;
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, appointment);
     }
 
 }

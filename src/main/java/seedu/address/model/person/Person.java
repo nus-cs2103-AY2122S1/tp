@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,12 +25,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Insurance> insurances = new HashSet<>();
+    private final Appointment appointment;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-             Set<Insurance> insurances) {
+             Set<Insurance> insurances, Appointment appointment) {
         requireAllNonNull(name, phone, email, address, tags, insurances);
         this.name = name;
         this.phone = phone;
@@ -37,13 +39,15 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.insurances.addAll(insurances);
+        this.appointment = appointment;
     }
 
     /**
      * Legacy constructor
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, new HashSet<>());
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Appointment appointment) {
+        this(name, phone, email, address, tags, new HashSet<>(), appointment);
     }
 
     public Name getName() {
@@ -60,6 +64,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
     /**
@@ -129,7 +137,9 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Meeting: ")
+                .append(getAppointment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
