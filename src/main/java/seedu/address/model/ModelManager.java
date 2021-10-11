@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> personToView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        personToView = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -137,6 +139,33 @@ public class ModelManager implements Model {
             currentPredicate = PREDICATE_SHOW_ALL_PERSONS;
         }
         filteredPersons.setPredicate(predicate.and(currentPredicate));
+    }
+
+    //=========== Person To View List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getPersonToView() {
+        return personToView;
+    }
+
+    @Override
+    public boolean isPersonExistToView() {
+        return personToView.size() == 1 && personToView.get(0) != null;
+    }
+
+    @Override
+    public String getNameOfPersonToView() {
+        return personToView.get(0).getName().toString();
+    }
+
+    @Override
+    public void updatePersonToView(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        personToView.setPredicate(predicate);
     }
 
     @Override
