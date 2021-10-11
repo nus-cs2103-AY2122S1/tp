@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
 
@@ -31,13 +32,13 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   NoOverlapLessonList lessonsList) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, lessonsList);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
+        this.lessonsList = lessonsList;
     }
 
     public Name getName() {
@@ -68,13 +69,17 @@ public class Person {
         return lessonsList;
     }
 
+    public Person updateLessonsList(NoOverlapLessonList newList) {
+        return new Person(name, phone, email, address, tags, newList);
+    }
+
     /**
-     * Immutable way of updating the lessons list
-     * @param newLessonsList to change to
-     * @return new Person instance with the updated lessons list
+     * Lesson to check with
+     * @param lesson lesson to check
+     * @return true if person can attend the lesson
      */
-    public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
-        return new Person(name, phone, email, address, tags, newLessonsList);
+    public boolean canAttendLesson(Lesson lesson) {
+        return !lessonsList.doesLessonOverlap(lesson);
     }
 
     /**

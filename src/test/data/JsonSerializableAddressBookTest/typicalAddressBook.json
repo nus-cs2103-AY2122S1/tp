@@ -5,7 +5,15 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "lessonsList" : [ {
+      "timeslot" : {
+        "startTime" : "10:00",
+        "endTime" : "12:00"
+      },
+      "subject" : "Biology",
+      "dayOfWeek" : 1
+    } ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
