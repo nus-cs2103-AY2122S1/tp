@@ -38,9 +38,7 @@ public class UiManager implements Ui {
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
 
-        // Add code to show welcome splash screen for some 5-6 seconds before closing it;
-        // Let it be in such a way that, on initializing this, it shows and closes in few seconds
-        // maybe used parallel threads
+        // Shows the Welcome Splash Screen.
         welcomeWindow = new WelcomeWindow();
 
         //Set the application icon.
