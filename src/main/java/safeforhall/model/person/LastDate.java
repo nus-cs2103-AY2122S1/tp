@@ -11,6 +11,8 @@ public class LastDate {
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+    private static final int LASTDATE_DEADLINE = 1;
+
     public final String date;
 
     /**
@@ -39,8 +41,18 @@ public class LastDate {
         return date;
     }
 
-    public LocalDate getLocalDate() {
+    /**
+     * Converts the given {@code LastDate} to a {@code LocalDate}.
+     */
+    public LocalDate toLocalDate() {
         return LocalDate.parse(date, dateFormatter);
+    }
+
+    /**
+     * Adds the period of validity to the given {@code LastDate} to get the next deadline.
+     */
+    public LocalDate getDeadline() {
+        return LocalDate.parse(date, dateFormatter).plusWeeks(LASTDATE_DEADLINE);
     }
 
     @Override

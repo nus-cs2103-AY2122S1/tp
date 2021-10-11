@@ -4,8 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static safeforhall.testutil.TypicalPersons.ALICE;
+import static safeforhall.testutil.TypicalPersons.CARL;
+import static safeforhall.testutil.TypicalPersons.ELLE;
+import static safeforhall.testutil.TypicalPersons.FIONA;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +20,7 @@ import safeforhall.model.ModelManager;
 import safeforhall.model.UserPrefs;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.NameNearLastDatePredicate;
+import safeforhall.model.person.Person;
 import safeforhall.testutil.TypicalPersons;
 
 /**
@@ -46,13 +53,36 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_oneLastDateFet() {
+    public void execute_oneLastDateFetNotFound() {
         String expectedMessage = ListCommand.MESSAGE_SUCCESS_FET;
-        NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("f", new LastDate("10-10-2021"));
-        ListCommand command = new ListCommand("f", new LastDate("10-10-2021"));
+        NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("f", new LastDate("17-09-2021"));
+        ListCommand command = new ListCommand("f", new LastDate("17-09-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.EMPTY_LIST, expectedModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_twoLastDateArtNotFound() {
+        String expectedMessage = ListCommand.MESSAGE_SUCCESS_ART;
+        NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("c", new LastDate("10-09-2021"),
+                new LastDate("15-09-2021"));
+        ListCommand command = new ListCommand("c", new LastDate("10-09-2021"), new LastDate("15-09-2021"));
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.EMPTY_LIST, expectedModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneLastDateFet() {
+        String expectedMessage = ListCommand.MESSAGE_SUCCESS_FET;
+        NameNearLastDatePredicate predicate = new NameNearLastDatePredicate("f", new LastDate("17-10-2021"));
+        ListCommand command = new ListCommand("f", new LastDate("17-10-2021"));
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        List<Person> validPeople = new ArrayList<>();
+        validPeople.add(CARL);
+        assertEquals(validPeople, expectedModel.getFilteredPersonList());
     }
 
     @Test
@@ -62,7 +92,10 @@ public class ListCommandTest {
         ListCommand command = new ListCommand("c", new LastDate("10-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        List<Person> validPeople = new ArrayList<>();
+        validPeople.add(ALICE);
+        validPeople.add(CARL);
+        assertEquals(validPeople, expectedModel.getFilteredPersonList());
     }
 
     @Test
@@ -73,7 +106,10 @@ public class ListCommandTest {
         ListCommand command = new ListCommand("f", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        List<Person> validPeople = new ArrayList<>();
+        validPeople.add(ALICE);
+        validPeople.add(ELLE);
+        assertEquals(validPeople, expectedModel.getFilteredPersonList());
     }
 
     @Test
@@ -84,6 +120,10 @@ public class ListCommandTest {
         ListCommand command = new ListCommand("c", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        List<Person> validPeople = new ArrayList<>();
+        validPeople.add(ALICE);
+        validPeople.add(CARL);
+        validPeople.add(FIONA);
+        assertEquals(validPeople, expectedModel.getFilteredPersonList());
     }
 }

@@ -11,14 +11,15 @@ import safeforhall.model.person.LastDate;
 import safeforhall.model.person.NameNearLastDatePredicate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons whose ART Collection or FET tests are due on the given date if one day is given or due within a
+ * range of 2 dates if 2 dates are given.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists residents whose ART collection or"
-            + "FET tests are due within the range of the current date and the optional given date. "
+            + "FET tests are due within the range of the given date or the range of the 2 dates given. "
             + "Parameters: "
             + CliSyntax.PREFIX_KEYWORD + "KEYWORD "
             + CliSyntax.PREFIX_DATE1 + "DATE "
@@ -67,7 +68,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        long period = ChronoUnit.DAYS.between(date1.getLocalDate(), date2.getLocalDate());
+        long period = ChronoUnit.DAYS.between(date1.toLocalDate(), date2.toLocalDate());
         if (period < 0) {
             throw new CommandException(MESSAGE_SECOND_DATE_EARLIER_THAN_FIRST);
         }
