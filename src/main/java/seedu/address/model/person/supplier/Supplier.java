@@ -31,7 +31,7 @@ public class Supplier extends Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both suppliers have the same name.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameSupplier(Supplier otherSupplier) {

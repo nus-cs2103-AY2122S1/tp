@@ -28,7 +28,7 @@ public class DeliveryDetails {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid delivery detail.
      */
     public static boolean isValidDeliveryDetail(String test) {
         return test.matches(VALIDATION_REGEX);

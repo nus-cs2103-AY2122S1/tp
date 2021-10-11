@@ -29,7 +29,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent supplier as the given argument.
      */
     public boolean contains(Supplier toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +37,8 @@ public class UniqueSupplierList implements Iterable<Supplier> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a supplier to the list.
+     * The supplier must not already exist in the list.
      */
     public void add(Supplier toAdd) {
         requireNonNull(toAdd);
@@ -51,7 +51,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
     /**
      * Replaces the supplier {@code target} in the list with {@code editedSupplier}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The supplier identity of {@code editedSupplier} must not be the same as another existing supplier in the list.
      */
     public void setSupplier(Supplier target, Supplier editedSupplier) {
         requireAllNonNull(target, editedSupplier);
@@ -69,7 +69,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the equivalent supplier from the list.
      * The person must exist in the list.
      */
     public void remove(Supplier toRemove) {
@@ -85,8 +85,8 @@ public class UniqueSupplierList implements Iterable<Supplier> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code suppliers}.
+     * {@code persons} must not contain duplicate suppliers.
      */
     public void setSuppliers(List<Supplier> suppliers) {
         requireAllNonNull(suppliers);
@@ -122,7 +122,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code suppliers} contains only unique suppliers.
      */
     private boolean suppliersAreUnique(List<Supplier> suppliers) {
         for (int i = 0; i < suppliers.size() - 1; i++) {

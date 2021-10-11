@@ -35,7 +35,7 @@ class JsonAdaptedSupplier {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedSupplier} with the given supplier details.
      */
     @JsonCreator
     public JsonAdaptedSupplier(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -72,7 +72,7 @@ class JsonAdaptedSupplier {
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Supplier} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted supplier.
      */
     public Supplier toModelType() throws IllegalValueException {
         final List<Tag> supplierTags = new ArrayList<>();

@@ -108,7 +108,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /// supplier level operations
     /**
-     * Returns true if a supplier with the same identity as {@code person} exists in the address book.
+     * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
      */
     public boolean hasSupplier(Supplier supplier) {
         requireNonNull(supplier);
@@ -126,7 +126,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given supplier {@code target} in the list with {@code editedSupplier}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing supplier in the address
+     * The person identity of {@code editedSupplier} must not be the same as another existing supplier in the address
      * book.
      */
     public void setSupplier(Supplier target, Supplier editedSupplier) {

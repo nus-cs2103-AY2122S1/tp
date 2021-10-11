@@ -23,11 +23,14 @@ import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new AddSupplierCommand object
+ */
 public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddSupplierCommand
-     * and returns an AddCommand object for execution.
+     * and returns an AddSupplierCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddSupplierCommand parse(String args) throws ParseException {

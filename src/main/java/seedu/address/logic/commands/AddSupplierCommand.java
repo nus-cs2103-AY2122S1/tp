@@ -13,6 +13,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
 
+/**
+ * Adds a supplier to the address book.
+ */
 public class AddSupplierCommand extends Command {
     public static final String COMMAND_WORD = "addSupplier";
 
@@ -39,7 +42,7 @@ public class AddSupplierCommand extends Command {
     private final Supplier toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Supplier}
      */
     public AddSupplierCommand(Supplier supplier) {
         requireNonNull(supplier);

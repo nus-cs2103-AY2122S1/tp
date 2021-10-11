@@ -30,6 +30,9 @@ import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Edits the details of an existing supplier in the address book.
+ */
 public class EditSupplierCommand extends Command {
 
     public static final String COMMAND_WORD = "editSupplier";
@@ -57,8 +60,8 @@ public class EditSupplierCommand extends Command {
     private final EditSupplierCommand.EditSupplierDescriptor editSupplierDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editSupplierDescriptor details to edit the person with
+     * @param index of the supplier in the filtered person list to edit
+     * @param editSupplierDescriptor details to edit the supplier with
      */
     public EditSupplierCommand(Index index, EditSupplierCommand.EditSupplierDescriptor editSupplierDescriptor) {
         requireNonNull(index);
@@ -91,8 +94,8 @@ public class EditSupplierCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Supplier} with the details of {@code supplierToEdit}
+     * edited with {@code editSupplierDescriptor}.
      */
     private static Supplier createEditedSupplier(Supplier supplierToEdit,
                                                EditSupplierCommand.EditSupplierDescriptor editSupplierDescriptor) {
@@ -130,8 +133,8 @@ public class EditSupplierCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the supplier with. Each non-empty field value will replace the
+     * corresponding field value of the supplier.
      */
     public static class EditSupplierDescriptor {
         private Name name;

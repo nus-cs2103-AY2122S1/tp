@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.supplier.Supplier;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Supplier}.
  */
 public class SupplierCard extends UiPart<Region> {
 

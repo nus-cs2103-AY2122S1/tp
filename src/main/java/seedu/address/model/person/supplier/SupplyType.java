@@ -28,7 +28,7 @@ public class SupplyType {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid supply type.
      */
     public static boolean isValidSupplyType(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -107,13 +107,14 @@ public interface Model {
     void addSupplier(Supplier supplier);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given person {@code target} with {@code editedSupplier}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedSupplier} must not be the same as another existing supplier in the address
+     * book.
      */
-    void setSupplier(Supplier target, Supplier editedPerson);
+    void setSupplier(Supplier target, Supplier editedSupplier);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();
 
     /**

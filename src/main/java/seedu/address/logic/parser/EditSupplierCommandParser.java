@@ -21,7 +21,9 @@ import seedu.address.logic.commands.EditSupplierCommand.EditSupplierDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
-
+/**
+ * Parses input arguments and creates a new EditSupplierCommand object
+ */
 public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
 
     /**
