@@ -18,6 +18,7 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
+
     private final UniqueModuleList modules;
     private final UniqueStudentList students;
     private final UniqueTaskList tasks;
@@ -155,7 +156,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the TAB.
      * The task identity of {@code editedTask} must not be the same
      * as another existing task in the module.
      */
@@ -205,6 +206,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
     }
+
 
     @Override
     public ObservableList<Task> getTaskList() {
