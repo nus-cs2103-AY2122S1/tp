@@ -174,6 +174,29 @@ public class AddCommandTest {
         public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+        public boolean hasPosition(Position toAdd) {
+            return false;
+        }
+
+        @Override
+        public void addPosition(Position toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePosition(Position positionToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Position> getFilteredPositionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPositionList(Predicate<Position> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

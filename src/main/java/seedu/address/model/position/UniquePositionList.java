@@ -137,5 +137,4 @@ public class UniquePositionList implements Iterable<Position> {
         return true;
     }
 
-
 }

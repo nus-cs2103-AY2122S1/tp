@@ -16,6 +16,7 @@ import seedu.address.model.position.Position;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
 
     Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
@@ -111,4 +112,17 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
+
+    // Position related methods
+    boolean hasPosition(Position toAdd);
+
+    void addPosition(Position toAdd);
+
+    void deletePosition(Position positionToDelete);
+
+    //=========== Filtered Position List Accessors =============================================================
+    ObservableList<Position> getFilteredPositionList();
+
+    void updateFilteredPositionList(Predicate<Position> predicate);
+
 }
