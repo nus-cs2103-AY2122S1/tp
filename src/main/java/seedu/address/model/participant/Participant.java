@@ -213,6 +213,15 @@ public class Participant {
     }
 
     /**
+     * Returns a string representation of the Participant's id.
+     *
+     * @return the Participant's id.
+     */
+    public String getIdValue() {
+        return this.id.toString();
+    }
+
+    /**
      * Returns true if both participants have the same name.
      * This defines a weaker notion of equality between two participants.
      * This allow Participant to both pass in Person and Participant objects.
@@ -227,7 +236,7 @@ public class Participant {
                 && otherParticipant.getBirthDate().equals(getBirthDate());
     }
 
-    public void deletefromEvents() {
+    public void deleteFromEvents() {
         this.events.forEach(e -> e.removeParticipant(this));
     }
 
