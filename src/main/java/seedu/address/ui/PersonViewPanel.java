@@ -58,12 +58,11 @@ public class PersonViewPanel extends UiPart<Region> {
 
     public void setClientInfo(Person personToView) {
         clientName.setText(personToView.getName().toString());
-        clientId.setText("-");
-        clientCurrentPlans.setText("-");
+        clientId.setText(personToView.getClientId().toString());
         clientLastMet.setText(personToView.getLastMet().toString());
-        clientRiskAppetite.setText("-");
+        clientRiskAppetite.setText(personToView.getRiskAppetite().toString());
         clientCurrentPlans.setText(personToView.getCurrentPlan().toString());
-        clientDisposableIncome.setText("-");
+        clientDisposableIncome.setText(personToView.getDisposableIncome().toString());
         nextMeeting.setText("-");
         clientEmail.setText(personToView.getEmail().toString());
         clientPhoneNumber.setText(personToView.getPhone().toString());
