@@ -42,6 +42,8 @@ public class PriorityTag extends Tag {
 
         public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
+        public static final int PRIORITY = 3;
+
     }
 
     /**
@@ -55,6 +57,7 @@ public class PriorityTag extends Tag {
 
         public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
+        public static final int PRIORITY = 2;
     }
 
     /**
@@ -68,6 +71,7 @@ public class PriorityTag extends Tag {
 
         public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
+        public static final int PRIORITY = 1;
     }
 
 }

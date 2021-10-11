@@ -4,9 +4,11 @@ import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.fast.commons.util.TagUtil;
 import seedu.fast.model.tag.Tag;
 
 /**
@@ -63,6 +65,25 @@ public class Person {
 
     public Appointment getAppointment() {
         return appointment;
+    }
+
+    /**
+     * Returns the highest priority of all the tags in person.
+     * @return the highest priority
+     */
+    public int getPriority() {
+        int temp = TagUtil.NO_PRIORITY;
+        if (tags.isEmpty()) {
+            return temp;
+        }
+        Iterator<Tag> itr = tags.iterator();
+        while (itr.hasNext()) {
+            int prio = itr.next().getPriority();
+            if (prio < temp) {
+                temp = prio;
+            }
+        }
+        return temp;
     }
 
     /**
