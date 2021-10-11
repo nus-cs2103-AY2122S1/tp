@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Helper functions for handling strings.
@@ -27,15 +28,17 @@ public class StringUtil {
         requireNonNull(sentence);
         requireNonNull(word);
 
-        String preppedWord = word.trim();
+        String preppedWord = word.trim().toLowerCase(Locale.ROOT);
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        String preppedSentence = sentence.trim().toLowerCase(Locale.ROOT);
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
-
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        if (preppedWord.split("\\s+").length == 1) {
+            String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+            return Arrays.stream(wordsInPreppedSentence)
+                    .anyMatch(t -> t.contains(preppedWord));
+        } else {
+            return preppedSentence.contains(preppedWord);
+        }
     }
 
     /**

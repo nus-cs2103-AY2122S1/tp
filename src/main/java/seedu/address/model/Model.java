@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.ui.PersonListPanel;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,25 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sets the Index of the Person's Detail to view
+     *
+     * @param index is index to selected index to
+     */
+    void setSelectedIndex(int index);
+
+    /**
+     * Returns the Index of the Person's Detail to view
+     *
+     * @return currently selected index
+     */
+    int getSelectedIndex();
+
+    /**
+     * Sets the PersonListPanel to control
+     *
+     * @param personListPanel the person list panel in GUI
+     */
+    void setPersonListControl(PersonListPanel personListPanel);
 }
