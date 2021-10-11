@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Group {
 
@@ -13,20 +15,34 @@ public class Group {
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     // Group student list
-    public final List<ID> students = new ArrayList<>();
+    public final List<ID> students;
 
     // Group name
-    public final String value;
+    public final String name;
 
     /**
-     * Constructs an {@code Group}.
+     * Constructs a {@code Group}.
      *
      * @param name A valid Group name.
      */
     public Group(String name) {
         requireNonNull(name);
         checkArgument(isValidGroup(name), MESSAGE_CONSTRAINTS);
-        value = name;
+        this.name = name;
+        this.students = new ArrayList<>();
+    }
+
+    /**
+     * Constructs a {@code Group} with the specified students.
+     *
+     * @param name A valid Group name.
+     * @param students Students to add into the group.
+     */
+    public Group(String name, List<ID> students) {
+        requireNonNull(name);
+        checkArgument(isValidGroup(name), MESSAGE_CONSTRAINTS);
+        this.name = name;
+        this.students = new ArrayList<>(students);
     }
 
     /**
@@ -63,19 +79,19 @@ public class Group {
 
     @Override
     public String toString() {
-        return value;
+        return name;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Group // instanceof handles nulls
-                && value.equals(((Group) other).value)); // state check
+                && name.equals(((Group) other).name)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return name.hashCode();
     }
 
 }
