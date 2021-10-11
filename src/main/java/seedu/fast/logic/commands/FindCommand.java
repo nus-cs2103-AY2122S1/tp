@@ -8,6 +8,7 @@ import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.PriorityPredicate;
+
 import seedu.fast.model.tag.PriorityTag;
 
 
