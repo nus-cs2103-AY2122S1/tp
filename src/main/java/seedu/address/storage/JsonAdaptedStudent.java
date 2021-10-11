@@ -1,8 +1,11 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
@@ -12,12 +15,17 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
+
+
 /**
  * Jackson-friendly version of {@link Student}.
  */
 class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
+
+    public static final String MESSAGE_GROUP_NAME_NOT_FOUND = "No matching group can be found in the group "
+                                                                + "list with the same group name as the student's.";
 
     private final String name;
     private final String telegramHandle;
@@ -51,7 +59,7 @@ class JsonAdaptedStudent {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
-    public Student toModelType() throws IllegalValueException {
+    public Student toModelType(ObservableList<Group> groupList) throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -84,8 +92,26 @@ class JsonAdaptedStudent {
 
         final GroupName modelGroupName = new GroupName(groupName);
 
-        // TODO Cannot retrieve groups from model until group saving/loading is implemented
-        return new Student(modelName, modelTelegramHandle, modelEmail, new Group(modelGroupName,
-                new Description("peepee")));
+        Group modelGroup = retrieveByName(modelGroupName, groupList);
+
+        return new Student(modelName, modelTelegramHandle, modelEmail, modelGroup);
+    }
+
+    /**
+     * Returns a {@code Group} from a given group list that matches the given {@code GroupName}.
+     * @return group from the group list that matches the given group name
+     * @throws IllegalValueException if no group that matches the groupName can be found.
+     */
+    public Group retrieveByName(GroupName groupName, ObservableList<Group> groupList) throws IllegalValueException {
+        requireNonNull(groupName);
+        for (Group group : groupList) {
+            if (group.getGroupName().equals(groupName)) {
+                String groupNameString = groupName.toString();
+                String descriptionString = group.getDescription().toString();
+                return new Group(new GroupName(groupNameString),
+                        new Description(descriptionString));
+            }
+        }
+        throw new IllegalValueException(MESSAGE_GROUP_NAME_NOT_FOUND);
     }
 }
