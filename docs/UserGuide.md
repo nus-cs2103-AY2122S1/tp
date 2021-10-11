@@ -5,7 +5,8 @@ title: User Guide
 
 Notor is a desktop app for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Notor allows you to take notes quickly and efficiently, and keeping them in an easy to reference format, which is vital if you are taking notes during meetings with mentees.
 
-* Table of Contents {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,11 +53,11 @@ Notor is a desktop app for mentors to keep tabs on their mentees, **optimized fo
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+[comment]: <> (Check if this is actually the correct format!!)
 * Parameters can be in any order.<br>
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
-  the parameter will be taken.<br>
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
 
 [comment]: <> (  Change this example e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.)
 
@@ -90,23 +91,21 @@ Format: `exit`
 
 ### Filtering with Notor
 
-#### Listing all persons : `list`
+Sometimes, you will want to view all people, groups, subgroups, or tags to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters.
+#### List all ___: `list`
+List can show all persons, groups, subgroups, or tags which you have added to Notor. Ensure you have one and only one parameter which determines what is to be shown.
 
-Shows a list of all persons.
+**_Show all people_**
 
 Format: `list /people`<br>
 Advanced user Format: `list /p`
 
-#### Listing all groups : `list`
-
-Shows a list of all groups.
+**_Show all groups_**
 
 Format:  `list /group`<br>
 Advanced user Format: `list /g`
 
-#### Listing all subgroups of group : `list`
-
-Shows a list of subgroups in group specified.
+**_Show all subgroups_**
 
 Format: `list /subgroup g:GROUP_NAME`<br>
 Advanced user Format: `list /sg g:GROUP_NAME`
@@ -117,13 +116,14 @@ Examples:
 
 #### Find a person : `find`
 
-Find all the people with the keyword specified. Optionally, group can be specified too.
+Find allows you to obtain the results that match with the keyword specified. You can filter in this way on people, groups, and subgroups. In addition, you may add additional parameters to your search, in order to narrow the search further.
 
+**_Finding people_**
 Format: `list /person n:KEYWORD [g:GROUP_NAME]`<br>
 Advanced user Format:  `find /p n:KEYWORD [g:GROUP_NAME]`
 
-* Find all the person that matches the `KEYWORD`.
-* Filter based on the group if `GROUP_NAME` is specified.
+* Find all people whose metadata matches the `KEYWORD` in that particular field. 
+* Filter based on the group if `GROUP_NAME` is specified. For example, if you specify `g:Final Year Project`, you will only find people who belong to the group `Final Year Project`.
 * The keyword must not include backslash (`/`) or colon (`:`).
 
 Examples:
@@ -162,17 +162,19 @@ Examples:
 * `find /subgroup sg:Artemis g:Orbital`
 
 ### Working with people
+The base functionality of Notor is to allow you to mantain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
 #### Adding a person: `person /create`
 
 Creates a person.
 
-Format: `person /create n:NAME [g:GROUP_NAME]`<br>
-Advanced user Format: `p /c n:NAME [g:GROUP_NAME]`
+Format: `person (INDEX) /create n:NAME [p:phone] [e:email] [g:GROUP_NAME]`<br>
+Advanced user Format: `p (INDEX) /c n:NAME [p:phone] [e:email] [g:GROUP_NAME]`
 
 * Creates a person with the `NAME`.
 * Optional arguments:
-* `GROUP_NAME`: name of the group to add the user to.
+  * 
+  * `GROUP_NAME`: name of the group to add the user to.
 
 Examples:
 
@@ -214,10 +216,11 @@ Examples:
 Edit an existing person's data.
 
 [comment]: <> (I believe you should be able to edit more than name... Need to edit)
-Format: `person NAME /edit n:NEW_NAME`<br>
-Advanced user Format:`p NAME /e n:NEW_NAME`
+Format: `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`<br>
+Advanced user Format:`p (INDEX) /e [n:NAME] [p:phone] [e:email]`
 
-* Edits an existing person with the name `NAME` and replaces the fields with the new parameters.
+* Edits the person at the index `INDEX` and replaces the fields specified with the new parameters.
+* Please specify at least one field to be edited.
 
 Examples:
 
@@ -410,7 +413,7 @@ Square brackets `[]` refer to optional arguments.<p>
 
 ### Person
 **Note**:
-* For the **Create** and **List** commands, please use the **List** command to make sure the `Group` you want to
+* For the **Create** and **List** commands, if you want to automatically add them to a group, please use the **List** command to make sure the `Group` you want to
   use the command on is displayed before using them via `GROUP_INDEX`.
 * For the **Add** and **Remove** commands, please make sure that the `GROUP_NAME` is typed exactly as how it is spelt on
   the card.
@@ -418,43 +421,32 @@ Square brackets `[]` refer to optional arguments.<p>
 
 Action     | Format                                                                        | Advanced Format
 -----------|-------------------------------------------------------------------------------|--------------------------------------------------------------------
-**Create** | `person (NAME) /create [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `p (NAME) /c [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
-**Edit**   | `person (INDEX) /edit [n:NAME] [p:phone] [e:email]`                           | `p (INDEX) /e [n:NAME] [p:phone] [e:email]`
+**Create** | `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `p (NAME) /c [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
+**Edit**   | `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`                           | `p (INDEX) /e [n:NAME] [p:phone] [e:email]`
 **Delete** | `person (INDEX) /delete`                                                      | `p (INDEX) /d`
 **Add**    | `person (INDEX) /add (g:GROUP_NAME) `                                         | `p (INDEX) /a (g:GROUP_NAME)`
 **Remove** | `person (INDEX) /remove (g:GROUP_NAME) `                                      | `p (INDEX) /r (g:GROUP_NAME)`
 **Note**   | `person (INDEX) /note (NOTE)`                                                 | `p (INDEX) /n (NOTE)`
 **Tag**    | `person (INDEX) /tag [t:TAG1,TAG2,...]`                                       | `p (INDEX) /t [t:TAG1,TAG2,...]`
 **Untag**  | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /u [t:TAG1,TAG2,...]`
+**Clear Tags** | `person (INDEX) /cleartags` | `p (INDEX) / ct`
 **List**   | `person /list [GROUP_INDEX]`                                                  | `p /l [GROUP_INDEX]`
 **Find**   | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
 
 ### Group
 Action     | Format                                         | Short Format
 -----------|------------------------------------------------|---------------------------------------
-**Create** | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
+**Create Group** | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
+**Create Subgroups** | `group (INDEX) /create n:SUBGROUP_NAME` | `g (INDEX) /c n:SUBGROUP_NAME`
 **Edit**   | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
 **Delete** | `group (INDEX) /delete`                        | `g (INDEX) /d`
 **Note**   | `group (INDEX) /note (NOTE)`                   | `g (INDEX) /n (NOTE)`
 **Tag**    | `group (INDEX) /tag [t:TAG1,TAG2,...]`         | `g (INDEX) /t [t:TAG1,TAG2,...]`
 **Untag**  | `group (INDEX) /untag [t:TAG1,TAG2,...]`       | `g (INDEX) /u [t:TAG1,TAG2,...]`
-**List**   | `group /list`                                  | `g /l`
+**Clear Tags** | `group (INDEX) /cleartags`                 | `g (INDEX) / ct`
+**List Groups**   | `group /list`                                  | `g /l`
+**List Out Subgroups**   | `group (INDEX) /list`                                | `g (INDEX) /l`
 **Find**   | `group /find (n:QUERY)`                        | `g /f (n:QUERY)`
-
-### Subgroup
-**Note**: For the **Edit**, **Delete**, **Note**, **Tag**, **Untag**, **List** and **Find** commands, please use the
-**List** command to list the `Subgroup` objects of a `Group` before running operations on them.
-
-Action     | Format                                               | Short Format
------------|------------------------------------------------------|----------------------------------------------
-**Create** | `group (INDEX:SUBGROUP_NAME) /create`                | `g (INDEX:SUBGROUP_NAME) /c`
-**Edit**   | `group (INDEX) /edit [n:NEW_NAME] [t:TAG1,TAG2,...]` | `g (INDEX) /e [n:NEW_NAME] [t:TAG1,TAG2,...]`
-**Delete** | `group (INDEX) /delete`                              | `g (INDEX) /d`
-**Note**   | `group (INDEX) /note (NOTE)`                         | `g (INDEX) /n (NOTE)`
-**Tag**    | `group (INDEX) /tag [t:TAG1,TAG2,...]`               | `g (INDEX) /t [t:TAG1,TAG2,...]`
-**Untag**  | `group (INDEX) /untag [t:TAG1,TAG2,...]`             | `g (INDEX) /u [t:TAG1,TAG2,...]`
-**List**   | `group (INDEX) /list`                                | `g (INDEX) /l`
-**Find**   | `group /find (n:QUERY)`                              | `g /f (n:QUERY)`
 
 ### Tags
 **Note**: for the **List** command, the `INDEX` argument can be either a `Group` or a `Person`, depending on what you
