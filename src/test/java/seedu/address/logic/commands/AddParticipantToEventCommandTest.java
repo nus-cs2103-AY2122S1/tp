@@ -9,10 +9,10 @@ import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 import static seedu.address.testutil.TypicalParticipants.ALEX;
 import static seedu.address.testutil.TypicalParticipants.BERNICE;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.participant.Participant;
@@ -25,9 +25,9 @@ class AddParticipantToEventCommandTest {
     @Test
     public void execute_addParticipantToEventSuccessful() throws Exception {
         Participant validParticipant = new ParticipantBuilder().build();
-        EventName eventName = SAMPLE_EVENT.getName();
+        EventName eventName = ANOTHER_EVENT.getName();
         ModelStubWithEventAndParticipant modelStub =
-                new ModelStubWithEventAndParticipant(validParticipant, SAMPLE_EVENT);
+                new ModelStubWithEventAndParticipant(validParticipant, ANOTHER_EVENT);
 
         CommandResult commandResult =
                 new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName).execute(modelStub);
