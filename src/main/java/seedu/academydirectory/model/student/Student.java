@@ -130,7 +130,6 @@ public class Student {
      */
     @Override
     public boolean equals(Object other) {
-        System.out.println(other);
         if (other == this) {
             return true;
         }
@@ -144,7 +143,7 @@ public class Student {
                 && otherStudent.getTelegram().equals(getTelegram())
                 && otherStudent.getAddress().equals(getAddress())
                 && otherStudent.getTags().equals(getTags())
-                && otherStudent.getAttendance().equals(getAttendance());
+                && otherStudent.getStudioRecord().equals(getStudioRecord());
     }
 
     @Override
