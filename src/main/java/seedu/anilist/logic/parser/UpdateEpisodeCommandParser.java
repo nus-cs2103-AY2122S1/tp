@@ -8,7 +8,7 @@ import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.UpdateEpisodeCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
-public class UpdateEpisodeCommandParser {
+public class UpdateEpisodeCommandParser implements Parser<UpdateEpisodeCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
