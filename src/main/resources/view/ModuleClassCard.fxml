@@ -15,7 +15,7 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" GridPane.columnIndex="0">
-            <HBox alignment="CENTER_LEFT" spacing="5">
+            <HBox alignment="CENTER_LEFT" spacing="5" VBox.vgrow="ALWAYS">
                 <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
@@ -30,14 +30,16 @@
                         <Insets bottom="2.0" />
                     </padding></Label>
             </HBox>
-            <Label fx:id="day" styleClass="cell_small_label" text="\$day">
-                <padding>
-                    <Insets bottom="2.0" />
-                </padding></Label>
-            <Label fx:id="time" styleClass="cell_small_label" text="\$time">
-                <padding>
-                    <Insets bottom="2.0" />
-                </padding></Label>
+         <HBox>
+            <children>
+                  <Label fx:id="day" styleClass="cell_small_label" text="\$day">
+                      <padding>
+                          <Insets right="5.0" />
+                      </padding>
+               </Label>
+                  <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+            </children>
+         </HBox>
             <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
                 <padding>
                     <Insets bottom="2.0" />

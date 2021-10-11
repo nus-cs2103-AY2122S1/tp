@@ -43,7 +43,7 @@ public class JsonAdaptedModuleClass {
      */
     public JsonAdaptedModuleClass(ModuleClass source) {
         moduleCode = source.getModuleCode().value;
-        day = source.getDay().toString();
+        day = source.getDay().getDayAsIntString();
         time = source.getTime().toString();
         remark = source.getRemark().value;
     }

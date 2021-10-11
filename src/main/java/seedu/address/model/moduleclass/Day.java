@@ -10,7 +10,7 @@ public class Day {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Days should only contain numbers";
-    public static final String VALIDATION_REGEX = "\\d";
+    public static final String VALIDATION_REGEX = "[1-7]";
     public final DayOfWeek value;
 
     /**
@@ -29,6 +29,14 @@ public class Day {
      */
     public static boolean isValidDay(String test) {
         return test.equals("") || test.matches(VALIDATION_REGEX);
+    }
+
+    public int getDayAsInt() {
+        return value.getValue();
+    }
+
+    public String getDayAsIntString() {
+        return String.valueOf(value.getValue());
     }
 
     @Override
