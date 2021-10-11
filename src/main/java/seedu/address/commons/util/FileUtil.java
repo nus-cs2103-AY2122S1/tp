@@ -11,20 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Logger;
-
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SealedObject;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-
-import seedu.address.commons.core.LogsCenter;
 
 /**
  * Writes and reads files
@@ -92,10 +82,18 @@ public class FileUtil {
         return new String(Files.readAllBytes(file), CHARSET);
     }
 
+    /**
+     * Reads from the encrypted file.
+     * Assumes encrypted file exists.
+     * @param encryptedFile cannot be null
+     * @return An instance of Sealed Object containing the encrypted data
+     * @throws IOException if there was an error during reading from the file
+     */
     public static SealedObject readFromEncryptedFile(Path encryptedFile) throws IOException {
         try {
             CipherInputStream cipherInputStream = new CipherInputStream(new BufferedInputStream(
-                    new FileInputStream(encryptedFile.toFile())), EncryptionUtil.createCipherInstance(Cipher.DECRYPT_MODE));
+                    new FileInputStream(encryptedFile.toFile())),
+                    EncryptionUtil.createCipherInstance(Cipher.DECRYPT_MODE));
             ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
             return (SealedObject) inputStream.readObject();
         } catch (ClassNotFoundException e) {
@@ -111,9 +109,16 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Writes given Sealed Object to encrypted file.
+     * @param encryptedFile cannot be null
+     * @param content cannot be null
+     * @throws IOException if there was an error during writing to the file
+     */
     public static void writeToEncryptedFile(Path encryptedFile, SealedObject content) throws IOException {
         CipherOutputStream cipherOutputStream = new CipherOutputStream(new BufferedOutputStream(
-                new FileOutputStream(encryptedFile.toFile())), EncryptionUtil.createCipherInstance(Cipher.ENCRYPT_MODE));
+                new FileOutputStream(encryptedFile.toFile())),
+                EncryptionUtil.createCipherInstance(Cipher.ENCRYPT_MODE));
         ObjectOutputStream outputStream = new ObjectOutputStream(cipherOutputStream);
         outputStream.writeObject(content);
         outputStream.close();

@@ -46,7 +46,8 @@ public class EncryptedJsonUtil {
 
     static <T> T deserializeObjectFromEncryptedJsonFile(Path encryptedJsonFile, Class<T> classOfObjectToDeserialize)
             throws IOException {
-        String jsonString = (String) EncryptionUtil.decryptSealedObject(FileUtil.readFromEncryptedFile(encryptedJsonFile));
+        String jsonString = (String) EncryptionUtil.decryptSealedObject(
+                FileUtil.readFromEncryptedFile(encryptedJsonFile));
         return fromJsonString(jsonString, classOfObjectToDeserialize);
     }
 
@@ -54,7 +55,7 @@ public class EncryptedJsonUtil {
      * Returns the Json object from the given file or {@code Optional.empty()} object if the file is not found.
      * If any values are missing from the file, default values will be used, as long as the file is a valid json file.
      * @param filePath cannot be null.
-     * @param classOfObjectToDeserialize Json file has to correspond to the structure in the class given here.
+     * @param classOfObjectToDeserialize Encrypted Json file has to correspond to the structure in the class given here.
      * @throws DataConversionException if the file format is not as expected.
      */
     public static <T> Optional<T> readEncryptedJsonFile(
@@ -79,7 +80,7 @@ public class EncryptedJsonUtil {
     }
 
     /**
-     * Saves the Json object to the specified file.
+     * Saves the Json object to the specified encrypted file.
      * Overwrites existing file if it exists, creates a new file if it doesn't.
      * @param jsonFile cannot be null
      * @param filePath cannot be null

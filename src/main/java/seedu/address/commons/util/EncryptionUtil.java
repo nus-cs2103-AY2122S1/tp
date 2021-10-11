@@ -6,7 +6,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -16,12 +15,18 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
 
+/**
+ * Encrypts and decrypts files
+ */
 public class EncryptionUtil {
 
     private static final Logger logger = LogsCenter.getLogger(EncryptionUtil.class);
 
+    /**
+     * Returns a new Cipher instance backed by AES encryption.
+     * @param opmode the operation mode of the cipher set to either
+     */
     public static Cipher createCipherInstance(int opmode) {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -30,12 +35,19 @@ public class EncryptionUtil {
             SecretKeySpec key = new SecretKeySpec(keyBytes, algorithm);
             cipher.init(opmode, key, new IvParameterSpec(new byte[16]));
             return cipher;
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException
+                | InvalidAlgorithmParameterException e) {
             logger.warning("Error create new Cipher instance with opmode" + opmode + ": " + e);
             throw new IllegalStateException(e);
         }
     }
 
+    /**
+     * Encrypts the given Serializable object.
+     * @param serializableObject the object to be encrypted
+     * @return a Sealed Object instance containing the Serializable object
+     * @throws IOException if there was an error during encryption
+     */
     public static SealedObject encryptSerializableObject(Serializable serializableObject) throws IOException {
         try {
             return new SealedObject(serializableObject, createCipherInstance(Cipher.ENCRYPT_MODE));
@@ -45,6 +57,12 @@ public class EncryptionUtil {
         }
     }
 
+    /**
+     * Decrypts the given SealedObject object
+     * @param sealedObject the object to be decrypted
+     * @return a decrypted Serializable instance
+     * @throws IOException if there was an error during decryption
+     */
     public static Serializable decryptSealedObject(SealedObject sealedObject) throws IOException {
         try {
             return (Serializable) sealedObject.getObject(createCipherInstance(Cipher.DECRYPT_MODE));
