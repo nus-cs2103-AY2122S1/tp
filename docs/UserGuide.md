@@ -75,14 +75,16 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 
 Adds a student into the database.
 
-Format: `add student -n <student_name> -i <student_id>  [-g <group_name>]...`
+Format: `add student -n <student_name> -i <student_id>  [-g <group_name>] [-t <tag_name>]...`
 
 * Adds a new student with the given name and NUSNET ID into the database.
 * Adds the student into the groups the student belongs to.
+* Adds a tag to the student if applicable. 
 
 Examples:
 * `add student -n John Doe -i E0123456`
-* `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
+* `add student -n Jane Doe -i E0123457 -g T01A -g R01A`
+* `add student -n Jane Doe -i E0123458 -t beginner`
 
 ### Creating a new group: `add group`
 
