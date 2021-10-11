@@ -8,7 +8,7 @@ import seedu.address.logic.commands.friends.ListFriendCommand;
 import seedu.address.logic.parser.friends.ListFriendCommandParser;
 import seedu.address.model.friend.FriendIdContainsKeywordPredicate;
 
-public class GetFriendListFriendCommandParserTest {
+public class ListFriendCommandParserTest {
 
     private ListFriendCommandParser parser = new ListFriendCommandParser();
 
