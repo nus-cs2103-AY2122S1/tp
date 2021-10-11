@@ -196,7 +196,12 @@ public class Event implements Comparable<Event> {
     public int compareTo(Event o) {
         int compareDateResult = eventDate.date.compareTo(o.eventDate.date);
         if (compareDateResult == 0) { // same date
-            return eventTime.compareTo(o.eventTime); // cannot have two events on same date and time
+            int compareTimeResult = eventTime.compareTo(o.eventTime);
+            if (compareTimeResult == 0) { // same time
+                return eventName.eventName.compareTo(o.eventName.eventName);
+            } else {
+                return compareTimeResult;
+            }
         } else {
             return compareDateResult;
         }

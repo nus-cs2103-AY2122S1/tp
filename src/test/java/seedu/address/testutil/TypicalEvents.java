@@ -57,6 +57,7 @@ public class TypicalEvents {
     }
 
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, SAMPLE_EVENT_COPY_NO_TIME, ANOTHER_EVENT, SAMPLE_EVENT_2));
+        return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, SAMPLE_EVENT_COPY_NO_TIME, SAMPLE_EVENT_COPY_DIFFERENT_NAME,
+                ANOTHER_EVENT, SAMPLE_EVENT_2));
     }
 }
