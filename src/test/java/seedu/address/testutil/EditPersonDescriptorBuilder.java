@@ -5,12 +5,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +39,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setParentPhone(person.getParentPhone());
+        descriptor.setParentEmail(person.getParentEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setSchool(person.getSchool());
+        descriptor.setAcadStream(person.getAcadStream());
+        descriptor.setFee(person.getFee());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
     }
@@ -64,12 +72,52 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(new Email(email));
         return this;
     }
+    /**
+     *
+     * Sets the Parent {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withParentPhone(String parentPhone) {
+        descriptor.setParentPhone(new Phone(parentPhone));
+        return this;
+    }
+
+    /**
+     * Sets the Parent {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withParentEmail(String parentEmail) {
+        descriptor.setParentEmail(new Email(parentEmail));
+        return this;
+    }
 
     /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code School} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSchool(String school) {
+        descriptor.setSchool(new School(school));
+        return this;
+    }
+
+    /**
+     * Sets the {@code AcadStream} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAcadStream(String acadStream) {
+        descriptor.setAcadStream(new AcadStream(acadStream));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFee(String fee) {
+        descriptor.setFee(new Fee(fee));
         return this;
     }
 

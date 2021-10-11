@@ -257,329 +257,408 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+A private 1-to-1 home tuition teacher in Singapore that:
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+1. has a need to manage not more than 50 student contacts
+2. has a need to manage admin details of each student, namely, lesson fees and payment
+3. has a need to keep track of lesson details for each student
+4. teaches lessons anytime between 8am and 10pm (UTC+8), on any day of the week
+5. has a need to manage a busy schedule of not more than 50 lessons
+6. prefers desktop apps over other types
+7. can type fast
+8. prefers typing to mouse interactions
+9. is reasonably comfortable using CLI apps
+10. tutors students belonging to Singapore’s education system
+
+**Value proposition**: Use **TAB** to manage customer contacts and customer relationships faster than 
+a typical mouse/GUI driven app. **TAB** effortlessly keeps track of large amounts of necessary 
+student and lesson information, to empower tutors to provide the best quality home tuition service.  
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+We categorise our user stories into three main epics:
+1. [S] - Keeping track of student information
+2. [L] - Keeping track of lesson information
+3. [U] - Having a simple, efficient, and intuitive UI/UX
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
+
+| ID  | Priority | As a …​                                 | I want to …​                                                     | So that I can…​                                                      |
+|-----| -------- | ------------------------------------------ | ------------------------------------------ | ---------------------------------------------------------------------- |
+| S1  | `HIGH`   | user                                       | add a new student                                                   | track student information with **TAB**                                  |
+| S2  | `HIGH`   | user                                       | delete a student                                                    | remove entries that I no longer need                                    |
+| S3  | `HIGH`   | user                                       | edit a student                                                      | update student information                                              |
+| S4  | `HIGH`   | user                                       | categorise my students with tags                                    |                                                                         |
+| S5  | `HIGH`   | user                                       | keep track of parent contacts                                       | communicate directly with the parent                                    |
+| S6  | `HIGH`   | user                                       | add remarks to a student                                            | keep track of supplementary information                                 |
+| S7  | `MEDIUM` | user                                       | add a student's school                                              | be reminded of the content that is relevant to the student              |
+| S8  | `MEDIUM` | user                                       | view a student's school                                             |                                                                         |
+| S9  | `MEDIUM` | user                                       | edit a student's school                                             |                                                                         |
+| S10 | `MEDIUM` | user                                       | delete a student's school                                           |                                                                         |
+| S11 | `MEDIUM` | user                                       | add a student's academic stream                                     | be reminded of the content that is relevant to the student              |
+| S12 | `MEDIUM` | user                                       | view a student's academic stream                                    |                                                                         |
+| S13 | `MEDIUM` | user                                       | edit a student's academic stream                                    |                                                                         |
+| S14 | `MEDIUM` | user                                       | delete a student's academic stream                                  |                                                                         |
+| S15 | `MEDIUM` | user                                       | add a student's academic level                                      | be reminded of the content that is relevant to the student              |
+| S16 | `MEDIUM` | user                                       | view a student's academic level                                     |                                                                         |
+| S17 | `MEDIUM` | user                                       | edit a student's academic level                                     |                                                                         |
+| S18 | `MEDIUM` | user                                       | delete a student's academic level                                   |                                                                         |
+| S19 | `MEDIUM` | user                                       | keep track of a student's outstanding fees                          | be reminded of the fees I have yet to collect                           |
+| S20 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
+| S21 | `LOW`    | user with many students stored in **TAB**  | sort students by name                                               | locate a student easily                                                 |
+| S22 | `LOW`    | user with many students stored in **TAB**  | sort students by tag                                                | locate a student easily                                                 |
+| L1  | `HIGH`   | user                                       | add recurring lessons with a specific start date for a student      | keep track of which date the student's lessons starts                   |
+| L2  | `HIGH`   | user                                       | add specific start and end timings for my lessons                   | plan my lesson schedule in detail                                       |
+| L3  | `HIGH`   | user                                       | add the corresponding subject to my lessons                         | plan and prepare for that specific subject                              |
+| L4  | `HIGH`   | user                                       | add each piece of homework I gave to my students for the lesson     | keep track of what I have to go through that lesson                     |
+| L5  | `HIGH`   | user                                       | delete a student's lesson                                           | remove lessons that I no longer have                                    |
+| L6  | `MEDIUM` | user                                       | edit a student's recurring lesson's date                            | update my lesson schedule in case of changes                            |
+| L7  | `MEDIUM` | user                                       | edit a student's lesson time                                        | update my lesson schedule in case of changes                            |
+| L8  | `MEDIUM` | user                                       | edit a student's lesson subject                                     | change the subject field in case of changes                             |
+| L9  | `MEDIUM` | user                                       | edit a student's homework for that particular lesson                |                                                                         |
+| L10 | `MEDIUM` | user                                       | add makeup lessons with specific time and date for a student        | track lessons outside of my usual lesson schedule                       |
+| L11 | `MEDIUM` | user                                       | add homework for the makeup lessons                                 | track lessons outside of my usual lesson schedule                       |
+| L12 | `MEDIUM` | user                                       | add subject for the makeup lessons                                  | track lessons outside of my usual lesson schedule                       |
+| L13 | `MEDIUM` | user                                       | view the lessons I have for the week                                | easily manage my schedule                                               |
+| L15 | `MEDIUM` | user                                       | view the homework I have set for my student after the lesson        | prepare for my upcoming lessons                                         |
+| L16 | `MEDIUM` | user                                       | view the subject of my upcoming lessons                             | prepare for my upcoming lessons                                         |
+| L17 | `MEDIUM` | user                                       | view a calendar of my scheduled lessons                             | plan ahead while managing my schedule                                   |
+| U1  | `HIGH`   | new user                                   | see usage instructions                                              | refer to instructions whenever I need guidance on how to use **TAB**    |
+| U2  | `HIGH`   | new user                                   | purge all current data                                              | remove all sample/experimental data I used while exploring **TAB**      |
+| U3  | `HIGH`   | user                                       | find a student by keyword                                           | locate details of students without having to go through the entire list |
+| U4  | `HIGH`   | user                                       | undo accidental changes                                             |                                                                         |
+| U5  | `MEDIUM` | user                                       | filter students by tags                                             | view a list of all the students that feature the specified tags         |
+| U6  | `MEDIUM` | user with incomplete information           | skip less important information to add                              | update later when I have the rest of the information                    |
+| U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard                           | paste and use the data outside of **TAB**                               |
+| U8  | `LOW`    | user who uses many tags                    | view all tags                                                       | remember my tags easily                                                 |
+| U9  | `LOW`    | expert user                                | customise the commands and input fields                             | choose not to follow the given template                                 |
+| U10 | `LOW`    | user                                       | be reminded to update data after a lesson                           | ensure that data stays up to date                                       |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TAB` and the **Actor** is the `user (tutor)`, unless specified otherwise)
+(For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the tutor `user`, unless specified otherwise)
 
-**Use case: UC2 – Edit a student**
+<br/>
 
-**MSS:**
+**Use case: UC1 - Get a list of students**
 
-1. User requests to list students.
-2. TAB shows a list of students.
-3. User requests to edit a specific student by the index in the list.
-4. TAB edits the corresponding fields of the student. 
+**MSS**
+
+1. User requests to list all students
+2. TAB displays a list of all students
+
    Use case ends.
 
-**Extensions:**
+**Extensions**
 
-* 2a. The list is empty.
+* 1a. User requests for a list of students filtered by a specified tag
+
+  * 1a1. TAB displays a filtered list of students with the specified tag
   
-  Use case ends.
+    Use case ends.
+  
+* 1b. User requests for a list of students that match a specified keyword
 
+  * 1b1. TAB displays a list of students with data matching the keyword
 
-* 3a. The given index is invalid.
+    Use case ends.
 
-  * 3a1. TAB shows an error message. 
+<br/>
 
-    Use case resumes at step 2.
-    
-
-* 3b. No data fields entered. 
-  * 3b1. TAB shows an error message. 
-
-    Use case resumes at step 3.
-    
-
-* 3c. Content to be edited does not satisfy requirements.
-
-  * 3c1. TAB shows an error message with the requirements specified. 
-  * 3c2. User enters new data.
-  * Steps 3c1-3c2 are repeated until the new data filled in is satisfies the requirements.
-    
-    Use case resumes at step 4.
-
-**Use case: Delete a person**
+**Use case: UC2 - Add a new student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new student with specified fields
+2. TAB adds the student with the specified fields
 
+   Use case ends.
+
+**Extension**
+
+* 1a. TAB detects that the entered student data does not satisfy requirements
+
+    * 1a1. TAB displays an error message and the recommended changes
+
+      Use case resumes at step 2.
+
+* 1b. TAB detects a duplicate student
+
+    * 1b1. TAB displays an error message
+
+      Use case ends.
+
+<br/>
+
+**Use case: UC3 – Edit a student**
+
+**MSS**
+
+1. User <ins>gets a list of students (UC1)</ins>
+2. User requests to edit certain fields of specific student in the list
+3. TAB updates the corresponding fields of the student
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The given index is invalid
+
+    * 2a1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2b. No fields to be edited are specified
+
+    * 2b1. TAB shows an error message
+
+      Use case resumes at step 1.
+
+* 2c. TAB detects that the entered student data does not satisfy requirements
+
+    * 2c1. TAB displays an error message and the recommended changes
+
+      Use case resumes at step 1.
+
+* 2d. TAB detects a duplicate student
+
+    * 2d1. TAB shows an error message
+
+      Use case ends.
+
+<br/>
+
+**Use case: UC4 - Delete a student**
+
+**MSS**
+
+1. User <ins>gets a list of students (UC1)</ins>
+2. User requests to delete a specific student in the list
+3. TAB deletes the student
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+   Use case ends.
+
+* 2a. The given index is invalid
+
+    * 2a1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+<br/>
+
+**Use case: UC5 - Add a student's lesson information**
+
+**MSS**
+
+1. User <ins>gets a list of students (UC1)</ins>
+2. User requests to add a lesson for a specific student in the list
+3. TAB adds the lesson to the student specified
+    
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-      
-  Use case resumes at step 2.
-
-**Use case: UC3 Track Student's Lesson Information**
-
-**MSS**
-
-1.  User requests to list students
-2.  TAB shows a list of students
-3.  User requests to add a lesson for a specific student in the list
-4.  TAB adds the lesson to the student specified
-    
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
+* 1a. The list is empty
   
   Use case ends.
 
-* 3a. The given index is invalid.
-  * 3a1. TAB shows an error message.
+* 2a. The given index is invalid
 
-* 3b. The specified end time is earlier than the start time
-  * 3b1. TAB shows an error message.
+  * 2a1. TAB shows an error message
     
-* 3c. There is an existing lesson for that student with the same lesson details.
-  * 3c1. TAB shows an error message. 
-    
-  Use case resumes at step 2.
+    Use case resumes at step 1.
+  
+* 2b. TAB detects that the entered lesson data does not satisfy requirements
 
-**Use case: UC5 – Delete Student’s Lesson Information**
+    * 2b1. TAB displays an error message and the recommended changes
+
+      Use case resumes at step 1.
+
+<br/>
+
+**Use case: UC6 – Edit a student’s lesson information**
 
 **MSS**
 
-1. User requests to list students. 
+1. User <ins>gets a list of students (UC1)</ins>
+2. User requests to edit certain fields of a specific lesson of a specific student in the list
+3. TAB updates the corresponding fields of the lesson for the specified student
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The specified student has no lessons
+
+  Use case ends.
+
+* 2b. The given index of the student is invalid
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2c. The given index of the lesson of the student is invalid
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2b. No lesson fields to be edited are specified
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2d. TAB detects that the entered lesson data does not satisfy requirements
+
+    * 2d1. TAB displays an error message and the recommended changes
+
+      Use case resumes at step 1.
+
+* 2e. TAB detects clashing lessons
+
+    * 2e1. TAB displays an error message
+
+      Use case ends.
+
+<br/>
+
+**Use case: UC7 – Delete a student’s lesson information**
+
+**MSS**
+
+1. User <ins>gets a list of students (UC1)</ins>
+2. User requests to delete a specific lesson for a specific student
+3. TAB deletes the specified lesson from the specified student in the list
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty
+
+  Use case ends.
+
+* 2a. The given index of the student is invalid
+
+    * 2a1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+* 2b. The given index of the lesson of the specified student is invalid
+
+    * 2b1. TAB displays an error message
+
+      Use case resumes at step 1.
+
+<br/>
+
+**Use Case: UC8 – View quick start instructions**
+
+**MSS**
+
+1. User opens the app
+2. TAB displays quick start instructions
+
+   Use case ends.
    
-2. TAB shows the list of students.
+<br/>
 
-3. User requests to delete a lesson for the student.
-
-4. TAB deletes the lesson from the specified student in the list.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index of the person is invalid.
-  * 3a1. TAB shows an error message.
-
-* 3b. The given index of the lesson of the person is invalid.
-  * 3b1. TAB shows an error message.
-
-  Use case resumes from step 2.
-
-**Use case: UC6 – Edit Student’s Lesson Information**
+**Use case: UC9 – Get help**
 
 **MSS**
 
-1. User requests to list students.
-
-2. TAB shows the list of students.
-
-3. User requests to edit lesson information of a lesson of the student.
-
-4. TAB edits the lesson information of the lesson for the specified student in the list.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-  
-  Use case ends.
-  
-
-* 3a. The given index of the person is invalid.
-    * 3a1. TAB shows an error message.
-
-* 3b. The given index of the lesson of the person is invalid.
-    * 3b1. TAB shows an error message.
-
-* 3c. There is no specified field to edit.
-    * 3c1. TAB shows an error message.
-  
-  Use case resumes from step 2.
-
-**Use case: UC7 – Find student by student fields**
-
-**MSS:**
-
-1.  User requests to list students.
-2.  TAB shows a list of students.
-3.  User requests to find student with a specified name and address.
-4.  TAB shows a list of students with matching name and address.
-
-    Use case ends.
-
-**Extensions:**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-**Use case: UC8 – Filter students by tags**
-
-**MSS:**
-
-1.  User request to view all tags.
-2.  TAB shows a list of created tags.
-3.  User requests to filter students by a few specified tags.
-4.  TAB shows a list of students matching the specified tags.
-
-    Use case ends.
-
-**Extensions:**
-
-* 2a. There are no tags.
-
-  Use case ends.
-
-**Use Case: UC8 – See quick start instructions**
-
-**MSS:**
-1. User opens the app.
-2. TAB shows quick tips in the command result box.
-   Use case ends.
-   
-**Use Case: UC9 – See help guide**
-
-**MSS:**
-
-1. User requests for help.
-2. TAB shows a summary table of all the command usages as well as a link to user guide page. 
+1. User requests for help
+2. TAB displays usage guide.
 
    Use case ends.
 
-**Use Case: Add a Student**
+<br/>
+
+**Use case: UC10 - Undo an accidental modification**
 
 **MSS**
 
-1. User requests to add a student with all the desired fields.
-2. TAB adds the student with all the specified fields.
+1. User requests to undo a previous modification to TAB's data within the session
+2. TAB undoes the previous modification
 
    Use case ends.
 
 **Extension**
-* 1a. User did not input student with all the compulsory fields.
 
-  * 1a1. TAB shows an error message for invalid command format.
-  * 1a2. User inputs student with all the compulsory details (name, phone, email, address).
-      
-    Steps 1a1-1a2 are repeated until the fields inputted are valid.
+* 1a. There are no previous modifications
 
-    Use case resumes from step 2.
+  * 1a1. TAB shows an error message
   
-* 1b. User inputs alphabets under the phone number field.
-  
-  * 1b1. TAB shows an error message for invalid phone number format.
-  * 1b2. User inputs student's phone number with only numerical values.
-  
-    Steps 1b1-1b2 are repeated until the phone number inputted is a valid format.
+    Use case ends.
 
-    Use case resumes from step 2.
+<br/>
 
-* 1c. User inputs an invalid email format.
-
-  * 1c1. TAB shows an error message for invalid email format.
-  * 1c2. User inputs the student's email address with the correct format.
-
-    Steps 1c1-1c2 are repeated until the email address inputted is a valid format.
-
-    Use case resumes from step 2.
-
-* 1d. User requests to add student with optional fields.
-
-  * 1d1. User inputs the optional fields with the respective prefixes together with the compulsory fields.
-  
-    Use case resumes from step 2.
-  
-**Use Case: Undo a Command**
+**Use case: UC11 - Redo an undone modification**
 
 **MSS**
 
-1. User makes a request that <u>modifies the storage. E.g. ladd, add, edit, delete,...</u>.
-2. TAB modifies the storage.
-3. User requests to undo the last modification.
-4. TAB undoes the last command.
+1. User requests to redo a modification to TAB's data that was previously undone within the session
+2. TAB reverts the previous undo command
 
    Use case ends.
 
 **Extension**
-* 1a. User did not make any request or User requests for commands that does not modify storage.
 
-  * 1a1. TAB shows an error message.
-  
-    User case ends.
+* 1a. There are no previous undo requests within the session
 
-**Use Case: Redo a Command**
-
-**MSS**
-
-1. User requests to redo a command.
-2. TAB redoes the previous undone command and modifies the storage accordingly.
-
-   Use case ends.
-
-**Extension**
-* 1a. User did not request for undo command within the session.
-
-    * 1a1. TAB shows an error message for no command to redo.
+    * 1a1. TAB shows an error message
   
       Use case ends.
     
-
+<br/>
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be portable, i.e. user can transfer data from one device to another easily.
-5. Should allow users to easily navigate the app interface.
-6. Data should only be stored locally to ensure user privacy.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed
+2. The response to any user action should become visible within 2 seconds
+3. Should be able to hold up to 50 students and 50 lessons without a noticeable sluggishness in performance for typical usage
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
+5. The source code should be open source
+6. The product is offered as a free service
+7. This product is for individual use
+8. Student and lesson data should be persistent
+9. All features should be easily testable
+10. Should be portable, i.e. user can transfer data from one device to another easily
+11. Should allow users to easily navigate the app interface
 
-*{More to be added}*
 
 ### Glossary
 
+* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6)
+* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
+* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Outstanding fees**: Tuition fees that have yet to be collected
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Academic Stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
-* **Academic Level**: Mainstream academic years from primary school through junior college in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
+* **Recurring lesson**: A lesson that will occur more than once in patterned intervals
+* **Session**: A session begins when the app is started and ends when the app is exited
+* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
+  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
