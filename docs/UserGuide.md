@@ -200,24 +200,27 @@ Format: `list`
 
 Finds all students whose fields match the given , based on the given find condition.
 
-Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORDS]…​`
+Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the find command:**<br>
 
 * The filter condition indicates that a student is only considered a match when `all`, `any` or `none`
-  of the the fields which you are searching for match their keywords.<br>
+  of the fields which you are searching for match the student.<br>
   e.g. 
     * `find n/John t/math cond/all` will return students with both name `John` and tag `math`.
     * `find n/John t/math cond/any` will return students with only name `John`, or only tag `math`, or both.
-    * `find n/John t/math cond/none` will return students without both name `John` and tag `math`.
+    * `find n/John t/math cond/none` will return students without the name `John` or the tag `math`.
 
 * The filter condition will not accept other arguments besides `all`, `any` and `none`.<br>
   e.g. `cond/every` will result in an error.
   
 * The filter condition is optional and defaults to `all` if not specified.
 
+* The filter condition is case-insensitive.<br>
+  e.g. `None` or `ANY` are accepted.
+  
 * You must provide at least one field to search.<br>
   e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
 
@@ -227,53 +230,21 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 * The search is case-insensitive.<br>
   e.g. keyword `hans` will match `Hans`.
 
-* A field just needs to match at least one keyword.<br>
-  e.g. keywords `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
-  
-* The keyword can be a part of a word.<br>
+* A keyword can match a word partially.<br>
   e.g. keyword `math` will match `mathematics`.
+  
+* The order of the keywords do not matter.<br>
+  e.g. keyword `west jurong` will match `jurong west`.
+  
+* All keywords need to match the field.<br>
+  e.g. keywords `Amad Ali` will not match `Amad` or `Ali Abdul`, but it will match `Amad bin Ali`.
 
 </div>
 
 Examples:
-* `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
-* `find cond/all a/Jurong east n/Ben e/gmail`
-  * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-  * will match a student named `benjamin`, with address `yishun east ave 1`, and email `benj@gmail.com`
-* `find cond/none t/paid sch/nus` will return students without the `paid` tag and whose school does not match `nus`
-
-#### Filtering students by tags: `filter`
-
-Filters students in TAB by their tags, based on the given filter condition.
-
-Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the filter command:**<br>
-
-* `all` indicates that a student must have all the specified tags to be matched.
-
-* `any` indicates that a student with at least one of the specified tag will be matched.
-
-* `none` indicates that a student must have none of the specified tags to be matched.
-
-* The filter condition will not accept other arguments besides `all`, `any` and `none`.
-  e.g. `cond/every` will result in an error.
-  
-* You must use the exact spelling of the existing tag.<br>
-  e.g. `Math` will not match `Mathematics`.
-  
-* The tags are **case-sensitive**.<br>
-  e.g. `filter cond/all t/MATH` does not return the same result as `filter cond/all t/math`.
-
-</div>
-
-Examples:
-* `filter cond/all t/math t/Sec1` will return students who have both `math` and `Sec1` tags.
-* `filter cond/any t/English t/Zoom` will return students with only the `English` tag, or only the `Zoom` tag, or both tags.
-* `filter cond/none t/Inactive t/paid` will return students without both `Inactive` and `paid` tags.
-
+* `find a/west p/9876 n/john` matches student with name `Johnny tan`, address `Clementi west`, and phone number `98765432`.
+* `find cond/none t/new t/paid t/zoom` returns students without the tags `new`, `paid` or `zoom`.
+* `find stream/express sch/nus cond/any` returns students with stream `express` or school `nus`.
 
 ### Managing Lessons
 
