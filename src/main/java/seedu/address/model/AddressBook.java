@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.address.model.student.Assessment;
 import seedu.address.model.student.AssessmentList;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.GroupList;
+import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -105,6 +107,16 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (!groups.contains(group)) {
                 groups.add(group);
             }
+        }
+        // TODO: someone help make it more OOP :P
+        List<Assessment> assessmentList = getAssessmentList();
+        Map<Assessment, Score> studentScores = s.getScores();
+        for (Assessment assessment : studentScores.keySet()) {
+            if (!assessments.contains(assessment)) {
+                assessments.add(assessment);
+            }
+            int index = assessmentList.indexOf(assessment);
+            assessmentList.get(index).add(s.getId(), studentScores.get(assessment));
         }
         students.add(s);
     }
