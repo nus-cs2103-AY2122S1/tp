@@ -88,8 +88,11 @@ public class AddClientCommandParserTest {
             CommandResult actualResult = parser.parse(args).execute(new ModelStub());
             CommandResult expectedResult = new AddClientCommand(descriptor).execute(new ModelStub());
             // compare the feedback to user excluding the id.
-            if (!expectedResult.getFeedbackToUser().substring(25)
-                    .equals(actualResult.getFeedbackToUser().substring(25))) {
+            String actualString = actualResult.getFeedbackToUser();
+            actualString = actualString.substring(actualString.indexOf("Name"));
+            String expectedString = expectedResult.getFeedbackToUser();
+            expectedString = expectedString.substring(expectedString.indexOf("Name"));
+            if (!actualString.equals(expectedString)) {
                 fail();
             }
             if (expectedResult.isShowHelp() != actualResult.isShowHelp()) {

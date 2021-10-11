@@ -40,13 +40,17 @@ public class AddClientCommandTest {
     @Test
     public void execute_newClient_returnsCommandResult() {
         Client clientToAdd = new Client(name, phoneNumber, null, null);
-        CommandResult commandResult = new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd));
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd));
         try {
-            CommandResult result = addClientCommand.execute(new ModelStub());
+            CommandResult actualResult = addClientCommand.execute(new ModelStub());
             // compare the feedback to user excluding the id.
-            assertEquals(commandResult.getFeedbackToUser().substring(25), result.getFeedbackToUser().substring(25));
-            assertEquals(commandResult.isShowHelp(), result.isShowHelp());
-            assertEquals(commandResult.isExit(), result.isExit());
+            String actualString = actualResult.getFeedbackToUser();
+            actualString = actualString.substring(actualString.indexOf("Name"));
+            String expectedString = expectedResult.getFeedbackToUser();
+            expectedString = expectedString.substring(expectedString.indexOf("Name"));
+            assertEquals(expectedString, actualString);
+            assertEquals(expectedResult.isShowHelp(), actualResult.isShowHelp());
+            assertEquals(expectedResult.isExit(), actualResult.isExit());
         } catch (CommandException e) {
             fail();
         }
