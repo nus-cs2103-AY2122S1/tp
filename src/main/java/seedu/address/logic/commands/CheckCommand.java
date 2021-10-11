@@ -10,10 +10,8 @@ import seedu.address.model.reservation.PersonContainsReservationPredicate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Checks if there is an available slot for reservation in the specified date and time.
@@ -28,23 +26,17 @@ public class CheckCommand extends Command {
             + "Parameters: Date (format: YYYY-MM-DD HHMM or YYYY-MM-DD or HHMM) \n"
             + "Example: " + COMMAND_WORD + " 2021-12-25 1900";
 
-    // Used to convert LocalDate to LocalDateTime when user inputs only date to query
-    public static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00");
-
     private final ListContainsReservationPredicate predicate;
     private final LocalDate date;
     private final LocalTime time;
     private final EnumTypeOfCheck typeOfCheck;
 
-    public CheckCommand(ListContainsReservationPredicate predicate
-            , LocalDate date
-            , LocalTime time
-            , EnumTypeOfCheck typeOfCheck) {
-        requireAllNonNull(predicate, date, typeOfCheck);
+    public CheckCommand(ListContainsReservationPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
-        this.date = date;
-        this.time = time;
-        this.typeOfCheck = typeOfCheck;
+        this.date = predicate.getDate();
+        this.time = predicate.getTime();
+        this.typeOfCheck = predicate.getTypeOfCheck();
     }
 
     @Override
@@ -58,7 +50,7 @@ public class CheckCommand extends Command {
     }
 
     private LocalDateTime convertToLocalDateTime(LocalDate date, LocalTime time) {
-        return LocalDateTime.of(date, (Optional.ofNullable(time).orElse(DEFAULT_TIME)));
+        return LocalDateTime.of(date, time);
     }
 
     private String getDisplayMessage(EnumTypeOfCheck e) {

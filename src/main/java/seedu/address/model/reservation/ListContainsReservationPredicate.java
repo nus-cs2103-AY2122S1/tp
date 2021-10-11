@@ -41,6 +41,18 @@ public class ListContainsReservationPredicate implements Predicate<Reservation> 
         return result;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public EnumTypeOfCheck getTypeOfCheck() {
+        return typeOfCheck;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

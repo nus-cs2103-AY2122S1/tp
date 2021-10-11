@@ -22,7 +22,7 @@ public class CheckCommandParser implements Parser<CheckCommand> {
     private LocalTime time;
     private EnumTypeOfCheck typeOfCheck;
     public static final String ALLOWED_TIME_FORMAT = "HHmm";
-
+    public static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00"); // Used to convert LocalDate to LocalDateTime when user inputs only date to query
     /**
      * Parses the given {@code String} of arguments in the context of the CheckCommand
      * and returns a CheckCommand object for execution.
@@ -41,7 +41,7 @@ public class CheckCommandParser implements Parser<CheckCommand> {
         }
 
         parseArgs(splitTrimmedArgs);
-        return new CheckCommand(new ListContainsReservationPredicate(date, time, typeOfCheck), date, time, typeOfCheck);
+        return new CheckCommand(new ListContainsReservationPredicate(date, time, typeOfCheck));
     }
 
     private void parseArgs(String[] splitTrimmedArgs) throws ParseException {
@@ -63,6 +63,7 @@ public class CheckCommandParser implements Parser<CheckCommand> {
         assert (dateString.length() != ALLOWED_TIME_FORMAT.length());
         try {
             date = LocalDate.parse(dateString, DATE_FORMATTER);
+            time = DEFAULT_TIME;
             typeOfCheck = EnumTypeOfCheck.Date;
         } catch (DateTimeParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
