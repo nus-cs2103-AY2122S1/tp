@@ -64,12 +64,13 @@ public class AddAllocCommand extends Command {
         List<Student> studentList = addressBook.getStudentList();
 
         assert allocDescriptor.getGroup().isPresent();
+        if (!groupList.contains(allocDescriptor.getGroup().get())) {
+            throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
+        }
+
         Group groupToEdit = getAllocGroup(groupList, allocDescriptor);
         List<Student> studentsToEdit = getAllocStudents(studentList, allocDescriptor);
 
-        if (!groupList.contains(groupToEdit)) {
-            throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
-        }
 
         if (studentsToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
