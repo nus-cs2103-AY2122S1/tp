@@ -10,6 +10,7 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 
+
 /**
  * Jackson-friendly version of {@link ModuleClass}.
  */

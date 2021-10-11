@@ -10,8 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 public class UniqueModuleClassList implements Iterable<ModuleClass> {
 
@@ -40,25 +38,6 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Replaces the class {@code target} in the list with {@code editedModuleClass}.
-     * {@code target} must exist in the list.
-     * The class identity of {@code editedModuleClass} must not be the same as another existing class in the list.
-     */
-    public void setPerson(ModuleClass target, ModuleClass editedModuleCLass) {
-        requireAllNonNull(target, editedModuleCLass);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new ModuleClassNotFoundException();
-        }
-
-        if (!target.isSameModuleClass(editedModuleCLass) && contains(editedModuleCLass)) {
-            throw new DuplicateModuleClassException();
-        }
-        internalList.set(index, editedModuleCLass);
-    }
-
-    /**
      * Removes the equivalent class from the list.
      * The class must exist in the list.
      */
@@ -79,11 +58,11 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new ModuleClassNotFoundException();
         }
 
         if (!target.isSameModuleClass(editedClass) && contains(editedClass)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateModuleClassException();
         }
 
         internalList.set(index, editedClass);

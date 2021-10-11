@@ -112,9 +112,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteClass(ModuleClass moduleClass) {
+        addressBook.removeClass(moduleClass);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addClass(ModuleClass moduleClass) {
+        addressBook.addClass(moduleClass);
+        updateFilteredModuleClassList(PREDICATE_SHOW_ALL_CLASSES);
     }
 
     @Override
@@ -122,6 +133,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
+        requireAllNonNull(target, editedClass);
+
+        addressBook.setModuleClass(target, editedClass);
     }
 
     //=========== Filtered Person List Accessors =============================================================

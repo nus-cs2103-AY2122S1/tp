@@ -24,6 +24,7 @@ public class ModuleClassListPanel extends UiPart<Region> {
         super(FXML);
         moduleClassListView.setItems(moduleClassList);
         moduleClassListView.setCellFactory(listview -> new ModuleClassListViewCell());
+        logger.info(String.valueOf(moduleClassList.size()));
     }
 
     /**
