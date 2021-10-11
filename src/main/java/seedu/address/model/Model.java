@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 
@@ -124,5 +123,5 @@ public interface Model {
     ObservableList<Position> getFilteredPositionList();
 
     void updateFilteredPositionList(Predicate<Position> predicate);
-
+    
 }
