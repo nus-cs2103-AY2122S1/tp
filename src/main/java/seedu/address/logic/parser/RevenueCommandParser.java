@@ -33,9 +33,14 @@ public class RevenueCommandParser implements Parser<RevenueCommand> {
                     RevenueCommand.COMMAND_WORD), ive);
         }
 
-        String revenueText = argMultimap.getValue(PREFIX_REVENUE).orElse("");
-        Money revenue = new Money(Float.parseFloat(revenueText));
-
+        Money revenue;
+        try {
+            String revenueText = argMultimap.getValue(PREFIX_REVENUE).orElse("");
+            revenue = new Money(Float.parseFloat(revenueText));
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RevenueCommand.COMMAND_WORD), e);
+        }
         return new RevenueCommand(index, new Revenue(revenue));
     }
 }

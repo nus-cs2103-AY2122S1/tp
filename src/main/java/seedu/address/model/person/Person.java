@@ -29,7 +29,7 @@ public class Person {
     private final Appointment appointment;
 
     /**
-     * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not statedd.
+     * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not stated.
      */
     public Person(Name name, Phone phone, Email email,
                   Address address, Set<Tag> tags, Note note, Appointment appointment) {
