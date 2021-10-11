@@ -22,12 +22,12 @@ public class EditTaskDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditTaskDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditTaskDescriptor} with fields containing {@code task}'s details
      */
-    public EditTaskDescriptorBuilder(Task person) {
+    public EditTaskDescriptorBuilder(Task task) {
         descriptor = new EditTaskDescriptor();
-        descriptor.setLabel(person.getLabel());
-        descriptor.setDate(person.getDate());
+        descriptor.setLabel(task.getLabel());
+        descriptor.setDate(task.getDate());
     }
 
     /**

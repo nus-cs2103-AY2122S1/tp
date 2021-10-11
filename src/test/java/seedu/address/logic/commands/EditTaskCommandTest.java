@@ -10,7 +10,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.EditTaskCommand.MESSAGE_DUPLICATE_TASK;
 import static seedu.address.logic.commands.EditTaskCommand.MESSAGE_NO_CHANGES_MADE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 
 import org.junit.jupiter.api.Test;
@@ -72,7 +71,7 @@ public class EditTaskCommandTest {
     public void execute_duplicateTaskUnfilteredList_failure() {
         Task firstTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(firstTask).build();
-        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_SECOND_PERSON, descriptor);
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_SECOND_TASK, descriptor);
 
         assertCommandFailure(editTaskCommand, model, MESSAGE_DUPLICATE_TASK);
     }
