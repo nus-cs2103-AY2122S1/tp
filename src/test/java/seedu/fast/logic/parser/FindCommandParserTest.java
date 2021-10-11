@@ -34,18 +34,18 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand_forPriority() {
+    public void parse_validArgs_returnsFindPriorityCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new PriorityPredicate(Arrays.asList(
-                        PriorityTag.LowPriority.TERM,PriorityTag.MediumPriority.TERM)));
-        assertParseSuccess(parser, PriorityTag.PRIORITY_TAG_PREFIX +
-                PriorityTag.LowPriority.TERM + " " +
-                PriorityTag.MediumPriority.TERM , expectedFindCommand);
+                new FindCommand(new PriorityPredicate(Arrays.asList(PriorityTag.LowPriority.TERM,
+                        PriorityTag.MediumPriority.TERM)));
+        assertParseSuccess(parser , PriorityTag.PRIORITY_TAG_PREFIX
+                + PriorityTag.LowPriority.TERM + " "
+                + PriorityTag.MediumPriority.TERM , expectedFindCommand);
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, PriorityTag.PRIORITY_TAG_PREFIX +
-                PriorityTag.LowPriority.TERM + " \n \t " +
-                PriorityTag.MediumPriority.TERM , expectedFindCommand);
+        assertParseSuccess(parser, PriorityTag.PRIORITY_TAG_PREFIX
+                + PriorityTag.LowPriority.TERM + " \n \t "
+                + PriorityTag.MediumPriority.TERM , expectedFindCommand);
     }
 
 }
