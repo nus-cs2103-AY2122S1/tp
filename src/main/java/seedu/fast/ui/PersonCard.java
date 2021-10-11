@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.fast.commons.util.Colors;
+import seedu.fast.commons.util.TagUtil;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 
@@ -81,11 +82,24 @@ public class PersonCard extends UiPart<Region> {
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
 
-        switch (tagName.toLowerCase()) { //Todo: add more color tags & abstract out case names
+        switch (tagName.toUpperCase()) { //Todo: add more color tags & abstract out case names
 
-        case "friends":
+        case TagUtil.FRIENDS:
             temp.setStyle(Colors.BLUE);
             break;
+
+        case TagUtil.HIGH_PRIORITY:
+            temp.setStyle(Colors.RED);
+            break;
+
+        case TagUtil.MEDIUM_PRIORITY:
+            temp.setStyle(Colors.ORANGE);
+            break;
+
+        case TagUtil.LOW_PRIORITY:
+            temp.setStyle(Colors.GREEN);
+            break;
+
         default:
             temp.setStyle(Colors.GREY);
         }
