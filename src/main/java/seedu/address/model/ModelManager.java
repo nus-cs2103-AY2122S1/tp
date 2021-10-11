@@ -28,6 +28,7 @@ public class ModelManager implements Model {
     private final ApplicationBook applicationBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Position> filteredPositions;
 
     /**
      * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
@@ -49,6 +50,7 @@ public class ModelManager implements Model {
         this.applicationBook = new ApplicationBook(applicationBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
     /**
@@ -67,6 +69,7 @@ public class ModelManager implements Model {
         this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
     public ModelManager() {
@@ -186,5 +189,37 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
+
+    // Position related methods
+    @Override
+    public boolean hasPosition(Position position) {
+        requireNonNull(position);
+        return positionBook.hasPosition(position);
+    }
+
+    @Override
+    public void addPosition(Position position) {
+        positionBook.addPosition(position);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deletePosition(Position positionToDelete) {
+        positionBook.removePosition(positionToDelete);
+    }
+
+
+    //=========== Filtered Position List Accessors =============================================================
+    @Override
+    public ObservableList<Position> getFilteredPositionList() {
+        return filteredPositions;
+    }
+
+    @Override
+    public void updateFilteredPositionList(Predicate<Position> predicate) {
+        requireNonNull(predicate);
+        filteredPositions.setPredicate(predicate);
+    }
+
 
 }
