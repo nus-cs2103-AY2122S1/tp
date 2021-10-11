@@ -66,4 +66,5 @@ class CheckCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n \t 1200  \t", expectedCheckCommand);
     }
+
 }
