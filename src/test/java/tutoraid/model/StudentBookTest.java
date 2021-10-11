@@ -36,14 +36,14 @@ public class StudentBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyStudentBook_replacesData() {
         StudentBook newData = TypicalStudents.getTypicalStudentBook();
         studentBook.resetData(newData);
         assertEquals(newData, studentBook);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
         Student editedAlice = new StudentBuilder(TypicalStudents.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
         List<Student> newStudents = Arrays.asList(TypicalStudents.ALICE, editedAlice);
@@ -53,30 +53,30 @@ public class StudentBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasStudent_nullStudent_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> studentBook.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInStudentBook_returnsFalse() {
         assertFalse(studentBook.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasStudent_studentInStudentBook_returnsTrue() {
         studentBook.addStudent(TypicalStudents.ALICE);
         assertTrue(studentBook.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasStudent_studentWithSameIdentityFieldsInStudentBook_returnsTrue() {
         studentBook.addStudent(TypicalStudents.ALICE);
         Student editedAlice = new StudentBuilder(TypicalStudents.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
         assertTrue(studentBook.hasStudent(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> studentBook.getStudentList().remove(0));
     }
 

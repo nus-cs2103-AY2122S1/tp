@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
-import tutoraid.testutil.AddressBookBuilder;
+import tutoraid.testutil.StudentBookBuilder;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.TypicalStudents;
 
@@ -61,41 +61,41 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setStudentBookFilePath_nullPath_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> modelManager.setStudentBookFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setStudentBookFilePath_validPath_setsStudentBookFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setStudentBookFilePath(path);
         assertEquals(path, modelManager.getStudentBookFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasStudent_nullStudent_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> modelManager.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInStudentBook_returnsFalse() {
         assertFalse(modelManager.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasStudent_studentInStudentBook_returnsTrue() {
         modelManager.addStudent(TypicalStudents.ALICE);
         assertTrue(modelManager.hasStudent(TypicalStudents.ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
     }
 
     @Test
     public void equals() {
-        StudentBook studentBook = new AddressBookBuilder().withPerson(TypicalStudents.ALICE).withPerson(TypicalStudents.BENSON).build();
+        StudentBook studentBook = new StudentBookBuilder().withStudent(TypicalStudents.ALICE).withStudent(TypicalStudents.BENSON).build();
         StudentBook differentStudentBook = new StudentBook();
         UserPrefs userPrefs = new UserPrefs();
 

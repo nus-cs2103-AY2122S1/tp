@@ -14,7 +14,7 @@ import tutoraid.testutil.TypicalStudents;
 
 public class StudentTest {
     @Test
-    public void isSamePerson() {
+    public void isSameStudent() {
         // same object -> returns true
         assertTrue(TypicalStudents.ALICE.isSameStudent(TypicalStudents.ALICE));
 
