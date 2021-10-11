@@ -30,6 +30,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (!moduleCodes.isEmpty()) {
             moduleCodeSet = ParserUtil.parseModuleCodes(moduleCodes);
+            // throw exception if empty
+
         }
 
         String trimmedArgs = args.trim();
