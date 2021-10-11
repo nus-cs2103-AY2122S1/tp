@@ -108,7 +108,10 @@ public class PersonBuilder {
         this.lessons = SampleDataUtil.getSampleLessonsWithoutOwner();
         return this;
     }
-    
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
@@ -123,7 +126,10 @@ public class PersonBuilder {
         this.lessons = lessonSetWithOneLesson;
         return this;
     }
-    
+
+    /**
+     * Sets the Parent {@code Phone} of the {@code Person} that we are building.
+     */
     public PersonBuilder withParentPhone(String parentPhone) {
         this.parentPhone = new Phone(parentPhone);
         return this;

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
@@ -191,7 +190,8 @@ class JsonAdaptedPerson {
 
         final Set<LessonWithoutOwner> modelLessonWithoutOwner = new TreeSet<>(personLessons);
 
-        return new Person(modelLessonWithoutOwner, modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
+        return new Person(modelLessonWithoutOwner, modelName,
+                modelPhone, modelEmail, modelParentPhone, modelParentEmail,
                 modelAddress, modelSchool, modelAcadStream, modelFee, modelRemark, modelTags);
     }
 }
