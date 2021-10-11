@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
 import seedu.address.model.task.Task;
 
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
+    private final FilteredList<Event> filteredEvents;
     private final TaskListManager taskListManager;
     private final FilteredList<Task> filteredTasks;
 
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
         this.taskListManager = new TaskListManager();
         filteredTasks = new FilteredList<>(this.taskListManager.getObservableTaskList());
     }
@@ -100,8 +103,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
     public void deleteMember(Member target) {
         addressBook.removeMember(target);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
     }
 
     @Override
@@ -111,13 +125,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
     public void setMember(Member target, Member editedMember) {
         requireAllNonNull(target, editedMember);
 
         addressBook.setMember(target, editedMember);
     }
 
-    //=========== Filtered Member List Accessors =============================================================
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
+    }
+
+    //=========== Filtered Member and Event Lists Accessors ===========================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Member} backed by the internal list of
@@ -126,6 +153,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Member> getFilteredMemberList() {
         return filteredMembers;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
     }
 
     @Override
@@ -227,6 +263,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -242,7 +284,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredMembers.equals(other.filteredMembers);
+                && filteredMembers.equals(other.filteredMembers)
+                && filteredEvents.equals(other.filteredEvents);
     }
 
 }
