@@ -76,7 +76,6 @@ public class RemoveParticipantFromEventCommand extends Command {
                     String.format(MESSAGE_PARTICIPANT_NOT_IN_EVENT, participantToRemove.getFullName()));
         }
 
-        // add participant
         selectedEvent.removeParticipant(participantToRemove);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,

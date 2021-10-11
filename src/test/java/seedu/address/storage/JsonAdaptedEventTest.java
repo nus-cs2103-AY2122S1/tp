@@ -31,7 +31,7 @@ public class JsonAdaptedEventTest {
     private static final List<String> VALID_PARTICIPANT_IDS = SAMPLE_EVENT.getParticipants().stream()
             .map(Participant::getParticipantId).map(ParticipantId::toString)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedParticipant> participants = List.of();
+    private static final List<Participant> participants = List.of();
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
