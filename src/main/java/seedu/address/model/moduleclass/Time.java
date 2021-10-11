@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Days should only contain numbers";
-    public static final String VALIDATION_REGEX = "\\{Alum}+";
+            "Time should only contain numbers in the following format: HH:mm";
+    public static final String VALIDATION_REGEX = "\\d+:\\d+";
     private final LocalTime value;
 
     public Time(String dateTime) {
