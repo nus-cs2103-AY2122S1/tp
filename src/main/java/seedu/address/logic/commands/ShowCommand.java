@@ -58,6 +58,9 @@ public class ShowCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Executes the show command if argument is a string name
+     */
     private CommandResult executeWithName(Model model) throws CommandException {
         FilteredList<Person> filteredList = new FilteredList<>(model.getFilteredPersonList());
         filteredList.setPredicate(predicate);
@@ -84,6 +87,9 @@ public class ShowCommand extends Command {
         }
     }
 
+    /**
+     * Executes the show command if argument is a numeric index
+     */
     private CommandResult executeWithIndex(Model model) throws CommandException {
         assert this.index != null;
         int index = this.index.getZeroBased();
