@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.UniqueApplicantList;
 
@@ -29,8 +30,6 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
         this();
         resetData(toBeCopied);
     }
-
-    //// list overwrite operations
 
     /**
      * Replaces the contents of the applicant list with {@code applicants}.
@@ -73,7 +72,6 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
-
         applicants.setApplicant(target, editedApplicant);
     }
 
