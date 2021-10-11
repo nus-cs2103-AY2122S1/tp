@@ -129,7 +129,7 @@ public class PersonBuilder {
         this.riskAppetite = new RiskAppetite(riskAppetite);
         return this;
     }
-  
+
     /**
      * Sets the {@code DisposableIncome} of the {@code Person} that we are building.
      */
@@ -154,6 +154,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * @return {@code Person} that we are building
+     */
     public Person build() {
         return new Person(clientId, name, phone, email, address, riskAppetite,
             disposableIncome, currentPlan, lastMet, tags);
