@@ -87,10 +87,6 @@ public class PersonMatchesKeywordsPredicateTest {
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withTags("Math").build();
         assertFalse(predicate.test(new PersonBuilder().withTags("Mathematics").build()));
 
-        // Keyword has multiple words
-        predicate = new PersonMatchesKeywordsPredicateBuilder().withTags("Math paid").build();
-        assertFalse(predicate.test(new PersonBuilder().withTags("Math", "paid").build()));
-
         // Does not match all tag keywords
         predicate =
             new PersonMatchesKeywordsPredicateBuilder().withTags("Math", "paid").withCondition(FindCondition.ALL)

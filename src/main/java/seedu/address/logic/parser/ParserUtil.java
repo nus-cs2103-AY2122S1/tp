@@ -261,7 +261,7 @@ public class ParserUtil {
         requireNonNull(keywords);
         String strippedKeywords = keywords.strip();
         if (strippedKeywords.isEmpty()) {
-            throw new ParseException(FindCommand.MESSAGE_INVALID_KEYWORD);
+            throw new ParseException(FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
         }
         return Arrays.asList(strippedKeywords.split("\\s+"));
     }
@@ -269,7 +269,7 @@ public class ParserUtil {
     /**
      * Parses {@code String keywords} into a {@code String}.
      * Leading and trailing whitespaces of keywords will be stripped.
-     * A tag keyword can consist of multiple words.
+     * A tag keyword can only be one word.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -277,7 +277,10 @@ public class ParserUtil {
         requireNonNull(keyword);
         String strippedKeyword = keyword.strip();
         if (strippedKeyword.isEmpty()) {
-            throw new ParseException(FindCommand.MESSAGE_INVALID_KEYWORD);
+            throw new ParseException(FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        }
+        if (!Tag.isValidTagName(strippedKeyword)) {
+            throw new ParseException(FindCommand.MESSAGE_TAG_KEYWORD_CONSTRAINTS);
         }
         return strippedKeyword;
     }

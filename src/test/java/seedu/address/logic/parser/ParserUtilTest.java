@@ -443,12 +443,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTagKeyword_multipleKeywords_returnsKeywordsString() throws Exception {
-        String keywordsMultiple = VALID_KEYWORD_1 + WHITESPACE + VALID_KEYWORD_2;
-        assertEquals(keywordsMultiple, ParserUtil.parseTagKeyword(keywordsMultiple));
-    }
-
-    @Test
     public void parseTagKeywords_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTagKeywords(null));
     }
@@ -457,13 +451,6 @@ public class ParserUtilTest {
     public void parseTagKeywords_collectionWithInvalidKeyword_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil
             .parseTagKeywords(Arrays.asList(VALID_KEYWORD_1, WHITESPACE)));
-    }
-
-    @Test
-    public void parseTagKeywords_collectionWithValidMultipleKeywords_returnsTagKeywordStringList() throws Exception {
-        String keywordsMultiple = VALID_KEYWORD_1 + WHITESPACE + VALID_KEYWORD_2;
-        assertEquals(Arrays.asList(VALID_KEYWORD_1, keywordsMultiple),
-            ParserUtil.parseTagKeywords(Arrays.asList(VALID_KEYWORD_1, keywordsMultiple)));
     }
 
     @Test

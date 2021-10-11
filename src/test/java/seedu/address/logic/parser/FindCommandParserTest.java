@@ -73,20 +73,26 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidKeyword_failure() {
-        // invalid name keyword
-        assertParseFailure(parser, " " + PREFIX_NAME + " ", FindCommand.MESSAGE_INVALID_KEYWORD);
-        // invalid phone keyword
-        assertParseFailure(parser, " " + PREFIX_PHONE + " ", FindCommand.MESSAGE_INVALID_KEYWORD);
-        // invalid email keyword
-        assertParseFailure(parser, " " + PREFIX_EMAIL + " ", FindCommand.MESSAGE_INVALID_KEYWORD);
-        // invalid parent phone keyword
-        assertParseFailure(parser, " " + PREFIX_PARENT_PHONE + " ", FindCommand.MESSAGE_INVALID_KEYWORD);
-        // invalid parent email keyword
-        assertParseFailure(parser, " " + PREFIX_PARENT_EMAIL + " ", FindCommand.MESSAGE_INVALID_KEYWORD);
-        // invalid address keyword
-        assertParseFailure(parser, " " + PREFIX_ADDRESS + " ", FindCommand.MESSAGE_INVALID_KEYWORD);
-        // invalid tag keyword
-        assertParseFailure(parser, " " + PREFIX_TAG + " ", FindCommand.MESSAGE_INVALID_KEYWORD);
+        // invalid empty name keyword
+        assertParseFailure(parser, " " + PREFIX_NAME + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty phone keyword
+        assertParseFailure(parser, " " + PREFIX_PHONE + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty email keyword
+        assertParseFailure(parser, " " + PREFIX_EMAIL + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty parent phone keyword
+        assertParseFailure(parser, " " + PREFIX_PARENT_PHONE + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty parent email keyword
+        assertParseFailure(parser, " " + PREFIX_PARENT_EMAIL + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty address keyword
+        assertParseFailure(parser, " " + PREFIX_ADDRESS + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid empty tag keyword
+        assertParseFailure(parser, " " + PREFIX_TAG + " ", FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        // invalid multiple words tag keyword
+        assertParseFailure(parser, " " + PREFIX_TAG + "math paid", FindCommand.MESSAGE_TAG_KEYWORD_CONSTRAINTS);
+
+        // invalid tag keyword followed by valid tag
+        assertParseFailure(parser, " " + PREFIX_TAG + " " + PREFIX_TAG + "math ",
+            FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
 
         // valid tag keyword followed by invalid condition
         assertParseFailure(parser, " " + PREFIX_TAG + "math " + PREFIX_FIND_CONDITION + "invalid",
@@ -95,7 +101,7 @@ public class FindCommandParserTest {
         // invalid condition followed by invalid tag keyword
         // invalid keyword takes precedence
         assertParseFailure(parser, " " + PREFIX_FIND_CONDITION + "invalid " + PREFIX_TAG + " ",
-            FindCommand.MESSAGE_INVALID_KEYWORD);
+            FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
 
         // invalid condition followed with no fields
         // Missing fields takes precedence
@@ -204,7 +210,6 @@ public class FindCommandParserTest {
             new PersonMatchesKeywordsPredicateBuilder().withParentEmail(VALID_PARENT_EMAIL_AMY).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, PARENT_EMAIL_DESC_AMY, expectedCommand);
-
 
         // address
         predicate =

@@ -55,7 +55,11 @@ public class FindCommand extends Command {
     public static final String MESSAGE_CONDITION_CONSTRAINTS = "Find condition should take on one of these values: "
         + "all / any / none";
 
-    public static final String MESSAGE_INVALID_KEYWORD = "Keyword cannot be empty.";
+    public static final String MESSAGE_KEYWORD_CONSTRAINTS = "Keyword cannot be empty.";
+
+    public static final String MESSAGE_TAG_KEYWORD_CONSTRAINTS = "Tag can only take one keyword. "
+        + "To search for multiple tags, use multiple t/ \n"
+        + "Example: find t/unpaid t/zoom";
 
     private final Predicate<Person> predicate;
 
