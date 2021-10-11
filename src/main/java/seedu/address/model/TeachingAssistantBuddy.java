@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.module.Module;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.task.Task;
@@ -16,6 +17,7 @@ import seedu.address.model.task.UniqueTaskList;
  */
 public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
+    //todo: need a unique module list here, I am naming it modules for now
     private final UniqueStudentList students;
     private final UniqueTaskList tasks;
 
@@ -34,15 +36,17 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public TeachingAssistantBuddy() {}
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/model/Module.java
-     * Creates a Module using the Persons in the {@code toBeCopied}
-=======
      * Creates an TeachingAssistantBuddy using the Persons in the {@code toBeCopied}
->>>>>>> feecc5ad964f8cf2e7a3b881a6daf5647d2619d4:src/main/java/seedu/address/model/TeachingAssistantBuddy.java
      */
     public TeachingAssistantBuddy(ReadOnlyTeachingAssistantBuddy toBeCopied) {
         this();
         resetData(toBeCopied);
+    }
+
+    //// module-level operations
+
+    public void removeModule(Module key) {
+        modules.remove(key);
     }
 
     //// list overwrite operations
@@ -56,7 +60,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/model/Module.java
      * Replaces the contents of the task list with {@code tasks}.
      * {@code persons} must not contain duplicate tasks.
      */
@@ -65,10 +68,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     /**
-     * Resets the existing data of this {@code Module} with {@code newData}.
-=======
      * Resets the existing data of this {@code TeachingAssistantBuddy} with {@code newData}.
->>>>>>> feecc5ad964f8cf2e7a3b881a6daf5647d2619d4:src/main/java/seedu/address/model/TeachingAssistantBuddy.java
      */
     public void resetData(ReadOnlyTeachingAssistantBuddy newData) {
         requireNonNull(newData);
@@ -114,7 +114,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the TAB.
      * The student identity of {@code editedPerson} must not be the same
      * as another existing student in the address book.
      */
@@ -125,9 +125,8 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/model/Module.java
      * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the TAB.
      * The task identity of {@code editedTask} must not be the same
      * as another existing task in the module.
      */
@@ -137,11 +136,8 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     /**
-     * Removes {@code key} from this {@code Module}.
-=======
      * Removes {@code key} from this {@code TeachingAssistantBuddy}.
->>>>>>> feecc5ad964f8cf2e7a3b881a6daf5647d2619d4:src/main/java/seedu/address/model/TeachingAssistantBuddy.java
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the TAB.
      */
     public void removeStudent(Student key) {
         students.remove(key);
@@ -166,6 +162,10 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Module> getModuleList() {
+        return modules.asUnmodifiableObservableList();
     }
 
     public ObservableList<Task> getTaskList() {
