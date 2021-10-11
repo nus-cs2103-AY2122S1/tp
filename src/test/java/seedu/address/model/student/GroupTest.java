@@ -49,14 +49,14 @@ public class GroupTest {
     }
 
     @Test
-    public void hasStudent_notIncluded_throwsNullPointerException() {
+    public void hasStudent_notIncluded() {
         ID id = new IdBuilder().build();
         Group group = new GroupBuilder().build();
         assertFalse(() -> group.hasStudent(id));
     }
 
     @Test
-    public void hasStudent_included_throwsNullPointerException() {
+    public void hasStudent_included() {
         ID id = new IdBuilder().build();
         Group group = new GroupBuilder().withStudents(List.of(id)).build();
         assertTrue(() -> group.hasStudent(id));
