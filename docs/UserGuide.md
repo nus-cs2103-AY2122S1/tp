@@ -98,14 +98,14 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `PHONE_NUMBER` is the elderly’s phone number. **This must be included.**
 * `LANGUAGE` is the elderly’s preferred language for communication. **This must be included.**
 * `ADDRESS` is the elderly’s address to be visited. **This must be included.**
-* `LAST_VISIT` is the last date that the user has visited the elderly. **This is optional to include.**
-* `VISIT` is the next scheduled date for the elderly’s visit. **This is optional to include.**
+* `LAST_VISIT` is the last datetime that the user has visited the elderly. **This is optional to include.**
+* `VISIT` is the next scheduled datetime for the elderly’s visit. **This is optional to include.**
 
 Examples:
-* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED` and `VISIT_DATE`.
-* `add n/Johnny p/87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31` adds an elderly and details without the `VISIT_DATE`.
-* `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31` adds an elderly and details without the `LAST_VISITED`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 v/2021-10-31` adds an elderly and details with `LAST_VISITED` and `VISIT_DATE`.
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED` and `VISIT`.
+* `add n/Johnny p/87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31 17:00` adds an elderly and details without the `VISIT`.
+* `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31 09:00` adds an elderly and details without the `LAST_VISITED`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 10:00 v/2021-10-31 16:00` adds an elderly and details with `LAST_VISITED` and `VISIT`.
 
 
 ### Delete an elderly or corresponding visit : `delete`
@@ -169,14 +169,17 @@ Examples:
 
 Updates the time for the next visit to the elderly with the given index of the elderly in the address book.
 
-Format: `visit INDEX  at/ VISIT_DATE`
+Format: `visit INDEX  at/VISIT [f/FREQUENCY o/OCCURRENCE]`
 
-* `INDEX` corresponds to the elderly’s index in the address book. It is a strictly positive integer, and must be included.
-* The visit date is in the format of `yyyy-mm-dd`, and it must be included.
+* `INDEX` corresponds to the elderly’s index in the address book. It is a **strictly positive integer, and must be included.**
+* The `VISIT` is in the format of `yyyy-mm-dd HH:mm`, and it must be included.
+* The `FREQUENCY` and `OCCURRENCE` are optional parameters, and must both be included or excluded.
+* `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
+* `OCCURRENCE` is a **strictly positive integer**.
 * If there is already an existing visit scheduled for the elderly, this command will schedule a new visit that overwrites the existing one.
 
 Examples:
-* `visit 1 2021-12-31` schedules a meeting to the first elderly in the address book on 31th December 2021.
+* `visit 1 at/2021-12-31 17:00` schedules a meeting to the first elderly in the address book on 31th December 2021, 5PM.
 
 
 ### Marking one visit as done : `done`
@@ -185,8 +188,8 @@ Marks a scheduled visit to an elderly as done.
 
 Format: `done INDEX`
 
-* `INDEX` is the index of the elderly visited by the user. There must be a scheduled visit for the elderly before the visit can be marked as done.
-* Once a scheduled visit is marked as done, it will update the last visit time of the elderly, and now there is no longer a scheduled next visit for the elderly.
+* `INDEX` is the index of the elderly visited by the user. It is a **strictly positive integer, and must be included.** There must be a scheduled visit for the elderly before the visit can be marked as done.
+* Once a scheduled visit is marked as done, it will update the last visited time of the elderly, and now there is no longer a scheduled next visit for the elderly.
 
 Examples:
 * `done 1` marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
@@ -246,9 +249,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 1800 v/2021-11-08`
+**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 18:00 v/2021-11-08 17:00`
 **delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
-**visit** | `visit INDEX at/VISIT_DATE`<br> e.g.,`visit 3 at/1900-11-08`
+**visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/1900-11-08 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find n/NAME` (Currently it is `find NAME`)<br> e.g., `find n/yida`
 **list** | `list`
