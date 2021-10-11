@@ -2,12 +2,19 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Group;
+import seedu.address.model.student.ID;
+import seedu.address.model.student.Name;
 
 /**
  * Parses input arguments and creates a new AddGroupCommand object
@@ -21,22 +28,33 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
      */
     public AddGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
+                ArgumentTokenizer.tokenize(args, PREFIX_GROUP, PREFIX_NAME, PREFIX_ID);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
 
-//        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-//        ID id = ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get());
-//
-//        List<Group> groupList = ParserUtil.parseGroups(argMultimap.getAllValues(PREFIX_GROUP));
-//        Map<Assessment, Score> emptyScores = new HashMap<>();
-//        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-
         Group group = ParserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
 
-        return new AddGroupCommand(group);
+        List<AllocDescriptor> allocDescriptors = new ArrayList<>();
+
+        List<Name> names = ParserUtil.parseNames(argMultimap.getAllValues(PREFIX_NAME));
+        for (Name name : names) {
+            AllocDescriptor allocDescriptor = new AllocDescriptor();
+            allocDescriptor.setGroup(group);
+            allocDescriptor.setName(name);
+            allocDescriptors.add(allocDescriptor);
+        }
+
+        List<ID> ids = ParserUtil.parseIds(argMultimap.getAllValues(PREFIX_ID));
+        for (ID id : ids) {
+            AllocDescriptor allocDescriptor = new AllocDescriptor();
+            allocDescriptor.setGroup(group);
+            allocDescriptor.setId(id);
+            allocDescriptors.add(allocDescriptor);
+        }
+
+        return new AddGroupCommand(group, allocDescriptors);
     }
 
     /**
