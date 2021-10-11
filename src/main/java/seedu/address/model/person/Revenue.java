@@ -27,8 +27,20 @@ public class Revenue {
     /**
      * Returns true if the resulting Revenue value is a valid.
      */
-    public boolean isValidRevenue() {
+    public boolean isValidResultingRevenue() {
         return this.value.getInDollars() >= 0;
+    }
+
+    /**
+     * Returns true if a given string is a valid revenue.
+     */
+    public static boolean isValidRevenue(String test) {
+        try {
+            float number = Float.valueOf(test);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override

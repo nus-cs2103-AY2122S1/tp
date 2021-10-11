@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REVENUE;
 
-import seedu.address.commons.core.Money;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.RevenueCommand;
@@ -33,14 +32,8 @@ public class RevenueCommandParser implements Parser<RevenueCommand> {
                     RevenueCommand.COMMAND_WORD), ive);
         }
 
-        Money revenue;
-        try {
-            String revenueText = argMultimap.getValue(PREFIX_REVENUE).orElse("");
-            revenue = new Money(Float.parseFloat(revenueText));
-        } catch (NumberFormatException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RevenueCommand.COMMAND_WORD), e);
-        }
-        return new RevenueCommand(index, new Revenue(revenue));
+        Revenue revenue = ParserUtil.parseRevenue(argMultimap.getValue(PREFIX_REVENUE).get());
+
+        return new RevenueCommand(index, revenue);
     }
 }

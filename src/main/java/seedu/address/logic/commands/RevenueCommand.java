@@ -52,7 +52,7 @@ public class RevenueCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), personToEdit.getNote(),
                 personToEdit.getAppointment());
 
-        if (!editedPerson.getRevenue().isValidRevenue()) {
+        if (!editedPerson.getRevenue().isValidResultingRevenue()) {
             throw new CommandException((MESSAGE_ADD_REVENUE_FAIL));
         }
         model.setPerson(personToEdit, editedPerson);
