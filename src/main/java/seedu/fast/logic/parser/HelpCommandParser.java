@@ -54,6 +54,12 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         }
     }
 
+    /**
+     * Checks if the arg is a command word.
+     *
+     * @param arg the input argument
+     * @return true if it is a command word, false otherwise
+     */
     public static boolean isCommandWord(String arg) {
         for (String s : COMMAND_LIST) {
             if (s.equals(arg)) {

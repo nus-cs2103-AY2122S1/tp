@@ -15,8 +15,8 @@ import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.logic.Logic;
 import seedu.fast.logic.commands.CommandResult;
 import seedu.fast.logic.commands.exceptions.CommandException;
-import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.logic.parser.HelpCommandParser;
+import seedu.fast.logic.parser.exceptions.ParseException;
 
 /**
  * The Main Window. Provides the basic application layout containing

@@ -1,14 +1,11 @@
 package seedu.fast.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
+
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.logic.commands.HelpCommand;
-import seedu.fast.logic.parser.HelpCommandParser;
-
 
 
 public class HelpCommandParserTest {

@@ -25,9 +25,8 @@ import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.logic.parser.HelpCommandParser;
-import seedu.fast.model.tag.Tag;
 import seedu.fast.model.tag.PriorityTag;
-
+import seedu.fast.model.tag.Tag;
 
 /**
  * Controller for a help page
