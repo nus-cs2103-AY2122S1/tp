@@ -42,7 +42,7 @@ public class Person {
                   Address address, School school, AcadStream acadStream, Fee outstandingFee, Remark remark,
                 Set<Tag> tags, Set<Lesson> lessons) {
         requireAllNonNull(name, phone, email, parentPhone, parentEmail, address,
-                school, acadStream, outstandingFee, remark, tags, lessons);\
+                school, acadStream, outstandingFee, remark, tags, lessons);
                 
         this.name = name;
         this.phone = phone;
