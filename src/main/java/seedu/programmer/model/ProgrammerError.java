@@ -67,7 +67,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     }
 
     /**
-     * Adds a student to the ProgrammerError.
+     * Adds a student to ProgrammerError.
      * The student must not already exist in ProgrammerError.
      */
     public void addStudent(Student p) {

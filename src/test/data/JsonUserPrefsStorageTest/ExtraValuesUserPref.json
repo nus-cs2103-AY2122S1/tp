@@ -9,5 +9,6 @@
       "z" : 99
     }
   },
-  "programmerErrorFilePath" : "ProgrammerError.json"
+  "programmerErrorFilePath" : "programmerError.json"
 }
+

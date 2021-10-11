@@ -24,7 +24,8 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(getTempFilePath("ab"));
+        JsonProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(
+                getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(programmerErrorStorage, userPrefsStorage);
     }
@@ -52,7 +53,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonProgrammerErrorStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonProgrammerErrorStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
         ProgrammerError original = getTypicalProgrammerError();
         storageManager.saveProgrammerError(original);
