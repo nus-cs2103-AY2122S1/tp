@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +28,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, FLAG_FRIEND_ID, FLAG_FRIEND_NAME, PREFIX_GAME);
+                ArgumentTokenizer.tokenize(args, FLAG_FRIEND_ID, FLAG_FRIEND_NAME, FLAG_GAME_SPACE);
 
         Index index;
 
@@ -50,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .get()));
         }
 
-        parseGamesForEdit(argMultimap.getAllValues(PREFIX_GAME)).ifPresent(editFriendDescriptor::setGames);
+        parseGamesForEdit(argMultimap.getAllValues(FLAG_GAME_SPACE)).ifPresent(editFriendDescriptor::setGames);
 
         if (!editFriendDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

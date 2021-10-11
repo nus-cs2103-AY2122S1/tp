@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.game.GameId;
 
 /**
  * Represents a Friend in the gitGud friend's list.
@@ -107,5 +108,4 @@ public class Friend {
         }
         return builder.toString();
     }
-
 }

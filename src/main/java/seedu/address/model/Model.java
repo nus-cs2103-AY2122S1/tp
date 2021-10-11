@@ -104,7 +104,7 @@ public interface Model {
      * The key in the HashMap represents a {@code GAME_NAME}, while the value represents
      * the {@code IN_GAME_USERNAME} for that game.
      */
-    void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks);
+    void linkFriend(Friend toLink, GameFriendLink gameFriendLink);
 
     boolean hasFriendId(FriendId idToFind);
 

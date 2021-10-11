@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FRIENDS;
 
 import java.util.Collections;
@@ -35,10 +33,10 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + FLAG_FRIEND_ID + "FRIEND_ID] "
             + "[" + PREFIX_FRIEND_NAME + "NAME] "
-            + "[" + PREFIX_GAME + "GAME]...\n"
+            + "[" + FLAG_GAME_SPACE + "GAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_GAME + "Apex Legends "
-            + PREFIX_GAME + "CSGO "
+            + FLAG_GAME_SPACE + "Apex Legends "
+            + FLAG_GAME_SPACE + "CSGO "
             + PREFIX_FRIEND_NAME + "John Lim";
 
     public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Edited Friend: %1$s";

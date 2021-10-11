@@ -11,7 +11,7 @@ public class GameId {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Game IDs should be unique for each game in the game's list.";
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$";
+    public static final String VALIDATION_REGEX = "^[\\sa-zA-Z0-9._-]+$";
     public final String value;
 
     /**

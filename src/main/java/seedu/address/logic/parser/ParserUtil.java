@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_SPACE;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.friend.gamefriendlink.UserName;
+import seedu.address.model.game.GameId;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -108,16 +111,28 @@ public class ParserUtil {
      * Parses {@code Collection<String> games} into a {@code Hashmap<String, String>}.
      * The key of the Hashmap is the game name, while the value is the username for that key.
      */
-    public static HashMap<String, String> parseGamesAndUsernames(Collection<String> games) throws ParseException {
-        requireNonNull(games);
-        final HashMap<String, String> gamesHashMap = new HashMap<>();
-        games.stream().forEach(segment -> {
-            String[] gameAndUsername = segment.split(":");
-            String gameName = gameAndUsername[0];
-            String inGameUsername = gameAndUsername[1];
-            gamesHashMap.put(gameName, inGameUsername);
-        });
-        return gamesHashMap;
+//    public static HashMap<String, String> parseGamesAndUsernames(Collection<String> games) throws ParseException {
+//        requireNonNull(games);
+//        final HashMap<String, String> gamesHashMap = new HashMap<>();
+//        games.stream().forEach(segment -> {
+//            String[] gameAndUsername = segment.split(":");
+//            String gameName = gameAndUsername[0];
+//            String inGameUsername = gameAndUsername[1];
+//            gamesHashMap.put(gameName, inGameUsername);
+//        });
+//        return gamesHashMap;
+//    }
+
+    public static GameId parseGameId(String gameId) throws ParseException {
+        requireNonNull(gameId);
+        return new GameId(gameId);
+    }
+
+    public static UserName parseUserName(String userName) throws ParseException {
+        if (!UserName.isValidUserName(userName)) {
+            throw new ParseException(UserName.MESSAGE_CONSTRAINTS);
+        }
+        return new UserName(userName);
     }
 
     /**

@@ -2,9 +2,6 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -12,6 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.friend.gamefriendlink.UserName;
+import seedu.address.model.game.GameId;
 
 /**
  * Links an existing friend to an existing game, associating them.
@@ -28,16 +28,18 @@ public class LinkCommand extends Command {
             + "Example: " + COMMAND_WORD + " Draco --g Valorant:SmurfLord";
 
     private final FriendId friendId;
-    private final HashMap<String, String> games;
+    private final GameId gameId;
+    private final UserName userName;
 
     /**
      * Constructor for LinkCommand.
      */
-    public LinkCommand(FriendId friendId, HashMap<String, String> games) {
-        requireAllNonNull(friendId, games);
+    public LinkCommand(FriendId friendId, GameId gameId, UserName userName) {
+        requireAllNonNull(friendId, gameId, userName);
 
         this.friendId = friendId;
-        this.games = games;
+        this.gameId = gameId;
+        this.userName = userName;
     }
 
     @Override
@@ -45,22 +47,20 @@ public class LinkCommand extends Command {
         if (!model.hasFriendWithId(friendId)) {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
         }
+        if (!model.hasGameWithId(gameId)) {
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_GAME_ID);
+        }
 
-        // check if game(s) are in model, else throw exception
-
-        List<Friend> lastShownList = model.getFilteredFriendsList();
-
-        // get list of games from model
-
-        Friend friendToEdit = lastShownList // obtain Friend object from the model that matches friendId
+        GameFriendLink gameFriendLink = new GameFriendLink(gameId, friendId, userName);
+        List<Friend> lastShownFriendList = model.getFilteredFriendsList();
+        // Obtain a Friend object from the model tha matches friendId
+        Friend friendToEdit = lastShownFriendList
                 .stream()
                 .filter(friend -> friend.getFriendId().equals(friendId))
                 .findFirst()
                 .get();
 
-        // update the game(s) in the model (since the usernames for them have been changed)
-
-        model.linkFriend(friendToEdit, new HashSet<>());
+        model.linkFriend(friendToEdit, gameFriendLink);
         model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
 
         return new CommandResult(generateSuccessMessage(friendToEdit));
@@ -70,17 +70,7 @@ public class LinkCommand extends Command {
      * Generates a success message referencing the friend and the games linked to him.
      */
     public String generateSuccessMessage(Friend friend) {
-        String successMessage = friend.getFriendId() + " is now linked to: ";
-        List<String> gameNames = new ArrayList<>(games.keySet());
-        for (int i = 0; i < gameNames.size(); i++) {
-            String gameName = gameNames.get(i);
-            if (i == gameNames.size() - 1) {
-                successMessage += gameName + " (" + games.get(gameName) + ")";
-            } else {
-                successMessage += gameName + " (" + games.get(gameName) + "), ";
-            }
-        }
-        return successMessage;
+        return friend.getFriendId() + " is now linked to " + gameId + " with username " + userName + ".";
     }
 
     @Override
@@ -98,6 +88,7 @@ public class LinkCommand extends Command {
         // state check
         LinkCommand e = (LinkCommand) other;
         return friendId.equals(e.friendId)
-                && games.equals(e.games);
+                && gameId.equals(e.gameId)
+                && userName.equals(e.userName);
     }
 }
