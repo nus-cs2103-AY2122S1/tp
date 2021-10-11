@@ -43,6 +43,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane insurances;
     @FXML
+    private Label revenue;
+    @FXML
+    private Label note;
+    @FXML
     private Label meeting;
 
     /**
@@ -54,6 +58,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        revenue.setText(String.valueOf(person.getRevenue().value));
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         person.getTags().stream()
@@ -62,6 +67,7 @@ public class PersonCard extends UiPart<Region> {
         person.getInsurances().stream()
                 .forEach(insurance -> insurances.getChildren().add(
                         new Label(insurance.getType().getTypeName())));
+        note.setText(person.getNote().value);
         meeting.setText("Meeting: " + person.getAppointment().getValue());
     }
 

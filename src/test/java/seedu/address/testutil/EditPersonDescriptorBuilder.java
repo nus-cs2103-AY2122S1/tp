@@ -9,6 +9,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -40,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setInsurances(person.getInsurances());
+        descriptor.setNote(person.getNote());
     }
 
     /**
@@ -92,6 +94,14 @@ public class EditPersonDescriptorBuilder {
         Set<Insurance> insuranceSet = Stream.of(insurances).
                 map(SampleDataUtil::ofValidInsurance).collect(Collectors.toSet());
         descriptor.setInsurances(insuranceSet);
+        return this;
+    }
+
+     /**
+     * Parses the {@code Note} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNote(String note) {
+        descriptor.setNote(new Note(note));
         return this;
     }
 

@@ -3,13 +3,16 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Money;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,15 +24,19 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final Money DEFAULT_REVENUE = new Money(0);
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NOTE = "";
     public static final String DEFAULT_MEETING = "";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Revenue revenue;
     private Address address;
     private Set<Tag> tags;
     private Set<Insurance> insurances;
+    private Note note;
     private Appointment appointment;
 
     /**
@@ -39,9 +46,11 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        revenue = new Revenue(DEFAULT_REVENUE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         insurances = new HashSet<>();
+        note = new Note(DEFAULT_NOTE);
         appointment = new Appointment(DEFAULT_MEETING);
     }
 
@@ -52,9 +61,11 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        revenue = personToCopy.getRevenue();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         insurances = new HashSet<>(personToCopy.getInsurances());
+        note = personToCopy.getNote();
         appointment = personToCopy.getAppointment();
     }
 
@@ -71,6 +82,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Revenue} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRevenue(String revenue) {
+        float revenueInFloat = Float.valueOf(revenue);
+        this.revenue = new Revenue(new Money(revenueInFloat));
         return this;
     }
 
@@ -106,6 +126,14 @@ public class PersonBuilder {
         return this;
     }
     /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
+    /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      */
     public PersonBuilder withAppointment(Appointment appointment) {
@@ -114,7 +142,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, insurances, appointment);
+        return new Person(name, phone, email, revenue, address, tags, insurances, note, appointment);
     }
 
 }

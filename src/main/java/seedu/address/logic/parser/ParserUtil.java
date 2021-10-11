@@ -1,21 +1,26 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Money;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.RevenueCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,6 +104,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String revenue} into a {@code Revenue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code revenue} is invalid.
+     */
+    public static Revenue parseRevenue(String revenue) throws ParseException {
+        requireNonNull(revenue);
+        String trimmedRevenue = revenue.trim();
+        if (!Revenue.isValidRevenue(trimmedRevenue)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RevenueCommand.COMMAND_WORD));
+        }
+        float number = Float.valueOf(trimmedRevenue);
+
+        return new Revenue(new Money(number));
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -151,6 +174,15 @@ public class ParserUtil {
             insuranceSet.add(parseInsurance(insuranceName));
         }
         return insuranceSet;
+    }
+
+    /**
+     * Parses {@code String note} into a {@code Note}
+     */
+    public static Note parseNote(String note) throws ParseException {
+        requireNonNull(note);
+        String trimmedNote = note.trim();
+        return new Note(trimmedNote);
     }
 
     /**

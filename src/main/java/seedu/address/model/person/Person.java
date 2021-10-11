@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.Money;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
-
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -22,32 +22,45 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Revenue revenue;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Insurance> insurances = new HashSet<>();
+    private final Note note;
     private final Appointment appointment;
 
     /**
-     * Every field must be present and not null.
+     * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not stated.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-             Set<Insurance> insurances, Appointment appointment) {
-        requireAllNonNull(name, phone, email, address, tags, insurances);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Set<Insurance> insurances, Note note, Appointment appointment) {
+        requireAllNonNull(name, phone, email, address, tags, insurances, note, appointment);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.revenue = new Revenue(new Money(0));
         this.address = address;
         this.tags.addAll(tags);
         this.insurances.addAll(insurances);
+        this.note = note;
         this.appointment = appointment;
     }
 
     /**
-     * Legacy constructor
+     * Every field for this case is provided and hence a revenue value will be tagged to the person.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Appointment appointment) {
-        this(name, phone, email, address, tags, new HashSet<>(), appointment);
+    public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags,
+             Set<Insurance> insurances, Note note, Appointment appointment) {
+        requireAllNonNull(name, phone, email, revenue, address, tags, insurances, note, appointment);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.revenue = revenue;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.insurances.addAll(insurances);
+        this.note = note;
+        this.appointment = appointment;
     }
 
     public Name getName() {
@@ -62,8 +75,16 @@ public class Person {
         return email;
     }
 
+    public Revenue getRevenue() {
+        return revenue;
+    }
+
     public Address getAddress() {
         return address;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     public Appointment getAppointment() {
@@ -117,15 +138,16 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getRevenue().equals(getRevenue())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getInsurances().equals(getInsurances());
+                && otherPerson.getInsurances().equals(getInsurances())
+                && otherPerson.getNote().equals(getNote());
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, insurances);
+        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note);
     }
 
     @Override
@@ -136,11 +158,14 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Revenue: ")
+                .append(getRevenue())
                 .append("; Address: ")
                 .append(getAddress())
+                .append("; Note: ")
+                .append(getNote())
                 .append("; Meeting: ")
                 .append(getAppointment());
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

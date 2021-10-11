@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -24,8 +25,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +46,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_NOTE + "NOTE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -98,13 +102,16 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Revenue originalRevenue = personToEdit.getRevenue();
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Insurance> updatedInsurances = editPersonDescriptor.getInsurances()
                 .orElse(personToEdit.getInsurances());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Appointment originalAppointment = personToEdit.getAppointment();
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedInsurances, originalAppointment);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, originalRevenue, updatedAddress,
+                updatedTags, updatedInsurances, updatedNote, originalAppointment);
     }
 
     @Override
@@ -133,9 +140,11 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Revenue revenue;
         private Address address;
         private Set<Tag> tags;
         private Set<Insurance> insurances;
+        private Note note;
 
         public EditPersonDescriptor() {}
 
@@ -147,9 +156,11 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setRevenue(toCopy.revenue);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setInsurances(toCopy.insurances);
+            setNote(toCopy.note);
         }
 
         /**
@@ -181,6 +192,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setRevenue(Revenue revenue) {
+            this.revenue = revenue;
+        }
+
+        public Optional<Revenue> getRevenue() {
+            return Optional.ofNullable(revenue);
         }
 
         public void setAddress(Address address) {
@@ -225,6 +244,13 @@ public class EditCommand extends Command {
             return (insurances != null)
                     ? Optional.of(Collections.unmodifiableSet(insurances)) : Optional.empty();
         }
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -244,9 +270,11 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getRevenue().equals(e.getRevenue())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getInsurances().equals(e.getInsurances());
+                    && getInsurances().equals(e.getInsurances())
+                    && getNote().equals(e.getNote());
         }
     }
 }
