@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
+import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 import static seedu.address.testutil.TypicalParticipants.ALEX;
 import static seedu.address.testutil.TypicalParticipants.BERNICE;
 
@@ -13,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.event.Event;
 import seedu.address.testutil.ParticipantBuilder;
 
 public class ParticipantTest {
@@ -31,6 +34,30 @@ public class ParticipantTest {
         Participant bobP = new ParticipantBuilder().build();
         assertEquals("2000-08-04", alexP.getBirthDateString());
         assertEquals("N/A", bobP.getBirthDateString());
+    }
+
+    @Test
+    public void addEventTest() {
+        Participant alexP = new ParticipantBuilder().build();
+        assertTrue(alexP.getNotes().isEmpty());
+        alexP.addEvent(SAMPLE_EVENT);
+        alexP.addEvent(ANOTHER_EVENT);
+        assertFalse(alexP.getEvents().isEmpty());
+        ArrayList<Event> expectedEvents = new ArrayList<>(List.of(SAMPLE_EVENT, ANOTHER_EVENT));
+        assertEquals(alexP.getEvents(), expectedEvents);
+    }
+
+    @Test
+    public void removeEventTest() {
+        Participant alexP = new ParticipantBuilder().build();
+        assertTrue(alexP.getEvents().isEmpty());
+        alexP.addEvent(SAMPLE_EVENT);
+        alexP.addEvent(ANOTHER_EVENT);
+        alexP.removeEvent(ANOTHER_EVENT);
+        ArrayList<Event> expectedEvents = new ArrayList<>(List.of(SAMPLE_EVENT));
+        assertEquals(alexP.getEvents(), expectedEvents);
+        alexP.removeEvent(SAMPLE_EVENT);
+        assertTrue(alexP.getEvents().isEmpty());
     }
 
     @Test

@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
@@ -22,6 +23,8 @@ public class TypicalEvents {
             new EventDate("2021-09-18"), new EventTime("1001"));
     public static final Event SAMPLE_EVENT_2 = new Event(new EventName("Random Event 1"),
             new EventDate("1-1-1"), new EventTime("0001"));
+    public static final Event SAMPLE_EVENT_3 = new Event(new EventName("Sleep"), new EventDate("2021-09-18"),
+            new EventTime("1002"), false, Collections.singletonList(new ParticipantBuilder().build()));
     public static final Event MARATHON_NO_TIME = new Event(new EventName("24km Marathon"),
             new EventDate("2021-10-5"), new EventTime());
     public static final Event MARATHON_HAS_TIME = new Event(new EventName("24Km Marathon with Time"),

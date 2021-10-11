@@ -25,7 +25,7 @@ public class ShowEventDetailsCommand extends Command {
     private final Predicate<Event> eventName;
 
     /**
-     * Creates an ShowDetailsCommand to find Event with the specified {@code eventName}
+     * Creates a ShowEventDetailsCommand for the Event with the specified {@code eventName}
      */
     public ShowEventDetailsCommand(Predicate<Event> eventName) {
         requireNonNull(eventName);

@@ -23,6 +23,7 @@ import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.RemoveEventCommand;
 import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
 import seedu.address.logic.commands.ShowEventDetailsCommand;
+import seedu.address.logic.commands.ShowEventParticipantsCommand;
 import seedu.address.logic.commands.SortEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -77,9 +78,6 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ShowEventDetailsCommand.COMMAND_WORD:
-            return new ShowEventDetailsCommandParser().parse(arguments);
-
         //Add new Commands and cases here:
 
         case AddEventCommand.COMMAND_WORD:
@@ -106,9 +104,11 @@ public class AddressBookParser {
         case RemoveParticipantFromEventCommand.COMMAND_WORD:
             return new RemoveParticipantFromEventParser().parse(arguments);
 
-        // TODO: findParticipant (Use Parser):
+        case ShowEventDetailsCommand.COMMAND_WORD:
+            return new ShowEventDetailsCommandParser().parse(arguments);
 
-        // TODO: showParticipants (Use Parser):
+        case ShowEventParticipantsCommand.COMMAND_WORD:
+            return new ShowEventParticipantsCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
