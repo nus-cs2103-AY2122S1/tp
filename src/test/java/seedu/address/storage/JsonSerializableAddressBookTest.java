@@ -30,7 +30,7 @@ public class JsonSerializableAddressBookTest {
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
         AddressBook typicalPersonsAddressBookWithTask = TypicalTasks
-                .addTaskToTypicalAddressBook(typicalPersonsAddressBook);
+                .addTypicalTasksToAddressBook(typicalPersonsAddressBook);
         assertEquals(addressBookFromFile, typicalPersonsAddressBookWithTask);
 
     }
