@@ -21,7 +21,7 @@ public class AssessmentBuilder {
                     result.add(assessment);
                 }
                 Assessment resultAssessment = result.get(result.indexOf(assessment));
-                resultAssessment.setScores(student.getId(), studentScores.get(assessment));
+                resultAssessment.setScore(student.getId(), studentScores.get(assessment));
             }
         }
         return result;

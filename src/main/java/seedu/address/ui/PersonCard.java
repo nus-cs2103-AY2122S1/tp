@@ -1,16 +1,19 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * A UI component that displays information of a {@code Student}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -50,9 +53,15 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         nusNetId.setText("ID: " + student.getId().value);
-        int length = student.getGroups().toString().length();
-        group.setText("Groups: " + student.getGroups().toString().substring(1, length - 1));
-        assessment.setText("Assessments: "); //TODO: add in the assessment stuff after add score is implemented
+
+        String groupsString = student.getGroups().stream()
+                .map(Group::toString).collect(Collectors.joining(", "));
+        group.setText("Groups: " + groupsString);
+
+        String assessmentsString = student.getScores().keySet().stream()
+                .map(Assessment::toString).sorted().collect(Collectors.joining(", "));
+        assessment.setText("Assessments: " + assessmentsString);
+
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
