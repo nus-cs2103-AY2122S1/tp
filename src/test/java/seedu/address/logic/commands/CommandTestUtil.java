@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLY_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -19,7 +21,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditSupplierDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -28,6 +33,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_JAMES = "James Charles";
+    public static final String VALID_NAME_CHARLES = "Charles James";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -36,6 +43,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_SUPPLY_TYPE_BEEF = "Beef";
+    public static final String VALID_SUPPLY_TYPE_CHICKEN = "Chicken";
+    public static final String VALID_DELIVERY_DETAIL_DAILY = "Everyday at 6pm";
+    public static final String VALID_DELIVERY_DETAIL_MONTHLY = "Every 3rd Friday of the month";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,18 +58,27 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String SUPPLY_TYPE_DESC_CHICKEN = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_CHICKEN;
+    public static final String SUPPLY_TYPE_DESC_BEEF = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_BEEF;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    // & not allowed in supply types
+    public static final String INVALID_SUPPLY_TYPE_DESC = " " + PREFIX_SUPPLY_TYPE + "Chicken & Beef";
+    // & not allowed in supply types
+    public static final String INVALID_DELIVERY_DETAILS_DESC = " " + PREFIX_DELIVERY_DETAILS + "Everyday @ 6pm";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditSupplierCommand.EditSupplierDescriptor DESC_JAMES;
+    public static final EditSupplierCommand.EditSupplierDescriptor DESC_CHARLES;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -68,6 +88,18 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    static {
+        DESC_JAMES = new EditSupplierDescriptorBuilder().withName(VALID_NAME_JAMES)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_CHICKEN)
+                .withDeliveryDetails(VALID_DELIVERY_DETAIL_DAILY).build();
+        DESC_CHARLES = new EditSupplierDescriptorBuilder().withName(VALID_NAME_CHARLES)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_BEEF)
+                .withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY).build();
+    }
+
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -123,6 +155,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the supplier at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showSupplierAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredSupplierList().size());
+
+        Supplier supplier = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
+        final String[] splitName = supplier.getName().fullName.split("\\s+");
+        model.updateFilteredSupplierList(new SupplierNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredSupplierList().size());
     }
 
 }
