@@ -31,11 +31,6 @@ faster than traditional GUI apps.
   e.g `n/NAME [e/EPISODE]` can be used as `n/Doraemon` or as `n/Doraemon e/1.`
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.<br>
-Format: `help`
-
 ### Adding anime: `add`
 
 Adds an anime into the list.<br>
@@ -58,6 +53,16 @@ Format: `delete INDEX`
 Examples:
 *  `delete 1` deletes the 1st anime in the anime list.
 
+### Viewing help : `help`
+
+Lists all currently supports commands, and provides a link to this user guide.<br>
+Format: `help`
+
+### Listing all anime: `list`
+
+Shows a list of all anime names the user has added.<br>
+Format: `list`
+
 ### Updating an anime episode: `update`
 
 Updates the episode that you are currently on for a specified anime.<br>
@@ -69,9 +74,3 @@ Format: `update INDEX e/NEWEPISODE`
 
 Examples:
 *  `update 1 e/3`
-
-
-### Listing all anime: `list`
-
-Shows a list of all anime names the user has added.<br>
-Format: `list`
