@@ -3,8 +3,8 @@ package seedu.programmer.model.student;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
+import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalStudents.ALICE;
 import static seedu.programmer.testutil.TypicalStudents.BOB;
 
@@ -28,18 +28,18 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void contains_StudentNotInList_returnsFalse() {
+    public void contains_studentNotInList_returnsFalse() {
         assertFalse(uniqueStudentList.contains(ALICE));
     }
 
     @Test
-    public void contains_StudentInList_returnsTrue() {
+    public void contains_studentInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
         assertTrue(uniqueStudentList.contains(ALICE));
     }
 
     @Test
-    public void contains_StudentWithSameIdentityFieldsInList_returnsFalse() {
+    public void contains_studentWithSameIdentityFieldsInList_returnsFalse() {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
         assertFalse(uniqueStudentList.contains(editedAlice)); // Same name, different student id considered different
@@ -57,22 +57,22 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void setStudentnullTargetStudent_throwsNullPointerException() {
+    public void setStudentNullTargetStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(null, ALICE));
     }
 
     @Test
-    public void setStudentnullEditedStudent_throwsNullPointerException() {
+    public void setStudentNullEditedStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(ALICE, null));
     }
 
     @Test
-    public void setStudenttargetStudentNotInList_throwsStudentNotFoundException() {
+    public void setStudentTargetStudentNotInList_throwsStudentNotFoundException() {
         assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setStudent(ALICE, ALICE));
     }
 
     @Test
-    public void setStudenteditedStudentIsSameStudent_success() {
+    public void setStudentEditedStudentIsSameStudent_success() {
         uniqueStudentList.add(ALICE);
         uniqueStudentList.setStudent(ALICE, ALICE);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
@@ -81,7 +81,7 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void setStudenteditedStudentHasSameIdentity_success() {
+    public void setStudentEditedStudentHasSameIdentity_success() {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
         uniqueStudentList.setStudent(ALICE, editedAlice);
@@ -91,7 +91,7 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void setStudenteditedStudentHasDifferentIdentity_success() {
+    public void setStudentEditedStudentHasDifferentIdentity_success() {
         uniqueStudentList.add(ALICE);
         uniqueStudentList.setStudent(ALICE, BOB);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
@@ -100,7 +100,7 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void setStudenteditedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
+    public void setStudentEditedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
         uniqueStudentList.add(ALICE);
         uniqueStudentList.add(BOB);
         assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudent(ALICE, BOB));
@@ -112,7 +112,7 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void remove_StudentDoesNotExist_throwsStudentNotFoundException() {
+    public void remove_studentDoesNotExist_throwsStudentNotFoundException() {
         assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.remove(ALICE));
     }
 
@@ -146,8 +146,8 @@ public class UniqueStudentListTest {
     @Test
     public void setStudent_list_replacesOwnListWithProvidedList() {
         uniqueStudentList.add(ALICE);
-        List<Student> StudentList = Collections.singletonList(BOB);
-        uniqueStudentList.setStudents(StudentList);
+        List<Student> studentList = Collections.singletonList(BOB);
+        uniqueStudentList.setStudents(studentList);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(BOB);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
