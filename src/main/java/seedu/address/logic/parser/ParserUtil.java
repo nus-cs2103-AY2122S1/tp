@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -32,6 +33,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
+    public static final String MESSAGE_INVALID_LAST_VISIT_DATE = "Last visit date should be in the past.";
+    public static final String MESSAGE_INVALID_VISIT_DATE = "Visit date should be in the future.";
     public static final String MESSAGE_INVALID_FREQUENCY = "Frequency can only be daily, weekly, "
             + "biweekly, monthly or quarterly.";
     public static final String MESSAGE_INVALID_OCCURRENCE = "Occurrence should be a positive number.";
@@ -127,10 +130,15 @@ public class ParserUtil {
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
+        LocalDateTime parsedLastVisit;
         try {
-            LocalDateTime.parse(trimmedLastVisit, formatter);
+            parsedLastVisit = LocalDateTime.parse(trimmedLastVisit, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        if (DateTimeUtil.isFuture(parsedLastVisit)) {
+            throw new ParseException(MESSAGE_INVALID_LAST_VISIT_DATE);
         }
 
         return Optional.ofNullable(new LastVisit(trimmedLastVisit));
@@ -178,10 +186,15 @@ public class ParserUtil {
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
+        LocalDateTime parsedVisit;
         try {
-            LocalDateTime.parse(trimmedVisit, formatter);
+            parsedVisit = LocalDateTime.parse(trimmedVisit, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        if (DateTimeUtil.isPast(parsedVisit)) {
+            throw new ParseException(MESSAGE_INVALID_VISIT_DATE);
         }
 
         return Optional.ofNullable(new Visit(trimmedVisit));
@@ -206,10 +219,15 @@ public class ParserUtil {
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
+        LocalDateTime parsedVisit;
         try {
-            LocalDateTime.parse(trimmedVisit, formatter);
+            parsedVisit = LocalDateTime.parse(trimmedVisit, formatter);
         } catch (DateTimeParseException e) {
             throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+
+        if (DateTimeUtil.isPast(parsedVisit)) {
+            throw new ParseException(MESSAGE_INVALID_VISIT_DATE);
         }
 
         return Optional.ofNullable(new Visit(trimmedVisit));

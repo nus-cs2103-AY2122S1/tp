@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import java.time.LocalDateTime;
+
 public class DateTimeUtil {
     public static final String YEAR_REGEX = "\\d{4}";
     public static final String MONTH_REGEX = "(0[1-9]|1[0-2])";
@@ -14,6 +16,20 @@ public class DateTimeUtil {
      */
     public static boolean matchDateTimeRegex(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the datetime {@code test} is in the future.
+     */
+    public static boolean isFuture(LocalDateTime test) {
+        return test.isAfter(LocalDateTime.now());
+    }
+
+    /**
+     * Returns true if the datetime {@code test} is in the past.
+     */
+    public static boolean isPast(LocalDateTime test) {
+        return test.isBefore(LocalDateTime.now());
     }
 
 }
