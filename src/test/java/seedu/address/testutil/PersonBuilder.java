@@ -55,6 +55,15 @@ public class PersonBuilder {
     }
 
     /**
+     * Creates a {@code PersonBuilder} with null birthday.
+     */
+    public static PersonBuilder ofNoBirthday() {
+        PersonBuilder person = new PersonBuilder();
+        person.birthday = null;
+        return person;
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {

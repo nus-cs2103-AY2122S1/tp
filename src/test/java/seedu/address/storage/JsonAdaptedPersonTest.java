@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BENSON_NO_BIRTHDAY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +47,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         null);
-        // todo implement test cases for person without birthday
-        // assertEquals(ALICE, person.toModelType());
+        assertEquals(BENSON_NO_BIRTHDAY, person.toModelType());
     }
 
     @Test
