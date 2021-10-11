@@ -16,11 +16,11 @@ import seedu.address.model.lesson.Lesson;
  */
 public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
     /** Values for cell height and width. */
     private static final int CELL_HEIGHT = 200;
     private static final int CELL_WIDTH = 100;
+    private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
     @FXML
     private ListView<Lesson> lessonListView;
