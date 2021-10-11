@@ -140,5 +140,4 @@ public class EditTaskCommandParserTest {
         expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
 }
