@@ -299,7 +299,7 @@ Examples:
 * `list` followed by `ladd 1 recurring/ date/16 Sep 2021 time/1500-1600 subject/Math`
   adds the recurring lesson to the 1st student in TAB.
 
-* `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2`
+* `find john` followed by `ladd 1 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
