@@ -1,6 +1,16 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.LONG_PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -22,6 +32,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String REGEX_SURROUNDING_DOUBLE_QUOTE = "^\"|\"$";
+    public static final String TEMPLATE_REGEX_REPLACEMENT_PATTERN = "(?<![\"'])(%s)(?![\"'])";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -121,5 +132,23 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Replaces the long form prefixes in the argument with their respective short forms.
+     */
+    public static String longToShortFormArgumentConverter(String args) {
+        return args.replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_NAME), PREFIX_NAME.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_ADDRESS), PREFIX_ADDRESS.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_EMAIL), PREFIX_EMAIL.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_PHONE), PREFIX_PHONE.getPrefix())
+                .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_TAG), PREFIX_TAG.getPrefix());
+    }
+
+    /**
+     * Given a long prefix, generates a regex pattern that matches the prefix in a string.
+     */
+    private static String replacePrefixRegexGenerator(Prefix longPrefix) {
+        return String.format(TEMPLATE_REGEX_REPLACEMENT_PATTERN, longPrefix.getPrefix());
     }
 }
