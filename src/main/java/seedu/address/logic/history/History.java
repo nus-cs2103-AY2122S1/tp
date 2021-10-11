@@ -26,7 +26,7 @@ public class History<T extends Copyable<T>> implements Historyable<T> {
      */
     @Override
     public T go(int delta) {
-        int newSnapshotIndex = currentSnapshotIndex + delta;
+        int newSnapshotIndex = currentSnapshotIndex - delta;
 
         int minIndex = 0;
         if (newSnapshotIndex < minIndex) {
@@ -92,6 +92,7 @@ public class History<T extends Copyable<T>> implements Historyable<T> {
      */
     @Override
     public void restore() {
+        currentSnapshotIndex = 0;
         for (Snapshot<T> snapshot : snapshots) {
             snapshot.restore();
         }
