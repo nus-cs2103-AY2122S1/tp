@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import static seedu.address.commons.util.TagUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.UntagCommand.MESSAGE_NOT_REMOVED;
 import static seedu.address.logic.commands.UntagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.TagUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STUDENT;
@@ -10,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WIFE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import static seedu.address.logic.commands.UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS;
 import static seedu.address.logic.commands.UntagCommand.MESSAGE_TAG_NOT_IN_PERSON;
 import static seedu.address.logic.commands.UntagCommand.getNotFoundTags;
