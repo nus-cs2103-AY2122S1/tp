@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,20 +19,20 @@ public class TAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a person. "
             + "Parameters: "
-            + PREFIX_TASKNAME + "TASKNAME "
-            + PREFIX_MEMBER_ID + "MEMBER_ID\n"
+            + PREFIX_TASKNAME + " TASKNAME "
+            + PREFIX_MEMBER_ID + " MEMBER_ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASKNAME + "Submit form "
-            + PREFIX_MEMBER_ID + "2";
+            + PREFIX_TASKNAME + " Submit form "
+            + PREFIX_MEMBER_ID + " 2";
 
-    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list of the member";
 
     public  final MemberID targetMemberID;
     public final Task toAdd;
 
     /**
-     * Creates an PAddCommand to add the specified {@code Person}
+     * Creates an TAddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
      */
     public TAddCommand(MemberID memberID, Task task) {
         requireNonNull(memberID);
@@ -47,14 +46,14 @@ public class TAddCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getAddressBook().getMemberList();
-        Member targetMember = members.get(Integer.parseInt(targetMemberID.toString()));
+        Member targetMember = members.get(Integer.parseInt(targetMemberID.toString()) - 1);
 
         if (model.hasTask(targetMember, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.addTask(targetMember, toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName(), toAdd));
     }
 
     @Override

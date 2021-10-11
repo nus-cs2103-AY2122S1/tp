@@ -63,6 +63,8 @@ public class AddressBookParser {
         case TAddCommand.COMMAND_WORD:
             return  new TAddCommandParser().parse(arguments);
 
+        case TDelCommand.COMMAND_WORD:
+            return  new TDelCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

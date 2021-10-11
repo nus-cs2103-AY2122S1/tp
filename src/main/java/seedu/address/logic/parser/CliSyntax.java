@@ -13,4 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_POSITION = new Prefix("/t");
     public static final Prefix PREFIX_TASKNAME = new Prefix("/n");
     public static final Prefix PREFIX_MEMBER_ID = new Prefix("/p");
+    public static final Prefix PREFIX_TASK_ID = new Prefix("/t");
+    public static final Prefix PREFIX_MEMBER_ID_DEL = new Prefix("/for");
 }

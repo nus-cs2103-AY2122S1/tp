@@ -33,9 +33,7 @@ public class TaskListManager {
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        boolean result = tasks.contains(task);
-        System.out.format("this is %b", result);
-        return result;
+        return tasks.contains(task);
     }
 
     /**
