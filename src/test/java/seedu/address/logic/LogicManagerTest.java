@@ -16,10 +16,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.person.PersonCreateCommand;
+import seedu.address.logic.executors.Executor;
+import seedu.address.logic.executors.exceptions.ExecuteException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -47,6 +49,7 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
+        Executor.setup(model);
     }
 
     @Test
@@ -58,7 +61,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertExecuteException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -78,12 +81,12 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        String addCommand = PersonCreateCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.createPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        assertExecuteFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
@@ -96,10 +99,11 @@ public class LogicManagerTest {
      * - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandFailure(String, Class, String, Model)
+     *
+     * @see #assertExecuteFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+            Model expectedModel) throws CommandException, ParseException, ExecuteException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -107,28 +111,31 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     *
+     * @see #assertExecuteFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
-        assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
+        assertExecuteFailure(inputCommand, ParseException.class, expectedMessage);
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     * Executes the command, confirms that a ExecuteException is thrown and that the result message is correct.
+     *
+     * @see #assertExecuteFailure(String, Class, String, Model)
      */
-    private void assertCommandException(String inputCommand, String expectedMessage) {
-        assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
+    private void assertExecuteException(String inputCommand, String expectedMessage) {
+        assertExecuteFailure(inputCommand, ExecuteException.class, expectedMessage);
     }
 
     /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     *
+     * @see #assertExecuteFailure(String, Class, String, Model)
      */
-    private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
+    private void assertExecuteFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
+        assertExecuteFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
     /**
@@ -136,9 +143,10 @@ public class LogicManagerTest {
      * - the {@code expectedException} is thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     *
      * @see #assertCommandSuccess(String, String, Model)
      */
-    private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
+    private void assertExecuteFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);

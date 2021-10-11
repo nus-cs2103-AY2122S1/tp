@@ -231,7 +231,7 @@ Try to keep track of what happens inside the component and where the execution t
    public CommandResult execute(Model model) throws CommandException {
        ...
        Person personToEdit = lastShownList.get(index.getZeroBased());
-       Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+       Person editedPerson = createEditedPerson(personToEdit, personEditDescriptor);
        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
        }
