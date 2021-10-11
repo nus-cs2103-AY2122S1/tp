@@ -34,8 +34,8 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_LANGUAGE + "English "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_LAST_VISIT + "2021-07-28 "
-            + PREFIX_VISIT + "2021-07-30 "
+            + PREFIX_LAST_VISIT + "2021-07-28 12:00"
+            + PREFIX_VISIT + "2021-07-30 18:30 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

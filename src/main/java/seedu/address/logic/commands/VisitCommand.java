@@ -34,9 +34,9 @@ public class VisitCommand extends Command {
             + "[" + PREFIX_FREQUENCY + "FREQUENCY "
             + PREFIX_OCCURRENCE + "OCCURRENCE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "2020-11-12 "
+            + PREFIX_DATE + "2020-11-12 12:00 "
             + "or " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "2020-11-12 "
+            + PREFIX_DATE + "2020-11-12 12:00 "
             + PREFIX_FREQUENCY + "Weekly "
             + PREFIX_OCCURRENCE + "2";
 
