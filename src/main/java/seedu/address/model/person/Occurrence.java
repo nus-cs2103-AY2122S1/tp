@@ -25,12 +25,16 @@ public class Occurrence {
      * Get the next number of occurrence for the visit.
      * @return The next occurrence for the visit.
      */
-    public Occurrence getNext() { return new Occurrence(value - 1); }
+    public Occurrence getNext() {
+        return new Occurrence(value - 1);
+    }
 
     /**
      * Returns true if a given int is a valid occurrence.
      */
-    public static boolean isValidOccurrence(int occurrence) { return occurrence > 0; }
+    public static boolean isValidOccurrence(int occurrence) {
+        return occurrence > 0;
+    }
 
     /**
      * Returns true if a given string is a valid occurrence.

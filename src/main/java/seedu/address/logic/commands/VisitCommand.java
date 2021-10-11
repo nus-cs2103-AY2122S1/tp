@@ -30,15 +30,15 @@ public class VisitCommand extends Command {
             + "Existing visit will be overwritten by the input."
             + "Or add a recurring visit using optional flags for frequency and occurrence\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + " VISIT_DATE "
-            + "[" + PREFIX_FREQUENCY + " FREQUENCY "
-            + PREFIX_OCCURRENCE + " OCCURRENCE]\n"
+            + PREFIX_DATE + "VISIT_DATE "
+            + "[" + PREFIX_FREQUENCY + "FREQUENCY "
+            + PREFIX_OCCURRENCE + "OCCURRENCE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + " 2020-11-12 "
+            + PREFIX_DATE + "2020-11-12 "
             + "or " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + " 2020-11-12 "
-            + PREFIX_FREQUENCY + " Weekly "
-            + PREFIX_OCCURRENCE + " 2";
+            + PREFIX_DATE + "2020-11-12 "
+            + PREFIX_FREQUENCY + "Weekly "
+            + PREFIX_OCCURRENCE + "2";
 
     public static final String MESSAGE_ADD_VISIT_SUCCESS = "Added visit to Person: %1$s";
     public static final String MESSAGE_DELETE_VISIT_SUCCESS = "Removed visit from Person: %1$s";

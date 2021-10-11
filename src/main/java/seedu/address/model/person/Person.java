@@ -72,9 +72,13 @@ public class Person {
         return visit;
     }
 
-    public Optional<Frequency> getFrequency() { return frequency; }
+    public Optional<Frequency> getFrequency() {
+        return frequency;
+    }
 
-    public Optional<Occurrence> getOccurrence() { return occurrence; }
+    public Optional<Occurrence> getOccurrence() {
+        return occurrence;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
