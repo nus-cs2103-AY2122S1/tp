@@ -66,8 +66,8 @@ public class GroupContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new GroupBuilder().withGroupName("CS2103T").build()));
 
         // Keywords match description, but does not match name
-        predicate = new GroupContainsKeywordsPredicate(Arrays.asList("A software engineering module tutorial"));
+        predicate = new GroupContainsKeywordsPredicate(Arrays.asList("softwareengineering"));
         assertFalse(predicate.test(new GroupBuilder().withGroupName("CS2103T")
-                .withDescription("A software engineering module tutorial").build()));
+                .withDescription("softwareengineering").build()));
     }
 }
