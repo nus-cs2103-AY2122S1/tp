@@ -190,7 +190,7 @@ public class ParserUtil {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(UnenrollCommand.MESSAGE_USAGE, pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE, pe));
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {

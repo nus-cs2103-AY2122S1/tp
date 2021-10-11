@@ -37,6 +37,7 @@ public class Lesson {
     public static final String CODE_MESSAGE_CONSTRAINT = "Lesson code should be of correct format";
     public static final String DAY_MESSAGE_CONSTRAINT = "Day specified is not legitimate";
     public static final String ENROLLMENT_MESSAGE_CONSTRAINT = "Student is unable to enroll for this lesson";
+    public static final String STUDENT_NOT_ENROLLED = "Student: $1$s is not enrolled for Lesson: %2$s";
     public static final String SUBJECT_MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric and"
             + "within %1$d characters";
 
@@ -203,6 +204,21 @@ public class Lesson {
     }
 
     /**
+     * Returns true if a student is eligible to unenroll from the lesson.
+     * A student must be already enrolled to the lesson.
+     * @param student the student to unenroll from this lesson.
+     * @return a boolean to represent whether the student can be unenrolled from the lesson.
+     */
+    public boolean isAbleToUnenroll(Student student) {
+        requireNonNull(student);
+        if (containsStudent(student)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
      * Returns true if the lessons overlap in timing and day.
      */
     public boolean hasOverlappedTiming(Lesson otherLesson) {
@@ -248,14 +264,10 @@ public class Lesson {
      */
     public void removeStudent(Student student) {
         requireNonNull(student);
+        checkArgument(isAbleToUnenroll(student),
+                String.format(STUDENT_NOT_ENROLLED, student, this));
+        students.remove(student);
         student.unenrollFromLesson(this);
-        // this step is needed to break out of the equality checks before deletion
-        for (Student s : students) {
-            if (s.isSamePerson(student)) {
-                students.remove(s);
-                return;
-            }
-        }
     }
 
     /**
