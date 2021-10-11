@@ -40,6 +40,17 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns the last value of an optional {@code prefix}.
+     */
+    public Optional<String> getOptionalValue(Prefix prefix) {
+        if (!argMultimap.containsKey(prefix)) {
+            return Optional.of("");
+        }
+        List<String> values = getAllValues(prefix);
+        return Optional.of(values.get(values.size() - 1));
+    }
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
