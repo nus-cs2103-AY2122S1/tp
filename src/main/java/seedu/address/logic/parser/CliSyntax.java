@@ -15,8 +15,6 @@ public class CliSyntax {
     // public static final Prefix PREFIX_STUDENT_NAME = new Prefix("s/");
     public static final Prefix PREFIX_TELE_HANDLE = new Prefix("t/");
     // public static final Prefix PREFIX_WEIGHTAGE = new Prefix("w/");
-    public static final Prefix PREFIX_TYPE = new Prefix("y/");
-
 
 
 
