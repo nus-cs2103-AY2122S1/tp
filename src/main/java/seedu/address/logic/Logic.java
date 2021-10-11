@@ -7,7 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model.DISPLAY_TYPE;
+import seedu.address.model.Model.displayType;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
@@ -53,5 +53,5 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    DISPLAY_TYPE getDisplayType();
+    displayType getDisplayType();
 }

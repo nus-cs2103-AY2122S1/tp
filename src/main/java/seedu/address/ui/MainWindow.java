@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
-import static seedu.address.model.Model.DISPLAY_TYPE.STUDENTS;
-import static seedu.address.model.Model.DISPLAY_TYPE.TASKS;
+import static seedu.address.model.Model.displayType.STUDENTS;
+import static seedu.address.model.Model.displayType.TASKS;
 
 import java.util.logging.Logger;
 
@@ -27,7 +27,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    public static boolean type = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -132,7 +131,7 @@ public class MainWindow extends UiPart<Stage> {
         if (logic.getDisplayType().equals(STUDENTS)) {
             studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
             studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-        } else if (logic.getDisplayType().equals(TASKS)){
+        } else if (logic.getDisplayType().equals(TASKS)) {
             taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
             studentListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
         }

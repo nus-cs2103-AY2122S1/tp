@@ -195,7 +195,7 @@ public class AddStudentCommandTest {
         }
 
         @Override
-        public DISPLAY_TYPE getDisplayType() {
+        public displayType getDisplayType() {
             throw new AssertionError("This method should not be called.");
         }
     }
