@@ -26,11 +26,11 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withLanguage("English")
-            .withPhone("94351253").withVisit("2021-10-10").withLastVisit("2021-07-07")
+            .withPhone("94351253").withVisit("2021-10-10 12:00").withLastVisit("2021-07-07 12:00")
             .withFrequency("").withOccurrence(1).withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withLanguage("French").withPhone("98765432").withLastVisit("2021-08-08")
+            .withLanguage("French").withPhone("98765432").withLastVisit("2021-08-08 12:00")
             .withFrequency("").withOccurrence(1).withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withFrequency("").withOccurrence(1).withLanguage("English").withAddress("wall street").build();

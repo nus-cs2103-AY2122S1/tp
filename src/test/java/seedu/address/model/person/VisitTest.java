@@ -35,4 +35,46 @@ public class VisitTest {
         Visit emptyVisit = new Visit("");
         assertFalse(emptyVisit.hasVisit());
     }
+
+    @Test
+    public void isValidVisit() {
+        // correct time regex -> returns true
+        assertTrue(Visit.isValidVisit("2021-01-02 12:00"));
+
+        // correct time regex for 24hr HH -> returns true
+        assertTrue(Visit.isValidVisit("2021-01-02 23:59"));
+
+        // incorrect date format -> returns false
+        assertFalse(Visit.isValidVisit("20210304 12:34"));
+
+        // incorrect time format -> returns false
+        assertFalse(Visit.isValidVisit("2021-04-05 0654"));
+
+        // incorrect datetime format -> returns false
+        assertFalse(Visit.isValidVisit("2021-04-0515:43"));
+
+        // incorrect regex no time -> returns false
+        assertFalse(Visit.isValidVisit("2021-01-02"));
+
+        // incorrect regex no date -> returns false
+        assertFalse(Visit.isValidVisit("12:01"));
+
+        // incorrect year range regex -> return false
+        assertFalse(Visit.isValidVisit("20211-01-02 12:00"));
+
+        // incorrect year range regex -> return false
+        assertFalse(Visit.isValidVisit("20211-01-02 12:00"));
+
+        // incorrect month range regex -> return false
+        assertFalse(Visit.isValidVisit("2021-13-02 12:00"));
+
+        // incorrect day range regex -> return false
+        assertFalse(Visit.isValidVisit("2021-01-32 12:00"));
+
+        // incorrect hour range regex -> return false
+        assertFalse(Visit.isValidVisit("2021-01-02 25:00"));
+
+        // incorrect minute range regex -> return false
+        assertFalse(Visit.isValidVisit("2021-01-02 12:99"));
+    }
 }

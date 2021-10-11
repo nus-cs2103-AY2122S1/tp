@@ -26,7 +26,7 @@ import seedu.address.model.person.Visit;
 
 
 public class DoneCommandTest {
-    private static final String VISIT_STUB = "2021-11-11";
+    private static final String VISIT_STUB = "2021-11-11 12:00";
     private static final Optional<Visit> EMPTY_VISIT = Optional.ofNullable(new Visit(""));
 
     // TODO: add in integration testing with delete command and last visited field

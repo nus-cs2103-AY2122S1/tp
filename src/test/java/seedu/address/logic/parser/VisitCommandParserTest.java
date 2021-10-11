@@ -14,7 +14,7 @@ import seedu.address.logic.commands.VisitCommand;
 
 public class VisitCommandParserTest {
     private VisitCommandParser parser = new VisitCommandParser();
-    private final String testVisit = "2020-11-11";
+    private final String testVisit = "2020-11-11 12:00";
 
     @Test
     public void parse_missingCompulsoryField_failure() {
