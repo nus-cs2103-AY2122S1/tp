@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -90,7 +89,7 @@ public class Person {
      * @return the updated Classes object.
      */
     public Classes addClass(TuitionClass tuitionClass) {
-        Classes updatedClass = this.getClasses().addClass(tuitionClass);
+        Classes updatedClass = this.getClasses().addClass(tuitionClass.getId());
         return updatedClass;
     }
 
@@ -98,10 +97,11 @@ public class Person {
      * Removes all traces of a tuition class from the student.
      */
     public Person removeClass(TuitionClass tuitionClass) {
-        for (TuitionClass c : classes.getClasses()) {
-            if (c.getTimeslot().equals(tuitionClass.getTimeslot())) {
-                classes.removeClass(c);
+        for (Integer id : classes.getClasses()) {
+            if ((tuitionClass.getId()) == id) {
+                classes.removeClass(id);
                 removeTag(new Tag(tuitionClass.getName().getName()));
+                return this;
             }
         }
         return this;
@@ -211,22 +211,6 @@ public class Person {
             classes.getClasses().forEach(builder::append);
         }
         return builder.toString();
-    }
-
-    /**
-     * Updates the tuition class when a new student is added
-     * or information of the tuition class has been changed.
-     * @param tuitionClass the tuition class that has been changed.
-     */
-    public void updateTuitionClass(TuitionClass tuitionClass) {
-        ArrayList<TuitionClass> tuitionClasses = classes.getClasses();
-        String tuitionName = tuitionClass.getName().getName();
-        for (TuitionClass tuition: tuitionClasses) {
-            if (tuition.getName().getName().equals(tuitionName)) {
-                int position = tuitionClasses.indexOf(tuition);
-                tuitionClasses.set(position, tuitionClass);
-            }
-        }
     }
 
     /**

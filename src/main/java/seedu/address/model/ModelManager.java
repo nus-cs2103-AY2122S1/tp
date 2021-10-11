@@ -129,9 +129,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
-        addressBook.updateTuitionClassInPersonObject(tuitionClass);
-        this.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
+    public TuitionClass getClassById(Integer id) {
+        requireAllNonNull(id);
+        return addressBook.getClassById(id);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -121,14 +121,14 @@ public interface Model {
     /**
      * Check whether the list of students contains the index from input.
      * @param index the index of student to be checked.
-     * @return true if the index is present.
+     * @return the person if the index is present.
      */
     Person getStudent(Index index);
 
     /**
      * Check whether the list of tuition classes contains the index from input.
      * @param index the index of class to be checked.
-     * @return true if the index is present.
+     * @return the class if the index is present.
      */
     TuitionClass getTuitionClass(Index index);
 
@@ -148,8 +148,9 @@ public interface Model {
     Person getSameNamePerson(Person otherPerson);
 
     /**
-     * Update the tuition classes included in person object when tuition classes is updated.
-     * @param tuitionClass the tuition class that has been changed.
+     * Check whether the list of tuition classes contains the id from input.
+     * @param id the id of class to be checked.
+     * @return the class if the id is present.
      */
-    void updateTuitionClassInPersonObject(TuitionClass tuitionClass);
+    TuitionClass getClassById(Integer id);
 }

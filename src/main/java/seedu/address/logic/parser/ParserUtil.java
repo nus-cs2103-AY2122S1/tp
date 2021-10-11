@@ -208,7 +208,7 @@ public class ParserUtil {
         ArrayList<String> studentList = new ArrayList<>();
         for (String s: studentNames) {
             if (!Name.isValidName(s)) {
-                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS_ADD_STUDENT_TO_CLASS);
             }
             studentList.add(s);
         }

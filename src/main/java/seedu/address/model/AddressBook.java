@@ -214,14 +214,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Updates the tuition class when a new student is added
-     * or information of the tuition class has been changed.
-     *
-     * @param tuitionClass the tuition class that has been changed.
+     * Returns the tuition class with a certain id.
+     * @param id the class with this id is to be found.
+     * @return the class found if exists, return null otherwise.
      */
-    public void updateTuitionClassInPersonObject(TuitionClass tuitionClass) {
-        for (Person person : persons) {
-            person.updateTuitionClass(tuitionClass);
+    public TuitionClass getClassById(Integer id) {
+        for (TuitionClass tuitionClass: tuitions) {
+            if (tuitionClass.getId() == id) {
+                return tuitionClass;
+            }
         }
+        return null;
     }
 }
