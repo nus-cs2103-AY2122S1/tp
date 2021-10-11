@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.tracker.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Module}'s {@code Code} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Module> {
     private final List<String> keywords;
@@ -17,8 +17,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Module> {
 
     @Override
     public boolean test(Module module) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword));
+        return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword)));
     }
 
     @Override
