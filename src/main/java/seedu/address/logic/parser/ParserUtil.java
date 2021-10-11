@@ -28,6 +28,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
     public static final String DATETIME_PARSE_FORMAT = "yyyy-MM-dd HH:mm";
+    public static final String DATETIME_DISPLAY_FORMAT = "dd LLL yyyy HH:mm";
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE = "Date is invalid.";
@@ -245,6 +246,28 @@ public class ParserUtil {
 
         int convertedOccurrence = Integer.parseInt(trimmedOccurrence);
         return Optional.ofNullable(new Occurrence(convertedOccurrence));
+    }
+
+    /**
+     * Format {@code storedDateString} into a {@code displayedDateString} to be displayed on Person Card.
+     *
+     * @param storedDateString datetime string of pattern dd yyyy-MM-dd HH:mm
+     * @return displayedDateString formatted datetime string of pattern dd LLL yyyy HH:mm
+     */
+    public static String parseDisplayedDatetime(String storedDateString) {
+        String displayedDateString;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
+        DateTimeFormatter displayFormat = DateTimeFormatter.ofPattern(DATETIME_DISPLAY_FORMAT);
+
+        try {
+            LocalDateTime date = LocalDateTime.parse(storedDateString, formatter);
+            displayedDateString = displayFormat.format(date);
+        } catch (DateTimeParseException ive) {
+            // TODO: handle exception to display
+            return storedDateString;
+        }
+        return displayedDateString;
     }
 
 }

@@ -60,8 +60,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         language.setText(person.getLanguage().value);
-        lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).value);
-        visit.setText(DISPLAY_NEXT_VISIT + person.getVisit().orElse(new Visit("")).value);
+        lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).getFormatted());
+        visit.setText(DISPLAY_NEXT_VISIT + person.getVisit().orElse(new Visit("")).getFormatted());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
