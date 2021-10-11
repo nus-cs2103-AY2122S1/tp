@@ -53,7 +53,7 @@ public class FilterEventCommandTest {
 
     @Test
     public void execute_onlyDateInput_multipleEventsFound() {
-        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
         EventDateTimePredicate predicate =
                 new EventDateTimePredicate(Collections.singletonList("2021-09-18"));
         FilterEventCommand command = new FilterEventCommand(predicate);
