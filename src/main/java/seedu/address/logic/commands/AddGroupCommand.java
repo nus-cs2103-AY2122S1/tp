@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.AddAllocCommand.createEditedStudents;
-import static seedu.address.logic.commands.AddAllocCommand.getAllocStudents;
 import static seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
+import static seedu.address.logic.commands.AddAllocCommand.createEditedStudent;
+import static seedu.address.logic.commands.AddAllocCommand.getAllocStudents;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -81,7 +81,7 @@ public class AddGroupCommand extends Command {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT_IN_GROUP, studentToEdit.getName()));
             }
 
-            Student editedStudent = createEditedStudents(studentToEdit, allocDescriptor);
+            Student editedStudent = createEditedStudent(studentToEdit, allocDescriptor);
             toAdd.addStudent(editedStudent.getId());
             model.setStudent(studentToEdit, editedStudent);
         }
