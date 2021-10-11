@@ -64,7 +64,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_Import() throws Exception {
+    public void parseCommand_import() throws Exception {
         assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD) instanceof ImportCommand);
     }
 

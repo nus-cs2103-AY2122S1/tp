@@ -4,13 +4,13 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_NOT_IMPLEMENTED_YET;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
-import java.nio.file.Paths;
 
 public class ImportCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
