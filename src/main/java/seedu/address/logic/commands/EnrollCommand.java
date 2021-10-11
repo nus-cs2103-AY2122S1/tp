@@ -2,15 +2,18 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonCode;
 import seedu.address.model.person.Student;
 
 public class EnrollCommand extends Command {
@@ -27,43 +30,44 @@ public class EnrollCommand extends Command {
     public static final String MESSAGE_LESSON_NOT_FOUND = "Lesson does not exist, please try again";
     public static final String MESSAGE_SUCCESS = "%1$s enrolled into lesson: %2$s";
 
-    private final Index index;
+    private final Index targetIndex;
     private final String lessonCode;
 
     /**
      * Creates an EnrollCommand for a Student with a given index to a specified {@code Lesson}.
      */
-    public EnrollCommand(Index index, String lessonCode) {
-        requireNonNull(index, lessonCode);
+    public EnrollCommand(Index targetIndex, String lessonCode) {
+        requireNonNull(targetIndex, lessonCode);
 
-        this.index = index;
+        this.targetIndex = targetIndex;
         this.lessonCode = lessonCode;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        LessonCode code = new LessonCode(lessonCode);
+        Optional<Lesson> lessonOptional = model.searchLessons(code);
+        Lesson lesson = lessonOptional.orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE));
+
+        List<Student> lastShownList = model.getFilteredPersonList();
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        Student student = lastShownList.get(index.getZeroBased());
+        Student studentToEnroll = lastShownList.get(targetIndex.getZeroBased());
 
-        Lesson lesson = model.searchLessons(lessonCode);
-        if (lesson == null) {
-            throw new CommandException(MESSAGE_LESSON_NOT_FOUND);
-        }
-
-        if (lesson.containsStudent(student)) {
+        if (lesson.containsStudent(studentToEnroll)) {
             throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON,
-                    student.getName(),
+                    studentToEnroll.getName(),
                     lesson));
         }
-        Student newStudent = Student.createClone(student); // todo consider cloneable
+
+        Student newStudent = studentToEnroll.createClone();
         lesson.addStudent(newStudent);
-        model.setPerson(student, newStudent);
+        model.setPerson(studentToEnroll, newStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, newStudent.getName(), lesson));
     }
@@ -72,7 +76,7 @@ public class EnrollCommand extends Command {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof EnrollCommand
-                && index.equals(((EnrollCommand) other).index)
+                && targetIndex.equals(((EnrollCommand) other).targetIndex)
                 && lessonCode.equals(((EnrollCommand) other).lessonCode));
     }
 }

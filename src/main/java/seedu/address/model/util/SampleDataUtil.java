@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonTime;
+import seedu.address.model.lesson.Price;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -59,10 +62,14 @@ public class SampleDataUtil {
      */
     public static Lesson[] getSampleLessons() {
         return new Lesson[] {
-            new Lesson("Science", new Grade("S1"), DayOfWeek.FRIDAY, LocalTime.of(13, 30), 10.5),
-            new Lesson("Math", new Grade("P4"), DayOfWeek.WEDNESDAY, LocalTime.of(18, 0), 15.9),
-            new Lesson("English", new Grade("P2"), DayOfWeek.MONDAY, LocalTime.of(9, 0), 8.5),
-            new Lesson("Biology", new Grade("S4"), DayOfWeek.SATURDAY, LocalTime.of(9, 0), 12.9)
+            new Lesson(new Subject("Science"), new Grade("S1"),
+                    new LessonTime(DayOfWeek.FRIDAY, LocalTime.of(13, 30)), new Price(10.5)),
+            new Lesson(new Subject("Math"), new Grade("P4"),
+                    new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.of(18, 0)), new Price(15.9)),
+            new Lesson(new Subject("English"), new Grade("P2"),
+                    new LessonTime(DayOfWeek.MONDAY, LocalTime.of(9, 0)), new Price(8.5)),
+            new Lesson(new Subject("Biology"), new Grade("S4"),
+                    new LessonTime(DayOfWeek.SATURDAY, LocalTime.of(9, 0)), new Price(12.9))
         };
     }
 
