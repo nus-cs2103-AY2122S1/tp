@@ -1,9 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
@@ -12,9 +14,9 @@ import seedu.address.model.friend.FriendIdContainsKeywordPredicate;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListCommand extends Command {
+public class ListFriendCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "--list";
 
     public static final String MESSAGE_SUCCESS_PREPEND = "Listed all %s";
 
@@ -29,7 +31,7 @@ public class ListCommand extends Command {
 
     private final Predicate<Friend> predicate;
 
-    public ListCommand(Predicate<Friend> predicate) {
+    public ListFriendCommand(Predicate<Friend> predicate) {
         this.predicate = predicate;
     }
 
@@ -67,7 +69,7 @@ public class ListCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ListCommand // instanceof handles nulls
-                && predicate.equals(((ListCommand) other).predicate)); // state check
+                || (other instanceof ListFriendCommand // instanceof handles nulls
+                && predicate.equals(((ListFriendCommand) other).predicate)); // state check
     }
 }

@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.friends.FriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
@@ -56,7 +55,8 @@ public class ParserUtil {
         if (!FriendId.isValidFriendId(trimmedName)) {
             throw new ParseException(FriendId.MESSAGE_CONSTRAINTS);
         } else if (friendId.contains(FLAG_FRIEND_NAME.toString().trim())) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendCommand.MESSAGE_USAGE));
+            // TODO set a different message if preferred
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendId.MESSAGE_CONSTRAINTS));
         }
         return new FriendId(trimmedName);
     }
@@ -124,7 +124,7 @@ public class ParserUtil {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Flag... flags) {
+        return Stream.of(flags).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

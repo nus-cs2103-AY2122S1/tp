@@ -15,15 +15,16 @@ import static seedu.address.testutil.TypicalFriends.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.friends.AddFriendCommand;
-import seedu.address.logic.commands.friends.FriendCommand;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandParserTest {
     private final AddFriendCommandParser parser = new AddFriendCommandParser();
+    // TODO set a different message if preferred
     private final String invalidCommandFormatMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            FriendCommand.MESSAGE_USAGE);
+           FriendId.MESSAGE_CONSTRAINTS);
 
     @Test
     public void parse_allFieldsPresent_success() {

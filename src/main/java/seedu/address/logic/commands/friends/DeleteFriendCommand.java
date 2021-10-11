@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -12,8 +13,8 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 
 
-public class DeleteFriendCommand extends FriendCommand {
-    public static final String COMMAND_WORD = "friend --delete";
+public class DeleteFriendCommand extends Command {
+    public static final String COMMAND_WORD = "--delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the person identified by the friend id"
             + ".\n"
             + "Parameters: FRIEND_ID (must be an existing friend id)\n"
