@@ -19,12 +19,21 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Executor for a PersonEditCommand.
+ */
 public class PersonEditExecutor extends PersonExecutor {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final PersonEditDescriptor personEditDescriptor;
 
+    /**
+     * Constructor for a PersonEditExecutor instance.
+     *
+     * @param index Index of the person to be edited.
+     * @param personEditDescriptor Descriptor for the edited person.
+     */
     public PersonEditExecutor(Index index, PersonEditDescriptor personEditDescriptor) {
         super(index);
         requireAllNonNull(index, personEditDescriptor);

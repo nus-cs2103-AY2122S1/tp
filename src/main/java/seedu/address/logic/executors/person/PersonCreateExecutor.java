@@ -7,12 +7,21 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.executors.exceptions.ExecuteException;
 import seedu.address.model.person.Person;
 
+/**
+ * Executor for a PersonCreateCommand.
+ */
 public class PersonCreateExecutor extends PersonExecutor {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     protected Person person;
 
+    /**
+     * Constructor for a PersonCreateExecutor instance.
+     *
+     * @param index Always null value for this command. Ignored for operations.
+     * @param person Person to be created.
+     */
     public PersonCreateExecutor(Index index, Person person) {
         super(index);
         requireNonNull(person);

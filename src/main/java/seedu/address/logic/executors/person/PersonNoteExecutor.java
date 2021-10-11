@@ -9,12 +9,21 @@ import seedu.address.logic.executors.exceptions.ExecuteException;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 
+/**
+ * Executor for a PersonNoteCommand.
+ */
 public class PersonNoteExecutor extends PersonExecutor {
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added note to Person: %1$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed note from Person: %1$s";
 
     private final Note note;
 
+    /**
+     * Constructor for a PersonNoteExecutor instance.
+     *
+     * @param index Index of the person to add a note to.
+     * @param note Note to be added to the person.
+     */
     public PersonNoteExecutor(Index index, Note note) {
         super(index);
         requireAllNonNull(index, note);

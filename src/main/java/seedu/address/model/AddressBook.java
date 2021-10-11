@@ -75,6 +75,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return groups.contains(group);
@@ -88,6 +91,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(person);
     }
 
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     */
     public void addGroup(Group group) {
         groups.add(group);
     }
@@ -103,6 +110,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setItem(target, editedPerson);
     }
 
+    /**
+     * Replaces the given group {@code target} in the list with {@code editedGroup}.
+     * {@code target} must exist in the address book.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
+     */
     public void setGroup(Group target, Group editedGroup) {
         requireNonNull(editedGroup);
 
@@ -117,6 +129,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
     public void removeGroup(Group key) {
         groups.remove(key);
     }
@@ -135,6 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();
     }

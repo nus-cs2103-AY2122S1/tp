@@ -6,6 +6,9 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.model.group.Group;
 
 public abstract class GroupCommandParser extends Parser<GroupCommand> {
+    /**
+     * TODO: Stub method.
+     */
     public Group parseGroup(Index index) {
 //        List<Group> lastShownList = model.getFilteredGroupList();
 //        if (index.getZeroBased() >= lastShownList.size()) {

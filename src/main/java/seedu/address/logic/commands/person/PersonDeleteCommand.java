@@ -21,6 +21,11 @@ public class PersonDeleteCommand extends PersonCommand {
 
     private final PersonDeleteExecutor executor;
 
+    /**
+     * Constructor for a PersonDeleteCommand.
+     *
+     * @param index Index of the person to be deleted.
+     */
     public PersonDeleteCommand(Index index) {
         super(index);
         requireNonNull(index);
