@@ -124,7 +124,9 @@ public class AddressBookParser {
     private String extractFullCommandWord(String firstCommandWord, String arguments) {
         int argumentsIndex = arguments.indexOf("-");
         if (argumentsIndex == -1) {
-            return firstCommandWord + arguments;
+            String arr[] = arguments.split(" ", 3);
+            String firstWord = arr[1];
+            return firstCommandWord + " " + firstWord;
         }
         String fullCommandWord = firstCommandWord + arguments.substring(0, argumentsIndex - 1).stripTrailing();
         return fullCommandWord;
