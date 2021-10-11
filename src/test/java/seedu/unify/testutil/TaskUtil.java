@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Task;
 
 /**

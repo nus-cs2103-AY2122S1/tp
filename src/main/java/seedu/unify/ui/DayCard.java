@@ -37,7 +37,7 @@ public class DayCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
-    private FlowPane tags;
+    private Label tag;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
@@ -49,9 +49,7 @@ public class DayCard extends UiPart<Region> {
         name.setText(task.getName().taskName);
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
-        task.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagTaskName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));
+        tag.setText(task.getTag().tagTaskName);
     }
 
     @Override

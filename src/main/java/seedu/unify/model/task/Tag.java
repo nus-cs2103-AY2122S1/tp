@@ -1,4 +1,4 @@
-package seedu.unify.model.tag;
+package seedu.unify.model.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.unify.commons.util.AppUtil.checkArgument;
@@ -48,7 +48,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagTaskName + ']';
+        return tagTaskName;
     }
 
 }

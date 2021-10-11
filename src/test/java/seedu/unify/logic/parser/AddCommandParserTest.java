@@ -28,7 +28,7 @@ import static seedu.unify.testutil.TypicalTasks.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.unify.logic.commands.AddCommand;
-import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Task;

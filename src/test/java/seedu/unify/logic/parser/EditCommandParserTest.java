@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Time;

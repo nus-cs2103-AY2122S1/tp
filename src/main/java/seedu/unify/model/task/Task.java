@@ -2,12 +2,7 @@ package seedu.unify.model.task;
 
 import static seedu.unify.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.unify.model.tag.Tag;
 
 /**
  * Represents a Task in the Uni-Fy app.
@@ -21,17 +16,19 @@ public class Task {
 
     // Data fields
     private final Date date;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tag tag;
+//    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Time time, Date date, Set<Tag> tags) {
-        requireAllNonNull(name, time, date, tags);
+    public Task(Name name, Time time, Date date, Tag tag) {
+        requireAllNonNull(name, time, date, tag);
         this.name = name;
         this.time = time;
         this.date = date;
-        this.tags.addAll(tags);
+        this.tag = tag;
+//        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -46,13 +43,15 @@ public class Task {
         return date;
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
+    public Tag getTag() { return tag; }
+
+//    /**
+//     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+//     * if modification is attempted.
+//     */
+//    public Set<Tag> getTags() {
+//        return Collections.unmodifiableSet(tags);
+//    }
 
     /**
      * Returns true if both tasks have the same name.
@@ -85,13 +84,13 @@ public class Task {
         return otherTask.getName().equals(getName())
                 && otherTask.getTime().equals(getTime())
                 && otherTask.getDate().equals(getDate())
-                && otherTask.getTags().equals(getTags());
+                && otherTask.getTag().equals(getTag());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, date, tags);
+        return Objects.hash(name, time, date, tag);
     }
 
     @Override
@@ -101,13 +100,15 @@ public class Task {
                 .append("; Time: ")
                 .append(getTime())
                 .append("; Date: ")
-                .append(getDate());
+                .append(getDate())
+                .append("; Tag: ")
+                .append(getTag());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
+//        Set<Tag> tags = getTags();
+//        if (!tags.isEmpty()) {
+//            builder.append("; Tags: ");
+//            tags.forEach(builder::append);
+//        }
         return builder.toString();
     }
 

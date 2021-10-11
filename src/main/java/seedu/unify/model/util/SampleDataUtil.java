@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.UniFy;
-import seedu.unify.model.tag.Tag;
+import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Task;
@@ -20,22 +20,22 @@ public class SampleDataUtil {
         return new Task[] {
             new Task(new Name("Alex Yeoh"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("friends")),
+                new Tag("Important")),
             new Task(new Name("Bernice Yu"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("colleagues", "friends")),
+                new Tag("Important")),
             new Task(new Name("Charlotte Oliveiro"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("neighbours")),
+                new Tag("Important")),
             new Task(new Name("David Li"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("family")),
+                new Tag("Important")),
             new Task(new Name("Irfan Ibrahim"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("classmates")),
+                new Tag("Important")),
             new Task(new Name("Roy Balakrishnan"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("colleagues"))
+                new Tag("Important"))
         };
     }
 
@@ -45,15 +45,6 @@ public class SampleDataUtil {
             sampleAb.addTask(sampleTask);
         }
         return sampleAb;
-    }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
     }
 
 }
