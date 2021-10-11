@@ -400,27 +400,31 @@ Square brackets `[]` refer to optional arguments.<p>
 Action     | Format                                                                                 | Advanced Format
 -----------|----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------
 **Create** | `person (INDEX) /create [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_NAME]` | `p (INDEX) /c [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_NAME]`
-**Edit**   | `person (INDEX) /edit [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]`                  | `p (INDEX) /e [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]`
+**Edit**   | `person (INDEX) /edit [n:NAME] [p:phone] [e:email]`                                    | `p (INDEX) /e [n:NAME] [p:phone] [e:email]`
 **Delete** | `person (INDEX) /delete`                                                               | `p (INDEX) /d`
 **Add**    | `person (INDEX) /add (g:GROUP_NAME) `                                                  | `p (INDEX) /a (g:GROUP_NAME)`
 **Remove** | `person (INDEX) /remove (g:GROUP_NAME) `                                               | `p (INDEX) /r (g:GROUP_NAME)`
 **Note**   | `person (INDEX) /note (NOTE)`                                                          | `p (INDEX) /n (NOTE)`
+**Tag**    | `person (INDEX) /tag [t:TAG1,TAG2,...]`                                                | `p (INDEX) /t [t:TAG1,TAG2,...]`
+**Untag**  | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                              | `p (INDEX) /u [t:TAG1,TAG2,...]`
 **List**   | `person /list [g:GROUP_NAME][:SUBGROUP_NAME]`                                          | `p /l [g:GROUP_NAME][:SUBGROUP_NAME]`
 **Find**   | `person /find (n:QUERY)`                                                               | `p /f (n:QUERY)`
 
 ### Group
-Action     | Format                             | Short Format
------------|------------------------------------|----------------------------
-**Create** | `group (GROUP_NAME) /create`       | `g (GROUP_NAME) /c`
-**Edit**   | `group (INDEX) /edit [n:NEW_NAME]` | `g (INDEX) /e [n:NEW_NAME]`
-**Delete** | `group (INDEX) /delete`            | `g (INDEX) /d`
-**Note**   | `group (INDEX) /note (NOTE)`       | `g (INDEX) /n (NOTE)`
-**List**   | `group /list`                      | `g /l`
-**Find**   | `group /find (n:QUERY)`            | `g /f (n:QUERY)`
+Action     | Format                                         | Short Format
+-----------|------------------------------------------------|---------------------------------------
+**Create** | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
+**Edit**   | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
+**Delete** | `group (INDEX) /delete`                        | `g (INDEX) /d`
+**Note**   | `group (INDEX) /note (NOTE)`                   | `g (INDEX) /n (NOTE)`
+**Tag**    | `group (INDEX) /tag [t:TAG1,TAG2,...]`         | `g (INDEX) /t [t:TAG1,TAG2,...]`
+**Untag**  | `group (INDEX) /untag [t:TAG1,TAG2,...]`       | `g (INDEX) /u [t:TAG1,TAG2,...]`
+**List**   | `group /list`                                  | `g /l`
+**Find**   | `group /find (n:QUERY)`                        | `g /f (n:QUERY)`
 
 ### Subgroup
-**Note**: For the **Edit**, **Delete**, **Note** and **Find** commands, please use the **List** command to list the
-`Subgroup` objects of a `Group` before running operations on them.
+**Note**: For the **Edit**, **Delete**, **Note**, **Tag**, **Untag** and **Find** commands, please use the **List**
+command to list the `Subgroup` objects of a `Group` before running operations on them.
 
 Action     | Format                                               | Short Format
 -----------|------------------------------------------------------|----------------------------------------------
@@ -428,6 +432,8 @@ Action     | Format                                               | Short Format
 **Edit**   | `group (INDEX) /edit [n:NEW_NAME] [t:TAG1,TAG2,...]` | `g (INDEX) /e [n:NEW_NAME] [t:TAG1,TAG2,...]`
 **Delete** | `group (INDEX) /delete`                              | `g (INDEX) /d`
 **Note**   | `group (INDEX) /note (NOTE)`                         | `g (INDEX) /n (NOTE)`
+**Tag**    | `group (INDEX) /tag [t:TAG1,TAG2,...]`               | `g (INDEX) /t [t:TAG1,TAG2,...]`
+**Untag**  | `group (INDEX) /untag [t:TAG1,TAG2,...]`             | `g (INDEX) /u [t:TAG1,TAG2,...]`
 **List**   | `group /list (g:INDEX)`                              | `g /l (g:INDEX)`
 **Find**   | `group /find (n:QUERY)`                              | `g /f (n:QUERY)`
 
