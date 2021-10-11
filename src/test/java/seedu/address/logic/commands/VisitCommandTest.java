@@ -26,6 +26,7 @@ import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Visit;
+import seedu.address.testutil.DateTimeUtil;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -33,7 +34,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class VisitCommandTest {
 
-    private static final String VISIT_STUB = "2021-11-11 12:00";
+    private static final String VISIT_STUB = DateTimeUtil.getValidVisitString();
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

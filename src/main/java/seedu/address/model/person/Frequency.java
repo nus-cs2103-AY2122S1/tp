@@ -2,12 +2,11 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.parser.ParserUtil.DATETIME_PARSE_FORMAT;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import seedu.address.commons.util.DateTimeUtil;
 
 /**
  * Represents frequency of visits for each person.
@@ -75,8 +74,7 @@ public enum Frequency {
      */
     public Visit nextVisit(Visit visit) {
         String currentStringVisit = visit.value;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
-        LocalDateTime currentDateTime = LocalDateTime.parse(currentStringVisit, formatter);
+        LocalDateTime currentDateTime = LocalDateTime.parse(currentStringVisit, DateTimeUtil.FORMATTER);
 
         LocalDateTime nextDateTime = null;
         switch (this) {
@@ -101,7 +99,7 @@ public enum Frequency {
         if (this == EMPTY) {
             return new Visit("");
         } else {
-            String newStringVisit = nextDateTime.format(formatter);
+            String newStringVisit = nextDateTime.format(DateTimeUtil.FORMATTER);
             return new Visit(newStringVisit);
         }
 

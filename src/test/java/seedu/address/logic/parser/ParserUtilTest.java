@@ -33,7 +33,10 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_LANGUAGE = " ";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_VISIT = "2020-111-11 12:00";
+    private static final String INVALID_DATETIME = "2021-02-30 12:00";
+    private static final String INVALID_DATETIME_FORMAT = "2020-111-11 12:00";
+    private static final String INVALID_VISIT_DATETIME = DateTimeUtil.getInvalidVisitString();
+    private static final String INVALID_LAST_VISIT_DATETIME = DateTimeUtil.getInvalidLastVisitString();
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -210,8 +213,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseVisit_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseVisit(INVALID_VISIT));
+    public void parseVisit_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisit(INVALID_DATETIME_FORMAT));
+    }
+
+    @Test
+    public void parseVisit_invalidDateTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisit(INVALID_DATETIME));
+    }
+
+    @Test
+    public void parseVisit_invalidPastDateTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisit(INVALID_VISIT_DATETIME));
     }
 
     @Test
@@ -233,8 +246,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseVisitForAdd_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseVisitForAdd(INVALID_VISIT));
+    public void parseVisitForAdd_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisitForAdd(INVALID_DATETIME_FORMAT));
+    }
+
+    @Test
+    public void parseVisitForAdd_invalidDateTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisitForAdd(INVALID_DATETIME));
+    }
+
+    @Test
+    public void parseVisitForAdd_invalidPastDateTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVisitForAdd(INVALID_VISIT_DATETIME));
     }
 
     @Test
@@ -256,8 +279,18 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLastVisit_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseLastVisit(INVALID_VISIT));
+    public void parseLastVisit_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLastVisit(INVALID_DATETIME_FORMAT));
+    }
+
+    @Test
+    public void parseLastVisit_invalidDateTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLastVisit(INVALID_DATETIME));
+    }
+
+    @Test
+    public void parseLastVisit_invalidPastDateTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLastVisit(INVALID_LAST_VISIT_DATETIME));
     }
 
     @Test

@@ -1,6 +1,8 @@
 package seedu.address.commons.util;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 public class DateTimeUtil {
     public static final String YEAR_REGEX = "\\d{4}";
@@ -10,6 +12,10 @@ public class DateTimeUtil {
     public static final String MINUTE_REGEX = "([0-5][0-9]|60)";
     public static final String VALIDATION_REGEX = "^" + YEAR_REGEX + "-" + MONTH_REGEX + "-" + DAY_REGEX
                                                       + " " + HOUR_REGEX + ":" + MINUTE_REGEX + "$";
+
+    private static final String DATETIME_PARSE_FORMAT = "uuuu-MM-dd HH:mm";
+    public static final DateTimeFormatter FORMATTER =
+        DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT).withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Returns true if {@code test} is in the datetime format yyyy-MM-dd HH:mm.

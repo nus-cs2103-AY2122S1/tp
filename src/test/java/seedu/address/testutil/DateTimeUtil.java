@@ -11,8 +11,17 @@ public class DateTimeUtil {
      * Returns a valid visit datetime string with a future date.
      */
     public static String getValidVisitString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
         LocalDateTime futureDateTime = LocalDateTime.now().plusDays(7);
+        return futureDateTime.format(formatter);
+    }
+
+    /**
+     * Returns a valid visit datetime string with a future date different from getValidVisitString().
+     */
+    public static String getValidVisitString2() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        LocalDateTime futureDateTime = LocalDateTime.now().plusDays(8);
         return futureDateTime.format(formatter);
     }
 
