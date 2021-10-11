@@ -426,7 +426,7 @@ Action     | Format                                                             
 **List**   | `group (GROUP_NAME:SUBGROUP_NAME) /list [p:INDEX]`                      | `g (GROUP_NAME:SUB_GROUP_NAME) /l [p:INDEX]`
 **Find**   | `group /find (n:GROUP_NAME:QUERY)`                                      | `g /f (n:GROUP_NAME:QUERY)`
 
-### Tags
+### Tag
 Note: for the **List** command, you have to either list by group or by person, but not both.
 
 Action   | Format                                               | Short Format
