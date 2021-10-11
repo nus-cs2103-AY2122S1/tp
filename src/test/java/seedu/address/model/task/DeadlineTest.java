@@ -12,41 +12,39 @@ public class DeadlineTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Name(null));
+        assertThrows(NullPointerException.class, () -> new Deadline(null));
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Name(invalidName));
+    public void constructor_invalidDeadline_throwsIllegalArgumentException() {
+        String invalidDeadline = "2021/12/12";
+        assertThrows(IllegalArgumentException.class, () -> new Deadline(invalidDeadline));
     }
 
     @Test
-    public void isValidName() {
-        // null name
-        assertThrows(NullPointerException.class, () -> seedu.address.model.person.Name.isValidName(null));
+    public void isValidDeadline() {
+        // null deadline
+        assertThrows(NullPointerException.class, () -> Deadline.isValidDeadline(null));
 
-        // invalid name
-        assertFalse(Name.isValidName("")); // empty string
-        assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("Report *")); // contains non-alphanumeric characters
+        // Invalid deadline
+        assertFalse(Deadline.isValidDeadline(""));
+        assertFalse(Deadline.isValidDeadline("2020"));
+        assertFalse(Deadline.isValidDeadline("2020/12/12"));
+        assertFalse(Deadline.isValidDeadline("Dec 12 2020"));
+        assertFalse(Deadline.isValidDeadline("2020-1-1"));
 
-        // valid name
-        assertTrue(Name.isValidName("homework")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("cs2103 report")); // alphanumeric characters
-        assertTrue(Name.isValidName("CS2103 Report")); // with capital letters
-        assertTrue(Name.isValidName("A very very long task name")); // long names
+        // Valid deadline
+        assertTrue(Deadline.isValidDeadline("2020-12-12"));
     }
 
     @Test
     public void equals() {
-        Name name1 = new Name("Report");
-        Name name2 = new Name("Report");
-        Name name3 = new Name("report");
+        Deadline deadline1 = new Deadline("2020-12-12");
+        Deadline deadline2 = new Deadline("2020-12-12");
+        Deadline deadline3 = new Deadline("2021-12-12");
 
-        assertNotEquals(name1, name3);
-        assertEquals(name1, name2);
+        assertNotEquals(deadline1, deadline3);
+        assertEquals(deadline1, deadline2);
     }
 }
+
