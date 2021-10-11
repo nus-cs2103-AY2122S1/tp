@@ -84,7 +84,7 @@ public class ImportCommand extends Command {
         }
 
         for (int i = 1; i < lines.length; i++) {
-            newAb.addStudent(readStudentFromRow(lines[i], assessments));
+            newAb.addStudent(readStudentFromRow(lines[i], assessments, newAb.getGroupList()));
         }
 
         model.setAddressBook(newAb);
@@ -92,7 +92,9 @@ public class ImportCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    private Student readStudentFromRow(String row, List<Assessment> assessments) throws CommandException {
+    private Student readStudentFromRow(String row,
+                                       List<Assessment> assessments,
+                                       List<Group> groupList) throws CommandException {
         String[] values = row.split(",", -1);
         Name name = makeName(readValue(values, 0));
         ID id = makeId(readValue(values, 1));
@@ -102,7 +104,13 @@ public class ImportCommand extends Command {
         for (int i = 0; i < groupCount; i++, readingColumn++) {
             String groupName = readValue(values, readingColumn);
             if (!groupName.isEmpty()) {
-                groups.add(makeGroup(groupName));
+                Group group = makeGroup(groupName);
+                // if the group already exists in the group list, use the existing group.
+                // otherwise, use the new group.
+                Group toAdd = groupList.stream().filter(grp -> grp.equals(group))
+                        .findFirst().orElse(group);
+                group.addStudent(id);
+                groups.add(toAdd);
             }
         }
 
