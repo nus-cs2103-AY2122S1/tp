@@ -46,7 +46,7 @@ public class JsonAdaptedStudentTest {
     @BeforeAll
     static void beforeAll() {
         ASSESSMENT_LIST.forEach(assessment ->
-                assessment.setScores(BENSON.getId(), BENSON.getScores().get(assessment)));
+                assessment.setScore(BENSON.getId(), BENSON.getScores().get(assessment)));
     }
 
     @Test

@@ -47,6 +47,12 @@ public class JsonAdaptedAssessment {
         }
 
         Assessment assessment = new Assessment(name);
+
+        // scores is not yet existent in the database
+        if (scores == null) {
+            return assessment;
+        }
+
         for (String id : scores.keySet()) {
             if (!ID.isValidID(id)) {
                 throw new IllegalValueException(ID.MESSAGE_CONSTRAINTS);

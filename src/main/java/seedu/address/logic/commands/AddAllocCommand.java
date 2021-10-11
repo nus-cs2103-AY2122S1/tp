@@ -39,8 +39,8 @@ public class AddAllocCommand extends Command {
             + PREFIX_ID + "<student_id>)";
 
     public static final String MESSAGE_SUCCESS = "New allocation added: %1$s";
-    public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exists.";
-    public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exists.";
+    public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
+    public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
             "This student needs to be allocated using ID due to duplicate naming.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the group.";

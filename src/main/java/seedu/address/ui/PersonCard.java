@@ -13,7 +13,7 @@ import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * A UI component that displays information of a {@code Student}.
  */
 public class PersonCard extends UiPart<Region> {
 

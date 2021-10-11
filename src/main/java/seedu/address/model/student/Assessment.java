@@ -33,6 +33,10 @@ public class Assessment {
         value = name;
     }
 
+    public void add(ID id, Score score) {
+        scores.put(id, score);
+    }
+
     /**
      * Returns true if a given string is a valid assessment name.
      */
@@ -44,8 +48,23 @@ public class Assessment {
         return value;
     }
 
-    public void setScores(ID id, Score score) {
+    public Map<ID, Score> getScores() {
+        return scores;
+    }
+
+    public void setScore(ID id, Score score) {
         scores.put(id, score);
+    }
+
+    public void setScores(Map<ID, Score> scores) {
+        this.scores.putAll(scores);
+    }
+
+    /**
+     * Returns true if the student with the given {@code id} is already graded.
+     */
+    public boolean isGraded(ID id) {
+        return scores.containsKey(id);
     }
 
     @Override
