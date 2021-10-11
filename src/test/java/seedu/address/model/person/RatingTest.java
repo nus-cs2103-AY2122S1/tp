@@ -15,7 +15,7 @@ public class RatingTest {
 
     @Test
     public void constructor_invalidRating_throwsIllegalArgumentException() {
-        String invalidRating = "";
+        String invalidRating = "0.5";
         assertThrows(IllegalArgumentException.class, () -> new Rating(invalidRating));
     }
 
@@ -25,11 +25,10 @@ public class RatingTest {
         assertThrows(NullPointerException.class, () -> Rating.isValidRating(null));
 
         // invalid ratings
-        assertFalse(Rating.isValidRating("")); // empty string
         assertFalse(Rating.isValidRating(" ")); // spaces only
         assertFalse(Rating.isValidRating("91")); // more than 2 numbers
         assertFalse(Rating.isValidRating("r")); // non-numeric
-        assertFalse(Rating.isValidRating("0")); // out of range
+        assertFalse(Rating.isValidRating("-1")); // out of range
         assertFalse(Rating.isValidRating("6")); // out of range
         assertFalse(Rating.isValidRating("2.5")); // not integer
 
