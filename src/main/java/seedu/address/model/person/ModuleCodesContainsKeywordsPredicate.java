@@ -3,6 +3,9 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Person}'s {@code ModuleCode}s matches all of the keywords given.
+ */
 public class ModuleCodesContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
