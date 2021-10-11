@@ -12,7 +12,6 @@ import seedu.siasa.logic.commands.EditCommand;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
-import seedu.siasa.logic.commands.ListCommand;
 import seedu.siasa.logic.commands.client.AddClientCommand;
 import seedu.siasa.logic.commands.client.DeleteClientCommand;
 import seedu.siasa.logic.commands.client.ListClientCommand;
