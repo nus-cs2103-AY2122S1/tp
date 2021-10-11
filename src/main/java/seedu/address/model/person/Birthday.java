@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 /**
  * Represents a Person's birthday in the address book.
@@ -16,7 +17,7 @@ public class Birthday {
     public static final String MESSAGE_CONSTRAINTS = "Birthdays should come in the form of ddMMyyyy";
     public static final String MESSAGE_INVALID_DATE = "Birthday is not a valid date";
     public static final String VALIDATION_REGEX = "\\d{8}";
-    private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("ddMMyyyy");
+    private static final DateTimeFormatter BIRTHDATE_FORMATTER = DateTimeFormatter.ofPattern("ddMMuuuu");
     public final LocalDate birthdate;
 
     /**
@@ -43,7 +44,7 @@ public class Birthday {
      */
     public static boolean isValidDate(String birthday) {
         try {
-            LocalDate.parse(birthday, BIRTHDATE_FORMATTER);
+            LocalDate.parse(birthday, BIRTHDATE_FORMATTER.withResolverStyle(ResolverStyle.STRICT));
             return true;
         } catch (DateTimeParseException e) {
             return false;
