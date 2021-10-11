@@ -31,7 +31,7 @@ Examples:
 #### Adding a tuition class: `addclass`
 Adds a tuition class with a set l/LIMIT of students at specified t/TIME.
 
-Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT n/NAME,NAME,NAME... [r/REMARK]`
+Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT s/NAME,NAME,NAME... [r/REMARK]`
 
 Examples:
 - `addclass n/Chemistry l/16 c/4 ts/Thu 15:00-17:00 s/Bernice Yu`
@@ -70,7 +70,13 @@ Format: `deleteclass [INDEX]`
 Move a student to/from classes by adding or removing them.
 
 #### Adding an existing student to a class: `addtoclass`
-Format: `addtoclass [INDEX_STUDENT] [INDEX_CLASS]`
+Add an existing student to an existing class using student NAME or INDEX.
+
+Format: `addtoclass si/INDEX_STUDENT tc/INDEX_CLASS` or `addtoclass s/NAME,NAME,NAME... tc/INDEX_CLASS`
+
+Examples:
+- `addtoclass si/1 tc/1`
+- `addtoclass s/James,Felicia tc/2`
 
 #### Removing an existing student from a class: `remove`
 Format: `remove [INDEX_STUDENT] [INDEX_CLASS]`
@@ -98,14 +104,14 @@ Format: `exit`
 Action | Format
 --------|------------------
 ***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
-***Add Class*** | `addclass l/limit t/time n/NAME,NAME,NAME... [r/REMARK] [t/TAG]…`
+***Add Class*** | `addclass l/limit t/time s/NAME,NAME,NAME... [r/REMARK] [t/TAG]…`
 ***View Student*** | `student [INDEX]`
 ***View Class*** | `class [INDEX]`
 ***Edit Student*** | `editstudent [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
 ***Edit Class*** | `editclass [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 ***Delete Student*** | `deletestudent [INDEX]`
 ***Delete Class*** | `deleteclass [INDEX]`
-***Add Student to Class*** | `addtoclass [INDEX_STUDENT] [INDEX_CLASS]`
+***Add Student to Class*** | `addtoclass si/INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
 ***Remove Student from Class*** | `remove [INDEX_STUDENT] [INDEX_CLASS]`
 ***Add Remarks to Student*** | `remark [INDEX_STUDENT] r/REMARK`
 ***Add Remarks to Class*** | `remarkclass [INDEX_CLASS] r/REMARK`
