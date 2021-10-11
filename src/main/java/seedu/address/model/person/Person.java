@@ -25,12 +25,13 @@ public class Person {
     private final Address address;
     private final Review review;
     private final Set<Tag> tags = new HashSet<>();
+    private final Rating rating;
 
     /**
      * Every field must be present and not null.
      */
     public Person(CategoryCode categoryCode, Name name, Phone phone, Email email, Address address,
-                  Review review, Set<Tag> tags) {
+                  Review review, Set<Tag> tags, Rating rating) {
         requireAllNonNull(categoryCode, name, phone, email, address, tags);
         this.categoryCode = categoryCode;
         this.name = name;
@@ -39,6 +40,7 @@ public class Person {
         this.review = review;
         this.address = address;
         this.tags.addAll(tags);
+        this.rating = rating;
     }
 
     public CategoryCode getCategoryCode() {
@@ -59,6 +61,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Rating getRating() {
+        return rating;
     }
 
     public Review getReview() {
@@ -132,6 +138,10 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        builder.append("; Rating: ")
+                .append(getRating());
+
         return builder.toString();
     }
 

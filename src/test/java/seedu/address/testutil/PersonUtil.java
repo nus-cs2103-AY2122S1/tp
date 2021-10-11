@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -14,6 +15,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * A utility class for Person.
@@ -38,6 +40,8 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_REVIEW + person.getReview().value + " ");
+        sb.append(PREFIX_RATING + person.getRating().value + " ");
+
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -62,6 +66,7 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
+        descriptor.getRating().ifPresent(rating -> sb.append(PREFIX_RATING).append(rating.value).append(" "));
         return sb.toString();
     }
 }

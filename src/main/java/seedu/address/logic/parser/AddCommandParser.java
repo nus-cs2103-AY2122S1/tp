@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -20,6 +21,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
@@ -35,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY_CODE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_REVIEW, PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_REVIEW, PREFIX_TAG, PREFIX_RATING);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY_CODE, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
                 PREFIX_EMAIL)
@@ -51,8 +53,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Review review = ParserUtil.parseReview(argMultimap.getValue(PREFIX_REVIEW).isPresent()
                 ? argMultimap.getValue(PREFIX_REVIEW).get() : "");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).isPresent()
+            ? argMultimap.getValue(PREFIX_RATING).get() : "0");
 
-        Person person = new Person(categoryCode, name, phone, email, address, review, tagList);
+        Person person = new Person(categoryCode, name, phone, email, address, review, tagList, rating);
 
         return new AddCommand(person);
     }

@@ -16,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String review;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String rating;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,12 +44,14 @@ class JsonAdaptedPerson {
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("review") String review,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("rating") String rating) {
         this.category = category;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.rating = rating;
         this.review = review;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -67,6 +71,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        rating = source.getRating().value;
     }
 
     /**
@@ -129,7 +134,18 @@ class JsonAdaptedPerson {
         final Review modelReview = new Review(review);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelReview, modelTags);
+
+        if (rating == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rating.class.getSimpleName()));
+        }
+        if (!Rating.isValidRating(rating)) {
+            throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        final Rating modelRating = new Rating(rating);
+
+        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelReview, modelTags,
+            modelRating);
+
     }
 
 }
