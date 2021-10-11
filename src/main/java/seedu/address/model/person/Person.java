@@ -40,6 +40,7 @@ public class Person {
         this.revenue = new Revenue(new Money(0));
         this.address = address;
         this.tags.addAll(tags);
+        this.note = note;
         this.appointment = appointment;
     }
 
@@ -47,8 +48,8 @@ public class Person {
      * Every field for this case is provided and hence a revenue value will be tagged to the person.
      */
     public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags,
-                  Appointment appointment) {
-        requireAllNonNull(name, phone, email, address, tags);
+                  Note note, Appointment appointment) {
+        requireAllNonNull(name, phone, email, address, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
