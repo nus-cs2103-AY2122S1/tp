@@ -31,7 +31,7 @@ Examples:
 #### Adding a tuition class: `addclass`
 Adds a tuition class with a set l/LIMIT of students at specified t/TIME.
 
-Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT n/NAME,NAME,NAME... [r/REMARK] [t/TAG]…`
+Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT n/NAME,NAME,NAME... [r/REMARK]`
 
 Examples:
 - `addclass n/Chemistry l/16 c/4 ts/Thu 15:00-17:00 s/Bernice Yu`
@@ -74,6 +74,20 @@ Format: `addtoclass [INDEX_STUDENT] [INDEX_CLASS]`
 
 #### Removing an existing student from a class: `remove`
 Format: `remove [INDEX_STUDENT] [INDEX_CLASS]`
+
+#### Adding remarks to a student: `remark`
+Adds a remark to the identified student.
+
+Format: `remark [INDEX_STUDENT] r/REMARK`
+
+Examples:
+- `remark 1 r/Haven't paid last week's fee`
+
+#### Adding remarks to a tuition class: `remarkclass`
+Format: `remarkclass [INDEX_CLASS] r/REMARK`
+
+Examples:
+- `remarkclass 2 r/Math homework due Friday`
 
 ### Exiting the app: `exit`
 Exits the program.<br>
