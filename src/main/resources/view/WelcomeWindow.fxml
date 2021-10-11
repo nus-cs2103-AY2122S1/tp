@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.image.ImageView?>
+<fx:root resizable="false" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" type="javafx.stage.Stage">
+    <scene>
+        <Scene>
+            <AnchorPane prefHeight="210" prefWidth="210">
+                <VBox>
+                    <children>
+                        <ImageView fx:id="appLogo" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true"/>
+                        <Label fx:id="appTagLine" text="Label">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+            </AnchorPane>
+        </Scene>
+    </scene>
+</fx:root>

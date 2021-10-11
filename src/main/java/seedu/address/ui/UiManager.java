@@ -24,6 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
+    private WelcomeWindow welcomeWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -36,6 +37,11 @@ public class UiManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
+
+        // Add code to show welcome splash screen for some 5-6 seconds before closing it;
+        // Let it be in such a way that, on initializing this, it shows and closes in few seconds
+        // maybe used parallel threads
+        welcomeWindow = new WelcomeWindow();
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
