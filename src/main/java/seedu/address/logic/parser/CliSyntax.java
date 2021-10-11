@@ -11,5 +11,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-
+    public static final Prefix PREFIX_STUDENT_ID = new Prefix("s/");
+    public static final Prefix PREFIX_GITHUB_ID = new Prefix("g/");
+    public static final Prefix PREFIX_TUTORIAL_ID = new Prefix("T/");
+    public static final Prefix PREFIX_TYPE = new Prefix("r/");
+    public static final Prefix PREFIX_NUS_NETWORK_ID = new Prefix("m/");
 }
