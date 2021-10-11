@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Reservation}'s {@code DateTime} matches the user input DateTime given.
+ */
 public class ListContainsReservationPredicate implements Predicate<Reservation> {
     private final LocalDate date;
     private final LocalTime time;

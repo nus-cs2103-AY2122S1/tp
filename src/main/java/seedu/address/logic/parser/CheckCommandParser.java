@@ -23,6 +23,12 @@ public class CheckCommandParser implements Parser<CheckCommand> {
     private EnumTypeOfCheck typeOfCheck;
     public static final String ALLOWED_TIME_FORMAT = "HHmm";
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the CheckCommand
+     * and returns a CheckCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public CheckCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -36,6 +42,21 @@ public class CheckCommandParser implements Parser<CheckCommand> {
 
         parseArgs(splitTrimmedArgs);
         return new CheckCommand(new ListContainsReservationPredicate(date, time, typeOfCheck), date, time, typeOfCheck);
+    }
+
+    private void parseArgs(String[] splitTrimmedArgs) throws ParseException {
+        if (splitTrimmedArgs.length > 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
+        } else if (splitTrimmedArgs.length == 2) {
+            parseDateTime(splitTrimmedArgs[0], splitTrimmedArgs[1]);
+        } else { // Input arguments array is length 1
+            String dateOrTimeString = splitTrimmedArgs[0];
+            if (dateOrTimeString.length() == ALLOWED_TIME_FORMAT.length()) {
+                parseTime(dateOrTimeString);
+            } else {
+                parseDate(dateOrTimeString);
+            }
+        }
     }
 
     private void parseDate(String dateString) throws ParseException {
@@ -66,21 +87,6 @@ public class CheckCommandParser implements Parser<CheckCommand> {
             typeOfCheck = EnumTypeOfCheck.DateTime;
         } catch (DateTimeParseException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
-        }
-    }
-
-    private void parseArgs(String[] splitTrimmedArgs) throws ParseException {
-        if (splitTrimmedArgs.length > 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckCommand.MESSAGE_USAGE));
-        } else if (splitTrimmedArgs.length == 2) {
-            parseDateTime(splitTrimmedArgs[0], splitTrimmedArgs[1]);
-        } else { // Input arguments array is length 1
-            String dateOrTimeString = splitTrimmedArgs[0];
-            if (dateOrTimeString.length() == ALLOWED_TIME_FORMAT.length()) {
-                parseTime(dateOrTimeString);
-            } else {
-                parseDate(dateOrTimeString);
-            }
         }
     }
 }

@@ -23,12 +23,13 @@ public class CheckCommand extends Command {
     public static final String COMMAND_WORD = "check";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Checks if there is an available slot for reservation"
+            + ": Checks if there is an available slot for reservation "
             + "at the date/time specified. \n"
-            + "Parameters: Date (YYYY-MM-DD format) \n"
-            + "Example: " + COMMAND_WORD + " 2020-12-25";
+            + "Parameters: Date (format: YYYY-MM-DD HHMM or YYYY-MM-DD or HHMM) \n"
+            + "Example: " + COMMAND_WORD + " 2021-12-25 1900";
 
-    public static final String DEFAULT_TIME = "00:00";
+    // Used to convert LocalDate to LocalDateTime when user inputs only date to query
+    public static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00");
 
     private final ListContainsReservationPredicate predicate;
     private final LocalDate date;
@@ -50,17 +51,17 @@ public class CheckCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredReservationList(predicate);
-
-        PersonContainsReservationPredicate personListPredicate
-                = new PersonContainsReservationPredicate(model.getFilteredReservationList());
-        model.updateFilteredPersonList(personListPredicate);
-
-        LocalDateTime dateTime = LocalDateTime.of(date, (Optional.ofNullable(time).orElse(LocalTime.parse(DEFAULT_TIME))));
-        return new CommandResult(String.format(getMessage(typeOfCheck)
-                , model.getFilteredReservationList().size(), dateTime));
+        model.updateFilteredPersonList(new PersonContainsReservationPredicate(model.getFilteredReservationList()));
+        return new CommandResult(String.format(getDisplayMessage(typeOfCheck)
+                , model.getFilteredReservationList().size()
+                , convertToLocalDateTime(date, time)));
     }
 
-    public String getMessage(EnumTypeOfCheck e) {
+    private LocalDateTime convertToLocalDateTime(LocalDate date, LocalTime time) {
+        return LocalDateTime.of(date, (Optional.ofNullable(time).orElse(DEFAULT_TIME)));
+    }
+
+    private String getDisplayMessage(EnumTypeOfCheck e) {
         String message = "";
         switch (e) {
         case Date:

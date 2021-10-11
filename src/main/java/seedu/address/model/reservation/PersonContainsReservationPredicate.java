@@ -6,7 +6,7 @@ import seedu.address.model.person.Person;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Phone} matches any of the phone number of the reservations specified .
  */
 public class PersonContainsReservationPredicate implements Predicate<Person> {
     private final ObservableList<Reservation> reservationsList;
