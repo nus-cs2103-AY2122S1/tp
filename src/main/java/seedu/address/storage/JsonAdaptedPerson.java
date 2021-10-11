@@ -99,10 +99,12 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        final Revenue modelRevenue;
         if (revenue == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Revenue.class.getSimpleName()));
+            modelRevenue = new Revenue(new Money(0));
+        } else {
+            modelRevenue = new Revenue(new Money(Float.parseFloat(revenue)));
         }
-        final Revenue modelRevenue = new Revenue(new Money(Float.parseFloat(revenue)));
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));

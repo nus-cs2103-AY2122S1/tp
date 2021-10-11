@@ -74,8 +74,9 @@ public class PersonBuilder {
     /**
      * Sets the {@code Revenue} of the {@code Person} that we are building.
      */
-    public PersonBuilder withRevenue(float revenue) {
-        this.revenue = new Revenue(new Money(revenue));
+    public PersonBuilder withRevenue(String revenue) {
+        float revenueInFloat = Float.valueOf(revenue);
+        this.revenue = new Revenue(new Money(revenueInFloat));
         return this;
     }
 

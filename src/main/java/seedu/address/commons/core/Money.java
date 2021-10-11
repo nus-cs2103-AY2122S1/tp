@@ -1,5 +1,7 @@
 package seedu.address.commons.core;
 
+import seedu.address.model.person.Revenue;
+
 public class Money {
     private static final float CONVERT_BETWEEN_CURRENCY = 100f;
     private int cents;
@@ -14,6 +16,13 @@ public class Money {
 
     public float getInDollars() {
         return (this.cents / CONVERT_BETWEEN_CURRENCY);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Money // instanceof handles nulls
+                && (cents == ((Money) other).getCents())); // state check
     }
 
     @Override

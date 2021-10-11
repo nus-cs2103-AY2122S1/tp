@@ -130,6 +130,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Revenue revenue;
         private Address address;
         private Set<Tag> tags;
 
@@ -143,6 +144,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setRevenue(toCopy.revenue);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -176,6 +178,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setRevenue(Revenue revenue) {
+            this.revenue = revenue;
+        }
+
+        public Optional<Revenue> getRevenue() {
+            return Optional.ofNullable(revenue);
         }
 
         public void setAddress(Address address) {
@@ -221,6 +231,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getRevenue().equals(e.getRevenue())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
