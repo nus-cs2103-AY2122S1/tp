@@ -34,8 +34,8 @@ import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
 import seedu.address.model.client.PhoneNumber;
+import seedu.address.model.commons.Name;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class EditClientCommandParserTest {

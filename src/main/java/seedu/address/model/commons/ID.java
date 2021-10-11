@@ -1,5 +1,7 @@
 package seedu.address.model.commons;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Represents a Client's or Product's ID in the address book.
  * Guarantees: immutable; is unique.
@@ -13,8 +15,13 @@ public class ID {
         id = idCounter;
         idCounter++;
     }
-
+    /**
+     * Constructs a {@code ID}.
+     *
+     * @param idString A valid id.
+     */
     public ID(String idString) {
+        requireAllNonNull(idString);
         id = Integer.parseInt(idString);
     }
 

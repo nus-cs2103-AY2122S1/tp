@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditProductCommand;
 import seedu.address.logic.commands.EditProductCommand.EditProductDescriptor;
-import seedu.address.model.product.Name;
+import seedu.address.model.commons.Name;
 import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
 import seedu.address.testutil.EditProductDescriptorBuilder;
