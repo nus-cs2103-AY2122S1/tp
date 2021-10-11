@@ -91,13 +91,13 @@ public class EditPersonDescriptorBuilder {
      * {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withInsurances(String... insurances) {
-        Set<Insurance> insuranceSet = Stream.of(insurances).
-                map(SampleDataUtil::ofValidInsurance).collect(Collectors.toSet());
+        Set<Insurance> insuranceSet = Stream.of(insurances)
+                .map(SampleDataUtil::ofValidInsurance).collect(Collectors.toSet());
         descriptor.setInsurances(insuranceSet);
         return this;
     }
 
-     /**
+    /**
      * Parses the {@code Note} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withNote(String note) {

@@ -41,7 +41,7 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         person.getInsurances().stream().forEach(
-                i -> sb.append(PREFIX_TAG + i.getType().getTypeName() + " ")
+            i -> sb.append(PREFIX_TAG + i.getType().getTypeName() + " ")
         );
         return sb.toString();
     }
