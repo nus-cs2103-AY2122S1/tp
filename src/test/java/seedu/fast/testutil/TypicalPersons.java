@@ -23,6 +23,7 @@ import java.util.List;
 
 import seedu.fast.model.Fast;
 import seedu.fast.model.person.Person;
+import seedu.fast.model.tag.PriorityTag;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -53,9 +54,11 @@ public class TypicalPersons {
             .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withTags(PriorityTag.LowPriority.NAME)
             .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
+            .withTags(PriorityTag.HighPriority.NAME)
             .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).build();
 
     // Manually added

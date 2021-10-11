@@ -12,7 +12,7 @@ import java.util.List;
  * Tests that a {@code Person}'s {@code PriorityTag} matches any of the priorities given.
  */
 public class PriorityPredicate implements Predicate<Person> {
-    private final List<String> tags;
+    public final List<String> tags;
 
     public PriorityPredicate(List<String> tags){
         this.tags=tags;
