@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonWithoutOwner;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -19,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +38,8 @@ class JsonAdaptedPerson {
     private final String parentPhone;
     private final String parentEmail;
     private final String address;
+    private final String school;
+    private final String acadStream;
     private final String outstandingFee;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -47,6 +52,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("parent phone") String parentPhone,
                              @JsonProperty("parent email") String parentEmail, @JsonProperty("address") String address,
+                             @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
                              @JsonProperty("outstanding fee") String outstandingFee,
                              @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
@@ -57,6 +63,8 @@ class JsonAdaptedPerson {
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
         this.address = address;
+        this.school = school;
+        this.acadStream = acadStream;
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         if (tagged != null) {
@@ -74,10 +82,11 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-
         parentPhone = source.getParentPhone().value;
         parentEmail = source.getParentEmail().value;
         address = source.getAddress().value;
+        school = source.getSchool().value;
+        acadStream = source.getAcadStream().value;
         outstandingFee = source.getFee().value;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
@@ -156,10 +165,22 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (school == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
+        }
+        final School modelSchool = new School(school);
+
+        if (acadStream == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadStream.class.getSimpleName()));
+        }
+        final AcadStream modelAcadStream = new AcadStream(acadStream);
+
         if (outstandingFee == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
         }
         final Fee modelFee = new Fee(outstandingFee);
+
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -170,8 +191,7 @@ class JsonAdaptedPerson {
 
         final Set<LessonWithoutOwner> modelLessonWithoutOwner = new TreeSet<>(personLessons);
 
-        return new Person(modelLessonWithoutOwner, modelName, modelPhone, modelEmail,
-                modelParentPhone, modelParentEmail, modelAddress, modelFee, modelRemark, modelTags);
+        return new Person(modelLessonWithoutOwner, modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
+                modelAddress, modelSchool, modelAcadStream, modelFee, modelRemark, modelTags);
     }
-
 }
