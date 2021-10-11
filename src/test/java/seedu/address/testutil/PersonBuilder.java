@@ -3,11 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -18,14 +14,24 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_EMAIL = "e0123456@u.nus.edu";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_GITHUB_ID = "amy-bee";
+    public static final String DEFAULT_NUS_NETWORK_ID = "e0123456";
+    public static final String DEFAULT_TYPE = "student";
+    public static final String DEFAULT_STUDENT_ID = "A0123456X";
+    public static final String DEFAULT_TUTORIAL_ID = "00";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private GitHubId gitHubId;
+    private NusNetworkId nusNetworkId;
+    private Type type;
+    private StudentId studentId;
+    private TutorialId tutorialId;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +42,11 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        gitHubId = new GitHubId(DEFAULT_GITHUB_ID);
+        nusNetworkId = new NusNetworkId(DEFAULT_NUS_NETWORK_ID);
+        type = new Type(DEFAULT_TYPE);
+        studentId = new StudentId(DEFAULT_STUDENT_ID);
+        tutorialId = new TutorialId(DEFAULT_TUTORIAL_ID);
     }
 
     /**
@@ -47,6 +58,11 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        gitHubId = personToCopy.getGitHubId();
+        nusNetworkId = personToCopy.getNusNetworkId();
+        type = personToCopy.getType();
+        studentId = personToCopy.getStudentId();
+        tutorialId = personToCopy.getTutorialId();
     }
 
     /**
@@ -89,8 +105,48 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code GitHubId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGitHubId(String gitHubId) {
+        this.gitHubId = new GitHubId(gitHubId);
+        return this;
+    }
+
+    /**
+     * Sets the {@code NusNetworkId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNusNetworkId(String nusNetworkId) {
+        this.nusNetworkId = new NusNetworkId(nusNetworkId);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Type} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withType(String type) {
+        this.type = new Type(type);
+        return this;
+    }
+
+    /**
+     * Sets the {@code StudentId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStudentId(String studentId) {
+        this.studentId = new StudentId(studentId);
+        return this;
+    }
+
+    /**
+     * Sets the {@code TutorialId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTutorialId(String tutorialId) {
+        this.tutorialId = new TutorialId(tutorialId);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, gitHubId, nusNetworkId, type, studentId, tutorialId);
     }
 
 }

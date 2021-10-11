@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -30,12 +26,23 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_EMAIL_AMY = "e0000000@u.nus.edu";
+    public static final String VALID_EMAIL_BOB = "e1111111@u.nus.edu";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_GITHUB_ID_AMY = "amy";
+    public static final String VALID_GITHUB_ID_BOB = "bob";
+    public static final String VALID_NUS_NETWORK_ID_AMY = "e0000000";
+    public static final String VALID_NUS_NETWORK_ID_BOB = "e1111111";
+    public static final String VALID_TYPE_AMY = "student";
+    public static final String VALID_TYPE_BOB = "student";
+    public static final String VALID_STUDENT_ID_AMY = "A0000000A";
+    public static final String VALID_STUDENT_ID_BOB = "A1111111A";
+    public static final String VALID_TUTORIAL_ID_AMY = "00";
+    public static final String VALID_TUTORIAL_ID_BOB = "11";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +54,28 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String GITHUB_ID_DESC_AMY = " " + PREFIX_GITHUB_ID + VALID_GITHUB_ID_AMY;
+    public static final String GITHUB_ID_DESC_BOB = " " + PREFIX_GITHUB_ID + VALID_GITHUB_ID_BOB;
+    public static final String NUS_NETWORK_ID_DESC_AMY = " " + PREFIX_NUS_NETWORK_ID + VALID_NUS_NETWORK_ID_AMY;
+    public static final String NUS_NETWORK_ID_DESC_BOB = " " + PREFIX_NUS_NETWORK_ID + VALID_NUS_NETWORK_ID_BOB;
+    public static final String TYPE_DESC_AMY = " " + PREFIX_TYPE + VALID_TYPE_AMY;
+    public static final String TYPE_DESC_BOB = " " + PREFIX_TYPE + VALID_TYPE_BOB;
+    public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_AMY;
+    public static final String STUDENT_ID_DESC_BOB = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_BOB;
+    public static final String TUTORIAL_ID_DESC_AMY = " " + PREFIX_TUTORIAL_ID + VALID_TUTORIAL_ID_AMY;
+    public static final String TUTORIAL_ID_DESC_BOB = " " + PREFIX_TUTORIAL_ID + VALID_TUTORIAL_ID_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_GITHUB_ID_DESC = " " + PREFIX_GITHUB_ID + "sid-"; // GitHub ID can't end with '-'
+    public static final String INVALID_NUS_NETWORK_ID_DESC = " " + PREFIX_NUS_NETWORK_ID + "e000000"; // need 7 digits
+    public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "teacher"; // accepts only student or tutor
+    public static final String INVALID_STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID + "A000000X"; // 7 digits in the middle
+    public static final String INVALID_TUTORIAL_ID_DESC = " " + PREFIX_TUTORIAL_ID + "001"; // only 2 digit tutorial id
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -62,8 +85,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY)
+                .withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND)
+                .build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();

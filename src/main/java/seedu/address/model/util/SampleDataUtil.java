@@ -6,11 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,22 +17,28 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
+                getTagSet("friends"), new GitHubId("test1"), new NusNetworkId("e0123456"),
+                new Type("student"), new StudentId("A0123456A"), new TutorialId("01")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("colleagues", "friends"), new GitHubId("test2"), new NusNetworkId("e0123457"),
+                new Type("student"), new StudentId("A0123456B"), new TutorialId("02")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
+                getTagSet("neighbours"), new GitHubId("test3"), new NusNetworkId("e0123458"),
+                new Type("student"), new StudentId("A0123456C"), new TutorialId("03")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
+                getTagSet("family"), new GitHubId("test4"), new NusNetworkId("e0123459"),
+                new Type("student"), new StudentId("A0123456D"), new TutorialId("04")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
+                getTagSet("classmates"), new GitHubId("test5"), new NusNetworkId("e0123450"),
+                new Type("student"), new StudentId("A0123456E"), new TutorialId("05")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+                getTagSet("colleagues"), new GitHubId("test6"), new NusNetworkId("e0123451"),
+                new Type("student"), new StudentId("A0123456F"), new TutorialId("06"))
         };
     }
 
