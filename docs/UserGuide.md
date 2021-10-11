@@ -203,11 +203,11 @@ _Details coming soon ..._
 ### Editing a student's Studio attendance: `attendance`
 Avengers will be able to edit the attendance status of their students.
 
-Format: `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`
+Format: `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS`
 
-* Edits the attendance of a student or multiple students who have the matching `KEYWORD` in their names and in Studio group as defined by `STUDIO_GROUP`.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* Edits the attendance of a student or multiple students based on their `INDEX`
+* Edits the tutee(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Multiple `INDEX` can be parsed in at once as long as they are all valid.
 * If `INDEX` is not supplied, the command will edit the attendance of the student is in the last created Studio session. Otherwise, it will execute the edit in the specified Studio session if `INDEX` is valid.
 * The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student attended the session or not.
 * Existing values will be updated to the input values.
