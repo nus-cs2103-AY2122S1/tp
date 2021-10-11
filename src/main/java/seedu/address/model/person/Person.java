@@ -33,7 +33,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
-        DisposableIncome disposableIncome ,CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
+        DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.clientId = clientId;
         this.name = name;
@@ -107,7 +107,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getClientId().equals(getClientId())
+                && otherPerson.getName().equals(getName())
                     || otherPerson.getEmail().equals(getEmail());
     }
 

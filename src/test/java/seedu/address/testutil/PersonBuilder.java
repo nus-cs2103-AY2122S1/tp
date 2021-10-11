@@ -21,7 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_CLIENTID = "9";
+    public static final String DEFAULT_CLIENTID = "0";
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -129,7 +129,7 @@ public class PersonBuilder {
         this.riskAppetite = new RiskAppetite(riskAppetite);
         return this;
     }
-  
+
     /**
      * Sets the {@code DisposableIncome} of the {@code Person} that we are building.
      */
@@ -154,6 +154,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * @return {@code Person} that we are building
+     */
     public Person build() {
         return new Person(clientId, name, phone, email, address, riskAppetite,
             disposableIncome, currentPlan, lastMet, tags);

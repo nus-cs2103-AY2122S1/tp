@@ -46,9 +46,12 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("clientId") String clientId, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address, @JsonProperty("riskAppetite") String riskAppetite,
-                             @JsonProperty("disposableIncome") String disposableIncome, @JsonProperty("current-plan") String currentPlan,
-                             @JsonProperty("last-met") String lastMet, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("address") String address,
+                             @JsonProperty("riskAppetite") String riskAppetite,
+                             @JsonProperty("disposableIncome") String disposableIncome,
+                             @JsonProperty("current-plan") String currentPlan,
+                             @JsonProperty("last-met") String lastMet,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
 
         this.clientId = clientId;
         this.name = name;

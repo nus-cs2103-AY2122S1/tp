@@ -130,6 +130,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void filterFilteredPersonList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        Predicate<? super Person> currentPredicate = filteredPersons.getPredicate();
+        if (currentPredicate == null) {
+            currentPredicate = PREDICATE_SHOW_ALL_PERSONS;
+        }
+        filteredPersons.setPredicate(predicate.and(currentPredicate));
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
