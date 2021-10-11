@@ -15,7 +15,7 @@ public class PersonModuleCodesContainsKeywordsPredicate implements Predicate<Per
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getModuleCodes()
+                .allMatch(keyword -> person.getModuleCodes()
                         .stream().anyMatch(moduleCode ->
                                 keyword.equalsIgnoreCase(moduleCode.toString())
                         )
