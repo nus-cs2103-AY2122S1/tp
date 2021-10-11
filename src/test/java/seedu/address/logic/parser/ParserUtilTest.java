@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_CLIENT_ID;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalClientIds.CLIENT_ID_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -24,8 +26,6 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_PHONE_FROM_PARSER = "+651234";
-    private static final String INVALID_PHONE = "651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -57,6 +57,26 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseClientId_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientId("10 a"));
+    }
+
+    @Test
+    public void parseClientId_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class,
+            MESSAGE_INVALID_CLIENT_ID, () -> ParserUtil.parseClientId(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseClientId_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(CLIENT_ID_FIRST_PERSON, ParserUtil.parseClientId("0"));
+
+        // Leading and trailing whitespaces
+        assertEquals(CLIENT_ID_FIRST_PERSON, ParserUtil.parseClientId("  0  "));
     }
 
     @Test
