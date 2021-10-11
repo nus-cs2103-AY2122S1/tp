@@ -10,6 +10,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Represents an Employee in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Employee extends Person {
     private Leaves leaves;
     private Salary salary;

@@ -3,8 +3,12 @@ package seedu.address.model.person.employee;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Employee's salary in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidSalary(String)}
+ */
 public class Salary {
-    public static final String MESSAGE_CONSTRAINTS = "Salary should be between 1-6 digits, and max 2 digits after the"
+    public static final String MESSAGE_CONSTRAINTS = "Salary should be numerical"
             + ".";
 
     /*

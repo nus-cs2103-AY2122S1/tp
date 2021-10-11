@@ -3,6 +3,10 @@ package seedu.address.model.person.employee;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Employee's number of leaves in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidLeaves(String)}
+ */
 public class Leaves {
     public static final String MESSAGE_CONSTRAINTS =
             "Leaves should only be in numbers";

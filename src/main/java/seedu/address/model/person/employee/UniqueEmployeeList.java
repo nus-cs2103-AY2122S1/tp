@@ -8,9 +8,21 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+/**
+ * A list of employees that enforces uniqueness between its elements and does not allow nulls.
+ * An employee is considered unique by comparing using {@code Employee#isSameEmployee(Employee)}.
+ * As such, adding and updating of employees uses Employee#isSameEmployee(Employee) for equality so as to
+ * ensure that the employee being added or updated is unique in terms of identity in the UniqueEmployeeList.
+ * However, the removal of an employee uses Employee#equals(Object) so as to ensure that the employee with exactly
+ * the same fields will be removed.
+ * Supports a minimal set of list operations.
+ *
+ * @see Employee#isSameEmployee(Employee)
+ */
 public class UniqueEmployeeList implements Iterable<Employee> {
 
     private final ObservableList<Employee> internalList = FXCollections.observableArrayList();
@@ -111,7 +123,7 @@ public class UniqueEmployeeList implements Iterable<Employee> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code employees} contains only unique employees.
      */
     private boolean employeesAreUnique(List<Employee> employees) {
         for (int i = 0; i < employees.size() - 1; i++) {

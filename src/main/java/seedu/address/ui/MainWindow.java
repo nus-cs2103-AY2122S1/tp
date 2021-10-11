@@ -8,7 +8,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -17,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.employee.Employee;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -117,10 +115,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
-        employeeListPanelPlaceHolder.getChildren().add(employeeListPanel.getRoot());
+//        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // take in personList as children
+        personListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot()); // take in employeeList as children
+
+//        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
+//        employeeListPanelPlaceHolder.getChildren().add(employeeListPanel.getRoot()); // only this line doesn't work
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

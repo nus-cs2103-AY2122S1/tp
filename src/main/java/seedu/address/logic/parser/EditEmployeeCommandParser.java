@@ -22,10 +22,13 @@ import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new EditEmployeeCommand object
+ */
 public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditEmployeeCommand
+     * and returns an EditEmployeeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditEmployeeCommand parse(String args) throws ParseException {
@@ -69,9 +72,9 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEmployeeDescriptor::setTags);
 
         if (!editEmployeeDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditEmployeeCommand.MESSAGE_NOT_EDITED);
         }
-
+        System.out.println("At least completed EditEmployeeCommand");
         return new EditEmployeeCommand(index, editEmployeeDescriptor);
     }
 

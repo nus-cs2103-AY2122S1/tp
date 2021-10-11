@@ -10,6 +10,9 @@ import javafx.scene.control.ListView;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.employee.Employee;
 
+/**
+ * Panel containing the list of employees.
+ */
 public class EmployeeListPanel extends UiPart<Region> {
     private static final String FXML = "EmployeeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EmployeeListPanel.class);
@@ -18,7 +21,7 @@ public class EmployeeListPanel extends UiPart<Region> {
     private ListView<Employee> employeeListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code EmployeeListPanel} with the given {@code ObservableList}.
      */
     public EmployeeListPanel(ObservableList<Employee> employeeList) {
         super(FXML);
@@ -27,7 +30,7 @@ public class EmployeeListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Employee} using a {@code EmployeeCard}.
      */
     class EmployeeListViewCell extends ListCell<Employee> {
         @Override

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -32,8 +33,9 @@ import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
 import seedu.address.model.tag.Tag;
 
-
-
+/**
+ * Edits the details of an existing employee in the address book.
+ */
 public class EditEmployeeCommand extends Command {
 
     public static final String COMMAND_WORD = "editemployee";
@@ -63,8 +65,8 @@ public class EditEmployeeCommand extends Command {
     private final EditEmployeeCommand.EditEmployeeDescriptor editEmployeeDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editEmployeeDescriptor details to edit the person with
+     * @param index of the employee in the filtered employee list to edit
+     * @param editEmployeeDescriptor details to edit the employee with
      */
     public EditEmployeeCommand(Index index, EditEmployeeCommand.EditEmployeeDescriptor editEmployeeDescriptor) {
         requireNonNull(index);
@@ -86,18 +88,18 @@ public class EditEmployeeCommand extends Command {
         Employee employeeToEdit = lastShownList.get(index.getZeroBased());
         Employee editedEmployee = createEditedEmployee(employeeToEdit, editEmployeeDescriptor);
 
-        if (!employeeToEdit.isSameEmployee(editedEmployee) && model.hasPerson(editedEmployee)) {
+        if (!employeeToEdit.isSameEmployee(editedEmployee) && model.hasEmployee(editedEmployee)) {
             throw new CommandException(MESSAGE_DUPLICATE_EMPLOYEE);
         }
 
-        model.setPerson(employeeToEdit, editedEmployee);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setEmployee(employeeToEdit, editedEmployee);
+        model.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
         return new CommandResult(String.format(MESSAGE_EDIT_EMPLOYEE_SUCCESS, editedEmployee));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Employee} with the details of {@code employeeToEdit}
+     * edited with {@code editEmployeeDescriptor}.
      */
     private static Employee createEditedEmployee(Employee employeeToEdit,
                                                  EditEmployeeCommand.EditEmployeeDescriptor editEmployeeDescriptor) {
@@ -135,8 +137,8 @@ public class EditEmployeeCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the employee with. Each non-empty field value will replace the
+     * corresponding field value of the emplyoee.
      */
     public static class EditEmployeeDescriptor {
         private Name name;
@@ -169,7 +171,8 @@ public class EditEmployeeCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, leaves,
+                    salary, jobTitle, tags);
         }
 
         public void setName(Name name) {

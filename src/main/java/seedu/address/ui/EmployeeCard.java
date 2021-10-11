@@ -9,6 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.employee.Employee;
 
+/**
+ * An UI component that displays information of a {@code Employee}.
+ */
 public class EmployeeCard extends UiPart<Region> {
     private static final String FXML = "EmployeeListCard.fxml";
 

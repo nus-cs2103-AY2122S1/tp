@@ -26,10 +26,13 @@ import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new AddEmployeeCommand object
+ */
 public class AddEmployeeCommandParser implements Parser<AddEmployeeCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddEmployeeCommand
+     * and returns an AddEmployeeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddEmployeeCommand parse(String args) throws ParseException {
