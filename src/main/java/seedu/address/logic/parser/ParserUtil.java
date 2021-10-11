@@ -46,11 +46,11 @@ public class ParserUtil {
      * Parses {@code clientId} into an {@code ClientId} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-negative unsigned integer).
+     * @throws ParseException if the specified index is invalid (not non-negative integer).
      */
     public static ClientId parseClientId(String clientId) throws ParseException {
         String trimmedId = clientId.trim();
-        if (!StringUtil.isNonNegativeUnsignedInteger(trimmedId)) {
+        if (!StringUtil.isNonNegativeInteger(trimmedId)) {
             throw new ParseException(MESSAGE_INVALID_CLIENT_ID);
         }
         return new ClientId(trimmedId);

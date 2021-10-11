@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClientId;
@@ -14,10 +15,6 @@ public class ViewCommand extends Command {
             + "by his/her client id. \n"
             + "Parameters: view {client id of the customer} \n"
             + "Example: " + COMMAND_WORD + " 1 ";
-
-    // Results to be printed to the Result Display
-    public static final String MESSAGE_VIEW_SUCCESS = "Viewing person: %1$s";
-    public static final String MESSAGE_NON_EXISTENT_USER = "There's no contact with client ID %s";
 
     private final PersonHasId predicate;
     private final ClientId clientId;
@@ -36,9 +33,9 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updatePersonToView(predicate);
         if (!model.isPersonExistToView()) {
-            return new CommandResult(String.format(MESSAGE_NON_EXISTENT_USER, clientId.toString()));
+            return new CommandResult(String.format(Messages.MESSAGE_VIEW_INVALID_CLIENT_ID, clientId.toString()));
         }
-        return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, model.getNameOfPersonToView()));
+        return new CommandResult(String.format(Messages.MESSAGE_VIEW_SUCCESS, model.getNameOfPersonToView()));
     }
 
     @Override

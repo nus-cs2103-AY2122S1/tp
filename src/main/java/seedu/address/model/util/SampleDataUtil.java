@@ -27,8 +27,8 @@ public class SampleDataUtil {
             new Person(new ClientId("0"), new Name("Alex Yeoh"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
                 new RiskAppetite("1"), new DisposableIncome("500"),
-                new CurrentPlan("Prudential PRUwealth, AIA Pro Achiever 2.0, Syfe Select, a lot more plans......." +
-                    ", Even more plans................................."),
+                new CurrentPlan("Prudential PRUwealth, AIA Pro Achiever 2.0, Syfe Select, a lot more plans......."
+                    + ", Even more plans................................."),
                 new LastMet("24-01-2021"), getTagSet("friends")),
             new Person(new ClientId("1"), new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
