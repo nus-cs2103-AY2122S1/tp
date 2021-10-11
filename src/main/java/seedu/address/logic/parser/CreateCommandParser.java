@@ -46,7 +46,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Mod> modList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD));
 
-        Person person = new Person(name, id, phone, email, modList, true);
+        Person person = new Person(name, id, phone, email, false, modList, true);
 
         return new CreateCommand(person);
     }

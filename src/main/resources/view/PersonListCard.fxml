@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -27,9 +28,10 @@
           </minWidth>
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <ImageView fx:id="fav" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
       </HBox>
       <FlowPane fx:id="mods" />
-      <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId"/>
+      <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
