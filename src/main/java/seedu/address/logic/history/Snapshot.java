@@ -37,6 +37,8 @@ public class Snapshot<T extends Copyable<T>> {
      * @param object The new object.
      */
     public Snapshot<T> edit(T object) {
+        requireNonNull(object);
+
         return new EditedSnapshot<T>(this.object.copy(), object);
     }
 }
