@@ -3,16 +3,15 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicateLessonException;
+
 
 /**
  * Wraps all data at the address-book level
@@ -145,6 +144,11 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new DuplicateLessonException();
         }
         this.lessons.setLessons(lessons);
+    }
+
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireNonNull(editedLesson);
+        lessons.setLesson(target, editedLesson);
     }
 
     /**

@@ -1,16 +1,27 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-import java.util.Iterator;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/**
+ * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
+ * A lesson is considered unique by comparing using {@code Lesson#isSameLesson(Lesson)}. As such, adding and updating of
+ * lessons uses Lesson#isSameLesson(Lesson) for equality so as to ensure that the lesson being added or updated is
+ * unique in terms of identity in the UniqueLessonList. However, the removal of a lesson uses Lesson#equals(Object) so
+ * as to ensure that the lesson with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Lesson#isSameLesson(Lesson)
+ */
 public class UniqueLessonList implements Iterable<Lesson> {
 
     private final ObservableList<Lesson> internalList = FXCollections.observableArrayList();
@@ -18,7 +29,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent lesson as the given argument.
      */
     public boolean contains(Lesson toCheck) {
         requireNonNull(toCheck);
@@ -26,8 +37,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a lesson to the list.
+     * The lesson must not already exist in the list.
      */
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
@@ -38,9 +49,9 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
      */
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
@@ -58,8 +69,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent lesson from the list.
+     * The lesson must exist in the list.
      */
     public void remove(Lesson toRemove) {
         requireNonNull(toRemove);
@@ -68,14 +79,14 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
     }
 
-    public void setLessons(seedu.address.model.lesson.UniqueLessonList replacement) {
+    public void setLessons(UniqueLessonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
      */
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
@@ -101,8 +112,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.person.UniquePersonList // instanceof handles nulls
-                && internalList.equals(((seedu.address.model.lesson.UniqueLessonList) other).internalList));
+                || (other instanceof UniqueLessonList // instanceof handles nulls
+                && internalList.equals(((UniqueLessonList) other).internalList));
     }
 
     @Override
@@ -111,7 +122,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code lessons} contains only unique lessons.
      */
     private boolean lessonsAreUnique(List<Lesson> lessons) {
         for (int i = 0; i < lessons.size() - 1; i++) {

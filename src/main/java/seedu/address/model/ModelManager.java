@@ -133,6 +133,12 @@ public class ModelManager implements Model {
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
+    @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+        addressBook.setLesson(target, editedLesson);
+    }
+
     //=========== Filtered Person and Lesson List Accessors ======================================================
 
     /**
@@ -194,7 +200,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredStudents.equals(other.filteredStudents)
+                && filteredLessons.equals(other.filteredLessons);
     }
 
 }
