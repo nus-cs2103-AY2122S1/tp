@@ -40,7 +40,7 @@ class JsonAdaptedLesson {
                              @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework) {
-        this.date = StringUtil.trimLeadingZeroes(date);
+        this.date = StringUtil.stripLeadingZeroes(date);
         this.timeRange = timeRange;
         this.subject = subject;
         if (homework != null) {

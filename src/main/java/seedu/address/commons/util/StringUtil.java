@@ -72,7 +72,7 @@ public class StringUtil {
      * @param s String to modify.
      * @return Stripped string.
      */
-    public static String trimLeadingZeroes(String s) {
+    public static String stripLeadingZeroes(String s) {
         String regex = "^0+(?!$)";
         return s.replaceAll(regex, "");
     }
