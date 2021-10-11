@@ -10,12 +10,12 @@ import seedu.address.model.commons.Name;
  * A utility class to help with building Client objects.
  */
 public class ClientBuilder {
-
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_PHONE_NUMBER = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    private Client client;
     private Name name;
     private PhoneNumber phoneNumber;
     private Email email;
@@ -25,8 +25,9 @@ public class ClientBuilder {
      * Creates a {@code ClientBuilder} with the default details.
      */
     public ClientBuilder() {
+        client = null;
         name = new Name(DEFAULT_NAME);
-        phoneNumber = new PhoneNumber(DEFAULT_PHONE);
+        phoneNumber = new PhoneNumber(DEFAULT_PHONE_NUMBER);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
     }
@@ -35,10 +36,19 @@ public class ClientBuilder {
      * Initializes the ClientBuilder with the data of {@code clientToCopy}.
      */
     public ClientBuilder(Client clientToCopy) {
+        client = clientToCopy;
         name = clientToCopy.getName();
         phoneNumber = clientToCopy.getPhoneNumber();
         email = clientToCopy.getEmail();
         address = clientToCopy.getAddress();
+    }
+
+    /**
+     * Sets the {@code ID} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withId(Client client) {
+        this.client = client;
+        return this;
     }
 
     /**
@@ -49,7 +59,6 @@ public class ClientBuilder {
         return this;
     }
 
-
     /**
      * Sets the {@code Address} of the {@code Client} that we are building.
      */
@@ -59,10 +68,10 @@ public class ClientBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Client} that we are building.
+     * Sets the {@code PhoneNumber} of the {@code Client} that we are building.
      */
-    public ClientBuilder withPhone(String phone) {
-        this.phoneNumber = new PhoneNumber(phone);
+    public ClientBuilder withPhoneNumber(String phoneNumber) {
+        this.phoneNumber = new PhoneNumber(phoneNumber);
         return this;
     }
 
@@ -74,7 +83,12 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Client}.
+     */
     public Client build() {
-        return new Client(name, phoneNumber, email, address);
+        return client == null
+               ? new Client(name, phoneNumber, email, address)
+               : Client.updateClient(client, name, phoneNumber, email, address);
     }
 }

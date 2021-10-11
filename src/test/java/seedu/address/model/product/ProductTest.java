@@ -2,14 +2,12 @@ package seedu.address.model.product;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CANNON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DAISY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_CANNON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_DAISY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_PRICE_CANNON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_PRICE_DAISY;
+import static seedu.address.testutil.TypicalProducts.CANNON;
+import static seedu.address.testutil.TypicalProducts.DAISY;
 import static seedu.address.testutil.TypicalProducts.IPAD;
-import static seedu.address.testutil.TypicalProducts.IPHONE;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,62 +17,61 @@ public class ProductTest {
     @Test
     public void isSameProduct() {
         // same object -> returns true
-        assertTrue(IPHONE.isSameProduct(IPHONE));
+        assertTrue(CANNON.isSameProduct(CANNON));
 
         // null -> returns false
-        assertFalse(IPHONE.isSameProduct(null));
+        assertFalse(CANNON.isSameProduct(null));
 
-        //Todo: testing same id, all other attributes different -> returns true
+        // same id, same data fields
+        Product copiedCannon = new ProductBuilder(CANNON).build();
+        assertTrue(CANNON.isSameProduct(copiedCannon));
 
-        // same name, all other attributes different -> returns false
-        Product editedIphone = new ProductBuilder(IPHONE).withUnitPrice(VALID_UNIT_PRICE_CANNON)
-                .withQuantity(VALID_QUANTITY_CANNON).build();
-        assertFalse(IPHONE.isSameProduct(editedIphone));
+        // same id, different data fields
+        Product editedCannon = new ProductBuilder(CANNON)
+                .withName(VALID_NAME_DAISY)
+                .withUnitPrice(VALID_UNIT_PRICE_DAISY)
+                .withQuantity(VALID_QUANTITY_DAISY)
+                .build();
+        assertTrue(CANNON.isSameProduct(editedCannon));
 
-        // different name, all other attributes same -> returns false
-        editedIphone = new ProductBuilder(IPHONE).withName(VALID_NAME_CANNON).build();
-        assertFalse(IPHONE.isSameProduct(editedIphone));
+        // different id, same data fields
+        editedCannon = new ProductBuilder(CANNON).withId(DAISY).build();
+        assertFalse(CANNON.isSameProduct(editedCannon));
 
-        // name differs in case, all other attributes same -> returns false
-        Product editedIpad = new ProductBuilder(IPAD).withName(VALID_NAME_CANNON.toLowerCase()).build();
-        assertFalse(IPAD.isSameProduct(editedIpad));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_CANNON + " ";
-        editedIpad = new ProductBuilder(IPAD).withName(nameWithTrailingSpaces).build();
-        assertFalse(IPAD.isSameProduct(editedIpad));
+        // different id, different data fields
+        editedCannon = new ProductBuilder(DAISY).build();
+        assertFalse(CANNON.isSameProduct(editedCannon));
     }
 
     @Test
     public void equals() {
-
         // same object -> returns true
-        assertTrue(IPHONE.equals(IPHONE));
+        assertTrue(CANNON.equals(CANNON));
 
         // same values but different id -> returns false
-        Product iphoneCopy = new ProductBuilder(IPHONE).build();
-        assertFalse(IPHONE.equals(iphoneCopy));
+        Product cannonCopy = new ProductBuilder(CANNON).withId(DAISY).build();
+        assertFalse(CANNON.equals(cannonCopy));
 
         // null -> returns false
-        assertFalse(IPHONE.equals(null));
+        assertFalse(CANNON.equals(null));
 
         // different type -> returns false
-        assertFalse(IPHONE.equals(5));
+        assertFalse(CANNON.equals(5));
 
         // different person -> returns false
-        assertFalse(IPHONE.equals(IPAD));
+        assertFalse(CANNON.equals(IPAD));
 
         // different name -> returns false
-        Product editedIphone = new ProductBuilder(IPHONE).withName(VALID_NAME_DAISY).build();
-        assertFalse(IPHONE.equals(editedIphone));
+        Product editedCannon = new ProductBuilder(CANNON).withName(VALID_NAME_DAISY).build();
+        assertFalse(CANNON.equals(editedCannon));
 
         // different unit price -> returns false
-        editedIphone = new ProductBuilder(IPHONE).withUnitPrice(VALID_UNIT_PRICE_DAISY).build();
-        assertFalse(IPHONE.equals(editedIphone));
+        editedCannon = new ProductBuilder(CANNON).withUnitPrice(VALID_UNIT_PRICE_DAISY).build();
+        assertFalse(CANNON.equals(editedCannon));
 
         // different quantity -> returns false
-        editedIphone = new ProductBuilder(IPHONE).withQuantity(VALID_QUANTITY_DAISY).build();
-        assertFalse(IPHONE.equals(editedIphone));
+        editedCannon = new ProductBuilder(CANNON).withQuantity(VALID_QUANTITY_DAISY).build();
+        assertFalse(CANNON.equals(editedCannon));
 
 
     }
