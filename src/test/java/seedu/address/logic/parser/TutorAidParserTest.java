@@ -22,9 +22,9 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class TutorAidParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final TutorAidParser parser = new TutorAidParser();
 
     @Test
     public void parseCommand_add() throws Exception {
