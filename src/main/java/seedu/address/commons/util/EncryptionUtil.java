@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Logger;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -13,7 +15,12 @@ import javax.crypto.SealedObject;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+
 public class EncryptionUtil {
+
+    private static final Logger logger = LogsCenter.getLogger(EncryptionUtil.class);
 
     public static Cipher createCipherInstance(int opmode) {
         try {
@@ -24,8 +31,8 @@ public class EncryptionUtil {
             cipher.init(opmode, key, new IvParameterSpec(new byte[16]));
             return cipher;
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
-            System.out.println(e);
-            return null;
+            logger.warning("Error create new Cipher instance with opmode" + opmode + ": " + e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -33,18 +40,18 @@ public class EncryptionUtil {
         try {
             return new SealedObject(serializableObject, createCipherInstance(Cipher.ENCRYPT_MODE));
         } catch (IllegalBlockSizeException e) {
-            System.out.println(e);
+            logger.warning("Error encrypted serializable object " + serializableObject + ": " + e);
+            throw new IOException(e);
         }
-        return null;
     }
 
-    public static Serializable decryptSealedObject(SealedObject sealedObject) {
+    public static Serializable decryptSealedObject(SealedObject sealedObject) throws IOException {
         try {
             return (Serializable) sealedObject.getObject(createCipherInstance(Cipher.DECRYPT_MODE));
         } catch (IOException | ClassNotFoundException | IllegalBlockSizeException
                 | BadPaddingException e) {
-            System.out.println(e);
+            logger.warning("Error decrypting sealed object " + sealedObject + ": " + e);
+            throw new IOException(e);
         }
-        return null;
     }
 }

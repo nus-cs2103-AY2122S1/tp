@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Logger;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -22,6 +23,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SealedObject;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Writes and reads files
@@ -96,8 +99,7 @@ public class FileUtil {
             ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
             return (SealedObject) inputStream.readObject();
         } catch (ClassNotFoundException e) {
-            System.out.println(e);
-            return null;
+            throw new IOException(e);
         }
     }
 
