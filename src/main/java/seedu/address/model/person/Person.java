@@ -44,14 +44,16 @@ public class Person {
     /**
      * Every field for this case is provided and hence a revenue value will be tagged to the person.
      */
-    public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, revenue, address, tags);
+    public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags,
+                  Appointment appointment) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.revenue = revenue;
         this.address = address;
         this.tags.addAll(tags);
+        this.appointment = appointment;
     }
 
     public Name getName() {
