@@ -8,7 +8,7 @@ import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 
-public class AssessmentBuilder {
+public class AssessmentListBuilder {
     /**
      * Takes in a list of students with scores, and returns a list of assessments with those scores reflected
      */
