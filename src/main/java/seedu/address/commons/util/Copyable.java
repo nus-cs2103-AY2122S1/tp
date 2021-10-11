@@ -6,6 +6,7 @@ package seedu.address.commons.util;
 public interface Copyable<T> {
     /**
      * Returns a duplicate copy of the instance of an object.
+     *
      * @return The duplicate copy.
      */
     T copy();

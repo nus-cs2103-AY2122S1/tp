@@ -40,6 +40,7 @@ public class CommandBox extends UiPart<Region> {
 
     /**
      * Handles any key button pressed event.
+     *
      * @param event The key pressed event.
      */
     @FXML
@@ -53,6 +54,7 @@ public class CommandBox extends UiPart<Region> {
         case DOWN:
             handleNavigateHistory(keyCode);
             break;
+        default:
         }
     }
 
@@ -93,6 +95,7 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText(nextCommand.getCommand());
             commandTextField.end();
             break;
+        default:
         }
     }
 

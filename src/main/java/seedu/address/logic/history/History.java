@@ -1,12 +1,12 @@
 package seedu.address.logic.history;
 
-import seedu.address.commons.util.Copyable;
-
 import java.util.LinkedList;
 
+import seedu.address.commons.util.Copyable;
+
 public class History<T extends Copyable<T>> implements Historyable<T> {
-    LinkedList<Snapshot<T>> snapshots = new LinkedList<>();
-    int currentSnapshotIndex = 0;
+    private final LinkedList<Snapshot<T>> snapshots = new LinkedList<>();
+    private int currentSnapshotIndex = 0;
 
     /**
      * Gets the size of the history stack.
@@ -98,5 +98,6 @@ public class History<T extends Copyable<T>> implements Historyable<T> {
             Snapshot<T> restoredSnapshot = snapshot.restore();
             snapshots.set(index, restoredSnapshot);
         }
-    };
+    }
+
 }

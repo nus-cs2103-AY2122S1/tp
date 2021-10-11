@@ -8,7 +8,7 @@ public class EditedSnapshot<T extends Copyable<T>> extends Snapshot<T> {
     /**
      * Stores the object to be saved and the object after changes have been made into an EditedSnapshot.
      *
-     * @param savedObject The object to be saved.
+     * @param savedObject  The object to be saved.
      * @param editedObject The object after changes have been made.
      */
     protected EditedSnapshot(T savedObject, T editedObject) {
