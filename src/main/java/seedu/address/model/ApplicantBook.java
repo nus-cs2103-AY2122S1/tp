@@ -37,6 +37,8 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
         resetData(toBeCopied);
     }
 
+    //// list overwrite operations
+
     /**
      * Replaces the contents of the applicant list with {@code applicants}.
      * {@code applicants} must not contain duplicate applicants.
