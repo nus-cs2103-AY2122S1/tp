@@ -415,6 +415,9 @@ public class Lesson {
         return getLessonCode();
     }
 
+    /**
+     * todo
+     */
     public void removeAll() {
         while (!students.isEmpty()) {
             Student currStudent = students.get(0);
