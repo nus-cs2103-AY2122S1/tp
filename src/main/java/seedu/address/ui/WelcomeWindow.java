@@ -55,13 +55,14 @@ public class WelcomeWindow extends UiPart<Stage>{
         appLogo.setImage(appLogoImage);
         displayAnimatedText(tagLine, delayTime);
 
-        close();
-
         // Fading transition
-        //FadeTransition fadeOut = new FadeTransition(Duration.millis(6000), appLogo);
+        //FadeTransition fadeOut = new FadeTransition(Duration.millis(5000), appLogo);
         //fadeOut.setFromValue(1.0);
         //fadeOut.setToValue(0.0);
         //fadeOut.play();
+
+        fadeTransition();
+        close();
 
         // Quit app
         /*
@@ -81,9 +82,16 @@ public class WelcomeWindow extends UiPart<Stage>{
     }
 
     public void close() {
-        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        PauseTransition delay = new PauseTransition(Duration.millis(5100));
         delay.setOnFinished( event -> getRoot().close() );
         delay.play();
+    }
+
+    public void fadeTransition() {
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(4000), appLogo);
+        fadeOut.setFromValue(0.0);
+        fadeOut.setToValue(1.0);
+        fadeOut.play();
     }
 
     public void displayAnimatedText(String textToDisplay, double delayTime) {
