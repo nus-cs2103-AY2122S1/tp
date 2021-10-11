@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.ui.PersonListPanel;
 
 /**
  * API of the Logic component
@@ -48,4 +49,25 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Sets the Index of the Person's Detail to view
+     *
+     * @param index is index to selected index to
+     */
+    void setSelectedIndex(int index);
+
+    /**
+     * Returns the Index of the Person's Detail to view
+     *
+     * @return currently selected index
+     */
+    int getSelectedIndex();
+
+    /**
+     * Sets the PersonListPanel to control
+     *
+     * @param personListPanel the person list panel in GUI
+     */
+    void setPersonList(PersonListPanel personListPanel);
 }
