@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Collection;
@@ -14,8 +14,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
 import seedu.address.logic.commands.LessonEditCommand;
+import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Homework;
 
@@ -32,7 +32,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
     public LessonEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_TIME, PREFIX_SUBJECT, PREFIX_HOMEWORK);
+            ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
+                PREFIX_SUBJECT, PREFIX_HOMEWORK);
 
         Index[] indices;
 
@@ -44,6 +45,9 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
+        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
+            editLessonDescriptor.setRecurring(true);
+        }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editLessonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }

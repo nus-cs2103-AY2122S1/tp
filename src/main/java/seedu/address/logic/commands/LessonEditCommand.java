@@ -15,11 +15,10 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import javax.swing.text.html.Option;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.PersonUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Date;
@@ -29,16 +28,7 @@ import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
-import seedu.address.model.person.AcadStream;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.School;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -65,7 +55,7 @@ public class LessonEditCommand extends Command {
         + "Parameters: " + COMMAND_PARAMETERS + "\n"
         + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s\nto %2s\nfor student: %3s";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s\nto %2$s\nfor student: %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
@@ -117,7 +107,8 @@ public class LessonEditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, toEdit, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS,
+            toEdit, editedLesson, editedPerson));
     }
 
     /**
@@ -127,25 +118,11 @@ public class LessonEditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, Lesson toEdit, Lesson editedLesson) {
         assert personToEdit != null;
 
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Phone updatedParentPhone = personToEdit.getParentPhone();
-        Email updatedParentEmail = personToEdit.getParentEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        School updatedSchool = personToEdit.getSchool();
-        AcadStream updatedAcadStream = personToEdit.getAcadStream();
-        Fee updatedOutstandingFee = personToEdit.getFee();
-        Remark updatedRemark = personToEdit.getRemark();
-        Set<Tag> updatedTags = personToEdit.getTags();
-
         Set<Lesson> updatedLessons = new TreeSet<>(personToEdit.getLessons().stream()
             .map(lesson -> lesson.equals(toEdit) ? editedLesson : lesson)
             .collect(Collectors.toSet()));
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
-            updatedAddress, updatedSchool, updatedAcadStream, updatedOutstandingFee,
-            updatedRemark, updatedTags, updatedLessons);
+        return PersonUtil.createdEditedPerson(personToEdit, updatedLessons);
     }
 
     /**
@@ -197,7 +174,6 @@ public class LessonEditCommand extends Command {
         private TimeRange timeRange;
         private Subject subject;
         private Set<Homework> homeworkSet;
-
         private boolean isRecurring;
 
         public EditLessonDescriptor() {}
@@ -217,7 +193,7 @@ public class LessonEditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet);
+            return isRecurring || CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet);
         }
 
         public Optional<Date> getDate() {
@@ -267,8 +243,8 @@ public class LessonEditCommand extends Command {
             return isRecurring;
         }
 
-        public void setRecurring(boolean recurring) {
-            isRecurring = recurring;
+        public void setRecurring(boolean isRecurring) {
+            this.isRecurring = isRecurring;
         }
 
         @Override
