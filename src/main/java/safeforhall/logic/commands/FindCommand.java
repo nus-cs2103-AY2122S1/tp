@@ -14,6 +14,7 @@ import safeforhall.model.Model;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
+import safeforhall.model.person.NameContainsKeywordsPredicate;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
@@ -42,9 +43,7 @@ public class FindCommand extends Command {
             + CliSyntax.PREFIX_VACCSTATUS + "T "
             + CliSyntax.PREFIX_FACULTY + "SoC";
 
-    public static final String MESSAGE_FIND_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_FILTERED = "At least one field to filter bu must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final FindCompositePredicate predicate;
 
@@ -71,7 +70,7 @@ public class FindCommand extends Command {
      * Stores the predicates to search the address book with. Each non-empty field value will be used for filtering.
      */
     public static class FindCompositePredicate implements Predicate<Person> {
-        private Predicate<Name> name;
+        private Predicate<Person> name;
         private Predicate<Room> room;
         private Predicate<Phone> phone;
         private Predicate<Email> email;
@@ -101,7 +100,8 @@ public class FindCommand extends Command {
         }
 
         public void setName(Name name) {
-            this.name = name::equals;
+            this.name = new NameContainsKeywordsPredicate(Arrays.asList(name.fullName.split("\\s+")));
+            //this.name = name::equals;
         }
 
         public void setRoom(Room room) {
@@ -124,7 +124,7 @@ public class FindCommand extends Command {
             this.faculty = faculty::equals;
         }
 
-        public Optional<Predicate<Name>> getName() {
+        public Optional<Predicate<Person>> getName() {
             return Optional.ofNullable(name);
         }
 
@@ -151,15 +151,17 @@ public class FindCommand extends Command {
         @Override
         public boolean test(Person person) {
             List<Predicate<Person>> allPredicates = Arrays.asList(
-                p -> getName().orElse(x -> true).test(p.getName()),
+                p -> getName().orElse(x -> true).test(p),
                 p -> getRoom().orElse(x -> true).test(p.getRoom()),
                 p -> getPhone().orElse(x -> true).test(p.getPhone()),
                 p -> getEmail().orElse(x -> true).test(p.getEmail()),
                 p -> getVaccStatus().orElse(x -> true).test(p.getVaccStatus()),
                 p -> getFaculty().orElse(x -> true).test(p.getFaculty()));
 
-            return allPredicates.stream()
-                    .reduce(p -> true, Predicate::and).test(person);
+            return allPredicates
+                    .stream()
+                    .reduce(p -> true, Predicate::and)
+                    .test(person);
         }
 
         @Override

@@ -34,12 +34,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                         CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_VACCSTATUS,
                         CliSyntax.PREFIX_FACULTY);
 
-        //try {
-        //    index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        //} catch (ParseException pe) {
-        //    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        //}
-
         FindCommand.FindCompositePredicate findCompositePredicate = new FindCommand.FindCompositePredicate();
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
             findCompositePredicate.setName(ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
