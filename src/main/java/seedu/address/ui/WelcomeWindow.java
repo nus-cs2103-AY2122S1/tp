@@ -1,8 +1,6 @@
 package seedu.address.ui;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -52,11 +50,20 @@ public class WelcomeWindow extends UiPart<Stage>{
         getRoot().initStyle(StageStyle.UNDECORATED);
         getRoot().show();
         getRoot().centerOnScreen();
-        //getRoot().toFront();
+        getRoot().setAlwaysOnTop(true);
 
         appLogo.setImage(appLogoImage);
         displayAnimatedText(tagLine, delayTime);
 
+        close();
+
+        // Fading transition
+        //FadeTransition fadeOut = new FadeTransition(Duration.millis(6000), appLogo);
+        //fadeOut.setFromValue(1.0);
+        //fadeOut.setToValue(0.0);
+        //fadeOut.play();
+
+        // Quit app
         /*
         try {
             Thread.sleep(10000);
@@ -69,8 +76,14 @@ public class WelcomeWindow extends UiPart<Stage>{
         // set a delay function to close the app here
     }
 
-    void show() {
+    public void show() {
         start();
+    }
+
+    public void close() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        delay.setOnFinished( event -> getRoot().close() );
+        delay.play();
     }
 
     public void displayAnimatedText(String textToDisplay, double delayTime) {
