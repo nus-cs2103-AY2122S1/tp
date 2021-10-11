@@ -170,18 +170,18 @@ Sample Usage:
 
     > Studying is removed from the student list!
 
-### Marking a task as done: : `done`
+### Marking a task as done: : `doneTask`
 
 Mark the specified task from the list as done.
 
-Format: `done INDEX`
+Format: `doneTask INDEX`
 
 * Mark the task as done at the specified `INDEX`.
 * The index refers to the index number shown in the task list.
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `tasks` followed by `done 2` marks the 2nd task in the task list as completed.
+* `doneTask 2` marks the 2nd task in the task list as completed.
 
 ### Exiting the program : `exit`
 
@@ -275,11 +275,12 @@ Action | Format, Examples
 **List Students** | `students`
 **List Tasks** | `tasks`
 **Add Student** | `add n/NAME s/STUDENT_NUMBER e/EMAIL g/GITHUB_LINK [t/TAG]…​` <br> e.g., `add n/James Ho s/A0221111L e/jamesho@example.com g/https://github.com/james t/W14-4`
-**AddTask** | `addTask n/TASK_NAME by/DATE [t/TAG]…​` <br> e.g., `addTask n/study by/2021-10-31 t/W14-4`
+**Add Task** | `addTask n/TASK_NAME by/DATE [t/TAG]…​` <br> e.g., `addTask n/study by/2021-10-31 t/W14-4`
+**DoneTask** | `doneTask INDEX` <br> e.g., `doneTask 1`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**DeleteTask** | `deleteTask INDEX`<br> e.g., `deleteTask 3`
+**Delete Task** | `deleteTask INDEX`<br> e.g., `deleteTask 3`
 **Edit** | `edit INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**EditTask** | `edit INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/study by/2012-10-31 t/W14-4`
+**Edit Task** | `edit INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/study by/2012-10-31 t/W14-4`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
