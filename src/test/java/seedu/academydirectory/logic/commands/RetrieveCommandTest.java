@@ -32,10 +32,10 @@ public class RetrieveCommandTest {
     @Test
     public void equals() {
         InformationWantedFunction firstFunction = new InformationWantedFunction(PREFIX_EMAIL);
-        InformationWantedFunction thirdFunction = new InformationWantedFunction(PREFIX_TELEGRAM);
+        InformationWantedFunction secondFunction = new InformationWantedFunction(PREFIX_TELEGRAM);
 
         RetrieveCommand retrieveFirstCommand = new RetrieveCommand(firstFunction);
-        RetrieveCommand retrieveSecondCommand = new RetrieveCommand(thirdFunction);
+        RetrieveCommand retrieveSecondCommand = new RetrieveCommand(secondFunction);
 
         // same object -> returns true
         assertEquals(retrieveFirstCommand, retrieveFirstCommand);
