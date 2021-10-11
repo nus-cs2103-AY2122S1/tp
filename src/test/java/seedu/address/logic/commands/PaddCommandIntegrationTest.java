@@ -14,9 +14,9 @@ import seedu.address.model.member.Member;
 import seedu.address.testutil.MemberBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code PAddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code PaddCommand}.
  */
-public class PAddCommandIntegrationTest {
+public class PaddCommandIntegrationTest {
 
     private Model model;
 
@@ -31,14 +31,14 @@ public class PAddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addMember(validMember);
-        assertCommandSuccess(new PAddCommand(validMember), model,
-                String.format(PAddCommand.MESSAGE_SUCCESS, validMember), expectedModel);
+        assertCommandSuccess(new PaddCommand(validMember), model,
+                String.format(PaddCommand.MESSAGE_SUCCESS, validMember), expectedModel);
     }
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member memberInList = model.getAddressBook().getMemberList().get(0);
-        assertCommandFailure(new PAddCommand(memberInList), model, PAddCommand.MESSAGE_DUPLICATE_MEMBER);
+        assertCommandFailure(new PaddCommand(memberInList), model, PaddCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
 }

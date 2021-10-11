@@ -23,45 +23,45 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.member.Member;
 import seedu.address.testutil.MemberBuilder;
 
-public class PAddCommandTest {
+public class PaddCommandTest {
 
     @Test
     public void constructor_nullMember_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PAddCommand(null));
+        assertThrows(NullPointerException.class, () -> new PaddCommand(null));
     }
 
     @Test
     public void execute_memberAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingMemberAdded modelStub = new ModelStubAcceptingMemberAdded();
         Member validMember = new MemberBuilder().build();
-        CommandResult commandResult = new PAddCommand(validMember).execute(modelStub);
+        CommandResult commandResult = new PaddCommand(validMember).execute(modelStub);
 
-        assertEquals(String.format(PAddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
+        assertEquals(String.format(PaddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
     }
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member validMember = new MemberBuilder().build();
-        PAddCommand PAddCommand = new PAddCommand(validMember);
+        PaddCommand PaddCommand = new PaddCommand(validMember);
         ModelStub modelStub = new ModelStubWithMember(validMember);
 
-        assertThrows(CommandException.class, PAddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
-                PAddCommand.execute(modelStub));
+        assertThrows(CommandException.class, PaddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
+                PaddCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Member alice = new MemberBuilder().withName("Alice").build();
         Member bob = new MemberBuilder().withName("Bob").build();
-        PAddCommand addAliceCommand = new PAddCommand(alice);
-        PAddCommand addBobCommand = new PAddCommand(bob);
+        PaddCommand addAliceCommand = new PaddCommand(alice);
+        PaddCommand addBobCommand = new PaddCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        PAddCommand addAliceCommandCopy = new PAddCommand(alice);
+        PaddCommand addAliceCommandCopy = new PaddCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

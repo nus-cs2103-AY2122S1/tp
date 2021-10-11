@@ -31,7 +31,7 @@ import static seedu.address.testutil.TypicalMembers.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.PAddCommand;
+import seedu.address.logic.commands.PaddCommand;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
 import seedu.address.model.member.Member;
@@ -40,8 +40,8 @@ import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
 import seedu.address.testutil.MemberBuilder;
 
-public class PAddCommandParserTest {
-    private PAddCommandParser parser = new PAddCommandParser();
+public class PaddCommandParserTest {
+    private PaddCommandParser parser = new PaddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -49,30 +49,30 @@ public class PAddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PAddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PAddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PAddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PAddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PAddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
 
         // multiple tags - all accepted
         Member expectedMemberMultiplePositions =
                 new MemberBuilder(BOB).withPositions(VALID_POSITION_FRIEND, VALID_POSITION_HUSBAND)
                         .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, new PAddCommand(expectedMemberMultiplePositions));
+                + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, new PaddCommand(expectedMemberMultiplePositions));
     }
 
     @Test
@@ -80,12 +80,12 @@ public class PAddCommandParserTest {
         // zero tags
         Member expectedMember = new MemberBuilder(AMY).withPositions().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new PAddCommand(expectedMember));
+                new PaddCommand(expectedMember));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PAddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -137,7 +137,7 @@ public class PAddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PAddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaddCommand.MESSAGE_USAGE));
 
     }
 }
