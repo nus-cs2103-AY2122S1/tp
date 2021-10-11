@@ -112,7 +112,7 @@ public class ImportCommand extends Command {
             if (!assessmentScore.isEmpty()) {
                 Score score = makeScore(assessmentScore);
                 scores.put(assessments.get(i), score);
-                assessments.get(i).setScores(id, score);
+                assessments.get(i).setScore(id, score);
             }
         }
 

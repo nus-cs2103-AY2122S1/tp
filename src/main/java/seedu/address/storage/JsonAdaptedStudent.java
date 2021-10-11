@@ -103,6 +103,9 @@ class JsonAdaptedStudent {
         final List<Group> modelGroups = groupList.stream()
                 .filter(group -> groups.contains(group.value))
                 .collect(Collectors.toList());
+        for (Group group : modelGroups) {
+            group.addStudent(modelId);
+        }
 
         final List<Tag> studentTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {

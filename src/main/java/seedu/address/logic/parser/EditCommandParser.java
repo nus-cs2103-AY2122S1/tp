@@ -32,15 +32,6 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
-        // bandage code to ensure that you can end with an empty set of tags and remove all tags
-        if (args.endsWith(PREFIX_NAME.getPrefix().trim())
-                || args.endsWith(PREFIX_ID.getPrefix().trim())
-                || args.endsWith(PREFIX_GROUP.getPrefix().trim())
-                || args.endsWith(PREFIX_TAG.getPrefix().trim())) {
-            args = args + " ";
-        }
-
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_GROUP, PREFIX_TAG);
 

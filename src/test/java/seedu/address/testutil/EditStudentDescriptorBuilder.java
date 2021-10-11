@@ -38,7 +38,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setId(student.getId());
         descriptor.setGroups(student.getGroups());
-        // descriptor.setScores(student.getScores());
+        // descriptor.setScore(student.getScores());
         descriptor.setTags(student.getTags());
     }
 
