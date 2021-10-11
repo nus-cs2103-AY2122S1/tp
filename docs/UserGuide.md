@@ -393,7 +393,8 @@ the data of your previous AddressBook home folder.
 
 ## Command summary
 Round brackets `()` refer to COMPULSORY arguments.
-Square brackets `[]` refer to optional arguments.
+Square brackets `[]` refer to optional arguments.<p>
+*TODO: Make command action words below link to their entries above.*
 
 ### Person
 Action     | Format                                                                | Advanced Format
@@ -408,34 +409,37 @@ Action     | Format                                                             
 **Find**   | `person /find (n:QUERY)`                                              | `p /f (n:QUERY)`
 
 ### Group
-Action     | Format                                  | Short Format
------------|-----------------------------------------|-----------------------------------
-**Create** | `group (GROUP_NAME) /create`            | `g (GROUP_NAME) /c`
-**Edit**   | `group (GROUP_NAME) /edit [n:NEW_NAME]` | `g (GROUP_NAME) /e [n:NEW_NAME]`
-**Delete** | `group (GROUP_NAME) /delete`            | `g (GROUP_NAME) /d`
-**Note**   | `group (GROUP_NAME) /note (NOTE)`       | `g (GROUP_NAME) /n (NOTE)`
-**List**   | `group /list`                           | `g /l`
-**Find**   | `group /find (n:QUERY)`                 | `g /f (n:QUERY)`
+Action     | Format                             | Short Format
+-----------|------------------------------------|----------------------------
+**Create** | `group (GROUP_NAME) /create`       | `g (GROUP_NAME) /c`
+**Edit**   | `group (INDEX) /edit [n:NEW_NAME]` | `g (INDEX) /e [n:NEW_NAME]`
+**Delete** | `group (INDEX) /delete`            | `g (INDEX) /d`
+**Note**   | `group (INDEX) /note (NOTE)`       | `g (INDEX) /n (NOTE)`
+**List**   | `group /list`                      | `g /l`
+**Find**   | `group /find (n:QUERY)`            | `g /f (n:QUERY)`
 
 ### Subgroup
-Action     | Format                                                                   | Short Format
------------|-------------------------------------------------------------------------|------------------------------------------------------------------
-**Create** | `group (GROUP_NAME:SUBGROUP_NAME) /create`                              | `g (GROUP_NAME:SUB_GROUP_NAME) /c`
-**Edit**   | `group (GROUP_NAME:SUBGROUP_NAME) /edit [n:NEW_NAME] [t:TAG1,TAG2,...]` | `g (GROUP_NAME:SUB_GROUP_NAME) /e [n:NEW_NAME] [t:TAG1,TAG2,...]`
-**Delete** | `group (GROUP_NAME:SUBGROUP_NAME) /delete`                              | `g (GROUP_NAME:SUB_GROUP_NAME) /d`
-**Note**   | `group (GROUP_NAME:SUBGROUP_NAME) /note (NOTE)`                         | `g (GROUP_NAME:SUB_GROUP_NAME) /n (NOTE)`
-**List**   | `group (GROUP_NAME:SUBGROUP_NAME) /list [p:INDEX]`                      | `g (GROUP_NAME:SUB_GROUP_NAME) /l [p:INDEX]`
-**Find**   | `group /find (n:GROUP_NAME:QUERY)`                                      | `g /f (n:GROUP_NAME:QUERY)`
+**Note**: For the **Edit**, **Delete**, **Note** and **Find** commands, please use the **List** command to list the
+`Subgroup` objects of a `Group` before running operations on them.
+
+Action     | Format                                               | Short Format
+-----------|------------------------------------------------------|----------------------------------------------
+**Create** | `group (INDEX:SUBGROUP_NAME) /create`                | `g (INDEX:SUB_GROUP_NAME) /c`
+**Edit**   | `group (INDEX) /edit [n:NEW_NAME] [t:TAG1,TAG2,...]` | `g (INDEX) /e [n:NEW_NAME] [t:TAG1,TAG2,...]`
+**Delete** | `group (INDEX) /delete`                              | `g (INDEX) /d`
+**Note**   | `group (INDEX) /note (NOTE)`                         | `g (INDEX) /n (NOTE)`
+**List**   | `group /list (g:INDEX)`                              | `g /l (g:INDEX)`
+**Find**   | `group /find (n:QUERY)`                              | `g /f (n:QUERY)`
 
 ### Tags
-Note: for the **List** command, you have to either list by group or by person, but not both.
+**Note**: for the **List** command, the `INDEX` argument can be either a `Group` or a `Person`, depending on what you
+have listed after using `person /list` or `group /list`.
 
-Action   | Format                                               | Short Format
----------|------------------------------------------------------|------------------------------------------------
-**List** | `tag /list [p:INDEX] [g:GROUP_NAME]:[SUBGROUP_NAME]` | `t /l [p:INDEX] [g:GROUP_NAME]:[SUBGROUP_NAME]`
+Action   | Format                | Short Format
+---------|-----------------------|------------------------------------------------
+**List** | `tag /list [p:INDEX]` | `t /l [p:INDEX] [g:GROUP_NAME]:[SUBGROUP_NAME]`
 
 ### General
-
 Action    | Format  | Advanced Format
 ----------|---------|----------
 **Help**  | `help`  | `h`
