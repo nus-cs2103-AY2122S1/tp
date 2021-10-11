@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
+
 /**
  * Represents the in-memory model of the address book data.
  */
@@ -103,6 +104,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteFacility(Facility target) {
+        addressBook.removeFacility(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -123,6 +129,11 @@ public class ModelManager implements Model {
     @Override
     public void resetMemberList() {
         addressBook.resetMemberList();
+    }
+
+    @Override
+    public void resetFacilityList() {
+        addressBook.resetFacilityList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -173,11 +184,6 @@ public class ModelManager implements Model {
     public void updateFilteredFacilityList(Predicate<Facility> predicate) {
         requireNonNull(predicate);
         filteredFacilities.setPredicate(predicate);
-    }
-
-    @Override
-    public void resetFacilityList() {
-        addressBook.resetFacilityList();
     }
 
 }

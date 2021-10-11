@@ -1,0 +1,14 @@
+{
+  "members" : [ ],
+  "facilities" : [ {
+    "name" : "Court 1",
+    "location" : "Tampines Hub Field",
+    "time" : "1500",
+    "capacity" : "4"
+  }, {
+    "name" : "Court 1",
+    "location" : "Tampines Hub Field",
+    "time" : "2000",
+    "capacity" : "4"
+  } ]
+}

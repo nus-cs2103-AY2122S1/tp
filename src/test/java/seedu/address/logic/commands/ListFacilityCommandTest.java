@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showFacilityAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class ListFacilityCommandTest {
 
     @Test
     public void execute_facilityListIsFiltered_showsEverything() {
-        showFacilityAtIndex(model, INDEX_FIRST_PERSON);
+        showFacilityAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new ListFacilityCommand(), model, ListFacilityCommand.MESSAGE_SUCCESS, expectedModel);
 
     }

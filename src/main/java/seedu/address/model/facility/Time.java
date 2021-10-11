@@ -6,6 +6,10 @@ import static java.util.Objects.requireNonNull;
  * Represents a Facility's time.
  */
 public class Time {
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Time should only contain numbers and it should be exactly 4 digits long";
+    public static final String VALIDATION_REGEX = "\\d{4}";
     public final String time;
 
     /**
@@ -16,6 +20,13 @@ public class Time {
     public Time(String time) {
         requireNonNull(time);
         this.time = time;
+    }
+
+    /**
+     * Returns true if a given string is a valid time.
+     */
+    public static boolean isValidTime(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

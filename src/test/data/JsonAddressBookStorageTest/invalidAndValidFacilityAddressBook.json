@@ -1,0 +1,14 @@
+{
+  "members": [],
+  "facilities": [ {
+    "name": "Valid Facility ",
+    "location": "Tampines Hub Field",
+    "time": "2000",
+    "capacity": "4"
+  }, {
+    "name": "Facility with Invalid Location Field",
+    "location": "Tampines Hub Field!",
+    "time": "2000",
+    "capacity": "4"
+  } ]
+}
