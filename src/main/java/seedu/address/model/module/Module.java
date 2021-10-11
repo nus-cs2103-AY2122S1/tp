@@ -1,8 +1,16 @@
 package seedu.address.model.module;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
+
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.UniqueStudentList;
 
 /**
  * Represents a Module in the TAB.
@@ -10,6 +18,8 @@ import java.util.Objects;
  */
 public class Module {
 
+    private final UniqueStudentList students;
+    private final FilteredList<Student> filteredStudents;
     // Identity fields
     private final ModuleName moduleName;
 
@@ -19,6 +29,8 @@ public class Module {
     public Module(ModuleName moduleName) {
         requireAllNonNull(moduleName);
         this.moduleName = moduleName;
+        students = new UniqueStudentList();
+        filteredStudents = new FilteredList<>(this.getStudentList());
     }
 
     public ModuleName getName() {
@@ -51,9 +63,75 @@ public class Module {
         if (!(other instanceof Module)) {
             return false;
         }
-
         Module otherModule = (Module) other;
         return otherModule.getName().equals(getName());
+    }
+
+    /**
+     * Replaces the contents of the student list with {@code students}.
+     * {@code students} must not contain duplicate students.
+     */
+    public void setStudents(List<Student> students) {
+        this.students.setStudents(students);
+    }
+
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in TAB.
+     */
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return students.contains(student);
+    }
+
+    /**
+     * Adds a student to TAB.
+     * The student must not already exist in TAB.
+     */
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    /**
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in TAB.
+     * The student identity of {@code editedStudent} must not be the same
+     * as another existing student in TAB.
+     */
+    public void setStudent(Student target, Student editedStudent) {
+        requireNonNull(editedStudent);
+
+        students.setStudent(target, editedStudent);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
+    }
+
+    /**
+     * Updates the filtered student list.
+     *
+     * @param predicate The predicate to filter students.
+     */
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
+        requireNonNull(predicate);
+        filteredStudents.setPredicate(predicate);
+    }
+
+    /**
+     * Removes {@code key} from this {@code TeachingAssistantBuddy}.
+     * {@code key} must exist in TAB.
+     */
+    public void removeStudent(Student key) {
+        students.remove(key);
+    }
+
+    public ObservableList<Student> getStudentList() {
+        return students.asUnmodifiableObservableList();
     }
 
     @Override

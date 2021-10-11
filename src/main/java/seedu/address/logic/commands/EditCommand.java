@@ -15,11 +15,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TeleHandle;
+import seedu.address.model.module.student.Email;
+import seedu.address.model.module.student.Name;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
+import seedu.address.model.module.student.TeleHandle;
 
 /**
  * Edits the details of an existing student in the studentId book.

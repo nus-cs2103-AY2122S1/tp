@@ -7,8 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
