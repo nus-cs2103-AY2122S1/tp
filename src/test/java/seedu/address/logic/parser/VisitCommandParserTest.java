@@ -40,8 +40,8 @@ public class VisitCommandParserTest {
         Optional<Frequency> frequency = Optional.of(Frequency.WEEKLY);
         Optional<Occurrence> occurrence = Optional.of(new Occurrence(2));
         VisitCommand command = new VisitCommand(INDEX_FIRST_PERSON, visit, frequency, occurrence);
-        String userInput = String.format("%s %s%s %s%s %s%s", "1", PREFIX_DATE, VALID_VISIT_DATETIME, PREFIX_FREQUENCY, "Weekly",
-                PREFIX_OCCURRENCE, 2);
+        String userInput = String.format("%s %s%s %s%s %s%s", "1", PREFIX_DATE, VALID_VISIT_DATETIME, PREFIX_FREQUENCY,
+                "Weekly", PREFIX_OCCURRENCE, 2);
         assertParseSuccess(parser, userInput, command);
     }
 
