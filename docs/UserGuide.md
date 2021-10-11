@@ -49,14 +49,14 @@ Format: `help`
 ### Adding a contact: `add`
 Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE f/FACULTY m/MAJOR  [t/TAG]...`
 
 A contact may have any number of tags (including 0)
 
 Examples: 
 
-* `add n/John Doe p/98765432 e/johnd@nus.edu.sg t/staff f/computing m/computer science mod/CS2040S`
-* `add n/Seth t/student f/computing m/computer science mod/CS2103T`
+* `add n/John Doe p/98765432 e/johnd@nus.edu.sg r/staff f/computing m/computer science mod/CS2040S`
+* `add n/Seth r/student f/computing m/computer science mod/CS2103T`
 
 List of personal detail tags:
 * n/: name
@@ -64,7 +64,7 @@ List of personal detail tags:
 * e/: email
 
 List of school-related tags:
-* t/: type - staff/student/admin
+* r/: role - staff/student/admin
 * f/: faculty
 * m/: major
 * cca/: cca
@@ -94,7 +94,7 @@ Format: `sort`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
