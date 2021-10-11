@@ -22,7 +22,7 @@ public class WelcomeWindow extends UiPart<Stage>{
     private static final String FXML = "WelcomeWindow.fxml";
 
     private final String tagLine = "TYPE. EXPLORE. CONNECT";
-    private final double delayTime = (tagLine.length() * 20 ) + 500;
+    private final double delayTime = (tagLine.length() * 5 ) + 100;
 
     private Image appLogoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
 
@@ -52,10 +52,19 @@ public class WelcomeWindow extends UiPart<Stage>{
         getRoot().initStyle(StageStyle.UNDECORATED);
         getRoot().show();
         getRoot().centerOnScreen();
-        getRoot().toFront();
+        //getRoot().toFront();
 
         appLogo.setImage(appLogoImage);
         displayAnimatedText(tagLine, delayTime);
+
+        /*
+        try {
+            Thread.sleep(10000);
+            getRoot().close();
+        } catch (InterruptedException e) {
+            logger.warning("Welcome Window could not be closed.");
+        }
+         */
 
         // set a delay function to close the app here
     }

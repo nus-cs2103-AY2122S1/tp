@@ -1,0 +1,6 @@
+#appTagLine {
+    -fx-font-family: "Open Sans";
+    -fx-text-fill: white;
+    -fx-font-size: 17pt;
+    -fx-padding: 4px;
+}
