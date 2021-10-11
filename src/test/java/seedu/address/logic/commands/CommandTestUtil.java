@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -44,6 +46,12 @@ public class CommandTestUtil {
             Map.of(new Assessment(VALID_ASSESSMENT_BOB), new Score(VALID_SCORE_BOB));
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TYPICAL_PERSONS_CSV_PATH = "src/test/data/ImportCommandTest/typicalPersons.csv";
+    public static final String VALID_WRONG_CSV_PATH = "src/test/data/ImportCommandTest/wrongFormat.csv";
+    public static final String VALID_NON_EXISTENT_PATH = "src/test/data/ImportCommandTest/doesNotExist.csv";
+    public static final int VALID_TYPICAL_PERSONS_GROUP_COUNT = 2;
+    public static final int VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT = 2;
+    public static final int VALID_TYPICAL_PERSONS_TAG_COUNT = 2;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -54,10 +62,22 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String FILE_DESC_VALID_FILE = " " + PREFIX_FILE + VALID_TYPICAL_PERSONS_CSV_PATH;
+    public static final String FILE_DESC_INVALID_FILE = " " + PREFIX_FILE + VALID_WRONG_CSV_PATH;
+    public static final String FILE_DESC_NON_EXISTENT_FILE = " " + PREFIX_FILE + VALID_NON_EXISTENT_PATH;
+    public static final String GROUP_COUNT_DESC_TYPICAL = " " + PREFIX_GROUP + VALID_TYPICAL_PERSONS_GROUP_COUNT;
+    public static final String ASSESSMENT_COUNT_DESC_TYPICAL = " " + PREFIX_ASSESSMENT
+            + VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
+    public static final String TAG_COUNT_DESC_TYPICAL = " " + PREFIX_TAG + VALID_TYPICAL_PERSONS_TAG_COUNT;
+    public static final String TAG_COUNT_DESC_ABOVE_TYPICAL = " " + PREFIX_TAG + (VALID_TYPICAL_PERSONS_TAG_COUNT + 1);
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "E0123"; // ID length too short
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05&"; // '&' not allowed in name
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_GROUP_COUNT_DESC = " " + PREFIX_GROUP + "invalid1"; // only numbers allowed
+    public static final String INVALID_ASSESSMENT_COUNT_DESC = " " + PREFIX_ASSESSMENT + "invalid2"; // only numbers
+    public static final String INVALID_TAG_COUNT_DESC = " " + PREFIX_TAG + "invalid3"; // only numbers
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
