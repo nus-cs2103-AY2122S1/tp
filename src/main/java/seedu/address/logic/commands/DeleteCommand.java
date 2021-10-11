@@ -9,6 +9,11 @@ import seedu.address.model.Model;
  */
 public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Delete either a module, a student or a task\n"
+            + "Parameters: Delete_Type (can be module, student or task)\n"
+            + "Example: " + COMMAND_WORD + " module (...additional parameters)";
+
 
     @Override
     public abstract CommandResult execute(Model model) throws CommandException;

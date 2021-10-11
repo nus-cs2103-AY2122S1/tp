@@ -7,7 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteModuleCommand;
+import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -31,7 +34,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = "delete " + matcher.group("commandWord");
