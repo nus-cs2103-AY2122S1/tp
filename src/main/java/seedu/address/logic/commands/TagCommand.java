@@ -81,7 +81,7 @@ public class TagCommand extends Command {
         Phone updatedPhone = personToEdit.getPhone();
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
-        Birthday updatedBirthday = personToEdit.getBirthday();
+        Birthday updatedBirthday = personToEdit.getBirthday().orElse(null);
 
         Set<Tag> updatedTags = new HashSet<Tag>();
         updatedTags.addAll(personToEdit.getTags());

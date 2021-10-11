@@ -38,7 +38,9 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
-        sb.append(PREFIX_BIRTHDAY + person.getBirthday().birthday.toString());
+        if (person.getBirthday().isPresent()) {
+            sb.append(PREFIX_BIRTHDAY + person.getBirthday().map(x -> x.toString()).get());
+        }
         return sb.toString();
     }
 

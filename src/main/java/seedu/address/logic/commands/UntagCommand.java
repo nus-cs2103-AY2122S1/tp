@@ -80,7 +80,7 @@ public class UntagCommand extends EditCommand {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
+        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday().orElse(null));
 
         Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());

@@ -21,7 +21,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_BIRTHDAY = "1999-06-05";
+    public static final String DEFAULT_BIRTHDAY = "05061999";
 
     private Name name;
     private Phone phone;
@@ -51,7 +51,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        birthday = personToCopy.getBirthday();
+        birthday = personToCopy.getBirthday().orElse(null);
     }
 
     /**
