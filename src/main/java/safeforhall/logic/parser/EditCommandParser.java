@@ -25,12 +25,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE,
                         CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_ROOM, CliSyntax.PREFIX_VACCSTATUS,
-                        CliSyntax.PREFIX_FACULTY);
+                        CliSyntax.PREFIX_FACULTY, CliSyntax.PREFIX_FETDATE, CliSyntax.PREFIX_COLLECTIONDATE);
         ArrayList<Index> indexArray;
 
         try {
             indexArray = ParserUtil.parseIndexes(argMultimap.getPreamble().trim().split(" "));
-            System.out.println(indexArray);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }

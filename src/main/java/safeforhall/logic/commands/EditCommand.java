@@ -100,8 +100,6 @@ public class EditCommand extends Command {
         LastDate updatedLastCollectionDate = editPersonDescriptor.getLastCollectionDate()
                 .orElse(personToEdit.getLastCollectionDate());
         // Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        //TODO: lastFetDate and lastCollectionDate
         return new Person(updatedName, updatedRoom, updatedPhone, updatedEmail, updatedVaccStatus, updatedFaculty,
                 updatedLastFetDate, updatedLastCollectionDate);
     }
@@ -161,7 +159,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, room, vaccStatus, faculty);
+            return CollectionUtil.isAnyNonNull(name, phone, email, room, vaccStatus, faculty,
+                    lastFetDate, lastCollectionDate);
         }
 
         public void setName(Name name) {

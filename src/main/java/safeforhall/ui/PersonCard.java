@@ -39,6 +39,10 @@ public class PersonCard extends UiPart<Region> {
     private Label vaccstatus;
     @FXML
     private Label faculty;
+    @FXML
+    private Label lastfetdate;
+    @FXML
+    private Label lastcollectiondate;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,6 +57,8 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         vaccstatus.setText(person.getVaccStatus().vaccStatus);
         faculty.setText(person.getFaculty().faculty);
+        lastfetdate.setText(person.getLastFetDate().date);
+        lastcollectiondate.setText(person.getLastCollectionDate().date);
     }
 
     @Override
