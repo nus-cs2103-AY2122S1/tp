@@ -1,9 +1,6 @@
 package seedu.academydirectory.ui;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 import com.sandec.mdfx.MarkdownView;
@@ -16,8 +13,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.commons.core.Messages;
 
 /**
  * Controller for a help page
@@ -39,6 +38,10 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button copyButton;
 
+    private Stage root;
+    private Label label;
+    private MarkdownView markdownView;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -46,22 +49,10 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-
-        StringBuilder builder = new StringBuilder(HELP_MESSAGE);
-        addHelpContent(builder);
-        Label label = new Label(builder.toString());
-        label.setVisible(false);
-
-        MarkdownView markdownView = new MarkdownView();
-        markdownView.mdStringProperty().bind(label.textProperty());
+        this.root = root;
+        this.markdownView = new MarkdownView();
         markdownView.getStylesheets().add(MARKDOWN_CSS);
-
-        ScrollPane content = new ScrollPane(markdownView);
-        content.setFitToWidth(true);
-        HBox container = new HBox(label, content);
-        container.getChildren().add(copyButton);
-
-        root.setScene(new Scene(container, DEFAULT_WIDTH, DEFAULT_HEIGHT));
+        setHelpMessage(Messages.GENERAL_HELP_MESSAGE);
     }
 
     /**
@@ -71,27 +62,16 @@ public class HelpWindow extends UiPart<Stage> {
         this(new Stage());
     }
 
-    /**
-     * Get markdown content of UG for conversion to help window
-     * @param builder string builder to append
-     */
-    private void addHelpContent(StringBuilder builder) {
-        try {
-            FileReader fileReader = new FileReader(USER_GUIDE);
-            Scanner sc = new Scanner(fileReader);
-            boolean isSummary = false;
-            while (sc.hasNextLine()) {
-                String nextLine = sc.nextLine().trim();
-                if (nextLine.contains(SUMMARY_HEADER)) {
-                    isSummary = true;
-                }
-                if (isSummary) {
-                    builder.append(nextLine).append("\n");
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    public void setHelpMessage(String helpMessage) {
+        logger.info(helpMessage);
+        label = new Label(HELP_MESSAGE + helpMessage);
+        markdownView.mdStringProperty().bind(label.textProperty());
+        ScrollPane content = new ScrollPane(markdownView);
+        content.setFitToWidth(true);
+        HBox container = new HBox(content, copyButton);
+        HBox.setHgrow(content, Priority.ALWAYS);
+        root.setScene(new Scene(container, DEFAULT_WIDTH, DEFAULT_HEIGHT));
     }
 
     /**

@@ -3,9 +3,11 @@ package seedu.academydirectory.logic.parser;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.logic.commands.AddCommand;
 import seedu.academydirectory.logic.commands.AttendanceCommand;
 import seedu.academydirectory.logic.commands.ClearCommand;
@@ -30,6 +32,11 @@ public class AcademyDirectoryParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    /**
+     * Used for logging input parsed.
+     */
+    private final Logger logger = LogsCenter.getLogger(AcademyDirectoryParser.class);
 
     /**
      * Parses user input into command for execution.
@@ -82,11 +89,11 @@ public class AcademyDirectoryParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            logger.info("Length " + arguments.length() + arguments);
+            return new HelpCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

@@ -29,14 +29,12 @@
           <URL value="@markdown.css"/>
         </stylesheets>
         <children>
-
           <Button fx:id="copyButton" mnemonicParsing="false" minWidth="100"
-                  onAction="#copyUrl" text="Get UG link">
+                  onAction="#copyUrl" text="Copy UG link">
             <HBox.margin>
               <Insets left="5.0" />
             </HBox.margin>
           </Button>
-
         </children>
 
         <opaqueInsets>

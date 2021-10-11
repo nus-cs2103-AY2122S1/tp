@@ -14,6 +14,23 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
+    public static final String HELP_MESSAGE = "### Locating students by name: `find`\n"
+            + "\n"
+            + "Finds students whose names contain any of the given keywords.\n"
+            + "\n"
+            + "Format: `find KEYWORD [MORE_KEYWORDS]`\n"
+            + "\n"
+            + "* The search is case-insensitive. e.g `hans` will match `Hans`\n"
+            + "* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`\n"
+            + "* Only the name is searched.\n"
+            + "* Only full words will be matched e.g. `Han` will not match `Hans`\n"
+            + "* Students matching at least one keyword will be returned (i.e. `OR` search).\n"
+            + "  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`\n"
+            + "\n"
+            + "Examples:\n"
+            + "* `find John` returns `john` and `John Doe`\n"
+            + "* `find alex david` returns `Alex Yeoh`, `David Li`<br>";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"

@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
@@ -136,10 +137,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Open the default menu help to show command summary.
      */
     @FXML
-    public void handleHelp() {
+    public void openDefaultHelp() {
+        String defaultHelp = Messages.GENERAL_HELP_MESSAGE;
+        showHelpFrom(defaultHelp);
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    public void showHelpFrom(String helpMessage) {
+        this.helpWindow.setHelpMessage(helpMessage);
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -179,7 +189,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                showHelpFrom(commandResult.getHelpContent());
             }
 
             if (commandResult.isExit()) {

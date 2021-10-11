@@ -35,6 +35,22 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+    public static final String HELP_MESSAGE = "### Editing a student : `edit`\n"
+            + "\n"
+            + "Tutors will be able to edit their tutees.\n"
+            + "\n"
+            + "Format: `edit INDEX [n/NAME] [e/EMAIL] [t/TELE_HANDLE] [p/PHONE_NUMBER]`\n"
+            + "\n"
+            + "* Edits the tutee at the specified `INDEX`. The index refers to the index number shown "
+            + "in the displayed student list. The index **must be a positive integer** 1, 2, 3, …\u200B\n"
+            + "* At least one of the optional fields must be provided.\n"
+            + "* Existing values will be updated to the input values.\n"
+            + "\n"
+            + "Examples:\n"
+            + "* `edit 1 p/91234567 e/e0425205@u.nus.com`  Edits the phone number and email address "
+            + "of the 1st student to be `91234567` and `e0425205@u.nus.edu` respectively.\n"
+            + "* `edit 2 n/Aaron Tan`  Edits the name of the 2nd student to be Aaron Tan.\n";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"

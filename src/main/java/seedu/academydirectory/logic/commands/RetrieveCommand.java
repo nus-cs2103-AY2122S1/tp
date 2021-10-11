@@ -23,6 +23,16 @@ public class RetrieveCommand extends Command {
 
     public static final String COMMAND_WORD = "retrieve";
 
+    public static final String HELP_MESSAGE = "### Retrieving additional information of students': `retrieve`\n"
+            + "\n"
+            + "Retrieves additional information of students if present. Currently supported information includes: \n"
+            + "- Studio Participation\n"
+            + "- Telegram Handle\n"
+            + "- Email address\n"
+            + "- Contact Number, if any\n"
+            + "\n"
+            + "Format: `retrieve INFORMATION [of STUDENT_NAME]`";
+
     // TODO: Support for individual names
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieve personal details of students "
             + "and displays them as a list\n"

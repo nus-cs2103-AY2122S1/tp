@@ -18,6 +18,27 @@ public class AttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "attendance";
 
+    public static final String HELP_MESSAGE = "### Editing a student's Studio attendance: `attendance`\n"
+            + "Avengers will be able to edit the attendance status of their students.\n"
+            + "\n"
+            + "Format: `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`\n"
+            + "\n"
+            + "* Edits the attendance of a student or multiple students who have the matching "
+            + "`KEYWORD` in their names and in Studio group as defined by `STUDIO_GROUP`.\n"
+            + "* Only full words will be matched e.g. `Han` will not match `Hans`.\n"
+            + "* The search is case-insensitive. e.g `hans` will match `Hans`.\n"
+            + "* If `INDEX` is not supplied, the command will edit the attendance of the student is in the "
+            + "last created Studio session. Otherwise, it will execute the edit in the specified Studio "
+            + "session if `INDEX` is valid.\n"
+            + "* The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student "
+            + "attended the session or not.\n"
+            + "* Existing values will be updated to the input values.\n"
+            + "\n"
+            + "Examples:\n"
+            + "\n"
+            + "* `attendance s/1 k/Aaron a/0`\n"
+            + "* `attendance s/33 k/Chan a/1 i/7`";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the attendance status of the student(s) identified "
             + "by the index number used in the last person listing as well "
