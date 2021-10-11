@@ -81,7 +81,7 @@ public class HelpWindow extends UiPart<Stage> {
         commandInstruction.setText(QUICK_START);
 
         EventHandler<ActionEvent> event =
-            e -> commandInstruction.setText(commandInstructionMessage(commandList.getValue()));
+            e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));
         commandList.setOnAction(event);
     }
 
@@ -94,21 +94,21 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
-     *
-     * @throws IllegalStateException <ul>
-     *                               <li>
-     *                               if this method is called on a thread other than the JavaFX Application Thread.
-     *                               </li>
-     *                               <li>
-     *                               if this method is called during animation or layout processing.
-     *                               </li>
-     *                               <li>
-     *                               if this method is called on the primary stage.
-     *                               </li>
-     *                               <li>
-     *                               if {@code dialogStage} is already showing.
-     *                               </li>
-     *                               </ul>
+     * @throws IllegalStateException
+     * <ul>
+     *     <li>
+     *         if this method is called on a thread other than the JavaFX Application Thread.
+     *     </li>
+     *     <li>
+     *         if this method is called during animation or layout processing.
+     *     </li>
+     *     <li>
+     *         if this method is called on the primary stage.
+     *     </li>
+     *     <li>
+     *         if {@code dialogStage} is already showing.
+     *     </li>
+     * </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");
@@ -149,9 +149,12 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Displays the command usage
+     * Displays the command usage.
+     *
+     * @param commandName Command to be explained.
+     * @return The proper usage of the command.
      */
-    public String commandInstructionMessage(String commandName) {
+    public String showCommandUsage(String commandName) {
         switch (commandName) {
         case "Quick Start":
             return QUICK_START;
