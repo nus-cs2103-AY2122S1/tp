@@ -20,9 +20,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Person} and {@code Task} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalObjects {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -60,7 +60,7 @@ public class TypicalPersons {
 
     public static final Task REPORT_1 = new TaskBuilder().withName("Report 1").withDeadline("2021-10-10").build();
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalObjects() {} // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

@@ -31,6 +31,16 @@ public class Task implements HasUniqueId {
         this.deadline = deadline;
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Task(Name name, Deadline deadline, UniqueId id) {
+        requireAllNonNull(name, deadline, id);
+        this.name = name;
+        this.deadline = deadline;
+        this.id = id;
+    }
+
     public Name getName() {
         return name;
     }
