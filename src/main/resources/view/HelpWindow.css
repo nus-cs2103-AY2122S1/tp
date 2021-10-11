@@ -1,5 +1,6 @@
 #copyButton, #helpMessage {
     -fx-font-family: "Open Sans";
+    -fx-font-size: 14px;
 }
 #copyButton {
     -fx-background-color: #A6B1E1;
@@ -25,12 +26,14 @@
 
 .table-view .column-header .label {
     -fx-text-fill: white;
+    -fx-font-size: 14px;
 }
 
 .table-view .table-cell,.table-row-cell {
     -fx-text-fill: #424874;
     -fx-label-padding: 5;
     -fx-wrap-text: true;
+    -fx-font-size: 14px;
 }
 
 .table-view .table-cell:hover {
@@ -66,9 +69,9 @@
 }
 
 .table-view .virtual-flow .scroll-bar:vertical .thumb{
-    -fx-background-color: #EAECF3;
+    -fx-background-color: #EFF1F6;
 }
 
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
-    -fx-background-color: #EAECF3;
+    -fx-background-color: #EFF1F6;
 }

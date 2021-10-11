@@ -19,7 +19,7 @@ public class TableUtilTest {
 
     @Test
     public void copySelectionToClipboard_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> TableUtil.copySelectionToClipboard(null));
+        assertThrows(NullPointerException.class, () -> TableUtil.getSelectionString(null));
     }
 }
 

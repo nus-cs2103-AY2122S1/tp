@@ -22,7 +22,7 @@ import javafx.scene.input.KeyEvent;
  */
 public class TableUtil {
     /**
-     * Installs the keyboard handler: CTRL + C or CMD + C = copy to clipboard..
+     * Installs the keyboard handler: CTRL + C or CMD + C = copy to clipboard.
      *
      * @param table Table to copy cell values from.
      */
@@ -52,10 +52,9 @@ public class TableUtil {
             requireNonNull(keyEvent);
 
             if (copyKeyCodeCombiWin.match(keyEvent) || copyKeyCodeCombiMac.match(keyEvent)) {
-
                 if (keyEvent.getSource() instanceof TableView) {
                     // copy to clipboard
-                    copySelectionToClipboard((TableView<?>) keyEvent.getSource());
+                    getSelectionString((TableView<?>) keyEvent.getSource());
 
                     // event is handled, consume it
                     keyEvent.consume();
@@ -65,21 +64,17 @@ public class TableUtil {
     }
 
     /**
-     * Gets table selection and copies the selected cell values to the clipboard.
+     * Gets table selection and creates the string of cell value(s) to be copied.
      *
      * @param table Table of the selected cells.
      */
-    public static void copySelectionToClipboard(TableView<?> table) {
+    public static void getSelectionString(TableView<?> table) {
         requireNonNull(table);
-
         StringBuilder clipboardString = new StringBuilder();
-
         ObservableList<TablePosition> positionList = table.getSelectionModel().getSelectedCells();
 
         int prevRow = -1;
-
         for (TablePosition position : positionList) {
-
             int row = position.getRow();
             int col = position.getColumn();
 
@@ -92,7 +87,6 @@ public class TableUtil {
 
             // create string from cell
             String text = "";
-
             Object observableValue = table.getColumns().get(col).getCellObservableValue(row);
 
             if (observableValue == null) {
@@ -107,12 +101,17 @@ public class TableUtil {
             // remember previous
             prevRow = row;
         }
+        copyStringToClipBoard(clipboardString.toString());
+    }
 
-        // create clipboard content
+    /**
+     * Copies the selected string to system clipboard.
+     *
+     * @param stringToCopy String to be copied.
+     */
+    public static void copyStringToClipBoard(String stringToCopy) {
         final ClipboardContent clipboardContent = new ClipboardContent();
-        clipboardContent.putString(clipboardString.toString());
-
-        // set clipboard content
+        clipboardContent.putString(stringToCopy);
         Clipboard.getSystemClipboard().setContent(clipboardContent);
     }
 }

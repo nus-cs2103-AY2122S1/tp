@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600.0" minWidth="550.0" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600.0" minWidth="600.0" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -23,9 +23,9 @@
         <URL value="@Fonts.css" />
         <URL value="@HelpWindow.css" />
       </stylesheets>
-         <VBox minWidth="550.0">
+         <VBox minHeight="600.0" minWidth="550.0">
             <children>
-               <TableView fx:id="table" fixedCellSize="0.0" layoutY="-1.0" minHeight="500.0" minWidth="550.0" VBox.vgrow="ALWAYS">
+               <TableView fx:id="table" fixedCellSize="0.0" layoutY="-1.0" minHeight="450.0" minWidth="550.0" VBox.vgrow="ALWAYS">
                  <columns>
                    <TableColumn fx:id="action" prefWidth="111.0" reorderable="false" text="Action" />
                    <TableColumn fx:id="format" prefWidth="232.0" reorderable="false" text="Format" />
@@ -35,7 +35,7 @@
                      <Insets />
                   </opaqueInsets>
                </TableView>
-            <HBox alignment="CENTER" layoutX="1.0" layoutY="536.0" minHeight="80.0" minWidth="550.0" style="-fx-background-color: D3DAFB50;">
+            <HBox alignment="CENTER" layoutX="1.0" layoutY="536.0" minHeight="90.0" minWidth="550.0" style="-fx-background-color: A6B1E150;">
               <children>
                 <Label fx:id="helpMessage" text="Label" textFill="#424874" wrapText="true" HBox.hgrow="ALWAYS">
                     <padding>
@@ -44,7 +44,7 @@
                 </Label>
                 <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" textFill="WHITE" wrapText="true">
                         <font>
-                           <Font name="Open Sans SemiBold" size="13.0" />
+                           <Font name="Open Sans SemiBold" size="14.0" />
                         </font>
                         <opaqueInsets>
                            <Insets />
@@ -60,7 +60,7 @@
                 <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
               </opaqueInsets>
               <padding>
-                <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                <Insets bottom="7.0" left="5.0" right="5.0" top="7.0" />
               </padding>
             </HBox>
             </children>

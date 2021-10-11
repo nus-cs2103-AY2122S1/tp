@@ -13,8 +13,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -31,6 +29,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-f13-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Select the table cell(s) and press CTRL + C or CMD + C to copy.\n"
             + "Refer to the user guide:\n" + USERGUIDE_URL;
+    public static final String TEXT_COLOR = "424874";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -89,7 +88,7 @@ public class HelpWindow extends UiPart<Stage> {
         // enable copy/paste
         TableUtil.installCopyPasteHandler(table);
         helpMessage.setText(HELP_MESSAGE);
-        root.getScene().setFill(Color.web("424874"));
+        root.getScene().setFill(Color.web(TEXT_COLOR));
     }
 
     /**
@@ -111,7 +110,7 @@ public class HelpWindow extends UiPart<Stage> {
             cell.setPadding(new Insets(7.5));
             text.wrappingWidthProperty().bind(field.widthProperty());
             text.textProperty().bind(cell.itemProperty());
-            text.setFill(Color.web("#424874"));
+            text.setFill(Color.web(TEXT_COLOR));
             return cell;
         };
     }
@@ -166,9 +165,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     @FXML
     private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+        TableUtil.copyStringToClipBoard(USERGUIDE_URL);
     }
 }
