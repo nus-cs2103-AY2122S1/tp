@@ -6,15 +6,19 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonCode;
 import seedu.address.model.person.Student;
 
-
+/**
+ * Unenrolls a person from a specified lesson.
+ */
 public class UnenrollCommand extends Command {
 
     public static final String COMMAND_WORD = "unenroll";
@@ -36,6 +40,8 @@ public class UnenrollCommand extends Command {
      * Creates an UnenrollCommand for a Student with a given index and a specified {@code Lesson}.
      */
     public UnenrollCommand(Index targetIndex, String lessonCode) {
+        requireNonNull(targetIndex, lessonCode);
+
         this.targetIndex = targetIndex;
         this.lessonCode = lessonCode;
     }
@@ -43,17 +49,15 @@ public class UnenrollCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredPersonList();
-        Lesson lesson = model.searchLessons(lessonCode);
 
+        LessonCode code = new LessonCode(lessonCode);
+        Optional<Lesson> lessonOptional = model.searchLessons(code);
+        Lesson lesson = lessonOptional.orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE));
+
+        List<Student> lastShownList = model.getFilteredPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        if (lesson == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE);
-        }
-
         Student studentToUnenroll = lastShownList.get(targetIndex.getZeroBased());
 
         if (!lesson.containsStudent(studentToUnenroll)) {
@@ -62,11 +66,12 @@ public class UnenrollCommand extends Command {
                     lesson));
         }
 
-        Student newStudent = Student.createClone(studentToUnenroll); // todo consider cloneable
+        Student newStudent = studentToUnenroll.createClone();
         lesson.removeStudent(newStudent);
         model.setPerson(studentToUnenroll, newStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+
         return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll.getName(), lesson));
     }
 
