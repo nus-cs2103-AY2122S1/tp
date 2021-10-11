@@ -126,7 +126,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidRating_throwsIllegalValueException() {
         JsonAdaptedPerson person =
             new JsonAdaptedPerson(VALID_CATEGORY_CODE, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TAGS, INVALID_RATING);
+                VALID_REVIEW, VALID_TAGS, INVALID_RATING);
         String expectedMessage = Rating.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -134,7 +134,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullRating_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_CATEGORY_CODE, VALID_NAME, VALID_PHONE, VALID_EMAIL,
-            VALID_ADDRESS, VALID_TAGS, null);
+            VALID_ADDRESS, VALID_REVIEW, VALID_TAGS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Rating.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }

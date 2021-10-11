@@ -43,9 +43,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("category") String category, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
-                             @JsonProperty("rating") String rating,
                              @JsonProperty("review") String review,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("rating") String rating) {
         this.category = category;
         this.name = name;
         this.phone = phone;
@@ -143,7 +143,8 @@ class JsonAdaptedPerson {
         }
         final Rating modelRating = new Rating(rating);
 
-        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelReview, modelTags, modelRating);
+        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelReview, modelTags,
+            modelRating);
 
     }
 

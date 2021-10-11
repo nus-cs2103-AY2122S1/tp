@@ -118,7 +118,7 @@ public class PersonBuilder {
         this.rating = new Rating(rating);
         return this;
     }
-  
+
     /**
      * Sets the {@code Review} of the {@code Person} that we are building.
      */

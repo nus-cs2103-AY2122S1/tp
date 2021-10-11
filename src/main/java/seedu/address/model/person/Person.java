@@ -66,7 +66,7 @@ public class Person {
     public Rating getRating() {
         return rating;
     }
-  
+
     public Review getReview() {
         return review;
     }

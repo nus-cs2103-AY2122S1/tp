@@ -45,11 +45,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "["
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_REVIEW + "REVIEW] "
             + "[" + PREFIX_TAG + "TAG] "
             + "[" + PREFIX_RATING + "RATING]...\n"
-            + "[" + PREFIX_REVIEW + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -260,7 +259,7 @@ public class EditCommand extends Command {
                     && getCategoryCode().equals(e.getCategoryCode())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getRating().equals(e.getRating());
+                    && getRating().equals(e.getRating())
                     && getReview().equals(e.getReview())
                     && getTags().equals(e.getTags());
         }
