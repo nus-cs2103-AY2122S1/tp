@@ -29,15 +29,11 @@ public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
     public static final ArrayList<String> SAMPLE_STUDENT = new ArrayList<>();
     public static final StudentList SAMPLE_STUDENTS = new StudentList(SAMPLE_STUDENT);
-    public static final TuitionClass SAMPLE_TUITION_CLASS =
-            new TuitionClass(new ClassName("Physics"),
-            new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"), SAMPLE_STUDENTS, EMPTY_REMARK, 1234567);
 
     public static final ArrayList<Integer> SAMPLE_CLASSES = new ArrayList<>() {
         {
             add(1234567);
-            add(1234567);
-            add(1234567);
+            add(2234567);
         }
     };
 
@@ -45,13 +41,12 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         //sampleClasses.add(sampleTuitionClass);
-
-        emptyClasses = new Classes(SAMPLE_CLASSES);
+        emptyClasses = new Classes(new ArrayList<>());
         System.out.println(emptyClasses.toString());
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK,
-                getTagSet("friends"), emptyClasses),
+                getTagSet("friends", "Physics", "Chemistry"), new Classes(SAMPLE_CLASSES)),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK,
                 getTagSet("colleagues", "friends"), emptyClasses),
@@ -70,11 +65,28 @@ public class SampleDataUtil {
         };
     }
 
+    public static TuitionClass[] getSampleClass() {
+        ArrayList<String> studentToAdd = new ArrayList<>();
+        studentToAdd.add("Alex Yeoh");
+        StudentList students = new StudentList(studentToAdd);
+        return new TuitionClass[] {
+            new TuitionClass(new ClassName("Physics"),
+                new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"),
+                students, EMPTY_REMARK, 1234567),
+            new TuitionClass(new ClassName("Chemistry"),
+                new ClassLimit(10), new Counter(5), new Timeslot("Tuesday 10am"),
+                students, EMPTY_REMARK, 2234567)
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
 
+        }
+        for (TuitionClass tuitionClass: getSampleClass()) {
+            sampleAb.addTuition(tuitionClass);
         }
         return sampleAb;
     }
