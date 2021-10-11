@@ -96,6 +96,9 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupCommandParser().parse(arguments);
+
         case AddAllocCommand.COMMAND_WORD:
             return new AddAllocCommandParser().parse(arguments);
 
