@@ -22,7 +22,7 @@ public class AcadLevel {
     public AcadLevel(String acadLevel) {
         requireNonNull(acadLevel);
         checkArgument(isValidAcadLevel(acadLevel), MESSAGE_CONSTRAINTS);
-        this.value = acadLevel.toUpperCase();
+        this.value = acadLevel;
     }
 
     /**
