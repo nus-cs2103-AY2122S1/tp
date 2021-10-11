@@ -22,6 +22,8 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Import command not implemented yet";
 
+    public static final String MESSAGE_FILEPATH_NOT_EXIST = "%1$s does not exist!";
+
     public static final String MESSAGE_ARGUMENTS = "File Path: %1$s";
 
     public static final String MESSAGE_SUCCESS = "%1$s imported, duplicates ignored.";
