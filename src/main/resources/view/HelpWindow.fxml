@@ -22,7 +22,7 @@
         <URL value="@Extensions.css"/>
 
       </stylesheets>
-      <BorderPane fx:id="mainPane" styleClass="border-pane">
+      <BorderPane fx:id="mainPane" styleClass="border-pane" >
         <center>
           <HBox alignment="CENTER">
             <children>
@@ -31,22 +31,27 @@
                   <Insets right="5.0"/>
                 </HBox.margin>
               </Label>
+
               <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" styleClass="button-copy-url">
                 <HBox.margin>
                   <Insets left="5.0"/>
                 </HBox.margin>
               </Button>
             </children>
+
             <opaqueInsets>
               <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>
             </opaqueInsets>
+
             <padding>
               <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>
             </padding>
           </HBox>
+
         </center>
         <bottom>
-          <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+
+          <VBox minHeight="400.0" maxHeight="Infinity" minWidth="100.0" prefWidth="100.0" BorderPane.alignment="CENTER" VBox.vgrow="ALWAYS">
             <children>
               <ComboBox fx:id="commandList" prefWidth="150.0" promptText="(Select a command)"
                         styleClass="combo-box">
@@ -54,14 +59,17 @@
                   <Insets left="5.0"/>
                 </VBox.margin>
               </ComboBox>
+
               <Label fx:id="commandInstruction" styleClass="label-bright" text="Label" textAlignment="JUSTIFY"
                      wrapText="true" VBox.vgrow="ALWAYS">
                 <padding>
                   <Insets left="5.0" right="5.0"/>
                 </padding>
               </Label>
+
             </children>
           </VBox>
+
         </bottom>
       </BorderPane>
     </Scene>
