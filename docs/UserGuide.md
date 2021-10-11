@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-ProfAddressBook Level 3 (*P*AB3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PAB3 can get your contact management tasks done faster than traditional GUI apps. PAB3 helps CS2103 Instructors manage both students and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
+ProfBook Level 3 (*P*B3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface 
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PB3 can get your 
+contact management tasks done faster than traditional GUI apps. PB3 helps CS2103 Instructors manage both students 
+and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
 {:toc}
@@ -14,9 +17,9 @@ ProfAddressBook Level 3 (*P*AB3)  is a desktop app for managing contacts, optimi
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/AY2122S1-CS2103-T16-2/tp/releases).
+1. Download the latest `profbook.jar` from [here](https://github.com/AY2122S1-CS2103-T16-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ProfBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -151,7 +154,7 @@ Examples:
 
 ### Import existing contacts from JSON: `import`
 
-Merges all contacts in a JSON file with the existing contacts in PAB3.
+Merges all contacts in a JSON file with the existing contacts in PB3.
 
 Format: `import FILENAME`
 
@@ -165,17 +168,21 @@ Format: `exit`
 
 ### Saving the data
 
-PAB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save 
+PB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save 
 manually.
 
 ### Editing the data file
 
-PAB3 data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update 
+PB3 data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update 
 data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, ProfBook will discard all data and start with an empty data 
+file at the next run.
 </div>
+
+### Coming Soon
+Export feature...
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -184,7 +191,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
-contains the data of your previous PAB3 home folder.
+contains the data of your previous PB3 home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
