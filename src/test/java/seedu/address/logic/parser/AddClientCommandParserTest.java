@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -18,7 +17,7 @@ import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientCommandParserTest {
-    private AddClientCommandParser parser = new AddClientCommandParser();
+    private final AddClientCommandParser parser = new AddClientCommandParser();
 
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
@@ -89,16 +88,22 @@ public class AddClientCommandParserTest {
             CommandResult actualResult = parser.parse(args).execute(new ModelStub());
             CommandResult expectedResult = new AddClientCommand(descriptor).execute(new ModelStub());
             // compare the feedback to user excluding the id.
-            assertEquals(expectedResult.getFeedbackToUser().substring(25),
-                    actualResult.getFeedbackToUser().substring(25));
-            assertEquals(expectedResult.isShowHelp(), actualResult.isShowHelp());
-            assertEquals(expectedResult.isExit(), actualResult.isExit());
+            if (!expectedResult.getFeedbackToUser().substring(25)
+                    .equals(actualResult.getFeedbackToUser().substring(25))) {
+                fail();
+            }
+            if (expectedResult.isShowHelp() != actualResult.isShowHelp()) {
+                fail();
+            }
+            if (expectedResult.isExit() != actualResult.isExit()) {
+                fail();
+            }
         } catch (ParseException | CommandException e) {
             fail();
         }
     }
 
-    public class ModelStub extends ModelManager {
+    public static class ModelStub extends ModelManager {
         /**
          * Assume there are no duplicate clients, return false.
          *
