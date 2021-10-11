@@ -28,7 +28,7 @@ import seedu.address.commons.exceptions.DataConversionException;
  */
 public class EncryptedJsonUtil {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);
+    private static final Logger logger = LogsCenter.getLogger(EncryptedJsonUtil.class);
 
     private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
@@ -48,7 +48,6 @@ public class EncryptedJsonUtil {
             throws IOException {
         String jsonString = (String) EncryptionUtil.decryptSealedObject(
                 FileUtil.readFromEncryptedFile(encryptedJsonFile));
-        System.out.println(jsonString);
         return fromJsonString(jsonString, classOfObjectToDeserialize);
     }
 
