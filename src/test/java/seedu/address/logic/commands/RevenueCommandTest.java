@@ -33,7 +33,8 @@ public class RevenueCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withRevenue(REVENUE_STUB).build();
 
-        RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(editedPerson.getRevenue().value));
+        RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON,
+                new Revenue(editedPerson.getRevenue().value));
 
         String expectedMessage = String.format(RevenueCommand.MESSAGE_ADD_REVENUE_SUCCESS, editedPerson);
 
@@ -51,7 +52,8 @@ public class RevenueCommandTest {
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
                 .withRevenue(REVENUE_STUB).build();
 
-        RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON, new Revenue(editedPerson.getRevenue().value));
+        RevenueCommand revenueCommand = new RevenueCommand(INDEX_FIRST_PERSON,
+                new Revenue(editedPerson.getRevenue().value));
 
         String expectedMessage = String.format(RevenueCommand.MESSAGE_ADD_REVENUE_SUCCESS, editedPerson);
 
