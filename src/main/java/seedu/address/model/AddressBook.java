@@ -2,11 +2,15 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.storage.JsonAddressBookStorage;
 
 /**
  * Wraps all data at the address-book level
@@ -54,6 +58,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+    }
+
+    /// bulk list updating operations
+
+    public void mergeFile(Path filePath) throws DataConversionException {
+        JsonAddressBookStorage toMergeStorage = new JsonAddressBookStorage(filePath);
+        ReadOnlyAddressBook toMerge = toMergeStorage.readAddressBook().get();
+        ObservableList<Person> toMergeList = toMerge.getPersonList();
+        for(Person person: toMergeList) {
+            if (!hasPerson(person)) {
+                addPerson(person);
+            }
+        }
     }
 
     //// person-level operations
