@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,10 +50,9 @@ public interface Model {
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
-     * Sorts the address book data in alphabetical order.
-     * @param field The field to sort by
+     * Sorts the contacts in the address book by alphabetical order.
      */
-    void sortAddressBook(SortCommandParser.SortableField field);
+    void sortAddressBook();
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
