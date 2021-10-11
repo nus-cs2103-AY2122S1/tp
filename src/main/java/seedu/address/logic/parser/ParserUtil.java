@@ -54,6 +54,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> names} into a {@code List<Name>}.
+     */
+    public static List<Name> parseNames(Collection<String> names) throws ParseException {
+        requireNonNull(names);
+        final List<Name> nameList = new ArrayList<>();
+        for (String name : names) {
+            nameList.add(parseName(name));
+        }
+        return nameList;
+    }
+
+    /**
      * Parses a {@code String score} into a {@code Score}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -96,6 +108,18 @@ public class ParserUtil {
             throw new ParseException(ID.MESSAGE_CONSTRAINTS);
         }
         return new ID(trimmedID);
+    }
+
+    /**
+     * Parses {@code Collection<String> ids} into a {@code List<ID>}.
+     */
+    public static List<ID> parseIds(Collection<String> ids) throws ParseException {
+        requireNonNull(ids);
+        final List<ID> idList = new ArrayList<>();
+        for (String id : ids) {
+            idList.add(parseID(id));
+        }
+        return idList;
     }
 
     /**
