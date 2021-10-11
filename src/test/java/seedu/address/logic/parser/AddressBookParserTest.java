@@ -7,6 +7,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CheckCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -23,9 +27,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ReserveCommand;
+import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.ListContainsReservationPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -75,6 +81,19 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_check() throws Exception {
+        String dateString = "2021-10-10";
+        String timeString = "1900";
+        LocalDate date = LocalDate.parse(dateString);
+        LocalTime time = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
+        EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
+
+        CheckCommand command = (CheckCommand) parser.parseCommand(
+                CheckCommand.COMMAND_WORD + " " + dateString + " " + timeString);
+        assertEquals(new CheckCommand(new ListContainsReservationPredicate(date, time, typeOfCheck)), command);
     }
 
     @Test
