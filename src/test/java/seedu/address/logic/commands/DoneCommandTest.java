@@ -35,7 +35,7 @@ public class DoneCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String personNewLastVisitedDate = personToDone.getVisit().toString();
+        String personNewLastVisitedDate = personToDone.getVisit().orElse(new Visit("")).toString();
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
                 personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT,
@@ -80,7 +80,7 @@ public class DoneCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String personNewLastVisitedDate = personToDone.getVisit().toString();
+        String personNewLastVisitedDate = personToDone.getVisit().orElse(new Visit("")).toString();
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
                 personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT,

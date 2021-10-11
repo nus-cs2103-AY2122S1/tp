@@ -149,7 +149,7 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Last Visit: ")
-                .append(getLastVisit())
+                .append(getLastVisit().orElse(new LastVisit("")))
                 .append("; Visit: ")
                 .append(getVisit().get());
 
