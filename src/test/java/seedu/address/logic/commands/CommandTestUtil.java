@@ -20,7 +20,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditClientDescriptorBuilder;
+import seedu.address.testutil.EditProductDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -75,16 +76,35 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditClientCommand.EditClientDescriptor DESC_AMY;
+    public static final EditClientCommand.EditClientDescriptor DESC_BOB;
+    public static final EditProductCommand.EditProductDescriptor DESC_CANNON;
+    public static final EditProductCommand.EditProductDescriptor DESC_DAISY;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_AMY = new EditClientDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
+                .withPhoneNumber(VALID_PHONE_NUMBER_AMY)
+                .withEmail(VALID_EMAIL_AMY)
+                .withAddress(VALID_ADDRESS_AMY)
+                .build();
+        DESC_BOB = new EditClientDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withPhoneNumber(VALID_PHONE_NUMBER_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .build();
+
+        DESC_CANNON = new EditProductDescriptorBuilder()
+                .withName(VALID_NAME_CANNON)
+                .withUnitPrice(VALID_UNIT_PRICE_CANNON)
+                .withQuantity(VALID_QUANTITY_CANNON)
+                .build();
+        DESC_DAISY = new EditProductDescriptorBuilder()
+                .withName(VALID_NAME_DAISY)
+                .withUnitPrice(VALID_UNIT_PRICE_DAISY)
+                .withQuantity(VALID_QUANTITY_DAISY)
+                .build();
     }
 
     /**
