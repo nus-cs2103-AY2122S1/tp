@@ -40,7 +40,7 @@ public class Assessment {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public String getName() {
+    public String getValue() {
         return value;
     }
 
@@ -60,6 +60,7 @@ public class Assessment {
      * Returns true if the student with the given {@code id} is already graded.
      */
     public boolean isGraded(ID id) {
+        requireNonNull(id);
         return scores.containsKey(id);
     }
 
@@ -78,7 +79,7 @@ public class Assessment {
         }
 
         return otherAssessment != null
-                && otherAssessment.getName().equals(getName());
+                && otherAssessment.getValue().equals(getValue());
     }
 
     @Override
