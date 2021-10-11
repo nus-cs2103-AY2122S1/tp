@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.UniqueList;
@@ -26,7 +25,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         persons = new UniqueList<>();
         groups = new UniqueList<>();
     }

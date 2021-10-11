@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.exceptions.DuplicateItemException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;

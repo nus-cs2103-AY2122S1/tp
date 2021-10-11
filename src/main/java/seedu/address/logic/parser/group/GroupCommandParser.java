@@ -10,11 +10,11 @@ public abstract class GroupCommandParser extends Parser<GroupCommand> {
      * TODO: Stub method.
      */
     public Group parseGroup(Index index) {
-//        List<Group> lastShownList = model.getFilteredGroupList();
-//        if (index.getZeroBased() >= lastShownList.size()) {
-//            throw new ParseException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-//        }
-//        return lastShownList.get(index.getZeroBased());
+        // List<Group> lastShownList = model.getFilteredGroupList();
+        // if (index.getZeroBased() >= lastShownList.size()) {
+        //     throw new ParseException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        // }
+        // return lastShownList.get(index.getZeroBased());
         return null;
     }
 }
