@@ -239,9 +239,9 @@ _{more aspects and alternatives to be added}_
 ## **Glossary, Naming Conventions**
 
 ### Anime
-Represents a single season of an anime series. 
+Represents a single season of an anime series.
 
-### Animes 
+### Animes
 We chose this to denote multiple anime even though the plural for anime is anime.
 This is to distinct between a single anime and multiple animes.
 
@@ -249,7 +249,7 @@ This is to distinct between a single anime and multiple animes.
 The name of our app. Only used for package name.
 
 ### AnimeList
-A list of Anime, also the overall structure of the data. 
+A list of Anime, also the overall structure of the data.
 I.e. the user data is stored as an instance of AnimeList in json format.
 
 --------------------------------------------------------------------------------------------------------------------
