@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.model.Model;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
 import seedu.address.model.reservation.PersonContainsReservationPredicate;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Checks if there is an available slot for reservation in the specified date and time.
@@ -31,6 +31,10 @@ public class CheckCommand extends Command {
     private final LocalTime time;
     private final EnumTypeOfCheck typeOfCheck;
 
+    /**
+     * Constructs a new CheckCommand object
+     * @param predicate contains the query date and/or time used to filter the reservation list
+     */
     public CheckCommand(ListContainsReservationPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
@@ -44,9 +48,9 @@ public class CheckCommand extends Command {
         requireNonNull(model);
         model.updateFilteredReservationList(predicate);
         model.updateFilteredPersonList(new PersonContainsReservationPredicate(model.getFilteredReservationList()));
-        return new CommandResult(String.format(getDisplayMessage(typeOfCheck)
-                , model.getFilteredReservationList().size()
-                , convertToLocalDateTime(date, time)));
+        return new CommandResult(String.format(getDisplayMessage(typeOfCheck),
+                model.getFilteredReservationList().size(),
+                convertToLocalDateTime(date, time)));
     }
 
     private LocalDateTime convertToLocalDateTime(LocalDate date, LocalTime time) {

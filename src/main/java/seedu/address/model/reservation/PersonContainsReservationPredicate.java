@@ -1,9 +1,9 @@
 package seedu.address.model.reservation;
 
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-
-import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s {@code Phone} matches any of the phone number of the reservations specified .
@@ -23,8 +23,8 @@ public class PersonContainsReservationPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.reservation.PersonContainsReservationPredicate // instanceof handles nulls
-                && reservationsList.equals(((PersonContainsReservationPredicate) other).reservationsList)); // state check
+                || (other instanceof seedu.address.model.reservation.PersonContainsReservationPredicate
+                && reservationsList.equals(((PersonContainsReservationPredicate) other).reservationsList));
     }
 }
 

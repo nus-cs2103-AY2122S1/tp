@@ -18,11 +18,17 @@ import seedu.address.model.reservation.ListContainsReservationPredicate;
  */
 public class CheckCommandParser implements Parser<CheckCommand> {
 
+    public static final String ALLOWED_TIME_FORMAT = "HHmm";
+
+    /**
+     * Used to convert LocalDate to LocalDateTime when user inputs only date to query
+     */
+    public static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00");
+
     private LocalDate date;
     private LocalTime time;
     private EnumTypeOfCheck typeOfCheck;
-    public static final String ALLOWED_TIME_FORMAT = "HHmm";
-    public static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00"); // Used to convert LocalDate to LocalDateTime when user inputs only date to query
+
     /**
      * Parses the given {@code String} of arguments in the context of the CheckCommand
      * and returns a CheckCommand object for execution.

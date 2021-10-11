@@ -1,10 +1,10 @@
 package seedu.address.model.reservation;
 
-import seedu.address.logic.parser.enums.EnumTypeOfCheck;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.function.Predicate;
+
+import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 
 /**
  * Tests that a {@code Reservation}'s {@code DateTime} matches the user input DateTime given.
@@ -14,6 +14,12 @@ public class ListContainsReservationPredicate implements Predicate<Reservation> 
     private final LocalTime time;
     private final EnumTypeOfCheck typeOfCheck;
 
+    /**
+     * Constructs a new ListContainsReservationPredicate
+     * @param date date parsed from user's input
+     * @param time time parsed from user's input
+     * @param typeOfCheck enum specifying if user is checking for date, time or both
+     */
     public ListContainsReservationPredicate(LocalDate date, LocalTime time, EnumTypeOfCheck typeOfCheck) {
         this.date = date;
         this.time = time;

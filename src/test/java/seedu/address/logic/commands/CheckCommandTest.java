@@ -1,20 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.parser.enums.EnumTypeOfCheck;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.reservation.ListContainsReservationPredicate;
-import seedu.address.model.reservation.PersonContainsReservationPredicate;
-import seedu.address.model.reservation.Reservation;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,6 +9,22 @@ import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.parser.enums.EnumTypeOfCheck;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.reservation.ListContainsReservationPredicate;
+import seedu.address.model.reservation.PersonContainsReservationPredicate;
+import seedu.address.model.reservation.Reservation;
 
 class CheckCommandTest {
     private LocalDate date1 = LocalDate.parse("2021-01-01", DATE_FORMATTER);
@@ -37,8 +38,8 @@ class CheckCommandTest {
 
     @Test
     void execute_validDateTime_success() {
-        String expectedMessage
-                = String.format(Messages.MESSAGE_RESERVATIONS_LISTED_DATETIME, 1, LocalDateTime.of(date1, time));
+        String expectedMessage =
+                String.format(Messages.MESSAGE_RESERVATIONS_LISTED_DATETIME, 1, LocalDateTime.of(date1, time));
         resultModel.addReservation(reservation1);
         resultModel.addReservation(reservation2);
         model.addReservation(reservation1);
@@ -56,8 +57,8 @@ class CheckCommandTest {
 
     @Test
     void execute_validDateTimeNoReservationFound_success() {
-        String expectedMessage
-                = String.format(Messages.MESSAGE_RESERVATIONS_LISTED_DATETIME, 0, LocalDateTime.of(date2, time));
+        String expectedMessage =
+                String.format(Messages.MESSAGE_RESERVATIONS_LISTED_DATETIME, 0, LocalDateTime.of(date2, time));
         resultModel.addReservation(reservation1);
         model.addReservation(reservation1);
         ListContainsReservationPredicate predicate = new ListContainsReservationPredicate(date2, time, typeOfCheck);
@@ -90,7 +91,7 @@ class CheckCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different command -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 }
