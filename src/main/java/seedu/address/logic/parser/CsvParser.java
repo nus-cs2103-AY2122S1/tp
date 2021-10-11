@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.CsvFileChooser;
 
 /**
  * Parses CSV files for import function.
@@ -25,12 +26,12 @@ public class CsvParser {
     /**
      * Constructs instance of CsvParser and parses the provided file.
      *
-     * @param csvFile File to be read.
+     * @param csvFileChooser csvFileChooser to choose csv file to be parsed.
      * @throws ParseException if csv file is empty or cannot be read.
      */
-    public CsvParser(File csvFile) throws ParseException {
+    public CsvParser(CsvFileChooser csvFileChooser) throws ParseException {
         try {
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(csvFileChooser.chooseFile("docs/assets/templates")));
             data = new HashMap<>();
             parse();
         } catch (IOException e) {

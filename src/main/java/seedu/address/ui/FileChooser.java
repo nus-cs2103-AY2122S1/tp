@@ -1,14 +1,13 @@
 package seedu.address.ui;
 
 import java.io.File;
-
-import seedu.address.logic.commands.exceptions.CommandException;
+import java.io.IOException;
 
 /**
  * File Chooser Interface.
  */
 public interface FileChooser {
 
-    File chooseFile(String defaultDirectory) throws CommandException;
+    File chooseFile(String defaultDirectory) throws IOException;
 
 }
