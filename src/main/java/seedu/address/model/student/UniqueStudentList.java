@@ -87,7 +87,7 @@ public class UniqueStudentList implements Iterable<Student> {
 
     /**
      * Replaces the contents of this list with {@code students}.
-     * {@code students} must not contain duplicate Students.
+     * {@code students} must not contain duplicate students.
      */
     public void setStudents(List<Student> students) {
         requireAllNonNull(students);
@@ -123,7 +123,7 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
-     * Returns true if {@code Students} contains only unique Students.
+     * Returns true if {@code students} contains only unique students.
      */
     private boolean studentsAreUnique(List<Student> students) {
         for (int i = 0; i < students.size() - 1; i++) {
