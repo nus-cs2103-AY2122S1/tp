@@ -125,7 +125,16 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String position} into a {@code Position}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param position the string title of the related position.
+     * @return the Position object of this corresponding position.
+     */
     public static Position parsePosition(String position) {
+        requireNonNull(position);
+        String trimmedPosition = position.trim();
         return new Position(new Title(position), new Description(""));
     }
 
