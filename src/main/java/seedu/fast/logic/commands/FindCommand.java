@@ -7,6 +7,7 @@ import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.PriorityPredicate;
+import seedu.fast.model.tag.PriorityTag;
 
 import java.util.function.Predicate;
 
@@ -22,10 +23,13 @@ public class FindCommand extends Command {
             + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or priority tags \n"
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "OR pr/PRIORITY [MORE_PRIORITIES]...\n"
-            + "Examples: " + COMMAND_WORD + " alice bob charlie\n"
-            + COMMAND_WORD + " pr/low medium\n";
+            + "Parameters: KEYWORD [MORE_KEYWORDS]..."
+            + " OR " + PriorityTag.PRIORITY_TAG_PREFIX
+            + "PRIORITY [MORE_PRIORITIES]...\n"
+            + "Example: " + COMMAND_WORD + " alice bob charlie\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PriorityTag.PRIORITY_TAG_PREFIX
+            + PriorityTag.LowPriority.TERM + "\n";
 
     private final Predicate<Person> predicate;
 
