@@ -11,8 +11,8 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the people in FAST alphabetically \n"
-            + "Example: " + COMMAND_WORD;
+            + ": Sorts the people in FAST alphabetically \n\n"
+            + "Example: \n" + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all persons alphabetically";
 
