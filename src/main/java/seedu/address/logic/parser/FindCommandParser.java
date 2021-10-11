@@ -33,8 +33,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             Set<ModuleCode> moduleCodeSet;
             moduleCodeSet = ParserUtil.parseModuleCodes(moduleCodes);
 
-            // throw exception if empty
-
             List<String> stringListOfModuleCodes = moduleCodeSet.stream().
                     map(moduleCode -> moduleCode.toString()).
                     collect(Collectors.toList());
