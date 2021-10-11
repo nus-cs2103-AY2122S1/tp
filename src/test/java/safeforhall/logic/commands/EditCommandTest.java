@@ -40,7 +40,7 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
-        ArrayList<Index> indexArray = new ArrayList();
+        ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);
         EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(indexArray, descriptor);
@@ -80,7 +80,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        ArrayList<Index> indexArray = new ArrayList();
+        ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);
         EditCommand editCommand = new EditCommand(indexArray, new EditCommand.EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -98,7 +98,7 @@ public class EditCommandTest {
 
 
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        ArrayList<Index> indexArray = new ArrayList();
+        ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -117,7 +117,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        ArrayList<Index> indexArray = new ArrayList();
+        ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_SECOND_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
@@ -129,7 +129,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        ArrayList<Index> indexArray = new ArrayList();
+        ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
