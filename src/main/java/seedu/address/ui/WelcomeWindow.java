@@ -18,7 +18,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 
-
 /**
  * Controller for a welcome page
  */

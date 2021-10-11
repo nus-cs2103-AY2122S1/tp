@@ -13,7 +13,7 @@
             <stylesheets>
                 <URL value="@WelcomeSplashScreen.css" />
             </stylesheets>
-            
+
             <AnchorPane prefHeight="250" prefWidth="290" style="-fx-background-color: #121212#121212;">
                 <VBox>
                     <children>
