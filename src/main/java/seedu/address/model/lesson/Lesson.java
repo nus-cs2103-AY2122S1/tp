@@ -37,7 +37,7 @@ public class Lesson {
     public static final String CODE_MESSAGE_CONSTRAINT = "Lesson code should be of correct format";
     public static final String DAY_MESSAGE_CONSTRAINT = "Day specified is not legitimate";
     public static final String ENROLLMENT_MESSAGE_CONSTRAINT = "Student is unable to enroll for this lesson";
-    public static final String STUDENT_NOT_ENROLLED = "Student: $1$s is not enrolled for Lesson: %2$s";
+    public static final String STUDENT_NOT_ENROLLED = "%1$s is not enrolled for %2$s";
     public static final String SUBJECT_MESSAGE_CONSTRAINTS = "Subject names should be alphanumeric and"
             + "within %1$d characters";
 
@@ -267,8 +267,7 @@ public class Lesson {
      */
     public void removeStudent(Student student) {
         requireNonNull(student);
-        checkArgument(isAbleToUnenroll(student),
-                String.format(STUDENT_NOT_ENROLLED, student, this));
+        checkArgument(isAbleToUnenroll(student), String.format(STUDENT_NOT_ENROLLED, student, this));
         students.remove(student);
         student.unenrollFromLesson(this);
     }
