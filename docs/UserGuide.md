@@ -203,10 +203,10 @@ Avengers will be able to edit the attendance status of their students.
 
 Format: `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS`
 
-* Edits the attendance of a student or multiple students based on their `INDEX`
-* Edits the tutee(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the attendance of a student or multiple students based on their `INDEX`.
+* Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * Multiple `INDEX` can be parsed in at once as long as they are all valid.
-* The `STUDIO_SESSION` field is a positive number from 1 to 12 inclusive which refers to the Studio Session to be modified.
+* The `STUDIO_SESSION` field is a positive integer from 1 to 12 inclusive which refers to the Studio Session to be modified.
 * The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student attended the session or not where 1 marks a student as having attended while 0 marks a student as unattended.
 * Existing values will be updated to the input values.
 
@@ -215,23 +215,24 @@ Examples:
 * `attendance 1 ses/1 att/1`
 * `attendance 1, 2, 3 ses/12 k/Chan a/1 i/7`
 
-### Editing a student’s Studio participation: `studiopart`
+### Editing a student’s Studio participation: `part`
 
-Avengers will be able to track the participation of their tutees during the relevant studios. We will be keeping track of Studio participation with a counter system which starts at 0 by default. If a student participates, their counter will increment by 1.
+Avengers will be able to track the participation of their students during the relevant studios. We will be keeping track of Studio participation with a counter system which starts at 0 by default.
 
-Format: `studiopart s/STUDIO_GROUP k/KEYWORD [a/AMOUNT] [i/INDEX]`
+Format: `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
 
-* Edits the Studio participation of a student or multiple students who have the matching KEYWORD in their names and in Studio group as defined by `STUDIO_GROUP`.
-Only full words will be matched e.g. `Han` will not match `Hans`.
-The search is case-insensitive. e.g `hans` will match `Hans`.
-If `AMOUNT` is not supplied, the command will add 1 to the Studio. Otherwise it will edit the tutee’s Studio participation counter by the specified `AMOUNT`.
-A tutee’s Studio participation counter cannot be reduced below 0.
-If `INDEX` is not supplied, the command will edit the Studio participation of the tutee in the last created Studio session. Otherwise, it will execute the edit in the specified Studio session if `INDEX` is valid.
+* Edits the Studio participation of a student or multiple students based on their `INDEX`.
+* Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* The `STUDIO_SESSION` field is a positive integer from 1 to 12 inclusive which refers to the Studio Session to be modified.
+* The `PARTICIPATION_TO_ADD` field is an integer from -500 to 500 inclusive which indicates the Participation score of the student.
+* `PARTICIPATION_TO_ADD` will be added to the student's current Participation score
+* A student’s Studio Participation score cannot be reduced below 0.
+* If a student's `Attendance` is `false` and the Participation score to be added is greater than 0, the student will also be marked as having attended the Studio.
 
 Examples:
-* `studiopart s/12 k/Benny a/3`
-* `studiopart s/2 k/Keng i/7`
-* `studiopart s/32 k/Ting a/-1 i/8`
+* `part 1, 2, 3 ses/12 add/500`
+* `part 4, 6 ses/2 add/-300`
+* `part 4 ses/9 add/1`
 
 ### Adding grades for an assessment:  `grade`
 Avengers will be able to add a student’s grade for a particular assessment.
