@@ -26,6 +26,7 @@ public class PersonUtil {
 
     /**
      * Returns the part of command string for the given {@code person}'s details.
+     * @formatter:off
      */
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
@@ -33,7 +34,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
         sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
         person.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
+            s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
         return sb.toString();
     }
