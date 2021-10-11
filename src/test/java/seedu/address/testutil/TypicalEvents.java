@@ -36,9 +36,9 @@ public class TypicalEvents {
     public static final Event SAMPLE_EVENT_COPY_DIFFERENT_TIME = new Event(new EventName("Sleep"),
             new EventDate("2021-09-18"), new EventTime("1001"));
     public static final Event SAMPLE_EVENT_COPY_DIFFERENT_COMPLETION = new Event(new EventName("Sleep"),
-            new EventDate("2021-09-18"), new EventTime("1001"), true, new ArrayList<>());
+            new EventDate("2021-09-18"), new EventTime("1000"), true, new ArrayList<>());
     public static final Event SAMPLE_EVENT_COPY_DIFFERENT_PARTICIPANTS = new Event(new EventName("Sleep"),
-            new EventDate("2021-09-18"), new EventTime("1001"), false,
+            new EventDate("2021-09-18"), new EventTime("1000"), false,
             Collections.singletonList(new ParticipantBuilder().build()));
 
     private TypicalEvents() {}
