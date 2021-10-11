@@ -1,15 +1,15 @@
 package seedu.address.logic.parser.tasks;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class TaskCommandsParser {
 
