@@ -25,6 +25,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.DateTimeUtil;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -40,7 +41,8 @@ public class ParserUtilTest {
     private static final String VALID_LANGUAGE = "English";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_VISIT_DATETIME = "2020-11-11 12:00";
+    private static final String VALID_VISIT_DATETIME = DateTimeUtil.getValidVisitString();
+    private static final String VALID_LAST_VISIT_DATETIME = DateTimeUtil.getValidLastVisitString();
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -260,14 +262,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseLastVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
-        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATETIME);
-        assertEquals(expectedLastVisit, ParserUtil.parseLastVisit(VALID_VISIT_DATETIME));
+        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_LAST_VISIT_DATETIME);
+        assertEquals(expectedLastVisit, ParserUtil.parseLastVisit(VALID_LAST_VISIT_DATETIME));
     }
 
     @Test
     public void parseLastVisit_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
-        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATETIME + WHITESPACE;
-        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATETIME);
+        String visitWithWhitespace = WHITESPACE + VALID_LAST_VISIT_DATETIME + WHITESPACE;
+        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_LAST_VISIT_DATETIME);
         assertEquals(expectedLastVisit, parseLastVisit(visitWithWhitespace));
     }
 
