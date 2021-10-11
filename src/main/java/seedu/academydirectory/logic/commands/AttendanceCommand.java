@@ -83,7 +83,7 @@ public class AttendanceCommand extends Command {
             attendanceToEdit = attendanceToEdit.update(studioSession, attendanceStatus);
             StudioRecord newStudioRecord = new StudioRecord(attendanceToEdit, studentToEdit.getParticipation());
             Student editedPerson = new Student(studentToEdit.getName(), studentToEdit.getPhone(),
-                    studentToEdit.getEmail(), studentToEdit.getTelegram(), studentToEdit.getAddress(), newStudioRecord,
+                    studentToEdit.getEmail(), studentToEdit.getTelegram(), newStudioRecord,
                     studentToEdit.getAssessment(), studentToEdit.getTags());
             model.setStudent(studentToEdit, editedPerson);
         }

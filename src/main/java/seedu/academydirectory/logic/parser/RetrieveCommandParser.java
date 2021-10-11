@@ -2,7 +2,6 @@ package seedu.academydirectory.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -34,7 +33,7 @@ public class RetrieveCommandParser implements Parser<RetrieveCommand> {
         String info = keywords[0];
         Prefix infoPrefix = new Prefix(info);
 
-        Stream<Prefix> prefixes = Stream.of(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM, PREFIX_ADDRESS);
+        Stream<Prefix> prefixes = Stream.of(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM);
         boolean isAnyPrefixMatch = prefixes.anyMatch(x -> x.equals(infoPrefix));
         if (!isAnyPrefixMatch) {
             throw new ParseException(

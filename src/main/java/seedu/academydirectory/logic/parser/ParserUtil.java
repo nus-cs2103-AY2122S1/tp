@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.student.Address;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
@@ -102,21 +101,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**

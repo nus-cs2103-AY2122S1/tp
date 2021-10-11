@@ -1,7 +1,6 @@
 package seedu.academydirectory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -28,7 +27,6 @@ public class RetrieveCommand extends Command {
             + "Retrieves additional information of students if present. Currently supported information includes: \n"
             + "- Studio Participation\n"
             + "- Telegram Handle\n"
-            + "- Email address\n"
             + "- Contact Number, if any\n"
             + "\n"
             + "Format: `retrieve INFORMATION [of STUDENT_NAME]`";
@@ -36,7 +34,7 @@ public class RetrieveCommand extends Command {
     // TODO: Support for individual names
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieve personal details of students "
             + "and displays them as a list\n"
-            + "Parameters: " + PREFIX_ADDRESS + " | " + PREFIX_EMAIL + " | "
+            + "Parameters: " + PREFIX_EMAIL + " | "
             + PREFIX_TELEGRAM + " | " + PREFIX_PHONE + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE;
 

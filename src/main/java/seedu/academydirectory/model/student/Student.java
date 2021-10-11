@@ -22,7 +22,6 @@ public class Student {
     private final Telegram telegram;
 
     // Data fields
-    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private StudioRecord studioRecord;
     private Assessment assessment;
@@ -30,13 +29,12 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Telegram telegram, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, telegram, address, tags);
+    public Student(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, telegram, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
-        this.address = address;
         this.tags.addAll(tags);
         this.studioRecord = new StudioRecord(12);
         this.assessment = new Assessment();
@@ -46,14 +44,13 @@ public class Student {
      * Constructor for Student with Attendance and Assessment.
      */
 
-    public Student(Name name, Phone phone, Email email, Telegram telegram, Address address, StudioRecord studioRecord,
+    public Student(Name name, Phone phone, Email email, Telegram telegram, StudioRecord studioRecord,
                    Assessment assessment, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, telegram, address, tags);
+        requireAllNonNull(name, phone, email, telegram, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
-        this.address = address;
         this.tags.addAll(tags);
         this.studioRecord = studioRecord;
         this.assessment = assessment;
@@ -81,10 +78,6 @@ public class Student {
 
     public Telegram getTelegram() {
         return telegram;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     public Attendance getAttendance() {
@@ -141,7 +134,6 @@ public class Student {
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getTelegram().equals(getTelegram())
-                && otherStudent.getAddress().equals(getAddress())
                 && otherStudent.getTags().equals(getTags())
                 && otherStudent.getStudioRecord().equals(getStudioRecord());
     }
@@ -149,7 +141,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, telegram, address, tags, studioRecord);
+        return Objects.hash(name, phone, email, telegram, tags, studioRecord);
     }
 
     @Override
@@ -161,9 +153,7 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Telegram: ")
-                .append(getTelegram())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getTelegram());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
