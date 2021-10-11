@@ -40,10 +40,10 @@ public class UniqueProductListTest {
     }
 
     @Test
-    public void contains_productWithSameIdentityFieldsInList_returnsFalse() {
+    public void contains_productWithSameIdentityFieldsInList_returnsTrue() {
         uniqueProductList.add(IPHONE);
         Product editedAlice = new ProductBuilder(IPHONE).withUnitPrice(VALID_UNIT_PRICE_CANNON).build();
-        assertFalse(uniqueProductList.contains(editedAlice));
+        assertTrue(uniqueProductList.contains(editedAlice));
     }
 
     @Test
