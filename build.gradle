@@ -76,6 +76,11 @@ dependencies {
 
 shadowJar {
     archiveName = 'academydirectory.jar'
+    jar {
+        into 'resources', {
+            from 'resources'
+        }
+    }
 }
 
 defaultTasks 'clean', 'test'

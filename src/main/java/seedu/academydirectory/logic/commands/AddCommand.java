@@ -19,6 +19,29 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
+    public static final String HELP_MESSAGE = "### Adding a student: `add`\n"
+            + "\n"
+            + "Tutors will be able to add their tutees.\n"
+            + "\n"
+            + "Format: `add n/NAME e/EMAIL t/TELE_HANDLE [p/PHONE_NUMBER]`\n"
+            + "\n"
+            + "<div markdown=\"span\" class=\"alert alert-primary\">:bulb: **Tip:**\n"
+            + "A student can have no phone number due to privacy concern.\n"
+            + "</div>\n"
+            + "\n"
+            + "* `PHONE_NUMBER` is an optional field.\n"
+            + "* `EMAIL` entry **must end with @u.nus.edu**. Else, a warning message will be shown.\\\n"
+            + "`Students outside of NUS cannot be added`\n"
+            + "* If newly inputted students have `NAME`, `EMAIL`, `TELE_HANDLE` matching exactly\n"
+            + "with an already existing entry, the program will output a warning message and "
+            + "show the existing entry.\\\n"
+            + "`This student already exists and thus cannot be added again`\\\n"
+            + "`Existing student: Name: NAME, Email: EMAIL , Telegram: TELE_HANDLE`\n"
+            + "\n"
+            + "Examples:\n"
+            + "* `add n/Aaron Tan t/@sausage e/e0123456@u.nus.edu p/90312311`\n"
+            + "* `add n/Betsy Lim t/@unislave e/e0123456@u.nus.edu`";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "

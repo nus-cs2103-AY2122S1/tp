@@ -68,10 +68,8 @@ generally or specifically.
 #### Viewing general help
 Format: `help` or `help --all`
 
-* The first command `help` displays a menu of all commands available to use, as a list, and how
-  to navigate each command.
-* The second command `help --all` displays the same menu of all commands available alongside the
-  syntax for each command.
+* The singular command `help` displays a menu of all commands available to use, as a list, and how
+  to navigate each command, alongside the syntax for each command.
 
 #### Viewing specific help
 
@@ -247,7 +245,7 @@ The input `GRADE` must be a positive integer.
 Example:
 * `grade n/Aaron a/RA1 g/15`
 
-### Displaying the grades for an assessment:  `showgrades`
+### Displaying the grades for an assessment:  `showgrade`
 Avengers will be able to view the grades of all the students for a particular assessment.
 
 Format: `showgrade a/ASSESSMENT [s/STUDIO_GROUP]`

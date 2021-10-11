@@ -11,6 +11,11 @@ import seedu.academydirectory.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
+    public static final String HELP_MESSAGE = "### Clearing all entries : `clear`\n"
+            + "\n"
+            + "Clears all entries from the address book.\n"
+            + "\n"
+            + "Format: `clear`";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
 
