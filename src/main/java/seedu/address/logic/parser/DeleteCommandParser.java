@@ -1,32 +1,34 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCommand;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.model.person.PersonHasEmail;
 import seedu.address.model.person.PersonHasId;
-import seedu.address.model.person.Phone;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
+
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -36,11 +38,23 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CLIENTID, PREFIX_EMAIL);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLIENTID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                    PREFIX_ADDRESS, PREFIX_RISKAPPETITE, PREFIX_DISPOSABLEINCOME, PREFIX_CURRENTPLAN, PREFIX_LASTMET,
+                    PREFIX_TAG);
 
         if (((!arePrefixesPresent(argMultimap, PREFIX_CLIENTID)) && (!arePrefixesPresent(argMultimap, PREFIX_EMAIL)))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        //Throws error if other fields are inputted
+        if (arePrefixesPresent(argMultimap, PREFIX_NAME) || arePrefixesPresent(argMultimap, PREFIX_PHONE)
+            || arePrefixesPresent(argMultimap, PREFIX_RISKAPPETITE)
+            || arePrefixesPresent(argMultimap, PREFIX_ADDRESS)
+            || arePrefixesPresent(argMultimap, PREFIX_DISPOSABLEINCOME)
+            || arePrefixesPresent(argMultimap, PREFIX_CURRENTPLAN)
+            || arePrefixesPresent(argMultimap, PREFIX_LASTMET)) {
+            throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_FIELDS, DeleteCommand.MESSAGE_USAGE));
         }
 
         ArrayList<Predicate> predicatesToDelete = new ArrayList<>();

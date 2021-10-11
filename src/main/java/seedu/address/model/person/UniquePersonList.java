@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -90,9 +89,9 @@ public class UniquePersonList implements Iterable<Person> {
     public Person removeByFields(ArrayList<Predicate> predicates) {
         requireAllNonNull(predicates);
         FilteredList<Person> filteredList = internalList.filtered(x -> true);
-        ObservableList<Person> tempList = FXCollections.observableArrayList();;
+        ObservableList<Person> tempList = FXCollections.observableArrayList();
         Person personToDelete = null;
-        for( int i = 0; i < predicates.size() ; i++) {
+        for (int i = 0; i < predicates.size(); i++) {
 
             Predicate<Person> predicate = predicates.get(i);
             filteredList.setPredicate(predicate);
@@ -101,41 +100,17 @@ public class UniquePersonList implements Iterable<Person> {
             } else if (i == predicates.size() - 1) {
                 personToDelete = filteredList.get(0);
             }
-            tempList = FXCollections.observableArrayList();
-            ObservableList<Person> finalTempList = tempList;
-            filteredList.forEach(person -> finalTempList.add(person));
-            filteredList = new FilteredList<>(finalTempList);
+            ObservableList<Person> newTempList = FXCollections.observableArrayList();
+            for (int j = 0; j < filteredList.size(); j++) {
+                newTempList.add(filteredList.get(j));
+            }
+            tempList = newTempList;
+            filteredList = new FilteredList<>(tempList);
         }
 
         internalList.remove(personToDelete);
         return personToDelete;
 
-    }
-
-    public ObservableList<Person> removeById(ClientId clientId, ObservableList<Person> personList) {
-        if (clientId.value.isEmpty()) {
-            return this.internalList;
-        } else {
-            FilteredList<Person> filteredList = personList.filtered(person -> person.getClientId().equals(clientId));
-            if (filteredList.size() < 1) {
-                throw new PersonNotFoundException();
-            } else {
-                return filteredList;
-            }
-        }
-    }
-
-    public ObservableList<Person> removeByEmail(Email email, ObservableList<Person> personList) {
-        if (email.value.isEmpty()) {
-            return personList;
-        } else {
-            FilteredList<Person> filteredList = personList.filtered(person -> person.getEmail().equals(email));
-            if (filteredList.size() < 1) {
-                throw new PersonNotFoundException();
-            } else {
-                return filteredList;
-            }
-        }
     }
 
     public void setPersons(UniquePersonList replacement) {

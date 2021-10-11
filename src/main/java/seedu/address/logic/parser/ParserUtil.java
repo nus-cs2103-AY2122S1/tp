@@ -55,7 +55,6 @@ public class ParserUtil {
         }
         return new ClientId(trimmedId);
     }
-  
     /**
      * Parses {@code clientId} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
