@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.ClientId;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 
 /**
@@ -65,10 +66,10 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Deletes the person with the matching Client ID and returns the deleted person
+     * Deletes the person with the matching Client ID and Email and returns the deleted person
      *
      */
-    Person deletePersonById(ClientId clientId);
+    Person deletePersonByFields(Predicate<Person> predicate);
 
     /**
      * Adds the given person.

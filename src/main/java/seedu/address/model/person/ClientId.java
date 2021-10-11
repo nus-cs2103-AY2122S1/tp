@@ -7,6 +7,7 @@ public class ClientId {
 
     public static final String VALIDATION_REGEX = "\\d{1,}";
     public static final String MESSAGE_CONSTRAINTS = "ClientId should only contain positive integers";
+    public static final String DEFAULT_VALUE = "";
     public final String value;
 
     /**

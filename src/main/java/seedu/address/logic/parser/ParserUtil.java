@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
 import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
@@ -52,6 +53,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromZeroBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String clientId} into an {@code ClientId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code clientId} is invalid.
+     */
+    public static ClientId parseClientId(String clientId) throws ParseException {
+        requireNonNull(clientId);
+        String trimmedClientId = clientId.trim();
+        if (!ClientId.isValidClientId(clientId)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new ClientId(trimmedClientId);
     }
 
     /**

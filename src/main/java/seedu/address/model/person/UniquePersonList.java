@@ -5,7 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -84,15 +86,41 @@ public class UniquePersonList implements Iterable<Person> {
      * Removes the equivalent person with matching client id from the list.
      * The person must exist in the list.
      */
-    public Person removeById(ClientId toRemove) {
-        requireNonNull(toRemove);
-        FilteredList<Person> filteredList = internalList.filtered(person -> person.getClientId().equals(toRemove));
+    public Person removeByFields(Predicate<Person> predicate) {
+        requireAllNonNull(predicate);
+        FilteredList<Person> filteredList = internalList.filtered(predicate);
         if (filteredList.size() < 1) {
             throw new PersonNotFoundException();
         } else {
-            Person personToDelete = filteredList.get(0);
-            internalList.remove(personToDelete);
-            return personToDelete;
+            Person deletedPerson = filteredList.get(0);
+            remove(deletedPerson);
+            return deletedPerson;
+        }
+    }
+
+    public ObservableList<Person> removeById(ClientId clientId, ObservableList<Person> personList) {
+        if (clientId.value.isEmpty()) {
+            return this.internalList;
+        } else {
+            FilteredList<Person> filteredList = personList.filtered(person -> person.getClientId().equals(clientId));
+            if (filteredList.size() < 1) {
+                throw new PersonNotFoundException();
+            } else {
+                return filteredList;
+            }
+        }
+    }
+
+    public ObservableList<Person> removeByEmail(Email email, ObservableList<Person> personList) {
+        if (email.value.isEmpty()) {
+            return personList;
+        } else {
+            FilteredList<Person> filteredList = personList.filtered(person -> person.getEmail().equals(email));
+            if (filteredList.size() < 1) {
+                throw new PersonNotFoundException();
+            } else {
+                return filteredList;
+            }
         }
     }
 

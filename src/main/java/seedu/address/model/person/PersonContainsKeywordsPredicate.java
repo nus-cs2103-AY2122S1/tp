@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.StringUtil.containsIgnoreCase;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -29,14 +30,17 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         String[] generalKeywords = keywords.getPreamble().split(" ");
         boolean checkGeneral = generalKeywords[0].equals(WILDCARD_KEYWORD)
                 || Arrays.stream(generalKeywords).anyMatch(x -> {
-                    boolean checkAttribute = Stream.of(person.getName().fullName, person.getPhone().value,
-                            person.getEmail().value, person.getAddress().value).anyMatch(y -> containsIgnoreCase(y, x));
+                    boolean checkAttribute = Stream.of(person.getClientId().value, person.getName().fullName
+                            , person.getPhone().value, person.getEmail().value, person.getAddress().value)
+                            .anyMatch(y -> containsIgnoreCase(y, x));
                     boolean checkAttributeTag = person.getTags().stream()
                             .anyMatch(y -> containsIgnoreCase(y.tagName, x));
                     return checkAttribute || checkAttributeTag;
                 }
         );
 
+        boolean checkClientId = keywords.getValue(PREFIX_CLIENTID)
+                .map(x -> containsIgnoreCase(person.getClientId().value, x)).orElse(true);
         boolean checkName = keywords.getValue(PREFIX_NAME)
                 .map(x -> containsIgnoreCase(person.getName().fullName, x)).orElse(true);
         boolean checkPhone = keywords.getValue(PREFIX_PHONE)
@@ -47,7 +51,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 .map(x -> containsIgnoreCase(person.getAddress().value, x)).orElse(true);
         boolean checkTags = keywords.getValue(PREFIX_TAG)
                 .map(x -> person.getTags().stream().anyMatch(y -> containsIgnoreCase(y.tagName, x))).orElse(true);
-        return checkGeneral && checkName && checkPhone && checkEmail && checkAddress && checkTags;
+        return checkClientId && checkGeneral && checkName && checkPhone && checkEmail && checkAddress && checkTags;
     }
 
     @Override
