@@ -1,10 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.ImportCommand.MESSAGE_NOT_IMPLEMENTED_YET;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +13,5 @@ public class ImportCommandTest {
 
     @Test
     public void execute() {
-        assertCommandFailure(new ImportCommand(Paths.get("data/test.json")), model, MESSAGE_NOT_IMPLEMENTED_YET);
     }
 }
