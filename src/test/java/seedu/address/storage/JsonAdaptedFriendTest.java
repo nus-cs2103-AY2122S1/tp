@@ -22,6 +22,7 @@ public class JsonAdaptedFriendTest {
     private static final String VALID_FRIEND_ID = BENSON.getFriendId().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final List<JsonAdaptedGame> VALID_GAMES = BENSON.getGames().stream()
+            .map(gameFriendLink -> gameFriendLink.getGameId().value)
             .map(JsonAdaptedGame::new)
             .collect(Collectors.toList());
 

@@ -7,7 +7,7 @@ import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -20,7 +20,7 @@ public class FriendBuilder {
 
     private FriendName friendName;
     private FriendId friendId;
-    private Set<Game> games;
+    private Set<GameFriendLink> games;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,7 +49,8 @@ public class FriendBuilder {
     }
 
     /**
-     * Parses the {@code games} into a {@code Set<Game>} and set it to the {@code Person} that we are building.
+     * Parses the {@code games} into a {@code Set<GameFriendLink>} and set it to the {@code Person} that we are
+     * building.
      */
     public FriendBuilder withGames(String ... games) {
         this.games = SampleDataUtil.getGameSet(games);

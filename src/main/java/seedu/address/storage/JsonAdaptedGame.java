@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
 
 /**
  * Jackson-friendly version of {@link Game}.
@@ -25,7 +26,7 @@ class JsonAdaptedGame {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedGame(Game sourceInstance) {
-        gameName = sourceInstance.gameName;
+        gameName = sourceInstance.getGameId().value;
     }
 
     @JsonValue
@@ -39,10 +40,10 @@ class JsonAdaptedGame {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Game toModelType() throws IllegalValueException {
-        if (!Game.isValidGameName(gameName)) {
-            throw new IllegalValueException(Game.MESSAGE_CONSTRAINTS);
+        if (!GameId.isValidGameId(gameName)) {
+            throw new IllegalValueException(GameId.MESSAGE_CONSTRAINTS);
         }
-        return new Game(gameName);
+        return new Game(new GameId(gameName));
     }
 
 }

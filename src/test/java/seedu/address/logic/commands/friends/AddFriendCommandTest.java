@@ -9,7 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.FriendsList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandTest {
@@ -158,12 +162,62 @@ public class AddFriendCommandTest {
         }
 
         @Override
-        public void linkFriend(Friend toLink, HashMap<String, String> games) {
+        public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasFriendId(FriendId idToFind) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGamesList(ReadOnlyGamesList readOnlyGamesList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyGamesList getGamesList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGame(Game game) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGameWithId(GameId gameId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGame(GameId targetId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGame(Game game) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGame(Game target, Game editedGame) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Game> getFilteredGamesList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGamesList(Predicate<Game> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGameId(GameId idToFind) {
             throw new AssertionError("This method should not be called.");
         }
     }

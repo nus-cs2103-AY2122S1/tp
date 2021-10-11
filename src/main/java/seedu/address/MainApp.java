@@ -16,9 +16,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.FriendsList;
+import seedu.address.model.GamesList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -75,22 +77,26 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyFriendsList> addressBookOptional;
-        ReadOnlyFriendsList initialData;
+        ReadOnlyFriendsList initialFriendData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleFriendsList);
+            initialFriendData = addressBookOptional.orElseGet(SampleDataUtil::getSampleFriendsList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new FriendsList();
+            initialFriendData = new FriendsList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new FriendsList();
+            initialFriendData = new FriendsList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        // TODO - Kevin
+        // Read and load initialGameData
+        ReadOnlyGamesList initialGameData = new GamesList();
+
+        return new ModelManager(initialFriendData, initialGameData, userPrefs);
     }
 
     private void initLogging(Config config) {

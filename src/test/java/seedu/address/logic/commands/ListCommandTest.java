@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +22,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalFriendsList(), new UserPrefs());
-        expectedModel = new ModelManager(model.getFriendsList(), new UserPrefs());
+        model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
+        expectedModel = new ModelManager(model.getFriendsList(), getTypicalGamesList(), new UserPrefs());
     }
 
     @Test

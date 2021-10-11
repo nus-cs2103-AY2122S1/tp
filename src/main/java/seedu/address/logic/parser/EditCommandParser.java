@@ -14,7 +14,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -60,11 +60,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> games} into a {@code Set<Game>} if {@code games} is non-empty.
+     * Parses {@code Collection<String> games} into a {@code Set<GameFriendLink>} if {@code games} is non-empty.
      * If {@code games} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Game>} containing zero games.
+     * {@code Set<GameFriendLink>} containing zero games.
      */
-    private Optional<Set<Game>> parseGamesForEdit(Collection<String> games) throws ParseException {
+    private Optional<Set<GameFriendLink>> parseGamesForEdit(Collection<String> games) throws ParseException {
         assert games != null;
 
         if (games.isEmpty()) {

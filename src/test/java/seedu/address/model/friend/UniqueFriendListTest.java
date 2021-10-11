@@ -3,7 +3,7 @@ package seedu.address.model.friend;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_CSGO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.BOB;
@@ -41,7 +41,7 @@ public class UniqueFriendListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFriendsList.add(ALICE);
-        Friend editedAlice = new FriendBuilder(ALICE).withGames(VALID_GAME_CSGO)
+        Friend editedAlice = new FriendBuilder(ALICE).withGames(VALID_GAME_ID_CSGO)
                 .build();
         assertTrue(uniqueFriendsList.contains(editedAlice));
     }
@@ -84,7 +84,7 @@ public class UniqueFriendListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueFriendsList.add(ALICE);
-        Friend editedAlice = new FriendBuilder(ALICE).withGames(VALID_GAME_CSGO)
+        Friend editedAlice = new FriendBuilder(ALICE).withGames(VALID_GAME_ID_CSGO)
                 .build();
         uniqueFriendsList.setFriend(ALICE, editedAlice);
         UniqueFriendsList expectedUniqueFriendsList = new UniqueFriendsList();

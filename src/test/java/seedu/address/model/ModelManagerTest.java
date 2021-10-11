@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FRIENDS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.BENSON;
@@ -122,11 +122,12 @@ public class ModelManagerTest {
     public void equals() {
         FriendsList friendsList = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         FriendsList differentFriendsList = new FriendsList();
+        GamesList gamesList = new GamesList();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(friendsList, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(friendsList, userPrefs);
+        modelManager = new ModelManager(friendsList, gamesList, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(friendsList, gamesList, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -139,19 +140,19 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentFriendsList, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentFriendsList, gamesList, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(friendsList, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredFriendsList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(friendsList, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, differentUserPrefs)));
     }
 }

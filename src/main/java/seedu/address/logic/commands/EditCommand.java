@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FRIENDS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * Edits the details of an existing friend in the address book.
@@ -78,7 +78,7 @@ public class EditCommand extends Command {
         }
 
         model.setFriend(friendToEdit, editedFriend);
-        model.updateFilteredFriendsList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredFriendsList(PREDICATE_SHOW_ALL_FRIENDS);
         return new CommandResult(String.format(MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend));
     }
 
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
 
         FriendId updatedFriendId = editFriendDescriptor.getFriendId().orElse(friendToEdit.getFriendId());
         FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getName());
-        Set<Game> updatedGames = editFriendDescriptor.getGames().orElse(friendToEdit.getGames());
+        Set<GameFriendLink> updatedGames = editFriendDescriptor.getGames().orElse(friendToEdit.getGames());
 
         return new Friend(updatedFriendId, updatedFriendName, updatedGames);
     }
@@ -121,7 +121,7 @@ public class EditCommand extends Command {
     public static class EditFriendDescriptor {
         private FriendName friendName;
         private FriendId friendId;
-        private Set<Game> games;
+        private Set<GameFriendLink> games;
 
         public EditFriendDescriptor() {}
 
@@ -162,7 +162,7 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setGames(Set<Game> gameSet) {
+        public void setGames(Set<GameFriendLink> gameSet) {
             this.games = (gameSet != null) ? new HashSet<>(gameSet) : null;
         }
 
@@ -171,7 +171,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Game>> getGames() {
+        public Optional<Set<GameFriendLink>> getGames() {
             return (games != null) ? Optional.of(Collections.unmodifiableSet(games)) : Optional.empty();
         }
 

@@ -5,12 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_CSGO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
@@ -32,7 +33,7 @@ import seedu.address.testutil.FriendBuilder;
  */
 public class EditCommandTest {
 
-    private final Model model = new ModelManager(getTypicalFriendsList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -42,7 +43,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
 
-        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), getTypicalGamesList(),
+                new UserPrefs());
         expectedModel.setFriend(model.getFilteredFriendsList().get(0), editedFriend);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -55,15 +57,16 @@ public class EditCommandTest {
 
         FriendBuilder personInList = new FriendBuilder(lastFriend);
         Friend editedFriend = personInList.withFriendName(VALID_NAME_BOB).withFriendId(VALID_FRIEND_ID_BOB)
-                .withGames(VALID_GAME_CSGO).build();
+                .withGames(VALID_GAME_ID_CSGO).build();
 
         EditCommand.EditFriendDescriptor descriptor = new EditFriendDescriptorBuilder().withFriendName(VALID_NAME_BOB)
-                .withFriendId(VALID_FRIEND_ID_BOB).withGames(VALID_GAME_CSGO).build();
+                .withFriendId(VALID_FRIEND_ID_BOB).withGames(VALID_GAME_ID_CSGO).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
 
-        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), getTypicalGamesList(),
+                new UserPrefs());
         expectedModel.setFriend(lastFriend, editedFriend);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -76,7 +79,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
 
-        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), getTypicalGamesList(),
+                new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -92,7 +96,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
 
-        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FriendsList(model.getFriendsList()), getTypicalGamesList(),
+                new UserPrefs());
         expectedModel.setFriend(model.getFilteredFriendsList().get(0), editedFriend);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

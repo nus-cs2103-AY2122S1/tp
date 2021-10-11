@@ -1,15 +1,14 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.model.FriendsList;
 import seedu.address.model.ReadOnlyFriendsList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -43,10 +42,11 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Game> getGameSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Game::new)
-                .collect(Collectors.toSet());
+    public static Set<GameFriendLink> getGameSet(String... strings) {
+        //        return Arrays.stream(strings)
+        //                .map(Game)
+        //                .collect(Collectors.toSet());
+        return new HashSet<>();
     }
 
 }

@@ -1,15 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditFriendDescriptor;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.game.Game;
+import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -53,11 +52,12 @@ public class EditFriendDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code games} into a {@code Set<Game>} and set it to the {@code EditFriendDescriptor}
+     * Parses the {@code games} into a {@code Set<GameFriendLink>} and set it to the {@code EditFriendDescriptor}
      * that we are building.
      */
     public EditFriendDescriptorBuilder withGames(String... games) {
-        Set<Game> gameSet = Stream.of(games).map(Game::new).collect(Collectors.toSet());
+        //        Set<GameFriendLink> gameSet = Stream.of(games).map(Game::new).collect(Collectors.toSet());
+        Set<GameFriendLink> gameSet = new HashSet<>();
         descriptor.setGames(gameSet);
         return this;
     }

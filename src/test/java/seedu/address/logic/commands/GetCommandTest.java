@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.BENSON;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
+import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 
 import java.util.List;
 
@@ -23,8 +24,9 @@ import seedu.address.model.friend.FriendIdMatchesKeywordPredicate;
  * Contains integration tests (interaction with the Model) for {@code GetCommand}.
  */
 public class GetCommandTest {
-    private final Model model = new ModelManager(getTypicalFriendsList(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalFriendsList(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(),
+            new UserPrefs());
 
     @Test
     public void equals() {
