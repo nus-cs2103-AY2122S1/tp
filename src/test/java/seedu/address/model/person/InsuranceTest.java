@@ -18,6 +18,13 @@ public class InsuranceTest {
         assertEquals(new Insurance(InsuranceType.LIFE), Insurance.of("Life"));
         assertEquals(new Insurance(InsuranceType.HEALTH), Insurance.of("Health"));
 
+        assertEquals(new Insurance(InsuranceType.GENERAL).hashCode(),
+                Insurance.of("General").hashCode());
+        assertEquals(new Insurance(InsuranceType.LIFE).hashCode(),
+                Insurance.of("Life").hashCode());
+        assertEquals(new Insurance(InsuranceType.HEALTH).hashCode(),
+                Insurance.of("Health").hashCode());
+
         assertEquals(new Insurance(InsuranceType.GENERAL), Insurance.of("General"));
         assertEquals(new Insurance(InsuranceType.GENERAL), Insurance.of("GENERAL"));
         assertEquals(new Insurance(InsuranceType.GENERAL), Insurance.of("general"));
