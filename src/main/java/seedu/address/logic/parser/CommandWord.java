@@ -30,7 +30,6 @@ public enum CommandWord {
     FIND("find"),
     HELP("help", "man"),
     LIST("list", "ls"),
-    SORT("sort"),
     REMARK("remark");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
