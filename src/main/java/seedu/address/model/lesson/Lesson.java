@@ -187,7 +187,9 @@ public class Lesson {
      * and must not be already enrolled to the lesson.
      */
     public boolean isAbleToEnroll(Student student) {
-        requireNonNull(student);
+        if (student == null) {
+            return false;
+        }
         if (containsStudent(student)) {
             return false;
         }
@@ -211,12 +213,13 @@ public class Lesson {
 
         boolean isClashingStartTime = (otherStartTime.isAfter(startTime) && otherStartTime.isBefore(endTime));
         boolean isClashingEndTime = (otherEndTime.isAfter(startTime) && otherEndTime.isBefore(endTime));
+        boolean isSameTiming = (otherStartTime.equals(startTime)); // end time implied as same due to fixed timing
         boolean isOnSameDay = otherLesson.getDayOfWeek().equals(dayOfWeek);
 
         if (!isOnSameDay) {
             return false;
         }
-        return (isClashingStartTime || isClashingEndTime);
+        return (isClashingStartTime || isClashingEndTime || isSameTiming);
     }
 
     /**
@@ -261,17 +264,22 @@ public class Lesson {
     /**
      * Returns true if a given string is a valid subject name for a lesson.
      */
-    public static boolean isValidSubject(String test) {
-        requireNonNull(test);
-        return test.matches(SUBJECT_VALIDATION_REGEX)
-                && (test.length() <= MAXIMUM_SUBJECT_LENGTH);
+    public static boolean isValidSubject(String testSubject) {
+        if (testSubject == null) {
+            return false;
+        }
+        return testSubject.matches(SUBJECT_VALIDATION_REGEX)
+                && (testSubject.length() <= MAXIMUM_SUBJECT_LENGTH)
+                && (!testSubject.isEmpty());
     }
 
     /**
      * Returns true if a given timings are within bounded limits.
      */
     public static boolean isValidTime(LocalTime testStart) {
-        requireNonNull(testStart);
+        if (testStart == null) {
+            return false;
+        }
         return testStart.equals(BOUNDED_START_TIME)
                 || testStart.equals(BOUNDED_END_TIME)
                 || (testStart.isAfter(BOUNDED_START_TIME) && testStart.isBefore(BOUNDED_END_TIME));
@@ -288,7 +296,9 @@ public class Lesson {
      * Returns true if a given lesson code is follows the correct format.
      */
     public static boolean isValidLessonCode(String testCode) {
-        requireNonNull(testCode);
+        if (testCode == null) {
+            return false;
+        }
         // check number of parameters in lesson code
         String[] testLessonParams = testCode.split("-");
         if (testLessonParams.length != 4) {
