@@ -14,6 +14,7 @@ import seedu.address.model.person.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -80,11 +81,20 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Student> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered lesson list */
+    ObservableList<Lesson> getFilteredLessonList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
 
     /**
      * Returns true if a lesson with the same values as {@code lesson} exists in TuitiONE.
@@ -106,10 +116,16 @@ public interface Model {
     /**
      * Returns an unmodifiable list of lessons.
      */
-    ObservableList<Lesson> getLessonList();
+    ObservableList<Lesson> getFilteredLessonList();
 
     /**
      * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
      */
     Lesson searchLessons(String lessonCode);
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
 }

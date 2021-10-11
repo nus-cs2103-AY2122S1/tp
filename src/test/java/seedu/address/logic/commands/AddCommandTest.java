@@ -165,13 +165,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Lesson> getLessonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public Lesson searchLessons(String lessonCode) {
             throw new AssertionError("This method should not be called.");
+        }
+      
+        @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+          throw new AssertionError("This method should not be called.");
         }
     }
 

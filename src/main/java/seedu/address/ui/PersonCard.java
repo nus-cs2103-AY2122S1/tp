@@ -16,6 +16,11 @@ import seedu.address.model.person.Student;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String STRING_FORMAT_PARENT_CONTACT = "Parent's Contact: \t%s";
+    private static final String STRING_FORMAT_ADDRESS = "Address: \t\t\t%s";
+    private static final String STRING_FORMAT_EMAIL = "Email Address: \t%s";
+    private static final String STRING_FORMAT_GRADE = "Grade: \t\t\t%s";
+    private static final String STRING_FORMAT_LESSON = "Lesson(s): \t";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -54,17 +59,18 @@ public class PersonCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        parentContact.setText(student.getParentContact().value);
-        address.setText(student.getAddress().value);
-        email.setText(student.getEmail().value);
-        grade.setText(student.getGrade().value);
+        name.setUnderline(true);
+        parentContact.setText(String.format(STRING_FORMAT_PARENT_CONTACT, student.getParentContact().value));
+        address.setText(String.format(STRING_FORMAT_ADDRESS, student.getAddress().value));
+        email.setText(String.format(STRING_FORMAT_EMAIL, student.getEmail().value));
+        grade.setText(String.format(STRING_FORMAT_GRADE, student.getGrade().value));
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         lessons.setText(student.getLessons().stream()
                 .sorted(Comparator.comparing(Lesson::getLessonCode))
                 .map(Lesson::getLessonCode)
-                .reduce("Lesson(s): ", (l1, l2) -> l1 + '\t' + l2));
+                .reduce(STRING_FORMAT_LESSON, (l1, l2) -> l1 + '\t' + l2));
     }
 
     @Override
