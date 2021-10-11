@@ -18,14 +18,17 @@ public class FindableContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        FindableContainsKeywordsPredicate firstPredicate = new FindableContainsKeywordsPredicate(firstPredicateKeywordList);
-        FindableContainsKeywordsPredicate secondPredicate = new FindableContainsKeywordsPredicate(secondPredicateKeywordList);
+        FindableContainsKeywordsPredicate firstPredicate
+                = new FindableContainsKeywordsPredicate(firstPredicateKeywordList);
+        FindableContainsKeywordsPredicate secondPredicate
+                = new FindableContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        FindableContainsKeywordsPredicate firstPredicateCopy = new FindableContainsKeywordsPredicate(firstPredicateKeywordList);
+        FindableContainsKeywordsPredicate firstPredicateCopy
+                = new FindableContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,7 +44,8 @@ public class FindableContainsKeywordsPredicateTest {
     @Test
     public void test_findableContainsKeywords_returnsTrue() {
         // One keyword
-        FindableContainsKeywordsPredicate predicate = new FindableContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        FindableContainsKeywordsPredicate predicate
+                = new FindableContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
