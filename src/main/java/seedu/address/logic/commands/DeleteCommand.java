@@ -59,8 +59,7 @@ public class DeleteCommand extends Command {
         switch (this.quantity) {
         case ONE: return deletePerson(model);
         case ALL: return deleteAll(model);
-        default:
-        case SHOWN: return deleteAllShown(model);
+        case SHOWN: default: return deleteAllShown(model);
         }
     }
 
