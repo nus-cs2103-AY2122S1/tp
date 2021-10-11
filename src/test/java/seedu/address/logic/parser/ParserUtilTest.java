@@ -39,6 +39,7 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
     }
 
+    // @formatter:off
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
