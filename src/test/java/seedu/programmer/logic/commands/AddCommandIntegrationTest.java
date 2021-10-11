@@ -51,7 +51,8 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentStudentId = "A6543210B";
-        Student studentDifferentName = new Student(validStudent.getName(), new StudentId(differentStudentId), validStudent.getClassId(), validStudent.getGrade());
+        Student studentDifferentName = new Student(validStudent.getName(), new StudentId(differentStudentId),
+                                                   validStudent.getClassId(), validStudent.getGrade());
 
         assertCommandSuccess(new AddCommand(studentDifferentName), expectedModel,
                 String.format(AddCommand.MESSAGE_SUCCESS, studentDifferentName), expectedModel);
@@ -62,7 +63,8 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentName = "Different Name";
-        Student studentDifferentName = new Student(new Name(differentName), validStudent.getStudentId(), validStudent.getClassId(), validStudent.getGrade());
+        Student studentDifferentName = new Student(new Name(differentName), validStudent.getStudentId(),
+                                                   validStudent.getClassId(), validStudent.getGrade());
 
         assertCommandFailure(new AddCommand(studentDifferentName), expectedModel, AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }
