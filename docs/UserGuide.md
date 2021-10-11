@@ -19,15 +19,23 @@ TBA
 ## Features
 
 ### Adding students/tuition classes
-#### Adding a student: `addstudent`
+#### Adding a student: `add`
 Adds a student’s information such as n/NAME, p/PHONE_NUMBER. 
 
-Format: `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
+
+Examples:
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+- `add n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks t/paid`
 
 #### Adding a tuition class: `addclass`
 Adds a tuition class with a set l/LIMIT of students at specified t/TIME.
 
-Format: `addclass l/LIMIT t/TIME n/NAME,NAME,NAME... [t/TAG]…`
+Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT n/NAME,NAME,NAME... [r/REMARK] [t/TAG]…`
+
+Examples:
+- `addclass n/Chemistry l/16 c/4 ts/Thu 15:00-17:00 s/Bernice Yu`
+- `addclass n/Math l/8 c/5 ts/Mon 11:00-14:00 s/Alex Yeoh r/Quiz on final lesson`
 
 ### Viewing students/tuition classes
 Provides a view of a student or class if an INDEX is provided. Otherwise, a full list is provided.
@@ -75,8 +83,8 @@ Format: `exit`
 
 Action | Format
 --------|------------------
-***Add Student*** | `addstudent n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
-***Add Class*** | `addclass l/limit t/time n/NAME,NAME,NAME... [t/TAG]…`
+***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
+***Add Class*** | `addclass l/limit t/time n/NAME,NAME,NAME... [r/REMARK] [t/TAG]…`
 ***View Student*** | `student [INDEX]`
 ***View Class*** | `class [INDEX]`
 ***Edit Student*** | `editstudent [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
@@ -85,6 +93,8 @@ Action | Format
 ***Delete Class*** | `deleteclass [INDEX]`
 ***Add Student to Class*** | `addtoclass [INDEX_STUDENT] [INDEX_CLASS]`
 ***Remove Student from Class*** | `remove [INDEX_STUDENT] [INDEX_CLASS]`
+***Add Remarks to Student*** | `remark [INDEX_STUDENT] r/REMARK`
+***Add Remarks to Class*** | `remarkclass [INDEX_CLASS] r/REMARK`
 ***Exit*** | `exit`
 
 
