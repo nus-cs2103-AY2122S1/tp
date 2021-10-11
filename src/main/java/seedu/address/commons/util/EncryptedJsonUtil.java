@@ -48,6 +48,7 @@ public class EncryptedJsonUtil {
             throws IOException {
         String jsonString = (String) EncryptionUtil.decryptSealedObject(
                 FileUtil.readFromEncryptedFile(encryptedJsonFile));
+        System.out.println(jsonString);
         return fromJsonString(jsonString, classOfObjectToDeserialize);
     }
 
