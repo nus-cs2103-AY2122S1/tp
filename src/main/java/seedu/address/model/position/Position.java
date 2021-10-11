@@ -15,8 +15,14 @@ public class Position {
 
     private final Description description;
 
-    // Data field is empty
-    private Integer rejectionRate;
+    // Data fields
+    private int rejectionRate;
+
+    // Total number of applicants for this position.
+    private int noOfApplicants;
+
+    // Total number of rejected applicants for this position.
+    private int noOfRejectedApplicants;
 
     /**
      * Every field must be present and not null.
@@ -83,4 +89,56 @@ public class Position {
         return builder.toString();
     }
 
+    /* Data calculations and others for Rejection rates */
+    public int getNoOfApplicants() {
+        return this.noOfApplicants;
+    }
+
+    public int getNoOfRejectedApplicants() {
+        return this.noOfRejectedApplicants;
+    }
+
+    public void updateNoOfApplicants(int newTotal) {
+        this.noOfApplicants = newTotal;
+    }
+
+    public void updateNoOfRejectedApplicants(int newTotal) {
+        this.noOfRejectedApplicants = newTotal;
+    }
+
+    /**
+     * Returns the rejection rate of a current position.
+     *
+     * @return The rejection rate of the position.
+     */
+    public int calculateRejectionRate() {
+        int newRate;
+        try {
+            newRate = Math.round(this.noOfRejectedApplicants / this.noOfApplicants);
+        } catch (ArithmeticException e) {
+            newRate = 0;
+        }
+        return newRate;
+    }
+
+    /**
+     * Updates the rejection rate of current position.
+     *
+     * @param total Total number of applicants in current position.
+     * @param count Total number of accepted applicants in current position.
+     */
+    public void updateRejectionRate(int total, int count) {
+        updateNoOfRejectedApplicants(count);
+        updateNoOfApplicants(total);
+        this.rejectionRate = calculateRejectionRate();
+    }
+
+    /**
+     * Returns the rejection rate of the current position.
+     *
+     * @return Rejection rate of current position.
+     */
+    public int getRejectionRate() {
+        return this.rejectionRate;
+    }
 }

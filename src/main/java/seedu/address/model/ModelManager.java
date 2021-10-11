@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
@@ -154,8 +155,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-
-
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -203,13 +202,13 @@ public class ModelManager implements Model {
     public void addPosition(Position position) {
         positionBook.addPosition(position);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        initialiseRejectionRate(position);
     }
 
     @Override
     public void deletePosition(Position positionToDelete) {
         positionBook.removePosition(positionToDelete);
     }
-
 
     //=========== Filtered Position List Accessors =============================================================
     @Override
@@ -224,4 +223,88 @@ public class ModelManager implements Model {
     }
 
 
+    //========== Applicant related methods ============================
+
+    /**
+     * Adds an applicant into the MTR ApplicantBook.
+     *
+     * @param target The new applicant to be added.
+     */
+    public void addApplicant(Applicant target) {
+        applicantBook.addApplicant(target);
+        Position p = target.getApplication().getPosition();
+        boolean hasPosition = positionBook.hasPosition(p);
+        if (hasPosition) {
+            int total = p.getNoOfApplicants() + 1;
+            int count = p.getNoOfRejectedApplicants();
+            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+                count++;
+            }
+            updateRejectionRate(p, total, count);
+        } else {
+            positionBook.addPosition(p);
+            addApplicant(target);
+        }
+    }
+
+    /**
+     * Deletes an applicant from the MTR ApplicantBook.
+     *
+     * @param target The applicant to be deleted.
+     */
+    public void deleteApplicant(Applicant target) {
+        boolean hasApplicant = applicantBook.hasApplicant(target);
+        if (hasApplicant) {
+            Position p = target.getApplication().getPosition();
+            int total = p.getNoOfApplicants();
+            int count = p.getNoOfRejectedApplicants();
+            total--;
+            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+                count--;
+            }
+            applicantBook.removeApplicant(target);
+            updateRejectionRate(p, total, count);
+        } else {
+            throw new ApplicantNotFoundException(); // to be updated
+        }
+    }
+
+    //========== Rejection rates =======================================
+    /**
+     * Initialise rejection rate of a new position.
+     *
+     * @param p The position to be initialised.
+     */
+    public void initialiseRejectionRate(Position p) {
+        int total = 0;
+        int count = 0;
+        for (Applicant a : applicantBook.getApplicantList()) {
+            Position currentPosition = a.getApplication().getPosition();
+            if (currentPosition == p) {
+                total++;
+                if (a.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+                    count++;
+                }
+            }
+        }
+        p.updateRejectionRate(total, count);
+    }
+
+    /**
+     * Updates rejection rate for a given position.
+     *
+     * @param p A given position in the MTR.
+     */
+    public void updateRejectionRate(Position p, int total, int count) {
+        p.updateRejectionRate(total, count);
+    }
+
+    /**
+     * Updates all rejection rates for all current positions.
+     */
+    public void initialiseAllRejectionRates() {
+        for (Position p: positionBook.getPositionList()) {
+            initialiseRejectionRate(p);
+        }
+    }
 }
