@@ -14,14 +14,16 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      */
     public HelpCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        String capitalisedArg = trimmedArgs.substring(0, 1).toUpperCase() + trimmedArgs.substring(1);
+
+        if (trimmedArgs.equals("")) {
+            return new HelpCommand("");
+        }
 
         // Compares the args with the list of command keywords
-
+        String capitalisedArg = trimmedArgs.substring(0, 1).toUpperCase() + trimmedArgs.substring(1);
         if (isCommandWord(capitalisedArg)) {
             return new HelpCommand(capitalisedArg);
         }
-
 
         // Returns an empty help command if none matches
         return new HelpCommand("");
@@ -41,7 +43,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         String[] args = arg.split(" ");
         StringBuilder capitalisedArg = new StringBuilder();
 
-        //String capitalisedArg = arg.substring(0, 1).toUpperCase() + arg.substring(1);
+        // capitalise the start of each word in the args
         for (String s : args) {
             capitalisedArg.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
         }

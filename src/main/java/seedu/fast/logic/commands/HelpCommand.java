@@ -7,7 +7,7 @@ import seedu.fast.model.Model;
  */
 public class HelpCommand extends Command {
 
-    String command = "";
+    String command;
 
     public static final String COMMAND_WORD = "help";
 
@@ -23,5 +23,22 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+
+        // state check
+        HelpCommand e = (HelpCommand) other;
+        return e.command.equals(((HelpCommand) other).command);
     }
 }
