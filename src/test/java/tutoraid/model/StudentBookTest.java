@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutoraid.model.student.Student;
-import tutoraid.model.student.exceptions.DuplicatePersonException;
+import tutoraid.model.student.exceptions.DuplicateStudentException;
 import tutoraid.testutil.PersonBuilder;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.TypicalPersons;
@@ -27,7 +27,7 @@ public class StudentBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), studentBook.getPersonList());
+        assertEquals(Collections.emptyList(), studentBook.getStudentList());
     }
 
     @Test
@@ -49,35 +49,35 @@ public class StudentBookTest {
         List<Student> newStudents = Arrays.asList(TypicalPersons.ALICE, editedAlice);
         StudentBookStub newData = new StudentBookStub(newStudents);
 
-        Assert.assertThrows(DuplicatePersonException.class, () -> studentBook.resetData(newData));
+        Assert.assertThrows(DuplicateStudentException.class, () -> studentBook.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> studentBook.hasPerson(null));
+        Assert.assertThrows(NullPointerException.class, () -> studentBook.hasStudent(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(studentBook.hasPerson(TypicalPersons.ALICE));
+        assertFalse(studentBook.hasStudent(TypicalPersons.ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        studentBook.addPerson(TypicalPersons.ALICE);
-        assertTrue(studentBook.hasPerson(TypicalPersons.ALICE));
+        studentBook.addStudent(TypicalPersons.ALICE);
+        assertTrue(studentBook.hasStudent(TypicalPersons.ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        studentBook.addPerson(TypicalPersons.ALICE);
+        studentBook.addStudent(TypicalPersons.ALICE);
         Student editedAlice = new PersonBuilder(TypicalPersons.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
-        assertTrue(studentBook.hasPerson(editedAlice));
+        assertTrue(studentBook.hasStudent(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> studentBook.getPersonList().remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> studentBook.getStudentList().remove(0));
     }
 
     /**
@@ -91,7 +91,7 @@ public class StudentBookTest {
         }
 
         @Override
-        public ObservableList<Student> getPersonList() {
+        public ObservableList<Student> getStudentList() {
             return students;
         }
     }

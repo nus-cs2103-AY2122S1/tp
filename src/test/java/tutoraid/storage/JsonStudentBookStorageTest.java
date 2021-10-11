@@ -65,20 +65,20 @@ public class JsonStudentBookStorageTest {
         JsonTutorAidStorage jsonAddressBookStorage = new JsonTutorAidStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        jsonAddressBookStorage.saveStudentBook(original, filePath);
         ReadOnlyStudentBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(TypicalPersons.HOON);
-        original.removePerson(TypicalPersons.ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        original.addStudent(TypicalPersons.HOON);
+        original.removeStudent(TypicalPersons.ALICE);
+        jsonAddressBookStorage.saveStudentBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(TypicalPersons.IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
+        original.addStudent(TypicalPersons.IDA);
+        jsonAddressBookStorage.saveStudentBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new StudentBook(readBack));
 
@@ -95,7 +95,7 @@ public class JsonStudentBookStorageTest {
     private void saveAddressBook(ReadOnlyStudentBook addressBook, String filePath) {
         try {
             new JsonTutorAidStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveStudentBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

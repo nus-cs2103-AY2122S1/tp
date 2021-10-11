@@ -45,8 +45,8 @@ public class JsonTutorAidStorage implements TutorAidStorage {
     public Optional<ReadOnlyStudentBook> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableStudentBook> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableStudentBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -60,21 +60,21 @@ public class JsonTutorAidStorage implements TutorAidStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyStudentBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveStudentBook(ReadOnlyStudentBook addressBook) throws IOException {
+        saveStudentBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyStudentBook)}.
+     * Similar to {@link #saveStudentBook(ReadOnlyStudentBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException {
+    public void saveStudentBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableStudentBook(addressBook), filePath);
     }
 
 }

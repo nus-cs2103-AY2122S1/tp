@@ -110,7 +110,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the student's particulars of this window.
      */
     void fillPersonCard(boolean viewAll) {
-        studentListPanel = new StudentListPanel(logic.getFilteredPersonList(), viewAll);
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), viewAll);
         personListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
@@ -123,7 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getStudentBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);

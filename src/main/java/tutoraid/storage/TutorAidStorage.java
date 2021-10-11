@@ -36,11 +36,11 @@ public interface TutorAidStorage {
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyStudentBook addressBook) throws IOException;
+    void saveStudentBook(ReadOnlyStudentBook addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyStudentBook)
+     * @see #saveStudentBook(ReadOnlyStudentBook)
      */
-    void saveAddressBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException;
+    void saveStudentBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException;
 
 }

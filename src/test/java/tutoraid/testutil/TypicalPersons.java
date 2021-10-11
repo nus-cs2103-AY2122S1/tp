@@ -79,7 +79,7 @@ public class TypicalPersons {
     public static StudentBook getTypicalAddressBook() {
         StudentBook ab = new StudentBook();
         for (Student student : getTypicalPersons()) {
-            ab.addPerson(student);
+            ab.addStudent(student);
         }
         return ab;
     }

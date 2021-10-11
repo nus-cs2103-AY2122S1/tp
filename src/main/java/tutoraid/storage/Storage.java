@@ -27,6 +27,6 @@ public interface Storage extends TutorAidStorage, UserPrefsStorage {
     Optional<ReadOnlyStudentBook> readAddressBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyStudentBook addressBook) throws IOException;
+    void saveStudentBook(ReadOnlyStudentBook addressBook) throws IOException;
 
 }

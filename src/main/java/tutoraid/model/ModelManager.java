@@ -16,7 +16,7 @@ import tutoraid.ui.UiManager;
 import tutoraid.commons.util.CollectionUtil;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the student book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -28,15 +28,15 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given studentBook and userPrefs.
      */
-    public ModelManager(ReadOnlyStudentBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStudentBook studentBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        CollectionUtil.requireAllNonNull(addressBook, userPrefs);
+        CollectionUtil.requireAllNonNull(studentBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with student book: " + studentBook + " and user prefs " + userPrefs);
 
-        this.studentBook = new StudentBook(addressBook);
+        this.studentBook = new StudentBook(studentBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.studentBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
     }
 
     public ModelManager() {
@@ -68,56 +68,56 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getStudentBookFilePath() {
+        return userPrefs.getStudentBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setStudentBookFilePath(Path studentBookFilePath) {
+        requireNonNull(studentBookFilePath);
+        userPrefs.setStudentBookFilePath(studentBookFilePath);
     }
 
     //=========== StudentBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyStudentBook addressBook) {
-        this.studentBook.resetData(addressBook);
+    public void setStudentBook(ReadOnlyStudentBook studentBook) {
+        this.studentBook.resetData(studentBook);
     }
 
     @Override
-    public ReadOnlyStudentBook getAddressBook() {
+    public ReadOnlyStudentBook getStudentBook() {
         return studentBook;
     }
 
     @Override
-    public boolean hasPerson(Student student) {
+    public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return studentBook.hasPerson(student);
+        return studentBook.hasStudent(student);
     }
 
     @Override
-    public void deletePerson(Student target) {
-        studentBook.removePerson(target);
+    public void deleteStudent(Student target) {
+        studentBook.removeStudent(target);
     }
 
     @Override
-    public void addPerson(Student student) {
-        studentBook.addPerson(student);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addStudent(Student student) {
+        studentBook.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
-    public void setPerson(Student target, Student editedStudent) {
+    public void setStudent(Student target, Student editedStudent) {
         CollectionUtil.requireAllNonNull(target, editedStudent);
 
-        studentBook.setPerson(target, editedStudent);
+        studentBook.setStudent(target, editedStudent);
     }
 
     @Override
-    public void viewPerson(Student targetStudent) {
+    public void viewStudent(Student targetStudent) {
         requireNonNull(targetStudent);
-        filteredStudents.setPredicate(person -> person.equals(targetStudent));
+        filteredStudents.setPredicate(student -> student.equals(targetStudent));
         UiManager.showViewWindow();
     }
 
@@ -130,15 +130,15 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedStudentBook}
      */
     @Override
-    public ObservableList<Student> getFilteredPersonList() {
+    public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Student> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
     }

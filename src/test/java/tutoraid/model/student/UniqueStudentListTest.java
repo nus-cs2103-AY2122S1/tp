@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import tutoraid.model.student.exceptions.DuplicatePersonException;
-import tutoraid.model.student.exceptions.PersonNotFoundException;
+import tutoraid.model.student.exceptions.DuplicateStudentException;
+import tutoraid.model.student.exceptions.StudentNotFoundException;
 import tutoraid.testutil.PersonBuilder;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.TypicalPersons;
@@ -53,28 +53,28 @@ public class UniqueStudentListTest {
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniqueStudentList.add(TypicalPersons.ALICE);
-        Assert.assertThrows(DuplicatePersonException.class, () -> uniqueStudentList.add(TypicalPersons.ALICE));
+        Assert.assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(TypicalPersons.ALICE));
     }
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setPerson(null, TypicalPersons.ALICE));
+        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(null, TypicalPersons.ALICE));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setPerson(TypicalPersons.ALICE, null));
+        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(TypicalPersons.ALICE, null));
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        Assert.assertThrows(PersonNotFoundException.class, () -> uniqueStudentList.setPerson(TypicalPersons.ALICE, TypicalPersons.ALICE));
+        Assert.assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setStudent(TypicalPersons.ALICE, TypicalPersons.ALICE));
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniqueStudentList.add(TypicalPersons.ALICE);
-        uniqueStudentList.setPerson(TypicalPersons.ALICE, TypicalPersons.ALICE);
+        uniqueStudentList.setStudent(TypicalPersons.ALICE, TypicalPersons.ALICE);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(TypicalPersons.ALICE);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -84,7 +84,7 @@ public class UniqueStudentListTest {
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueStudentList.add(TypicalPersons.ALICE);
         Student editedAlice = new PersonBuilder(TypicalPersons.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
-        uniqueStudentList.setPerson(TypicalPersons.ALICE, editedAlice);
+        uniqueStudentList.setStudent(TypicalPersons.ALICE, editedAlice);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(editedAlice);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -93,7 +93,7 @@ public class UniqueStudentListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueStudentList.add(TypicalPersons.ALICE);
-        uniqueStudentList.setPerson(TypicalPersons.ALICE, TypicalPersons.BOB);
+        uniqueStudentList.setStudent(TypicalPersons.ALICE, TypicalPersons.BOB);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(TypicalPersons.BOB);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -103,7 +103,7 @@ public class UniqueStudentListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueStudentList.add(TypicalPersons.ALICE);
         uniqueStudentList.add(TypicalPersons.BOB);
-        Assert.assertThrows(DuplicatePersonException.class, () -> uniqueStudentList.setPerson(TypicalPersons.ALICE, TypicalPersons.BOB));
+        Assert.assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudent(TypicalPersons.ALICE, TypicalPersons.BOB));
     }
 
     @Test
@@ -113,7 +113,7 @@ public class UniqueStudentListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        Assert.assertThrows(PersonNotFoundException.class, () -> uniqueStudentList.remove(TypicalPersons.ALICE));
+        Assert.assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.remove(TypicalPersons.ALICE));
     }
 
     @Test
@@ -126,7 +126,7 @@ public class UniqueStudentListTest {
 
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setPersons((UniqueStudentList) null));
+        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((UniqueStudentList) null));
     }
 
     @Test
@@ -134,20 +134,20 @@ public class UniqueStudentListTest {
         uniqueStudentList.add(TypicalPersons.ALICE);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(TypicalPersons.BOB);
-        uniqueStudentList.setPersons(expectedUniqueStudentList);
+        uniqueStudentList.setStudents(expectedUniqueStudentList);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
 
     @Test
     public void setPersons_nullList_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setPersons((List<Student>) null));
+        Assert.assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((List<Student>) null));
     }
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueStudentList.add(TypicalPersons.ALICE);
         List<Student> studentList = Collections.singletonList(TypicalPersons.BOB);
-        uniqueStudentList.setPersons(studentList);
+        uniqueStudentList.setStudents(studentList);
         UniqueStudentList expectedUniqueStudentList = new UniqueStudentList();
         expectedUniqueStudentList.add(TypicalPersons.BOB);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
@@ -156,7 +156,7 @@ public class UniqueStudentListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Student> listWithDuplicateStudents = Arrays.asList(TypicalPersons.ALICE, TypicalPersons.ALICE);
-        Assert.assertThrows(DuplicatePersonException.class, () -> uniqueStudentList.setPersons(listWithDuplicateStudents));
+        Assert.assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudents(listWithDuplicateStudents));
     }
 
     @Test

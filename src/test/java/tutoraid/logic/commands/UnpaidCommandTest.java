@@ -31,25 +31,25 @@ public class UnpaidCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Student studentToEdit = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Student studentToEdit = model.getFilteredStudentList().get(INDEX_SECOND_PERSON.getZeroBased());
         Student editedStudent = new PersonBuilder(studentToEdit).withPaymentStatus(false).build();
 
         UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_SECOND_PERSON);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_SET_TO_UNPAID_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new StudentBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(studentToEdit, editedStudent);
+        Model expectedModel = new ModelManager(new StudentBook(model.getStudentBook()), new UserPrefs());
+        expectedModel.setStudent(studentToEdit, editedStudent);
 
         assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         UnpaidCommand unpaidCommand = new UnpaidCommand(outOfBoundIndex);
 
-        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -58,11 +58,11 @@ public class UnpaidCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
         UnpaidCommand unpaidCommand = new UnpaidCommand(outOfBoundIndex);
 
-        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(unpaidCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test

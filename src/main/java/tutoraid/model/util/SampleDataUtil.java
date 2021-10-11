@@ -13,7 +13,7 @@ public class SampleDataUtil {
     public static final Progress DEFAULT_PROGRESS = new Progress("No Progress");
     public static final PaymentStatus DEFAULT_PAYMENT_STATUS = new PaymentStatus(false);
 
-    public static Student[] getSamplePersons() {
+    public static Student[] getSampleStudents() {
         return new Student[] {
             // All details available
             new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
@@ -41,10 +41,10 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyStudentBook getSampleAddressBook() {
+    public static ReadOnlyStudentBook getSampleStudentBook() {
         StudentBook sampleAb = new StudentBook();
-        for (Student sampleStudent : getSamplePersons()) {
-            sampleAb.addPerson(sampleStudent);
+        for (Student sampleStudent : getSampleStudents()) {
+            sampleAb.addStudent(sampleStudent);
         }
         return sampleAb;
     }

@@ -16,28 +16,28 @@ public class StudentTest {
     @Test
     public void isSamePerson() {
         // same object -> returns true
-        assertTrue(TypicalPersons.ALICE.isSamePerson(TypicalPersons.ALICE));
+        assertTrue(TypicalPersons.ALICE.isSameStudent(TypicalPersons.ALICE));
 
         // null -> returns false
-        assertFalse(TypicalPersons.ALICE.isSamePerson(null));
+        assertFalse(TypicalPersons.ALICE.isSameStudent(null));
 
         // same name, all other attributes different -> returns true
         Student editedAlice = new PersonBuilder(TypicalPersons.ALICE).withStudentPhone(VALID_STUDENT_PHONE_BOB)
                 .withParentName(VALID_PARENT_NAME_BOB).withParentPhone(VALID_PARENT_PHONE_BOB).build();
-        assertTrue(TypicalPersons.ALICE.isSamePerson(editedAlice));
+        assertTrue(TypicalPersons.ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(TypicalPersons.ALICE).withStudentName(VALID_STUDENT_NAME_BOB).build();
-        assertFalse(TypicalPersons.ALICE.isSamePerson(editedAlice));
+        assertFalse(TypicalPersons.ALICE.isSameStudent(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Student editedBob = new PersonBuilder(TypicalPersons.BOB).withStudentName(VALID_STUDENT_NAME_BOB.toLowerCase()).build();
-        assertFalse(TypicalPersons.BOB.isSamePerson(editedBob));
+        assertFalse(TypicalPersons.BOB.isSameStudent(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_STUDENT_NAME_BOB + " ";
         editedBob = new PersonBuilder(TypicalPersons.BOB).withStudentName(nameWithTrailingSpaces).build();
-        assertFalse(TypicalPersons.BOB.isSamePerson(editedBob));
+        assertFalse(TypicalPersons.BOB.isSameStudent(editedBob));
     }
 
     @Test

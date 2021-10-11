@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        TutorAidStorage tutorAidStorage = new JsonTutorAidStorage(userPrefs.getAddressBookFilePath());
+        TutorAidStorage tutorAidStorage = new JsonTutorAidStorage(userPrefs.getStudentBookFilePath());
         storage = new StorageManager(tutorAidStorage, userPrefsStorage);
 
         initLogging(config);
@@ -73,7 +73,7 @@ public class MainApp extends Application {
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample StudentBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleStudentBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty StudentBook");
             initialData = new StudentBook();
