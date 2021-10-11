@@ -1,10 +1,9 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (
-CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact
-management tasks done faster than traditional GUI apps.
+Notor is a desktop app for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Notor allows you to take notes quickly and efficiently, and keeping them in an easy to reference format, which is vital if you are taking notes during meetings with mentees.
 
 * Table of Contents {:toc}
 
@@ -16,7 +15,7 @@ management tasks done faster than traditional GUI apps.
 
 2. Download the latest `notor.jar`.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your Notor.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
@@ -79,7 +78,7 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Notor.
 
 Format: `clear`
 
@@ -374,7 +373,7 @@ Notor data are saved as a JSON file `[JAR file location]/data/Notor.json`. Advan
 directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Notor will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -387,7 +386,7 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+the data of your previous Notor home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

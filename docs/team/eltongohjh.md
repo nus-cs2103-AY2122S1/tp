@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: Elton's Project Portfolio Page
 ---
 
