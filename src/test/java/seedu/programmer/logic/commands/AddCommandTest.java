@@ -38,6 +38,7 @@ public class AddCommandTest {
         sampleCommandA = new AddCommand(sampleStudentA);
         sampleCommandB = new AddCommand(sampleStudentB);
     }
+
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
