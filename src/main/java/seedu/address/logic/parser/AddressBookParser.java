@@ -51,16 +51,6 @@ public class AddressBookParser {
             arguments = arguments + " ";
         }
 
-        /*boolean isTwoWordCommand = arguments.length() > 0
-                && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
-
-        if (isTwoWordCommand) {
-            commandWord = extractFullCommandWord(commandWord, arguments);
-            arguments = extractArguments(arguments);
-        }
-
-         */
-
         switch (commandWord) {
 
         case EditCommand.COMMAND_WORD:
@@ -89,13 +79,19 @@ public class AddressBookParser {
 
         default:
             return parseTwoWordCommand(commandWord, arguments);
-            //throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
     private Command parseTwoWordCommand(String commandWord, String arguments) throws ParseException {
-        commandWord = extractFullCommandWord(commandWord, arguments);
-        arguments = extractArguments(arguments);
+        boolean isTwoWordCommand = arguments.length() > 0
+                && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
+
+        if (isTwoWordCommand) {
+            commandWord = extractFullCommandWord(commandWord, arguments);
+            arguments = extractArguments(arguments);
+        } else {
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
 
         switch (commandWord) {
 
@@ -139,7 +135,7 @@ public class AddressBookParser {
         int argumentsIndex = arguments.indexOf("-");
         //TODO: if someone can make this look prettier please do so!
         if (argumentsIndex == -1) {
-            String arr[] = arguments.split(" ", 3);
+            String[] arr = arguments.split(" ", 3);
             String firstWord = arr[1];
             return firstCommandWord + " " + firstWord;
         }
