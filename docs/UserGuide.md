@@ -228,9 +228,9 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Contact | add n/<NAME> te/<TELEGRAM> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>] |
-| Delete a Contact | delete <INDEX> |
-| Edit a Contact | edit <INDEX> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>] |
+| Add a new Contact | add n/\<NAME> te/\<TELEGRAM> [p/<PHONE_NUMBER>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Delete a Contact | delete \<INDEX> |
+| Edit a Contact | edit \<INDEX> [n/\<NAME>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
 | Find a Contact (by Name) | find \<STRING> |
 | Find a Contact (by Tag) | find t/\<TAG> |
 | Show a Contact (by Name)| show \<NAME> |
