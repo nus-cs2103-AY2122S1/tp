@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +65,25 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+
+    /**
+     * Generates a random alphanumeric string with default length 10.
+     * Credit to: https://www.baeldung.com/java-random-string
+     */
+    public static String generateRandomString() {
+        final int leftLimit = 97; // letter 'a'
+        final int rightLimit = 122; // letter 'z'
+        int defaultLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(defaultLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        return generatedString;
     }
 }

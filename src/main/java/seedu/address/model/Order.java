@@ -31,7 +31,24 @@ public class Order {
         }
     }
 
+    /**
+     * Gets a list of items in the order.
+     */
     public ObservableList<Item> getOrderItems() {
         return items.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Order)) {
+            return false;
+        }
+
+        Order otherOrder = (Order) other;
+        return items.equals(otherOrder.items);
     }
 }

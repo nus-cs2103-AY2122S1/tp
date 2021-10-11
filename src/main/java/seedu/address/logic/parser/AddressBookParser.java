@@ -7,14 +7,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddToOrderCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EndAndTransactOrderCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveFromOrderCommand;
+import seedu.address.logic.commands.StartOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -42,7 +46,7 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        switch(commandWord) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -67,6 +71,18 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case StartOrderCommand.COMMAND_WORD:
+            return new StartOrderCommand();
+
+        case AddToOrderCommand.COMMAND_WORD:
+            return new AddToOrderCommandParser().parse(arguments);
+
+        case RemoveFromOrderCommand.COMMAND_WORD:
+            return new RemoveFromOrderCommandParser().parse(arguments);
+
+        case EndAndTransactOrderCommand.COMMAND_WORD:
+            return new EndAndTransactOrderCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
