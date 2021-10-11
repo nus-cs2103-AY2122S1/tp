@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.MarkStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -29,7 +28,8 @@ public class MarkStudentCommandParser implements Parser<MarkStudentCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkStudentCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_WEEK).isPresent()) {
@@ -37,6 +37,6 @@ public class MarkStudentCommandParser implements Parser<MarkStudentCommand> {
             return new MarkStudentCommand(index, week);
         }
 
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentCommand.MESSAGE_USAGE));
     }
 }
