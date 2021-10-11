@@ -1,7 +1,5 @@
 package seedu.address.model.position;
 
-import seedu.address.model.applicant.Applicant;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -23,8 +21,8 @@ public class Position {
     // Total number of applicants for this position.
     private int noOfApplicants;
 
-    // Total number of accepted applicants for this position.
-    private int noOfAcceptedApplicants;
+    // Total number of rejected applicants for this position.
+    private int noOfRejectedApplicants;
 
     /**
      * Every field must be present and not null.
@@ -96,16 +94,16 @@ public class Position {
         return this.noOfApplicants;
     }
 
-    public int getNoOfAcceptedApplicants() {
-        return this.noOfAcceptedApplicants;
+    public int getNoOfRejectedApplicants() {
+        return this.noOfRejectedApplicants;
     }
 
     public void updateNoOfApplicants(int newTotal) {
         this.noOfApplicants = newTotal;
     }
 
-    public void updateNoOfAcceptedApplicants(int newTotal) {
-        this.noOfAcceptedApplicants = newTotal;
+    public void updateNoOfRejectedApplicants(int newTotal) {
+        this.noOfRejectedApplicants = newTotal;
     }
 
     /**
@@ -116,7 +114,7 @@ public class Position {
     public int calculateRejectionRate() {
         int newRate;
         try {
-            newRate = Math.round((this.noOfApplicants - this.noOfAcceptedApplicants) / this.noOfApplicants);
+            newRate = Math.round(this.noOfRejectedApplicants / this.noOfApplicants);
         } catch (ArithmeticException e) {
             newRate = 0;
         }
@@ -125,13 +123,8 @@ public class Position {
 
     /**
      * Updates the rejection rate of current position.
-     *
-     * @param total Total number of applicants in current position.
-     * @param count Total number of accepted applicants in current position.
      */
-    public void updateRejectionRate(int total, int count) {
-        updateNoOfAcceptedApplicants(count);
-        updateNoOfApplicants(total);
+    public void updateRejectionRate() {
         this.rejectionRate = calculateRejectionRate();
     }
 

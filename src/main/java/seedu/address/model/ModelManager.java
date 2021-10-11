@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
@@ -145,6 +146,11 @@ public class ModelManager implements Model {
         applicantBook.addApplicant(applicant);
         applicationBook.addApplication(new Application(applicant, position));
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // TODO: update to show applicants
+        position.updateNoOfApplicants(position.getNoOfApplicants() + 1);
+        if (applicant.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+            position.updateNoOfRejectedApplicants(position.getNoOfRejectedApplicants() + 1);
+        }
+        position.updateRejectionRate();
     }
 
     @Override
@@ -153,8 +159,6 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
-
-
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -203,13 +207,13 @@ public class ModelManager implements Model {
     public void addPosition(Position position) {
         positionBook.addPosition(position);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        initialiseRejectionRate(position);
     }
 
     @Override
     public void deletePosition(Position positionToDelete) {
         positionBook.removePosition(positionToDelete);
     }
-
 
     //=========== Filtered Position List Accessors =============================================================
     @Override
@@ -223,5 +227,57 @@ public class ModelManager implements Model {
         filteredPositions.setPredicate(predicate);
     }
 
+    //========== Applicant related methods ============================
 
+    /**
+     * Deletes an applicant from the MTR ApplicantBook.
+     *
+     * @param target The applicant to be deleted.
+     */
+    public void deleteApplicant(Applicant target) {
+        boolean hasApplicant = applicantBook.hasApplicant(target);
+        if (hasApplicant) {
+            Position p = target.getApplication().getPosition();
+            p.updateNoOfApplicants(p.getNoOfApplicants() - 1);
+            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+                p.updateNoOfRejectedApplicants(p.getNoOfRejectedApplicants() - 1);
+            }
+            p.updateRejectionRate();
+            applicantBook.removeApplicant(target);
+        } else {
+            throw new ApplicantNotFoundException(); // to be updated
+        }
+    }
+
+    //========== Rejection rates =======================================
+    /**
+     * Initialise rejection rate of a new position.
+     *
+     * @param p The position to be initialised.
+     */
+    public void initialiseRejectionRate(Position p) {
+        int total = 0;
+        int count = 0;
+        for (Applicant a : applicantBook.getApplicantList()) {
+            Position currentPosition = a.getApplication().getPosition();
+            if (currentPosition == p) {
+                total++;
+                if (a.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+                    count++;
+                }
+            }
+        }
+        p.updateNoOfApplicants(total);
+        p.updateNoOfRejectedApplicants(count);
+        p.updateRejectionRate();
+    }
+
+    /**
+     * Updates all rejection rates for all current positions.
+     */
+    public void initialiseAllRejectionRates() {
+        for (Position p: positionBook.getPositionList()) {
+            initialiseRejectionRate(p);
+        }
+    }
 }
