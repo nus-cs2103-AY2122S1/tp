@@ -59,7 +59,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_sameSameStudentIdDifferentName_success() {
+    public void execute_sameSameStudentIdDifferentName_failure() {
         Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         String differentName = "Different Name";
