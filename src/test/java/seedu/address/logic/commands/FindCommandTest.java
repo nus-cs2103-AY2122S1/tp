@@ -174,7 +174,7 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
      */
     private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) {
-        String tags = userInput.substring(2).trim();
+        String tags = userInput.substring(2);
         return new TagContainsKeywordsPredicate(Arrays.asList(tags.split("\\s+")));
     }
 
@@ -182,7 +182,7 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
      */
     private TelegramHandleContainsKeywordsPredicate prepareTelegramHandlePredicate(String userInput) {
-        String telegramHandles = userInput.substring(1).trim();
+        String telegramHandles = userInput.substring(1);
         return new TelegramHandleContainsKeywordsPredicate(Arrays
                 .asList(telegramHandles.split("\\s+")));
     }
