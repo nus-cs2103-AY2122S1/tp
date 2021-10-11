@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -64,26 +68,11 @@ public class WelcomeWindow extends UiPart<Stage>{
         appLogo.setImage(appLogoImage);
         displayAnimatedText(tagLine, delayTime);
 
-        // Fading transition
-        //FadeTransition fadeOut = new FadeTransition(Duration.millis(5000), appLogo);
-        //fadeOut.setFromValue(1.0);
-        //fadeOut.setToValue(0.0);
-        //fadeOut.play();
-
+        // To add the fading effect on the app logo.
         fadeTransition();
+
+        // To close the WelcomeWindow after a specified amount of time.
         close();
-
-        // Quit app
-        /*
-        try {
-            Thread.sleep(10000);
-            getRoot().close();
-        } catch (InterruptedException e) {
-            logger.warning("Welcome Window could not be closed.");
-        }
-         */
-
-        // set a delay function to close the app here
     }
 
     /**
@@ -130,7 +119,6 @@ public class WelcomeWindow extends UiPart<Stage>{
                     if (i.get() > textToDisplay.length()) {
                         timeline.stop();
                     } else {
-                        // Add where to show text
                         appTagLine.setText(textToDisplay.substring(0, i.get()));
                         i.set(i.get() + 1);
                     }
