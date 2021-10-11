@@ -64,6 +64,7 @@ public class CommandTestUtil {
     public static final String RATING_DESC_AMY = " " + PREFIX_RATING + VALID_RATING_AMY;
     public static final String RATING_DESC_BOB = " " + PREFIX_RATING + VALID_RATING_BOB;
 
+    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY_CODE + "abc"; // Only valid categories
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol

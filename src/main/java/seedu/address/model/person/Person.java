@@ -111,7 +111,10 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getCategoryCode().equals(getCategoryCode())
+                && otherPerson.getRating().equals(getRating())
+                && otherPerson.getReview().equals(getReview());
     }
 
     @Override
@@ -124,6 +127,8 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Category: ")
+                .append(getCategoryCode())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
