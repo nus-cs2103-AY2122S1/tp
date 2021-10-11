@@ -60,8 +60,8 @@ Format: `editclass INDEX l/limit t/time n/NAME,NAME,NAME... [t/TAG]…`
 ### Deleting students/tuition classes
 Deletes a student or a tuition class given INDEX.
 
-#### Deleting a student: `deletestudent`
-Format: `deletestudent [INDEX]`
+#### Deleting a student: `delete`
+Format: `delete [INDEX]`
 
 #### Deleting a tuition class: `deleteclass`
 Format: `deleteclass [INDEX]`
