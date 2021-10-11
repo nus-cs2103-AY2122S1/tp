@@ -11,7 +11,7 @@ import seedu.address.model.student.ID;
  */
 public class GroupBuilder {
 
-    public static final String DEFAULT_VALUE = "P01";
+    public static final String DEFAULT_VALUE = "T02A";
 
     private List<ID> students;
     private String value;
