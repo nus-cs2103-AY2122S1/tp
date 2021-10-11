@@ -9,7 +9,7 @@ public class VisitTest {
 
     @Test
     public void equals() {
-        Visit visit = new Visit("2021-11-11");
+        Visit visit = new Visit("2021-11-11 12:00");
 
         // same object -> returns true
         assertTrue(visit.equals(visit));
@@ -25,7 +25,7 @@ public class VisitTest {
         assertFalse(visit.equals(null));
 
         // different visit -> returns false
-        Visit differentVisit = new Visit("2021-10-01");
+        Visit differentVisit = new Visit("2021-10-01 12:00");
         assertFalse(visit.equals(differentVisit));
 
         // non-empty visit -> returns true

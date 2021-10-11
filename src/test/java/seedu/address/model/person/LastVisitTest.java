@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class LastVisitTest {
     @Test
     public void equals() {
-        LastVisit lastVisit = new LastVisit("2021-11-11");
+        LastVisit lastVisit = new LastVisit("2021-11-11 12:00");
 
         // same object -> returns true
         assertTrue(lastVisit.equals(lastVisit));
@@ -24,7 +24,7 @@ public class LastVisitTest {
         assertFalse(lastVisit.equals(null));
 
         // different visit -> returns false
-        LastVisit differentVisit = new LastVisit("2021-10-01");
+        LastVisit differentVisit = new LastVisit("2021-10-01 12:00");
         assertFalse(lastVisit.equals(differentVisit));
     }
 
