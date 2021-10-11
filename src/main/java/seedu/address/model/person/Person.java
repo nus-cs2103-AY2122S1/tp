@@ -111,10 +111,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getCategoryCode().equals(getCategoryCode())
-                && otherPerson.getRating().equals(getRating())
-                && otherPerson.getReview().equals(getReview());
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
