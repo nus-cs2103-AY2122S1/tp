@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fitToWidth="true">
+    <VBox styleClass="help-menu" fx:id="container" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <padding>
+            <Insets top="5" right="10" bottom="5" left="10"/>
+        </padding>
+        <Label fx:id="text" styleClass="help-menu-text"/>
+        <HBox>
+            <Button fx:id="copyUserGuideButton" mnemonicParsing="false" onAction="#copyUserGuideUrl" text="Copy User Guide URL">
+                <VBox.margin>
+                    <Insets left="5.0"/>
+                </VBox.margin>
+            </Button>
+            <Button fx:id="copyDevGuideButton" mnemonicParsing="false" onAction="#copyDevGuideUrl" text="Copy Developer Guide URL">
+                <VBox.margin>
+                    <Insets left="5.0"/>
+                </VBox.margin>
+            </Button>
+        </HBox>
+    </VBox>
+</ScrollPane>
+
+

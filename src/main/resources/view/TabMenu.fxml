@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets top="5" right="10" bottom="5" left="10"/>
@@ -61,7 +62,7 @@
                     </HBox>
                 </children>
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="100"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="100"/>
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>

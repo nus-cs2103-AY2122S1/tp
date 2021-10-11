@@ -146,7 +146,6 @@
 
 .help-menu{
     -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-top-width: 1px;
 }
 
 .tabMenu-header-selected {
