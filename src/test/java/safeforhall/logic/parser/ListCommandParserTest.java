@@ -39,6 +39,12 @@ public class ListCommandParserTest {
         assertParseSuccess(parser, KEYWORD_DESC_C + LAST_DATE1_DESC_OCT
                 + LAST_DATE2_DESC_OCT, expectedListCommand);
 
+        expectedListCommand = new ListCommand("lf", new LastDate("10-10-2021"));
+        assertParseSuccess(parser, KEYWORD_DESC_F + LAST_DATE1_DESC_OCT, expectedListCommand);
+
+        expectedListCommand = new ListCommand("lc", new LastDate("10-10-2021"));
+        assertParseSuccess(parser, KEYWORD_DESC_C + LAST_DATE1_DESC_OCT, expectedListCommand);
+
         // multiple whitespaces between keywords
         expectedListCommand = new ListCommand("f", new LastDate("10-10-2021"));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_F
@@ -55,5 +61,13 @@ public class ListCommandParserTest {
         expectedListCommand = new ListCommand("c", new LastDate("10-10-2021"), new LastDate("15-10-2021"));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_C + LAST_DATE1_DESC_OCT
                 + LAST_DATE2_DESC_OCT, expectedListCommand);
+
+        expectedListCommand = new ListCommand("lf", new LastDate("10-10-2021"));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_F
+                + LAST_DATE1_DESC_OCT, expectedListCommand);
+
+        expectedListCommand = new ListCommand("lc", new LastDate("10-10-2021"));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + KEYWORD_DESC_C
+                + LAST_DATE1_DESC_OCT, expectedListCommand);
     }
 }

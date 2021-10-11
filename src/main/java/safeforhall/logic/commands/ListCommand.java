@@ -3,12 +3,15 @@ package safeforhall.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.time.temporal.ChronoUnit;
+import java.util.function.Predicate;
 
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
 import safeforhall.model.person.LastDate;
+import safeforhall.model.person.NameMissedDeadlinePredicate;
 import safeforhall.model.person.NameNearLastDatePredicate;
+import safeforhall.model.person.Person;
 
 /**
  * Lists all persons whose ART Collection or FET tests are due on the given date if one day is given or due within a
@@ -29,17 +32,35 @@ public class ListCommand extends Command {
             + CliSyntax.PREFIX_DATE1 + "30-09-2021 "
             + CliSyntax.PREFIX_DATE2 + "05-10-2021";
 
+    public static final String MESSAGE_USAGE_LATE = COMMAND_WORD + ": Lists residents whose ART collection or"
+            + "FET tests are due before the given date. "
+            + "Parameters: "
+            + CliSyntax.PREFIX_KEYWORD + "KEYWORD "
+            + CliSyntax.PREFIX_DATE1 + "DATE \n"
+            + "Example: " + COMMAND_WORD + " "
+            + CliSyntax.PREFIX_KEYWORD + "lf "
+            + CliSyntax.PREFIX_DATE1 + "30-09-2021 ";
+
     public static final String MESSAGE_SUCCESS_ART = "Listed all residents whose ART collections are due on the "
             + "given range of dates";
     public static final String MESSAGE_SUCCESS_FET = "Listed all residents whose FET are due on the given range of "
             + "dates";
+    public static final String MESSAGE_SUCCESS_MISSED_ART = "Listed all residents whose ART collections are due "
+            + "before the given date";
+    public static final String MESSAGE_SUCCESS_MISSED_FET = "Listed all residents whose FET are due before the "
+            + "given date";
     public static final String MESSAGE_SECOND_DATE_EARLIER_THAN_FIRST = "The second date inputted is earlier than "
             + "the first";
+    public static final String MESSAGE_WRONG_KEYWORD = "Wrong keyword parsed";
+    public static final String ART_KEYWORD = "c";
+    public static final String FET_KEYWORD = "f";
+    public static final String LATE_ART_KEYWORD = "lc";
+    public static final String LATE_FET_KEYWORD = "lf";
 
     private final String keyword;
     private final LastDate date1;
     private final LastDate date2;
-    private final NameNearLastDatePredicate predicate;
+    private final Predicate<Person> predicate;
 
     /**
      * Creates an ListCommand to add the specified {@code String}
@@ -49,7 +70,13 @@ public class ListCommand extends Command {
         this.keyword = keyword;
         this.date1 = date1;
         this.date2 = date1;
-        this.predicate = new NameNearLastDatePredicate(keyword, date1);
+        if (keyword.equals("lf")) {
+            this.predicate = new NameMissedDeadlinePredicate(FET_KEYWORD, date1);
+        } else if (keyword.equals("lc")) {
+            this.predicate = new NameMissedDeadlinePredicate(ART_KEYWORD, date1);
+        } else {
+            this.predicate = new NameNearLastDatePredicate(keyword, date1);
+        }
     }
 
     /**
@@ -73,10 +100,17 @@ public class ListCommand extends Command {
             throw new CommandException(MESSAGE_SECOND_DATE_EARLIER_THAN_FIRST);
         }
         model.updateFilteredPersonList(predicate);
-        if (keyword.equals("f")) {
-            return new CommandResult(MESSAGE_SUCCESS_FET);
-        } else {
+        switch (keyword) {
+        case ART_KEYWORD:
             return new CommandResult(MESSAGE_SUCCESS_ART);
+        case FET_KEYWORD:
+            return new CommandResult(MESSAGE_SUCCESS_FET);
+        case LATE_ART_KEYWORD:
+            return new CommandResult(MESSAGE_SUCCESS_MISSED_ART);
+        case LATE_FET_KEYWORD:
+            return new CommandResult(MESSAGE_SUCCESS_MISSED_FET);
+        default:
+            throw new CommandException(MESSAGE_WRONG_KEYWORD);
         }
     }
 
