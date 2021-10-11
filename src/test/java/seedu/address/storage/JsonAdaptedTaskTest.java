@@ -8,8 +8,8 @@ import static seedu.address.testutil.TypicalTasks.REPORT_1;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Name;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Name;
 
 public class JsonAdaptedTaskTest {
     private static final String INVALID_NAME = "@REPORT_1";
@@ -17,7 +17,7 @@ public class JsonAdaptedTaskTest {
 
     private static final String VALID_NAME = REPORT_1.getName().toString();
     private static final String VALID_DEADLINE = REPORT_1.getDeadline().toString();
-    private static final String VALID_UNIQUEID = REPORT_1.getId().getUUID().toString();
+    private static final String VALID_UNIQUEID = REPORT_1.getId().getUuid().toString();
 
     @Test
     public void toModelType_validTaskDetails_returnsTask() throws Exception {

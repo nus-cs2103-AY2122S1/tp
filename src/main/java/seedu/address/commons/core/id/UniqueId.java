@@ -20,16 +20,15 @@ public class UniqueId {
         this.id = UUID.randomUUID();
     }
 
+    /**
+     * Creates a UniqueId object.
+     *
+     * @param id String representation of the UUID of a task.
+     */
     public UniqueId(String id) {
         requireNonNull(id);
         this.owner = null;
-        this.id = UUID. fromString(id);
-    }
-
-    public UniqueId(UUID id) {
-        requireNonNull(id);
-        this.owner = null;
-        this.id = id;
+        this.id = UUID.fromString(id);
     }
 
     /**
@@ -50,7 +49,7 @@ public class UniqueId {
         return new UniqueId(IdOwner.STUDENT);
     }
 
-    public UUID getUUID() {
+    public UUID getUuid() {
         return this.id;
     }
 

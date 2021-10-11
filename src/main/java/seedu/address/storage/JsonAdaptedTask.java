@@ -37,7 +37,7 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         name = source.getName().name;
         deadline = source.getDeadline().stringDeadline;
-        uniqueId = source.getId().getUUID().toString();
+        uniqueId = source.getId().getUuid().toString();
     }
 
     /**
@@ -55,7 +55,8 @@ public class JsonAdaptedTask {
         final Name modelName = new Name(name);
 
         if (deadline == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deadline.class.getSimpleName()));
         }
         if (!Deadline.isValidDeadline(deadline)) {
             throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
@@ -63,7 +64,8 @@ public class JsonAdaptedTask {
         final Deadline modelDeadline = new Deadline(deadline);
 
         if (uniqueId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UniqueId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UniqueId.class.getSimpleName()));
         }
 
         final UniqueId modelUniqueId = new UniqueId(uniqueId);

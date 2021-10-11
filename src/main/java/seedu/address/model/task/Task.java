@@ -83,7 +83,6 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
-        System.out.println(isSameTask(otherTask));
         return otherTask.getId().equals(getId()) && isSameTask(otherTask);
     }
 
