@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.Money;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
-
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -22,13 +22,14 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Revenue revenue;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
     private final Appointment appointment;
 
     /**
-     * Every field must be present and not null.
+     * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not stated.
      */
     public Person(Name name, Phone phone, Email email,
                   Address address, Set<Tag> tags, Note note, Appointment appointment) {
@@ -36,6 +37,23 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.revenue = new Revenue(new Money(0));
+        this.address = address;
+        this.tags.addAll(tags);
+        this.note = note;
+        this.appointment = appointment;
+    }
+
+    /**
+     * Every field for this case is provided and hence a revenue value will be tagged to the person.
+     */
+    public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags,
+                  Note note, Appointment appointment) {
+        requireAllNonNull(name, phone, email, address, note, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.revenue = revenue;
         this.address = address;
         this.tags.addAll(tags);
         this.note = note;
@@ -52,6 +70,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public Revenue getRevenue() {
+        return revenue;
     }
 
     public Address getAddress() {
@@ -105,6 +127,7 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getRevenue().equals(getRevenue())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getNote().equals(getNote());
@@ -113,7 +136,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, note);
+        return Objects.hash(name, phone, email, revenue, address, tags, note);
     }
 
     @Override
@@ -124,6 +147,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Revenue: ")
+                .append(getRevenue())
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Note: ")

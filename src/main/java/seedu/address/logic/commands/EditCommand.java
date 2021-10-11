@@ -27,6 +27,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -100,12 +101,13 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Revenue originalRevenue = personToEdit.getRevenue();
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Appointment originalAppointment = personToEdit.getAppointment();
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
+        return new Person(updatedName, updatedPhone, updatedEmail, originalRevenue,
                 updatedAddress, updatedTags, updatedNote, originalAppointment);
     }
 
@@ -135,6 +137,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Revenue revenue;
         private Address address;
         private Set<Tag> tags;
         private Note note;
@@ -149,6 +152,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setRevenue(toCopy.revenue);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setNote(toCopy.note);
@@ -183,6 +187,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setRevenue(Revenue revenue) {
+            this.revenue = revenue;
+        }
+
+        public Optional<Revenue> getRevenue() {
+            return Optional.ofNullable(revenue);
         }
 
         public void setAddress(Address address) {
@@ -236,6 +248,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getRevenue().equals(e.getRevenue())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
                     && getNote().equals(e.getNote());
