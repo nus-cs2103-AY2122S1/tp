@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.model.student.exceptions.DuplicateGroupException;
 import seedu.address.model.student.exceptions.GroupNotFoundException;
@@ -41,6 +42,22 @@ public class GroupList {
             return;
         }
         groups.add(group);
+    }
+
+    /**
+     * Updates the group list accordingly to the student info.
+     *
+     * @see seedu.address.model.AddressBook#addStudent(Student)
+     */
+    public void update(Student toUpdate) {
+        requireNonNull(toUpdate);
+
+        List<Group> studentGroups = toUpdate.getGroups();
+        for (Group group : studentGroups) {
+            if (!groups.contains(group)) {
+                groups.add(group);
+            }
+        }
     }
 
     /**
