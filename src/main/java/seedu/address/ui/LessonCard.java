@@ -45,6 +45,12 @@ public class LessonCard extends UiPart<Region> {
         lesson.getHomework().stream()
             .sorted(Comparator.comparing(homework -> homework.description))
             .forEach(homework -> homeworkList.getChildren()
-                .add(new Label(homework + "\n")));
+                .add(homeworkLabel(homework.toString())));
+    }
+
+    private Label homeworkLabel(String homework) {
+        Label label = new Label(homework);
+        label.setWrapText(true);
+        return label;
     }
 }

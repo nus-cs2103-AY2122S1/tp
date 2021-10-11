@@ -12,25 +12,30 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="150" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
-                <Insets top="5" right="5" bottom="5" left="10" />
+                <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
-            <HBox spacing="5" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
-                <Label fx:id="lessonId" styleClass="cell_medium_label" HBox.hgrow="ALWAYS">
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <Label fx:id="lessonId" styleClass="cell_medium_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="type" text="\$first" styleClass="cell_medium_label" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="type" text="\$first" styleClass="cell_medium_label">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
             </HBox>
             <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             <Label fx:id="subject" styleClass="cell_small_label" text="\$subject" />
-            <FlowPane fx:id="homeworkList" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
+            <FlowPane fx:id="homeworkList" />
         </VBox>
     </GridPane>
 </HBox>

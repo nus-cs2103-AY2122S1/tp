@@ -13,9 +13,9 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" minWidth="10" prefWidth="150" percentWidth="50" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" percentWidth="50" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="TOP_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
@@ -42,8 +42,10 @@
     <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" minWidth="10" percentWidth="50" />
     </columnConstraints>
-    <HBox alignment="CENTER_RIGHT" minHeight="105" GridPane.columnIndex="1">
-      <StackPane fx:id="lessonListPanelPlaceholder"/>
-    </HBox>
+    <VBox alignment="CENTER_RIGHT" minHeight="105" GridPane.columnIndex="1">
+      <HBox spacing="5" alignment="CENTER_RIGHT" >
+        <StackPane fx:id="lessonListPanelPlaceholder" HBox.hgrow="SOMETIMES"/>
+      </HBox>
+    </VBox>
   </GridPane>
 </HBox>

@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -18,8 +20,8 @@ public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
 
     /** Values for cell height and width. */
-    private static final int CELL_HEIGHT = 200;
-    private static final int CELL_WIDTH = 100;
+    private static final int CELL_HEIGHT = 180;
+    private static final int CELL_WIDTH = 150;
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
     @FXML
@@ -32,10 +34,6 @@ public class LessonListPanel extends UiPart<Region> {
         super(FXML);
         lessonListView.setItems(lessonList);
         lessonListView.setOrientation(Orientation.HORIZONTAL);
-
-        lessonListView.setPrefWidth(lessonList.size() * CELL_WIDTH);
-        lessonListView.setPrefHeight(CELL_HEIGHT);
-
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
@@ -51,7 +49,10 @@ public class LessonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LessonCard(lesson, getIndex() + 1).getRoot());
+                LessonCard lessonCard = new LessonCard(lesson, getIndex() + 1);
+                setGraphic(lessonCard.getRoot());
+                setPrefWidth(CELL_WIDTH);
+                setPrefWidth(CELL_HEIGHT);
             }
         }
     }
