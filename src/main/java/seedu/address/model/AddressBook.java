@@ -12,6 +12,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicateLessonException;
+import seedu.address.model.person.exceptions.LessonNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -144,6 +145,18 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new DuplicateLessonException();
         }
         this.lessons.addAll(lessons);
+    }
+
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireNonNull(editedLesson);
+        int index = lessons.indexOf(target);
+        if (index == -1) {
+            throw new LessonNotFoundException();
+        }
+        if (!target.isSameLesson(editedLesson) && lessons.stream().anyMatch(editedLesson::isSameLesson)) {
+            throw new DuplicateLessonException();
+        }
+        lessons.set(index, editedLesson);
     }
 
     /**
