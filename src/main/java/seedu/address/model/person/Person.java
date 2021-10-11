@@ -98,7 +98,7 @@ public class Person implements HasUniqueId {
      * @return new Person instance with the updated lessons list
      */
     public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
-        return new Person(name, phone, email, address, tags, newLessonsList);
+        return new Person(id, name, phone, email, address, tags, newLessonsList);
     }
 
     /**
@@ -129,7 +129,13 @@ public class Person implements HasUniqueId {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getId().equals(getId());
+        // TODO: make the following code only compare the object id. You will have to face some tedious test fail.
+        return otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getLessonsList().equals(lessonsList);
     }
 
     @Override

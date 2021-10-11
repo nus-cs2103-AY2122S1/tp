@@ -67,7 +67,7 @@ public class TaskTest {
         assertNotEquals(REPORT_1, editedReport1);
 
         // different id -> returns false
-        editedReport1 = new TaskBuilder(REPORT_1).build();
+        editedReport1 = new TaskBuilder(REPORT_1).withUniqueId("29b89cca-8a8b-43ab-8155-e839fb9711f0").build();
         assertNotEquals(REPORT_1, editedReport1);
     }
 }

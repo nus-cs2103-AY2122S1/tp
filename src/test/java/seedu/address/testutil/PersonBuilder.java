@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
@@ -114,8 +113,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Person} object from the {@code PersonBuilder}.
+     *
+     * @return A {@code Person} object.
+     */
     public Person build() {
-        return new Person(id, name, phone, email, address, tags, lessonsList);
+        Person person = new Person(id, name, phone, email, address, tags, lessonsList);
+        id.setOwner(person);
+        return person;
     }
 
 }

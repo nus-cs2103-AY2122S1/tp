@@ -3,6 +3,8 @@ package seedu.address.model.id;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalObjects.ALICE;
+import static seedu.address.testutil.TypicalTasks.REPORT_1;
 
 import java.util.List;
 
@@ -31,12 +33,13 @@ public class UniqueIdTest {
 
     @Test
     public void getOwnerTest() {
-        for (Task task : tasks) {
-            assertEquals(task, task.getId().getOwner());
-        }
-        for (Person student : students) {
-            assertEquals(student, student.getId().getOwner());
-        }
+        Task task = REPORT_1;
+        Person student = ALICE;
+        UniqueId taskId = task.getId();
+        UniqueId studentId = student.getId();
+
+        assertEquals(task, taskId.getOwner());
+        assertEquals(student, studentId.getOwner());
     }
 
     @Test

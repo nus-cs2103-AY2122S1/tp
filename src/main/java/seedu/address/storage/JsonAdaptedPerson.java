@@ -75,12 +75,6 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        if (uniqueId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    UniqueId.class.getSimpleName()));
-        }
-        final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -115,7 +109,18 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final NoOverlapLessonList lessonsList = new NoOverlapLessonList();
-        return new Person(modelUniqueId, modelName, modelPhone, modelEmail, modelAddress, modelTags, lessonsList);
+
+        if (uniqueId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UniqueId.class.getSimpleName()));
+        }
+        final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
+
+        Person person = new Person(modelUniqueId, modelName, modelPhone, modelEmail,
+                modelAddress, modelTags, lessonsList);
+
+        modelUniqueId.setOwner(person);
+        return person;
     }
 
 }

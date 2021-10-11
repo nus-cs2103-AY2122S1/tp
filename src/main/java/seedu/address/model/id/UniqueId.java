@@ -14,18 +14,17 @@ public class UniqueId {
     /**
      * The owner of the id. It can be a task or a student.
      */
-    private final HasUniqueId owner;
+    private HasUniqueId owner;
     private final UUID id;
 
     private UniqueId(HasUniqueId owner) {
-         requireNonNull(owner);
+        requireNonNull(owner);
         this.owner = owner;
         this.id = UUID.randomUUID();
     }
 
     private UniqueId(String id) {
-        // requireNonNull(owner);
-        this.owner = null; // TODO: refine this
+        this.owner = null;
         this.id = UUID.fromString(id);
     }
 
@@ -52,6 +51,10 @@ public class UniqueId {
         return owner;
     }
 
+    public void setOwner(HasUniqueId owner) {
+        this.owner = owner;
+    }
+
     public UUID getUuid() {
         return this.id;
     }
@@ -71,7 +74,7 @@ public class UniqueId {
         if (this.owner == null || otherId.owner == null) {
             return this.id.equals(otherId.id);
         }
-        return this.id.equals(otherId.id) && this.owner.equals(otherId.owner);
+        return this.id.equals(otherId.id);
     }
 
     @Override

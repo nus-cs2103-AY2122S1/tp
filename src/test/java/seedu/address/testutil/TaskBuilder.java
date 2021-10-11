@@ -56,7 +56,14 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Task} object from the {@code TaskBuilder}.
+     *
+     * @return A {@code Task} object.
+     */
     public Task build() {
-        return new Task(name, deadline, uniqueId);
+        Task task = new Task(name, deadline, uniqueId);
+        uniqueId.setOwner(task);
+        return task;
     }
 }
