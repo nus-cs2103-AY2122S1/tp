@@ -70,15 +70,17 @@ public class Task {
     }*/
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object other) {
+        if (this == other) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (other == null || getClass() != other.getClass()) {
             return false;
         }
-        Task task = (Task) o;
-        return isDone == task.isDone && Objects.equals(taskName, task.taskName);
+        Task task = (Task) other;
+        boolean result = isDone == task.isDone && taskName.equals(task.taskName);
+        System.out.println(result);
+        return result;
     }
 
     @Override

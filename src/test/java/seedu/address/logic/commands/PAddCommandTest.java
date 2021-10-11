@@ -185,7 +185,7 @@ public class PAddCommandTest {
         }
 
         @Override
-        public void hasTask(Member member, Task task) {
+        public boolean hasTask(Member member, Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
