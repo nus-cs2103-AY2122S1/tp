@@ -42,6 +42,12 @@ public class AddressBookParser {
 
         String commandWord = matcher.group("commandWord");
         String arguments = matcher.group("arguments");
+
+        // if it ends with a prefix, add a space so that the prefix can be picked up by the tokenizer
+        if (arguments.matches(".*-[a-z]$")) {
+            arguments = arguments + " ";
+        }
+
         boolean isTwoWordCommand = arguments.length() > 0
                 && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
 
