@@ -18,9 +18,10 @@ public class BirthDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Birth dates should be of the format DD/MM/YYYY "
             + "and adhere to the following constraints:\n"
-            + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
-            + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
-            + "3. Year must be 4 characters";
+            + "1. Must be a valid birth date (before now)\n"
+            + "2. Day must be between 1-31 (0 in front of single digit is optional)\n"
+            + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
+            + "4. Year must be 4 characters.";
 
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy")
             .withResolverStyle(ResolverStyle.SMART);
