@@ -6,8 +6,8 @@
     "email": "alice@example.com",
     "vaccStatus": "T",
     "faculty" : "SoC",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "09-09-2021",
+    "lastCollectionDate" : "10-09-2021"
   }, {
     "name": "Alice Pauline",
     "room": "A100",
@@ -15,7 +15,7 @@
     "email": "pauline@example.com",
     "vaccStatus": "T",
     "faculty" : "SoC",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "09-09-2021",
+    "lastCollectionDate" : "10-09-2021"
   } ]
 }

@@ -7,8 +7,8 @@
     "email" : "alice@example.com",
     "vaccStatus" : "T",
     "faculty" : "SoC",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "09-09-2021",
+    "lastCollectionDate" : "10-09-2021"
   }, {
     "name" : "Benson Meier",
     "room" : "A101",
@@ -16,8 +16,8 @@
     "email" : "johnd@example.com",
     "vaccStatus" : "T",
     "faculty" : "FASS",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "10-09-2021",
+    "lastCollectionDate" : "11-09-2021"
   }, {
     "name" : "Carl Kurz",
     "room" : "A102",
@@ -25,8 +25,8 @@
     "email" : "heinz@example.com",
     "vaccStatus" : "T",
     "faculty" : "FASS",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "11-09-2021",
+    "lastCollectionDate" : "12-09-2021"
   }, {
     "name" : "Daniel Meier",
     "room" : "A103",
@@ -34,8 +34,8 @@
     "email" : "cornelia@example.com",
     "vaccStatus" : "T",
     "faculty" : "FASS",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "09-09-2021",
+    "lastCollectionDate" : "08-09-2021"
   }, {
     "name" : "Elle Meyer",
     "room" : "A104",
@@ -43,8 +43,8 @@
     "email" : "werner@example.com",
     "vaccStatus" : "T",
     "faculty" : "FASS",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "12-09-2021",
+    "lastCollectionDate" : "12-09-2021"
   }, {
     "name" : "Fiona Kunz",
     "room" : "A105",
@@ -52,8 +52,8 @@
     "email" : "lydia@example.com",
     "vaccStatus" : "T",
     "faculty" : "FASS",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "20-09-2021",
+    "lastCollectionDate" : "21-09-2021"
   }, {
     "name" : "George Best",
     "room" : "A106",
@@ -61,7 +61,7 @@
     "email" : "anna@example.com",
     "vaccStatus" : "T",
     "faculty" : "FASS",
-    "lastFetDate" : "TODO",
-    "lastCollectionDate" : "TODO"
+    "lastFetDate" : "01-09-2021",
+    "lastCollectionDate" : "22-09-2021"
   } ]
 }
