@@ -132,6 +132,12 @@ public class ModelManager implements Model {
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
+    @Override
+    public void setLesson(Lesson target, Lesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
+        addressBook.setLesson(target, editedLesson);
+    }
+
     //=========== Filtered Person and Lesson List Accessors ======================================================
 
     /**

@@ -134,6 +134,25 @@ public class Student {
                 && otherStudent.getEnrolledLessonCodes().equals(getEnrolledLessonCodes());
     }
 
+    /**
+     * make clone, to refactor to somewhere more suitable
+     */
+    public static Student createClone(Student studentToCopy) {
+        Name name = studentToCopy.getName();
+        ParentContact parentContact = studentToCopy.getParentContact();
+        Email email = studentToCopy.getEmail();
+        Address address = studentToCopy.getAddress();
+        Grade grade = studentToCopy.getGrade();
+        Set<Tag> tags = new HashSet<>(studentToCopy.getTags());
+
+        Set<Lesson> existingLessons = studentToCopy.getLessons();
+        existingLessons.forEach(l -> l.removeStudent(studentToCopy));
+
+        Student newStudent = new Student(name, parentContact, email, address, grade, tags);
+        existingLessons.forEach(l -> l.addStudent(newStudent));
+        return newStudent;
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
