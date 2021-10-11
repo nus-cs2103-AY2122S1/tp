@@ -39,14 +39,14 @@ public class EncryptedJsonUtil {
                     .addSerializer(Level.class, new ToStringSerializer())
                     .addDeserializer(Level.class, new EncryptedJsonUtil.LevelDeserializer(Level.class)));
 
-    static <T> void serializeObjectToEncryptedJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
-        String jsonString = JsonUtil.toJsonString(objectToSerialize);
-        FileUtil.writeToEncryptedFile(EncryptionUtil.encryptSerializableObject(jsonString));
+    static <T> void serializeObjectToEncryptedJsonFile(Path encryptedJsonFile, T objectToSerialize) throws IOException {
+        String jsonString = toJsonString(objectToSerialize);
+        FileUtil.writeToEncryptedFile(encryptedJsonFile, EncryptionUtil.encryptSerializableObject(jsonString));
     }
 
-    static <T> T deserializeObjectFromEncryptedJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)
+    static <T> T deserializeObjectFromEncryptedJsonFile(Path encryptedJsonFile, Class<T> classOfObjectToDeserialize)
             throws IOException {
-        String jsonString = (String) EncryptionUtil.decryptSealedObject(FileUtil.readFromEncryptedFile());
+        String jsonString = (String) EncryptionUtil.decryptSealedObject(FileUtil.readFromEncryptedFile(encryptedJsonFile));
         return fromJsonString(jsonString, classOfObjectToDeserialize);
     }
 

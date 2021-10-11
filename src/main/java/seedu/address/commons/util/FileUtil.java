@@ -89,10 +89,10 @@ public class FileUtil {
         return new String(Files.readAllBytes(file), CHARSET);
     }
 
-    public static SealedObject readFromEncryptedFile() throws IOException {
+    public static SealedObject readFromEncryptedFile(Path encryptedFile) throws IOException {
         try {
             CipherInputStream cipherInputStream = new CipherInputStream(new BufferedInputStream(
-                    new FileInputStream("data/file")), EncryptionUtil.createCipherInstance(Cipher.DECRYPT_MODE));
+                    new FileInputStream(encryptedFile.toFile())), EncryptionUtil.createCipherInstance(Cipher.DECRYPT_MODE));
             ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
             return (SealedObject) inputStream.readObject();
         } catch (ClassNotFoundException e) {
@@ -109,11 +109,11 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
-    public static void writeToEncryptedFile(SealedObject file) throws IOException {
+    public static void writeToEncryptedFile(Path encryptedFile, SealedObject content) throws IOException {
         CipherOutputStream cipherOutputStream = new CipherOutputStream(new BufferedOutputStream(
-                new FileOutputStream("data/file")), EncryptionUtil.createCipherInstance(Cipher.ENCRYPT_MODE));
+                new FileOutputStream(encryptedFile.toFile())), EncryptionUtil.createCipherInstance(Cipher.ENCRYPT_MODE));
         ObjectOutputStream outputStream = new ObjectOutputStream(cipherOutputStream);
-        outputStream.writeObject(file);
+        outputStream.writeObject(content);
         outputStream.close();
     }
 }
