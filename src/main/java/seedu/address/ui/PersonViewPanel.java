@@ -77,6 +77,7 @@ public class PersonViewPanel extends UiPart<Region> {
             Person person = personToView.get(0);
             clientName.setText(person.getName().toString());
             clientId.setText(person.getClientId().toString());
+            clientCreatedAt.setText("-");
             clientLastMet.setText(person.getLastMet().toString());
             clientRiskAppetite.setText(person.getRiskAppetite().toString());
             clientCurrentPlans.setText(person.getCurrentPlan().toString());
