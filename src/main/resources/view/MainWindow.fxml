@@ -49,14 +49,14 @@
                 <HBox VBox.vgrow="ALWAYS">
                     <children>
 
-                        <VBox fx:id="personList" minWidth="355.0" prefWidth="500.0" styleClass="pane-with-border">
+                        <VBox fx:id="personList" minWidth="355.0" prefWidth="500.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />
                             </padding>
                             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
 
-                        <VBox fx:id="moduleClassList" minWidth="355.0" prefWidth="500.0" styleClass="pane-with-border">
+                        <VBox fx:id="moduleClassList" minWidth="355.0" prefWidth="500.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />
                             </padding>
