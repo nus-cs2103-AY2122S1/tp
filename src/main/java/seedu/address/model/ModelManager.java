@@ -157,16 +157,22 @@ public class ModelManager implements Model {
         return inventory.getItemWithName(name);
     }
 
+    // ============== Order related methods ========================
+
     /**
      * Sets the current order of the model.
-     *
-     * @param order
      */
     @Override
     public void setOrder(Order order) {
         requireNonNull(order);
 
         optionalOrder = Optional.of(order);
+    }
+
+    public Order getOrder() {
+        assert hasUnclosedOrder();
+
+        return optionalOrder.get();
     }
 
     /**
@@ -205,6 +211,7 @@ public class ModelManager implements Model {
         assert hasUnclosedOrder();
 
         TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
-        optionalOrder = Optional.empty();  // Reset to no order status
+        // Reset to no order status
+        optionalOrder = Optional.empty();
     }
 }
