@@ -146,6 +146,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Remark: ")
                 .append(getRemark())
+                .append(" ")
                 .append(getAppointment());
 
         Set<Tag> tags = getTags();
