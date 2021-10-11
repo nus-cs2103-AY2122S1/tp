@@ -1,7 +1,6 @@
 package seedu.fast.logic.parser;
 
 import seedu.fast.logic.commands.HelpCommand;
-import seedu.fast.logic.parser.exceptions.ParseException;
 
 public class HelpCommandParser implements Parser<HelpCommand> {
 
@@ -12,21 +11,8 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      * Parses the given {@code String} of arguments in the context of the HelpCommand
      * and returns a HelpCommand object for execution.
      */
-    public HelpCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-
-        if (trimmedArgs.equals("")) {
-            return new HelpCommand("");
-        }
-
-        // Compares the args with the list of command keywords
-        String capitalisedArg = trimmedArgs.substring(0, 1).toUpperCase() + trimmedArgs.substring(1);
-        if (isCommandWord(capitalisedArg)) {
-            return new HelpCommand(capitalisedArg);
-        }
-
-        // Returns an empty help command if none matches
-        return new HelpCommand("");
+    public HelpCommand parse(String args) {
+        return new HelpCommand(args); //Since none of the inputs are valid, we can return the arg.
     }
 
     /**
@@ -36,19 +22,26 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      * @return The args of the help command, or "" if there is no args.
      */
     public static String getArgs(String commandText) {
+
+        // if there are no args
         if (commandText.split(" ").length == 1) {
             return "";
         }
-        String arg = commandText.substring(4).trim();
-        String[] args = arg.split(" ");
-        StringBuilder capitalisedArg = new StringBuilder();
 
-        // capitalise the start of each word in the args
+        String arg = commandText.substring(HelpCommand.COMMAND_WORD.length()).trim();
+        String[] args = arg.split(" ");
+        StringBuilder capitalisedArgBuilder = new StringBuilder();
+
+        // Capitalise the start of each word in the args
         for (String s : args) {
-            capitalisedArg.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
+            // Capitalises the first letter of the word
+            capitalisedArgBuilder.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
         }
-        if (isCommandWord(capitalisedArg.toString())) {
-            return capitalisedArg.toString();
+
+        String capitalisedArg = capitalisedArgBuilder.toString();
+        if (isCommandWord(capitalisedArg)) {
+            return capitalisedArg;
+
         } else { // if the arg does not match a given command, return ""
             return "";
         }
