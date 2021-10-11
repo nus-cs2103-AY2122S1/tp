@@ -43,6 +43,15 @@ public class PersonBuilder {
     }
 
     /**
+     * Creates a {@code PersonBuilder} with null birthday.
+     */
+    public static PersonBuilder ofNoBirthday(){
+        PersonBuilder person = new PersonBuilder();
+        person.birthday = null;
+        return person;
+    }
+
+    /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
