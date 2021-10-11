@@ -43,7 +43,7 @@
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;
     -fx-background-color: #1d1d1d;
-    -fx-table-cell-border-color: transparent;
+    -fx-table-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
 }
@@ -205,6 +205,24 @@
 
 .menu .left-container {
     -fx-background-color: black;
+}
+
+.student_view_big_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+}
+
+.student_view_medium_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
+}
+
+.student_view_small_label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: #ffffff;
 }
 
 /*

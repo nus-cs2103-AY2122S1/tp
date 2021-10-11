@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
@@ -13,28 +17,31 @@ import seedu.address.model.student.Student;
  */
 public class StudentWindow extends UiPart<Stage> {
 
-    public static final String VIEW_MESSAGE = "You are currently viewing: ";
+    public static final String VIEW_MESSAGE = "Currently viewing: ";
 
     private static final Logger logger = LogsCenter.getLogger(StudentWindow.class);
     private static final String FXML = "StudentWindow.fxml";
 
     @FXML
-    private Label showMessage;
+    private HBox cardPane;
 
     @FXML
-    private Label studentName;
+    private Label message;
 
     @FXML
-    private Label studentAddress;
+    private Label name;
 
     @FXML
-    private Label studentEmail;
+    private Label address;
 
     @FXML
-    private Label studentPhone;
+    private Label email;
 
     @FXML
-    private Label studentTags;
+    private Label phone;
+
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a new StudentWindow.
@@ -43,7 +50,6 @@ public class StudentWindow extends UiPart<Stage> {
      */
     public StudentWindow(Stage root) {
         super(FXML, root);
-        showMessage.setText(VIEW_MESSAGE);
     }
 
     /**
@@ -72,17 +78,16 @@ public class StudentWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show(Student student) {
+        tags.getChildren().clear();
         logger.fine("Showing student information.");
-        studentName.setText(student.getName().toString());
-        studentAddress.setText(student.getAddress().toString());
-        studentEmail.setText(student.getEmail().toString());
-        studentPhone.setText(student.getPhone().toString());
-        Object[] tags = student.getTags().toArray();
-        String tagList = "";
-        for (int i = 0; i < tags.length; i++) {
-            tagList += tags[i];
-        }
-        studentTags.setText(tagList);
+        message.setText(VIEW_MESSAGE);
+        name.setText(student.getName().fullName);
+        address.setText(student.getAddress().value);
+        email.setText(student.getEmail().value);
+        phone.setText(student.getPhone().value);
+        student.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         getRoot().show();
         getRoot().centerOnScreen();
     }
