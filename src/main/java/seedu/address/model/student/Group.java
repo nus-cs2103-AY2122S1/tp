@@ -39,9 +39,9 @@ public class Group {
     /**
      * Returns true if a student with the same identity as {@code student} exists in the group.
      */
-    public boolean hasStudent(Student student) {
-        requireNonNull(student);
-        return students.contains(student.getId());
+    public boolean hasStudent(ID id) {
+        requireNonNull(id);
+        return students.contains(id);
     }
 
     /**
@@ -49,16 +49,16 @@ public class Group {
      * The student must not already exist in the group.
      * The student's group list needs to be updated accordingly.
      */
-    public void addStudent(Student s) {
-        students.add(s.getId());
+    public void addStudent(ID id) {
+        students.add(id);
     }
 
     /**
-     * Removes {@code key} from this {@code Group}.
+     * Removes student with id {@code key} from this {@code Group}.
      * {@code key} must exist in the group.
      */
-    public void removeStudent(Student key) {
-        students.remove(key.getId());
+    public void removeStudent(ID key) {
+        students.remove(key);
     }
 
     @Override

@@ -129,16 +129,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
-    /**
-     * Adds a student to a group.
-     * The group must already exist in the address book.
-     * The student must not already exist in the group.
-     * The student's group list needs to be updated accordingly.
-     */
-    public void addStudentToGroup(Group g, Student s) {
-        g.addStudent(s);
-    }
-
     //// group-level operations
 
     /**
