@@ -9,4 +9,6 @@ public class TagUtil {
     public static final String MEDIUM_PRIORITY = "MEDIUMPRIORITY";
     public static final String LOW_PRIORITY = "LOWPRIORITY";
 
+    public static final int NO_PRIORITY = 10;
+
 }

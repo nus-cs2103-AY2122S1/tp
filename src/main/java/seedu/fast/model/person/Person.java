@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.fast.commons.util.TagUtil;
 import seedu.fast.model.tag.Tag;
 
 /**
@@ -71,7 +72,7 @@ public class Person {
      * @return the highest priority
      */
     public int getPriority() {
-        int temp = 10;
+        int temp = TagUtil.NO_PRIORITY;
         if (tags.isEmpty()) {
             return temp;
         }

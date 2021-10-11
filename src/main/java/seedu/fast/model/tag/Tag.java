@@ -3,6 +3,7 @@ package seedu.fast.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.util.AppUtil.checkArgument;
 
+import seedu.fast.commons.util.TagUtil;
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -64,7 +65,7 @@ public class Tag {
         if (tagName.equals(PriorityTag.HighPriority.NAME)) {
             return PriorityTag.HighPriority.PRIORITY;
         }
-        return 10;
+        return TagUtil.NO_PRIORITY;
     }
 
     public int getPriority() {
