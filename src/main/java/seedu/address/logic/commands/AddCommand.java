@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
@@ -24,6 +25,7 @@ public class AddCommand extends Command {
             + PREFIX_MODULE_CODE + "MODULE_CODE... "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: add "
             + PREFIX_NAME + "John Doe "
