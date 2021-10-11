@@ -6,18 +6,20 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the TAB level.
+ * Duplicates are not allowed (by .isSameModule, .isSameStudent, and .isSameTask comparison)
  */
 public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
-    //todo: need a unique module list here, I am naming it modules for now
+
+    private final UniqueModuleList modules;
     private final UniqueStudentList students;
     private final UniqueTaskList tasks;
 
@@ -29,6 +31,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
      *   among constructors.
      */
     {
+        modules = new UniqueModuleList();
         students = new UniqueStudentList();
         tasks = new UniqueTaskList();
     }
@@ -36,24 +39,26 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public TeachingAssistantBuddy() {}
 
     /**
-     * Creates an TeachingAssistantBuddy using the Persons in the {@code toBeCopied}
-     */
+     * Creates an TeachingAssistantBuddy using the TAB information in the {@code toBeCopied}
+     * */
     public TeachingAssistantBuddy(ReadOnlyTeachingAssistantBuddy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
-    //// module-level operations
-
-    public void removeModule(Module key) {
-        modules.remove(key);
-    }
-
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the student list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the module list with {@code modules}.
+     * {@code modules} must not contain duplicate modules.
+     */
+    public void setModules(List<Module> modules) {
+        this.modules.setModules(modules);
+    }
+
+    /**
+     * Replaces the contents of the student list with {@code students}.
+     * {@code students} must not contain duplicate students.
      */
     public void setStudents(List<Student> students) {
         this.students.setStudents(students);
@@ -79,7 +84,15 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a module with the same identity as {@code module} exists in TAB.
+     */
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return modules.contains(module);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in TAB.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -87,36 +100,53 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in TAB.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
     }
 
-
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a module to TAB.
+     * The module must not already exist in TAB.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addModule(Module module) {
+        modules.add(module);
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to TAB.
+     * The student must not already exist in TAB.
+     */
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    /**
+     * Adds a task to TAB.
+     * The task must not already exist in TAB.
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Replaces the given module {@code target} in the list with {@code editedModule}.
+     * {@code target} must exist in TAB.
+     * The module identity of {@code editedModule} must not be the same
+     * as another existing module in TAB.
+     */
+    public void setModule(Module target, Module editedModule) {
+        requireNonNull(editedModule);
+        modules.setModule(target, editedModule);
+    }
 
     /**
-     * Replaces the given student {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the TAB.
-     * The student identity of {@code editedPerson} must not be the same
-     * as another existing student in the address book.
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in TAB.
+     * The student identity of {@code editedStudent} must not be the same
+     * as another existing student in TAB.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -137,15 +167,23 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
     /**
      * Removes {@code key} from this {@code TeachingAssistantBuddy}.
-     * {@code key} must exist in the TAB.
+     * {@code key} must exist in TAB.
+     */
+    public void removeModule(Module key) {
+        modules.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code TeachingAssistantBuddy}.
+     * {@code key} must exist in TAB.
      */
     public void removeStudent(Student key) {
         students.remove(key);
     }
 
     /**
-     * Removes {@code key} from this {@code Module}.
-     * {@code key} must exist in the module.
+     * Removes {@code key} from this {@code TeachingAssistantBuddy}.
+     * {@code key} must exist in TAB.
      */
     public void removeTask(Task key) {
         tasks.remove(key);
@@ -160,14 +198,17 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     @Override
-    public ObservableList<Student> getStudentList() {
-        return students.asUnmodifiableObservableList();
-    }
-
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Student> getStudentList() {
+        return students.asUnmodifiableObservableList();
+    }
+
+
+    @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
     }

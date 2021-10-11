@@ -1,30 +1,24 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddModuleCommand;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
 
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-
 public class DeleteModuleCommandParser implements Parser<DeleteModuleCommand> {
-
 
     /**
      * Parses {@code userInput} into a command and returns it.
      *
-     * @param args
+     * @param args args for deleting a module
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
     public DeleteModuleCommand parse(String args) throws ParseException {
-        //todo: get the name of the module to be deleted (modules are compared by names)
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME);
 
