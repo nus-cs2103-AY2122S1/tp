@@ -82,17 +82,6 @@ Format: `add NAME`
 Examples:
 * `add Tom Lim` adds Tom Lim to the list and displays a confirmation output
 
-### Navigation: `/back`
-
-Go back to the welcome page to redecide.
-
-Format: `/back`
-
-* `/back` should be exactly entered to go back to the initial (welcome) page
-
-Examples:
-* `/back` displays the following output:
-  You exited the current directory!
 
 ### Listing the task list : `tasks`
 
@@ -100,19 +89,20 @@ Displays all the tasks currently in the list.
 
 Format: `tasks`
 
-### Adding a task with a date: `add TASK_NAME /by DATE`
+### Adding a task with a date: `addTask n/TASK_NAME by/DATE`
 
 Adds a task with the given name and a specified deadline.
 
-Format: `add TASK_NAME /by DATE`
+Format: `addTask n/TASK_NAME by/DATE`
+Format: `addTask n/TASK_NAME by/DATE`
 
 * Adds a task with the specified `TASK_NAME`
 * The task has the deadline `DATE`
 * The deadline must be in the format `YYYY-MM-dd`
 
 Examples:
-* `add grade scripts /by 2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
-* `add tutorial preparation /by 2021-10-04` creates the task "tutorial preparation", which is to be completed by the given date.
+* `add n/grade scripts by/2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
+* `add n/tutorial preparation by/2021-10-04` creates the task "tutorial preparation", which is to be completed by the given date.
 
 ### Marking a student as present: `mark`
 
@@ -160,18 +150,38 @@ Sample Usage:
 
     > Kho Tze Jit is removed from the student list!
 
-### Marking a task as done: : `done`
+### Deleting a task: `deleteTask INDEX`
+
+Deletes the specified task from the task list.
+
+Format: `deleteTask INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index must refer to the index number shown in the displayed task list.
+* The index and week number must be a positive number: 1, 2, 3…
+
+Examples:
+
+* `deleteTask 1` removes the 1st task in the task list.
+
+Sample Usage:
+
+`> deleteTask 1`
+
+    > Studying is removed from the student list!
+
+### Marking a task as done: : `doneTask`
 
 Mark the specified task from the list as done.
 
-Format: `done INDEX`
+Format: `doneTask INDEX`
 
 * Mark the task as done at the specified `INDEX`.
 * The index refers to the index number shown in the task list.
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `tasks` followed by `done 2` marks the 2nd task in the task list as completed.
+* `doneTask 2` marks the 2nd task in the task list as completed.
 
 ### Exiting the program : `exit`
 
@@ -265,8 +275,12 @@ Action | Format, Examples
 **List Students** | `students`
 **List Tasks** | `tasks`
 **Add Student** | `add n/NAME s/STUDENT_NUMBER e/EMAIL g/GITHUB_LINK [t/TAG]…​` <br> e.g., `add n/James Ho s/A0221111L e/jamesho@example.com g/https://github.com/james t/W14-4`
+**Add Task** | `addTask n/TASK_NAME by/DATE [t/TAG]…​` <br> e.g., `addTask n/study by/2021-10-31 t/W14-4`
+**DoneTask** | `doneTask INDEX` <br> e.g., `doneTask 1`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Task** | `deleteTask INDEX`<br> e.g., `deleteTask 3`
 **Edit** | `edit INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Task** | `edit INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/study by/2012-10-31 t/W14-4`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
