@@ -392,39 +392,52 @@ the data of your previous AddressBook home folder.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+Round brackets `()` refer to COMPULSORY arguments.
+Square brackets `[]` refer to optional arguments.
 
-## Person
+### Person
+Action     | Format                                                                | Advanced Format
+-----------|-----------------------------------------------------------------------|--------------------------------------------------------------
+**Create** | `person (INDEX) /create [g:GROUP_NAME]`                               | `p (INDEX) /c [g:GROUP_NAME]`
+**Edit**   | `person (INDEX) /edit [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]` | `p (INDEX) /e [n:NAME] [p:phone] [e:email] [t:TAG1,TAG2,...]`
+**Delete** | `person (INDEX) /delete`                                              | `p (INDEX) /d`
+**Add**    | `person (INDEX) /add (g:GROUP_NAME) `                                 | `p (INDEX) /a (g:GROUP_NAME)`
+**Remove** | `person (INDEX) /remove (g:GROUP_NAME) `                              | `p (INDEX) /r (g:GROUP_NAME)`
+**Note**   | `person (INDEX) /note (NOTE)`                                         | `p (INDEX) /n (NOTE)`
+**List**   | `person /list [g:GROUP_NAME] [sg:SUBGROUP_NAME]`                      | `p /l [g:GROUP_NAME] [sg:SUBGROUP_NAME]`
+**Find**   | `person /find (n:QUERY)`                                              | `p /f (n:QUERY)`
 
-Action | Format | Advanced Format
---------|--------|----------
-**Create** | `person /create NAME [g:GROUP_NAME]` | `p /c NAME [g:GROUP_NAME]`
-**Edit** | `person NAME /edit n:NAME` | `p NAME /e n:NAME`
-**Delete** | `person /delete NAME` | `p NAME /d n:NAME`
-**Remove** | `person NAME /remove or /r g:GROUP_NAME ` | `p NAME /r g:GROUP_NAME`
-**Note** | `person NAME /note` | `p NAME /n`
+### Group
+Action     | Format                                  | Short Format
+-----------|-----------------------------------------|-----------------------------------
+**Create** | `group (GROUP_NAME) /create`            | `g (GROUP_NAME) /c`
+**Edit**   | `group (GROUP_NAME) /edit [n:NEW_NAME]` | `g (GROUP_NAME) /e [n:NEW_NAME]`
+**Delete** | `group (GROUP_NAME) /delete`            | `g (GROUP_NAME) /d`
+**Note**   | `group (GROUP_NAME) /note (NOTE)`       | `g (GROUP_NAME) /n (NOTE)`
+**List**   | `group /list`                           | `g /l`
+**Find**   | `group /find (n:QUERY)`                 | `g /f (n:QUERY)`
 
-## Group
+### Subgroup
+Action     | Format                                                                   | Short Format
+-----------|-------------------------------------------------------------------------|------------------------------------------------------------------
+**Create** | `group (GROUP_NAME:SUBGROUP_NAME) /create`                              | `g (GROUP_NAME:SUB_GROUP_NAME) /c`
+**Edit**   | `group (GROUP_NAME:SUBGROUP_NAME) /edit [n:NEW_NAME] [t:TAG1,TAG2,...]` | `g (GROUP_NAME:SUB_GROUP_NAME) /e [n:NEW_NAME] [t:TAG1,TAG2,...]`
+**Delete** | `group (GROUP_NAME:SUBGROUP_NAME) /delete`                              | `g (GROUP_NAME:SUB_GROUP_NAME) /d`
+**Note**   | `group (GROUP_NAME:SUBGROUP_NAME) /note (NOTE)`                         | `g (GROUP_NAME:SUB_GROUP_NAME) /n (NOTE)`
+**List**   | `group (GROUP_NAME:SUBGROUP_NAME) /list [p:INDEX]`                      | `g (GROUP_NAME:SUB_GROUP_NAME) /l [p:INDEX]`
+**Find**   | `group /find (n:GROUP_NAME:QUERY)`                                      | `g /f (n:GROUP_NAME:QUERY)`
 
-Action | Format |  Advanced Format
---------|--------|----------
-**Create** | `group / c g:GROUP_NAME` | `g / c g:GROUP_NAME`
-**Edit** | `group g:GROUP_NAME /edit g:GROUP_NAME` | `g GROUP_NAME /e g:GROUP_NAME`
-**Delete** | `group g:GROUP_NAME /delete g:GROUP_NAME` | `g g:GROUP_NAME /d g:GROUP_NAME`
-**Note** | `group g:GROUP_NAME /note` | `g g:GROUP_NAME /n g:GROUP_NAME`
-**Create subgroup** | `group GROUP_NAME /create sg:SUB_GROUP_NAME` | `g g:GROUP_NAME /c sg:SUB_GROUP_NAME`
-**Edit
-subgroup** | `group GROUP_NAME:SUB_GROUP_NAME /edit sg:SUB_GROUP_NAME` | `g g:GROUP_NAME:SUB_GROUP_NAME /e sg:SUB_GROUP_NAME`
-**Delete subgroup** | `group GROUP_NAME /delete sg:SUB_GROUP_NAME` | `g GROUP_NAME /d sg:SUB_GROUP_NAME`
-**Note subgroup** |  `group GROUP_NAME /note sg:SUB_GROUP_NAME` | `g GROUP_NAME /n sg:SUB_GROUP_NAME`
+### Tags
+Note: for the **List** command, you have to either list by group or by person, but not both.
 
-## General
+Action   | Format                                               | Short Format
+---------|------------------------------------------------------|------------------------------------------------
+**List** | `tag /list [p:INDEX] [g:GROUP_NAME]:[SUBGROUP_NAME]` | `t /l [p:INDEX] [g:GROUP_NAME]:[SUBGROUP_NAME]`
 
-Action | Format | Advanced Format
---------|--------|----------
-**Help** | `help` | `-`
-**List person** | `list person`  | `l p`
-**List group** | `list group` | `l g`
-**List subgroup** | `list /subgroup  g:GROUP_NAME` | `l /sg g:GROUP_NAME`
-**find person** | `find /person PERSON_NAME` | `f /p n:PERSON_NAME`
-**find group** | `find /group GROUP_NAME` | `f /g g:GROUP_NAME`
-**find subgroup** | `find /subgroup or /sg GROUP_NAME` | `f /sg g:GROUP_NAME`
+### General
+
+Action    | Format  | Advanced Format
+----------|---------|----------
+**Help**  | `help`  | `h`
+**Exit**  | `exit`  | `e`
+**Clear** | `clear` | `c`
