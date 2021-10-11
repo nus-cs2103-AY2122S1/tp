@@ -111,7 +111,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BOB + GROUP_DESC_TUTORIAL
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
+        // invalid nusNetId
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC + GROUP_DESC_TUTORIAL
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ID.MESSAGE_CONSTRAINTS);
 
