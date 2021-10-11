@@ -90,18 +90,6 @@ public class EditTaskCommandParserTest {
     }
 
     @Test
-    public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_TASK;
-        String userInput = targetIndex.getOneBased() + DATE_DESC_SEPT + LABEL_DESC_ORDER;
-
-        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDate(VALID_DATE_SEPT)
-                .withLabel(VALID_LABEL_ORDER).build();
-        EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
     public void parse_oneFieldSpecified_success() {
         // label
         Index targetIndex = INDEX_THIRD_TASK;
