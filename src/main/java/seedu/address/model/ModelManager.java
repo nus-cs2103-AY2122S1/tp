@@ -137,13 +137,11 @@ public class ModelManager implements Model {
      */
     public void deleteTask(Task toDelete) {
         addressBook.deleteTask(toDelete);
-
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-
         addressBook.setTask(target, editedTask);
     }
 
@@ -155,6 +153,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
+        System.out.println(filteredTasks);
         filteredTasks.setPredicate(predicate);
     }
 

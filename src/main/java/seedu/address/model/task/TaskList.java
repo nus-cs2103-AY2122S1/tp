@@ -78,7 +78,8 @@ public class TaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
         int index = internalList.indexOf(toMark);
-        internalList.get(index).setIsDone(true);
+        toMark.setIsDone(true);
+        internalList.set(index, toMark);
     }
 
 

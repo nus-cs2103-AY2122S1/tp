@@ -11,7 +11,6 @@ public class TypicalTasks {
 
     public static final Task TASK1 = new TaskBuilder().withLabel("Buy red button")
             .withDate("18th of September 2021").build();
-
     public static final Task TASK2 = new TaskBuilder().withLabel("Buy green buttons")
             .withDate("20th of September 2021").withIsDone(false).build();
     public static final Task TASK3 = new TaskBuilder().withLabel("Buy blue buttons")
@@ -27,7 +26,6 @@ public class TypicalTasks {
         }
         return ab;
     }
-
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(TASK1, TASK2, TASK3));
     }
