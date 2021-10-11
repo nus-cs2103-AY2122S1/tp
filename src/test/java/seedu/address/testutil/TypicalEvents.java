@@ -26,6 +26,9 @@ public class TypicalEvents {
     public static final Event SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION = new Event(new EventName("Sleep"),
             new EventDate("2021-09-18"), new EventTime("1002"), true,
             Collections.singletonList(new ParticipantBuilder().build()));
+    public static final Event SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION_COPY = new Event(new EventName("Sleep"),
+            new EventDate("2021-09-18"), new EventTime("1002"), true,
+            Collections.singletonList(new ParticipantBuilder().build()));
     public static final Event SAMPLE_EVENT_DEFAULT_TIME_AND_COMPLETION = new Event(new EventName("Sleep again"),
             new EventDate("2021-09-18"));
 
