@@ -85,7 +85,7 @@ public class AddAllocCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        Student editedStudent = createEditedStudents(studentToEdit, allocDescriptor);
+        Student editedStudent = createEditedStudent(studentToEdit, allocDescriptor);
 
         groupToEdit.addStudent(editedStudent.getId());
         model.setStudent(studentToEdit, editedStudent);
@@ -117,7 +117,7 @@ public class AddAllocCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code preAllocStudent}
      * allocated to the group specified in the {@code allocDescriptor}.
      */
-    public static Student createEditedStudents(Student toEditStudent, AllocDescriptor allocDescriptor) {
+    public static Student createEditedStudent(Student toEditStudent, AllocDescriptor allocDescriptor) {
         assert toEditStudent != null;
         assert allocDescriptor.getGroup().isPresent();
 

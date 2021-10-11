@@ -65,7 +65,7 @@ class JsonAdaptedStudent {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         groups.addAll(source.getGroups().stream()
-                .map(group -> group.value)
+                .map(group -> group.name)
                 .collect(Collectors.toList()));
         assessments.addAll(source.getScores().keySet().stream()
                 .map(Assessment::getName)
@@ -101,7 +101,7 @@ class JsonAdaptedStudent {
                 .forEach(assessment -> modelScores.put(assessment, assessment.scores.get(modelId)));
 
         final List<Group> modelGroups = groupList.stream()
-                .filter(group -> groups.contains(group.value))
+                .filter(group -> groups.contains(group.name))
                 .collect(Collectors.toList());
         for (Group group : modelGroups) {
             group.addStudent(modelId);
