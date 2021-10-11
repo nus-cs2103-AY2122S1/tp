@@ -1,17 +1,14 @@
 package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import java.util.function.Predicate;
 
+import seedu.fast.commons.core.Messages;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.PriorityPredicate;
 import seedu.fast.model.tag.PriorityTag;
-
-import java.util.function.Predicate;
-
-import seedu.fast.commons.core.Messages;
-
 
 
 /**

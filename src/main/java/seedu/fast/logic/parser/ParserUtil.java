@@ -67,7 +67,7 @@ public class ParserUtil {
         }
         for (int i = 1; i < chars.length - 1; i++) {
             char current = chars[i];
-            char next = chars[i+1];
+            char next = chars[i + 1];
             if (Character.isWhitespace(current) && Character.isLetter(next)) {
                 chars[i + 1] = Character.toUpperCase(next);
             }

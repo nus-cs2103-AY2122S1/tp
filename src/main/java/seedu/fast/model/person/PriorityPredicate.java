@@ -1,11 +1,11 @@
 package seedu.fast.model.person;
 
-import seedu.fast.model.tag.PriorityTag;
-import seedu.fast.model.tag.Tag;
-
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.List;
+
+import seedu.fast.model.tag.PriorityTag;
+import seedu.fast.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code PriorityTag} matches any of the priorities given.
@@ -14,7 +14,7 @@ public class PriorityPredicate implements Predicate<Person> {
     public final List<String> tags;
 
     public PriorityPredicate(List<String> tags) {
-        this.tags=tags;
+        this.tags = tags;
     }
 
     @Override
