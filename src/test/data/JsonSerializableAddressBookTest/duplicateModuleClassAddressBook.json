@@ -1,0 +1,14 @@
+{
+  "persons" : [ ],
+  "classes" : [ {
+    "moduleCode": "CS2106",
+    "day": "5",
+    "time": "10:00",
+    "remark": "T01"
+  }, {
+    "moduleCode": "CS2106",
+    "day": "5",
+    "time": "10:00",
+    "remark": "T01"
+  } ]
+}
