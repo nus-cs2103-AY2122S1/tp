@@ -1,11 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -46,7 +42,7 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
         Counter counter = ParserUtil.parseCounter(argMultimap.getValue(PREFIX_COUNTER).get());
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_TIMESLOT).get());
         StudentList student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
-        Remark remark = new Remark(""); // add class command does not allow adding remarks straight away
+        Remark remark = ParserUtil.parseRemark(argMultimap.getOptionalValue(PREFIX_REMARK).get());
         TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student, remark);
 
         logger.info("AddClassCommandParser " + tuitionClass);
