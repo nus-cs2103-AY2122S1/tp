@@ -23,8 +23,11 @@ public class TypicalEvents {
             new EventDate("2021-09-18"), new EventTime("1001"));
     public static final Event SAMPLE_EVENT_2 = new Event(new EventName("Random Event 1"),
             new EventDate("1-1-1"), new EventTime("0001"));
-    public static final Event SAMPLE_EVENT_3 = new Event(new EventName("Sleep"), new EventDate("2021-09-18"),
-            new EventTime("1002"), false, Collections.singletonList(new ParticipantBuilder().build()));
+    public static final Event SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION = new Event(new EventName("Sleep"),
+            new EventDate("2021-09-18"), new EventTime("1002"), true,
+            Collections.singletonList(new ParticipantBuilder().build()));
+    public static final Event SAMPLE_EVENT_DEFAULT_TIME_AND_COMPLETION = new Event(new EventName("Sleep again"),
+            new EventDate("2021-09-18"));
 
     private TypicalEvents() {}
 

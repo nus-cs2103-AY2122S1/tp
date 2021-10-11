@@ -22,12 +22,17 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ShowEventDetailsCommand;
+import seedu.address.logic.commands.ShowEventParticipantsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventNamePredicate;
 import seedu.address.model.participant.NameContainsKeywordsPredicate;
 import seedu.address.model.participant.Participant;
 import seedu.address.testutil.EditParticipantDescriptorBuilder;
 import seedu.address.testutil.ParticipantBuilder;
 import seedu.address.testutil.ParticipantUtil;
+import seedu.address.testutil.TypicalEvents;
 
 public class AddressBookParserTest {
 
@@ -87,6 +92,22 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_showDetails() throws Exception {
+        Event sampleEvent = TypicalEvents.SAMPLE_EVENT;
+        ShowEventDetailsCommand command = (ShowEventDetailsCommand) parser.parseCommand(
+                String.format("%s %s", ShowEventDetailsCommand.COMMAND_WORD, sampleEvent.getNameString()));
+        assertEquals(new ShowEventDetailsCommand(new EventNamePredicate(sampleEvent.getNameString())), command);
+    }
+
+    @Test
+    public void parseCommand_showParticipants() throws Exception {
+        Event sampleEvent = TypicalEvents.SAMPLE_EVENT;
+        ShowEventParticipantsCommand command = (ShowEventParticipantsCommand) parser.parseCommand(
+                String.format("%s %s", ShowEventParticipantsCommand.COMMAND_WORD, sampleEvent.getNameString()));
+        assertEquals(new ShowEventParticipantsCommand(new EventNamePredicate(sampleEvent.getNameString())), command);
     }
 
     @Test
