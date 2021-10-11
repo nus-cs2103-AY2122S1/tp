@@ -37,20 +37,20 @@ public interface Model {
     /**
      * Returns the user prefs' anime list file path.
      */
-    Path getAniListFilePath();
+    Path getAnimeListFilePath();
 
     /**
      * Sets the user prefs' anime list file path.
      */
-    void setAniListFilePath(Path aniListFilePath);
+    void setAnimeListFilePath(Path animeListFilePath);
 
     /**
      * Replaces anime list data with the data in {@code animeList}.
      */
-    void setAniList(ReadOnlyAnimeList aniList);
+    void setAnimeList(ReadOnlyAnimeList animeList);
 
     /** Returns the AnimeList */
-    ReadOnlyAnimeList getAniList();
+    ReadOnlyAnimeList getAnimeList();
 
     /**
      * Returns true if an Anime with the same identity as {@code Anime} exists in the anime list.

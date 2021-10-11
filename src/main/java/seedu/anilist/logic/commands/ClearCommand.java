@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAniList(new AnimeList());
+        model.setAnimeList(new AnimeList());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -22,8 +22,8 @@ import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.ReadOnlyUserPrefs;
 import seedu.anilist.model.UserPrefs;
 import seedu.anilist.model.util.SampleDataUtil;
-import seedu.anilist.storage.AniListStorage;
-import seedu.anilist.storage.JsonAniListStorage;
+import seedu.anilist.storage.AnimeListStorage;
+import seedu.anilist.storage.JsonAnimeListStorage;
 import seedu.anilist.storage.JsonUserPrefsStorage;
 import seedu.anilist.storage.Storage;
 import seedu.anilist.storage.StorageManager;
@@ -48,7 +48,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing Anime List ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AniListStorage aniListStorage = new JsonAniListStorage(userPrefs.getAniListFilePath());
-        storage = new StorageManager(aniListStorage, userPrefsStorage);
+        AnimeListStorage animeListStorage = new JsonAnimeListStorage(userPrefs.getAnimeListFilePath());
+        storage = new StorageManager(animeListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -69,24 +69,24 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s anime list and {@code userPrefs}. <br>
+     * The data from the sample anime list will be used instead if {@code storage}'s anime list is not found,
+     * or an empty anime list will be used instead if errors occur when reading {@code storage}'s anime list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAnimeList> addressBookOptional;
+        Optional<ReadOnlyAnimeList> animeListOptional;
         ReadOnlyAnimeList initialData;
         try {
-            addressBookOptional = storage.readAniList();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            animeListOptional = storage.readAnimeList();
+            if (!animeListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AnimeList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAnimeList);
+            initialData = animeListOptional.orElseGet(SampleDataUtil::getSampleAnimeList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty AnimeList");
             initialData = new AnimeList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty AnimeList");
             initialData = new AnimeList();
         }
 
@@ -167,13 +167,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting Anime List " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Anime List ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

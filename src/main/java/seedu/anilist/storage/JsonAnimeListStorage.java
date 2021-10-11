@@ -15,44 +15,44 @@ import seedu.anilist.commons.util.JsonUtil;
 import seedu.anilist.model.ReadOnlyAnimeList;
 
 /**
- * A class to access AniList data stored as a json file on the hard disk.
+ * A class to access AnimeList data stored as a json file on the hard disk.
  */
-public class JsonAniListStorage implements AniListStorage {
+public class JsonAnimeListStorage implements AnimeListStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAniListStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonAnimeListStorage.class);
 
     private Path filePath;
 
-    public JsonAniListStorage(Path filePath) {
+    public JsonAnimeListStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAniListFilePath() {
+    public Path getAnimeListFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyAnimeList> readAniList() throws DataConversionException {
-        return readAniList(filePath);
+    public Optional<ReadOnlyAnimeList> readAnimeList() throws DataConversionException {
+        return readAnimeList(filePath);
     }
 
     /**
-     * Similar to {@link #readAniList()}.
+     * Similar to {@link #readAnimeList()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAnimeList> readAniList(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyAnimeList> readAnimeList(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAniList> jsonAniList = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAniList.class);
-        if (!jsonAniList.isPresent()) {
+        Optional<JsonSerializableAnimeList> jsonAnimeList = JsonUtil.readJsonFile(
+                filePath, JsonSerializableAnimeList.class);
+        if (!jsonAnimeList.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAniList.get().toModelType());
+            return Optional.of(jsonAnimeList.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonAniListStorage implements AniListStorage {
     }
 
     @Override
-    public void saveAniList(ReadOnlyAnimeList aniList) throws IOException {
-        saveAniList(aniList, filePath);
+    public void saveAnimeList(ReadOnlyAnimeList animeList) throws IOException {
+        saveAnimeList(animeList, filePath);
     }
 
     /**
-     * Similar to {@link #saveAniList(ReadOnlyAnimeList)}.
+     * Similar to {@link #saveAnimeList(ReadOnlyAnimeList)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAniList(ReadOnlyAnimeList aniList, Path filePath) throws IOException {
-        requireNonNull(aniList);
+    public void saveAnimeList(ReadOnlyAnimeList animeList, Path filePath) throws IOException {
+        requireNonNull(animeList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAniList(aniList), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAnimeList(animeList), filePath);
     }
 
 }

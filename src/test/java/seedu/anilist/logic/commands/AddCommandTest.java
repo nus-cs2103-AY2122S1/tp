@@ -99,12 +99,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAniListFilePath() {
+        public Path getAnimeListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAniListFilePath(Path aniListFilePath) {
+        public void setAnimeListFilePath(Path animeListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAniList(ReadOnlyAnimeList aniList) {
+        public void setAnimeList(ReadOnlyAnimeList animeList) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAnimeList getAniList() {
+        public ReadOnlyAnimeList getAnimeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAnimeList getAniList() {
+        public ReadOnlyAnimeList getAnimeList() {
             return new AnimeList();
         }
     }

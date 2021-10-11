@@ -66,25 +66,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAniListFilePath() {
-        return userPrefs.getAniListFilePath();
+    public Path getAnimeListFilePath() {
+        return userPrefs.getAnimeListFilePath();
     }
 
     @Override
-    public void setAniListFilePath(Path aniListFilePath) {
-        requireNonNull(aniListFilePath);
-        userPrefs.setAniListFilePath(aniListFilePath);
+    public void setAnimeListFilePath(Path animeListFilePath) {
+        requireNonNull(animeListFilePath);
+        userPrefs.setAnimeListFilePath(animeListFilePath);
     }
 
     //=========== AnimeList ================================================================================
 
     @Override
-    public void setAniList(ReadOnlyAnimeList aniList) {
-        this.animeList.resetData(aniList);
+    public void setAnimeList(ReadOnlyAnimeList animeList) {
+        this.animeList.resetData(animeList);
     }
 
     @Override
-    public ReadOnlyAnimeList getAniList() {
+    public ReadOnlyAnimeList getAnimeList() {
         return animeList;
     }
 

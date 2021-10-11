@@ -12,7 +12,7 @@ import seedu.anilist.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AniListStorage, UserPrefsStorage {
+public interface Storage extends AnimeListStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,12 +21,12 @@ public interface Storage extends AniListStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAniListFilePath();
+    Path getAnimeListFilePath();
 
     @Override
-    Optional<ReadOnlyAnimeList> readAniList() throws DataConversionException, IOException;
+    Optional<ReadOnlyAnimeList> readAnimeList() throws DataConversionException, IOException;
 
     @Override
-    void saveAniList(ReadOnlyAnimeList aniList) throws IOException;
+    void saveAnimeList(ReadOnlyAnimeList animeList) throws IOException;
 
 }

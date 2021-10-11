@@ -2,7 +2,7 @@ package seedu.anilist.logic.commands;
 
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class AddCommandIntegrationTest {
     public void execute_newAnime_success() {
         Anime validAnime = new AnimeBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAniList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAnimeList(), new UserPrefs());
         expectedModel.addAnime(validAnime);
 
         assertCommandSuccess(new AddCommand(validAnime), model,
@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateAnime_throwsCommandException() {
-        Anime animeInList = model.getAniList().getAnimeList().get(0);
+        Anime animeInList = model.getAnimeList().getAnimeList().get(0);
         assertCommandFailure(new AddCommand(animeInList), model, AddCommand.MESSAGE_DUPLICATE_ANIME);
     }
 
