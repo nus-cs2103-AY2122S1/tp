@@ -5,7 +5,6 @@ import seedu.fast.model.tag.Tag;
 
 import java.util.Set;
 import java.util.function.Predicate;
-
 import java.util.List;
 
 /**
@@ -14,18 +13,18 @@ import java.util.List;
 public class PriorityPredicate implements Predicate<Person> {
     public final List<String> tags;
 
-    public PriorityPredicate(List<String> tags){
+    public PriorityPredicate(List<String> tags) {
         this.tags=tags;
     }
 
     @Override
-    public boolean test(Person person){
+    public boolean test(Person person) {
         Set<Tag> personTags = person.getTags();
-        for (String tag:tags){
-            for (Tag personTag:personTags){
-                if (personTag.tagName.equals(getTagName(tag))){
+        for (String tag:tags) {
+            for (Tag personTag:personTags) {
+                if (personTag.tagName.equals(getTagName(tag))) {
                     return true;
-                }else{
+                } else {
                     continue;
                 }
             }
@@ -33,8 +32,8 @@ public class PriorityPredicate implements Predicate<Person> {
         return false;
     }
 
-    private static String getTagName(String tag){
-        switch(tag){
+    private static String getTagName(String tag) {
+        switch(tag) {
         case PriorityTag.LowPriority.TERM:
             return PriorityTag.LowPriority.NAME;
         case PriorityTag.MediumPriority.TERM:

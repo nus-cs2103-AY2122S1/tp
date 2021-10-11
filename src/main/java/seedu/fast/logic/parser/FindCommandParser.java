@@ -26,12 +26,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        if(trimmedArgs.startsWith(PriorityTag.PRIORITY_TAG_PREFIX)){
+        if (trimmedArgs.startsWith(PriorityTag.PRIORITY_TAG_PREFIX)) {
             trimmedArgs = trimmedArgs.substring(
                     PriorityTag.PRIORITY_TAG_PREFIX.length());
             String[] tags = trimmedArgs.split("\\s+");
-            for (String tag:tags){
-                if (isNotPriority(tag)){
+            for (String tag:tags) {
+                if (isNotPriority(tag)) {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
                 }
@@ -44,8 +44,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
-    private static boolean isNotPriority(String tag){
-        switch(tag){
+    private static boolean isNotPriority(String tag) {
+        switch(tag) {
         case PriorityTag.LowPriority.TERM:
         case PriorityTag.MediumPriority.TERM:
         case PriorityTag.HighPriority.TERM:
