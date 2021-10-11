@@ -89,10 +89,25 @@ public class CommandTestUtil {
                 .withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND)
+                .withGitHubId(VALID_GITHUB_ID_AMY)
+                .withNusNetworkId(VALID_NUS_NETWORK_ID_AMY)
+                .withType(VALID_TYPE_AMY)
+                .withStudentId(VALID_STUDENT_ID_AMY)
+                .withTutorialId(VALID_TUTORIAL_ID_AMY)
                 .build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_BOB = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withGitHubId(VALID_GITHUB_ID_BOB)
+                .withNusNetworkId(VALID_NUS_NETWORK_ID_BOB)
+                .withType(VALID_TYPE_BOB)
+                .withStudentId(VALID_STUDENT_ID_BOB)
+                .withTutorialId(VALID_TUTORIAL_ID_BOB)
+                .build();
     }
 
     /**
