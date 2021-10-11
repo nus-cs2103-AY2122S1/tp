@@ -129,6 +129,7 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Lesson lesson) {
         addressBook.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Person and Lesson List Accessors ======================================================
@@ -140,6 +141,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getFilteredPersonList() {
         return filteredStudents;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
+     * {@code versionedTuitiONE}
+     * @return
+     */
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLessons;
     }
 
     @Override
