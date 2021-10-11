@@ -11,10 +11,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentPlan;
+import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -123,6 +125,35 @@ public class ParserUtil {
         requireNonNull(lastMet);
         String trimmedLastMet = lastMet.trim();
         return new LastMet(trimmedLastMet);
+    }
+
+    /** Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code RiskAppetite} is invalid.
+     */
+    public static RiskAppetite parseRiskAppetite(String riskAppetite) throws ParseException {
+        requireNonNull(riskAppetite);
+        String trimmedRiskAppetite = riskAppetite.trim();
+        if (!RiskAppetite.isValidRiskAppetite(trimmedRiskAppetite)) {
+            throw new ParseException(RiskAppetite.MESSAGE_CONSTRAINTS);
+        }
+        return new RiskAppetite(trimmedRiskAppetite);
+    }
+
+    /**
+     * Parses a {@code String disposableIncome} into an {@code disposableIncome}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DisposableIncome} is invalid.
+     */
+    public static DisposableIncome parseDisposableIncome(String disposableIncome) throws ParseException {
+        requireNonNull(disposableIncome);
+        String trimmedDisposableIncome = disposableIncome.trim();
+        if (!DisposableIncome.isValidDisposableIncome(trimmedDisposableIncome)) {
+            throw new ParseException(DisposableIncome.MESSAGE_CONSTRAINTS);
+        }
+        return new DisposableIncome(trimmedDisposableIncome);
     }
 
     /**
