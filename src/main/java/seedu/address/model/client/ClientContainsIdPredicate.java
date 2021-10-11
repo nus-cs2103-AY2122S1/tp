@@ -16,10 +16,15 @@ public class ClientContainsIdPredicate implements Predicate<Client> {
         this.id = id;
     }
 
+    public int getId() {
+        return Integer.parseInt(id.get(0));
+    }
+
     @Override
     public boolean test(Client client) {
-        return id.stream()
-                .anyMatch(id -> StringUtil.containsWordIgnoreCase(client.getId().toString(), id));
+            return id.stream()
+                    .anyMatch(id ->
+                            StringUtil.containsWordIgnoreCase(client.getId().toString(), id));
     }
 
     @Override
