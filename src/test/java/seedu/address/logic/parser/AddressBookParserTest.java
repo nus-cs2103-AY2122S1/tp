@@ -26,6 +26,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -47,7 +48,7 @@ public class AddressBookParserTest {
 
     @BeforeEach
     public void setUp() {
-        model.getAddressBook().setClientCounter("9");
+        model.getAddressBook().setClientCounter("0");
     }
 
     @Test
@@ -74,8 +75,10 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        descriptor.setClientId(null);
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        EditCommand command1 = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -101,6 +104,16 @@ public class AddressBookParserTest {
         SearchCommand command = (SearchCommand) parser.parseCommand(
                 SearchCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new SearchCommand(new PersonContainsKeywordsPredicate(aMM)), command);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        String keywords = "do t/friends e/example.com";
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(keywords,
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords);
+        assertEquals(new FilterCommand(new PersonContainsKeywordsPredicate(aMM)), command);
     }
 
     @Test
