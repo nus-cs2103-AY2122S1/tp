@@ -18,6 +18,10 @@ public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
+    /** Values for cell height and width. */
+    private static final int CELL_HEIGHT = 200;
+    private static final int CELL_WIDTH = 100;
+
     @FXML
     private ListView<Lesson> lessonListView;
 
@@ -28,8 +32,10 @@ public class LessonListPanel extends UiPart<Region> {
         super(FXML);
         lessonListView.setItems(lessonList);
         lessonListView.setOrientation(Orientation.HORIZONTAL);
-        lessonListView.setPrefWidth(500);
-        lessonListView.setPrefHeight(150);
+
+        lessonListView.setPrefWidth(lessonList.size() * CELL_WIDTH);
+        lessonListView.setPrefHeight(CELL_HEIGHT);
+
         lessonListView.setCellFactory(listView -> new LessonListViewCell());
     }
 
