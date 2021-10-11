@@ -35,6 +35,7 @@ public class AddApplicantCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New applicant added: %1$s";
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in MrTechRecruiter";
+    public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
 
     private final Applicant toAdd;
     private final Position position;
@@ -54,6 +55,10 @@ public class AddApplicantCommand extends Command {
 
         if (model.hasApplicant(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
+        }
+
+        if (!model.hasPosition(position)) {
+            throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
         model.addApplicantToPosition(toAdd, position);
