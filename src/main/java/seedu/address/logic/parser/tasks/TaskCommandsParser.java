@@ -2,10 +2,8 @@ package seedu.address.logic.parser.tasks;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.persons.AddPersonCommand;
 import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.persons.AddPersonCommandParser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

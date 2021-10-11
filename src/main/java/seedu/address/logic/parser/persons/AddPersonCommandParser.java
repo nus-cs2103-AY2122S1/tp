@@ -51,7 +51,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set<UniqueId> assignedTaskIds = new HashSet<>();    // add command does not allow assigning tasks straight away
+        Set<UniqueId> assignedTaskIds = new HashSet<>(); // add command does not allow assigning tasks straight away
 
         // default empty lessons list
         Person person = new Person(name, phone, email, address, tagList, assignedTaskIds, new NoOverlapLessonList());
