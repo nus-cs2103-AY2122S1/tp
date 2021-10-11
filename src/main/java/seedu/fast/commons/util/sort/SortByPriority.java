@@ -6,7 +6,7 @@ import seedu.fast.model.person.Person;
 
 public class SortByPriority implements Comparator<Person> {
 
-    public static final String KEYWORD = "prio";
+    public static final String KEYWORD = "priority";
 
     @Override
     public int compare(Person p1, Person p2) {
