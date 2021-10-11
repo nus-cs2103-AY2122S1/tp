@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class AcadLevel {
     public static final String MESSAGE_CONSTRAINTS = "Academic level should contain a maximum of "
-            + "15 alphanumeric characters";
+            + "15 alphanumeric characters (including spaces).";
 
     /*
      * Academic level can only consist of a maximum of 15 alphanumeric characters.

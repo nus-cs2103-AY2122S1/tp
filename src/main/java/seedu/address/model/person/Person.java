@@ -198,47 +198,47 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append("; Address: ").append(getAddress());
+        builder.append(getName()).append("; \nAddress: ").append(getAddress());
 
         if (!getPhone().isEmpty()) {
-            builder.append("; Phone: ").append(getPhone());
+            builder.append("; \nPhone: ").append(getPhone());
         }
 
         if (!getEmail().isEmpty()) {
-            builder.append("; Email: ").append(getEmail());
+            builder.append("; \nEmail: ").append(getEmail());
         }
 
         if (!getParentPhone().isEmpty()) {
-            builder.append("; Parent Phone: ").append(getParentPhone());
+            builder.append("; \nParent Phone: ").append(getParentPhone());
         }
 
         if (!getParentEmail().isEmpty()) {
-            builder.append("; Parent Email: ").append(getParentEmail());
+            builder.append("; \nParent Email: ").append(getParentEmail());
         }
 
         if (!getSchool().isEmpty()) {
-            builder.append("; School: ").append(getSchool());
+            builder.append("; \nSchool: ").append(getSchool());
         }
 
         if (!getAcadStream().isEmpty()) {
-            builder.append("; Academic Stream: ").append(getAcadStream());
+            builder.append("; \nAcademic Stream: ").append(getAcadStream());
         }
 
         if (!getAcadLevel().isEmpty()) {
-            builder.append("; Academic Level: ").append(getAcadLevel());
+            builder.append("; \nAcademic Level: ").append(getAcadLevel());
         }
 
         if (!getFee().isEmpty()) {
-            builder.append("; Outstanding Fees: ").append(getFee());
+            builder.append("; \nOutstanding Fees: ").append(getFee());
         }
 
         if (!getRemark().isEmpty()) {
-            builder.append("; Remark: ").append(getRemark());
+            builder.append("; \nRemark: ").append(getRemark());
         }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; \nTags: ");
             tags.forEach(builder::append);
         }
         return builder.toString();
