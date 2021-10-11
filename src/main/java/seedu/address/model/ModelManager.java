@@ -20,26 +20,26 @@ import seedu.address.ui.UiManager;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final StudentBook studentBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given studentBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStudentBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.studentBook = new StudentBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.studentBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new StudentBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -77,32 +77,32 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== StudentBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setAddressBook(ReadOnlyStudentBook addressBook) {
+        this.studentBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyStudentBook getAddressBook() {
+        return studentBook;
     }
 
     @Override
     public boolean hasPerson(Student student) {
         requireNonNull(student);
-        return addressBook.hasPerson(student);
+        return studentBook.hasPerson(student);
     }
 
     @Override
     public void deletePerson(Student target) {
-        addressBook.removePerson(target);
+        studentBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Student student) {
-        addressBook.addPerson(student);
+        studentBook.addPerson(student);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -110,7 +110,7 @@ public class ModelManager implements Model {
     public void setPerson(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        addressBook.setPerson(target, editedStudent);
+        studentBook.setPerson(target, editedStudent);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return studentBook.equals(other.studentBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents);
     }
