@@ -120,7 +120,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                     while (m.find()) {
                         keywords.add(m.group());
                     }
-                    System.out.println(keywords);
                     predicateList.add(new EmploymentTypeContainsKeywordsPredicate(keywords));
                 }
             }
