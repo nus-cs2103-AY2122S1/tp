@@ -11,8 +11,8 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
 public class UpdateEpisodeCommandParser implements Parser<UpdateEpisodeCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UpdateEpisodeCommand
+     * and returns an UpdateEpisodeCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public UpdateEpisodeCommand parse(String args) throws ParseException {
@@ -33,7 +33,7 @@ public class UpdateEpisodeCommandParser implements Parser<UpdateEpisodeCommand> 
         }
 
         if (!episodeDescriptor.isEpisodeUpdated()) {
-            throw new ParseException(UpdateEpisodeCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(UpdateEpisodeCommand.MESSAGE_NOT_UPDATED);
         }
 
         return new UpdateEpisodeCommand(index, episodeDescriptor);

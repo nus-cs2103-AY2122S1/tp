@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.anilist.model.tag.Tag;
 
 /**
- * Represents an Anime in the address book.
+ * Represents an Anime in the anime list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Anime {

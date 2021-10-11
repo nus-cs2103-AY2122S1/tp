@@ -25,18 +25,18 @@ public class UpdateEpisodeCommand extends Command {
         + "by the index number used in the displayed anime list. "
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_EPISODE + "EPISODE "
-        + "Example: " + COMMAND_WORD + " " + PREFIX_EPISODE + " 1 ";
+        + PREFIX_EPISODE + "EPISODE\n"
+        + "Example: " + COMMAND_WORD + " 1 " + PREFIX_EPISODE + "1";
 
-    public static final String MESSAGE_UPDATE_ANIME_EPISODE_SUCCESS = "Updated Anime: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "An episode number should be provided";
+    public static final String MESSAGE_UPDATE_ANIME_EPISODE_SUCCESS = "Updated Anime episode: %1$s";
+    public static final String MESSAGE_NOT_UPDATED = "An episode number should be provided";
 
     private final Index index;
     private final UpdateEpisodeCommand.EpisodeDescriptor episodeDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param episodeDescriptor details to edit the person with
+     * @param index of the anime in the filtered anime list to edit
+     * @param episodeDescriptor details to update the anime's episode with
      */
     public UpdateEpisodeCommand(Index index, UpdateEpisodeCommand.EpisodeDescriptor episodeDescriptor) {
         requireNonNull(index);
@@ -64,8 +64,8 @@ public class UpdateEpisodeCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns an {@code Anime} with the episode number of {@code animeToEdit}
+     * edited with {@code episodeDescriptor}.
      */
     private static Anime createUpdatedAnime(Anime animeToEdit,
                                             UpdateEpisodeCommand.EpisodeDescriptor episodeDescriptor) {
@@ -97,8 +97,7 @@ public class UpdateEpisodeCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the episode to update the anime episode with.
      */
     public static class EpisodeDescriptor {
         private Episode episode;
@@ -107,7 +106,6 @@ public class UpdateEpisodeCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EpisodeDescriptor(UpdateEpisodeCommand.EpisodeDescriptor toCopy) {
             setEpisode(toCopy.episode);
