@@ -7,20 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class CommandsListTest {
 
-    /**
-     * Converts a list of Commands which is a String array into a String.
-     * Each entry is separated by a comma and space.
-     */
-    private String listOfCommandsToString(String[] listOfCommands) {
-        String result = "";
-        for (int i = 0; i < listOfCommands.length; i++) {
-            result += listOfCommands[i];
-            result += ", ";
-        }
-        result = result.substring(0, result.length() - 2);
-        return result;
-    }
-
     @Test
     public void getListOfCommandsAsString() {
         String[] listOfCommandsCopy = CommandsList.getListOfCommands();
@@ -46,5 +32,19 @@ public class CommandsListTest {
             String actualString = CommandsList.getListOfCommandsAsString();
             assertNotEquals(wrongString, actualString);
         }
+    }
+
+    /**
+     * Converts a list of Commands which is a String array into a String.
+     * Each entry is separated by a comma and space.
+     */
+    private String listOfCommandsToString(String[] listOfCommands) {
+        String result = "";
+        for (int i = 0; i < listOfCommands.length; i++) {
+            result += listOfCommands[i];
+            result += ", ";
+        }
+        result = result.substring(0, result.length() - 2);
+        return result;
     }
 }
