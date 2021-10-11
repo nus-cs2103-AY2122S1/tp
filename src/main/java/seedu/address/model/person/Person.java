@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -7,6 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
 
@@ -24,19 +26,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<UniqueId> assignedTaskIds = new HashSet<>();
     private final NoOverlapLessonList lessonsList;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  NoOverlapLessonList lessonsList) {
+                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.assignedTaskIds.addAll(assignedTaskIds);
         this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
     }
 
@@ -64,6 +68,14 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<UniqueId> getAssignedTaskIds() {
+        return Collections.unmodifiableSet(assignedTaskIds);
+    }
+
     public NoOverlapLessonList getLessonsList() {
         return lessonsList;
     }
@@ -74,7 +86,17 @@ public class Person {
      * @return new Person instance with the updated lessons list
      */
     public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
-        return new Person(name, phone, email, address, tags, newLessonsList);
+        return new Person(name, phone, email, address, tags, assignedTaskIds, newLessonsList);
+    }
+
+    /**
+     * Immutable way of updating the assigned task id list
+     * @param newAssignedTaskIds the new assigned task id list
+     * @return new Person instance with the updated assigned task id list
+     */
+    public Person updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
+        requireNonNull(newAssignedTaskIds);
+        return new Person(name, phone, email, address, tags, newAssignedTaskIds, lessonsList);
     }
 
     /**

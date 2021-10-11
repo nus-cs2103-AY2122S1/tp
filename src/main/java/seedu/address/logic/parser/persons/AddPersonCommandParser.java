@@ -7,9 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.id.UniqueId;
 import seedu.address.logic.commands.persons.AddPersonCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -49,9 +51,10 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<UniqueId> assignedTaskIds = new HashSet<>();    // add command does not allow assigning tasks straight away
 
         // default empty lessons list
-        Person person = new Person(name, phone, email, address, tagList, new NoOverlapLessonList());
+        Person person = new Person(name, phone, email, address, tagList, assignedTaskIds, new NoOverlapLessonList());
 
         return new AddPersonCommand(person);
     }

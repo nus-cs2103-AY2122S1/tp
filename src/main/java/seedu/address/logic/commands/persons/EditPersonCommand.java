@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.id.UniqueId;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
@@ -101,9 +102,11 @@ public class EditPersonCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<UniqueId> updatedAssignedTaskIds = personToEdit.getAssignedTaskIds();   // not allowed to be edited here
         NoOverlapLessonList lessonList = editPersonDescriptor.getLessonsList().orElse(personToEdit.getLessonsList());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, lessonList);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList);
     }
 
     @Override

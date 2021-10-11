@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.id.UniqueId;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
@@ -104,8 +105,10 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<UniqueId> modelAssignedTaskIds = new HashSet<>();
         final NoOverlapLessonList lessonsList = new NoOverlapLessonList();
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, lessonsList);
+        return new Person(modelName, modelPhone, modelEmail,
+                modelAddress, modelTags, modelAssignedTaskIds, lessonsList);
     }
 
 }

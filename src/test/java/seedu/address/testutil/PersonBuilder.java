@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -27,6 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<UniqueId> assignedTaskIds;
     private NoOverlapLessonList lessonsList;
 
     /**
@@ -38,6 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        assignedTaskIds = new HashSet<>();
         lessonsList = new NoOverlapLessonList();
     }
 
@@ -50,6 +53,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        assignedTaskIds = new HashSet<>(personToCopy.getAssignedTaskIds());
     }
 
     /**
@@ -101,7 +105,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, lessonsList);
+        return new Person(name, phone, email, address, tags, assignedTaskIds, lessonsList);
     }
 
 }
