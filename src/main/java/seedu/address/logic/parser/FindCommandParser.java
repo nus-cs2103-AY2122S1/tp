@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCode;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -32,9 +32,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             Set<ModuleCode> moduleCodeSet;
             moduleCodeSet = ParserUtil.parseModuleCodes(moduleCodes);
 
-            List<String> stringListOfModuleCodes = moduleCodeSet.stream().
-                    map(moduleCode -> moduleCode.toString()).
-                    collect(Collectors.toList());
+            List<String> stringListOfModuleCodes = moduleCodeSet.stream()
+                    .map(moduleCode -> moduleCode.toString())
+                    .collect(Collectors.toList());
 
             return new FindCommand(
                     new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes)
