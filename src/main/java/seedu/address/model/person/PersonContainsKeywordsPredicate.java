@@ -46,7 +46,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                 .map(x -> containsIgnoreCase(person.getAddress().value, x)).orElse(true);
         boolean checkTags = keywords.getValue(PREFIX_TAG)
                 .map(x -> person.getTags().stream().anyMatch(y -> containsIgnoreCase(y.tagName, x))).orElse(true);
-        return checkClientId && checkGeneral && checkName && checkPhone && checkEmail && checkAddress && checkTags;
+        return checkGeneral && checkName && checkPhone && checkEmail && checkAddress && checkTags;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -69,7 +70,7 @@ public interface Model {
      * Deletes the person with the matching Client ID and Email and returns the deleted person
      *
      */
-    Person deletePersonByFields(Predicate<Person> predicate);
+    Person deletePersonByFields(ArrayList<Predicate> predicates);
 
     /**
      * Adds the given person.

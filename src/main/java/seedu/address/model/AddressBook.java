@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -135,8 +136,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Person with {@code clientId} and {@code email} must exist in the address book.
      */
-    public Person removePersonByFields(Predicate<Person> predicate) {
-        return persons.removeByFields(predicate);
+    public Person removePersonByFields(ArrayList<Predicate> predicates) {
+        return persons.removeByFields(predicates);
     }
 
     //// util methods

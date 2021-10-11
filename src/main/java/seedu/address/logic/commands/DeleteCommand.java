@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -29,11 +31,12 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_CLIENTID +" 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_FAILURE = "Person not found in list";
 
-    private final PersonContainsKeywordsPredicate predicate;
+    private final ArrayList<Predicate> predicates;
 
-    public DeleteCommand(PersonContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    public DeleteCommand(ArrayList<Predicate> predicates) {
+        this.predicates = predicates;
     }
 
     @Override
@@ -41,9 +44,9 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         Person personToDelete;
         try {
-            personToDelete = model.deletePersonByFields(predicate);
+            personToDelete = model.deletePersonByFields(predicates);
         } catch (PersonNotFoundException e) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_CLIENTID);
+            throw new CommandException(MESSAGE_DELETE_PERSON_FAILURE);
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
@@ -53,6 +56,6 @@ public class DeleteCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && predicate.equals(((DeleteCommand) other).predicate)); // state check
+                && predicates.equals(((DeleteCommand) other).predicates)); // state check
     }
 }

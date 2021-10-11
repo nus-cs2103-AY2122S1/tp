@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
@@ -10,9 +11,16 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.person.PersonHasEmail;
+import seedu.address.model.person.PersonHasId;
 import seedu.address.model.person.Phone;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
@@ -35,7 +43,20 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        return new DeleteCommand(new PersonContainsKeywordsPredicate(argMultimap));
+        ArrayList<Predicate> predicatesToDelete = new ArrayList<>();
+        String clientIdString = argMultimap.getValue(PREFIX_CLIENTID).orElse("");
+        if (!clientIdString.isEmpty()) {
+            ClientId clientId = ParserUtil.parseClientId(clientIdString);
+            predicatesToDelete.add(new PersonHasId(clientId));
+        }
+
+        String emailString = argMultimap.getValue(PREFIX_EMAIL).orElse("");
+        if (!emailString.isEmpty()) {
+            Email email = ParserUtil.parseEmail(emailString);
+            predicatesToDelete.add(new PersonHasEmail(email));
+        }
+
+        return new DeleteCommand(predicatesToDelete);
 
     }
 

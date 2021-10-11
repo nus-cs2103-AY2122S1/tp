@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -86,16 +87,29 @@ public class UniquePersonList implements Iterable<Person> {
      * Removes the equivalent person with matching client id from the list.
      * The person must exist in the list.
      */
-    public Person removeByFields(Predicate<Person> predicate) {
-        requireAllNonNull(predicate);
-        FilteredList<Person> filteredList = internalList.filtered(predicate);
-        if (filteredList.size() < 1) {
-            throw new PersonNotFoundException();
-        } else {
-            Person deletedPerson = filteredList.get(0);
-            remove(deletedPerson);
-            return deletedPerson;
+    public Person removeByFields(ArrayList<Predicate> predicates) {
+        requireAllNonNull(predicates);
+        FilteredList<Person> filteredList = internalList.filtered(x -> true);
+        ObservableList<Person> tempList = FXCollections.observableArrayList();;
+        Person personToDelete = null;
+        for( int i = 0; i < predicates.size() ; i++) {
+
+            Predicate<Person> predicate = predicates.get(i);
+            filteredList.setPredicate(predicate);
+            if (filteredList.size() < 1) {
+                throw new PersonNotFoundException();
+            } else if (i == predicates.size() - 1) {
+                personToDelete = filteredList.get(0);
+            }
+            tempList = FXCollections.observableArrayList();
+            ObservableList<Person> finalTempList = tempList;
+            filteredList.forEach(person -> finalTempList.add(person));
+            filteredList = new FilteredList<>(finalTempList);
         }
+
+        internalList.remove(personToDelete);
+        return personToDelete;
+
     }
 
     public ObservableList<Person> removeById(ClientId clientId, ObservableList<Person> personList) {
