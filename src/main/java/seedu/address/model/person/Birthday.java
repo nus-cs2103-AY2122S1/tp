@@ -32,7 +32,7 @@ public class Birthday {
     }
 
     /**
-     * Returns if a given string is in valid format.
+     * Returns if a given string is in valid birthday format.
      */
     public static boolean isValidFormat(String birthday) {
         return birthday.matches(VALIDATION_REGEX);

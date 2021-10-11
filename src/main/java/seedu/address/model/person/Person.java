@@ -128,7 +128,7 @@ public class Person {
         }
         if (getBirthday().isPresent()) {
             builder.append("; Birthday: ")
-                    .append(getBirthday().map(Birthday::toString).get());
+                    .append(getBirthday().get());
         }
         return builder.toString();
     }
