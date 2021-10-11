@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,14 +26,13 @@ public class Student {
     private final Address address;
     private final Grade grade;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<LessonCode> lessonCodes = new HashSet<>();
+    private final Set<Lesson> lessons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, ParentContact parentContact, Email email, Address address, Grade grade, Set<Tag> tags) {
         requireAllNonNull(name, parentContact, email, address, tags);
-
         this.name = name;
         this.parentContact = parentContact;
         this.email = email;
@@ -71,11 +70,11 @@ public class Student {
     }
 
     /**
-     * Returns an immutable lesson code set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<LessonCode> getLessonCodes() {
-        return Collections.unmodifiableSet(lessonCodes);
+    public Set<Lesson> getLessons() {
+        return Collections.unmodifiableSet(lessons);
     }
 
     /**
@@ -86,31 +85,34 @@ public class Student {
         if (otherStudent == this) {
             return true;
         }
-        return (otherStudent != null) && otherStudent.name.equals(name);
+        return otherStudent != null
+                && otherStudent.getName().equals(getName());
     }
 
     /**
-     * Adds lesson to student instance. Student instance holds a weaker linkage to Lessons, using its lesson code.
+     * Returns an unmodifiable set of enrolled lesson codes for equality checks.
+     */
+    public Set<String> getEnrolledLessonCodes() {
+        return lessons.stream().map(Lesson::getLessonCode).collect(Collectors.toUnmodifiableSet());
+    }
+
+    /**
+     * Adds lesson to student instance.
      */
     public void enrollForLesson(Lesson lesson) {
-        lessonCodes.add(lesson.getLessonCode());
+        lessons.add(lesson);
     }
 
     /**
-     * Remove lesson from student instance. Student instance uses a weaker linkage to Lessons, using its lesson code.
+     * Remove lesson from student instance.
      */
     public void unenrollFromLesson(Lesson lesson) {
-        LessonCode codeToUnenroll = lesson.getLessonCode();
-        lessonCodes.remove(codeToUnenroll);
-    }
-
-    /**
-     * Returns a clone of the Student instance.
-     */
-    public Student createClone() {
-        Student newStudent = new Student(name, parentContact, email, address, grade, tags);
-        newStudent.lessonCodes.addAll(lessonCodes);
-        return newStudent;
+        for (Lesson l : lessons) {
+            if (l.isSameLesson(lesson)) {
+                lessons.remove(l);
+                break;
+            }
+        }
     }
 
     /**
@@ -122,40 +124,68 @@ public class Student {
         if (other == this) {
             return true;
         }
+
         if (!(other instanceof Student)) {
             return false;
         }
+
         Student otherStudent = (Student) other;
-        return otherStudent.name.equals(name)
-                && otherStudent.parentContact.equals(parentContact)
-                && otherStudent.email.equals(email)
-                && otherStudent.address.equals(address)
-                && otherStudent.grade.equals(grade)
-                && otherStudent.tags.equals(tags)
-                && otherStudent.lessonCodes.equals(lessonCodes);
+        return otherStudent.getName().equals(getName())
+                && otherStudent.getParentContact().equals(getParentContact())
+                && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getAddress().equals(getAddress())
+                && otherStudent.getGrade().equals(getGrade())
+                && otherStudent.getTags().equals(getTags())
+                && otherStudent.getEnrolledLessonCodes().equals(getEnrolledLessonCodes());
+    }
+
+    /**
+     * make clone, to refactor to somewhere more suitable
+     */
+    public static Student createClone(Student studentToCopy) {
+        Name name = studentToCopy.getName();
+        ParentContact parentContact = studentToCopy.getParentContact();
+        Email email = studentToCopy.getEmail();
+        Address address = studentToCopy.getAddress();
+        Grade grade = studentToCopy.getGrade();
+        Set<Tag> tags = new HashSet<>(studentToCopy.getTags());
+
+        Set<Lesson> existingLessons = studentToCopy.getLessons();
+        existingLessons.forEach(l -> l.removeStudent(studentToCopy));
+
+        Student newStudent = new Student(name, parentContact, email, address, grade, tags);
+        existingLessons.forEach(l -> l.addStudent(newStudent));
+        return newStudent;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, parentContact, email, address, tags, lessonCodes);
+        return Objects.hash(name, parentContact, email, address, tags, getEnrolledLessonCodes());
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(name)
-                .append("; Phone: ").append(parentContact)
-                .append("; Email: ").append(email)
-                .append("; Address: ").append(address)
-                .append("; Grade: ").append(grade);
+        builder.append(getName())
+                .append("; Phone: ")
+                .append(getParentContact())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Grade: ")
+                .append(getGrade());
+
+        Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        if (!lessonCodes.isEmpty()) {
+        Set<String> lessons = getEnrolledLessonCodes();
+        if (!lessons.isEmpty()) {
             builder.append("; Lesson: ");
-            lessonCodes.forEach(builder::append);
+            lessons.forEach(builder::append);
         }
         return builder.toString();
     }

@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.model.lesson.LessonTime.TIME_MESSAGE_CONSTRAINTS;
-import static seedu.address.model.lesson.LessonTime.isValidTime;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -16,9 +14,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonTime;
-import seedu.address.model.lesson.Price;
-import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Grade;
 
 /**
@@ -40,18 +35,14 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
-        Subject subject = ParserUtil.parseSubjectArgs(argMultimap.getValue(PREFIX_SUBJECT).get());
+        String subject = ParserUtil.parseSubjectArgs(argMultimap.getValue(PREFIX_SUBJECT).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
-        Price price = ParserUtil.parseCostArgs(argMultimap.getValue(PREFIX_COST).get());
-
         DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY).get());
         LocalTime startTime = ParserUtil.parseLocalTime(argMultimap.getValue(PREFIX_TIME).get());
-        if (!isValidTime(startTime)) {
-            throw new ParseException(TIME_MESSAGE_CONSTRAINTS);
-        }
-        LessonTime lessonTime = new LessonTime(dayOfWeek, startTime);
+        double price = ParserUtil.parseCostArgs(argMultimap.getValue(PREFIX_COST).get());
 
-        Lesson lesson = new Lesson(subject, grade, lessonTime, price);
+        Lesson lesson = new Lesson(subject, grade, dayOfWeek, startTime, price);
+
         return new AddLessonCommand(lesson);
 
     }

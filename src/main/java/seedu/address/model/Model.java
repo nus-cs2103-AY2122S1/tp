@@ -1,14 +1,11 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonCode;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Student;
 
 /**
@@ -124,12 +121,7 @@ public interface Model {
     void setLesson(Lesson target, Lesson editedLesson);
 
     /**
-     * Returns lesson corresponding to String lessonCode, wrapped in an optional.
+     * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
      */
-    Optional<Lesson> searchLessons(LessonCode lessonCode);
-
-    /**
-     * Returns Student corresponding to String lessonCode, wrapped in an optional.
-     */
-    Optional<Student> searchStudents(Name lessonCode);
+    Lesson searchLessons(String lessonCode);
 }

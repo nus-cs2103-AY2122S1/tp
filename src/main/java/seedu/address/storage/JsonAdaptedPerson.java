@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.LessonCode;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -69,9 +68,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        lessonCodes.addAll(source.getLessonCodes().stream()
-                .map(LessonCode::toString)
-                .collect(Collectors.toList()));
+        lessonCodes.addAll(source.getEnrolledLessonCodes());
     }
 
     /**
@@ -83,8 +80,6 @@ class JsonAdaptedPerson {
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
-     * Lesson codes will only be attached in {@link JsonAddressBookStorage} when it can interact
-     * with both lesson and students.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
@@ -131,7 +126,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
         }
         if (!Grade.isValidGrade(grade)) {
-            throw new IllegalValueException(Grade.GRADE_MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
         }
         final Grade modelGrade = new Grade(grade);
 

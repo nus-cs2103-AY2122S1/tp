@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.lesson.Lesson.LESSON_PERIOD_IN_HOURS;
 import static seedu.address.model.person.Grade.isValidGrade;
 
 import java.time.DayOfWeek;
@@ -22,6 +23,7 @@ public class LessonBuilder {
     public static final DayOfWeek DEFAULT_DAY_OF_WEEK = DayOfWeek.WEDNESDAY;
     public static final LocalTime DEFAULT_START_TIME = LocalTime.of(15, 0);
     public static final double DEFAULT_PRICE = 9.9;
+    public static final LocalTime DEFAULT_END_TIME = DEFAULT_START_TIME.plusHours(LESSON_PERIOD_IN_HOURS);
     public static final String DEFAULT_LESSON_CODE = "Science-S1-Wed-1500";
 
     private String subject;

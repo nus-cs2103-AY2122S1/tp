@@ -115,7 +115,7 @@ public class JsonAdaptedStudentTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         INVALID_GRADE, VALID_TAGS, VALID_LESSON_CODES);
-        String expectedMessage = Grade.GRADE_MESSAGE_CONSTRAINTS;
+        String expectedMessage = Grade.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

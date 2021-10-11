@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,8 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonCode;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.PersonBuilder;
 
@@ -61,26 +59,26 @@ public class AddCommandTest {
         AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
-        assertEquals(addAliceCommand, addAliceCommand);
+        assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
         AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertEquals(addAliceCommand, addAliceCommandCopy);
+        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertNotEquals(1, addAliceCommand);
+        assertFalse(addAliceCommand.equals(1));
 
         // null -> returns false
-        assertNotEquals(null, addAliceCommand);
+        assertFalse(addAliceCommand.equals(null));
 
         // different person -> returns false
-        assertNotEquals(addAliceCommand, addBobCommand);
+        assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private static class ModelStub implements Model {
+    private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -177,12 +175,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Optional<Lesson> searchLessons(LessonCode lessonCode) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Optional<Student> searchStudents(Name lessonCode) {
+        public Lesson searchLessons(String lessonCode) {
             throw new AssertionError("This method should not be called.");
         }
 

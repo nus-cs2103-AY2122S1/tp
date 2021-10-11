@@ -9,7 +9,7 @@ import java.util.Objects;
  * Represents the grade of the student
  */
 public class Grade {
-    public static final String GRADE_MESSAGE_CONSTRAINTS = "Prefix should either be S (to denote secondary) "
+    public static final String MESSAGE_CONSTRAINTS = "Prefix should either be S (to denote secondary) "
             + "or P (to denote Primary)."
             + "Level number should be from 1 to 6 for primary and 1 to 4 for secondary.";
 
@@ -23,7 +23,7 @@ public class Grade {
      */
     public Grade(String value) {
         requireAllNonNull(value);
-        checkArgument(isValidGrade(value), GRADE_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGrade(value), MESSAGE_CONSTRAINTS);
         this.value = value;
     }
 

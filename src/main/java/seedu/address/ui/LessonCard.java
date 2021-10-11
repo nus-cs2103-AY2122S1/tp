@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
-import static seedu.address.model.lesson.LessonTime.TIME_FORMATTER;
-import static seedu.address.model.lesson.LessonTime.parseDayToString;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,9 +17,9 @@ public class LessonCard extends UiPart<Region> {
     private static final String FXML = "LessonListCard.fxml";
     private static final String STRING_FORMAT_SUBJECT = "Subject: \t%s";
     private static final String STRING_FORMAT_GRADE = "Grade: \t%s";
-    private static final String STRING_FORMAT_DAY = "Day: \t%s";
+    private static final String STRING_FORMAT_DAY = "Day: \t\t%s";
     private static final String STRING_FORMAT_TIME = "Time: \t%s - %s";
-    private static final String STRING_FORMAT_PRICE = "Price: \t%s";
+    private static final String STRING_FORMAT_PRICE = "Price: \tSGD$%s";
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -56,18 +56,18 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayIndex + ". ");
-        lessonCode.setText(lesson.getLessonCode().value);
+        lessonCode.setText(lesson.getLessonCode());
         lessonCode.setUnderline(true);
         subject.setText(String.format(STRING_FORMAT_SUBJECT, lesson.getSubject()));
         grade.setText(String.format(STRING_FORMAT_GRADE, lesson.getGrade().value));
         dayOfWeek.setText(String.format(
                 STRING_FORMAT_DAY,
-                parseDayToString(lesson.getLessonTime().dayOfWeek)));
+                lesson.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH)));
         time.setText(String.format(
                 STRING_FORMAT_TIME,
-                lesson.getLessonTime().startTime.format(TIME_FORMATTER),
-                lesson.getLessonTime().endTime.format(TIME_FORMATTER)));
-        price.setText(String.format(STRING_FORMAT_PRICE, lesson.getPrice().toString()));
+                lesson.getStartTime().toString(),
+                lesson.getEndTime().toString()));
+        price.setText(String.format(STRING_FORMAT_PRICE, Double.toString(lesson.getPrice())));
     }
 
     @Override
