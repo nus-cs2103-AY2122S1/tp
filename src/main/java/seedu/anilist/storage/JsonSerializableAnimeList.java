@@ -14,7 +14,7 @@ import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
 
 /**
- * An Immutable AniList that is serializable to JSON format.
+ * An Immutable AnimeList that is serializable to JSON format.
  */
 @JsonRootName(value = "anilist")
 class JsonSerializableAnimeList {

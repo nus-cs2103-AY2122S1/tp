@@ -15,7 +15,7 @@ import seedu.anilist.commons.util.JsonUtil;
 import seedu.anilist.model.ReadOnlyAnimeList;
 
 /**
- * A class to access AniList data stored as a json file on the hard disk.
+ * A class to access AnimeList data stored as a json file on the hard disk.
  */
 public class JsonAnimeListStorage implements AnimeListStorage {
 
@@ -45,14 +45,14 @@ public class JsonAnimeListStorage implements AnimeListStorage {
     public Optional<ReadOnlyAnimeList> readAnimeList(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAnimeList> jsonAniList = JsonUtil.readJsonFile(
+        Optional<JsonSerializableAnimeList> jsonAnimeList = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAnimeList.class);
-        if (!jsonAniList.isPresent()) {
+        if (!jsonAnimeList.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAniList.get().toModelType());
+            return Optional.of(jsonAnimeList.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
