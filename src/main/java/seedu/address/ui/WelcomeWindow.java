@@ -1,8 +1,10 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -16,18 +18,17 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 
-import java.util.logging.Logger;
 
 /**
  * Controller for a welcome page
  */
-public class WelcomeWindow extends UiPart<Stage>{
+public class WelcomeWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(WelcomeWindow.class);
     private static final String FXML = "WelcomeWindow.fxml";
 
     private final String tagLine = "TYPE. EXPLORE. CONNECT";
-    private final double delayTime = (tagLine.length() * 5 ) + 100;
+    private final double delayTime = (tagLine.length() * 5) + 100;
 
     private Image appLogoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
 
@@ -87,7 +88,7 @@ public class WelcomeWindow extends UiPart<Stage>{
      */
     public void close() {
         PauseTransition delay = new PauseTransition(Duration.millis(5100));
-        delay.setOnFinished( event -> getRoot().close() );
+        delay.setOnFinished(event -> getRoot().close());
         delay.play();
     }
 
@@ -114,14 +115,13 @@ public class WelcomeWindow extends UiPart<Stage>{
         IntegerProperty i = new SimpleIntegerProperty(0);
         Timeline timeline = new Timeline();
 
-        KeyFrame keyFrame = new KeyFrame(
-                Duration.millis(delayTime), event -> {
-                    if (i.get() > textToDisplay.length()) {
-                        timeline.stop();
-                    } else {
-                        appTagLine.setText(textToDisplay.substring(0, i.get()));
-                        i.set(i.get() + 1);
-                    }
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(delayTime), event -> {
+            if (i.get() > textToDisplay.length()) {
+                timeline.stop();
+            } else {
+                appTagLine.setText(textToDisplay.substring(0, i.get()));
+                i.set(i.get() + 1);
+            }
         });
 
         timeline.getKeyFrames().add(keyFrame);
