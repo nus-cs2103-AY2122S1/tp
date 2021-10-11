@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -57,39 +58,50 @@ public class ShowCommand extends Command {
         this.index = index;
     }
 
-    @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
+    private CommandResult executeWithName(Model model) throws CommandException {
         FilteredList<Person> filteredList = new FilteredList<>(model.getFilteredPersonList());
-        if (predicate != null) {
+        filteredList.setPredicate(predicate);
+
+        if (filteredList.isEmpty()) {
+            filteredList = new FilteredList<>(model.getAddressBook().getPersonList());
             filteredList.setPredicate(predicate);
             if (filteredList.isEmpty()) {
-                filteredList = new FilteredList<>(model.getAddressBook().getPersonList());
-                filteredList.setPredicate(predicate);
-                if (filteredList.isEmpty()) {
-                    return new CommandResult(MESSAGE_NO_NAME);
-                } else {
-                    model.updateFilteredPersonList(model.PREDICATE_SHOW_ALL_PERSONS);
-                    this.execute(model);
-                }
-            }
-            if (filteredList.size() == 1) {
-                int index = model.getFilteredPersonList().indexOf(filteredList.get(0));
-                model.setSelectedIndex(index);
-                return new CommandResult(String.format(MESSAGE_SUCCESS,
-                        model.getFilteredPersonList().get(index).getName()));
+                throw new CommandException(MESSAGE_NO_NAME);
             } else {
-                model.updateFilteredPersonList(predicate);
-                return new CommandResult(String.format(MESSAGE_MULTIPLE_NAME, model.getFilteredPersonList().size()));
+                model.updateFilteredPersonList(model.PREDICATE_SHOW_ALL_PERSONS);
+                this.executeWithName(model);
             }
-        } else if (index != null) {
-            int index = this.index.getZeroBased();
-            if (index >= model.getFilteredPersonList().size()) {
-                return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
+        }
+
+        if (filteredList.size() == 1) {
+            int index = model.getFilteredPersonList().indexOf(filteredList.get(0));
             model.setSelectedIndex(index);
             return new CommandResult(String.format(MESSAGE_SUCCESS,
                     model.getFilteredPersonList().get(index).getName()));
+        } else {
+            model.updateFilteredPersonList(predicate);
+            return new CommandResult(String.format(MESSAGE_MULTIPLE_NAME, model.getFilteredPersonList().size()));
+        }
+    }
+
+    private CommandResult executeWithIndex(Model model) throws CommandException {
+        assert this.index != null;
+        int index = this.index.getZeroBased();
+        if (index >= model.getFilteredPersonList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        model.setSelectedIndex(index);
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                model.getFilteredPersonList().get(index).getName()));
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        if (predicate != null) {
+            return executeWithName(model);
+        } else if (index != null) {
+            return executeWithIndex(model);
         }
         return new CommandResult(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
