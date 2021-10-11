@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +12,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.PersonModuleCodesContainsKeywordsPredicate;
+import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -38,7 +37,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     collect(Collectors.toList());
 
             return new FindCommand(
-                    new PersonModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes)
+                    new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes)
             );
         }
 
