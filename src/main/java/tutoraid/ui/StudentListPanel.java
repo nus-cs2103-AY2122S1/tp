@@ -11,7 +11,7 @@ import tutoraid.commons.core.LogsCenter;
 import tutoraid.model.student.Student;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of students.
  */
 public class StudentListPanel extends UiPart<Region> {
     private static final String FXML = "StudentListPanel.fxml";
@@ -19,22 +19,22 @@ public class StudentListPanel extends UiPart<Region> {
     private final boolean viewAll;
 
     @FXML
-    private ListView<Student> personListView;
+    private ListView<Student> studentListView;
 
     /**
      * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
      */
     public StudentListPanel(ObservableList<Student> studentList, boolean viewAll) {
         super(FXML);
-        personListView.setItems(studentList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        studentListView.setItems(studentList);
+        studentListView.setCellFactory(listView -> new StudentListViewCell());
         this.viewAll = viewAll;
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
-    class PersonListViewCell extends ListCell<Student> {
+    class StudentListViewCell extends ListCell<Student> {
         @Override
         protected void updateItem(Student student, boolean empty) {
             super.updateItem(student, empty);

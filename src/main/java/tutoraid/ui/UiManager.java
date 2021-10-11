@@ -20,7 +20,7 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
     private static MainWindow mainWindow;
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/tutor_aid_32.png";
 
     private Logic logic;
 
@@ -91,7 +91,7 @@ public class UiManager implements Ui {
      */
     public static void showViewWindow() {
         if (mainWindow != null) {
-            mainWindow.fillPersonCard(true);
+            mainWindow.fillStudentCard(true);
         }
     }
 
@@ -100,7 +100,7 @@ public class UiManager implements Ui {
      */
     public static void hideViewWindow() {
         if (mainWindow != null) {
-            mainWindow.fillPersonCard(false);
+            mainWindow.fillStudentCard(false);
         }
     }
 }

@@ -31,7 +31,7 @@ public class MinimalStudentCard extends UiPart<Region> {
     private Label id;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Student} and index to display.
+     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
      */
     public MinimalStudentCard(Student student, int displayedIndex) {
         super(FXML);

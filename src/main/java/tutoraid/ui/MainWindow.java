@@ -42,7 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane studentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -109,16 +109,16 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the student's particulars of this window.
      */
-    void fillPersonCard(boolean viewAll) {
+    void fillStudentCard(boolean viewAll) {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), viewAll);
-        personListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts(boolean viewAll) {
-        fillPersonCard(viewAll);
+        fillStudentCard(viewAll);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -170,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public StudentListPanel getPersonListPanel() {
+    public StudentListPanel getStudentListPanel() {
         return studentListPanel;
     }
 
