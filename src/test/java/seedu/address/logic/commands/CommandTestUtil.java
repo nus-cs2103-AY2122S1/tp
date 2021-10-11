@@ -187,7 +187,7 @@ public class CommandTestUtil {
         }
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(queries)));
 
-        assertEquals(persons.length,model.getFilteredPersonList().size());
+        assertEquals(persons.length, model.getFilteredPersonList().size());
     }
 
 }

@@ -138,7 +138,7 @@ public class DeleteCommandTest {
         showAllPersons(model);
         List<Person> persons = new ArrayList<>(model.getFilteredPersonList());
 
-        Person[] personsToDelete = {persons.get(0), persons.get(1), persons.get(2)} ;
+        Person[] personsToDelete = {persons.get(0), persons.get(1), persons.get(2)};
 
         showPersons(model, personsToDelete);
 
