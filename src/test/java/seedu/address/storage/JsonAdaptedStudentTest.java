@@ -30,7 +30,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_ID = BENSON.getId().toString();
     private static final List<String> VALID_GROUPS = BENSON.getGroups().stream()
-            .map(group -> group.value)
+            .map(group -> group.name)
             .collect(Collectors.toList());
     private static final List<String> VALID_ASSESSMENTS = BENSON.getScores().keySet().stream()
             .map(Assessment::getName)
@@ -99,7 +99,7 @@ public class JsonAdaptedStudentTest {
                 new JsonAdaptedStudent(VALID_NAME, VALID_ID, invalidGroups, VALID_ASSESSMENTS, VALID_TAGS);
         Student modelStudent = student.toModelType(GROUP_LIST, ASSESSMENT_LIST);
         assertTrue(modelStudent.getGroups().stream()
-                .noneMatch(group -> group.value.equals(INVALID_GROUP)));
+                .noneMatch(group -> group.name.equals(INVALID_GROUP)));
     }
 
     @Test

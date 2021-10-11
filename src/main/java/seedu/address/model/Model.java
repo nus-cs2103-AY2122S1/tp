@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
 /**
@@ -76,6 +77,17 @@ public interface Model {
      * address book.
      */
     void setStudent(Student target, Student editedStudent);
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the application.
+     */
+    boolean hasGroup(Group group);
+
+    /**
+     * Adds the given group.
+     * {@code group} must not already exist in the address book.
+     */
+    void addGroup(Group group);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
