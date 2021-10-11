@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -30,13 +32,13 @@ public class Insurance {
      * @param insuranceName The name of the Insurance to return
      * @return The Insurance with the supplied name
      */
-    public static Insurance of(String insuranceName) {
+    public static Insurance of(String insuranceName) throws IllegalValueException {
         for (InsuranceType type : InsuranceType.values()) {
             if (type.getTypeName().equalsIgnoreCase(insuranceName)) {
                 return new Insurance(type);
             }
         }
-        throw new IllegalArgumentException(insuranceName + INVALID_ARG_SUFFIX);
+        throw new IllegalValueException(insuranceName + INVALID_ARG_SUFFIX);
     }
 
     /**

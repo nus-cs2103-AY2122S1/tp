@@ -4,12 +4,14 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
+import seedu.address.model.person.InsuranceType;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -60,11 +62,24 @@ public class SampleDataUtil {
     }
 
     /**
+     * Returns an Insurance, assumed to be valid
+     */
+    public static Insurance ofValidInsurance(String insuranceName) {
+        for (InsuranceType type : InsuranceType.values()) {
+            if (type.getTypeName().equalsIgnoreCase(insuranceName)) {
+                return new Insurance(type);
+            }
+        }
+        assert false; // This shouldn't happen in testing
+        return null;
+    }
+
+    /**
      * Returns an insurance set containing the list of insurances given.
      */
     public static Set<Insurance> getInsuranceSet(String... insurances) {
         return Arrays.stream(insurances)
-                .map(Insurance::of)
+                .map(SampleDataUtil::ofValidInsurance)
                 .collect(Collectors.toSet());
     }
 

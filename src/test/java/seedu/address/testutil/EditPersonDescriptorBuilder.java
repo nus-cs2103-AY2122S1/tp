@@ -12,6 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -89,7 +90,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withInsurances(String... insurances) {
         Set<Insurance> insuranceSet = Stream.of(insurances).
-                map(Insurance::of).collect(Collectors.toSet());
+                map(SampleDataUtil::ofValidInsurance).collect(Collectors.toSet());
         descriptor.setInsurances(insuranceSet);
         return this;
     }
