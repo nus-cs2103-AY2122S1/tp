@@ -40,6 +40,17 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label studentId;
+    @FXML
+    private Label gitHubId;
+    @FXML
+    private Label tutorialId;
+    @FXML
+    private Label type;
+    @FXML
+    private Label nusNetworkId;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,6 +66,12 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        gitHubId.setText(person.getGitHubId().value);
+        studentId.setText(person.getStudentId().value);
+        type.setText(person.getType().value);
+        nusNetworkId.setText(person.getNusNetworkId().value);
+        tutorialId.setText(person.getTutorialId().value);
+
     }
 
     @Override
