@@ -13,7 +13,7 @@ public class CliSyntax {
     public static final Flag FLAG_ADD = new Flag("--add ");
     public static final Flag FLAG_DELETE = new Flag("--delete ");
     public static final Flag FLAG_GET = new Flag("--get ");
-    public static final Flag FLAG_LIST = new Flag("--list");
+    public static final Flag FLAG_LIST = new Flag("--list ");
     public static final Flag FLAG_POSTFIX = new Flag(" "); // for flags with optional fields
 
     // data flags

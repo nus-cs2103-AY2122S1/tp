@@ -26,7 +26,7 @@ public class FriendCommandParser implements Parser<Command> {
      */
     @Override
     public Command parse(String arguments) throws ParseException {
-        String[] userInput = arguments.split(" ");
+        String[] userInput = arguments.strip().split(" ");
         if (userInput.length <= 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
