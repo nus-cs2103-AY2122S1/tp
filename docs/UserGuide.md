@@ -289,8 +289,8 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
-**Attendance** | `attendance s/STUDIO_GROUP k/KEYWORD a/ATTENDANCE_STATUS [i/INDEX]`<br> e.g., `attendance s/1 k/Aaron a/0`
-**Studio Participation** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE`<br> e.g., `studiopart s/12 k/Benny a/3`
+**Attendance** | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` <br> e.g., `attendance 1, 2 ses/1 att/1`
+**Studio Participation** | `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
 **Grade** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE` <br> e.g., `grade n/Aaron a/RA1 g/15`
 **Show Grades** | `showgrade a/ASSESSMENT [s/STUDIO_GROUP]` <br> e.g., `showgrade a/RA1`
 **Help** | `help`
