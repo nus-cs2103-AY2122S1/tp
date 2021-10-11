@@ -2,8 +2,6 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,47 +18,57 @@ public class Event {
     /**
      * Identity fields
      */
-    private final String name;
-    private final LocalDate date;
+    private final EventName name;
+    private final EventDate date;
 
     /**
      * Data field is a hashmap of members and booleans that represent their attendance.
      */
-    private final Map<Member, Boolean> participants;
+    private final Map<Member, Boolean> participants = new HashMap<>();
 
     /**
-     * Creates a {@code Event} with the given {@code String} for name, {@code LocalDate} and {@code Set<Member>}
+     * Creates a {@code Event} with the given {@code EventName} for name and {@code EventDate}
      * for participants.
      * Every field must be present and not null.
      */
-    public Event(String name, LocalDate date, Set<Member> participants) {
+    public Event(EventName name, EventDate date) {
         requireAllNonNull(name, date);
         this.name = name;
         this.date = date;
-        this.participants = new HashMap<>();
+    }
+
+    /**
+     * Creates a {@code Event} with the given {@code EventName} for name, {@code EventDate} and {@code Set<Member>}
+     * for participants.
+     * Every field must be present and not null.
+     */
+    public Event(EventName name, EventDate date, Set<Member> participants) {
+        requireAllNonNull(name, date);
+        this.name = name;
+        this.date = date;
         for (Member m : participants) {
             this.participants.put(m, false);
         }
     }
 
     /**
-     * Creates a {@code Event} with the given {@code String} for name, {@code LocalDate} and
+     * Creates a {@code Event} with the given {@code EventName} for name, {@code EventDate} and
      * {@code Map<Member, Boolean>} for participants.
      * Every field must be present and not null.
      */
-    public Event(String name, LocalDate date, Map<Member, Boolean> participants) {
+    public Event(EventName name, EventDate date, Map<Member, Boolean> participants) {
         requireAllNonNull(name, date);
         this.name = name;
         this.date = date;
-        this.participants = participants;
+        this.participants.putAll(participants);
     }
 
 
-    public String getName() {
+    public EventName getName() {
         return name;
     }
 
-    public LocalDate getDate() {
+    public EventDate getDate() {
         return date;
     }
 
@@ -69,7 +77,7 @@ public class Event {
     }
 
     /**
-     * Set of participants of the event.
+     * Get of participants of the event.
      *
      * @return an immutable set of participants, which throws {@code UnsupportedOperationException}
      * if modification is attempted
@@ -86,6 +94,17 @@ public class Event {
     public void removeParticipants(Set<Member> members) {
         for (Member m : members) {
             participants.remove(m);
+        }
+    }
+
+    /**
+     * Add a set of members from the event.
+     *
+     * @param members to be added
+     */
+    public void addParticipants(Set<Member> members) {
+        for (Member m : members) {
+            participants.put(m, false);
         }
     }
 
@@ -185,6 +204,6 @@ public class Event {
      */
     @Override
     public String toString() {
-        return String.format("%s ; Date: %s", name, date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format("%s; Date: %s", name, date);
     }
 }

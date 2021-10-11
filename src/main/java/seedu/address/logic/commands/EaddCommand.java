@@ -1,11 +1,22 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
 import seedu.address.model.member.Member;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 
 /**
  * Adds a member to the address book.
@@ -14,43 +25,53 @@ public class EaddCommand extends Command {
 
     public static final String COMMAND_WORD = "eadd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to Ailurus. "
+            + "Parameters:"
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_POSITION + "POSITION]...\n"
+            + PREFIX_DATE + "DATE (format: " + EventDate.DATE_TIME_FORMAT + ") "
+            + "[" + PREFIX_MEMBER + "MEMBER_INDEX (must be a positive integer)]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_POSITION + "friends "
-            + PREFIX_POSITION + "owesMoney";
+            + PREFIX_NAME + "Freshmen Orientation Camp Project "
+            + PREFIX_DATE + "11/07/2021"
+            + PREFIX_MEMBER + "1 "
+            + PREFIX_MEMBER + "2";
 
-    public static final String MESSAGE_SUCCESS = "New member added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New event added: %1$s";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the Ailurus";
 
-    private final Member toAdd;
+    private final Event toAdd;
+    private final Set<Index> indexSet;
+    private final Set<Member> memberSet = new HashSet<>();
 
     /**
-     * Creates an PaddCommand to add the specified {@code Person}
+     * Creates an EaddCommand to add the specified {@code Event} with specified {@code Set<Index>}
      */
-    public EaddCommand(Member member) {
-        requireNonNull(member);
-        toAdd = member;
+    public EaddCommand(Event event, Set<Index> indexList) {
+        requireNonNull(event);
+        toAdd = event;
+        indexSet = indexList;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Member> lastShownList = model.getFilteredMemberList();
 
-        if (model.hasMember(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
+        // adds all members in indexSet to participant list in event
+        for (Index targetIndex : indexSet) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+            }
+            Member memberAsParticipant = lastShownList.get(targetIndex.getZeroBased());
+            memberSet.add(memberAsParticipant);
+        }
+        toAdd.addParticipants(memberSet);
+
+        if (model.hasEvent(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
-        model.addMember(toAdd);
+        model.addEvent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
@@ -58,6 +79,7 @@ public class EaddCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EaddCommand // instanceof handles nulls
-                && toAdd.equals(((EaddCommand) other).toAdd));
+                && toAdd.equals(((EaddCommand) other).toAdd)
+                && indexSet.equals(((EaddCommand) other).indexSet));
     }
 }

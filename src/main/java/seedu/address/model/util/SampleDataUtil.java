@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventDate;
+import seedu.address.model.event.EventName;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
 import seedu.address.model.member.Member;
@@ -54,7 +56,8 @@ public class SampleDataUtil {
         set.add(new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                         new Address("Blk 45 Aljunied Street 85, #11-31"),
                         getPositionSet("colleagues")));
-        sampleAb.addEvent(new Event("GenshinTime", LocalDate.parse("2021-10-11"), set));
+        sampleAb.addEvent(new Event(new EventName("Freshmen Orientation Camp Project"), new EventDate("11/07/2021"),
+                        set));
         return sampleAb;
     }
 
