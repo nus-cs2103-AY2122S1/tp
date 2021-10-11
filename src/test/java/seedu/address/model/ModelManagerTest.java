@@ -133,6 +133,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(inventory, differentUserPrefs)));
     }
 
+    // ========= order related methods tests ==========
+
     @Test
     public void setOrder_emptyOrder_orderIsSet() {
         Order order = new Order();
@@ -143,9 +145,12 @@ public class ModelManagerTest {
 
     @Test
     public void addToOrder_normalItem_itemAdded() {
+        Order expectedOrder = new Order();
         Item milk = new Item(new Name("Milk"), "AS0123", 15, new HashSet<>());
+
+        modelManager.setOrder(new Order());
+        expectedOrder.addItem(milk);
         modelManager.addToOrder(milk);
+        assertEquals(modelManager.getOrder(), expectedOrder);
     }
-
-
 }
