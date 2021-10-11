@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -32,8 +33,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
-    public static final String MESSAGE_INVALID_KEYWORD = "Keyword cannot be empty.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -254,7 +253,7 @@ public class ParserUtil {
     /**
      * Parses {@code String keywords} into a {@code List<String>}.
      * Leading and trailing whitespaces will be stripped and
-     * keywords string is split into a list of words.
+     * keywords string is split by whitespace into a list of words.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
@@ -262,27 +261,35 @@ public class ParserUtil {
         requireNonNull(keywords);
         String strippedKeywords = keywords.strip();
         if (strippedKeywords.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_KEYWORD);
+            throw new ParseException(FindCommand.MESSAGE_INVALID_KEYWORD);
         }
-        return List.of(strippedKeywords.split("\\s+"));
+        return Arrays.asList(strippedKeywords.split("\\s+"));
     }
 
     /**
-     * Parses {@code String keywords} into a {@code List<String>}.
+     * Parses {@code String keywords} into a {@code String}.
      * Leading and trailing whitespaces of keywords will be stripped.
-     * A tag keyword can be a phrase.
+     * A tag keyword can consist of multiple words.
      *
      * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static String parseTagKeyword(String keyword) throws ParseException {
+        requireNonNull(keyword);
+        String strippedKeyword = keyword.strip();
+        if (strippedKeyword.isEmpty()) {
+            throw new ParseException(FindCommand.MESSAGE_INVALID_KEYWORD);
+        }
+        return strippedKeyword;
+    }
+
+    /**
+     * Parses {@code Collection<String> keywords} into a {@code List<String>}.
      */
     public static List<String> parseTagKeywords(Collection<String> keywords) throws ParseException {
         requireNonNull(keywords);
         final List<String> tagKeywords = new ArrayList<>();
         for (String keyword : keywords) {
-            String strippedKeyword = keyword.strip();
-            if (strippedKeyword.isEmpty()) {
-                throw new ParseException(MESSAGE_INVALID_KEYWORD);
-            }
-            tagKeywords.add(strippedKeyword);
+            tagKeywords.add(parseTagKeyword(keyword));
         }
         return tagKeywords;
     }

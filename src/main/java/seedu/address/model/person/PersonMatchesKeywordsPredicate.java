@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,15 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     public boolean isAnyFieldSearched() {
         return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords, parentPhoneKeywords,
             parentEmailKeywords, addressKeywords, tagKeywords);
+    }
+
+    /**
+     * Sets find condition.
+     *
+     * @param condition Find condition
+     */
+    public void setCondition(FindCondition condition) {
+        this.condition = condition;
     }
 
     /**
@@ -99,12 +109,59 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Sets find condition.
-     *
-     * @param condition Find condition
+     * Returns the find condition.
      */
-    public void setCondition(FindCondition condition) {
-        this.condition = condition;
+    public FindCondition getCondition() {
+        return condition;
+    }
+
+    /**
+     * Returns optional name keywords.
+     */
+    public Optional<List<String>> getNameKeywords() {
+        return Optional.ofNullable(nameKeywords);
+    }
+
+    /**
+     * Returns optional phone keywords.
+     */
+    public Optional<List<String>> getPhoneKeywords() {
+        return Optional.ofNullable(phoneKeywords);
+    }
+
+    /**
+     * Returns optional email keywords.
+     */
+    public Optional<List<String>> getEmailKeywords() {
+        return Optional.ofNullable(emailKeywords);
+    }
+
+    /**
+     * Returns optional parent phone keywords.
+     */
+    public Optional<List<String>> getParentPhoneKeywords() {
+        return Optional.ofNullable(parentPhoneKeywords);
+    }
+
+    /**
+     * Returns optional parent email keywords.
+     */
+    public Optional<List<String>> getParentEmailKeywords() {
+        return Optional.ofNullable(parentEmailKeywords);
+    }
+
+    /**
+     * Returns optional address keywords.
+     */
+    public Optional<List<String>> getAddressKeywords() {
+        return Optional.ofNullable(addressKeywords);
+    }
+
+    /**
+     * Returns optional tag keywords.
+     */
+    public Optional<List<String>> getTagKeywords() {
+        return Optional.ofNullable(tagKeywords);
     }
 
     /**
@@ -200,25 +257,26 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      */
     private List<Predicate<Person>> getPredicates() {
         List<Predicate<Person>> predicates = new ArrayList<>();
-        if (nameKeywords != null) {
+        if (getNameKeywords().isPresent()) {
             predicates.add(getNameMatchPredicate());
         }
-        if (phoneKeywords != null) {
+        ;
+        if (getPhoneKeywords().isPresent()) {
             predicates.add(getPhoneMatchPredicate());
         }
-        if (emailKeywords != null) {
+        if (getEmailKeywords().isPresent()) {
             predicates.add(getEmailMatchPredicate());
         }
-        if (parentPhoneKeywords != null) {
+        if (getParentPhoneKeywords().isPresent()) {
             predicates.add(getParentPhoneMatchPredicate());
         }
-        if (parentEmailKeywords != null) {
+        if (getParentEmailKeywords().isPresent()) {
             predicates.add(getParentEmailMatchPredicate());
         }
-        if (addressKeywords != null) {
+        if (getAddressKeywords().isPresent()) {
             predicates.add(getAddressMatchPredicate());
         }
-        if (tagKeywords != null) {
+        if (getTagKeywords().isPresent()) {
             predicates.addAll(getTagsMatchPredicates());
         }
 
@@ -290,13 +348,14 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
 
         PersonMatchesKeywordsPredicate p = (PersonMatchesKeywordsPredicate) other;
-        return nameKeywords.equals(p.nameKeywords)
-            && phoneKeywords.equals(p.phoneKeywords)
-            && emailKeywords.equals(p.emailKeywords)
-            && parentPhoneKeywords.equals(p.parentPhoneKeywords)
-            && parentEmailKeywords.equals(p.parentEmailKeywords)
-            && addressKeywords.equals(p.addressKeywords)
-            && tagKeywords.equals(p.tagKeywords);
+        return getNameKeywords().equals(p.getNameKeywords())
+            && getPhoneKeywords().equals(p.getPhoneKeywords())
+            && getEmailKeywords().equals(p.getEmailKeywords())
+            && getParentPhoneKeywords().equals(p.getParentPhoneKeywords())
+            && getParentEmailKeywords().equals(p.getParentEmailKeywords())
+            && getAddressKeywords().equals(p.getAddressKeywords())
+            && getTagKeywords().equals(p.getTagKeywords())
+            && getCondition().equals(p.getCondition());
     }
 
 }

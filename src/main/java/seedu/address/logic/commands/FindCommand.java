@@ -55,6 +55,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_CONDITION_CONSTRAINTS = "Find condition should take on one of these values: "
         + "all / any / none";
 
+    public static final String MESSAGE_INVALID_KEYWORD = "Keyword cannot be empty.";
+
     private final Predicate<Person> predicate;
 
     /**
@@ -98,7 +100,7 @@ public class FindCommand extends Command {
          */
         public static FindCondition valueOfName(String name) {
             for (FindCondition c : values()) {
-                if (c.name().toLowerCase().equals(name)) {
+                if (c.name().equalsIgnoreCase(name)) {
                     return c;
                 }
             }
