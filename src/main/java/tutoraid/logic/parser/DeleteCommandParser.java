@@ -1,9 +1,10 @@
 package tutoraid.logic.parser;
 
+
+import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.DeleteStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
-import tutoraid.commons.core.Messages;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

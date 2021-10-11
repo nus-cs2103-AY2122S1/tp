@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import tutoraid.commons.core.GuiSettings;
-import tutoraid.model.StudentBook;
 import tutoraid.model.ReadOnlyStudentBook;
+import tutoraid.model.StudentBook;
 import tutoraid.model.UserPrefs;
 import tutoraid.testutil.TypicalStudents;
 

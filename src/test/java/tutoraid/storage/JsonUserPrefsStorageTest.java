@@ -2,7 +2,6 @@ package tutoraid.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static tutoraid.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;

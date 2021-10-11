@@ -7,9 +7,10 @@ import tutoraid.commons.core.GuiSettings;
 import tutoraid.logic.commands.CommandResult;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.logic.parser.exceptions.ParseException;
+import tutoraid.model.Model;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.student.Student;
-import tutoraid.model.Model;
+
 
 /**
  * API of the Logic component

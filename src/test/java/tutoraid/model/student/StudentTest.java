@@ -31,7 +31,8 @@ public class StudentTest {
         assertFalse(TypicalStudents.ALICE.isSameStudent(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Student editedBob = new StudentBuilder(TypicalStudents.BOB).withStudentName(VALID_STUDENT_NAME_BOB.toLowerCase()).build();
+        Student editedBob = new StudentBuilder(TypicalStudents.BOB).withStudentName(
+                VALID_STUDENT_NAME_BOB.toLowerCase()).build();
         assertFalse(TypicalStudents.BOB.isSameStudent(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false

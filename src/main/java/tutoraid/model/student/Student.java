@@ -1,10 +1,8 @@
 package tutoraid.model.student;
 
-import tutoraid.commons.util.CollectionUtil;
-
-import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Objects;
+
+import tutoraid.commons.util.CollectionUtil;
 
 /**
  * Represents a Student in the TutorAid.

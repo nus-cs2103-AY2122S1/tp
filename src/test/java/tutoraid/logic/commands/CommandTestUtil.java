@@ -2,7 +2,6 @@ package tutoraid.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tutoraid.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,11 +9,11 @@ import java.util.List;
 
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
-import tutoraid.model.StudentBook;
+import tutoraid.logic.parser.CliSyntax;
 import tutoraid.model.Model;
+import tutoraid.model.StudentBook;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
 import tutoraid.model.student.Student;
-import tutoraid.logic.parser.CliSyntax;
 import tutoraid.testutil.Assert;
 
 /**
@@ -79,7 +78,7 @@ public class CommandTestUtil {
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
@@ -100,6 +99,7 @@ public class CommandTestUtil {
         assertEquals(expectedStudentBook, actualModel.getStudentBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s student book.

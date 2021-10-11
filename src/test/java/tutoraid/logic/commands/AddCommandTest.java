@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tutoraid.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,13 +15,13 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.logic.commands.exceptions.CommandException;
-import tutoraid.model.StudentBook;
 import tutoraid.model.Model;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.ReadOnlyUserPrefs;
+import tutoraid.model.StudentBook;
 import tutoraid.model.student.Student;
-import tutoraid.testutil.StudentBuilder;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.StudentBuilder;
 
 public class AddCommandTest {
 

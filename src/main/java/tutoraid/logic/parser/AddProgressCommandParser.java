@@ -2,11 +2,12 @@ package tutoraid.logic.parser;
 
 import java.util.stream.Stream;
 
+import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.AddProgressCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.student.Progress;
-import tutoraid.commons.core.Messages;
+
 
 /**
  * Parses input arguments and creates a new PaidCommand object

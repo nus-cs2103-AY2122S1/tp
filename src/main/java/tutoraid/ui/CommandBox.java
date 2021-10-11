@@ -4,10 +4,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import tutoraid.logic.Logic;
 import tutoraid.logic.commands.CommandResult;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.logic.parser.exceptions.ParseException;
-import tutoraid.logic.Logic;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

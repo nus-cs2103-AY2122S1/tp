@@ -1,7 +1,6 @@
 package tutoraid.model;
 
 import static java.util.Objects.requireNonNull;
-import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -11,9 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.commons.core.LogsCenter;
+import tutoraid.commons.util.CollectionUtil;
 import tutoraid.model.student.Student;
 import tutoraid.ui.UiManager;
-import tutoraid.commons.util.CollectionUtil;
+
 
 /**
  * Represents the in-memory model of the student book data.

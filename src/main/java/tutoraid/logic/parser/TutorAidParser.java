@@ -3,6 +3,7 @@ package tutoraid.logic.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.AddProgressCommand;
 import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.commands.ClearCommand;
@@ -16,7 +17,6 @@ import tutoraid.logic.commands.PaidCommand;
 import tutoraid.logic.commands.UnpaidCommand;
 import tutoraid.logic.commands.ViewCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
-import tutoraid.commons.core.Messages;
 
 /**
  * Parses user input.
@@ -52,7 +52,8 @@ public class TutorAidParser {
         } else {
             matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
             if (!matcher.matches()) {
-                throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(
+                        Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
             }
             commandWord = matcher.group("commandWord");
             arguments = matcher.group("arguments");

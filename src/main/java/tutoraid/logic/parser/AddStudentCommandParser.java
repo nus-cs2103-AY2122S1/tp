@@ -2,11 +2,16 @@ package tutoraid.logic.parser;
 
 import java.util.stream.Stream;
 
+import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
+import tutoraid.model.student.ParentName;
+import tutoraid.model.student.PaymentStatus;
+import tutoraid.model.student.Phone;
+import tutoraid.model.student.Progress;
 import tutoraid.model.student.Student;
-import tutoraid.commons.core.Messages;
-import tutoraid.model.student.*;
+import tutoraid.model.student.StudentName;
+
 
 /**
  * Parses input arguments and creates a new AddStudentCommand object
@@ -26,10 +31,12 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         // Student name is a required fields (student phone, parent name and parent phone are optional)
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_STUDENT_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
-        StudentName studentName = ParserUtil.parseStudentName(argMultimap.getValue(CliSyntax.PREFIX_STUDENT_NAME).get());
+        StudentName studentName = ParserUtil.parseStudentName(
+                argMultimap.getValue(CliSyntax.PREFIX_STUDENT_NAME).get());
         Phone studentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).get());
         ParentName parentName = ParserUtil.parseParentName(argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).get());
         Phone parentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).get());

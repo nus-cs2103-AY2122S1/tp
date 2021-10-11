@@ -8,11 +8,12 @@ import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
-import tutoraid.model.student.Student;
 import tutoraid.model.student.Progress;
+import tutoraid.model.student.Student;
+
 
 /**
- * Adds a progress to an exiting student in TutorAid. Updates the progress if one already exists.
+ * Adds progress string to an exiting student in TutorAid. Updates the progress if one already exists.
  */
 public class AddProgressCommand extends Command {
 

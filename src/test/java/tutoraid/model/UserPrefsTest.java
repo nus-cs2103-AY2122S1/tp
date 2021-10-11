@@ -1,8 +1,7 @@
 package tutoraid.model;
 
-import static tutoraid.testutil.Assert.assertThrows;
-
 import org.junit.jupiter.api.Test;
+
 import tutoraid.testutil.Assert;
 
 public class UserPrefsTest {

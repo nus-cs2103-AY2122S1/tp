@@ -1,7 +1,6 @@
 package tutoraid.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static tutoraid.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +43,8 @@ public class JsonAdaptedStudentTest {
                 VALID_PARENT_NAME, VALID_PARENT_PHONE,
                 VALID_PROGRESS, VALID_PAYMENT_STATUS);
 
-        String expectedMessage = String.format(JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(
+                JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 

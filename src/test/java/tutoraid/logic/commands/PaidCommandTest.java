@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
-import tutoraid.model.StudentBook;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
+import tutoraid.model.StudentBook;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.StudentBuilder;

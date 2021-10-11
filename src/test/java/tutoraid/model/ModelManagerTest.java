@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
-import static tutoraid.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
-import tutoraid.testutil.StudentBookBuilder;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.StudentBookBuilder;
 import tutoraid.testutil.TypicalStudents;
 
 public class ModelManagerTest {
@@ -90,12 +89,14 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList()
+            .remove(0));
     }
 
     @Test
     public void equals() {
-        StudentBook studentBook = new StudentBookBuilder().withStudent(TypicalStudents.ALICE).withStudent(TypicalStudents.BENSON).build();
+        StudentBook studentBook = new StudentBookBuilder().withStudent(TypicalStudents.ALICE)
+            .withStudent(TypicalStudents.BENSON).build();
         StudentBook differentStudentBook = new StudentBook();
         UserPrefs userPrefs = new UserPrefs();
 

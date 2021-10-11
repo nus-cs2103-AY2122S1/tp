@@ -4,7 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tutoraid.commons.exceptions.IllegalValueException;
-import tutoraid.model.student.*;
+import tutoraid.model.student.Name;
+import tutoraid.model.student.ParentName;
+import tutoraid.model.student.PaymentStatus;
+import tutoraid.model.student.Phone;
+import tutoraid.model.student.Progress;
+import tutoraid.model.student.Student;
+import tutoraid.model.student.StudentName;
 
 /**
  * Jackson-friendly version of {@link Student}.

@@ -15,13 +15,22 @@ import tutoraid.commons.util.ConfigUtil;
 import tutoraid.commons.util.StringUtil;
 import tutoraid.logic.Logic;
 import tutoraid.logic.LogicManager;
+import tutoraid.model.Model;
+import tutoraid.model.ModelManager;
+import tutoraid.model.ReadOnlyStudentBook;
+import tutoraid.model.ReadOnlyUserPrefs;
 import tutoraid.model.StudentBook;
+import tutoraid.model.UserPrefs;
 import tutoraid.model.util.SampleDataUtil;
+import tutoraid.storage.JsonTutorAidStorage;
+import tutoraid.storage.JsonUserPrefsStorage;
+import tutoraid.storage.Storage;
+import tutoraid.storage.StorageManager;
 import tutoraid.storage.TutorAidStorage;
+import tutoraid.storage.UserPrefsStorage;
 import tutoraid.ui.Ui;
 import tutoraid.ui.UiManager;
-import tutoraid.model.*;
-import tutoraid.storage.*;
+
 
 /**
  * Runs the application.

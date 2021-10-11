@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_BOB;
-import static tutoraid.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,8 +16,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.exceptions.DuplicateStudentException;
-import tutoraid.testutil.StudentBuilder;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.StudentBuilder;
 import tutoraid.testutil.TypicalStudents;
 
 public class StudentBookTest {

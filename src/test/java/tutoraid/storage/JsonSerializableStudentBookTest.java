@@ -1,7 +1,6 @@
 package tutoraid.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static tutoraid.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.commons.util.JsonUtil;
 import tutoraid.model.StudentBook;
-import tutoraid.testutil.TypicalStudents;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.TypicalStudents;
 
 public class JsonSerializableStudentBookTest {
 

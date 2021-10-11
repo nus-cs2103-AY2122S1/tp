@@ -2,8 +2,9 @@ package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import tutoraid.model.StudentBook;
 import tutoraid.model.Model;
+import tutoraid.model.StudentBook;
+
 
 /**
  * Clears TutorAid entries.

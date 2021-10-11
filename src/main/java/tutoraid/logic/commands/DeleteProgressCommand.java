@@ -8,11 +8,12 @@ import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
-import tutoraid.model.student.Student;
 import tutoraid.model.student.Progress;
+import tutoraid.model.student.Student;
+
 
 /**
- * Delete a progress of an exiting student in TutorAid.
+ * Delete progress of an existing student in TutorAid.
  */
 public class DeleteProgressCommand extends Command {
 

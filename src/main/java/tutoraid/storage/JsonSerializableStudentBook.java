@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import tutoraid.commons.exceptions.IllegalValueException;
-import tutoraid.model.StudentBook;
 import tutoraid.model.ReadOnlyStudentBook;
+import tutoraid.model.StudentBook;
 import tutoraid.model.student.Student;
 
 /**

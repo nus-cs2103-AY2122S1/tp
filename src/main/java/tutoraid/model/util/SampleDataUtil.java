@@ -2,8 +2,13 @@ package tutoraid.model.util;
 
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.StudentBook;
+import tutoraid.model.student.ParentName;
+import tutoraid.model.student.PaymentStatus;
+import tutoraid.model.student.Phone;
+import tutoraid.model.student.Progress;
 import tutoraid.model.student.Student;
-import tutoraid.model.student.*;
+import tutoraid.model.student.StudentName;
+
 
 /**
  * Contains utility methods for populating {@code StudentBook} with sample data.

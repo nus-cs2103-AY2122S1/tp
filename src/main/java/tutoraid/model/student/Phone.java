@@ -1,9 +1,8 @@
 package tutoraid.model.student;
 
-import tutoraid.commons.util.AppUtil;
-
 import static java.util.Objects.requireNonNull;
-import static tutoraid.commons.util.AppUtil.checkArgument;
+
+import tutoraid.commons.util.AppUtil;
 
 /**
  * Represents a Student's phone number in the student book.

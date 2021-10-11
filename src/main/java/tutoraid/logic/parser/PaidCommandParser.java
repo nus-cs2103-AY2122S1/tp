@@ -1,9 +1,10 @@
 package tutoraid.logic.parser;
 
+import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.PaidCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
-import tutoraid.commons.core.Messages;
+
 
 /**
  * Parses input arguments and creates a new PaidCommand object

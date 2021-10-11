@@ -1,24 +1,23 @@
 package tutoraid.model.student;
 
 import static java.util.Objects.requireNonNull;
-import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tutoraid.commons.util.CollectionUtil;
 import tutoraid.model.student.exceptions.DuplicateStudentException;
 import tutoraid.model.student.exceptions.StudentNotFoundException;
-import tutoraid.commons.util.CollectionUtil;
 
 /**
  * A list of students that enforces uniqueness between its elements and does not allow nulls.
- * A student is considered unique by comparing using {@code Student#isSameStudent(Student)}. As such, adding and updating of
- * students uses Student#isSameStudent(Student) for equality to ensure that the student being added or updated is
- * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses Student#equals(Object)
- * to ensure that the student with exactly the same fields will be removed.
- *
+ * A student is considered unique by comparing using {@code Student#isSameStudent(Student)}. As such, adding and
+ * updating of students uses Student#isSameStudent(Student) for equality to ensure that the student being added or
+ * updated is unique in terms of identity in the UniqueStudentList. However, the removal of a student uses
+ * Student#equals(Object) to ensure that the student with exactly the same fields will be removed.
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Student#isSameStudent(Student)
@@ -114,7 +113,7 @@ public class UniqueStudentList implements Iterable<Student> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueStudentList // instanceof handles nulls
-                        && internalList.equals(((UniqueStudentList) other).internalList));
+                && internalList.equals(((UniqueStudentList) other).internalList));
     }
 
     @Override

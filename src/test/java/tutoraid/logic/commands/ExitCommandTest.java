@@ -1,7 +1,5 @@
 package tutoraid.logic.commands;
 
-import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import org.junit.jupiter.api.Test;
 
 import tutoraid.model.Model;
