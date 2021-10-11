@@ -71,7 +71,6 @@ public class AddAllocCommand extends Command {
         Group groupToEdit = getAllocGroup(groupList, allocDescriptor);
         List<Student> studentsToEdit = getAllocStudents(studentList, allocDescriptor);
 
-
         if (studentsToEdit.isEmpty()) {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
