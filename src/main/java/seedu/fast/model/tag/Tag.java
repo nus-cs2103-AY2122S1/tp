@@ -3,6 +3,7 @@ package seedu.fast.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.util.AppUtil.checkArgument;
 
+import seedu.fast.commons.util.TagUtil;
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -15,6 +16,8 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    public final int priority;
+
 
     /**
      * Constructs a {@code Tag}.
@@ -25,6 +28,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.priority = setPriority(tagName);
     }
 
     /**
@@ -49,6 +53,23 @@ public class Tag {
             return new PriorityTag(term);
         }
         return new Tag(term);
+    }
+
+    public static int setPriority(String tagName) {
+        if (tagName.equals(PriorityTag.LowPriority.NAME)) {
+            return PriorityTag.LowPriority.PRIORITY;
+        }
+        if (tagName.equals(PriorityTag.MediumPriority.NAME)) {
+            return PriorityTag.MediumPriority.PRIORITY;
+        }
+        if (tagName.equals(PriorityTag.HighPriority.NAME)) {
+            return PriorityTag.HighPriority.PRIORITY;
+        }
+        return TagUtil.NO_PRIORITY;
+    }
+
+    public int getPriority() {
+        return priority;
     }
 
     @Override
