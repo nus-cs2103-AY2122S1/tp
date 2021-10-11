@@ -93,5 +93,4 @@ class CheckCommandTest {
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
-
 }
