@@ -11,7 +11,7 @@ import seedu.address.testutil.SerializableTestClass;
 import seedu.address.testutil.TestUtil;
 
 /**
- * Tests JSON Read and Write
+ * Tests encrypted JSON Read and Write
  */
 public class EncryptedJsonUtilTest {
 

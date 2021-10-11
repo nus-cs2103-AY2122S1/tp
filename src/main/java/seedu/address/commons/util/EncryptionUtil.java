@@ -27,7 +27,7 @@ public class EncryptionUtil {
      * Returns a new Cipher instance backed by AES encryption.
      * @param opmode the operation mode of the cipher set to either
      */
-    public static Cipher createCipherInstance(int opmode) {
+    private static Cipher createCipherInstance(int opmode) {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             byte[] keyBytes = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
@@ -43,6 +43,20 @@ public class EncryptionUtil {
     }
 
     /**
+     * Returns a new Cipher instance in Encrypt Mode
+     */
+    public static Cipher createEncryptCipherInstance() {
+        return createCipherInstance(Cipher.ENCRYPT_MODE);
+    }
+
+    /**
+     * Returns a new Cipher instance in Decrypt Mode
+     */
+    public static Cipher createDecryptCipherInstance() {
+        return createCipherInstance(Cipher.DECRYPT_MODE);
+    }
+
+    /**
      * Encrypts the given Serializable object.
      * @param serializableObject the object to be encrypted
      * @return a Sealed Object instance containing the Serializable object
@@ -50,7 +64,7 @@ public class EncryptionUtil {
      */
     public static SealedObject encryptSerializableObject(Serializable serializableObject) throws IOException {
         try {
-            return new SealedObject(serializableObject, createCipherInstance(Cipher.ENCRYPT_MODE));
+            return new SealedObject(serializableObject, createEncryptCipherInstance());
         } catch (IllegalBlockSizeException e) {
             logger.warning("Error encrypted serializable object " + serializableObject + ": " + e);
             throw new IOException(e);
@@ -65,7 +79,7 @@ public class EncryptionUtil {
      */
     public static Serializable decryptSealedObject(SealedObject sealedObject) throws IOException {
         try {
-            return (Serializable) sealedObject.getObject(createCipherInstance(Cipher.DECRYPT_MODE));
+            return (Serializable) sealedObject.getObject(createDecryptCipherInstance());
         } catch (IOException | ClassNotFoundException | IllegalBlockSizeException
                 | BadPaddingException e) {
             logger.warning("Error decrypting sealed object " + sealedObject + ": " + e);

@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.SealedObject;
@@ -93,7 +92,7 @@ public class FileUtil {
         try {
             CipherInputStream cipherInputStream = new CipherInputStream(new BufferedInputStream(
                     new FileInputStream(encryptedFile.toFile())),
-                    EncryptionUtil.createCipherInstance(Cipher.DECRYPT_MODE));
+                    EncryptionUtil.createDecryptCipherInstance());
             ObjectInputStream inputStream = new ObjectInputStream(cipherInputStream);
             return (SealedObject) inputStream.readObject();
         } catch (ClassNotFoundException e) {
@@ -118,7 +117,7 @@ public class FileUtil {
     public static void writeToEncryptedFile(Path encryptedFile, SealedObject content) throws IOException {
         CipherOutputStream cipherOutputStream = new CipherOutputStream(new BufferedOutputStream(
                 new FileOutputStream(encryptedFile.toFile())),
-                EncryptionUtil.createCipherInstance(Cipher.ENCRYPT_MODE));
+                EncryptionUtil.createEncryptCipherInstance());
         ObjectOutputStream outputStream = new ObjectOutputStream(cipherOutputStream);
         outputStream.writeObject(content);
         outputStream.close();
