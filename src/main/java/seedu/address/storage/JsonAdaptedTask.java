@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.format.DateTimeFormatter;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -36,7 +38,8 @@ public class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getName().name;
-        deadline = source.getDeadline().stringDeadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        deadline = source.getDeadline().deadline.format(formatter);
         uniqueId = source.getId().getUuid().toString();
     }
 

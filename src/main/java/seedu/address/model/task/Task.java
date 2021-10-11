@@ -20,8 +20,6 @@ public class Task {
     // The id of the task
     private final UniqueId id;
 
-    //private final String stringId;
-
     /**
      * Every field must be present and not null.
      */
