@@ -219,7 +219,7 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 * The filter condition is optional and defaults to `all` if not specified.
 
 * The filter condition is case-insensitive.<br>
-  e.g. `None` or `ANY` are accepted.
+  e.g. `None` or `ANY` are valid.
   
 * You must provide at least one field to search.<br>
   e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
@@ -227,6 +227,9 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 * You must provide at least one keyword to search a field.<br>
   e.g. entering just `find n/ ` alone is not a valid command as the keyword is empty.
 
+* Tags must only have one keyword.<br>
+  e.g. `find t/zoom math` is invalid. To search multiple tags, you can do `find t/zoom t/math`.
+  
 * The search is case-insensitive.<br>
   e.g. keyword `hans` will match `Hans`.
 
