@@ -208,14 +208,14 @@ Format: `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS`
 * Edits the attendance of a student or multiple students based on their `INDEX`
 * Edits the tutee(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * Multiple `INDEX` can be parsed in at once as long as they are all valid.
-* If `INDEX` is not supplied, the command will edit the attendance of the student is in the last created Studio session. Otherwise, it will execute the edit in the specified Studio session if `INDEX` is valid.
-* The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student attended the session or not.
+* The `STUDIO_SESSION` field is a positive number from 1 to 12 inclusive which refers to the Studio Session to be modified.
+* The `ATTENDANCE_STATUS` field can only be a 1 or 0 to indicate whether the student attended the session or not where 1 marks a student as having attended while 0 marks a student as unattended.
 * Existing values will be updated to the input values.
 
 Examples:
 
-* `attendance s/1 k/Aaron a/0`
-* `attendance s/33 k/Chan a/1 i/7`
+* `attendance 1 ses/1 att/1`
+* `attendance 1, 2, 3 ses/12 k/Chan a/1 i/7`
 
 ### Editing a student’s Studio participation: `studiopart`
 
