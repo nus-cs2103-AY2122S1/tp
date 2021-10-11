@@ -88,4 +88,9 @@ public class CommandResult {
         return Objects.hash(feedbackToUser, isShowPersonList, isShowHelp, isShowTagList, isExit);
     }
 
+    @Override
+    public String toString() {
+        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", showHelp = " + isShowHelp
+                + ", exit = " + isExit;
+    }
 }
