@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
  * Represents an insurance policy that a person can own.
@@ -56,13 +56,13 @@ public class Insurance {
         } else if (!(obj instanceof Insurance)) {
             return false;
         } else {
-            Insurance insuranceObj = (Insurance)obj;
+            Insurance insuranceObj = (Insurance) obj;
             return this.type.equals(insuranceObj.type);
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return type.hashCode();
     }
 
