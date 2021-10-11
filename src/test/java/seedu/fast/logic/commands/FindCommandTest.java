@@ -8,7 +8,8 @@ import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.testutil.TypicalPersons.CARL;
 import static seedu.fast.testutil.TypicalPersons.ELLE;
 import static seedu.fast.testutil.TypicalPersons.FIONA;
-import static seedu.fast.testutil.TypicalPersons.GEORGE;
+import static seedu.fast.testutil.TypicalPersons.GRABAHAN;
+import static seedu.fast.testutil.TypicalPersons.JOE;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import java.util.Arrays;
@@ -102,6 +103,10 @@ public class FindCommandTest {
 
     @Test
     public void execute_multiplePriorities_multiplePersonsFound() {
+        model.addPerson(JOE);
+        model.addPerson(GRABAHAN);
+        expectedModel.addPerson(JOE);
+        expectedModel.addPerson(GRABAHAN);
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PriorityPredicate predicate = preparePriorityPredicate(
                 PriorityTag.LowPriority.TERM + " "
@@ -109,18 +114,22 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(JOE, GRABAHAN), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_onePriority_onePersonFound() {
+        model.addPerson(JOE);
+        model.addPerson(GRABAHAN);
+        expectedModel.addPerson(JOE);
+        expectedModel.addPerson(GRABAHAN);
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         PriorityPredicate predicate = preparePriorityPredicate(
                 PriorityTag.LowPriority.TERM);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(GRABAHAN), model.getFilteredPersonList());
     }
 
     /**
