@@ -23,7 +23,11 @@ public class FindCommand extends Command {
             + "2. Finds all persons whose tag(s) (if present) matches the specified tag(s) and "
             + "displays them as a list with index numbers.\n"
             + "Parameters : t/TAG [MORE_TAGS]...\n"
-            + "Example: " + COMMAND_WORD + " t/friends family";
+            + "Example: " + COMMAND_WORD + " t/friends family"
+            + "\n3. Finds all persons whose telegram handles(s) (if present) matches the specified telegram "
+            + "handle(s) and displays them as a list with index numbers.\n"
+            + "Parameters : t/TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLES]...\n"
+            + "Example: " + COMMAND_WORD + " @alex_1";
 
     private final Predicate<Person> predicate;
 
