@@ -67,8 +67,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        String filepath = " data/test.json";
-        ImportCommand command = (ImportCommand) parser.parseCommand(ImportCommand.COMMAND_WORD + filepath);
+        ImportCommand command = (ImportCommand) parser.parseCommand(ImportCommand.COMMAND_WORD
+                + " data/test.json");
         Path testPath = Paths.get("data/test.json");
         assertEquals(new ImportCommand(testPath), command);
     }
