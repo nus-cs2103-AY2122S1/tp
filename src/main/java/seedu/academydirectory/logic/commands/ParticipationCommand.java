@@ -10,6 +10,7 @@ import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
+import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Student;
 
@@ -57,8 +58,15 @@ public class ParticipationCommand extends Command {
         }
 
         if (participationUpdate > 0) {
-            AttendanceCommand attendanceCommand = new AttendanceCommand(true, studioSession, indexArrayList);
-            attendanceCommand.execute(model);
+            int sessionCount = model.getFilteredStudentList().get(0).getParticipation().getSessionCount();
+            for (Index index : indexArrayList) {
+                Student studentToEdit = lastShownList.get(index.getZeroBased());
+                boolean[] newAttArr = studentToEdit.getAttendance().getAttendanceArray();
+                newAttArr[studioSession - 1] = true;
+                Attendance newAttendance = new Attendance(sessionCount);
+                newAttendance.setAttendance(newAttArr);
+                studentToEdit.setAttendance(newAttendance);
+            }
         }
 
         for (Index index : indexArrayList) {
@@ -66,12 +74,12 @@ public class ParticipationCommand extends Command {
             Participation participationToEdit = studentToEdit.getParticipation();
             participationToEdit = participationToEdit.add(studioSession, participationUpdate);
 
-            Student editedPerson = new Student(
+            Student editedStudent = new Student(
                     studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
                     studentToEdit.getTelegram(), studentToEdit.getAddress(), studentToEdit.getStudioRecord(),
                     studentToEdit.getAssessment(), studentToEdit.getTags());
-            editedPerson.setParticipation(participationToEdit);
-            model.setStudent(studentToEdit, editedPerson);
+            editedStudent.setParticipation(participationToEdit);
+            model.setStudent(studentToEdit, editedStudent);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_UPDATE_PARTICIPATION_SUCCESS);
