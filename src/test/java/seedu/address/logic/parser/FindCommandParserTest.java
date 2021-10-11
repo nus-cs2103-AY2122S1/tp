@@ -35,6 +35,12 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "n/\n Alice \n \t Bob  \t", expectedFindCommand);
+
+        // blank inputs for prefixes
+        ArrayList<Predicate<Person>> emptyPredicates = new ArrayList<>();
+
+        FindCommand emptyFindCommand = new FindCommand(emptyPredicates);
+        assertParseSuccess(parser, "n/ y/", emptyFindCommand);
     }
 
 }
