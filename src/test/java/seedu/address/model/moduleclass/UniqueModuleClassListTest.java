@@ -2,8 +2,8 @@ package seedu.address.model.moduleclass;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalModuleClasses.CS2100_LAB1;
 import static seedu.address.testutil.TypicalModuleClasses.CS2100_TUT1;
 
@@ -40,8 +40,8 @@ public class UniqueModuleClassListTest {
     @Test
     public void contains_classWithSameIdentityFieldsInList_returnsTrue() {
         uniqueClassList.add(CS2100_LAB1);
-        ModuleClass editedCS2100_LAB1 = new ModuleClassBuilder(CS2100_LAB1).withRemark("hello").build();
-        assertTrue(uniqueClassList.contains(editedCS2100_LAB1));
+        ModuleClass editedCS2100Lab1 = new ModuleClassBuilder(CS2100_LAB1).withRemark("hello").build();
+        assertTrue(uniqueClassList.contains(editedCS2100Lab1));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class UniqueModuleClassListTest {
     }
 
     @Test
-    public void remove_ModuleClassDoesNotExist_throwsModuleClassNotFoundException() {
+    public void remove_moduleClassDoesNotExist_throwsModuleClassNotFoundException() {
         assertThrows(ModuleClassNotFoundException.class, () -> uniqueClassList.remove(CS2100_LAB1));
     }
 
@@ -153,8 +153,8 @@ public class UniqueModuleClassListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueClassList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniqueClassList.asUnmodifiableObservableList().remove(0));
     }
 
 }

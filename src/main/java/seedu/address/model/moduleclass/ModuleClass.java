@@ -2,7 +2,6 @@ package seedu.address.model.moduleclass;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.model.person.ModuleCode;

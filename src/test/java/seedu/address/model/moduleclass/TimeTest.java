@@ -19,7 +19,7 @@ public class TimeTest {
 
         assertFalse(Time.isValidTime("24:12")); //out of range
         assertFalse(Time.isValidTime("23.12")); //invalid format
-        assertFalse(Time.isValidTime("13:0"));  //invalid format
+        assertFalse(Time.isValidTime("13:0")); //invalid format
         assertFalse(Time.isValidTime("15:61")); //out of range
         assertFalse(Time.isValidTime("24:00")); //out of range
 

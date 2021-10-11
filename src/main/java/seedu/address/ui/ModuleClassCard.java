@@ -25,6 +25,9 @@ public class ModuleClassCard extends UiPart<Region> {
     @FXML
     private Label remark;
 
+    /**
+     * An UI component that displays information of a {@code moduleClass}.
+     */
     public ModuleClassCard(ModuleClass moduleClass, int displayedIndex) {
         super(FXML);
         this.moduleClass = moduleClass;

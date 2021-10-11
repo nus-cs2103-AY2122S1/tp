@@ -57,7 +57,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the class list with {@code classes}.
      * {@code classes} must not contain duplicate class;
      */
-    public void setModuleClass(List<ModuleClass> classes) {
+    public void setModuleClasses(List<ModuleClass> classes) {
         this.moduleClasses.setModuleClasses(classes);
     }
 
@@ -68,7 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setModuleClass(newData.getModuleClassList());
+        setModuleClasses(newData.getModuleClassList());
     }
 
     /**

@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.moduleclass.Day;
+import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.Time;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
@@ -39,10 +42,23 @@ public class SampleDataUtil {
         };
     }
 
+    public static ModuleClass[] getSampleModuleClasses() {
+        return new ModuleClass[] {
+            new ModuleClass(new ModuleCode("CS2103"), new Day("2"), new Time("10:00"), new Remark("T17")),
+            new ModuleClass(new ModuleCode("CS2100"), new Day("2"), new Time("15:00"), new Remark("T21")),
+            new ModuleClass(new ModuleCode("CS2103"), new Day("1"), new Time("14:00"), new Remark("TG09")),
+            new ModuleClass(new ModuleCode("CS2106"), new Day("5"), new Time("10:00"), new Remark("T01")),
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+
+        for (ModuleClass sampleModuleClass : getSampleModuleClasses()) {
+            sampleAb.addClass(sampleModuleClass);
         }
         return sampleAb;
     }

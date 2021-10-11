@@ -13,10 +13,14 @@ public class Time {
     public static final String VALIDATION_REGEX = "\\d+:\\d+";
     private final LocalTime value;
 
-    public Time(String dateTime) {
-        requireNonNull(dateTime);
-        checkArgument(isValidTime(dateTime), MESSAGE_CONSTRAINTS);
-        this.value = LocalTime.parse(dateTime);
+    /**
+     * Represents a moduleClass's time in the address book.
+     * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
+     */
+    public Time(String time) {
+        requireNonNull(time);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
+        this.value = LocalTime.parse(time);
     }
 
 

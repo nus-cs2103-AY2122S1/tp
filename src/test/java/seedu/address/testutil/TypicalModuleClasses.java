@@ -12,28 +12,26 @@ import seedu.address.model.moduleclass.ModuleClass;
  */
 public class TypicalModuleClasses {
 
-    private TypicalModuleClasses() {} //prevents instantiation
-
     public static final ModuleClass CS2100_LAB1 = new ModuleClassBuilder()
             .withModuleCode("CS2100")
             .withDay("2")
             .withTime("15:00")
             .withRemark("COM1 0113")
             .build();
-
     public static final ModuleClass CS2103_TUT1 = new ModuleClassBuilder()
             .withModuleCode("CS2103")
             .withDay("4")
             .withTime("09:00")
             .withRemark("online")
             .build();
-
     public static final ModuleClass CS2100_TUT1 = new ModuleClassBuilder()
             .withModuleCode("CS2100")
             .withDay("3")
             .withTime("17:00")
             .withRemark("COM1 01-20")
             .build();
+
+    private TypicalModuleClasses() {} //prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical classes.
@@ -47,6 +45,6 @@ public class TypicalModuleClasses {
     }
 
     public static List<ModuleClass> getTypicalModuleClasses() {
-        return new ArrayList<>(Arrays.asList(CS2100_LAB1, CS2100_TUT1, CS2103_TUT1));
+        return new ArrayList<>(Arrays.asList(CS2100_LAB1, CS2103_TUT1, CS2100_TUT1));
     }
 }

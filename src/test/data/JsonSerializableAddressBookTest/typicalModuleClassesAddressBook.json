@@ -1,0 +1,19 @@
+{
+  "persons" : [ ],
+  "classes" : [ {
+    "moduleCode": "CS2100",
+    "day": "2",
+    "time": "15:00",
+    "remark": "COM1 0113"
+  }, {
+    "moduleCode": "CS2103",
+    "day": "4",
+    "time": "09:00",
+    "remark": "online"
+  }, {
+    "moduleCode": "CS2100",
+    "day": "3",
+    "time": "17:00",
+    "remark": "COM1 01-20"
+  } ]
+}
