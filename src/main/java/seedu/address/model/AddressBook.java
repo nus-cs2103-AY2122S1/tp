@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.UniqueFacilityList;
 import seedu.address.model.person.Person;
@@ -106,6 +107,29 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addFacility(Facility f) {
         facilities.add(f);
+    }
+
+    /**
+     * Splits members into different facilities.
+     *
+     * @param personFilteredList List of filtered members to be allocated.
+     */
+    public void split(FilteredList<Person> personFilteredList) {
+        int index = 0;
+        for (Facility facility : facilities) {
+            Facility toEdit = facility;
+            toEdit.clearAllocationList();
+
+            int facilityCount = 0;
+
+            while (toEdit.isWithinMaxCapacity(facilityCount + 1)
+                    && !(index > personFilteredList.size() - 1)) {
+                toEdit.addPersonToFacility(personFilteredList.get(index));
+                facilityCount++;
+                index++;
+            }
+            facilities.replaceFacility(facility, toEdit);
+        }
     }
 
     /**

@@ -18,6 +18,18 @@ public class Capacity {
         this.capacity = capacity;
     }
 
+    /**
+     * Returns true if number of members allocated is within
+     * capacity.
+     *
+     * @param numberOfPerson Current number of persons allocated.
+     * @return Boolean value of whether capacity has been reached.
+     */
+    public boolean isWithinCapacity(int numberOfPerson) {
+        Integer max = Integer.parseInt(capacity);
+        return numberOfPerson <= max;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return (obj == this)

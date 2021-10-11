@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 
 
 /**
@@ -52,6 +53,21 @@ public class UniqueFacilityList implements Iterable<Facility> {
         return other == this // short circuit if same object
                 || (other instanceof UniqueFacilityList // instanceof handles nulls
                 && facilityList.equals(((UniqueFacilityList) other).facilityList));
+    }
+
+    /**
+     * Replaces target Facility with edited Facility.
+     *
+     * @param target Facility to be replaced.
+     * @param editedFacility Facility replacing old one.
+     */
+    public void replaceFacility(Facility target, Facility editedFacility) {
+        int index = facilityList.indexOf(target);
+        if (index == -1) {
+            throw new FacilityNotFoundException();
+        }
+
+        facilityList.set(index, editedFacility);
     }
 
 

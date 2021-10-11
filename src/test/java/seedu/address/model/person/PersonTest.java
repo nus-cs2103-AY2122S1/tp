@@ -11,6 +11,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -48,6 +50,16 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void isAvailableOnDay_success() {
+        Person person = new PersonBuilder().build();
+        assertFalse(person.isAvailableOnDay("Mon"));
+        person.setDays(Arrays.asList("Mon", "Tue"));
+        assertTrue(person.isAvailableOnDay("Mon"));
+        assertTrue(person.isAvailableOnDay("Tue"));
+        assertFalse(person.isAvailableOnDay("Fri"));
     }
 
     @Test

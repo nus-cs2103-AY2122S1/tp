@@ -2,6 +2,11 @@ package seedu.address.model.facility;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import seedu.address.model.person.Person;
+
 /**
  * Represents a Facility in the address book.
  */
@@ -10,6 +15,7 @@ public class Facility {
     private final Location location;
     private final Time time;
     private final Capacity capacity;
+    private List<Person> personAllocatedList = new ArrayList<>();
 
     /**
      * Creates a Facility object with the specified name,
@@ -44,6 +50,30 @@ public class Facility {
         return capacity;
     }
 
+    public void clearAllocationList() {
+        personAllocatedList = new ArrayList<>();
+    }
+
+    public String getPersonsAsString() {
+        if (personAllocatedList == null) {
+            return "no person allocated";
+        }
+
+        StringBuilder builder = new StringBuilder();
+        personAllocatedList.forEach(person -> builder
+                .append(person.getName()).append(", "));
+
+        return builder.toString();
+    }
+
+    public boolean isWithinMaxCapacity(int numberOfPersons) {
+        return capacity.isWithinCapacity(numberOfPersons);
+    }
+
+    public void addPersonToFacility(Person person) {
+        personAllocatedList.add(person);
+    }
+
     /**
      * Returns true if both facilities have same identity
      * and field values.
@@ -65,7 +95,8 @@ public class Facility {
         return name.equals(facility.name)
                 && location.equals(facility.location)
                 && time.equals(facility.time)
-                && capacity.equals(facility.capacity);
+                && capacity.equals(facility.capacity)
+                && personAllocatedList.equals(facility.personAllocatedList);
     }
 
     @Override

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private List<String> days;
 
     // Data fields
     private final Address address;
@@ -71,6 +73,14 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public boolean isAvailableOnDay(String day) {
+        return days != null && days.contains(day);
+    }
+
+    public void setDays(List<String> days) {
+        this.days = days;
     }
 
     /**
