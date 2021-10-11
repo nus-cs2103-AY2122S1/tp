@@ -114,6 +114,13 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
+     * Replaces the given Lesson {@code target} with {@code editedLesson}.
+     * {@code target} must exist in the address book.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
+     */
+    void setLesson(Lesson target, Lesson editedLesson);
+
+    /**
      * Returns lesson corresponding to String lessonCode, else null if lesson does not exist.
      */
     Lesson searchLessons(String lessonCode);

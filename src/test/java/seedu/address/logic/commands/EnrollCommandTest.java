@@ -23,7 +23,8 @@ import seedu.address.model.person.Student;
 
 public class EnrollCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+    // todo push inits to setup method
     private final Lesson testLessonOne = new Lesson("Science",
             new Grade("P2"),
             DayOfWeek.WEDNESDAY,
@@ -42,14 +43,13 @@ public class EnrollCommandTest {
 
     @Test
     public void execute_validEnrollment_success() throws CommandException {
-        Student studentToEnroll = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EnrollCommand enrollCommand = new EnrollCommand(INDEX_FIRST_PERSON, "Science-P2-Wed-1230");
-
-        String expectedMessage = String.format(EnrollCommand.MESSAGE_SUCCESS, studentToEnroll.getName(), testLessonOne);
+        String code = "Science-P2-Wed-1230";
+        EnrollCommand enrollCommand = new EnrollCommand(INDEX_FIRST_PERSON, code);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-        testLessonTwo.addStudent(studentToEnroll);
+        Student studentToEnroll = expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        expectedModel.searchLessons(code).addStudent(studentToEnroll);
+        String expectedMessage = String.format(EnrollCommand.MESSAGE_SUCCESS, studentToEnroll.getName(), testLessonOne);
 
         assertCommandSuccess(enrollCommand, model, expectedMessage, expectedModel);
     }
