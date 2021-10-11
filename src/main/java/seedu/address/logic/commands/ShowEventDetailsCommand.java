@@ -25,7 +25,7 @@ public class ShowEventDetailsCommand extends Command {
     private final Predicate<Event> eventName;
 
     /**
-     * Creates an ShowDetailsCommand to find Event with the specified {@code eventName}
+     * Creates a ShowEventDetailsCommand for the Event with the specified {@code eventName}
      */
     public ShowEventDetailsCommand(Predicate<Event> eventName) {
         requireNonNull(eventName);
@@ -45,7 +45,7 @@ public class ShowEventDetailsCommand extends Command {
         String displayedMessage = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
                 desiredEvent.getName(),
                 desiredEvent.getDate(),
-                desiredEvent.getTime().toString().equals("") ? "N/A" : desiredEvent.getTime(),
+                desiredEvent.getTime().toString().equals("") ? "" : desiredEvent.getTime(),
                 desiredEvent.getIsDone() ? "Completed" : "Uncompleted");
 
         return new CommandResult(displayedMessage);

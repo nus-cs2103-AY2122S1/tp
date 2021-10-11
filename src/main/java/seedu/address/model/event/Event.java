@@ -15,7 +15,7 @@ public class Event implements Comparable<Event> {
 
     public static final String COMPLETED = "Completed";
     public static final String UNCOMPLETED = "Uncompleted";
-    private boolean isDone = false;
+    private boolean isDone;
     private ArrayList<Participant> participants = new ArrayList<>();
     private EventName eventName;
     private EventDate eventDate;
@@ -32,7 +32,7 @@ public class Event implements Comparable<Event> {
         this.eventName = name;
         this.eventDate = date;
         this.eventTime = time;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -64,23 +64,67 @@ public class Event implements Comparable<Event> {
     }
 
     public EventName getName() {
-        return this.eventName;
+        return eventName;
+    }
+
+    public String getNameString() {
+        return eventName.eventName;
     }
 
     public EventDate getDate() {
-        return this.eventDate;
+        return eventDate;
+    }
+
+    public String getDateString() {
+        return eventDate.toString();
     }
 
     public EventTime getTime() {
-        return this.eventTime;
+        return eventTime;
+    }
+
+    public String getTimeString() {
+        return eventTime.toString();
     }
 
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
     public List<Participant> getParticipants() {
-        return this.participants;
+        return participants;
+    }
+
+    /**
+     * Adds the given participant to the list of participants.
+     *
+     * @param participant The participant to be added.
+     */
+    public void addParticipant(Participant participant) {
+        requireNonNull(participant);
+        this.participants.add(participant);
+        participant.addEvent(this);
+    }
+
+    /**
+     * Removes the given participant from the list of participants.
+     *
+     * @param participant The participant to be removed.
+     */
+    public void removeParticipant(Participant participant) {
+        requireNonNull(participant);
+        this.participants.remove(participant);
+        participant.removeEvent(this);
+    }
+
+    /** Returns true if the given participant is attending this event.
+     *
+     * @param participant The given participant.
+     * @return True if the participant is attending.
+     */
+    public boolean hasParticipant(Participant participant) {
+        requireNonNull(participant);
+        return this.participants.stream().anyMatch(p -> p.isSameParticipant(participant));
     }
 
     /**
@@ -89,7 +133,7 @@ public class Event implements Comparable<Event> {
      * @return An Event that is marked done.
      */
     public Event markAsDone() {
-        return new Event(this.eventName, this.eventDate, this.eventTime, true, this.participants);
+        return new Event(eventName, eventDate, eventTime, true, participants);
     }
 
     /**
@@ -150,11 +194,11 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event o) {
-        int compareDateResult = this.eventDate.date.compareTo(o.eventDate.date);
+        int compareDateResult = eventDate.date.compareTo(o.eventDate.date);
         if (compareDateResult == 0) { // same date
-            int compareTimeResult = this.eventTime.compareTo(o.eventTime);
+            int compareTimeResult = eventTime.compareTo(o.eventTime);
             if (compareTimeResult == 0) { // same time
-                return this.eventName.eventName.compareTo(o.eventName.eventName);
+                return eventName.eventName.compareTo(o.eventName.eventName);
             } else {
                 return compareTimeResult;
             }

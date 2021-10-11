@@ -73,12 +73,11 @@ public class AddParticipantToEventCommand extends Command {
                 .filter(e -> e.getName().equals(eventName))
                 .findFirst().get();
 
-        if (selectedEvent.getParticipants().contains(participantToAdd)) {
+        if (selectedEvent.hasParticipant(participantToAdd)) {
             throw new CommandException("Participant " + participantToAdd.getFullName() + " already exists!");
         }
 
-        // add participant
-        selectedEvent.getParticipants().add(participantToAdd);
+        selectedEvent.addParticipant(participantToAdd);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
                 participantToAdd.getFullName(), eventName));

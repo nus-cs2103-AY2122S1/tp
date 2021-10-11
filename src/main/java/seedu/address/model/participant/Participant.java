@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,19 +33,21 @@ public class Participant {
     private final Set<Note> notes = new HashSet<>();
     private final ArrayList<NextOfKin> nextOfKins = new ArrayList<>();
 
+    private final ArrayList<Event> events = new ArrayList<>();
+
 
     /**
      * Every field must be present and not null.
      * Called upon creation of new Participant.
      *
-     * @param name       Name object of the person.
-     * @param phone      Phone object of the person.
-     * @param email      Email object of the person.
-     * @param address    Address object of the person.
-     * @param tags       tags of the person.
-     * @param birthDate  birthdate of the person.
+     * @param name       Name object of the participant.
+     * @param phone      Phone object of the participant.
+     * @param email      Email object of the participant.
+     * @param address    Address object of the participant.
+     * @param tags       tags of the participant.
+     * @param birthDate  birthdate of the participant.
      * @param notes      notes attached by the manager.
-     * @param nextOfKin  nextOfKin of the person.
+     * @param nextOfKin  nextOfKin of the participant.
      */
     public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
                        Set<Note> notes, Collection<NextOfKin> nextOfKin) {
@@ -64,15 +67,15 @@ public class Participant {
      * Overloaded constructor with provided Participant ID. Every field must be present and not null.
      * Called when converting existing Participants in memory (JSONAdaptedParticipant) to Participant.
      *
-     * @param name       Name object of the person.
-     * @param phone      Phone object of the person.
-     * @param email      Email object of the person.
-     * @param address    Address object of the person.
-     * @param tags       tags of the person.
-     * @param birthDate  birthdate of the person.
+     * @param name       Name object of the participant.
+     * @param phone      Phone object of the participant.
+     * @param email      Email object of the participant.
+     * @param address    Address object of the participant.
+     * @param tags       tags of the participant.
+     * @param birthDate  birthdate of the participant.
      * @param notes      notes attached by the manager.
-     * @param nextOfKin  nextOfKin of the person.
-     * @param id         ParticipantId object of the person.
+     * @param nextOfKin  nextOfKin of the participant.
+     * @param id         ParticipantId object of the participant.
      */
     public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
                        Set<Note> notes, Collection<NextOfKin> nextOfKin, ParticipantId id) {
@@ -157,18 +160,45 @@ public class Participant {
     }
 
     /**
-     * Adds a note to set of notes.
+     * Adds an Event to the list of events.
      *
-     * @param note note to be added.
+     * @param event Event to be added.
+     */
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    /**
+     * Removes a specific Event from the list of events.
+     *
+     * @param event Event to be removed.
+     */
+    public void removeEvent(Event event) {
+        events.remove(event);
+    }
+
+    /**
+     * Returns an Arraylist of events the participant is attending.
+     *
+     * @return this object's events.
+     */
+    public ArrayList<Event> getEvents() {
+        return events;
+    }
+
+    /**
+     * Adds a Note to the set of notes.
+     *
+     * @param note Note to be added.
      */
     public void addNote(Note note) {
         notes.add(note);
     }
 
     /**
-     * Removes a specific Note from the set.
+     * Removes a specific Note from the set of notes.
      *
-     * @param note    A Note to be removed.
+     * @param note Note to be removed.
      */
     public void removeNote(Note note) {
         notes.remove(note);
@@ -183,8 +213,17 @@ public class Participant {
     }
 
     /**
+     * Returns a string representation of the Participant's id.
+     *
+     * @return the Participant's id.
+     */
+    public String getIdValue() {
+        return this.id.toString();
+    }
+
+    /**
      * Returns true if both participants have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two participants.
      * This allow Participant to both pass in Person and Participant objects.
      */
     public boolean isSameParticipant(Participant otherParticipant) {
@@ -195,6 +234,10 @@ public class Participant {
         return otherParticipant != null
                 && otherParticipant.getName().equals(getName())
                 && otherParticipant.getBirthDate().equals(getBirthDate());
+    }
+
+    public void deleteFromEvents() {
+        this.events.forEach(e -> e.removeParticipant(this));
     }
 
     /**
