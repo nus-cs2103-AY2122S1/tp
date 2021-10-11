@@ -18,7 +18,7 @@ public class HelpPanel extends UiPart<Region> {
     @FXML
     private Label text;
 
-    private final String helpContent ="General:\n"
+    private final String helpContent = "General:\n"
             + "1. Contacts Tab -> contacts\n"
             + "2. Tasks Tab -> tasks\n"
             + "3. Help Tab -> help\n"
@@ -37,8 +37,8 @@ public class HelpPanel extends UiPart<Region> {
             + "4. Find by description -> find DESCRIPTION\n"
             + "5. Find by tag -> find [t/TAG]\n"
             + "6. Clear Tasks -> clear\n\n"
-            + "For more detailed information on each command," +
-            " visit our User Guide at https://ay2122s1-cs2103t-w15-2.github.io/tp/UserGuide.html";
+            + "For more detailed information on each command,"
+            + " visit our User Guide at https://ay2122s1-cs2103t-w15-2.github.io/tp/UserGuide.html";
 
     /**
      * Creates a new Help Panel to contain help messages.
