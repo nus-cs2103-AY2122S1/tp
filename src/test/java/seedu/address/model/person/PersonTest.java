@@ -51,10 +51,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // email and clientId differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).withClientId("2").build();
+        // email and name differs in case, all other attributes same -> returns false
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).withName("Not Bob").build();
         assertFalse(BOB.isSamePerson(editedBob));
-
     }
 
     @Test

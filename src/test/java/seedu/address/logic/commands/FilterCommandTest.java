@@ -82,10 +82,10 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleFilter() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        PersonContainsKeywordsPredicate predicate1 = preparePredicate("Pauline Kurz Elle Kunz p/94 e/example.com");
-        PersonContainsKeywordsPredicate predicate2 = preparePredicate("* a/ave");
-        FilterCommand command1 = new FilterCommand(predicate2);
-        FilterCommand command2 = new FilterCommand(predicate1);
+        PersonContainsKeywordsPredicate predicate1 = preparePredicate(" Pauline Kurz Elle Kunz p/94 e/example.com");
+        PersonContainsKeywordsPredicate predicate2 = preparePredicate(" a/ave");
+        FilterCommand command1 = new FilterCommand(predicate1);
+        FilterCommand command2 = new FilterCommand(predicate2);
         expectedModel.filterFilteredPersonList(predicate1);
         expectedModel.filterFilteredPersonList(predicate2);
         command1.execute(model);

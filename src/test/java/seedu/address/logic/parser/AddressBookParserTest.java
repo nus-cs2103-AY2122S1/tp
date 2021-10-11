@@ -48,7 +48,7 @@ public class AddressBookParserTest {
 
     @BeforeEach
     public void setUp() {
-        model.getAddressBook().setClientCounter("9");
+        model.getAddressBook().setClientCounter("0");
     }
 
     @Test
@@ -75,8 +75,10 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        descriptor.setClientId(null);
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        EditCommand command1 = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

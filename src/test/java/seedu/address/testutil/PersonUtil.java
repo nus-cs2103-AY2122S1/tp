@@ -59,6 +59,10 @@ public class PersonUtil {
                 .append(riskAppetite.value).append(" "));
         descriptor.getDisposableIncome().ifPresent(disposableIncome -> sb.append(PREFIX_DISPOSABLEINCOME)
                 .append(disposableIncome.value).append(" "));
+        descriptor.getCurrentPlan().ifPresent(currentPlan -> sb.append(PREFIX_CURRENTPLAN)
+                .append(currentPlan.value).append(" "));
+        descriptor.getLastMet().ifPresent(lastMet -> sb.append(PREFIX_LASTMET)
+                .append(lastMet.dateInString).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
