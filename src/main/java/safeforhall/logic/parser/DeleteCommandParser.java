@@ -2,6 +2,8 @@ package safeforhall.logic.parser;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
+
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.DeleteCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -18,11 +20,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            ArrayList<Index> indexArray = ParserUtil.parseIndexes(args.trim().split(" "));
+            return new DeleteCommand(indexArray);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 

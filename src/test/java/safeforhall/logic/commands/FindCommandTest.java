@@ -95,12 +95,13 @@ public class FindCommandTest {
 
     @Test
     public void execute_multiplePredicates_multiplePersonsFound2() {
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
         FindCompositePredicate predicate = preparePredicate("kurz elle kunz best", null, null, null, null, "soc");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalPersons.CARL, TypicalPersons.ELLE, TypicalPersons.GEORGE),
+        assertEquals(Arrays.asList(TypicalPersons.CARL, TypicalPersons.ELLE,
+                TypicalPersons.FIONA, TypicalPersons.GEORGE),
                 model.getFilteredPersonList());
     }
 

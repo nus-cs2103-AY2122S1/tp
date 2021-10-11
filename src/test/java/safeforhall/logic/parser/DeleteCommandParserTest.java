@@ -5,8 +5,11 @@ import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
+import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.DeleteCommand;
 
 /**
@@ -22,11 +25,14 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        ArrayList<Index> indexArray = new ArrayList<>();
+        indexArray.add(INDEX_FIRST_PERSON);
+        assertParseSuccess(parser, "1", new DeleteCommand(indexArray));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
     }
 }

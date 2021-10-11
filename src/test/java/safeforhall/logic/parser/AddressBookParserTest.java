@@ -6,13 +6,16 @@ import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static safeforhall.testutil.Assert.assertThrows;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+//import static safeforhall.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.DeleteCommand;
@@ -21,8 +24,10 @@ import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Room;
@@ -52,7 +57,9 @@ public class AddressBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        ArrayList<Index> indexArray = new ArrayList<>();
+        indexArray.add(INDEX_FIRST_PERSON);
+        assertEquals(new DeleteCommand(indexArray), command);
     }
 
     @Test
@@ -93,6 +100,13 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_list() throws Exception {
+        ListCommand command = (ListCommand) parser.parseCommand(
+                ListCommand.COMMAND_WORD + " k/c d1/10-10-2021");
+        assertEquals(new ListCommand("c", new LastDate("10-10-2021")), command);
     }
 
     @Test
