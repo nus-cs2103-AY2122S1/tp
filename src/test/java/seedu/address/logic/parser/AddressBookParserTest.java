@@ -49,7 +49,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_visit() throws Exception {
-        final Visit visit = new Visit("2020-11-11");
+        final Visit visit = new Visit("2020-11-11 12:00");
         VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + visit.value);
         Optional<Visit> expectedVisit = Optional.ofNullable(visit);

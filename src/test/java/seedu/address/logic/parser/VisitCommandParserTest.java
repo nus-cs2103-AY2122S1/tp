@@ -20,7 +20,7 @@ import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Visit;
 
 public class VisitCommandParserTest {
-    private static final String TEST_VISIT = "2021-11-11";
+    private static final String TEST_VISIT = "2020-11-11 12:00";
 
     private VisitCommandParser parser = new VisitCommandParser();
 

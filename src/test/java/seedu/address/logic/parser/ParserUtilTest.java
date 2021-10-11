@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_LANGUAGE = " ";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_VISIT = "2020-111-11";
+    private static final String INVALID_VISIT = "2020-111-11 12:00";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -40,7 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_LANGUAGE = "English";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_VISIT_DATE = "2020-11-11";
+    private static final String VALID_VISIT_DATETIME = "2020-11-11 12:00";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -214,14 +214,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
-        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT_DATE);
-        assertEquals(expectedVisit, ParserUtil.parseVisit(VALID_VISIT_DATE));
+        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT_DATETIME);
+        assertEquals(expectedVisit, ParserUtil.parseVisit(VALID_VISIT_DATETIME));
     }
 
     @Test
     public void parseVisit_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
-        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATE + WHITESPACE;
-        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT_DATE);
+        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATETIME + WHITESPACE;
+        Optional<Visit> expectedVisit = parseVisit(VALID_VISIT_DATETIME);
         assertEquals(expectedVisit, ParserUtil.parseVisit(visitWithWhitespace));
     }
 
@@ -237,14 +237,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseVisitForAdd_validValueWithoutWhitespace_returnsVisit() throws Exception {
-        Optional<Visit> expectedVisit = parseVisitForAdd(VALID_VISIT_DATE);
-        assertEquals(expectedVisit, ParserUtil.parseVisitForAdd(VALID_VISIT_DATE));
+        Optional<Visit> expectedVisit = parseVisitForAdd(VALID_VISIT_DATETIME);
+        assertEquals(expectedVisit, ParserUtil.parseVisitForAdd(VALID_VISIT_DATETIME));
     }
 
     @Test
     public void parseVisitForAdd_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
-        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATE + WHITESPACE;
-        Optional<Visit> expectedVisit = parseVisitForAdd(VALID_VISIT_DATE);
+        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATETIME + WHITESPACE;
+        Optional<Visit> expectedVisit = parseVisitForAdd(VALID_VISIT_DATETIME);
         assertEquals(expectedVisit, ParserUtil.parseVisitForAdd(visitWithWhitespace));
     }
 
@@ -260,14 +260,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseLastVisit_validValueWithoutWhitespace_returnsVisit() throws Exception {
-        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATE);
-        assertEquals(expectedLastVisit, ParserUtil.parseLastVisit(VALID_VISIT_DATE));
+        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATETIME);
+        assertEquals(expectedLastVisit, ParserUtil.parseLastVisit(VALID_VISIT_DATETIME));
     }
 
     @Test
     public void parseLastVisit_validValueWithWhitespace_returnsTrimmedVisit() throws Exception {
-        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATE + WHITESPACE;
-        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATE);
+        String visitWithWhitespace = WHITESPACE + VALID_VISIT_DATETIME + WHITESPACE;
+        Optional<LastVisit> expectedLastVisit = parseLastVisit(VALID_VISIT_DATETIME);
         assertEquals(expectedLastVisit, parseLastVisit(visitWithWhitespace));
     }
 }

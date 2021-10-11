@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_LANGUAGE = "English";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_LAST_VISIT = "2021-01-01";
+    public static final String DEFAULT_LAST_VISIT = "2021-01-01 12:00";
     public static final String DEFAULT_VISIT = "";
 
     private Name name;

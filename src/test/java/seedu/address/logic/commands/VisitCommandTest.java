@@ -33,7 +33,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class VisitCommandTest {
 
-    private static final String VISIT_STUB = "2021-11-11";
+    private static final String VISIT_STUB = "2021-11-11 12:00";
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

@@ -2,8 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.ParserUtil.DATETIME_PARSE_FORMAT;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -74,10 +75,10 @@ public enum Frequency {
      */
     public Visit nextVisit(Visit visit) {
         String currentStringVisit = visit.value;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate currentDateTime = LocalDate.parse(currentStringVisit, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_FORMAT);
+        LocalDateTime currentDateTime = LocalDateTime.parse(currentStringVisit, formatter);
 
-        LocalDate nextDateTime = null;
+        LocalDateTime nextDateTime = null;
         switch (this) {
         case DAILY:
             nextDateTime = currentDateTime.plusDays(1);

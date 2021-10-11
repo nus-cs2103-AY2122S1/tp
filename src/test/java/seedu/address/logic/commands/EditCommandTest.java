@@ -36,7 +36,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().withVisit("2021-10-10").withLastVisit("2021-07-07").build();
+        Person editedPerson = new PersonBuilder().withVisit("2021-10-10 12:00")
+                .withLastVisit("2021-07-07 12:00").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
