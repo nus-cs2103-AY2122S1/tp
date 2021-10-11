@@ -1,6 +1,7 @@
 package seedu.fast.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.function.Predicate;
 
 import seedu.fast.commons.core.Messages;
