@@ -146,10 +146,10 @@ public class Event implements Comparable<Event> {
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
             return true;
+        } else {
+            return otherEvent != null
+                    && otherEvent.getName().equals(getName());
         }
-
-        return otherEvent != null
-                && otherEvent.getName().equals(getName());
     }
 
     /**
