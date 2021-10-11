@@ -1,7 +1,7 @@
 package seedu.fast.model.person;
 
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.fast.model.tag.PriorityTag;
