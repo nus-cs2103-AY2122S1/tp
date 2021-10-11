@@ -11,6 +11,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_GROUP = new Prefix("-g ");
     public static final Prefix PREFIX_ASSESSMENT = new Prefix("-a ");
     public static final Prefix PREFIX_SCORE = new Prefix("-s ");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_TAG = new Prefix("-t ");
+    public static final Prefix PREFIX_FILE = new Prefix("-f ");
 
 }

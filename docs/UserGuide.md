@@ -146,36 +146,39 @@ Examples:
 
 Loads data as specified in the provided CSV file.
 
-Format: `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>`
+Format: `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]`
 
 * The file path can be either the absolute path or the relative path.
 * The first row of the CSV file needs to be headers for the respective columns.
-* The first two columns refer to the student’s name and NUSNET ID.
-* The next n columns, where n is the specified number of groups, refer to the student’s groups.
-* The next m columns, where m is the specified number of assessments, refer to the student’s grade in the respective assessments.
-* The header for the assessment rows should be in the following format: `<assessment_name>/<max_grade>`. For example, `Rune Trials/600`.
+* The header for the assessment columns should the name of the assessment. For example, `Rune Trials`.
+* The header for every other column does not matter.
 * Every row apart from the first represents a student.
+* The first two columns refer to the student’s name and NUSNET ID.
+* The next i columns, where i is the specified number of group columns, refer to the student’s groups.
+* The next j columns, where j is the specified number of assessment columns, refer to the student’s grade in the respective assessments.
+* The next k columns, where k is the specified number of tag columns, refer to the student's tags.
+* The number of group columns, assessment columns, and tag columns are assumed to be 0 if they are not specified.
 
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tips:**<br>
 
-* If the student does not have as many groups as the number of groups, you should leave several group columns blank.
+* If the student does not have as many groups as the number of group columns, you should leave several group columns blank.
 
 * If the student does not have a grade for some assessment, you should leave the corresponding assessment column blank.
 
 </div>
 
 Examples:
-* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10`
+* `import -f /home/prof/CS1101S/student_data.csv -g 2 -a 10 -t 1`
 * `import -f student_data.csv -g 3 -a 30`
 
 
-### Resetting all data: `clear data`
+### Resetting all data: `clear`
 
 Clears all existing data.
 
-Format: `clear data`
+Format: `clear`
 
 
 ### Saving the data `[coming soon]`
@@ -201,5 +204,5 @@ Action | Format, Examples
 **Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
 **Add Assessment** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
-**Import data** | `import -f <file_path> -g <number_of_groups> -a <number_of_assessments>` <br> e.g. `import -f student_data.csv -g 3 -a 30`
+**Import data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` <br> e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
 **Clear** | `clear data`

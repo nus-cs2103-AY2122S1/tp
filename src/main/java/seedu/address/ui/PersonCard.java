@@ -2,12 +2,15 @@ package seedu.address.ui;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
 /**
@@ -51,10 +54,15 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         nusNetId.setText("ID: " + student.getId().value);
-        String groupText = student.getGroups().toString();
-        group.setText("Groups: " + groupText.substring(1, groupText.length() - 1));
-        String scoreText = Arrays.toString(student.getScores().entrySet().toArray());
-        assessment.setText("Assessments: " + scoreText.substring(1, scoreText.length() - 1));
+
+        String groupsString = student.getGroups().stream()
+                .map(Group::toString).collect(Collectors.joining(", "));
+        group.setText("Groups: " + groupsString);
+
+        String assessmentsString = student.getScores().keySet().stream()
+                .map(Assessment::toString).sorted().collect(Collectors.joining(", "));
+        assessment.setText("Assessments: " + assessmentsString);
+
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -16,6 +16,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -37,7 +38,6 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        boolean isTwoWordCommand = false;
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -45,16 +45,20 @@ public class AddressBookParser {
 
         String commandWord = matcher.group("commandWord");
         String arguments = matcher.group("arguments");
-        if ((arguments.length() != 0) && (!arguments.startsWith(" -"))) {
-            isTwoWordCommand = true;
-            if (Character.isDigit(arguments.charAt(1))) {
-                isTwoWordCommand = false;
-            }
+
+        // if it ends with a prefix, add a space so that the prefix can be picked up by the tokenizer
+        if (arguments.matches(".*-[a-z]$")) {
+            arguments = arguments + " ";
         }
+
+        boolean isTwoWordCommand = arguments.length() > 0
+                && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
+
         if (isTwoWordCommand) {
-            commandWord = convertFormat(commandWord, arguments);
-            arguments = convertFormatArguments(arguments);
+            commandWord = extractFullCommandWord(commandWord, arguments);
+            arguments = extractArguments(arguments);
         }
+
         switch (commandWord) {
 
         case AddAllocCommand.COMMAND_WORD:
@@ -87,6 +91,9 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -95,40 +102,32 @@ public class AddressBookParser {
     /**
      * Removes second word of command from arguments.
      *
-     * @param arguments arguments to format.
-     * @return formatted arguments.
+     * @param arguments raw arguments to extract from.
+     * @return extracted arguments.
      */
-    private String convertFormatArguments(String arguments) {
-        int index = 0;
-        if (arguments.contains("-")) {
-            index = arguments.indexOf("-");
+    private String extractArguments(String arguments) {
+        int argumentsIndex = arguments.indexOf("-");
+        if (argumentsIndex == -1) {
+            return "";
         }
-        if (index == 0) {
-            return null;
-        } else {
-            String argumentsFormatted = arguments.substring(index - 1);
-            return argumentsFormatted;
-        }
+        String extractedArguments = arguments.substring(argumentsIndex - 1);
+        return extractedArguments;
     }
 
     /**
      * Converts commandWord to the two word format and retrieves second word from arguments.
      *
-     * @param commandWord commandWord to format.
+     * @param firstCommandWord the original commandWord parsed.
      * @param arguments arguments to retrieve second half of commandWord from.
-     * @return formatted commandWord.
+     * @return full commandWord.
      */
-    private String convertFormat(String commandWord, String arguments) {
-        int index = 0;
-        if (arguments.contains("-")) {
-            index = arguments.indexOf("-");
+    private String extractFullCommandWord(String firstCommandWord, String arguments) {
+        int argumentsIndex = arguments.indexOf("-");
+        if (argumentsIndex == -1) {
+            return firstCommandWord + arguments;
         }
-        if (index == 0) {
-            return commandWord + arguments;
-        } else {
-            String commandWordPartTwo = commandWord + arguments.substring(0, index - 1);
-            return commandWordPartTwo;
-        }
+        String fullCommandWord = firstCommandWord + arguments.substring(0, argumentsIndex - 1).stripTrailing();
+        return fullCommandWord;
     }
 
 }
