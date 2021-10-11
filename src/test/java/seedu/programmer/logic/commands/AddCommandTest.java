@@ -2,6 +2,7 @@ package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -22,6 +24,20 @@ import seedu.programmer.model.student.Student;
 import seedu.programmer.testutil.StudentBuilder;
 
 public class AddCommandTest {
+    private static Student validStudent;
+    private static Student sampleStudentA;
+    private static AddCommand sampleCommandA;
+    private static AddCommand sampleCommandB;
+
+    @BeforeAll
+    public static void oneTimeSetUp() {
+        // Initialize sample students and Commands once before all tests
+        validStudent = new StudentBuilder().build();
+        sampleStudentA = new StudentBuilder().withName("Alice").build();
+        Student sampleStudentB = new StudentBuilder().withName("Bob").build();
+        sampleCommandA = new AddCommand(sampleStudentA);
+        sampleCommandB = new AddCommand(sampleStudentB);
+    }
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -29,7 +45,6 @@ public class AddCommandTest {
 
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        Student validStudent = new StudentBuilder().build();
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
 
@@ -37,10 +52,9 @@ public class AddCommandTest {
         assertEquals(List.of(validStudent), modelStub.studentsAdded);
     }
 
-    //todo
+    // todo
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
-        Student validStudent = new StudentBuilder().build();
         AddCommand addCommand = new AddCommand(validStudent);
         ModelStub modelStub = new ModelStubWithStudent(validStudent);
 
@@ -50,12 +64,32 @@ public class AddCommandTest {
 
     @Test
     public void execute_invalidName_throwsCommandException() {
-        Student validStudent = new StudentBuilder().build();
         AddCommand addCommand = new AddCommand(validStudent);
         ModelStub modelStub = new ModelStubWithStudent(validStudent);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () ->
             addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void equals_sameValues_returnsTrue() {
+        AddCommand sampleCommandACopy = new AddCommand(sampleStudentA);
+        assertEquals(sampleCommandA, sampleCommandACopy);
+    }
+
+    @Test
+    public void equals_differentTypes_returnsFalse() {
+        assertNotEquals(1, sampleCommandA);
+    }
+
+    @Test
+    public void equals_nullValue_returnsFalse() {
+        assertNotEquals(null, sampleCommandA);
+    }
+
+    @Test
+    public void equals_differentStudent_returnsFalse() {
+        assertNotEquals(sampleCommandA, sampleCommandB);
     }
 
     /**
