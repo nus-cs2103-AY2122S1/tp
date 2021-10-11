@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 
 public class CommandsListTest {
 
+    /**
+     * Converts a list of Commands which is a String array into a String.
+     * Each entry is separated by a comma and space.
+     */
     private String listOfCommandsToString(String[] listOfCommands) {
         String result = "";
         for (int i = 0; i < listOfCommands.length; i++) {
@@ -18,7 +22,7 @@ public class CommandsListTest {
     }
 
     @Test
-    public void getListOfCommandsAsString_none_correctString() {
+    public void getListOfCommandsAsString() {
         String[] listOfCommandsCopy = CommandsList.getListOfCommands();
         String correctString = listOfCommandsToString(listOfCommandsCopy);
 
@@ -31,7 +35,7 @@ public class CommandsListTest {
      * modifying it's contents should not affect original array.
      */
     @Test
-    public void getListOfCommands_none_copyOfActualArray() {
+    public void getListOfCommands() {
         String[] listOfCommandsCopy = CommandsList.getListOfCommands();
         if (listOfCommandsCopy.length > 0) {
             for (int i = 0; i < listOfCommandsCopy.length; i++) {

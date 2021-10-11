@@ -7,7 +7,9 @@ public class CommandsList {
     private static final String[] LIST_OF_COMMANDS = {"add", "delete", "help", "list", "update"};
 
     /**
-     * @return a copy of the LIST_OF_COMMANDS array
+     * Creates a copy of the LIST_OF_COMMANDS array and return it.
+     *
+     * @return the copied array
      */
     public static String[] getListOfCommands() {
         String[] copyArray = new String[LIST_OF_COMMANDS.length];
@@ -20,7 +22,9 @@ public class CommandsList {
     }
 
     /**
-     * @return string of the list of all supported commands, each command separated by a comma
+     * Converts the list of commands into a String, with each command separated by a comma and space.
+     *
+     * @return string of the list of all supported commands
      */
     public static String getListOfCommandsAsString() {
         StringBuilder listOfCommandsAsString = new StringBuilder();
