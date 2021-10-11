@@ -16,6 +16,7 @@ import seedu.fast.logic.Logic;
 import seedu.fast.logic.commands.CommandResult;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.logic.parser.exceptions.ParseException;
+import seedu.fast.logic.parser.HelpCommandParser;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -192,8 +193,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                String commandHelp = commandText.split(" ")[1];
-                handleHelp(commandHelp);
+                String helpArg = HelpCommandParser.getArgs(commandText);
+                handleHelp(helpArg);
             }
 
             if (commandResult.isExit()) {
