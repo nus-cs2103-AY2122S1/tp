@@ -132,7 +132,12 @@ public class Student {
         List<Group> groups = getGroups();
         if (!groups.isEmpty()) {
             builder.append("; Groups: ");
-            groups.forEach(builder::append);
+            groups.forEach(group -> {
+                builder.append(group);
+                builder.append(", ");
+            });
+            //removes last ", "
+            builder.delete(builder.length() - 2, builder.length());
         }
 
         Map<Assessment, Score> scores = getScores();
@@ -144,7 +149,12 @@ public class Student {
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            tags.forEach(tag -> {
+                builder.append(tag);
+                builder.append(", ");
+            });
+            //removes last ", "
+            builder.delete(builder.length() - 2, builder.length());
         }
         return builder.toString();
     }
