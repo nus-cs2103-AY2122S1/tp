@@ -1,10 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductContainsIdPredicate;
 
 /**
@@ -23,15 +29,33 @@ public class ViewProductCommand extends Command {
                     + " 20 ";
 
     private final ProductContainsIdPredicate predicate;
+    private Index index;
 
+    /**
+     * Constructor for the view product command.
+     */
     public ViewProductCommand(ProductContainsIdPredicate predicate) {
         this.predicate = predicate;
+        try {
+            this.index = Index.fromOneBased(predicate.getId());
+        } catch (IndexOutOfBoundsException ioobe) {
+            this.index = Index.fromOneBased(Integer.MAX_VALUE);
+        }
+
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredProductList(predicate);
+        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
+        List<Product> lastShownList = model.getFilteredProductList();
+        if (index.getZeroBased() < 0 || index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
+        }
+
+        Product productToEdit = lastShownList.get(index.getZeroBased());
+        Predicate<Product> productPredicate = (product -> product.equals(productToEdit));
+        model.updateFilteredProductList(productPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size())
         );
