@@ -5,6 +5,9 @@ import java.util.Comparator;
 import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.model.person.Person;
 
+/**
+ * Custom comparator that compares Person objects by their Appointment date.
+ */
 public class SortByAppointment implements Comparator<Person> {
 
     public static final String KEYWORD = "appointment";

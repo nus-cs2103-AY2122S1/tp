@@ -4,6 +4,9 @@ import java.util.Comparator;
 
 import seedu.fast.model.person.Person;
 
+/**
+ * Custom comparator that compares Person objects by their Names.
+ */
 public class SortByName implements Comparator<Person> {
 
     public static final String KEYWORD = "name";

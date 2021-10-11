@@ -99,8 +99,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the persons in the list.
-     * Todo: sort by different sorting conditions
+     * Sorts the persons in the list by the given comparator.
      */
     public void sortPersons(Comparator<Person> sortBy) {
         internalList.sort(sortBy);
