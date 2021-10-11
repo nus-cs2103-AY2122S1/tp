@@ -16,13 +16,16 @@ public class ProductContainsIdPredicate implements Predicate<Product> {
         this.id = id;
     }
 
+    public int getId() {
+
+        return Integer.parseInt(id.get(0));
+    }
+
     @Override
     public boolean test(Product product) {
         return id.stream()
                 .anyMatch(id -> {
-                    Integer integerId = Integer.parseInt(id);
-                    String stringOfId = integerId.toString();
-                    return StringUtil.containsWordIgnoreCase(product.getId().toString(), stringOfId);
+                    return StringUtil.containsWordIgnoreCase(product.getId().toString(), id);
                 });
     }
 
