@@ -14,29 +14,29 @@ import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
 
 /**
- * An Immutable AniList that is serializable to JSON format.
+ * An Immutable AnimeList that is serializable to JSON format.
  */
 @JsonRootName(value = "anilist")
-class JsonSerializableAniList {
+class JsonSerializableAnimeList {
 
     public static final String MESSAGE_DUPLICATE_ANIME = "Anime list contains duplicate anime(s).";
 
     private final List<JsonAdaptedAnime> anime = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAniList} with the given anime.
+     * Constructs a {@code JsonSerializableAnimeList} with the given anime.
      */
     @JsonCreator
-    public JsonSerializableAniList(@JsonProperty("anime") List<JsonAdaptedAnime> anime) {
+    public JsonSerializableAnimeList(@JsonProperty("anime") List<JsonAdaptedAnime> anime) {
         this.anime.addAll(anime);
     }
 
     /**
      * Converts a given {@code ReadOnlyAnimeList} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAniList}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableAnimeList}.
      */
-    public JsonSerializableAniList(ReadOnlyAnimeList source) {
+    public JsonSerializableAnimeList(ReadOnlyAnimeList source) {
         anime.addAll(source.getAnimeList().stream().map(JsonAdaptedAnime::new).collect(Collectors.toList()));
     }
 

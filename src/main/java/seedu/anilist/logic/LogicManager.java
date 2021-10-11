@@ -10,7 +10,7 @@ import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.logic.commands.Command;
 import seedu.anilist.logic.commands.CommandResult;
 import seedu.anilist.logic.commands.exceptions.CommandException;
-import seedu.anilist.logic.parser.AniListParser;
+import seedu.anilist.logic.parser.AnimeListParser;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.ReadOnlyAnimeList;
@@ -26,7 +26,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AniListParser aniListParser;
+    private final AnimeListParser animeListParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -34,7 +34,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        aniListParser = new AniListParser();
+        animeListParser = new AnimeListParser();
     }
 
     @Override
@@ -42,11 +42,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = aniListParser.parseCommand(commandText);
+        Command command = animeListParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAniList(model.getAniList());
+            storage.saveAnimeList(model.getAnimeList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -55,8 +55,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAnimeList getAniList() {
-        return model.getAniList();
+    public ReadOnlyAnimeList getAnimeList() {
+        return model.getAnimeList();
     }
 
     @Override
@@ -65,8 +65,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAniListFilePath() {
-        return model.getAniListFilePath();
+    public Path getAnimeListFilePath() {
+        return model.getAnimeListFilePath();
     }
 
     @Override

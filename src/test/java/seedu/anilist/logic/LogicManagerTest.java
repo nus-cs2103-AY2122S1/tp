@@ -3,9 +3,9 @@ package seedu.anilist.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX;
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnime.AMY;
+import static seedu.anilist.testutil.TypicalAnimes.AKIRA;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -24,7 +24,7 @@ import seedu.anilist.model.ModelManager;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.UserPrefs;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.storage.JsonAniListStorage;
+import seedu.anilist.storage.JsonAnimeListStorage;
 import seedu.anilist.storage.JsonUserPrefsStorage;
 import seedu.anilist.storage.StorageManager;
 import seedu.anilist.testutil.AnimeBuilder;
@@ -40,10 +40,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAniListStorage addressBookStorage =
-                new JsonAniListStorage(temporaryFolder.resolve("anilist.json"));
+        JsonAnimeListStorage animeListStorage =
+                new JsonAnimeListStorage(temporaryFolder.resolve("animeList.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(animeListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -67,17 +67,17 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAniListStorage addressBookStorage =
-                new JsonAniListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonAnimeListIoExceptionThrowingStub
+        JsonAnimeListStorage animeListStorage =
+                new JsonAnimeListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAnimeList.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(animeListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY;
-        Anime expectedAnime = new AnimeBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AKIRA;
+        Anime expectedAnime = new AnimeBuilder(AKIRA).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addAnime(expectedAnime);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -85,7 +85,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredAnimeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredAnimeList().remove(0));
     }
 
@@ -125,7 +125,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAniList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAnimeList(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -145,13 +145,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAniListIoExceptionThrowingStub extends JsonAniListStorage {
-        private JsonAniListIoExceptionThrowingStub(Path filePath) {
+    private static class JsonAnimeListIoExceptionThrowingStub extends JsonAnimeListStorage {
+        private JsonAnimeListIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAniList(ReadOnlyAnimeList aniList, Path filePath) throws IOException {
+        public void saveAnimeList(ReadOnlyAnimeList animeList, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

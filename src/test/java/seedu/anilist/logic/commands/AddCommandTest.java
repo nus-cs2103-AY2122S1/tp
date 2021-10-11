@@ -26,52 +26,52 @@ import seedu.anilist.testutil.AnimeBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_animeAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingAnimeAdded modelStub = new ModelStubAcceptingAnimeAdded();
         Anime validAnime = new AnimeBuilder().build();
 
         CommandResult commandResult = new AddCommand(validAnime).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validAnime), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validAnime), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validAnime), modelStub.animesAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateAnime_throwsCommandException() {
         Anime validAnime = new AnimeBuilder().build();
         AddCommand addCommand = new AddCommand(validAnime);
-        ModelStub modelStub = new ModelStubWithPerson(validAnime);
+        ModelStub modelStub = new ModelStubWithAnime(validAnime);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_ANIME, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Anime alice = new AnimeBuilder().withName("Alice").build();
-        Anime bob = new AnimeBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Anime naruto = new AnimeBuilder().withName("Naruto").build();
+        Anime bleach = new AnimeBuilder().withName("Bleach").build();
+        AddCommand addNarutoCommand = new AddCommand(naruto);
+        AddCommand addBleachCommand = new AddCommand(bleach);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addNarutoCommand.equals(addNarutoCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addAliceCommandCopy = new AddCommand(naruto);
+        assertTrue(addNarutoCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addNarutoCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addNarutoCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different anime -> returns false
+        assertFalse(addNarutoCommand.equals(addBleachCommand));
     }
 
     /**
@@ -99,12 +99,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAniListFilePath() {
+        public Path getAnimeListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAniListFilePath(Path aniListFilePath) {
+        public void setAnimeListFilePath(Path animeListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAniList(ReadOnlyAnimeList aniList) {
+        public void setAnimeList(ReadOnlyAnimeList animeList) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAnimeList getAniList() {
+        public ReadOnlyAnimeList getAnimeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -150,12 +150,12 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single anime.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithAnime extends ModelStub {
         private final Anime anime;
 
-        ModelStubWithPerson(Anime anime) {
+        ModelStubWithAnime(Anime anime) {
             requireNonNull(anime);
             this.anime = anime;
         }
@@ -168,25 +168,25 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the anime being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Anime> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingAnimeAdded extends ModelStub {
+        final ArrayList<Anime> animesAdded = new ArrayList<>();
 
         @Override
         public boolean hasAnime(Anime anime) {
             requireNonNull(anime);
-            return personsAdded.stream().anyMatch(anime::isSameAnime);
+            return animesAdded.stream().anyMatch(anime::isSameAnime);
         }
 
         @Override
         public void addAnime(Anime anime) {
             requireNonNull(anime);
-            personsAdded.add(anime);
+            animesAdded.add(anime);
         }
 
         @Override
-        public ReadOnlyAnimeList getAniList() {
+        public ReadOnlyAnimeList getAnimeList() {
             return new AnimeList();
         }
     }

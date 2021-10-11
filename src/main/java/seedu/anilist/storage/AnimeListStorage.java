@@ -11,36 +11,36 @@ import seedu.anilist.model.ReadOnlyAnimeList;
 /**
  * Represents a storage for {@link AnimeList}.
  */
-public interface AniListStorage {
+public interface AnimeListStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAniListFilePath();
+    Path getAnimeListFilePath();
 
     /**
-     * Returns AniList data as a {@link ReadOnlyAnimeList}.
+     * Returns AnimeList data as a {@link ReadOnlyAnimeList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAnimeList> readAniList() throws DataConversionException, IOException;
+    Optional<ReadOnlyAnimeList> readAnimeList() throws DataConversionException, IOException;
 
     /**
-     * @see #getAniListFilePath()
+     * @see #getAnimeListFilePath()
      */
-    Optional<ReadOnlyAnimeList> readAniList(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyAnimeList> readAnimeList(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyAnimeList} to the storage.
-     * @param aniList cannot be null.
+     * @param animeList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAniList(ReadOnlyAnimeList aniList) throws IOException;
+    void saveAnimeList(ReadOnlyAnimeList animeList) throws IOException;
 
     /**
-     * @see #saveAniList(ReadOnlyAnimeList)
+     * @see #saveAnimeList(ReadOnlyAnimeList)
      */
-    void saveAniList(ReadOnlyAnimeList aniList, Path filePath) throws IOException;
+    void saveAnimeList(ReadOnlyAnimeList animeList, Path filePath) throws IOException;
 
 }

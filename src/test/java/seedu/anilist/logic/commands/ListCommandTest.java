@@ -1,8 +1,8 @@
 package seedu.anilist.logic.commands;
 
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,7 @@ public class ListCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAniList(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAnimeList(), new UserPrefs());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_ANIME);
+        showAnimeAtIndex(model, INDEX_FIRST_ANIME);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

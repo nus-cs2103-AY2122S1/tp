@@ -9,28 +9,28 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 
 /**
- * Adds a person to the anime list.
+ * Adds an anime to the anime list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the anime list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an anime to the anime list. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "ANIME "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_NAME + "Naruto "
+            + PREFIX_TAG + "Action "
+            + PREFIX_TAG + "Fantasy";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the anime list";
+    public static final String MESSAGE_SUCCESS = "New anime added: %1$s";
+    public static final String MESSAGE_DUPLICATE_ANIME = "This anime already exists in the anime list";
 
     private final Anime toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Anime}
      */
     public AddCommand(Anime anime) {
         requireNonNull(anime);
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasAnime(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_ANIME);
         }
 
         model.addAnime(toAdd);

@@ -25,17 +25,17 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.AnimeBuilder;
-import seedu.anilist.testutil.EditPersonDescriptorBuilder;
-import seedu.anilist.testutil.PersonUtil;
+import seedu.anilist.testutil.AnimeUtil;
+import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 
 public class AnimeListParserTest {
 
-    private final AniListParser parser = new AniListParser();
+    private final AnimeListParser parser = new AnimeListParser();
 
     @Test
     public void parseCommand_add() throws Exception {
         Anime anime = new AnimeBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(anime));
+        AddCommand command = (AddCommand) parser.parseCommand(AnimeUtil.getAddCommand(anime));
         assertEquals(new AddCommand(anime), command);
     }
 
@@ -55,9 +55,9 @@ public class AnimeListParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Anime anime = new AnimeBuilder().build();
-        EditCommand.EditAnimeDescriptor descriptor = new EditPersonDescriptorBuilder(anime).build();
+        EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder(anime).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ANIME.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_ANIME.getOneBased() + " " + AnimeUtil.getEditAnimeDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_ANIME, descriptor), command);
     }
 

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnime.ALICE;
-import static seedu.anilist.testutil.TypicalAnime.BENSON;
+import static seedu.anilist.testutil.TypicalAnimes.ALICE;
+import static seedu.anilist.testutil.TypicalAnimes.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,7 +26,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AnimeList(), new AnimeList(modelManager.getAniList()));
+        assertEquals(new AnimeList(), new AnimeList(modelManager.getAnimeList()));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAniListFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setAnimeListFilePath(Paths.get("anime/list/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAniListFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setAnimeListFilePath(Paths.get("new/anime/list/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -61,35 +61,35 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAniListFilePath(null));
+    public void setAnimeListFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setAnimeListFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
-        modelManager.setAniListFilePath(path);
-        assertEquals(path, modelManager.getAniListFilePath());
+    public void setAnimeListFilePath_validPath_setsAnimeListFilePath() {
+        Path path = Paths.get("anime/list/file/path");
+        modelManager.setAnimeListFilePath(path);
+        assertEquals(path, modelManager.getAnimeListFilePath());
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasAnime_nullAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasAnime(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasAnime_animeNotInAnimeList_returnsFalse() {
         assertFalse(modelManager.hasAnime(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasAnime_animeInAnimeList_returnsTrue() {
         modelManager.addAnime(ALICE);
         assertTrue(modelManager.hasAnime(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredAnimeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAnimeList().remove(0));
     }
 
@@ -126,7 +126,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAniListFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setAnimeListFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(animeList, differentUserPrefs)));
     }
 }

@@ -3,7 +3,7 @@ package seedu.anilist.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.anilist.storage.JsonAdaptedAnime.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnime.BENSON;
+import static seedu.anilist.testutil.TypicalAnimes.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,33 +24,33 @@ public class JsonAdaptedAnimeTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedAnime person = new JsonAdaptedAnime(BENSON);
-        assertEquals(BENSON, person.toModelType());
+    public void toModelType_validAnimeDetails_returnsAnime() throws Exception {
+        JsonAdaptedAnime anime = new JsonAdaptedAnime(BENSON);
+        assertEquals(BENSON, anime.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedAnime person =
+        JsonAdaptedAnime anime =
                 new JsonAdaptedAnime(INVALID_NAME, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, anime::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedAnime person = new JsonAdaptedAnime(null, VALID_TAGS);
+        JsonAdaptedAnime anime = new JsonAdaptedAnime(null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        assertThrows(IllegalValueException.class, expectedMessage, anime::toModelType);
     }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedAnime person =
+        JsonAdaptedAnime anime =
                 new JsonAdaptedAnime(VALID_NAME, invalidTags);
-        assertThrows(IllegalValueException.class, person::toModelType);
+        assertThrows(IllegalValueException.class, anime::toModelType);
     }
 
 }

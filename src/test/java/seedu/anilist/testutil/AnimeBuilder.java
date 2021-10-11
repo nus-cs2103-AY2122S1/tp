@@ -28,7 +28,7 @@ public class AnimeBuilder {
     }
 
     /**
-     * Initializes the AnimeBuilder with the data of {@code personToCopy}.
+     * Initializes the AnimeBuilder with the data of {@code animeToCopy}.
      */
     public AnimeBuilder(Anime animeToCopy) {
         name = animeToCopy.getName();
@@ -36,7 +36,7 @@ public class AnimeBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Anime} that we are building.
      */
     public AnimeBuilder withName(String name) {
         this.name = new Name(name);
@@ -44,7 +44,7 @@ public class AnimeBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Anime} that we are building.
      */
     public AnimeBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);

@@ -17,15 +17,15 @@ import seedu.anilist.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AniListStorage aniListStorage;
+    private AnimeListStorage animeListStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AniListStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code AnimeListStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AniListStorage aniListStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AnimeListStorage animeListStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.aniListStorage = aniListStorage;
+        this.animeListStorage = animeListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -50,30 +50,30 @@ public class StorageManager implements Storage {
     // ================ AniList methods ==============================
 
     @Override
-    public Path getAniListFilePath() {
-        return aniListStorage.getAniListFilePath();
+    public Path getAnimeListFilePath() {
+        return animeListStorage.getAnimeListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAnimeList> readAniList() throws DataConversionException, IOException {
-        return readAniList(aniListStorage.getAniListFilePath());
+    public Optional<ReadOnlyAnimeList> readAnimeList() throws DataConversionException, IOException {
+        return readAnimeList(animeListStorage.getAnimeListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAnimeList> readAniList(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyAnimeList> readAnimeList(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return aniListStorage.readAniList(filePath);
+        return animeListStorage.readAnimeList(filePath);
     }
 
     @Override
-    public void saveAniList(ReadOnlyAnimeList aniList) throws IOException {
-        saveAniList(aniList, aniListStorage.getAniListFilePath());
+    public void saveAnimeList(ReadOnlyAnimeList animeList) throws IOException {
+        saveAnimeList(animeList, animeListStorage.getAnimeListFilePath());
     }
 
     @Override
-    public void saveAniList(ReadOnlyAnimeList aniList, Path filePath) throws IOException {
+    public void saveAnimeList(ReadOnlyAnimeList animeList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        aniListStorage.saveAniList(aniList, filePath);
+        animeListStorage.saveAnimeList(animeList, filePath);
     }
 
 }

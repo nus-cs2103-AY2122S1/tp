@@ -1,7 +1,7 @@
 package seedu.anilist.logic.commands;
 
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class ClearCommandTest {
     public void execute_nonEmptyAnimeList_success() {
         Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAnimeList(), new UserPrefs());
-        expectedModel.setAniList(new AnimeList());
+        expectedModel.setAnimeList(new AnimeList());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

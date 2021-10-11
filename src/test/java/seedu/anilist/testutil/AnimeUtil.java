@@ -11,21 +11,21 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Anime.
  */
-public class PersonUtil {
+public class AnimeUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code anime}.
      */
     public static String getAddCommand(Anime anime) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(anime);
+        return AddCommand.COMMAND_WORD + " " + getAnimeDetails(anime);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code anime}'s details.
      */
-    public static String getPersonDetails(Anime anime) {
+    public static String getAnimeDetails(Anime anime) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + anime.getName().fullName + " ");
         anime.getTags().stream().forEach(
@@ -35,9 +35,9 @@ public class PersonUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditAnimeDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditCommand.EditAnimeDescriptor descriptor) {
+    public static String getEditAnimeDescriptorDetails(EditCommand.EditAnimeDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         if (descriptor.getTags().isPresent()) {

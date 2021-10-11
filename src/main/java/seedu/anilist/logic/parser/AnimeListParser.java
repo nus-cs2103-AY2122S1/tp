@@ -21,7 +21,7 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AniListParser {
+public class AnimeListParser {
 
     /**
      * Used for initial separation of command word and args.

@@ -3,10 +3,10 @@ package seedu.anilist.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnime.ALICE;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.testutil.TypicalAnimes.ALICE;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -36,16 +36,16 @@ public class AnimeListTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyAnimeList_replacesData() {
         AnimeList newData = getTypicalAnimeList();
         animeList.resetData(newData);
         assertEquals(newData, animeList);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicateAnimes_throwsDuplicateAnimeException() {
+        // Two animes with the same identity fields
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
         List<Anime> newAnimes = Arrays.asList(ALICE, editedAlice);
         AnimeListStub newData = new AnimeListStub(newAnimes);
@@ -54,36 +54,36 @@ public class AnimeListTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasAnime_nullAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> animeList.hasAnime(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasAnime_animeNotInAnimeList_returnsFalse() {
         assertFalse(animeList.hasAnime(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasAnime_animeInAnimeList_returnsTrue() {
         animeList.addAnime(ALICE);
         assertTrue(animeList.hasAnime(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasAnime_animeWithSameIdentityFieldsInAnimeList_returnsTrue() {
         animeList.addAnime(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
         assertTrue(animeList.hasAnime(editedAlice));
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getAnimeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> animeList.getAnimeList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAnimeList whose animes list can violate interface constraints.
      */
     private static class AnimeListStub implements ReadOnlyAnimeList {
         private final ObservableList<Anime> anime = FXCollections.observableArrayList();

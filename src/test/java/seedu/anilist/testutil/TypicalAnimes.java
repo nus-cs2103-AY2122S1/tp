@@ -1,9 +1,9 @@
 package seedu.anilist.testutil;
 
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import seedu.anilist.model.anime.Anime;
 /**
  * A utility class containing a list of {@code Anime} objects to be used in tests.
  */
-public class TypicalAnime {
+public class TypicalAnimes {
 
     public static final Anime ALICE = new AnimeBuilder().withName("Alice Pauline").withTags("friends").build();
     public static final Anime BENSON = new AnimeBuilder().withName("Benson Meier")
@@ -31,15 +31,15 @@ public class TypicalAnime {
     public static final Anime HOON = new AnimeBuilder().withName("Hoon Meier").build();
     public static final Anime IDA = new AnimeBuilder().withName("Ida Mueller").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Anime AMY = new AnimeBuilder().withName(VALID_NAME_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
-    public static final Anime BOB = new AnimeBuilder().withName(VALID_NAME_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    // Manually added - Anime's details found in {@code CommandTestUtil}
+    public static final Anime AKIRA = new AnimeBuilder().withName(VALID_NAME_AKIRA)
+            .withTags(VALID_TAG_SUPERHERO).build();
+    public static final Anime BNHA = new AnimeBuilder().withName(VALID_NAME_BNHA)
+            .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalAnime() {} // prevents instantiation
+    private TypicalAnimes() {} // prevents instantiation
 
     /**
      * Returns an {@code AnimeList} with all the typical anime.

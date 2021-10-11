@@ -3,10 +3,10 @@ package seedu.anilist.model.anime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnime.ALICE;
-import static seedu.anilist.testutil.TypicalAnime.BOB;
+import static seedu.anilist.testutil.TypicalAnimes.ALICE;
+import static seedu.anilist.testutil.TypicalAnimes.BNHA;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,57 +23,57 @@ public class UniqueAnimeListTest {
     private final UniqueAnimeList uniqueAnimeList = new UniqueAnimeList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAnimeList.contains(null));
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_animeNotInList_returnsFalse() {
         assertFalse(uniqueAnimeList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_animeInList_returnsTrue() {
         uniqueAnimeList.add(ALICE);
         assertTrue(uniqueAnimeList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_animeWithSameIdentityFieldsInList_returnsTrue() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
         assertTrue(uniqueAnimeList.contains(editedAlice));
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAnimeList.add(null));
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateAnime_throwsDuplicateAnimeException() {
         uniqueAnimeList.add(ALICE);
         assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.add(ALICE));
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
+    public void setAnime_nullTargetAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAnimeList.setAnime(null, ALICE));
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
+    public void setAnime_nullEditedAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAnimeList.setAnime(ALICE, null));
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
+    public void setAnime_targetAnimeNotInList_throwsAnimeNotFoundException() {
         assertThrows(AnimeNotFoundException.class, () -> uniqueAnimeList.setAnime(ALICE, ALICE));
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
+    public void setAnime_editedAnimeIsSameAnime_success() {
         uniqueAnimeList.add(ALICE);
         uniqueAnimeList.setAnime(ALICE, ALICE);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
@@ -82,9 +82,9 @@ public class UniqueAnimeListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
+    public void setAnime_editedAnimeHasSameIdentity_success() {
         uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
+        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
                 .build();
         uniqueAnimeList.setAnime(ALICE, editedAlice);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
@@ -93,33 +93,33 @@ public class UniqueAnimeListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
+    public void setAnime_editedAnimeHasDifferentIdentity_success() {
         uniqueAnimeList.add(ALICE);
-        uniqueAnimeList.setAnime(ALICE, BOB);
+        uniqueAnimeList.setAnime(ALICE, BNHA);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(BOB);
+        expectedUniqueAnimeList.add(BNHA);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setAnime_editedAnimeHasNonUniqueIdentity_throwsDuplicateAnimeException() {
         uniqueAnimeList.add(ALICE);
-        uniqueAnimeList.add(BOB);
-        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setAnime(ALICE, BOB));
+        uniqueAnimeList.add(BNHA);
+        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setAnime(ALICE, BNHA));
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullAnime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAnimeList.remove(null));
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
+    public void remove_animeDoesNotExist_throwsAnimeNotFoundException() {
         assertThrows(AnimeNotFoundException.class, () -> uniqueAnimeList.remove(ALICE));
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
+    public void remove_existingAnime_removesAnime() {
         uniqueAnimeList.add(ALICE);
         uniqueAnimeList.remove(ALICE);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
@@ -127,36 +127,36 @@ public class UniqueAnimeListTest {
     }
 
     @Test
-    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
+    public void setAnimes_nullUniqueAnimeList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAnimeList.setMultipleAnime((UniqueAnimeList) null));
     }
 
     @Test
-    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
+    public void setAnimes_uniqueAnimeList_replacesOwnListWithProvidedUniqueAnimeList() {
         uniqueAnimeList.add(ALICE);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(BOB);
+        expectedUniqueAnimeList.add(BNHA);
         uniqueAnimeList.setMultipleAnime(expectedUniqueAnimeList);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
+    public void setAnimes_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAnimeList.setMultipleAnime((List<Anime>) null));
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
+    public void setAnimes_list_replacesOwnListWithProvidedList() {
         uniqueAnimeList.add(ALICE);
-        List<Anime> animeList = Collections.singletonList(BOB);
+        List<Anime> animeList = Collections.singletonList(BNHA);
         uniqueAnimeList.setMultipleAnime(animeList);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(BOB);
+        expectedUniqueAnimeList.add(BNHA);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setAnimes_listWithDuplicateAnimes_throwsDuplicateAnimeException() {
         List<Anime> listWithDuplicateAnimes = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setMultipleAnime(listWithDuplicateAnimes));
     }

@@ -3,19 +3,19 @@ package seedu.anilist.logic.parser;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SUPERHERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.anilist.testutil.TypicalAnime.AMY;
-import static seedu.anilist.testutil.TypicalAnime.BOB;
+import static seedu.anilist.testutil.TypicalAnimes.AKIRA;
+import static seedu.anilist.testutil.TypicalAnimes.BNHA;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,29 +30,29 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Anime expectedAnime = new AnimeBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Anime expectedAnime = new AnimeBuilder(BNHA).withTags(VALID_TAG_SUPERHERO).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedAnime));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BNHA
+                + TAG_DESC_SUPERHERO, new AddCommand(expectedAnime));
 
         // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedAnime));
+        assertParseSuccess(parser, NAME_DESC_AKIRA + NAME_DESC_BNHA
+                + TAG_DESC_SUPERHERO, new AddCommand(expectedAnime));
 
 
         // multiple tags - all accepted
-        Anime expectedAnimeMultipleTags = new AnimeBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Anime expectedAnimeMultipleTags = new AnimeBuilder(BNHA).withTags(VALID_TAG_SUPERHERO, VALID_TAG_SHOUNEN)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedAnimeMultipleTags));
+        assertParseSuccess(parser, NAME_DESC_BNHA
+                + TAG_DESC_SHOUNEN + TAG_DESC_SUPERHERO, new AddCommand(expectedAnimeMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Anime expectedAnime = new AnimeBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY,
+        Anime expectedAnime = new AnimeBuilder(AKIRA).withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AKIRA,
                 new AddCommand(expectedAnime));
     }
 
@@ -61,11 +61,11 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB,
+        assertParseFailure(parser, VALID_NAME_BNHA,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB,
+        assertParseFailure(parser, VALID_NAME_BNHA,
                 expectedMessage);
     }
 
@@ -73,15 +73,15 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_SHOUNEN + TAG_DESC_SUPERHERO, Name.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_BNHA
+                + INVALID_TAG_DESC + VALID_TAG_SUPERHERO, Tag.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BNHA
+                + TAG_DESC_SHOUNEN + TAG_DESC_SUPERHERO,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

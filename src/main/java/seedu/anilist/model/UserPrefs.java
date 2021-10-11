@@ -14,7 +14,7 @@ import seedu.anilist.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path aniListFilePath = Paths.get("data" , "anilist.json");
+    private Path animeListFilePath = Paths.get("data" , "anilist.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +35,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAniListFilePath(newUserPrefs.getAniListFilePath());
+        setAnimeListFilePath(newUserPrefs.getAnimeListFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +47,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAniListFilePath() {
-        return aniListFilePath;
+    public Path getAnimeListFilePath() {
+        return animeListFilePath;
     }
 
-    public void setAniListFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.aniListFilePath = addressBookFilePath;
+    public void setAnimeListFilePath(Path animeListFilePath) {
+        requireNonNull(animeListFilePath);
+        this.animeListFilePath = animeListFilePath;
     }
 
     @Override
@@ -68,19 +68,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && aniListFilePath.equals(o.aniListFilePath);
+                && animeListFilePath.equals(o.animeListFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, aniListFilePath);
+        return Objects.hash(guiSettings, animeListFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + aniListFilePath);
+        sb.append("\nLocal data file location : " + animeListFilePath);
         return sb.toString();
     }
 

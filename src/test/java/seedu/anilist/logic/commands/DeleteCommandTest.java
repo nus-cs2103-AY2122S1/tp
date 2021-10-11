@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.anilist.testutil.TypicalAnime.getTypicalAnimeList;
+import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
 
@@ -33,7 +33,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ANIME_SUCCESS, animeToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAniList(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAnimeList(), new UserPrefs());
         expectedModel.deleteAnime(animeToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -49,14 +49,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_ANIME);
+        showAnimeAtIndex(model, INDEX_FIRST_ANIME);
 
         Anime animeToDelete = model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ANIME);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ANIME_SUCCESS, animeToDelete);
 
-        Model expectedModel = new ModelManager(model.getAniList(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAnimeList(), new UserPrefs());
         expectedModel.deleteAnime(animeToDelete);
         showNoPerson(expectedModel);
 
@@ -65,11 +65,11 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_ANIME);
+        showAnimeAtIndex(model, INDEX_FIRST_ANIME);
 
         Index outOfBoundIndex = INDEX_SECOND_ANIME;
         // ensures that outOfBoundIndex is still in bounds of anime list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAniList().getAnimeList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAnimeList().getAnimeList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
