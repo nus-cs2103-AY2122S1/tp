@@ -1,8 +1,8 @@
 package safeforhall.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+//import java.util.Set;
+//import java.util.stream.Collectors;
+//import java.util.stream.Stream;
 
 import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
 //import safeforhall.model.person.Address;
@@ -10,7 +10,7 @@ import safeforhall.model.person.Email;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
-import safeforhall.model.tag.Tag;
+//import safeforhall.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -67,11 +67,11 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
-        return this;
-    }
+    //public EditPersonDescriptorBuilder withTags(String... tags) {
+    //    Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+    //    descriptor.setTags(tagSet);
+    //    return this;
+    //}
 
     public EditPersonDescriptor build() {
         return descriptor;

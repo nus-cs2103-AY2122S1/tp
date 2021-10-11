@@ -31,15 +31,14 @@ public class EditCommand extends Command {
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
             + "[" + CliSyntax.PREFIX_ROOM + "ROOM] "
             + "[" + CliSyntax.PREFIX_VACCSTATUS + "VACCINATION STATUS] "
-            + "[" + CliSyntax.PREFIX_FACULTY + "FACULTY] \n"
-            //TODO
-            //+ "[" + CliSyntax.PREFIX_FETDATE + "LAST FET DATE] "
-            //+ "[" + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE] \n"
+            + "[" + CliSyntax.PREFIX_FACULTY + "FACULTY]"
+            + "[" + CliSyntax.PREFIX_FETDATE + "LAST FET DATE] "
+            + "[" + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_PHONE + "91234567 "
             + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited People: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Residents: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -81,7 +80,6 @@ public class EditCommand extends Command {
             count++;
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedResidents));
     }
 
@@ -98,11 +96,14 @@ public class EditCommand extends Command {
         Room updatedRoom = editPersonDescriptor.getRoom().orElse(personToEdit.getRoom());
         VaccStatus updatedVaccStatus = editPersonDescriptor.getVaccStatus().orElse(personToEdit.getVaccStatus());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
+        LastFetDate updatedLastFetDate = editPersonDescriptor.getLastFetDate().orElse(personToEdit.getLastFetDate());
+        LastCollectionDate updatedLastCollectionDate = editPersonDescriptor.getLastCollectionDate()
+                .orElse(personToEdit.getLastCollectionDate());
         // Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         //TODO: lastFetDate and lastCollectionDate
         return new Person(updatedName, updatedRoom, updatedPhone, updatedEmail, updatedVaccStatus, updatedFaculty,
-                null, null);
+                updatedLastFetDate, updatedLastCollectionDate);
     }
 
     @Override
@@ -134,6 +135,8 @@ public class EditCommand extends Command {
         private Room room;
         private VaccStatus vaccStatus;
         private Faculty faculty;
+        private LastFetDate lastFetDate;
+        private LastCollectionDate lastCollectionDate;
         //private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,6 +152,8 @@ public class EditCommand extends Command {
             setRoom(toCopy.room);
             setVaccStatus(toCopy.vaccStatus);
             setFaculty(toCopy.faculty);
+            setLastFetDate(toCopy.lastFetDate);
+            setLastCollectionDate(toCopy.lastCollectionDate);
             //setTags(toCopy.tags);
         }
 
@@ -205,6 +210,22 @@ public class EditCommand extends Command {
 
         public Optional<Faculty> getFaculty() {
             return Optional.ofNullable(faculty);
+        }
+
+        public void setLastFetDate(LastFetDate lastFetDate) {
+            this.lastFetDate = lastFetDate;
+        }
+
+        public Optional<LastFetDate> getLastFetDate() {
+            return Optional.ofNullable(lastFetDate);
+        }
+
+        public void setLastCollectionDate(LastCollectionDate lastCollectionDate) {
+            this.lastCollectionDate = lastCollectionDate;
+        }
+
+        public Optional<LastCollectionDate> getLastCollectionDate() {
+            return Optional.ofNullable(lastCollectionDate);
         }
 
         @Override
