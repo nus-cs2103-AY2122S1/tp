@@ -16,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String review;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -39,12 +41,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("category") String category, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
+                             @JsonProperty("review") String review,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.category = category;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.review = review;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        review = source.getReview().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,8 +120,16 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (review == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Review.class.getSimpleName()));
+        }
+        if (!Review.isValidReview(review)) {
+            throw new IllegalValueException(Review.MESSAGE_CONSTRAINTS);
+        }
+        final Review modelReview = new Review(review);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelCategory, modelName, modelPhone, modelEmail, modelAddress, modelReview, modelTags);
     }
 
 }
