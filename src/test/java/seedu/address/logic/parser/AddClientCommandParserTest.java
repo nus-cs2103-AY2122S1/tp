@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -92,15 +93,9 @@ public class AddClientCommandParserTest {
             actualString = actualString.substring(actualString.indexOf("Name"));
             String expectedString = expectedResult.getFeedbackToUser();
             expectedString = expectedString.substring(expectedString.indexOf("Name"));
-            if (!actualString.equals(expectedString)) {
-                fail();
-            }
-            if (expectedResult.isShowHelp() != actualResult.isShowHelp()) {
-                fail();
-            }
-            if (expectedResult.isExit() != actualResult.isExit()) {
-                fail();
-            }
+            assertEquals(expectedString, actualString);
+            assertEquals(expectedResult.isShowHelp(), actualResult.isShowHelp());
+            assertEquals(expectedResult.isExit(), actualResult.isExit());
         } catch (ParseException | CommandException e) {
             fail();
         }
