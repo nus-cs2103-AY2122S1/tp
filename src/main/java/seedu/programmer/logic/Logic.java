@@ -8,7 +8,7 @@ import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.ReadOnlyProgrammerError;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
 
 /**
  * API of the Logic component
@@ -24,14 +24,14 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the ProgrammerError.
      *
      * @see seedu.programmer.model.Model#getProgrammerError()
      */
     ReadOnlyProgrammerError getProgrammerError();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of students */
+    ObservableList<Student> getFilteredStudentList();
 
     /**
      * Returns the user prefs' ProgrammerError file path.

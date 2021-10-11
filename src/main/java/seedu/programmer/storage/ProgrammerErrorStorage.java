@@ -41,6 +41,6 @@ public interface ProgrammerErrorStorage {
     /**
      * @see #saveProgrammerError(ReadOnlyProgrammerError)
      */
-    void saveProgrammerError(ReadOnlyProgrammerError addressBook, Path filePath) throws IOException;
+    void saveProgrammerError(ReadOnlyProgrammerError programmerError, Path filePath) throws IOException;
 
 }

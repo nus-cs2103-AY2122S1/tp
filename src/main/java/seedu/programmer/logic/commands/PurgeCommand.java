@@ -6,8 +6,7 @@ import java.util.List;
 
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ProgrammerError;
-import seedu.programmer.model.person.Person;
-
+import seedu.programmer.model.student.Student;
 
 /**
  * Purges ProgrammerError.
@@ -35,10 +34,7 @@ public class PurgeCommand extends Command {
      * @return Whether the list is empty or not.
      */
     public Boolean checkEmpty(Model model) {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        if (lastShownList.size() == 0) {
-            return true;
-        }
-        return false;
+        List<Student> lastShownList = model.getFilteredStudentList();
+        return lastShownList.size() == 0;
     }
 }

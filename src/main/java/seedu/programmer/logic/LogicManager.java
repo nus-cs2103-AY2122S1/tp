@@ -14,8 +14,9 @@ import seedu.programmer.logic.parser.ProgrammerErrorParser;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ReadOnlyProgrammerError;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
 import seedu.programmer.storage.Storage;
+
 
 /**
  * The main LogicManager of the app.
@@ -60,8 +61,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Student> getFilteredStudentList() {
+        return model.getFilteredStudentList();
     }
 
     @Override

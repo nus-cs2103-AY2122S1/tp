@@ -5,14 +5,14 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.GuiSettings;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +53,36 @@ public interface Model {
     ReadOnlyProgrammerError getProgrammerError();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in ProgrammerError.
+     * Returns true if a student with the same identity as {@code student} exists in ProgrammerError.
      */
-    boolean hasPerson(Person person);
+    boolean hasStudent(Student student);
 
     /**
-     * Deletes the given person.
-     * The person must exist in ProgrammerError.
+     * Deletes the given student.
+     * The student must exist in ProgrammerError.
      */
-    void deletePerson(Person target);
+    void deleteStudent(Student target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in ProgrammerError.
-     */
-    void addPerson(Person person);
+     * Adds the given student.
+     * {@code student} must not already exist in the ProgrammerError.
+     * */
+    void addStudent(Student student);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in ProgrammerError.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in ProgrammerError.
+     * Replaces the given student {@code target} with {@code editedStudent}.
+     * {@code target} must exist in the ProgrammerError.
+     * The student identity of {@code editedStudent} must not be the same as another existing student
+     * in the ProgrammerError.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setStudent(Student target, Student editedStudent);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered student list */
+    ObservableList<Student> getFilteredStudentList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredStudentList(Predicate<Student> predicate);
 }

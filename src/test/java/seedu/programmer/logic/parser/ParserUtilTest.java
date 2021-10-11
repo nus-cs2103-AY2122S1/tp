@@ -3,15 +3,15 @@ package seedu.programmer.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.programmer.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.programmer.testutil.Assert.assertThrows;
-import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.person.ClassId;
-import seedu.programmer.model.person.Grade;
-import seedu.programmer.model.person.Name;
-import seedu.programmer.model.person.StudentId;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.StudentId;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -41,10 +41,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseIndex("  1  "));
     }
 
     @Test

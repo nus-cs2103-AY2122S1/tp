@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.logic.commands.ViewCommand;
-import seedu.programmer.model.person.NameContainsKeywordsPredicate;
+import seedu.programmer.model.student.NameContainsKeywordsPredicate;
 
 public class ViewCommandParserTest {
 

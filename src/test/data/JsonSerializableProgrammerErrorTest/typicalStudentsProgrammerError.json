@@ -1,0 +1,39 @@
+{
+  "_comment": "ProgrammerError save file which contains the same Person values as in TypicalPersons#getTypicalProgrammerError()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "studentId": "A0212352F",
+    "classId": "B01",
+    "grade": "A"
+  }, {
+    "name" : "Benson Meier",
+    "studentId": "A0312352F",
+    "classId": "B03",
+    "grade": "A"
+  }, {
+    "name" : "Carl Kurz",
+    "studentId": "A0212332F",
+    "classId": "B02",
+    "grade": "A"
+  }, {
+    "name" : "Daniel Meier",
+    "studentId": "A0212352H",
+    "classId": "B01",
+    "grade": "A"
+  }, {
+    "name" : "Elle Meyer",
+    "studentId": "A0215352R",
+    "classId": "B04",
+    "grade": "B-"
+  }, {
+    "name" : "Fiona Kunz",
+    "studentId": "A0244352F",
+    "classId": "B03",
+    "grade": "A+"
+  }, {
+    "name" : "George Best",
+    "studentId": "A0212354F",
+    "classId": "B02",
+    "grade": "A"
+  } ]
+}

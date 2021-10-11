@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyProgrammerError;
-import seedu.programmer.model.person.Person;
+import seedu.programmer.model.student.Student;
 
 /**
  * An Immutable ProgrammerError that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.programmer.model.person.Person;
 @JsonRootName(value = "programmererror")
 class JsonSerializableProgrammerError {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "students list contains duplicate student(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableProgrammerError} with the given persons.
+     * Constructs a {@code JsonSerializableProgrammerError} with the given students.
      */
     @JsonCreator
-    public JsonSerializableProgrammerError(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableProgrammerError(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+        this.students.addAll(students);
     }
 
     /**
@@ -36,8 +36,9 @@ class JsonSerializableProgrammerError {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableProgrammerError}.
      */
+
     public JsonSerializableProgrammerError(ReadOnlyProgrammerError source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +48,12 @@ class JsonSerializableProgrammerError {
      */
     public ProgrammerError toModelType() throws IllegalValueException {
         ProgrammerError programmerError = new ProgrammerError();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (programmerError.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedStudent jsonAdaptedstudent : students) {
+            Student student = jsonAdaptedstudent.toModelType();
+            if (programmerError.hasStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            programmerError.addPerson(person);
+            programmerError.addStudent(student);
         }
         return programmerError;
     }

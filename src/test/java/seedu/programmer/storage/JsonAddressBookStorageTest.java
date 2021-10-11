@@ -52,7 +52,7 @@
 //
 //    @Test
 //    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-//        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonProgrammerError.json"));
+//        assertThrows(DataConversionException.class, () -> readAddressBook("invalidStudentProgrammerError.json"));
 //    }
 //
 //    @Test
