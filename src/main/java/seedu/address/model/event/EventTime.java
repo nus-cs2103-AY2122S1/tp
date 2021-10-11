@@ -69,7 +69,7 @@ public class EventTime implements Comparable<EventTime> {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof EventTime
-                && time.equals(((EventTime) other).time) && hasTime == ((EventTime) other).hasTime);
+                && hasTime == ((EventTime) other).hasTime && time.equals(((EventTime) other).time));
     }
 
     @Override

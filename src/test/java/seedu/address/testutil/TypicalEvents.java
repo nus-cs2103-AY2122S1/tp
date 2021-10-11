@@ -40,6 +40,8 @@ public class TypicalEvents {
     public static final Event SAMPLE_EVENT_COPY_DIFFERENT_PARTICIPANTS = new Event(new EventName("Sleep"),
             new EventDate("2021-09-18"), new EventTime("1000"), false,
             Collections.singletonList(new ParticipantBuilder().build()));
+    public static final Event SAMPLE_EVENT_COPY_NO_TIME = new Event(new EventName("Sleeped"),
+            new EventDate("2021-09-18"));
 
     private TypicalEvents() {}
 
@@ -55,6 +57,6 @@ public class TypicalEvents {
     }
 
     public static List<Event> getTypicalEvents() {
-        return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, ANOTHER_EVENT, SAMPLE_EVENT_2));
+        return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, SAMPLE_EVENT_COPY_NO_TIME, ANOTHER_EVENT, SAMPLE_EVENT_2));
     }
 }
