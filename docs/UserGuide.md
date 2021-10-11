@@ -282,12 +282,13 @@ Adds a lesson with the corresponding details to the specified student in TAB.
 **Lesson fields:**
 * Date of lesson `dd MMM yyyy`
   *  e.g. `02 Jan 2018`
-* Start time `HH:mm`
-* End time `HH:mm`
+* Time range `HHmm-HHmm`
 * Subject
 * Homework
 
-Format: `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/SUBJECT [hw/HOMEWORK]`
+Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]`
+
+* The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
 
 <div markdown="span" class="alert alert-primary">
 :bulb: The type of lesson will be inferred from the presence of the "recurring/" prefix.
@@ -295,11 +296,11 @@ Format: `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/
 
 Examples:
 
-* `list` followed by `ladd 1 recurring/ date/16 Sep 2021 start/15:00 end/16:00 subject/Math` (recurring lesson)
-adds the lesson to the 1st student in TAB.
+* `list` followed by `ladd 1 recurring/ date/16 Sep 2021 time/1500-1600 subject/Math`
+  adds the recurring lesson to the 1st student in TAB.
 
-* `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
-  (makeup lesson w/ homework) adds the lesson to the 1st student in the results of the `find` command.
+* `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2`
+  adds the makeup lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
 
