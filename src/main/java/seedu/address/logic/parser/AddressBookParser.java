@@ -51,7 +51,7 @@ public class AddressBookParser {
             arguments = arguments + " ";
         }
 
-        boolean isTwoWordCommand = arguments.length() > 0
+        /*boolean isTwoWordCommand = arguments.length() > 0
                 && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
 
         if (isTwoWordCommand) {
@@ -59,16 +59,9 @@ public class AddressBookParser {
             arguments = extractArguments(arguments);
         }
 
+         */
+
         switch (commandWord) {
-
-        case AddAllocCommand.COMMAND_WORD:
-            return new AddAllocCommandParser().parse(arguments);
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case AddScoreCommand.COMMAND_WORD:
-            return new AddScoreCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -93,6 +86,27 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
+
+        default:
+            return parseTwoWordCommand(commandWord, arguments);
+            //throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    private Command parseTwoWordCommand(String commandWord, String arguments) throws ParseException {
+        commandWord = extractFullCommandWord(commandWord, arguments);
+        arguments = extractArguments(arguments);
+
+        switch (commandWord) {
+
+        case AddAllocCommand.COMMAND_WORD:
+            return new AddAllocCommandParser().parse(arguments);
+
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+
+        case AddScoreCommand.COMMAND_WORD:
+            return new AddScoreCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -123,6 +137,7 @@ public class AddressBookParser {
      */
     private String extractFullCommandWord(String firstCommandWord, String arguments) {
         int argumentsIndex = arguments.indexOf("-");
+        //TODO: if someone can make this look prettier please do so!
         if (argumentsIndex == -1) {
             String arr[] = arguments.split(" ", 3);
             String firstWord = arr[1];
