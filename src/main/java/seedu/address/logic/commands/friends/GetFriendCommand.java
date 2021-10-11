@@ -1,8 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.FriendIdMatchesKeywordPredicate;
@@ -12,9 +14,9 @@ import seedu.address.model.friend.FriendIdMatchesKeywordPredicate;
  * argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class GetCommand extends Command {
+public class GetFriendCommand extends Command {
 
-    public static final String COMMAND_WORD = "get";
+    public static final String COMMAND_WORD = "--get";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets all the information about a friend whose "
             + "FRIEND_ID matches the given keyword(s) exactly (case-insensitive) and displays them in a "
@@ -25,7 +27,7 @@ public class GetCommand extends Command {
 
     private final FriendIdMatchesKeywordPredicate predicate;
 
-    public GetCommand(FriendIdMatchesKeywordPredicate predicate) {
+    public GetFriendCommand(FriendIdMatchesKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -46,7 +48,7 @@ public class GetCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof GetCommand // instanceof handles nulls
-                && predicate.equals(((GetCommand) other).predicate)); // state check
+                || (other instanceof GetFriendCommand // instanceof handles nulls
+                && predicate.equals(((GetFriendCommand) other).predicate)); // state check
     }
 }

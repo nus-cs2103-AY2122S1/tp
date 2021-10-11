@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FRIENDS;
 
 import java.util.Collections;
@@ -34,12 +34,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + FLAG_FRIEND_ID + "FRIEND_ID] "
-            + "[" + PREFIX_FRIEND_NAME + "NAME] "
-            + "[" + PREFIX_GAME + "GAME]...\n"
+            + "[" + FLAG_FRIEND_NAME + "NAME] "
+            + "[" + FLAG_GAME_OLD + "GAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_GAME + "Apex Legends "
-            + PREFIX_GAME + "CSGO "
-            + PREFIX_FRIEND_NAME + "John Lim";
+            + FLAG_GAME_OLD + "Apex Legends "
+            + FLAG_GAME_OLD + "CSGO "
+            + FLAG_FRIEND_NAME + "John Lim";
 
     public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Edited Friend: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

@@ -5,14 +5,25 @@ package seedu.address.logic.parser;
  */
 public class CliSyntax {
 
-    /* Prefix definitions */
-    public static final Prefix PREFIX_FRIEND_NAME = new Prefix("n/");
-    public static final Prefix FLAG_FRIEND_ID = new Prefix("--id ");
-    public static final Prefix PREFIX_GAME = new Prefix("--g");
-    public static final Prefix FLAG_DELETE = new Prefix("--delete ");
-    public static final Prefix FLAG_FRIEND_NAME = new Prefix("--name ");
-    public static final Prefix FLAG_FRIEND_SPACE = new Prefix("--friend ");
-    public static final Prefix FLAG_FRIEND = new Prefix("--friend");
-    public static final Prefix FLAG_GAME_SPACE = new Prefix("--game ");
-    public static final Prefix FLAG_GAME = new Prefix("--game");
+    /* Flag definitions */
+
+    // command flags:
+    public static final Flag FLAG_FRIEND = new Flag("--friend ");
+    public static final Flag FLAG_GAME = new Flag("--game ");
+    public static final Flag FLAG_ADD = new Flag("--add ");
+    public static final Flag FLAG_DELETE = new Flag("--delete ");
+    public static final Flag FLAG_GET = new Flag("--get ");
+    public static final Flag FLAG_LIST = new Flag("--list");
+    public static final Flag FLAG_POSTFIX = new Flag(" "); // for flags with optional fields
+
+    // data flags
+    public static final Flag FLAG_FRIEND_NAME = new Flag("--name ");
+    public static final Flag FLAG_FRIEND_ID = new Flag("--id ");
+
+    // TODO remove once commands are updated
+    public static final Flag FLAG_GAME_OLD = new Flag("--g");
+    public static final Flag FLAG_FRIEND_SPACE = new Flag("--friend ");
+
+
+
 }

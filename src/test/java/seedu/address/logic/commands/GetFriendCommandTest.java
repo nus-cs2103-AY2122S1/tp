@@ -15,6 +15,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.friends.GetFriendCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -23,7 +24,7 @@ import seedu.address.model.friend.FriendIdMatchesKeywordPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code GetCommand}.
  */
-public class GetCommandTest {
+public class GetFriendCommandTest {
     private final Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(),
             new UserPrefs());
@@ -35,14 +36,14 @@ public class GetCommandTest {
         FriendIdMatchesKeywordPredicate secondPredicate =
                 new FriendIdMatchesKeywordPredicate("second");
 
-        GetCommand getFirstCommand = new GetCommand(firstPredicate);
-        GetCommand getSecondCommand = new GetCommand(secondPredicate);
+        GetFriendCommand getFirstCommand = new GetFriendCommand(firstPredicate);
+        GetFriendCommand getSecondCommand = new GetFriendCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(getFirstCommand.equals(getFirstCommand));
 
         // same values -> returns true
-        GetCommand getFirstCommandCopy = new GetCommand(firstPredicate);
+        GetFriendCommand getFirstCommandCopy = new GetFriendCommand(firstPredicate);
         assertTrue(getFirstCommand.equals(getFirstCommandCopy));
 
         // different types -> returns false
@@ -60,17 +61,17 @@ public class GetCommandTest {
         String emptyString = " ";
         String expectedMessage = String.format(MESSAGE_INVALID_FRIEND_ID, emptyString);
         FriendIdMatchesKeywordPredicate predicate = new FriendIdMatchesKeywordPredicate(emptyString);
-        GetCommand getCommand = new GetCommand(predicate);
+        GetFriendCommand getFriendCommand = new GetFriendCommand(predicate);
 
-        assertThrows(CommandException.class, expectedMessage, () -> getCommand.execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> getFriendCommand.execute(model));
     }
 
     @Test
     public void execute_existingFriendId_correctFriendFound() {
         String friendId = "98765432";
-        String expectedMessage = String.format(GetCommand.MESSAGE_FRIEND_FULL_INFORMATION, friendId);
+        String expectedMessage = String.format(GetFriendCommand.MESSAGE_FRIEND_FULL_INFORMATION, friendId);
         FriendIdMatchesKeywordPredicate predicate = new FriendIdMatchesKeywordPredicate(friendId);
-        GetCommand command = new GetCommand(predicate);
+        GetFriendCommand command = new GetFriendCommand(predicate);
 
         expectedModel.updateFilteredFriendsList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

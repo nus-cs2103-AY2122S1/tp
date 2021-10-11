@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -34,14 +34,14 @@ public class CommandTestUtil {
     public static final String FRIEND_ID_DESC_BOB = " " + VALID_FRIEND_ID_BOB;
     public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_BOB;
-    public static final String GAME_DESC_AMY = " " + PREFIX_GAME + VALID_GAME_ID_APEX_LEGENDS;
-    public static final String GAME_DESC_BOB = " " + PREFIX_GAME + VALID_GAME_ID_CSGO;
+    public static final String GAME_DESC_AMY = " " + FLAG_GAME_OLD + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_BOB = " " + FLAG_GAME_OLD + VALID_GAME_ID_CSGO;
 
-    public static final String GAME_DESC_CSGO = " " + PREFIX_GAME + VALID_GAME_ID_CSGO;
-    public static final String GAME_DESC_APEX_LEGENDS = " " + PREFIX_GAME + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_CSGO = " " + FLAG_GAME_OLD + VALID_GAME_ID_CSGO;
+    public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_GAME_OLD + VALID_GAME_ID_APEX_LEGENDS;
 
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
-    public static final String INVALID_GAME_DESC = " " + PREFIX_GAME + "kickstar*"; // '*' not allowed in games
+    public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + "kickstar*"; // '*' not allowed in games
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  --name";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
