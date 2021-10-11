@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.academydirectory.commons.exceptions.IllegalValueException;
-import seedu.academydirectory.model.student.Address;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
@@ -34,7 +33,6 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final String telegram;
-    private final String address;
     private final boolean[] attendance;
     private final int[] participation;
     private final HashMap<String, Integer> assessment;
@@ -43,7 +41,6 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-                              @JsonProperty("address") String address,
                               @JsonProperty("attendance") boolean[] attendance,
                               @JsonProperty("participation") int[] participation,
                               @JsonProperty("assessment") HashMap<String, Integer> assessment,
@@ -52,7 +49,6 @@ class JsonAdaptedStudent {
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
-        this.address = address;
         this.attendance = attendance;
         this.participation = participation;
         this.assessment = assessment;
@@ -68,7 +64,6 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         telegram = source.getTelegram().value;
-        address = source.getAddress().value;
         attendance = source.getAttendance().getAttendanceArray();
         participation = source.getParticipation().getParticipationArray();
         assessment = source.getAssessment().getAssessment();
@@ -121,14 +116,6 @@ class JsonAdaptedStudent {
         }
         final Telegram modelTelegram = new Telegram(telegram);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
         Attendance tempAttendance = new Attendance(attendance.length);
         tempAttendance.setAttendance(attendance);
 
@@ -143,7 +130,7 @@ class JsonAdaptedStudent {
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
-        return new Student(modelName, modelPhone, modelEmail, modelTelegram, modelAddress, modelStudioRecord,
+        return new Student(modelName, modelPhone, modelEmail, modelTelegram, modelStudioRecord,
                 modelAssessment, modelTags);
     }
 

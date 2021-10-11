@@ -1,6 +1,5 @@
 package seedu.academydirectory.model.student;
 
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
@@ -22,8 +21,6 @@ public class InformationWantedFunction implements Function<Student, Information>
             return student.getEmail();
         } else if (PREFIX_TELEGRAM.equals(prefix)) {
             return student.getTelegram();
-        } else if (PREFIX_ADDRESS.equals(prefix)) {
-            return student.getAddress();
         } else if (PREFIX_PHONE.equals(prefix)) {
             return student.getPhone();
         }

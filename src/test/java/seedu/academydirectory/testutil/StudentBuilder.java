@@ -3,7 +3,6 @@ package seedu.academydirectory.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.academydirectory.model.student.Address;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Attendance;
 import seedu.academydirectory.model.student.Email;
@@ -25,14 +24,12 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_TELEGRAM = "@amy";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final int DEFAULT_NUMBER_OF_STUDIO_SESSIONS = 12;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Telegram telegram;
-    private Address address;
     private Set<Tag> tags;
     private StudioRecord studioRecord;
     private Assessment assessment;
@@ -45,7 +42,6 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         telegram = new Telegram(DEFAULT_TELEGRAM);
-        address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         studioRecord = new StudioRecord(DEFAULT_NUMBER_OF_STUDIO_SESSIONS);
         assessment = new Assessment();
@@ -59,7 +55,6 @@ public class StudentBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         telegram = studentToCopy.getTelegram();
-        address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
         studioRecord = studentToCopy.getStudioRecord();
         assessment = studentToCopy.getAssessment();
@@ -78,14 +73,6 @@ public class StudentBuilder {
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code Student} that we are building.
-     */
-    public StudentBuilder withAddress(String address) {
-        this.address = new Address(address);
         return this;
     }
 
@@ -148,7 +135,7 @@ public class StudentBuilder {
      */
     public Student build() {
 
-        Student newStudent = new Student(name, phone, email, telegram, address, tags);
+        Student newStudent = new Student(name, phone, email, telegram, tags);
         newStudent.setAttendance(studioRecord.getAttendance());
         return newStudent;
     }

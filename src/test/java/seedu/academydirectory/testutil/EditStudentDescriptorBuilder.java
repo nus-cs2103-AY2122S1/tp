@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.academydirectory.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.academydirectory.model.student.Address;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
@@ -37,7 +36,6 @@ public class EditStudentDescriptorBuilder {
         descriptor.setPhone(student.getPhone());
         descriptor.setEmail(student.getEmail());
         descriptor.setTelegram(student.getTelegram());
-        descriptor.setAddress(student.getAddress());
         descriptor.setTags(student.getTags());
     }
 
@@ -70,14 +68,6 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withTelegram(String telegram) {
         descriptor.setTelegram(new Telegram(telegram));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Address} of the {@code EditStudentDescriptor} that we are building.
-     */
-    public EditStudentDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
         return this;
     }
 
