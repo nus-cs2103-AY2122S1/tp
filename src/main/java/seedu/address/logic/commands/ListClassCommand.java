@@ -19,7 +19,6 @@ public class ListClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredStudentList(PREDICATE_SHOW_NO_STUDENTS);
         model.updaateFilteredTutorialClassList(PREDICATE_SHOW_ALL_CLASSES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
