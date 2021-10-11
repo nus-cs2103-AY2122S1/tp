@@ -2,11 +2,11 @@ package seedu.unify.model.util;
 
 import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.UniFy;
-import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Time;
-import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Tag;
+import seedu.unify.model.task.Date;
+import seedu.unify.model.task.Name;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.Time;
 
 
 /**
