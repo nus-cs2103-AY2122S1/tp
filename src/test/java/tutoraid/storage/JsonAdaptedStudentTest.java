@@ -23,56 +23,56 @@ public class JsonAdaptedStudentTest {
     private static final boolean VALID_PAYMENT_STATUS = TypicalStudents.BENSON.getPaymentStatus().hasPaid;
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(TypicalStudents.BENSON);
-        assertEquals(TypicalStudents.BENSON, person.toModelType());
+    public void toModelType_validStudentDetails_returnsStudent() throws Exception {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(TypicalStudents.BENSON);
+        assertEquals(TypicalStudents.BENSON, student.toModelType());
     }
 
     @Test
     public void toModelType_invalidStudentName_throwsIllegalValueException() {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(INVALID_NAME, VALID_STUDENT_PHONE,
+        JsonAdaptedStudent student = new JsonAdaptedStudent(INVALID_NAME, VALID_STUDENT_PHONE,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE,
                         VALID_PROGRESS, VALID_PAYMENT_STATUS);
 
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
     public void toModelType_nullStudentName_throwsIllegalValueException() {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(null, VALID_STUDENT_PHONE,
+        JsonAdaptedStudent student = new JsonAdaptedStudent(null, VALID_STUDENT_PHONE,
                 VALID_PARENT_NAME, VALID_PARENT_PHONE,
                 VALID_PROGRESS, VALID_PAYMENT_STATUS);
 
         String expectedMessage = String.format(JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
     public void toModelType_invalidStudentPhone_throwsIllegalValueException() {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(VALID_STUDENT_NAME, INVALID_PHONE,
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_STUDENT_NAME, INVALID_PHONE,
                 VALID_PARENT_NAME, VALID_PARENT_PHONE,
                 VALID_PROGRESS, VALID_PAYMENT_STATUS);
 
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
     public void toModelType_invalidParentName_throwsIllegalValueException() {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(VALID_STUDENT_NAME, VALID_STUDENT_PHONE,
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_STUDENT_NAME, VALID_STUDENT_PHONE,
                 INVALID_NAME, VALID_PARENT_PHONE,
                 VALID_PROGRESS, VALID_PAYMENT_STATUS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
     public void toModelType_invalidParentPhone_throwsIllegalValueException() {
-        JsonAdaptedStudent person = new JsonAdaptedStudent(VALID_STUDENT_NAME, INVALID_PHONE,
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_STUDENT_NAME, INVALID_PHONE,
                 VALID_PARENT_NAME, INVALID_PHONE,
                 VALID_PROGRESS, VALID_PAYMENT_STATUS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 }

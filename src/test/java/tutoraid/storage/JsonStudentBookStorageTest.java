@@ -24,11 +24,11 @@ public class JsonStudentBookStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readStudentBook_nullFilePath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> readStudentBook(null));
     }
 
-    private java.util.Optional<ReadOnlyStudentBook> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyStudentBook> readStudentBook(String filePath) throws Exception {
         return new JsonTutorAidStorage(Paths.get(filePath)).readStudentBook(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -40,69 +40,69 @@ public class JsonStudentBookStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readStudentBook("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatStudentBook.json"));
+        Assert.assertThrows(DataConversionException.class, () -> readStudentBook("notJsonFormatStudentBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonStudentBook.json"));
+    public void readStudentBook_invalidPersonStudentBook_throwDataConversionException() {
+        Assert.assertThrows(DataConversionException.class, () -> readStudentBook("invalidPersonStudentBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        Assert.assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonStudentBook.json"));
+    public void readStudentBook_invalidAndValidPersonStudentBook_throwDataConversionException() {
+        Assert.assertThrows(DataConversionException.class, () -> readStudentBook("invalidAndValidPersonStudentBook.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+    public void readAndSaveStudentBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempStudentBook.json");
         StudentBook original = TypicalStudents.getTypicalStudentBook();
-        JsonTutorAidStorage jsonAddressBookStorage = new JsonTutorAidStorage(filePath);
+        JsonTutorAidStorage jsonTutorAidStorage = new JsonTutorAidStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveStudentBook(original, filePath);
-        ReadOnlyStudentBook readBack = jsonAddressBookStorage.readStudentBook(filePath).get();
+        jsonTutorAidStorage.saveStudentBook(original, filePath);
+        ReadOnlyStudentBook readBack = jsonTutorAidStorage.readStudentBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addStudent(TypicalStudents.HOON);
         original.removeStudent(TypicalStudents.ALICE);
-        jsonAddressBookStorage.saveStudentBook(original, filePath);
-        readBack = jsonAddressBookStorage.readStudentBook(filePath).get();
+        jsonTutorAidStorage.saveStudentBook(original, filePath);
+        readBack = jsonTutorAidStorage.readStudentBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Save and read without specifying file path
         original.addStudent(TypicalStudents.IDA);
-        jsonAddressBookStorage.saveStudentBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readStudentBook().get(); // file path not specified
+        jsonTutorAidStorage.saveStudentBook(original); // file path not specified
+        readBack = jsonTutorAidStorage.readStudentBook().get(); // file path not specified
         assertEquals(original, new StudentBook(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveStudentBook_nullStudentBook_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> saveStudentBook(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code studentBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyStudentBook addressBook, String filePath) {
+    private void saveStudentBook(ReadOnlyStudentBook studentBook, String filePath) {
         try {
             new JsonTutorAidStorage(Paths.get(filePath))
-                    .saveStudentBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveStudentBook(studentBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> saveAddressBook(new StudentBook(), null));
+    public void saveStudentBook_nullFilePath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> saveStudentBook(new StudentBook(), null));
     }
 }
