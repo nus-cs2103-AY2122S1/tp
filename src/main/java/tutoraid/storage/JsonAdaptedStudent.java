@@ -9,7 +9,7 @@ import tutoraid.model.student.*;
 /**
  * Jackson-friendly version of {@link Student}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
@@ -21,10 +21,10 @@ class JsonAdaptedPerson {
     private final boolean hasPaid;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given student details.
+     * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(
+    public JsonAdaptedStudent(
             @JsonProperty("studentName") String studentName, @JsonProperty("studentPhone") String studentPhone,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("progress") String progress, @JsonProperty("paymentStatus") boolean hasPaid) {
@@ -40,7 +40,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Student source) {
+    public JsonAdaptedStudent(Student source) {
         studentName = source.getStudentName().fullName;
         studentPhone = source.getStudentPhone().value;
         parentName = source.getParentName().fullName;

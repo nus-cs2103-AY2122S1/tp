@@ -29,7 +29,7 @@ public class JsonStudentBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyStudentBook> readAddressBook(String filePath) throws Exception {
-        return new JsonTutorAidStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonTutorAidStorage(Paths.get(filePath)).readStudentBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -66,20 +66,20 @@ public class JsonStudentBookStorageTest {
 
         // Save in new file and read back
         jsonAddressBookStorage.saveStudentBook(original, filePath);
-        ReadOnlyStudentBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        ReadOnlyStudentBook readBack = jsonAddressBookStorage.readStudentBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addStudent(TypicalPersons.HOON);
         original.removeStudent(TypicalPersons.ALICE);
         jsonAddressBookStorage.saveStudentBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        readBack = jsonAddressBookStorage.readStudentBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Save and read without specifying file path
         original.addStudent(TypicalPersons.IDA);
         jsonAddressBookStorage.saveStudentBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        readBack = jsonAddressBookStorage.readStudentBook().get(); // file path not specified
         assertEquals(original, new StudentBook(readBack));
 
     }

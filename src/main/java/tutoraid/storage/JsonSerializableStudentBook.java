@@ -16,19 +16,19 @@ import tutoraid.model.student.Student;
 /**
  * An Immutable StudentBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "studentbook")
 class JsonSerializableStudentBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableStudentBook} with the given persons.
+     * Constructs a {@code JsonSerializableStudentBook} with the given students.
      */
     @JsonCreator
-    public JsonSerializableStudentBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableStudentBook(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+        this.students.addAll(students);
     }
 
     /**
@@ -37,20 +37,20 @@ class JsonSerializableStudentBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableStudentBook}.
      */
     public JsonSerializableStudentBook(ReadOnlyStudentBook source) {
-        persons.addAll(source.getStudentList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code StudentBook} object.
+     * Converts this student book into the model's {@code StudentBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public StudentBook toModelType() throws IllegalValueException {
         StudentBook studentBook = new StudentBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Student student = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
             if (studentBook.hasStudent(student)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
             studentBook.addStudent(student);
         }

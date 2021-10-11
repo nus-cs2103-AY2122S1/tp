@@ -50,30 +50,30 @@ public class StorageManager implements Storage {
     // ================ StudentBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return tutorAidStorage.getAddressBookFilePath();
+    public Path getStudentBookFilePath() {
+        return tutorAidStorage.getStudentBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyStudentBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(tutorAidStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyStudentBook> readStudentBook() throws DataConversionException, IOException {
+        return readStudentBook(tutorAidStorage.getStudentBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyStudentBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyStudentBook> readStudentBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return tutorAidStorage.readAddressBook(filePath);
+        return tutorAidStorage.readStudentBook(filePath);
     }
 
     @Override
-    public void saveStudentBook(ReadOnlyStudentBook addressBook) throws IOException {
-        saveStudentBook(addressBook, tutorAidStorage.getAddressBookFilePath());
+    public void saveStudentBook(ReadOnlyStudentBook studentBook) throws IOException {
+        saveStudentBook(studentBook, tutorAidStorage.getStudentBookFilePath());
     }
 
     @Override
-    public void saveStudentBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException {
+    public void saveStudentBook(ReadOnlyStudentBook studentBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        tutorAidStorage.saveStudentBook(addressBook, filePath);
+        tutorAidStorage.saveStudentBook(studentBook, filePath);
     }
 
 }

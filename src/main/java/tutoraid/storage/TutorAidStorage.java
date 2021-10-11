@@ -16,7 +16,7 @@ public interface TutorAidStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getStudentBookFilePath();
 
     /**
      * Returns StudentBook data as a {@link ReadOnlyStudentBook}.
@@ -24,23 +24,23 @@ public interface TutorAidStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyStudentBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyStudentBook> readStudentBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getStudentBookFilePath()
      */
-    Optional<ReadOnlyStudentBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyStudentBook> readStudentBook(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyStudentBook} to the storage.
-     * @param addressBook cannot be null.
+     * @param studentBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveStudentBook(ReadOnlyStudentBook addressBook) throws IOException;
+    void saveStudentBook(ReadOnlyStudentBook studentBook) throws IOException;
 
     /**
      * @see #saveStudentBook(ReadOnlyStudentBook)
      */
-    void saveStudentBook(ReadOnlyStudentBook addressBook, Path filePath) throws IOException;
+    void saveStudentBook(ReadOnlyStudentBook studentBook, Path filePath) throws IOException;
 
 }

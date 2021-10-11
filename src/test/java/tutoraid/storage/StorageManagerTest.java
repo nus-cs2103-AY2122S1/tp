@@ -56,13 +56,13 @@ public class StorageManagerTest {
          */
         StudentBook original = TypicalPersons.getTypicalAddressBook();
         storageManager.saveStudentBook(original);
-        ReadOnlyStudentBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyStudentBook retrieved = storageManager.readStudentBook().get();
         assertEquals(original, new StudentBook(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getStudentBookFilePath());
     }
 
 }
