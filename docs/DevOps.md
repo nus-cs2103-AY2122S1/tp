@@ -1,5 +1,6 @@
 ---
-layout: page title: DevOps guide
+layout: page
+title: DevOps guide
 ---
 
 * Table of Contents {:toc}

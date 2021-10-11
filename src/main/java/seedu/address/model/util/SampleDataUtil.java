@@ -9,7 +9,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
-import seedu.address.model.person.NoteDate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -19,8 +18,8 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static final Note EMPTY_NOTE = new Note("", "");
-    public static final NoteDate EMPTY_NOTE_DATE = new NoteDate();
 
+    // @formatter:off
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),

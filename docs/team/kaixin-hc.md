@@ -1,5 +1,6 @@
 ---
-layout: page title: Hannah's Project Portfolio Page
+layout: page
+title: Hannah's Project Portfolio Page
 ---
 
 ### Project: Notor
@@ -16,15 +17,13 @@ Given below are my contributions to the project.
 
 * **Project management**:
 
-
 * **Enhancements to existing features**:
 
 * **Documentation**:
-    * Readme
+    * ReadMe
     * Setting up AboutUs page + portfolios
 * **Community**:
 
 * **Tools**:
-
 
 * _{you can add/remove categories in the list above}_

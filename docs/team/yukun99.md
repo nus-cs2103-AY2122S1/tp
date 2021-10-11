@@ -1,5 +1,6 @@
 ---
-layout: page title: Yukun's Project Portfolio Page
+layout: page
+title: Yukun's Project Portfolio Page
 ---
 
 ### Project: Notor

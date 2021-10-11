@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -22,12 +22,19 @@ import seedu.address.model.person.Person;
 public class NoteWindow extends UiPart<Stage> {
 
     protected static final ArrayList<NoteWindow> OPENED_NOTE_WINDOWS = new ArrayList<>();
+    private static final int WIDTH = 616;
+    private static final int HEIGHT = 390;
+    private static final int OFFSET = 10;
+    private static final int SCREEN_X = Toolkit.getDefaultToolkit().getScreenSize().width;
+    private static final int SCREEN_Y = Toolkit.getDefaultToolkit().getScreenSize().height;
+    private static final int CENTER_X = (SCREEN_X - WIDTH) / 2;
+    private static final int CENTER_Y = (SCREEN_Y - HEIGHT) / 2;
     private static final String FXML = "NoteWindow.fxml";
-    private static final Modifier CTRL = KeyCombination.SHORTCUT_DOWN;
-    private static final KeyCombination SAVE_KEY = new KeyCodeCombination(KeyCode.S, CTRL);
-    private static final KeyCombination EXIT_AND_SAVE_KEY = new KeyCodeCombination(KeyCode.Q, CTRL);
-    private static final KeyCombination EXIT_KEY = new KeyCodeCombination(KeyCode.W, CTRL);
-    private static final KeyCombination TIME_STAMP_KEY = new KeyCodeCombination(KeyCode.T, CTRL);
+    private static final Modifier ALT = KeyCombination.ALT_DOWN;
+    private static final KeyCombination SAVE_KEY = new KeyCodeCombination(KeyCode.S, ALT);
+    private static final KeyCombination EXIT_AND_SAVE_KEY = new KeyCodeCombination(KeyCode.Q, ALT);
+    private static final KeyCombination EXIT_KEY = new KeyCodeCombination(KeyCode.W, ALT);
+    private static final KeyCombination TIME_STAMP_KEY = new KeyCodeCombination(KeyCode.T, ALT);
 
     @FXML
     private TextArea noteTextArea;
@@ -53,7 +60,10 @@ public class NoteWindow extends UiPart<Stage> {
      */
     public void show() {
         getRoot().show();
-        getRoot().centerOnScreen();
+        int newX = Math.min(CENTER_X + (OPENED_NOTE_WINDOWS.size() - 1) * OFFSET, SCREEN_X - WIDTH);
+        int newY = Math.min(CENTER_Y + (OPENED_NOTE_WINDOWS.size() - 1) * OFFSET, SCREEN_Y - HEIGHT);
+        getRoot().setX(newX);
+        getRoot().setY(newY);
     }
 
     /**
@@ -108,44 +118,26 @@ public class NoteWindow extends UiPart<Stage> {
         handleExit();
     }
 
-    /**
-     * Returns the index of first character of current line of the text cursor.
-     * @return index of current line
-     */
-    private int getLineIndex() {
-        int noOfCharsTillCursor = noteTextArea.getCaretPosition();
-        int wordIndex = 0;
-        ObservableList<CharSequence> noteCharSequence = noteTextArea.getParagraphs();
-        for (CharSequence charSequence : noteCharSequence) {
-            int noOfChars = charSequence.length() + 1;
-            if (wordIndex + noOfChars >= noOfCharsTillCursor) {
-                return wordIndex;
-            }
-            wordIndex += noOfChars;
-        }
-        return wordIndex;
-    }
 
     private void timeStampNote() {
-        int currentLine = getLineIndex();
-        String noteBeforeLine = currentLine == 0 ? "" : noteTextArea.getText(0, currentLine);
-        System.out.println(noteBeforeLine);
-        String noteAfterLine = noteTextArea.getText(currentLine, noteTextArea.getLength());
-        noteTextArea.setText(noteBeforeLine + System.lineSeparator() + DateUtil.getCurrentDateTime()
-                + System.lineSeparator() + noteAfterLine);
-        noteTextArea.selectPositionCaret(currentLine);
+        int noOfCharsTillCursor = noteTextArea.getCaretPosition();
+        String noteBeforeLine = noOfCharsTillCursor == 0 ? "" : noteTextArea.getText(0, noOfCharsTillCursor);
+        String noteAfterLine = noteTextArea.getText(noOfCharsTillCursor, noteTextArea.getLength());
+        String dateTime = DateUtil.getCurrentDateTime();
+
+        noteTextArea.setText(noteBeforeLine + dateTime + noteAfterLine);
+        noteTextArea.selectPositionCaret(noOfCharsTillCursor + dateTime.length());
         noteTextArea.deselect();
     }
 
     /**
-     * Reads user key event. Saves on pressing Ctrl + S. Exits on pressing Ctrl + W. Exits and saves on pressing
-     * Ctrl + Q.
+     * Reads user key event. Saves on pressing ALT + S. Exits on pressing ALT + W. Exits and saves on pressing
+     * ALT + Q. TimeStamps on the current line when ALT + T is pressed.
      * @param event User key Event
      * @see seedu.address.logic.Logic#executeSaveNote(Person, Person)
      */
     @FXML
     public void handleOnKeyPressed(KeyEvent event) throws CommandException {
-
         if (SAVE_KEY.match(event)) {
             handleSave();
             return;

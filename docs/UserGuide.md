@@ -1,10 +1,9 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (
-CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact
-management tasks done faster than traditional GUI apps.
+Notor is a desktop app for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Notor allows you to take notes quickly and efficiently, and keeping them in an easy to reference format, which is vital if you are taking notes during meetings with mentees.
 
 * Table of Contents {:toc}
 
@@ -16,7 +15,7 @@ management tasks done faster than traditional GUI apps.
 
 2. Download the latest `notor.jar`.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your Notor.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
@@ -79,7 +78,7 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Notor.
 
 Format: `clear`
 
@@ -180,6 +179,22 @@ Examples:
 * `person /create n:John Lim g:CS2103T`
 * `p /c n:Mary`
 
+#### Adding a person to a group or subgroup: `person /add`
+
+Adds a person to a specified group.
+
+Format: `person NAME /add g:GROUP_NAME [sg:SUP_GROUP_NAME]`<br>
+Advanced user Format: `p  NAME /a g:GROUP_NAME [sg:SUP_GROUP_NAME]`
+
+* Adds a person with the NAME to GROUP_NAME.
+* Optional arguments:
+* `SUB_GROUP_NAME`: name of the subgroup to add the user to.
+
+Examples:
+
+* `person John /add Lim g:CS2103T`
+* `p Mary /a g:CS2103T sg:W08`
+* 
 #### Deleting a person : `person /delete`
 
 Deletes an existing person.
@@ -191,7 +206,7 @@ Advanced user Format: `p /d n:NAME`
 
 Examples:
 
-* `person /delete n:John Lim g:CS2103T`
+* `person /delete n:John Lim `
 * `p /d n:Mary`
 
 #### Editing a person : `person /edit`
@@ -248,7 +263,7 @@ Creates a group.
 Format: `group /create g:GROUP_NAME`<br>
 Advanced user Format: `g /c g:GROUP_NAME`
 
-* Creates a new group with the name `group_name`.
+* Creates a new group with the name `GROUP_NAME`.
 * The new group must not have a same name with other existing groups.
 * The new group's name must not include backslash (`/`) or colon (`:`).
 
@@ -269,12 +284,12 @@ Examples :
 * `group /delete g:CS2103T` will delete the group CS2103T.
 * `g /d g:Orbital`
 
-### Editing a group: `group group_name /edit`
+### Editing a group: `group /edit`
 
 Edits the name of an existing group.
 
-Format: `group group_name /edit g:NEW_NAME`<br>
-Advanced user Format: `g group_name /e g:NEW_NAME`
+Format: `group GROUP_NAME /edit g:NEW_NAME`<br>
+Advanced user Format: `g GROUP_NAME /e g:NEW_NAME`
 
 * Renames an existing group `GROUP_NAME` to `NEW_NAME` .
 * The new group must not have a same name with other existing groups.
@@ -283,84 +298,81 @@ Advanced user Format: `g group_name /e g:NEW_NAME`
 Examples :
 
 * `group CS2103T /edit g:CS2101` will rename the group CS2103T to CS2101
-* `g Orbitan /e g:Orbital`
+* `g Orbital /e g:Orbital3`
 
-### Creating a subgroup: `group group_name /create`
+### Creating a subgroup: `group GROUP_NAME /create`
 
 Creates a new subgroup.
 
-Format: `group group_name /create sg:SUBGROUP_NAME`<br>
-Advanced user Format: `g group_name /c sg:SUBGROUP_NAME`
+Format: `group GROUP_NAME /create sg:SUBGROUP_NAME`<br>
+Advanced user Format: `g GROUP_NAME /c sg:SUBGROUP_NAME`
 
-* Creates a new subgroup of `group_name` with the name `subgroup_name`.
+* Creates a new subgroup of `GROUP_NAME` with the name `SUBGROUP_NAME`.
 * The new subgroup must not have a same name with other existing subgroups in the same group.
 * The new subgroup's name must not include backslash (`/`) or colon (`:`).
 
 Examples :
 
-* `group Orbital /create g:Artemis` will create a new subgroup Artemis in group Orbital.
-* `g CS2103T /c g:ip`
+* `group Orbital /create sg:Artemis` will create a new subgroup Artemis in group Orbital.
+* `g CS2103T /c sg:ip`
 
-### Deleting a subgroup: `group group_name /delete`
+### Deleting a subgroup: `group GROUP_NAME /delete`
 
 Deletes an existing subgroup from a group.
 
-Format: `group group_name /delete sg:SUBGROUP_NAME`<br>
-Advanced user Format: `g group_name /d sg:SUBGROUP_NAME`
+Format: `group GROUP_NAME /delete sg:SUBGROUP_NAME`<br>
+Advanced user Format: `g GROUP_NAME /d sg:SUBGROUP_NAME`
 
-* Deletes an existing subgroup of `group_name` with the name `subgroup_name`.
+* Deletes an existing subgroup of `GROUP_NAME` with the name `SUBGROUP_NAME`.
 
 Examples :
 
-* `group Orbital /delete g:Artemis` will delete the subgroup Artemis from Orbital.
-* `g CS2103T /d g:ip`
+* `group Orbital /delete sg:Artemis` will delete the subgroup Artemis from Orbital.
+* `g CS2103T /d sg:ip`
 
-### Editing a subgroup: `group group_name /edit`
+### Editing a subgroup: `group GROUP_NAME /edit`
 
 Edits the name of an existing subgroup from a group.
 
-Format: `group GROUP_NAME:SUPGROUP_NAME /edit sg:new_name`<br>
-Advanced user Format: `g GROUP_NAME:SUPGROUP_NAME /e sg:SUBGROUP_NAME`
+Format: `group GROUP_NAME:SUP_GROUP_NAME /edit sg:NEW_SUP_GROUP_NAME`<br>
+Advanced user Format: `g GROUP_NAME:SUP_GROUP_NAME /e sg:SUB_GROUP_NAME`
 
-* Renames an existing subgroup of `GROUP_NAME` with the name `SUPGROUP_NAME` to `NEW_NAME`.
+* Renames an existing subgroup of `GROUP_NAME` with the name `SUP_GROUP_NAME` to `NEW_SUP_GROUP_NAME`.
 * The new subgroup must not have a same name with other existing subgroups in the same group.
 * The new subgroup's name must not include backslash (`/`) or colon (`:`).
 
 Examples :
 
-* `group Orbital:Artemis /edit g:Apollo` will rename the subgroup Artemis to Apollo.
-* `g CS2103T:tp /e g:ip`
+* `group g:Orbital:Artemis /edit sg:Apollo` will rename the subgroup Artemis to Apollo.
+* `g g:CS2103T:tp /e sg:ip`
 
-### Adding notes on a group: `group group_name /note`
+### Adding notes on a group: `group GROUP_NAME /note`
 
 Adds notes on a group and saves the time when the note is added.
 
-Format: ` group group_name /note`<br>
-Advanced user Format: `g group_name /n`
+Format: ` group GROUP_NAME /note`<br>
+Advanced user Format: `g GROUP_NAME /n`
 
-* Entering the command will lead to a popup window where the user can edit notes for `group`.
+* Entering the command will lead to a popup window where the user can edit notes for `GROUP_NAME`.
 * The time when the note is edited will be saved.
 
 Examples :
 
-* `group Orbital /note` will prompt a popup window where the user can edit the notes for Orbital.
+* `group Orbital /note sg:Team1` will prompt a popup window where the user can edit the notes for Orbital.
 * `g CS2103T /n`
 
-### Adding notes on a subgroup: `group group_name /note`
+
+### Adding notes on a subgroup: `group GROUP_NAME /note`
 
 Adds notes on a subgroup and saves the time when the note is added.
 
-Format: ` group group_name /note sg:SUB_GROUP`<br>
-Advanced user Format: `g group_name /n sg:SUB_GROUP`
+Format: ` group GROUP_NAME /note sg:SUB_GROUP_NAME`<br>
+Advanced user Format: `g GROUP_NAME /n sg:SUB_GROUP_NAME`
 
-* Entering the command will lead to a popup window where the user can edit notes for `sub_group`.
+* Entering the command will lead to a popup window where the user can edit notes for `SUB_GROUP_NAME`.
 * The time when the note is edited will be saved.
 
 Examples :
-
-* `group Orbital /note sg: Artemis` will prompt a popup window where the user can edit the notes for Artemis.
-* `g CS2103T /e sg: ip`
-
 ## Miscellaneous information
 
 ### Saving the data
@@ -374,7 +386,7 @@ Notor data are saved as a JSON file `[JAR file location]/data/Notor.json`. Advan
 directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Notor will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -387,7 +399,7 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+the data of your previous Notor home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -397,23 +409,22 @@ the data of your previous AddressBook home folder.
 
 Action | Format | Advanced Format
 --------|--------|----------
-**Create** | `person /create NAME [g:GROUP_NAME]` | `p /c NAME [g:GROUP_NAME]`
+**Create** | `person /create n:NAME [g:GROUP_NAME]` | `p /c n:NAME [g:GROUP_NAME]`
+**Add** | `person NAME /add  g:GROUP_NAME [sg:SUB_GROUP_NAME]` | `p NAME /a  g:GROUP_NAME [sg:SUB_GROUP_NAME]`
 **Edit** | `person NAME /edit n:NAME` | `p NAME /e n:NAME`
-**Delete** | `person /delete NAME` | `p NAME /d n:NAME`
-**Remove** | `person NAME /remove or /r g:GROUP_NAME ` | `p NAME /r g:GROUP_NAME`
+**Delete** | `person /delete n:NAME` | `p NAME /d n:NAME`
+**Remove** | `person NAME /remove g:GROUP_NAME ` | `p NAME /r g:GROUP_NAME`
 **Note** | `person NAME /note` | `p NAME /n`
 
 ## Group
 
 Action | Format |  Advanced Format
 --------|--------|----------
-**Create** | `group / c g:GROUP_NAME` | `g / c g:GROUP_NAME`
-**Edit** | `group g:GROUP_NAME /edit g:GROUP_NAME` | `g GROUP_NAME /e g:GROUP_NAME`
-**Delete** | `group g:GROUP_NAME /delete g:GROUP_NAME` | `g g:GROUP_NAME /d g:GROUP_NAME`
-**Note** | `group g:GROUP_NAME /note` | `g g:GROUP_NAME /n g:GROUP_NAME`
-**Create subgroup** | `group GROUP_NAME /create sg:SUB_GROUP_NAME` | `g g:GROUP_NAME /c sg:SUB_GROUP_NAME`
-**Edit
-subgroup** | `group GROUP_NAME:SUB_GROUP_NAME /edit sg:SUB_GROUP_NAME` | `g g:GROUP_NAME:SUB_GROUP_NAME /e sg:SUB_GROUP_NAME`
+**Create** | `group /create g:GROUP_NAME` | `g /c g:GROUP_NAME`
+**Edit** | `group GROUP_NAME /edit g:GROUP_NAME` | `g GROUP_NAME /e g:GROUP_NAME`
+**Delete** | `group GROUP_NAME /delete g:GROUP_NAME` | `g GROUP_NAME /d g:GROUP_NAME`
+**Note** | `group GROUP_NAME /note` | `g GROUP_NAME /n`
+**Create subgroup** | `group GROUP_NAME /create sg:SUB_GROUP_NAME` | `g GROUP_NAME /c sg:SUB_GROUP_NAME`
 **Delete subgroup** | `group GROUP_NAME /delete sg:SUB_GROUP_NAME` | `g GROUP_NAME /d sg:SUB_GROUP_NAME`
 **Note subgroup** |  `group GROUP_NAME /note sg:SUB_GROUP_NAME` | `g GROUP_NAME /n sg:SUB_GROUP_NAME`
 

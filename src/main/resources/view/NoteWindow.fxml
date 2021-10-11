@@ -16,7 +16,7 @@
         <Scene>
          <VBox>
             <children>
-                  <AnchorPane prefHeight="0.0" prefWidth="600.0"/>
+                  <AnchorPane prefHeight="0.0" prefWidth="600"/>
                <MenuBar prefHeight="25.0" prefWidth="470.0">
                   <menus>
                      <Menu mnemonicParsing="false" text="File">

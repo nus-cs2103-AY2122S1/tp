@@ -1,5 +1,6 @@
 ---
-layout: page title: Developer Guide
+layout: page
+title: Developer Guide
 ---
 
 * Table of Contents {:toc}
@@ -23,7 +24,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## Glossary
 
 * **Autocomplete**: A functionality to complete a `Tag` or a `Command` without users typing the complete strings
-* **Command structure**: The order in which parameters and command words must be written in order for the command to be correctly parsed
+* **Command structure**: The order in which parameters and command words must be written in order for the command to be
+  correctly parsed
 * **Dummy data**: Sample data used in testing or example data present on first launch of application
 * **Group**: A container containing `Person` objects with shared traits that is created by the user
 * **Key power features**: Essential features that will be used often when running the software application
@@ -31,7 +33,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 * **Metadata**: Personal data about a `Person` object
 * **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
 * **Pin**: Fixing a `Person` to the top of the current list of `Person` objects or a `Group`
-* **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is automatically in the parent `Group` as well
+* **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **
+  Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is
+  automatically in the parent `Group` as well
 * **Tag**: A string descriptor attached to `Group` objects or `Person` objects
 * **Ungrouped**: Used to describe a `Person` object with no grouping
 
@@ -211,13 +215,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
+**Target user profile**: mentor professors
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* has groups of contacts that have different needs
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
@@ -286,12 +290,10 @@ otherwise)
 
 **Extensions**
 
-* 2a. The list is empty.
-  Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message.
-      Use case resumes at step 2.
+    * 3a1. AddressBook shows an error message. Use case resumes at step 2.
 
 **Use case: User types a command**
 
@@ -312,20 +314,23 @@ otherwise)
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Installing a new update shall not in any way, modify or erase existing data and value from the previous version, and the new update should be compatible with the data produced earlier within the system.
-5.  Should be able to store notes in English language, and provisions shall be made to support all languages.
-6.  The system should be able to handle notes with at most 1000 lines without any noticeable decrease in performance, so that users can keep extensive notes on their mentees.
-7.  The user should not lose any data if the system exits prematurely.
-8.  The system should be able to reply to the prompt or command from the user within 3 seconds.
-9.  The system should be intuitive to use for a mentor professor.
-10.  Should ensure personal data privacy and security of data access. 
-11. Software testing will require the use of automated testing. The test will be deleted after successful implementation of the software system.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be
+   able to accomplish most of the tasks faster using commands than using the mouse.
+4. Installing a new update shall not in any way, modify or erase existing data and value from the previous version, and
+   the new update should be compatible with the data produced earlier within the system.
+5. Should be able to store notes in English language, and provisions shall be made to support all languages.
+6. The system should be able to handle notes with at most 1000 lines without any noticeable decrease in performance, so
+   that users can keep extensive notes on their mentees.
+7. The user should not lose any data if the system exits prematurely.
+8. The system should be able to reply to the prompt or command from the user within 3 seconds.
+9. The system should be intuitive to use for a mentor professor.
+10. Should ensure personal data privacy and security of data access.
+11. Software testing will require the use of automated testing. The test will be deleted after successful implementation
+    of the software system.
 
 --------------------------------------------------------------------------------------------------------------------
-
 
 ## **Appendix: Instructions for manual testing**
 

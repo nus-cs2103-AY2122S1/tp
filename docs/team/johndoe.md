@@ -1,5 +1,6 @@
 ---
-layout: page title: John Doe's Project Portfolio Page
+layout: page
+title: John Doe's Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3
