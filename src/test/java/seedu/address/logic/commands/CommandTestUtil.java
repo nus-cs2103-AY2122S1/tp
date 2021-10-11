@@ -18,8 +18,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductContainsKeywordsPredicate;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 import seedu.address.testutil.EditProductDescriptorBuilder;
 
@@ -151,17 +154,30 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+    public static void showClientAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredClientList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Client client = model.getFilteredClientList().get(targetIndex.getZeroBased());
+        final String[] splitName = client.getName().fullName.split("\\s+");
+        model.updateFilteredClientList(new ClientContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredClientList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the product at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showProductAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredProductList().size());
+
+        Product product = model.getFilteredProductList().get(targetIndex.getZeroBased());
+        final String[] splitName = product.getName().fullName.split("\\s+");
+        model.updateFilteredProductList(new ProductContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredProductList().size());
+    }
 }
