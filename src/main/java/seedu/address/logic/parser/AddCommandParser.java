@@ -34,9 +34,8 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
-
     private static final Prefix[] REQUIRED_PREFIXES = {
-            PREFIX_NAME, PREFIX_EMAIL
+        PREFIX_NAME, PREFIX_EMAIL
     };
 
     private Model model;
