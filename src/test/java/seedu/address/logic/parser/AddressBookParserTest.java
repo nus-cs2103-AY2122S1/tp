@@ -7,6 +7,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,7 +67,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " data/test.json") instanceof ImportCommand);
+        ImportCommand command = (ImportCommand) parser.parseCommand(ImportCommand.COMMAND_WORD
+                + " data/test.json");
+        Path testPath = Paths.get("data/test.json");
+        assertEquals(new ImportCommand(testPath), command);
     }
 
     @Test
