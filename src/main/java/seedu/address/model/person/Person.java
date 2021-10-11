@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 import seedu.address.commons.core.Money;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,11 +25,12 @@ public class Person {
     private final Revenue revenue;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Appointment appointment;
 
     /**
      * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not statedd.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Appointment appointment) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +38,7 @@ public class Person {
         this.revenue = new Revenue(new Money(0));
         this.address = address;
         this.tags.addAll(tags);
+        this.appointment = appointment;
     }
 
     /**
@@ -70,6 +72,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
     /**
@@ -133,7 +139,9 @@ public class Person {
                 .append("; Revenue: ")
                 .append(getRevenue())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Meeting: ")
+                .append(getAppointment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
