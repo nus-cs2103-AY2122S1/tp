@@ -19,6 +19,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static final Note EMPTY_NOTE = new Note("");
 
+    // @formatter:off
     public static Person[] getSamplePersons() {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
