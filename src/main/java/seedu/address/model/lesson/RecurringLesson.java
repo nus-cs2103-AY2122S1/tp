@@ -68,17 +68,17 @@ public class RecurringLesson extends Lesson {
         final StringBuilder builder = new StringBuilder();
         String typeOfLesson = "Recurring Lesson";
         builder.append(typeOfLesson)
-            .append("\n")
+            .append(" ")
             .append(getNextDate())
-            .append("\nTime: ")
+            .append(" Time: ")
             .append(getTimeRange())
-            .append("\nSubject: ")
+            .append(" Subject: ")
             .append(getSubject());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
-            builder.append("\nHomework: ");
-            homework.forEach(hw -> builder.append(hw + "\n"));
+            builder.append(" Homework: ");
+            homework.forEach(hw -> builder.append(hw + ", "));
         }
         return builder.toString();
     }
