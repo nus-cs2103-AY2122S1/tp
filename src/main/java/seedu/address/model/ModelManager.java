@@ -29,19 +29,21 @@ public class ModelManager implements Model {
     private final ApplicationBook applicationBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Applicant> filteredApplicants;
     private final FilteredList<Position> filteredPositions;
 
     /**
      * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
-            ReadOnlyApplicantBook applicantBook, ApplicationBook applicationBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
+                        ReadOnlyPositionBook positionBook, ApplicationBook applicationBook,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, positionBook, applicantBook, applicationBook, userPrefs);
+        requireAllNonNull(addressBook, applicantBook, positionBook, applicationBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-                + ", position book: " + positionBook
                 + ", applicant book: " + applicantBook
+                + ", position book: " + positionBook
                 + ", application book: " + applicationBook
                 + ", userPrefs: " + userPrefs);
 
@@ -51,6 +53,7 @@ public class ModelManager implements Model {
         this.applicationBook = new ApplicationBook(applicationBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
@@ -70,11 +73,12 @@ public class ModelManager implements Model {
         this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new PositionBook(), new ApplicantBook(), new ApplicationBook(), new UserPrefs());
+        this(new AddressBook(), new ApplicantBook(), new PositionBook(), new ApplicationBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -136,6 +140,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteApplicant(Applicant target) {
+        applicantBook.removeApplicant(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -151,13 +160,26 @@ public class ModelManager implements Model {
             position.updateNoOfRejectedApplicants(position.getNoOfRejectedApplicants() + 1);
         }
         position.updateRejectionRate();
+        applicationBook.addApplication(applicant.getApplication());
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+    }
+
+    @Override
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicantBook.hasApplicant(applicant);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireAllNonNull(target, editedApplicant);
+        applicantBook.setApplicant(target, editedApplicant);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -172,9 +194,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return filteredApplicants;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants) {
+        requireNonNull(predicateShowAllApplicants);
+        filteredApplicants.setPredicate(predicateShowAllApplicants);
     }
 
     @Override

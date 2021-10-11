@@ -80,7 +80,6 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
      */
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireNonNull(editedApplicant);
-
         applicants.setApplicant(target, editedApplicant);
     }
 
