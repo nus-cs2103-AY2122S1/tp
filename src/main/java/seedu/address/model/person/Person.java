@@ -130,6 +130,10 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        builder.append("; Rating: ")
+                .append(getRating());
+
         return builder.toString();
     }
 

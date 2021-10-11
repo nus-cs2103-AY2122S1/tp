@@ -38,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_RATING);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY_CODE, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
-                PREFIX_EMAIL, PREFIX_RATING)
+                PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -49,7 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get());
+        Rating rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).isPresent()
+            ? argMultimap.getValue(PREFIX_RATING).get() : "0");
 
         Person person = new Person(categoryCode, name, phone, email, address, tagList, rating);
 
