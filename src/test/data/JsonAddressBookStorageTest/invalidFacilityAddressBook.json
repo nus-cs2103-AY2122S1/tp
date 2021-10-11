@@ -1,0 +1,9 @@
+{
+  "members": [],
+  "facilities": [ {
+    "name" : "Facility with invalid time field",
+    "location": "Tampines Hub Field",
+    "time": "200",
+    "capacity": "4"
+  } ]
+}

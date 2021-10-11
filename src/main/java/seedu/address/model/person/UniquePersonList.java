@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
@@ -95,6 +96,13 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Replaces the contents of this list with empty list.
+     */
+    public void resetPersons() {
+        internalList.setAll();
     }
 
     /**
