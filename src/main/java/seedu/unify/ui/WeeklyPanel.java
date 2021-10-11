@@ -7,15 +7,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import seedu.unify.commons.core.LogsCenter;
+import seedu.unify.logic.Logic;
 import seedu.unify.model.task.Task;
 
 public class WeeklyPanel extends UiPart<Region> {
 
     private static final String FXML = "WeeklyPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(WeeklyPanel.class);
+    private Logic logic;
+
 
     @FXML
     private Label weekLabel;
@@ -29,14 +31,14 @@ public class WeeklyPanel extends UiPart<Region> {
     public WeeklyPanel(ObservableList<Task> taskList) {
         super(FXML);
         weekLabel.setText("11/10/2021"); // get date.toString
-        StackPane dailyPane = new StackPane(); // replaced with getting pane from daily panel
+
+
 
         for (int i = 0; i < 7; i++) {
             // these are just placeholders
-            Label placeHolderLabel = new Label();
             VBox placeHolderVBox = new VBox();
-            placeHolderLabel.setText(indexToDay(i));
-            placeHolderVBox.getChildren().add(placeHolderLabel);
+            DailyPanel dailyPanel = new DailyPanel(taskList, indexToDay(i));
+            placeHolderVBox.getChildren().add(dailyPanel.getRoot());
             placeHolderVBox.setStyle("-fx-border-style: solid inside;"
                     + "-fx-border-width: 1;");
             dailyHBox.widthProperty().addListener(e -> placeHolderVBox.setPrefWidth(dailyHBox.getWidth() / 7));
