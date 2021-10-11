@@ -1,5 +1,6 @@
 ---
-layout: page title: Elton's Project Portfolio Page
+layout: page
+title: Elton's Project Portfolio Page
 ---
 
 ### Project: Notor

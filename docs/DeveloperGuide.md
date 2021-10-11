@@ -1,5 +1,6 @@
 ---
-layout: page title: Developer Guide
+layout: page
+title: Developer Guide
 ---
 
 * Table of Contents {:toc}
@@ -8,8 +9,9 @@ layout: page title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+This project is a further iteration of the [_AddressBook-Level 3 (
+AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
+those already present in AB-3. Removed features are listed as well.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -19,171 +21,77 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Autocomplete**: A functionality to complete a `Tag` or a `Command` without users typing the complete strings
+* **Command structure**: The order in which parameters and command words must be written in order for the command to be
+  correctly parsed
+* **Dummy data**: Sample data used in testing or example data present on first launch of application
+* **Group**: A container containing `Person` objects with shared traits that is created by the user
+* **Key power features**: Essential features that will be used often when running the software application
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Metadata**: Personal data about a `Person` object
+* **Note**: A general description of each `Person` to record their activities, with last edit timestamp attached
+* **Pin**: Fixing a `Person` to the top of the current list of `Person` objects or a `Group`
+* **Subgroup**: A child of a `Group` used to store multiple persons based on a more specific category than `Group`. A **
+  Subgroup** can be created by specifying the parent group of the **Subgroup**. A person in a **Subgroup** is
+  automatically in the parent `Group` as well
+* **Tag**: A string descriptor attached to `Group` objects or `Person` objects
+* **Ungrouped**: Used to describe a `Person` object with no grouping
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Design**
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in
-the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML
-Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit
-diagrams.
-</div>
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+The **Architecture** of our iteration is built upon AB-3. Please refer to the AB-3 **Architecture**
+section for the general Architectural design of the app. Only changes will be listed here.
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+### Model Changes
 
-Given below is a quick overview of main components and how they interact with each other.
-
-**Main components of the architecture**
-
-**`Main`** has two classes
-called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It
-is responsible for,
-
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
-
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
-
-The rest of the App consists of four components.
-
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-
-**How the architecture components interact with each other**
-
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete 1`.
-
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
-
-Each of the four main components (also shown in the diagram above),
-
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
-  API `interface` mentioned in the previous point.
-
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
-the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
-through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
-implementation of a component), as illustrated in the (partial) class diagram below.
-
-<img src="images/ComponentManagers.png" width="300" />
-
-The sections below give more details of each component.
-
-### UI component
-
-The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
-
-![Structure of the UI Component](images/UiClassDiagram.png)
-
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`
-, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
-the commonalities between classes that represent parts of the visible GUI.
-
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
-are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
-is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
-
-The `UI` component,
-
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
-
-### Logic component
-
-**
-API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
-
-Here's a (partial) class diagram of the `Logic` component:
-
-<img src="images/LogicClassDiagram.png" width="550"/>
-
-How the `Logic` component works:
-
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is
-   executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
-call.
-
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
-<img src="images/ParserClasses.png" width="600"/>
-
-How the parsing works:
-
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
-  a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
-
-### Model component
+*(placeholder API for now, will update to our own link later when implemented.)*
 
 **
 API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![ModelClassDiagram](images/ModelClassDiagram.png)
 
+* `Person` does not contain the `Address` field anymore.
+* `Person` contains a new `Note` field.
+* This UML diagram is the current class structure implemented.
 
-The `Model` component,
+Here is the better class structure to be implemented:
+![ModelClassDiagram2](images/BetterModelClassDiagram.png)
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
-  this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
-  a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
-  should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+* `Trie` allows tags to be autocompleted as commands are entered.
+* Storing `String` objects in a `Trie` in AddressBook allows all tags to only get created once instead of once per
+  object.
+* Storing tags as `String` objects in a trie is simpler than a dedicated `Tag` class.
 
 ### Storage component
+
+*(placeholder API for now, will update to our own link later when implemented.)*
 
 **
 API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![StorageClassDiagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 
-* can save both address book data and user preference data in json format, and read them back into corresponding
-  objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
+* now includes a new `Archive` Storage component
+* `Archive` allows users to temporarily remove `Person`s from their Address Book
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+**
+API** : [`Trie.java`](https://github.com/AY2122S1-CS2103T-W08-1/tp/blob/master/src/main/java/seedu/address/commons/core/trie/Trie.java)
+
+* Allows grouping and autocompletion of `Tag` and `Command` objects.
+* Supports addition and deletion of items.
+* Supports finding of first item.
+* Supports finding of first item that contains specified keyword.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -307,74 +215,120 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
-
+**Target user profile**: mentor professors
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* has groups of contacts that have different needs
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities:<p>
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+* High - must have<p>
+* Medium - nice to have<p>
+* Low - unlikely to have<p>
+* Default - already implemented)
 
-*{More to be added}*
+|As a …                                                                                      |I want to …                                                                                                   |So that I can …                                            |Priority    |Status     |When?         |
+|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|------------|-----------|--------------|
+|on the go user                                                                              |add notes without wifi or internet access                                                                     |use the app anywhere                                       |Default     |           |Iteration 1.2 |
+|new user                                                                                    |have dummy data                                                                                               |see what my entries look like                              |Default     |           |Iteration 1.2 |
+|new user                                                                                    |remove all dummy entries easily                                                                               |start doing work quickly                                   |Medium      |           |Iteration 1.2 |
+|general user, new user                                                                      |see a simple UI which shows essential features immediately and hides away advanced features till you need them|slowly learn the features                                  |High        |           |Iteration 1.2 |
+|general user, mentor professor, module professor                                            |take notes with timestamps                                                                                    |see my notes chronologically                               |High        |           |Iteration 1.2 |
+|general user, mentor professor, module professor                                            |edit the groups or tags of a student                                                                          |                                                           |High        |           |Iteration 1.2 |
+|mentor professor                                                                            |group the students based on the mentoring subjects                                                            |tag or comment on each group separately                    |High        |           |Iteration 1.2 |
+|general user, mentor professor, module professor                                            |have easy-to-remember commands for inputting information                                                      |                                                           |High        |           |Iteration 1.2 |
+|general user                                                                                |delete groups/subgroups                                                                                       |                                                           |High        |Not started|Iteration 1.2 |
+|experienced user, general user                                                              |add tags cumulatively                                                                                         |not retype my old tags                                     |High        |Not started|Iteration 1.2 |
+|new user                                                                                    |see clear error messages that explains how to enter the correct command                                       |learn the right syntax from my errors                      |High        |Not started|Iteration 1.2b|
+|experienced user, general user, mentor professor, module professor                          |edit previous notes I have taken                                                                              |                                                           |High        |           |Iteration 1.2b|
+|mentor professor, module professor, new user                                                |have an easily accessible help page                                                                           |                                                           |High        |           |Iteration 1.2b|
+|experienced user, general user, mentor professor, module professor, new user, on the go user|search by tag/category                                                                                        |find students based on tag/category                        |High        |Not started|Iteration 1.2b|
+|general user, mentor professor, module professor                                            |have notes attached to categories                                                                             |save notes relevant to a whole group                       |Medium      |           |Iteration 1.2b|
+|general user                                                                                |create general notes                                                                                          |take down any thoughts I have on the fly                   |Medium      |Not started|Iteration 1.2b|
+|new user                                                                                    |see a confirmation message if I choose to delete something                                                    |avoid accidental deletions                                 |Medium      |           |Iteration 1.2b|
+|experienced user, mentor professor, module professor                                        |specify the kinds of data attached to contacts which is viewable from the front page                          |only see information that I need                           |Nice To Have|           |Iteration 1.3 |
+|general user                                                                                |display all of the user information in an easy to reference format                                            |read large amounts of information at once easily           |Medium      |           |Iteration 1.3 |
+|mentor professor, module professor                                                          |initialise the contacts for many students at once                                                             |add similar students by batch                              |Medium      |           |Iteration 1.3 |
+|mentor professor                                                                            |see the last time I contacted a student                                                                       |know if I need to check up on them                         |Medium      |           |Iteration 1.3 |
+|new user                                                                                    |get prompted for the arguments.                                                                               |learn the command structure                                |Medium      |           |Iteration 1.3 |
+|experienced user                                                                            |pin users I need to access regularly                                                                          |see commonly accessed users easily                         |Low         |           |Iteration 1.3b|
+|experienced user                                                                            |see personal metadata such as number of high-priority students & number of contacts                           |determine my own usage                                     |Low         |           |Iteration 1.3b|
+|new user                                                                                    |see a short tutorial                                                                                          |get familiar with key features                             |Low         |Not started|Iteration 1.3b|
+|general user                                                                                |see a list of recently looked up people                                                                       |quickly add on thoughts on the people I've just seen       |Medium      |           |Iteration 1.3b|
+|mentor professor, module professor                                                          |hide groups                                                                                                   |ignore groups no longer relevant to me                     |Low         |           |Iteration 1.3b|
+|general user, mentor professor, module professor, on the go user                            |export the data to PDF & CSV / Excel                                                                          |reference the information in another format                |Low         |           |Iteration 1.3b|
+|experienced user                                                                            |sort by complete inclusion of terms rather than matching any term                                             |narrow down my search results easily                       |Low         |Not started|Iteration 1.3b|
+|general user                                                                                |create general reminders                                                                                      |remind myself of tasks I need to do for my mentees/students|Low         |Not started|Iteration 1.3b|
+|experienced user, module professor                                                          |set my own command aliases                                                                                    |use my own commands when I am used to them                 |Low         |           |Delay         |
+|experienced user, mentor professor, module professor                                        |use shorter commands                                                                                          |save time                                                  |Medium      |           |Delay         |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a note**
 
 **MSS**
 
-1. User requests to list persons
+1. User requests to add a note to the person
 2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+3. User requests to add a note to a specific person in the list
+4. AddressBook opens up a pop up dialogue for the user to type the note for the person
+5. User requests to save the note to the person
+6. AddressBook stores the book to the person
+7. AddressBook saves the note to storage
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
+    * 3a1. AddressBook shows an error message. Use case resumes at step 2.
 
-    * 3a1. AddressBook shows an error message.
+**Use case: User types a command**
 
-      Use case resumes at step 2.
+**MSS**
 
-*{More to be added}*
+1. User starts typing a command in AddressBook
+2. AddressBook shows possible commands starting with what user has typed
+3. User presses tab to select the right command
+4. User presses enter to execute the selected command
+5. AddressBook <u>runs command (UC1)</u>
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The typed string is not in any command.
+    * 2a1. AddressBook displays no commands. Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+3. A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
-
-### Glossary
-
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+4. Installing a new update shall not in any way, modify or erase existing data and value from the previous version, and
+   the new update should be compatible with the data produced earlier within the system.
+5. Should be able to store notes in English language, and provisions shall be made to support all languages.
+6. The system should be able to handle notes with at most 1000 lines without any noticeable decrease in performance, so
+   that users can keep extensive notes on their mentees.
+7. The user should not lose any data if the system exits prematurely.
+8. The system should be able to reply to the prompt or command from the user within 3 seconds.
+9. The system should be intuitive to use for a mentor professor.
+10. Should ensure personal data privacy and security of data access.
+11. Software testing will require the use of automated testing. The test will be deleted after successful implementation
+    of the software system.
 
 --------------------------------------------------------------------------------------------------------------------
 

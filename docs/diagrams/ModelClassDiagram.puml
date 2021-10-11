@@ -18,11 +18,11 @@ Class ReadOnlyUserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Note
 
 }
 
@@ -43,12 +43,10 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> Note
 Person *--> "*" Tag
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
 @enduml
