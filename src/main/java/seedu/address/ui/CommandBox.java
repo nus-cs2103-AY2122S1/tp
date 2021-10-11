@@ -3,6 +3,8 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,9 +34,26 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Handles the Enter button pressed event.
+     * Handles any key button pressed event.
+     * @param event The key pressed event.
      */
     @FXML
+    private void handleKeyPressed(KeyEvent event) {
+        KeyCode keyCode = event.getCode();
+        switch (keyCode) {
+        case ENTER:
+            handleCommandEntered();
+            break;
+        case UP:
+        case DOWN:
+            handleNavigateHistory(keyCode);
+            break;
+        }
+    }
+
+    /**
+     * Handles the Enter button pressed event.
+     */
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
@@ -47,6 +66,13 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles the Up button pressed event.
+     */
+    private void handleNavigateHistory(KeyCode keyCode) {
+        System.out.println(keyCode);
     }
 
     /**
