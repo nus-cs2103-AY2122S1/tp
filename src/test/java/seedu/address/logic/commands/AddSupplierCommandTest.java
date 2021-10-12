@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
@@ -119,6 +120,11 @@ public class AddSupplierCommandTest {
         }
 
         @Override
+        public void addCustomer(Customer customer) {
+
+        }
+
+        @Override
         public void addEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
@@ -139,6 +145,11 @@ public class AddSupplierCommandTest {
         }
 
         @Override
+        public boolean hasCustomer(Customer customer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
@@ -149,12 +160,22 @@ public class AddSupplierCommandTest {
         }
 
         @Override
+        public void deleteCustomer(Customer target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCustomer(Customer target, Customer editedCustomer) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -189,17 +210,27 @@ public class AddSupplierCommandTest {
         }
 
         @Override
+        public ObservableList<Customer> getFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Employee> getFilteredEmployeeList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Reservation> getFilteredReservationList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCustomerList(Predicate<Customer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

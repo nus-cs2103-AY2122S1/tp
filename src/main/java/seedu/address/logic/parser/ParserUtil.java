@@ -16,6 +16,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.Allergy;
+import seedu.address.model.person.customer.LoyaltyPoints;
+import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
@@ -133,7 +136,76 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String loyaltyPoints} into an {@code loyaltyPoints}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code loyaltyPoints} is invalid.
+     */
+    public static LoyaltyPoints parseLoyaltyPoints(String loyaltyPoints) throws ParseException {
+        requireNonNull(loyaltyPoints);
+        String trimmedLoyaltyPoints = loyaltyPoints.trim();
+        if (!LoyaltyPoints.isValidLoyaltyPoints(trimmedLoyaltyPoints)) {
+            throw new ParseException(LoyaltyPoints.MESSAGE_CONSTRAINTS);
+        }
+        return new LoyaltyPoints(trimmedLoyaltyPoints);
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Allergy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code allergy} is invalid.
+     */
+    public static Allergy parseAllergy(String allergy) throws ParseException {
+        requireNonNull(allergy);
+        String trimmedAllergy = allergy.trim();
+        if (!Allergy.isValidAllergyName(trimmedAllergy)) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+        }
+        return new Allergy(trimmedAllergy);
+    }
+
+    /**
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>}.
+     */
+    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
+        requireNonNull(allergies);
+        final Set<Allergy> allergySet = new HashSet<>();
+        for (String allergyName : allergies) {
+            allergySet.add(parseAllergy(allergyName));
+        }
+        return allergySet;
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Allergy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialRequest} is invalid.
+     */
+    public static SpecialRequest parseSpecialRequest(String specialRequest) throws ParseException {
+        requireNonNull(specialRequest);
+        String trimmedSpecialRequest = specialRequest.trim();
+        if (!SpecialRequest.isValidSpecialRequestName(trimmedSpecialRequest)) {
+            throw new ParseException(SpecialRequest.MESSAGE_CONSTRAINTS);
+        }
+        return new SpecialRequest(trimmedSpecialRequest);
+    }
+
+    /**
+     * Parses {@code Collection<String> specialRequests} into a {@code Set<SpecialRequest>}.
+     */
+    public static Set<SpecialRequest> parseSpecialRequests(Collection<String> specialRequests) throws ParseException {
+        requireNonNull(specialRequests);
+        final Set<SpecialRequest> specialRequestSet = new HashSet<>();
+        for (String specialRequestName : specialRequests) {
+            specialRequestSet.add(parseSpecialRequest(specialRequestName));
+        }
+        return specialRequestSet;
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.

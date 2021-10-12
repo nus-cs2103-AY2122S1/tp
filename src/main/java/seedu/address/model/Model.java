@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
@@ -16,8 +17,8 @@ import seedu.address.model.reservation.Reservation;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
     Predicate<Reservation> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
-
     /** {@code Predicate} that always evaluate to true */
     Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
 
@@ -68,16 +69,24 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a customer with the same identity as {@code customer} exists in the address book.
+     */
+    boolean hasCustomer(Customer customer);
+    /**
      * Returns true if an employee with the same identity as {@code employee} exists in the address book.
      */
     boolean hasEmployee(Employee employee);
-
     /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
 
+    /**
+     * Deletes the given customer.
+     * The customer must exist in the address book.
+     */
+    void deleteCustomer(Customer target);
     /**
      * Deletes the given employee.
      * The employee must exist in the address book.
@@ -91,6 +100,11 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given customer.
+     * {@code customer} must not already exist in the address book.
+     */
+    void addCustomer(Customer customer);
+    /**
      * Adds the given employee.
      * {@code employee} must not already exist in the address book.
      */
@@ -103,6 +117,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given customer {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in
+     * the address book.
+     */
+    void setCustomer(Customer target, Customer editedCustomer);
     /**
      * Replaces the given employee {@code target} with {@code editedEmployee}.
      * {@code target} must exist in the address book.
@@ -132,9 +153,13 @@ public interface Model {
      */
     void setReservation(Reservation target, Reservation editedReservation);
 
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+
+    /** Returns an unmodifiable view of the filtered customer list */
+    ObservableList<Customer> getFilteredCustomerList();
     /** Returns an unmodifiable view of the filtered employee list */
     ObservableList<Employee> getFilteredEmployeeList();
 
@@ -149,6 +174,12 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+
+     * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCustomerList(Predicate<Customer> predicate);
     /**
      * Updates the filter of the filtered Employee list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

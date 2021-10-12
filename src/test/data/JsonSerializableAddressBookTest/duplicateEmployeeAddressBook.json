@@ -20,8 +20,13 @@
     "salary" : "5000",
     "jobTitle" : "Account Manager"
   } ],
+  "customers": [
+
+  ],
   "suppliers": [
 
   ],
-  "reservations": []
+  "reservations": [
+
+  ]
 }
