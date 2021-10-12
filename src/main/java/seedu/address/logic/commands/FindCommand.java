@@ -6,11 +6,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.function.*;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.student.*;
+import seedu.address.model.student.GroupContainsKeywordPredicate;
+import seedu.address.model.student.IdContainsKeywordPredicate;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.TagContainsKeywordPredicate;
+
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
