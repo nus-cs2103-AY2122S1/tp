@@ -53,7 +53,7 @@ public class PriorityTag extends Tag {
 
         public static final String NAME = "MediumPriority";
 
-        public static final String TERM = "medium";
+        public static final String TERM = "med";
 
         public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 

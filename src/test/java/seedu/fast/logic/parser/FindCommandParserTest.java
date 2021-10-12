@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.PriorityPredicate;
+import seedu.fast.model.tag.PriorityTag;
 
 public class FindCommandParserTest {
 
@@ -29,6 +31,21 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindPriorityCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new PriorityPredicate(Arrays.asList(PriorityTag.LowPriority.TERM,
+                        PriorityTag.MediumPriority.TERM)));
+        assertParseSuccess(parser , PriorityTag.PRIORITY_TAG_PREFIX
+                + PriorityTag.LowPriority.TERM + " "
+                + PriorityTag.MediumPriority.TERM , expectedFindCommand);
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, PriorityTag.PRIORITY_TAG_PREFIX
+                + PriorityTag.LowPriority.TERM + " \n \t "
+                + PriorityTag.MediumPriority.TERM , expectedFindCommand);
     }
 
 }

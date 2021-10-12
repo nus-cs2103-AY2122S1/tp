@@ -55,7 +55,33 @@ public class ParserUtil {
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+        trimmedName = capitalise(trimmedName);
         return new Name(trimmedName);
+    }
+
+    /**
+     * Takes in a {@code String trimmedName} and capitalises each letter
+     * after a whitespace.
+     *
+     * @param trimmedName
+     * @return trimmedName with capitalised words.
+     */
+    private static String capitalise(String trimmedName) {
+        char[] chars = trimmedName.toLowerCase().toCharArray();
+        if (Character.isLetter(chars[0])) {
+            chars[0] = Character.toUpperCase(chars[0]);
+            //Capitalise first letter
+        }
+        for (int i = 1; i < chars.length - 1; i++) {
+            char current = chars[i];
+            char next = chars[i + 1];
+            if (Character.isWhitespace(current) && Character.isLetter(next)) {
+                chars[i + 1] = Character.toUpperCase(next);
+            }
+            //Capitalise any letter after a whitespace
+        }
+        trimmedName = String.valueOf(chars);
+        return trimmedName;
     }
 
     /**
