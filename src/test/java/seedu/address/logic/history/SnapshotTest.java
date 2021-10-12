@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.CopyableInt;
+
 public class SnapshotTest {
     @Test
     public void constructor_expected_success() {

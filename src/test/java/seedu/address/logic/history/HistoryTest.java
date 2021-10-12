@@ -3,12 +3,14 @@ package seedu.address.logic.history;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.history.CopyableInt.COPYABLE_ONE;
-import static seedu.address.logic.history.CopyableInt.COPYABLE_THREE;
-import static seedu.address.logic.history.CopyableInt.COPYABLE_TWO;
-import static seedu.address.logic.history.CopyableInt.COPYABLE_ZERO;
+import static seedu.address.commons.util.CopyableInt.COPYABLE_ONE;
+import static seedu.address.commons.util.CopyableInt.COPYABLE_THREE;
+import static seedu.address.commons.util.CopyableInt.COPYABLE_TWO;
+import static seedu.address.commons.util.CopyableInt.COPYABLE_ZERO;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.util.CopyableInt;
 
 public class HistoryTest {
     private Historyable<CopyableInt> history = new History<>();
@@ -51,7 +53,7 @@ public class HistoryTest {
     }
 
     @Test
-    void push_null_throwNullPointerException() {
+    void push_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> history.push(null));
     }
 

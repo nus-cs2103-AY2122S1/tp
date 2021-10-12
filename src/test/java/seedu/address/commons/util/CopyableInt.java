@@ -1,6 +1,4 @@
-package seedu.address.logic.history;
-
-import seedu.address.commons.util.Copyable;
+package seedu.address.commons.util;
 
 /**
  * A utility class that implements the Copyable interface.
@@ -14,7 +12,7 @@ public class CopyableInt implements Copyable<CopyableInt> {
 
     private final int number;
 
-    protected CopyableInt(int number) {
+    public CopyableInt(int number) {
         this.number = number;
     }
 
@@ -23,7 +21,7 @@ public class CopyableInt implements Copyable<CopyableInt> {
      *
      * @return The saved integer.
      */
-    protected int getNumber() {
+    public int getNumber() {
         return number;
     }
 
