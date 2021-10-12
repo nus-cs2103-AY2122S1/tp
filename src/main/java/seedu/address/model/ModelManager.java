@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
@@ -123,6 +124,25 @@ public class ModelManager implements Model {
     public void addGroup(Group group) {
         addressBook.addGroup(group);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public boolean hasAssessment(Assessment assessment) {
+        requireNonNull(assessment);
+        return addressBook.hasAssessment(assessment);
+    }
+
+    @Override
+    public void addAssessment(Assessment assessment) {
+        addressBook.addAssessment(assessment);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
+    public void setAssessment(Assessment target, Assessment editedAssessment) {
+        requireAllNonNull(target, editedAssessment);
+
+        addressBook.setAssessment(target, editedAssessment);
     }
 
     //=========== Filtered Student List Accessors =============================================================

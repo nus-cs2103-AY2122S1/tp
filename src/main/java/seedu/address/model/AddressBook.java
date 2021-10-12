@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * The student identity of {@code editedStudent} must not be the same as
+     * another existing student in the address book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -160,6 +160,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addAssessment(Assessment a) {
         assessments.add(a);
+    }
+
+    /**
+     * Replaces the given assessment {@code target} in the list with {@code editedAssessment}.
+     * {@code target} must exist in the address book.
+     * The assessment identity of {@code editedStudent} must not be the same as
+     * another existing assessment in the address book.
+     */
+    public void setAssessment(Assessment target, Assessment editedAssessment) {
+        requireNonNull(editedAssessment);
+
+        assessments.setAssessment(target, editedAssessment);
     }
 
     //// util methods
