@@ -16,6 +16,7 @@ import seedu.unify.logic.Logic;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.exceptions.ParseException;
+import seedu.unify.model.task.Date;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -126,8 +127,9 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        // pass in date into weeklyPanel constructor instead of a taskList
-        weeklyPanel = new WeeklyPanel(logic.getFilteredTaskList());
+        // pass in date into weeklyPanel constructor instead of
+        // a taskList. Currently placeholder
+        weeklyPanel = new WeeklyPanel(new Date("2020-10-10"));
         weeklyPanelPlaceholder.getChildren().add(weeklyPanel.getRoot());
     }
 
