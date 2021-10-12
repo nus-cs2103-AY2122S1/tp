@@ -70,7 +70,6 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case RemarkCommand.COMMAND_WORD:
-            // return new RemarkCommand();
             return new RemarkCommandParser().parse(arguments);
 
         default:

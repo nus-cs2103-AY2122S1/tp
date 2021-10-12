@@ -24,8 +24,8 @@ public class Person {
     private final Nationality nationality;
     private final TutorialGroup tutorialGroup;
     private final SocialHandle socialHandle;
-    private final Set<Tag> tags = new HashSet<>();
     private final Remark remark;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -114,13 +114,14 @@ public class Person {
                 && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getTutorialGroup().equals(getTutorialGroup())
                 && otherPerson.getSocialHandle().equals(getSocialHandle())
+                && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nationality, tutorialGroup, socialHandle, tags);
+        return Objects.hash(name, phone, email, nationality, tutorialGroup, socialHandle, remark, tags);
     }
 
     @Override
