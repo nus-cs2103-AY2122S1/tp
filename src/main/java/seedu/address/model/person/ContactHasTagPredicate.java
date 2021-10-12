@@ -18,8 +18,11 @@ public class ContactHasTagPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return tags.stream()
+        if (!tags.isEmpty()) {
+            return tags.stream()
                 .anyMatch(tag -> person.getTags().contains(new Tag(tag.toLowerCase())));
+        }
+        return true;
     }
 
     @Override
