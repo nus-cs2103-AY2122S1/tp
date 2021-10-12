@@ -34,6 +34,9 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FriendMainCard friendMainCard;
+    private GameMainCard gameMainCard;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -111,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredFriendsList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        showFriendList();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,12 +166,116 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void removePersonListPanel() {
+        personListPanelPlaceholder.getChildren().removeAll(personListPanel.getRoot());
+    }
+
+    private void removeFriendMainCard() {
+        if (friendMainCard != null) {
+            personListPanelPlaceholder.getChildren().removeAll(friendMainCard.getRoot());
+            friendMainCard = null;
+        }
+    }
+
+    private void removeGameMainCard() {
+        if (gameMainCard != null) {
+            personListPanelPlaceholder.getChildren().removeAll(gameMainCard.getRoot());
+            gameMainCard = null;
+        }
+    }
+
+    /**
+     * Shows the {@Code FriendMainCard} when the {@Code find} command is run.
+     * @param commandResult The {@Code commandResult} from the find command.
+     */
+    private void handleShowFriendMainCard(CommandResult commandResult) {
+        // only mounts the friend main card if it is not already mounted or if friend different
+        if (friendMainCard == null) {
+            removePersonListPanel();
+            removeGameMainCard();
+            friendMainCard = new FriendMainCard(commandResult.getFriendToGet(), logic.getFilteredGamesList());
+            personListPanelPlaceholder.getChildren().add(friendMainCard.getRoot());
+        } else if (!friendMainCard.getCurrentFriend().equals(commandResult.getFriendToGet())) {
+            removeFriendMainCard();
+            friendMainCard = new FriendMainCard(commandResult.getFriendToGet(), logic.getFilteredGamesList());
+            personListPanelPlaceholder.getChildren().add(friendMainCard.getRoot());
+        }
+    }
+
+    /**
+     * Shows the {@Code GameMainCard} when the {@Code find} command is run.
+     * @param commandResult The {@Code commandResult} from the find command.
+     */
+    private void handleShowGameMainCard(CommandResult commandResult) {
+        // only mounts the friend main card if it is not already mounted
+        if (gameMainCard == null) {
+            // add code to removeGameListPanel
+            removeFriendMainCard();
+            removePersonListPanel();
+            //TODO: the friend list that is retrieved should contain friends that play that game only
+            gameMainCard = new GameMainCard(commandResult.getGameToGet(), logic.getFilteredFriendsList());
+            personListPanelPlaceholder.getChildren().add(gameMainCard.getRoot());
+        } else if (!gameMainCard.getCurrentGame().equals(commandResult.getGameToGet())) {
+            removePersonListPanel();
+            gameMainCard = new GameMainCard(commandResult.getGameToGet(), logic.getFilteredFriendsList());
+            personListPanelPlaceholder.getChildren().add(gameMainCard.getRoot());
+        }
+    }
+
+    /**
+     * Shows the {@Code PersonListPanel} when the {@Code friend --list} command is run.
+     */
+    private void showFriendList() {
+        // only shows friend list if not already being shown
+        if (!personListPanelPlaceholder.getChildren().contains(personListPanel.getRoot())) {
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Handles the mounting and dismounting of UI Regions when a {@Code friend}
+     * command is run.
+     * @param commandResult The {@Code commandResult} from the {@Code friend} command.
+     */
+    private void handleFriendCommand(CommandResult commandResult) {
+        if (commandResult.isFriendGet()) {
+            handleShowFriendMainCard(commandResult);
+        } else {
+            // TODO: remove the friend main card and show the friend list
+            removeFriendMainCard();
+            removeGameMainCard();
+            showFriendList();
+        }
+    }
+
+    /**
+     * Handles the mounting and dismounting of UI Regions when a {@Code game}
+     * command is run.
+     * @param commandResult The {@Code commandResult} from the {@Code game} command.
+     */
+    // TODO: Handle the game command to list or get
+    private void handleGameCommand(CommandResult commandResult) {
+        if (commandResult.isGameGet()) {
+            // TODO: hide the personlist panel
+            //TODO: show the game detailed card
+            handleShowGameMainCard(commandResult);
+        } else {
+            // TODO: temporary, replace with showGameList
+            showFriendList();
+            // removes everything else
+            //TODO: Add code to remove friend list
+            removeFriendMainCard();
+            removeGameMainCard();
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
 
     /**
-     * Executes the command and returns the result.
+     * Executes the command based on the {@Code CommandType}
+     * enumeration.
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
@@ -178,14 +285,22 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getCommandType()) {
+            case FRIEND_GET: case FRIEND_ADD: case FRIEND_LIST: case FRIEND_DELETE:
+                handleFriendCommand(commandResult);
+                break;
+            case GAME_ADD: case GAME_GET: case GAME_DELETE: case GAME_LIST:
+                handleGameCommand(commandResult);
+                break;
+            case HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                break;
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
