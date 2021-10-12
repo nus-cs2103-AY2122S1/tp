@@ -24,6 +24,9 @@ import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
+import seedu.fast.logic.parser.ParserUtil;
+import seedu.fast.model.tag.PriorityTag;
+import seedu.fast.model.tag.Tag;
 
 /**
  * Controller for a help page
@@ -31,14 +34,13 @@ import seedu.fast.logic.commands.SortCommand;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t09-4.github.io/tp/";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
-        "Edit", "Find", "List", "Help", "Remark", "Sort", "Misc"};
+    public static final String HELP_MESSAGE = "View our user guide: " + USERGUIDE_URL;
+    public static final String[] COMMAND_LIST = ParserUtil.COMMAND_LIST;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    private static final String QUICK_START = "Please select a command in the dropdown to view "
+    private static final String QUICK_START_MESSAGE = "Please select a command in the dropdown to view "
         + "the usage for each command! \n\n"
         + "Financial Advisor Smart Tracker (FAST) is a desktop app for"
         + "managing clients, optimized for use via a Command Line Interface (CLI) while still having the "
@@ -55,7 +57,8 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String HELP_COMMAND_USAGE = HelpCommand.MESSAGE_USAGE;
     private static final String REMARK_COMMAND_USAGE = RemarkCommand.MESSAGE_USAGE;
     private static final String SORT_COMMAND_USAGE = SortCommand.MESSAGE_USAGE;
-
+    private static final String TAG_USAGE = Tag.MESSAGE_USAGE;
+    private static final String PRIORITY_TAG_USAGE = PriorityTag.MESSAGE_USAGE;
 
     @FXML
     private Button copyButton;
@@ -78,37 +81,64 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
-        commandInstruction.setText(QUICK_START);
+        commandInstruction.setText(QUICK_START_MESSAGE);
 
+        // show different command usage depending on the selected command
         EventHandler<ActionEvent> event =
-            e -> commandInstruction.setText(commandInstructionMessage(commandList.getValue()));
+            e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));
+        commandList.setOnAction(event);
+    }
+
+    /**
+     * Creates a new HelpWindow.
+     *
+     * @param root Stage to use as the root of the HelpWindow.
+     */
+    public HelpWindow(Stage root, String helpArg) {
+        super(FXML, root);
+        helpMessage.setText(HELP_MESSAGE);
+        commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
+
+        // For "help" inputs
+        if (helpArg.equals("")) {
+            commandInstruction.setText(QUICK_START_MESSAGE);
+
+        // For "help COMMAND" inputs
+        } else {
+            commandList.getSelectionModel().select(helpArg);
+            commandInstruction.setText(showCommandUsage(helpArg));
+        }
+
+        // show different command usage depending on the selected command
+        EventHandler<ActionEvent> event =
+            e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));
         commandList.setOnAction(event);
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(String helpArg) {
+        this(new Stage(), helpArg);
     }
 
     /**
      * Shows the help window.
-     *
-     * @throws IllegalStateException <ul>
-     *                               <li>
-     *                               if this method is called on a thread other than the JavaFX Application Thread.
-     *                               </li>
-     *                               <li>
-     *                               if this method is called during animation or layout processing.
-     *                               </li>
-     *                               <li>
-     *                               if this method is called on the primary stage.
-     *                               </li>
-     *                               <li>
-     *                               if {@code dialogStage} is already showing.
-     *                               </li>
-     *                               </ul>
+     * @throws IllegalStateException
+     * <ul>
+     *     <li>
+     *         if this method is called on a thread other than the JavaFX Application Thread.
+     *     </li>
+     *     <li>
+     *         if this method is called during animation or layout processing.
+     *     </li>
+     *     <li>
+     *         if this method is called on the primary stage.
+     *     </li>
+     *     <li>
+     *         if {@code dialogStage} is already showing.
+     *     </li>
+     * </ul>
      */
     public void show() {
         logger.fine("Showing help page about the application.");
@@ -133,8 +163,17 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Focuses on the help window.
      */
-    public void focus() {
+    public void focus(String command) {
         getRoot().requestFocus();
+        if (!ParserUtil.matchArgs(command).equals("")) {
+            commandList.getSelectionModel().select(command);
+            commandInstruction.setText(showCommandUsage(command));
+        } else {
+            // when focusing back, the combobox cannot go back to "(Select a command)"
+            // Hence we default to Quick Start
+            commandList.getSelectionModel().select("Quick Start");
+            commandInstruction.setText(showCommandUsage("Quick Start"));
+        }
     }
 
     /**
@@ -149,12 +188,15 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Displays the command usage
+     * Displays the command usage.
+     *
+     * @param commandName Command to be explained.
+     * @return The proper usage of the command.
      */
-    public String commandInstructionMessage(String commandName) {
+    public String showCommandUsage(String commandName) {
         switch (commandName) {
         case "Quick Start":
-            return QUICK_START;
+            return QUICK_START_MESSAGE;
         case "Add":
             return ADD_COMMAND_USAGE;
         case "Appointment":
@@ -177,6 +219,10 @@ public class HelpWindow extends UiPart<Stage> {
             return REMARK_COMMAND_USAGE;
         case "Sort":
             return SORT_COMMAND_USAGE;
+        case "Tag" :
+            return TAG_USAGE;
+        case "Priority Tag" :
+            return PRIORITY_TAG_USAGE;
         case "Misc":
             return "Coming soon!";
         default:

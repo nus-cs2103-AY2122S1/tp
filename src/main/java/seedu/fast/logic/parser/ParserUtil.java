@@ -1,6 +1,7 @@
 package seedu.fast.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_HELP_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,6 +9,8 @@ import java.util.Set;
 
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.StringUtil;
+import seedu.fast.logic.commands.HelpCommand;
+import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Email;
@@ -23,9 +26,13 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
+        "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -127,7 +134,7 @@ public class ParserUtil {
      * Parses {@code String tagName} and returns the corresponding priority tag name.
      */
     public static String parsePriorityTag(String tagName) {
-        switch(tagName) {
+        switch (tagName) {
         case PriorityTag.LowPriority.COMMAND:
             return PriorityTag.LowPriority.NAME;
         case PriorityTag.MediumPriority.COMMAND:
@@ -136,6 +143,61 @@ public class ParserUtil {
             return PriorityTag.HighPriority.NAME;
         //It is guaranteed that the default case will always be a high priority tag instance.
         }
+    }
+
+    /**
+     * Parses {@code String command} and returns the corresponding help command.
+     */
+    public static String matchArgs(String command) {
+        for (String s : COMMAND_LIST) {
+            if (s.equals(command)) {
+                return s;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Extracts the arguments from a help command.
+     *
+     * @param commandText The input text.
+     * @return The args of the help command, or "" if there is no or invalid args.
+     * @throws HelpParseException if help is not followed by a valid arg
+     */
+    public static String parseHelp(String commandText) throws HelpParseException {
+
+        // if there are no args
+        if (commandText.split(" ").length == 1) {
+            return "";
+        }
+
+        String arg = commandText.substring(HelpCommand.COMMAND_WORD.length());
+        String trimmedArgs = arg.trim();
+        String capitalisedArg = ParserUtil.capitaliseFirstLetters(trimmedArgs);
+
+        if (!ParserUtil.matchArgs(capitalisedArg).equals("")) {
+            return capitalisedArg;
+
+        } else { // if the arg does not match a given command, throw exception
+            throw new HelpParseException(
+                String.format(MESSAGE_INVALID_HELP_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+    }
+
+    /**
+     * Capitalise the start of each word in the args
+     */
+    public static String capitaliseFirstLetters(String inputString) {
+        String[] words = inputString.split(" ");
+        StringBuilder capitalisedWordsBuilder = new StringBuilder();
+
+        for (String s : words) {
+            // Capitalises the first letter of the word
+            capitalisedWordsBuilder.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
+            capitalisedWordsBuilder.append(" ");
+        }
+        return capitalisedWordsBuilder.toString().trim();
     }
 
 }

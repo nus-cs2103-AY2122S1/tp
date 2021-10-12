@@ -15,6 +15,13 @@ public class HelpCommandTest {
     @Test
     public void execute_help_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
-        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new HelpCommand(""), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_helpWithArg_success() {
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        assertCommandSuccess(new HelpCommand("add"), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new HelpCommand("invalid input"), model, expectedCommandResult, expectedModel);
     }
 }
