@@ -19,7 +19,7 @@ public class CliSyntax {
     /* Prefix for academic details */
     public static final Prefix PREFIX_SCHOOL = new Prefix("sch/");
     public static final Prefix PREFIX_ACAD_STREAM = new Prefix("stream/");
-    public static final Prefix PREFIX_ACADEMIC_LEVEL = new Prefix("lvl/");
+    public static final Prefix PREFIX_ACAD_LEVEL = new Prefix("lvl/");
 
     /* Prefix definitions for lesson */
     public static final Prefix PREFIX_RECURRING = new Prefix("recurring/");

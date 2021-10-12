@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -45,7 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_FEE, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_ACAD_LEVEL,
+                        PREFIX_FEE, PREFIX_REMARK, PREFIX_TAG);
 
         if (!areAllPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS)
                 || !areAnyPrefixesPresent(
@@ -62,6 +65,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         School school = ParserUtil.parseSchool(argMultimap.getValue(PREFIX_SCHOOL).orElse(""));
         AcadStream acadStream = ParserUtil.parseAcadStream(argMultimap.getValue(PREFIX_ACAD_STREAM).orElse(""));
+        AcadLevel acadLevel = ParserUtil.parseAcadLevel(argMultimap.getValue(PREFIX_ACAD_LEVEL).orElse(""));
         Fee fee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_FEE).orElse(""));
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -69,7 +73,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Lesson> lessonList = new TreeSet<>();
 
         Person person = new Person(name, phone, email, parentPhone, parentEmail,
-            address, school, acadStream, fee, remark, tagList, lessonList);
+            address, school, acadStream, acadLevel, fee, remark, tagList, lessonList);
 
         return new AddCommand(person);
     }
