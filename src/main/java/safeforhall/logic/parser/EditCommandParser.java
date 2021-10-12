@@ -29,9 +29,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArrayList<Index> indexArray;
 
         try {
-            indexArray = ParserUtil.parseIndexes(argMultimap.getPreamble().trim().split(" "));
+            indexArray = ParserUtil.parseIndexes(argMultimap.getPreamble().split(" "));
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            String message = pe.getMessage() + "\n" + EditCommand.MESSAGE_USAGE;
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message), pe);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();

@@ -30,10 +30,10 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the residents identified "
+            + "by the index numbers used in the displayed resident list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEXES (positive integers, separated by a space) "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Residents: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This resident already exists in the address book.";
 
     private final ArrayList<Index> indexArray;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -252,7 +252,12 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail());
+                    && getEmail().equals(e.getEmail())
+                    && getRoom().equals(e.getRoom())
+                    && getVaccStatus().equals(e.getVaccStatus())
+                    && getFaculty().equals(e.getFaculty())
+                    && getLastFetDate().equals(e.getLastFetDate())
+                    && getLastCollectionDate().equals(e.getLastCollectionDate());
         }
     }
 }

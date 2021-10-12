@@ -95,8 +95,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-
-
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);

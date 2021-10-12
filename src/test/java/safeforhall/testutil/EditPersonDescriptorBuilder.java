@@ -5,11 +5,13 @@ package safeforhall.testutil;
 //import java.util.stream.Stream;
 
 import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
-//import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
 //import safeforhall.model.tag.Tag;
 
 /**
@@ -35,6 +37,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setRoom(person.getRoom());
+        descriptor.setFaculty(person.getFaculty());
+        //TODO: lastfetdate and lastcollectiondate
+
         // descriptor.setAddress(person.getAddress());
         // descriptor.setTags(person.getTags());
     }
@@ -60,6 +66,30 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Room} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRoom(String room) {
+        descriptor.setRoom(new Room(room));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Faculty} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFaculty(String faculty) {
+        descriptor.setFaculty(new Faculty(faculty));
+        return this;
+    }
+
+    /**
+     * Sets the {@code VaccStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withVaccStatus(String vaccStatus) {
+        descriptor.setVaccStatus(new VaccStatus(vaccStatus));
         return this;
     }
 
