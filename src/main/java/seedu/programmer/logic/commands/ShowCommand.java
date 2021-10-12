@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.Messages;
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
-import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Student;
 
 /**
@@ -24,7 +22,7 @@ public class ShowCommand extends Command {
             + "Parameter: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SHOW_STUDENT_SUCCESS = "Show Student's lab results: %1$s";
+    public static final String MESSAGE_SHOW_STUDENT_SUCCESS = "Show Student's lab results on the side panel";
 
     private final Index targetIndex;
 
@@ -42,7 +40,6 @@ public class ShowCommand extends Command {
         }
 
         Student studentToShow = lastShownList.get(targetIndex.getZeroBased());
-        ObservableList<LabResult> results = model.showLabResultList(studentToShow);
         return new CommandResult(MESSAGE_SHOW_STUDENT_SUCCESS, false, false, true, studentToShow);
     }
 

@@ -11,7 +11,7 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.model.student.LabResult;
 
 /**
- * Panel containing the list of students.
+ * Panel containing the list of lab results
  */
 public class LabResultListPanel extends UiPart<Region> {
     private static final String FXML = "LabResultListPanel.fxml";
@@ -21,7 +21,7 @@ public class LabResultListPanel extends UiPart<Region> {
     private ListView<LabResult> labResultListView;
 
     /**
-     * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
+     * Creates a {@code LabelResultListPanel} with the given {@code ObservableList}.
      */
     public LabResultListPanel(ObservableList<LabResult> labResultList) {
         super(FXML);
@@ -30,7 +30,7 @@ public class LabResultListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code student} using a {@code studentCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code labResult} using a {@code LabResultCard}.
      */
     class LabListListViewCell extends ListCell<LabResult> {
         @Override

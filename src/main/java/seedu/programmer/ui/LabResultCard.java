@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.programmer.model.student.LabResult;
 
 /**
- * An UI component that displays information of a {@code student}.
+ * An UI component that displays information of the lab result.
  */
 public class LabResultCard extends UiPart<Region> {
 
@@ -34,7 +34,7 @@ public class LabResultCard extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code studentCode} with the given {@code student} and index to display.
+     * Creates a {@code labResultCode} with the given {@code labResult} and index to display.
      */
     public LabResultCard(LabResult result, int displayedIndex) {
         super(FXML);
