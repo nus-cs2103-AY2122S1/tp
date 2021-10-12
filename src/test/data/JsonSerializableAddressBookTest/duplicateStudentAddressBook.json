@@ -9,5 +9,9 @@
     "telegramHandle": "@alice_pauline",
     "email": "pauline@example.com",
     "groupName": "CS2103T"
+  } ],
+  "groups" : [ {
+    "name" : "CS2103T",
+    "description" : "A Software engineering module"
   } ]
 }
