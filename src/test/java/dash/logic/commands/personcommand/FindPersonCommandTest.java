@@ -53,7 +53,6 @@ public class FindPersonCommandTest {
 
         FindPersonDescriptor secondFindPersonDescriptor = new FindPersonDescriptor();
         secondFindPersonDescriptor.setName(Collections.singletonList("second"));
-        
         // same object -> returns true
         assertTrue(firstFindPersonDescriptor.equals(firstFindPersonDescriptor));
 
