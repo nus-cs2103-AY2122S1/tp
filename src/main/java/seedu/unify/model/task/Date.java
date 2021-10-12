@@ -5,6 +5,8 @@ import static seedu.unify.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Task's date in the Uni-fy app.
@@ -66,4 +68,14 @@ public class Date {
         return value.hashCode();
     }
 
+    /**
+     * Parses date from string format into LocalDate format and returns it.
+     *
+     * @return The LocalDate representing the date.
+     */
+    public LocalDate getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(this.value, formatter);
+        return date;
+    }
 }
