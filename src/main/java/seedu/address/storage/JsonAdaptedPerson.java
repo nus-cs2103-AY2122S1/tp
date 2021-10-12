@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.core.Money;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String revenue;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedClaim> claims = new ArrayList<>();
     private final List<JsonAdaptedInsurance> insurances = new ArrayList<>();
     private final String appointment;
     private final String note;
@@ -49,7 +51,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("revenue") String revenue,
             @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("insurances") List<JsonAdaptedInsurance> insurances,
-            @JsonProperty("note") String note, @JsonProperty("appointment") String appointment) {
+            @JsonProperty("note") String note, @JsonProperty("appointment") String appointment,
+            @JsonProperty("claims") List<JsonAdaptedClaim> claims) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +60,9 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (claims != null) {
+            this.claims.addAll(claims);
         }
         if (insurances != null) {
             this.insurances.addAll(insurances);
@@ -82,6 +88,9 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         note = source.getNote().value;
         appointment = source.getAppointment().getValue();
+        claims.addAll(source.getClaims().stream()
+                .map(JsonAdaptedClaim::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -93,6 +102,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Claim> personClaims = new ArrayList<>();
+        for (JsonAdaptedClaim claim : claims) {
+            personClaims.add(claim.toModelType());
         }
 
         final List<Insurance> personInsurances = new ArrayList<>();
@@ -140,6 +154,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Claim> modelClaims = new HashSet<>(personClaims);
         final Set<Insurance> modelInsurances = new HashSet<>(personInsurances);
 
         if (note == null) {
@@ -154,7 +169,7 @@ class JsonAdaptedPerson {
         final Appointment modelAppointment = new Appointment(appointment);
 
         return new Person(modelName, modelPhone, modelEmail, modelRevenue, modelAddress, modelTags,
-                modelInsurances, modelNote, modelAppointment);
+                modelInsurances, modelNote, modelAppointment, modelClaims);
     }
 
 }

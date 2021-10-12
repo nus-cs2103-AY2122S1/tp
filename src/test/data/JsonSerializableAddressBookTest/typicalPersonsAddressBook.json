@@ -15,6 +15,11 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ],
+    "claims" : [
+      {"title": "Knee Surgery",
+      "description": "Caused by a fall",
+      "status": "completed"}
+    ],
     "insurances" : [ "Life", "Health", "General"],
     "note" : "Has cancer",
     "appointment": ""

@@ -33,7 +33,11 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withRevenue("0.00f")
             .withTags("owesMoney", "friends").withInsurances("Life", "Health", "General")
-            .withNote("Has cancer").build();
+            .withNote("Has cancer")
+            .withClaim(new ClaimBuilder().withTitle("Knee Surgery")
+                    .withDescription("Caused by a fall")
+                    .withStatus("completed"))
+            .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withRevenue("0.00f").withEmail("heinz@example.com").withAddress("wall street")
             .withNote("Has dementia").build();

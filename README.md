@@ -12,7 +12,7 @@
 2. Manage insurance claims
 3. Manage appointments
 
-This application is specially designed for insurance agents who can type fast and prefer to use a 
+This application is specially designed for insurance agents who can type fast and prefer to use a
 *Command Line Interface* (CLI) to interact with the aaplication
 
 For the detailed documentation of this project, see the **[InsurancePal website](https://ay2122s1-cs2103t-t17-4.github.io/tp)**.

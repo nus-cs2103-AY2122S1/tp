@@ -1,10 +1,13 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Money;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
@@ -38,6 +41,7 @@ public class PersonBuilder {
     private Set<Insurance> insurances;
     private Note note;
     private Appointment appointment;
+    private Set<Claim> claims;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -52,6 +56,7 @@ public class PersonBuilder {
         insurances = new HashSet<>();
         note = new Note(DEFAULT_NOTE);
         appointment = new Appointment(DEFAULT_MEETING);
+        claims = new HashSet<>();
     }
 
     /**
@@ -67,6 +72,7 @@ public class PersonBuilder {
         insurances = new HashSet<>(personToCopy.getInsurances());
         note = personToCopy.getNote();
         appointment = personToCopy.getAppointment();
+        claims = new HashSet<>(personToCopy.getClaims());
     }
 
     /**
@@ -141,8 +147,18 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Claim} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withClaim(ClaimBuilder ... claims) {
+        this.claims = Arrays.stream(claims)
+                .map(claim -> claim.build())
+                .collect(Collectors.toSet());
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, revenue, address, tags, insurances, note, appointment);
+        return new Person(name, phone, email, revenue, address, tags, insurances, note, appointment, claims);
     }
 
 }

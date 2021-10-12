@@ -9,7 +9,9 @@ import java.util.Set;
 
 import seedu.address.commons.core.Money;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.tag.Tag;
+
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -26,6 +28,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Insurance> insurances = new HashSet<>();
+    private final Set<Claim> claims = new HashSet<>();
     private final Note note;
     private final Appointment appointment;
 
@@ -33,8 +36,8 @@ public class Person {
      * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not stated.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Set<Insurance> insurances, Note note, Appointment appointment) {
-        requireAllNonNull(name, phone, email, address, tags, insurances, note, appointment);
+                  Set<Tag> tags, Set<Insurance> insurances, Note note, Appointment appointment, Set<Claim> claims) {
+        requireAllNonNull(name, phone, email, address, tags, insurances, note, appointment, claims);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,14 +47,15 @@ public class Person {
         this.insurances.addAll(insurances);
         this.note = note;
         this.appointment = appointment;
+        this.claims.addAll(claims);
     }
 
     /**
      * Every field for this case is provided and hence a revenue value will be tagged to the person.
      */
     public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags,
-             Set<Insurance> insurances, Note note, Appointment appointment) {
-        requireAllNonNull(name, phone, email, revenue, address, tags, insurances, note, appointment);
+             Set<Insurance> insurances, Note note, Appointment appointment, Set<Claim> claims) {
+        requireAllNonNull(name, phone, email, revenue, address, tags, insurances, note, appointment, claims);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,6 +65,22 @@ public class Person {
         this.insurances.addAll(insurances);
         this.note = note;
         this.appointment = appointment;
+        this.claims.addAll(claims);
+    }
+
+    /**
+     * Overridden constructor which takes in a person and overwrites its claims with another set of claims.
+     */
+    public Person(Person previousPerson, Set<Claim> claims) {
+        this(previousPerson.name,
+                previousPerson.phone,
+                previousPerson.email,
+                previousPerson.address,
+                previousPerson.tags,
+                previousPerson.insurances,
+                previousPerson.note,
+                previousPerson.appointment,
+                claims);
     }
 
     public Name getName() {
@@ -97,6 +117,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable claims set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Claim> getClaims() {
+        return Collections.unmodifiableSet(this.claims);
     }
 
     /**
@@ -141,13 +169,14 @@ public class Person {
                 && otherPerson.getRevenue().equals(getRevenue())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
+                && otherPerson.getClaims().equals(getClaims())
                 && otherPerson.getInsurances().equals(getInsurances())
                 && otherPerson.getNote().equals(getNote());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note);
+        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note, claims);
     }
 
     @Override
@@ -166,6 +195,7 @@ public class Person {
                 .append(getNote())
                 .append("; Meeting: ")
                 .append(getAppointment());
+
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
@@ -175,6 +205,10 @@ public class Person {
         if (!insurances.isEmpty()) {
             builder.append("; Insurances: ");
             insurances.forEach(builder::append);
+        }
+        if (!claims.isEmpty()) {
+            builder.append("; Claims: ");
+            claims.forEach(builder::append);
         }
         return builder.toString();
     }

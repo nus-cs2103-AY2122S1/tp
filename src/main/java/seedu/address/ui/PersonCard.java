@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -48,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private Label note;
     @FXML
     private Label meeting;
+    @FXML
+    private VBox claims;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,6 +72,9 @@ public class PersonCard extends UiPart<Region> {
                         new Label(insurance.getType().getTypeName())));
         note.setText(person.getNote().value);
         meeting.setText("Meeting: " + person.getAppointment().getValue());
+        person.getClaims().stream()
+                .sorted(Comparator.comparing(claim -> claim.getTitle()))
+                .forEach(claim -> claims.getChildren().add(new Label(claim.toString() + "\n")));
     }
 
     @Override

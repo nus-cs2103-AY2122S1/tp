@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.ClaimBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -95,6 +96,10 @@ public class PersonTest {
 
         // different insurances -> returns false
         editedAlice = new PersonBuilder(ALICE).withInsurances(VALID_INSURANCE_HEALTH).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different claims -> returns false
+        editedAlice = new PersonBuilder(ALICE).withClaim(new ClaimBuilder()).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

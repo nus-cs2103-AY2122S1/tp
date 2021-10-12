@@ -12,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Insurance;
@@ -81,8 +82,10 @@ public class ScheduleCommand extends Command {
         Set<Tag> originalTags = personToMeet.getTags();
         Set<Insurance> originalInsurances = personToMeet.getInsurances();
         Note originalNote = personToMeet.getNote();
+        Set<Claim> originalClaims = personToMeet.getClaims();
         return new Person(originalName, originalPhone, originalEmail, originalRevenue,
-                originalAddress, originalTags, originalInsurances, originalNote, desiredAppointment);
+                originalAddress, originalTags, originalInsurances, originalNote, desiredAppointment,
+                originalClaims);
     }
 
     @Override

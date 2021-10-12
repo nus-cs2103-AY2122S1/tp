@@ -51,7 +51,7 @@ public class RevenueCommand extends Command {
                 this.revenue.addRevenue(personToEdit.getRevenue()),
                 personToEdit.getAddress(), personToEdit.getTags(),
                 personToEdit.getInsurances(), personToEdit.getNote(),
-                personToEdit.getAppointment());
+                personToEdit.getAppointment(), personToEdit.getClaims());
 
         if (!editedPerson.getRevenue().isValidResultingRevenue()) {
             throw new CommandException((MESSAGE_ADD_REVENUE_FAIL));

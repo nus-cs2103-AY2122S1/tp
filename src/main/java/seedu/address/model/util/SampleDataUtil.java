@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,26 +32,27 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Revenue(new Money(0)), new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends"), getInsuranceSet("Life"), new Note("Likes chicken"),
-                new Appointment("")),
+                new Appointment(""), new HashSet<>()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"), getInsuranceSet("Health"),
-                new Note("Enjoys beef"), new Appointment("")),
+                new Note("Enjoys beef"), new Appointment(""), new HashSet<>()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getTagSet("neighbours"), getInsuranceSet("Life", "Health"),
-                new Note("Eats chinese food"), new Appointment("")),
+                new Note("Eats chinese food"), new Appointment(""), new HashSet<>()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getTagSet("family"), getInsuranceSet("General"),
-                new Note("Does not eat pork"), new Appointment("")),
+                new Note("Does not eat pork"), new Appointment(""), new HashSet<>()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getTagSet("classmates"), getInsuranceSet("Life", "General"),
-                new Note("Does not like cake"), new Appointment("")),
+                new Note("Does not like cake"), new Appointment(""), new HashSet<>()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), getInsuranceSet(), new Note("Does not like coffee"), new Appointment(""))
+                getTagSet("colleagues"), getInsuranceSet(), new Note("Does not like coffee"),
+                    new Appointment(""), new HashSet<>())
         };
     }
 
