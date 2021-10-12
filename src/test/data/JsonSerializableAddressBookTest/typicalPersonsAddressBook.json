@@ -49,5 +49,30 @@
     "address" : "4th street",
     "tagged" : [ ],
     "birthday": "12041990"
+  }, {
+      "name": "Hannah Worst",
+      "phone": "1234567",
+      "email": "hhhhannah@example.com",
+      "address": "12th street",
+      "tagged" : [],
+      "birthday" : "31011990"
+  }, {
+      "name": "Hannah No Birthday Worst",
+      "phone": "1234567",
+      "email": "hhhhannah@example.com",
+      "address": "12th street",
+      "birthday" : null
+  }, {
+    "name" : "Indigo Color",
+    "phone" : "2442984",
+    "email" : "color@rainbow.com",
+    "address" : "big tokyo",
+    "birthday" : "11101995"
+  }, {
+    "name" : "Indigo No Birthday Color",
+    "phone" : "2442984",
+    "email" : "color@rainbow.com",
+    "address" : "big tokyo",
+    "birthday" : null
   } ]
 }
