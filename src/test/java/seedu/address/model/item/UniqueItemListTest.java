@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
+import static seedu.address.testutil.TypicalItems.CHOCOCHIP;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -158,6 +159,25 @@ public class UniqueItemListTest {
     public void setItems_listWithDuplicateItems_throwsDuplicateItemException() {
         List<Item> listWithDuplicateItems = Arrays.asList(APPLE_PIE, APPLE_PIE);
         assertThrows(DuplicateItemException.class, () -> uniqueItemList.setItems(listWithDuplicateItems));
+    }
+
+    @Test
+    public void setItems_sortItems_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueItemList.sortItems(null));
+    }
+    @Test
+    public void setItems_sortItems_successful() {
+        uniqueItemList.add(BANANA_MUFFIN);
+        uniqueItemList.add(APPLE_PIE);
+        uniqueItemList.add(CHOCOCHIP);
+        uniqueItemList.sortItems(new ItemNameComparator());
+
+        UniqueItemList expectedUniqueItemList = new UniqueItemList();
+        expectedUniqueItemList.add(APPLE_PIE);
+        expectedUniqueItemList.add(BANANA_MUFFIN);
+        expectedUniqueItemList.add(CHOCOCHIP);
+
+        assertEquals(expectedUniqueItemList, this.uniqueItemList);
     }
 
     @Test
