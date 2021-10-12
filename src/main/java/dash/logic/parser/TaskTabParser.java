@@ -10,7 +10,6 @@ import dash.logic.commands.HelpCommand;
 import dash.logic.commands.SwitchTabContactsCommand;
 import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
-import dash.logic.commands.personcommand.ListPeopleCommand;
 import dash.logic.commands.taskcommand.AddTaskCommand;
 import dash.logic.commands.taskcommand.ClearTaskCommand;
 import dash.logic.commands.taskcommand.DeleteTaskCommand;
