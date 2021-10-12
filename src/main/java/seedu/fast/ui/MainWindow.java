@@ -138,19 +138,16 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Handles the event for MainWindow.fxml
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        handleHelp("");
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the help window directly to the help page for command or focuses on it if it's already opened.
+     * Opens or focuses to the default help page if the command is invalid.
      */
     @FXML
     public void handleHelp(String command) {
@@ -158,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow = new HelpWindow(command);
             helpWindow.show();
         } else {
-            helpWindow.focus();
+            helpWindow.focus(command);
         }
     }
 
@@ -210,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
         } catch (HelpParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
-            handleHelp("");
+            handleHelp(""); // opens a default help window
             throw e;
         }
     }

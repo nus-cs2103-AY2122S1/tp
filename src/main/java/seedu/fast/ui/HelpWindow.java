@@ -40,7 +40,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    private static final String QUICK_START = "Please select a command in the dropdown to view "
+    private static final String QUICK_START_MESSAGE = "Please select a command in the dropdown to view "
         + "the usage for each command! \n\n"
         + "Financial Advisor Smart Tracker (FAST) is a desktop app for"
         + "managing clients, optimized for use via a Command Line Interface (CLI) while still having the "
@@ -81,7 +81,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
-        commandInstruction.setText(QUICK_START);
+        commandInstruction.setText(QUICK_START_MESSAGE);
 
         // show different command usage depending on the selected command
         EventHandler<ActionEvent> event =
@@ -101,7 +101,7 @@ public class HelpWindow extends UiPart<Stage> {
 
         // For "help" inputs
         if (helpArg.equals("")) {
-            commandInstruction.setText(QUICK_START);
+            commandInstruction.setText(QUICK_START_MESSAGE);
 
         // For "help COMMAND" inputs
         } else {
@@ -163,8 +163,17 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Focuses on the help window.
      */
-    public void focus() {
+    public void focus(String command) {
         getRoot().requestFocus();
+        if (HelpCommandParser.isCommandWord(command)) {
+            commandList.getSelectionModel().select(command);
+            commandInstruction.setText(showCommandUsage(command));
+        } else {
+            // when focusing back, the combobox cannot go back to "(Select a command)"
+            // Hence we default to Quick Start
+            commandList.getSelectionModel().select("Quick Start");
+            commandInstruction.setText(showCommandUsage("Quick Start"));
+        }
     }
 
     /**
@@ -187,7 +196,7 @@ public class HelpWindow extends UiPart<Stage> {
     public String showCommandUsage(String commandName) {
         switch (commandName) {
         case "Quick Start":
-            return QUICK_START;
+            return QUICK_START_MESSAGE;
         case "Add":
             return ADD_COMMAND_USAGE;
         case "Appointment":

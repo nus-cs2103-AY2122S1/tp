@@ -10,8 +10,4 @@ public class HelpParseException extends IllegalValueException {
     public HelpParseException(String message) {
         super(message);
     }
-
-    public HelpParseException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

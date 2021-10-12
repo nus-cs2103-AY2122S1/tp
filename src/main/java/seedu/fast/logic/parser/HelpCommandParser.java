@@ -39,7 +39,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             if (isCommandWord(capitalisedArg)) {
                 return capitalisedArg;
 
-            } else { // if the arg does not match a given command, return ""
+            } else { // if the arg does not match a given command, throw exception
                 throw new HelpParseException(
                         String.format(MESSAGE_INVALID_HELP_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
             }
