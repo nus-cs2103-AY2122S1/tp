@@ -35,7 +35,27 @@ public class EventNameTest {
         assertTrue(EventName.isValidEventName("12345")); // numbers only
         assertTrue(EventName.isValidEventName("2nd time sleeping")); // alphanumeric characters
         assertTrue(EventName.isValidEventName("gO hOmE aH bOi")); // with capital letters
+
         // long names
         assertTrue(EventName.isValidEventName("Run for Charity sponsored by NUS CS2103T AY2122S1 T10 group 2"));
+    }
+
+    @Test
+    public void testEquals() {
+        EventName firstEventName = new EventName("first");
+        EventName secondEventName = new EventName("second");
+
+        // same EventName
+        assertTrue(firstEventName.equals(firstEventName));
+
+        // different EventName, same name
+        EventName firstEventNameCopy = new EventName("first");
+        assertTrue(firstEventName.equals(firstEventNameCopy));
+
+        // null -> returns false
+        assertFalse(firstEventName.equals(null));
+
+        // different EventName, different name
+        assertFalse(firstEventName.equals(secondEventName));
     }
 }
