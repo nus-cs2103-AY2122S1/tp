@@ -26,10 +26,10 @@ public class WelcomeWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(WelcomeWindow.class);
     private static final String FXML = "WelcomeWindow.fxml";
 
-    private final String tagLine = "TYPE. EXPLORE. CONNECT";
+    private final String tagLine = "TYPE. EXPLORE. CONNECT. ";
     private final double delayTime = (tagLine.length() * 5) + 100;
 
-    private Image appLogoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
+    private final Image appLogoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
 
     @FXML
     private Label appTagLine;
@@ -39,25 +39,15 @@ public class WelcomeWindow extends UiPart<Stage> {
 
     /**
      * Creates a new WelcomeWindow.
-     *
-     * @param root Stage to use as the root of the HelpWindow.
-     */
-    public WelcomeWindow(Stage root) {
-        super(FXML, root);
-        show();
-    }
-
-    /**
-     * Creates a new WelcomeWindow.
      */
     public WelcomeWindow() {
-        this(new Stage());
+        super(FXML, new Stage());
     }
 
     /**
      * Helps in Creating a WelcomeWindow.
      */
-    public void start() {
+    public void start(MainWindow mainWindow) {
         // To show the welcome window
         logger.fine("Showing welcome window (App has started)");
         getRoot().initStyle(StageStyle.UNDECORATED);
@@ -72,22 +62,18 @@ public class WelcomeWindow extends UiPart<Stage> {
         fadeTransition();
 
         // To close the WelcomeWindow after a specified amount of time.
-        close();
-    }
-
-    /**
-     * Creates a new WelcomeWindow.
-     */
-    public void show() {
-        start();
+        close(mainWindow);
     }
 
     /**
      * Handles the closing of the WelcomeWindow created.
      */
-    public void close() {
-        PauseTransition delay = new PauseTransition(Duration.millis(5100));
-        delay.setOnFinished(event -> getRoot().close());
+    public void close(MainWindow mainWindow) {
+        PauseTransition delay = new PauseTransition(Duration.millis(delayTime * tagLine.length() + 100));
+        delay.setOnFinished(event -> {
+            getRoot().close();
+            mainWindow.show();
+        });
         delay.play();
     }
 
