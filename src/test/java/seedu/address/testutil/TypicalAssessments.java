@@ -3,8 +3,6 @@ package seedu.address.testutil;
 import java.util.Map;
 
 import seedu.address.model.student.Assessment;
-import seedu.address.model.student.ID;
-import seedu.address.model.student.Score;
 
 /**
  * A utility class containing a list of {@code Assessment} objects to be used in tests.

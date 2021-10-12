@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import seedu.address.model.student.Assessment;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.Score;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A utility class to help with building Assessment object.
@@ -53,6 +53,9 @@ public class AssessmentBuilder {
         return this;
     }
 
+    /**
+     * Returns an {@code Assessment}.
+     */
     public Assessment build() {
         Assessment assessment = new Assessment(value);
         assessment.getScores().putAll(scores);

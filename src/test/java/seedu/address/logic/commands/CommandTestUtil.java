@@ -2,7 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -19,8 +25,8 @@ import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.AllocDescriptorBuilder;
-import seedu.address.testutil.ScoreDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.ScoreDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.

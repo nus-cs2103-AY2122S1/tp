@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.AssessmentBuilder;
 import seedu.address.testutil.IdBuilder;
-import seedu.address.testutil.ScoreBuilder;
 
 public class AssessmentTest {
 

@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import seedu.address.model.student.exceptions.DuplicateGroupException;
 import seedu.address.model.student.exceptions.GroupNotFoundException;

@@ -1,11 +1,6 @@
 package seedu.address.testutil;
 
 import seedu.address.model.student.Score;
-import seedu.address.model.student.ID;
-import seedu.address.model.student.Score;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A utility class to help with building Score objects.

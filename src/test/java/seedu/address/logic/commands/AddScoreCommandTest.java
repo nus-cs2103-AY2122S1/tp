@@ -9,9 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,11 +26,9 @@ import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.AssessmentBuilder;
-import seedu.address.testutil.ScoreDescriptorBuilder;
-import seedu.address.testutil.ScoreBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.Map;
+import seedu.address.testutil.ScoreBuilder;
+import seedu.address.testutil.ScoreDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with Model) and unit tests for AddScoreCommand.

@@ -36,7 +36,8 @@ public class EditStudentDescriptorTest {
         assertFalse(EDIT_DESCRIPTOR_AMY.equals(EDIT_DESCRIPTOR_BOB));
 
         // different name -> returns false
-        EditStudentDescriptor editedAmy = new EditStudentDescriptorBuilder(EDIT_DESCRIPTOR_AMY).withName(VALID_NAME_BOB).build();
+        EditStudentDescriptor editedAmy = new EditStudentDescriptorBuilder(EDIT_DESCRIPTOR_AMY)
+                .withName(VALID_NAME_BOB).build();
         assertFalse(EDIT_DESCRIPTOR_AMY.equals(editedAmy));
 
         // different ID -> returns false

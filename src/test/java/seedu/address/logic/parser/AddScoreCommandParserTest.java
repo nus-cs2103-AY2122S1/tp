@@ -25,6 +25,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddScoreCommand;
 import seedu.address.logic.commands.AddScoreCommand.ScoreDescriptor;
 import seedu.address.model.student.Assessment;

@@ -161,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAssessment(Assessment target, Assessment editedAssessment){
+        public void setAssessment(Assessment target, Assessment editedAssessment) {
             throw new AssertionError("This method should not be called.");
         }
 
