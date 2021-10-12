@@ -62,7 +62,7 @@ public class AddClassCommand extends Command {
         for (Person person: validStudentsAsPerson) {
             Person studentToChange = person;
             person.addClass(tuitionClass);
-            person.addTag(new Tag(tuitionClass.getName().getName()));
+            person.addTag(new Tag(tuitionClass.getName().getName() + " " + tuitionClass.getTimeslot().time));
             model.setPerson(studentToChange, person);
         }
     }
@@ -74,22 +74,24 @@ public class AddClassCommand extends Command {
         for (String s: nowStudents) {
             Person person = new Person(new Name(s));
             if (!model.hasPerson(person)) {
-                invalidStudents.add(s);
+                if (!invalidStudents.contains(s)) {
+                    invalidStudents.add(s);
+                }
                 continue;
             }
             if (newStudents.size() >= limit) {
                 //valid students not added due to limit exceeded.
-                notAddedStudent.add(s);
+                if (!notAddedStudent.contains(s)) {
+                    notAddedStudent.add(s);
+                }
                 continue;
             }
-            newStudents.add(s);
-            validStudentsAsPerson.add(model.getSameNamePerson(person));
+            if (!newStudents.contains(s)) {
+                newStudents.add(s);
+                validStudentsAsPerson.add(model.getSameNamePerson(person));
+            }
         }
-        ArrayList[] returnValue = new ArrayList[4];
-        returnValue[0] = newStudents;
-        returnValue[1] = invalidStudents;
-        returnValue[2] = validStudentsAsPerson;
-        returnValue[3] = notAddedStudent;
+        ArrayList[] returnValue = new ArrayList[]{newStudents, invalidStudents, validStudentsAsPerson, notAddedStudent};
         return returnValue;
     }
     private String getMessage(ArrayList<String> invalidStudents, ArrayList<String> notAdded) {
