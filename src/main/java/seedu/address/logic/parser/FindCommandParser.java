@@ -1,17 +1,20 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.GroupContainsKeywordPredicate;
-import seedu.address.model.student.IdContainsKeywordPredicate;
+import seedu.address.model.student.GroupContainsKeywordsPredicate;
+import seedu.address.model.student.IdContainsKeywordsPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.TagContainsKeywordPredicate;
+import seedu.address.model.student.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -87,13 +90,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new NameContainsKeywordsPredicate(keywordsList));
 
         case "ID":
-            return new FindCommand(new IdContainsKeywordPredicate(keywordsList));
+            return new FindCommand(new IdContainsKeywordsPredicate(keywordsList));
 
         case "GROUP":
-            return new FindCommand(new GroupContainsKeywordPredicate(keywordsList));
+            return new FindCommand(new GroupContainsKeywordsPredicate(keywordsList));
 
         case "TAG":
-            return new FindCommand(new TagContainsKeywordPredicate(keywordsList));
+            return new FindCommand(new TagContainsKeywordsPredicate(keywordsList));
 
         default:
             throw new ParseException(

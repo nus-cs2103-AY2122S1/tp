@@ -7,10 +7,10 @@ import java.util.function.Predicate;
  * Tests that a {@code Student}'s {@code ID} matches any of the keywords given.
  * Supports partial searching of IDs.
  */
-public class IdContainsKeywordPredicate implements Predicate<Student> {
+public class IdContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
 
-    public IdContainsKeywordPredicate(List<String> keyword) {
+    public IdContainsKeywordsPredicate(List<String> keyword) {
         this.keywords = keyword;
     }
 
@@ -23,8 +23,8 @@ public class IdContainsKeywordPredicate implements Predicate<Student> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof IdContainsKeywordPredicate // instanceof handles nulls
-                && keywords.equals(((IdContainsKeywordPredicate) other).keywords)); // state check
+                || (other instanceof IdContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((IdContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }

@@ -10,11 +10,11 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.student.GroupContainsKeywordPredicate;
-import seedu.address.model.student.IdContainsKeywordPredicate;
+import seedu.address.model.student.GroupContainsKeywordsPredicate;
+import seedu.address.model.student.IdContainsKeywordsPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.TagContainsKeywordPredicate;
+import seedu.address.model.student.TagContainsKeywordsPredicate;
 
 
 /**
@@ -46,15 +46,15 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
-    public FindCommand(IdContainsKeywordPredicate predicate) {
+    public FindCommand(IdContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
-    public FindCommand(GroupContainsKeywordPredicate predicate) {
+    public FindCommand(GroupContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
-    public FindCommand(TagContainsKeywordPredicate predicate) {
+    public FindCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

@@ -5,11 +5,12 @@ import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Student}'s {@code Tag} matches any of the keywords given.
+ * Supports partial searching of tags.
  */
-public class TagContainsKeywordPredicate implements Predicate<Student> {
+public class TagContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
 
-    public TagContainsKeywordPredicate(List<String> keywords) {
+    public TagContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -17,14 +18,14 @@ public class TagContainsKeywordPredicate implements Predicate<Student> {
     public boolean test(Student student) {
         return student.getTags().stream()
                 .anyMatch(tag -> keywords.stream()
-                        .anyMatch(keyword -> tag.tagName.toLowerCase().equals(keyword.toLowerCase())));
+                        .anyMatch(keyword -> tag.tagName.toLowerCase().contains(keyword.toLowerCase())));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TagContainsKeywordPredicate // instanceof handles nulls
-                && keywords.equals(((TagContainsKeywordPredicate) other).keywords)); // state check
+                || (other instanceof TagContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }
