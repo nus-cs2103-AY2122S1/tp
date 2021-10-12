@@ -57,11 +57,13 @@ tasks done faster than traditional GUI apps.
 
 Create a new task for a specific module
 
-Format: `module add <module name>, <task name>`
+Format: `add task m/<module name>, a/<task name>, d/<task deadline>`
 
 Examples:
-* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
-* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
+* `add task m/CS2103 a/assignment1 d/2021.10.12`: 
+  * Adds the task assignment1 with deadline on 12 October 2021 to module CS2103
+* `add task m/CS2100 a/lab1 d/2021.10.13 `: 
+  * Adds the task lab1 with deadline on 13 October 2021 to module CS2100
 
 ### Creating a new module: `module add`
 

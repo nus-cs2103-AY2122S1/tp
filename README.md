@@ -20,7 +20,7 @@
 #### Module add task
 
 * Create a new task for a specific module
-* Format: `add task m/<module name>, a/<task name>, d/<task deadline>`
+* Format: `add task m/<module name> a/<task name> d/<task deadline>`
 
 #### Module add student
 
