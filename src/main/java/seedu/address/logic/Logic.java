@@ -44,6 +44,12 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' position book file path.
+     */
+    Path getPositionBookFilePath(); // this file paths might need to be combined.
+
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();

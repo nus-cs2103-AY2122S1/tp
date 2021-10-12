@@ -75,6 +75,10 @@ public class LogicManager implements Logic {
         return model.getAddressBookFilePath();
     }
 
+    public Path getPositionBookFilePath() {
+        return model.getPositionBookFilePath();
+    }
+
     @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
