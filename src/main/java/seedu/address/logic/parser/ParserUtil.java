@@ -135,7 +135,7 @@ public class ParserUtil {
         requireNonNull(taskName);
         String trimmedTaskName = taskName.trim();
         if (!Task.isValidTaskName(trimmedTaskName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Task.MESSAGE_CONSTRAINTS);
         }
         return new Task(trimmedTaskName);
     }
@@ -165,7 +165,7 @@ public class ParserUtil {
         requireNonNull(taskID);
         String trimmedTaskID = taskID.trim();
         if (!TaskID.isValidTaskID(trimmedTaskID)) {
-            throw new ParseException(MemberID.MESSAGE_CONSTRAINTS);
+            throw new ParseException(TaskID.MESSAGE_CONSTRAINTS);
         }
         return new TaskID(trimmedTaskID);
     }

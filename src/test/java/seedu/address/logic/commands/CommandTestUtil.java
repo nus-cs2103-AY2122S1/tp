@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -36,6 +32,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_POSITION_HUSBAND = "husband";
     public static final String VALID_POSITION_FRIEND = "friend";
+    public static final String VALID_TASK_NAME = "write a poem";
+    public static final String VALID_TASK_ID = "1";
+    public static final String VALID_MEMBER_ID = "1";
+    public static final String VALID_MEMBER_ID_DEL = "1";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +47,21 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String POSITION_DESC_FRIEND = " " + PREFIX_POSITION + VALID_POSITION_FRIEND;
     public static final String POSITION_DESC_HUSBAND = " " + PREFIX_POSITION + VALID_POSITION_HUSBAND;
+    public static final String TASK_NAME_DESC_POEM = " " + PREFIX_TASKNAME + VALID_TASK_NAME;
+    public static final String TASK_ID_DESC_ONE = " " + PREFIX_TASK_ID + VALID_TASK_ID;
+    public static final String MEMBER_ID_DESC_ONE = " " + PREFIX_MEMBER_ID + VALID_MEMBER_ID;
+    public static final String MEMBER_ID_DEL_DESC_ONE = " " + PREFIX_MEMBER_ID_DEL + VALID_MEMBER_ID;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION + "hubby*"; // '*' not allowed in positions
+    public static final String INVALID_TASK_NAME_DESC = " " + PREFIX_TASKNAME + ""; // an empty string is not allowed in names
+    public static final String INVALID_TASK_ID_DESC = " " + PREFIX_TASK_ID + "abs"; // 'abs' not allowed in id
+    public static final String INVALID_MEMBER_ID_DESC = " " + PREFIX_MEMBER_ID + "abs"; // 'abs' not allowed in id
+    public static final String INVALID_MEMBER_ID_DEL_DESC = " " + PREFIX_MEMBER_ID_DEL + "abs"; // 'abs' not allowed in id
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
