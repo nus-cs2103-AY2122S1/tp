@@ -50,7 +50,7 @@ public class FindCommandParserTest {
                                 String.format("[%s]", VALID_MODULE_CODE_CS2040)
                         )
                 ));
-        String userInput = String.format(" m/%s m/%s",VALID_MODULE_CODE_CS2030S, VALID_MODULE_CODE_CS2040);
+        String userInput = String.format(" m/%s m/%s", VALID_MODULE_CODE_CS2030S, VALID_MODULE_CODE_CS2040);
         assertParseSuccess(parser, userInput, expectedFindCommand);
     }
 }
