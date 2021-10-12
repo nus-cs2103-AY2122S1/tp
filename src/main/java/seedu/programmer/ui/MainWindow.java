@@ -172,7 +172,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-
     /**
      * Display the selected student's lab results.
      */
