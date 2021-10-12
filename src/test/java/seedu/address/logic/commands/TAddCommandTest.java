@@ -7,74 +7,83 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TaskListManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
 
-public class PaddCommandTest {
+class TAddCommandTest {
 
     @Test
-    public void constructor_nullMember_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PaddCommand(null));
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new TAddCommand(null, null));
     }
 
     @Test
-    public void execute_memberAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingMemberAdded modelStub = new ModelStubAcceptingMemberAdded();
+    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+        Index validMemberID = Index.fromOneBased(1);
+        Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
-        CommandResult commandResult = new PaddCommand(validMember).execute(modelStub);
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
+        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberID);
+        CommandResult commandResult = new TAddCommand(validMemberID, validTask).execute(modelStub);
 
-        assertEquals(String.format(PaddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
+        assertEquals(String.format(TAddCommand.MESSAGE_SUCCESS, validMember.getName(), validTask),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
-    public void execute_duplicateMember_throwsCommandException() {
+    public void execute_duplicateTask_throwsCommandException() {
+        Index validMemberID = Index.fromOneBased(1);
+        Task duplicateTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
-        PaddCommand PaddCommand = new PaddCommand(validMember);
-        ModelStub modelStub = new ModelStubWithMember(validMember);
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
+        TAddCommand tAddCommand = new TAddCommand(validMemberID, duplicateTask);
+        ModelStub modelStub = new ModelStubWithTask(addressBook, duplicateTask, validMemberID);
 
-        assertThrows(CommandException.class, PaddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
-                PaddCommand.execute(modelStub));
+        assertThrows(CommandException.class, TAddCommand.MESSAGE_DUPLICATE_TASK, () ->
+                tAddCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Member alice = new MemberBuilder().withName("Alice").build();
-        Member bob = new MemberBuilder().withName("Bob").build();
-        PaddCommand addAliceCommand = new PaddCommand(alice);
-        PaddCommand addBobCommand = new PaddCommand(bob);
+        Index validMemberID = Index.fromOneBased(1);
+        Task validTask1 = new Task("Do homework");
+        Task validTask2 = new Task("Write a poem");
+        Member validMember = new MemberBuilder().build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
+        TAddCommand addHomeworkCommand = new TAddCommand(validMemberID, validTask1);
+        TAddCommand addPoemCommand = new TAddCommand(validMemberID, validTask2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addHomeworkCommand.equals(addHomeworkCommand));
 
         // same values -> returns true
-        PaddCommand addAliceCommandCopy = new PaddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        TAddCommand addHomeworkCommandCopy = new TAddCommand(validMemberID, validTask1);
+        assertTrue(addHomeworkCommand.equals(addHomeworkCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addHomeworkCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addHomeworkCommand.equals(null));
 
         // different member -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addHomeworkCommand.equals(addPoemCommand));
     }
 
     /**
@@ -118,11 +127,6 @@ public class PaddCommandTest {
 
         @Override
         public void addEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addEventMembers(Event event, Set<Member> memberSet) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -235,45 +239,77 @@ public class PaddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single member.
+     * A Model stub that contains a single member with task.
      */
-    private class ModelStubWithMember extends ModelStub {
+    private class ModelStubWithTask extends TAddCommandTest.ModelStub {
         private final Member member;
+        private final Task task;
+        private final AddressBook addressBook;
 
-        ModelStubWithMember(Member member) {
-            requireNonNull(member);
-            this.member = member;
+        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
+            this.addressBook = new AddressBook(addressBook);
+            requireNonNull(memberID);
+            ObservableList<Member> members = addressBook.getMemberList();
+            this.member = members.get(memberID.getZeroBased());
+            requireNonNull(task);
+            this.task = task;
         }
 
         @Override
-        public boolean hasMember(Member member) {
+        public ReadOnlyAddressBook getAddressBook() {
+            return addressBook;
+        }
+
+        @Override
+        public boolean hasTask(Member member, Task task) {
             requireNonNull(member);
-            return this.member.isSameMember(member);
+            requireNonNull(task);
+            return this.member.equals(member) && this.task.equals(task);
         }
     }
 
     /**
      * A Model stub that always accept the member being added.
      */
-    private class ModelStubAcceptingMemberAdded extends ModelStub {
-        final ArrayList<Member> membersAdded = new ArrayList<>();
+    private class ModelStubAcceptingTaskAdded extends ModelStub {
+        private final AddressBook addressBook;
+        private final Member member;
+        private final Task task;
+        private final TaskListManager taskListManager;
 
-        @Override
-        public boolean hasMember(Member member) {
-            requireNonNull(member);
-            return membersAdded.stream().anyMatch(member::isSameMember);
+
+        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
+            this.addressBook = new AddressBook(addressBook);
+            requireNonNull(memberID);
+            ObservableList<Member> members = addressBook.getMemberList();
+            this.member = members.get(memberID.getZeroBased());
+            requireNonNull(task);
+            this.task = task;
+            this.taskListManager = new TaskListManager();
         }
 
         @Override
-        public void addMember(Member member) {
+        public boolean hasTask(Member member, Task task) {
+            loadTaskList(member);
+            return taskListManager.hasTask(task);
+        }
+
+        @Override
+        public void addTask(Member member, Task task) {
             requireNonNull(member);
-            membersAdded.add(member);
+            loadTaskList(member);
+            taskListManager.addTask(task);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return this.addressBook;
+        }
+
+        @Override
+        public void loadTaskList(Member member) {
+            requireNonNull(member);
+            taskListManager.loadTaskList(member.getTaskList());
         }
     }
-
 }

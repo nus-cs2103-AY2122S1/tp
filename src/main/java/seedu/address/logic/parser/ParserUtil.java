@@ -16,6 +16,7 @@ import seedu.address.model.member.Email;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
+import seedu.address.model.task.Task;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -125,6 +126,7 @@ public class ParserUtil {
     }
 
     /**
+
      * Parses a {@code String name} into a {@code EventName}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -165,5 +167,20 @@ public class ParserUtil {
             indexSet.add(parseIndex(index));
         }
         return indexSet;
+    }
+
+    /**
+     * Parses a {@code String taskName} into a {@code Task}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskName} is invalid.
+     */
+    public static Task parseTask(String taskName) throws ParseException {
+        requireNonNull(taskName);
+        String trimmedTaskName = taskName.trim();
+        if (!Task.isValidTaskName(trimmedTaskName)) {
+            throw new ParseException(Task.MESSAGE_CONSTRAINTS);
+        }
+        return new Task(trimmedTaskName);
     }
 }

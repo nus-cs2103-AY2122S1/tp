@@ -140,7 +140,7 @@ public interface Model {
      * Returns ture if a given {@code task} with the same identity as task
      * exist in the task list of the given {@code member}.
      */
-    void hasTask(Member member, Task task);
+    boolean hasTask(Member member, Task task);
 
     /**
      * Adds the given {@code task} to the given {@code member}'s task list.
