@@ -23,7 +23,7 @@ public class AddFacilityCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Court 1 "
             + PREFIX_LOCATION + "University Sports Hall "
-            + PREFIX_TIME + "11:30 "
+            + PREFIX_TIME + "1130 "
             + PREFIX_CAPACITY + "5 ";
     public static final String MESSAGE_SUCCESS = "New facility added: %1$s";
 
