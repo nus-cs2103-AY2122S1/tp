@@ -24,6 +24,8 @@ public class GameMainCard extends UiPart<Region> {
     @FXML
     private ListView<Friend> friendListView;
 
+    private Game currentGame;
+
     /**
      * Creates a {@code GameMainCard} with the given {@Code Game} and {@code ObservableList}.
      */
@@ -32,6 +34,11 @@ public class GameMainCard extends UiPart<Region> {
         gameTitle.setText(String.format(GAME_TITLE, game.getGameId()));
         friendListView.setItems(friendList);
         friendListView.setCellFactory(listView -> new FriendListViewCell());
+        this.currentGame = game;
+    }
+
+    public Game getCurrentGame() {
+        return currentGame;
     }
 
     /**

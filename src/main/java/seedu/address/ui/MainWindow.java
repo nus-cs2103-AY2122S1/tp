@@ -189,10 +189,14 @@ public class MainWindow extends UiPart<Stage> {
      * @param commandResult The {@Code commandResult} from the find command.
      */
     private void handleShowFriendMainCard(CommandResult commandResult) {
-        // only mounts the friend main card if it is not already mounted
+        // only mounts the friend main card if it is not already mounted or if friend different
         if (friendMainCard == null) {
             removePersonListPanel();
             removeGameMainCard();
+            friendMainCard = new FriendMainCard(commandResult.getFriendToGet(), logic.getFilteredGamesList());
+            personListPanelPlaceholder.getChildren().add(friendMainCard.getRoot());
+        } else if (!friendMainCard.getCurrentFriend().equals(commandResult.getFriendToGet())) {
+            removeFriendMainCard();
             friendMainCard = new FriendMainCard(commandResult.getFriendToGet(), logic.getFilteredGamesList());
             personListPanelPlaceholder.getChildren().add(friendMainCard.getRoot());
         }
@@ -209,6 +213,10 @@ public class MainWindow extends UiPart<Stage> {
             removeFriendMainCard();
             removePersonListPanel();
             //TODO: the friend list that is retrieved should contain friends that play that game only
+            gameMainCard = new GameMainCard(commandResult.getGameToGet(), logic.getFilteredFriendsList());
+            personListPanelPlaceholder.getChildren().add(gameMainCard.getRoot());
+        } else if (!gameMainCard.getCurrentGame().equals(commandResult.getGameToGet())) {
+            removePersonListPanel();
             gameMainCard = new GameMainCard(commandResult.getGameToGet(), logic.getFilteredFriendsList());
             personListPanelPlaceholder.getChildren().add(gameMainCard.getRoot());
         }
