@@ -76,7 +76,15 @@ public class LessonTest {
     }
 
     @Test
-    public void isAbleToUnenroll() {}
+    public void isAbleToUnenroll() {
+        Student student = new PersonBuilder().withGrade(defaultLesson.getGrade().value).build();
+        // student is not enrolled
+        assertFalse(defaultLesson.isAbleToUnenroll(student));
+
+        // enroll and test
+        defaultLesson.addStudent(student);
+        assertTrue(defaultLesson.isAbleToUnenroll(student));
+    }
 
     @Test
     public void containsStudent() {
@@ -91,7 +99,16 @@ public class LessonTest {
     }
 
     @Test
-    public void addStudent() {}
+    public void addStudent() {
+        Student student = new PersonBuilder().withGrade(defaultLesson.getGrade().value).build();
+        defaultLesson.addStudent(student);
+
+        assertEquals(1, defaultLesson.getStudents().size());
+        assertTrue(defaultLesson.containsStudent(student));
+
+        assertEquals(1, student.getLessonCodes().size());
+        assertTrue(student.getLessonCodes().contains(defaultLesson.getLessonCode()));
+    }
 
     @Test
     public void removeStudent() {
@@ -111,7 +128,19 @@ public class LessonTest {
     }
 
     @Test
-    public void removeAll() {}
+    public void removeAll() {
+        Student studentA = new PersonBuilder().withGrade(defaultLesson.getGrade().value).build();
+        Student studentB = new PersonBuilder().withName("John Low").withGrade(defaultLesson.getGrade().value).build();
+
+        defaultLesson.addStudent(studentA);
+        defaultLesson.addStudent(studentB);
+        assertEquals(2, defaultLesson.getStudents().size());
+
+        defaultLesson.removeAll();
+        assertEquals(0, defaultLesson.getStudents().size());
+        assertEquals(0, studentA.getLessonCodes().size());
+        assertEquals(0, studentB.getLessonCodes().size());
+    }
 
     @Test
     public void createClone() {

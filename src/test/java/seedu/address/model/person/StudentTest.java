@@ -62,8 +62,7 @@ public class StudentTest {
     public void equals() {
         // same values -> returns true
         Student aliceCopy = new PersonBuilder(ALICE).build();
-        Student alice = ALICE;
-        assertEquals(alice, aliceCopy);
+        assertEquals(ALICE, aliceCopy);
 
         // same object -> returns true
         assertEquals(ALICE, ALICE);

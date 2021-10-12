@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.lesson.LessonCode.isValidLessonCode;
 
 import java.util.List;
-import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -27,6 +27,7 @@ public class EnrollCommand extends Command {
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
 
     public static final String MESSAGE_STUDENT_IN_LESSON = "%1$s is already enrolled in the existing %2$s";
+    public static final String MESSAGE_UNABLE_TO_ENROLL = "%1$s cannot be enrolled into %2$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "Lesson does not exist, please try again";
     public static final String MESSAGE_SUCCESS = "%1$s enrolled into lesson: %2$s";
 
@@ -47,9 +48,12 @@ public class EnrollCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!isValidLessonCode(lessonCode)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE);
+        }
         LessonCode code = new LessonCode(lessonCode);
-        Optional<Lesson> lessonOptional = model.searchLessons(code);
-        Lesson lesson = lessonOptional.orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE));
+        Lesson lesson = model.searchLessons(code)
+                .orElseThrow(() -> new CommandException(MESSAGE_LESSON_NOT_FOUND));
 
         List<Student> lastShownList = model.getFilteredPersonList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -58,9 +62,10 @@ public class EnrollCommand extends Command {
         Student studentToEnroll = lastShownList.get(targetIndex.getZeroBased());
 
         if (lesson.containsStudent(studentToEnroll)) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON,
-                    studentToEnroll.getName(),
-                    lesson));
+            throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON, studentToEnroll.getName(), lesson));
+        }
+        if (!lesson.isAbleToEnroll(studentToEnroll)) {
+            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
         }
 
         Student newStudent = studentToEnroll.createClone();
