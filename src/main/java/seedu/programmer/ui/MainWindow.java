@@ -29,7 +29,6 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private Stage secondaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
@@ -173,10 +172,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+
+    /**
+     * Display the selected student's lab results.
+     */
     @FXML
     public void handleShowResult(Student target) {
-        studentParticular = new StudentCard(target, 1);
-        studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
+        if (studentParticularPlaceholder.getChildren().isEmpty()) {
+            studentParticular = new StudentCard(target);
+            studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
+        } else {
+            studentParticular.updateStudentInformation(target);
+            studentParticularPlaceholder.getChildren().set(0, studentParticular.getRoot());
+        }
+
         labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
@@ -192,6 +201,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            studentParticularPlaceholder.getChildren().clear();
+            labResultListPanelPlaceholder.getChildren().clear();
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

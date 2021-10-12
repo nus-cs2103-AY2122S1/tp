@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.programmer.model.student.Student;
 
 /**
@@ -43,10 +44,16 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
-        studentId.setText("Student_ID: " + student.getStudentId().studentId);
-        classId.setText("Class_ID: " + student.getClassId().classId);
-        grade.setText("Grade: " + student.getGrade().grade);
+        updateStudentInformation(student);
+    }
+
+    /**
+     * Creates a student particular card to display
+     */
+    public StudentCard(Student student) {
+        super(FXML);
+        this.student = student;
+        updateStudentInformation(student);
     }
 
     @Override
@@ -65,5 +72,20 @@ public class StudentCard extends UiPart<Region> {
         StudentCard card = (StudentCard) other;
         return id.getText().equals(card.id.getText())
                 && student.equals(card.student);
+    }
+
+    /**
+     * Update the student particulars to be displayed.
+     * */
+    public void updateStudentInformation(Student student) {
+        name.setText(student.getName().fullName);
+        studentId.setText("Student_ID: " + student.getStudentId().studentId);
+        classId.setText("Class_ID: " + student.getClassId().classId);
+        grade.setText("Grade: " + student.getGrade().grade);
+
+        name.setTextFill(Color.WHITE);
+        studentId.setTextFill(Color.WHITE);
+        classId.setTextFill(Color.WHITE);
+        grade.setTextFill(Color.WHITE);
     }
 }

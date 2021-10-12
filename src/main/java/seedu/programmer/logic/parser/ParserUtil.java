@@ -95,14 +95,25 @@ public class ParserUtil {
         return new Grade(trimmedGrade);
     }
 
-    //todo: for test use
+    //todo: for test of show feature only
 
+    /**
+     * Parses the index of the student that the lab result is added to.
+     *
+     * @param index the index of the student.
+     * */
     public static int parseNumber(String index) {
         if (index == null) {
             return 1;
         }
         return Integer.parseInt(index.trim());
     }
+
+    /**
+     * Parses the title of the lab assignment.
+     *
+     * @param title the title of the lab assignment.
+     * */
     public static String parseTitle(String title) {
         if (title == null) {
             return " ";
@@ -110,6 +121,11 @@ public class ParserUtil {
         return title.trim();
     }
 
+    /**
+     * Parses the result of the lab assignment.
+     *
+     * @param result the result of the lab assignment.
+     * */
     public static Double parseResult(String result) {
         if (result == null) {
             return 0.0;
@@ -117,6 +133,11 @@ public class ParserUtil {
         return Double.parseDouble(result.trim());
     }
 
+    /**
+     * Parses the total score of the lab assignment
+     *
+     * @param total the total score of the lab assignment.
+     * */
     public static Double parseTotal(String total) {
         if (total == null) {
             return 0.0;

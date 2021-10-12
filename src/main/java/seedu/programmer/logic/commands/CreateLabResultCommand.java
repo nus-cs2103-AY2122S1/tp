@@ -12,13 +12,13 @@ import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Student;
 
 /**
- * Adds a student to ProgrammerError.
+ * Create a student lab result for the student identified using it's displayed index from ProgrammerErrors.
  */
 public class CreateLabResultCommand extends Command {
 
     public static final String COMMAND_WORD = "create";
 
-    //todo
+    //todo: for test of show feature only
     public static final String MESSAGE_USAGE = COMMAND_WORD + "work in progress";
 
     public static final String MESSAGE_CREATE_RESULT_SUCCESS = "Success";
@@ -27,6 +27,10 @@ public class CreateLabResultCommand extends Command {
 
     private final LabResult result;
 
+    /**
+     * @param targetIndex the student that the lab result is assigned to.
+     * @param result the lab result to be added.
+     * */
     public CreateLabResultCommand(Index targetIndex, LabResult result) {
         this.targetIndex = targetIndex;
         this.result = result;
@@ -45,7 +49,7 @@ public class CreateLabResultCommand extends Command {
         Student replacement = target;
         replacement.addLabResult(result);
 
-        model.setStudent(target,replacement);
+        model.setStudent(target, replacement);
         return new CommandResult(String.format(MESSAGE_CREATE_RESULT_SUCCESS, target));
     }
 

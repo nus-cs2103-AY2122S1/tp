@@ -3,7 +3,6 @@ package seedu.programmer.model.student;
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +29,7 @@ public class Student {
         this.studentId = studentId;
         this.classId = classId;
         this.grade = grade;
-        this.labResultList= new ArrayList<>();
+        this.labResultList = new ArrayList<>();
     }
 
     public Name getName() {
@@ -53,6 +52,9 @@ public class Student {
         return labResultList;
     }
 
+    /**
+     * Add a lab result into the student's record
+     * */
     public void addLabResult(LabResult result) {
         if (this.labResultList == null) {
             labResultList = new ArrayList<>();

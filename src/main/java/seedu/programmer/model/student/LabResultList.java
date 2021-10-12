@@ -1,12 +1,12 @@
 package seedu.programmer.model.student;
 
+import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
 public class LabResultList implements Iterable<LabResult> {
 

@@ -1,10 +1,16 @@
 package seedu.programmer.model.student;
 
+//todo: for testing show feature only
 public class LabResult {
     private String title;
     private Double actualScore;
     private Double totalScore;
 
+    /**
+     * @param title the title of the lab
+     * @param actualScore  the score obtained by the student
+     * @param totalScore the total score
+     * */
     public LabResult(String title, Double actualScore, Double totalScore) {
         this.title = title;
         this.actualScore = actualScore;

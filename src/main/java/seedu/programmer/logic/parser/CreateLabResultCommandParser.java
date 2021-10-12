@@ -16,8 +16,9 @@ import seedu.programmer.model.student.LabResult;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new CreateLabResultCommand object
  */
+//todo: for test of show feature only
 public class CreateLabResultCommandParser implements Parser<CreateLabResultCommand> {
 
     /**
@@ -28,11 +29,10 @@ public class CreateLabResultCommandParser implements Parser<CreateLabResultComma
      */
     public CreateLabResultCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_LAB_TITLE,PREFIX_LAB_RESULT, PREFIX_LAB_TOTAL);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_LAB_TITLE, PREFIX_LAB_RESULT, PREFIX_LAB_TOTAL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_LAB_TITLE,PREFIX_LAB_RESULT, PREFIX_LAB_TOTAL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_LAB_TITLE, PREFIX_LAB_RESULT, PREFIX_LAB_TOTAL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            //todo
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 

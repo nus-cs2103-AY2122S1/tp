@@ -2,9 +2,9 @@ package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.programmer.model.student.Student;
-
 import java.util.Objects;
+
+import seedu.programmer.model.student.Student;
 
 /**
  * Represents the result of a command execution.

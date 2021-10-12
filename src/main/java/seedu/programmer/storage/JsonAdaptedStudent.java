@@ -1,5 +1,8 @@
 package seedu.programmer.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,9 +13,6 @@ import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -37,7 +37,6 @@ class JsonAdaptedStudent {
         this.studentId = studentId;
         this.classId = classId;
         this.grade = grade;
-        //this.labResultList = labResultList;
     }
 
     /**
@@ -48,7 +47,8 @@ class JsonAdaptedStudent {
         studentId = source.getStudentId().studentId;
         classId = source.getClassId().classId;
         grade = source.getGrade().grade;
-        if(source.getLabResultList() != null) {
+        //todo: for test of show feature only
+        if (source.getLabResultList() != null) {
             labResultList = new ArrayList<>();
             labResultList.addAll(source.getLabResultList());
         }
@@ -94,8 +94,8 @@ class JsonAdaptedStudent {
         }
         final Grade modelGrade = new Grade(grade);
         Student student = new Student(modelName, modelStudentId, modelClassId, modelGrade);
+        //todo: for test of show feature only
         student.setLabResultRecord(labResultList);
-
         return student;
     }
 
