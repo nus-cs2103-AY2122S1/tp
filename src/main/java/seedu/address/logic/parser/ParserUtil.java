@@ -13,12 +13,15 @@ import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
+import seedu.address.model.person.AcadLevel;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,15 +34,15 @@ public class ParserUtil {
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * stripped.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        String strippedIndex = oneBasedIndex.strip();
+        if (!StringUtil.isNonZeroUnsignedInteger(strippedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(Integer.parseInt(strippedIndex));
     }
 
     /**
@@ -67,67 +70,91 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
+        String strippedName = name.strip();
+        if (!Name.isValidName(strippedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new Name(strippedName);
     }
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
+        String strippedPhone = phone.strip();
+        if (!Phone.isValidPhone(strippedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new Phone(strippedPhone);
     }
 
     /**
      * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
+        String strippedEmail = email.strip();
+        if (!Email.isValidEmail(strippedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Email(strippedEmail);
     }
 
     /**
      * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
+        String strippedAddress = address.strip();
+        if (!Address.isValidAddress(strippedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Address(strippedAddress);
+    }
+
+    /**
+     * Parses a {@code String school} into a {@code School}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code school} is invalid.
+     */
+    public static School parseSchool(String school) throws ParseException {
+        requireNonNull(school);
+        String strippedSchName = school.strip();
+        return new School(strippedSchName);
+    }
+
+    /**
+     * Parses a {@code String acadStream} into an {@code AcadStream}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code acadStream} is invalid.
+     */
+    public static AcadStream parseAcadStream(String acadStream) throws ParseException {
+        requireNonNull(acadStream);
+        String strippedAcadStream = acadStream.strip();
+        return new AcadStream(strippedAcadStream);
     }
 
     /**
      * Parses a {@code String fee} into an {@code Fee}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code fee} is invalid.
      */
@@ -141,33 +168,48 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String acadLevel} into an {@code AcadLevel}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code acadLevel} is invalid.
+     */
+    public static AcadLevel parseAcadLevel(String acadLevel) throws ParseException {
+        requireNonNull(acadLevel);
+        String strippedAcadLevel = acadLevel.strip();
+        if (!AcadLevel.isValidAcadLevel(strippedAcadLevel)) {
+            throw new ParseException(AcadLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new AcadLevel(strippedAcadLevel);
+    }
+
+    /**
      * Parses a {@code String remark} into an {@code Remark}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      */
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
-        String trimmedRemark = remark.trim();
-        return new Remark(trimmedRemark);
+        String strippedRemark = remark.strip();
+        return new Remark(strippedRemark);
     }
 
     /**
      * Parses a {@code String date} into a {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
+        String strippedDate = date.strip();
+        if (!Date.isValidDate(strippedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        return new Date(strippedDate);
     }
 
     /**
      * Parses {@code String TimeRange} into a {@code TimeRange}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code TimeRange} is invalid.
      */
@@ -180,35 +222,34 @@ public class ParserUtil {
         return new TimeRange(strippedTimeRange);
     }
 
-
     /**
      * Parses a {@code String subject} into a {@code Subject}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code Subject} is invalid.
      */
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
-        String trimmedSubject = subject.trim();
-        if (!Subject.isValidSubject(trimmedSubject)) {
+        String strippedSubject = subject.strip();
+        if (!Subject.isValidSubject(strippedSubject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(trimmedSubject);
+        return new Subject(strippedSubject);
     }
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        String strippedTag = tag.strip();
+        if (!Tag.isValidTagName(strippedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(strippedTag);
     }
 
     /**
@@ -225,17 +266,17 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String individualHomework} into a {@code Homework}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code Homework} is invalid.
      */
     public static Homework parseIndividualPieceOfHomework(String individualHomework) throws ParseException {
         requireNonNull(individualHomework);
-        String trimmedHomework = individualHomework.trim();
-        if (!Homework.isValidDescription(trimmedHomework)) {
+        String strippedHomework = individualHomework.strip();
+        if (!Homework.isValidDescription(strippedHomework)) {
             throw new ParseException(Homework.MESSAGE_CONSTRAINTS);
         }
-        return new Homework(trimmedHomework);
+        return new Homework(strippedHomework);
     }
 
     /**

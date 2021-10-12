@@ -9,10 +9,11 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
  */
 public class ListCommand extends Command {
 
+    public static final String COMMAND_ACTION = "List All Students";
+
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
-
 
     @Override
     public CommandResult execute() {

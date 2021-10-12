@@ -10,6 +10,8 @@ import seedu.address.model.ReadOnlyAddressBook;
  */
 public class ClearCommand extends UndoableCommand {
 
+    public static final String COMMAND_ACTION = "Clear All Data";
+
     public static final String COMMAND_WORD = "clear";
 
     public static final String USER_TIP = "You may clear all the data with: " + COMMAND_WORD;
@@ -17,7 +19,6 @@ public class ClearCommand extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
     private ReadOnlyAddressBook previousAddressBook;
-
 
     @Override
     public CommandResult executeUndoableCommand() {
