@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary implements Field {
 
-    public static final String MESSAGE_CONSTRAINTS = "Salaries have to be a positive integer representing the pay in cents.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Salaries have to be a positive integer representing the pay in cents.";
 
     public final Integer value;
 
