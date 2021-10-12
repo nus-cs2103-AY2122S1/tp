@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.TuitionClass;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
 
 public class RemoveStudentCommand extends Command {
     public static final String COMMAND_WORD = "remove";
@@ -23,8 +23,15 @@ public class RemoveStudentCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 " + PREFIX_TUITION_CLASS + "2";
 
     public static final String MESSAGE_REMOVE_STUDENT_SUCCESS = "Removed student: %1$s from tuition class: %2$s ";
-    private final Index studentIndex, classIndex;
+    private final Index studentIndex;
+    private final Index classIndex;
 
+    /**
+     * Constructor for remove student command.
+     *
+     * @param studentIndex
+     * @param classIndex
+     */
     public RemoveStudentCommand(Index studentIndex, Index classIndex) {
         this.studentIndex = studentIndex;
         this.classIndex = classIndex;
