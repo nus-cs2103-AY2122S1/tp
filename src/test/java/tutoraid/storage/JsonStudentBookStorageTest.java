@@ -1,0 +1,108 @@
+package tutoraid.storage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import tutoraid.commons.exceptions.DataConversionException;
+import tutoraid.model.ReadOnlyStudentBook;
+import tutoraid.model.StudentBook;
+import tutoraid.testutil.Assert;
+import tutoraid.testutil.TypicalStudents;
+
+public class JsonStudentBookStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonStudentBookStorageTest");
+
+    @TempDir
+    public Path testFolder;
+
+    @Test
+    public void readStudentBook_nullFilePath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> readStudentBook(null));
+    }
+
+    private java.util.Optional<ReadOnlyStudentBook> readStudentBook(String filePath) throws Exception {
+        return new JsonTutorAidStorage(Paths.get(filePath)).readStudentBook(addToTestDataPathIfNotNull(filePath));
+    }
+
+    private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
+        return prefsFileInTestDataFolder != null
+                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
+                : null;
+    }
+
+    @Test
+    public void read_missingFile_emptyResult() throws Exception {
+        assertFalse(readStudentBook("NonExistentFile.json").isPresent());
+    }
+
+    @Test
+    public void read_notJsonFormat_exceptionThrown() {
+        Assert.assertThrows(DataConversionException.class, () -> readStudentBook("notJsonFormatStudentBook.json"));
+    }
+
+    @Test
+    public void readStudentBook_invalidPersonStudentBook_throwDataConversionException() {
+        Assert.assertThrows(DataConversionException.class, () -> readStudentBook("invalidPersonStudentBook.json"));
+    }
+
+    @Test
+    public void readStudentBook_invalidAndValidPersonStudentBook_throwDataConversionException() {
+        Assert.assertThrows(
+            DataConversionException.class, () -> readStudentBook("invalidAndValidPersonStudentBook.json"));
+    }
+
+    @Test
+    public void readAndSaveStudentBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempStudentBook.json");
+        StudentBook original = TypicalStudents.getTypicalStudentBook();
+        JsonTutorAidStorage jsonTutorAidStorage = new JsonTutorAidStorage(filePath);
+
+        // Save in new file and read back
+        jsonTutorAidStorage.saveStudentBook(original, filePath);
+        ReadOnlyStudentBook readBack = jsonTutorAidStorage.readStudentBook(filePath).get();
+        assertEquals(original, new StudentBook(readBack));
+
+        // Modify data, overwrite exiting file, and read back
+        original.addStudent(TypicalStudents.HOON);
+        original.removeStudent(TypicalStudents.ALICE);
+        jsonTutorAidStorage.saveStudentBook(original, filePath);
+        readBack = jsonTutorAidStorage.readStudentBook(filePath).get();
+        assertEquals(original, new StudentBook(readBack));
+
+        // Save and read without specifying file path
+        original.addStudent(TypicalStudents.IDA);
+        jsonTutorAidStorage.saveStudentBook(original); // file path not specified
+        readBack = jsonTutorAidStorage.readStudentBook().get(); // file path not specified
+        assertEquals(original, new StudentBook(readBack));
+
+    }
+
+    @Test
+    public void saveStudentBook_nullStudentBook_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> saveStudentBook(null, "SomeFile.json"));
+    }
+
+    /**
+     * Saves {@code studentBook} at the specified {@code filePath}.
+     */
+    private void saveStudentBook(ReadOnlyStudentBook studentBook, String filePath) {
+        try {
+            new JsonTutorAidStorage(Paths.get(filePath))
+                    .saveStudentBook(studentBook, addToTestDataPathIfNotNull(filePath));
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file.", ioe);
+        }
+    }
+
+    @Test
+    public void saveStudentBook_nullFilePath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> saveStudentBook(new StudentBook(), null));
+    }
+}
