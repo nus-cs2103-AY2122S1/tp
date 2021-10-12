@@ -17,8 +17,10 @@ import dash.model.person.Email;
 import dash.model.person.Name;
 import dash.model.person.Phone;
 import dash.model.tag.Tag;
+import dash.model.task.TaskDescription;
 import dash.testutil.Assert;
 import dash.testutil.TypicalIndexes;
+import jdk.jfr.Description;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -27,12 +29,16 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
+    private static final String INVALID_DESCRIPTION = " ";
+
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String VALID_DESCRIPTION = "Review PRs";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +198,28 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTaskDescription_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseTaskDescription((String) null));
+    }
+
+    @Test
+    public void parseTaskDescription_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseTaskDescription(INVALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseTaskDescription_validValueWithoutWhitespace_returnsAddress() throws Exception {
+        TaskDescription expectedDescription = new TaskDescription(VALID_DESCRIPTION);
+        assertEquals(expectedDescription, ParserUtil.parseTaskDescription(VALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseTaskDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
+        String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+        TaskDescription expectedDescription = new TaskDescription(VALID_DESCRIPTION);
+        assertEquals(expectedDescription, ParserUtil.parseTaskDescription(descriptionWithWhitespace));
     }
 }
