@@ -129,8 +129,8 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) { // {"tag1", "tag2,tag3"}
-            String[] tokenizedTags = tagName.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "").split(",");
+        for (String tagSequence : tags) { // {"tag1", "tag2,tag3"}
+            String[] tokenizedTags = tagSequence.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "").split(",");
             for (String tag : tokenizedTags) {
                 tagSet.add(parseTag(tag));
             }
