@@ -126,6 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        // pass in date into weeklyPanel constructor instead of a taskList
         weeklyPanel = new WeeklyPanel(logic.getFilteredTaskList());
         weeklyPanelPlaceholder.getChildren().add(weeklyPanel.getRoot());
     }

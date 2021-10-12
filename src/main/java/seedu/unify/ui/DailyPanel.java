@@ -22,13 +22,13 @@ public class DailyPanel extends UiPart<Region> {
     @FXML
     private ListView<Task> taskListView;
 
-
     /**
      * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
      */
     public DailyPanel(ObservableList<Task> taskList, String dayString) {
         super(FXML);
         day.setText(dayString);
+        // create new task list here based on date
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new DailyPanel.DailyViewCell());
     }

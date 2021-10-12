@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.Logic;
+import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Task;
 
 public class WeeklyPanel extends UiPart<Region> {
@@ -17,6 +18,8 @@ public class WeeklyPanel extends UiPart<Region> {
     private static final String FXML = "WeeklyPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(WeeklyPanel.class);
     private Logic logic;
+    // add date to be passed down from Weekly Panel
+    private Date[] dateRange;
 
 
     @FXML
