@@ -14,10 +14,17 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteEmployeeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEmployeeCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
+import seedu.address.logic.commands.CheckCommand;
+import seedu.address.logic.commands.DeleteSupplierCommand;
+import seedu.address.logic.commands.EditSupplierCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PersonCommand;
+import seedu.address.logic.commands.ReserveCommand;
+import seedu.address.logic.commands.SupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -53,17 +60,26 @@ public class AddressBookParser {
         case AddEmployeeCommand.COMMAND_WORD:
             return new AddEmployeeCommandParser().parse(arguments);
 
+        case AddSupplierCommand.COMMAND_WORD:
+            return new AddSupplierCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case EditEmployeeCommand.COMMAND_WORD:
             return new EditEmployeeCommandParser().parse(arguments);
 
+        case EditSupplierCommand.COMMAND_WORD:
+            return new EditSupplierCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteEmployeeCommand.COMMAND_WORD:
             return new DeleteEmployeeCommandParser().parse(arguments);
+
+        case DeleteSupplierCommand.COMMAND_WORD:
+            return new DeleteSupplierCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -79,6 +95,18 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SupplierCommand.COMMAND_WORD:
+            return new SupplierCommand();
+
+        case PersonCommand.COMMAND_WORD:
+            return new PersonCommand();
+
+        case ReserveCommand.COMMAND_WORD:
+            return new ReserveCommandParser().parse(arguments);
+
+        case CheckCommand.COMMAND_WORD:
+            return new CheckCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

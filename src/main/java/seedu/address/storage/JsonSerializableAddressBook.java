@@ -13,6 +13,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.employee.Employee;
+import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.reservation.Reservation;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -25,18 +27,26 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
+    public static final String MESSAGE_DUPLICATE_SUPPLIER = "Suppliers list contains duplicate supplier(s).";
+
+    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedSupplier> suppliers = new ArrayList<>();
+    private final List<JsonAdaptedReservation> reservations = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and employees.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-        @JsonProperty("employees") List<JsonAdaptedEmployee> employees) {
+        @JsonProperty("employees") List<JsonAdaptedEmployee> employees,
+        @JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers,
+        @JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
         this.persons.addAll(persons);
         this.employees.addAll(employees);
+        this.persons.addAll(persons);
+        this.suppliers.addAll(suppliers);
+        this.reservations.addAll(reservations);
     }
-
-
 
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
@@ -46,6 +56,9 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
+        suppliers.addAll(source.getSupplierList().stream().map(JsonAdaptedSupplier::new).collect(Collectors.toList()));
+        reservations.addAll(
+                source.getReservationList().stream().map(JsonAdaptedReservation::new).collect(Collectors.toList()));
     }
 
     /**
@@ -68,6 +81,17 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
             }
             addressBook.addEmployee(employee);
+        }
+        for (JsonAdaptedSupplier jsonAdaptedSupplier : suppliers) {
+            Supplier supplier = jsonAdaptedSupplier.toModelType();
+            if (addressBook.hasSupplier(supplier)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_SUPPLIER);
+            }
+            addressBook.addSupplier(supplier);
+        }
+        for (JsonAdaptedReservation jsonAdaptedReservation: reservations) {
+            Reservation reservation = jsonAdaptedReservation.toModelType();
+            addressBook.addReservation(reservation);
         }
         return addressBook;
     }

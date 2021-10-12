@@ -45,5 +45,9 @@
   } ],
   "employees": [
 
-  ]
+  ],
+  "suppliers": [
+
+  ],
+  "reservations": []
 }

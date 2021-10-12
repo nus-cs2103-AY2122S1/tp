@@ -26,6 +26,8 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.exceptions.DuplicateEmployeeException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.EmployeeBuilder;
+import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -146,8 +148,10 @@ public class AddressBookTest {
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
+
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Employee> employees = FXCollections.observableArrayList();
+        private final ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons, Collection<Employee> employees) {
             this.persons.setAll(persons);
@@ -162,6 +166,16 @@ public class AddressBookTest {
         @Override
         public ObservableList<Employee> getEmployeeList() {
             return employees;
+        }
+
+        @Override
+        public ObservableList<Supplier> getSupplierList() {
+            return suppliers;
+        }
+
+        @Override
+        public ObservableList<Reservation> getReservationList() {
+            return null;
         }
     }
 
