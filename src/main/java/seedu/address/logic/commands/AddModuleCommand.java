@@ -8,14 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.student.Student;
 
 /**
  * Adds a student to the address book.
  */
 public class AddModuleCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add module";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
             + "Parameters: "
@@ -44,14 +44,15 @@ public class AddModuleCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
-        if (model.hasStudent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.addStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        //        requireNonNull(model);
+        //
+        //        if (model.hasStudent(toAdd)) {
+        //            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        //        }
+        //
+        //        model.addStudent(toAdd);
+        //        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return null; //to be edited
     }
 
     @Override

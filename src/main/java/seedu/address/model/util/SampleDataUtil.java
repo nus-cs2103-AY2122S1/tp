@@ -5,12 +5,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
-import seedu.address.model.TeachingAssistantBuddy;
-import seedu.address.model.student.Email;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TeleHandle;
+import seedu.address.model.module.student.Email;
+import seedu.address.model.module.student.Name;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
+import seedu.address.model.module.student.TeleHandle;
 import seedu.address.model.tag.Tag;
 
 
@@ -39,11 +38,12 @@ public class SampleDataUtil {
         };
     }
     public static ReadOnlyTeachingAssistantBuddy getSampleModule() {
-        TeachingAssistantBuddy sampleAb = new TeachingAssistantBuddy();
-        for (Student sampleStudent : getSamplePersons()) {
-            sampleAb.addStudent(sampleStudent);
-        }
-        return sampleAb;
+        //        TeachingAssistantBuddy sampleAb = new TeachingAssistantBuddy();
+        //        for (Student sampleStudent : getSamplePersons()) {
+        //            sampleAb.addStudent(sampleStudent);
+        //        }
+        //        return sampleAb;
+        return null;
     }
 
     /**

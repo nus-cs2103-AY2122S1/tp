@@ -14,7 +14,7 @@ import seedu.address.logic.parser.TeachingAssistantBuddyParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.student.Student;
 import seedu.address.storage.Storage;
 
 /**

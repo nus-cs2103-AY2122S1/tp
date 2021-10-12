@@ -8,7 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.student.Student;
 
 /**
  * API of the Logic component
