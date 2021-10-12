@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -13,13 +18,22 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = "find: Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive)\n"
+            + "Alternatively, finds all persons whose module codes contains all of the specified\n"
+            + "module code(s) (case-insensitive).\n"
+            + "Displays the results as a list with index numbers."
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + PREFIX_MODULE_CODE + "CS2030S "
+            + PREFIX_MODULE_CODE + "CS2040 "
             + "Example: find alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Person> predicate;
 
     public FindCommand(NameContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    public FindCommand(ModuleCodesContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
