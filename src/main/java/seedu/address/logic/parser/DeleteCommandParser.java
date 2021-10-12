@@ -21,6 +21,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasEmail;
 import seedu.address.model.person.PersonHasId;
 
@@ -52,7 +53,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_FIELDS, DeleteCommand.MESSAGE_USAGE));
         }
 
-        ArrayList<Predicate> predicatesToDelete = new ArrayList<>();
+        ArrayList<Predicate<Person>> predicatesToDelete = new ArrayList<>();
         String clientIdString = argMultimap.getValue(PREFIX_CLIENTID).orElse("");
         if (!clientIdString.isEmpty()) {
             ClientId clientId = ParserUtil.parseClientId(clientIdString);
@@ -67,14 +68,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         return new DeleteCommand(predicatesToDelete);
 
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**
