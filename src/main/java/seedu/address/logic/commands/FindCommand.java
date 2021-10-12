@@ -19,7 +19,8 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = "find: Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive)\n"
-            + "Alternatively, finds all persons whose module codes contain all of the specified module code(s).\n"
+            + "Alternatively, finds all persons whose module codes contains all of the specified\n"
+            + "module code(s) (case-insensitive).\n"
             + "Displays the results as a list with index numbers."
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + PREFIX_MODULE_CODE + "CS2030S "
