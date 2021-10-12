@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TaskBuilder;
 
@@ -32,6 +33,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
     }
 
     @Test
@@ -52,10 +54,21 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<Task> sampleTaskList = List.of(new TaskBuilder(REPORT_1).build());
+        List<Task> sampleTaskList = List.of(REPORT_1);
         AddressBookStub newData = new AddressBookStub(newPersons, sampleTaskList);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicateTasks_throwsDuplicatePersonException() {
+        // Two tasks with the same identity fields
+        Task editedReport1 = new TaskBuilder(REPORT_1).build();
+        List<Task> newTaskList = List.of(REPORT_1, editedReport1);
+        List<Person> samplePersonList = List.of(ALICE);
+        AddressBookStub newData = new AddressBookStub(samplePersonList, newTaskList);
+
+        assertThrows(DuplicateTaskException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
@@ -64,14 +77,30 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasTask_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasTask(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasTask_taskNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasTask(REPORT_1));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasTask_taskInAddressBook_returnsTrue() {
+        addressBook.addTask(REPORT_1);
+        assertTrue(addressBook.hasTask(REPORT_1));
     }
 
     @Test
@@ -83,8 +112,20 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasTask_taskWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addTask(REPORT_1);
+        Task editedReport1 = new TaskBuilder(REPORT_1).build();
+        assertTrue(addressBook.hasTask(editedReport1));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void getTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
     }
 
     /**

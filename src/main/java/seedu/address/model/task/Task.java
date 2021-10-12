@@ -4,13 +4,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.commons.core.id.UniqueId;
+import seedu.address.model.id.HasUniqueId;
+import seedu.address.model.id.UniqueId;
 
 /**
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task {
+public class Task implements HasUniqueId {
     // The task name
     private final Name name;
 
@@ -24,7 +25,7 @@ public class Task {
      * Every field must be present and not null.
      */
     public Task(Name name, Deadline deadline) {
-        this.id = UniqueId.generateTaskId();
+        this.id = UniqueId.generateId(this);
         requireAllNonNull(name, deadline, id);
         this.name = name;
         this.deadline = deadline;
@@ -87,7 +88,7 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, deadline);
+        return Objects.hash(name, deadline, id);
     }
 
     @Override

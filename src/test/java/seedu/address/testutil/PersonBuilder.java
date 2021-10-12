@@ -2,7 +2,9 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -22,6 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    private UniqueId id;
     private Name name;
     private Phone phone;
     private Email email;
@@ -33,6 +36,7 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        id = UniqueId.generateId(UUID.randomUUID().toString());
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -45,11 +49,20 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
+        id = personToCopy.getId();
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+    }
+
+    /**
+     * Sets the {@code Id} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(String id) {
+        this.id = UniqueId.generateId(id);
+        return this;
     }
 
     /**
@@ -100,8 +113,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@code Person} object from the {@code PersonBuilder}.
+     *
+     * @return A {@code Person} object.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags, lessonsList);
+        Person person = new Person(id, name, phone, email, address, tags, lessonsList);
+        id.setOwner(person);
+        return person;
     }
 
 }
