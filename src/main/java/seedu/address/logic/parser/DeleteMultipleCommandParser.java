@@ -6,7 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class DeleteMultipleCommandParser {
+public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteMultipleCommand
      * and returns a DeleteMultipleCommand object for execution.
@@ -14,9 +14,9 @@ public class DeleteMultipleCommandParser {
      */
     public DeleteMultipleCommand parse(String args) throws ParseException {
         try {
-            String[] indexes = args.split("-");
-            Index indexStart = ParserUtil.parseIndex(indexes[0]);
-            Index indexEnd = ParserUtil.parseIndex(indexes[1]);
+            int indexOfDash = ParserUtil.getIndexOfSubstring(args, "-");
+            Index indexStart = ParserUtil.parseIndex(args.substring(0, indexOfDash));
+            Index indexEnd = ParserUtil.parseIndex(args.substring(indexOfDash + 1));
             return new DeleteMultipleCommand(indexStart, indexEnd);
         } catch (ParseException pe) {
             throw new ParseException(
