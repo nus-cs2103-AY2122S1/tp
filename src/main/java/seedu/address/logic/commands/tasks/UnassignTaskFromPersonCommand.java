@@ -1,5 +1,13 @@
 package seedu.address.logic.commands.tasks;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -9,14 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 public class UnassignTaskFromPersonCommand extends Command {
 
