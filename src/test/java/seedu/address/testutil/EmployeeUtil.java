@@ -13,7 +13,6 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddEmployeeCommand;
 import seedu.address.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
-import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.tag.Tag;
 
@@ -41,8 +40,8 @@ public class EmployeeUtil {
         sb.append(PREFIX_LEAVES + employee.getLeaves().currentLeaves + " ");
         sb.append(PREFIX_SALARY + employee.getSalary().currentSalary + " ");
         sb.append(PREFIX_JOBTITLE + employee.getJobTitle().jobTitle + " ");
-        employee.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        employee.getTags().stream().forEach(s ->
+                sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }

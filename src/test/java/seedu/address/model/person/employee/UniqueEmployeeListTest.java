@@ -29,18 +29,18 @@ public class UniqueEmployeeListTest {
     }
 
     @Test
-    public void contains_EmployeeNotInList_returnsFalse() {
+    public void contains_employeeNotInList_returnsFalse() {
         assertFalse(uniqueEmployeeList.contains(ALICE_EMPLOYEE));
     }
 
     @Test
-    public void contains_EmployeeInList_returnsTrue() {
+    public void contains_employeeInList_returnsTrue() {
         uniqueEmployeeList.add(ALICE_EMPLOYEE);
         assertTrue(uniqueEmployeeList.contains(ALICE_EMPLOYEE));
     }
 
     @Test
-    public void contains_EmployeeWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_employeeWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEmployeeList.add(ALICE_EMPLOYEE);
         Employee editedAlice = new EmployeeBuilder(ALICE_EMPLOYEE)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
@@ -66,14 +66,14 @@ public class UniqueEmployeeListTest {
 
     @Test
     public void setEmployee_nullEditedEmployee_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> uniqueEmployeeList.setEmployee(ALICE_EMPLOYEE, null));
+        assertThrows(NullPointerException.class, () ->
+                uniqueEmployeeList.setEmployee(ALICE_EMPLOYEE, null));
     }
 
     @Test
     public void setEmployee_targetEmployeeNotInList_throwsEmployeeNotFoundException() {
-        assertThrows(EmployeeNotFoundException.class,
-                () -> uniqueEmployeeList.setEmployee(ALICE_EMPLOYEE, ALICE_EMPLOYEE));
+        assertThrows(EmployeeNotFoundException.class, () ->
+                uniqueEmployeeList.setEmployee(ALICE_EMPLOYEE, ALICE_EMPLOYEE));
     }
 
     @Test
@@ -88,11 +88,12 @@ public class UniqueEmployeeListTest {
     @Test
     public void setEmployee_editedEmployeeHasSameIdentity_success() {
         uniqueEmployeeList.add(ALICE_EMPLOYEE);
-        Employee editedALICE_EMPLOYEE = new EmployeeBuilder(ALICE_EMPLOYEE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Employee editedAlice = new EmployeeBuilder(ALICE_EMPLOYEE).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueEmployeeList.setEmployee(ALICE_EMPLOYEE, editedALICE_EMPLOYEE);
+        uniqueEmployeeList.setEmployee(ALICE_EMPLOYEE, editedAlice);
         UniqueEmployeeList expectedUniqueEmployeeList = new UniqueEmployeeList();
-        expectedUniqueEmployeeList.add(editedALICE_EMPLOYEE);
+        expectedUniqueEmployeeList.add(editedAlice);
         assertEquals(expectedUniqueEmployeeList, uniqueEmployeeList);
     }
 
@@ -119,7 +120,7 @@ public class UniqueEmployeeListTest {
     }
 
     @Test
-    public void remove_EmployeeDoesNotExist_throwsEmployeeNotFoundException() {
+    public void remove_employeeDoesNotExist_throwsEmployeeNotFoundException() {
         assertThrows(EmployeeNotFoundException.class, () -> uniqueEmployeeList.remove(ALICE_EMPLOYEE));
     }
 
@@ -153,8 +154,8 @@ public class UniqueEmployeeListTest {
     @Test
     public void setEmployees_list_replacesOwnListWithProvidedList() {
         uniqueEmployeeList.add(ALICE_EMPLOYEE);
-        List<Employee> EmployeeList = Collections.singletonList(BOB_EMPLOYEE);
-        uniqueEmployeeList.setEmployees(EmployeeList);
+        List<Employee> employeeList = Collections.singletonList(BOB_EMPLOYEE);
+        uniqueEmployeeList.setEmployees(employeeList);
         UniqueEmployeeList expectedUniqueEmployeeList = new UniqueEmployeeList();
         expectedUniqueEmployeeList.add(BOB_EMPLOYEE);
         assertEquals(expectedUniqueEmployeeList, uniqueEmployeeList);
@@ -163,12 +164,13 @@ public class UniqueEmployeeListTest {
     @Test
     public void setEmployees_listWithDuplicateEmployees_throwsDuplicateEmployeeException() {
         List<Employee> listWithDuplicateEmployees = Arrays.asList(ALICE_EMPLOYEE, ALICE_EMPLOYEE);
-        assertThrows(DuplicateEmployeeException.class, () -> uniqueEmployeeList.setEmployees(listWithDuplicateEmployees));
+        assertThrows(DuplicateEmployeeException.class, () ->
+                uniqueEmployeeList.setEmployees(listWithDuplicateEmployees));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueEmployeeList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniqueEmployeeList.asUnmodifiableObservableList().remove(0));
     }
 }

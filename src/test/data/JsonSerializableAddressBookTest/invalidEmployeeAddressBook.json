@@ -1,4 +1,7 @@
 {
+  "persons": [
+
+  ],
   "employees": [ {
     "name": "Hans Muster",
     "phone": "9482424",

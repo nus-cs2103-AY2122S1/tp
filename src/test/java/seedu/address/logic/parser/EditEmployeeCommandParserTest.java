@@ -49,9 +49,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
 import seedu.address.logic.commands.EditEmployeeCommand;
+import seedu.address.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -61,7 +60,6 @@ import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditEmployeeCommandParserTest {
 

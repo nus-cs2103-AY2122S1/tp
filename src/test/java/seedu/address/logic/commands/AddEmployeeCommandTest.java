@@ -49,8 +49,8 @@ public class AddEmployeeCommandTest {
         AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand(validEmployee);
         ModelStub modelStub = new ModelStubWithEmployee(validEmployee);
 
-        assertThrows(CommandException.class, AddEmployeeCommand.MESSAGE_DUPLICATE_EMPLOYEE,
-                () -> addEmployeeCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddEmployeeCommand.MESSAGE_DUPLICATE_EMPLOYEE, () ->
+                addEmployeeCommand.execute(modelStub));
     }
 
     @Test

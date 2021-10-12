@@ -31,7 +31,7 @@ class JsonSerializableAddressBook {
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-    @JsonProperty("employees") List<JsonAdaptedEmployee> employees) {
+        @JsonProperty("employees") List<JsonAdaptedEmployee> employees) {
         this.persons.addAll(persons);
         this.employees.addAll(employees);
     }

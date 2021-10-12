@@ -5,11 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
-import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;

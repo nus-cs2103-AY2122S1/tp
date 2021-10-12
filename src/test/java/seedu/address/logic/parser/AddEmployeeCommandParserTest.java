@@ -93,12 +93,12 @@ public class AddEmployeeCommandParserTest {
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple salaries - last salary accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB +ADDRESS_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + LEAVES_DESC_BOB + SALARY_DESC_AMY + SALARY_DESC_BOB
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple job titles - last job title accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB +ADDRESS_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + LEAVES_DESC_BOB + SALARY_DESC_BOB + JOBTITLE_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 

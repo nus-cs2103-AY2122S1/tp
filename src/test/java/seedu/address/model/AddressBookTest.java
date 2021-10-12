@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalEmployees.ALICE_EMPLOYEE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -99,7 +99,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasEmployee_EmployeeNotInAddressBook_returnsFalse() {
+    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
         assertFalse(addressBookEmployee.hasEmployee(ALICE_EMPLOYEE));
     }
 
@@ -110,7 +110,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasEmployee_InAddressBook_returnsTrue() {
+    public void hasEmployee_inAddressBook_returnsTrue() {
         addressBookEmployee.addEmployee(ALICE_EMPLOYEE);
         assertTrue(addressBookEmployee.hasEmployee(ALICE_EMPLOYEE));
     }

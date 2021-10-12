@@ -1,9 +1,9 @@
 package seedu.address.model.person.employee;
 
-import seedu.address.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Employee}'s {@code Name} matches any of the keywords given.

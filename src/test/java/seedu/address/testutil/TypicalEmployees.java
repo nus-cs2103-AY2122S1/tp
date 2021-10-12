@@ -70,12 +70,14 @@ public class TypicalEmployees {
             .build();
 
     // Manually added - Employee's details found in {@code CommandTestUtil}
-    public static final Employee AMY_EMPLOYEE = new EmployeeBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
+    public static final Employee AMY_EMPLOYEE = new EmployeeBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withTags(VALID_TAG_FRIEND)
             .withLeaves(VALID_LEAVES_AMY).withSalary(VALID_SALARY_AMY).withJobTitle(VALID_JOBTITLE_AMY)
             .build();
-    public static final Employee BOB_EMPLOYEE = new EmployeeBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    public static final Employee BOB_EMPLOYEE = new EmployeeBuilder().withName(VALID_NAME_BOB)
+            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withLeaves(VALID_LEAVES_BOB).withSalary(VALID_SALARY_BOB).withJobTitle(VALID_JOBTITLE_BOB)
             .build();
 
