@@ -48,7 +48,7 @@ import seedu.address.model.task.Task;
 
 
 public class HelpWindow extends AnchorPane {
-    public static final String USER_GUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USER_GUIDE_URL = "https://ay2122s1-cs2103t-w10-1.github.io/tp/UserGuide.html";
     public static final String USER_GUIDE_MESSAGE = "For full details, refer to the user guide: " + USER_GUIDE_URL;
     public static final String HELP_MESSAGE = "For more detailed commands, type \"help [command]\"\n"
             + "To close this window, type \"close\"";
