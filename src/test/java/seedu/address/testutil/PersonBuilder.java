@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -35,6 +36,7 @@ public class PersonBuilder {
     private Role role;
     private Salary salary;
     private Status status;
+    private Set<Period> absentDates;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,6 +47,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        absentDates = new HashSet<>();
         role = Role.translateStringToRole(DEFAULT_ROLE);
         salary = new Salary(DEFAULT_SALARY);
         status = Status.translateStringToStatus(DEFAULT_STATUS);
@@ -63,6 +66,16 @@ public class PersonBuilder {
         salary = personToCopy.getSalary();
         status = personToCopy.getStatus();
     }
+
+    /**
+     * Parses the {@code periods} into a {@code Set<Period>} and set it to the {@code Person}
+     * that we are building.
+     */
+    public PersonBuilder withAbsentDates(String ... periods) {
+        this.absentDates = SampleDataUtil.getPeriodSet(periods);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.

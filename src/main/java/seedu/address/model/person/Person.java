@@ -29,6 +29,7 @@ public class Person {
     private final Role role;
     private final Salary salary;
     private final Status status;
+    private final Set<Period> absentDates = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Field> fields = new HashSet<>();
 
@@ -52,7 +53,6 @@ public class Person {
         this.fields.addAll(tags);
         addToFieldSet(fields, name, phone, email, address, salary, status, role);
     }
-
 
 
 
@@ -99,6 +99,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable period set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Period> getAbsentDates() {
+        return Collections.unmodifiableSet(this.absentDates);
     }
 
     /**

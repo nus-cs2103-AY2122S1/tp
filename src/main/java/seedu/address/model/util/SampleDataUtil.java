@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -57,6 +58,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a period set containing the list of strings given.
+     */
+    public static Set<Period> getPeriodSet(String ... strings) {
+        return Arrays.stream(strings)
+                .map(Period::transformStringToPeriod)
                 .collect(Collectors.toSet());
     }
 

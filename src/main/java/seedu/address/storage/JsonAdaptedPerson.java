@@ -35,8 +35,9 @@ class JsonAdaptedPerson {
     private final String role;
     private final String salary;
     private final String status;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String schedule;
+    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedPeriod> absentDates = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +47,8 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("role") String role,
             @JsonProperty("salary") String salary, @JsonProperty("status") String status,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule,
+            @JsonProperty("absent") List<JsonAdaptedPeriod> absentDates) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,10 +56,15 @@ class JsonAdaptedPerson {
         this.role = role;
         this.salary = salary;
         this.status = status;
+        this.schedule = schedule;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.schedule = schedule;
+        if (absentDates != null) {
+            this.absentDates.addAll(absentDates);
+        }
+
+
     }
 
     /**
@@ -74,7 +81,11 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        absentDates.addAll(source.getAbsentDates().stream()
+                .map(JsonAdaptedPeriod::new)
+                .collect(Collectors.toList()));
         schedule = source.getSchedule().toString();
+
     }
 
     /**
@@ -87,7 +98,6 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
