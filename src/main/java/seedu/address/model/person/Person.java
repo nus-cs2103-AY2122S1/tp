@@ -23,19 +23,21 @@ public class Person {
     // Data fields
     private final Nationality nationality;
     private final TutorialGroup tutorialGroup;
+    private final SocialHandle socialHandle;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nationality nationality,
-                  TutorialGroup tutorialGroup, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, nationality, tutorialGroup, tags);
+                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nationality = nationality;
         this.tutorialGroup = tutorialGroup;
+        this.socialHandle = socialHandle;
         this.tags.addAll(tags);
     }
 
@@ -57,6 +59,10 @@ public class Person {
 
     public TutorialGroup getTutorialGroup() {
         return tutorialGroup;
+    }
+
+    public SocialHandle getSocialHandle() {
+        return socialHandle;
     }
 
     /**
@@ -100,13 +106,14 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getTutorialGroup().equals(getTutorialGroup())
+                && otherPerson.getSocialHandle().equals(getSocialHandle())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nationality, tutorialGroup, tags);
+        return Objects.hash(name, phone, email, nationality, tutorialGroup, socialHandle, tags);
     }
 
     @Override
@@ -120,7 +127,9 @@ public class Person {
                 .append("; Nationality: ")
                 .append(getNationality())
                 .append("; Tutorial Group: ")
-                .append(getTutorialGroup());
+                .append(getTutorialGroup())
+                .append("; Social handle: ")
+                .append(getSocialHandle());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
