@@ -1,45 +1,33 @@
 package seedu.programmer.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.UserPrefs;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
-import seedu.programmer.testutil.StudentBuilder;
+import seedu.programmer.model.student.StudentId;
 
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
 public class AddCommandIntegrationTest {
-    private static Student validStudent;
-    private static Student sampleStudentA;
-    private static AddCommand sampleCommandA;
-    private static AddCommand sampleCommandB;
+    private Student validStudent;
     private Model model;
-
-    @BeforeAll
-    public static void oneTimeSetUp() {
-        // Initialize sample students and Commands once before all tests
-        validStudent = new StudentBuilder().build();
-        sampleStudentA = new StudentBuilder().withName("Alice").build();
-        Student sampleStudentB = new StudentBuilder().withName("Bob").build();
-        sampleCommandA = new AddCommand(sampleStudentA);
-        sampleCommandB = new AddCommand(sampleStudentB);
-    }
 
     @BeforeEach
     public void setUp() {
-        // Re-initialize model before each test
+        // Re-initialize these variables before each test
+        validStudent = new Student(new Name("Tester"), new StudentId("A0123456B"), new ClassId("B01"), new Grade("A"));
         model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
     }
 
@@ -59,23 +47,25 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void equals_sameValues_returnsTrue() {
-        AddCommand sampleCommandACopy = new AddCommand(sampleStudentA);
-        assertEquals(sampleCommandA, sampleCommandACopy);
+    public void execute_sameNameDifferentStudentId_success() {
+        Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
+        expectedModel.addStudent(validStudent);
+        String differentStudentId = "A6543210B";
+        Student studentDifferentName = new Student(validStudent.getName(), new StudentId(differentStudentId),
+                                                   validStudent.getClassId(), validStudent.getGrade());
+
+        assertCommandSuccess(new AddCommand(studentDifferentName), expectedModel,
+                String.format(AddCommand.MESSAGE_SUCCESS, studentDifferentName), expectedModel);
     }
 
     @Test
-    public void equals_differentTypes_returnsFalse() {
-        assertNotEquals(1, sampleCommandA);
-    }
+    public void execute_sameSameStudentIdDifferentName_failure() {
+        Model expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
+        expectedModel.addStudent(validStudent);
+        String differentName = "Different Name";
+        Student studentDifferentName = new Student(new Name(differentName), validStudent.getStudentId(),
+                                                   validStudent.getClassId(), validStudent.getGrade());
 
-    @Test
-    public void equals_nullValue_returnsFalse() {
-        assertNotEquals(null, sampleCommandA);
-    }
-
-    @Test
-    public void equals_differentStudent_returnsFalse() {
-        assertNotEquals(sampleCommandA, sampleCommandB);
+        assertCommandFailure(new AddCommand(studentDifferentName), expectedModel, AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 }
