@@ -60,11 +60,12 @@ public class EditSupplierCommandParser implements Parser<EditSupplierCommand> {
             editSupplierDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_SUPPLY_TYPE).isPresent()) {
-            editSupplierDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_SUPPLY_TYPE).get()));
+            editSupplierDescriptor.setSupplyType(ParserUtil.parseSupplyType(argMultimap.getValue(PREFIX_SUPPLY_TYPE)
+                    .get()));
         }
         if (argMultimap.getValue(PREFIX_DELIVERY_DETAILS).isPresent()) {
-            editSupplierDescriptor.setAddress(
-                    ParserUtil.parseAddress(argMultimap.getValue(PREFIX_DELIVERY_DETAILS).get())
+            editSupplierDescriptor.setDeliveryDetails(
+                    ParserUtil.parseDeliveryDetails(argMultimap.getValue(PREFIX_DELIVERY_DETAILS).get())
             );
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSupplierDescriptor::setTags);

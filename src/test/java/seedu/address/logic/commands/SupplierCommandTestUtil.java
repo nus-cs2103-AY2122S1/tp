@@ -66,7 +66,7 @@ public class SupplierCommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // & not allowed in supply types
     public static final String INVALID_SUPPLY_TYPE_DESC = " " + PREFIX_SUPPLY_TYPE + "Chicken & Beef";
-    // & not allowed in supply types
+    // @ not allowed in delivery details
     public static final String INVALID_DELIVERY_DETAILS_DESC = " " + PREFIX_DELIVERY_DETAILS + "Everyday @ 6pm";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
