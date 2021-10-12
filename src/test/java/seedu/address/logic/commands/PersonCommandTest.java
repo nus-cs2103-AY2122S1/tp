@@ -13,7 +13,7 @@ public class PersonCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_person_switch_success() {
+    public void execute_personSwitch_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_SWITCH_MESSAGE,
                 false, false, true, false);
         assertCommandSuccess(new PersonCommand(), model, expectedCommandResult, expectedModel);

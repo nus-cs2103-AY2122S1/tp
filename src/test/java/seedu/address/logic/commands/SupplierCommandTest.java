@@ -13,7 +13,7 @@ public class SupplierCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_supplier_switch_success() {
+    public void execute_supplierSwitch_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_SWITCH_MESSAGE,
                 false, false, false, true);
         assertCommandSuccess(new SupplierCommand(), model, expectedCommandResult, expectedModel);
