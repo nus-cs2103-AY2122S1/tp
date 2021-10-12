@@ -202,6 +202,7 @@ public class ParserUtil {
             throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
         }
         return new JobTitle(trimmedJobTitle);
+    }
 
     /**
      * Parses a {@code String supplyType} into a {@code SupplyType}.

@@ -10,5 +10,8 @@
     "leaves": "Invalid",
     "salary": "SSS",
     "jobTitle": "Product manager"
-  } ]
+  } ],
+  "suppliers": [
+
+  ], "reservations": []
 }

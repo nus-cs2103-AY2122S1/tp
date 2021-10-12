@@ -19,5 +19,9 @@
     "leaves" : "14",
     "salary" : "5000",
     "jobTitle" : "Account Manager"
-  } ]
+  } ],
+  "suppliers": [
+
+  ],
+  "reservations": []
 }

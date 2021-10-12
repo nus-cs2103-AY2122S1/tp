@@ -10,5 +10,9 @@
     "leaves": "10",
     "salary": "4000",
     "jobTitle": "Senior Developer"
-  } ]
+  } ],
+  "suppliers": [
+
+  ],
+  "reservations": []
 }

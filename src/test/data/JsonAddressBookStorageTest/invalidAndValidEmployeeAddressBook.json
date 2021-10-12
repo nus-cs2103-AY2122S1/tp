@@ -18,5 +18,9 @@
     "leaves": "14",
     "salary": "3000",
     "jobTitle": "Cleaner"
-  } ]
+  } ],
+  "suppliers": [
+
+  ],
+  "reservations": []
 }

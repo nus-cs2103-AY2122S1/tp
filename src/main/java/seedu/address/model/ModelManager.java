@@ -124,7 +124,7 @@ public class ModelManager implements Model {
     public void deleteEmployee(Employee employee) {
         addressBook.removeEmployee(employee);
     }
-  
+
     @Override
     public void deleteSupplier(Supplier target) {
         addressBook.removeSupplier(target);
