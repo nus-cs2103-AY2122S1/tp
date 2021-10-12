@@ -21,7 +21,7 @@ public class DeleteEmployeeCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Employee: %1$s";
+    public static final String MESSAGE_DELETE_EMPLOYEE_SUCCESS = "Deleted Employee: %1$s";
 
     private final Index targetIndex;
 
@@ -40,7 +40,7 @@ public class DeleteEmployeeCommand extends Command {
 
         Employee employeeToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEmployee(employeeToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, employeeToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_EMPLOYEE_SUCCESS, employeeToDelete));
     }
 
     @Override

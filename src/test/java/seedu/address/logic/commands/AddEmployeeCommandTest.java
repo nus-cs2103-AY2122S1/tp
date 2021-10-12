@@ -22,47 +22,49 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.employee.Employee;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EmployeeBuilder;
 
-public class AddCommandTest {
+public class AddEmployeeCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullEmployee_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddEmployeeCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_employeeAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingEmployeeAdded modelStub = new ModelStubAcceptingEmployeeAdded();
+        Employee validEmployee = new EmployeeBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddEmployeeCommand(validEmployee).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddEmployeeCommand.MESSAGE_SUCCESS, validEmployee),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEmployee), modelStub.employeesAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateEmployee_throwsCommandException() {
+        Employee validEmployee = new EmployeeBuilder().build();
+        AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand(validEmployee);
+        ModelStub modelStub = new ModelStubWithEmployee(validEmployee);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddEmployeeCommand.MESSAGE_DUPLICATE_EMPLOYEE,
+                () -> addEmployeeCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Employee alice = new EmployeeBuilder().withName("Alice").build();
+        Employee bob = new EmployeeBuilder().withName("Bob").build();
+        AddEmployeeCommand addAliceCommand = new AddEmployeeCommand(alice);
+        AddEmployeeCommand addBobCommand = new AddEmployeeCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddEmployeeCommand addAliceCommandCopy = new AddEmployeeCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -181,39 +183,39 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single employee.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithEmployee extends ModelStub {
+        private final Employee employee;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithEmployee(Employee employee) {
+            requireNonNull(employee);
+            this.employee = employee;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasEmployee(Employee employee) {
+            requireNonNull(employee);
+            return this.employee.isSameEmployee(employee);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the employee being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingEmployeeAdded extends ModelStub {
+        final ArrayList<Employee> employeesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasEmployee(Employee employee) {
+            requireNonNull(employee);
+            return employeesAdded.stream().anyMatch(employee::isSameEmployee);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addEmployee(Employee employee) {
+            requireNonNull(employee);
+            employeesAdded.add(employee);
         }
 
         @Override
@@ -223,3 +225,4 @@ public class AddCommandTest {
     }
 
 }
+

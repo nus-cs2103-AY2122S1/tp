@@ -98,6 +98,8 @@ public class Employee extends Person {
                 && otherEmployee.getPhone().equals(getPhone())
                 && otherEmployee.getEmail().equals(getEmail())
                 && otherEmployee.getAddress().equals(getAddress())
+                && otherEmployee.getLeaves().equals(getLeaves())
+                && otherEmployee.getSalary().equals(getSalary())
                 && otherEmployee.getJobTitle().equals(getJobTitle())
                 && otherEmployee.getTags().equals(getTags());
     }

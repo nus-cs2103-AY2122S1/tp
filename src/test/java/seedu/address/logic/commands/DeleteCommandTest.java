@@ -49,6 +49,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        System.out.println(model.getFilteredPersonList().size());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

@@ -17,7 +17,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
