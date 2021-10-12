@@ -13,6 +13,9 @@ import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventDateTimePredicate;
 import seedu.address.model.event.EventTime;
 
+/**
+ * Parses input arguments and creates a new FilterEventCommand object.
+ */
 public class FilterEventCommandParser implements Parser<FilterEventCommand> {
 
     /**
