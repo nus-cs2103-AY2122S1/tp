@@ -12,8 +12,8 @@ import seedu.address.model.id.UniqueId;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task implements HasUniqueId {
-    // The task name
-    private final Name name;
+    // The task description
+    private final Description description;
 
     // The deadline of the task
     private final Deadline deadline;
@@ -24,26 +24,26 @@ public class Task implements HasUniqueId {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Deadline deadline) {
+    public Task(Description description, Deadline deadline) {
         this.id = UniqueId.generateId(this);
-        requireAllNonNull(name, deadline, id);
-        this.name = name;
+        requireAllNonNull(description, deadline, id);
+        this.description = description;
         this.deadline = deadline;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Deadline deadline, UniqueId id) {
-        requireAllNonNull(name, deadline, id);
-        this.name = name;
+    public Task(Description description, Deadline deadline, UniqueId id) {
+        requireAllNonNull(description, deadline, id);
+        this.description = description;
         this.deadline = deadline;
         this.id = id;
         id.setOwner(this);
     }
 
-    public Name getName() {
-        return name;
+    public Description getName() {
+        return description;
     }
 
     public Deadline getDeadline() {
@@ -55,7 +55,7 @@ public class Task implements HasUniqueId {
     }
 
     /**
-     * Returns true if both tasks have the same name and deadline.
+     * Returns true if both tasks have the same description and deadline.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameTask(Task otherTask) {
@@ -69,7 +69,7 @@ public class Task implements HasUniqueId {
     }
 
     /**
-     * Returns true if both tasks have the same id, name and deadline.
+     * Returns true if both tasks have the same id, description and deadline.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -89,7 +89,7 @@ public class Task implements HasUniqueId {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, deadline, id);
+        return Objects.hash(description, deadline, id);
     }
 
     @Override

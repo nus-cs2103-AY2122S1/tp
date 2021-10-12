@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Description;
 
 public class JsonAdaptedTaskTest {
     private static final String INVALID_NAME = "@REPORT_1";
@@ -29,14 +29,14 @@ public class JsonAdaptedTaskTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedTask task =
                 new JsonAdaptedTask(INVALID_NAME, VALID_DEADLINE, VALID_UNIQUEID);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedTask task = new JsonAdaptedTask(null, VALID_DEADLINE, VALID_UNIQUEID);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
