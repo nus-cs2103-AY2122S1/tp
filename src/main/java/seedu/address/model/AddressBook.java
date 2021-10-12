@@ -121,10 +121,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Splits members into different facilities.
      *
-     * @param personFilteredList List of filtered members to be allocated.
+     * @param membersFilteredList List of filtered members to be allocated.
      */
-    public void split(FilteredList<Person> personFilteredList) {
-        facilities.allocateMembersToFacilities(personFilteredList);
+    public void split(FilteredList<Person> membersFilteredList) {
+        facilities.allocateMembersToFacilities(membersFilteredList);
     }
 
     /**
