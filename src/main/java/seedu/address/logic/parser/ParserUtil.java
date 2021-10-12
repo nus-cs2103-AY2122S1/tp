@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.position.Description;
+import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 import seedu.address.model.tag.Tag;
 
@@ -124,6 +125,18 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String position} into a {@code Position}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param position the string title of the related position.
+     * @return the Position object of this corresponding position.
+     */
+    public static Position parsePosition(String position) {
+        requireNonNull(position);
+        String trimmedPosition = position.trim();
+        return new Position(new Title(position), new Description(""));
+    }
 
     // All position related methods
     /**

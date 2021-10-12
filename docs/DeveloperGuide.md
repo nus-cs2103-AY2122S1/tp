@@ -267,7 +267,7 @@ Additionally, the user:
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 
 An efficient applicant management system for HR departments of technology companies to track application statuses and store applicant information.
 
@@ -307,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The format is invalid.
 
   * 1a1. MrTechRecruiter shows an error message.
-    
+
   Use case ends.
 
 
@@ -319,7 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. MrTechRecruiter shows a list of positions
 3. User requests to delete a specific position in the list
 4. MrTechRecruiter deletes the position
-    
+ 
     Use case ends.
 
 **Extensions**
@@ -327,13 +327,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
     * 2a1. MrTechRecruiter displays a message that no position is in the list.
-  
+
     Use case ends.
 
-* 3a The given name of the position is invalid. 
+* 3a The given name of the position is invalid.
 
     * 3a1. MrTechRecruiter shows an error message.
-    
+
     Use case resumes at step 2.
 
 
@@ -375,28 +375,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. MrTechRecruiter shows an error message.
 
       Use case resumes at step 2.
-   
+
 **Use case: Viewing average rejection rates for all job positions.**
 
 **MSS**
 
 1. User requests to see a list of all job positions
 2. MrTechRecruiter displays the list of job positions, and their respective rejection rates.
- 
+
    Use case ends.
-   
+
 **Extensions**
 
 * 1a. No current job positions.
-  
+
     * 1a1. MrTechRecruiter shows an 'No job positions' message.
-      
+
       Use case ends.
-    
+
 * 2b. Job positions with relatively high rejection rates.
 
     * 2b1. MrTechRecruiter highlights the job positions with high rejection rates.
-    
+
       Use case ends.
 
 **Use case: Viewing average rejection rates for a particular job position.**
@@ -405,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User searches for a particular job position using the 'find' function.
 2. MrTechRecruiter displays the job position and its corresponding rejection rate.
-   
+
    Use case ends.
 
 **Extensions**
@@ -420,8 +420,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. MrTechRecruiter highlights its high rejection rate.
 
-      Use case ends. 
-   
+      Use case ends.
+
 
 **Use case: Search for applicants through keywords**
 
@@ -472,8 +472,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Applicant**: A potential hire that is applying for a particular job position
 * **CLI**: Command-line interface. CLI programs take in input in the form of text-based commands, usually input by the user, to execute the program's various functions.
 * **CAP**: Cumulative average point. Similar to grade point average (GPA), it is a numerical measure of a student's average academic performance across their duration of study.
-* **Rejection rate**: The percentage of jobs for a particular job position that was not accepted by the employee or employer. 
-                      Calculation = `No. of rejected jobs` / `Total no. of jobs applied`. 
+* **Rejection rate**: The percentage of jobs for a particular job position that was not accepted by the employee or employer.
+* **Calculation** = `No. of rejected jobs` / `Total no. of jobs applied`.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -549,5 +550,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }
-   
+
 ### _
