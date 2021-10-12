@@ -40,8 +40,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label vaccstatus;
-    @FXML
     private Label faculty;
     @FXML
     private Rectangle status;

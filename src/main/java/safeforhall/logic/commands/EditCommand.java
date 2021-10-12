@@ -15,7 +15,6 @@ import safeforhall.commons.util.CollectionUtil;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
-import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
@@ -128,7 +127,6 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -141,7 +139,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
 
@@ -149,7 +146,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
         }
 
         public void setName(Name name) {
@@ -174,14 +171,6 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
         }
 
         /**
@@ -219,7 +208,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags());
         }
     }
