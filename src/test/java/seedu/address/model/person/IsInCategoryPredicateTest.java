@@ -17,7 +17,8 @@ class IsInCategoryPredicateTest {
     @Test
     public void equals() {
         Set<CategoryCode> firstCategoryCodeSet = Collections.singleton(new CategoryCode("att"));
-        Set<CategoryCode> secondCategoryCodeSet = new HashSet<>(Arrays.asList(new CategoryCode("fnb"), new CategoryCode("att")));
+        Set<CategoryCode> secondCategoryCodeSet = new HashSet<>
+                (Arrays.asList(new CategoryCode("fnb"), new CategoryCode("att")));
 
         IsInCategoryPredicate firstPredicate = new IsInCategoryPredicate(firstCategoryCodeSet);
         IsInCategoryPredicate secondPredicate = new IsInCategoryPredicate(secondCategoryCodeSet);
@@ -61,7 +62,8 @@ class IsInCategoryPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").build()));
 
         //Multiple category codes
-        predicate = new IsInCategoryPredicate(new HashSet<>(Arrays.asList(new CategoryCode("acc"), new CategoryCode("tpt"))));
+        predicate = new IsInCategoryPredicate(new HashSet<>
+                (Arrays.asList(new CategoryCode("acc"), new CategoryCode("tpt"))));
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("fnb").build()));
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").build()));
     }

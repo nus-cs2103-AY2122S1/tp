@@ -53,10 +53,10 @@ class FilterCommandParserTest {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
                 new FilterCommand(Collections.singleton(new CategoryCode("att")));
-        assertParseSuccess(parser,CATEGORY_DESC_ATT, expectedFilterCommand);
+        assertParseSuccess(parser, CATEGORY_DESC_ATT, expectedFilterCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser,PREAMBLE_WHITESPACE + CATEGORY_DESC_ATT, expectedFilterCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_ATT, expectedFilterCommand);
     }
 
     @Test
@@ -64,9 +64,10 @@ class FilterCommandParserTest {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
                 new FilterCommand(new HashSet<>(Arrays.asList(new CategoryCode("att"), new CategoryCode("fnb"))));
-        assertParseSuccess(parser,CATEGORY_DESC_FNB + CATEGORY_DESC_ATT, expectedFilterCommand);
+        assertParseSuccess(parser, CATEGORY_DESC_FNB + CATEGORY_DESC_ATT, expectedFilterCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser,PREAMBLE_WHITESPACE + CATEGORY_DESC_ATT + "      " + CATEGORY_DESC_FNB, expectedFilterCommand);
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_ATT + "      " + CATEGORY_DESC_FNB,
+                expectedFilterCommand);
     }
 }
