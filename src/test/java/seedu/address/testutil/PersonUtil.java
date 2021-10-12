@@ -61,6 +61,7 @@ public class PersonUtil {
         descriptor.getSocialHandle().ifPresent(socialHandle -> sb.append(PREFIX_SOCIAL_HANDLE)
                 .append(socialHandle.value).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
+
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
