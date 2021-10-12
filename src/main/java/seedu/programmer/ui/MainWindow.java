@@ -200,11 +200,10 @@ public class MainWindow extends UiPart<Stage> {
             studentParticular.updateStudentInformation(target);
             studentParticularPlaceholder.getChildren().set(0, studentParticular.getRoot());
         }
-
         labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
-  
+
     /**
      * Downloads the JSON data as a CSV file to the user's chosen directory.
      */
