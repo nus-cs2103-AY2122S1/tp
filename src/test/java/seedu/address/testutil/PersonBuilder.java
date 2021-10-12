@@ -30,6 +30,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<UniqueId> assignedTaskIds;
     private NoOverlapLessonList lessonsList;
 
     /**
@@ -42,6 +43,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        assignedTaskIds = new HashSet<>();
         lessonsList = new NoOverlapLessonList();
     }
 
@@ -55,6 +57,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        assignedTaskIds = new HashSet<>(personToCopy.getAssignedTaskIds());
         lessonsList = personToCopy.getLessonsList();
     }
 
@@ -79,6 +82,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code ids} into a {@code Set<UniqueId>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAssignedTaskIds(String ... assignedTaskIds) {
+        this.assignedTaskIds = SampleDataUtil.getUniqueIdSet(assignedTaskIds);
         return this;
     }
 
@@ -120,9 +131,7 @@ public class PersonBuilder {
      * @return A {@code Person} object.
      */
     public Person build() {
-        Person person = new Person(id, name, phone, email, address, tags, lessonsList);
-        id.setOwner(person);
-        return person;
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList);
     }
 
 }

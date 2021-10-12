@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -28,36 +29,39 @@ public class Person implements HasUniqueId {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<UniqueId> assignedTaskIds = new HashSet<>();
     private final NoOverlapLessonList lessonsList;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  NoOverlapLessonList lessonsList) {
+                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList) {
         this.id = UniqueId.generateId(this);
-        requireAllNonNull(name, phone, email, address, tags, id, lessonsList);
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id, lessonsList);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.lessonsList = lessonsList;
+        this.assignedTaskIds.addAll(assignedTaskIds);
+        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
     }
 
     /**
      * Every field must be present and not null.
      */
     public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  NoOverlapLessonList lessonsList) {
-        requireAllNonNull(name, phone, email, address, tags, uniqueId, lessonsList);
+                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList) {
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId, lessonsList);
         this.id = uniqueId;
+        uniqueId.setOwner(this);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.lessonsList = lessonsList;
+        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
     }
 
     public Name getName() {
@@ -88,6 +92,14 @@ public class Person implements HasUniqueId {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<UniqueId> getAssignedTaskIds() {
+        return Collections.unmodifiableSet(assignedTaskIds);
+    }
+
     public NoOverlapLessonList getLessonsList() {
         return lessonsList;
     }
@@ -109,7 +121,17 @@ public class Person implements HasUniqueId {
      * @return new Person instance with the updated lessons list
      */
     public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
-        return new Person(id, name, phone, email, address, tags, newLessonsList);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newLessonsList);
+    }
+
+    /**
+     * Immutable way of updating the assigned task id list
+     * @param newAssignedTaskIds the new assigned task id list
+     * @return new Person instance with the updated assigned task id list
+     */
+    public Person updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
+        requireNonNull(newAssignedTaskIds);
+        return new Person(id, name, phone, email, address, tags, newAssignedTaskIds, lessonsList);
     }
 
     /**
