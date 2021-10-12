@@ -103,8 +103,7 @@ public class Student {
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getTags().equals(getTags())
-                && otherStudent.getAttendance().equals(getAttendance());
+                && otherStudent.getTags().equals(getTags());
     }
 
     @Override
@@ -118,11 +117,7 @@ public class Student {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Attendance: ")
-                .append(getAttendance())
-                .append("; Participation: ")
-                .append(getParticipation());
+                .append(getEmail());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

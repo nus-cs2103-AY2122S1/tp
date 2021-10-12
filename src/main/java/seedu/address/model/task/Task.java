@@ -106,14 +106,16 @@ public class Task {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Deadline: ")
-                .append(getDeadline());
+                .append(getDeadline())
+                .append("; Status: ")
+                .append(getStatus());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-        builder.append("; Status: ").append(getStatus());
+
         return builder.toString();
     }
 }
