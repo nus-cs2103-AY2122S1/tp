@@ -25,19 +25,21 @@ public class Person {
     private final TutorialGroup tutorialGroup;
     private final SocialHandle socialHandle;
     private final Set<Tag> tags = new HashSet<>();
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nationality nationality,
-                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, tags);
+                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nationality = nationality;
         this.tutorialGroup = tutorialGroup;
         this.socialHandle = socialHandle;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -65,6 +67,10 @@ public class Person {
         return socialHandle;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -72,6 +78,7 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -129,14 +136,16 @@ public class Person {
                 .append("; Tutorial Group: ")
                 .append(getTutorialGroup())
                 .append("; Social handle: ")
-                .append(getSocialHandle());
+                .append(getSocialHandle())
+                .append("; Remark: ")
+                .append(getRemark());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
         return builder.toString();
     }
-
 }

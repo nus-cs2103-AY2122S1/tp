@@ -7,6 +7,7 @@
     "nationality": "Singapore ",
     "tutorialGroup": "09",
     "socialHandle": "@alicep",
+    "remark" : "likes coding",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "nationality": "China ",
     "tutorialGroup": "08",
     "socialHandle": "@bensonm",
+    "remark" : "likes coding",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "nationality": "Malaysia ",
     "tutorialGroup": "05",
     "socialHandle": "@carlk",
+    "remark" : "likes coding",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "nationality": "Thailand ",
     "tutorialGroup": "09",
     "socialHandle": "@danielm",
+    "remark" : "likes coding",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "nationality": "USA ",
     "tutorialGroup": "29",
     "socialHandle": "@ellem",
+    "remark" : "likes coding",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "nationality": "Australia ",
     "tutorialGroup": "19",
     "socialHandle": "@fionak",
+    "remark" : "likes coding",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "nationality": "Vietnam ",
     "tutorialGroup": "28",
     "socialHandle": "@georgeb",
+    "remark" : "likes coding",
     "tagged" : [ ]
   } ]
 }

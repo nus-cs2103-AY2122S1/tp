@@ -17,6 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.SocialHandle;
 import seedu.address.model.person.TutorialGroup;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String nationality;
     private final String tutorialGroup;
     private final String socialHandle;
+    private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -41,13 +43,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("nationality") String nationality,
             @JsonProperty("tutorialGroup") String tutorialGroup, @JsonProperty("socialHandle") String socialHandle,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nationality = nationality;
         this.tutorialGroup = tutorialGroup;
         this.socialHandle = socialHandle;
+        this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -63,6 +66,7 @@ class JsonAdaptedPerson {
         nationality = source.getNationality().value;
         tutorialGroup = source.getTutorialGroup().value;
         socialHandle = source.getSocialHandle().value;
+        remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -130,9 +134,14 @@ class JsonAdaptedPerson {
         }
         final SocialHandle modelSocialHandle = new SocialHandle(socialHandle);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelNationality,
-                modelTutorialGroup, modelSocialHandle, modelTags);
+                modelTutorialGroup, modelSocialHandle, modelRemark, modelTags);
     }
 
 }

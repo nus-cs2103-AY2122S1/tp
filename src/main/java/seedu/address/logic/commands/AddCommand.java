@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
@@ -28,6 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_NATIONALITY + "NATIONALITY "
             + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP "
             + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE "
+            + PREFIX_REMARK + "REMARK "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -36,6 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_NATIONALITY + "Singapore "
             + PREFIX_TUTORIAL_GROUP + "09 "
             + PREFIX_SOCIAL_HANDLE + "@johnd "
+            + PREFIX_REMARK + "likes to code "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
