@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Employee> filteredEmployees;
     private final FilteredList<Supplier> filteredSuppliers;
     private final FilteredList<Reservation> filteredReservations;
 
@@ -39,6 +41,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
         filteredReservations = new FilteredList<>(this.addressBook.getReservationList());
     }
@@ -101,6 +104,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEmployee(Employee employee) {
+        requireNonNull(employee);
+        return addressBook.hasEmployee(employee);
+    }
+
+    @Override
     public boolean hasSupplier(Supplier supplier) {
         requireNonNull(supplier);
         return addressBook.hasSupplier(supplier);
@@ -112,6 +121,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteEmployee(Employee employee) {
+        addressBook.removeEmployee(employee);
+    }
+
+    @Override
     public void deleteSupplier(Supplier target) {
         addressBook.removeSupplier(target);
     }
@@ -120,6 +134,12 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addEmployee(Employee employee) {
+        addressBook.addEmployee(employee);
+        updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
     }
 
     @Override
@@ -136,9 +156,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setEmployee(Employee target, Employee editedEmployee) {
+        requireAllNonNull(target, editedEmployee);
+        addressBook.setEmployee(target, editedEmployee);
+    }
+
+    @Override
     public void setSupplier(Supplier target, Supplier editedSupplier) {
         requireAllNonNull(target, editedSupplier);
-
         addressBook.setSupplier(target, editedSupplier);
     }
 
@@ -176,6 +201,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Employee> getFilteredEmployeeList() {
+        return filteredEmployees;
+    }
+
+    @Override
     public ObservableList<Reservation> getFilteredReservationList() {
         return filteredReservations;
     }
@@ -210,6 +240,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
+        requireNonNull(predicate);
+        filteredEmployees.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -226,6 +262,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
+                && filteredEmployees.equals(other.filteredEmployees)
                 && filteredSuppliers.equals(other.filteredSuppliers);
     }
 

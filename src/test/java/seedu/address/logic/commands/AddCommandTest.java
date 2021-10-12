@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.testutil.PersonBuilder;
@@ -141,6 +142,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasEmployee(Employee employee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEmployee(Employee employee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addEmployee(Employee employee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEmployee(Employee target, Employee editedEmployee) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasReservation(Reservation reservation) {
             return false;
         }
@@ -176,7 +197,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Employee> getFilteredEmployeeList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public boolean hasSupplier(Supplier person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

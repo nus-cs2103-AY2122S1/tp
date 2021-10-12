@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 
@@ -19,6 +20,9 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Employee> PREDICATE_SHOW_ALL_EMPLOYEES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -64,10 +68,21 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if an employee with the same identity as {@code employee} exists in the address book.
+     */
+    boolean hasEmployee(Employee employee);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Deletes the given employee.
+     * The employee must exist in the address book.
+     */
+    void deleteEmployee(Employee employee);
 
     /**
      * Adds the given person.
@@ -76,11 +91,25 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given employee.
+     * {@code employee} must not already exist in the address book.
+     */
+    void addEmployee(Employee employee);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Replaces the given employee {@code target} with {@code editedEmployee}.
+     * {@code target} must exist in the address book.
+     * The employee identity of {@code editedEmployee} must not be the
+     * same as another existing employee in the address book.
+     */
+    void setEmployee(Employee target, Employee editedEmployee);
 
     /**
      * Returns true if the same reservation exists in the database.
@@ -106,6 +135,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered employee list */
+    ObservableList<Employee> getFilteredEmployeeList();
+
     /**
      * Returns an unmodifiable view of the filtered reservation list
      */
@@ -116,6 +148,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered Employee list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEmployeeList(Predicate<Employee> predicate);
 
     /**
      * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.

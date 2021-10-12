@@ -16,6 +16,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.employee.JobTitle;
+import seedu.address.model.person.employee.Leaves;
+import seedu.address.model.person.employee.Salary;
 import seedu.address.model.person.supplier.DeliveryDetails;
 import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
@@ -154,6 +157,51 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String leaves} into a {@code Leaves}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code leaves} is invalid.
+     */
+    public static Leaves parseLeaves(String leaves) throws ParseException {
+        requireNonNull(leaves);
+        String trimmedLeaves = leaves.trim();
+        if (!Leaves.isValidLeaves(trimmedLeaves)) {
+            throw new ParseException(Leaves.MESSAGE_CONSTRAINTS);
+        }
+        return new Leaves(trimmedLeaves);
+    }
+
+    /**
+     * Parses a {@code String salary} into a {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
+    }
+
+    /**
+     * Parses a {@code String job title} into a {@code JobTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code jobTitle} is invalid.
+     */
+    public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
+        requireNonNull(jobTitle);
+        String trimmedJobTitle = jobTitle.trim();
+        if (!JobTitle.isValidJobTitle(trimmedJobTitle)) {
+            throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new JobTitle(trimmedJobTitle);
     }
 
     /**

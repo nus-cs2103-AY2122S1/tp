@@ -8,6 +8,8 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.employee.Employee;
+import seedu.address.model.person.employee.UniqueEmployeeList;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.UniqueSupplierList;
 import seedu.address.model.reservation.Reservation;
@@ -20,6 +22,7 @@ import seedu.address.model.reservation.ReservationList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueEmployeeList employees;
     private final UniqueSupplierList suppliers;
     private final ReservationList reservations;
 
@@ -32,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        employees = new UniqueEmployeeList();
         suppliers = new UniqueSupplierList();
         reservations = new ReservationList();
     }
@@ -69,12 +73,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the employee list with {@code employees}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setEmployees(List<Employee> employees) {
+        this.employees.setEmployees(employees);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
+        setEmployees(newData.getEmployeeList());
         setSuppliers(newData.getSupplierList());
         setReservations(newData.getReservationList());
     }
@@ -191,9 +203,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
+        // TODO: refine later
         return String.format(
-                "%d persons\n%d suppliers\n%d reservations\n",
+                "%d persons\n%d employees\n%d suppliers\n%d reservations\n",
                 persons.asUnmodifiableObservableList().size(),
+                employees.asUnmodifiableObservableList().size(),
                 suppliers.asUnmodifiableObservableList().size(),
                 reservations.asUnmodifiableObservableList().size());
     }
@@ -208,6 +222,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return suppliers.asUnmodifiableObservableList();
     }
 
+    @Override
     public ObservableList<Reservation> getReservationList() {
         return reservations.asUnmodifiableObservableList();
     }
@@ -217,12 +232,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons)
+                && employees.equals(((AddressBook) other).employees)
                 && suppliers.equals(((AddressBook) other).suppliers)
                 && reservations.equals(((AddressBook) other).reservations));
     }
 
     @Override
+    public ObservableList<Employee> getEmployeeList() {
+        return employees.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns true if an employee with the same identity as {@code employee} exists in the address book.
+     */
+    public boolean hasEmployee(Employee employee) {
+        requireNonNull(employee);
+        return employees.contains(employee);
+    }
+
+    /**
+     * Removes {@code employee} from this {@code AddressBook}.
+     * {@code employee} must exist in the address book.
+     */
+    public void removeEmployee(Employee employee) {
+        employees.remove(employee);
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    public void setEmployee(Employee target, Employee editedEmployee) {
+        requireNonNull(editedEmployee);
+        employees.setEmployee(target, editedEmployee);
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(persons, suppliers, reservations);
+        return Objects.hash(persons, employees, suppliers, reservations);
     }
 }
