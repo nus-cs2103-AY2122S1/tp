@@ -43,9 +43,25 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
 
     @Test
     public void test_levelOfEducationContainsKeywords_returnsTrue() {
-        // One keyword
+        // One matching letter
         LevelOfEducationContainsKeywordsPredicate predicate =
-                new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("Masters"));
+                new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("M"));
+        assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("Masters").build()));
+
+        // One keyword
+        predicate = new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("Masters"));
+        assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("Masters").build()));
+
+        // One portion of a two word category
+        predicate = new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("School"));
+        assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("High School").build()));
+
+        // Both parts of a two word category
+        predicate = new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("High School"));
+        assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("High School").build()));
+
+        // Mixed-case keywords
+        predicate = new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("maSteRS"));
         assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("Masters").build()));
     }
 
@@ -62,8 +78,9 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
 
         // Keywords match name, phone, and email, but does not match level of education
         predicate = new LevelOfEducationContainsKeywordsPredicate(Arrays
-                .asList("Alice", "12345", "alice@email.com", "Main", "Street"));
+                .asList("Alice", "12345", "alice@email.com", "Engineer", "Temporary", "4000", "5", "old"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withLevelOfEducation("PhD").build()));
+                .withEmail("alice@email.com").withRole("Engineer").withEmploymentType("Temporary")
+                .withExpectedSalary("4000").withLevelOfEducation("PhD").withExperience("5").build()));
     }
 }
