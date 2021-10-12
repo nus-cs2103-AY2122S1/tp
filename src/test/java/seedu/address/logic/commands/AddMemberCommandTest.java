@@ -119,6 +119,12 @@ public class AddMemberCommandTest {
         public void addFacility(Facility facility) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void split(Predicate<Person> person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
@@ -135,6 +141,11 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public boolean hasFacility(Facility facility) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -146,6 +157,11 @@ public class AddMemberCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setFacility(Facility target, Facility editedFacility) {
             throw new AssertionError("This method should not be called.");
         }
 

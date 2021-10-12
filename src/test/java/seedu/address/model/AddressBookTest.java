@@ -5,7 +5,25 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1;
+import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_10;
+import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_1;
+import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_2;
+import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
+import static seedu.address.testutil.TypicalFacilities.UNIVERSITY_TOWN_SPORTS_HALL_1_COURT_20;
+import static seedu.address.testutil.TypicalFacilities.UNIVERSITY_TOWN_SPORTS_HALL_COURT_21;
+import static seedu.address.testutil.TypicalFacilities.UTOWN_FIELD_SECTION_A;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalPersons.IDA;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,6 +34,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -78,6 +97,45 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void split_noPersonsInFilteredList_noChangesToFacilities() {
+        ObservableList<Person> emptyPersonsList = FXCollections.emptyObservableList();
+        FilteredList<Person> emptyList = new FilteredList<>(emptyPersonsList);
+        ObservableList<Facility> facilities = addressBook.getFacilityList();
+        addressBook.split(emptyList);
+        assertEquals(facilities, addressBook.getFacilityList());
+    }
+
+    @Test
+    public void split_personPresentInFilteredList_facilitiesUpdate() {
+        AddressBook newData = getTypicalAddressBook();
+        FilteredList<Person> filteredList = new FilteredList<Person>(newData.getPersonList());
+        addressBook.split(filteredList);
+
+        AddressBook expected = getTypicalAddressBook();
+        TAMPINES_HUB_FIELD_SECTION_B.addPersonToFacility(ALICE);
+        TAMPINES_HUB_FIELD_SECTION_B.addPersonToFacility(BENSON);
+        TAMPINES_HUB_FIELD_SECTION_B.addPersonToFacility(CARL);
+        TAMPINES_HUB_FIELD_SECTION_B.addPersonToFacility(DANIEL);
+        KENT_RIDGE_SPORT_HALL_5_COURT_1.addPersonToFacility(ELLE);
+        KENT_RIDGE_SPORT_HALL_5_COURT_1.addPersonToFacility(FIONA);
+        KENT_RIDGE_SPORT_HALL_5_COURT_1.addPersonToFacility(GEORGE);
+        KENT_RIDGE_SPORT_HALL_5_COURT_1.addPersonToFacility(HOON);
+        KENT_RIDGE_SPORT_HALL_5_COURT_2.addPersonToFacility(IDA);
+        KENT_RIDGE_SPORT_HALL_5_COURT_2.addPersonToFacility(AMY);
+        KENT_RIDGE_SPORT_HALL_5_COURT_2.addPersonToFacility(BOB);
+        expected.setFacilities(Arrays.asList(
+                TAMPINES_HUB_FIELD_SECTION_B,
+                KENT_RIDGE_SPORT_HALL_5_COURT_1,
+                KENT_RIDGE_SPORT_HALL_5_COURT_2,
+                UNIVERSITY_TOWN_SPORTS_HALL_1_COURT_20,
+                UNIVERSITY_TOWN_SPORTS_HALL_COURT_21,
+                KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1,
+                KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_10,
+                UTOWN_FIELD_SECTION_A));
+        assertEquals(expected, newData);
     }
 
     /**

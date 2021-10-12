@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.UniqueFacilityList;
 import seedu.address.model.person.Person;
@@ -118,6 +119,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Splits members into different facilities.
+     *
+     * @param membersFilteredList List of filtered members to be allocated.
+     */
+    public void split(FilteredList<Person> membersFilteredList) {
+        facilities.allocateMembersToFacilities(membersFilteredList);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -126,6 +136,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Replaces the given facility {@code target} in the list with {@code editedFacility}.
+     * {@code target} must exist in SportsPA.
+     * The facility parameters of {@code editedFacility} must not be the same as another existing facility in SportsPA.
+     */
+    public void setFacility(Facility target, Facility editedFacility) {
+        requireNonNull(editedFacility);
+
+        facilities.setFacility(target, editedFacility);
     }
 
     /**

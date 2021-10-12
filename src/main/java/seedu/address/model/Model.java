@@ -63,6 +63,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a facility with the same parameters as {@code facility} exists in SportsPA.
+     */
+    boolean hasFacility(Facility facility);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -87,12 +92,21 @@ public interface Model {
      */
     void addFacility(Facility facility);
 
+    void split(Predicate<Person> predicate);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Replaces the given facility {@code target} with {@code editedFacility}.
+     * {@code target} must exist in SportsPA.
+     * The facility parameters of {@code editedFacility} must not be the same as another existing facility in SportsPA.
+     */
+    void setFacility(Facility facility, Facility editedFacility);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

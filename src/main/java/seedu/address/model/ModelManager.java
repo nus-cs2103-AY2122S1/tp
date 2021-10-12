@@ -99,6 +99,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasFacility(Facility facility) {
+        requireNonNull(facility);
+        return addressBook.hasFacility(facility);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -120,10 +126,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void split(Predicate<Person> predicate) {
+        FilteredList<Person> toAllocate = new FilteredList<Person>(addressBook.getPersonList());
+        toAllocate.setPredicate(predicate);
+        addressBook.split(toAllocate);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setFacility(Facility target, Facility editedFacility) {
+        requireAllNonNull(target, editedFacility);
+        addressBook.setFacility(target, editedFacility);
     }
 
     @Override
