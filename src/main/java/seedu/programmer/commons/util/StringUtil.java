@@ -5,7 +5,6 @@ import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 
 /**
  * Helper functions for handling strings.
@@ -13,29 +12,27 @@ import java.util.Arrays;
 public class StringUtil {
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     * Returns true if the {@code sentence} contains the {@code phrase}.
+     *   Ignores case, but a full character sequence match is required.
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsPhraseIgnoreCase("ABc def", "abc") == true
+     *       containsPhraseIgnoreCase("ABc def", "DEF") == true
+     *       containsPhraseIgnoreCase("ABc def", "AB") == true
+     *       containsPhraseIgnoreCase("ABc def", "ABcdef") == false // not a full char sequence match
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param phrase cannot be null, cannot be empty, need not be a single word
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean containsPhraseIgnoreCase(String sentence, String phrase) {
         requireNonNull(sentence);
-        requireNonNull(word);
+        requireNonNull(phrase);
 
-        String preppedWord = word.trim();
+        String preppedWord = phrase.trim();
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String preppedSentence = sentence.toLowerCase();
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        return preppedSentence.contains(preppedWord.toLowerCase());
     }
 
     /**

@@ -35,7 +35,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedNameArgs.split("\\s+");
+        String[] nameKeywords = new String[] {trimmedNameArgs};
 
         return new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
