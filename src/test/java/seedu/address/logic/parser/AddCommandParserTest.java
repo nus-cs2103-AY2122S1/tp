@@ -94,7 +94,8 @@ public class AddCommandParserTest {
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(noAddressPerson));
 
         // no everything
-        Person noEverythingPerson = new PersonBuilder(AMY).withAddress("").withEmail("").withPhone("").withTags().build();
+        Person noEverythingPerson = new PersonBuilder(AMY).withAddress("").withEmail("").withPhone("").withTags()
+                .build();
         assertParseSuccess(parser, NAME_DESC_AMY, new AddCommand(noEverythingPerson));
     }
 
