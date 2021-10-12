@@ -17,12 +17,18 @@ public class PriorityPredicate implements Predicate<Person> {
         this.tags = tags;
     }
 
+    /**
+     * Tests to see if a Person has the PriorityTags that are being searched for.
+     * @param person The Person being tested.
+     * @return true if person contains the desired tags, false otherwise.
+     */
     @Override
     public boolean test(Person person) {
-        Set<Tag> personTags = person.getTags();
-        for (String tag:tags) {
-            for (Tag personTag:personTags) {
-                if (personTag.tagName.equals(getTagName(tag))) {
+        Set<Tag> personsTags = person.getTags();
+        for (String predicateTag:tags) {
+            String predicateTagName = getTagName(predicateTag);
+            for (Tag personsTag:personsTags) {
+                if (personsTag.tagName.equals(predicateTagName)) {
                     return true;
                 } else {
                     continue;

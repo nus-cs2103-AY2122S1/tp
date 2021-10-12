@@ -27,9 +27,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         if (trimmedArgs.startsWith(PriorityTag.PRIORITY_TAG_PREFIX)) {
-            trimmedArgs = trimmedArgs.substring(
+            String tokenizedArgs = trimmedArgs.substring(
                     PriorityTag.PRIORITY_TAG_PREFIX.length());
-            String[] tags = trimmedArgs.split("\\s+");
+            String[] tags = tokenizedArgs.split("\\s+");
+            // splits trimmedArgs according to whitespaces
             for (String tag:tags) {
                 if (isNotPriority(tag)) {
                     throw new ParseException(
@@ -39,20 +40,15 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new PriorityPredicate(Arrays.asList(tags)));
         } else {
             String[] nameKeywords = trimmedArgs.split("\\s+");
-
+            // splits trimmedArgs according to whitespaces
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
     }
 
     private static boolean isNotPriority(String tag) {
-        switch(tag) {
-        case PriorityTag.LowPriority.TERM:
-        case PriorityTag.MediumPriority.TERM:
-        case PriorityTag.HighPriority.TERM:
-            return false;
-        default:
-            return true;
-        }
+        return tag == PriorityTag.LowPriority.TERM
+                || tag == PriorityTag.MediumPriority.TERM
+                || tag == PriorityTag.HighPriority.TERM;
     }
 
 }
