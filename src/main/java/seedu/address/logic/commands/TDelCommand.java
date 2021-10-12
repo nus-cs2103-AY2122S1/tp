@@ -57,10 +57,10 @@ public class TDelCommand extends Command {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
         Task targetTask = tasks.get(Integer.parseInt(targetTaskID.toString()) - 1);
-        String deletedTaskName = targetTask.toString();
+        String deletedTaskName = targetTask.getTaskName();
         model.deleteTask(targetMember, taskId);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, deletedTaskName, targetMember.getName().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName().toString(), deletedTaskName));
     }
 
     @Override
