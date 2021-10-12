@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -34,6 +35,17 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with a clashing lesson.
+     *
+     * @param toCheck The lesson to check.
+     * @return True if there is a clash in lesson timing, false otherwise.
+     */
+    public boolean hasClashes(Lesson toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> person.hasClashingLessons(toCheck));
     }
 
     /**
@@ -133,5 +145,11 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Internal list:\n" + internalList
+                + "\nInternal unmodifiable list:\n" + internalUnmodifiableList;
     }
 }
