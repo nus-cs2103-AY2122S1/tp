@@ -110,7 +110,7 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getTutorialGroup());
         SocialHandle updatedSocialHandle = editPersonDescriptor.getSocialHandle()
                 .orElse(personToEdit.getSocialHandle());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNationality,
@@ -170,8 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, nationality, tutorialGroup, socialHandle,
-                    remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, tags);
         }
 
         public void setName(Name name) {
@@ -222,7 +221,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(socialHandle);
         }
 
-        public void setRemark(Remark remark) { this.remark = remark; }
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
 
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);

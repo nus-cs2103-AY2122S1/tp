@@ -18,7 +18,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.SocialHandle;
 import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
@@ -30,7 +29,6 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TUTORIAL_GROUP = "B";
     private static final String INVALID_SOCIAL_HANDLE = "rachel walker";
-    private static final String INVALID_REMARK = " ";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -39,7 +37,6 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TUTORIAL_GROUP = "09";
     private static final String VALID_SOCIAL_HANDLE = "@rachelw";
-    private static final String VALID_REMARK = "she likes singing";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -201,29 +198,6 @@ public class ParserUtilTest {
         String socialHandleWithWhitespace = WHITESPACE + VALID_SOCIAL_HANDLE + WHITESPACE;
         SocialHandle expectedSocialHandle = new SocialHandle(VALID_SOCIAL_HANDLE);
         assertEquals(expectedSocialHandle, ParserUtil.parseSocialHandle(socialHandleWithWhitespace));
-    }
-
-    @Test
-    public void parseRemark_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseRemark((String) null));
-    }
-
-    @Test
-    public void parseRemark_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseRemark(INVALID_REMARK));
-    }
-
-    @Test
-    public void parseRemark_validValueWithoutWhitespace_returnsRemark() throws Exception {
-        Remark expectedRemark = new Remark(VALID_REMARK);
-        assertEquals(expectedRemark, ParserUtil.parseRemark(VALID_REMARK));
-    }
-
-    @Test
-    public void parseRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
-        String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
-        Remark expectedRemark = new Remark(VALID_REMARK);
-        assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
     }
 
     @Test
