@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.displayType.STUDENTS;
+import static seedu.address.model.Model.displayType.TASKS;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -24,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Task> filteredTasks;
+    private Model.displayType displayType;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        displayType = STUDENTS;
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
@@ -80,6 +84,10 @@ public class ModelManager implements Model {
     }
 
     //=========== AddressBook ================================================================================
+
+    public Model.displayType getDisplayType() {
+        return displayType;
+    }
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -179,6 +187,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
+        displayType = STUDENTS;
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
     }
@@ -197,6 +206,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
+        displayType = TASKS;
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }

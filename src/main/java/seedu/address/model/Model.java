@@ -18,6 +18,10 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
+    enum displayType {
+        STUDENTS, TASKS
+    };
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -55,6 +59,8 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    displayType getDisplayType();
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.

@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.model.Model.displayType.STUDENTS;
+import static seedu.address.model.Model.displayType.TASKS;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -32,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -123,6 +127,16 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
+    void updateInnerParts() {
+        if (logic.getDisplayType().equals(STUDENTS)) {
+            studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+            studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        } else if (logic.getDisplayType().equals(TASKS)) {
+            taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+            studentListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        }
+    }
+
     /**
      * Sets the default size based on {@code guiSettings}.
      */
@@ -186,6 +200,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            updateInnerParts();
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
