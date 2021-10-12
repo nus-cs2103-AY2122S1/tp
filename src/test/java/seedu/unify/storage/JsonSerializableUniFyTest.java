@@ -1,6 +1,5 @@
 package seedu.unify.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.unify.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -10,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.unify.commons.exceptions.IllegalValueException;
 import seedu.unify.commons.util.JsonUtil;
-import seedu.unify.model.UniFy;
-import seedu.unify.testutil.TypicalTasks;
 
 public class JsonSerializableUniFyTest {
 

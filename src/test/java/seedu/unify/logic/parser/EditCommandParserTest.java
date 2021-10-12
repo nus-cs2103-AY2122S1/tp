@@ -3,9 +3,6 @@ package seedu.unify.logic.parser;
 import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.unify.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.DATE_DESC_BOB;
-import static seedu.unify.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.unify.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.unify.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.unify.logic.commands.CommandTestUtil.INVALID_TIME_DESC;
 import static seedu.unify.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -23,7 +20,6 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 
 import org.junit.jupiter.api.Test;
@@ -31,10 +27,6 @@ import org.junit.jupiter.api.Test;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
-import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Tag;
-import seedu.unify.model.task.Time;
 import seedu.unify.testutil.EditTaskDescriptorBuilder;
 
 public class EditCommandParserTest {
