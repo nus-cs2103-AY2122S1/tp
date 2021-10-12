@@ -6,7 +6,15 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "lessonsList" : [ {
+      "timeslot" : {
+        "startTime" : "10:00",
+        "endTime" : "12:00"
+      },
+      "subject" : "Biology",
+      "dayOfWeek" : 1
+    } ]
   }, {
     "uniqueId": "99f5ad00-6e1b-49c8-98d8-5ae3459bb262",
     "name" : "Benson Meier",

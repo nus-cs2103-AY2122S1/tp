@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.model.id.HasUniqueId;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
 
@@ -35,13 +36,13 @@ public class Person implements HasUniqueId {
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   NoOverlapLessonList lessonsList) {
         this.id = UniqueId.generateId(this);
-        requireAllNonNull(name, phone, email, address, tags, id);
+        requireAllNonNull(name, phone, email, address, tags, id, lessonsList);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
+        this.lessonsList = lessonsList;
     }
 
     /**
@@ -49,14 +50,14 @@ public class Person implements HasUniqueId {
      */
     public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   NoOverlapLessonList lessonsList) {
-        requireAllNonNull(name, phone, email, address, tags, uniqueId);
+        requireAllNonNull(name, phone, email, address, tags, uniqueId, lessonsList);
         this.id = uniqueId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
+        this.lessonsList = lessonsList;
     }
 
     public Name getName() {
@@ -89,6 +90,16 @@ public class Person implements HasUniqueId {
 
     public NoOverlapLessonList getLessonsList() {
         return lessonsList;
+    }
+
+    /**
+     * Check if person can attend lesson
+     *
+     * @param lesson lesson to check
+     * @return true if person can attend the lesson
+     */
+    public boolean canAttendLesson(Lesson lesson) {
+        return !lessonsList.doesLessonOverlap(lesson);
     }
 
     /**

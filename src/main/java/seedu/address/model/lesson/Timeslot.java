@@ -34,6 +34,14 @@ public class Timeslot {
         endTime = LocalTime.parse((endTimeStr));
     }
 
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
     /**
      * Checks if string representation is valid
      *
