@@ -48,11 +48,15 @@ public class TDelCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getAddressBook().getMemberList();
-        int taskId = targetMemberID.getZeroBased();
-        Member targetMember = members.get(taskId);
+        System.out.println(members.toArray().length);
+        int memberId = targetMemberID.getZeroBased();
+        Member targetMember = members.get(memberId);
+        System.out.println(targetMember.getName());
 
+        int taskId = targetTaskID.getZeroBased();
         TaskList taskList = targetMember.getTaskList();
         ObservableList<Task> tasks = taskList.asUnmodifiableObservableList();
+        System.out.println(tasks.toArray().length);
         if (tasks.size() <= taskId) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
