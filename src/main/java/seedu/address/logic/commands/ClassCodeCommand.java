@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
-import java.util.List;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
