@@ -37,45 +37,38 @@ public class SampleDataUtil {
         }
     };
 
-    private static Classes emptyClasses;
-
     public static Person[] getSamplePersons() {
         //sampleClasses.add(sampleTuitionClass);
-        emptyClasses = new Classes(new ArrayList<>());
-        System.out.println(emptyClasses.toString());
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK,
                 getTagSet("friends", "Physics", "Chemistry"), new Classes(SAMPLE_CLASSES)),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK,
-                getTagSet("colleagues", "friends"), emptyClasses),
+                getTagSet("colleagues", "friends"), getEmptyClasses()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK,
-                getTagSet("neighbours"), emptyClasses),
+                getTagSet("neighbours"), getEmptyClasses()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK,
-                getTagSet("family"), emptyClasses),
+                getTagSet("family"), getEmptyClasses()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK,
-                getTagSet("classmates"), emptyClasses),
+                getTagSet("classmates"), getEmptyClasses()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,
-                getTagSet("colleagues"), emptyClasses)
+                getTagSet("colleagues"), getEmptyClasses())
         };
     }
 
     public static TuitionClass[] getSampleClass() {
-        ArrayList<String> studentToAdd = new ArrayList<>();
-        studentToAdd.add("Alex Yeoh");
-        StudentList students = new StudentList(studentToAdd);
         return new TuitionClass[] {
             new TuitionClass(new ClassName("Physics"),
                 new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"),
-                students, EMPTY_REMARK, 1234567),
+                getSampleStudentList(), EMPTY_REMARK, 1234567),
             new TuitionClass(new ClassName("Chemistry"),
                 new ClassLimit(10), new Counter(5), new Timeslot("Tuesday 10am"),
-                students, EMPTY_REMARK, 2234567)
+                getSampleStudentList(), EMPTY_REMARK, 2234567)
         };
     }
 
@@ -98,6 +91,17 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    private static Classes getEmptyClasses() {
+        return new Classes(new ArrayList<>());
+    }
+
+    private static StudentList getSampleStudentList() {
+        ArrayList<String> studentToAdd = new ArrayList<>();
+        studentToAdd.add("Alex Yeoh");
+        StudentList students = new StudentList(studentToAdd);
+        return students;
     }
 
 }
