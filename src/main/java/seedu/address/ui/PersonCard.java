@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -39,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label role;
+    private FlowPane roles;
     @FXML
     private Label salary;
     @FXML
@@ -58,7 +59,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(staff.getPhone().value);
         address.setText(staff.getAddress().value);
         email.setText(staff.getEmail().value);
-        role.setText(staff.getRole().getValue());
+        staff.getRoles().stream()
+                .sorted(Comparator.comparing(Role::toString))
+                .forEach(role -> roles.getChildren().add(new Label(role.toString())));
         salary.setText(staff.getSalary().toString());
         status.setText(staff.getStatus().getValue());
         staff.getTags().stream()

@@ -55,7 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_ROLE + "ROLE]... "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -165,12 +165,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(staffToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(staffToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(staffToEdit.getAddress());
-        Role updatedRole = editPersonDescriptor.getRole().orElse(staffToEdit.getRole());
+        Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(staffToEdit.getRoles());
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(staffToEdit.getSalary());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(staffToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(staffToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles,
                 updatedSalary, updatedStatus, updatedTags);
     }
 
@@ -201,7 +201,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Role role;
+        private Set<Role> roles;
         private Salary salary;
         private Status status;
         private Set<Tag> tags;
@@ -218,7 +218,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setRole(toCopy.role);
+            setRoles(toCopy.roles);
             setSalary(toCopy.salary);
             setStatus(toCopy.status);
             setTags(toCopy.tags);
@@ -263,12 +263,21 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setRole(Role role) {
-            this.role = role;
+        /**
+         * Sets {@code roles} to this object's {@code roles}.
+         * A defensive copy of {@code roles} is used internally.
+         */
+        public void setRoles(Set<Role> roles) {
+            this.roles = (roles != null) ? new HashSet<>(roles) : null;
         }
 
-        public Optional<Role> getRole() {
-            return Optional.ofNullable(role);
+        /**
+         * Returns an unmodifiable role set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code roles} is null.
+         */
+        public Optional<Set<Role>> getRoles() {
+            return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
         }
 
         public void setSalary(Salary salary) {
@@ -323,7 +332,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getRole().equals(e.getRole())
+                    && getRoles().equals(e.getRoles())
                     && getSalary().equals(e.getSalary())
                     && getStatus().equals(e.getStatus())
                     && getTags().equals(e.getTags());
