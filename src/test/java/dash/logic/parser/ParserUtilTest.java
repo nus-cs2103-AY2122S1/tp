@@ -20,7 +20,6 @@ import dash.model.tag.Tag;
 import dash.model.task.TaskDescription;
 import dash.testutil.Assert;
 import dash.testutil.TypicalIndexes;
-import jdk.jfr.Description;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
