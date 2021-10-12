@@ -55,7 +55,7 @@ public class EditCommandTest {
 
         TaskBuilder taskInList = new TaskBuilder(lastTask);
         Task editedTask = taskInList.withName(VALID_NAME_BOB).withTime(VALID_TIME_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTag(VALID_TAG_HUSBAND).build();
 
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withTime(VALID_TIME_BOB).withTag(VALID_TAG_HUSBAND).build();
