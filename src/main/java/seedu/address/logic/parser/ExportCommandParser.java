@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.nio.file.Path;
 
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -19,7 +20,11 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      */
 
     public ExportCommand parse(String args) throws ParseException {
-
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
+        }
         try {
             Path filePath = ParserUtil.parseFilePath(args);
             return new ExportCommand(filePath);

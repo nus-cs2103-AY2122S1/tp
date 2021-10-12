@@ -47,8 +47,11 @@ public class ParserUtil {
     public static Path parseFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
+        if (trimmedFilePath == null) {
+            throw new ParseException(MESSAGE_INVALID_FILEPATH);
+        }
 
-        if (!FileUtil.isValidPath(trimmedFilePath)) {
+        if (trimmedFilePath != null && !FileUtil.isValidPath(trimmedFilePath)) {
             throw new ParseException(MESSAGE_INVALID_FILEPATH);
         }
         return Paths.get(trimmedFilePath);
