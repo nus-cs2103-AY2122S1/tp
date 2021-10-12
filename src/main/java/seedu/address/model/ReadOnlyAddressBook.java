@@ -1,8 +1,8 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.member.Member;
 
 /**
  * Unmodifiable view of an address book

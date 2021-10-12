@@ -1,4 +1,4 @@
-package seedu.address.model.event.exceptions;
+package seedu.address.model.data.event.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Events (Events are considered duplicates if they have the same

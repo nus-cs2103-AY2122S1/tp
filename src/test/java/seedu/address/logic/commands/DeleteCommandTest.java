@@ -16,7 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.member.Member;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

@@ -1,4 +1,4 @@
-package seedu.address.model.member.exceptions;
+package seedu.address.model.data.member.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Members (Members are considered duplicates if they have the same

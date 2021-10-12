@@ -1,4 +1,4 @@
-package seedu.address.model.member;
+package seedu.address.model.data;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -6,9 +6,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Member}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Data}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Member> {
+public class NameContainsKeywordsPredicate<T extends Data> implements Predicate<T> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
@@ -16,9 +16,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Member> {
     }
 
     @Override
-    public boolean test(Member member) {
+    public boolean test(T data) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(member.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(data.getName().fullName, keyword));
     }
 
     @Override

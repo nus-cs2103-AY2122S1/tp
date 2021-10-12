@@ -21,8 +21,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.MemberBuilder;
 
@@ -248,7 +248,7 @@ public class PaddCommandTest {
         @Override
         public boolean hasMember(Member member) {
             requireNonNull(member);
-            return this.member.isSameMember(member);
+            return this.member.isSameType(member);
         }
     }
 
@@ -261,7 +261,7 @@ public class PaddCommandTest {
         @Override
         public boolean hasMember(Member member) {
             requireNonNull(member);
-            return membersAdded.stream().anyMatch(member::isSameMember);
+            return membersAdded.stream().anyMatch(member::isSameType);
         }
 
         @Override
