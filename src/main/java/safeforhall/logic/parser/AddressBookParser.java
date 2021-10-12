@@ -6,16 +6,7 @@ import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import safeforhall.logic.commands.AddCommand;
-import safeforhall.logic.commands.ClearCommand;
-import safeforhall.logic.commands.Command;
-import safeforhall.logic.commands.DeleteCommand;
-import safeforhall.logic.commands.EditCommand;
-import safeforhall.logic.commands.ExitCommand;
-import safeforhall.logic.commands.FindCommand;
-import safeforhall.logic.commands.HelpCommand;
-import safeforhall.logic.commands.ListCommand;
-import safeforhall.logic.commands.ViewCommand;
+import safeforhall.logic.commands.*;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
@@ -65,6 +56,9 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
