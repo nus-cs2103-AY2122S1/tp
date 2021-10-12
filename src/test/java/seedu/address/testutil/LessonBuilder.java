@@ -47,6 +47,17 @@ public class LessonBuilder {
     }
 
     /**
+     * Initializes the LessonBuilder with the data of {@code lessonToCopy}.
+     */
+    public LessonBuilder(Lesson lessonToCopy) {
+        this.subject = lessonToCopy.getSubject();
+        this.grade = lessonToCopy.getGrade();
+        this.lessonTime = lessonToCopy.getLessonTime();
+        this.price = lessonToCopy.getPrice();
+        this.students = lessonToCopy.getStudents();
+    }
+
+    /**
      * Sets the {@code subject} of the {@code Lesson} that we are building.
      */
     public LessonBuilder withSubject(Subject subject) {
