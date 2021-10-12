@@ -1,5 +1,6 @@
 package seedu.address.model.person.supplier;
 
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -74,5 +75,31 @@ public class Supplier extends Person {
                 .append(getDeliveryDetails());
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Supplier)) {
+            return false;
+        }
+
+        Supplier otherSupplier = (Supplier) other;
+        return otherSupplier.getName().equals(getName())
+                && otherSupplier.getPhone().equals(getPhone())
+                && otherSupplier.getEmail().equals(getEmail())
+                && otherSupplier.getAddress().equals(getAddress())
+                && otherSupplier.getTags().equals(getTags())
+                && otherSupplier.getSupplyType().equals(getSupplyType())
+                && otherSupplier.getDeliveryDetails().equals(getDeliveryDetails());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getTags(), supplyType, deliveryDetails);
     }
 }
