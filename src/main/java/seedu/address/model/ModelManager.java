@@ -12,7 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -102,6 +104,12 @@ public class ModelManager implements Model {
         teachingAssistantBuddy.removeModule(target);
     }
 
+    @Override
+    public boolean hasModuleName(ModuleName moduleName) {
+        requireNonNull(moduleName);
+        return teachingAssistantBuddy.hasModuleName(moduleName);
+    }
+
     /**
      * @param student
      * @return true if current teachingAssistantBuddy has specified student
@@ -126,6 +134,18 @@ public class ModelManager implements Model {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         teachingAssistantBuddy.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public void addTask(ModuleName moduleName, Task task) {
+        requireAllNonNull(moduleName, task);
+        teachingAssistantBuddy.addTask(moduleName, task);
+    }
+
+    @Override
+    public boolean hasTask(ModuleName moduleName, Task task) {
+        requireAllNonNull(moduleName, task);
+        return teachingAssistantBuddy.hasTask(moduleName, task);
     }
 
     @Override

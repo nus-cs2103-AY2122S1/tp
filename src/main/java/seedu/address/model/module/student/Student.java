@@ -1,8 +1,12 @@
 package seedu.address.model.module.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Represents a Student in the TAB.
@@ -19,6 +23,8 @@ public class Student {
     private final StudentId studentId;
     //private final Set<Tag> tags = new HashSet<>();
 
+    private final UniqueTaskList taskList;
+
     /**
      * Every field must be present and not null.
      */
@@ -28,6 +34,7 @@ public class Student {
         this.teleHandle = teleHandle;
         this.email = email;
         this.studentId = studentId;
+        this.taskList = new UniqueTaskList();
         //this.tags.addAll(tags);
     }
 
@@ -45,6 +52,23 @@ public class Student {
 
     public StudentId getStudentId() {
         return studentId;
+    }
+
+    /**
+     * Adds a task to this student's task list.
+     * The task must not already exist in this student's task list.
+     * @param task
+     */
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+
+    /**
+     * Returns true if this student has {@code task} exists in the task list.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return taskList.contains(task);
     }
 
     /**

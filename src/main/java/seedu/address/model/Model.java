@@ -6,7 +6,9 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -59,6 +61,8 @@ public interface Model {
      */
     void deleteModule(Module moduleToDelete);
 
+    boolean hasModuleName(ModuleName moduleToCheck);
+
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
@@ -95,6 +99,22 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Adds a task to the given module.
+     * {@code task} must not already exist in the module.
+     * @param moduleName The module to receive the task.
+     * @param task The task to be added.
+     */
+    void addTask(ModuleName moduleName, Task task);
+
+    /**
+     * Returns true if the module with the given name has the task.
+     * @param moduleName The given module name.
+     * @param task The task to check.
+     * @return Whether the given module has the task or not.
+     */
+    boolean hasTask(ModuleName moduleName, Task task);
 
     boolean hasModule(Module module);
 
