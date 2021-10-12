@@ -17,7 +17,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -283,16 +282,9 @@ public class ParserUtil {
      * of the qualifiers of the predicate.
      * @throws ParseException
      */
-    public static PersonContainsFieldsPredicate testByAllFields(String args) throws ParseException {
-        requireNonNull(args);
+    public static PersonContainsFieldsPredicate testByAllFields(ArgumentMultimap argMultimap) throws ParseException {
+        requireNonNull(argMultimap);
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
-        //when no argument is given to the argMultiMap
-        if (argMultimap.isEmpty()) {
-            throw new ParseException(ViewCommand.HELP_MESSAGE);
-        }
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME), ParserUtil::parseName);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail);
