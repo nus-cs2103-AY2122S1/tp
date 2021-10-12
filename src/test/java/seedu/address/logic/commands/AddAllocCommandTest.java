@@ -167,6 +167,6 @@ public class AddAllocCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, ALLOC_DESC_BOB);
+        assertNotEquals(standardCommand, new AddAllocCommand(ALLOC_DESC_BOB));
     }
 }
