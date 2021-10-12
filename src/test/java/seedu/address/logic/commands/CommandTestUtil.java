@@ -30,6 +30,19 @@ public class CommandTestUtil {
     public static final String VALID_TELEGRAM_HANDLE_BOB = "@bob_choo";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+
+    public static final String VALID_GROUP_NAME = "CS2103T";
+    public static final String VALID_GROUP_NAME_CS1231S = "CS1231S";
+    public static final String VALID_GROUP_NAME_CS1101S = "CS1101S";
+    public static final String VALID_GROUP_NAME_CS2030S = "CS2030S";
+    public static final String VALID_GROUP_NAME_CS2040S = "CS2040S";
+
+    public static final String VALID_GROUP_DESCRIPTION = "Software eng mod";
+    public static final String VALID_GROUP_DESCRIPTION_CS1231S = "Discrete Structures";
+    public static final String VALID_GROUP_DESCRIPTION_CS1101S = "Programming Methodology I";
+    public static final String VALID_GROUP_DESCRIPTION_CS2030S = "Programming Methodology II";
+    public static final String VALID_GROUP_DESCRIPTION_CS2040S = "Data Structures and Algorithms";
+
     public static final String VALID_GROUP_NAME_AMY = "CS2103T"; // TODO change back later @albino monke
     public static final String VALID_DESC_AMY = "hi";
     public static final String VALID_GROUP_NAME_BOB = "CS2103T"; // TODO change back later @albino monke

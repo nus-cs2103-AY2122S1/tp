@@ -42,6 +42,14 @@ public class Group {
         return Collections.unmodifiableSet(students);
     }
 
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        students.remove(student);
+    }
+
     /**
      * Returns true if both groups have the same GroupName.
      * This defines a weaker notion of equality between two groups.
