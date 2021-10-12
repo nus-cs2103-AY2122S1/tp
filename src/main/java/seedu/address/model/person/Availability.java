@@ -32,6 +32,9 @@ public class Availability {
      * Returns true if a given availability is valid.
      */
     public static boolean isValidAvailability(List<String> test) {
+        if (test.size() == 1) {
+            return true;
+        }
         List<String> days = Arrays.asList(DAYS);
         for (String day : test) {
             if (!days.contains(day)) {
