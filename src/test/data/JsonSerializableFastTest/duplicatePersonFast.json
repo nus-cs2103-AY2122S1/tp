@@ -6,13 +6,17 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "remark": "",
     "tagged": [ "friends" ],
-    "appointment": "10 Oct 2021"
+    "appointmentDate": "10 Oct 2021",
+    "appointmentTime" : "",
+    "appointmentVenue" : ""
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
     "remark": "",
-    "appointment": "10 Oct 2021"
+    "appointmentDate": "10 Oct 2021",
+    "appointmentTime" : "",
+    "appointmentVenue" : ""
   } ]
 }

@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
+    private Label appointmentHeader;
+    @FXML
     private Label appointmentDate;
     @FXML
     private Label appointmentTime;
@@ -68,10 +70,11 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
 
-        // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
-        appointmentDate.setText(checkAndAddHeader(person.getAppointment().getDate(), "Date"));
-        appointmentTime.setText(checkAndAddHeader(person.getAppointment().getTime(), "Time"));
-        appointmentVenue.setText(checkAndAddHeader(person.getAppointment().getVenue(), "Venue"));
+        appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
+        appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTime(), "Time",
+                person.getAppointment().getDate()));
+        appointmentVenue.setText(checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
+                person.getAppointment().getDate()));
     }
 
     /**
@@ -106,8 +109,50 @@ public class PersonCard extends UiPart<Region> {
         return temp;
     }
 
-    private String checkAndAddHeader(String text, String header) {
-        if (!text.equals(Appointment.NO_APPOINTMENT) && !text.equals(Appointment.NO_TIME)) {
+    /**
+     * Check if appointment has been scheduled with this contact and modify the displayed header.
+     * If appointment is scheduled, appointment header remains as "Upcoming Appointment"
+     * and adds "Date: " indicator before the specified date.
+     * If appointment is not scheduled yet, appointment header will show "No Appointment Scheduled yet"
+     * and no date detail is shown.
+     *
+     * @param date The date data retrieved.
+     * @return A String representing the date data if it is present.
+     */
+    private String checkDateAndAddHeader(String date) {
+        String emptyDate = "";
+        String header = "Date: ";
+
+        if (date.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
+            appointmentHeader.setText(Appointment.NO_APPOINTMENT);
+            date = emptyDate;
+        }
+
+        if (!date.equals(Appointment.NO_APPOINTMENT) && !date.equals(emptyDate)) {
+            date = header + ": " + date;
+        }
+
+        return date;
+    }
+
+    /**
+     * Check if appointment has been scheduled with this contact and if time and venue data are present.
+     * If appointment is scheduled and time and/or venue data is present, add the header before the data.
+     * If appointment is scheduled and time and/or venue data is not present,
+     * display a '-' to indicate that the data is missing.
+     * If appointment is not scheduled, hides the time and venue field as it is not supposed to be there.
+     *
+     * @param text The time/venue data retrieved.
+     * @param header Either "Time " or "Venue: "
+     * @param date The date data retrieved.
+     * @return A String representing the data if it is present.
+     */
+    private String checkTimeVenueAndAddHeader(String text, String header, String date) {
+        if (text.equals(Appointment.NO_TIME) && !date.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
+            text = "-";
+        }
+
+        if (!text.equals(Appointment.NO_TIME)) {
             text = header + ": " + text;
         }
 

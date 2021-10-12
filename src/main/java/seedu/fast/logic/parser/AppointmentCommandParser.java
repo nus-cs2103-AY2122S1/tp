@@ -123,14 +123,14 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
      * Checks if the retrieved venue from user input is too long.
      * The venue description should not be longer than 50 characters.
      *
-     * If the retrieved venue if longer than 50 characters, the string will be truncated.
+     * If the retrieved venue if longer than 30 characters, the string will be truncated.
      *
      * @param venue Time String retrieved from user input
      * @return A String representing the venue (no longer than 50 characters).
      */
     private String parseVenueString(String venue) throws ParseException {
-        if (venue.length() > 50) {
-            return venue.substring(0, 49);
+        if (venue.length() > 30) {
+            return venue.substring(0, 29);
         }
 
         return venue.trim();
