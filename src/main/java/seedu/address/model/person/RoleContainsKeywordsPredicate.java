@@ -15,8 +15,12 @@ public class RoleContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getRole().role, keyword));
+        if (keywords.isEmpty()) {
+            return false;
+        } else {
+            return keywords.stream()
+                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getRole().role, keyword));
+        }
     }
 
     @Override

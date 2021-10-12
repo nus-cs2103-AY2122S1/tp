@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -144,28 +146,38 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroRoleKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_oneRoleKeyword_onePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
-        RoleContainsKeywordsPredicate predicate = prepareRolePredicate(" ");
+        RoleContainsKeywordsPredicate predicate =
+                prepareRolePredicate("Cashier");
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.singletonList(FIONA), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_multipleRoleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_oneRoleKeyword_multiplePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        // Model with Hoon and Ida manually added
+        Model modelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithHoonIda.addPerson(HOON);
+        modelWithHoonIda.addPerson(IDA);
+
+        // Expected Model with Hoon and Ida manually added
+        Model expectedModelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModelWithHoonIda.addPerson(HOON);
+        expectedModelWithHoonIda.addPerson(IDA);
+
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
-        RoleContainsKeywordsPredicate predicate =
-                prepareRolePredicate("Cashier Assistant Doctor");
+        RoleContainsKeywordsPredicate predicate = prepareRolePredicate("Software");
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, DANIEL, FIONA), model.getFilteredPersonList());
+        expectedModelWithHoonIda.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelWithHoonIda, expectedMessage, expectedModelWithHoonIda);
+        assertEquals(Arrays.asList(HOON, IDA), modelWithHoonIda.getFilteredPersonList());
     }
 
 
