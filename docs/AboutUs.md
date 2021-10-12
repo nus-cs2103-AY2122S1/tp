@@ -18,10 +18,10 @@ You can reach us at the email `e0559714@u.nus.edu`
 [[portfolio](team/chenhsiaoting.md)]
 
 * Role: Team lead
-* Responsibilities: 
-  1. Team lead: Responsible for overall project coordination 
-  2. Scheduling and tracking: In charge of defining, assigning, and tracking project tasks 
-  3. Deliverables and deadlines: Ensure project deliverables are done on time and in the right format 
+* Responsibilities:
+  1. Team lead: Responsible for overall project coordination
+  2. Scheduling and tracking: In charge of defining, assigning, and tracking project tasks
+  3. Deliverables and deadlines: Ensure project deliverables are done on time and in the right format
   4. Logic package gatekeeper: In charge of merging any commits related Logic package on main repo
 
 
@@ -44,7 +44,7 @@ You can reach us at the email `e0559714@u.nus.edu`
 
 <img src="images/kevinmingtarja.png" width="200px">
 
-[[github](https://github.com/kevinmingtarja)] 
+[[github](https://github.com/kevinmingtarja)]
 [[portfolio](team/kevinnathanaelmingtarja.md)]
 
 * Role: Developer
@@ -76,8 +76,8 @@ You can reach us at the email `e0559714@u.nus.edu`
 [[portfolio](team/nathanwonghungrui.md)]
 
 * Role: Documentation, Tool Expert
-* Responsibilities: 
-  1. Project Documentation (UG & DG): Responsible for the quality of various project documents. 
+* Responsibilities:
+  1. Project Documentation (UG & DG): Responsible for the quality of various project documents.
   2. UI (JavaFX): In-charged of UI direction
   3. Tool expert: e.g. Intellij expert, Git expert, etc. Helps other team members with matters related to the specific tool.
   4. UI package gatekeeper: In charge of merging any commits related Logic package on main repo

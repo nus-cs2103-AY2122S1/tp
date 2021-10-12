@@ -450,7 +450,7 @@ Use case ends.
 * 2a. The list is empty.
 
   Use case ends.
-  
+
 **Use case: Tag a person**
 
 **MSS**
