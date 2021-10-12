@@ -9,9 +9,10 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.model.facility.exceptions.DuplicateFacilityException;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 import seedu.address.model.person.Person;
-import seedu.address.model.facility.exceptions.DuplicateFacilityException;
+
 
 
 
