@@ -115,21 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param personFilteredList List of filtered members to be allocated.
      */
     public void split(FilteredList<Person> personFilteredList) {
-        int index = 0;
-        for (Facility facility : facilities) {
-            Facility toEdit = facility;
-            toEdit.clearAllocationList();
-
-            int facilityCount = 0;
-
-            while (toEdit.isWithinMaxCapacity(facilityCount + 1)
-                    && !(index > personFilteredList.size() - 1)) {
-                toEdit.addPersonToFacility(personFilteredList.get(index));
-                facilityCount++;
-                index++;
-            }
-            facilities.replaceFacility(facility, toEdit);
-        }
+        facilities.allocateMembersToFacilities(personFilteredList);
     }
 
     /**

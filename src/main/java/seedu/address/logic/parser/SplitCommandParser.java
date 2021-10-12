@@ -12,7 +12,7 @@ public class SplitCommandParser implements Parser<SplitCommand> {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(String.format (MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     SplitCommand.MESSAGE_USAGE));
         }
 
