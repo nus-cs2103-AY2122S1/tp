@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.UniqueStudentList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Represents a Module in the TAB.
@@ -20,6 +22,7 @@ public class Module {
 
     private final UniqueStudentList students;
     private final FilteredList<Student> filteredStudents;
+    private final UniqueTaskList tasks;
     // Identity fields
     private final ModuleName moduleName;
 
@@ -31,6 +34,7 @@ public class Module {
         this.moduleName = moduleName;
         students = new UniqueStudentList();
         filteredStudents = new FilteredList<>(this.getStudentList());
+        tasks = new UniqueTaskList();
     }
 
     public ModuleName getName() {
@@ -132,6 +136,25 @@ public class Module {
 
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Adds a task to this module.
+     * The task must not already exist in this module.
+     * @param task The task to be added.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+        students.forEach(s -> studentAddTask(s, task));
+    }
+
+    /**
+     * Add a task to a given student.
+     * @param student The student to receive the task.
+     * @param task The task to be added to the student.
+     */
+    public void studentAddTask(Student student, Task task) {
+        student.addTask(task);
     }
 
     @Override
