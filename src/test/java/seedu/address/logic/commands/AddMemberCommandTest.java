@@ -119,6 +119,12 @@ public class AddMemberCommandTest {
         public void addFacility(Facility facility) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void split(Predicate<Person> person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");

@@ -28,13 +28,10 @@ import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
+import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
-import seedu.address.model.facility.FacilityName;
-import seedu.address.model.facility.Location;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
-import seedu.address.model.facility.Time;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditFacilityDescriptorBuilder;
@@ -57,11 +54,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addFacility() throws ParseException {
-        FacilityName name = new FacilityName("Court 1");
-        Location location = new Location("University Sports Hall");
-        Time time = new Time("1130");
-        Capacity capacity = new Capacity("5");
-        Facility facility = new Facility(name, location, time, capacity);
+        Facility facility = new FacilityBuilder()
+                .withFacilityName("Court 1")
+                .withLocation("University Sports Hall")
+                .withCapacity("5")
+                .withTime("1130").build();
         AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
                 + "n/Court 1 l/University Sports Hall t/1130 c/5");
         assertEquals(new AddFacilityCommand(facility), command);
@@ -153,6 +150,11 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD) instanceof ListFacilityCommand);
         assertTrue(parser.parseCommand(
                 ListFacilityCommand.COMMAND_WORD + " 3") instanceof ListFacilityCommand);
+    }
+
+    @Test
+    public void parseCommand_split() throws Exception {
+        assertEquals(new SplitCommand("Mon"), parser.parseCommand(SplitCommand.COMMAND_WORD + " Mon"));
     }
 
     @Test

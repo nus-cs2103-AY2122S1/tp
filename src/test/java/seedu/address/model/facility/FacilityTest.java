@@ -1,10 +1,15 @@
 package seedu.address.model.facility;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.Person;
+import seedu.address.testutil.FacilityBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class FacilityTest {
 
@@ -19,6 +24,29 @@ public class FacilityTest {
         assertThrows(NullPointerException.class, () -> new Facility(new FacilityName("Court"), new Location("loc"),
                 new Time("time"), null));
     }
+
+    @Test
+    public void getPersonAsString_success() {
+        Person person = new PersonBuilder().build();
+        Person secondPerson = new PersonBuilder().withName("Matt").build();
+        Facility facility = new FacilityBuilder().build();
+        facility.addPersonToFacility(person);
+        facility.addPersonToFacility(secondPerson);
+        assertEquals("Amy Bee, Matt, ", facility.getPersonsAsString());
+    }
+
+    @Test
+    public void clearAllocationList_emptiesList() {
+        Person person = new PersonBuilder().build();
+        Person secondPerson = new PersonBuilder().withName("Matt").build();
+        Facility facility = new FacilityBuilder().build();
+        facility.addPersonToFacility(person);
+        facility.addPersonToFacility(secondPerson);
+        facility.clearAllocationList();
+        Facility expectedFacility = new FacilityBuilder().build();
+        assertEquals(expectedFacility, facility);
+    }
+
     @Test
     public void equals() {
         Facility facility = new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),

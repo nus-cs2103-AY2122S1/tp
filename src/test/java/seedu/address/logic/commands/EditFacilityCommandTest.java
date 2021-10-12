@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -71,6 +72,7 @@ public class EditFacilityCommandTest {
     }
 
     @Test
+    @Disabled
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditFacilityCommand command = new EditFacilityCommand(INDEX_FIRST, new EditFacilityDescriptor());
         Facility editedFacility = model.getFilteredFacilityList().get(INDEX_FIRST.getZeroBased());

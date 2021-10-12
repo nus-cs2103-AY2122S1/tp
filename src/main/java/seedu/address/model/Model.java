@@ -92,6 +92,8 @@ public interface Model {
      */
     void addFacility(Facility facility);
 
+    void split(Predicate<Person> predicate);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.

@@ -126,6 +126,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void split(Predicate<Person> predicate) {
+        FilteredList<Person> toAllocate = new FilteredList<Person>(addressBook.getPersonList());
+        toAllocate.setPredicate(predicate);
+        addressBook.split(toAllocate);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 

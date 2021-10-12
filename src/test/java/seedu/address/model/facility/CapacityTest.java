@@ -13,6 +13,14 @@ public class CapacityTest {
     }
 
     @Test
+    public void isWithinCapacity() {
+        Capacity capacity = new Capacity("5");
+        assertTrue(capacity.isWithinCapacity(5));
+        assertTrue(capacity.isWithinCapacity(4));
+        assertFalse(capacity.isWithinCapacity(6));
+    }
+
+    @Test
     public void equals() {
         Capacity capacity = new Capacity("5");
         Capacity capacityCopy = new Capacity("5");

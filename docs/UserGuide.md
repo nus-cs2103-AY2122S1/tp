@@ -210,13 +210,13 @@ Examples:
 
 Splits members into facilities based on its capacity and members' availability.
 
-Format: `split d/DAY`
+Format: `split DAY`
 
 * Allocate members available at the specified `DAY` to each facility
 * `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
 
 Examples:
-* `split d/Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
+* `split Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
 
 ### Clearing all entries in facility list: `clearf`
 
