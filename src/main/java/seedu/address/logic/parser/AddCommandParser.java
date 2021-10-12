@@ -41,7 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         case AddModuleCommand.COMMAND_WORD:
             return null; // to be implemented
         case AddTaskCommand.COMMAND_WORD:
-            return null; //to be implemented
+            return new AddTaskCommandParser().parse(arguments); //to be implemented
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments); //to be implemented
         default:
