@@ -1,10 +1,9 @@
-package seedu.address.model.data.member;
+package seedu.address.model.data;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.data.Data;
 
 /**
  * Tests that a {@code Data}'s {@code Name} matches any of the keywords given.
