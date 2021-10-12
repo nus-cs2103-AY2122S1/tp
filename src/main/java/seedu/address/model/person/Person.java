@@ -27,6 +27,7 @@ public class Person {
     private final Revenue revenue;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Insurance> insurances = new HashSet<>();
     private final Set<Claim> claims = new HashSet<>();
     private final Note note;
     private final Appointment appointment;
@@ -34,16 +35,16 @@ public class Person {
     /**
      * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not stated.
      */
-    public Person(Name name, Phone phone, Email email,
-                  Address address, Set<Tag> tags, Note note,
-                  Appointment appointment, Set<Claim> claims) {
-        requireAllNonNull(name, phone, email, address, note, tags, claims);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Set<Insurance> insurances, Note note, Appointment appointment, Set<Claim> claims) {
+        requireAllNonNull(name, phone, email, address, tags, insurances, note, appointment, claims);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.revenue = new Revenue(new Money(0));
         this.address = address;
         this.tags.addAll(tags);
+        this.insurances.addAll(insurances);
         this.note = note;
         this.appointment = appointment;
         this.claims.addAll(claims);
@@ -53,14 +54,15 @@ public class Person {
      * Every field for this case is provided and hence a revenue value will be tagged to the person.
      */
     public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags,
-                  Note note, Appointment appointment, Set<Claim> claims) {
-        requireAllNonNull(name, phone, email, address, note, tags);
+             Set<Insurance> insurances, Note note, Appointment appointment, Set<Claim> claims) {
+        requireAllNonNull(name, phone, email, revenue, address, tags, insurances, note, appointment, claims);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.revenue = revenue;
         this.address = address;
         this.tags.addAll(tags);
+        this.insurances.addAll(insurances);
         this.note = note;
         this.appointment = appointment;
         this.claims.addAll(claims);
@@ -75,6 +77,7 @@ public class Person {
                 previousPerson.email,
                 previousPerson.address,
                 previousPerson.tags,
+                previousPerson.insurances,
                 previousPerson.note,
                 previousPerson.appointment,
                 claims);
@@ -116,8 +119,20 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns an immutable claims set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Claim> getClaims() {
         return Collections.unmodifiableSet(this.claims);
+    }
+
+    /**
+     * Returns an immutable insurance set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Insurance> getInsurances() {
+        return Collections.unmodifiableSet(insurances);
     }
 
     /**
@@ -155,13 +170,13 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getClaims().equals(getClaims())
+                && otherPerson.getInsurances().equals(getInsurances())
                 && otherPerson.getNote().equals(getNote());
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, revenue, address, tags, note, claims);
+        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note, claims);
     }
 
     @Override
@@ -185,6 +200,11 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+        Set<Insurance> insurances = getInsurances();
+        if (!insurances.isEmpty()) {
+            builder.append("; Insurances: ");
+            insurances.forEach(builder::append);
         }
         if (!claims.isEmpty()) {
             builder.append("; Claims: ");

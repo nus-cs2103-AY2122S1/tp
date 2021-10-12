@@ -10,6 +10,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -37,6 +38,7 @@ public class PersonBuilder {
     private Revenue revenue;
     private Address address;
     private Set<Tag> tags;
+    private Set<Insurance> insurances;
     private Note note;
     private Appointment appointment;
     private Set<Claim> claims;
@@ -51,6 +53,7 @@ public class PersonBuilder {
         revenue = new Revenue(DEFAULT_REVENUE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        insurances = new HashSet<>();
         note = new Note(DEFAULT_NOTE);
         appointment = new Appointment(DEFAULT_MEETING);
         claims = new HashSet<>();
@@ -66,6 +69,7 @@ public class PersonBuilder {
         revenue = personToCopy.getRevenue();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        insurances = new HashSet<>(personToCopy.getInsurances());
         note = personToCopy.getNote();
         appointment = personToCopy.getAppointment();
         claims = new HashSet<>(personToCopy.getClaims());
@@ -121,6 +125,13 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Insurances} of the {@code Insurance} that we are building.
+     */
+    public PersonBuilder withInsurances(String... insurances) {
+        this.insurances = SampleDataUtil.getInsuranceSet(insurances);
+        return this;
+    }
+    /**
      * Sets the {@code Note} of the {@code Person} that we are building.
      */
     public PersonBuilder withNote(String note) {
@@ -147,7 +158,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, revenue, address, tags, note, appointment, claims);
+        return new Person(name, phone, email, revenue, address, tags, insurances, note, appointment, claims);
     }
 
 }
