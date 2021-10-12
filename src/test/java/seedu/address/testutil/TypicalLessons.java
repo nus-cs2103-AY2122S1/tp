@@ -10,11 +10,11 @@ import seedu.address.model.lesson.Lesson;
 
 public class TypicalLessons {
     // all fields present
-    public static final Lesson RECURRINGLESSON = new LessonBuilder().withDate("12 Jan 2000")
+    public static final Lesson RECURRING_LESSON = new LessonBuilder().withDate("12 Jan 2000")
         .withTimeRange("1400-1900").withSubject("Science")
         .withHomeworkSet("As1").buildRecurring();
 
-    public static final Lesson MAKEUPLESSON = new LessonBuilder().withDate("12 Jan 2000")
+    public static final Lesson MAKEUP_LESSON = new LessonBuilder().withDate("12 Jan 2000")
         .withTimeRange("1400-1900").withSubject("Science")
         .withHomeworkSet("Ex3").build();
 
