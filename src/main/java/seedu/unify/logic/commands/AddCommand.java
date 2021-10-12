@@ -17,16 +17,16 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Uni-Fy app. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the Uni-Fy app. \n"
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_TIME + "TIME "
-            + PREFIX_DATE + "DATE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_NAME + "task_name "
+            + PREFIX_DATE + "date "
+            + PREFIX_TIME + "time "
+            + PREFIX_TAG + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Assignment 1 "
-            + PREFIX_TIME + "16:40 "
             + PREFIX_DATE + "2021-12-12 "
+            + PREFIX_TIME + "16:40 "
             + PREFIX_TAG + "Important";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
