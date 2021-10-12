@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
@@ -45,7 +46,7 @@ class JsonAdaptedTutorialClass {
      * Converts a given {@code TutorialClass} into this class for Jackson use.
      */
     public JsonAdaptedTutorialClass(TutorialClass source) {
-        classCode = source.getClassCode();
+        classCode = source.getClassCode().toString();
         schedule = source.getSchedule().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -69,7 +70,7 @@ class JsonAdaptedTutorialClass {
         if (!Tag.isValidTagName(classCode)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        final String modelClassCode = classCode;
+        final ClassCode modelClassCode = new ClassCode(classCode);
 
         if (schedule == null) {
             throw new IllegalValueException(

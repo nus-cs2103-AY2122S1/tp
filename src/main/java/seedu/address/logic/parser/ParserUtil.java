@@ -102,11 +102,11 @@ public class ParserUtil {
     /**
      * Temporary implementation.
      */
-    public static String parseClassCode(String classCode) throws ParseException {
-        requireNonNull(classCode);
-        String trimmedClassCode = classCode.trim();
-        return trimmedClassCode;
-    }
+//    public static String parseClassCode(String classCode) throws ParseException {
+//        requireNonNull(classCode);
+//        String trimmedClassCode = classCode.trim();
+//        return trimmedClassCode;
+//    }
 
     /**
      * Parses a {@code String schedule} into an {@code Schedule}.

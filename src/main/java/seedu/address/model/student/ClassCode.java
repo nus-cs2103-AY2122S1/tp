@@ -2,6 +2,11 @@ package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a Student's classcode in the address book.
+ * Guarantees: immutable.
+ */
+
 public class ClassCode {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode can take any values, and it should not be blank";
@@ -12,7 +17,7 @@ public class ClassCode {
     /**
      * Constructs an {@code ClassCode}.
      *
-     * @param classCode A valid remark.
+     * @param classCode A valid classcode.
      */
     public ClassCode (String classCode) {
         requireNonNull(classCode);

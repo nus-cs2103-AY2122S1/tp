@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
@@ -30,7 +31,7 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE));
         }
 
-        String classCode = ParserUtil.parseClassCode(argMultimap.getValue(PREFIX_CLASSCODE).get());
+        ClassCode classCode = ParserUtil.parseClassCode(argMultimap.getValue(PREFIX_CLASSCODE).get());
         Schedule schedule = ParserUtil.parseSchedule(argMultimap.getValue(PREFIX_SCHEDULE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
