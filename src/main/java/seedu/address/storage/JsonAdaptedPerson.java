@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.id.UniqueId;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -26,6 +26,7 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
+    private final String uniqueId;
     private final String name;
     private final String phone;
     private final String email;
@@ -36,9 +37,10 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(@JsonProperty("uniqueId") String uniqueId, @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+        this.uniqueId = uniqueId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -52,6 +54,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        uniqueId = source.getId().getUuid().toString();
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -107,8 +110,15 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<UniqueId> modelAssignedTaskIds = new HashSet<>();
         final NoOverlapLessonList lessonsList = new NoOverlapLessonList();
-        return new Person(modelName, modelPhone, modelEmail,
-                modelAddress, modelTags, modelAssignedTaskIds, lessonsList);
+
+        if (uniqueId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    UniqueId.class.getSimpleName()));
+        }
+        final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
+
+        return new Person(modelUniqueId, modelName, modelPhone, modelEmail,
+                modelAddress, modelTags, new HashSet<>(), lessonsList);
     }
 
 }
