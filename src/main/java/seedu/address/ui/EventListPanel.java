@@ -8,8 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.event.Event;
 
 /**
  * Panel containing the list of events.

@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.event.Event;
+import seedu.address.model.data.event.Event;
 
 /**
  * An UI component that displays information of a {@code Member}.
@@ -44,7 +44,7 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
-        name.setText(event.getName());
+        name.setText(event.getName().fullName);
         date.setText(event.getDate().toString());
         event.getParticipants().stream()
                 .sorted(Comparator.comparing(participant -> participant.getName().fullName))
