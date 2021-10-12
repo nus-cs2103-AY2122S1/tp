@@ -13,6 +13,7 @@ import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -167,6 +168,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String acadLevel} into an {@code AcadLevel}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code acadLevel} is invalid.
+     */
+    public static AcadLevel parseAcadLevel(String acadLevel) throws ParseException {
+        requireNonNull(acadLevel);
+        String strippedAcadLevel = acadLevel.strip();
+        if (!AcadLevel.isValidAcadLevel(strippedAcadLevel)) {
+            throw new ParseException(AcadLevel.MESSAGE_CONSTRAINTS);
+        }
+        return new AcadLevel(strippedAcadLevel);
+    }
+
+    /**
      * Parses a {@code String remark} into an {@code Remark}.
      * Leading and trailing whitespaces will be stripped.
      */
@@ -193,7 +209,7 @@ public class ParserUtil {
 
     /**
      * Parses {@code String TimeRange} into a {@code TimeRange}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be stripped.
      *
      * @throws ParseException if the given {@code TimeRange} is invalid.
      */

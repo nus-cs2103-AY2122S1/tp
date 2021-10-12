@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -28,12 +29,22 @@ import seedu.address.model.tag.Tag;
  * Deletes a Lesson from an existing person in the address book.
  */
 public class LessonDeleteCommand extends Command {
+
+    public static final String COMMAND_ACTION = "Delete Lesson";
+
     public static final String COMMAND_WORD = "ldelete";
+
+    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
+            + "LESSON_INDEX (must be a positive integer)";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 " + "1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the lesson identified by lesson index"
         + " of the student identified by the index number used in the displayed student list.\n"
-        + "Parameters: INDEX (must be a positive integer) LESSON_INDEX (must be a positive integer)\n"
-        + "Example: " + COMMAND_WORD + " 1 " + "1";
+        + "Parameters: " + COMMAND_PARAMETERS + "\n"
+        + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s\nfor student: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
@@ -97,6 +108,7 @@ public class LessonDeleteCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         School updatedSchool = personToEdit.getSchool();
         AcadStream updatedAcadStream = personToEdit.getAcadStream();
+        AcadLevel updatedAcadLevel = personToEdit.getAcadLevel();
         Fee updatedOutstandingFee = personToEdit.getFee();
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
@@ -105,7 +117,7 @@ public class LessonDeleteCommand extends Command {
         TreeSet<Lesson> updatedLessonSet = new TreeSet<>(updatedLessons);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
-                updatedAddress, updatedSchool, updatedAcadStream, updatedOutstandingFee,
+                updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel, updatedOutstandingFee,
                 updatedRemark, updatedTags, updatedLessonSet);
     }
 
