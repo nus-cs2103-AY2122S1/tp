@@ -44,6 +44,10 @@ public class Availability {
         return true;
     }
 
+    public boolean contains(String day) {
+        return values.contains(day);
+    }
+
     @Override
     public String toString() {
         return values;

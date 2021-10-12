@@ -56,7 +56,7 @@ public class Person {
     }
 
     public boolean isAvailableOnDay(String day) {
-        return days != null && days.contains(day);
+        return availability.contains(day);
     }
 
     public void setDays(List<String> days) {
