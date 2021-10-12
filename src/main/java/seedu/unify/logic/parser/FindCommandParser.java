@@ -46,7 +46,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (p == null) {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         } else {
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), p);
         }
     }
 }
