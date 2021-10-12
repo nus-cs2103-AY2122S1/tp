@@ -1,14 +1,30 @@
 package seedu.programmer.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.json.CDL;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
@@ -161,6 +177,92 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Downloads the JSON data as a CSV file to the user's chosen directory.
+     */
+    @FXML
+    private void handleDownload() {
+        try {
+            JSONArray jsonData = getJsonData();
+            File destinationFile = promptUserForDestination();
+            writeJsonToCsv(jsonData, destinationFile);
+            Popup popup = createPopup("Your has been successfully downloaded to " + destinationFile + "!");
+            showPopupMessage(popup);
+            logger.info("Data successfully downloaded as CSV.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Displays a popup message at the top-center with respect to the primaryStage.
+     *
+     * @param popup Popup object to be displayed on the primaryStage
+     */
+    private void showPopupMessage(Popup popup) {
+        // Display popup at position scaled according to primaryStage's coordinates
+        popup.setX(1.5 * primaryStage.getX());
+        popup.setY(3 * primaryStage.getY());
+        popup.show(primaryStage);
+    }
+
+    /**
+     * Creates a Popup object with a message.
+     *
+     * @param message The text to display to the user
+     * @return a Popup object
+     */
+    private Popup createPopup(String message) {
+        final Popup popup = new Popup();
+        popup.setAutoFix(true);
+        popup.setHideOnEscape(true);
+        Label label = new Label(message);
+        label.getStylesheets().add("view/Styles.css");
+        label.getStyleClass().add("popup");
+        popup.getContent().add(label);
+        return popup;
+    }
+
+    /**
+     * Writes JSON data to a CSV file.
+     *
+     * @param jsonData JSONArray of data
+     * @param destinationFile File object to write to
+     * @throws IOException if error reading to or from file
+     * @throws JSONException if JSON is invalid
+     */
+    private void writeJsonToCsv(JSONArray jsonData, File destinationFile) throws JSONException, IOException {
+        String csv = CDL.toString(jsonData);
+        FileUtils.writeStringToFile(destinationFile, csv, Charset.defaultCharset());
+        logger.info("The following data was written:\n" + csv);
+    }
+
+    /**
+     * Creates a File object based on user's chosen directory.
+     *
+     * @return File object with a file name appended to the chosen directory
+     */
+    private File promptUserForDestination() {
+        String destFileName = "programmerError.csv";
+        DirectoryChooser dirChooser = new DirectoryChooser();
+        return new File(dirChooser.showDialog(primaryStage), destFileName);
+    }
+
+    /**
+     * Retrieves students' JSON data stored in ProgrammerError.
+     *
+     * @return JSONArray of student's data
+     * @throws IOException if error reading to or from file
+     * @throws JSONException if JSON is invalid
+     */
+    private JSONArray getJsonData() throws IOException, JSONException {
+        String resourceName = "data/programmerError.json";
+        InputStream is = new FileInputStream(resourceName);
+        String jsonTxt = IOUtils.toString(is, StandardCharsets.UTF_8);
+        JSONObject json = new JSONObject(jsonTxt);
+        return json.getJSONArray("students");
     }
 
     public StudentListPanel getStudentListPanel() {
