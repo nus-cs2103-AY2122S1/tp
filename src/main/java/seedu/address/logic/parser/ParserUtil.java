@@ -215,5 +215,23 @@ public class ParserUtil {
         return new StudentList(studentList);
     }
 
-
+    /**
+     * Returns list of student indexes.
+     *
+     * @param studentIndexes list of indexes, each representing a student.
+     * @return List of student indexes.
+     * @throws ParseException If index is invalid.
+     */
+    public static List<Index> parseStudentIndexes(List studentIndexes) throws ParseException {
+        List<Index> args = new ArrayList<Index>();
+        String[] students = ((String) studentIndexes.get(0)).split(" ");
+        for (String student : students) {
+            Index i = parseIndex(student);
+            if (!args.contains(i)) {
+                args.add(i);
+            }
+        }
+        //throw  new ParseException(studentIndexes.stream().reduce("", (s, x) -> s+x));
+        return args;
+    }
 }
