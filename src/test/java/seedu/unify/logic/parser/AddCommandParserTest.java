@@ -22,7 +22,6 @@ import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.unify.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.unify.testutil.TypicalTasks.AMY;
 import static seedu.unify.testutil.TypicalTasks.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +39,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Task expectedTask = new TaskBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Task expectedTask = new TaskBuilder(BOB).withTag(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + TIME_DESC_BOB
@@ -59,18 +58,10 @@ public class AddCommandParserTest {
                 + DATE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedTask));
 
         // multiple tags - all accepted
-        Task expectedTaskMultipleTags = new TaskBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Task expectedTaskMultipleTags = new TaskBuilder(BOB).withTag(VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + TIME_DESC_BOB + DATE_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedTaskMultipleTags));
-    }
-
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Task expectedTask = new TaskBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + TIME_DESC_AMY + DATE_DESC_AMY,
-                new AddCommand(expectedTask));
     }
 
     @Test
