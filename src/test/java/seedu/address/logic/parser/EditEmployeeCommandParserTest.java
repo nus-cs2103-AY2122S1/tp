@@ -182,7 +182,7 @@ public class EditEmployeeCommandParserTest {
         descriptor = new EditEmployeeDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditEmployeeCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
-        
+
         // leaves
         userInput = targetIndex.getOneBased() + LEAVES_DESC_AMY;
         descriptor = new EditEmployeeDescriptorBuilder().withLeaves(VALID_LEAVES_AMY).build();

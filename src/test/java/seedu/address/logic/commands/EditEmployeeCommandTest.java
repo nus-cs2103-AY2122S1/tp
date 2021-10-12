@@ -170,5 +170,4 @@ public class EditEmployeeCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditEmployeeCommand(INDEX_FIRST_PERSON, DESC_EMPLOYEE_BOB)));
     }
-
 }

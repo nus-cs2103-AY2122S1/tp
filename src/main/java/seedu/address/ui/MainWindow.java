@@ -116,11 +116,15 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
-//        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // take in personList as children
+        // take in personList as children
+        //        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
         personListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot()); // take in employeeList as children
 
-//        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
-//        employeeListPanelPlaceHolder.getChildren().add(employeeListPanel.getRoot()); // only this line doesn't work
+        //        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
+
+        // only this line doesn't work
+        //        employeeListPanelPlaceHolder.getChildren().add(employeeListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
