@@ -40,13 +40,11 @@
                    <StackPane fx:id="personListPanelPlaceholder" prefHeight="100.0" prefWidth="106.0" HBox.hgrow="ALWAYS" />
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                  
                                 <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                             <padding>
                               <Insets bottom="5" left="10" right="10" top="5" />
                             </padding>
                           </StackPane>
-                  
                           <StackPane fx:id="commandBoxPlaceholder" minHeight="30.0" styleClass="pane-with-border">
                             <padding>
                               <Insets bottom="5" left="10" right="10" top="5" />
@@ -56,7 +54,6 @@
                         </VBox>
                      </children>
                   </HBox>
-      
                        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
                </children>
         </VBox>
