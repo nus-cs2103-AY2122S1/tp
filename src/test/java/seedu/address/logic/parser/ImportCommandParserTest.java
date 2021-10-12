@@ -11,7 +11,7 @@ import seedu.address.logic.commands.ImportCommand;
 
 public class ImportCommandParserTest {
 
-    ImportCommandParser parser = new ImportCommandParser();
+    private ImportCommandParser parser = new ImportCommandParser();
 
     @Test
     public void parse_fileNamePresent_success() {
