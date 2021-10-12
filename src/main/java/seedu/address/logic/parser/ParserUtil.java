@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -14,9 +13,9 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.customer.AllergyList;
+import seedu.address.model.person.customer.Allergy;
 import seedu.address.model.person.customer.LoyaltyPoints;
-import seedu.address.model.person.customer.SrList;
+import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -115,39 +114,61 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String allergies} into an {@code Allergies}.
+     * Parses a {@code String allergy} into a {@code Allergy}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code allergies} is invalid.
+     * @throws ParseException if the given {@code allergy} is invalid.
      */
-    public static AllergyList parseAllergies(String allergies) throws ParseException {
+    public static Allergy parseAllergy(String allergy) throws ParseException {
+        requireNonNull(allergy);
+        String trimmedAllergy = allergy.trim();
+        if (!Allergy.isValidAllergyName(trimmedAllergy)) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+        }
+        return new Allergy(trimmedAllergy);
+    }
+
+    /**
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>}.
+     */
+    public static Set<Allergy> parseAllergies(Collection<String> allergies) throws ParseException {
         requireNonNull(allergies);
-        String trimmedAllergies = allergies.trim();
-        List<String> formattedAllergyList = List.of(trimmedAllergies.split("\\s*,\\s*"));
-        if (!AllergyList.isValidAllergyList(formattedAllergyList)) {
-            throw new ParseException(AllergyList.MESSAGE_CONSTRAINTS);
+        final Set<Allergy> allergySet = new HashSet<>();
+        for (String allergyName : allergies) {
+            allergySet.add(parseAllergy(allergyName));
         }
-        return new AllergyList(formattedAllergyList);
+        return allergySet;
     }
 
     /**
-     * Parses a {@code String specialRequests} into an {@code SpecialRequests}.
+     * Parses a {@code String allergy} into a {@code Allergy}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code specialRequests} is invalid.
+     * @throws ParseException if the given {@code specialRequest} is invalid.
      */
-    public static SrList parseSpecialRequests(String specialRequests) throws ParseException {
-        requireNonNull(specialRequests);
-        String trimmedSpecialRequests = specialRequests.trim();
-        List<String> formattedSrList = List.of(trimmedSpecialRequests.split("\\s*,\\s*"));
-        if (!SrList.isValidSrList(formattedSrList)) {
-            throw new ParseException(SrList.MESSAGE_CONSTRAINTS);
+    public static SpecialRequest parseSpecialRequest(String specialRequest) throws ParseException {
+        requireNonNull(specialRequest);
+        String trimmedSpecialRequest = specialRequest.trim();
+        if (!SpecialRequest.isValidSpecialRequestName(trimmedSpecialRequest)) {
+            throw new ParseException(SpecialRequest.MESSAGE_CONSTRAINTS);
         }
-        return new SrList(formattedSrList);
+        return new SpecialRequest(trimmedSpecialRequest);
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses {@code Collection<String> specialRequests} into a {@code Set<SpecialRequest>}.
+     */
+    public static Set<SpecialRequest> parseSpecialRequests(Collection<String> specialRequests) throws ParseException {
+        requireNonNull(specialRequests);
+        final Set<SpecialRequest> specialRequestSet = new HashSet<>();
+        for (String specialRequestName : specialRequests) {
+            specialRequestSet.add(parseSpecialRequest(specialRequestName));
+        }
+        return specialRequestSet;
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.

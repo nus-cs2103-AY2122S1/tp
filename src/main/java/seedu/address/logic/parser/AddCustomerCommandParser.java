@@ -18,12 +18,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-// import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.customer.AllergyList;
+import seedu.address.model.person.customer.Allergy;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.LoyaltyPoints;
-import seedu.address.model.person.customer.SrList;
+import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,9 +39,8 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_LP, PREFIX_ALLERGIES, PREFIX_SPECIALREQUESTS, PREFIX_TAG);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LP,
-                PREFIX_ALLERGIES, PREFIX_SPECIALREQUESTS, PREFIX_TAG) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_LP) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddCustomerCommand.MESSAGE_USAGE));
         }
@@ -52,8 +50,9 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         LoyaltyPoints loyaltyPoints = ParserUtil.parseLoyaltyPoints(argMultimap.getValue(PREFIX_LP).get());
-        AllergyList allergies = ParserUtil.parseAllergies(argMultimap.getValue(PREFIX_ALLERGIES).get());
-        SrList specialRequests = ParserUtil.parseSpecialRequests(argMultimap.getValue(PREFIX_SPECIALREQUESTS).get());
+        Set<Allergy> allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGIES));
+        Set<SpecialRequest> specialRequests =
+                ParserUtil.parseSpecialRequests(argMultimap.getAllValues(PREFIX_SPECIALREQUESTS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Customer customer = new Customer(name, phone, email, address, loyaltyPoints, allergies,

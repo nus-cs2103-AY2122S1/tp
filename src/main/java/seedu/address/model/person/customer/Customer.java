@@ -16,8 +16,8 @@ public class Customer extends Person {
 
     // Customer specific data fields
     private final LoyaltyPoints loyaltyPoints;
-    private final AllergyList allergies;
-    private final SrList specialRequests;
+    private final Set<Allergy> allergies;
+    private final Set<SpecialRequest> specialRequests;
 
 
 
@@ -25,87 +25,11 @@ public class Customer extends Person {
      * Every field must be present and not null.
      */
     public Customer(Name name, Phone phone, Email email, Address address, LoyaltyPoints loyaltyPoints,
-                    AllergyList allergies, SrList specialRequests, Set<Tag> tags) {
+                    Set<Allergy> allergies, Set<SpecialRequest> specialRequests, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         this.allergies = allergies;
         this.loyaltyPoints = loyaltyPoints;
         this.specialRequests = specialRequests;
-    }
-
-    /**
-     * Every field except for Allergies must be present and not null.
-     */
-    public Customer(Name name, Phone phone, Email email, Address address, LoyaltyPoints loyaltyPoints,
-                    SrList specialRequests, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-        this.allergies = new AllergyList();
-        this.loyaltyPoints = loyaltyPoints;
-        this.specialRequests = specialRequests;
-    }
-
-    /**
-     * Every field except for special requests must be present and not null.
-     */
-    public Customer(Name name, Phone phone, Email email, Address address, LoyaltyPoints loyaltyPoints,
-                    AllergyList allergies, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-        this.allergies = allergies;
-        this.loyaltyPoints = loyaltyPoints;
-        this.specialRequests = new SrList();
-    }
-
-    /**
-     * Every field  except for allergies and special requests must be present and not null.
-     */
-    public Customer(Name name, Phone phone, Email email, Address address, LoyaltyPoints loyaltyPoints,
-                    Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-        this.allergies = new AllergyList();
-        this.loyaltyPoints = loyaltyPoints;
-        this.specialRequests = new SrList();
-    }
-
-    /**
-     * Every field except for loyalty points must be present and not null.
-     */
-    public Customer(Name name, Phone phone, Email email, Address address,
-                    AllergyList allergies, SrList specialRequests, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-        this.allergies = allergies;
-        this.loyaltyPoints = new LoyaltyPoints("0000");
-        this.specialRequests = specialRequests;
-    }
-
-
-    /**
-     * * Every field except for allergies must be present and not null.
-     */
-    public Customer(Name name, Phone phone, Email email, Address address, SrList specialRequests, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-        this.allergies = new AllergyList();
-        this.loyaltyPoints = new LoyaltyPoints("0000");
-        this.specialRequests = specialRequests;
-    }
-
-    /**
-     * Every field except special requests must be present and not null.
-     */
-    public Customer(Name name, Phone phone, Email email, Address address,
-                    AllergyList allergies, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-        this.allergies = allergies;
-        this.loyaltyPoints = new LoyaltyPoints("0000");
-        this.specialRequests = new SrList();
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Customer(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
-        this.allergies = new AllergyList();
-        this.loyaltyPoints = new LoyaltyPoints("0000");
-        this.specialRequests = new SrList();
     }
 
     public Name getName() {
@@ -127,11 +51,11 @@ public class Customer extends Person {
         return loyaltyPoints;
     }
 
-    public SrList getSpecialRequests() {
+    public Set<SpecialRequest> getSpecialRequests() {
         return specialRequests;
     }
 
-    public AllergyList getAllergies() {
+    public Set<Allergy> getAllergies() {
         return allergies;
     }
 
@@ -198,12 +122,17 @@ public class Customer extends Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Loyalty Points: ")
-                .append(getLoyaltyPoints())
-                .append("; Allergies: ")
-                .append(getAllergies())
-                .append("; Special Requests: ")
-                .append(getSpecialRequests());
-
+                .append(getLoyaltyPoints());
+        Set<Allergy> allergies = getAllergies();
+        if (!allergies.isEmpty()) {
+            builder.append("; Allergies: ");
+            allergies.forEach(builder::append);
+        }
+        Set<SpecialRequest> specialRequests = getSpecialRequests();
+        if (!specialRequests.isEmpty()) {
+            builder.append("; Special Requests: ");
+            specialRequests.forEach(builder::append);
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

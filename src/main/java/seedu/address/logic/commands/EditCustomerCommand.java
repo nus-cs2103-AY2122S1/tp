@@ -22,14 +22,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-//import seedu.address.model.person.customer.AllergyList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.customer.Allergy;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.LoyaltyPoints;
-//import seedu.address.model.person.customer.SrList;
+import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.tag.Tag;
 
 
@@ -54,7 +54,7 @@ public class EditCustomerCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LP + "4000 "
             + PREFIX_ALLERGIES + "Peanuts"
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_SPECIALREQUESTS + "Window seating"
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
@@ -62,19 +62,18 @@ public class EditCustomerCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address " + "book.";
 
     private final Index index;
-    private final EditCustomerCommand.EditCustomerDescriptor editCustomerDescriptor;
+    private final EditCustomerDescriptor editCustomerDescriptor;
 
     /**
      * @param index of the customer in the filtered customer list to edit
      * @param editCustomerDescriptor details to edit the customer with
      */
-    public EditCustomerCommand(Index index,
-                               EditCustomerCommand.EditCustomerDescriptor editCustomerDescriptor) {
+    public EditCustomerCommand(Index index, EditCustomerDescriptor editCustomerDescriptor) {
         requireNonNull(index);
         requireNonNull(editCustomerDescriptor);
 
         this.index = index;
-        this.editCustomerDescriptor = new EditCustomerCommand.EditCustomerDescriptor(editCustomerDescriptor);
+        this.editCustomerDescriptor = new EditCustomerDescriptor(editCustomerDescriptor);
     }
 
     @Override
@@ -89,11 +88,11 @@ public class EditCustomerCommand extends Command {
         Customer customerToEdit = lastShownCustomerList.get(index.getZeroBased());
         Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
-        if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
+        if (!customerToEdit.isSameCustomer(editedCustomer) && model.hasCustomer(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
-        model.setPerson(customerToEdit, editedCustomer);
+        model.setCustomer(customerToEdit, editedCustomer);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer));
     }
@@ -103,7 +102,7 @@ public class EditCustomerCommand extends Command {
      * edited with {@code editCustomerDescriptor}.
      */
     private static Customer createEditedCustomer(Customer customerToEdit,
-                                             EditCustomerCommand.EditCustomerDescriptor editCustomerDescriptor) {
+                                                 EditCustomerDescriptor editCustomerDescriptor) {
         assert customerToEdit != null;
 
         Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
@@ -112,15 +111,16 @@ public class EditCustomerCommand extends Command {
         Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
         LoyaltyPoints updatedLoyaltyPoints =
                 editCustomerDescriptor.getLoyaltyPoints().orElse(customerToEdit.getLoyaltyPoints());
-        /** AllergyList updatedAllergies =
-                editCustomerDescriptor.getAllergies().orElse(customerToEdit.getAllergies());
-        SrList updatedSpecialRequests =
-                editCustomerDescriptor.getSpecialRequests().orElse(customerToEdit.getSpecialRequests());*/
 
+        Set<Allergy> updatedAllergies =
+                editCustomerDescriptor.getAllergies().orElse(customerToEdit.getAllergies());
+
+        Set<SpecialRequest> updatedSpecialRequests =
+                editCustomerDescriptor.getSpecialRequests().orElse(customerToEdit.getSpecialRequests());
         Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
 
         return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedLoyaltyPoints,
-                updatedTags);
+                updatedAllergies, updatedSpecialRequests, updatedTags);
     }
 
     @Override
@@ -151,8 +151,8 @@ public class EditCustomerCommand extends Command {
         private Email email;
         private Address address;
         private LoyaltyPoints loyaltyPoints;
-        /**private AllergyList allergies;
-        private SrList specialRequests;*/
+        private Set<Allergy> allergies;
+        private Set<SpecialRequest> specialRequests;
         private Set<Tag> tags;
 
         public EditCustomerDescriptor() {}
@@ -161,14 +161,14 @@ public class EditCustomerCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditCustomerDescriptor(EditCustomerCommand.EditCustomerDescriptor toCopy) {
+        public EditCustomerDescriptor(EditCustomerDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setLoyaltyPoints(toCopy.loyaltyPoints);
-            /**setAllergies(toCopy.allergies);
-            setSpecialRequests(toCopy.specialRequests);*/
+            setAllergies(toCopy.allergies);
+            setSpecialRequests(toCopy.specialRequests);
             setTags(toCopy.tags);
         }
 
@@ -176,7 +176,8 @@ public class EditCustomerCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, loyaltyPoints, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, loyaltyPoints,
+                    allergies, specialRequests, tags);
         }
 
         public void setName(Name name) {
@@ -223,6 +224,41 @@ public class EditCustomerCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
+        public void setAllergies(Set<Allergy> allergies) {
+            this.allergies = (allergies != null) ? new HashSet<>(allergies) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Allergy>> getAllergies() {
+            return (allergies != null) ? Optional.of(Collections.unmodifiableSet(allergies)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setSpecialRequests(Set<SpecialRequest> specialRequests) {
+            this.specialRequests = (specialRequests != null) ? new HashSet<>(specialRequests) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<SpecialRequest>> getSpecialRequests() {
+            return (specialRequests != null) ? Optional.of(Collections.unmodifiableSet(specialRequests))
+                    : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
@@ -244,18 +280,20 @@ public class EditCustomerCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCustomerCommand.EditCustomerDescriptor)) {
+            if (!(other instanceof EditCustomerDescriptor)) {
                 return false;
             }
 
             // state check
-            EditCustomerCommand.EditCustomerDescriptor e = (EditCustomerCommand.EditCustomerDescriptor) other;
+            EditCustomerDescriptor e = (EditCustomerDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getLoyaltyPoints().equals(e.getLoyaltyPoints())
+                    && getAllergies().equals(e.getAllergies())
+                    && getSpecialRequests().equals(e.getSpecialRequests())
                     && getTags().equals(e.getTags());
         }
     }

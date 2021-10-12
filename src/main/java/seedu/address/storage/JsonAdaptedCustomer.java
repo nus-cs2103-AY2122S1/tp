@@ -14,10 +14,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.customer.AllergyList;
+import seedu.address.model.person.customer.Allergy;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.LoyaltyPoints;
-import seedu.address.model.person.customer.SrList;
+import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,8 +32,8 @@ class JsonAdaptedCustomer {
     private final String email;
     private final String address;
     private final String loyaltyPoints;
-    private final String allergies;
-    private final String specialRequests;
+    private final List<JsonAdaptedAllergy> allergies = new ArrayList<>();
+    private final List<JsonAdaptedSpecialRequest> specialRequests = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -43,16 +43,20 @@ class JsonAdaptedCustomer {
     public JsonAdaptedCustomer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("loyaltyPoints") String loyaltyPoints,
-                             @JsonProperty("allergies") String allergies,
-                             @JsonProperty("specialRequests") String specialRequests,
+                             @JsonProperty("allergies") List<JsonAdaptedAllergy> allergies,
+                             @JsonProperty("specialRequests") List<JsonAdaptedSpecialRequest> specialRequests,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.loyaltyPoints = loyaltyPoints;
-        this.allergies = allergies;
-        this.specialRequests = specialRequests;
+        if (allergies != null) {
+            this.allergies.addAll(allergies);
+        }
+        if (specialRequests != null) {
+            this.specialRequests.addAll(specialRequests);
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -67,8 +71,12 @@ class JsonAdaptedCustomer {
         email = source.getEmail().value;
         address = source.getAddress().value;
         loyaltyPoints = source.getLoyaltyPoints().value;
-        allergies = source.getAllergies().toString();
-        specialRequests = source.getSpecialRequests().toString();
+        allergies.addAll(source.getAllergies().stream()
+                .map(JsonAdaptedAllergy::new)
+                .collect(Collectors.toList()));
+        specialRequests.addAll(source.getSpecialRequests().stream()
+                .map(JsonAdaptedSpecialRequest::new)
+                .collect(Collectors.toList()));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -84,7 +92,14 @@ class JsonAdaptedCustomer {
         for (JsonAdaptedTag tag : tagged) {
             customerTags.add(tag.toModelType());
         }
-
+        final List<Allergy> customerAllergies = new ArrayList<>();
+        for (JsonAdaptedAllergy allergy : allergies) {
+            customerAllergies.add(allergy.toModelType());
+        }
+        final List<SpecialRequest> customerSpecialRequests = new ArrayList<>();
+        for (JsonAdaptedSpecialRequest specialRequest : specialRequests) {
+            customerSpecialRequests.add(specialRequest.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -126,29 +141,9 @@ class JsonAdaptedCustomer {
         }
         final LoyaltyPoints modelLoyaltyPoints = new LoyaltyPoints(loyaltyPoints);
 
-        if (allergies == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    AllergyList.class.getSimpleName()));
-        }
-        List<String> tempList1 = List.of(allergies.trim().split("\\s*,\\s*"));
-
-        if (!AllergyList.isValidAllergyList(tempList1)) {
-            throw new IllegalValueException(AllergyList.MESSAGE_CONSTRAINTS);
-        }
-        final AllergyList modelAllergies = new AllergyList(tempList1);
-
-        if (specialRequests == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    SrList.class.getSimpleName()));
-        }
-        List<String> tempList2 = List.of(specialRequests.trim().split("\\s*,\\s*"));
-
-        if (!SrList.isValidSrList(tempList2)) {
-            throw new IllegalValueException(SrList.MESSAGE_CONSTRAINTS);
-        }
-        final SrList modelSpecialRequests = new SrList(tempList2);
-
         final Set<Tag> modelTags = new HashSet<>(customerTags);
+        final Set<Allergy> modelAllergies = new HashSet<>(customerAllergies);
+        final Set<SpecialRequest> modelSpecialRequests = new HashSet<>(customerSpecialRequests);
         return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelLoyaltyPoints,
                 modelAllergies, modelSpecialRequests, modelTags);
     }

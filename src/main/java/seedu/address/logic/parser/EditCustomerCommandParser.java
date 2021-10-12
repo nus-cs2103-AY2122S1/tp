@@ -19,6 +19,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCustomerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.customer.Allergy;
+import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -58,18 +60,17 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
             editCustomerDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editCustomerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editCustomerDescriptor.setAddress(ParserUtil
+                    .parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_LP).isPresent()) {
-            editCustomerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_LP).get()));
+            editCustomerDescriptor.setLoyaltyPoints(ParserUtil
+                    .parseLoyaltyPoints(argMultimap.getValue(PREFIX_LP).get()));
         }
-        if (argMultimap.getValue(PREFIX_ALLERGIES).isPresent()) {
-            editCustomerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ALLERGIES).get()));
-        }
-        if (argMultimap.getValue(PREFIX_SPECIALREQUESTS).isPresent()) {
-            editCustomerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap
-                    .getValue(PREFIX_SPECIALREQUESTS).get()));
-        }
+        parseAllergiesForEdit(argMultimap.getAllValues(PREFIX_ALLERGIES))
+                .ifPresent(editCustomerDescriptor::setAllergies);
+        parseSpecialRequestsForEdit(argMultimap.getAllValues(PREFIX_SPECIALREQUESTS))
+                .ifPresent(editCustomerDescriptor::setSpecialRequests);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editCustomerDescriptor::setTags);
 
         if (!editCustomerDescriptor.isAnyFieldEdited()) {
@@ -77,6 +78,40 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
         }
 
         return new EditCustomerCommand(index, editCustomerDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> allergies} into a {@code Set<Allergy>} if {@code Allergys} is non-empty.
+     * If {@code Allergys} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Allergy>} containing zero Allergys.
+     */
+    private Optional<Set<Allergy>> parseAllergiesForEdit(Collection<String> allergies) throws ParseException {
+        assert allergies != null;
+
+        if (allergies.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> allergySet = allergies.size() == 1 && allergies.contains("")
+                ? Collections.emptySet() : allergies;
+        return Optional.of(ParserUtil.parseAllergies(allergySet));
+    }
+
+    /**
+     * Parses {@code Collection<String> specialRequests} into a {@code Set<SpecialRequest>}
+     * if {@code SpecialRequests} is non-empty.
+     * If {@code SpecialRequests} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<SpecialRequest>} containing zero SpecialRequests.
+     */
+    private Optional<Set<SpecialRequest>> parseSpecialRequestsForEdit(Collection<String> specialRequests)
+            throws ParseException {
+        assert specialRequests != null;
+
+        if (specialRequests.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> specialRequestSet = specialRequests.size() == 1 && specialRequests.contains("")
+                ? Collections.emptySet() : specialRequests;
+        return Optional.of(ParserUtil.parseSpecialRequests(specialRequestSet));
     }
 
     /**
