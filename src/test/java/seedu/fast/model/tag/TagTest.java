@@ -2,7 +2,6 @@ package seedu.fast.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import static seedu.fast.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -10,6 +9,10 @@ import org.junit.jupiter.api.Test;
 import seedu.fast.commons.util.TagUtil;
 
 public class TagTest {
+
+    public static final String VALID_TAG_TERM = "test";
+    public static final String INVALID_TAG_TERM = "hi there";
+    public static final String VALID_PRIORITY_TAG_TERM = "pr/low";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -34,11 +37,9 @@ public class TagTest {
         assertThrows(NullPointerException.class, () -> Tag.isValidTagTerm(null));
 
         //valid Tag term
-        String VALID_TAG_TERM = "test";
         assertTrue(Tag.isValidTagTerm(VALID_TAG_TERM));
 
         //invalid Tag term
-        String INVALID_TAG_TERM = "hi there";
         assertFalse(Tag.isValidTagTerm(INVALID_TAG_TERM));
     }
 
@@ -48,15 +49,12 @@ public class TagTest {
         assertThrows(NullPointerException.class, () -> Tag.createTag(null));
 
         //valid Tag term
-        String VALID_TAG_TERM = "test";
         assertTrue(Tag.createTag(VALID_TAG_TERM) instanceof Tag);
 
         //valid PriorityTag term
-        String VALID_PRIORITY_TAG_TERM = "pr/low";
         assertTrue(Tag.createTag(VALID_PRIORITY_TAG_TERM) instanceof PriorityTag);
 
         //invalid term
-        String INVALID_TAG_TERM = "big fat";
         assertThrows(IllegalArgumentException.class, () -> Tag.createTag(INVALID_TAG_TERM));
     }
 

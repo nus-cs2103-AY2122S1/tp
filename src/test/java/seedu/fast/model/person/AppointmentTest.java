@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import seedu.fast.commons.util.DateUtil;
 
 public class AppointmentTest {
-    public static String BAD_FORMAT_DATE = "2021-111-13";
-    public static String INVALID_DATE = "2021-13-13";
-    public static String VALID_DATE = "11 Nov 2021";
+    public static final String BAD_FORMAT_DATE = "2021-111-13";
+    public static final String INVALID_DATE = "2021-13-13";
+    public static final String VALID_DATE = "11 Nov 2021";
     //following string will remain correct as long as locale of the system is the same
-    public static String VALID_DATE_STRING = "Thu Nov 11 00:00:00 SGT 2021";
+    public static final String VALID_DATE_STRING = "Thu Nov 11 00:00:00 SGT 2021";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
