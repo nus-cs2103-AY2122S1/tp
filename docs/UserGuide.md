@@ -191,9 +191,10 @@ Examples:
 
 Adds a task to the task list.
 
-Format: `task -a n/NAME`
+Format: `task -a n/NAME d/DEADLINE`
 
-* Adds a task with the name `NAME`
+* Adds a task with the name `NAME` and deadline `DEADLINE`
+* The deadline must be in the format `YYYY-MM-DD`
 * `-a` refers to the add command
 
 Examples:
