@@ -80,18 +80,17 @@ public class FindCommand extends Command {
         private Predicate<Faculty> faculty;
 
         // For equality checks
-        private Name ename;
-        private Room eroom;
-        private Phone ephone;
-        private Email eemail;
-        private VaccStatus evaccStatus;
-        private Faculty efaculty;
+        private Name eName;
+        private Room eRoom;
+        private Phone ePhone;
+        private Email eEmail;
+        private VaccStatus eVaccStatus;
+        private Faculty eFaculty;
 
         public FindCompositePredicate() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public FindCompositePredicate(FindCompositePredicate toCopy) {
             this.name = toCopy.name;
@@ -100,12 +99,12 @@ public class FindCommand extends Command {
             this.email = toCopy.email;
             this.vaccStatus = toCopy.vaccStatus;
             this.faculty = toCopy.faculty;
-            this.ename = toCopy.ename;
-            this.eroom = toCopy.eroom;
-            this.ephone = toCopy.ephone;
-            this.eemail = toCopy.eemail;
-            this.evaccStatus = toCopy.evaccStatus;
-            this.efaculty = toCopy.efaculty;
+            this.eName = toCopy.eName;
+            this.eRoom = toCopy.eRoom;
+            this.ePhone = toCopy.ePhone;
+            this.eEmail = toCopy.eEmail;
+            this.eVaccStatus = toCopy.eVaccStatus;
+            this.eFaculty = toCopy.eFaculty;
         }
 
         /**
@@ -116,32 +115,32 @@ public class FindCommand extends Command {
         }
 
         public void setName(Name name) {
-            this.ename = new Name(String.join(" ", name.fullName.split("\\s+")));
+            this.eName = new Name(String.join(" ", name.fullName.split("\\s+")));
             this.name = new NameContainsKeywordsPredicate(Arrays.asList(name.fullName.split("\\s+")));
         }
 
         public void setRoom(Room room) {
-            this.eroom = room;
+            this.eRoom = room;
             this.room = room::equals;
         }
 
         public void setPhone(Phone phone) {
-            this.ephone = phone;
+            this.ePhone = phone;
             this.phone = phone::equals;
         }
 
         public void setEmail(Email email) {
-            this.eemail = email;
+            this.eEmail = email;
             this.email = email::equals;
         }
 
         public void setVaccStatus(VaccStatus vaccStatus) {
-            this.evaccStatus = vaccStatus;
+            this.eVaccStatus = vaccStatus;
             this.vaccStatus = vaccStatus::equals;
         }
 
         public void setFaculty(Faculty faculty) {
-            this.efaculty = faculty;
+            this.eFaculty = faculty;
             this.faculty = faculty::equals;
         }
 
@@ -169,6 +168,12 @@ public class FindCommand extends Command {
             return Optional.ofNullable(faculty);
         }
 
+        /**
+         * Tests if the provided person matches all the available criteria.
+         *
+         * @param person The Person object to test
+         * @return True if matches all the preset criteria
+         */
         @Override
         public boolean test(Person person) {
             List<Predicate<Person>> allPredicates = Arrays.asList(
@@ -200,12 +205,12 @@ public class FindCommand extends Command {
             // state check
             FindCompositePredicate e = (FindCompositePredicate) other;
 
-            return Objects.equals(ename, e.ename)
-                    && Objects.equals(eroom, e.eroom)
-                    && Objects.equals(ephone, e.ephone)
-                    && Objects.equals(eemail, e.eemail)
-                    && Objects.equals(evaccStatus, e.evaccStatus)
-                    && Objects.equals(efaculty, e.efaculty);
+            return Objects.equals(eName, e.eName)
+                    && Objects.equals(eRoom, e.eRoom)
+                    && Objects.equals(ePhone, e.ePhone)
+                    && Objects.equals(eEmail, e.eEmail)
+                    && Objects.equals(eVaccStatus, e.eVaccStatus)
+                    && Objects.equals(eFaculty, e.eFaculty);
         }
     }
 }
