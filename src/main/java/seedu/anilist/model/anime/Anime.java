@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.anilist.model.tag.Tag;
 
 /**
- * Represents a Anime in the address book.
+ * Represents an Anime in the anime list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Anime {
@@ -19,19 +19,35 @@ public class Anime {
     private final Name name;
 
     // Data fields
+    private final Episode episode;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null except Episode which defaults to 0.
      */
     public Anime(Name name, Set<Tag> tags) {
         requireAllNonNull(name, tags);
         this.name = name;
+        this.episode = new Episode("0");
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Anime(Name name, Episode episode, Set<Tag> tags) {
+        requireAllNonNull(name, tags, episode);
+        this.name = name;
+        this.episode = episode;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Episode getEpisode() {
+        return episode;
     }
 
     /**
@@ -77,13 +93,14 @@ public class Anime {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, tags);
+        return Objects.hash(name, episode, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
+        builder.append(String.format(" (%s)", getEpisode()));
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

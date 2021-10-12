@@ -15,6 +15,7 @@ import seedu.anilist.logic.commands.ExitCommand;
 import seedu.anilist.logic.commands.FindCommand;
 import seedu.anilist.logic.commands.HelpCommand;
 import seedu.anilist.logic.commands.ListCommand;
+import seedu.anilist.logic.commands.UpdateEpisodeCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,6 +68,9 @@ public class AnimeListParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case UpdateEpisodeCommand.COMMAND_WORD:
+            return new UpdateEpisodeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
