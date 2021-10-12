@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.tasks.AddTaskCommand;
+import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
+import seedu.address.logic.commands.tasks.UnassignTaskFromPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class TaskCommandsParser {
@@ -41,9 +43,14 @@ public class TaskCommandsParser {
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
 
+        case AssignTaskToPersonCommand.COMMAND_WORD:
+            return new AssignTaskToPersonCommandParser().parse(arguments);
+
+        case UnassignTaskFromPersonCommand.COMMAND_WORD:
+            return new UnassignTaskFromPersonCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 }
-
