@@ -23,6 +23,8 @@ import seedu.address.model.person.Person;
  */
 public class AddCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Add Student";
+
     public static final String COMMAND_WORD = "add";
 
     public static final String COMMAND_PARAMETERS = PREFIX_NAME + "NAME "
@@ -37,6 +39,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_FEE + "FEE] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "

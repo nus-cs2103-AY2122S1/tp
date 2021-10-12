@@ -31,6 +31,8 @@ import seedu.address.model.tag.Tag;
 
 public class LessonAddCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Add Lesson";
+
     public static final String COMMAND_WORD = "ladd";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
@@ -39,6 +41,8 @@ public class LessonAddCommand extends Command {
             + PREFIX_TIME + "HHmm-HHmm "
             + PREFIX_SUBJECT + "SUBJECT "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE_RECURRING_LESSON = COMMAND_WORD + " 1 "
             + PREFIX_RECURRING + " "

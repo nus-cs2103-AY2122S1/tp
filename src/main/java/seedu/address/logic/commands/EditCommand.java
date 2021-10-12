@@ -45,6 +45,8 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Edit Student";
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
@@ -60,6 +62,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_FEE + "FEE] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
