@@ -149,7 +149,7 @@ public class ParserUtil {
         requireNonNull(deliveryDetails);
         String trimmedDeliveryDetails = deliveryDetails.trim();
         if (!DeliveryDetails.isValidDeliveryDetail(trimmedDeliveryDetails)) {
-            throw new ParseException(SupplyType.MESSAGE_CONSTRAINTS);
+            throw new ParseException(DeliveryDetails.MESSAGE_CONSTRAINTS);
         }
         return new DeliveryDetails(trimmedDeliveryDetails);
     }

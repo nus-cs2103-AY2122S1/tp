@@ -37,7 +37,7 @@ public class AddSupplierCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This supplier already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in the address book";
 
     private final Supplier toAdd;
 
@@ -54,7 +54,7 @@ public class AddSupplierCommand extends Command {
         requireNonNull(model);
 
         if (model.hasSupplier(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_SUPPLIER);
         }
 
         model.addSupplier(toAdd);
@@ -65,7 +65,7 @@ public class AddSupplierCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
+                || (other instanceof AddSupplierCommand // instanceof handles nulls
                 && toAdd.equals(((AddSupplierCommand) other).toAdd));
     }
 }
