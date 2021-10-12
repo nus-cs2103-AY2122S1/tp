@@ -29,14 +29,13 @@ public class AddressBookBuilder {
         addressBook.addPerson(person);
         return this;
     }
-
     /**
      * Adds a new {@code Customer} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withCustomer(Customer customer) {
         addressBook.addCustomer(customer);
+        return this;
     }
-  
     /**
      * Adds a new {@code Employee} to the {@code AddressBook} that we are building.
      */

@@ -19,7 +19,6 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
     Predicate<Reservation> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
-  
     /** {@code Predicate} that always evaluate to true */
     Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
 
@@ -73,13 +72,10 @@ public interface Model {
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
     boolean hasCustomer(Customer customer);
-  
     /**
      * Returns true if an employee with the same identity as {@code employee} exists in the address book.
      */
     boolean hasEmployee(Employee employee);
- 
-
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -91,7 +87,6 @@ public interface Model {
      * The customer must exist in the address book.
      */
     void deleteCustomer(Customer target);
-  
     /**
      * Deletes the given employee.
      * The employee must exist in the address book.
@@ -109,7 +104,6 @@ public interface Model {
      * {@code customer} must not already exist in the address book.
      */
     void addCustomer(Customer customer);
-  
     /**
      * Adds the given employee.
      * {@code employee} must not already exist in the address book.

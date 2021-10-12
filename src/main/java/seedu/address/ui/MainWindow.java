@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private CustomerListPanel customerListPanel;
     private EmployeeListPanel employeeListPanel;
     private SupplierListPanel supplierListPanel;
     private ResultDisplay resultDisplay;
@@ -116,6 +117,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -166,6 +168,16 @@ public class MainWindow extends UiPart<Stage> {
         PersonType personType = new PersonType("Person");
         personTypePlaceholder.getChildren().add(personType.getRoot());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+    /**
+     * Displays the Customer list.
+     */
+    @FXML
+    public void handleShowCustomer() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Customer");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
     }
 
     /**

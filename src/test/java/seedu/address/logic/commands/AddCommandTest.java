@@ -161,7 +161,6 @@ public class AddCommandTest {
         public void setCustomer(Customer target, Customer editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
-      
         @Override
         public boolean hasEmployee(Employee employee) {
             throw new AssertionError("This method should not be called.");
@@ -211,7 +210,6 @@ public class AddCommandTest {
         public ObservableList<Customer> getFilteredCustomerList() {
             throw new AssertionError("This method should not be called.");
         }
-      
         @Override
         public ObservableList<Reservation> getFilteredReservationList() {
             return null;
@@ -226,7 +224,6 @@ public class AddCommandTest {
         public void updateFilteredCustomerList(Predicate<Customer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-      
         @Override
         public ObservableList<Employee> getFilteredEmployeeList() {
             throw new AssertionError("This method should not be called.");

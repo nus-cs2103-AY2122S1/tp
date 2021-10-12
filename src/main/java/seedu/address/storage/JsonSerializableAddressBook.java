@@ -25,14 +25,11 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "Persons list contains duplicate person(s).";
-
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
-  
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate employee(s).";
     public static final String MESSAGE_DUPLICATE_SUPPLIER = "Suppliers list contains duplicate supplier(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
     private final List<JsonAdaptedSupplier> suppliers = new ArrayList<>();
     private final List<JsonAdaptedReservation> reservations = new ArrayList<>();
@@ -88,7 +85,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
             addressBook.addCustomer(customer);
-         
+        }
         for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
             Employee employee = jsonAdaptedEmployee.toModelType();
             if (addressBook.hasEmployee(employee)) {
@@ -103,11 +100,10 @@ class JsonSerializableAddressBook {
             }
             addressBook.addSupplier(supplier);
         }
-        for (JsonAdaptedReservation jsonAdaptedReservation: reservations) {
+        for (JsonAdaptedReservation jsonAdaptedReservation : reservations) {
             Reservation reservation = jsonAdaptedReservation.toModelType();
             addressBook.addReservation(reservation);
         }
         return addressBook;
     }
-
 }

@@ -41,9 +41,9 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label loyaltyPoints;
     @FXML
-    private Label specialRequests;
+    private FlowPane specialRequests;
     @FXML
-    private Label allergies;
+    private FlowPane allergies;
     @FXML
     private FlowPane tags;
 
@@ -58,6 +58,14 @@ public class CustomerCard extends UiPart<Region> {
         phone.setText(customer.getPhone().value);
         address.setText(customer.getAddress().value);
         email.setText(customer.getEmail().value);
+        loyaltyPoints.setText(customer.getLoyaltyPoints().value);
+        customer.getAllergies().stream()
+                .sorted(Comparator.comparing(allergy -> allergy.allergyName))
+                .forEach(allergy -> allergies.getChildren().add(new Label(allergy.allergyName)));
+        customer.getTags().stream()
+                .sorted(Comparator.comparing(specialRequest -> specialRequest.tagName))
+                .forEach(specialRequest -> specialRequests.getChildren()
+                        .add(new Label(specialRequest.tagName)));
         customer.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

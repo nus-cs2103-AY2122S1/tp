@@ -5,15 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGIES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -29,9 +27,9 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
-import seedu.address.testutil.EditCustomerDescriptorBuilder;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
+import seedu.address.testutil.EditCustomerDescriptorBuilder;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -66,7 +64,6 @@ public class CommandTestUtil {
     public static final String VALID_JOBTITLE_BOB = "UIUX Designer";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-  
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -225,7 +222,6 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }
-  
     /**
      * Updates {@code model}'s filtered list to show only the employee at the given {@code targetIndex} in the
      * {@code model}'s address book.

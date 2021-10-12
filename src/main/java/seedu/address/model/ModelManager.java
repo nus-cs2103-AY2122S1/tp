@@ -132,7 +132,6 @@ public class ModelManager implements Model {
     public void deleteCustomer(Customer target) {
         addressBook.removeCustomer(target);
     }
-  
     @Override
     public void deleteEmployee(Employee employee) {
         addressBook.removeEmployee(employee);
@@ -179,7 +178,6 @@ public class ModelManager implements Model {
 
         addressBook.setCustomer(target, editedCustomer);
     }
-  
     @Override
     public void setEmployee(Employee target, Employee editedEmployee) {
         requireAllNonNull(target, editedEmployee);

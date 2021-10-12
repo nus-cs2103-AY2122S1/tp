@@ -94,29 +94,29 @@ public class SampleDataUtil {
         return new Customer[] {
             new Customer(new Name("Javier Phon"), new Phone("87438807"), new Email("imphonofyou@example"
                         + ".com"), new Address("Blk 30 Geylang Street 29, #06-40"), new LoyaltyPoints("1000"),
-                        getAllergySet("McSpicy", "Pineapples"), getSpecialRequestSet("Doesn't eat meat"),
+                        getAllergySet("McSpicy", "Pineapples"), getSpecialRequestSet("Doesnt eat meat"),
                         getTagSet("boss")),
             new Customer(new Name("Pham Ba Thang"), new Phone("99272758"), new Email("igotchupham"
                         + "@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                         new LoyaltyPoints("10000"), getAllergySet("Peanuts", "milk"),
                         getSpecialRequestSet("Nothing under 100 dollars"),
-                        getTagSet("most handsome", "friends")),
+                        getTagSet("mosthandsome", "friends")),
             new Customer(new Name("Clement Kong"), new Phone("93210283"), new Email("kingkongbingbong"
                         + "@example.com"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                         new LoyaltyPoints("5000"), getAllergySet("Cheese", "rice"),
                         getSpecialRequestSet("Loves window seats"),
-                        getTagSet("mouse hunt specialist")),
+                        getTagSet("mousehuntspecialist")),
             new Customer(new Name("Lee Hern Ping"), new Phone("91031282"), new Email("wohernhandsome"
                         + "@example.com"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                         new LoyaltyPoints("1000"), getAllergySet("Apples"),
                         getSpecialRequestSet("Every visit is his birthday"),
-                        getTagSet("second most handsome after thang")),
+                        getTagSet("secondmosthandsomeafterthang")),
             new Customer(new Name("Chetwin Low"), new Phone("92492021"), new Email("chetwinchickenwing"
                         + "@example.com"), new Address("Blk 47 Tampines Street 20, #17-35"),
                         new LoyaltyPoints("0500"),
                         getAllergySet("coriander"),
                         getSpecialRequestSet("Everything should be deep fried"),
-                        getTagSet("sick of AB3"))
+                        getTagSet("sickofAB3"))
         };
     }
 
@@ -124,6 +124,9 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Customer sampleCustomer : getSampleCustomers()) {
+            sampleAb.addCustomer(sampleCustomer);
         }
         for (Employee sampleEmployee : getSampleEmployees()) {
             sampleAb.addEmployee(sampleEmployee);

@@ -61,7 +61,6 @@ public class TestUtil {
     public static Customer getCustomer(Model model, Index index) {
         return model.getFilteredCustomerList().get(index.getZeroBased());
     }
-  
     /**
      * Returns the employee in the {@code model}'s employee list at {@code index}.
      */

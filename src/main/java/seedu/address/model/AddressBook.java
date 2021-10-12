@@ -205,7 +205,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removeCustomer(Customer key) {
         customers.remove(key);
     }
-  
     public void removeSupplier(Supplier key) {
         suppliers.remove(key);
     }
