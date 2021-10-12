@@ -61,7 +61,7 @@ public interface Model {
      */
     void deleteModule(Module moduleToDelete);
 
-    boolean hasModule(ModuleName moduleToCheck);
+    boolean hasModuleName(ModuleName moduleToCheck);
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.

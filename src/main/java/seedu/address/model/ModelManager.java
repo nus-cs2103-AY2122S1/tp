@@ -105,9 +105,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasModule(ModuleName moduleName) {
+    public boolean hasModuleName(ModuleName moduleName) {
         requireNonNull(moduleName);
-        return teachingAssistantBuddy.hasModule(moduleName);
+        return teachingAssistantBuddy.hasModuleName(moduleName);
     }
 
     /**

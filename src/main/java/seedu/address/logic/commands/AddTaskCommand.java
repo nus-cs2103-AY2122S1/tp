@@ -28,7 +28,7 @@ public class AddTaskCommand extends AddCommand {
     public static final String MESSAGE_MODULE_NOT_FOUND = "This module is not found.";
 
     private final Task toAdd;
-    private final ModuleName module;
+    private final ModuleName moduleName;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -36,22 +36,22 @@ public class AddTaskCommand extends AddCommand {
     public AddTaskCommand(ModuleName moduleName, Task task) {
         requireNonNull(task);
         toAdd = task;
-        this.module = moduleName;
+        this.moduleName = moduleName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasModule(module)) {
+        if (!model.hasModuleName(moduleName)) {
             throw new CommandException(MESSAGE_MODULE_NOT_FOUND);
         }
 
-        if (model.hasTask(module, toAdd)) {
+        if (model.hasTask(moduleName, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        model.addTask(module, toAdd);
+        model.addTask(moduleName, toAdd);
         return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, toAdd));
     }
 

@@ -87,7 +87,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     /**
      * Returns true if a module with the same identity as {@code module} exists in TAB.
      */
-    public boolean hasModule(ModuleName module) {
+    public boolean hasModuleName(ModuleName module) {
         requireNonNull(module);
         for (Module m : modules) {
             if (m.getName().equals(module)) {
