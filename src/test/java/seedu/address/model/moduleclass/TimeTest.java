@@ -1,6 +1,8 @@
 package seedu.address.model.moduleclass;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,9 +10,15 @@ import org.junit.jupiter.api.Test;
 
 public class TimeTest {
 
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Time(null));
+    }
+
+    @Test
+    public void constructor_emptyString() {
+        assertThrows(IllegalArgumentException.class, () -> new Time(""));
     }
 
     @Test
@@ -27,5 +35,25 @@ public class TimeTest {
         assertTrue(Time.isValidTime("00:00"));
         assertTrue(Time.isValidTime("12:31"));
         assertTrue(Time.isValidTime("23:59"));
+        assertTrue(Time.isValidTime("15:00:15"));
+    }
+
+    @Test
+    public void isEqualTime() {
+        Time time1 = new Time("15:00");
+        Time time2 = new Time("16:00");
+        Time time3 = new Time("15:00:15");
+
+        assertEquals(time1, time1);
+        assertEquals(time2, time2);
+        assertNotEquals(time1, time3);
+    }
+
+    @Test
+    public void toStringTest() {
+        Time time1 = new Time("15:00");
+        Time time2 = new Time("00:00");
+        assertEquals("15:00", time1.toString());
+        assertEquals("00:00", time2.toString());
     }
 }
