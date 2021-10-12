@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -87,6 +88,13 @@ public class Inventory implements ReadOnlyInventory {
      */
     public void addItem(Item newItem) {
         items.add(newItem);
+    }
+
+    /**
+     * Sort items in the inventory using the given {@code comparator}
+     */
+    public void sortItems(Comparator<Item> comparator) {
+        items.sortItems(comparator);
     }
 
     /**

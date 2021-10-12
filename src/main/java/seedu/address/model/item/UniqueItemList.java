@@ -3,6 +3,7 @@ package seedu.address.model.item;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,6 +96,15 @@ public class UniqueItemList implements Iterable<Item> {
             throw new DuplicateItemException();
         }
         internalList.setAll(items);
+    }
+
+    /**
+     * Sorts the item list using the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    public void sortItems(Comparator<Item> comparator) {
+        requireNonNull(comparator);
+        internalList.sort(comparator);
     }
 
     /**
