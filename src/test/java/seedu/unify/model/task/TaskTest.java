@@ -26,7 +26,7 @@ public class TaskTest {
 
         // same name, all other attributes different -> returns true
         Task editedAlice = new TaskBuilder(ALICE).withTime(VALID_TIME_BOB)
-                .withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameTask(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -74,7 +74,7 @@ public class TaskTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TaskBuilder(ALICE).withTag(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

@@ -46,7 +46,7 @@ public class UniFyTest {
     @Test
     public void resetData_withDuplicateTasks_throwsDuplicateTaskException() {
         // Two tasks with the same identity fields
-        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND)
                 .build();
         List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
         UniFyStub newData = new UniFyStub(newTasks);
@@ -73,7 +73,7 @@ public class UniFyTest {
     @Test
     public void hasTask_taskWithSameIdentityFieldsInAddressBook_returnsTrue() {
         uniFy.addTask(ALICE);
-        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniFy.hasTask(editedAlice));
     }
