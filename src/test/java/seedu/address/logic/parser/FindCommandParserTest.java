@@ -4,12 +4,19 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.MultiplePredicates;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NationalityContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.TutorialGroupContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -22,13 +29,20 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
+        MultiplePredicates predicate = new MultiplePredicates(new ArrayList<Predicate<Person>>(List.of(
+                new NameContainsKeywordsPredicate(List.of("Alice")),
+                new PhoneContainsKeywordsPredicate(List.of("91234456")),
+                new NationalityContainsKeywordsPredicate(List.of("MY")),
+                new TutorialGroupContainsKeywordsPredicate(List.of("19"))
+        )));
+
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+                new FindCommand(predicate);
+        assertParseSuccess(parser, " n/Alice p/91234456 nat/MY tg/19", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t p/91234456 \n \t nat/MY \n \t tg/19 \t", expectedFindCommand);
     }
 
 }

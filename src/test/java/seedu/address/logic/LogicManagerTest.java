@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -20,7 +21,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -40,7 +47,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -53,21 +60,93 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_emptyCommand_throwsParseException() {
+        String emptyCommand = " ";
+        String helpMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
+        assertParseException(emptyCommand, helpMessage);
+    }
+
+    @Test
+    public void execute_nonEnglish_throwsParseException() {
+        String emptyCommand = "한글你好";
+        assertParseException(emptyCommand, MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void execute_emoji_throwsParseException() {
+        String emptyCommand = "\uD83D\uDE3E";
+        assertParseException(emptyCommand, MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    @Test
+    public void execute_specialChars_throwsParseException() {
+        String emptyCommand = "\\/!@#$%^&()_+{}:<>?";
+        assertParseException(emptyCommand, MESSAGE_UNKNOWN_COMMAND);
+    }
+
+
+    @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    public void execute_addCommand_throwsParseException() {
+        String addCommand = AddCommand.COMMAND_WORD;
+        String addMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        assertParseException(addCommand, addMessage);
+    }
+
+    @Test
+    public void execute_clearCommand_success() throws Exception {
+        String clearCommand = ClearCommand.COMMAND_WORD;
+        assertCommandSuccess(clearCommand, ClearCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_deleteCommand_throwsParseException() {
+        String deleteCommand = DeleteCommand.COMMAND_WORD;
+        String deleteMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+        assertParseException(deleteCommand, deleteMessage);
+    }
+
+    @Test
+    public void execute_editCommand_throwsParseException() {
+        String editCommand = EditCommand.COMMAND_WORD;
+        String editMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertParseException(editCommand, editMessage);
+    }
+
+    @Test
+    public void execute_exitCommand_throwsParseException() throws Exception {
+        String exitCommand = ExitCommand.COMMAND_WORD;
+        assertCommandSuccess(exitCommand, ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, model);
+    }
+
+    @Test
+    public void execute_findCommand_throwsParseException() {
+        String findCommand = FindCommand.COMMAND_WORD;
+        String findMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+        assertParseException(findCommand, findMessage);
+    }
+
+    @Test
+    public void execute_helpCommand_success() throws Exception {
+        String helpCommand = HelpCommand.COMMAND_WORD;
+        assertCommandSuccess(helpCommand, HelpCommand.SHOWING_HELP_MESSAGE, model);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_commandExecutionError_throwsCommandException() {
+        String deleteCommand = "delete 9";
+        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -105,7 +184,7 @@ public class LogicManagerTest {
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
             Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
-        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(expectedMessage, ((CommandResult) result).getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
 
