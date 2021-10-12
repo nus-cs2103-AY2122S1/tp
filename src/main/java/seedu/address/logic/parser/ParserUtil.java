@@ -78,8 +78,8 @@ public class ParserUtil {
         Index taskIndex = Index.fromOneBased(Integer.parseInt(trimmedTaskIndex));
         return new Index[]{personIndex, taskIndex};
     }
-  
-    /*
+
+    /**
      * Parses a space separated string into a list of Indexes
      * @param oneBasedindexes spaced separated string of valid Index nums
      * @return a List of Indexes specified by the input
