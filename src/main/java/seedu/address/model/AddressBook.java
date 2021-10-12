@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.UniqueModuleClassList;
 import seedu.address.model.person.Person;
@@ -72,10 +71,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts the contacts in the address book in lexicographical order.
+     * Sorts the contacts in the address book by alphabetical order.
      */
-    public void sortAddressBook(SortCommandParser.SortableField sf) {
-        persons.sortList(sf);
+    public void sortAddressBook() {
+        persons.sortList();
     }
 
     //// person-level operations
