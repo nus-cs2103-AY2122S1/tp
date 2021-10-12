@@ -12,7 +12,6 @@ import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
-//import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the TAB level.
@@ -23,7 +22,6 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
     private final UniqueModuleList modules;
     private final UniqueStudentList students;
-    //private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
