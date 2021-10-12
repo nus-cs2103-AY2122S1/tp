@@ -266,7 +266,10 @@ public class EditEmployeeCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getLeaves().equals(e.getLeaves())
+                    && getSalary().equals(e.getSalary())
+                    && getJobTitle().equals(e.getJobTitle());
         }
     }
 }

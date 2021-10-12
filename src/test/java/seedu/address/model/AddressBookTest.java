@@ -55,7 +55,7 @@ public class AddressBookTest {
     public void resetData_withValidReadOnlyAddressBook_replacesDataEmployees() {
         AddressBook newData = getTypicalAddressBookEmployees();
         addressBookEmployee.resetData(newData);
-        assertEquals(newData, addressBook);
+        assertEquals(newData, addressBookEmployee);
     }
 
     @Test
