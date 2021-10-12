@@ -1,19 +1,14 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.RecurringLesson;
-import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -78,12 +73,6 @@ public class SampleDataUtil {
             .collect(Collectors.toSet());
     }
 
-    public static Lesson getSampleLesson() {
-        return new RecurringLesson(new Date("14 Jan 2022"),
-            new TimeRange("1430-1530"),
-                new Subject("Math"), getSampleHomeworkSet());
-    }
-
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -109,16 +98,4 @@ public class SampleDataUtil {
             .map(Homework::new)
             .collect(Collectors.toSet());
     }
-
-    /**
-     * Returns a sample homework set.
-     */
-    public static Set<Homework> getSampleHomeworkSet() {
-        HashSet<Homework> sampleHomeworks = new HashSet<>();
-        sampleHomeworks.add(new Homework("TYS Page 20"));
-        sampleHomeworks.add(new Homework("Onsponge textbook"));
-        sampleHomeworks.add(new Homework("Tutorial 12"));
-        return sampleHomeworks;
-    }
-
 }
